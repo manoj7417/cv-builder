@@ -27,7 +27,7 @@ export default function DashboardIdea() {
     <Navbar/>
     <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
         <div className="container  w-fullbg-blue-300 "style={{marginBottom:"-200px"}}>
-          <div className="flex px-5 justify-between">
+          <div className="flex px-24 justify-between">
             <div className="space-y-2 mt-40">
               <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Scan your Resume or CV</h1>
               <p className="text-gray-700 text-lg pe-10">Scan your resume or CV with genie AI and get a detailed report. Help you know your ATS score and let you know your mistakes</p>

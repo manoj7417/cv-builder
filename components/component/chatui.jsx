@@ -42,9 +42,9 @@ export function Chatui() {
   };
 
   return (
-    <div className="flex h-screen flex-col max-h-[calc(100vh-35rem)]">
-      <main className="flex-1 overflow-y-auto p-4" ref={chatContainerRef}>
-        <div className="grid gap-4">
+    <div className="flex h-screen flex-col max-h-[calc(100vh-20rem)]">
+      <main className="flex-1 overflow-y-auto p-4 bg-gray-100 rounded-lg" ref={chatContainerRef}>
+        <div className="grid gap-4 ">
           {messages.map((message, index) => (
             <div key={index} className={`flex ${message.sender === 'AI' ? '' : 'justify-end'}`}>
               <div className={`max-w-[60%] rounded-t-lg ${message.sender === 'AI' ? 'rounded-bl-lg bg-gray-900 text-gray-50' : 'rounded-br-lg bg-gray-200 text-black'} p-3`}>

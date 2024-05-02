@@ -14,6 +14,7 @@ import { RiShirtFill } from "react-icons/ri"
 import { Carousel, CarouselItem } from "@/components/ui/carousel"
 import Footer from "../ui/newFooter";
 import { redirect } from "next/dist/server/api-utils"
+import Navbar from "../ui/newNav"
 
 export default function DashboardIdea() {
 
@@ -21,12 +22,12 @@ export default function DashboardIdea() {
   return (
     <>
     <header>
-        <NewNavbar />
+        <Navbar />
     </header>
     <main>
-    <section className="flex min-h-screen flex-col items-center justify-center pt-12 md:pt-24 lg:pt-32 "style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
+    <section className="flex min-h-screen flex-col items-center justify-center  "style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
         <div className="container  w-fullbg-blue-300 "style={{marginBottom:"-200px"}}>
-          <div className="flex px-5 justify-between">
+          <div className="flex justify-between px-24">
             <div className="space-y-2 mt-40">
               <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Crafted by industry experts</h1>
               <p className="text-gray-700 text-lg pe-10">

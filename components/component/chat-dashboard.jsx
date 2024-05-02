@@ -9,11 +9,11 @@ import { Chatui } from "./chatui"
 
 export function ChatDashboard() {
   return (
-    <div className="flex flex-col h-screen bg-gray-100 ">
+    <div className="flex flex-col  h-screen w-screen bg-gray-100 ">
 
      
       <main className="flex-1 overflow-auto">
-        <div className="container mx-auto py-8 px-4">
+        <div className="container mx-auto py-8 px-4 w-[calc(100%-10rem)]">
           <div className="space-y-6">
             <div className="bg-white  rounded-lg shadow-sm p-4">
               <div className="flex gap-4 items-center">
