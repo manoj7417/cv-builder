@@ -44,21 +44,21 @@ export default function Footer() {
         </div>
         <hr className="my-4" />
         <div className="max-w-6xl items-center justify-between md:flex mx-auto">
-          <div className="inline-flex items-center">
+          <div className="inline-flex items-center gap-2">
           <Image
-                src={"/GCH.png"}
-                width={300}
-                height={300}
+                src={"/gch_logo.png"}
+                width={30}
+                height={30}
                 alt="newlogo"
                 className="w-50 h-auto object-contain"
               />
-            {/* <span className="md:-ml-4 -ml-10 text-lg font-bold">
-              Career Genie Hub
-            </span> */}
+            <span className="text-lg font-bold">
+               Genies Career Hub
+            </span>
           </div>
           <div className="mt-4 md:mt-0">
             <p className="text-sm font-medium text-black">
-              © 2024 Careergeniehub. All rights reserved.
+              © 2024 Genies Career Hub . All rights reserved.
             </p>
           </div>
         </div>
