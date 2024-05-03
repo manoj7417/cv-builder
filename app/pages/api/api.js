@@ -13,7 +13,7 @@ export const instance = axios.create({
 
 export const AnalyzeAts = async (message) => {
   try {
-    const response = await instance.post("/openai/atsCheck", {message});
+    const response = await instance.post("/openai/atsCheck", { message });
     return response.data;
   } catch (error) {
     console.error("Error creating user:", error.response || error);
@@ -23,10 +23,33 @@ export const AnalyzeAts = async (message) => {
 
 export const AskBot = async (message) => {
   try {
-    const response = await instance.post("/openai/askBot", {message});
+    const response = await instance.post("/openai/askBot", { message });
     return response.data;
   } catch (error) {
     console.error("Error creating user:", error.response || error);
     throw error;
   }
 };
+
+export const login = async (data) => {
+  try {
+    const response = await instance.post("/user/login", data, { withCredentials: true });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
+    return error
+  }
+}
+
+
+export const registerUser = async (data) => {
+  try {
+    const response = await instance.post("/user/register", data, {
+      withCredentials: true
+    });
+    return response.data
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
+    return error
+  }
+}
