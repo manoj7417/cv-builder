@@ -5,7 +5,7 @@ import { GiMagicLamp } from "react-icons/gi";
 
 export function ServiceSection() {
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="flex flex-col min-h-[100dvh] ">
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-blue-100 bg-opacity-10  scroll-mt-20">
           <div className=" px-4 md:px-6 mb-10">
@@ -162,9 +162,9 @@ export function ServiceSection() {
             </div>
           </div>
         </section>
-
+    
         <section
-          className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20"
+          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20"
           style={{
             backgroundImage: "url('/banner-bg.svg')",
             backgroundPosition: "center",
