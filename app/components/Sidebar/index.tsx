@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           <button className="flex items-center justify-between w-full" onClick={() => setActiveTab('ATS')}>
             <span className="flex items-center space-x-2">
               <GrScorecard className="h-6 w-6 text-indigo-500" />
-              <span className=" text-gray-900 text-lg ps-3 ">ATS Checker</span>
+              <span className=" text-gray-900 text-lg ps-3 ">Gap Analyser</span>
             </span>
           </button>
          
@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         <button className="flex items-center justify-between w-full" onClick={() => setActiveTab('AI')}>
           <span className="flex items-center space-x-2">
             <RiOpenaiFill className="h-6 w-6 text-indigo-500" onClick={() => setActiveTab('AI')}/>
-            <span className=" text-gray-900 text-lg ps-3 ">AI Assistant</span>
+            <span className=" text-gray-900 text-lg ps-3 ">Genie</span>
           </span>
         </button>
          

@@ -1,4 +1,4 @@
-
+'use client'
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import Link from "next/link"
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs"
@@ -17,36 +17,90 @@ import { redirect } from "next/dist/server/api-utils"
 import { Steps } from "../home/Steps"
 import Navbar from "../ui/newNav"
 import Slider from "@/components/component/Slider"
+import { useState } from "react"
+import Loader from "../ui/AnalyserLoader"
+import { AnalyzeAts } from "../pages/api/api"
+import pdfToText from 'react-pdftotext'
+import { useRouter } from "next/navigation"
+
 
 export default function DashboardIdea() {
+  const [isAnalysing, setIsAnalysing] = useState(false)
+  const router = useRouter()
+  const handlepdfFileChange = async (e) => {
+    setIsAnalysing(true)
+    let selectedFile = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = async () => {
+      // Store the data URL in state or dispatch it to Redux store
+      localStorage.setItem("pdfFile", JSON.stringify(reader.result))
+      // Perform any additional operations you need with the file data here
+      // For example, you can pass it to your pdfToText function
+      pdfToText(selectedFile)
+        .then(async text => {
+          await getFeedback(text);
+        })
+        .catch(error => console.error("Failed to extract text from pdf"));
+
+    };
+  }
+
+  const getFeedback = async (message) => {
+    try {
+      const response = await AnalyzeAts(message)
+      const value = JSON.parse(response[0].text.value)
+      if (value.score) {
+        localStorage.setItem('feedback', JSON.stringify(value))
+        router.push('/analyser/feedback')
+      }
+    } catch (error) {
+
+    } finally {
+      setIsAnalysing(false)
+    }
+  }
 
 
   return (
     <>
-    <main >
-    <Navbar/>
-    <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
-        <div className="container  w-fullbg-blue-300 "style={{marginBottom:"-200px"}}>
-          <div className="flex px-24 justify-between">
-            <div className="space-y-2 mt-40">
-              <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Scan your Resume or CV</h1>
-              <p className="text-gray-700 text-lg pe-10">Scan your resume or CV with genie AI and get a detailed report. Help you know your ATS score and let you know your mistakes</p>
-              <div className="flex items-center space-x-4">
-                <button className="text-xl text-white bg-blue-500 rounded-xl px-5 mt-5 py-3" ><a href="/resume-import">Analyze Now</a></button>
+      <main >
+        <Navbar />
+        {isAnalysing && <Loader />}
+        <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
+          <div className="container  w-fullbg-blue-300 " style={{ marginBottom: "-200px" }}>
+            <div className="flex px-24 justify-between">
+              <div className="space-y-2 mt-40">
+                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Scan your Resume or CV</h1>
+                <p className="text-gray-700 text-lg pe-10">Scan your resume or CV with genie AI and get a detailed report. Help you know your ATS score and let you know your mistakes</p>
+                <div className="flex items-center space-x-4">
+                  <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
+                    <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-md text-white font-semibold">
+                      Upload your cv now
+                    </span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="application/pdf"
+                      onChange={
+                        handlepdfFileChange
+                      }
+                    />
+                  </label>
+                </div>
               </div>
+              <Image src="/ats friendly.png" className="px-7 pt-7 " alt="@shadcn" width={600} height={100} />
             </div>
-            <Image src="/ats friendly.png" className="px-7 pt-7 " alt="@shadcn" width={600} height={100} />
           </div>
-        </div>
-      <div className= "w-full  " >
-        <div className="rounded-t-3xl border-t-8 border-blue-500 shadow-xl  bg-gradient-to-b from-[#dcecff] to-[white]">
-           
-          <Steps/>
-          <Slider/>
-        </div>
-      </div>
-    </section>
-    <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
+          <div className="w-full  " >
+            <div className="rounded-t-3xl border-t-8 border-blue-500 shadow-xl  bg-gradient-to-b from-[#dcecff] to-[white]">
+
+              <Steps />
+              <Slider />
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
@@ -72,8 +126,8 @@ export default function DashboardIdea() {
             </div>
           </div>
         </section>
-    <Footer/>
-    </main>
+        <Footer />
+      </main>
     </>
   )
 }
