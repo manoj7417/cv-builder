@@ -16,7 +16,7 @@ export default function Home() {
     // Adjust this logic based on your actual loading conditions
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 0); // Adjust time based on your needs
+    }, 2000); // Adjust time based on your needs
 
     return () => clearTimeout(timer);
   }, []);
