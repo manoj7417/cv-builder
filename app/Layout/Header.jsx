@@ -48,14 +48,15 @@ const Header = () => {
       <nav>
         <div className="wrapper">
           <div className="logo">
-            <a href="/">
+            <a href="/" className="flex items-center gap-2">
               <Image
-                src={"/GCH.png"}
-                width={300}
-                height={300}
+                src={"/gch_logo.png"}
+                width={30}
+                height={30}
                 alt="newlogo"
                 className="w-50 h-auto object-contain"
               />
+              <span className="text-black font-bold text-2xl">Genies Career Hub</span>
             </a>
           </div>
           <input type="radio" name="slider" id="menu-btn" />
