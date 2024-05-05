@@ -22,6 +22,7 @@ import Loader from "../ui/AnalyserLoader"
 import { AnalyzeAts } from "../pages/api/api"
 import pdfToText from 'react-pdftotext'
 import { useRouter } from "next/navigation"
+import Header from "../Layout/Header"
 
 
 export default function DashboardIdea() {
@@ -65,7 +66,7 @@ export default function DashboardIdea() {
   return (
     <>
       <main >
-        <Navbar />
+        {/* <Header /> */}
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
           <div className="container  w-fullbg-blue-300 " style={{ marginBottom: "-200px" }}>
@@ -126,7 +127,7 @@ export default function DashboardIdea() {
             </div>
           </div>
         </section>
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </>
   )

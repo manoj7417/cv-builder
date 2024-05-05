@@ -14,7 +14,7 @@ export default function Homepage() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section
         className="flex items-center justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-gradient-to-b from-[#E0F2FE] to-[#dcecff]"
         style={{

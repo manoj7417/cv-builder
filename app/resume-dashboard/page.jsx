@@ -30,7 +30,7 @@ export default function DashboardIdea() {
       {/* <header>
         <Navbar />
       </header> */}
-      <Header />
+      {/* <Header /> */}
       <main>
         <section
           className="flex min-h-screen flex-col items-center justify-center  "
@@ -1291,7 +1291,7 @@ export default function DashboardIdea() {
             </div>
           </div>
         </section>
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </>
   );

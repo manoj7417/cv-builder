@@ -20,7 +20,7 @@ export default function Create() {
   return (
     <>
       <Provider store={store}>
-        <Header />
+        {/* <Header /> */}
         <main className="relative h-full overflow-hidden w-full bg-blue-50 py-20">
           <div className="grid grid-cols-3 md:grid-cols-9">
             <div className="col-span-2 pt-9">
@@ -44,7 +44,7 @@ export default function Create() {
           </div>
         </main>
       </Provider>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

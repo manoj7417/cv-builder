@@ -60,6 +60,7 @@ export default function ResumeFeedback() {
 
     return (
         <>
+        {/* <Header/> */}
             <section className="analyser_resume_section">
                 <div className="bg-blue-50 w-full">
                     <div className="main_heading_section">
@@ -221,14 +222,14 @@ export default function ResumeFeedback() {
 
                                         </div>
                                     </div>
-                                    <div className="recommandation_button my-10">
+                                    {/* <div className="recommandation_button my-10">
                                         <button className="text-sm my-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md">
                                             View Templates
                                         </button>
                                         <button className="lg:mx-3 mx-2 text-sm px-5 py-3 bg-transparent text-black rounded-md border border-gray-400">
                                             Check the Result by Genie
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="lg:col-span-6 col-span-1 lg:w-full w-4/5 mx-auto h-full">
