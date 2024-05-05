@@ -19,14 +19,14 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
     <aside className="fixed ms-6 ps-10 p-4 bg-white rounded-xl shadow-xl text-center">
       <div className="mb-4 flex items-center space-x-4 p-4">
       <GiMagicLamp className='h-12 w-12 text-indigo-500 ' />
-        <h5 className="text-xl font-semibold ">Ginie Builder</h5>
+        <h5 className="text-xl font-semibold ">Genie Builder</h5>
       </div>
       <ul className="flex flex-col space-y-6 mb-8">
         <li>
           <button  className="flex items-center justify-between w-full" onClick={() => setActiveTab('Content')}>
             <span className="flex items-center space-x-2">
             <LuLayoutList className="h-6 w-6 text-indigo-500" />
-              <span className="text-gray-900 text-lg ps-3 ">Content</span>
+              <span className="text-gray-900 text-lg ps-3 ">Edit your resume</span>
             </span>
             
           </button>
@@ -41,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           </button>
          
         </li>
-        <li>
+        {/* <li>
           <button className="flex items-center justify-between w-full" onClick={() => setActiveTab('ATS')}>
             <span className="flex items-center space-x-2">
               <GrScorecard className="h-6 w-6 text-indigo-500" />
@@ -49,8 +49,8 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </span>
           </button>
          
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
         <button className="flex items-center justify-between w-full" onClick={() => setActiveTab('AI')}>
           <span className="flex items-center space-x-2">
             <RiOpenaiFill className="h-6 w-6 text-indigo-500" onClick={() => setActiveTab('AI')}/>
@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           </span>
         </button>
          
-        </li>
+        </li> */}
         {/* <li>
           <div className="flex items-center space-x-2">
           <IoDownloadOutline className="h-6 w-6 text-indigo-500" />

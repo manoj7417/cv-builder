@@ -67,7 +67,7 @@ export default function ResumeFeedback() {
                             A Result of Your CV,Analysis
                         </h1>
                         <p className="lg:w-1/2 w-3/5 mx-auto text-center lg:text-base text-sm">
-                            Ginie Career online CV checker was designed by a team of
+                            Genie Career online CV checker was designed by a team of
                             experienced recruiters, data analysts, and software engineers.
                         </p>
                     </div>

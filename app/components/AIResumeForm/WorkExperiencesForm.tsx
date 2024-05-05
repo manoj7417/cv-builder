@@ -48,7 +48,7 @@ export const WorkExperiencesForm = () => {
               onChange={handleWorkExperienceChange}
             />
             <Input
-              label="Job Totle"
+              label="Job Title"
               labelClassName="col-span-4"
               name="jobTitle"
               placeholder="Software Engineer"
