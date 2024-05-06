@@ -1,12 +1,12 @@
-'use client'
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 import { Hero } from "./home/Hero";
 import { Steps } from "./home/Steps";
 import Homepage from "./components/Homepage";
 // import Footer from "./ui/newFooter";
 import LoaderUI from "./ui/LoaderUI";
-import Header from './Layout/Header';
-import Footer from './Layout/Footer';
+import Header from "./Layout/Header";
+import Footer from "./Layout/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,9 +27,9 @@ export default function Home() {
         <LoaderUI />
       ) : (
         <>
-        <Header/>
+          <Header />
           <Homepage />
-          <Footer/>
+          <Footer />
         </>
       )}
     </main>

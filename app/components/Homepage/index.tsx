@@ -37,8 +37,7 @@ export default function Homepage() {
                   </span>
                 </h1>
                 <p className="max-w-[600px] text-gray-700 md:text-xl">
-                  Our AI-powered resume builder helps you craft a standout
-                  resume and land your dream job.
+                Enriching Professional Experiences and Building Success Stories
                 </p>
               </div>
               <div className="flex lg:flex-row  flex-col gap-2 min-[400px]:flex-row ">

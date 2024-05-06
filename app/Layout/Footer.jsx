@@ -99,7 +99,7 @@ export default function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-black transition"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -123,7 +123,7 @@ export default function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-black transition"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -147,7 +147,7 @@ export default function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-black transition"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -167,7 +167,7 @@ export default function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-black transition"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -191,7 +191,7 @@ export default function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-black transition"
                 >
                   <span className="sr-only">Dribbble</span>
 
@@ -220,50 +220,55 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
-                    {" "}
+                    
                     1on1 Coaching{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Company Review{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Accounts Review{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     HR Consulting{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     SEO Optimisation{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
               </ul>
@@ -276,30 +281,33 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     About{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Meet the Team{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Accounts Review{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
               </ul>
@@ -312,30 +320,33 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Contact{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     FAQs{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Live Chat{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
               </ul>
@@ -348,48 +359,52 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Accessibility{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Returns Policy{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black"
                   >
                     {" "}
                     Refund Policy{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
 
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-black transition"
                   >
                     {" "}
                     Hiring Statistics{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <p className="text-xs text-gray-500">
-            &copy; 2022. Company Name. All rights reserved.
+          <p className="text-sm text-black">
+            &copy; 2024. Genies Career Hub. All rights reserved.
           </p>
         </div>
       </footer>

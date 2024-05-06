@@ -459,6 +459,15 @@
   }
 }
 
+
+footer a svg {
+  transition: transform 350ms;
+}
+
+footer a:hover svg {
+  transform: translate(0.5rem, 0rem);
+}
+
 /* Mobile Responsive CSS Ends Here  */
 
 /* New Header CSS Ends Here */
