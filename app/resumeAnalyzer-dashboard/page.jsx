@@ -23,9 +23,11 @@ import { AnalyzeAts } from "../pages/api/api"
 import pdfToText from 'react-pdftotext'
 import { useRouter } from "next/navigation"
 import Header from "../Layout/Header"
+import AuthHook from "../hooks/AuthHook"
 
 
 export default function DashboardIdea() {
+  AuthHook()
   const [isAnalysing, setIsAnalysing] = useState(false)
   const router = useRouter()
   const handlepdfFileChange = async (e) => {

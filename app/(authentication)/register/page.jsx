@@ -21,10 +21,9 @@ export default function Register() {
     const handleRegister = async (data) => {
         try {
             const response = await registerUser(data)
-            console.log(response.response.data.error)
             if (response.status === "SUCCESS") {
                 toast.success("Registration successful")
-                router.push("/")
+                router.push("/login")
             }
             return toast.error(response.response.data.error || 'Registration failed')
         } catch (error) {

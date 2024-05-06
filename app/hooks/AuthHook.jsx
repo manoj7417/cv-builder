@@ -1,14 +1,20 @@
-'use client'
-import { useAuth } from '../context/AuthContext';
-import { useRouter } from 'next/navigation';
+
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { usePathname, useRouter } from 'next/navigation';
 
 function AuthHook() {
-    const { userState } = useAuth()
+    const { userState } = useContext(AuthContext);
     const router = useRouter()
+    const pathname = usePathname()
 
-    if (!userState.isAuthenticated) {
-        router.push('/login')
-    }
+    useEffect(() => {
+        console.log(userState.isAuthenticated)
+        if (!userState.isAuthenticated) {
+            router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
+        }
+    }, []);
+    return null;
 }
 
 export default AuthHook

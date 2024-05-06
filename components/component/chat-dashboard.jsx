@@ -9,13 +9,13 @@ import { Chatui } from "./chatui"
 
 export function ChatDashboard() {
   return (
-    <div className="flex flex-col  h-screen w-screen bg-gray-100 ">
+    <div className="flex flex-col  h-screen w-full bg-gray-100 ">
 
-     
+
       <main className="flex-1 overflow-auto">
         <div className="container mx-auto py-8 px-4 w-[calc(100%-10rem)]">
-          <div className="flex space-y-6">
-          <div className="bg-white w-96 mt-6 me-10  rounded-lg shadow-sm p-4">
+          <div className="flex space-y-6 ">
+            <div className="bg-white w-[30%] mt-6 me-10  rounded-lg shadow-sm p-4 ">
               <div className="space-y-4">
                 <h2 className="text-lg font-semibold">Recommended Next Steps</h2>
                 <div className="space-y-2">
@@ -33,7 +33,7 @@ export function ChatDashboard() {
                     <div>
                       <h3 className="font-medium">Analyze & Identify why your resume isn&apos;t getting callbacks.</h3>
                       <p className="text-gray-500 text-sm">
-                      To understand why you&apos;re not receiving responses from job applications, evaluate your resume or CV to pinpoint areas that may need improvement. This involves checking the document for any issues with formatting, content relevance, and alignment with job descriptions, which could be causing employers to overlook your application.
+                        To understand why you&apos;re not receiving responses from job applications, evaluate your resume or CV to pinpoint areas that may need improvement. This involves checking the document for any issues with formatting, content relevance, and alignment with job descriptions, which could be causing employers to overlook your application.
                       </p>
                     </div>
                   </div>
@@ -42,39 +42,38 @@ export function ChatDashboard() {
                     <div>
                       <h3 className="font-medium">Seek Genie&apos;s Help</h3>
                       <p className="text-gray-500 text-sm">
-                      Reach out to Genie for expert guidance on career decisions, job searches, resume reviews, and more. Genie is equipped to offer personalized advice and practical solutions to help you achieve your professional goals.
+                        Reach out to Genie for expert guidance on career decisions, job searches, resume reviews, and more. Genie is equipped to offer personalized advice and practical solutions to help you achieve your professional goals.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
 
-            
-            <div className="bg-white  rounded-lg shadow-sm p-4">
-              <div className="flex gap-4 items-center">
-                <Avatar>
-                  <AvatarImage alt="Health Buddy" src="/Designer.png" />
-                  <AvatarFallback>CG</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <h2 className="text-lg font-semibold">How can I help you today?</h2>
-                  <p className="text-gray-500 text-sm max-w-3xl">
-                  Genie is at your service, ready to guide you to success. Whether you&apos;re aiming for career advancement, seeking a new job, uncertain about career decisions, or needing assistance with your resume, rest assured, Genie has got your back.
-                  </p>
+            <div className=" w-[70%]">
+                <div className="bg-white  rounded-lg shadow-sm p-4">
+                <div className="flex gap-4 items-center">
+                  <Avatar className="shadow-md">
+                    <AvatarImage alt="Health Buddy" src="/genieAIicon.svg" />
+                    <AvatarFallback>CG</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <h2 className="text-lg font-semibold">How can I help you today?</h2>
+                    <p className="text-gray-500 text-sm max-w-3xl">
+                      Genie is at your service, ready to guide you to success. Whether you&apos;re aiming for career advancement, seeking a new job, uncertain about career decisions, or needing assistance with your resume, rest assured, Genie has got your back.
+                    </p>
+                  </div>
                 </div>
               </div>
+              <div className="bg-white  rounded-lg shadow-sm p-4">
+                <Chatui />
+              </div>
             </div>
-            <div className="bg-white  rounded-lg shadow-sm p-4">
-              <Chatui />
-            </div>
-            </div>
-            
+
           </div>
         </div>
       </main>
-      
+
     </div>
   )
 }

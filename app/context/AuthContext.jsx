@@ -1,12 +1,11 @@
 'use client'
 
-import { createContext, useContext, useState } from "react"
+import { createContext,  useState } from "react"
 
 export const AuthContext = createContext()
 
-export function useAuth() {
-    return useContext(AuthContext)
-}
+
+
 let initialValues = {
     isAuthenticated: false,
     user: null

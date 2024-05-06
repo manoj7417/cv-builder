@@ -1,19 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 // import { ArrowRight } from 'lucide-react'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { login } from "@/app/pages/api/api";
 import { ToastContainer, toast } from 'react-toastify'
-import { useAuth } from "@/app/context/AuthContext";
-
-export default function Login() {
+import { AuthContext } from "@/app/context/AuthContext";
+function LoginUser() {
     const router = useRouter();
-    const { userlogin, userlogout } = useAuth()
+    const { userlogin, userlogout } = useContext(AuthContext)
+    const searchParams = useSearchParams()
+    const redirect = searchParams.get('redirect')
 
     const {
         register,
@@ -29,8 +30,11 @@ export default function Login() {
             if (response.status === "SUCCESS") {
                 toast.success(response.message)
                 userlogin()
-                router.push("/")
-            }
+                setTimeout(() => redirect ?
+                    router.push(redirect)
+                    : router.push("/"), [1000])
+
+            }   
             return toast.error(response.response.data.error)
         } catch (error) {
         }
@@ -40,7 +44,6 @@ export default function Login() {
     return (
         <>
             <section>
-                <ToastContainer />
                 <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
                     <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
                         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
@@ -163,3 +166,12 @@ export default function Login() {
         </>
     );
 }
+
+export default function Login() {
+    return (
+        <Suspense>
+            <LoginUser />
+        </Suspense>
+    )
+}
+

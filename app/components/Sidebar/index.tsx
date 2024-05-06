@@ -1,45 +1,49 @@
 "use client";
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from "react";
 import { selectResume } from "@/app/lib/redux/resumeSlice";
-import { MdChecklist, MdHistory } from 'react-icons/md';
-import { RiFileEditLine, RiOpenaiFill } from 'react-icons/ri';
-import { GrScorecard } from 'react-icons/gr';
-import { IoDownloadOutline, IoShareSocialOutline } from 'react-icons/io5';
-import { GiMagicLamp } from 'react-icons/gi';
-import { LuLayoutList } from 'react-icons/lu';
-
+import { MdChecklist, MdHistory } from "react-icons/md";
+import { RiFileEditLine, RiOpenaiFill } from "react-icons/ri";
+import { GrScorecard } from "react-icons/gr";
+import { IoDownloadOutline, IoShareSocialOutline } from "react-icons/io5";
+import { GiMagicLamp } from "react-icons/gi";
+import { LuLayoutList } from "react-icons/lu";
+import Image from "next/image";
 
 interface SidebarProps {
-  setActiveTab: (tab: string) => void;  // Function type defined
+  setActiveTab: (tab: string) => void; // Function type defined
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
-
   return (
     <aside className="fixed ms-6 ps-10 p-4 bg-white rounded-xl shadow-xl text-center">
       <div className="mb-4 flex items-center space-x-4 p-4">
-      <GiMagicLamp className='h-12 w-12 text-indigo-500 ' />
+        <Image src="/genieAIicon.svg" alt="magicLamp" width={50} height={50}/>
         <h5 className="text-xl font-semibold ">Genie Builder</h5>
       </div>
       <ul className="flex flex-col space-y-6 mb-8">
         <li>
-          <button  className="flex items-center justify-between w-full" onClick={() => setActiveTab('Content')}>
+          <button
+            className="flex items-center justify-between w-full"
+            onClick={() => setActiveTab("Content")}
+          >
             <span className="flex items-center space-x-2">
-            <LuLayoutList className="h-6 w-6 text-indigo-500" />
-              <span className="text-gray-900 text-lg ps-3 ">Edit your resume</span>
+              <LuLayoutList className="h-6 w-6 text-indigo-500" />
+              <span className="text-gray-900 text-lg ps-3 ">
+                Edit your resume
+              </span>
             </span>
-            
           </button>
-         
         </li>
         <li>
-          <button className="flex items-center justify-between w-full" onClick={() => setActiveTab('Design')}>
+          <button
+            className="flex items-center justify-between w-full"
+            onClick={() => setActiveTab("Design")}
+          >
             <span className="flex items-center space-x-2">
               <MdChecklist className="h-6 w-6 text-indigo-500" />
               <span className=" text-gray-900 text-lg ps-3 ">Design</span>
             </span>
           </button>
-         
         </li>
         {/* <li>
           <button className="flex items-center justify-between w-full" onClick={() => setActiveTab('ATS')}>
@@ -78,13 +82,13 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         </li>
         <li>
           <div className="flex items-center space-x-2">
-          <IoShareSocialOutline className="h-6 w-6 text-indigo-500" />
+            <IoShareSocialOutline className="h-6 w-6 text-indigo-500" />
             <span className=" text-gray-900 text-lg ps-3 ">Share</span>
           </div>
         </li>
       </ul>
     </aside>
   );
-}
+};
 
 export default Sidebar;
