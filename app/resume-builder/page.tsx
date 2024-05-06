@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../lib/redux/store";
 import Sidebar from "../components/Sidebar";
@@ -12,10 +12,15 @@ import { ThemeForm } from "../components/ResumeForm/ThemeForm";
 import Footer from "../ui/newFooter";
 import { AIResumeForm } from "../components/AIResumeForm";
 import Header from "../Layout/Header";
+import AuthHook from "../hooks/AuthHook";
 
 export default function Create() {
   // Possible values: 'DESIGN', 'ATS', 'NONE'
   const [activeTab, setActiveTab] = useState<string>("AIContent");
+  
+  useEffect(() => {
+    AuthHook();
+  }, []);
 
   return (
     <>
