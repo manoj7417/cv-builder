@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
+import AuthHook from "@/app/hooks/AuthHook";
 
 export default function ResumeFeedback() {
     const [values, setValues] = useState({
@@ -15,6 +16,7 @@ export default function ResumeFeedback() {
         skills: 0
     })
     const iframeRef = useRef(null);
+    AuthHook()
 
     let pdfFile = null;
     let score = null;
@@ -36,6 +38,7 @@ export default function ResumeFeedback() {
             impact, style, skills
         })
     }
+
 
     useEffect(() => {
         handleSetScore(score)
@@ -60,7 +63,7 @@ export default function ResumeFeedback() {
 
     return (
         <>
-        {/* <Header/> */}
+            {/* <Header/> */}
             <section className="analyser_resume_section">
                 <div className="bg-blue-50 w-full">
                     <div className="main_heading_section">
