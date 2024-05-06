@@ -14,9 +14,7 @@ export default function ImportResume() {
     setHasAddedResume(Boolean(fileUrl));
   };
 
-  useEffect(() => {
-    AuthHook()
-}, [])
+  AuthHook();
 
   useEffect(() => {
     setHasUsedAppBefore(getHasUsedAppBefore());

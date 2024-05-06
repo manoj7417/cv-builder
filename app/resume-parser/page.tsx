@@ -13,6 +13,7 @@ import { cx } from "../lib/cx";
 import ResumeDropzone from "../components/ResumeDropzone";
 import { ResumeTable } from "./ResumeTable";
 import { readPdf } from "../lib/parse-resume-from-pdf/read-pdf";
+import AuthHook from "../hooks/AuthHook";
 
 const RESUME_EXAMPLES = [
   {
@@ -33,6 +34,7 @@ const RESUME_EXAMPLES = [
 const defaultFileUrl = RESUME_EXAMPLES[1]["fileUrl"];
 
 export default function ResumeParser() {
+  AuthHook();
   const [fileUrl, setFileUrl] = useState(defaultFileUrl);
 
   const [textItems, setTextItems] = useState<TextItems>([]);

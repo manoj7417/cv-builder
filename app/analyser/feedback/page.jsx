@@ -16,6 +16,7 @@ export default function ResumeFeedback() {
         skills: 0
     })
     const iframeRef = useRef(null);
+    AuthHook()
 
     let pdfFile = null;
     let score = null;
@@ -38,9 +39,6 @@ export default function ResumeFeedback() {
         })
     }
 
-    useEffect(() => {
-        AuthHook()
-    }, [])
 
     useEffect(() => {
         handleSetScore(score)
@@ -65,7 +63,7 @@ export default function ResumeFeedback() {
 
     return (
         <>
-        {/* <Header/> */}
+            {/* <Header/> */}
             <section className="analyser_resume_section">
                 <div className="bg-blue-50 w-full">
                     <div className="main_heading_section">
