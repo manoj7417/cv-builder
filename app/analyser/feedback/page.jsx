@@ -25,7 +25,6 @@ export default function ResumeFeedback() {
         pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
         let value = JSON.parse(localStorage.getItem("feedback"));
         content = value;
-        console.log(content)
     }
 
 
@@ -71,7 +70,7 @@ export default function ResumeFeedback() {
                                                     OverAll
                                                 </dd>
                                                 <dd className="mt-1 text-base leading-9 font-bold text-black">
-                                                    {content ? content.analysis.resume_score : '0'}/100
+                                                    {content ? content?.analysis?.resume_score : '0'}/100
                                                 </dd>
                                             </dl>
                                         </div>
@@ -145,12 +144,12 @@ export default function ResumeFeedback() {
                                 </div>
                                 <div className="progress_bar p-5 ">
                                     <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
-                                        <p className="tracking-wider">Your resume scored <span className={`${content.analysis.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
-                                            {content ? content.analysis.resume_score : "0"}
+                                        <p className="tracking-wider">Your resume scored <span className={`${content?.analysis?.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
+                                            {content ? content?.analysis?.resume_score : "0"}
                                         </span> out of 100.</p>
                                         <div className="w-full  my-2.5  overflow-hidden  ">
                                             <div className=" relative h-7 w-full rounded-2xl">
-                                                <Progress value={content.analysis.resume_score} className={"h-5"} />
+                                                <Progress value={content?.analysis?.resume_score} className={"h-5"} />
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +162,7 @@ export default function ResumeFeedback() {
                                         </p>
                                         <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                                             {
-                                                content.analysis.feedback?.length > 0 ?
+                                                content?.analysis?.feedback?.length > 0 ?
                                                     <ul className="custom-counter">
                                                         {
                                                             content.analysis.feedback.map((content, index) => {
