@@ -50,7 +50,7 @@ export default function Register() {
                     <div className="relative">
                         <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
                             <h3 className="text-4xl font-bold text-white">
-                                Now you dont have to rely on your designer to create a new page
+                            Approach your Dream Profession with CVs that are crafted in Minutes!
                             </h3>
                             <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                                 <li className="flex items-center space-x-3">
@@ -70,7 +70,7 @@ export default function Register() {
                                     </div>
                                     <span className="text-lg font-medium text-white">
                                         {" "}
-                                        Commercial License{" "}
+                                        Curated CVs
                                     </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
@@ -90,7 +90,7 @@ export default function Register() {
                                     </div>
                                     <span className="text-lg font-medium text-white">
                                         {" "}
-                                        Unlimited Exports{" "}
+                                        Skill Gaps Analyser 
                                     </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
@@ -110,7 +110,7 @@ export default function Register() {
                                     </div>
                                     <span className="text-lg font-medium text-white">
                                         {" "}
-                                        120+ Coded Blocks{" "}
+                                        ATS Optimization 
                                     </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
@@ -130,7 +130,7 @@ export default function Register() {
                                     </div>
                                     <span className="text-lg font-medium text-white">
                                         {" "}
-                                        Design Files Included{" "}
+                                        AI-Based CV Builder
                                     </span>
                                 </li>
                             </ul>

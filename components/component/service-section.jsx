@@ -12,31 +12,30 @@ export function ServiceSection() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-2xl bg-gradient-to-b from-[#8181b9] to-[#131350] hover:bg-blue-900 text-white  px-5 py-1 mb-5">
-                  resume Builder
+                  Resume Builder
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-950">
-                  Faster iteration. More innovation.
+                  A Step Closer to Your Dream Job!
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                  The platform for buliding quick resumes and CV&apos;s. Focus
-                  on your work instead of crafting your resume. Resume
-                  Builder is the perfect tool for your next job interview.
+                  Be quick with CV Building to apply with a profile that is
+                  professionally prolific and lands you on the job you always
+                  dreamt of.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              
               <div className="flex flex-col justify-center space-y-4">
                 <ul className="grid gap-6 mb-10">
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        resume Builder
+                        Resume Builder
                       </h3>
                       <p className="text-gray-500 ">
-                        Access 100+ customizable templates for your resume and
-                        CV. Tailor your resume to fit the job style you&apos;re
-                        after.
+                        Looking for an impressive Resume Template? Find the best
+                        Artificial Intelligence-Based Services in CV Building
+                        here!
                       </p>
                     </div>
                   </li>
@@ -46,27 +45,25 @@ export function ServiceSection() {
                         Analyzer
                       </h3>
                       <p className="text-gray-500 ">
-                        It will analyze your resume and CV and provide you with
-                        a detailed report. Help you know your ATS score and let
-                        you know will you be
+                        Not Sure if Your Resume is Perfect for the Job you are
+                        applying for? Get your CV analysed by Industry Experts
+                        now!
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        AI Genie
+                        Genie
                       </h3>
                       <p className="text-gray-500 ">
-                        Genie builds your resume while you relax and enjoy. You
-                        can seek career guidance, and it will grant your 3 free
-                        wishes.
+                      Simplify your approach to Job Applications with an AI-based CV Builder that does all that you want while you sit back and relax!
                       </p>
                     </div>
                   </li>
                 </ul>
                 <div>
-                  <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-[#0284C7]">
+                  <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
                     <a href="/resume-dashboard">Start Building</a>
                   </button>
                 </div>
@@ -162,7 +159,7 @@ export function ServiceSection() {
             </div>
           </div>
         </section>
-    
+
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20"
           style={{
@@ -173,11 +170,10 @@ export function ServiceSection() {
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Unable to find the right job? Genie can help you.
+              Get Matched to the Job that is Right for You!
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Genie will help you find the right job and provide you with the
-                best career advice and builds your resume.
+              Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
@@ -200,11 +196,11 @@ export function ServiceSection() {
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Experience the best career hub for your next job.
+              Find the Exact Job you Need with Perfectly Crafted CVs
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Subscribe to our newsletter and get the latest updates on our
-                platform.
+                Subscribe to our newsletter and get latest updates.
+                
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">

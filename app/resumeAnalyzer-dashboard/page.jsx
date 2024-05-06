@@ -70,15 +70,15 @@ export default function DashboardIdea() {
       <main >
         {/* <Header /> */}
         {isAnalysing && <Loader />}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
-          <div className="container  w-fullbg-blue-300 " style={{ marginBottom: "-200px" }}>
+        <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')" }}>
+          <div className="container  w-fullbg-blue-300 resume-dashboard">
             <div className="flex px-24 justify-between">
-              <div className="space-y-2 mt-40">
-                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Scan your Resume or CV</h1>
-                <p className="text-gray-700 text-lg pe-10">Scan your resume or CV with genie AI and get a detailed report. Help you know your ATS score and let you know your mistakes</p>
+              <div className="space-y-2 2xl:mt-40 lg:mt-32">
+                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Perfectly Analysed CV for Perfect Job</h1>
+                <p className="text-gray-700 text-lg pe-10">Scan Your CV and identify errors with the help of specialised Artificial Intelligence-based tools to create an ATS optimized and grammatically correct Resume.</p>
                 <div className="flex items-center space-x-4">
                   <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
-                    <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-md text-white font-semibold">
+                    <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold">
                       Upload your cv now
                     </span>
                     <input
@@ -92,7 +92,7 @@ export default function DashboardIdea() {
                   </label>
                 </div>
               </div>
-              <Image src="/ats friendly.png" className="px-7 pt-7 " alt="@shadcn" width={600} height={100} />
+              <Image src="/enhance.png"  className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
             </div>
           </div>
           <div className="w-full  " >
@@ -107,10 +107,10 @@ export default function DashboardIdea() {
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
-                Unable to find the right job? Genie can help you.
+              Get Matched to the Job that is Right for You!
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Genie will help you find the right job and provide you with the best career advice and builds your resume.
+              Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">

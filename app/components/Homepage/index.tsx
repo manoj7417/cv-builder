@@ -24,20 +24,20 @@ export default function Homepage() {
       >
         <div className="container px-4 md:px-6 lg:pt-0 pt-20">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-            <div className="flex flex-col justify-center space-y-4 lg:px-24 px-5">
+            <div className="flex flex-col justify-center space-y-4 lg:px-20 px-5">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">
-                  Unlock Your{" "}
-                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent">
-                    Career
+                <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl font-bold tracking-tighter text-gray-900">
+                  WHERE
+                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent ml-2">
+                    RIGHT JOB
                   </span>{" "}
-                  Potential with{" "}
-                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent">
-                    Genie
+                  MEETS
+                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent ml-2">
+                    RIGHT TALENT!
                   </span>
                 </h1>
                 <p className="max-w-[600px] text-gray-700 md:text-xl">
-                Enriching Professional Experiences and Building Success Stories
+                Enriching Professional Experiences and Building Success Stories that Resonate with Dreams.
                 </p>
               </div>
               <div className="flex lg:flex-row  flex-col gap-2 min-[400px]:flex-row ">
@@ -84,13 +84,13 @@ export default function Homepage() {
               src="https://enhancv.com/_next/static/images/resume3-fdd7e3eafb8f16ef8e0aa6f5ef523dca.webp"
               width="550"
             /> */}
-            <div className="FoldImageAnimated_card">
+            <div className="FoldImageAnimated_card lg:h-[60vh] 2xl:h-[55vh]">
               <div className="FoldImageAnimated_content">
                 <div className="FoldImageAnimated_front">
                   <div className="relative">
                     <img
                       alt="Resume Example 3"
-                      src="/resume3_01.png"
+                      src="/resume11.png"
                       width={550}
                       height={550}
                       decoding="async"
@@ -99,7 +99,8 @@ export default function Homepage() {
                       style={{
                         color: "transparent",
                         maxWidth: "100%",
-                        height: "auto",
+                        height: "500px",
+                        objectFit: "contain",
                         zIndex: 1,
                       }}
                     />
@@ -110,7 +111,7 @@ export default function Homepage() {
                     <div className="FoldImageAnimated_resumeFour">
                       <img
                         alt="Resume Example 4"
-                        src="/resume1_01.png"
+                        src="/resum12.png"
                         className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
                         width={550}
                         height={550}
@@ -120,7 +121,8 @@ export default function Homepage() {
                         style={{
                           color: "transparent",
                           maxWidth: "100%",
-                          height: "auto",
+                          height: "500px",
+                          objectFit: "contain",
                           zIndex: 1,
                         }}
                       />

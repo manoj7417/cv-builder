@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Hero } from "./home/Hero";
 import { Steps } from "./home/Steps";
 import Homepage from "./components/Homepage";
@@ -7,9 +7,15 @@ import Homepage from "./components/Homepage";
 import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
+import { AuthContext } from "./context/AuthContext";
+import ResumeHeader from "./Layout/ResumeHeader";
+
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+
+  const { userState } = useContext(AuthContext);
+
 
   useEffect(() => {
     // Here you might check for specific resources or simply set a timer
@@ -27,7 +33,7 @@ export default function Home() {
         <LoaderUI />
       ) : (
         <>
-          <Header />
+          {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
           <Homepage />
           <Footer />
         </>
