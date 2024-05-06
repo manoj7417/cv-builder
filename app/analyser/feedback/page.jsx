@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import AuthHook from "@/app/hooks/AuthHook";
+import FeedbackModal from "@/components/component/FeedbackModal";
 
 export default function ResumeFeedback() {
     const [values, setValues] = useState({
@@ -19,30 +20,14 @@ export default function ResumeFeedback() {
     AuthHook()
 
     let pdfFile = null;
-    let score = null;
-    let feedback = null
+    let content;
     if (typeof window !== 'undefined') {
         pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
         let value = JSON.parse(localStorage.getItem("feedback"));
-        score = value.score;
-        feedback = value.feedback;
+        content = value;
+        console.log(content)
     }
 
-    const handleSetScore = (score) => {
-        const randomNumber = Math.floor(Math.random() * 20)
-        const style = score - randomNumber
-        const newRandom = Math.floor(randomNumber / 2)
-        const impact = score + newRandom
-        const skills = score + newRandom;
-        setValues({
-            impact, style, skills
-        })
-    }
-
-
-    useEffect(() => {
-        handleSetScore(score)
-    }, []);
 
     useEffect(() => {
         const updateHeight = () => {
@@ -86,23 +71,23 @@ export default function ResumeFeedback() {
                                                     OverAll
                                                 </dd>
                                                 <dd className="mt-1 text-base leading-9 font-bold text-black">
-                                                    {score ? score : '0'}/100
+                                                    {content ? content.analysis.resume_score : '0'}/100
                                                 </dd>
                                             </dl>
                                         </div>
                                     </div>
-                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg">
-                                        <div className="px-4 py-5 sm:p-6">
+                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg  group">
+                                        <div className="px-4 py-5 sm:p-6 group ">
                                             <dl className="text-center">
-                                                <dt className="text-xl leading-5 font-medium text-black truncate uppercase py-2">
-                                                    Impact
+                                                <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                                                    Clarity
                                                 </dt>
                                                 <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                                                    {values.impact}/100
+                                                    {content?.clarity?.score}/100
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        values.impact > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        content?.clarity?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Excellent
                                                         </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Needs Work
@@ -111,19 +96,20 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.clarity?.pointers}/>
                                     </div>
-                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg">
+                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
                                             <dl className="text-center">
-                                                <dt className="text-xl leading-5 font-medium text-black truncate uppercase py-2">
-                                                    Style
+                                                <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                                                    Relevancy
                                                 </dt>
                                                 <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                                                    {values.style}/100
+                                                    {content?.relevancy?.score}/100
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        values.style > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        content?.relevancy?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Excellent
                                                         </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Needs Work
@@ -132,19 +118,20 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.relevancy?.pointers}/>
                                     </div>
-                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg">
+                                    <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
                                             <dl className="text-center">
-                                                <dt className="text-xl leading-5 font-medium text-black truncate uppercase py-2">
-                                                    Skills
+                                                <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                                                    Content
                                                 </dt>
                                                 <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                                                    {values.skills}/100
+                                                    {content?.content_quality?.score}/100
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        values.skills > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        content?.content_quality?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Excellent
                                                         </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Needs Work
@@ -153,16 +140,17 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.content_quality?.pointers}/>
                                     </div>
                                 </div>
                                 <div className="progress_bar p-5 ">
                                     <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
-                                        <p className="tracking-wider">Your resume scored <span className={`${score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
-                                            {score ? score : "0"}
+                                        <p className="tracking-wider">Your resume scored <span className={`${content.analysis.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
+                                            {content ? content.analysis.resume_score : "0"}
                                         </span> out of 100.</p>
                                         <div className="w-full  my-2.5  overflow-hidden  ">
                                             <div className=" relative h-7 w-full rounded-2xl">
-                                                <Progress value={score} className={"h-5"} />
+                                                <Progress value={content.analysis.resume_score} className={"h-5"} />
                                             </div>
                                         </div>
                                     </div>
@@ -175,12 +163,12 @@ export default function ResumeFeedback() {
                                         </p>
                                         <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                                             {
-                                                feedback?.length > 0 ?
+                                                content.analysis.feedback?.length > 0 ?
                                                     <ul className="custom-counter">
                                                         {
-                                                            feedback.map((content, index) => {
-                                                                return <li className="text-sm flex my-4" key={index}>
-                                                                    <span className=" shadow-2xl px-4 py-1 border rounded-full mr-3 flex items-center justify-center">
+                                                            content.analysis.feedback.map((content, index) => {
+                                                                return <li className="text-sm flex items-center my-4" key={index}>
+                                                                    <span className=" shadow-2xl w-[35px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
                                                                         {index + 1}
                                                                     </span>
                                                                     <p>
