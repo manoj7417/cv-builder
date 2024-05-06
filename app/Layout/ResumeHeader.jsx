@@ -1,15 +1,18 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { AuthContext } from "../context/AuthContext";
 
 export default function ResumeHeader() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  const {userlogout} = useContext(AuthContext)
+
   const handleLogout = () => {
-    // dispatch(fetchLogout());
+    userlogout()
   };
 
   const handleClickOutside = (event) => {
@@ -89,11 +92,11 @@ export default function ResumeHeader() {
                         Settings
                       </a>
                       <div
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                         role="menuitem"
                         onClick={handleLogout}
                       >
-                        Sign out
+                        Logout
                       </div>
                     </div>
                   </div>

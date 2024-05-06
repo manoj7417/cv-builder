@@ -399,7 +399,7 @@ const Header = () => {
              {/* Auth buttons  */}
             <li>
               <div className="auths_button ml-2">
-                <button className="px-4 py-2 bg-blue-900  font-medium shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 text-white text-base rounded-md" onClick={handleLogin}>Login</button>
+                <button className="px-4 py-2 bg-blue-900 hover:bg-blue-700  font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 text-white text-base rounded-md" onClick={handleLogin}>Login</button>
               </div>
             </li>
           </ul>

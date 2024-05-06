@@ -1,13 +1,13 @@
 const STEPS = [
-  { title: "Add a resume pdf", text: "or create from scratch" },
-  { title: "Preview design", text: "and make edits" },
-  { title: "Analyze your resume", text: "get instant feedback" },
+  { title: "Add a Resume pdf", text: "or Create from Scratch" },
+  { title: "Preview Design", text: "and Make Corrections" },
+  { title: "Analyze your Resume", text: "and Get Instant Feedback" },
 ];
 
 export const Steps = () => {
   return (
     <section className="mx-auto px-8 py-12 border-b-2 border-blue-500 ">
-       <h2 className="text-3xl text-center font-semibold  max-w-2xl  mx-auto">Quickly identify errors in your resume or CV with instant analysis.</h2>
+       <h2 className="text-3xl text-center font-semibold  max-w-2xl  mx-auto">Quickly Identify Errors in your Resume with Instant Analysis</h2>
       <h1 className="text-center text-3xl font-bold">3 Simple Steps</h1>
       <div className="mt-8 flex justify-center">
         <dl className="flex flex-col gap-y-10 lg:flex-row lg:justify-center lg:gap-x-20">

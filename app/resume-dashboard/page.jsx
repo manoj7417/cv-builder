@@ -27,53 +27,45 @@ import Footer from "../Layout/Footer";
 export default function DashboardIdea() {
   return (
     <>
-      {/* <header>
-        <Navbar />
-      </header> */}
-      {/* <Header /> */}
       <main>
         <section
           className="flex min-h-screen flex-col items-center justify-center  "
           style={{
             backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
           }}
         >
-          <div
-            className="container  w-full h-screen"
-            style={{ marginBottom: "-200px" }}
-          >
+          <div className="container  w-full h-screen resume-dashboard">
             <div className="flex justify-between lg:px-24 px-10">
-              <div className="space-y-2 mt-40">
-                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">
-                  Crafted by industry experts
+              <div className="space-y-2 2xl:mt-40 lg:mt-20">
+                <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mb-5 tracking-tighter text-gray-900">
+                  Build Right CV for Right Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
-                  Crafted by seasoned professionals in the industry, our
-                  resume builder is meticulously designed to cater to a
-                  diverse range of needs and requirements, ensuring that every
-                  aspect of your resume is addressed with expertise and
-                  precision.
+                  Curated by Professionals and Industry Experts from all across
+                  the globe and integrating Artificial Intelligence, we bring
+                  forward CV Template options that are custom-tailored to the
+                  job you are applying for, to ensure that your Resume gets
+                  through every Application Tracking Software.
                 </p>
                 <div className="flex items-center space-x-4">
-                  <button className="text-xl text-white bg-blue-900 rounded-md px-5 mt-5 py-3">
-                    <a href="/resume-import">Build Resume for free</a>
+                  <button className="text-xl text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
+                    <a href="/resume-import">Build Resume for Free</a>
                   </button>
                 </div>
               </div>
-                <Image
-                  src="/ats friendly.png"
-                  className="px-7 pt-7 rounded-t-3xl lg:block hidden"
-                  alt="@shadcn"
-                  width={600}
-                  height={100}
-                />
+              <Image
+                src="/resume.png"
+                className="px-7 pt-7 rounded-t-3xl lg:block hidden"
+                alt="@shadcn"
+                width={600}
+                height={100}
+              />
             </div>
           </div>
           <div className="w-full  bg-white">
             <div className="rounded-t-3xl border-t-8 border-blue-500 p-6 shadow-xl ">
               <h2 className="text-3xl text-center font-semibold my-5">
-                Templates available for you to choose from
+                Choose From Our Detailed Templates Options
               </h2>
               <Tabs className="w-full py-5" defaultValue="all">
                 <TabsList className="mb-4 flex w-full justify-center flex-wrap py-10 h-auto">
@@ -1268,11 +1260,11 @@ export default function DashboardIdea() {
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Unable to find the right job? Genie can help you.
+                Get Matched to the Job that is Right for You!
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Genie will help you find the right job and provide you with the
-                best career advice and builds your resume.
+                Find the perfect profession and get matched with the best job
+                profile with the AI-Based Job Assistance Programme.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
