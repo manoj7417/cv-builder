@@ -82,16 +82,16 @@ const Header = () => {
                     <header>Resume Templates</header>
                     <ul className="mega-links">
                       <li>
-                        <Link href="/resume"><FiCamera className="inline mr-1 mt-0"/>Creative Templates</Link>
+                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Creative Templates</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiPenTool className="inline mr-1 mt-0"/>Traditional Templates</Link>
+                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Traditional Templates</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiBox className="inline mr-1 mt-0"/>Modern Templates</Link>
+                        <a href="#"><FiBox className="inline mr-1 mt-0"/>Modern Templates</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiColumns className="inline mr-1 mt-0"/> Simple Templates</Link>
+                        <a href="#"><FiColumns className="inline mr-1 mt-0"/> Simple Templates</a>
                       </li>
                     </ul>
                   </div>
@@ -99,16 +99,16 @@ const Header = () => {
                     <header>Resume Writing Guides </header>
                     <ul className="mega-links">
                       <li>
-                        <Link href="/resume"><FiPenTool className="inline mr-1 mt-0"/>Writing a Resume</Link>
+                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Writing a Resume</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiColumns className="inline mr-1 mt-0"/>Resume Summary</Link>
+                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>Resume Summary</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiCamera className="inline mr-1 mt-0"/>Choosing a Resume Format</Link>
+                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Choosing a Resume Format</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiBox className="inline mr-1 mt-0"/>Fitting Experience</Link>
+                        <a href="#"><FiBox className="inline mr-1 mt-0"/>Fitting Experience</a>
                       </li>
                     </ul>
                   </div>
@@ -116,16 +116,16 @@ const Header = () => {
                     <header>Resume Examples</header>
                     <ul className="mega-links">
                       <li>
-                        <Link href="/resume"><FiBox className="inline mr-1 mt-0"/>Project Manager</Link>
+                        <a href="#"><FiBox className="inline mr-1 mt-0"/>Project Manager</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiCamera className="inline mr-1 mt-0"/>Data Scientist</Link>
+                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Data Scientist</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiColumns className="inline mr-1 mt-0"/>Designer</Link>
+                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>Designer</a>
                       </li>
                       <li>
-                        <Link href="/resume"><FiPenTool className="inline mr-1 mt-0"/>Software Engineer</Link>
+                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Software Engineer</a>
                       </li>
                     </ul>
                   </div>
