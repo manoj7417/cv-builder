@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Resume } from '../components/Resume'
 import { Provider } from 'react-redux'
 import { store } from '../lib/redux/store'
@@ -7,7 +7,7 @@ import { store } from '../lib/redux/store'
 const page = () => {
 
   
-  React.useEffect(() => {
+  useEffect(() => {
     const resume = localStorage.getItem('newResumeContent');
 
     if (resume ) {
