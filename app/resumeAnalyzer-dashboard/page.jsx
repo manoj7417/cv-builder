@@ -42,6 +42,7 @@ export default function DashboardIdea() {
       // For example, you can pass it to your pdfToText function
       pdfToText(selectedFile)
         .then(async text => {
+          await localStorage.setItem("newResumeContent", text)
           await getFeedback(text);
         })
         .catch(error => console.error("Failed to extract text from pdf"));
