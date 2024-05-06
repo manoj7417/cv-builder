@@ -108,7 +108,7 @@ export default function DashboardIdea() {
                 Unable to find the right job? Genie can help you.
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Genie will help you find the right job and provide you with the best career advice and builds your portfolio.
+                Genie will help you find the right job and provide you with the best career advice and builds your resume.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">

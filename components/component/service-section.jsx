@@ -12,14 +12,14 @@ export function ServiceSection() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-2xl bg-gradient-to-b from-[#8181b9] to-[#131350] hover:bg-blue-900 text-white  px-5 py-1 mb-5">
-                  Portfolio Builder
+                  resume Builder
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-950">
                   Faster iteration. More innovation.
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                   The platform for buliding quick resumes and CV&apos;s. Focus
-                  on your work instead of crafting your portfolio. Resume
+                  on your work instead of crafting your resume. Resume
                   Builder is the perfect tool for your next job interview.
                 </p>
               </div>
@@ -31,7 +31,7 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Portfolio Builder
+                        resume Builder
                       </h3>
                       <p className="text-gray-500 ">
                         Access 100+ customizable templates for your resume and
@@ -119,7 +119,7 @@ export function ServiceSection() {
                       </h3>
                       <p className="text-gray-500 ">
                         Genie will help you find the right job and provide you
-                        with the best career advice and builds your portfolio.
+                        with the best career advice and builds your resume.
                       </p>
                     </div>
                   </li>
@@ -177,7 +177,7 @@ export function ServiceSection() {
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                 Genie will help you find the right job and provide you with the
-                best career advice and builds your portfolio.
+                best career advice and builds your resume.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
