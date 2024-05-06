@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
+import AuthHook from "@/app/hooks/AuthHook";
 
 export default function ResumeFeedback() {
     const [values, setValues] = useState({
@@ -36,6 +37,10 @@ export default function ResumeFeedback() {
             impact, style, skills
         })
     }
+
+    useEffect(() => {
+        AuthHook()
+    }, [])
 
     useEffect(() => {
         handleSetScore(score)
