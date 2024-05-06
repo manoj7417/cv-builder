@@ -54,7 +54,7 @@ export default function Login() {
                                     title=""
                                     className="font-semibold text-black transition-all duration-200 hover:underline"
                                 >
-                                    Create a free account
+                                    Sign Up for Free!
                                 </Link>
                             </p>
                             <form className="mt-8" onSubmit={handleSubmit(handleLogin)}>

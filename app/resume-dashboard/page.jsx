@@ -50,9 +50,9 @@ export default function DashboardIdea() {
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
                   Crafted by seasoned professionals in the industry, our
-                  portfolio builder is meticulously designed to cater to a
+                  resume builder is meticulously designed to cater to a
                   diverse range of needs and requirements, ensuring that every
-                  aspect of your portfolio is addressed with expertise and
+                  aspect of your resume is addressed with expertise and
                   precision.
                 </p>
                 <div className="flex items-center space-x-4">
@@ -1272,7 +1272,7 @@ export default function DashboardIdea() {
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                 Genie will help you find the right job and provide you with the
-                best career advice and builds your portfolio.
+                best career advice and builds your resume.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
