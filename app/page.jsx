@@ -27,9 +27,9 @@ export default function Home() {
         <LoaderUI />
       ) : (
         <>
+        <Header/>
           <Homepage />
-          {/* <Footer/> */}
-          {/* <Footer /> */}
+          <Footer/>
         </>
       )}
     </main>
