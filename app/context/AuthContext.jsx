@@ -1,20 +1,29 @@
 'use client'
 
-import { createContext,  useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export const AuthContext = createContext()
 
 
-
-let initialValues = {
-    isAuthenticated: false,
-    user: null
+const getInitialUserState = () => {
+    if (typeof window !== 'undefined') {
+        return JSON.parse(localStorage.getItem("userState")) || false;
+    } else {
+        return false;
+    }
 };
+
+
+let initialValues = getInitialUserState()
 
 
 
 export function AuthProvider({ children }) {
     const [userState, setUserState] = useState(initialValues)
+
+    useEffect(() => {
+        localStorage.setItem("userState", JSON.stringify(userState))
+    }, [userState])
 
     const userlogin = () => {
         const authuserState = { isAuthenticated: true, user: null }
@@ -27,6 +36,7 @@ export function AuthProvider({ children }) {
             isAuthenticated: false,
             user: null
         })
+        localStorage.removeItem("userState")
     }
 
     const value = {
