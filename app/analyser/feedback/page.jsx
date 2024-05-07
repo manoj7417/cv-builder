@@ -11,6 +11,7 @@ import AuthHook from "@/app/hooks/AuthHook";
 import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { getBetterResume } from "@/app/pages/api/api";
+import { toast } from "react-toastify";
 
 export default function ResumeFeedback() {
     const [content, setContent] = useState({})
@@ -42,6 +43,7 @@ export default function ResumeFeedback() {
         try {
             const response = await getBetterResume(resume)
             let data;
+            console.log(response.data);
             if (response.status === 200) {
                 data = JSON.parse(response.data[0].text.value)
                 return data.resume
@@ -58,10 +60,15 @@ export default function ResumeFeedback() {
         const resume = localStorage.getItem('newResumeContent');
         if (resume) {
             const data = await fetchBetterResume(resume);
-            let userResumeContent = JSON.parse(localStorage.getItem('resume-builder-parser-state')) || { resume: {} }
-            userResumeContent.resume = data
-            localStorage.setItem('resume-builder-parser-state', JSON.stringify(userResumeContent))
-            router.push('/resume-builder')
+            if (data && Object.keys(data).length > 0) {
+
+                let userResumeContent = JSON.parse(localStorage.getItem('resume-builder-parser-state')) || { resume: {} }
+                userResumeContent.resume = data
+                localStorage.setItem('resume-builder-parser-state', JSON.stringify(userResumeContent))
+                router.push('/resume-builder')
+            } else {
+                toast.error("Something went wrong")
+            }
         }
     }
 
