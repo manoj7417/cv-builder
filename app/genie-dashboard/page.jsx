@@ -5,12 +5,14 @@ import React from "react";
 import ResumeHeader from "../Layout/ResumeHeader";
 import Footer from "../Layout/Footer";
 import AuthHook from "../hooks/AuthHook";
+import NewResumeHeader from "../Layout/NewResumeHeader";
 
 const page = () => {
   AuthHook()
   return (
     <>
-      <ResumeHeader />
+      {/* <ResumeHeader /> */}
+      <NewResumeHeader/>
       <ChatDashboard />
       <Footer />
     </>
