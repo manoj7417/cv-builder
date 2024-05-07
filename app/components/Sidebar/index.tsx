@@ -11,9 +11,10 @@ import Image from "next/image";
 
 interface SidebarProps {
   setActiveTab: (tab: string) => void; // Function type defined
+  activeTab: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setActiveTab ,activeTab}) => {
   return (
     <aside className="fixed ms-6 ps-10 p-4 bg-white rounded-xl shadow-xl text-center">
       <div className="mb-4 flex items-center space-x-4 p-4">
@@ -41,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           >
             <span className="flex items-center space-x-2">
               <MdChecklist className="h-6 w-6 text-indigo-500" />
-              <span className=" text-gray-900 text-lg ps-3 ">Design</span>
+              <span className={`text-gray-900 text-lg ps-3 ${activeTab === "Design" ? "bg-red-200" : ""}`}>Design</span>
             </span>
           </button>
         </li>
