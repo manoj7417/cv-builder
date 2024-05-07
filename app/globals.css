@@ -492,6 +492,11 @@ footer a:hover svg {
 }
 
 
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+
+  /* Styles for Desktops */
+}
+
 
 /* Mobile Responsive CSS Ends Here  */
 

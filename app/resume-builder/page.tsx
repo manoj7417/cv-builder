@@ -19,6 +19,9 @@ export default function Create() {
   // Possible values: 'DESIGN', 'ATS', 'NONE'
   const [activeTab, setActiveTab] = useState<string>("AIContent");
 
+
+  console.log("activeTab:::",activeTab)
+
   AuthHook();
 
   return (
