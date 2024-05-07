@@ -74,7 +74,7 @@ export default function DashboardIdea() {
           <div className="container  w-fullbg-blue-300 resume-dashboard">
             <div className="flex px-24 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
-                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Perfectly Analysed CV for Perfect Job</h1>
+                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">Perfectly Analysed CV for Perfect Job</h1>
                 <p className="text-gray-700 text-lg pe-10">Scan Your CV and identify errors with the help of specialised Artificial Intelligence-based tools to create an ATS optimized and grammatically correct Resume.</p>
                 <div className="flex items-center space-x-4">
                   <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
@@ -92,7 +92,7 @@ export default function DashboardIdea() {
                   </label>
                 </div>
               </div>
-              <Image src="/enhance.png"  className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
+              <Image src="/1enhance.png"  className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
             </div>
           </div>
           <div className="w-full  " >
