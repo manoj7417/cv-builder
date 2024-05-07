@@ -31,7 +31,7 @@ export default function Create() {
         <main className="relative h-full overflow-hidden w-full bg-blue-50 py-20">
           <div className="grid grid-cols-3 md:grid-cols-9">
             <div className="col-span-2 pt-9">
-              <Sidebar setActiveTab={setActiveTab} />
+              <Sidebar setActiveTab={setActiveTab} activeTab={activeTab}/>
             </div>
             <div className="col-span-4 pt-5">
               <Resume />

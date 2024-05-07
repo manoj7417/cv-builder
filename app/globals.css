@@ -491,10 +491,19 @@ footer a:hover svg {
   }
 }
 
-
+/* Responsive CSS For Mackbook pro  */
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
-
-  /* Styles for Desktops */
+  .mobile_responsive_nav nav .wrapper {
+    position: relative;
+    max-width: 1300px;
+    padding: 0px 30px;
+    height: 70px;
+    line-height: 70px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 

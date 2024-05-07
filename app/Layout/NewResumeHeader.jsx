@@ -8,8 +8,8 @@ import { AuthContext } from "../context/AuthContext";
 const navigation = [
   { name: "Resume Builder", href: "#", current: true },
   { name: "Resume Analyser", href: "#", current: false },
-//   { name: "Projects", href: "#", current: false },
-//   { name: "Calendar", href: "#", current: false },
+  { name: "Projects", href: "#", current: false },
+  { name: "Calendar", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -70,7 +70,7 @@ export default function NewResumeHeader() {
                           item.current
                             ?  "text-black"
                             : "text-black",
-                          "rounded-md px-3 py-2 text-base font-bold"
+                          "rounded-md px-3 py-2 text-base font-semibold"
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
