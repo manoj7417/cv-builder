@@ -17,7 +17,7 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Create() {
   // Possible values: 'DESIGN', 'ATS', 'NONE'
-  const [activeTab, setActiveTab] = useState<string>("AIContent");
+  const [activeTab, setActiveTab] = useState<string>("Content");
 
 
   console.log("activeTab:::",activeTab)

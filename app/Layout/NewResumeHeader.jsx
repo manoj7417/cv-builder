@@ -4,12 +4,14 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { AuthContext } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
+import { IoIosArrowDown } from "react-icons/io";
 
 const navigation = [
-  { name: "Resume Builder", href: "#", current: true },
-  { name: "Resume Analyser", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Resume Builder", href: "/resume-builder", current: true },
+  { name: "Resume Analyser", href: "/resumeAnalyzer-dashboard", current: false },
+  { name: "Genie Talk", href: "/genie-dashboard", current: false },
+  { name: "Psychometric", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -17,15 +19,15 @@ function classNames(...classes) {
 }
 
 export default function NewResumeHeader() {
+  const { userlogout, userState } = useContext(AuthContext);
+  const router = useRouter()
 
-    const {userlogout} = useContext(AuthContext)
-
-
-    const handleLogout = () => {
-        userlogout()
-      };
-
-
+  const handleLogout = () => {
+    if (userState?.isAuthenticated) {
+      userlogout();
+      router.push('/')
+    }
+  };
 
   return (
     <Disclosure as="nav" className="bg-[#fafbfd] sticky top-0 z-50">
@@ -67,14 +69,13 @@ export default function NewResumeHeader() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
-                            ?  "text-black"
-                            : "text-black",
-                          "rounded-md px-3 py-2 text-base font-semibold"
+                          item.current ? "text-black" : "text-black",
+                          "rounded-md px-3 py-2 text-base flex items-center justify-center"
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
+                        <IoIosArrowDown className="inline ml-1 text-sm" />
                       </a>
                     ))}
                   </div>
