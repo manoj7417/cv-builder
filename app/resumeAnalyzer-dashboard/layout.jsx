@@ -1,14 +1,19 @@
+'use client'
+import { useContext } from "react";
 import Footer from "../Layout/Footer"
+import Header from "../Layout/Header";
 import NewResumeHeader from "../Layout/NewResumeHeader"
-import ResumeHeader from "../Layout/ResumeHeader"
+import { AuthContext } from "../context/AuthContext";
 
 const Layout = ({ children }) => {
+
+  const { userState } = useContext(AuthContext);
+
     return (
-      <main className="resume_dashboard">
-        <div className="resume_dashboard_container">
+      <main className="resume_analyser">
+        <div className="resume_analyser_container">
           <div className="wrapper">
-            {/* <ResumeHeader/> */}
-            <NewResumeHeader/>
+            {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
             {children}
             <Footer/>
           </div>

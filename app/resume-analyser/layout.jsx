@@ -1,6 +1,7 @@
 import Footer from "../Layout/Footer"
 import NewResumeHeader from "../Layout/NewResumeHeader"
 import ResumeHeader from "../Layout/ResumeHeader"
+import { useContext } from "react";
 
 const Layout = ({ children }) => {
     return (
