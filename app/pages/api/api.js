@@ -54,3 +54,12 @@ export const registerUser = async (data) => {
   }
 }
 
+export const getBetterResume = async (message) => {
+  try {
+    const response = await instance.post('/openai/generateBetterResume', { message }, { withCredentials: true });
+    return response;
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
+    return error
+  }
+}
