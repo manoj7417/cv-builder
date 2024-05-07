@@ -7,7 +7,7 @@ export function ServiceSection() {
   return (
     <div className="flex flex-col min-h-[100dvh] ">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-blue-100 bg-opacity-10  scroll-mt-20">
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff]  scroll-mt-20">
           <div className=" px-4 md:px-6 mb-10">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -171,11 +171,8 @@ export function ServiceSection() {
         </section>
 
         <section
-          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20"
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
-          }}
+          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-[white] to-[#dcecff]"
+          
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
@@ -202,7 +199,7 @@ export function ServiceSection() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t  bg-opacity-25 scroll-mt-20">
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff] scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">

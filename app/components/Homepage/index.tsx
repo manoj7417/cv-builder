@@ -16,7 +16,7 @@ export default function Homepage() {
     <>
       {/* <Navbar /> */}
       <section
-        className="flex items-center justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-white"
+        className="flex items-center justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-gradient-to-r from-white to-[#dcecff]"
         // style={{
         //   backgroundImage: "url('/banner-bg.svg')",
         //   backgroundPosition: "center",

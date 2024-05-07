@@ -35,7 +35,7 @@ import {
 
 export default function Slider() {
   return (
-    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-t from-[white] to-[#dcecff]">
+    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-r from-[white] to-[#dcecff]">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl font-semibold tracking-tight text-center md:text-4xl">
         Curating CVs that Reflect Perfection
