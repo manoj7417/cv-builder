@@ -42,6 +42,7 @@ export default function DashboardIdea() {
       // For example, you can pass it to your pdfToText function
       pdfToText(selectedFile)
         .then(async text => {
+          await localStorage.setItem("newResumeContent", text)
           await getFeedback(text);
         })
         .catch(error => console.error("Failed to extract text from pdf"));
@@ -52,8 +53,10 @@ export default function DashboardIdea() {
   const getFeedback = async (message) => {
     try {
       const response = await AnalyzeAts(message)
+      console.log(response);
       const value = JSON.parse(response[0].text.value)
-      if (value.score) {
+      console.log(value);
+      if (value.analysis.resume_score) {
         localStorage.setItem('feedback', JSON.stringify(value))
         router.push('/analyser/feedback')
       }

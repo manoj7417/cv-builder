@@ -3,11 +3,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AskBot } from '@/app/pages/api/api'; // Ensure this path is correct
+import ChatLoader from '@/app/ui/ChatLoader';
 
 export function Chatui() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const chatContainerRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -20,6 +22,7 @@ export function Chatui() {
       const newUserMessage = { sender: 'user', text: input };
       setMessages([...messages, newUserMessage]);
       setInput('');
+      setIsLoading(true)
       try {
         const reply = await AskBot(input);
         const newAIMessage = { sender: 'AI', text: reply[0].text.value };
@@ -27,6 +30,8 @@ export function Chatui() {
       } catch (error) {
         console.error('Error fetching response from AI:', error);
         setMessages(messages => [...messages, { sender: 'AI', text: "Sorry, I couldn't fetch a response. Please try again." }]);
+      }finally{
+        setIsLoading(false)
       }
     }
   };
@@ -43,15 +48,20 @@ export function Chatui() {
 
   return (
     <div className="flex h-screen flex-col max-h-[calc(100vh-20rem)]">
-      <main className="flex-1 overflow-y-auto p-4 bg-gray-100 rounded-lg" ref={chatContainerRef}>
+      <main className="flex-1 overflow-y-auto p-4 bg-gray-50 rounded-lg" ref={chatContainerRef}>
         <div className="grid gap-4 ">
           {messages.map((message, index) => (
             <div key={index} className={`flex ${message.sender === 'AI' ? '' : 'justify-end'}`}>
-              <div className={`max-w-[60%] rounded-t-lg ${message.sender === 'AI' ? 'rounded-bl-lg bg-gray-900 text-gray-50' : 'rounded-br-lg bg-gray-200 text-black'} p-3`}>
+              <div className={`max-w-[60%] rounded-t-lg ${message.sender === 'AI' ? 'rounded-br-lg bg-gray-900 text-gray-50' : 'rounded-bl-lg bg-gray-200 text-black'} p-3`}>
                 <p>{message.text}</p>
               </div>
             </div>
           ))}
+          {isLoading &&
+            <div className='flex '>
+              <ChatLoader />
+            </div>
+          }
         </div>
       </main>
       <div className="border-t border-gray-200 bg-white px-4 py-3">
