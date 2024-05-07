@@ -6,6 +6,7 @@ import Image from "next/image";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const navigation = [
   { name: "Resume Builder", href: "/resume-builder", current: true },
@@ -24,6 +25,9 @@ export default function NewResumeHeader() {
 
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
+        toast.success("User logout successfully",{
+            position:"top-right"
+        })
       userlogout();
       router.push('/')
     }
