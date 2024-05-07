@@ -45,13 +45,13 @@ export default function Homepage() {
                   className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                   href="/resume-dashboard"
                 >
-                  Resume Builder
+                  CV Curator
                 </Link>
                 <Link
                   className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 text-bold text-blue-900 font-medium shadow transition-colors border-2 border-transparent hover:border-blue-900 mx-2"
                   href="/resumeAnalyzer-dashboard"
                 >
-                  Resume Analyzer
+                  CV Analyser
                 </Link> */}
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
@@ -62,7 +62,7 @@ export default function Homepage() {
                   href="/resume-dashboard"
                   onMouseEnter={toggleHover}
                 >
-                  Resume Builder
+                  CV Curator
                 </Link>
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-bold text-blue-900 font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
@@ -73,7 +73,7 @@ export default function Homepage() {
                   href="/resumeAnalyzer-dashboard"
                   onMouseEnter={toggleHover}
                 >
-                  Resume Analyzer
+                  CV Analyser
                 </Link>
               </div>
             </div>

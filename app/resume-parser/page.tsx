@@ -24,7 +24,7 @@ const RESUME_EXAMPLES = [
     fileUrl: "resume-example/inhouse-resume.pdf",
     description: (
       <span>
-        Created with Inhouse Resume Builder -{" "}
+        Created with Inhouse CV Curator -{" "}
         <Link href="/resume-builder">Link</Link>
       </span>
     ),

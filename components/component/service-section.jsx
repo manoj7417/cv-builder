@@ -12,15 +12,13 @@ export function ServiceSection() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-2xl bg-gradient-to-b from-[#8181b9] to-[#131350] hover:bg-blue-900 text-white  px-5 py-1 mb-5">
-                  Resume Builder
+                  CV Curator
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-950">
                   A Step Closer to Your Dream Job!
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                  Be quick with CV Building to apply with a profile that is
-                  professionally prolific and lands you on the job you always
-                  dreamt of.
+                Get your CV engineered in minutes for a rapid job application that is professionally prolific and lands you on the job you always dreamt of.
                 </p>
               </div>
             </div>
@@ -30,7 +28,7 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Resume Builder
+                        CV Curator
                       </h3>
                       <p className="text-gray-500 ">
                         Looking for an impressive Resume Template? Find the best
@@ -42,7 +40,7 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Analyzer
+                        Analyser
                       </h3>
                       <p className="text-gray-500 ">
                         Not Sure if Your Resume is Perfect for the Job you are
@@ -64,7 +62,7 @@ export function ServiceSection() {
                 </ul>
                 <div>
                   <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/resume-dashboard">Start Building</a>
+                    <a href="/resume-dashboard">Curate Now</a>
                   </button>
                 </div>
               </div>

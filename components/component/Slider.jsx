@@ -38,10 +38,10 @@ export default function Slider() {
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-t from-[white] to-[#dcecff]">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl font-semibold tracking-tight text-center md:text-4xl">
-        Tailoring CVs, Sourcing Careers
+        Curating CVs that Reflect Perfection
         </h2>
         <p className="text-center max-w-3xl mx-auto">
-        Explore Unlimited possibilities with the power of a perfectly crafted CV. Create a Resume that aligns with your Professional Profile, using our customized templates. You can also rectify your current CV and check your ATS Score now.
+        Explore unlimited possibilities with the power of a perfectly crafted CV by creating one that aligns with your Professional Profile, employing our customised templates. If you already have a CV, you can easily rectify your current CV to create your ATS (Application Tracking Score) optimized CV.
         </p>
 
         <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
@@ -55,7 +55,7 @@ export default function Slider() {
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
             <MdOutlineDesignServices className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2" />
             <p className="text-base mt-2 text-center">
-              Customize Layouts to Suit your Preferences
+              Customized Layouts to Suit Your Preferences
             </p>
           </div>
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">

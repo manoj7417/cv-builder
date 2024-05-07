@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
           <div className="wrapper">
             {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
             {children}
-            <Footer/>
+            {/* <Footer/> */}
           </div>
         </div>
       </main>

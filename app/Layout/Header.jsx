@@ -129,10 +129,10 @@ const Header = () => {
                     </ul>
                   </div>
                   <div className="row">
-                    <header>Resume Builder</header>
+                    <header>CV Curator</header>
                     <ul className="mega-links">
                       <li>
-                        <a href="#"><FiBox className="inline mr-1 mt-0"/>Resume Builder</a>
+                        <a href="#"><FiBox className="inline mr-1 mt-0"/>CV Curator</a>
                       </li>
                       <li>
                         <a href="#"><FiCamera className="inline mr-1 mt-0"/>Resume Checker</a>
