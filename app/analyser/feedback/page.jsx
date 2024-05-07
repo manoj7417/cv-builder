@@ -11,21 +11,10 @@ import AuthHook from "@/app/hooks/AuthHook";
 import FeedbackModal from "@/components/component/FeedbackModal";
 
 export default function ResumeFeedback() {
-    const [values, setValues] = useState({
-        impact: 0,
-        style: 0,
-        skills: 0
-    })
+    const [content, setContent] = useState({})
     const iframeRef = useRef(null);
     AuthHook()
-
-    let pdfFile = null;
-    let content;
-    if (typeof window !== 'undefined') {
-        pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
-        let value = JSON.parse(localStorage.getItem("feedback"));
-        content = value;
-    }
+    const [pdfFile, setPDFFile] = useState(null)
 
 
     useEffect(() => {
@@ -45,10 +34,17 @@ export default function ResumeFeedback() {
         };
     }, [pdfFile]);
 
+    useEffect(() => {
+        let pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
+        let value = JSON.parse(localStorage.getItem("feedback"));
+        setPDFFile(pdfFile);
+        setContent(value)
+    }, [])
+
     return (
         <>
             {/* <Header/> */}
-            <section className="analyser_resume_section">
+            <section className="analyser_resume_section" suppressHydrationWarning>
                 <div className="bg-blue-50 w-full">
                     <div className="main_heading_section">
                         <h1 className=" text-center lg:text-5xl text-3xl font-bold leading-snug pt-10 pb-5">
@@ -70,7 +66,7 @@ export default function ResumeFeedback() {
                                                     OverAll
                                                 </dd>
                                                 <dd className="mt-1 text-base leading-9 font-bold text-black">
-                                                    {content ? content?.analysis?.resume_score : '0'}/100
+                                                    {Object.keys(content).length > 0 ? content?.analysis?.resume_score : '0'}/100
                                                 </dd>
                                             </dl>
                                         </div>
@@ -82,11 +78,11 @@ export default function ResumeFeedback() {
                                                     Clarity
                                                 </dt>
                                                 <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                                                    {content?.clarity?.score}/100
+                                                    {Object.keys(content).length > 0 && content?.clarity?.score}/100
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        content?.clarity?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        Object.keys(content).length > 0 && content?.clarity?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Excellent
                                                         </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Needs Work
@@ -95,7 +91,7 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.clarity?.pointers}/>
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.clarity?.pointers} />
                                     </div>
                                     <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
@@ -104,11 +100,11 @@ export default function ResumeFeedback() {
                                                     Relevancy
                                                 </dt>
                                                 <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                                                    {content?.relevancy?.score}/100
+                                                    {Object.keys(content).length > 0 && content?.relevancy?.score}/100
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        content?.relevancy?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        Object.keys(content).length > 0 && content?.relevancy?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Excellent
                                                         </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Needs Work
@@ -117,7 +113,7 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.relevancy?.pointers}/>
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.relevancy?.pointers} />
                                     </div>
                                     <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
@@ -130,7 +126,7 @@ export default function ResumeFeedback() {
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        content?.content_quality?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        Object.keys(content).length > 0 && content?.content_quality?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Excellent
                                                         </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
                                                             Needs Work
@@ -139,7 +135,7 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.content_quality?.pointers}/>
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.content_quality?.pointers} />
                                     </div>
                                 </div>
                                 <div className="progress_bar p-5 ">
@@ -162,10 +158,10 @@ export default function ResumeFeedback() {
                                         </p>
                                         <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                                             {
-                                                content?.analysis?.feedback?.length > 0 ?
+                                                Object.keys(content).length > 0 && content?.analysis?.feedback?.length > 0 ?
                                                     <ul className="custom-counter">
                                                         {
-                                                            content.analysis.feedback.map((content, index) => {
+                                                            Object.keys(content).length > 0 && content.analysis.feedback.map((content, index) => {
                                                                 return <li className="text-sm flex items-center my-4" key={index}>
                                                                     <span className=" shadow-2xl w-[35px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
                                                                         {index + 1}

@@ -10,7 +10,7 @@ function FeedbackModal({ content, className }) {
                     {
                         content?.length > 0 && content.map((item, index) => {
                             return <li key={index} className=' text-xs flex items-start'>
-                                <span className='border w-[40px] h-[20px] flex justify-center items-center rounded-full mr-3'>{index + 1}</span>
+                                <span className=' flex justify-center items-center rounded-full mr-3 font-bold'>{index + 1}.</span>
                                 {item}</li>
                         })
                     }
