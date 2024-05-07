@@ -12,7 +12,7 @@ const navigation = [
   { name: "Resume Builder", href: "/resume-builder", current: true },
   { name: "Resume Analyser", href: "/resumeAnalyzer-dashboard", current: false },
   { name: "Genie Talk", href: "/genie-dashboard", current: false },
-  { name: "Psychometric", href: "#", current: false },
+  { name: "Psychometric Test", href: "#", current: false },
 ];
 
 function classNames(...classes) {
