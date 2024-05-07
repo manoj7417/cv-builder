@@ -24,9 +24,9 @@ export default function Homepage() {
       >
         <div className="container px-4 md:px-6 lg:pt-0 pt-20">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-            <div className="flex flex-col justify-center space-y-4 lg:px-20 px-5">
+            <div className="flex flex-col justify-center space-y-4 2xl:px-20 lg:px-0 px-5">
               <div className="space-y-2">
-                <h1 className="2xl:text-6xl lg:text-4xl md:text-4xl font-bold tracking-tighter text-gray-900">
+                <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl font-bold tracking-tighter text-gray-900">
                   WHERE
                   <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent 2xl:ml-3 lg:ml-2">
                     RIGHT JOB
