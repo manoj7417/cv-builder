@@ -77,7 +77,7 @@ export function ServiceSection() {
                   loop
                   preload="none"
                 >
-                  <source src="/landing_video.mp4" type="video/mp4" />
+                  <source src="/builder.mp4" type="video/mp4" />
                   <track
                     src="/path/to/captions.vtt"
                     kind="subtitles"
@@ -94,14 +94,33 @@ export function ServiceSection() {
               <div className="space-y-2"></div>
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              <img
+              {/* <img
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-first"
                 height="310"
                 src="/new_section3.png"
                 width="550"
-              />
-              <div className="flex flex-col justify-center space-y-4 ps-5">
+              /> */}
+              <div className="w-[600px] h-auto rounded-md pr-10">
+                <video
+                  width="1000"
+                  height="1000"
+                  autoPlay
+                  muted
+                  loop
+                  preload="none"
+                >
+                  <source src="/aigenie.mp4" type="video/mp4" />
+                  <track
+                    src="/path/to/captions.vtt"
+                    kind="subtitles"
+                    srcLang="en"
+                    label="English"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="flex flex-col justify-center space-y-4 ps-20">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
                   <h2 className="text-4xl font-bold text-blue-900">
                     Career Genie
