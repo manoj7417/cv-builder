@@ -121,7 +121,7 @@ export function ServiceSection() {
               <div className="flex flex-col justify-center space-y-4 ps-20">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
                   <h2 className="text-4xl font-bold text-blue-900">
-                    Career Genie
+                  Genie Connect
                   </h2>
                   <GiMagicLamp className="h-14 w-14 ms-5 text-blue-900" />
                 </div>
@@ -129,37 +129,30 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Career Guidance
+                      Genie Advocates
                       </h3>
                       <p className="text-gray-500 ">
-                        Genie will help you find the right job and provide you
-                        with the best career advice and builds your resume.
+                      Get recommendations from Genie on how to craft the perfect CV for the job or professional role you are aiming for. 
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Solve your problems
+                      Genie Counsels
                       </h3>
                       <p className="text-gray-500 ">
-                        Not sure how to ask for a raise, looking for your next
-                        job, or feeling stuck in your current role and unsure
-                        about what to do next? Genie is here to guide you
-                        through these challenges and help you navigate your
-                        career journey.
+                      Puzzled about your Career Choices? Get counselled by Genie and find solutions to your professional problems.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Grant your wishes
+                      Genie Sources
                       </h3>
                       <p className="text-gray-500 ">
-                        Wish to get a promotion or a raise at your next job, or
-                        just want to make a change in your current role? Genie
-                        can help you with these requests and grant your wishes.
+                      Need specific resources to get started with your professional journey? Ask the Genie and get specific resources to refer to!
                       </p>
                     </div>
                   </li>
@@ -167,7 +160,7 @@ export function ServiceSection() {
                 <div>
                   <button className="items-center flex px-7 py-2 rounded-md text-base text-white bg-blue-900 hover:bg-blue-700">
                     <a className="flex items-center" href="/genie-dashboard">
-                      Connect with Genie{" "}
+                      Connect with Genie
                       <GiMagicLamp className="h-8 w-8 ms-5 text-white" />
                     </a>
                   </button>
@@ -187,10 +180,10 @@ export function ServiceSection() {
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Get Matched to the Job that is Right for You!
+              Looking for More?
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-              Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
+              Contact our Industry Experts to get additional information for a more personalised approach to Career Counselling.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
@@ -198,7 +191,7 @@ export function ServiceSection() {
                 className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
                 href="#"
               >
-                Contact Expert
+                Contact Now
               </Link>
               {/* <Link
                 className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
@@ -212,8 +205,8 @@ export function ServiceSection() {
         <section className="w-full py-12 md:py-24 lg:py-32 border-t  bg-opacity-25 scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Find the Exact Job you Need with Perfectly Crafted CVs
+              <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">
+              Stay Connected with the Genie!
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                 Subscribe to our newsletter and get latest updates.
