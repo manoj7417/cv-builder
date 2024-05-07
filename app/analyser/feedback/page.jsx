@@ -9,13 +9,16 @@ import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import AuthHook from "@/app/hooks/AuthHook";
 import FeedbackModal from "@/components/component/FeedbackModal";
+import NewResumeLoader from "@/app/ui/newResumeLoader";
+import { getBetterResume } from "@/app/pages/api/api";
 
 export default function ResumeFeedback() {
     const [content, setContent] = useState({})
     const iframeRef = useRef(null);
     AuthHook()
     const [pdfFile, setPDFFile] = useState(null)
-
+    const [isLoading, setIsLoading] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         const updateHeight = () => {
@@ -34,6 +37,34 @@ export default function ResumeFeedback() {
         };
     }, [pdfFile]);
 
+
+    const fetchBetterResume = async (resume) => {
+        try {
+            const response = await getBetterResume(resume)
+            let data;
+            if (response.status === 200) {
+                data = JSON.parse(response.data[0].text.value)
+                return data.resume
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const handleBetterResumeContent = async () => {
+        setIsLoading(true)
+        const resume = localStorage.getItem('newResumeContent');
+        if (resume) {
+            const data = await fetchBetterResume(resume);
+            let userResumeContent = JSON.parse(localStorage.getItem('resume-builder-parser-state')) || { resume: {} }
+            userResumeContent.resume = data
+            localStorage.setItem('resume-builder-parser-state', JSON.stringify(userResumeContent))
+            router.push('/resume-builder')
+        }
+    }
+
     useEffect(() => {
         let pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
         let value = JSON.parse(localStorage.getItem("feedback"));
@@ -45,10 +76,18 @@ export default function ResumeFeedback() {
         <>
             {/* <Header/> */}
             <section className="analyser_resume_section" suppressHydrationWarning>
+                {isLoading &&
+                    <div className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"
+                        style={{
+                            zIndex: 9999
+                        }}>
+                        <NewResumeLoader />
+                    </div>
+                }
                 <div className="bg-blue-50 w-full">
                     <div className="main_heading_section">
                         <h1 className=" text-center lg:text-5xl text-3xl font-bold leading-snug pt-10 pb-5">
-                            A Result of Your CV,Analysis
+                            A Result of Your CV Analysis
                         </h1>
                         <p className="lg:w-1/2 w-3/5 mx-auto text-center lg:text-base text-sm">
                             Genie Career online CV checker was designed by a team of
@@ -91,13 +130,13 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.clarity?.pointers} />
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.clarity?.pointers} onClick={handleBetterResumeContent} />
                                     </div>
                                     <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
                                             <dl className="text-center">
                                                 <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                                                    Relevancy
+                                                    Relevance
                                                 </dt>
                                                 <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
                                                     {Object.keys(content).length > 0 && content?.relevancy?.score}/100
@@ -113,7 +152,7 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.relevancy?.pointers} />
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.relevancy?.pointers} onClick={handleBetterResumeContent} />
                                     </div>
                                     <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
@@ -135,12 +174,12 @@ export default function ResumeFeedback() {
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.content_quality?.pointers} />
+                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.content_quality?.pointers} onClick={handleBetterResumeContent} />
                                     </div>
                                 </div>
                                 <div className="progress_bar p-5 ">
                                     <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
-                                        <p className="tracking-wider">Your resume scored <span className={`${content?.analysis?.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
+                                        <p className="tracking-wider">Your resume ATS score was <span className={`${content?.analysis?.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
                                             {content ? content?.analysis?.resume_score : "0"}
                                         </span> out of 100.</p>
                                         <div className="w-full  my-2.5  overflow-hidden  ">
