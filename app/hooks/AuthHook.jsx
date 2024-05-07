@@ -9,7 +9,6 @@ function AuthHook() {
     const pathname = usePathname()
 
     useEffect(() => {
-        console.log(userState.isAuthenticated)
         if (!userState.isAuthenticated) {
             router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
         }

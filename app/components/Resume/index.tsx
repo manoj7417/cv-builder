@@ -28,8 +28,7 @@ export const Resume = () => {
 
   return (
     <>
-      <div className="flex pb-20 w-full justify-center md:justify-end">
-       
+      <div className="flex pb-20 w-full justify-center">
         <div className="relative">
         <ResumeControlBarCSR
             scale={scale}
