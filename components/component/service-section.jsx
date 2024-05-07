@@ -101,7 +101,7 @@ export function ServiceSection() {
                 src="/new_section3.png"
                 width="550"
               /> */}
-              <div className="w-[600px] h-auto rounded-md pr-10">
+              <div className="w-[550px] h-auto shadow-lg rounded-md pr-10">
                 <video
                   width="1000"
                   height="1000"
