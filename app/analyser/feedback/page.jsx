@@ -20,6 +20,11 @@ export default function ResumeFeedback() {
     const [pdfFile, setPDFFile] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
+    const [modalsView, setModalsView] = useState({
+        clarity: false,
+        relevance: false,
+        content: false
+    })
 
     useEffect(() => {
         const updateHeight = () => {
@@ -72,6 +77,24 @@ export default function ResumeFeedback() {
         }
     }
 
+
+    const handleModalClose = (name) => {
+        setModalsView({
+            ...modalsView,
+            [name]: false
+        })
+    }
+
+    const handleOpenModal = (name) => {
+        const modalView = {
+            clarity: false,
+            relevance: false,
+            content: false, [name]: true
+        }
+        console.log(modalView)
+        setModalsView(modalView)
+    }
+
     useEffect(() => {
         let pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
         let value = JSON.parse(localStorage.getItem("feedback"));
@@ -94,11 +117,10 @@ export default function ResumeFeedback() {
                 <div className="bg-blue-50 w-full">
                     <div className="main_heading_section">
                         <h1 className=" text-center lg:text-5xl text-3xl font-bold leading-snug pt-10 pb-5">
-                            A Result of Your CV Analysis
+                            CV Analyser Insights
                         </h1>
                         <p className="lg:w-1/2 w-3/5 mx-auto text-center lg:text-base text-sm">
-                            Genie Career online CV checker was designed by a team of
-                            experienced recruiters, data analysts, and software engineers.
+                            Our CV Analyser is meticulously designed by a team of experienced professionals, recruiters, data analysts, and technical experts to curate compatible and optimized CVs. Check your CV Score, Content Suggestions, Recommendations, and more subsequently!
                         </p>
                     </div>
                     <div className="calculation_section py-10">
@@ -128,16 +150,16 @@ export default function ResumeFeedback() {
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        Object.keys(content).length > 0 && content?.clarity?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        Object.keys(content).length > 0 && content?.clarity?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base" onClick={() => handleOpenModal('clarity')}>
                                                             Excellent
-                                                        </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base" onClick={() => handleOpenModal('clarity')}>
                                                             Needs Work
                                                         </button>
                                                     }
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.clarity?.pointers} onClick={handleBetterResumeContent} />
+                                        <FeedbackModal showModal={modalsView.clarity} content={content?.clarity?.pointers} onClick={handleBetterResumeContent} onClose={() => handleModalClose('clarity')} />
                                     </div>
                                     <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
@@ -150,16 +172,16 @@ export default function ResumeFeedback() {
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        Object.keys(content).length > 0 && content?.relevancy?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        Object.keys(content).length > 0 && content?.relevancy?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base" onClick={() => handleOpenModal('relevance')}>
                                                             Excellent
-                                                        </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base" onClick={() => handleOpenModal('relevance')}>
                                                             Needs Work
                                                         </button>
                                                     }
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.relevancy?.pointers} onClick={handleBetterResumeContent} />
+                                        <FeedbackModal showModal={modalsView.relevance} content={content?.relevancy?.pointers} onClick={handleBetterResumeContent} onClose={() => handleModalClose('relevance')} />
                                     </div>
                                     <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                                         <div className="px-4 py-5 sm:p-6">
@@ -172,16 +194,16 @@ export default function ResumeFeedback() {
                                                 </dd>
                                                 <dd className="pt-2">
                                                     {
-                                                        Object.keys(content).length > 0 && content?.content_quality?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        Object.keys(content).length > 0 && content?.content_quality?.score > 80 ? <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base" onClick={() => handleOpenModal('content')}>
                                                             Excellent
-                                                        </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base">
+                                                        </button> : <button className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base" onClick={() => handleOpenModal('content')}>
                                                             Needs Work
                                                         </button>
                                                     }
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <FeedbackModal className={'hidden group-hover:block'} content={content?.content_quality?.pointers} onClick={handleBetterResumeContent} />
+                                        <FeedbackModal showModal={modalsView.content} content={content?.content_quality?.pointers} onClick={handleBetterResumeContent} onClose={() => handleModalClose('content')} />
                                     </div>
                                 </div>
                                 <div className="progress_bar p-5 ">
