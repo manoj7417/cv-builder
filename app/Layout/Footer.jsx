@@ -217,13 +217,23 @@ export default function Footer() {
               <p className="font-bold text-gray-900">Services</p>
 
               <ul className="mt-6 space-y-4 text-sm">
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     className="text-black transition"
                   >
                     
-                    1on1 Coaching{" "}
+                     Counselling
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                  </a>
+                </li> */}
+
+                <li>
+                  <a
+                    href="#"
+                    className="text-black transition"
+                  >
+                    CV Curator
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -233,8 +243,7 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    Company Review{" "}
+                     CV Analyser
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -244,23 +253,11 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    Accounts Review{" "}
+                    Genie Connect
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-black transition"
-                  >
-                    {" "}
-                    HR Consulting{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
-                  </a>
-                </li>
-
+{/* 
                 <li>
                   <a
                     href="#"
@@ -270,7 +267,7 @@ export default function Footer() {
                     SEO Optimisation{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -294,8 +291,7 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    Meet the Team{" "}
+                    Meet the Team
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -305,8 +301,7 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    Accounts Review{" "}
+                     Terms and Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -322,8 +317,7 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    Contact{" "}
+                    Contact
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -333,8 +327,7 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    FAQs{" "}
+                    FAQs
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -344,8 +337,7 @@ export default function Footer() {
                     href="#"
                     className="text-black transition"
                   >
-                    {" "}
-                    Live Chat{" "}
+                    Live Chat
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -356,7 +348,7 @@ export default function Footer() {
               <p className="font-bold text-gray-900">Legal</p>
 
               <ul className="mt-6 space-y-4 text-sm">
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     className="text-black transition"
@@ -365,7 +357,7 @@ export default function Footer() {
                     Accessibility{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
-                </li>
+                </li> */}
 
                 <li>
                   <a

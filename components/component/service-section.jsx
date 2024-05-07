@@ -31,8 +31,8 @@ export function ServiceSection() {
                         CV Curator
                       </h3>
                       <p className="text-gray-500 ">
-                        Looking for an impressive Resume Template? Find the best
-                        Artificial Intelligence-Based Services in CV Building
+                        Looking for an impressive CV Template? Find the best
+                        Artificial Intelligence-Based Services in CV Making
                         here!
                       </p>
                     </div>
@@ -40,10 +40,10 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Analyser
+                        CV Analyser
                       </h3>
                       <p className="text-gray-500 ">
-                        Not Sure if Your Resume is Perfect for the Job you are
+                        Not Sure if Your CV is Perfect for the Job you are
                         applying for? Get your CV analysed by Industry Experts
                         now!
                       </p>
@@ -55,14 +55,14 @@ export function ServiceSection() {
                         Genie
                       </h3>
                       <p className="text-gray-500 ">
-                      Simplify your approach to Job Applications with an AI-based CV Builder that does all that you want while you sit back and relax!
+                      Simplify your approach to Job Applications with an AI-based CV Maker that does all that you want while you sit back and relax!
                       </p>
                     </div>
                   </li>
                 </ul>
                 <div>
                   <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/resume-dashboard">Curate Now</a>
+                    <a href="/CV-dashboard">Curate Now</a>
                   </button>
                 </div>
               </div>
@@ -182,16 +182,16 @@ export function ServiceSection() {
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
               Looking for More?
               </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
+              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
               Contact our Industry Experts to get additional information for a more personalised approach to Career Counselling.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
               <Link
                 className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                href="#"
+                href="/contact-us"
               >
-                Contact Now
+                Contact Expert
               </Link>
               {/* <Link
                 className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
@@ -224,11 +224,10 @@ export function ServiceSection() {
                   className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
                   href="#"
                 >
-                  Sign up
+                  Subscribe
                 </Link>
               </form>
               <p className="text-xs text-gray-500">
-                Sign up to get notified when we launch.
                 <Link className="underline underline-offset-2" href="#">
                   Terms & Conditions
                 </Link>

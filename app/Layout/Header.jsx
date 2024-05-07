@@ -75,7 +75,7 @@ const Header = () => {
               <label htmlFor="resume" className="mobile-item">
                 Resume
               </label>
-              <div className="mega-box">
+              {/* <div className="mega-box">
                 <div className="content">
                   <div className="row">
                     <header>Resume Templates</header>
@@ -146,7 +146,7 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </li>
             {/* Cover Letter  */}
             <li>
@@ -158,7 +158,7 @@ const Header = () => {
               <label htmlFor="cover" className="mobile-item">
                 Cover Letter
               </label>
-              <div className="mega-box">
+              {/* <div className="mega-box">
                 <div className="content">
                   <div className="row">
                     <header>Cover Letter Writing Guides</header>
@@ -211,25 +211,8 @@ const Header = () => {
                       </li>
                     </ul>
                   </div>
-                  {/* <div className="row">
-                    <header>Security services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Site Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">VPS Hosting</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">Website design</a>
-                      </li>
-                    </ul>
-                  </div> */}
                 </div>
-              </div>
+              </div> */}
             </li>
             {/* Career  */}
             <li>
@@ -241,7 +224,7 @@ const Header = () => {
               <label htmlFor="career" className="mobile-item">
                 Career
               </label>
-              <div className="mega-box">
+              {/* <div className="mega-box">
                 <div className="content">
                   <div className="row">
                     <header>Career Coaching Services</header>
@@ -285,25 +268,9 @@ const Header = () => {
                       </li>
                     </ul>
                   </div>
-                  {/* <div className="row">
-                    <header>Security services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Site Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">VPS Hosting</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">Website design</a>
-                      </li>
-                    </ul>
-                  </div> */}
+
                 </div>
-              </div>
+              </div> */}
             </li>
             {/* Blog  */}
             {/* <li>

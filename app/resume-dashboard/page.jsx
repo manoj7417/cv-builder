@@ -1262,7 +1262,7 @@ export default function DashboardIdea() {
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Get Matched to the Job that is Right for You!
               </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
+              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
                 Find the perfect profession and get matched with the best job
                 profile with the AI-Based Job Assistance Programme.
               </p>
