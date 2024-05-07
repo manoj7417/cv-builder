@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { MdCancel } from "react-icons/md";
 
-function FeedbackModal({ content, className, onClick }) {
+function FeedbackModal({ content, showModal, onClick, onClose }) {
     return (
 
-        <div className={`absolute w-[500px] rounded-lg  p-6 shadow-lg bg-white z-40 ${className}`}>
+        <div className={`absolute w-[500px] rounded-lg  p-6 shadow-lg bg-white z-40 ${showModal ? null : 'hidden'}`}>
+            <MdCancel onClick={onClose} className=' cursor-pointer text-3xl absolute top-0 right-0'/>
             <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Pointers</h3>
                 <ul className="space-y-2">
