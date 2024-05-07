@@ -8,7 +8,8 @@ import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import { AuthContext } from "./context/AuthContext";
-import ResumeHeader from "./Layout/ResumeHeader";
+// import ResumeHeader from "./Layout/ResumeHeader";
+import NewResumeHeader from "./Layout/NewResumeHeader";
 
 
 export default function Home() {
@@ -33,7 +34,7 @@ export default function Home() {
         <LoaderUI />
       ) : (
         <>
-          {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
+          {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
           <Homepage />
           <Footer />
         </>
