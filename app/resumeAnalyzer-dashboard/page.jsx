@@ -75,12 +75,12 @@ export default function DashboardIdea() {
           <div className="container  w-fullbg-blue-300 resume-dashboard">
             <div className="flex px-24 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
-                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">Perfectly Analysed CV for Perfect Job</h1>
-                <p className="text-gray-700 text-lg pe-10">Scan Your CV and identify errors with the help of specialised Artificial Intelligence-based tools to create an ATS optimized and grammatically correct Resume.</p>
+                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">An Analysed CV goes a Long Way</h1>
+                <p className="text-gray-700 text-lg pe-10">Wondering why your CV does not get through the initial rounds of selection? Analyse your CV with our AI-based CV Analyser and get industry expertise integrated to create a flawless application profile.</p>
                 <div className="flex items-center space-x-4">
                   <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
                     <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold">
-                      Upload your cv now
+                      Analyse CV Now
                     </span>
                     <input
                       type="file"
