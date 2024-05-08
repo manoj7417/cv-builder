@@ -18,7 +18,6 @@ import { MdQueryStats } from "react-icons/md";
 import { IoShirt } from "react-icons/io5";
 import { RiShirtFill } from "react-icons/ri";
 import { Carousel, CarouselItem } from "@/components/ui/carousel";
-// import Footer from "../ui/newFooter";
 import { redirect } from "next/dist/server/api-utils";
 import Navbar from "../ui/newNav";
 import Header from "../Layout/Header";
@@ -38,18 +37,18 @@ export default function DashboardIdea() {
             <div className="flex justify-between lg:px-24 px-10">
               <div className="space-y-2 2xl:mt-40 lg:mt-20">
                 <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mb-5 tracking-tighter text-gray-900">
-                  Build Right CV for Right Job
+                  Craft the Perfect CV for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
                   Curated by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
                   forward CV Template options that are custom-tailored to the
-                  job you are applying for, to ensure that your Resume gets
+                  job you are applying for, to ensure that your CV gets
                   through every Application Tracking Software.
                 </p>
                 <div className="flex items-center space-x-4">
                   <button className="text-xl text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
-                    <a href="/resume-import">Build Resume for Free</a>
+                    <a href="/resume-import">Create CV Now!</a>
                   </button>
                 </div>
               </div>
@@ -1002,68 +1001,6 @@ export default function DashboardIdea() {
                   </Carousel>
                 </TabsContent>
                 <TabsContent value="professional">
-                  {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Side Project 1</CardTitle>
-                        <CardDescription>
-                          A side project I worked on.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          alt="Project 1"
-                          className="aspect-video w-full rounded-md object-cover"
-                          height={300}
-                          src="/placeholder.svg"
-                          width={400}
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="link">View Project</Button>
-                      </CardFooter>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Side Project 2</CardTitle>
-                        <CardDescription>
-                          Another side project I worked on.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          alt="Project 2"
-                          className="aspect-video w-full rounded-md object-cover"
-                          height={300}
-                          src="/placeholder.svg"
-                          width={400}
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="link">View Project</Button>
-                      </CardFooter>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Side Project 3</CardTitle>
-                        <CardDescription>
-                          A third side project I worked on.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          alt="Project 3"
-                          className="aspect-video w-full rounded-md object-cover"
-                          height={300}
-                          src="/placeholder.svg"
-                          width={400}
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="link">View Project</Button>
-                      </CardFooter>
-                    </Card>
-                  </div> */}
                   <Carousel>
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
