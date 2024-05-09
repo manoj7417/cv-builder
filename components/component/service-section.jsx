@@ -18,7 +18,7 @@ export function ServiceSection() {
                   A Step Closer to Your Dream Job!
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Get your CV engineered in minutes for a rapid job application that is professionally prolific and lands you on the job you always dreamt of.
+                You can get your CV engineered in minutes and start your job application process quickly while ensuring that your profile reflects the exact requisites of the job you have always dreamt of.
                 </p>
               </div>
             </div>

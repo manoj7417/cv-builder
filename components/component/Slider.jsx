@@ -41,7 +41,7 @@ export default function Slider() {
         Curating CVs that Reflect Perfection
         </h2>
         <p className="text-center max-w-3xl mx-auto">
-        Explore unlimited possibilities with the power of a perfectly crafted CV by creating one that aligns with your Professional Profile, employing our customised templates. If you already have a CV, you can easily rectify your current CV to create your ATS (Application Tracking Score) optimized CV.
+        Explore unlimited possibilities with the power of a perfectly crafted CV by creating one that aligns with your Professional Profile, employing our customised templates. If you already have a CV, you can easily rectify it to create an ATS (Application Tracking Score) optimized CV.
         </p>
 
         <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">

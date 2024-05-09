@@ -1,13 +1,14 @@
-import { GeneralSetting } from "@/app/lib/redux/settingsSlice";
+import type { GeneralSetting } from "../../../lib/redux/settingsSlice";
+import { PX_PER_PT } from "../../../lib/constants";
 import {
-  FONT_FAMILY_TO_DISPLAY_NAME,
   FONT_FAMILY_TO_STANDARD_SIZE_IN_PT,
-  getAllFontFamiliesToLoad,
+  FONT_FAMILY_TO_DISPLAY_NAME,
+  type FontFamily,
 } from "../../fonts/constants";
-import { PX_PER_PT } from "@/app/lib/constants";
+import { getAllFontFamiliesToLoad } from "../../fonts/lib";
 import dynamic from "next/dynamic";
 
-const SelectionComponent = ({
+const Selection = ({
   selectedColor,
   isSelected,
   style = {},
@@ -61,9 +62,8 @@ const FontFamilySelections = ({
       {allFontFamilies.map((fontFamily, idx) => {
         const isSelected = selectedFontFamily === fontFamily;
         const standardSizePt = FONT_FAMILY_TO_STANDARD_SIZE_IN_PT[fontFamily];
-
         return (
-          <SelectionComponent
+          <Selection
             key={idx}
             selectedColor={themeColor}
             isSelected={isSelected}
@@ -74,14 +74,18 @@ const FontFamilySelections = ({
             onClick={() => handleSettingsChange("fontFamily", fontFamily)}
           >
             {FONT_FAMILY_TO_DISPLAY_NAME[fontFamily]}
-          </SelectionComponent>
+          </Selection>
         );
       })}
     </SelectionsWrapper>
   );
 };
 
-export const FontFamilySelectionCSR = dynamic(
+/**
+ * Load FontFamilySelections client side since it calls getAllFontFamiliesToLoad,
+ * which uses navigator object that is only available on client side
+ */
+export const FontFamilySelectionsCSR = dynamic(
   () => Promise.resolve(FontFamilySelections),
   {
     ssr: false,
@@ -89,16 +93,17 @@ export const FontFamilySelectionCSR = dynamic(
 );
 
 export const FontSizeSelections = ({
+  selectedFontSize,
   fontFamily,
   themeColor,
-  selectedFontSize,
   handleSettingsChange,
 }: {
-  fontFamily: string;
+  fontFamily: FontFamily;
   themeColor: string;
   selectedFontSize: string;
   handleSettingsChange: (field: GeneralSetting, value: string) => void;
 }) => {
+  
   const standardSizePt = FONT_FAMILY_TO_STANDARD_SIZE_IN_PT[fontFamily];
   const compactSizePt = standardSizePt - 1;
 
@@ -107,9 +112,8 @@ export const FontSizeSelections = ({
       {["Compact", "Standard", "Large"].map((type, idx) => {
         const fontSizePt = String(compactSizePt + idx);
         const isSelected = fontSizePt === selectedFontSize;
-
         return (
-          <SelectionComponent
+          <Selection
             key={idx}
             selectedColor={themeColor}
             isSelected={isSelected}
@@ -120,7 +124,7 @@ export const FontSizeSelections = ({
             onClick={() => handleSettingsChange("fontSize", fontSizePt)}
           >
             {type}
-          </SelectionComponent>
+          </Selection>
         );
       })}
     </SelectionsWrapper>
@@ -128,8 +132,8 @@ export const FontSizeSelections = ({
 };
 
 export const DocumentSizeSelections = ({
-  themeColor,
   selectedDocumentSize,
+  themeColor,
   handleSettingsChange,
 }: {
   themeColor: string;
@@ -140,7 +144,7 @@ export const DocumentSizeSelections = ({
     <SelectionsWrapper>
       {["Letter", "A4"].map((type, idx) => {
         return (
-          <SelectionComponent
+          <Selection
             key={idx}
             selectedColor={themeColor}
             isSelected={type === selectedDocumentSize}
@@ -148,11 +152,11 @@ export const DocumentSizeSelections = ({
           >
             <div className="flex flex-col items-center">
               <div>{type}</div>
-              <div className="text-xs text-center">
-                {type === "Letter" ? "(US, Canada)" : "(India,Other Countries)"}
+              <div className="text-xs">
+                {type === "Letter" ? "(US, Canada)" : "(other countries)"}
               </div>
             </div>
-          </SelectionComponent>
+          </Selection>
         );
       })}
     </SelectionsWrapper>

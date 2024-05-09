@@ -79,7 +79,7 @@ export const ResumePDF = ({
 
   return (
     <>
-      <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
+      {/* <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
           style={{
@@ -115,7 +115,50 @@ export const ResumePDF = ({
             })}
           </View>
         </Page>
-      </Document>
+      </Document> */}
+      <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
+      <Page
+        size={documentSize === "A4" ? "A4" : "LETTER"}
+        style={{
+          ...styles.flexCol,
+          color: DEFAULT_FONT_COLOR,
+          fontFamily,
+          fontSize: fontSize + "pt",
+        }}
+      >
+        {Boolean(settings.themeColor) && (
+          <View
+            style={{
+              width: spacing["full"],
+              height: spacing[3.5],
+              backgroundColor: themeColor,
+            }}
+          />
+        )}
+        <View
+          style={{
+            ...styles.flexRow,
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            padding: `${spacing[0]} ${spacing[20]}`,
+          }}
+        >
+          <View style={{ width: "48%" }}>
+            <ResumePDFProfile
+              profile={profile}
+              themeColor={themeColor}
+              isPDF={isPDF}
+            />
+          </View>
+          <View style={{ width: "48%" }}>
+            {showFormsOrder.map((form) => {
+              const Component = formTypeToComponent[form];
+              return <Component key={form} />;
+            })}
+          </View>
+        </View>
+      </Page>
+    </Document>
     </>
   );
 };

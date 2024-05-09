@@ -43,8 +43,11 @@ const Header = () => {
       className={`mobile_responsive_nav ${
         showBackground ? "mobile_black" : "mobile_white"
       }`}
+      suppressHydrationWarning
     >
-      <nav>
+      <div  className={`mobile_responsive_nav ${
+        showBackground ? "mobile_black" : "mobile_white"
+      }`}>
         <div className="wrapper">
           <div className="logo">
             <a href="/" className="flex items-center gap-2">
@@ -375,7 +378,7 @@ const Header = () => {
             <MdOutlineMenu className="text-black" />
           </label>
         </div>
-      </nav>
+      </div>
     </div>
   );
 };
