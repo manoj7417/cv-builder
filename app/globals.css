@@ -492,11 +492,11 @@ footer a:hover svg {
 }
 
 /* Responsive CSS For Mackbook pro  */
-@media screen and (min-width: 1025px) and (max-width: 1280px) {
+/* @media screen and (min-width: 1025px) and (max-width: 1280px) {
   .mobile_responsive_nav nav .wrapper {
     max-width: 1300px;
   }
-}
+} */
 
 
 /* Mobile Responsive CSS Ends Here  */

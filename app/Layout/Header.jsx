@@ -45,7 +45,7 @@ const Header = () => {
       }`}
       suppressHydrationWarning
     >
-      <div  className={`mobile_responsive_nav ${
+      <nav  className={`mobile_responsive_nav ${
         showBackground ? "mobile_black" : "mobile_white"
       }`}>
         <div className="wrapper">
@@ -378,7 +378,7 @@ const Header = () => {
             <MdOutlineMenu className="text-black" />
           </label>
         </div>
-      </div>
+      </nav>
     </div>
   );
 };

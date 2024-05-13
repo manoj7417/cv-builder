@@ -18,10 +18,12 @@ export const ENGLISH_FONT_FAMILIES = [
   ...SANS_SERIF_ENGLISH_FONT_FAMILIES,
   ...SERIF_ENGLISH_FONT_FAMILIES,
 ];
-type EnglishFontFamily = (typeof ENGLISH_FONT_FAMILIES)[number];
+
+export type EnglishFontFamily = (typeof ENGLISH_FONT_FAMILIES)[number];
 
 export const NON_ENGLISH_FONT_FAMILIES = ["NotoSansSC"] as const;
-type NonEnglishFontFamily = (typeof NON_ENGLISH_FONT_FAMILIES)[number];
+
+export type NonEnglishFontFamily = (typeof NON_ENGLISH_FONT_FAMILIES)[number];
 
 export const NON_ENGLISH_FONT_FAMILY_TO_LANGUAGE: Record<
   NonEnglishFontFamily,
