@@ -79,7 +79,7 @@ export default function NewResumeHeader() {
                           href={item.href}
                           className={classNames(
                             item.current ? "text-black" : "text-black",
-                            "rounded-md px-3 py-2 text-base flex items-center justify-center font-medium"
+                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >

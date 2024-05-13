@@ -93,7 +93,7 @@ export const ResumePDF = ({
             <View
               style={{
                 width: spacing["full"],
-                height: spacing[3.5],
+                height: spacing[2.5],
                 backgroundColor: themeColor,
               }}
             />
@@ -116,7 +116,7 @@ export const ResumePDF = ({
           </View>
         </Page>
       </Document> */}
-      <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
+       <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
       <Page
         size={documentSize === "A4" ? "A4" : "LETTER"}
         style={{
@@ -126,39 +126,50 @@ export const ResumePDF = ({
           fontSize: fontSize + "pt",
         }}
       >
-        {Boolean(settings.themeColor) && (
-          <View
-            style={{
-              width: spacing["full"],
-              height: spacing[3.5],
-              backgroundColor: themeColor,
-            }}
+        <View style={styles.paddingAll}>
+          <ResumePDFProfile
+            profile={profile}
+            themeColor={themeColor}
+            isPDF={isPDF}
           />
-        )}
-        <View
-          style={{
-            ...styles.flexRow,
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            padding: `${spacing[0]} ${spacing[20]}`,
-          }}
-        >
-          <View style={{ width: "48%" }}>
-            <ResumePDFProfile
-              profile={profile}
+        </View>
+        <View style={styles.flexRow}>
+          <View style={styles.leftColumn}>
+            <ResumePDFEducation
+              heading={formToHeading["educations"]}
+              educations={educations}
               themeColor={themeColor}
-              isPDF={isPDF}
+              showBulletPoints={showBulletPoints["educations"]}
+            />
+            <ResumePDFSkills
+              heading={formToHeading["skills"]}
+              skills={skills}
+              themeColor={themeColor}
+              showBulletPoints={showBulletPoints["skills"]}
             />
           </View>
-          <View style={{ width: "48%" }}>
-            {showFormsOrder.map((form) => {
-              const Component = formTypeToComponent[form];
-              return <Component key={form} />;
-            })}
+          <View style={styles.rightColumn}>
+            <ResumePDFWorkExperience
+              heading={formToHeading["workExperiences"]}
+              workExperiences={workExperiences}
+              themeColor={themeColor}
+            />
+            <ResumePDFProject
+              heading={formToHeading["projects"]}
+              projects={projects}
+              themeColor={themeColor}
+            />
+            <ResumePDFCustom
+              heading={formToHeading["custom"]}
+              custom={custom}
+              themeColor={themeColor}
+              showBulletPoints={showBulletPoints["custom"]}
+            />
           </View>
         </View>
       </Page>
     </Document>
+
     </>
   );
 };

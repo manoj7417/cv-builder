@@ -48,9 +48,20 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  paddingAll :{
+    padding:"0px"
+  },
   flexCol: {
     display: "flex",
     flexDirection: "column",
+  },
+  leftColumn: {
+    width: "30%",
+    padding:"30px",
+  },
+  rightColumn: {
+    width: "70%",
+    padding:"30px"
   },
   icon: {
     width: "13pt",
