@@ -54,14 +54,38 @@ const initialState = {
             columns: 1,
             visible: true,
             id: "education",
-            items: []
+            items: [{
+                institute: "THDC",
+                degree: "B.Tech",
+                startDate: "Aug 2016",
+                endDate: "Dec 2020",
+                description: ""
+            }, {
+                institute: "TWS",
+                degree: "12th",
+                startDate: "April 2015",
+                endDate: "April 2016",
+                description: ""
+            }]
         },
         experience: {
             name: "Experience",
             columns: 1,
             visible: true,
             id: "experience",
-            items: []
+            items: [{
+                jobtitle: "Web dev",
+                employer: "CEOITBOX",
+                startDate: "Aug 2016",
+                endDate: "Dec 2020",
+                description: ""
+            }, {
+                jobtitle: "Web dev",
+                employer: "CEOITBOX",
+                startDate: "April 2015",
+                endDate: "April 2016",
+                description: ""
+            }]
         },
         volunteer: {
             name: "Volunteering",
@@ -196,7 +220,7 @@ function Builder() {
     const [resumeData, setResumeData] = useState(initialState)
     return (
         <div className='w-screen h-screen'>
-            <div className='w-1/2 h-full overflow-auto border-2'>
+            <div className='w-1/2 h-full overflow-auto border-2 no-scrollbar'>
                 <Form resumeData={resumeData} setResumeData={setResumeData} />
             </div>
         </div>
