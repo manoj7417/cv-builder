@@ -92,7 +92,7 @@ export function ServiceSection() {
               <div className="space-y-2"></div>
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              {/* <img
+              {/* <Image
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-first"
                 height="310"

@@ -12,7 +12,7 @@ function AuthHook() {
         if (!userState.isAuthenticated) {
             router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
         }
-    }, []);
+    }, [userState.isAuthenticated, pathname, router]);
     return null;
 }
 
