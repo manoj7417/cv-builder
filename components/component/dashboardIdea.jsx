@@ -28,6 +28,7 @@ import Link from "next/link"
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs"
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export default function DashboardIdea() {
   return (
@@ -72,7 +73,7 @@ export default function DashboardIdea() {
                     <CardDescription>A personal project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 1"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -90,7 +91,7 @@ export default function DashboardIdea() {
                     <CardDescription>Another personal project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 2"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -108,7 +109,7 @@ export default function DashboardIdea() {
                     <CardDescription>A third personal project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 3"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -130,7 +131,7 @@ export default function DashboardIdea() {
                     <CardDescription>A professional project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 1"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -148,7 +149,7 @@ export default function DashboardIdea() {
                     <CardDescription>Another professional project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 2"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -166,7 +167,7 @@ export default function DashboardIdea() {
                     <CardDescription>A third professional project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 3"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -188,7 +189,7 @@ export default function DashboardIdea() {
                     <CardDescription>A side project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 1"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -206,7 +207,7 @@ export default function DashboardIdea() {
                     <CardDescription>Another side project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 2"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -224,7 +225,7 @@ export default function DashboardIdea() {
                     <CardDescription>A third side project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <img
+                    <Image
                       alt="Project 3"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}

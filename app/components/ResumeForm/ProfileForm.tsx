@@ -25,14 +25,14 @@ export const ProfileForm = () => {
           value={name}
           onChange={handleProfileChange}
         />
-        <Input
-          label="Objective"
-          labelClassName="col-span-full"
-          name="summary"
-          placeholder="Entrepreneur and innovator obsessed with making exceptional products"
-          value={summary}
-          onChange={handleProfileChange}
-        />
+          <Input
+            label="Objective"
+            labelClassName="col-span-full border"
+            name="summary"
+            placeholder="Entrepreneur and innovator obsessed with making exceptional products"
+            value={summary}
+            onChange={handleProfileChange}
+          />
         <Input
           label="Email"
           labelClassName="col-span-4"

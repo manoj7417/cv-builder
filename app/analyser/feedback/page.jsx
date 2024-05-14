@@ -208,7 +208,7 @@ export default function ResumeFeedback() {
                                 </div>
                                 <div className="progress_bar p-5 ">
                                     <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
-                                        <p className="tracking-wider">Your resume ATS score was <span className={`${content?.analysis?.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
+                                        <p className="tracking-wider">Your resume ATS score is <span className={`${content?.analysis?.resume_score > 65 ? 'text-green-400' : "text-red-500"} font-bold`}>
                                             {content ? content?.analysis?.resume_score : "0"}
                                         </span> out of 100.</p>
                                         <div className="w-full  my-2.5  overflow-hidden  ">
@@ -220,9 +220,7 @@ export default function ResumeFeedback() {
                                     <div className="recommendation_section bg-white shadow-lg py-10 px-5 mt-3 rounded-md ">
                                         <h3 className="text-xl font-bold">RECOMMENDATIONS</h3>
                                         <p className="text-sm my-2">
-                                            Utilize our CV checker to compare your resume against
-                                            those from successful candidates hired at leading global
-                                            companies in our database.{" "}
+                                        Get assistance from our CV Analyser to get a profound analysis as per industry standards and get recommendations accordingly.
                                         </p>
                                         <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                                             {
