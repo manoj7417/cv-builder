@@ -27,17 +27,131 @@ const initialState = {
       label: "",
       href: "",
     },
-    customFields: [],
-    picture: {
-      url: "https://storage.rxresu.me/clvlwaeik0qf8fnw32i7lho6x/pictures/clvlwaeik0qf8fnw32i7lho6x.jpg",
-      size: 64,
-      aspectRatio: 1,
-      borderRadius: 0,
-      effects: {
-        hidden: false,
-        border: false,
-        grayscale: false,
-      },
+    sections: {
+        summary: {
+            name: "Summary",
+            columns: 1,
+            visible: true,
+            id: "summary",
+            content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>"
+        },
+        awards: {
+            name: "Awards",
+            columns: 1,
+            visible: true,
+            id: "awards",
+            items: []
+        },
+        certifications: {
+            name: "Certifications",
+            columns: 1,
+            visible: true,
+            id: "certifications",
+            items: []
+        },
+        education: {
+            name: "Education",
+            columns: 1,
+            visible: true,
+            id: "education",
+            items: [{
+                institute: "THDC",
+                degree: "B.Tech",
+                startDate: "Aug 2016",
+                endDate: "Dec 2020",
+                description: ""
+            }, {
+                institute: "TWS",
+                degree: "12th",
+                startDate: "April 2015",
+                endDate: "April 2016",
+                description: ""
+            }]
+        },
+        experience: {
+            name: "Experience",
+            columns: 1,
+            visible: true,
+            id: "experience",
+            items: [{
+                jobtitle: "Web dev",
+                employer: "CEOITBOX",
+                startDate: "Aug 2016",
+                endDate: "Dec 2020",
+                description: ""
+            }, {
+                jobtitle: "Web dev",
+                employer: "CEOITBOX",
+                startDate: "April 2015",
+                endDate: "April 2016",
+                description: ""
+            }]
+        },
+        volunteer: {
+            name: "Volunteering",
+            columns: 1,
+            visible: true,
+            id: "volunteer",
+            items: []
+        },
+        interests: {
+            name: "Interests",
+            columns: 1,
+            visible: true,
+            id: "interests",
+            items: []
+        },
+        languages: {
+            name: "Languages",
+            columns: 1,
+            visible: true,
+            id: "languages",
+            items: []
+        },
+        profiles: {
+            name: "Profiles",
+            columns: 1,
+            visible: true,
+            id: "profiles",
+            items: []
+        },
+        projects: {
+            name: "Projects",
+            columns: 1,
+            visible: true,
+            id: "projects",
+            items: []
+        },
+        publications: {
+            name: "Publications",
+            columns: 1,
+            visible: true,
+            id: "publications",
+            items: []
+        },
+        references: {
+            name: "References",
+            columns: 1,
+            visible: true,
+            id: "references",
+            items: []
+        },
+        skills: {
+            name: "Skills",
+            columns: 1,
+            visible: true,
+            id: "skills",
+            items: []
+        },
+        custom: {
+            w5x9jciqnkyyb1838abqsfgx: {
+                name: "Custom Section",
+                columns: 1,
+                visible: true,
+                id: "w5x9jciqnkyyb1838abqsfgx",
+                items: []
+            }
+        }
     },
   },
   sections: {
