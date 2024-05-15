@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 import { FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
@@ -28,7 +29,7 @@ const Template3 = () => {
               />
             </div>
           </div>
-          <div className="resume_section mt-5 flex">
+          <div className="resume_section mt-5 flex md:flex-row flex-col">
             <div className="md:w-[30%] w-full left_side border-r-2 border-gray-300 p-8">
               <div className="contact_section border-b-2 border-gray-300 pb-3">
                 <h2 className="text-xl text-gray-600 font-semibold uppercase">

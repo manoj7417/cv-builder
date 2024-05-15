@@ -4,17 +4,38 @@ import { FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
-const MobileTemplate3 = () => {
+const MobileTemplate3 = ({setMobileContent}) => {
     
+  const [windowDimension, detectHW] = useState({
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
+  });
+
+  const detectSize = () => {
+    detectHW({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", detectSize);
+
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimension]);
 
   return (
     <>
-      <div className="h-[297mm] w-[210mm]" style={{
-        transform: "scale(1,0.5)"
-      }} >
+    <div className="top_header bg-white p-10 border border-gray-300 flex justify-end">
+    <FaTimes onClick={()=>setMobileContent(false)} className="cursor-pointer"/>
+    </div>
+      <div className={`w-${windowDimension.winWidth} h-${windowDimension.winHeight}`}>
         <div className="bg-white shadow-lg mx-auto">
-          <div className="top_section flex justify-around items-center bg-gray-200 py-20">
+          <div className="top_section flex justify-around items-center bg-gray-200 py-20 px-5">
             <div className="name_profile">
               <h1 className="text-4xl uppercase">
                 Edward <span className="font-bold  text-4xl">Christofer</span>
@@ -31,7 +52,7 @@ const MobileTemplate3 = () => {
               />
             </div>
           </div>
-          <div className="resume_section mt-5 flex">
+          <div className="resume_section mt-5 flex md:flex-row flex-col">
             <div className="md:w-[30%] w-full left_side border-r-2 border-gray-300 p-8">
               <div className="contact_section border-b-2 border-gray-300 pb-3">
                 <h2 className="text-xl text-gray-600 font-semibold uppercase">

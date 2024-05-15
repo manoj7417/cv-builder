@@ -238,14 +238,16 @@ function Builder() {
   const [mobileContent, setMobileContent] = useState(false);
 
   const handleMobileContent = () => {
-    setIsMobile(false);
+    // setIsMobile(false);
     setMobileContent(true);
   };
 
   useEffect(() => {
+    
     const checkIfMobile = () => {
       const isMobileDevice = window.innerWidth <= 768; // Adjust this value based on your definition of "mobile"
       setIsMobile(isMobileDevice);
+      setMobileContent(false);
     };
 
     checkIfMobile();
@@ -263,7 +265,7 @@ function Builder() {
         <Form resumeData={resumeData} setResumeData={setResumeData} />
         <div className="mobile_section flex justify-end mb-10 mx-10">
           <div>
-            {isMobile && (
+            {isMobile &&  (
               <button
                 className="px-5 py-2 bg-black text-white rounded-lg"
                 onClick={handleMobileContent}
@@ -276,7 +278,7 @@ function Builder() {
             {mobileContent && (
               <>
                 <section className="w-screen h-screen absolute top-0 left-0 ">
-                  <MobileTemplate3 />
+                  <MobileTemplate3 setMobileContent={setMobileContent}/>
                 </section>
               </>
             )}
