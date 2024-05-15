@@ -1,14 +1,15 @@
+"use client"
 import Template3 from '@/components/resume-templates/Template3';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import React, { useState } from 'react'
 
 
 const ResumeViewPage = () => {
-    const [scale,setScale] = useState(0.8)
+  const [scale, setScale] = useState(0.8)
   return (
     <div>
       <div className="resume_view_section">
-          <Template3 scale={scale}/>
+        <Template3 scale={scale} />
       </div>
       {/* <div className="mobile_section lg:hidden block">
       <Dialog>
