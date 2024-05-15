@@ -58,7 +58,7 @@ const ResumeViewPage = ({ resumeData }) => {
   };
 
   const handleDownloadResume = async () => {
-    const el = document.getElementById('resume')
+    const el = document.getElementById('template')
     const resume = el.innerHTML
     const body = {
       html: resume
@@ -94,7 +94,7 @@ const ResumeViewPage = ({ resumeData }) => {
       //   // Handle error
       // }
     } catch (error) {
-
+      console.log(error)
     } finally {
       setIsLoading(false)
     }
@@ -231,8 +231,7 @@ const ResumeViewPage = ({ resumeData }) => {
                 className={cn("relative bg-white")}
                 style={{
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                  minHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                  maxHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                  height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
                 }}
               >

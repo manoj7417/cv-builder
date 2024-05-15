@@ -10,7 +10,7 @@ const Template3 = ({ resumeData }) => {
 
   return (
     <>
-      <div className="p-custom space-y-3">
+      <div className="p-custom space-y-3 " id="template">
         <div className="bg-white mx-auto">
           <div className="top_section flex justify-around items-center bg-gray-200 py-20">
             <div className="name_profile">
@@ -152,7 +152,7 @@ const Template3 = ({ resumeData }) => {
                     </p>
                   </div>
                 </div>
-                <div className="experience_2 my-5">
+                {/* <div className="experience_2 my-5">
                   <div className="post flex  justify-between items-center my-2">
                     <div className="post_title">
                       <h3 className="font-bold">Senior Graphic Designer</h3>
@@ -172,7 +172,7 @@ const Template3 = ({ resumeData }) => {
                       eligendi. Qui, ratione.
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="project_section my-5">
                 <div className="project_heading flex gap-5 items-center">
