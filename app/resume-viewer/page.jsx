@@ -112,63 +112,38 @@ const ResumeViewPage = () => {
             <button className="p-2 bg-blue-900 text-white rounded-md hover:bg-blue-700 text-sm">
               Download PDF
             </button>
-            {/* Profile Section  */}
-            {/* <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setIsToggleOpen(!isToggleOpen)}
-                  className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white focus:outline-none"
-                >
-                  <Image
-                    src="/avatar.jpg"
-                    alt="user name"
-                    title="user name"
-                    width={30}
-                    height={30}
-                    className="max-w-full rounded-full"
-                  />
-                  <span className="absolute bottom-0 right-0 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 p-1 text-sm text-white">
-                    <span className="sr-only"> 7 new emails </span>
-                  </span>
-                </button>
-                {isToggleOpen && (
-                  <div
-                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu"
-                  >
-                    <div className="py-1" role="none">
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Profile
-                      </a>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Settings
-                      </a>
-                      <div
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                        role="menuitem"
-                      >
-                        Logout
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div> */}
-            <Drawer direction="left">
+            <Drawer direction="right">
               <DrawerTrigger className="bg-blue-900 text-white p-2 hover:bg-blue-700 text-sm rounded-md">Explore More Templates</DrawerTrigger>
-              <DrawerContent className="bg-white flex flex-col h-full w-[400px] mt-24 fixed bottom-0 right-0">
+              <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                 <DrawerHeader>
-                  <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                  <DrawerTitle>Choose Templates</DrawerTitle>
                   <DrawerDescription>
-                    This action cannot be undone.
+                    <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
+                        <div className="image_section_1 ">
+                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_2">
+                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_1">
+                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_2">
+                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_1">
+                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_2">
+                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_1">
+                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                        <div className="image_section_2">
+                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
+                        </div>
+                    </div>
                   </DrawerDescription>
                 </DrawerHeader>
               </DrawerContent>
