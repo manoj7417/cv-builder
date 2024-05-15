@@ -152,7 +152,7 @@ const ResumeViewPage = ({ resumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button  flex 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10 my-1">
+          <div className="actions_button flex 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10 my-1">
             <Controls />
             <button className="p-2 bg-blue-900 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-600 text-sm flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
               isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />

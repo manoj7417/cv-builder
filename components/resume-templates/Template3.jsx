@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 import { FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
@@ -12,7 +12,7 @@ const Template3 = ({ resumeData }) => {
     <>
       <div className="p-custom space-y-3">
         <div className="bg-white mx-auto">
-          <div className="top_section flex justify-around items-center bg-gray-200 py-20">
+          <div className="top_section flex justify-around items-center bg-gray-200 py-10">
             <div className="name_profile">
               <h1 className="text-4xl uppercase font-bold">
                 {resumeData?.basics?.name}
@@ -30,7 +30,7 @@ const Template3 = ({ resumeData }) => {
             </div>
           </div>
           <div className="resume_section mt-5 flex md:flex-row flex-col">
-            <div className="md:w-[30%] w-full left_side border-r-2 border-gray-300 p-8">
+            <div className="md:w-[30%] w-full left_side border-r-2 border-gray-300 p-5">
               <div className="contact_section border-b-2 border-gray-300 pb-3">
                 <h2 className="text-xl text-gray-600 font-semibold uppercase">
                   Contact
@@ -66,7 +66,7 @@ const Template3 = ({ resumeData }) => {
                   </a>
                 </div>
               </div>
-              <div className="skills_section border-b-2 border-gray-300 py-5">
+              <div className="skills_section border-b-2 border-gray-300 py-3">
                 <h2 className="text-xl text-gray-600 font-semibold uppercase">
                   Skills
                 </h2>
@@ -82,7 +82,7 @@ const Template3 = ({ resumeData }) => {
                   </ul>
                 </div>
               </div>
-              <div className="education_section py-5">
+              <div className="education_section py-3">
                 <h2 className="text-xl text-gray-600 font-semibold uppercase">
                   Education
                 </h2>
@@ -105,7 +105,7 @@ const Template3 = ({ resumeData }) => {
                 </div>
               </div>
             </div>
-            <div className="md:w-[70%] w-full right_side p-8">
+            <div className="md:w-[70%] w-full right_side p-5">
               <div className="about_section">
                 <div className="about_heading flex gap-5 items-center">
                   <div className="icon bg-gray-300 p-2">
@@ -116,13 +116,9 @@ const Template3 = ({ resumeData }) => {
                 <p className="my-5">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Dolorem ipsum culpa rem voluptatem non laudantium, quae
-                  voluptatum maxime natus inventore accusantium dolor accusamus
-                  velit debitis, sit ipsa itaque distinctio nobis, pariatur
-                  expedita omnis officiis illum in. Veritatis, eligendi. Qui,
-                  ratione.
                 </p>
               </div>
-              <div className="experience_section my-10">
+              <div className="experience_section my-2">
                 <div className="experience_heading flex gap-5 items-center">
                   <div className="icon bg-gray-300 p-2">
                     <FaGraduationCap />
@@ -174,7 +170,7 @@ const Template3 = ({ resumeData }) => {
                   </div>
                 </div>
               </div>
-              <div className="project_section my-5">
+              <div className="project_section my-2">
                 <div className="project_heading flex gap-5 items-center">
                   <div className="icon bg-gray-300 p-2">
                     <FaGraduationCap />
