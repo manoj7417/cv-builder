@@ -1,7 +1,7 @@
 "use client";
 import Template3 from "@/components/resume-templates/Template3";
 import { cn } from "@/lib/utils";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { CiUndo } from "react-icons/ci";
@@ -24,6 +24,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "../components/Button";
+import { printResume } from "../pages/api/api";
 
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -43,17 +44,61 @@ const Controls = () => {
   );
 };
 
-const ResumeViewPage = () => {
+const ResumeViewPage = ({ resumeData }) => {
   const [scale, setScale] = useState(0.8);
   const transformRef = useRef(null);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsToggleOpen(false);
     }
   };
+
+  const handleDownloadResume = async () => {
+    const el = document.getElementById('resume')
+    const resume = el.innerHTML
+    const body = {
+      html: resume
+    }
+    setIsLoading(true)
+    try {
+      const response = await printResume(body)
+      if (response.ok) {
+        const blob = await response.blob(); // Get response body as blob
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'generated.pdf';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }
+      // if (response.status === 200) {
+      //   const blob = new Blob([response.data], { type: 'application/pdf' });
+      //   const url = window.URL.createObjectURL(blob);
+      //   const a = document.createElement('a');
+      //   a.href = url;
+      //   a.download = 'generated.pdf';
+      //   a.target = '_blank'; // Open in new tab
+      //   document.body.appendChild(a);
+      //   a.click();
+      //   document.body.removeChild(a);
+      //   window.URL.revokeObjectURL(url);
+      // } else {
+      //   console.error('Failed to generate PDF:', response.status);
+      //   // Handle error
+      // }
+    } catch (error) {
+
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -109,7 +154,10 @@ const ResumeViewPage = () => {
         >
           <div className="actions_button  flex 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10 my-1">
             <Controls />
-            <button className="p-2 bg-blue-900 text-white rounded-md hover:bg-blue-700 text-sm">
+            <button className="p-2 bg-blue-900 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-600 text-sm flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
+              isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            }
+
               Download PDF
             </button>
             {/* Profile Section  */}
@@ -176,14 +224,20 @@ const ResumeViewPage = () => {
           </div>
 
           <TransformComponent>
-            <div
-              className={cn("relative bg-white shadow-2xl")}
-              style={{
-                width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                minHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-              }}
-            >
-              <Template3 />
+            <div className="shadow-2xl">
+
+              <div
+                id="resume"
+                className={cn("relative bg-white")}
+                style={{
+                  width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                  minHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                  maxHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                  overflow: "hidden",
+                }}
+              >
+                <Template3 resumeData={resumeData} />
+              </div>
             </div>
           </TransformComponent>
         </TransformWrapper>

@@ -6,19 +6,19 @@ import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
-const Template3 = () => {
+const Template3 = ({ resumeData }) => {
 
   return (
     <>
       <div className="p-custom space-y-3">
-        <div className="bg-white shadow-lg mx-auto">
+        <div className="bg-white mx-auto">
           <div className="top_section flex justify-around items-center bg-gray-200 py-20">
             <div className="name_profile">
-              <h1 className="text-4xl uppercase">
-                Edward <span className="font-bold  text-4xl">Christofer</span>
+              <h1 className="text-4xl uppercase font-bold">
+                {resumeData?.basics?.name}
               </h1>
               <p className="text-base font-medium mt-1">
-                Web & Graphic Designer
+                {resumeData?.basics?.jobtitle}
               </p>
             </div>
             <div className="profile_pic">
