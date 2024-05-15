@@ -9,7 +9,11 @@ const initialState = {
         headline: "",
         email: "anujrawat@glassfrog.design",
         phone: "fdasfasdfasdf",
-        location: "",
+        country: "India",
+        address: "Sudhowala",
+        city: "Dehradun",
+        jobtitle: "Web Dev",
+        postalcode: "248001",
         url: {
             label: "",
             href: ""
@@ -29,10 +33,10 @@ const initialState = {
     },
     sections: {
         summary: {
-            name: "Summary",
+            name: "Profile",
             columns: 1,
             visible: true,
-            id: "summary",
+            id: "profile",
             content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>"
         },
         awards: {
