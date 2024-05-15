@@ -76,13 +76,15 @@ const initialState = {
         degree: "B.Tech",
         startDate: "Aug 2016",
         endDate: "Dec 2020",
-        description: ""
+        description: "",
+        city: "Tehri"
       }, {
         institute: "TWS",
         degree: "12th",
         startDate: "April 2015",
         endDate: "April 2016",
-        description: ""
+        description: "",
+        city: "DUN"
       }]
     },
     experience: {
@@ -95,13 +97,15 @@ const initialState = {
         employer: "CEOITBOX",
         startDate: "Aug 2016",
         endDate: "Dec 2020",
-        description: ""
+        description: "",
+        city: "Delhi"
       }, {
         jobtitle: "Web dev",
         employer: "CEOITBOX",
         startDate: "April 2015",
         endDate: "April 2016",
-        description: ""
+        description: "",
+        city: "Dun"
       }]
     },
     volunteer: {
@@ -282,7 +286,7 @@ function Builder() {
         </div>
       </div>
       <div className="lg:block hidden resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
-        <ResumeViewPage scale={scale} />
+        <ResumeViewPage scale={scale} resumeData={resumeData}/>
       </div>
     </div>
   );

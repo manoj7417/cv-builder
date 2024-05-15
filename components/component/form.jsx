@@ -20,6 +20,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { DatePickerDemo } from "./datepicker";
 import { useState } from "react";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 
 export default function Form({ resumeData, setResumeData }) {
@@ -40,6 +41,124 @@ export default function Form({ resumeData, setResumeData }) {
     const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
     setResumeData(updatedResumeData)
   }
+
+  const handleEducationChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, items: resumeData.sections.education.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, [name]: value
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleEducationDescriptionChange = (val, i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, items: resumeData.sections.education.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, description: val
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleExperienceChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, items: resumeData.sections.experience.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, [name]: value
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleExperienceDescriptionChange = (val, i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, items: resumeData.sections.experience.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, description: val
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleAddNewEducation = () => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, items: [
+            ...resumeData.sections.education.items,
+            {
+              institution: "",
+              area: "",
+              studyType: "",
+              startDate: "",
+              endDate: "",
+              city: "",
+              description: ""
+            }
+          ]
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleAddNewExperience = () => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, items: [
+            ...resumeData.sections.experience.items,
+            {
+              jobtitle: "",
+              employer: "",
+              startDate: "",
+              endDate: "",
+              description: "",
+              city: ""
+            }
+          ]
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
   return (
     <div className="py-10">
       <div className="px-10">
@@ -167,42 +286,41 @@ export default function Form({ resumeData, setResumeData }) {
             </p>
           </div>
         </div>
-        <div className=" my-5 h-auto">
+        <div className=" my-5 h-auto ">
           {
             sections?.education?.items.length > 0 &&
             sections?.education?.items.map((item, index) => {
-              return <div key={index} className="flex items-start justify-between group my-5 ">
-                <GoGrabber className="mt-6 text-3xl
-               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
-                <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out">
-                  <AccordionItem value="item-1">
+              return <div key={index} className="flex items-start justify-center group my-5 relative">
+                <GoGrabber className=" text-3xl
+               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"/>
+                <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out " defaultValue={`item-${index}`} defaultChecked>
+                  <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger>
                       <div className=" px-3 flex flex-col items-start">
                         <p >{item?.degree && `${item?.degree} at `}{item?.institute}</p>
                         <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
                       </div></AccordionTrigger>
                     <AccordionContent>
-                      <div className="w-full py-5">
+                      <div className="w-full pt-5 px-5 pb-10">
                         <div className="grid grid-cols-2 gap-4 px-2 py-5">
                           <div className="space-y-2">
                             <Label htmlFor="institute">Institute</Label>
-                            <Input id="institute" placeholder="Institute Name" />
+                            <Input id="institute" placeholder="Institute Name" value={item.institute} onChange={(e) => handleEducationChange(e, index)} name="institute" />
                           </div>
                           <div className="space-y-2">
                             <Label htmlFor="degree">Degree</Label>
-                            <Input id="degree" placeholder="Degree Name" type="text" />
+                            <Input id="degree" placeholder="Degree Name" type="text" value={item.degree} name="degree" onChange={(e) => handleEducationChange(e, index)} />
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4 px-2">
                           <div className="flex flex-col md:flex-row ">
-                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  px-2">
+                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
                                 <DatePickerDemo id="start_date" />
-
                               </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  px-2">
+                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
                               <Label for="end_date" className="block">End Date</Label>
                               <div className="w-full">
                                 <DatePickerDemo id="end_date" />
@@ -212,7 +330,7 @@ export default function Form({ resumeData, setResumeData }) {
 
                           <div className="space-y-2">
                             <Label htmlFor="city">City</Label>
-                            <Input id="city" placeholder="Enter city name" type="text" />
+                            <Input placeholder="Enter city name" type="text" value={item.city} name="city" onChange={(e) => handleEducationChange(e, index)} />
                           </div>
                         </div>
                         <div className="space-y-2 my-5 px-2">
@@ -224,18 +342,23 @@ export default function Form({ resumeData, setResumeData }) {
                               height: "200px",
                             }}
                             placeholder="eg. Graduated from the University "
+                            value={item.description}
+                            onChange={(e) => handleEducationDescriptionChange(e, index)}
                           />
                         </div>
                       </div>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-                <MdDeleteOutline className="mt-7 text-2xl
+                <MdDeleteOutline className="absolute top-2 right-1 text-2xl
                font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"/>
               </div>
             })
 
           }
+        </div>
+        <div className="px-10 ">
+          <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewEducation}><IoIosAddCircleOutline className="text-xl mr-2" />Add one more {`${resumeData?.sections?.education?.name}`.toLowerCase()}</Button>
         </div>
       </div>
 
@@ -257,34 +380,34 @@ export default function Form({ resumeData, setResumeData }) {
               return <div key={index} className="flex items-start justify-between group my-5 ">
                 <GoGrabber className="mt-6 text-3xl
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
-                <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out">
-                  <AccordionItem value="item-1">
+                <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out" defaultValue={`item-${index}`}>
+                  <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger>
                       <div className=" px-3 flex flex-col items-start">
                         <p >{item?.jobtitle && `${item?.jobtitle} at `}{item?.employer}</p>
                         <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
                       </div></AccordionTrigger>
                     <AccordionContent>
-                      <div className="w-full py-5">
+                      <div className="w-full pt-5 px-5 pb-10">
                         <div className="grid grid-cols-2 gap-4 px-2 py-5">
                           <div className="space-y-2">
                             <Label htmlFor="institute">Job Title</Label>
-                            <Input id="institute" placeholder="Enter Job title" />
+                            <Input id="institute" placeholder="Enter Job title" value={item.jobtitle} name="jobtitle" onChange={(e) => handleExperienceChange(e, index)} />
                           </div>
                           <div className="space-y-2">
                             <Label htmlFor="degree">Employer</Label>
-                            <Input id="degree" placeholder="Employer name" type="text" />
+                            <Input id="degree" placeholder="Employer name" type="text" value={item.employer} name="employer" onChange={(e) => handleExperienceChange(e, index)} />
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4 px-2">
                           <div className="flex flex-col md:flex-row ">
-                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  px-2">
+                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
                                 <DatePickerDemo id="start_date" />
                               </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  px-2">
+                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
                               <Label for="end_date" className="block">End Date</Label>
                               <div className="w-full">
                                 <DatePickerDemo id="end_date" />
@@ -294,7 +417,7 @@ export default function Form({ resumeData, setResumeData }) {
 
                           <div className="space-y-2">
                             <Label htmlFor="city">City</Label>
-                            <Input id="city" placeholder="Enter city name" type="text" />
+                            <Input id="city" placeholder="Enter city name" type="text" value={item.city} name="city" onChange={(e) => handleExperienceChange(e, index)} />
                           </div>
                         </div>
                         <div className="space-y-2 my-5 px-2">
@@ -306,7 +429,9 @@ export default function Form({ resumeData, setResumeData }) {
                             style={{
                               height: "200px",
                             }}
-                            placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities.  "
+                            placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
+                            value={item.description}
+                            onChange={(e) => handleExperienceDescriptionChange(e, index)}
                           />
                         </div>
                       </div>
@@ -319,12 +444,12 @@ export default function Form({ resumeData, setResumeData }) {
             })
           }
         </div>
+        <div className="px-10 ">
+          <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewExperience}><IoIosAddCircleOutline className="text-xl mr-2"  />Add one more {`${resumeData?.sections?.experience?.name}`.toLowerCase()}</Button>
+        </div>
       </div>
-
       <div>
-
       </div>
-
     </div>
   );
 }
