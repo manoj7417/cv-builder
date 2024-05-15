@@ -1,17 +1,56 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 import { FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
-const Template3 = ({scale}) => {
+const Template3 = ({ scale }) => {
+
+  const A4_RATIO = 1.414;
+
+  const [windowDimension, detectHW] = useState({
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight / A4_RATIO,
+  });
+
+  const detectSize = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // Determine the dimension to adjust based on A4 ratio
+    let newWidth, newHeight;
+    if (width / height > A4_RATIO) {
+      // If the width is greater than height * A4_RATIO, adjust width
+      newHeight = height;
+      newWidth = height * A4_RATIO;
+    } else {
+      // Otherwise, adjust height
+      newWidth = width;
+      newHeight = width / A4_RATIO;
+    }
+    detectHW({
+      winWidth: newWidth,
+      winHeight: newHeight,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", detectSize); 
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimension]);
 
   return (
     <>
-      <div className="w-[219mm] h-[297mm] mx-auto no-scrollbar overflow-y-scroll absolute left-[100px] -top-20" style={{
-        transform: `scale(${scale},${scale})`
-      }} >
+      <div
+        className={`w-${windowDimension.winWidth} h-${windowDimension.winHeight} mx-auto no-scrollbar overflow-y-scroll absolute left-[100px] -top-28`}
+        style={{
+          transform: `scale(${scale},${scale})`,
+        }}
+      >
         <div className="bg-white shadow-lg mx-auto">
           <div className="top_section flex justify-around items-center bg-gray-200 py-20">
             <div className="name_profile">
@@ -30,7 +69,7 @@ const Template3 = ({scale}) => {
               />
             </div>
           </div>
-          <div className="resume_section mt-5 flex">
+          <div className="resume_section mt-5 flex md:flex-row flex-col">
             <div className="md:w-[30%] w-full left_side border-r-2 border-gray-300 p-8">
               <div className="contact_section border-b-2 border-gray-300 pb-3">
                 <h2 className="text-xl text-gray-600 font-semibold uppercase">

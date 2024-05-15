@@ -28,130 +28,136 @@ const initialState = {
       href: "",
     },
     sections: {
-        summary: {
-            name: "Summary",
-            columns: 1,
-            visible: true,
-            id: "summary",
-            content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>"
+      summary: {
+        name: "Summary",
+        columns: 1,
+        visible: true,
+        id: "summary",
+        content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>",
+      },
+      awards: {
+        name: "Awards",
+        columns: 1,
+        visible: true,
+        id: "awards",
+        items: [],
+      },
+      certifications: {
+        name: "Certifications",
+        columns: 1,
+        visible: true,
+        id: "certifications",
+        items: [],
+      },
+      education: {
+        name: "Education",
+        columns: 1,
+        visible: true,
+        id: "education",
+        items: [
+          {
+            institute: "THDC",
+            degree: "B.Tech",
+            startDate: "Aug 2016",
+            endDate: "Dec 2020",
+            description: "",
+          },
+          {
+            institute: "TWS",
+            degree: "12th",
+            startDate: "April 2015",
+            endDate: "April 2016",
+            description: "",
+          },
+        ],
+      },
+      experience: {
+        name: "Experience",
+        columns: 1,
+        visible: true,
+        id: "experience",
+        items: [
+          {
+            jobtitle: "Web dev",
+            employer: "CEOITBOX",
+            startDate: "Aug 2016",
+            endDate: "Dec 2020",
+            description: "",
+          },
+          {
+            jobtitle: "Web dev",
+            employer: "CEOITBOX",
+            startDate: "April 2015",
+            endDate: "April 2016",
+            description: "",
+          },
+        ],
+      },
+      volunteer: {
+        name: "Volunteering",
+        columns: 1,
+        visible: true,
+        id: "volunteer",
+        items: [],
+      },
+      interests: {
+        name: "Interests",
+        columns: 1,
+        visible: true,
+        id: "interests",
+        items: [],
+      },
+      languages: {
+        name: "Languages",
+        columns: 1,
+        visible: true,
+        id: "languages",
+        items: [],
+      },
+      profiles: {
+        name: "Profiles",
+        columns: 1,
+        visible: true,
+        id: "profiles",
+        items: [],
+      },
+      projects: {
+        name: "Projects",
+        columns: 1,
+        visible: true,
+        id: "projects",
+        items: [],
+      },
+      publications: {
+        name: "Publications",
+        columns: 1,
+        visible: true,
+        id: "publications",
+        items: [],
+      },
+      references: {
+        name: "References",
+        columns: 1,
+        visible: true,
+        id: "references",
+        items: [],
+      },
+      skills: {
+        name: "Skills",
+        columns: 1,
+        visible: true,
+        id: "skills",
+        items: [],
+      },
+      custom: {
+        w5x9jciqnkyyb1838abqsfgx: {
+          name: "Custom Section",
+          columns: 1,
+          visible: true,
+          id: "w5x9jciqnkyyb1838abqsfgx",
+          items: [],
         },
-        awards: {
-            name: "Awards",
-            columns: 1,
-            visible: true,
-            id: "awards",
-            items: []
-        },
-        certifications: {
-            name: "Certifications",
-            columns: 1,
-            visible: true,
-            id: "certifications",
-            items: []
-        },
-        education: {
-            name: "Education",
-            columns: 1,
-            visible: true,
-            id: "education",
-            items: [{
-                institute: "THDC",
-                degree: "B.Tech",
-                startDate: "Aug 2016",
-                endDate: "Dec 2020",
-                description: ""
-            }, {
-                institute: "TWS",
-                degree: "12th",
-                startDate: "April 2015",
-                endDate: "April 2016",
-                description: ""
-            }]
-        },
-        experience: {
-            name: "Experience",
-            columns: 1,
-            visible: true,
-            id: "experience",
-            items: [{
-                jobtitle: "Web dev",
-                employer: "CEOITBOX",
-                startDate: "Aug 2016",
-                endDate: "Dec 2020",
-                description: ""
-            }, {
-                jobtitle: "Web dev",
-                employer: "CEOITBOX",
-                startDate: "April 2015",
-                endDate: "April 2016",
-                description: ""
-            }]
-        },
-        volunteer: {
-            name: "Volunteering",
-            columns: 1,
-            visible: true,
-            id: "volunteer",
-            items: []
-        },
-        interests: {
-            name: "Interests",
-            columns: 1,
-            visible: true,
-            id: "interests",
-            items: []
-        },
-        languages: {
-            name: "Languages",
-            columns: 1,
-            visible: true,
-            id: "languages",
-            items: []
-        },
-        profiles: {
-            name: "Profiles",
-            columns: 1,
-            visible: true,
-            id: "profiles",
-            items: []
-        },
-        projects: {
-            name: "Projects",
-            columns: 1,
-            visible: true,
-            id: "projects",
-            items: []
-        },
-        publications: {
-            name: "Publications",
-            columns: 1,
-            visible: true,
-            id: "publications",
-            items: []
-        },
-        references: {
-            name: "References",
-            columns: 1,
-            visible: true,
-            id: "references",
-            items: []
-        },
-        skills: {
-            name: "Skills",
-            columns: 1,
-            visible: true,
-            id: "skills",
-            items: []
-        },
-        custom: {
-            w5x9jciqnkyyb1838abqsfgx: {
-                name: "Custom Section",
-                columns: 1,
-                visible: true,
-                id: "w5x9jciqnkyyb1838abqsfgx",
-                items: []
-            }
-        }
+      },
     },
   },
   sections: {
@@ -320,14 +326,16 @@ function Builder() {
   const [mobileContent, setMobileContent] = useState(false);
 
   const handleMobileContent = () => {
-    setIsMobile(false);
+    // setIsMobile(false);
     setMobileContent(true);
   };
 
   useEffect(() => {
+    
     const checkIfMobile = () => {
       const isMobileDevice = window.innerWidth <= 768; // Adjust this value based on your definition of "mobile"
       setIsMobile(isMobileDevice);
+      setMobileContent(false);
     };
 
     checkIfMobile();
@@ -345,7 +353,7 @@ function Builder() {
         <Form resumeData={resumeData} setResumeData={setResumeData} />
         <div className="mobile_section flex justify-end mb-10 mx-10">
           <div>
-            {isMobile && (
+            {isMobile &&  (
               <button
                 className="px-5 py-2 bg-black text-white rounded-lg"
                 onClick={handleMobileContent}
@@ -358,7 +366,7 @@ function Builder() {
             {mobileContent && (
               <>
                 <section className="w-screen h-screen absolute top-0 left-0 ">
-                  <MobileTemplate3 />
+                  <MobileTemplate3 setMobileContent={setMobileContent}/>
                 </section>
               </>
             )}
