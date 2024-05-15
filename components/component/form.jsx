@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css";
+import 'react-quill/dist/quill.snow.css';
 import {
   Dialog,
   DialogContent,
@@ -19,51 +19,68 @@ import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { DatePickerDemo } from "./datepicker";
+import { useState } from "react";
 
 
 export default function Form({ resumeData, setResumeData }) {
-  const { sections } = resumeData
+  const { sections } = resumeData;
+  const [edit, setEdit] = useState({
+    profileLabel: false,
+    educationLabel: false,
+    experienceLabel: false
+  })
+
+  const handleBasicInfoChange = (e) => {
+    const { name, value } = e.target;
+    const updatedResumeData = { ...resumeData, basics: { ...resumeData.basics, [name]: value } }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleChangeProfileSummaryChange = (val) => {
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
+    setResumeData(updatedResumeData)
+  }
   return (
-    <div className="">
+    <div className="py-10">
       <div className="px-10">
         <div className="grid grid-cols-2 gap-4 mb-2">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="Enter your name" />
+            <Input id="name" placeholder="Enter your name" name="name" onChange={handleBasicInfoChange} value={resumeData?.basics?.name} />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">Job Title</Label>
-            <Input id="jobTitle" placeholder="Job Title" type="text" />
+            <Label htmlFor="jobtitle">Job Title</Label>
+            <Input id="jobtitle" placeholder="Enter Job Title" name="jobtitle" type="text" onChange={handleBasicInfoChange} value={resumeData?.basics?.jobtitle} />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-2">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" placeholder="" type="email" />
+            <Input id="email" placeholder="Enter your email address" type="email" name="email" onChange={handleBasicInfoChange} value={resumeData?.basics?.email} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" placeholder="" />
+            <Input id="phone" placeholder="Enter phone number" name="phone" value={resumeData?.basics?.phone} />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-2">
           <div className="space-y-2">
-            <Label htmlFor="email">Country</Label>
-            <Input id="email" placeholder="" />
+            <Label htmlFor="country">Country</Label>
+            <Input id="country" placeholder="Enter Country Name" value={resumeData?.basics?.country} />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone">City</Label>
-            <Input id="phone" placeholder="" />
+            <Label htmlFor="city">City</Label>
+            <Input id="city" placeholder="Enter City Name" name="city" onChange={handleBasicInfoChange} value={resumeData?.basics?.city} />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-2">
           <div className="space-y-2">
-            <Label htmlFor="email">Address</Label>
-            <Input id="email" placeholder="" />
+            <Label htmlFor="address">Address</Label>
+            <Input id="address" placeholder="e.g. Sudhowala" onChange={handleBasicInfoChange} name="address" value={resumeData?.basics?.address} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Postal Code</Label>
-            <Input id="phone" placeholder="" />
+            <Input id="phone" placeholder="e.g. 248001" name="postalcode" value={resumeData?.basics?.postalcode} />
           </div>
         </div>
       </div>
@@ -72,7 +89,7 @@ export default function Form({ resumeData, setResumeData }) {
       <div className="py-5 my-5 px-10">
         <div className="space-y-2">
           <div className=" flex justify-between items-center">
-            <Label htmlFor="Profile" className="text-2xl">Profile</Label>
+            <Label htmlFor="Profile" className="text-2xl">{resumeData?.sections?.summary?.name}</Label>
             <Dialog>
               <DialogTrigger asChild>
                 <Button
@@ -133,6 +150,8 @@ export default function Form({ resumeData, setResumeData }) {
               style={{
                 height: "200px",
               }}
+              value={resumeData?.sections?.summary?.content}
+              onChange={handleChangeProfileSummaryChange}
             />
           </div>
         </div>
@@ -180,6 +199,7 @@ export default function Form({ resumeData, setResumeData }) {
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
                                 <DatePickerDemo id="start_date" />
+
                               </div>
                             </div>
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  px-2">
@@ -281,6 +301,7 @@ export default function Form({ resumeData, setResumeData }) {
                           <Label htmlFor="city" >Description</Label>
                           <ReactQuill
                             id="Profile"
+                            theme="snow"
                             className="no-scrollbar"
                             style={{
                               height: "200px",
@@ -298,6 +319,10 @@ export default function Form({ resumeData, setResumeData }) {
             })
           }
         </div>
+      </div>
+
+      <div>
+
       </div>
 
     </div>

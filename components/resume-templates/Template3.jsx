@@ -6,51 +6,11 @@ import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
-const Template3 = ({ scale }) => {
-
-  const A4_RATIO = 1.414;
-
-  const [windowDimension, detectHW] = useState({
-    winWidth: window.innerWidth,
-    winHeight: window.innerHeight / A4_RATIO,
-  });
-
-  const detectSize = () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    // Determine the dimension to adjust based on A4 ratio
-    let newWidth, newHeight;
-    if (width / height > A4_RATIO) {
-      // If the width is greater than height * A4_RATIO, adjust width
-      newHeight = height;
-      newWidth = height * A4_RATIO;
-    } else {
-      // Otherwise, adjust height
-      newWidth = width;
-      newHeight = width / A4_RATIO;
-    }
-    detectHW({
-      winWidth: newWidth,
-      winHeight: newHeight,
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", detectSize); 
-    return () => {
-      window.removeEventListener("resize", detectSize);
-    };
-  }, [windowDimension]);
+const Template3 = () => {
 
   return (
     <>
-      <div
-        className={`w-${windowDimension.winWidth} h-${windowDimension.winHeight} mx-auto no-scrollbar overflow-y-scroll absolute left-[100px] -top-28`}
-        style={{
-          transform: `scale(${scale},${scale})`,
-        }}
-      >
+      <div className="p-custom space-y-3">
         <div className="bg-white shadow-lg mx-auto">
           <div className="top_section flex justify-around items-center bg-gray-200 py-20">
             <div className="name_profile">

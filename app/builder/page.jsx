@@ -22,235 +22,143 @@ const initialState = {
     headline: "",
     email: "anujrawat@glassfrog.design",
     phone: "fdasfasdfasdf",
-    location: "",
+    country: "India",
+    address: "Sudhowala",
+    city: "Dehradun",
+    jobtitle: "Web Dev",
+    postalcode: "248001",
     url: {
       label: "",
-      href: "",
+      href: ""
     },
-    sections: {
-      summary: {
-        name: "Summary",
-        columns: 1,
-        visible: true,
-        id: "summary",
-        content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>",
-      },
-      awards: {
-        name: "Awards",
-        columns: 1,
-        visible: true,
-        id: "awards",
-        items: [],
-      },
-      certifications: {
-        name: "Certifications",
-        columns: 1,
-        visible: true,
-        id: "certifications",
-        items: [],
-      },
-      education: {
-        name: "Education",
-        columns: 1,
-        visible: true,
-        id: "education",
-        items: [
-          {
-            institute: "THDC",
-            degree: "B.Tech",
-            startDate: "Aug 2016",
-            endDate: "Dec 2020",
-            description: "",
-          },
-          {
-            institute: "TWS",
-            degree: "12th",
-            startDate: "April 2015",
-            endDate: "April 2016",
-            description: "",
-          },
-        ],
-      },
-      experience: {
-        name: "Experience",
-        columns: 1,
-        visible: true,
-        id: "experience",
-        items: [
-          {
-            jobtitle: "Web dev",
-            employer: "CEOITBOX",
-            startDate: "Aug 2016",
-            endDate: "Dec 2020",
-            description: "",
-          },
-          {
-            jobtitle: "Web dev",
-            employer: "CEOITBOX",
-            startDate: "April 2015",
-            endDate: "April 2016",
-            description: "",
-          },
-        ],
-      },
-      volunteer: {
-        name: "Volunteering",
-        columns: 1,
-        visible: true,
-        id: "volunteer",
-        items: [],
-      },
-      interests: {
-        name: "Interests",
-        columns: 1,
-        visible: true,
-        id: "interests",
-        items: [],
-      },
-      languages: {
-        name: "Languages",
-        columns: 1,
-        visible: true,
-        id: "languages",
-        items: [],
-      },
-      profiles: {
-        name: "Profiles",
-        columns: 1,
-        visible: true,
-        id: "profiles",
-        items: [],
-      },
-      projects: {
-        name: "Projects",
-        columns: 1,
-        visible: true,
-        id: "projects",
-        items: [],
-      },
-      publications: {
-        name: "Publications",
-        columns: 1,
-        visible: true,
-        id: "publications",
-        items: [],
-      },
-      references: {
-        name: "References",
-        columns: 1,
-        visible: true,
-        id: "references",
-        items: [],
-      },
-      skills: {
-        name: "Skills",
-        columns: 1,
-        visible: true,
-        id: "skills",
-        items: [],
-      },
-      custom: {
-        w5x9jciqnkyyb1838abqsfgx: {
-          name: "Custom Section",
-          columns: 1,
-          visible: true,
-          id: "w5x9jciqnkyyb1838abqsfgx",
-          items: [],
-        },
-      },
-    },
+    customFields: [],
+    picture: {
+      url: "https://storage.rxresu.me/clvlwaeik0qf8fnw32i7lho6x/pictures/clvlwaeik0qf8fnw32i7lho6x.jpg",
+      size: 64,
+      aspectRatio: 1,
+      borderRadius: 0,
+      effects: {
+        hidden: false,
+        border: false,
+        grayscale: false
+      }
+    }
   },
   sections: {
     summary: {
-      name: "Summary",
+      name: "Profile",
       columns: 1,
       visible: true,
-      id: "summary",
-      content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>",
+      id: "profile",
+      content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>"
     },
     awards: {
       name: "Awards",
       columns: 1,
       visible: true,
       id: "awards",
-      items: [],
+      items: []
     },
     certifications: {
       name: "Certifications",
       columns: 1,
       visible: true,
       id: "certifications",
-      items: [],
+      items: []
     },
     education: {
       name: "Education",
       columns: 1,
       visible: true,
       id: "education",
-      items: [],
+      items: [{
+        institute: "THDC",
+        degree: "B.Tech",
+        startDate: "Aug 2016",
+        endDate: "Dec 2020",
+        description: ""
+      }, {
+        institute: "TWS",
+        degree: "12th",
+        startDate: "April 2015",
+        endDate: "April 2016",
+        description: ""
+      }]
     },
     experience: {
       name: "Experience",
       columns: 1,
       visible: true,
       id: "experience",
-      items: [],
+      items: [{
+        jobtitle: "Web dev",
+        employer: "CEOITBOX",
+        startDate: "Aug 2016",
+        endDate: "Dec 2020",
+        description: ""
+      }, {
+        jobtitle: "Web dev",
+        employer: "CEOITBOX",
+        startDate: "April 2015",
+        endDate: "April 2016",
+        description: ""
+      }]
     },
     volunteer: {
       name: "Volunteering",
       columns: 1,
       visible: true,
       id: "volunteer",
-      items: [],
+      items: []
     },
     interests: {
       name: "Interests",
       columns: 1,
       visible: true,
       id: "interests",
-      items: [],
+      items: []
     },
     languages: {
       name: "Languages",
       columns: 1,
       visible: true,
       id: "languages",
-      items: [],
+      items: []
     },
     profiles: {
       name: "Profiles",
       columns: 1,
       visible: true,
       id: "profiles",
-      items: [],
+      items: []
     },
     projects: {
       name: "Projects",
       columns: 1,
       visible: true,
       id: "projects",
-      items: [],
+      items: []
     },
     publications: {
       name: "Publications",
       columns: 1,
       visible: true,
       id: "publications",
-      items: [],
+      items: []
     },
     references: {
       name: "References",
       columns: 1,
       visible: true,
       id: "references",
-      items: [],
+      items: []
     },
     skills: {
       name: "Skills",
       columns: 1,
       visible: true,
       id: "skills",
-      items: [],
+      items: []
     },
     custom: {
       w5x9jciqnkyyb1838abqsfgx: {
@@ -258,9 +166,9 @@ const initialState = {
         columns: 1,
         visible: true,
         id: "w5x9jciqnkyyb1838abqsfgx",
-        items: [],
-      },
-    },
+        items: []
+      }
+    }
   },
   metadata: {
     template: "pikachu",
@@ -317,7 +225,7 @@ const initialState = {
     },
     notes: "",
   },
-};
+}
 
 function Builder() {
   const [resumeData, setResumeData] = useState(initialState);
@@ -373,7 +281,7 @@ function Builder() {
           </div>
         </div>
       </div>
-      <div className="lg:block hidden resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-500 fixed right-0 top-0 bottom-0">
+      <div className="lg:block hidden resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
         <ResumeViewPage scale={scale} />
       </div>
     </div>
