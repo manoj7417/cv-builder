@@ -5,13 +5,11 @@ import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
-const Template3 = ({scale}) => {
+const Template3 = () => {
 
   return (
     <>
-      <div className="w-[219mm] h-[297mm] mx-auto no-scrollbar overflow-y-scroll absolute left-[100px] -top-20" style={{
-        transform: `scale(${scale},${scale})`
-      }} >
+      <div className="p-custom space-y-3">
         <div className="bg-white shadow-lg mx-auto">
           <div className="top_section flex justify-around items-center bg-gray-200 py-20">
             <div className="name_profile">
