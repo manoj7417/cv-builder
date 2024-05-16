@@ -15,6 +15,12 @@ import {
 import MobileTemplate3 from "@/components/resume-templates/MobileTemplate3";
 import Template1 from "@/components/resume-templates/Template1";
 import Template2 from "@/components/resume-templates/Template2";
+import {
+  ReactZoomPanPinchRef,
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
 
 const initialState = {
   basics: {
@@ -238,10 +244,12 @@ const initialState = {
 }
 
 function Builder() {
+
   const [resumeData, setResumeData] = useState(initialState);
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
+  
 
   const handleMobileContent = () => {
     // setIsMobile(false);
@@ -280,7 +288,7 @@ function Builder() {
               </button>
             )}
           </div>
-          <div className="mobileContent">
+          {/* <div className="mobileContent">
             {mobileContent && (
               <>
                 <section className="w-screen h-screen absolute top-0 left-0 ">
@@ -288,11 +296,11 @@ function Builder() {
                 </section>
               </>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
-      <div className="lg:block hidden resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
-        <ResumeViewPage scale={scale} resumeData={resumeData} />
+      <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
+        <ResumeViewPage scale={scale} resumeData={resumeData}/>
       </div>
     </div>
   );
