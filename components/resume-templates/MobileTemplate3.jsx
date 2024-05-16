@@ -7,33 +7,13 @@ import { FaUser } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 
 const MobileTemplate3 = ({setMobileContent}) => {
-    
-  const [windowDimension, detectHW] = useState({
-    winWidth: window.innerWidth,
-    winHeight: window.innerHeight,
-  });
-
-  const detectSize = () => {
-    detectHW({
-      winWidth: window.innerWidth,
-      winHeight: window.innerHeight,
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", detectSize);
-
-    return () => {
-      window.removeEventListener("resize", detectSize);
-    };
-  }, [windowDimension]);
 
   return (
     <>
     <div className="top_header bg-white p-10 border border-gray-300 flex justify-end">
     <FaTimes onClick={()=>setMobileContent(false)} className="cursor-pointer"/>
     </div>
-      <div className={`w-${windowDimension.winWidth} h-${windowDimension.winHeight}`}>
+      <div>
         <div className="bg-white shadow-lg mx-auto">
           <div className="top_section flex justify-around items-center bg-gray-200 py-20 px-5">
             <div className="name_profile">

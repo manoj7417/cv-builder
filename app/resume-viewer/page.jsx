@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
+import { LuLayoutGrid } from "react-icons/lu";
 import {
   ReactZoomPanPinchRef,
   TransformComponent,
@@ -107,6 +108,7 @@ const ResumeViewPage = ({ resumeData }) => {
     };
   }, []);
 
+
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.origin !== window.location.origin) return;
@@ -126,6 +128,7 @@ const ResumeViewPage = ({ resumeData }) => {
       window.removeEventListener("message", handleMessage);
     };
   }, [transformRef]);
+
 
   const pageSizeMap = {
     a4: {
@@ -152,16 +155,15 @@ const ResumeViewPage = ({ resumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button flex 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10 my-1">
+          <div className="actions_button hidden  bg-gray-600 md:flex 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10">
             <Controls />
-            <button className="p-2 bg-blue-900 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-600 text-sm flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
+            <button className="p-2 bg-white text-black disabled:bg-gray-600 font-semibold text-sm flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
               isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             }
-
               Download PDF
             </button>
             <Drawer direction="right">
-              <DrawerTrigger className="bg-blue-900 text-white p-2 hover:bg-blue-700 text-sm rounded-md">Explore More Templates</DrawerTrigger>
+              <DrawerTrigger className="bg-white text-black p-2 text-sm font-semibold">Templates <LuLayoutGrid className="inline"/></DrawerTrigger>
               <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                 <DrawerHeader>
                   <DrawerTitle>Choose Templates</DrawerTitle>
@@ -197,10 +199,8 @@ const ResumeViewPage = ({ resumeData }) => {
               </DrawerContent>
             </Drawer>
           </div>
-
           <TransformComponent>
             <div className="shadow-2xl">
-
               <div
                 id="resume"
                 className={cn("relative bg-white")}

@@ -15,6 +15,12 @@ import {
 import MobileTemplate3 from "@/components/resume-templates/MobileTemplate3";
 import Template1 from "@/components/resume-templates/Template1";
 import Template2 from "@/components/resume-templates/Template2";
+import {
+  ReactZoomPanPinchRef,
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
 
 const initialState = {
   basics: {
@@ -232,10 +238,12 @@ const initialState = {
 }
 
 function Builder() {
+
   const [resumeData, setResumeData] = useState(initialState);
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
+  
 
   const handleMobileContent = () => {
     // setIsMobile(false);
