@@ -148,35 +148,35 @@ const ResumeViewPage = ({ resumeData }) => {
               Download PDF
             </button>
             <Drawer direction="right">
-              <DrawerTrigger className="bg-white text-black p-2 text-sm font-semibold">Templates <LuLayoutGrid className="inline"/></DrawerTrigger>
+              <DrawerTrigger className="bg-white text-black p-2 text-sm font-semibold">Templates <LuLayoutGrid className="inline" /></DrawerTrigger>
               <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                 <DrawerHeader>
                   <DrawerTitle>Choose Templates</DrawerTitle>
                   <DrawerDescription>
                     <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
                       <div className="image_section_1 ">
-                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_2">
-                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_1">
-                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_2">
-                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_1">
-                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_2">
-                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_1">
-                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                       <div className="image_section_2">
-                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
                       </div>
                     </div>
                   </DrawerDescription>
