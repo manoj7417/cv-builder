@@ -59,7 +59,7 @@ const ResumeViewPage = ({ resumeData }) => {
   };
 
   const handleDownloadResume = async () => {
-    const el = document.getElementById('resume')
+    const el = document.getElementById('template')
     const resume = el.innerHTML
     const body = {
       html: resume
@@ -79,23 +79,8 @@ const ResumeViewPage = ({ resumeData }) => {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
       }
-      // if (response.status === 200) {
-      //   const blob = new Blob([response.data], { type: 'application/pdf' });
-      //   const url = window.URL.createObjectURL(blob);
-      //   const a = document.createElement('a');
-      //   a.href = url;
-      //   a.download = 'generated.pdf';
-      //   a.target = '_blank'; // Open in new tab
-      //   document.body.appendChild(a);
-      //   a.click();
-      //   document.body.removeChild(a);
-      //   window.URL.revokeObjectURL(url);
-      // } else {
-      //   console.error('Failed to generate PDF:', response.status);
-      //   // Handle error
-      // }
     } catch (error) {
-
+      console.log(error)
     } finally {
       setIsLoading(false)
     }
@@ -163,36 +148,36 @@ const ResumeViewPage = ({ resumeData }) => {
               Download PDF
             </button>
             <Drawer direction="right">
-              <DrawerTrigger className="bg-white text-black p-2 text-sm font-semibold">Templates <LuLayoutGrid className="inline"/></DrawerTrigger>
+              <DrawerTrigger className="bg-white text-black p-2 text-sm font-semibold">Templates <LuLayoutGrid className="inline" /></DrawerTrigger>
               <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                 <DrawerHeader>
                   <DrawerTitle>Choose Templates</DrawerTitle>
                   <DrawerDescription>
                     <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                        <div className="image_section_1 ">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_1">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_1">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_1">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
+                      <div className="image_section_1 ">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_1">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_1">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_1">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" width={100} height={100} />
+                      </div>
                     </div>
                   </DrawerDescription>
                 </DrawerHeader>
@@ -206,8 +191,7 @@ const ResumeViewPage = ({ resumeData }) => {
                 className={cn("relative bg-white")}
                 style={{
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                  minHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                  maxHeight: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                  height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
                 }}
               >

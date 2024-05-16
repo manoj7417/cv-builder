@@ -18,9 +18,9 @@ import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { DatePickerDemo } from "./datepicker";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { DatePicker } from "antd";
 
 
 export default function Form({ resumeData, setResumeData }) {
@@ -51,6 +51,52 @@ export default function Form({ resumeData, setResumeData }) {
             if (index === i) {
               return {
                 ...item, [name]: value
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleEducationStartDateChange = (val, i) => {
+    if (!val) return
+    let date = val['$d']
+    const year = date.getFullYear();
+    const monthName = date.toLocaleString('en-US', { month: 'long' });
+    const newDate = `${monthName}-${year}`;
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, items: resumeData.sections.education.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, startDate: newDate
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleEducationEndDateChange = (val, i) => {
+    if (!val) return
+    let date = val['$d']
+    const year = date.getFullYear();
+    const monthName = date.toLocaleString('en-US', { month: 'long' });
+    const newDate = `${monthName}-${year}`;
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, items: resumeData.sections.education.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, endDate: newDate
               }
             }
             return item
@@ -158,6 +204,106 @@ export default function Form({ resumeData, setResumeData }) {
     }
     setResumeData(updatedResumeData)
   }
+
+  const handleDeleteExperienceSection = (i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, items:
+            resumeData.sections.experience.items.filter((el, index) => {
+              return index !== i
+            })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleDeleteEducationSection = (i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, items:
+            resumeData.sections.education.items.filter((el, index) => {
+              return index !== i
+            })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleProjectChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, items: resumeData.sections.projects.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, [name]: value
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleProjectDescriptionChange = (val, i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, items: resumeData.sections.projects.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, description: val
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleDeleteProjectSection = (i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, items:
+            resumeData.sections.projects.items.filter((el, index) => {
+              return index !== i
+            })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleAddNewProject = () => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, items: [
+            ...resumeData.sections.projects.items,
+            {
+              title: '',
+              subtitle: '',
+              startDate: "",
+              endDate: "",
+              description: ""
+            }
+          ]
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
 
   return (
     <div className="py-10">
@@ -317,13 +463,13 @@ export default function Form({ resumeData, setResumeData }) {
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
-                                <DatePickerDemo id="start_date" />
+                                <DatePicker picker="month" onChange={(e) => handleEducationStartDateChange(e, index)} name="startDate" />
                               </div>
                             </div>
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
                               <Label for="end_date" className="block">End Date</Label>
                               <div className="w-full">
-                                <DatePickerDemo id="end_date" />
+                                <DatePicker picker="month" onChange={(e) => handleEducationEndDateChange(e, index)} name="endDate" />
                               </div>
                             </div>
                           </div>
@@ -351,7 +497,7 @@ export default function Form({ resumeData, setResumeData }) {
                   </AccordionItem>
                 </Accordion>
                 <MdDeleteOutline className="absolute top-2 right-1 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"/>
+               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out" onClick={() => handleDeleteEducationSection(index)} />
               </div>
             })
 
@@ -404,13 +550,13 @@ export default function Form({ resumeData, setResumeData }) {
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
-                                <DatePickerDemo id="start_date" />
+                                <DatePicker picker="month" />
                               </div>
                             </div>
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
                               <Label for="end_date" className="block">End Date</Label>
                               <div className="w-full">
-                                <DatePickerDemo id="end_date" />
+                                <DatePicker picker="month" />
                               </div>
                             </div>
                           </div>
@@ -439,16 +585,98 @@ export default function Form({ resumeData, setResumeData }) {
                   </AccordionItem>
                 </Accordion>
                 <MdDeleteOutline className="mt-7 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"/>
+               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out" onClick={() => handleDeleteExperienceSection(index)} />
               </div>
             })
           }
         </div>
         <div className="px-10 ">
-          <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewExperience}><IoIosAddCircleOutline className="text-xl mr-2"  />Add one more {`${resumeData?.sections?.experience?.name}`.toLowerCase()}</Button>
+          <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewExperience}><IoIosAddCircleOutline className="text-xl mr-2" />Add one more {`${resumeData?.sections?.experience?.name}`.toLowerCase()}</Button>
         </div>
       </div>
-      <div>
+
+      {/* Projects */}
+      <div className="py-5 mt-0 mb-10">
+        <div className="space-y-2 px-10">
+          <Label className="text-2xl">{sections.projects.name}</Label>
+          <div>
+            <p className="text-sm text-gray-500">
+              Show your best projects
+            </p>
+          </div>
+        </div>
+
+        <div className=" my-5 h-auto">
+          {
+            sections?.projects?.items.length > 0 &&
+            sections?.projects?.items.map((item, index) => {
+              return <div key={index} className="flex items-start justify-between group my-5 ">
+                <GoGrabber className="mt-6 text-3xl
+               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
+                <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out" defaultValue={`item-${index}`}>
+                  <AccordionItem value={`item-${index}`}>
+                    <AccordionTrigger>
+                      <div className=" px-3 flex flex-col items-start">
+                        <p >{item?.title}</p>
+                        <p>{item?.subtitle}</p>
+                        <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
+                      </div></AccordionTrigger>
+                    <AccordionContent>
+                      <div className="w-full pt-5 px-5 pb-10">
+                        <div className="grid grid-cols-2 gap-4 px-2 py-5">
+                          <div className="space-y-2">
+                            <Label htmlFor="institute">Title</Label>
+                            <Input id="institute" placeholder="Enter Job title" value={item.title} name="title" onChange={(e) => handleProjectChange(e, index)} />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="degree">Subtitle</Label>
+                            <Input id="degree" placeholder="Employer name" type="text" value={item.subtitle} name="subtitle" onChange={(e) => handleProjectChange(e, index)} />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4 px-2">
+                          <div className="flex flex-col md:flex-row ">
+                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
+                              <Label for="start_date" className="block">Start Date</Label>
+                              <div className="w-full">
+                                <DatePicker picker="month" />
+                              </div>
+                            </div>
+                            <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
+                              <Label for="end_date" className="block">End Date</Label>
+                              <div className="w-full">
+                                <DatePicker picker="month" />
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div className="space-y-2 my-5 px-2">
+                          <Label htmlFor="city" >Description</Label>
+                          <ReactQuill
+                            id="Profile"
+                            theme="snow"
+                            className="no-scrollbar"
+                            style={{
+                              height: "200px",
+                            }}
+                            placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
+                            value={item.description}
+                            onChange={(e) => handleProjectDescriptionChange(e, index)}
+                          />
+                        </div>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+                <MdDeleteOutline className="mt-7 text-2xl
+               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out" onClick={() => handleDeleteProjectSection(index)} />
+              </div>
+            })
+          }
+        </div>
+        <div className="px-10 ">
+          <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewProject}><IoIosAddCircleOutline className="text-xl mr-2" />Add one more {`${resumeData?.sections?.experience?.name}`.toLowerCase()}</Button>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 import Form from "@/components/component/form";
 import React, { useEffect, useState } from "react";
-import ResumeViewPage from "../resume-viewer/page";
+import ResumeViewPage from "../resume-viewer/ResumeViewer";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -147,7 +147,13 @@ const initialState = {
       columns: 1,
       visible: true,
       id: "projects",
-      items: []
+      items: [{
+       title : '',
+       subtitle : '',
+       startDate : "",
+       endDate : "",
+       description : ""
+      }]
     },
     publications: {
       name: "Publications",
@@ -251,7 +257,7 @@ function Builder() {
   };
 
   useEffect(() => {
-    
+
     const checkIfMobile = () => {
       const isMobileDevice = window.innerWidth <= 768; // Adjust this value based on your definition of "mobile"
       setIsMobile(isMobileDevice);
@@ -273,7 +279,7 @@ function Builder() {
         <Form resumeData={resumeData} setResumeData={setResumeData} />
         <div className="mobile_section flex justify-end mb-10 mx-10">
           <div>
-            {isMobile &&  (
+            {isMobile && (
               <button
                 className="px-5 py-2 bg-black text-white rounded-lg"
                 onClick={handleMobileContent}
@@ -286,7 +292,7 @@ function Builder() {
             {mobileContent && (
               <>
                 <section className="w-screen h-screen absolute top-0 left-0 ">
-                  <MobileTemplate3 setMobileContent={setMobileContent}/>
+                  <MobileTemplate3 setMobileContent={setMobileContent} />
                 </section>
               </>
             )}

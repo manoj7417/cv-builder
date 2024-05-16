@@ -66,7 +66,7 @@ export const getBetterResume = async (message) => {
 
 export const printResume = async (html) => {
   try {
-    const response = await fetch('https://seal-app-tilby.ondigitalocean.app/api/print/resume', {
+    const response = await fetch(`${baseURL}/api/print/resume`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
