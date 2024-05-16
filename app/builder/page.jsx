@@ -282,7 +282,7 @@ function Builder() {
               </button>
             )}
           </div>
-          <div className="mobileContent">
+          {/* <div className="mobileContent">
             {mobileContent && (
               <>
                 <section className="w-screen h-screen absolute top-0 left-0 ">
@@ -290,10 +290,10 @@ function Builder() {
                 </section>
               </>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
-      <div className="lg:block hidden resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
+      <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
         <ResumeViewPage scale={scale} resumeData={resumeData}/>
       </div>
     </div>
