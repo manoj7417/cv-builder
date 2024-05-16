@@ -7,9 +7,6 @@ import { FaFacebookF } from "react-icons/fa";
 
 const Template1 = () => {
   const val = ResumeData?.resume;
-
-  console.log("val::", val);
-
   return (
     <>
       <div className="resume_wrapper">

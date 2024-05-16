@@ -32,13 +32,13 @@ const Controls = () => {
 
   return (
     <div className="tools">
-      <button className="p-2 bg-white" onClick={() => zoomIn()}>
+      <button className="2xl:p-5 md:p-2 p-1 bg-white" onClick={() => zoomIn()}>
         <FiPlus />
       </button>
-      <button className="p-2 bg-white mx-2" onClick={() => zoomOut()}>
+      <button className="2xl:p-5 md:p-2 p-1 bg-white mx-2" onClick={() => zoomOut()}>
         <FiMinus />
       </button>
-      <button className="p-2 bg-white" onClick={() => resetTransform()}>
+      <button className="2xl:p-5 md:p-2 p-1 bg-white" onClick={() => resetTransform()}>
         <CiUndo />
       </button>
     </div>
@@ -155,9 +155,9 @@ const ResumeViewPage = ({ resumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button bg-gray-600 p-5 flex flex-row 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10">
+          <div className="actions_button bg-gray-600 p-2 flex flex-row 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10">
             <Controls />
-            <button className="p-2 bg-white text-black disabled:bg-gray-600 font-semibold text-sm flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
+            <button className="2xl:p-5 md:p-2 p-1 bg-white text-black disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
               isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             }
               Download PDF
