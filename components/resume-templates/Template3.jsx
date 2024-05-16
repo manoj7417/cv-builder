@@ -50,13 +50,16 @@ const Template3 = ({ resumeData }) => {
                     <FaXTwitter className="mr-2" />
                     Twitter
                   </a>
-                  <a
-                    href="mailto:hello@justaashir.com"
-                    className="hover:underline flex items-center mt-1"
-                  >
-                    <MdOutlineMailOutline className="mr-2" />
-                    hello@justaashir.com
-                  </a>
+                  {
+                    resumeData?.basics?.email &&
+                    <a
+                      href="mailto:hello@justaashir.com"
+                      className="hover:underline flex items-center mt-1"
+                    >
+                      <MdOutlineMailOutline className="mr-2" />
+                      {resumeData?.basics?.email}
+                    </a>
+                  }
                   <a
                     href="https://justaashir.com"
                     className="hover:underline flex items-center mt-1"
@@ -148,7 +151,7 @@ const Template3 = ({ resumeData }) => {
                     </p>
                   </div>
                 </div>
-                {/* <div className="experience_2 my-5">
+                <div className="experience_2 my-5">
                   <div className="post flex  justify-between items-center my-2">
                     <div className="post_title">
                       <h3 className="font-bold">Senior Graphic Designer</h3>
@@ -168,7 +171,7 @@ const Template3 = ({ resumeData }) => {
                       eligendi. Qui, ratione.
                     </p>
                   </div>
-                </div> */}
+                </div>
               </div>
               <div className="project_section my-2">
                 <div className="project_heading flex gap-5 items-center">

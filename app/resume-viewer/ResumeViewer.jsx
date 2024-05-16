@@ -78,21 +78,6 @@ const ResumeViewPage = ({ resumeData }) => {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
       }
-      // if (response.status === 200) {
-      //   const blob = new Blob([response.data], { type: 'application/pdf' });
-      //   const url = window.URL.createObjectURL(blob);
-      //   const a = document.createElement('a');
-      //   a.href = url;
-      //   a.download = 'generated.pdf';
-      //   a.target = '_blank'; // Open in new tab
-      //   document.body.appendChild(a);
-      //   a.click();
-      //   document.body.removeChild(a);
-      //   window.URL.revokeObjectURL(url);
-      // } else {
-      //   console.error('Failed to generate PDF:', response.status);
-      //   // Handle error
-      // }
     } catch (error) {
       console.log(error)
     } finally {
@@ -167,30 +152,30 @@ const ResumeViewPage = ({ resumeData }) => {
                   <DrawerTitle>Choose Templates</DrawerTitle>
                   <DrawerDescription>
                     <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                        <div className="image_section_1 ">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_1">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_1">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_1">
-                          <img src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
-                        <div className="image_section_2">
-                        <img src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4"/>
-                        </div>
+                      <div className="image_section_1 ">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_1">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_1">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_1">
+                        <Image src="/5.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
+                      <div className="image_section_2">
+                        <Image src="/6.png" alt="pic1" className="cursor-pointer hover:border-sky-700 hover:border-4" />
+                      </div>
                     </div>
                   </DrawerDescription>
                 </DrawerHeader>
