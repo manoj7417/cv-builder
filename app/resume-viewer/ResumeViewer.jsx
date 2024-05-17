@@ -59,7 +59,7 @@ const ResumeViewPage = ({ resumeData }) => {
   };
 
   const handleDownloadResume = async () => {
-    const el = document.getElementById('template')
+    const el = document.getElementById('resume')
     const resume = el.innerHTML
     const body = {
       html: resume
@@ -140,7 +140,7 @@ const ResumeViewPage = ({ resumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button bg-gray-600 p-5 flex flex-row 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10">
+          <div className="actions_button bg-gray-300 p-5 flex flex-row 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10">
             <Controls />
             <button className="p-2 bg-white text-black disabled:bg-gray-600 font-semibold text-sm flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
               isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />

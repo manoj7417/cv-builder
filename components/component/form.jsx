@@ -21,6 +21,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
+import CustomLabelInput from "../ui/customLabelInput";
 
 
 export default function Form({ resumeData, setResumeData }) {
@@ -37,8 +38,19 @@ export default function Form({ resumeData, setResumeData }) {
     setResumeData(updatedResumeData)
   }
 
+  const handleProileLabelChange = (e) => {
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, name: e.target.value } } }
+    setResumeData(updatedResumeData)
+  }
+
   const handleChangeProfileSummaryChange = (val) => {
+    console.log(val)
     const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleEducationLabelChange = (e) => {
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, education: { ...resumeData.sections.education, name: e.target.value } } }
     setResumeData(updatedResumeData)
   }
 
@@ -62,11 +74,15 @@ export default function Form({ resumeData, setResumeData }) {
   }
 
   const handleEducationStartDateChange = (val, i) => {
-    if (!val) return
-    let date = val['$d']
-    const year = date.getFullYear();
-    const monthName = date.toLocaleString('en-US', { month: 'long' });
-    const newDate = `${monthName}-${year}`;
+    let newDate;
+    if (!val) {
+      newDate = ''
+    } else {
+      let date = val['$d']
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString('en-US', { month: 'short' });
+      newDate = `${monthName}-${year}`;
+    }
     const updatedResumeData = {
       ...resumeData, sections: {
         ...resumeData.sections, education: {
@@ -85,11 +101,15 @@ export default function Form({ resumeData, setResumeData }) {
   }
 
   const handleEducationEndDateChange = (val, i) => {
-    if (!val) return
-    let date = val['$d']
-    const year = date.getFullYear();
-    const monthName = date.toLocaleString('en-US', { month: 'long' });
-    const newDate = `${monthName}-${year}`;
+    let newDate;
+    if (!val) {
+      newDate = ''
+    } else {
+      let date = val['$d']
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString('en-US', { month: 'short' });
+      newDate = `${monthName}-${year}`;
+    }
     const updatedResumeData = {
       ...resumeData, sections: {
         ...resumeData.sections, education: {
@@ -122,6 +142,12 @@ export default function Form({ resumeData, setResumeData }) {
         }
       }
     }
+    console.log(updatedResumeData);
+    setResumeData(updatedResumeData)
+  }
+
+  const handleExperienceLabelChange = (e) => {
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, experience: { ...resumeData.sections.experience, name: e.target.value } } }
     setResumeData(updatedResumeData)
   }
 
@@ -152,6 +178,60 @@ export default function Form({ resumeData, setResumeData }) {
             if (index === i) {
               return {
                 ...item, description: val
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleExperienceStartDateChange = (val, i) => {
+    let newDate;
+    if (!val) {
+      newDate = ''
+    } else {
+      let date = val['$d']
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString('en-US', { month: 'short' });
+      newDate = `${monthName}-${year}`;
+    }
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, items: resumeData.sections.experience.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, startDate: newDate
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleExperienceEndDateChange = (val, i) => {
+    let newDate;
+    if (!val) {
+      newDate = ''
+    } else {
+      let date = val['$d']
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString('en-US', { month: 'short' });
+      newDate = `${monthName}-${year}`;
+    }
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, items: resumeData.sections.experience.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, endDate: newDate
               }
             }
             return item
@@ -304,6 +384,64 @@ export default function Form({ resumeData, setResumeData }) {
     setResumeData(updatedResumeData)
   }
 
+  const handleProjectStartDateChange = (val, i) => {
+    let newDate;
+    if (!val) {
+      newDate = ''
+    } else {
+      let date = val['$d']
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString('en-US', { month: 'short' });
+      newDate = `${monthName}-${year}`;
+    }
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, items: resumeData.sections.projects.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, startDate: newDate
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleProjectEndDateChange = (val, i) => {
+    let newDate;
+    if (!val) {
+      newDate = ''
+    } else {
+      let date = val['$d']
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString('en-US', { month: 'short' });
+      newDate = `${monthName}-${year}`;
+    }
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, items: resumeData.sections.projects.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, endDate: newDate
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleProjectLabelChange = (e) => {
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, projects: { ...resumeData.sections.projects, name: e.target.value } } }
+    setResumeData(updatedResumeData)
+  }
 
   return (
     <div className="py-10">
@@ -325,27 +463,17 @@ export default function Form({ resumeData, setResumeData }) {
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" placeholder="Enter phone number" name="phone" value={resumeData?.basics?.phone} />
+            <Input id="phone" placeholder="Enter phone number" name="phone" value={resumeData?.basics?.phone} onChange={handleBasicInfoChange} />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-2">
           <div className="space-y-2">
             <Label htmlFor="country">Country</Label>
-            <Input id="country" placeholder="Enter Country Name" value={resumeData?.basics?.country} />
+            <Input id="country" placeholder="Enter Country Name" value={resumeData?.basics?.country} name="country" onChange={handleBasicInfoChange} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="city">City</Label>
             <Input id="city" placeholder="Enter City Name" name="city" onChange={handleBasicInfoChange} value={resumeData?.basics?.city} />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4 mb-2">
-          <div className="space-y-2">
-            <Label htmlFor="address">Address</Label>
-            <Input id="address" placeholder="e.g. Sudhowala" onChange={handleBasicInfoChange} name="address" value={resumeData?.basics?.address} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="phone">Postal Code</Label>
-            <Input id="phone" placeholder="e.g. 248001" name="postalcode" value={resumeData?.basics?.postalcode} />
           </div>
         </div>
       </div>
@@ -354,7 +482,10 @@ export default function Form({ resumeData, setResumeData }) {
       <div className="py-5 my-5 px-10">
         <div className="space-y-2">
           <div className=" flex justify-between items-center">
-            <Label htmlFor="Profile" className="text-2xl">{resumeData?.sections?.summary?.name}</Label>
+            <div className=" w-[40%] group">
+              <Label htmlFor="Profile" className="text-2xl group-hover:hidden">{resumeData?.sections?.summary?.name}</Label>
+              <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.summary?.name} onChange={handleProileLabelChange} />
+            </div>
             <Dialog>
               <DialogTrigger asChild>
                 <Button
@@ -425,7 +556,10 @@ export default function Form({ resumeData, setResumeData }) {
       {/* education section */}
       <div className="py-5 my-20">
         <div className="space-y-2 px-10">
-          <Label className="text-2xl">{sections.education.name}</Label>
+          <div className=" w-[40%] group">
+            <Label className="text-2xl group-hover:hidden">{sections.education.name}</Label>
+            <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.education?.name} onChange={handleEducationLabelChange} />
+          </div>
           <div>
             <p className="text-sm text-gray-500">
               A varied education on your resume sums up the value that your learnings and background will bring to job.
@@ -441,9 +575,15 @@ export default function Form({ resumeData, setResumeData }) {
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"/>
                 <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out " defaultValue={`item-${index}`} defaultChecked>
                   <AccordionItem value={`item-${index}`}>
-                    <AccordionTrigger>
-                      <div className=" px-3 flex flex-col items-start">
-                        <p >{item?.degree && `${item?.degree} at `}{item?.institute}</p>
+                    <AccordionTrigger className="group-hover:text-blue-900">
+                      <div className=" px-3 flex flex-col items-start ">
+                        {(item?.degree || item?.institute) ? <p >
+                          <span>{item?.degree}</span>
+                          <span>{item?.degree && item?.institute && ' at '}</span>
+                          <span>{item?.institute}</span>
+                        </p>
+                          : <p>(Not Specified)</p>
+                        }
                         <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
                       </div></AccordionTrigger>
                     <AccordionContent>
@@ -511,7 +651,10 @@ export default function Form({ resumeData, setResumeData }) {
       {/* experience section */}
       <div className="py-5 mt-0 mb-10">
         <div className="space-y-2 px-10">
-          <Label className="text-2xl">{sections.experience.name}</Label>
+          <div className=" w-[40%] group">
+            <Label className="text-2xl group-hover:hidden">{sections?.experience?.name}</Label>
+            <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.experience?.name} onChange={handleExperienceLabelChange} />
+          </div>
           <div>
             <p className="text-sm text-gray-500">
               Show your relevant experience (last 10 years). Use bullet points to note your achievements, if possible - use numbers/facts (Achieved X, measured by Y, by doing Z).
@@ -524,13 +667,13 @@ export default function Form({ resumeData, setResumeData }) {
             sections?.experience?.items.length > 0 &&
             sections?.experience?.items.map((item, index) => {
               return <div key={index} className="flex items-start justify-between group my-5 ">
-                <GoGrabber className="mt-6 text-3xl
+                <GoGrabber className="mt-3 text-3xl
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
                 <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out" defaultValue={`item-${index}`}>
                   <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger>
                       <div className=" px-3 flex flex-col items-start">
-                        <p >{item?.jobtitle && `${item?.jobtitle} at `}{item?.employer}</p>
+                        {(item?.jobtitle || item?.employer) ? <p >{item?.jobtitle && `${item?.jobtitle}${item?.employer && ` at `} `}{item?.employer}</p> : <p>(Not Specified)</p>}
                         <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
                       </div></AccordionTrigger>
                     <AccordionContent>
@@ -550,13 +693,13 @@ export default function Form({ resumeData, setResumeData }) {
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
-                                <DatePicker picker="month" />
+                                <DatePicker picker="month" onChange={(e) => handleExperienceStartDateChange(e, index)} />
                               </div>
                             </div>
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
                               <Label for="end_date" className="block">End Date</Label>
                               <div className="w-full">
-                                <DatePicker picker="month" />
+                                <DatePicker picker="month" onChange={(e) => handleExperienceEndDateChange(e, index)} />
                               </div>
                             </div>
                           </div>
@@ -584,7 +727,7 @@ export default function Form({ resumeData, setResumeData }) {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-                <MdDeleteOutline className="mt-7 text-2xl
+                <MdDeleteOutline className="mt-3 text-2xl
                font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out" onClick={() => handleDeleteExperienceSection(index)} />
               </div>
             })
@@ -598,7 +741,10 @@ export default function Form({ resumeData, setResumeData }) {
       {/* Projects */}
       <div className="py-5 mt-0 mb-10">
         <div className="space-y-2 px-10">
-          <Label className="text-2xl">{sections.projects.name}</Label>
+          <div className=" w-[40%] group">
+            <Label className="text-2xl group-hover:hidden">{sections?.projects?.name}</Label>
+            <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.projects?.name} onChange={handleProjectLabelChange} />
+          </div>
           <div>
             <p className="text-sm text-gray-500">
               Show your best projects
@@ -611,13 +757,13 @@ export default function Form({ resumeData, setResumeData }) {
             sections?.projects?.items.length > 0 &&
             sections?.projects?.items.map((item, index) => {
               return <div key={index} className="flex items-start justify-between group my-5 ">
-                <GoGrabber className="mt-6 text-3xl
+                <GoGrabber className="mt-3 text-3xl
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
                 <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out" defaultValue={`item-${index}`}>
                   <AccordionItem value={`item-${index}`}>
                     <AccordionTrigger>
                       <div className=" px-3 flex flex-col items-start">
-                        <p >{item?.title}</p>
+                        <p >{item?.title ? `${item?.title}` : "(Not Specified  )"}</p>
                         <p>{item?.subtitle}</p>
                         <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
                       </div></AccordionTrigger>
@@ -638,13 +784,13 @@ export default function Form({ resumeData, setResumeData }) {
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                               <Label for="start_date" className="block">Start Date</Label>
                               <div className="w-full">
-                                <DatePicker picker="month" />
+                                <DatePicker picker="month" onChange={(e) => handleProjectStartDateChange(e, index)} />
                               </div>
                             </div>
                             <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
                               <Label for="end_date" className="block">End Date</Label>
                               <div className="w-full">
-                                <DatePicker picker="month" />
+                                <DatePicker picker="month" onChange={(e) => handleProjectEndDateChange(e, index)} />
                               </div>
                             </div>
                           </div>
@@ -668,7 +814,7 @@ export default function Form({ resumeData, setResumeData }) {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-                <MdDeleteOutline className="mt-7 text-2xl
+                <MdDeleteOutline className="mt-3 text-2xl
                font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out" onClick={() => handleDeleteProjectSection(index)} />
               </div>
             })
@@ -678,6 +824,6 @@ export default function Form({ resumeData, setResumeData }) {
           <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewProject}><IoIosAddCircleOutline className="text-xl mr-2" />Add one more {`${resumeData?.sections?.experience?.name}`.toLowerCase()}</Button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
