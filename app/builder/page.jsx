@@ -24,15 +24,12 @@ import {
 
 const initialState = {
   basics: {
-    name: "Anuj Rawat",
-    headline: "",
-    email: "anujrawat@glassfrog.design",
-    phone: "fdasfasdfasdf",
-    country: "India",
-    address: "Sudhowala",
-    city: "Dehradun",
-    jobtitle: "Web Dev",
-    postalcode: "248001",
+    name: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+    jobtitle: "",
     url: {
       label: "",
       href: ""
@@ -56,7 +53,7 @@ const initialState = {
       columns: 1,
       visible: true,
       id: "profile",
-      content: "<p>fasdfasdfasdfasdffasdfasfadsfadsffasthfgdhdfg</p>"
+      content: ""
     },
     awards: {
       name: "Awards",
@@ -77,42 +74,14 @@ const initialState = {
       columns: 1,
       visible: true,
       id: "education",
-      items: [{
-        institute: "THDC",
-        degree: "B.Tech",
-        startDate: "Aug 2016",
-        endDate: "Dec 2020",
-        description: "",
-        city: "Tehri"
-      }, {
-        institute: "TWS",
-        degree: "12th",
-        startDate: "April 2015",
-        endDate: "April 2016",
-        description: "",
-        city: "DUN"
-      }]
+      items: []
     },
     experience: {
       name: "Experience",
       columns: 1,
       visible: true,
       id: "experience",
-      items: [{
-        jobtitle: "Web dev",
-        employer: "CEOITBOX",
-        startDate: "Aug 2016",
-        endDate: "Dec 2020",
-        description: "",
-        city: "Delhi"
-      }, {
-        jobtitle: "Web dev",
-        employer: "CEOITBOX",
-        startDate: "April 2015",
-        endDate: "April 2016",
-        description: "",
-        city: "Dun"
-      }]
+      items: []
     },
     volunteer: {
       name: "Volunteering",
@@ -147,13 +116,7 @@ const initialState = {
       columns: 1,
       visible: true,
       id: "projects",
-      items: [{
-       title : '',
-       subtitle : '',
-       startDate : "",
-       endDate : "",
-       description : ""
-      }]
+      items: [  ]
     },
     publications: {
       name: "Publications",
@@ -244,12 +207,11 @@ const initialState = {
 }
 
 function Builder() {
-
   const [resumeData, setResumeData] = useState(initialState);
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
-  
+
 
   const handleMobileContent = () => {
     // setIsMobile(false);
@@ -274,8 +236,8 @@ function Builder() {
   }, []);
 
   return (
-    <div className="flex md:flex-row flex-col w-full h-full mb-20 relative">
-      <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto border-2">
+    <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
+      <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto border-2 ">
         <Form resumeData={resumeData} setResumeData={setResumeData} />
         <div className="mobile_section flex justify-end mb-10 mx-10">
           <div>
@@ -300,7 +262,7 @@ function Builder() {
         </div>
       </div>
       <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
-        <ResumeViewPage scale={scale} resumeData={resumeData}/>
+        <ResumeViewPage scale={scale} resumeData={resumeData} />
       </div>
     </div>
   );
