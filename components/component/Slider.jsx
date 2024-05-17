@@ -32,16 +32,29 @@ import {
   MdOutlineDesignServices,
   MdOutlineSettingsSuggest,
 } from "react-icons/md";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { IoIosStar } from "react-icons/io";
 
 export default function Slider() {
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-r from-[white] to-[#dcecff]">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl font-semibold tracking-tight text-center md:text-4xl">
-        Curating CVs that Reflect Perfection
+          Curating CVs that Reflect Perfection
         </h2>
         <p className="text-center max-w-3xl mx-auto">
-        Explore unlimited possibilities with the power of a perfectly crafted CV by creating one that aligns with your Professional Profile, employing our customised templates. If you already have a CV, you can easily rectify it to create an ATS (Application Tracking Score) optimized CV.
+          Explore unlimited possibilities with the power of a perfectly crafted
+          CV by creating one that aligns with your Professional Profile,
+          employing our customised templates. If you already have a CV, you can
+          easily rectify it to create an ATS (Application Tracking Score)
+          optimized CV.
         </p>
 
         <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
@@ -73,13 +86,10 @@ export default function Slider() {
             <CarouselItem>
               <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
                   <Image
                     alt="Product 1"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/resume-temp-example.png"
+                    src="/newResume.png"
                     height={900}
                     width={600}
                   />
@@ -92,47 +102,171 @@ export default function Slider() {
                     </a>
                   </div>
                 </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
+                <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                  <div className="card_box">
+                    <span></span>
+                  </div>
                   <Image
                     alt="Product 2"
-                    src="/3.png"
+                    src="/newResume1.png"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                     height={900}
                     width={600}
                   />
                   <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
+                    <Dialog>
+                      <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                        Try Now
+                      </DialogTrigger>
+                      <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                        <DialogHeader>
+                          <DialogTitle className="mt-1">
+                            Download our premium cv now and enhance your job
+                            search?
+                          </DialogTitle>
+                          <DialogDescription>
+                            <section className="overflow-hidden">
+                              <div className="mx-auto max-w-5xl py-10">
+                                <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                  <Image
+                                    alt="template1"
+                                    className="w-full rounded object-cover lg:w-1/2"
+                                    src="/newResume1.png"
+                                    width={500}
+                                    height={500}
+                                  />
+                                  <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                    <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                      Premium
+                                    </h2>
+                                    <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                      Professional Templates
+                                    </h1>
+                                    <div className="my-2 flex items-center">
+                                      <span className="flex items-center space-x-1">
+                                        {[...Array(5)].map((_, i) => (
+                                          <IoIosStar
+                                            key={i}
+                                            size={16}
+                                            className="text-yellow-500"
+                                          />
+                                        ))}
+                                        <span className="ml-5 inline-block text-xs font-semibold">
+                                          4 Reviews
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <p className="leading-relaxed text-gray-800">
+                                      Lorem ipsum dolor, sit amet consectetur
+                                      adipisicing elit. Tenetur rem amet
+                                      repudiandae neque adipisci eum enim, natus
+                                      illo inventore totam?
+                                    </p>
+                                    <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                    <div className="flex items-center justify-between">
+                                      <span className="title-font text-xl font-bold text-gray-900">
+                                        $50
+                                      </span>
+                                      <button
+                                        type="button"
+                                        className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                      >
+                                        Download
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </section>
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                  <div className="card_box">
+                    <span></span>
+                  </div>
                   <Image
                     alt="Product 3"
-                    src="/4.png"
+                    src="/newResume2.png"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                     height={900}
                     width={600}
                   />
                   <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
+                    <Dialog>
+                      <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                        Try Now
+                      </DialogTrigger>
+                      <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                        <DialogHeader>
+                          <DialogTitle className="mt-1">
+                            Download our premium cv now and enhance your job
+                            search?
+                          </DialogTitle>
+                          <DialogDescription>
+                            <section className="overflow-hidden">
+                              <div className="mx-auto max-w-5xl py-10">
+                                <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                  <Image
+                                    alt="template1"
+                                    className="w-full rounded object-cover lg:w-1/2"
+                                    src="/newResume2.png"
+                                    width={500}
+                                    height={500}
+                                  />
+                                  <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                    <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                      Premium
+                                    </h2>
+                                    <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                      Professional Templates
+                                    </h1>
+                                    <div className="my-2 flex items-center">
+                                      <span className="flex items-center space-x-1">
+                                        {[...Array(5)].map((_, i) => (
+                                          <IoIosStar
+                                            key={i}
+                                            size={16}
+                                            className="text-yellow-500"
+                                          />
+                                        ))}
+                                        <span className="ml-5 inline-block text-xs font-semibold">
+                                          4 Reviews
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <p className="leading-relaxed text-gray-800">
+                                      Lorem ipsum dolor, sit amet consectetur
+                                      adipisicing elit. Tenetur rem amet
+                                      repudiandae neque adipisci eum enim, natus
+                                      illo inventore totam?
+                                    </p>
+                                    <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                    <div className="flex items-center justify-between">
+                                      <span className="title-font text-xl font-bold text-gray-900">
+                                        $30
+                                      </span>
+                                      <button
+                                        type="button"
+                                        className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                      >
+                                        Download
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </section>
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
                   <Image
                     alt="Product 1"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
@@ -150,9 +284,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
                   <Image
                     alt="Product 2"
                     src="/6.png"
@@ -174,9 +305,6 @@ export default function Slider() {
             <CarouselItem>
               <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
                   <Image
                     alt="Product 1"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
@@ -194,9 +322,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
                   <Image
                     alt="Product 2"
                     src="/8.png"
@@ -231,9 +356,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
                   <Image
                     alt="Product 1"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
@@ -251,9 +373,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
                   <Image
                     alt="Product 2"
                     src="/11.png"
@@ -275,9 +394,6 @@ export default function Slider() {
             <CarouselItem>
               <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
                   <Image
                     alt="Product 1"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
@@ -295,9 +411,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
                   <Image
                     alt="Product 2"
                     src="/3.png"
@@ -332,9 +445,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
                   <Image
                     alt="Product 1"
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
@@ -352,9 +462,6 @@ export default function Slider() {
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
                   <Image
                     alt="Product 2"
                     src="/6.png"
