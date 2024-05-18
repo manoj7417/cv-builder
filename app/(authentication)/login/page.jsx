@@ -29,6 +29,7 @@ function LoginUser() {
             const response = await login(data)
             if (response.status === 200) {
                 toast.success(response.data.message)
+                console.log(redirect)
                 router.push(redirect || '/')
             }
         } catch (error) {

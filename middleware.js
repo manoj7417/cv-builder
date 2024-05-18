@@ -11,6 +11,7 @@ export const config = {
 export async function middleware(req) {
   const { pathname } = req.nextUrl
   let cookie = req.cookies.get('accessToken')
+  console.log(cookie)
   if (protectedRoutes.includes(pathname)) {
     if (!cookie?.value) {
       return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, req.nextUrl));
