@@ -100,27 +100,27 @@ export default function DashboardIdea() {
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
                         {/* Premium Card  */}
-                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -129,7 +129,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume.png"
                                             width={500}
                                             height={500}
                                           />
@@ -183,6 +183,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -191,7 +192,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -208,7 +209,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -223,22 +224,22 @@ export default function DashboardIdea() {
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -247,7 +248,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -301,6 +302,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -309,7 +311,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -331,7 +333,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -340,28 +342,28 @@ export default function DashboardIdea() {
                             </a>
                           </div>
                         </div>
-                        {/* Premium Card  */}
+                        {/* Premium Card Start */}
                         <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/3.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -370,7 +372,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -424,6 +426,8 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
+                        {/* Premium Card  End*/}
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -432,7 +436,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -449,7 +453,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -459,27 +463,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/6.png"
+                            src="/15.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -488,7 +492,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/15.png"
                                             width={500}
                                             height={500}
                                           />
@@ -554,7 +558,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -571,7 +575,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -588,7 +592,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -605,7 +609,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -622,7 +626,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -644,7 +648,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -661,7 +665,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -678,7 +682,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -695,7 +699,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -712,7 +716,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -737,7 +741,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -753,21 +757,21 @@ export default function DashboardIdea() {
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/16.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -776,7 +780,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -830,6 +834,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -838,7 +843,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -853,22 +858,22 @@ export default function DashboardIdea() {
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/18.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -877,7 +882,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -929,14 +934,9 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -945,7 +945,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -960,27 +960,27 @@ export default function DashboardIdea() {
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
                         {/* Premium Card  */}
-                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -989,7 +989,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1041,14 +1041,9 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -1057,7 +1052,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1067,27 +1062,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 3"
-                            src="/4.png"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1096,7 +1091,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1148,14 +1143,9 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 1"
@@ -1164,7 +1154,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1181,7 +1171,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1199,27 +1189,27 @@ export default function DashboardIdea() {
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
                         {/* Premium Card  */}
-                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/tab1_done.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1228,7 +1218,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1280,14 +1270,9 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -1296,7 +1281,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1306,27 +1291,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 3"
-                            src="/tab3_done.png"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1335,7 +1320,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1389,6 +1374,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 1"
@@ -1397,7 +1383,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1414,7 +1400,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1436,7 +1422,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1446,27 +1432,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/tab2_done.png"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1475,7 +1461,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1529,6 +1515,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -1537,7 +1524,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1554,7 +1541,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1564,27 +1551,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/tab5_done.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1593,7 +1580,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1645,12 +1632,6 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
                       </div>
@@ -1669,7 +1650,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1686,7 +1667,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1707,13 +1688,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
                               <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
                                 Try Now
@@ -1731,7 +1706,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/7.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1793,7 +1768,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -1803,27 +1778,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/10.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1832,7 +1807,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1892,27 +1867,27 @@ export default function DashboardIdea() {
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/7.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1921,7 +1896,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -1975,6 +1950,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -1983,7 +1959,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2000,7 +1976,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2010,27 +1986,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -2039,7 +2015,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -2091,14 +2067,9 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -2107,7 +2078,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2132,7 +2103,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2142,27 +2113,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/3.png"
+                            src="/newResume.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -2171,7 +2142,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume.png"
                                             width={500}
                                             height={500}
                                           />
@@ -2225,6 +2196,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -2233,7 +2205,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2250,7 +2222,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2260,27 +2232,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
                             alt="Product 2"
-                            src="/az1.png"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -2289,7 +2261,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume1.png"
                                             width={500}
                                             height={500}
                                           />
@@ -2349,27 +2321,27 @@ export default function DashboardIdea() {
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/11.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -2378,7 +2350,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/newResume2.png"
                                             width={500}
                                             height={500}
                                           />
@@ -2432,6 +2404,7 @@ export default function DashboardIdea() {
                             </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -2440,7 +2413,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2450,27 +2423,27 @@ export default function DashboardIdea() {
                           </div>
                         </div>
                         {/* Premium Card  */}
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <div className="card_box">
                             <span></span>
                           </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/6.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <Dialog>
-                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
                                 Try Now
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                    Download our premium cv now and enhance your
-                                    job search?
+                                    Download our premium CV now and enhance your
+                                    job search!
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -2479,7 +2452,7 @@ export default function DashboardIdea() {
                                           <Image
                                             alt="template1"
                                             className="w-full rounded object-cover lg:w-1/2"
-                                            src="/5.png"
+                                            src="/6.png"
                                             width={500}
                                             height={500}
                                           />
@@ -2531,14 +2504,9 @@ export default function DashboardIdea() {
                                 </DialogHeader>
                               </DialogContent>
                             </Dialog>
-                            {/* <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a> */}
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -2547,7 +2515,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"
@@ -2564,7 +2532,7 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
                               href="/resume-builder"

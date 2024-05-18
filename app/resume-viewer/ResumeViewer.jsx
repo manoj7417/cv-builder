@@ -26,19 +26,20 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "../components/Button";
 import { printResume } from "../pages/api/api";
+import Link from "next/link";
 
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
 
   return (
     <div className="tools">
-      <button className="2xl:p-5 md:p-2 p-1 bg-white" onClick={() => zoomIn()}>
-        <FiPlus />
+      <button className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white rounded-md" onClick={() => zoomIn()}>
+        <FiPlus className="text-white"/>
       </button>
-      <button className="2xl:p-5 md:p-2 p-1 bg-white mx-2" onClick={() => zoomOut()}>
+      <button className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white mx-2 rounded-md" onClick={() => zoomOut()}>
         <FiMinus />
       </button>
-      <button className="2xl:p-5 md:p-2 p-1 bg-white" onClick={() => resetTransform()}>
+      <button className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white rounded-md" onClick={() => resetTransform()}>
         <CiUndo />
       </button>
     </div>
@@ -140,16 +141,16 @@ const ResumeViewPage = ({ resumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button bg-gray-300 p-5 flex flex-row 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-10">
+          <div className="actions_button bg-gray-800 p-1 flex flex-row 2xl:justify-around 2xl:p-5 justify-evenly items-center absolute top-0 w-full z-20">
             <Controls />
-            <button className="2xl:p-5 md:p-2 p-1 bg-white text-black disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around" onClick={handleDownloadResume} disabled={isLoading}>{
+            <button className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around rounded-md" onClick={handleDownloadResume} disabled={isLoading}>{
               isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             }
               Download PDF
             </button>
              <div className="choose_templates xl:block hidden">
             <Drawer direction="right">
-              <DrawerTrigger className="bg-white text-black 2xl:p-5 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold">Templates <LuLayoutGrid className="inline" /></DrawerTrigger>
+              <DrawerTrigger className="bg-blue-900 text-white 2xl:p-5 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">Templates <LuLayoutGrid className="inline" /></DrawerTrigger>
               <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                 <DrawerHeader>
                   <DrawerTitle>Choose Templates</DrawerTitle>
@@ -191,7 +192,7 @@ const ResumeViewPage = ({ resumeData }) => {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsToggleOpen(!isToggleOpen)}
-                  className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white focus:outline-none"
+                  className="relative inline-flex h-[2.4rem] w-10 items-center justify-center rounded-full text-white focus:outline-none"
                 >
                   <Image
                     src="/avatar.jpg"
@@ -214,27 +215,20 @@ const ResumeViewPage = ({ resumeData }) => {
                     aria-labelledby="user-menu"
                   >
                     <div className="py-1" role="none">
-                      <a
+                      <Link
                         href="/user-profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         role="menuitem"
                       >
                         Profile
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        href="/user-dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         role="menuitem"
                       >
-                        Settings
-                      </a>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        History
-                      </a>
+                        Dashboard
+                      </Link>
                       <div
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                         role="menuitem"
