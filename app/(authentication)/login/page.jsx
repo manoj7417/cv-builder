@@ -27,14 +27,9 @@ function LoginUser() {
     const handleLogin = async (data) => {
         try {
             const response = await login(data)
-            console.log(response)
             if (response.status === 200) {
                 toast.success(response.data.message)
-                setTimeout(() => {
-                    redirect ?
-                        router.push('/builder')
-                        : router.push("/")
-                }, [1000])
+                router.push(redirect || '/')
             }
         } catch (error) {
             toast.error(error.response.data.error)
