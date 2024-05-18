@@ -12,18 +12,13 @@ import { ThemeForm } from "../components/ResumeForm/ThemeForm";
 import Footer from "../ui/newFooter";
 import { AIResumeForm } from "../components/AIResumeForm";
 import Header from "../Layout/Header";
-import AuthHook from "../hooks/AuthHook";
+
 import { AuthContext } from "../context/AuthContext";
 
 export default function Create() {
   // Possible values: 'DESIGN', 'ATS', 'NONE'
   const [activeTab, setActiveTab] = useState<string>("Content");
-
-
   console.log("activeTab:::",activeTab)
-
-  AuthHook();
-
   return (
     <>
       <Provider store={store}>

@@ -29,7 +29,7 @@ function LoginUser() {
             const response = await login(data)
             if (response.status === 200) {
                 toast.success(response.message)
-                userlogin()
+                await userlogin()
                 setTimeout(() => {
                     redirect ?
                         router.push('/builder')
