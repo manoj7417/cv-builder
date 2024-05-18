@@ -27,16 +27,17 @@ function LoginUser() {
     const handleLogin = async (data) => {
         try {
             const response = await login(data)
-            if (response.status === "SUCCESS") {
+            if (response.status === 200) {
                 toast.success(response.message)
                 userlogin()
-                setTimeout(() => redirect ?
-                    router.push(redirect)
-                    : router.push("/"), [1000])
-
-            }   
-            return toast.error(response.response.data.error)
+                setTimeout(() => {
+                    redirect ?
+                        router.push('/builder')
+                        : router.push("/")
+                }, [1000])
+            }
         } catch (error) {
+            toast.error(error.response.data.error)
         }
     };
 

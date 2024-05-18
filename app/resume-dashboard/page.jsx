@@ -54,7 +54,7 @@ export default function DashboardIdea() {
                 </p>
                 <div className="flex items-center space-x-4">
                   <button className="text-xl text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
-                    <a href="/resume-import">Create CV Now!</a>
+                    <a href="/builder">Create CV Now!</a>
                   </button>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function DashboardIdea() {
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
                                   <DialogTitle className="mt-1">
-                                  Download our premium cv now and enhance your job search?
+                                    Download our premium cv now and enhance your job search?
                                   </DialogTitle>
                                   <DialogDescription>
                                     <section className="overflow-hidden">
@@ -1264,10 +1264,10 @@ export default function DashboardIdea() {
         </section>
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t  scroll-mt-20 bg-blue-100"
-          // style={{
-          //   backgroundImage: "url('/banner-bg.svg')",
-          //   backgroundPosition: "center",
-          // }}
+        // style={{
+        //   backgroundImage: "url('/banner-bg.svg')",
+        //   backgroundPosition: "center",
+        // }}
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">

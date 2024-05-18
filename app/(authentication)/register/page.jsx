@@ -21,13 +21,12 @@ export default function Register() {
     const handleRegister = async (data) => {
         try {
             const response = await registerUser(data)
-            if (response.status === "SUCCESS") {
+            if (response.status === 200) {
                 toast.success("Registration successful")
                 router.push("/login")
             }
-            return toast.error(response.response.data.error || 'Registration failed')
         } catch (error) {
-
+            toast.error(error.response.data.error)
         }
     };
 
@@ -50,7 +49,7 @@ export default function Register() {
                     <div className="relative">
                         <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
                             <h3 className="text-4xl font-bold text-white">
-                            Approach your Dream Profession with CVs that are crafted in Minutes!
+                                Approach your Dream Profession with CVs that are crafted in Minutes!
                             </h3>
                             <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                                 <li className="flex items-center space-x-3">
@@ -90,7 +89,7 @@ export default function Register() {
                                     </div>
                                     <span className="text-lg font-medium text-white">
                                         {" "}
-                                        Skill Gaps Analyser 
+                                        Skill Gaps Analyser
                                     </span>
                                 </li>
                                 <li className="flex items-center space-x-3">
@@ -110,7 +109,7 @@ export default function Register() {
                                     </div>
                                     <span className="text-lg font-medium text-white">
                                         {" "}
-                                        ATS Optimization 
+                                        ATS Optimization
                                     </span>
                                 </li>
                                 <li className="flex items-center space-x-3">

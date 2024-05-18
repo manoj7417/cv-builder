@@ -34,10 +34,10 @@ export const AskBot = async (message) => {
 export const login = async (data) => {
   try {
     const response = await instance.post("/user/login", data, { withCredentials: true });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error creating user:", error.response || error);
-    return error
+    throw error;
   }
 }
 
@@ -50,7 +50,7 @@ export const registerUser = async (data) => {
     return response.data
   } catch (error) {
     console.error("Error creating user:", error.response || error);
-    return error
+    throw error
   }
 }
 
