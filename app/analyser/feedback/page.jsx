@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
-import AuthHook from "@/app/hooks/AuthHook";
+
 import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { getBetterResume } from "@/app/pages/api/api";
@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 export default function ResumeFeedback() {
     const [content, setContent] = useState({})
     const iframeRef = useRef(null);
-    AuthHook()
     const [pdfFile, setPDFFile] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { getHasUsedAppBefore } from "../lib/redux/local-storage";
 import Link from "next/link";
 import ResumeDropzone from "../components/ResumeDropzone";
-import AuthHook from "../hooks/AuthHook";
 
 export default function ImportResume() {
   const [hasUsedAppBefore, setHasUsedAppBefore] = useState(false);
@@ -13,8 +12,6 @@ export default function ImportResume() {
   const onFileUrlChange = (fileUrl: string) => {
     setHasAddedResume(Boolean(fileUrl));
   };
-
-  AuthHook();
 
   useEffect(() => {
     setHasUsedAppBefore(getHasUsedAppBefore());

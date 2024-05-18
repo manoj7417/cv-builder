@@ -5,6 +5,7 @@ const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 export const instance = axios.create({
   baseURL: `${baseURL}/api`,
+  withCredentials: true,
   headers: {
     "x-api-key": apiKey,
     "Content-Type": "application/json"
@@ -34,10 +35,10 @@ export const AskBot = async (message) => {
 export const login = async (data) => {
   try {
     const response = await instance.post("/user/login", data, { withCredentials: true });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error creating user:", error.response || error);
-    return error
+    throw error;
   }
 }
 
@@ -50,7 +51,7 @@ export const registerUser = async (data) => {
     return response.data
   } catch (error) {
     console.error("Error creating user:", error.response || error);
-    return error
+    throw error
   }
 }
 

@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { login } from "@/app/pages/api/api";
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { AuthContext } from "@/app/context/AuthContext";
 function LoginUser() {
     const router = useRouter();
@@ -27,16 +27,13 @@ function LoginUser() {
     const handleLogin = async (data) => {
         try {
             const response = await login(data)
-            if (response.status === "SUCCESS") {
-                toast.success(response.message)
-                userlogin()
-                setTimeout(() => redirect ?
-                    router.push(redirect)
-                    : router.push("/"), [1000])
-
-            }   
-            return toast.error(response.response.data.error)
+            if (response.status === 200) {
+                toast.success(response.data.message)
+                console.log(redirect)
+                router.push(redirect || '/')
+            }
         } catch (error) {
+            toast.error(error.response.data.error)
         }
     };
 
@@ -110,6 +107,7 @@ function LoginUser() {
                                             <input
                                                 className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                                                 type="password"
+                                                autoComplete
                                                 placeholder="Password"
                                                 {...register("password", {
                                                     required: {
