@@ -5,6 +5,7 @@ const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 export const instance = axios.create({
   baseURL: `${baseURL}/api`,
+  withCredentials: true,
   headers: {
     "x-api-key": apiKey,
     "Content-Type": "application/json"
