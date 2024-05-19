@@ -1,5 +1,6 @@
 "use client";
 import React, { Suspense, useContext, useEffect, useState } from "react";
+import { setCookie } from 'cookies-next';
 // import { ArrowRight } from 'lucide-react'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +30,9 @@ function LoginUser() {
             const response = await login(data)
             if (response.status === 200) {
                 toast.success(response.data.message)
-                console.log(redirect)
+                const { accessToken, refreshToken } = response?.data?.data;
+                setCookie('accessToken', accessToken, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
+                setCookie('refreshToken', refreshToken, { expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000) });
                 router.push(redirect || '/')
             }
         } catch (error) {
