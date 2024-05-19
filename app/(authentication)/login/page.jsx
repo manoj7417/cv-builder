@@ -30,9 +30,10 @@ function LoginUser() {
             const response = await login(data)
             if (response.status === 200) {
                 toast.success(response.data.message)
-                const { accessToken, refreshToken } = response?.data?.data;
+                const { accessToken, refreshToken , userdata } = response?.data?.data;
                 setCookie('accessToken', accessToken, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
                 setCookie('refreshToken', refreshToken, { expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000) });
+                userlogin(userdata)
                 router.push(redirect || '/')
             }
         } catch (error) {

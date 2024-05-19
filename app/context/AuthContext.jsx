@@ -25,8 +25,8 @@ export function AuthProvider({ children }) {
         localStorage.setItem("userState", JSON.stringify(userState))
     }, [userState])
 
-    const userlogin = () => {
-        const authuserState = { isAuthenticated: true, user: null }
+    const userlogin = (userdata) => {
+        const authuserState = { isAuthenticated: true, userdata: userdata }
         setUserState(authuserState)
     }
 
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
         setUserState({
             ...userState,
             isAuthenticated: false,
-            user: null
+            userdata: null
         })
         localStorage.removeItem("userState")
     }
