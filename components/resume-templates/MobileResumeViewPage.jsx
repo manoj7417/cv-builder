@@ -24,8 +24,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "../components/Button";
-import { printResume } from "../pages/api/api";
+import { printResume } from "@/app/pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
@@ -35,19 +34,19 @@ const Controls = () => {
   return (
     <div className="tools">
       <button
-        className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+        className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white rounded-md"
         onClick={() => zoomIn()}
       >
         <FiPlus className="text-white" />
       </button>
       <button
-        className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
+        className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white mx-2 rounded-md"
         onClick={() => zoomOut()}
       >
         <FiMinus />
       </button>
       <button
-        className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+        className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white rounded-md"
         onClick={() => resetTransform()}
       >
         <CiUndo />
@@ -56,7 +55,7 @@ const Controls = () => {
   );
 };
 
-const ResumeViewPage = ({ resumeData }) => {
+const MobileResumeViewPage = ({ resumeData }) => {
   const [scale, setScale] = useState(0.8);
   const transformRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -162,7 +161,7 @@ const ResumeViewPage = ({ resumeData }) => {
             <div className="auth_section flex justify-end w-full gap-10">
             <Controls />
             <button
-              className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around rounded-md"
+              className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around rounded-md"
               onClick={handleDownloadResume}
               disabled={isLoading}
             >
@@ -340,4 +339,4 @@ const ResumeViewPage = ({ resumeData }) => {
   );
 };
 
-export default ResumeViewPage;
+export default MobileResumeViewPage;

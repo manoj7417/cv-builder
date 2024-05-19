@@ -155,11 +155,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -274,11 +270,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -398,11 +390,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -481,7 +469,7 @@ export default function DashboardIdea() {
                               </DialogTrigger>
                               <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
                                 <DialogHeader>
-                                  <DialogTitle className="mt-1">
+                                  <DialogTitle>
                                     Download our premium CV now and enhance your
                                     job search!
                                   </DialogTitle>
@@ -518,11 +506,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -806,11 +790,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -908,11 +888,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1015,11 +991,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1117,11 +1089,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1244,11 +1212,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1346,11 +1310,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1487,11 +1447,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1606,11 +1562,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1732,11 +1684,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1833,11 +1781,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -1922,11 +1866,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -2041,11 +1981,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -2168,11 +2104,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -2287,11 +2219,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -2376,11 +2304,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">
@@ -2478,11 +2402,7 @@ export default function DashboardIdea() {
                                               </span>
                                             </div>
                                             <p className="leading-relaxed text-gray-800">
-                                              Lorem ipsum dolor, sit amet
-                                              consectetur adipisicing elit.
-                                              Tenetur rem amet repudiandae neque
-                                              adipisci eum enim, natus illo
-                                              inventore totam?
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                             </p>
                                             <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                             <div className="flex items-center justify-between">

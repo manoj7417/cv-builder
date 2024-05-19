@@ -2,7 +2,6 @@
 import Form from "@/components/component/form";
 import React, { useEffect, useState } from "react";
 import ResumeViewPage from "../resume-viewer/ResumeViewer";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import MobileTemplate3 from "@/components/resume-templates/MobileTemplate3";
 import Template1 from "@/components/resume-templates/Template1";
 import Template2 from "@/components/resume-templates/Template2";
 import {
@@ -21,6 +19,7 @@ import {
   TransformWrapper,
   useControls,
 } from "react-zoom-pan-pinch";
+import MobileResumeViewPage from "@/components/resume-templates/MobileResumeViewPage";
 
 const initialState = {
   basics: {
@@ -238,7 +237,7 @@ function Builder() {
       <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
-          <div className="mobile_section flex justify-end mb-10 mx-10">
+          {/* <div className="mobile_section flex justify-end mb-10 mx-10 fixed bottom-5 right-0">
             <div>
               {isMobile && (
                 <button
@@ -249,9 +248,14 @@ function Builder() {
                 </button>
               )}
             </div>
-          </div>
+            <div>
+              {
+                mobileContent && (<MobileResumeViewPage scale={scale} resumeData={resumeData}/>)
+              }
+            </div>
+          </div> */}
         </div>
-        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
+        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0">
           <ResumeViewPage scale={scale} resumeData={resumeData} />
         </div>
       </div>

@@ -38,9 +38,9 @@ export default function NewResumeHeader() {
   };
 
   return (
-    <section>
+    <section className="bg-[#fafbfd] sticky top-0 z-50">
       <div>
-        <Disclosure className="bg-[#fafbfd] sticky top-0 z-50">
+        <Disclosure>
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -73,7 +73,7 @@ export default function NewResumeHeader() {
                           alt="newlogo"
                           className="w-50 h-auto object-contain"
                         />
-                        <span className="text-black font-bold text-2xl">
+                        <span className="text-black font-bold md:text-2xl text-sm">
                           Genies Career Hub
                         </span>
                       </a>
@@ -97,7 +97,7 @@ export default function NewResumeHeader() {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0">
                     <button
                       type="button"
                       className="relative rounded-full bg-black p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -113,7 +113,7 @@ export default function NewResumeHeader() {
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
                           <Image
@@ -138,7 +138,7 @@ export default function NewResumeHeader() {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                href="/user-profile"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
@@ -151,7 +151,7 @@ export default function NewResumeHeader() {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                href="/user-dashboard"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
