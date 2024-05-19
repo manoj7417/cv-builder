@@ -157,10 +157,7 @@ export default function Slider() {
                                       </span>
                                     </div>
                                     <p className="leading-relaxed text-gray-800">
-                                      Lorem ipsum dolor, sit amet consectetur
-                                      adipisicing elit. Tenetur rem amet
-                                      repudiandae neque adipisci eum enim, natus
-                                      illo inventore totam?
+                                    Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                     </p>
                                     <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                     <div className="flex items-center justify-between">
@@ -184,8 +181,6 @@ export default function Slider() {
                     </Dialog>
                   </div>
                 </div>
-
-               
 
                 <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                   <Image
@@ -276,10 +271,7 @@ export default function Slider() {
                                       </span>
                                     </div>
                                     <p className="leading-relaxed text-gray-800">
-                                      Lorem ipsum dolor, sit amet consectetur
-                                      adipisicing elit. Tenetur rem amet
-                                      repudiandae neque adipisci eum enim, natus
-                                      illo inventore totam?
+                                    Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
                                     </p>
                                     <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
                                     <div className="flex items-center justify-between">
@@ -484,10 +476,10 @@ export default function Slider() {
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2">
             <ChevronLeftIcon className="h-6 w-6" />
           </CarouselPrevious>
-          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
+          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2">
             <ChevronRightIcon className="h-6 w-6" />
           </CarouselNext>
         </Carousel>

@@ -1,6 +1,22 @@
-import React from "react";
+'use client'
+import { AuthContext } from "@/app/context/AuthContext";
+import { useRouter } from "next/navigation";
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
 
 const UserDashboardPage = () => {
+  const { userlogout, userState } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    if (userState?.isAuthenticated) {
+      toast.success("User logout successfully", {
+        position: "top-right",
+      });
+      userlogout();
+      router.push("/");
+    }
+  };
   return (
     <>
       <div>
@@ -44,8 +60,8 @@ const UserDashboardPage = () => {
                   </li>
                   <li>
                     <a
-                      href="#"
-                      className="flex items-center mr-4 hover:text-blue-500 text-black"
+                      className="flex items-center mr-4 hover:text-blue-500 text-black cursor-pointer"
+                      onClick={handleLogout}
                     >
                       <span className="inline-flex mr-1">
                         <svg
