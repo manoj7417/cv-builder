@@ -27,6 +27,10 @@ export default function NewResumeHeader() {
   const { userlogout, userState } = useContext(AuthContext);
   const router = useRouter();
 
+
+  const {isAuthenticated} = userState;
+  console.log("isAuthenticated",isAuthenticated)
+
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
       toast.success("User logout successfully", {

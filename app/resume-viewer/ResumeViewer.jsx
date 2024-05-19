@@ -183,7 +183,7 @@ const ResumeViewPage = ({ resumeData }) => {
                       <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
                         <div className="image_section_1 ">
                           <Image
-                            src="/5.png"
+                            src="/newResume.png"
                             alt="pic1"
                             className="cursor-pointer hover:border-sky-700 hover:border-4"
                             width={500}
@@ -192,7 +192,7 @@ const ResumeViewPage = ({ resumeData }) => {
                         </div>
                         <div className="image_section_2">
                           <Image
-                            src="/6.png"
+                            src="/newResume1.png"
                             alt="pic1"
                             className="cursor-pointer hover:border-sky-700 hover:border-4"
                             width={500}
@@ -201,7 +201,7 @@ const ResumeViewPage = ({ resumeData }) => {
                         </div>
                         <div className="image_section_1">
                           <Image
-                            src="/5.png"
+                            src="/newResume2.png"
                             alt="pic1"
                             className="cursor-pointer hover:border-sky-700 hover:border-4"
                             width={500}

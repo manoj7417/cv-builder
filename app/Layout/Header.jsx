@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiBox, FiCamera, FiColumns, FiFeather, FiLayout, FiMessageSquare, FiPenTool, FiUsers } from "react-icons/fi";
 import { AiOutlineFileText } from "react-icons/ai";
 import {
@@ -12,11 +12,18 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineMenu,
 } from "react-icons/md";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
+
+  const { userlogout, userState } = useContext(AuthContext);
+   
+    const  {} = userState;
   const router = useRouter()
   const TOP_OFFSET = 50;
   const [showBackground, setShowBackground] = useState(false);
+
+
 
   useEffect(() => {
     const handleScroll = () => {
