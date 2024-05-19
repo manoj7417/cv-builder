@@ -463,7 +463,6 @@ export default function Form({ resumeData, setResumeData }) {
 
   return (
     <>
-<<<<<<< HEAD
       <div className="header_section bg-gray-800 md:p-1.5 p-1 flex flex-row 2xl:justify-around 2xl:p-5 justify-start items-center fixed top-0 left-0 w-full z-0">
         <Link href={'/resume-dashboard'} className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"><MdOutlineKeyboardArrowLeft className="inline text-xl" />Back</Link>
       </div>
@@ -473,52 +472,6 @@ export default function Form({ resumeData, setResumeData }) {
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
               <Input id="name" placeholder="Enter your name" name="name" onChange={handleBasicInfoChange} value={resumeData?.basics?.name} />
-=======
-     {/* <div className="header_section bg-gray-800 md:p-1.5 p-1 flex flex-row 2xl:justify-around 2xl:p-5 justify-start items-center fixed top-0 left-0 w-full z-0">
-        <Link href={'/resume-dashboard'} className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"><MdOutlineKeyboardArrowLeft className="inline text-xl"/>Back</Link>
-      </div> */}
-    <div className="py-14">
-      <div className="px-10">
-        <div className="grid grid-cols-2 gap-4 mb-2">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="Enter your name" name="name" onChange={handleBasicInfoChange} value={resumeData?.basics?.name} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="jobtitle">Job Title</Label>
-            <Input id="jobtitle" placeholder="Enter Job Title" name="jobtitle" type="text" onChange={handleBasicInfoChange} value={resumeData?.basics?.jobtitle} />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4 mb-2">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" placeholder="Enter your email address" type="email" name="email" onChange={handleBasicInfoChange} value={resumeData?.basics?.email} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" placeholder="Enter phone number" name="phone" value={resumeData?.basics?.phone} onChange={handleBasicInfoChange} />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4 mb-2">
-          <div className="space-y-2">
-            <Label htmlFor="country">Country</Label>
-            <Input id="country" placeholder="Enter Country Name" value={resumeData?.basics?.country} name="country" onChange={handleBasicInfoChange} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="city">City</Label>
-            <Input id="city" placeholder="Enter City Name" name="city" onChange={handleBasicInfoChange} value={resumeData?.basics?.city} />
-          </div>
-        </div>
-      </div>
-
-      {/* profile section */}
-      <div className="py-5 my-5 px-10">
-        <div className="space-y-2">
-          <div className=" flex justify-between items-center">
-            <div className=" w-[40%] group">
-              <Label htmlFor="Profile" className="text-2xl group-hover:hidden">{resumeData?.sections?.summary?.name}</Label>
-              <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.summary?.name} onChange={handleProileLabelChange} />
->>>>>>> a94d8110a0ecd856571cfc853e0b5a22095ac16a
             </div>
             <div className="space-y-2">
               <Label htmlFor="jobtitle">Job Title</Label>
