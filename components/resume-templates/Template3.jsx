@@ -178,8 +178,11 @@ const Template3 = ({ resumeData }) => {
     <>
       <div className="p-custom space-y-3 ">
         <div className="bg-white mx-auto">
-          <div className="top_section flex justify-around items-center bg-gray-200 py-10 border-2">
-            <div className="name_profile w-[70%] border-2  h-full px-10">
+          <div className="top_section flex justify-around items-center  py-10 border-2" style={{
+            backgroundColor : resumeData?.metadata?.theme?.primary
+          }
+          }>
+            <div className="name_profile w-[70%]  h-full px-10">
               <h1 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}>
                 {resumeData?.basics?.name}
               </h1>

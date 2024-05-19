@@ -236,7 +236,7 @@ function Builder() {
   return (
     <>
       <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
-        <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto border-2 ">
+        <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
           <div className="mobile_section flex justify-end mb-10 mx-10">
             <div>
