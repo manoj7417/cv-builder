@@ -31,12 +31,6 @@ import { cn } from "@/lib/utils";
 
 export default function Form({ resumeData, setResumeData }) {
   const { sections } = resumeData;
-  const [edit, setEdit] = useState({
-    profileLabel: false,
-    educationLabel: false,
-    experienceLabel: false
-  })
-
   const handleBasicInfoChange = (e) => {
     const { name, value } = e.target;
     const updatedResumeData = { ...resumeData, basics: { ...resumeData.basics, [name]: value } }
@@ -49,7 +43,6 @@ export default function Form({ resumeData, setResumeData }) {
   }
 
   const handleChangeProfileSummaryChange = (val) => {
-    console.log(val)
     const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
     setResumeData(updatedResumeData)
   }
