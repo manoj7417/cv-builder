@@ -8,21 +8,21 @@ export default function PricingPage() {
     <>
       <div>
         <div
-          className="pricing_section"
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
-          }}
+          className="pricing_section bg-slate-100"
+          // style={{
+          //   backgroundImage: "url('/banner-bg.svg')",
+          //   backgroundPosition: "center bottom",
+          // }}
         >
-          <section className="overflow-hidden">
-            <div className="mx-auto max-w-5xl px-5 py-10">
+          <section className="overflow-hidden border">
+            <div className="mx-auto max-w-5xl p-10 m-10 bg-gradient-to-tr from-white to-[#dcecff] shadow-lg rounded-md">
               <div className="mx-auto flex flex-wrap items-center lg:w-4/5">
                 <Image
                   alt="template1"
                   className="w-full rounded object-cover lg:w-1/2"
                   src="/5.png"
-                  width={300}
-                  height={300}
+                  width={500}
+                  height={500}
                 />
                 <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-10">
                   <h2 className="text-base font-semibold tracking-widest text-blue-950">

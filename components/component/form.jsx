@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import dynamic from 'next/dynamic';
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import {
@@ -22,6 +23,7 @@ import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "../ui/customLabelInput";
+import Link from "next/link";
 
 
 export default function Form({ resumeData, setResumeData }) {
@@ -444,7 +446,11 @@ export default function Form({ resumeData, setResumeData }) {
   }
 
   return (
-    <div className="py-10">
+    <>
+     <div className="header_section bg-gray-800 md:p-1.5 p-1 flex flex-row 2xl:justify-around 2xl:p-5 justify-start items-center fixed top-0 left-0 w-full z-0">
+        <Link href={'/resume-dashboard'} className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"><MdOutlineKeyboardArrowLeft className="inline text-xl"/>Back</Link>
+      </div>
+    <div className="py-14">
       <div className="px-10">
         <div className="grid grid-cols-2 gap-4 mb-2">
           <div className="space-y-2">
@@ -545,6 +551,8 @@ export default function Form({ resumeData, setResumeData }) {
               className="no-scrollbar"
               style={{
                 height: "200px",
+                zIndex:"-1",
+                position:"relative"
               }}
               value={resumeData?.sections?.summary?.content}
               onChange={handleChangeProfileSummaryChange}
@@ -825,5 +833,6 @@ export default function Form({ resumeData, setResumeData }) {
         </div>
       </div>
     </div >
+    </>
   );
 }

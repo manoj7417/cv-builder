@@ -144,7 +144,7 @@ export default function NewResumeHeader() {
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
-                                Your Profile
+                                Profile
                               </a>
                             )}
                           </Menu.Item>
@@ -157,7 +157,7 @@ export default function NewResumeHeader() {
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
-                                Settings
+                                Dashboard
                               </a>
                             )}
                           </Menu.Item>

@@ -32,7 +32,7 @@ const initialState = {
     jobtitle: "",
     url: {
       label: "",
-      href: ""
+      href: "",
     },
     customFields: [],
     picture: {
@@ -43,9 +43,9 @@ const initialState = {
       effects: {
         hidden: false,
         border: false,
-        grayscale: false
-      }
-    }
+        grayscale: false,
+      },
+    },
   },
   sections: {
     summary: {
@@ -53,91 +53,91 @@ const initialState = {
       columns: 1,
       visible: true,
       id: "profile",
-      content: ""
+      content: "",
     },
     awards: {
       name: "Awards",
       columns: 1,
       visible: true,
       id: "awards",
-      items: []
+      items: [],
     },
     certifications: {
       name: "Certifications",
       columns: 1,
       visible: true,
       id: "certifications",
-      items: []
+      items: [],
     },
     education: {
       name: "Education",
       columns: 1,
       visible: true,
       id: "education",
-      items: []
+      items: [],
     },
     experience: {
       name: "Experience",
       columns: 1,
       visible: true,
       id: "experience",
-      items: []
+      items: [],
     },
     volunteer: {
       name: "Volunteering",
       columns: 1,
       visible: true,
       id: "volunteer",
-      items: []
+      items: [],
     },
     interests: {
       name: "Interests",
       columns: 1,
       visible: true,
       id: "interests",
-      items: []
+      items: [],
     },
     languages: {
       name: "Languages",
       columns: 1,
       visible: true,
       id: "languages",
-      items: []
+      items: [],
     },
     profiles: {
       name: "Profiles",
       columns: 1,
       visible: true,
       id: "profiles",
-      items: []
+      items: [],
     },
     projects: {
       name: "Projects",
       columns: 1,
       visible: true,
       id: "projects",
-      items: [  ]
+      items: [],
     },
     publications: {
       name: "Publications",
       columns: 1,
       visible: true,
       id: "publications",
-      items: []
+      items: [],
     },
     references: {
       name: "References",
       columns: 1,
       visible: true,
       id: "references",
-      items: []
+      items: [],
     },
     skills: {
       name: "Skills",
       columns: 1,
       visible: true,
       id: "skills",
-      items: []
+      items: [],
     },
     custom: {
       w5x9jciqnkyyb1838abqsfgx: {
@@ -145,9 +145,9 @@ const initialState = {
         columns: 1,
         visible: true,
         id: "w5x9jciqnkyyb1838abqsfgx",
-        items: []
-      }
-    }
+        items: [],
+      },
+    },
   },
   metadata: {
     template: "pikachu",
@@ -204,7 +204,7 @@ const initialState = {
     },
     notes: "",
   },
-}
+};
 
 function Builder() {
   const [resumeData, setResumeData] = useState(initialState);
@@ -212,14 +212,12 @@ function Builder() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
 
-
   const handleMobileContent = () => {
     // setIsMobile(false);
     setMobileContent(true);
   };
 
   useEffect(() => {
-
     const checkIfMobile = () => {
       const isMobileDevice = window.innerWidth <= 768; // Adjust this value based on your definition of "mobile"
       setIsMobile(isMobileDevice);
@@ -236,35 +234,28 @@ function Builder() {
   }, []);
 
   return (
-    <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
-      <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto border-2 ">
-        <Form resumeData={resumeData} setResumeData={setResumeData} />
-        <div className="mobile_section flex justify-end mb-10 mx-10">
-          <div>
-            {isMobile && (
-              <button
-                className="px-5 py-2 bg-black text-white rounded-lg"
-                onClick={handleMobileContent}
-              >
-                Preview and Download
-              </button>
-            )}
+    <>
+      <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
+        <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto border-2 ">
+          <Form resumeData={resumeData} setResumeData={setResumeData} />
+          <div className="mobile_section flex justify-end mb-10 mx-10">
+            <div>
+              {isMobile && (
+                <button
+                  className="px-5 py-2 bg-black text-white rounded-lg"
+                  onClick={handleMobileContent}
+                >
+                  Preview and Download
+                </button>
+              )}
+            </div>
           </div>
-          {/* <div className="mobileContent">
-            {mobileContent && (
-              <>
-                <section className="w-screen h-screen absolute top-0 left-0 ">
-                  <MobileTemplate3 setMobileContent={setMobileContent} />
-                </section>
-              </>
-            )}
-          </div> */}
+        </div>
+        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
+          <ResumeViewPage scale={scale} resumeData={resumeData} />
         </div>
       </div>
-      <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 fixed right-0 top-0 bottom-0">
-        <ResumeViewPage scale={scale} resumeData={resumeData} />
-      </div>
-    </div>
+    </>
   );
 }
 
