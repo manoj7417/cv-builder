@@ -37,14 +37,12 @@ import { Progress } from "../ui/progress";
 import { Textarea } from "../ui/textarea";
 import AiGenerateLoader from "@/app/ui/AiGenerateLoader";
 import { SkillsSelect } from "./skills-select";
+import { GoEye } from "react-icons/go";
+import { GoEyeClosed } from "react-icons/go";
+import { AskBot } from "@/app/pages/api/api";
 
-const MultiStepForm = ({
-  steps,
-  formData,
-  setFormData,
-  setSteps,
-  isLoading,
-}) => {
+
+const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, handleGenerateProfileSummary, resumeData }) => {
   const handleJobTitleChange = (e) => {
     const newFormDate = { ...formData, jobTitle: e.target.value };
     setFormData(newFormDate);
@@ -57,12 +55,9 @@ const MultiStepForm = ({
 
   const handleExperienceChange = (e) => {
     const { name, value } = e.target;
-    const newFormData = {
-      ...formData,
-      experience: { ...formData, [name]: value },
-    };
-    setFormData(newFormData);
-  };
+    const newFormData = { ...formData, experience: { ...formData.experience, [name]: value } }
+    setFormData(newFormData)
+  }
 
   if (steps === 1) {
     return (
@@ -211,12 +206,10 @@ const MultiStepForm = ({
               <Button onClick={() => setSteps((prev) => prev - 1)}>Back</Button>
             </div>
             <div>
-              <Button
-                onClick={() => setSteps((prev) => prev + 1)}
-                disabled={formData.skills.length === 0}
-              >
-                Submit
-              </Button>
+              <Button onClick={() => {
+                handleGenerateProfileSummary()
+                setSteps(prev => prev + 1)
+              }} disabled={formData.skills.length === 0} >Submit</Button>
             </div>
           </div>
         </DialogFooter>
@@ -225,27 +218,25 @@ const MultiStepForm = ({
   } else if (steps === 4) {
     return (
       <DialogContent className="sm:max-w-[425px]">
-        {isLoading ? (
-          <div>
-            <AiGenerateLoader />
-            <p className="text-gray-500">
-              Generating presonalized profile summary with{" "}
-              <span className=" text-violet-700 font-bold">AI</span>
-            </p>
-          </div>
-        ) : (
-          <DialogHeader>
-            <DialogTitle>
-              <div className=" flex items-center">
-                <p className="mr-3">100%</p>
-                <Progress value={100} className=" shadow-sm h-4 border" />
-              </div>
-            </DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you are done.
-            </DialogDescription>
-          </DialogHeader>
-        )}
+        {
+          isLoading ?
+            <div>
+              <AiGenerateLoader />
+              <p className="text-gray-500">Generating presonalized profile summary with <span className=" text-violet-700 font-bold">AI</span></p>
+            </div>
+            :
+            <DialogHeader>
+              <DialogTitle>
+                <div className=" flex items-center">
+                  <p className="mr-3">100%</p>
+                  <Progress value={100} className=' shadow-sm h-4 border' />
+                </div >
+              </DialogTitle >
+              <DialogDescription>
+                {resumeData?.sections?.summary?.content}
+              </DialogDescription>
+            </DialogHeader >
+        }
       </DialogContent>
     );
   }
@@ -263,10 +254,10 @@ export default function Form({ resumeData, setResumeData }) {
       description: "",
       jobTitle: "",
     },
-    skills: "",
-  });
-  const [steps, setSteps] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+    skills: ''
+  })
+  const [steps, setSteps] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
   const handleBasicInfoChange = (e) => {
     const { name, value } = e.target;
     const updatedResumeData = {
@@ -288,16 +279,9 @@ export default function Form({ resumeData, setResumeData }) {
   };
 
   const handleChangeProfileSummaryChange = (val) => {
-    console.log(val);
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        summary: { ...resumeData.sections.summary, content: val },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
+    setResumeData(updatedResumeData)
+  }
 
   const handleEducationLabelChange = (e) => {
     const updatedResumeData = {
@@ -878,6 +862,77 @@ export default function Form({ resumeData, setResumeData }) {
     setResumeData(updatedResumeData);
   };
 
+  const handleSkillsVisbility = (flag) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, skills: {
+          ...resumeData.sections.skills, visible: flag
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleProjectsVisbility = (flag) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, projects: {
+          ...resumeData.sections.projects, visible: flag
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleExpierenceVisbility = (flag) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, experience: {
+          ...resumeData.sections.experience, visible: flag
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleEducationVisbility = (flag) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, education: {
+          ...resumeData.sections.education, visible: flag
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleGenerateProfileSummary = async () => {
+    const data = JSON.stringify(formData)
+    const message = data + ' Generated profile summary using the data appended data'
+    setIsLoading(true)
+    try {
+      const response = await AskBot(message)
+      const data = response[0].text.value.split('\n')[2]
+      if (data) {
+        const updatedResumeData = {
+          ...resumeData,
+          sections: {
+            ...resumeData.sections,
+            summary: {
+              ...resumeData.sections.summary,
+              content: data
+            }
+          }
+        }
+        setResumeData(updatedResumeData)
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <>
       <div className=" px-5 py-20">
@@ -979,13 +1034,7 @@ export default function Form({ resumeData, setResumeData }) {
                     <FaCrown className=" text-yellow-500 ml-2" />
                   </Button>
                 </DialogTrigger>
-                <MultiStepForm
-                  formData={formData}
-                  setFormData={setFormData}
-                  steps={steps}
-                  setSteps={setSteps}
-                  isLoading={isLoading}
-                />
+                <MultiStepForm formData={formData} setFormData={setFormData} steps={steps} setSteps={setSteps} isLoading={isLoading} handleGenerateProfileSummary={handleGenerateProfileSummary} />
               </Dialog>
             </div>
             <div>
@@ -1012,15 +1061,17 @@ export default function Form({ resumeData, setResumeData }) {
         {/* education section */}
         <div className="py-5 my-20">
           <div className="space-y-2 px-10">
-            <div className=" w-[40%] group">
-              <Label className="text-2xl group-hover:hidden">
-                {sections.education.name}
-              </Label>
-              <CustomLabelInput
-                className="hidden group-hover:block"
-                value={resumeData?.sections?.education?.name}
-                onChange={handleEducationLabelChange}
-              />
+            <div className="flex justify-between">
+              <div className=" w-[40%] group">
+                <Label className="text-2xl group-hover:hidden">{sections.education.name}</Label>
+                <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.education?.name} onChange={handleEducationLabelChange} />
+              </div>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {
+                  sections?.education?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() =>
+                    handleEducationVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleEducationVisbility(true)} />
+                }
+              </div>
             </div>
             <div>
               <p className="text-sm text-gray-500">
@@ -1185,15 +1236,17 @@ export default function Form({ resumeData, setResumeData }) {
         {/* experience section */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className=" w-[40%] group">
-              <Label className="text-2xl group-hover:hidden">
-                {sections?.experience?.name}
-              </Label>
-              <CustomLabelInput
-                className="hidden group-hover:block"
-                value={resumeData?.sections?.experience?.name}
-                onChange={handleExperienceLabelChange}
-              />
+            <div className="flex justify-between">
+              <div className=" w-[40%] group">
+                <Label className="text-2xl group-hover:hidden">{sections?.experience?.name}</Label>
+                <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.experience?.name} onChange={handleExperienceLabelChange} />
+              </div>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {
+                  sections?.experience?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() =>
+                    handleExpierenceVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleExpierenceVisbility(true)} />
+                }
+              </div>
             </div>
             <div>
               <p className="text-sm text-gray-500">
@@ -1362,15 +1415,16 @@ export default function Form({ resumeData, setResumeData }) {
         {/* Projects */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className=" w-[40%] group">
-              <Label className="text-2xl group-hover:hidden">
-                {sections?.projects?.name}
-              </Label>
-              <CustomLabelInput
-                className="hidden group-hover:block"
-                value={resumeData?.sections?.projects?.name}
-                onChange={handleProjectLabelChange}
-              />
+            <div className="flex justify-between">
+              <div className=" w-[40%] group">
+                <Label className="text-2xl group-hover:hidden">{sections?.projects?.name}</Label>
+                <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.projects?.name} onChange={handleProjectLabelChange} />
+              </div>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {
+                  sections?.projects?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() => handleProjectsVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleProjectsVisbility(true)} />
+                }
+              </div>
             </div>
             <div>
               <p className="text-sm text-gray-500">Show your best projects</p>
@@ -1499,29 +1553,23 @@ export default function Form({ resumeData, setResumeData }) {
               })}
           </div>
           <div className="px-10 ">
-            <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
-              onClick={handleAddNewProject}
-            >
-              <IoIosAddCircleOutline className="text-xl mr-2" />
-              Add one more{" "}
-              {`${resumeData?.sections?.experience?.name}`.toLowerCase()}
-            </Button>
+            <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewProject}><IoIosAddCircleOutline className="text-xl mr-2" />Add one more {`${resumeData?.sections?.projects?.name}`.toLowerCase()}</Button>
           </div>
         </div>
 
         {/* Skills */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className=" w-[40%] group">
-              <Label className="text-2xl group-hover:hidden">
-                {sections?.skills?.name}
-              </Label>
-              <CustomLabelInput
-                className="hidden group-hover:block"
-                value={sections?.skills?.name}
-                onChange={handleSkillsLabelChange}
-              />
+            <div className="flex justify-between">
+              <div className=" w-[40%] group">
+                <Label className="text-2xl group-hover:hidden">{sections?.skills?.name}</Label>
+                <CustomLabelInput className='hidden group-hover:block' value={sections?.skills?.name} onChange={handleSkillsLabelChange} />
+              </div>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {
+                  sections?.skills?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() => handleSkillsVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleSkillsVisbility(true)} />
+                }
+              </div>
             </div>
             <div>
               <p className="text-sm text-gray-500">Enter your skills</p>
@@ -1651,7 +1699,8 @@ export default function Form({ resumeData, setResumeData }) {
               }}
             />
           </div>
-          <div></div>
+          <div>
+          </div>
 
           <div className=" my-5">
             <Label htmlFor="theme.primary">Font Color</Label>
