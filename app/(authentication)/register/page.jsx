@@ -21,7 +21,7 @@ export default function Register() {
     const handleRegister = async (data) => {
         try {
             const response = await registerUser(data)
-            if (response.status === 200) {
+            if (response.status === 201) {
                 toast.success("Registration successful")
                 router.push("/login")
             }

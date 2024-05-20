@@ -48,7 +48,7 @@ export const registerUser = async (data) => {
     const response = await instance.post("/user/register", data, {
       withCredentials: true
     });
-    return response.data
+    return response
   } catch (error) {
     console.error("Error creating user:", error.response || error);
     throw error

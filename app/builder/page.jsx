@@ -205,7 +205,10 @@ const initialState = {
 };
 
 function Builder() {
-  const [resumeData, setResumeData] = useState(initialState);
+  const [resumeData, setResumeData] = useState(() => {
+    const storedResumeData = localStorage.getItem("resumeData");
+    return storedResumeData ? JSON.parse(storedResumeData) : initialState;
+  });
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
