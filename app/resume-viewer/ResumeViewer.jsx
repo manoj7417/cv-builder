@@ -28,6 +28,7 @@ import { Button } from "../components/Button";
 import { printResume } from "../pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { GetTemplate } from "@/components/resume-templates/GetTemplate";
 
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -56,7 +57,7 @@ const Controls = () => {
   );
 };
 
-const ResumeViewPage = ({ resumeData }) => {
+const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const [scale, setScale] = useState(0.8);
   const transformRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -96,6 +97,16 @@ const ResumeViewPage = ({ resumeData }) => {
       setIsLoading(false);
     }
   };
+
+  const handleTemplateChange = (val) => {
+    const updatedResumeData = {
+      ...resumeData, metadata: {
+        ...resumeData.metadata,
+        template: val
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -160,107 +171,107 @@ const ResumeViewPage = ({ resumeData }) => {
               </Link>
             </div>
             <div className="auth_section flex justify-end w-full gap-10 items-center">
-            <Controls />
-            <button
-              className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-              onClick={handleDownloadResume}
-              disabled={isLoading}
-            >
-              {isLoading && (
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Download PDF
-            </button>
-            <div className="choose_templates xl:block hidden">
-              <Drawer direction="right">
-                <DrawerTrigger className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">
-                  Templates <LuLayoutGrid className="inline" />
-                </DrawerTrigger>
-                <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
-                  <DrawerHeader>
-                    <DrawerTitle>Choose Templates</DrawerTitle>
-                    <DrawerDescription>
-                      <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                        <div className="image_section_1 ">
-                          <Image
-                            src="/newResume.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
+              <Controls />
+              <button
+                className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                onClick={handleDownloadResume}
+                disabled={isLoading}
+              >
+                {isLoading && (
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Download PDF
+              </button>
+              <div className="choose_templates xl:block hidden">
+                <Drawer direction="right">
+                  <DrawerTrigger className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">
+                    Templates <LuLayoutGrid className="inline" />
+                  </DrawerTrigger>
+                  <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
+                    <DrawerHeader>
+                      <DrawerTitle>Choose Templates</DrawerTitle>
+                      <DrawerDescription>
+                        <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
+                          <div className="image_section_1 " onClick={() => handleTemplateChange('Template3')}>
+                            <Image
+                              src="/newResume.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_2" onClick={() => handleTemplateChange('Template2')}>
+                            <Image
+                              src="/newResume1.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_1" onClick={() => handleTemplateChange('Template1')}>
+                            <Image
+                              src="/newResume2.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_2">
+                            <Image
+                              src="/6.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_1">
+                            <Image
+                              src="/5.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_2">
+                            <Image
+                              src="/6.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_1">
+                            <Image
+                              src="/5.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
+                          <div className="image_section_2">
+                            <Image
+                              src="/6.png"
+                              alt="pic1"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              width={500}
+                              height={500}
+                            />
+                          </div>
                         </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/newResume1.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_1">
-                          <Image
-                            src="/newResume2.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_1">
-                          <Image
-                            src="/5.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_1">
-                          <Image
-                            src="/5.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                      </div>
-                    </DrawerDescription>
-                  </DrawerHeader>
-                </DrawerContent>
-              </Drawer>
+                      </DrawerDescription>
+                    </DrawerHeader>
+                  </DrawerContent>
+                </Drawer>
+              </div>
             </div>
-            </div>
-            
+
             <div className="profile_section">
               <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
                 {/* Avatar with Dropdown */}
@@ -307,7 +318,7 @@ const ResumeViewPage = ({ resumeData }) => {
                         <div
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                           role="menuitem"
-                          // onClick={handleLogout}
+                        // onClick={handleLogout}
                         >
                           Logout
                         </div>
@@ -330,7 +341,7 @@ const ResumeViewPage = ({ resumeData }) => {
                   overflow: "hidden",
                 }}
               >
-                <Template3 resumeData={resumeData} />
+                <GetTemplate name={resumeData?.metadata?.template} resumeData={resumeData} />
               </div>
             </div>
           </TransformComponent>
