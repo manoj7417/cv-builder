@@ -29,7 +29,7 @@ const UserDashboardPage = () => {
                   className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
                   src="/pic.jpg"
                 />
-                <span className="hidden md:block">ADMIN</span>
+                <span className="hidden md:block">Maria</span>
               </div>
               <div className="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
                   <button className="outline-none focus:outline-none">
@@ -282,7 +282,7 @@ const UserDashboardPage = () => {
             <div className="h-full ml-14 mt-14 mb-10 md:ml-64">
               {/* Statistics Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-                <div className="bg-blue-200 shadow-lg rounded-md flex items-center justify-between p-3  font-medium group">
+                <div className="bg-blue-300 shadow-lg rounded-md flex items-center justify-between p-3  font-medium group">
                   <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                     <svg
                       width={30}
@@ -301,8 +301,8 @@ const UserDashboardPage = () => {
                     </svg>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl text-white">1,257</p>
-                    <p className="text-white">Visitors</p>
+                    <p className="text-2xl text-white">15</p>
+                    <p className="text-white">Projects</p>
                   </div>
                 </div>
                 <div className="bg-red-400 shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
@@ -324,8 +324,8 @@ const UserDashboardPage = () => {
                     </svg>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl">557</p>
-                    <p>Orders</p>
+                    <p className="text-2xl">8</p>
+                    <p>Skills</p>
                   </div>
                 </div>
                 <div className="bg-orange-400 shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
@@ -347,8 +347,8 @@ const UserDashboardPage = () => {
                     </svg>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl">$11,257</p>
-                    <p>Sales</p>
+                    <p className="text-2xl">11</p>
+                    <p>Certifications</p>
                   </div>
                 </div>
                 <div className="bg-green-400 shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
@@ -370,8 +370,8 @@ const UserDashboardPage = () => {
                     </svg>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl">$75,257</p>
-                    <p>Balances</p>
+                    <p className="text-2xl">75</p>
+                    <p>Experience</p>
                   </div>
                 </div>
               </div>
@@ -728,7 +728,7 @@ const UserDashboardPage = () => {
                     <table className="w-full">
                       <thead>
                         <tr className="text-xs font-semibold tracking-wide text-left text-black uppercase border-b bg-white">
-                          <th className="px-4 py-3">Client</th>
+                          <th className="px-4 py-3">Templates</th>
                           <th className="px-4 py-3">Amount</th>
                           <th className="px-4 py-3">Status</th>
                           <th className="px-4 py-3">Date</th>
@@ -738,10 +738,10 @@ const UserDashboardPage = () => {
                         <tr className="bg-white text-black">
                           <td className="px-4 py-3">
                             <div className="flex items-center text-sm">
-                              <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <div className="relative hidden w-20 h-20 mr-3 md:block">
                                 <img
-                                  className="object-cover w-full h-full rounded-full"
-                                  src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                  className="object-cover w-full h-full"
+                                  src="/5.png"
                                   alt
                                   loading="lazy"
                                 />
@@ -751,10 +751,7 @@ const UserDashboardPage = () => {
                                 />
                               </div>
                               <div>
-                                <p className="font-semibold">Hans Burger</p>
-                                <p className="text-xs text-black">
-                                  10x Developer
-                                </p>
+                                <p className="font-semibold">Designer Templates</p>
                               </div>
                             </div>
                           </td>
@@ -762,7 +759,7 @@ const UserDashboardPage = () => {
                           <td className="px-4 py-3 text-xs">
                             <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                               {" "}
-                              Approved{" "}
+                              Paid
                             </span>
                           </td>
                           <td className="px-4 py-3 text-sm">15-01-2021</td>
@@ -770,10 +767,10 @@ const UserDashboardPage = () => {
                         <tr className="bg-white text-black">
                           <td className="px-4 py-3">
                             <div className="flex items-center text-sm">
-                              <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <div className="relative hidden w-20 h-20 mr-3 md:block">
                                 <img
-                                  className="object-cover w-full h-full rounded-full"
-                                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
+                                  className="object-cover w-full h-full"
+                                  src="/6.png"
                                   alt
                                   loading="lazy"
                                 />
@@ -783,10 +780,7 @@ const UserDashboardPage = () => {
                                 />
                               </div>
                               <div>
-                                <p className="font-semibold">Jolina Angelie</p>
-                                <p className="text-xs text-black">
-                                  Unemployed
-                                </p>
+                                <p className="font-semibold">Professional Template</p>
                               </div>
                             </div>
                           </td>
@@ -802,10 +796,10 @@ const UserDashboardPage = () => {
                         <tr className="bg-white text-black">
                           <td className="px-4 py-3">
                             <div className="flex items-center text-sm">
-                              <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <div className="relative hidden w-20 h-20 mr-3  md:block">
                                 <img
-                                  className="object-cover w-full h-full rounded-full"
-                                  src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=b8377ca9f985d80264279f277f3a67f5"
+                                  className="object-cover w-full h-full"
+                                  src="/8.png"
                                   alt
                                   loading="lazy"
                                 />
@@ -815,10 +809,7 @@ const UserDashboardPage = () => {
                                 />
                               </div>
                               <div>
-                                <p className="font-semibold">Dave Li</p>
-                                <p className="text-xs text-black">
-                                  Influencer
-                                </p>
+                                <p className="font-semibold">ATS Template</p>
                               </div>
                             </div>
                           </td>
@@ -834,10 +825,10 @@ const UserDashboardPage = () => {
                         <tr className="bg-white text-black">
                           <td className="px-4 py-3">
                             <div className="flex items-center text-sm">
-                              <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <div className="relative hidden w-20 h-20 mr-3 md:block">
                                 <img
-                                  className="object-cover w-full h-full rounded-full"
-                                  src="https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                  className="object-cover w-full h-full"
+                                  src="/15.png"
                                   alt
                                   loading="lazy"
                                 />
@@ -847,10 +838,7 @@ const UserDashboardPage = () => {
                                 />
                               </div>
                               <div>
-                                <p className="font-semibold">Rulia Joberts</p>
-                                <p className="text-xs text-black">
-                                  Actress
-                                </p>
+                                <p className="font-semibold">Simple Template</p>
                               </div>
                             </div>
                           </td>
@@ -858,7 +846,7 @@ const UserDashboardPage = () => {
                           <td className="px-4 py-3 text-xs">
                             <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                               {" "}
-                              Approved{" "}
+                              Paid
                             </span>
                           </td>
                           <td className="px-4 py-3 text-sm">17-04-2021</td>
@@ -866,10 +854,10 @@ const UserDashboardPage = () => {
                         <tr className="bg-white text-black">
                           <td className="px-4 py-3">
                             <div className="flex items-center text-sm">
-                              <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <div className="relative hidden w-20 h-20 mr-3 md:block">
                                 <img
-                                  className="object-cover w-full h-full rounded-full"
-                                  src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                  className="object-cover w-full h-full"
+                                  src="/16.png"
                                   alt
                                   loading="lazy"
                                 />
@@ -879,10 +867,7 @@ const UserDashboardPage = () => {
                                 />
                               </div>
                               <div>
-                                <p className="font-semibold">Hitney Wouston</p>
-                                <p className="text-xs text-black">
-                                  Singer
-                                </p>
+                                <p className="font-semibold">Simple Template</p>0
                               </div>
                             </div>
                           </td>

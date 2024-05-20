@@ -648,9 +648,6 @@ export default function Form({ resumeData, setResumeData }) {
 
   return (
     <>
-      <div className="header_section bg-gray-800 md:p-1.5 p-1 flex flex-row 2xl:justify-around 2xl:p-5 justify-start items-center fixed top-0 left-0 w-full z-0">
-        <Link href={'/resume-dashboard'} className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"><MdOutlineKeyboardArrowLeft className="inline text-xl" />Back</Link>
-      </div>
       <div className=" px-5 py-20">
         <div className="px-10">
           <div className="grid grid-cols-2 gap-4 mb-2">

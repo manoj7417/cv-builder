@@ -35,19 +35,19 @@ const Controls = () => {
   return (
     <div className="tools">
       <button
-        className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+        className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
         onClick={() => zoomIn()}
       >
         <FiPlus className="text-white" />
       </button>
       <button
-        className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
+        className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
         onClick={() => zoomOut()}
       >
         <FiMinus />
       </button>
       <button
-        className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+        className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
         onClick={() => resetTransform()}
       >
         <CiUndo />
@@ -149,7 +149,7 @@ const ResumeViewPage = ({ resumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button bg-gray-800 p-1 flex flex-row 2xl:justify-evenly 2xl:p-5 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+          <div className="actions_button bg-gray-800 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
                 href={"/resume-dashboard"}
@@ -159,10 +159,10 @@ const ResumeViewPage = ({ resumeData }) => {
                 Back
               </Link>
             </div>
-            <div className="auth_section flex justify-end w-full gap-10">
+            <div className="auth_section flex justify-end w-full gap-10 items-center">
             <Controls />
             <button
-              className="2xl:p-5 md:p-2 p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around rounded-md"
+              className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
               onClick={handleDownloadResume}
               disabled={isLoading}
             >
@@ -173,7 +173,7 @@ const ResumeViewPage = ({ resumeData }) => {
             </button>
             <div className="choose_templates xl:block hidden">
               <Drawer direction="right">
-                <DrawerTrigger className="bg-blue-900 text-white 2xl:p-5 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">
+                <DrawerTrigger className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">
                   Templates <LuLayoutGrid className="inline" />
                 </DrawerTrigger>
                 <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
