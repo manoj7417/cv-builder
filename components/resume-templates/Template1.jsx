@@ -27,25 +27,29 @@ const Education = ({ fontStyle, data }) => {
                 <>
                   <div className="education1 flex my-5" key={index}>
                     <div className="year w-[150px] pr-8 relative text-[#0175b2]">
-                      {item?.startDate &&
+                      {<p>item?.startDate</p> &&
                         `${item?.startDate}${item?.endDate && " - "}`}
                       {item?.endDate}
                       <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
                       <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
                     </div>
-                    <div className="content pl-8 flex flex-col">
+                    <div className="content pl-8 flex flex-col break-all">
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                         {item?.degree}
                       </h3>
                       <h4 style={{ fontSize: fontStyle.paraFont }}>
                         {item?.institute}
-                      </h4> 
+                      </h4>
+                      <div
+                        className={`py-2 ${fontStyle.paraFont} break-words`}
+                        dangerouslySetInnerHTML={{ __html: item?.description }}
+                      ></div>
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     className={`py-2 ${fontStyle.paraFont} break-words`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
-                  ></div>
+                  ></div> */}
                 </>
               );
             })}
@@ -71,42 +75,67 @@ const Experience = ({ fontStyle, data }) => {
           </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1 my-5" key={index}>
-                <div className="post flex  justify-between items-center my-2">
-                  <div className="post_title">
-                    <h3
-                      style={{ fontSize: fontStyle.subHeadingFont }}
-                      className="font-bold"
-                    >
-                      {item?.jobtitle}
-                    </h3>
-                    <h4
-                      style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
-                    >
-                      {item?.employer}
-                    </h4>
-                  </div>
-                  <div className="year font-bold">
-                    <p
-                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                    >
-                      <span>{item?.startDate}</span>
-                      <span>{item?.startDate && item?.endDate && " - "}</span>
-                      <span>{item?.endDate}</span>
+              // <div className="experience_1 my-5" key={index}>
+              //   <div className="post flex  justify-between items-center my-2">
+              //     <div className="post_title">
+              //       <h3
+              //         style={{ fontSize: fontStyle.subHeadingFont }}
+              //         className="font-bold"
+              //       >
+              //         {item?.jobtitle}
+              //       </h3>
+              //       <h4
+              //         style={{ fontSize: fontStyle.paraFont }}
+              //         className="font-semibold"
+              //       >
+              //         {item?.employer}
+              //       </h4>
+              //     </div>
+              //     <div className="year font-bold">
+              //       <p
+              //         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+              //       >
+              //         <span>{item?.startDate}</span>
+              //         <span>{item?.startDate && item?.endDate && " - "}</span>
+              //         <span>{item?.endDate}</span>
+              //       </p>
+              //       {item?.city && (
+              //         <p className="text-13px flex font-normal items-center justify-end text-end">
+              //           <IoLocationOutline className="mr-1" />
+              //           {item?.city}
+              //         </p>
+              //       )}
+              //     </div>
+              //   </div>
+              //   <div
+              //     className={`${fontStyle.paraFont} break-words`}
+              //     dangerouslySetInnerHTML={{ __html: item?.description }}
+              //   ></div>
+              // </div>
+              <div className="experience_1 flex my-5" key={index}>
+                <div className="year w-[150px] pr-8 relative text-[#0175b2]">
+                {item?.startDate && (
+                    <p className="text-center">
+                      {item.startDate}
+                      {item?.endDate && " - "}
                     </p>
-                    {item?.city && (
-                      <p className="text-13px flex font-normal items-center justify-end text-end">
-                        <IoLocationOutline className="mr-1" />
-                        {item?.city}
-                      </p>
-                    )}
-                  </div>
+                  )}
+                  {item?.endDate && <p>{item.endDate}</p>}
+                  <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
+                  <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
                 </div>
-                <div
-                  className={`${fontStyle.paraFont} break-words`}
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                ></div>
+                <div className="content pl-8 flex flex-col break-all">
+                  <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                    {item?.jobtitle}
+                  </h3>
+                  <h4 style={{ fontSize: fontStyle.paraFont }}>
+                    {item?.employer}
+                  </h4>
+                  <div
+                    className={`py-2 ${fontStyle.paraFont} break-words`}
+                    dangerouslySetInnerHTML={{ __html: item?.description }}
+                  ></div>
+                </div>
               </div>
             );
           })}
@@ -170,39 +199,69 @@ const Projects = ({ fontStyle, data }) => {
   );
 };
 
+// const Skills = ({ fontStyle, data }) => {
+//   return (
+//     <div className="skills_section border-b-2 border-gray-300 py-3">
+//       <h2
+//         className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+//       >
+//         Skills
+//       </h2>
+//       <div className="text-gray-600 my-1">
+//         <ul className="list-disc pl-5">
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             React <js></js>
+//           </li>
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             Next js
+//           </li>
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             Node js
+//           </li>
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             Tailwind Css
+//           </li>
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             Redux
+//           </li>
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             Redux Toolkit
+//           </li>
+//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
+//             React Query
+//           </li>
+//         </ul>
+//       </div>
+//     </div>
+//   );
+// };
+
 const Skills = ({ fontStyle, data }) => {
   return (
-    <div className="skills_section border-b-2 border-gray-300 py-3">
-      <h2
-        className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
-      >
-        Skills
-      </h2>
-      <div className="text-gray-600 my-1">
-        <ul className="list-disc pl-5">
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            React <js></js>
-          </li>
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            Next js
-          </li>
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            Node js
-          </li>
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            Tailwind Css
-          </li>
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            Redux
-          </li>
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            Redux Toolkit
-          </li>
-          <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-            React Query
-          </li>
-        </ul>
-      </div>
+    <div>
+      {data.visible && data.items.length > 0 && (
+        <div className="skills_section border-b-2 border-gray-300 py-3">
+          <h2
+            className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-gray-600 my-1">
+            <ul className="list-disc pl-5">
+              {data.items.map((item, i) => {
+                return (
+                  <li
+                    className={`font-bold text-white ${fontStyle.skillsFont}`}
+                    key={i}
+                  >
+                    {item?.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -221,7 +280,7 @@ const Profile = ({ data, fontStyle }) => {
             </h2>
           </div>
           <div
-            className={`my-5 ${fontStyle.subHeadingFont}`}
+            className={`text-white my-5 break-words ${fontStyle.subHeadingFont}`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -247,10 +306,12 @@ const Template1 = ({ resumeData }) => {
   return (
     <>
       <div className="resume_wrapper flex w-[210mm] h-[297mm] bg-white p-3 mx-auto">
-        <div className="resume_left w-[35%]" style={{
-            backgroundColor: resumeData?.metadata?.theme?.primary
-          }
-          }>
+        <div
+          className="resume_left w-[35%]"
+          style={{
+            backgroundColor: resumeData?.metadata?.theme?.primary,
+          }}
+        >
           <div className="resume_image w-full">
             <img src="/pic.jpg" alt="Resume_image" className="w-full block" />
           </div>
@@ -261,7 +322,7 @@ const Template1 = ({ resumeData }) => {
                 fontStyle={fontStyle}
               />
             </div>
-            <div className="resume_item resume_address py-5 border-b-2 border-white">
+            <div className="resume_item resume_address py-5">
               {(resumeData?.basics?.city || resumeData?.basics?.country) && (
                 <p className="flex items-center">
                   <IoLocationOutline className="text-white" />
@@ -298,7 +359,9 @@ const Template1 = ({ resumeData }) => {
               {resumeData?.basics?.jobtitle}
             </p>
             <div className="contact_details mt-2">
-              <div className={`text-gray-600 my-4 ${fontStyle.contactFont} flex`}>
+              <div
+                className={`text-gray-600 my-4 ${fontStyle.contactFont} flex`}
+              >
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}
@@ -342,7 +405,10 @@ const Template1 = ({ resumeData }) => {
           </div>
           <div className="resume_item resume_experience my-10">
             <div className="resume_info">
-            <Projects fontStyle={fontStyle} data={resumeData?.sections?.projects} />
+              <Projects
+                fontStyle={fontStyle}
+                data={resumeData?.sections?.projects}
+              />
             </div>
           </div>
         </div>
