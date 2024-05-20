@@ -28,6 +28,7 @@ import { Button } from "../components/Button";
 import { printResume } from "../pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import Template1 from "@/components/resume-templates/Template1";
 
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -330,7 +331,7 @@ const ResumeViewPage = ({ resumeData }) => {
                   overflow: "hidden",
                 }}
               >
-                <Template3 resumeData={resumeData} />
+                <Template1 resumeData={resumeData} />
               </div>
             </div>
           </TransformComponent>

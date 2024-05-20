@@ -746,10 +746,10 @@ export default function Form({ resumeData, setResumeData }) {
                 return <div key={index} className="flex items-start justify-center group my-5 relative">
                   <GoGrabber className=" text-3xl
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"/>
-                  <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out " defaultValue={`item-${index}`} defaultChecked>
+                  <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2" defaultValue={`item-${index}`} defaultChecked>
                     <AccordionItem value={`item-${index}`}>
                       <AccordionTrigger className="group-hover:text-blue-900">
-                        <div className=" px-3 flex flex-col items-start ">
+                        <div className="px-3 flex flex-col items-start">
                           {(item?.degree || item?.institute) ? <p >
                             <span>{item?.degree}</span>
                             <span>{item?.degree && item?.institute && ' at '}</span>
@@ -757,7 +757,7 @@ export default function Form({ resumeData, setResumeData }) {
                           </p>
                             : <p>(Not Specified)</p>
                           }
-                          <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
+                          <p className="text-gray-500 text-sm mt-1">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
                         </div></AccordionTrigger>
                       <AccordionContent>
                         <div className="w-full pt-5 px-5 pb-10">
@@ -842,7 +842,7 @@ export default function Form({ resumeData, setResumeData }) {
                 return <div key={index} className="flex items-start justify-between group my-5 ">
                   <GoGrabber className="mt-3 text-3xl
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
-                  <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out" defaultValue={`item-${index}`}>
+                  <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2" defaultValue={`item-${index}`}>
                     <AccordionItem value={`item-${index}`}>
                       <AccordionTrigger>
                         <div className=" px-3 flex flex-col items-start">
@@ -932,14 +932,15 @@ export default function Form({ resumeData, setResumeData }) {
                 return <div key={index} className="flex items-start justify-between group my-5 ">
                   <GoGrabber className="mt-3 text-3xl
                font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"/>
-                  <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out" defaultValue={`item-${index}`}>
+                  <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2" defaultValue={`item-${index}`}>
                     <AccordionItem value={`item-${index}`}>
                       <AccordionTrigger>
                         <div className=" px-3 flex flex-col items-start">
                           <p >{item?.title ? `${item?.title}` : "(Not Specified  )"}</p>
                           <p>{item?.subtitle}</p>
                           <p className="text-gray-500 text-sm">{item?.startDate && `${item.startDate} - `}{item?.endDate}</p>
-                        </div></AccordionTrigger>
+                        </div>
+                        </AccordionTrigger>
                       <AccordionContent>
                         <div className="w-full pt-5 px-5 pb-10">
                           <div className="grid grid-cols-2 gap-4 px-2 py-5">
@@ -978,7 +979,7 @@ export default function Form({ resumeData, setResumeData }) {
                               style={{
                                 height: "200px",
                               }}
-                              placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
+                              placeholder="e.g.Created and implemented lesson plans based on child-led interests and curiosities."
                               value={item.description}
                               onChange={(e) => handleProjectDescriptionChange(e, index)}
                             />

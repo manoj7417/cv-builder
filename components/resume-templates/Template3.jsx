@@ -125,7 +125,10 @@ const Skills = ({ fontStyle, data }) => {
       </h2>
       <div className="text-gray-600 my-1">
         <ul className="list-disc pl-5">
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>React js</li>
+          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont} relative`}>React js <p
+                          className="absolute top-0 left-0 h-full bg-[#0175b2]"
+                          style={{ width: "70%" }}
+                        /></li>
           <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Next js</li>
           <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Node js</li>
           <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Tailwind Css</li>
