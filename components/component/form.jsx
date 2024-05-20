@@ -1001,6 +1001,21 @@ export default function Form({ resumeData, setResumeData }) {
           </div>
         </div>
 
+        {/* Skills */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="space-y-2 px-10">
+            <div className=" w-[40%] group">
+              <Label className="text-2xl group-hover:hidden">{sections?.projects?.name}</Label>
+              <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.projects?.name} onChange={handleProjectLabelChange} />
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">
+                Show your best projects
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* theme */}
         <div className="px-10 rounded-md ">
           <div className="my-5">
