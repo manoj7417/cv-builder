@@ -5,7 +5,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaFacebookF } from "react-icons/fa";
 
-const Template1 = () => {
+export const Template1 = () => {
   const val = ResumeData?.resume;
   return (
     <>
@@ -79,7 +79,7 @@ const Template1 = () => {
                         <div className="skills_left">{item?.name}</div>
                         <div className="skills_bar">
                           <p>
-                            <span style={{ width: `${item?.percentage}%`}} />
+                            <span style={{ width: `${item?.percentage}%` }} />
                           </p>
                         </div>
                       </div>

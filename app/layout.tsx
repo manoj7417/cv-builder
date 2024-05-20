@@ -10,11 +10,6 @@ import Footer from "./Layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Genies Career Hub",
-  description: "career genie hub",
-};
-
 export default function RootLayout({
   children,
 }: {

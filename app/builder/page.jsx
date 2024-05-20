@@ -149,7 +149,7 @@ const initialState = {
     },
   },
   metadata: {
-    template: "pikachu",
+    template: "Template3",
     layout: [
       [
         [
@@ -201,7 +201,6 @@ const initialState = {
       hideIcons: false,
       underlineLinks: true,
     },
-    notes: "",
   },
 };
 
@@ -256,7 +255,7 @@ function Builder() {
           </div> */}
         </div>
         <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0">
-          <ResumeViewPage scale={scale} resumeData={resumeData} />
+          <ResumeViewPage resumeData={resumeData} setResumeData={setResumeData} />
         </div>
       </div>
     </>

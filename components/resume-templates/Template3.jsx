@@ -159,8 +159,7 @@ const Profile = ({ data, fontStyle }) => {
   )
 }
 
-const Template3 = ({ resumeData }) => {
-
+export const Template3 = ({ resumeData }) => {
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
@@ -179,7 +178,7 @@ const Template3 = ({ resumeData }) => {
       <div className="p-custom space-y-3 ">
         <div className="bg-white mx-auto">
           <div className="top_section flex justify-around items-center  py-10 border-2" style={{
-            backgroundColor : resumeData?.metadata?.theme?.primary
+            backgroundColor: resumeData?.metadata?.theme?.primary
           }
           }>
             <div className="name_profile w-[70%]  h-full px-10">
@@ -240,7 +239,6 @@ const Template3 = ({ resumeData }) => {
               <Profile data={resumeData?.sections?.summary} fontStyle={fontStyle} />
               <Experience fontStyle={fontStyle} data={resumeData?.sections?.experience} />
               <Projects fontStyle={fontStyle} data={resumeData?.sections?.projects} />
-
             </div>
           </div>
         </div>

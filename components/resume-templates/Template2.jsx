@@ -1,6 +1,6 @@
 import React from "react";
 
-const Template2 = () => {
+export const Template2 = () => {
   return (
     <>
       <div className="bg-gray-500 w-[219mm] h-[297mm] mx-auto">
@@ -139,7 +139,7 @@ const Template2 = () => {
               </div>
               <section className="mt-5">
                 <h3 className="uppercase text-white font-medium text-2xl">
-                   Projects
+                  Projects
                 </h3>
                 <div className="h-1 bg-green w-48 my-4"></div>
                 <div className="mt-5">
