@@ -119,21 +119,27 @@ const Projects = ({ fontStyle, data }) => {
 
 const Skills = ({ fontStyle, data }) => {
   return (
-    <div className="skills_section border-b-2 border-gray-300 py-3">
-      <h2 className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}>
-        Skills
-      </h2>
-      <div className="text-gray-600 my-1">
-        <ul className="list-disc pl-5">
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>React js</li>
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Next js</li>
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Node js</li>
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Tailwind Css</li>
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Redux</li>
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>Redux Toolkit</li>
-          <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}>React Query</li>
-        </ul>
-      </div>
+    <div>
+      {
+        data.visible && data.items.length > 0 &&
+        <div className="skills_section border-b-2 border-gray-300 py-3">
+
+
+          <h2 className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}>
+            {data?.name}
+          </h2>
+          <div className="text-gray-600 my-1">
+            <ul className="list-disc pl-5">
+              {
+                data.items.map((item, i) => {
+                  return <li className={`font-bold text-gray-600 ${fontStyle.skillsFont}`} key={i}>{item?.name}</li>
+                })
+              }
+            </ul>
+          </div>
+
+        </div>
+      }
     </div>
   )
 }

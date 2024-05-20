@@ -31,6 +31,8 @@ import { cn } from "@/lib/utils";
 import { Progress } from "../ui/progress";
 import { Textarea } from "../ui/textarea";
 import AiGenerateLoader from "@/app/ui/AiGenerateLoader";
+import { SkillsSelect } from "./skills-select";
+
 
 const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading }) => {
   const handleJobTitleChange = (e) => {
@@ -235,6 +237,7 @@ export default function Form({ resumeData, setResumeData }) {
   }
 
   const handleChangeProfileSummaryChange = (val) => {
+    console.log(val)
     const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
     setResumeData(updatedResumeData)
   }
@@ -646,6 +649,78 @@ export default function Form({ resumeData, setResumeData }) {
     setResumeData(updatedResumeData)
   }
 
+  const handleSkillsLabelChange = (e) => {
+    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, skills: { ...resumeData.sections.skills, name: e.target.value } } }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleAddNewSkills = () => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, skills: {
+          ...resumeData.sections.skills, items: [
+            ...resumeData.sections.skills.items,
+            {
+              name: "",
+              level: ""
+            }
+          ]
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleSkillNameChange = (val, i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, skills: {
+          ...resumeData.sections.skills, items: resumeData.sections.skills.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, name: val
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleDeleteSkills = (i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, skills: {
+          ...resumeData.sections.skills, items:
+            resumeData.sections.skills.items.filter((el, index) => {
+              return index !== i
+            })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
+  const handleSkillLevelChange = (val, i) => {
+    const updatedResumeData = {
+      ...resumeData, sections: {
+        ...resumeData.sections, skills: {
+          ...resumeData.sections.skills, items: resumeData.sections.skills.items.map((item, index) => {
+            if (index === i) {
+              return {
+                ...item, level: val
+              }
+            }
+            return item
+          })
+        }
+      }
+    }
+    setResumeData(updatedResumeData)
+  }
+
   return (
     <>
       <div className=" px-5 py-20">
@@ -712,11 +787,9 @@ export default function Form({ resumeData, setResumeData }) {
             </div>
             <div className="no-scrollbar">
               <ReactQuill
-                id="Profile"
                 className="no-scrollbar"
                 style={{
                   height: "200px",
-                  zIndex: "-1",
                   position: "relative"
                 }}
                 value={resumeData?.sections?.summary?.content}
@@ -1002,13 +1075,53 @@ export default function Form({ resumeData, setResumeData }) {
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
             <div className=" w-[40%] group">
-              <Label className="text-2xl group-hover:hidden">{sections?.projects?.name}</Label>
-              <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.projects?.name} onChange={handleProjectLabelChange} />
+              <Label className="text-2xl group-hover:hidden">{sections?.skills?.name}</Label>
+              <CustomLabelInput className='hidden group-hover:block' value={sections?.skills?.name} onChange={handleSkillsLabelChange} />
             </div>
             <div>
               <p className="text-sm text-gray-500">
-                Show your best projects
+                Enter your skills
               </p>
+            </div>
+          </div>
+          <div>
+            {
+              sections.skills.items.length > 0 && sections.skills.items.map((skills, index) => {
+                return (
+                  <div key={index} className="flex items-start justify-center group my-5 relative">
+                    <GoGrabber className=" text-3xl
+               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"/>
+                    <Accordion type="single" collapsible className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out " defaultValue={`item-${index}`} defaultChecked>
+                      <AccordionItem value={`item-${index}`}>
+                        <AccordionTrigger className="group-hover:text-blue-900">
+                          <div className=" px-3 flex flex-col items-start ">
+                            <p>{skills.name || '(Not Specified)'}</p>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent >
+                          <div className=" grid-cols-2 gap-2 flex px-2">
+                            <div className=" w-1/2">
+                              <Label htmlFor={`skills-${index}`}>Name</Label>
+                              <Input value={skills?.name} onChange={(e) => handleSkillNameChange(e.target.value, index)} />
+                            </div>
+                            <div className=" w-1/2 flex flex-col items-start justify-center">
+                              <Label htmlFor={`skills-${index}`} className="mb-1">Level</Label>
+                              <SkillsSelect className='w-full' onSelectChange={handleSkillLevelChange} index={index} value={skills?.level} />
+                            </div>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                    <MdDeleteOutline className="absolute top-2 right-1 text-2xl
+               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out" onClick={() => handleDeleteSkills(index)} />
+                  </div>
+                )
+              })
+            }
+          </div>
+          <div className="mt-5 px-10">
+            <div >
+              <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewSkills}><IoIosAddCircleOutline className="text-xl mr-2" />Add Skills</Button>
             </div>
           </div>
         </div>
