@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { ResumeData } from "@/constants/data";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaGraduationCap, FaPhoneAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaFacebookF } from "react-icons/fa";
+import { IoLocationOutline } from "react-icons/io5";
 
 
 
