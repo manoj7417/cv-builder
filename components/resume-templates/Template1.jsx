@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { ResumeData } from "@/constants/data";
 import { FaGraduationCap, FaPhoneAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -160,8 +160,8 @@ const Profile = ({ data, fontStyle }) => {
 }
 
 
-const Template1 = ({resumeData}) => {
-  
+const Template1 = ({ resumeData }) => {
+
 
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
@@ -180,6 +180,9 @@ const Template1 = ({resumeData}) => {
 
   return (
     <>
+      <div>
+        Template 1
+      </div>
       {/* <div className="resume_wrapper">
         <div className="resume_left">
           <div className="resume_image">
@@ -260,7 +263,7 @@ const Template1 = ({resumeData}) => {
           </div>
         </div>
       </div> */}
-       <div className="resume_wrapper flex w-[210mm] h-[297mm] bg-white p-3 mx-auto my-12">
+      {/* <div className="resume_wrapper flex w-[210mm] h-[297mm] bg-white p-3 mx-auto my-12">
       <div className="resume_left w-[35%] bg-[#26252d]">
         <div className="resume_image w-full">
           <img src="/pic.jpg" alt="Resume_image" className="w-full block"/>
@@ -348,7 +351,7 @@ const Template1 = ({resumeData}) => {
           </div>
         </div>
       </div>
-    </div> 
+    </div>  */}
     </>
   );
 };
