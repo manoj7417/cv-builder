@@ -1,6 +1,6 @@
 import React from "react";
 
-const Template5 = () => {
+export const Template5 = () => {
   return (
     <>
       <div className="bg-gray-100 p-4">

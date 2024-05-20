@@ -218,7 +218,7 @@ const Template1 = ({resumeData}) => {
                         <div className="skills_left">{item?.name}</div>
                         <div className="skills_bar">
                           <p>
-                            <span style={{ width: `${item?.percentage}%`}} />
+                            <span style={{ width: `${item?.percentage}%` }} />
                           </p>
                         </div>
                       </div>
