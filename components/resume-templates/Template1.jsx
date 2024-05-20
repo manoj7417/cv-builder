@@ -159,19 +159,35 @@ const Profile = ({ data, fontStyle }) => {
 }
 
 
-const Template1 = () => {
-  const val = ResumeData?.resume;
+const Template1 = ({resumeData}) => {
+  
+
+  const [fontStyle, setFontStyle] = useState({
+    mainHeadingFont: "text-40px",
+    jobtitleFont: "text-24px",
+    headingFont: "text-22px",
+    subHeadingFont: "text-16px",
+    paraFont: "text-15px",
+    paddingFont: "10px 0",
+    dates: 'text-14px',
+    datesStyle: "text-gray-500 font-normal",
+    skillsFont: "text-15px",
+    contactFont: "text-13px"
+  })
+
+
+
   return (
     <>
-      <div className="resume_wrapper">
+      {/* <div className="resume_wrapper">
         <div className="resume_left">
           <div className="resume_image">
             <img src="/pic.jpg" alt="Resume_image" />
           </div>
           <div className="resume_bottom">
             <div className="resume_item resume_namerole">
-              <div className="name">{val?.name}</div>
-              <div className="role">{val?.role}</div>
+              <div className={`${fontStyle.mainHeadingFont} name`}>{resumeData?.basics?.name}</div>
+              <div className={`${fontStyle.jobtitleFont} role`}>{resumeData?.basics?.jobtitle}</div>
               <div className="links"></div>
             </div>
             <div className="resume_item resume_profile">
@@ -231,41 +247,107 @@ const Template1 = () => {
             </div>
           </div>
           <div className="resume_item resume_education">
-            <div className="resume_title">{val?.education?.label}</div>
             <div className="resume_info">
-              {val?.education?.section.length > 0 &&
-                val?.education?.section.map((item, idx) => (
-                  <>
-                    <div className="resume_data">
-                      <div className="year">{item?.year}</div>
-                      <div className="content">
-                        <p>{item?.title}</p>
-                        <p>{item?.description}</p>
-                      </div>
-                    </div>
-                  </>
-                ))}
+            <Education fontStyle={fontStyle} data={resumeData?.sections?.education} />
             </div>
           </div>
           <div className="resume_item resume_experience">
             <div className="resume_title">{val?.experience?.label}</div>
             <div className="resume_info">
-              {val?.experience?.section.length > 0 &&
-                val?.experience?.section?.map((item, idx) => (
-                  <>
-                    <div className="resume_data">
-                      <div className="year">{item?.year}</div>
-                      <div className="content">
-                        <p>{item?.title}</p>
-                        <p>{item?.description}</p>
-                      </div>
+            <Experience fontStyle={fontStyle} data={resumeData?.sections?.experience} />
+            </div>
+          </div>
+        </div>
+      </div> */}
+       <div className="resume_wrapper flex w-[210mm] h-[297mm] bg-white p-3 mx-auto my-12">
+      <div className="resume_left w-[35%] bg-[#26252d]">
+        <div className="resume_image w-full">
+          <img src="/pic.jpg" alt="Resume_image" className="w-full block"/>
+        </div>
+        <div className="resume_bottom py-5 px-8">
+          <div className="resume_item resume_profile py-5 border-b-2 border-[#0175b2]">
+            <div className="resume_title text-white uppercase font-bold text-base mb-3 tracking-wider">{val?.profile?.label}</div>
+            <div className="resume_info text-[#84838b]">{val?.profile?.description}</div>
+          </div>
+          <div className="resume_item resume_address py-5 border-b-2 border-[#0175b2]">
+            <div className="resume_title text-white uppercase font-bold text-base mb-3 tracking-wider">{val?.address?.label}</div>
+            {val?.address?.section.length > 0 &&
+              val?.address?.section?.map((item, idx) => (
+                <div className="resume_info text-[#84838b]" key={idx}>
+                  {item?.line1}
+                  <br />
+                  {item?.line2}
+                  <br />
+                  {item?.city}, {item?.country}
+                </div>
+              ))}
+          </div>
+          <div className="resume_item resume_skills py-5 border-b-2 border-[#0175b2]">
+            <div className="resume_title text-white uppercase font-bold text-base mb-3 tracking-wider">{val?.skills?.label}</div>
+            <div className="resume_info">
+              {val?.skills?.section.length > 0 &&
+                val?.skills?.section?.map((item, idx) => (
+                  <div className="skills_list flex justify-between mb-2" key={idx}>
+                    <div className="skills_left text-[#84838b]">{item?.name}</div>
+                    <div className="skills_bar relative w-[125px] h-[20px] bg-white">
+                      <p className="absolute top-0 left-0 h-full bg-[#0175b2]" style={{ width: `${item?.percentage}%` }} />
                     </div>
-                  </>
+                  </div>
                 ))}
             </div>
           </div>
         </div>
       </div>
+      <div className="resume_right w-[65%] px-10 py-5 text-[#26252d]">
+        <div className="resume_item resume_namerole">
+          <div className="name text-4xl uppercase font-bold tracking-wider mb-2">{val?.name}</div>
+          <div className="role text-lg uppercase mb-3">{val?.role}</div>
+          <div className="contact_details flex flex-wrap gap-2 justify-between mt-2">
+            <div className="phone flex items-center"><FaPhoneAlt className="inline mr-1" />{val?.phone}</div>
+            <div className="email flex items-center"><MdEmail className="inline mr-1" />{val?.email}</div>
+            <div className="facebook flex items-center"><FaFacebookF className="inline mr-1" />{val?.facebook}</div>
+          </div>
+        </div>
+        <div className="resume_item resume_education my-10">
+          <div className="resume_title text-[#26252d] uppercase font-bold text-base mb-3 tracking-wider">{val?.education?.label}</div>
+          <div className="resume_info">
+            {val?.education?.section.length > 0 &&
+              val?.education?.section.map((item, idx) => (
+                <div className="resume_data flex mb-4" key={idx}>
+                  <div className="year w-[250px] pr-8 relative text-[#0175b2]">
+                    {item?.year}
+                    <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
+                    <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
+                  </div>
+                  <div className="content pl-8">
+                    <p className="font-bold">{item?.title}</p>
+                    <p>{item?.description}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+        <div className="resume_item resume_experience my-10">
+          <div className="resume_title text-[#26252d] uppercase font-bold text-base mb-3 tracking-wider">{val?.experience?.label}</div>
+          <div className="resume_info">
+            {val?.experience?.section.length > 0 &&
+              val?.experience?.section?.map((item, idx) => (
+                <div className="resume_data flex mb-4" key={idx}>
+                  <div className="year w-[250px] pr-8 relative text-[#0175b2]">
+                    {item?.year}
+                    <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
+                    <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
+                  </div>
+                  <div className="content pl-8">
+                    <p className="font-bold">{item?.title}</p>
+                    <p>{item?.description}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div> 
     </>
   );
 };
