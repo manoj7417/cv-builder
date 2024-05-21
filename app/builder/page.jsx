@@ -35,7 +35,7 @@ const initialState = {
     },
     customFields: [],
     picture: {
-      url: "https://storage.rxresu.me/clvlwaeik0qf8fnw32i7lho6x/pictures/clvlwaeik0qf8fnw32i7lho6x.jpg",
+      url: "",
       size: 64,
       aspectRatio: 1,
       borderRadius: 0,
@@ -205,10 +205,7 @@ const initialState = {
 };
 
 function Builder() {
-  const [resumeData, setResumeData] = useState(() => {
-    const storedResumeData = localStorage.getItem("resumeData");
-    return storedResumeData ? JSON.parse(storedResumeData) : initialState;
-  });
+  const [resumeData, setResumeData] = useState(initialState);
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
@@ -233,6 +230,23 @@ function Builder() {
       window.removeEventListener("resize", checkIfMobile);
     };
   }, []);
+
+  // useEffect(() => {
+  //   console.log("running");
+  //   const storedResumeData = localStorage.getItem("resumeData");
+
+  //   if (storedResumeData) {
+  //     try {
+  //       const parsedResumeData = JSON.parse(storedResumeData);
+  //       // Only update state if the new data is different
+  //       if (JSON.stringify(parsedResumeData) !== JSON.stringify(resumeData)) {
+  //         setResumeData(parsedResumeData);
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to parse resume data from localStorage:", error);
+  //     }
+  //   }
+  // }, []);
 
   return (
     <>

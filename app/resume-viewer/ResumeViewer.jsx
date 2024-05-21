@@ -3,7 +3,7 @@ import Template3 from "@/components/resume-templates/Template3";
 import { cn } from "@/lib/utils";
 import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
@@ -29,6 +29,10 @@ import { printResume } from "../pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
+import { AuthContext } from "../context/AuthContext";
+import { deleteCookie } from "cookies-next";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -58,11 +62,25 @@ const Controls = () => {
 };
 
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
+  const { userState, userlogout } = useContext(AuthContext)
   const [scale, setScale] = useState(0.8);
   const transformRef = useRef(null);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    if (userState?.isAuthenticated) {
+      deleteCookie('accessToken')
+      deleteCookie('refreshToken')
+      toast.success("User logout successfully", {
+        position: "top-right",
+      });
+      userlogout();
+      router.push("/");
+    }
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -133,6 +151,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
+    console.log("running")
   }, [transformRef]);
 
   const pageSizeMap = {
@@ -318,7 +337,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                         <div
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                           role="menuitem"
-                        // onClick={handleLogout}
+                          onClick={handleLogout}
                         >
                           Logout
                         </div>

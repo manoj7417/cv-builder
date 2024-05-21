@@ -40,6 +40,7 @@ import { SkillsSelect } from "./skills-select";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
 import { AskBot } from "@/app/pages/api/api";
+import ImageUpload from "./ImageUpload";
 
 
 const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, handleGenerateProfileSummary, resumeData }) => {
@@ -233,7 +234,9 @@ const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, hand
                 </div >
               </DialogTitle >
               <DialogDescription>
-                {resumeData?.sections?.summary?.content}
+                <div className="mt-5 text-center">
+                  AI has generated your personalised profile summary
+                </div>
               </DialogDescription>
             </DialogHeader >
         }
@@ -937,27 +940,33 @@ export default function Form({ resumeData, setResumeData }) {
     <>
       <div className=" px-5 py-20">
         <div className="px-10">
-          <div className="grid grid-cols-2 gap-4 mb-2">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                placeholder="Enter your name"
-                name="name"
-                onChange={handleBasicInfoChange}
-                value={resumeData?.basics?.name}
-              />
+          <div className="w-full flex">
+            <div className=" w-1/2 pr-2">
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Enter your name"
+                  name="name"
+                  onChange={handleBasicInfoChange}
+                  value={resumeData?.basics?.name}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="jobtitle">Job Title</Label>
+                <Input
+                  id="jobtitle"
+                  placeholder="Enter Job Title"
+                  name="jobtitle"
+                  type="text"
+                  onChange={handleBasicInfoChange}
+                  value={resumeData?.basics?.jobtitle}
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="jobtitle">Job Title</Label>
-              <Input
-                id="jobtitle"
-                placeholder="Enter Job Title"
-                name="jobtitle"
-                type="text"
-                onChange={handleBasicInfoChange}
-                value={resumeData?.basics?.jobtitle}
-              />
+            <div className="w-1/2 flex flex-col items-start justify-around px-10">
+              <Label>Avatar</Label>
+              <ImageUpload resumeData={resumeData} setResumeData={setResumeData} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-2">
@@ -1281,8 +1290,7 @@ export default function Form({ resumeData, setResumeData }) {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1702,35 +1710,6 @@ export default function Form({ resumeData, setResumeData }) {
           <div>
           </div>
 
-          <div className=" my-5">
-            <Label htmlFor="theme.primary">Font Color</Label>
-            <div className="relative">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div
-                    className="absolute inset-y-0 left-3 my-2.5 size-4 cursor-pointer rounded-full ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
-                    style={{
-                      backgroundColor: resumeData.metadata.theme.primary,
-                    }}
-                  />
-                </PopoverTrigger>
-                <PopoverContent className="rounded-lg border-none bg-transparent p-0">
-                  <HexColorPicker
-                    color={resumeData.metadata.theme.primary}
-                    onChange={handleTemplateThemeChange}
-                  />
-                </PopoverContent>
-              </Popover>
-              <Input
-                id="theme.primary"
-                value={resumeData.metadata.theme.primary}
-                className="pl-10"
-                onChange={(event) => {
-                  handleTemplateThemeChange(event.target.value);
-                }}
-              />
-            </div>
-          </div>
         </div>
       </div>
     </>

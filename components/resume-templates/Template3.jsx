@@ -195,13 +195,16 @@ export const Template3 = ({ resumeData }) => {
                 {resumeData?.basics?.jobtitle}
               </p>
             </div>
-            <div className="profile_pic w-[30%] flex items-center justify-center">
-              <img
-                src="/pic.jpg"
-                alt="pic"
-                className="w-24 h-24 rounded-full object-cover"
-              />
-            </div>
+            {
+              resumeData?.basics?.picture?.url &&
+              <div className="profile_pic w-[30%] flex items-center justify-center">
+                <img
+                  src={resumeData?.basics?.picture?.url}
+                  alt="pic"
+                  className="w-24 h-24 rounded-full object-cover"
+                />
+              </div>
+            }
           </div>
           <div className="resume_section mt-5 flex flex-row">
             <div className="md:w-[30%] w-full left_side border-r-2 border-gray-300 p-5">

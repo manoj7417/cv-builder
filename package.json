@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@coreui/coreui": "^5.0.1",
     "@coreui/react": "^5.0.0",
     "@headlessui/react": "^2.0.1",
