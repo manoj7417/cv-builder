@@ -49,7 +49,7 @@ export default function Register() {
                     <div className="relative">
                         <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
                             <h3 className="text-4xl font-bold text-white">
-                                Approach your Dream Profession with CVs that are crafted in Minutes!
+                                Approach your Dream Profession with <br/><span className="underline">Genies Career Hub!</span>
                             </h3>
                             <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                                 <li className="flex items-center space-x-3">
