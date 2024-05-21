@@ -114,7 +114,7 @@ const Experience = ({ fontStyle, data }) => {
               // </div>
               <div className="experience_1 flex my-5" key={index}>
                 <div className="year w-[150px] pr-8 relative text-[#0175b2]">
-                {item?.startDate && (
+                  {item?.startDate && (
                     <p className="text-center">
                       {item.startDate}
                       {item?.endDate && " - "}
@@ -313,7 +313,13 @@ const Template1 = ({ resumeData }) => {
           }}
         >
           <div className="resume_image w-full">
-            <img src="/pic.jpg" alt="Resume_image" className="w-full block" />
+            {resumeData?.basics?.picture?.url && (
+              <img
+                src={resumeData?.basics?.picture?.url}
+                alt="Resume_image"
+                className="w-24 h-24 block mx-auto my-5 rounded-full"
+              />
+            )}
           </div>
           <div className="resume_bottom py-5 px-8">
             <div className="resume_item resume_profile py-5">
@@ -387,7 +393,7 @@ const Template1 = ({ resumeData }) => {
               </div>
             </div>
           </div>
-          <div className="resume_item resume_education my-10">
+          <div className="resume_item resume_education my-5">
             <div className="resume_info">
               <Education
                 fontStyle={fontStyle}
@@ -395,7 +401,7 @@ const Template1 = ({ resumeData }) => {
               />
             </div>
           </div>
-          <div className="resume_item resume_experience my-10">
+          <div className="resume_item resume_experience my-5">
             <div className="resume_info">
               <Experience
                 fontStyle={fontStyle}
@@ -403,7 +409,7 @@ const Template1 = ({ resumeData }) => {
               />
             </div>
           </div>
-          <div className="resume_item resume_experience my-10">
+          <div className="resume_item resume_experience my-5">
             <div className="resume_info">
               <Projects
                 fontStyle={fontStyle}
