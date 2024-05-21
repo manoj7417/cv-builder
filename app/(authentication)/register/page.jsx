@@ -49,7 +49,7 @@ export default function Register() {
               <h3 className="text-4xl font-bold text-white">
                 Approach your Dream Profession with <br />
                 <Link href={"/"}>
-                  <span className="underline">Genies Career Hub!</span>
+                  <span className="bg-gradient-to-r from-blue-600 via-green-200 to-indigo-400 inline-block text-transparent bg-clip-text">Genies Career Hub!</span>
                 </Link>
               </h3>
               <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
