@@ -10,14 +10,14 @@ import { toast } from "react-toastify";
 import { deleteCookie } from 'cookies-next';
 
 const navigation = [
-  { name: "CV Curator", href: "/resume-builder", current: true },
+  { name: "CV Curator", href: "/builder", current: true },
   {
     name: "Resume Analyser",
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
   { name: "Genie Connect", href: "/genie-dashboard", current: false },
-  { name: "Psychometric Test", href: "#", current: false },
+  { name: "Psychometric Test", href: "/coming-soon", current: false },
 ];
 
 function classNames(...classes) {

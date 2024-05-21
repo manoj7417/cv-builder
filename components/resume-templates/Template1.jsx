@@ -409,7 +409,7 @@ const Template1 = ({ resumeData }) => {
               />
             </div>
           </div>
-          <div className="resume_item resume_experience my-5">
+          <div className="resume_item projects my-5">
             <div className="resume_info">
               <Projects
                 fontStyle={fontStyle}
