@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
+import { deleteCookie } from 'cookies-next';
 
 const navigation = [
   { name: "CV Curator", href: "/resume-builder", current: true },
@@ -28,11 +29,12 @@ export default function NewResumeHeader() {
   const router = useRouter();
 
 
-  const {isAuthenticated} = userState;
-  console.log("isAuthenticated",isAuthenticated)
+  const { isAuthenticated } = userState;
 
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
+      deleteCookie('accessToken')
+      deleteCookie('refreshToken')
       toast.success("User logout successfully", {
         position: "top-right",
       });

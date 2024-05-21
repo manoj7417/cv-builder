@@ -46,11 +46,11 @@ export default function ResumeFeedback() {
     const fetchBetterResume = async (resume) => {
         try {
             const response = await getBetterResume(resume)
+            console.log(response)
             let data;
-            console.log(response.data);
             if (response.status === 200) {
                 data = JSON.parse(response.data[0].text.value)
-                return data.resume
+                return data
             }
         } catch (error) {
             console.error(error);
@@ -64,12 +64,9 @@ export default function ResumeFeedback() {
         const resume = localStorage.getItem('newResumeContent');
         if (resume) {
             const data = await fetchBetterResume(resume);
-            if (data && Object.keys(data).length > 0) {
-
-                let userResumeContent = JSON.parse(localStorage.getItem('resume-builder-parser-state')) || { resume: {} }
-                userResumeContent.resume = data
-                localStorage.setItem('resume-builder-parser-state', JSON.stringify(userResumeContent))
-                router.push('/resume-builder')
+            if (data) {
+                localStorage.setItem('resumeData', JSON.stringify(data))
+                router.push('/builder')
             } else {
                 toast.error("Something went wrong")
             }
@@ -219,7 +216,7 @@ export default function ResumeFeedback() {
                                     <div className="recommendation_section bg-white shadow-lg py-10 px-5 mt-3 rounded-md ">
                                         <h3 className="text-xl font-bold">RECOMMENDATIONS</h3>
                                         <p className="text-sm my-2">
-                                        Get assistance from our CV Analyser to get a profound analysis as per industry standards and get recommendations accordingly.
+                                            Get assistance from our CV Analyser to get a profound analysis as per industry standards and get recommendations accordingly.
                                         </p>
                                         <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                                             {
