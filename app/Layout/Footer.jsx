@@ -96,7 +96,7 @@ export default function Footer() {
 
               <li>
                 <div 
-                  className="text-black transition"
+                  className="text-black transition hover:text-gray-600"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -117,7 +117,7 @@ export default function Footer() {
 
               <li>
                 <div 
-                  className="text-black transition hover:text-red-600"
+                  className="text-black transition hover:text-red-700"
                 >
                   <span className="sr-only">Dribbble</span>
 
