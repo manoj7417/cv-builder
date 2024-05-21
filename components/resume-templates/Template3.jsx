@@ -181,7 +181,7 @@ export const Template3 = ({ resumeData }) => {
 
   return (
     <>
-      <div className="p-custom space-y-3 ">
+      <div className="p-custom space-y-3">
         <div className="bg-white mx-auto">
           <div className="top_section flex justify-around items-center  py-10 border-2" style={{
             backgroundColor: resumeData?.metadata?.theme?.primary
