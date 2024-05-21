@@ -217,12 +217,11 @@ export function ServiceSection() {
                   placeholder="Enter your email"
                   type="email"
                 />
-                <Link
+                <div
                   className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                  href="#"
                 >
                   Subscribe
-                </Link>
+                </div>
               </form>
               <p className="text-xs text-gray-500">
                 <Link className="underline underline-offset-2" href="#">

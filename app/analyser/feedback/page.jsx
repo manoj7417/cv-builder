@@ -131,7 +131,7 @@ return (
           </p>
         </div>
       </div>
-      <div className="calculation_section py-10 bg-sky-200">
+      <div className="calculation_section py-10 bg-[#F1F6FA]">
         <div className="grid lg:grid-cols-12 grid-cols-1 ">
           <div className="lg:col-span-6 col-span-1">
             <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-1 gap-4 sm:grid-cols-4 px-5 mb-5">
@@ -150,7 +150,7 @@ return (
                   </dl>
                 </div>
               </div>
-              <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg  group">
+              <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg  group">
                 <div className="px-4 py-5 sm:p-6 group ">
                   <dl className="text-center">
                     <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
@@ -188,7 +188,7 @@ return (
                   onClose={() => handleModalClose("clarity")}
                 />
               </div>
-              <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
+              <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
                 <div className="px-4 py-5 sm:p-6">
                   <dl className="text-center">
                     <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
@@ -226,7 +226,7 @@ return (
                   onClose={() => handleModalClose("relevance")}
                 />
               </div>
-              <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
+              <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
                 <div className="px-4 py-5 sm:p-6">
                   <dl className="text-center">
                     <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">

@@ -230,7 +230,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/builder"
                     className="text-black transition"
                   >
                     CV Curator
@@ -240,7 +240,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/resumeAnalyzer-dashboard"
                     className="text-black transition"
                   >
                      CV Analyser
@@ -251,7 +251,8 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    rel="noreferrer"
+                    className="text-black transition pointer-events-none"
                   >
                     Genie Connect
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
@@ -278,7 +279,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     About{" "}
@@ -289,7 +290,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     Meet the Team
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
@@ -299,7 +300,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                      Terms and Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
@@ -314,7 +315,7 @@ export default function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/contact-us"
                     className="text-black transition"
                   >
                     Contact
@@ -325,7 +326,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     FAQs
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
@@ -335,7 +336,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     Live Chat
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
@@ -362,7 +363,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     Returns Policy{" "}
@@ -373,7 +374,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     Refund Policy{" "}
@@ -384,7 +385,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     Hiring Statistics{" "}
