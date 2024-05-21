@@ -24,7 +24,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "../ui/customLabelInput";
@@ -41,6 +41,7 @@ import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
 import { AskBot } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
+import { useRouter } from "next/navigation";
 
 
 const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, handleGenerateProfileSummary, resumeData }) => {
@@ -246,6 +247,7 @@ const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, hand
 };
 
 export default function Form({ resumeData, setResumeData }) {
+  const router = useRouter()
   const { sections } = resumeData;
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -936,6 +938,16 @@ export default function Form({ resumeData, setResumeData }) {
     }
   }
 
+  useEffect(() => {
+    const newResumeData = localStorage.getItem('resumeData')
+    const previousPage = localStorage.getItem('previousPage')
+    console.log(previousPage)
+    if (newResumeData && previousPage === '/feedback') {
+      setResumeData(JSON.parse(newResumeData))
+      localStorage.removeItem('previousPage')
+    }
+  }, [])
+
   return (
     <>
       <div className=" px-5 py-20">
@@ -1491,7 +1503,7 @@ export default function Form({ resumeData, setResumeData }) {
                                 <Label htmlFor="degree">Subtitle</Label>
                                 <Input
                                   id="degree"
-                                  placeholder="Employer name"
+                                  placeholder="Enter project subtitle"
                                   type="text"
                                   value={item.subtitle}
                                   name="subtitle"
@@ -1672,7 +1684,7 @@ export default function Form({ resumeData, setResumeData }) {
                   onClick={() => handleTemplateThemeChange(color)}
                   className={cn(
                     "flex size-6 cursor-pointer items-center justify-center rounded-full ring-primary ring-offset-1 ring-offset-background transition-shadow hover:ring-1",
-                    resumeData.metadata.theme.primary === color && "ring-1"
+                    resumeData?.metadata?.theme?.primary === color && "ring-1"
                   )}
                 >
                   <div
