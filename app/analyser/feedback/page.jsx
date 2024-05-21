@@ -137,8 +137,8 @@ export default function ResumeFeedback() {
             </p>
           </div>
         </div>
-        <div className="calculation_section py-10 bg-sky-200">
-          <div className="grid lg:grid-cols-12 grid-cols-1 ">
+        <div className="calculation_section py-10 bg-[#CCD8EE]">
+          <div className="grid lg:grid-cols-12 grid-cols-1">
             <div className="lg:col-span-6 col-span-1">
               <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-1 gap-4 sm:grid-cols-4 px-5 mb-5">
                 <div className="bg-white overflow-hidden shadow sm:rounded-lg ">
@@ -156,7 +156,7 @@ export default function ResumeFeedback() {
                     </dl>
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg  group">
+                <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg  group">
                   <div className="px-4 py-5 sm:p-6 group ">
                     <dl className="text-center">
                       <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
@@ -194,7 +194,7 @@ export default function ResumeFeedback() {
                     onClose={() => handleModalClose("clarity")}
                   />
                 </div>
-                <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
+                <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
                   <div className="px-4 py-5 sm:p-6">
                     <dl className="text-center">
                       <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
@@ -232,7 +232,7 @@ export default function ResumeFeedback() {
                     onClose={() => handleModalClose("relevance")}
                   />
                 </div>
-                <div className="bg-gradient-to-r from-cyan-500 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
+                <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
                   <div className="px-4 py-5 sm:p-6">
                     <dl className="text-center">
                       <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">

@@ -62,7 +62,7 @@ export function ServiceSection() {
                 </ul>
                 <div>
                   <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/CV-dashboard">Curate Now</a>
+                    <a href="/resume-dashboard">Curate Now</a>
                   </button>
                 </div>
               </div>
