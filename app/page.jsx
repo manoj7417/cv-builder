@@ -1,8 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 import React, { useState, useEffect, useContext } from "react";
-import { Hero } from "./home/Hero";
-import { Steps } from "./home/Steps";
 import Homepage from "./components/Homepage";
 import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
