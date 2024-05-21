@@ -226,7 +226,7 @@ return (
                   onClose={() => handleModalClose("relevance")}
                 />
               </div>
-              <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
+              <div className="bg-gradient-to-r from-cyan-00 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                 <div className="px-4 py-5 sm:p-6">
                   <dl className="text-center">
                     <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
