@@ -219,16 +219,16 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2" onClick={() => handleTemplateChange('Template2')}>
+                          <div className="image_section_2" >
                             <Image
                               src="/newResume1.png"
                               alt="pic1"
-                              className="hover:border-sky-700 hover:border-4 pointer-events-none"
+                              className="hover:border-sky-700 hover:border-4 cursor-none"
                               width={500}
                               height={500}
                             />
                           </div>
-                          <div className="image_section_1" >
+                          <div className="image_section_1" onClick={() => handleTemplateChange('Template1')}>
                             <Image
                               src="/newResume2.png"
                               alt="pic1"
@@ -361,7 +361,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               >
                 <GetTemplate name={resumeData?.metadata?.template} resumeData={resumeData} />
                 <div className="absolute z-10  bottom-2 right-5 text-gray-500">
-                  <p>@Career Genies Hub</p> 
+                  <p>@Career Genies Hub</p>
                 </div>
               </div>
             </div>

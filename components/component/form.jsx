@@ -951,6 +951,22 @@ export default function Form({ resumeData, setResumeData }) {
   return (
     <>
       <div className=" px-5 py-20">
+        <div className="px-10 py-5">
+          <div className=" rounded-lg h-24 bg-blue-50 flex">
+            <div className="w-[20%]">
+              <img src="https://resume.io/assets/media/target_imaged1c63cc7f36ccc827819.png" alt="image" />
+            </div>
+            <div className="w-[80%] flex items-center justify-center">
+
+              <h1 className=" text-md">
+                Compose your CV with the Genie
+              </h1>
+              <Link href='/resumeAnalyzer-dashboard'>
+                <Button className="ml-3">Create Now</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="px-10">
           <div className="w-full flex">
             <div className=" w-1/2 pr-2">

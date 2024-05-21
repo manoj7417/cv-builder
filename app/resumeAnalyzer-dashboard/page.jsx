@@ -40,10 +40,14 @@ export default function DashboardIdea() {
       // For example, you can pass it to your pdfToText function
       pdfToText(selectedFile)
         .then(async text => {
+          console.log(text)
           await localStorage.setItem("newResumeContent", text)
           await getFeedback(text);
         })
-        .catch(error => console.error("Failed to extract text from pdf"));
+        .catch(error => {
+          console.error("Failed to extract text from pdf")
+          setIsAnalysing(false)
+        });
 
     };
   }
@@ -51,7 +55,9 @@ export default function DashboardIdea() {
   const getFeedback = async (message) => {
     try {
       const response = await AnalyzeAts(message)
+      console.log(response)
       const value = JSON.parse(response[0].text.value)
+      console.log(value)
       if (value.analysis.resume_score) {
         localStorage.setItem('feedback', JSON.stringify(value))
         router.push('/analyser/feedback')
@@ -91,7 +97,7 @@ export default function DashboardIdea() {
                   </label>
                 </div>
               </div>
-              <Image src="/1enhance.png"  className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
+              <Image src="/1enhance.png" className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
             </div>
           </div>
           <div className="w-full  " >
@@ -106,10 +112,10 @@ export default function DashboardIdea() {
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
-              Get Matched to the Job that is Right for You!
+                Get Matched to the Job that is Right for You!
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
-              Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
+                Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
