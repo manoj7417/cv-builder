@@ -46,7 +46,6 @@ export default function ResumeFeedback() {
     try {
       const response = await getBetterResume(resume);
       let data;
-      console.log(response.data);
       if (response.status === 200) {
         data = JSON.parse(response.data[0].text.value);
         return data;
@@ -88,13 +87,14 @@ export default function ResumeFeedback() {
       content: false,
       [name]: true,
     };
-    console.log(modalView);
+
     setModalsView(modalView);
   };
 
   useEffect(() => {
     let pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
     let value = JSON.parse(localStorage.getItem("feedback"));
+    console.log(pdfFile)
     setPDFFile(pdfFile);
     setContent(value);
   }, []);
