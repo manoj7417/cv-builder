@@ -68,6 +68,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
@@ -123,6 +124,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
       }
     }
     setResumeData(updatedResumeData)
+    setIsDrawerOpen(false);
   }
 
   useEffect(() => {
@@ -178,7 +180,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
           smooth
           minScale={0.4}
         >
-          <div className="actions_button bg-gray-800 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+          <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
                 href={"/resume-dashboard"}
@@ -191,7 +193,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
             <div className="auth_section flex justify-end w-full gap-10 items-center">
               <Controls />
               <button
-                className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                 onClick={handleDownloadResume}
                 disabled={isLoading}
               >
@@ -201,8 +203,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                 Download PDF
               </button>
               <div className="choose_templates xl:block hidden">
-                <Drawer direction="right">
-                  <DrawerTrigger className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">
+                <Drawer direction="right" open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+                  <DrawerTrigger className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md" onClick={() => setIsDrawerOpen(true)}>
                     Templates <LuLayoutGrid className="inline" />
                   </DrawerTrigger>
                   <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
@@ -299,7 +301,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                     className="relative inline-flex h-[2.4rem] w-10 items-center justify-center rounded-full text-white focus:outline-none"
                   >
                     <Image
-                      src="/avatar.jpg"
+                      src="/pic.jpg"
                       alt="user name"
                       title="user name"
                       width={30}
@@ -356,7 +358,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                 style={{
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                  overflow: "hidden",
+                  overflowY: "scroll",
                 }}
               >
                 <GetTemplate name={resumeData?.metadata?.template} resumeData={resumeData} />

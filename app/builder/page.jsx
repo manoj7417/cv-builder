@@ -253,7 +253,8 @@ function Builder() {
       <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
-          {/* <div className="mobile_section flex justify-end mb-10 mx-10 fixed bottom-5 right-0">
+          {
+          /* <div className="mobile_section flex justify-end mb-10 mx-10 fixed bottom-5 right-0">
             <div>
               {isMobile && (
                 <button
@@ -269,9 +270,13 @@ function Builder() {
                 mobileContent && (<MobileResumeViewPage scale={scale} resumeData={resumeData}/>)
               }
             </div>
-          </div> */}
+          </div> */
+          }
         </div>
-        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0">
+        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0 " style={{
+             backgroundImage: "url('/banner-bg.svg')",
+             backgroundPosition: "bottom center",
+           }}>
           <ResumeViewPage resumeData={resumeData} setResumeData={setResumeData} />
         </div>
       </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { GiMagicLamp } from "react-icons/gi";
+import { FiBox } from "react-icons/fi";
 
 export function ServiceSection() {
   return (
@@ -62,7 +63,9 @@ export function ServiceSection() {
                 </ul>
                 <div>
                   <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/resume-dashboard">Curate Now</a>
+                    <a href="/resume-dashboard" className="flex items-center">Curate Now
+                    <FiBox className="h-5 w-5 ms-5 text-white"/>
+                    </a>
                   </button>
                 </div>
               </div>
@@ -161,7 +164,7 @@ export function ServiceSection() {
                   <button className="items-center flex px-7 py-2 rounded-md text-base text-white bg-blue-900 hover:bg-blue-700">
                     <a className="flex items-center" href="/genie-dashboard">
                       Connect with Genie
-                      <GiMagicLamp className="h-8 w-8 ms-5 text-white" />
+                      <GiMagicLamp className="h-6 w-6 ms-5 text-white" />
                     </a>
                   </button>
                 </div>
@@ -172,7 +175,10 @@ export function ServiceSection() {
 
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-[white] to-[#dcecff]"
-          
+           style={{
+           backgroundImage: "url('/banner-bg.svg')",
+           backgroundPosition: "center",
+        }}
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">

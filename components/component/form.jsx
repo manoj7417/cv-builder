@@ -43,8 +43,15 @@ import { AskBot } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
 import { useRouter } from "next/navigation";
 
-
-const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, handleGenerateProfileSummary, resumeData }) => {
+const MultiStepForm = ({
+  steps,
+  formData,
+  setFormData,
+  setSteps,
+  isLoading,
+  handleGenerateProfileSummary,
+  resumeData,
+}) => {
   const handleJobTitleChange = (e) => {
     const newFormDate = { ...formData, jobTitle: e.target.value };
     setFormData(newFormDate);
@@ -57,9 +64,12 @@ const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, hand
 
   const handleExperienceChange = (e) => {
     const { name, value } = e.target;
-    const newFormData = { ...formData, experience: { ...formData.experience, [name]: value } }
-    setFormData(newFormData)
-  }
+    const newFormData = {
+      ...formData,
+      experience: { ...formData.experience, [name]: value },
+    };
+    setFormData(newFormData);
+  };
 
   if (steps === 1) {
     return (
@@ -208,10 +218,15 @@ const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, hand
               <Button onClick={() => setSteps((prev) => prev - 1)}>Back</Button>
             </div>
             <div>
-              <Button onClick={() => {
-                handleGenerateProfileSummary()
-                setSteps(prev => prev + 1)
-              }} disabled={formData.skills.length === 0} >Submit</Button>
+              <Button
+                onClick={() => {
+                  handleGenerateProfileSummary();
+                  setSteps((prev) => prev + 1);
+                }}
+                disabled={formData.skills.length === 0}
+              >
+                Submit
+              </Button>
             </div>
           </div>
         </DialogFooter>
@@ -220,34 +235,36 @@ const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, hand
   } else if (steps === 4) {
     return (
       <DialogContent className="sm:max-w-[425px]">
-        {
-          isLoading ?
-            <div>
-              <AiGenerateLoader />
-              <p className="text-gray-500">Generating presonalized profile summary with <span className=" text-violet-700 font-bold">AI</span></p>
-            </div>
-            :
-            <DialogHeader>
-              <DialogTitle>
-                <div className=" flex items-center">
-                  <p className="mr-3">100%</p>
-                  <Progress value={100} className=' shadow-sm h-4 border' />
-                </div >
-              </DialogTitle >
-              <DialogDescription>
-                <div className="mt-5 text-center">
-                  AI has generated your personalised profile summary
-                </div>
-              </DialogDescription>
-            </DialogHeader >
-        }
+        {isLoading ? (
+          <div>
+            <AiGenerateLoader />
+            <p className="text-gray-500">
+              Generating presonalized profile summary with{" "}
+              <span className=" text-violet-700 font-bold">AI</span>
+            </p>
+          </div>
+        ) : (
+          <DialogHeader>
+            <DialogTitle>
+              <div className=" flex items-center">
+                <p className="mr-3">100%</p>
+                <Progress value={100} className=" shadow-sm h-4 border" />
+              </div>
+            </DialogTitle>
+            <DialogDescription>
+              <div className="mt-5 text-center">
+                AI has generated your personalised profile summary
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        )}
       </DialogContent>
     );
   }
 };
 
 export default function Form({ resumeData, setResumeData }) {
-  const router = useRouter()
+  const router = useRouter();
   const { sections } = resumeData;
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -259,10 +276,10 @@ export default function Form({ resumeData, setResumeData }) {
       description: "",
       jobTitle: "",
     },
-    skills: ''
-  })
-  const [steps, setSteps] = useState(1)
-  const [isLoading, setIsLoading] = useState(false)
+    skills: "",
+  });
+  const [steps, setSteps] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const handleBasicInfoChange = (e) => {
     const { name, value } = e.target;
     const updatedResumeData = {
@@ -284,9 +301,15 @@ export default function Form({ resumeData, setResumeData }) {
   };
 
   const handleChangeProfileSummaryChange = (val) => {
-    const updatedResumeData = { ...resumeData, sections: { ...resumeData.sections, summary: { ...resumeData.sections.summary, content: val } } }
-    setResumeData(updatedResumeData)
-  }
+    const updatedResumeData = {
+      ...resumeData,
+      sections: {
+        ...resumeData.sections,
+        summary: { ...resumeData.sections.summary, content: val },
+      },
+    };
+    setResumeData(updatedResumeData);
+  };
 
   const handleEducationLabelChange = (e) => {
     const updatedResumeData = {
@@ -869,55 +892,68 @@ export default function Form({ resumeData, setResumeData }) {
 
   const handleSkillsVisbility = (flag) => {
     const updatedResumeData = {
-      ...resumeData, sections: {
-        ...resumeData.sections, skills: {
-          ...resumeData.sections.skills, visible: flag
-        }
-      }
-    }
-    setResumeData(updatedResumeData)
-  }
+      ...resumeData,
+      sections: {
+        ...resumeData.sections,
+        skills: {
+          ...resumeData.sections.skills,
+          visible: flag,
+        },
+      },
+    };
+    setResumeData(updatedResumeData);
+  };
 
   const handleProjectsVisbility = (flag) => {
     const updatedResumeData = {
-      ...resumeData, sections: {
-        ...resumeData.sections, projects: {
-          ...resumeData.sections.projects, visible: flag
-        }
-      }
-    }
-    setResumeData(updatedResumeData)
-  }
+      ...resumeData,
+      sections: {
+        ...resumeData.sections,
+        projects: {
+          ...resumeData.sections.projects,
+          visible: flag,
+        },
+      },
+    };
+    setResumeData(updatedResumeData);
+  };
 
   const handleExpierenceVisbility = (flag) => {
     const updatedResumeData = {
-      ...resumeData, sections: {
-        ...resumeData.sections, experience: {
-          ...resumeData.sections.experience, visible: flag
-        }
-      }
-    }
-    setResumeData(updatedResumeData)
-  }
+      ...resumeData,
+      sections: {
+        ...resumeData.sections,
+        experience: {
+          ...resumeData.sections.experience,
+          visible: flag,
+        },
+      },
+    };
+    setResumeData(updatedResumeData);
+  };
 
   const handleEducationVisbility = (flag) => {
     const updatedResumeData = {
-      ...resumeData, sections: {
-        ...resumeData.sections, education: {
-          ...resumeData.sections.education, visible: flag
-        }
-      }
-    }
-    setResumeData(updatedResumeData)
-  }
+      ...resumeData,
+      sections: {
+        ...resumeData.sections,
+        education: {
+          ...resumeData.sections.education,
+          visible: flag,
+        },
+      },
+    };
+    setResumeData(updatedResumeData);
+  };
 
   const handleGenerateProfileSummary = async () => {
-    const data = JSON.stringify(formData)
-    const message = data + ' Generated profile summary using the data appended data'
-    setIsLoading(true)
+    const data = JSON.stringify(formData);
+    const message =
+      data + " Generated profile summary using the data appended data";
+    setIsLoading(true);
     try {
-      const response = await AskBot(message)
-      const data = response[0].text.value.split('\n')[2]
+      const response = await AskBot(message);
+      const data = response[0].text.value.split("\n")[2];
       if (data) {
         const updatedResumeData = {
           ...resumeData,
@@ -925,80 +961,82 @@ export default function Form({ resumeData, setResumeData }) {
             ...resumeData.sections,
             summary: {
               ...resumeData.sections.summary,
-              content: data
-            }
-          }
-        }
-        setResumeData(updatedResumeData)
+              content: data,
+            },
+          },
+        };
+        setResumeData(updatedResumeData);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    const newResumeData = localStorage.getItem('resumeData')
-    const previousPage = localStorage.getItem('previousPage')
-    console.log(previousPage)
-    if (newResumeData && previousPage === '/feedback') {
-      setResumeData(JSON.parse(newResumeData))
-      localStorage.removeItem('previousPage')
+    const newResumeData = localStorage.getItem("resumeData");
+    const previousPage = localStorage.getItem("previousPage");
+    console.log(previousPage);
+    if (newResumeData && previousPage === "/feedback") {
+      setResumeData(JSON.parse(newResumeData));
+      localStorage.removeItem("previousPage");
     }
-  }, [])
+  }, []);
 
   return (
     <>
-      <div className=" px-5 py-20">
+      <div className=" px-5 py-20 bg-slate-50">
         <div className="px-10 py-5">
-          <div className=" rounded-lg h-24 bg-blue-50 flex">
-            <div className="w-[20%]">
-              <img src="https://resume.io/assets/media/target_imaged1c63cc7f36ccc827819.png" alt="image" />
+          <div className=" rounded-lg h-24 bg-blue-50 flex items-center justify-around">
+            <div>
+              <img
+                src="https://resume.io/assets/media/target_imaged1c63cc7f36ccc827819.png"
+                alt="image"
+                className="w-40 h-40 object-contain"
+              />
             </div>
-            <div className="w-[80%] flex items-center justify-center">
-
-              <h1 className=" text-md">
-                Compose your CV with the Genie
-              </h1>
-              <Link href='/resumeAnalyzer-dashboard'>
+            <div className="flex items-center">
+              <h1 className="text-md">Compose your CV with the Genie</h1>
+              <Link href="/resumeAnalyzer-dashboard">
                 <Button className="ml-3">Create Now</Button>
               </Link>
             </div>
           </div>
         </div>
         <div className="px-10">
-          <div className="w-full flex">
-            <div className=" w-1/2 pr-2">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  placeholder="Enter your name"
-                  name="name"
-                  onChange={handleBasicInfoChange}
-                  value={resumeData?.basics?.name}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="jobtitle">Job Title</Label>
-                <Input
-                  id="jobtitle"
-                  placeholder="Enter Job Title"
-                  name="jobtitle"
-                  type="text"
-                  onChange={handleBasicInfoChange}
-                  value={resumeData?.basics?.jobtitle}
-                />
-              </div>
+          <div className="w-full">
+            <Label>Avatar</Label>
+            <ImageUpload
+              resumeData={resumeData}
+              setResumeData={setResumeData}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4 mb-2">
+            <div className="space-y-2 my-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Enter your name"
+                name="name"
+                onChange={handleBasicInfoChange}
+                value={resumeData?.basics?.name}
+              />
             </div>
-            <div className="w-1/2 flex flex-col items-start justify-around px-10">
-              <Label>Avatar</Label>
-              <ImageUpload resumeData={resumeData} setResumeData={setResumeData} />
+            <div className="space-y-2 my-2">
+              <Label htmlFor="jobtitle">Job Title</Label>
+              <Input
+                id="jobtitle"
+                placeholder="Enter Job Title"
+                name="jobtitle"
+                type="text"
+                onChange={handleBasicInfoChange}
+                value={resumeData?.basics?.jobtitle}
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-2">
-            <div className="space-y-2">
+            <div className="space-y-2 my-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -1009,7 +1047,7 @@ export default function Form({ resumeData, setResumeData }) {
                 value={resumeData?.basics?.email}
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 my-2">
               <Label htmlFor="phone">Phone</Label>
               <Input
                 id="phone"
@@ -1071,7 +1109,14 @@ export default function Form({ resumeData, setResumeData }) {
                     <FaCrown className=" text-yellow-500 ml-2" />
                   </Button>
                 </DialogTrigger>
-                <MultiStepForm formData={formData} setFormData={setFormData} steps={steps} setSteps={setSteps} isLoading={isLoading} handleGenerateProfileSummary={handleGenerateProfileSummary} />
+                <MultiStepForm
+                  formData={formData}
+                  setFormData={setFormData}
+                  steps={steps}
+                  setSteps={setSteps}
+                  isLoading={isLoading}
+                  handleGenerateProfileSummary={handleGenerateProfileSummary}
+                />
               </Dialog>
             </div>
             <div>
@@ -1100,14 +1145,27 @@ export default function Form({ resumeData, setResumeData }) {
           <div className="space-y-2 px-10">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">{sections.education.name}</Label>
-                <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.education?.name} onChange={handleEducationLabelChange} />
+                <Label className="text-2xl group-hover:hidden">
+                  {sections.education.name}
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={resumeData?.sections?.education?.name}
+                  onChange={handleEducationLabelChange}
+                />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {
-                  sections?.education?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() =>
-                    handleEducationVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleEducationVisbility(true)} />
-                }
+                {sections?.education?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() => handleEducationVisbility(false)}
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() => handleEducationVisbility(true)}
+                  />
+                )}
               </div>
             </div>
             <div>
@@ -1275,14 +1333,27 @@ export default function Form({ resumeData, setResumeData }) {
           <div className="space-y-2 px-10">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">{sections?.experience?.name}</Label>
-                <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.experience?.name} onChange={handleExperienceLabelChange} />
+                <Label className="text-2xl group-hover:hidden">
+                  {sections?.experience?.name}
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={resumeData?.sections?.experience?.name}
+                  onChange={handleExperienceLabelChange}
+                />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {
-                  sections?.experience?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() =>
-                    handleExpierenceVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleExpierenceVisbility(true)} />
-                }
+                {sections?.experience?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() => handleExpierenceVisbility(false)}
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() => handleExpierenceVisbility(true)}
+                  />
+                )}
               </div>
             </div>
             <div>
@@ -1318,7 +1389,8 @@ export default function Form({ resumeData, setResumeData }) {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1453,13 +1525,27 @@ export default function Form({ resumeData, setResumeData }) {
           <div className="space-y-2 px-10">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">{sections?.projects?.name}</Label>
-                <CustomLabelInput className='hidden group-hover:block' value={resumeData?.sections?.projects?.name} onChange={handleProjectLabelChange} />
+                <Label className="text-2xl group-hover:hidden">
+                  {sections?.projects?.name}
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={resumeData?.sections?.projects?.name}
+                  onChange={handleProjectLabelChange}
+                />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {
-                  sections?.projects?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() => handleProjectsVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleProjectsVisbility(true)} />
-                }
+                {sections?.projects?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() => handleProjectsVisbility(false)}
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() => handleProjectsVisbility(true)}
+                  />
+                )}
               </div>
             </div>
             <div>
@@ -1589,7 +1675,14 @@ export default function Form({ resumeData, setResumeData }) {
               })}
           </div>
           <div className="px-10 ">
-            <Button className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center" onClick={handleAddNewProject}><IoIosAddCircleOutline className="text-xl mr-2" />Add one more {`${resumeData?.sections?.projects?.name}`.toLowerCase()}</Button>
+            <Button
+              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              onClick={handleAddNewProject}
+            >
+              <IoIosAddCircleOutline className="text-xl mr-2" />
+              Add one more{" "}
+              {`${resumeData?.sections?.projects?.name}`.toLowerCase()}
+            </Button>
           </div>
         </div>
 
@@ -1598,13 +1691,27 @@ export default function Form({ resumeData, setResumeData }) {
           <div className="space-y-2 px-10">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">{sections?.skills?.name}</Label>
-                <CustomLabelInput className='hidden group-hover:block' value={sections?.skills?.name} onChange={handleSkillsLabelChange} />
+                <Label className="text-2xl group-hover:hidden">
+                  {sections?.skills?.name}
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={sections?.skills?.name}
+                  onChange={handleSkillsLabelChange}
+                />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {
-                  sections?.skills?.visible ? <GoEyeClosed className=" cursor-pointer" onClick={() => handleSkillsVisbility(false)} /> : <GoEye className="cursor-pointer" onClick={() => handleSkillsVisbility(true)} />
-                }
+                {sections?.skills?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() => handleSkillsVisbility(false)}
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() => handleSkillsVisbility(true)}
+                  />
+                )}
               </div>
             </div>
             <div>
@@ -1690,7 +1797,7 @@ export default function Form({ resumeData, setResumeData }) {
         {/* theme */}
         <div className="px-10 rounded-md ">
           <div className="my-5">
-            <Label className="text-2xl ">Theme</Label>
+            <Label className="text-2xl">Theme</Label>
           </div>
           <div className="mb-2 grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9">
             {colors.length > 0 &&
@@ -1699,19 +1806,20 @@ export default function Form({ resumeData, setResumeData }) {
                   key={color}
                   onClick={() => handleTemplateThemeChange(color)}
                   className={cn(
-                    "flex size-6 cursor-pointer items-center justify-center rounded-full ring-primary ring-offset-1 ring-offset-background transition-shadow hover:ring-1",
+                    "flex size-6 cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                     resumeData?.metadata?.theme?.primary === color && "ring-1"
                   )}
                 >
-                  <div
-                    className="size-5 rounded-full"
-                    style={{ backgroundColor: color }}
-                  />
+                  <div className="size-6" style={{ backgroundColor: color }} />
                 </div>
               ))}
           </div>
-          <Label htmlFor="theme.primary">Primary Color</Label>
-          <div className="relative my-2">
+          <div className="my-5">
+            <Label htmlFor="theme.primary" className="text-2xl">
+              Custom Color Picker
+            </Label>
+          </div>
+          {/* <div className="relative my-2">
             <Popover>
               <PopoverTrigger asChild>
                 <div
@@ -1734,10 +1842,36 @@ export default function Form({ resumeData, setResumeData }) {
                 handleTemplateThemeChange(event.target.value);
               }}
             />
+          </div> */}
+          <div className="flex items-center space-x-4 my-2">
+            <Input
+              id="theme.primary"
+              value={resumeData.metadata.theme.primary}
+              className="pl-2 w-36"
+              onChange={(event) => {
+                handleTemplateThemeChange(event.target.value);
+              }}
+            />
+            <Popover>
+              <PopoverTrigger asChild>
+                <div
+                  className="cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
+                  style={{
+                    width: "28px",
+                    height: "28px",
+                    backgroundColor: resumeData.metadata.theme.primary,
+                  }}
+                />
+              </PopoverTrigger>
+              <PopoverContent className="rounded-lg border-none bg-transparent p-0">
+                <HexColorPicker
+                  color={resumeData.metadata.theme.primary}
+                  onChange={handleTemplateThemeChange}
+                />
+              </PopoverContent>
+            </Popover>
           </div>
-          <div>
-          </div>
-
+          <div></div>
         </div>
       </div>
     </>
