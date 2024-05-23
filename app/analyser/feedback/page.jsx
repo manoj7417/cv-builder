@@ -4,10 +4,8 @@
 // import ResumeBuilder from "@/src/shared/ResumeBuilder";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
-
 import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { getBetterResume } from "@/app/pages/api/api";
