@@ -2,23 +2,8 @@
 import Form from "@/components/component/form";
 import React, { useEffect, useState } from "react";
 import ResumeViewPage from "../resume-viewer/ResumeViewer";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import Template1 from "@/components/resume-templates/Template1";
 import Template2 from "@/components/resume-templates/Template2";
-import {
-  ReactZoomPanPinchRef,
-  TransformComponent,
-  TransformWrapper,
-  useControls,
-} from "react-zoom-pan-pinch";
 import MobileResumeViewPage from "@/components/resume-templates/MobileResumeViewPage";
 
 const initialState = {
@@ -254,7 +239,7 @@ function Builder() {
 
   return (
     <>
-      <div className="flex md:flex-row flex-col w-full h-full mb-20 relative ">
+      <div className="flex md:flex-row flex-col w-full h-full relative ">
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
           {
@@ -277,10 +262,10 @@ function Builder() {
           </div>
           }
         </div>
-        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0 lg:block hidden" style={{
-             backgroundImage: "url('/banner-bg.svg')",
-             backgroundPosition: "bottom center",
-           }}>
+        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden lg:fixed lg:right-0 lg:block hidden" style={{
+          background:`url(bigbg.svg)`,
+          backgroundPosition:"bottom"
+        }}>
           <ResumeViewPage resumeData={resumeData} setResumeData={setResumeData} />
         </div>
       </div>

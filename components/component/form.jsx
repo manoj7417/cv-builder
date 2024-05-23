@@ -1190,7 +1190,7 @@ export default function Form({ resumeData, setResumeData }) {
                     <Accordion
                       type="single"
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2"
+                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
                       defaultValue={`item-${index}`}
                       defaultChecked
                     >
@@ -1382,7 +1382,7 @@ export default function Form({ resumeData, setResumeData }) {
                     <Accordion
                       type="single"
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2"
+                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
                       defaultValue={`item-${index}`}
                     >
                       <AccordionItem value={`item-${index}`}>
@@ -1572,7 +1572,7 @@ export default function Form({ resumeData, setResumeData }) {
                     <Accordion
                       type="single"
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2"
+                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
                       defaultValue={`item-${index}`}
                     >
                       <AccordionItem value={`item-${index}`}>
@@ -1739,7 +1739,7 @@ export default function Form({ resumeData, setResumeData }) {
                     <Accordion
                       type="single"
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2"
+                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
                       defaultValue={`item-${index}`}
                       defaultChecked
                     >

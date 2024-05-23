@@ -8,6 +8,7 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
+import { PiArrowsOutSimple } from "react-icons/pi";
 import {
   ReactZoomPanPinchRef,
   TransformComponent,
@@ -150,6 +151,30 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
 
   const MM_TO_PX = 3.78;
 
+
+  const updateScale = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const aspectRatio = 210 / 297; // A4 aspect ratio
+
+    if (width <= 768) {
+      setScale(0.4); // Mobile devices
+    } else if (width <= 1024) {
+      setScale(0.4); // Tablets
+    }else if(width <= 1440){
+      setScale(0.4)
+    } else {
+      setScale(0.7); // Desktops
+    }
+  };
+
+  useEffect(() => {
+    updateScale();
+    window.addEventListener("resize", updateScale);
+
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
+
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
@@ -204,7 +229,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2">
+                          <div className="image_section_2" >
                             <Image
                               src="/newResume1.png"
                               alt="pic1"
@@ -338,7 +363,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
           </div>
           <div>
             <div className="shadow-2xl" style={{
-              scale:`${scale}`
+              transform:`scale(${scale})`
             }}>
               <div
                 id="resume"
@@ -347,13 +372,13 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
-                  overflowY:"scroll"
                 }}
               >
                 <GetTemplate
                   name={resumeData?.metadata?.template}
                   resumeData={resumeData}
                 />
+                <PiArrowsOutSimple className="text-4xl text-blue-900 font-bold"/>
                 <div className="absolute z-10  bottom-2 right-5 text-gray-500">
                   <p>@Career Genies Hub</p>
                 </div>
