@@ -157,7 +157,7 @@ const Profile = ({ data, fontStyle }) => {
             </div>
             <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>{data?.name}</h2>
           </div>
-          <div className={`my-5 ${fontStyle.subHeadingFont}`} dangerouslySetInnerHTML={{ __html: htmlContent }}>
+          <div className={`my-5 ${fontStyle.subHeadingFont} break-words` } dangerouslySetInnerHTML={{ __html: htmlContent }}>
           </div>
         </div>
       }
@@ -183,7 +183,7 @@ export const Template3 = ({ resumeData }) => {
     <>
       <div className="p-custom space-y-3">
         <div className="bg-white mx-auto">
-          <div className="top_section flex justify-around items-center  py-10 border-2" style={{
+          <div className="top_section flex justify-around items-center text-white  py-10" style={{
             backgroundColor: resumeData?.metadata?.theme?.primary
           }
           }>

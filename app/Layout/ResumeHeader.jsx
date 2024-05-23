@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import { AuthContext } from "../context/AuthContext";
 
 export default function ResumeHeader() {

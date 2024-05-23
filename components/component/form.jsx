@@ -3,16 +3,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
@@ -28,20 +23,20 @@ import { useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "../ui/customLabelInput";
-import Link from "next/link";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { HexColorPicker } from "react-colorful";
 import { colors } from "@/constants/colors";
 import { cn } from "@/lib/utils";
-import { Progress } from "../ui/progress";
-import { Textarea } from "../ui/textarea";
-import AiGenerateLoader from "@/app/ui/AiGenerateLoader";
 import { SkillsSelect } from "./skills-select";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
-import { AskBot } from "@/app/pages/api/api";
+import { AskBot, getBetterResume } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
-import { useRouter } from "next/navigation";
+import pdfToText from 'react-pdftotext'
+import NewResumeLoader from "@/app/ui/newResumeLoader";
+
+import dayjs from "dayjs";
+import { MultiStepForm } from "./MultiStepForm";
 
 const MultiStepForm = ({
   steps,
@@ -974,6 +969,42 @@ export default function Form({ resumeData, setResumeData }) {
     }
   };
 
+  const handlepdfFileChange = (e) => {
+    setIsGeneratingResume(true)
+    let selectedFile = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = async () => {
+      pdfToText(selectedFile)
+        .then(async text => {
+          await localStorage.setItem("newResumeContent", text)
+          await getResumeData(text);
+        })
+        .catch(error => {
+          console.error("Failed to extract text from pdf")
+          setIsAnalysing(false)
+        });
+
+    };
+  }
+
+  const getResumeData = async (message) => {
+    try {
+      const response = await getBetterResume(message)
+      let value;
+      if (response.status === 200) {
+        value = JSON.parse(response.data[0].text.value)
+        console.log(value)
+        setResumeData(value)
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsGeneratingResume(false)
+    }
+  }
+
+
   useEffect(() => {
     const newResumeData = localStorage.getItem("resumeData");
     const previousPage = localStorage.getItem("previousPage");
@@ -1246,7 +1277,7 @@ export default function Form({ resumeData, setResumeData }) {
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
                               <div className="flex flex-col md:flex-row ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
-                                  <Label for="start_date" className="block">
+                                  <Label htmlFor="start_date" className="block">
                                     Start Date
                                   </Label>
                                   <div className="w-full">
@@ -1622,7 +1653,7 @@ export default function Form({ resumeData, setResumeData }) {
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                               <div className="flex flex-col md:flex-row ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
-                                  <Label for="start_date" className="block">
+                                  <Label htmlFor="start_date" className="block">
                                     Start Date
                                   </Label>
                                   <div className="w-full">
