@@ -17,6 +17,7 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -41,8 +42,124 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { IoIosStar } from "react-icons/io";
+import { AuthContext } from "@/app/context/AuthContext";
+import { useEffect, useState } from "react";
+import ImageCarousel from "./ImageCarousel";
+
+export const templateType = {
+  free: "Free",
+  premium: "Premium",
+  dummy: "Dummy"
+}
+
+const Carousel1 = [
+  {
+    name: "Template3",
+    src: "/newResume.png",
+    alt: "newResume.png",
+    type: templateType.free
+  },
+  {
+    name: "Template2",
+    src: "/newResume1.png",
+    alt: "newResume1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "DummyTemplate1",
+    src: "/5.png",
+    alt: "5.png",
+    type: templateType.dummy
+  }, {
+    name: "DummyTemplate2",
+    src: "/6.png",
+    alt: "6.png",
+    type: templateType.dummy
+  },
+  {
+    name: "Template1",
+    src: "/newResume2.png",
+    alt: "newResume2.png",
+    type: templateType.premium,
+  }
+]
+
+const Carousel2 = [
+  {
+    name: "DummyTemplate3",
+    src: "/7.png",
+    alt: "7.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate4",
+    src: "/8.png",
+    alt: "8.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate5",
+    src: "/9.png",
+    alt: "9.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate6",
+    src: "/10.png",
+    alt: "10.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate7",
+    src: "/11.png",
+    alt: "11.png",
+    type: templateType.dummy
+  }
+]
+
+const Carousel3 = [
+  {
+    name: "DummyTemplate8",
+    src: "/resume-temp-example.png",
+    alt: "resume-temp-example.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate9",
+    src: "/3.png",
+    alt: "3.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate10",
+    src: "/4.png",
+    alt: "4.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate11",
+    src: "/5.png",
+    alt: "5.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate12",
+    src: "/6.png",
+    alt: "6.png",
+    type: templateType.dummy
+  },
+]
 
 export default function Slider() {
+  const [userState, setUserState] = useState({})
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userState'))
+
+    if (user) {
+      setUserState(user.userdata)
+    }
+  }, [])
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-r from-[white] to-[#dcecff]">
       <div className="container mx-auto mb-10 ">
@@ -83,398 +200,9 @@ export default function Slider() {
       <div className="relative w-full">
         <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>
           <CarouselContent>
-            <CarouselItem>
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/newResume.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <div className="card_box">
-                    <span></span>
-                  </div>
-                  <Image
-                    alt="Product 2"
-                    src="/newResume1.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <Dialog>
-                      <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
-                        Try Now
-                      </DialogTrigger>
-                      <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
-                        <DialogHeader>
-                          <DialogTitle className="mt-1">
-                            Download our premium CV now and enhance your job
-                            search!
-                          </DialogTitle>
-                          <DialogDescription>
-                            <section className="overflow-hidden">
-                              <div className="mx-auto max-w-5xl py-10">
-                                <div className="mx-auto flex flex-wrap items-center lg:w-full">
-                                  <Image
-                                    alt="template1"
-                                    className="w-full rounded object-cover lg:w-1/2"
-                                    src="/newResume1.png"
-                                    width={500}
-                                    height={500}
-                                  />
-                                  <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
-                                    <h2 className="text-base font-semibold tracking-widest text-blue-950">
-                                      Premium
-                                    </h2>
-                                    <h1 className="my-1 text-2xl font-bold text-blue-950">
-                                      Professional Templates
-                                    </h1>
-                                    <div className="my-2 flex items-center">
-                                      <span className="flex items-center space-x-1">
-                                        {[...Array(5)].map((_, i) => (
-                                          <IoIosStar
-                                            key={i}
-                                            size={16}
-                                            className="text-yellow-500"
-                                          />
-                                        ))}
-                                        <span className="ml-5 inline-block text-xs font-semibold">
-                                          4 Reviews
-                                        </span>
-                                      </span>
-                                    </div>
-                                    <p className="leading-relaxed text-gray-800">
-                                    Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
-                                    </p>
-                                    <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
-                                    <div className="flex items-center justify-between">
-                                      <span className="title-font text-xl font-bold text-gray-900">
-                                        $50
-                                      </span>
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                                      >
-                                        Download
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </section>
-                          </DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/5.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 2"
-                    src="/6.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <div className="card_box">
-                    <span></span>
-                  </div>
-                  <Image
-                    alt="Product 2"
-                    src="/newResume2.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <Dialog>
-                      <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
-                        Try Now
-                      </DialogTrigger>
-                      <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
-                        <DialogHeader>
-                          <DialogTitle className="mt-1">
-                            Download our premium CV now and enhance your job
-                            search!
-                          </DialogTitle>
-                          <DialogDescription>
-                            <section className="overflow-hidden">
-                              <div className="mx-auto max-w-5xl py-10">
-                                <div className="mx-auto flex flex-wrap items-center lg:w-full">
-                                  <Image
-                                    alt="template1"
-                                    className="w-full rounded object-cover lg:w-1/2"
-                                    src="/newResume2.png"
-                                    width={500}
-                                    height={500}
-                                  />
-                                  <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
-                                    <h2 className="text-base font-semibold tracking-widest text-blue-950">
-                                      Premium
-                                    </h2>
-                                    <h1 className="my-1 text-2xl font-bold text-blue-950">
-                                      Professional Templates
-                                    </h1>
-                                    <div className="my-2 flex items-center">
-                                      <span className="flex items-center space-x-1">
-                                        {[...Array(5)].map((_, i) => (
-                                          <IoIosStar
-                                            key={i}
-                                            size={16}
-                                            className="text-yellow-500"
-                                          />
-                                        ))}
-                                        <span className="ml-5 inline-block text-xs font-semibold">
-                                          4 Reviews
-                                        </span>
-                                      </span>
-                                    </div>
-                                    <p className="leading-relaxed text-gray-800">
-                                    Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
-                                    </p>
-                                    <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
-                                    <div className="flex items-center justify-between">
-                                      <span className="title-font text-xl font-bold text-gray-900">
-                                        $50
-                                      </span>
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                                      >
-                                        Download
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </section>
-                          </DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/7.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Image
-                    alt="Product 2"
-                    src="/8.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Image
-                    alt="Product 3"
-                    src="/9.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/10.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Image
-                    alt="Product 2"
-                    src="/11.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/resume-temp-example.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Image
-                    alt="Product 2"
-                    src="/3.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 3"
-                    src="/4.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/5.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 2"
-                    src="/6.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
+            <ImageCarousel data={Carousel1} userState={userState}  />
+            <ImageCarousel data={Carousel2} userState={userState}  />
+            <ImageCarousel data={Carousel3} userState={userState}  />
           </CarouselContent>
           <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2">
             <ChevronLeftIcon className="h-6 w-6" />
@@ -484,7 +212,7 @@ export default function Slider() {
           </CarouselNext>
         </Carousel>
       </div>
-    </div>
+    </div >
   );
 }
 
