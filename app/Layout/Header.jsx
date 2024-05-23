@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiBox, FiCamera, FiColumns, FiFeather, FiLayout, FiMessageSquare, FiPenTool, FiUsers } from "react-icons/fi";
 import { AiOutlineFileText } from "react-icons/ai";
 import {
@@ -12,11 +12,18 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineMenu,
 } from "react-icons/md";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
+
+  const { userlogout, userState } = useContext(AuthContext);
+   
+    const  {} = userState;
   const router = useRouter()
   const TOP_OFFSET = 50;
   const [showBackground, setShowBackground] = useState(false);
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,8 +50,11 @@ const Header = () => {
       className={`mobile_responsive_nav ${
         showBackground ? "mobile_black" : "mobile_white"
       }`}
+      suppressHydrationWarning
     >
-      <nav>
+      <nav  className={`mobile_responsive_nav ${
+        showBackground ? "mobile_black" : "mobile_white"
+      }`}>
         <div className="wrapper">
           <div className="logo">
             <a href="/" className="flex items-center gap-2">
@@ -67,44 +77,44 @@ const Header = () => {
             {/* Resume Navs  */}
             <li>
             <a href="#" className="desktop-item">
-              Resume
+              CV
               <IoIosArrowDown className="inline ml-1" />
             </a>
               
               <input type="checkbox" id="resume" />
               <label htmlFor="resume" className="mobile-item">
-                Resume
+                CV
               </label>
               <div className="mega-box">
                 <div className="content">
                   <div className="row">
-                    <header>Resume Templates</header>
+                    <header>CV Templates</header>
                     <ul className="mega-links">
                       <li>
-                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Creative Templates</a>
+                        <a href="#" className="pointer-events-none"><FiCamera className="inline mr-1 mt-0"/>Creative Templates</a>
                       </li>
                       <li>
-                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Traditional Templates</a>
+                        <a href="#" className="pointer-events-none"><FiPenTool className="inline mr-1 mt-0"/>Traditional Templates</a>
                       </li>
                       <li>
-                        <a href="#"><FiBox className="inline mr-1 mt-0"/>Modern Templates</a>
+                        <a href="#" className="pointer-events-none"><FiBox className="inline mr-1 mt-0"/>Modern Templates</a>
                       </li>
                       <li>
-                        <a href="#"><FiColumns className="inline mr-1 mt-0"/> Simple Templates</a>
+                        <a href="#" className="pointer-events-none"><FiColumns className="inline mr-1 mt-0"/> Simple Templates</a>
                       </li>
                     </ul>
                   </div>
                   <div className="row">
-                    <header>Resume Writing Guides </header>
-                    <ul className="mega-links">
+                    <header>CV Writing Guides </header>
+                    <ul className="mega-links pointer-events-none">
                       <li>
-                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Writing a Resume</a>
+                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Writing a CV</a>
                       </li>
                       <li>
-                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>Resume Summary</a>
+                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>CV Summary</a>
                       </li>
                       <li>
-                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Choosing a Resume Format</a>
+                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Choosing a CV Format</a>
                       </li>
                       <li>
                         <a href="#"><FiBox className="inline mr-1 mt-0"/>Fitting Experience</a>
@@ -112,8 +122,8 @@ const Header = () => {
                     </ul>
                   </div>
                   <div className="row">
-                    <header>Resume Examples</header>
-                    <ul className="mega-links">
+                    <header>CV Examples</header>
+                    <ul className="mega-links pointer-events-none">
                       <li>
                         <a href="#"><FiBox className="inline mr-1 mt-0"/>Project Manager</a>
                       </li>
@@ -129,19 +139,19 @@ const Header = () => {
                     </ul>
                   </div>
                   <div className="row">
-                    <header>Resume Builder</header>
-                    <ul className="mega-links">
+                    <header>CV Curator</header>
+                    <ul className="mega-links pointer-events-none">
                       <li>
-                        <a href="#"><FiBox className="inline mr-1 mt-0"/>Resume Builder</a>
+                        <a href="#"><FiBox className="inline mr-1 mt-0"/>CV Curator</a>
                       </li>
                       <li>
-                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>Resume Checker</a>
+                        <a href="#"><FiCamera className="inline mr-1 mt-0"/>CV Checker</a>
                       </li>
                       <li>
-                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>Resume Skills</a>
+                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>CV Skills</a>
                       </li>
                       <li>
-                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Resume Analayser</a>
+                        <a href="#"><FiPenTool className="inline mr-1 mt-0"/>CV Analayser</a>
                       </li>
                     </ul>
                   </div>
@@ -162,7 +172,7 @@ const Header = () => {
                 <div className="content">
                   <div className="row">
                     <header>Cover Letter Writing Guides</header>
-                    <ul className="mega-links">
+                    <ul className="mega-links pointer-events-none">
                       <li>
                         <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Writing a Cover Letter</a>
                       </li>
@@ -179,7 +189,7 @@ const Header = () => {
                   </div>
                   <div className="row">
                     <header>Cover Letter Examples</header>
-                    <ul className="mega-links">
+                    <ul className="mega-links pointer-events-none">
                       <li>
                         <a href="#"><FiBox className="inline mr-1 mt-0"/>Designer</a>
                       </li>
@@ -196,7 +206,7 @@ const Header = () => {
                   </div>
                   <div className="row">
                     <header>Cover Letter Builder</header>
-                    <ul className="mega-links">
+                    <ul className="mega-links pointer-events-none">
                       <li>
                         <a href="#"><FiBox className="inline mr-1 mt-0"/>QA Engineer</a>
                       </li>
@@ -211,23 +221,6 @@ const Header = () => {
                       </li>
                     </ul>
                   </div>
-                  {/* <div className="row">
-                    <header>Security services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Site Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">VPS Hosting</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">Website design</a>
-                      </li>
-                    </ul>
-                  </div> */}
                 </div>
               </div>
             </li>
@@ -245,12 +238,12 @@ const Header = () => {
                 <div className="content">
                   <div className="row">
                     <header>Career Coaching Services</header>
-                    <ul className="mega-links">
+                    <ul className="mega-links pointer-events-none">
                       <li>
-                        <a href="#"><AiOutlineFileText className="inline mr-1"/>Resume Writing</a>
+                        <a href="#"><AiOutlineFileText className="inline mr-1"/>CV Writing</a>
                       </li>
                       <li>
-                        <a href="#"><FiUsers className="inline mr-1"/>Resume Review</a>
+                        <a href="#"><FiUsers className="inline mr-1"/>CV Review</a>
                       </li>
                       <li>
                         <a href="#"><FiFeather className="inline mr-1"/>Cover Letter Writing</a>
@@ -262,7 +255,7 @@ const Header = () => {
                   </div>
                   <div className="row">
                     <header>Career Coaching Guides</header>
-                    <ul className="mega-links">
+                    <ul className="mega-links pointer-events-none">
                       <li>
                         <a href="#"><FiMessageSquare className="inline mr-1"/>Job Interview Questions</a>
                       </li>
@@ -273,9 +266,9 @@ const Header = () => {
                   </div>
                   <div className="row">
                     <header>Resources</header>
-                    <ul className="mega-links">
+                    <ul className="mega-links pointer-events-none">
                       <li>
-                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>Resume  Resources</a>
+                        <a href="#"><FiColumns className="inline mr-1 mt-0"/>CV  Resources</a>
                       </li>
                       <li>
                         <a href="#"><FiPenTool className="inline mr-1 mt-0"/>Cover Letter Resources</a>
@@ -285,23 +278,7 @@ const Header = () => {
                       </li>
                     </ul>
                   </div>
-                  {/* <div className="row">
-                    <header>Security services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Site Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">VPS Hosting</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">Website design</a>
-                      </li>
-                    </ul>
-                  </div> */}
+
                 </div>
               </div>
             </li>

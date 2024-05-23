@@ -4,6 +4,16 @@
 @tailwind utilities;
 
 @layer components {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
   .btn-primary {
     @apply bg-primary outline-theme-purple inline-block rounded-full px-6 py-2 font-semibold shadow-sm;
   }
@@ -38,14 +48,12 @@
   --resume-padding: 1.5rem;
 }
 
-
-
 /* Mobile Responsive Css Starts Here */
 
 .mobile_responsive_nav {
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 9;
   width: 100%;
 }
 
@@ -275,15 +283,15 @@
     background: #3a3b3c;
   }
 
-  .mobile_responsive_nav #menu-btn:checked~.nav-links {
+  .mobile_responsive_nav #menu-btn:checked ~ .nav-links {
     left: 0%;
   }
 
-  .mobile_responsive_nav #menu-btn:checked~.btn.menu-btn {
+  .mobile_responsive_nav #menu-btn:checked ~ .btn.menu-btn {
     display: none;
   }
 
-  .mobile_responsive_nav #close-btn:checked~.btn.menu-btn {
+  .mobile_responsive_nav #close-btn:checked ~ .btn.menu-btn {
     display: block;
   }
 
@@ -311,10 +319,10 @@
   }
 
   /* .mobile_responsive_nav #showDrop:checked~.drop-menu, */
-  .mobile_responsive_nav #resume:checked~.mega-box,
-  .mobile_responsive_nav #cover:checked~.mega-box,
-  .mobile_responsive_nav #career:checked~.mega-box,
-  .mobile_responsive_nav #blog:checked~.mega-box {
+  .mobile_responsive_nav #resume:checked ~ .mega-box,
+  .mobile_responsive_nav #cover:checked ~ .mega-box,
+  .mobile_responsive_nav #career:checked ~ .mega-box,
+  .mobile_responsive_nav #blog:checked ~ .mega-box {
     max-height: 100%;
   }
 
@@ -405,9 +413,6 @@
   padding: 0 30px;
 }
 
-
-
-
 .FoldImageAnimated_card {
   position: relative;
   width: 100%;
@@ -468,7 +473,6 @@
   }
 }
 
-
 footer a svg {
   transition: transform 350ms;
 }
@@ -477,13 +481,9 @@ footer a:hover svg {
   transform: translate(0.5rem, 0rem);
 }
 
-
-
 .resume-dashboard {
   margin-bottom: -100px;
 }
-
-
 
 @media (min-width: 1536px) {
   .resume-dashboard {
@@ -491,8 +491,92 @@ footer a:hover svg {
   }
 }
 
-
+/* Responsive CSS For Mackbook pro  */
+/* @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .mobile_responsive_nav nav .wrapper {
+    max-width: 1300px;
+  }
+} */
 
 /* Mobile Responsive CSS Ends Here  */
 
 /* New Header CSS Ends Here */
+
+
+
+/* Resume Templates CSS Starts Here  */
+
+/* Templates 1 CSS Starts Here */
+
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
+
+
+.bg-dark-gray {
+  background-color: #272727;
+}
+
+.text-green {
+  color: #29f3c3;
+}
+
+.bg-green {
+  background-color: #29f3c3;
+}
+
+.border-green {
+  border-color: #29f3c3;
+}
+
+
+
+.card_box {
+  position: relative;
+  z-index: 1;
+}
+
+.card_box span {
+  position: absolute;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card_box span::before {
+  content: 'Premium';
+  position: absolute;
+  width: 150%;
+  height: 40px;
+  background-image: linear-gradient(45deg, #ff6547 0%, #ffb144  51%, #ff7053  100%);
+  transform: rotate(-45deg) translateY(-20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.23);
+  z-index: 9;
+}
+
+
+.card_box span::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  bottom: 0;
+  left: 0;
+  height: 10px;
+  z-index: -1;
+  box-shadow: 140px -140px #cc3f47;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+}
+
+/* Resume Tempates CSS Ends Here  */

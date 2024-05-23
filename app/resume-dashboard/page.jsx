@@ -1,3 +1,4 @@
+'use client'
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import Link from "next/link";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
@@ -18,13 +19,160 @@ import { MdQueryStats } from "react-icons/md";
 import { IoShirt } from "react-icons/io5";
 import { RiShirtFill } from "react-icons/ri";
 import { Carousel, CarouselItem } from "@/components/ui/carousel";
-// import Footer from "../ui/newFooter";
 import { redirect } from "next/dist/server/api-utils";
-import Navbar from "../ui/newNav";
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { IoIosStar } from "react-icons/io";
+import { templateType } from "@/components/component/Slider";
+import ImageCarousel from "@/components/component/ImageCarousel";
+import { useEffect, useState } from "react";
+
+const AllTemplates = [
+  [
+    {
+      name: "Template3",
+      src: "/newResume.png",
+      alt: "newResume.png",
+      type: templateType.premium
+    },
+    {
+      name: "AllTemplate1",
+      src: "/3.png",
+      alt: "/3.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate2",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate3",
+      src: "/newResume1.png",
+      alt: "/newResume1.png",
+      type: templateType.premium
+    },
+    {
+      name: "AllTemplate4",
+      src: "/6.png",
+      alt: "/6.png",
+      type: templateType.free
+    }
+  ],
+  [
+    {
+      name: "AllTempalte5",
+      src: "/resume-temp-example.png",
+      alt: "/resume-temp-example.png",
+      type: templateType.free
+    },
+    {
+      name: "Template2",
+      src: "/newResume2.png",
+      alt: "/newResume2.png",
+      type: templateType.premium
+    },
+    {
+      name: "AllTemplate7",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate8",
+      src: "/5.png",
+      alt: "/5.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate9",
+      src: "/15.png",
+      alt: "/15.png",
+      type: templateType.premium
+    }
+  ],
+  [
+    {
+      name: "AllTempalte5",
+      src: "/resume-temp-example.png",
+      alt: "/resume-temp-example.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate6",
+      src: "/3.png",
+      alt: "/3.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate7",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate8",
+      src: "/5.png",
+      alt: "/5.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate9",
+      src: "/6.png",
+      alt: "/6.png",
+      type: templateType.free
+    }
+  ],
+  [
+    {
+      name: "AllTempalte5",
+      src: "/resume-temp-example.png",
+      alt: "/resume-temp-example.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate6",
+      src: "/3.png",
+      alt: "/3.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate7",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate8",
+      src: "/5.png",
+      alt: "/5.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate9",
+      src: "/6.png",
+      alt: "/6.png",
+      type: templateType.free
+    }
+  ],
+]
 
 export default function DashboardIdea() {
+  const [userState, setUserState] = useState({})
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userState'))
+    if (user) {
+      setUserState(user.userdata)
+    }
+  }, [])
   return (
     <>
       <main>
@@ -38,18 +186,18 @@ export default function DashboardIdea() {
             <div className="flex justify-between lg:px-24 px-10">
               <div className="space-y-2 2xl:mt-40 lg:mt-20">
                 <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mb-5 tracking-tighter text-gray-900">
-                  Build Right CV for Right Job
+                  Craft the Perfect CV for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
                   Curated by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
                   forward CV Template options that are custom-tailored to the
-                  job you are applying for, to ensure that your Resume gets
-                  through every Application Tracking Software.
+                  job you are applying for, to ensure that your CV gets through
+                  every Application Tracking Software.
                 </p>
                 <div className="flex items-center space-x-4">
                   <button className="text-xl text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
-                    <a href="/resume-import">Build Resume for Free</a>
+                    <a href="/builder">Create CV Now!</a>
                   </button>
                 </div>
               </div>
@@ -92,364 +240,11 @@ export default function DashboardIdea() {
                 </TabsList>
                 <TabsContent className="py-7" value="all">
                   <Carousel>
-                    <CarouselItem>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/3.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 3"
-                            src="/4.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/6.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                    <div className="border-t mt-5 bg-gray-300"></div>
-                    <CarouselItem>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/3.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 3"
-                            src="/4.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/6.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                    <CarouselItem>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/3.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 3"
-                            src="/4.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/6.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                    <div className="border-t mt-5 bg-gray-300"></div>
-                    <CarouselItem>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/3.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 3"
-                            src="/4.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                          <Image
-                            alt="Product 1"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                          <Image
-                            alt="Product 2"
-                            src="/6.png"
-                            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            height={900}
-                            width={600}
-                          />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
+                    {
+                      AllTemplates.map((carousel, index) => {
+                        return <ImageCarousel data={carousel} key={index} userState={userState} />
+                      })
+                    }
                   </Carousel>
                 </TabsContent>
                 <TabsContent value="simple">
@@ -464,32 +259,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 2"
-                            src="/16.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -498,32 +357,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/18.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume1.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -532,10 +455,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -546,23 +469,87 @@ export default function DashboardIdea() {
                     <div className="border-t mt-5 bg-gray-300"></div>
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -571,32 +558,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 3"
-                            src="/4.png"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume1.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 1"
@@ -605,10 +656,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -622,10 +673,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -639,23 +690,87 @@ export default function DashboardIdea() {
                   <Carousel>
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/tab1_done.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume1.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -664,32 +779,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 3"
-                            src="/tab3_done.png"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 1"
@@ -698,10 +877,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -715,10 +894,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -737,32 +916,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 2"
-                            src="/tab2_done.png"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume1.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -771,10 +1014,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -788,30 +1031,93 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 2"
-                            src="/tab5_done.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
                       </div>
@@ -830,10 +1136,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -847,16 +1153,20 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
+                        {/* Premium Card  */}
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 3"
                             src="/7.png"
@@ -864,13 +1174,72 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9]  text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium cv now and enhance your
+                                    job search?
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/7.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
@@ -881,30 +1250,93 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 2"
-                            src="/10.png"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
                       </div>
@@ -912,23 +1344,87 @@ export default function DashboardIdea() {
                     <div className="border-t mt-5 bg-gray-300"></div>
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/7.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -937,10 +1433,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -954,32 +1450,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/5.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume1.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -988,10 +1548,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -1002,68 +1562,6 @@ export default function DashboardIdea() {
                   </Carousel>
                 </TabsContent>
                 <TabsContent value="professional">
-                  {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Side Project 1</CardTitle>
-                        <CardDescription>
-                          A side project I worked on.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          alt="Project 1"
-                          className="aspect-video w-full rounded-md object-cover"
-                          height={300}
-                          src="/placeholder.svg"
-                          width={400}
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="link">View Project</Button>
-                      </CardFooter>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Side Project 2</CardTitle>
-                        <CardDescription>
-                          Another side project I worked on.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          alt="Project 2"
-                          className="aspect-video w-full rounded-md object-cover"
-                          height={300}
-                          src="/placeholder.svg"
-                          width={400}
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="link">View Project</Button>
-                      </CardFooter>
-                    </Card>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Side Project 3</CardTitle>
-                        <CardDescription>
-                          A third side project I worked on.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          alt="Project 3"
-                          className="aspect-video w-full rounded-md object-cover"
-                          height={300}
-                          src="/placeholder.svg"
-                          width={400}
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="link">View Project</Button>
-                      </CardFooter>
-                    </Card>
-                  </div> */}
                   <Carousel>
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
@@ -1075,32 +1573,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 2"
-                            src="/3.png"
+                            src="/newResume.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 3"
@@ -1109,10 +1671,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -1126,30 +1688,93 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
                             alt="Product 2"
-                            src="/az1.png"
+                            src="/newResume1.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume1.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
                       </div>
@@ -1157,23 +1782,87 @@ export default function DashboardIdea() {
                     <div className="border-t mt-5 bg-gray-300"></div>
                     <CarouselItem>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-8">
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/newResume2.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/11.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/newResume2.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -1182,32 +1871,96 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
                           </div>
                         </div>
-                        <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                        {/* Premium Card  */}
+                        <div className="group relative rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
+                          <div className="card_box">
+                            <span></span>
+                          </div>
                           <Image
-                            alt="Product 1"
+                            alt="Product 2"
+                            src="/6.png"
                             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                            src="/resume-temp-example.png"
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                            <a
-                              className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
-                            >
-                              Try Now
-                            </a>
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <Dialog>
+                              <DialogTrigger className="bg-[#0EA5E9] text-white px-8 h-10 rounded-md">
+                                Try Now
+                              </DialogTrigger>
+                              <DialogContent className="bg-gradient-to-r from-[white] to-[#dcecff]">
+                                <DialogHeader>
+                                  <DialogTitle className="mt-1">
+                                    Download our premium CV now and enhance your
+                                    job search!
+                                  </DialogTitle>
+                                  <DialogDescription>
+                                    <section className="overflow-hidden">
+                                      <div className="mx-auto max-w-5xl py-10">
+                                        <div className="mx-auto flex flex-wrap items-center lg:w-full">
+                                          <Image
+                                            alt="template1"
+                                            className="w-full rounded object-cover lg:w-1/2"
+                                            src="/6.png"
+                                            width={500}
+                                            height={500}
+                                          />
+                                          <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                                            <h2 className="text-base font-semibold tracking-widest text-blue-950">
+                                              Premium
+                                            </h2>
+                                            <h1 className="my-1 text-2xl font-bold text-blue-950">
+                                              Professional Templates
+                                            </h1>
+                                            <div className="my-2 flex items-center">
+                                              <span className="flex items-center space-x-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                  <IoIosStar
+                                                    key={i}
+                                                    size={16}
+                                                    className="text-yellow-500"
+                                                  />
+                                                ))}
+                                                <span className="ml-5 inline-block text-xs font-semibold">
+                                                  4 Reviews
+                                                </span>
+                                              </span>
+                                            </div>
+                                            <p className="leading-relaxed text-gray-800">
+                                              Exceptional quality and design, crafted to meet your professional needs. Elevate your projects with our expertly curated templates.
+                                            </p>
+                                            <div className="mb-5 flex items-center border-b-2 border-gray-600 pb-5"></div>
+                                            <div className="flex items-center justify-between">
+                                              <span className="title-font text-xl font-bold text-gray-900">
+                                                $50
+                                              </span>
+                                              <button
+                                                type="button"
+                                                className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                              >
+                                                Download
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </div>
+
                         <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
                           <Image
                             alt="Product 2"
@@ -1216,10 +1969,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -1233,10 +1986,10 @@ export default function DashboardIdea() {
                             height={900}
                             width={600}
                           />
-                          <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <a
                               className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                              href="/resume-builder"
+                              href="/builder"
                             >
                               Try Now
                             </a>
@@ -1252,17 +2005,17 @@ export default function DashboardIdea() {
         </section>
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t  scroll-mt-20 bg-blue-100"
-          // style={{
-          //   backgroundImage: "url('/banner-bg.svg')",
-          //   backgroundPosition: "center",
-          // }}
+        // style={{
+        //   backgroundImage: "url('/banner-bg.svg')",
+        //   backgroundPosition: "center",
+        // }}
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Get Matched to the Job that is Right for You!
               </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
+              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
                 Find the perfect profession and get matched with the best job
                 profile with the AI-Based Job Assistance Programme.
               </p>
@@ -1274,12 +2027,12 @@ export default function DashboardIdea() {
               >
                 Contact Expert
               </Link>
-              <Link
+              {/* <Link
                 className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
                 href="#"
               >
                 Learn more
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>

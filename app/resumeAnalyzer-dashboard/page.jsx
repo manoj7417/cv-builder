@@ -23,11 +23,9 @@ import { AnalyzeAts } from "../pages/api/api"
 import pdfToText from 'react-pdftotext'
 import { useRouter } from "next/navigation"
 import Header from "../Layout/Header"
-import AuthHook from "../hooks/AuthHook"
 
 
 export default function DashboardIdea() {
-  AuthHook()
   const [isAnalysing, setIsAnalysing] = useState(false)
   const router = useRouter()
   const handlepdfFileChange = async (e) => {
@@ -42,10 +40,14 @@ export default function DashboardIdea() {
       // For example, you can pass it to your pdfToText function
       pdfToText(selectedFile)
         .then(async text => {
+          console.log(text)
           await localStorage.setItem("newResumeContent", text)
           await getFeedback(text);
         })
-        .catch(error => console.error("Failed to extract text from pdf"));
+        .catch(error => {
+          console.error("Failed to extract text from pdf")
+          setIsAnalysing(false)
+        });
 
     };
   }
@@ -53,7 +55,9 @@ export default function DashboardIdea() {
   const getFeedback = async (message) => {
     try {
       const response = await AnalyzeAts(message)
+      console.log(response)
       const value = JSON.parse(response[0].text.value)
+      console.log(value)
       if (value.analysis.resume_score) {
         localStorage.setItem('feedback', JSON.stringify(value))
         router.push('/analyser/feedback')
@@ -75,12 +79,12 @@ export default function DashboardIdea() {
           <div className="container  w-fullbg-blue-300 resume-dashboard">
             <div className="flex px-24 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
-                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl xl:text-6xl/none">Perfectly Analysed CV for Perfect Job</h1>
-                <p className="text-gray-700 text-lg pe-10">Scan Your CV and identify errors with the help of specialised Artificial Intelligence-based tools to create an ATS optimized and grammatically correct Resume.</p>
+                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">An Analysed CV goes a Long Way</h1>
+                <p className="text-gray-700 text-lg pe-10">Wondering why your CV does not get through the initial rounds of selection? Analyse your CV with our AI-based CV Analyser and get industry expertise integrated to create a flawless application profile.</p>
                 <div className="flex items-center space-x-4">
                   <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
                     <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold">
-                      Upload your cv now
+                      Analyse CV Now
                     </span>
                     <input
                       type="file"
@@ -93,7 +97,7 @@ export default function DashboardIdea() {
                   </label>
                 </div>
               </div>
-              <Image src="/enhance.png"  className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
+              <Image src="/1enhance.png" className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
             </div>
           </div>
           <div className="w-full  " >
@@ -108,10 +112,10 @@ export default function DashboardIdea() {
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
-              Get Matched to the Job that is Right for You!
+                Get Matched to the Job that is Right for You!
               </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-              Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
+              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
+                Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
@@ -121,12 +125,12 @@ export default function DashboardIdea() {
               >
                 Contact Expert
               </Link>
-              <Link
+              {/* <Link
                 className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
                 href="#"
               >
                 Learn more
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>

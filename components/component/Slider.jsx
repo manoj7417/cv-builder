@@ -17,6 +17,7 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -32,16 +33,145 @@ import {
   MdOutlineDesignServices,
   MdOutlineSettingsSuggest,
 } from "react-icons/md";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { IoIosStar } from "react-icons/io";
+import { AuthContext } from "@/app/context/AuthContext";
+import { useEffect, useState } from "react";
+import ImageCarousel from "./ImageCarousel";
+
+export const templateType = {
+  free: "Free",
+  premium: "Premium",
+  dummy: "Dummy"
+}
+
+const Carousel1 = [
+  {
+    name: "Template3",
+    src: "/newResume.png",
+    alt: "newResume.png",
+    type: templateType.free
+  },
+  {
+    name: "Template2",
+    src: "/newResume1.png",
+    alt: "newResume1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "DummyTemplate1",
+    src: "/5.png",
+    alt: "5.png",
+    type: templateType.dummy
+  }, {
+    name: "DummyTemplate2",
+    src: "/6.png",
+    alt: "6.png",
+    type: templateType.dummy
+  },
+  {
+    name: "Template1",
+    src: "/newResume2.png",
+    alt: "newResume2.png",
+    type: templateType.premium,
+  }
+]
+
+const Carousel2 = [
+  {
+    name: "DummyTemplate3",
+    src: "/7.png",
+    alt: "7.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate4",
+    src: "/8.png",
+    alt: "8.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate5",
+    src: "/9.png",
+    alt: "9.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate6",
+    src: "/10.png",
+    alt: "10.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate7",
+    src: "/11.png",
+    alt: "11.png",
+    type: templateType.dummy
+  }
+]
+
+const Carousel3 = [
+  {
+    name: "DummyTemplate8",
+    src: "/resume-temp-example.png",
+    alt: "resume-temp-example.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate9",
+    src: "/3.png",
+    alt: "3.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate10",
+    src: "/4.png",
+    alt: "4.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate11",
+    src: "/5.png",
+    alt: "5.png",
+    type: templateType.dummy
+  },
+  {
+    name: "DummyTemplate12",
+    src: "/6.png",
+    alt: "6.png",
+    type: templateType.dummy
+  },
+]
 
 export default function Slider() {
+  const [userState, setUserState] = useState({})
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userState'))
+
+    if (user) {
+      setUserState(user.userdata)
+    }
+  }, [])
   return (
-    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-t from-[white] to-[#dcecff]">
+    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-r from-[white] to-[#dcecff]">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl font-semibold tracking-tight text-center md:text-4xl">
-        Tailoring CVs, Sourcing Careers
+          Curating CVs that Reflect Perfection
         </h2>
         <p className="text-center max-w-3xl mx-auto">
-        Explore Unlimited possibilities with the power of a perfectly crafted CV. Create a Resume that aligns with your Professional Profile, using our customized templates. You can also rectify your current CV and check your ATS Score now.
+          Explore unlimited possibilities with the power of a perfectly crafted
+          CV by creating one that aligns with your Professional Profile,
+          employing our customised templates. If you already have a CV, you can
+          easily rectify it to create an ATS (Application Tracking Score)
+          optimized CV.
         </p>
 
         <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
@@ -55,7 +185,7 @@ export default function Slider() {
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
             <MdOutlineDesignServices className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2" />
             <p className="text-base mt-2 text-center">
-              Customize Layouts to Suit your Preferences
+              Customized Layouts to Suit Your Preferences
             </p>
           </div>
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
@@ -70,319 +200,19 @@ export default function Slider() {
       <div className="relative w-full">
         <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>
           <CarouselContent>
-            <CarouselItem>
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/resume-temp-example.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
-                  <Image
-                    alt="Product 2"
-                    src="/3.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 3"
-                    src="/4.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/5.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
-                  <Image
-                    alt="Product 2"
-                    src="/6.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/7.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
-                  <Image
-                    alt="Product 2"
-                    src="/8.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Image
-                    alt="Product 3"
-                    src="/9.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/10.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[white] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
-                  <Image
-                    alt="Product 2"
-                    src="/11.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/resume-temp-example.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
-                  <Image
-                    alt="Product 2"
-                    src="/3.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Image
-                    alt="Product 3"
-                    src="/4.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#b9818a] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 1</span>
-                  </Link>
-                  <Image
-                    alt="Product 1"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    src="/5.png"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-                <div className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-b from-[#8181b9] to-[#dcecff]">
-                  <Link className="absolute inset-0 z-10" href="#">
-                    <span className="sr-only">View Product 2</span>
-                  </Link>
-                  <Image
-                    alt="Product 2"
-                    src="/6.png"
-                    className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                    height={900}
-                    width={600}
-                  />
-                  <div className="absolute bottom-0 right-0 flex h-full w-full items-center justify-center translate-y-full transition-all duration-300 group-hover:translate-y-0">
-                    <a
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-50"
-                      href="/resume-builder"
-                    >
-                      Try Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
+            <ImageCarousel data={Carousel1} userState={userState}  />
+            <ImageCarousel data={Carousel2} userState={userState}  />
+            <ImageCarousel data={Carousel3} userState={userState}  />
           </CarouselContent>
-          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2">
             <ChevronLeftIcon className="h-6 w-6" />
           </CarouselPrevious>
-          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
+          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2">
             <ChevronRightIcon className="h-6 w-6" />
           </CarouselNext>
         </Carousel>
       </div>
-    </div>
+    </div >
   );
 }
 

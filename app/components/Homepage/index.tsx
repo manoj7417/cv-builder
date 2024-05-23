@@ -5,6 +5,7 @@ import { ServiceSection } from "@/components/component/service-section";
 import Footer from "../../ui/newFooter";
 import Navbar from "../../ui/newNav";
 import { useState } from "react";
+import Image from "next/image";
 export default function Homepage() {
   const [hovered, setHovered] = useState(false);
 
@@ -16,27 +17,27 @@ export default function Homepage() {
     <>
       {/* <Navbar /> */}
       <section
-        className="flex items-center justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-gradient-to-b from-[#E0F2FE] to-[#dcecff]"
-        style={{
-          backgroundImage: "url('/banner-bg.svg')",
-          backgroundPosition: "center",
-        }}
+        className="flex items-center justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-gradient-to-r from-white to-[#dcecff]"
+        // style={{
+        //   backgroundImage: "url('/banner-bg.svg')",
+        //   backgroundPosition: "center",
+        // }}
       >
         <div className="container px-4 md:px-6 lg:pt-0 pt-20">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-            <div className="flex flex-col justify-center space-y-4 lg:px-20 px-5">
+            <div className="flex flex-col justify-center space-y-4 2xl:px-20 lg:px-0 px-5">
               <div className="space-y-2">
                 <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl font-bold tracking-tighter text-gray-900">
                   WHERE
-                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent ml-2">
+                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent 2xl:ml-3 lg:ml-2">
                     RIGHT JOB
                   </span>{" "}
                   MEETS
-                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent ml-2">
+                  <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent 2xl:ml-3 lg:ml-2">
                     RIGHT TALENT!
                   </span>
                 </h1>
-                <p className="max-w-[600px] text-gray-700 md:text-xl">
+                <p className="max-w-[600px] text-gray-700 2xl:text-xl lg:text-base">
                 Enriching Professional Experiences and Building Success Stories that Resonate with Dreams.
                 </p>
               </div>
@@ -45,13 +46,13 @@ export default function Homepage() {
                   className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                   href="/resume-dashboard"
                 >
-                  Resume Builder
+                  CV Curator
                 </Link>
                 <Link
                   className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 text-bold text-blue-900 font-medium shadow transition-colors border-2 border-transparent hover:border-blue-900 mx-2"
                   href="/resumeAnalyzer-dashboard"
                 >
-                  Resume Analyzer
+                  CV Analyser
                 </Link> */}
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
@@ -62,7 +63,7 @@ export default function Homepage() {
                   href="/resume-dashboard"
                   onMouseEnter={toggleHover}
                 >
-                  Resume Builder
+                  CV Curator
                 </Link>
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-bold text-blue-900 font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
@@ -73,11 +74,11 @@ export default function Homepage() {
                   href="/resumeAnalyzer-dashboard"
                   onMouseEnter={toggleHover}
                 >
-                  Resume Analyzer
+                  CV Analyser
                 </Link>
               </div>
             </div>
-            {/* <img
+            {/* <Image
               alt="Hero"
               className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
               height="550"
@@ -88,7 +89,7 @@ export default function Homepage() {
               <div className="FoldImageAnimated_content">
                 <div className="FoldImageAnimated_front">
                   <div className="relative">
-                    <img
+                    <Image
                       alt="Resume Example 3"
                       src="/resume11.png"
                       width={550}
@@ -109,7 +110,7 @@ export default function Homepage() {
                 <div className="FoldImageAnimated_back">
                   <div className="FoldImageAnimated_resumeFourContainer">
                     <div className="FoldImageAnimated_resumeFour">
-                      <img
+                      <Image
                         alt="Resume Example 4"
                         src="/resum12.png"
                         className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"

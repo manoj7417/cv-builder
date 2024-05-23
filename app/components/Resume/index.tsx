@@ -10,9 +10,10 @@ import { ResumePDFProfile } from "./ResumePDF/ResumePDFProfile";
 import { ResumePDF } from "./ResumePDF";
 import {
   useRegisterReactPDFFont,
-  useRegisterReactPDFHypenationCallback,
+  useRegisterReactPDFHyphenationCallback,
 } from "../fonts/hooks";
 import { ResumeControlBarCSR } from "./ResumeControlBar";
+import { NonEnglishFontsCSSLazyLoader } from "../fonts/NonEnglishFontsCSSLoader";
 
 export const Resume = () => {
   const [scale, setScale] = useState(0.8);
@@ -24,10 +25,11 @@ export const Resume = () => {
   );
 
   useRegisterReactPDFFont();
-  useRegisterReactPDFHypenationCallback(settings.fontFamily);
+  useRegisterReactPDFHyphenationCallback(settings.fontFamily);
 
   return (
     <>
+      <NonEnglishFontsCSSLazyLoader/>
       <div className="flex pb-20 w-full justify-center">
         <div className="relative">
         <ResumeControlBarCSR

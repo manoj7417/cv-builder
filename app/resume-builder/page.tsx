@@ -12,15 +12,13 @@ import { ThemeForm } from "../components/ResumeForm/ThemeForm";
 import Footer from "../ui/newFooter";
 import { AIResumeForm } from "../components/AIResumeForm";
 import Header from "../Layout/Header";
-import AuthHook from "../hooks/AuthHook";
+
 import { AuthContext } from "../context/AuthContext";
 
 export default function Create() {
   // Possible values: 'DESIGN', 'ATS', 'NONE'
-  const [activeTab, setActiveTab] = useState<string>("AIContent");
-
-  AuthHook();
-
+  const [activeTab, setActiveTab] = useState<string>("Content");
+  console.log("activeTab:::",activeTab)
   return (
     <>
       <Provider store={store}>
@@ -28,7 +26,7 @@ export default function Create() {
         <main className="relative h-full overflow-hidden w-full bg-blue-50 py-20">
           <div className="grid grid-cols-3 md:grid-cols-9">
             <div className="col-span-2 pt-9">
-              <Sidebar setActiveTab={setActiveTab} />
+              <Sidebar setActiveTab={setActiveTab} activeTab={activeTab}/>
             </div>
             <div className="col-span-4 pt-5">
               <Resume />

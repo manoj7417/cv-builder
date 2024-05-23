@@ -1,15 +1,15 @@
 "use client";
+import dynamic from "next/dynamic";
 import React, { useState, useEffect, useContext } from "react";
 import { Hero } from "./home/Hero";
 import { Steps } from "./home/Steps";
 import Homepage from "./components/Homepage";
-// import Footer from "./ui/newFooter";
 import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import { AuthContext } from "./context/AuthContext";
-import ResumeHeader from "./Layout/ResumeHeader";
-
+// import NewResumeHeader from "./Layout/NewResumeHeader";
+const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,12 +28,12 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="">
+    <main>
       {isLoading ? (
         <LoaderUI />
       ) : (
         <>
-          {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
+          {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
           <Homepage />
           <Footer />
         </>

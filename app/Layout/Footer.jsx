@@ -10,71 +10,12 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 export default function Footer() {
   return (
     <>
-      {/* <footer
-        className="w-full lg:p-20 p-5 bg-gradient-to-b from-[#E0F2FE] to-[#dcecff] text-black"
-        style={{
-          backgroundImage: "url('/banner-bg.svg')",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="mx-auto flex max-w-[71rem] flex-col items-start md:space-x-8 space-x-2 md:flex-row">
-          <div className="w-full md:px-4 px-1 md:w-1/2 lg:px-0">
-            <h1 className="max-w-sm text-3xl font-bold">Connect With Us</h1>
-            <div className="social_icons flex items-center gap-5 mt-2">
-              <FaInstagram className="text-2xl cursor-pointer" />
-              <FaTwitter className="text-2xl cursor-pointer" />
-            </div>
-          </div>
-          <div className="mt-8 grid grid-cols-2 gap-6 md:mt-0 lg:w-3/4 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="mb-8 lg:mb-0">
-                <p className="mb-6 text-lg font-semibold text-black ">
-                  Company
-                </p>
-                <ul className="flex flex-col space-y-4 text-[14px] font-medium text-black">
-                  <li><a href="#">About us <MdOutlineKeyboardArrowRight className="inline text-xl"/></a></li>
-                  <li><a href="#">Company History</a></li>
-                  <li><a href="#">Our Team</a></li>
-                  <li><a href="#">Our Vision</a></li>
-                  <li>
-                    <a
-                      href="https://www.careergenies.co.uk/blog"
-                      target="_blank"
-                    >
-                      Blog
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-10 border-t border-gray-500 pt-10">
-          <div className="max-w-6xl mx-auto sm:flex sm:justify-between">
-            <div className="inline-flex items-center gap-2">
-              <Image
-                src={"/gch_logo.png"}
-                width={30}
-                height={30}
-                alt="newlogo"
-                className="w-50 h-auto object-contain"
-              />
-              <span className="text-lg font-bold">Genies Career Hub</span>
-            </div>
-            <div className="mt-4 md:mt-0">
-              <p className="text-sm font-medium text-black">
-                © 2024 Genies Career Hub . All rights reserved.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer> */}
       <footer
-        className="bg-white"
-        style={{
-          backgroundImage: "url('/banner-bg.svg')",
-          backgroundPosition: "center",
-        }}
+        className="bg-[#fafbfd]"
+        // style={{
+        //   backgroundImage: "url('/banner-bg.svg')",
+        //   backgroundPosition: "center",
+        // }}
       >
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
           <div className="sm:flex sm:items-center sm:justify-between">
@@ -95,11 +36,8 @@ export default function Footer() {
 
             <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
               <li>
-                <a
-                  href="#"
-                  rel="noreferrer"
-                  target="_blank"
-                  className="text-black transition"
+                <div
+                  className="text-black transition hover:text-blue-500"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -115,15 +53,12 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </div>
               </li>
-
+ 
               <li>
-                <a
-                  href="#"
-                  rel="noreferrer"
-                  target="_blank"
-                  className="text-black transition"
+                <div
+                  className="text-black transition hover:text-pink-500"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -139,15 +74,12 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </div>
               </li>
 
               <li>
-                <a
-                  href="#"
-                  rel="noreferrer"
-                  target="_blank"
-                  className="text-black transition"
+                <div 
+                  className="text-black transition hover:text-sky-500"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -159,15 +91,12 @@ export default function Footer() {
                   >
                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                   </svg>
-                </a>
+                </div>
               </li>
 
               <li>
-                <a
-                  href="#"
-                  rel="noreferrer"
-                  target="_blank"
-                  className="text-black transition"
+                <div 
+                  className="text-black transition hover:text-gray-600"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -183,15 +112,12 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </div>
               </li>
 
               <li>
-                <a
-                  href="#"
-                  rel="noreferrer"
-                  target="_blank"
-                  className="text-black transition"
+                <div 
+                  className="text-black transition hover:text-red-700"
                 >
                   <span className="sr-only">Dribbble</span>
 
@@ -207,7 +133,7 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </div>
               </li>
             </ul>
           </div>
@@ -219,11 +145,20 @@ export default function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/builder"
                     className="text-black transition"
                   >
-                    
-                    1on1 Coaching{" "}
+                    CV Curator
+                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    href="/resumeAnalyzer-dashboard"
+                    className="text-black transition"
+                  >
+                     CV Analyser
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -231,43 +166,10 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    rel="noreferrer"
+                    className="text-black transition pointer-events-none"
                   >
-                    {" "}
-                    Company Review{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-black transition"
-                  >
-                    {" "}
-                    Accounts Review{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-black transition"
-                  >
-                    {" "}
-                    HR Consulting{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-black transition"
-                  >
-                    {" "}
-                    SEO Optimisation{" "}
+                    Genie Connect
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -281,7 +183,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     About{" "}
@@ -292,10 +194,9 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
-                    {" "}
-                    Meet the Team{" "}
+                    Meet the Team
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -303,10 +204,9 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
-                    {" "}
-                    Accounts Review{" "}
+                     Terms and Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -319,11 +219,10 @@ export default function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/contact-us"
                     className="text-black transition"
                   >
-                    {" "}
-                    Contact{" "}
+                    Contact
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -331,10 +230,9 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
-                    {" "}
-                    FAQs{" "}
+                    FAQs
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -342,10 +240,9 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
-                    {" "}
-                    Live Chat{" "}
+                    Live Chat
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
                 </li>
@@ -359,18 +256,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
-                  >
-                    {" "}
-                    Accessibility{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     Returns Policy{" "}
@@ -381,7 +267,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     Refund Policy{" "}
@@ -392,7 +278,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-black transition"
+                    className="text-black transition pointer-events-none"
                   >
                     {" "}
                     Hiring Statistics{" "}

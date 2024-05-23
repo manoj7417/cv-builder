@@ -1,13 +1,13 @@
 const STEPS = [
-  { title: "Add a Resume pdf", text: "or Create from Scratch" },
-  { title: "Preview Design", text: "and Make Corrections" },
-  { title: "Analyze your Resume", text: "and Get Instant Feedback" },
+  { title: "Scan Your CV", text: "through the pdf CV Analyser" },
+  { title: "Check CV Score", text: "for Clarity, Relevance, and Content" },
+  { title: "Get Recommendations", text: " on how to make a perfect CV" },
 ];
 
 export const Steps = () => {
   return (
     <section className="mx-auto px-8 py-12 border-b-2 border-blue-500 ">
-       <h2 className="text-3xl text-center font-semibold  max-w-2xl  mx-auto">Quickly Identify Errors in your Resume with Instant Analysis</h2>
+       <h2 className="text-3xl text-center font-semibold  max-w-2xl  mx-auto">Identify Skill Gaps and Errors in your CV in Minutes</h2>
       <h1 className="text-center text-3xl font-bold">3 Simple Steps</h1>
       <div className="mt-8 flex justify-center">
         <dl className="flex flex-col gap-y-10 lg:flex-row lg:justify-center lg:gap-x-20">

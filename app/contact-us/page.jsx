@@ -32,7 +32,7 @@ export default function ContactPageTwo() {
           <div className="grid items-center justify-items-center gap-x-4 gap-y-10 lg:grid-cols-2">
             <div className="flex items-center justify-center">
               <div className="px-2 md:px-12">
-                <p className="text-2xl font-bold text-blue-800 md:text-4xl">
+                <p className="text-2xl font-bold text-blue-800 md:text-5xl">
                   Get in touch
                 </p>
                 <p className="mt-4 text-lg text-gray-600">
@@ -113,7 +113,7 @@ export default function ContactPageTwo() {
                   </div>
                   <button
                     type="button"
-                    className="w-full rounded-md bg-blue-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    className="w-full rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     Send Message
                   </button>

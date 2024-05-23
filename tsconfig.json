@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts","**/*.jsx", "**/*.tsx", ".next/types/**/*.ts", "app/lib/parse-resume-from-pdf/pdfjs-custom.d.ts", "app/components/Homepage/index.tsx", "components/component/Slider.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts","**/*.jsx", "**/*.tsx", ".next/types/**/*.ts", "app/lib/parse-resume-from-pdf/pdfjs-custom.d.ts", "app/components/Homepage/index.tsx", "components/component/Slider.jsx", "app/middleware.js", "middleware.js", "utils/typography.js"],
   "exclude": ["node_modules"]
 }

@@ -12,7 +12,7 @@ import { THEME_COLORS } from "./constants";
 import { InputGroupWrapper } from "../Form/InputGroup";
 import {
   DocumentSizeSelections,
-  FontFamilySelectionCSR,
+  FontFamilySelectionsCSR,
   FontSizeSelections,
 } from "./Selection";
 import { FontFamily } from "../../fonts/constants";
@@ -66,7 +66,7 @@ export const ThemeForm = () => {
         </div>
         <div>
           <InputGroupWrapper label="Font Family" />
-          <FontFamilySelectionCSR
+          <FontFamilySelectionsCSR
             selectedFontFamily={fontFamily}
             themeColor={themeColor}
             handleSettingsChange={handleSettingsChange}

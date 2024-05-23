@@ -79,7 +79,7 @@ export const ResumePDF = ({
 
   return (
     <>
-      <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
+      {/* <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
           style={{
@@ -93,7 +93,7 @@ export const ResumePDF = ({
             <View
               style={{
                 width: spacing["full"],
-                height: spacing[3.5],
+                height: spacing[2.5],
                 backgroundColor: themeColor,
               }}
             />
@@ -115,7 +115,61 @@ export const ResumePDF = ({
             })}
           </View>
         </Page>
-      </Document>
+      </Document> */}
+       <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
+      <Page
+        size={documentSize === "A4" ? "A4" : "LETTER"}
+        style={{
+          ...styles.flexCol,
+          color: DEFAULT_FONT_COLOR,
+          fontFamily,
+          fontSize: fontSize + "pt",
+        }}
+      >
+        <View style={styles.paddingAll}>
+          <ResumePDFProfile
+            profile={profile}
+            themeColor={themeColor}
+            isPDF={isPDF}
+          />
+        </View>
+        <View style={styles.flexRow}>
+          <View style={styles.leftColumn}>
+            <ResumePDFEducation
+              heading={formToHeading["educations"]}
+              educations={educations}
+              themeColor={themeColor}
+              showBulletPoints={showBulletPoints["educations"]}
+            />
+            <ResumePDFSkills
+              heading={formToHeading["skills"]}
+              skills={skills}
+              themeColor={themeColor}
+              showBulletPoints={showBulletPoints["skills"]}
+            />
+          </View>
+          <View style={styles.rightColumn}>
+            <ResumePDFWorkExperience
+              heading={formToHeading["workExperiences"]}
+              workExperiences={workExperiences}
+              themeColor={themeColor}
+            />
+            <ResumePDFProject
+              heading={formToHeading["projects"]}
+              projects={projects}
+              themeColor={themeColor}
+            />
+            <ResumePDFCustom
+              heading={formToHeading["custom"]}
+              custom={custom}
+              themeColor={themeColor}
+              showBulletPoints={showBulletPoints["custom"]}
+            />
+          </View>
+        </View>
+      </Page>
+    </Document>
+
     </>
   );
 };

@@ -7,20 +7,18 @@ export function ServiceSection() {
   return (
     <div className="flex flex-col min-h-[100dvh] ">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-blue-100 bg-opacity-10  scroll-mt-20">
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff]  scroll-mt-20">
           <div className=" px-4 md:px-6 mb-10">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-2xl bg-gradient-to-b from-[#8181b9] to-[#131350] hover:bg-blue-900 text-white  px-5 py-1 mb-5">
-                  Resume Builder
+                  CV Curator
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-950">
                   A Step Closer to Your Dream Job!
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                  Be quick with CV Building to apply with a profile that is
-                  professionally prolific and lands you on the job you always
-                  dreamt of.
+                You can get your CV engineered in minutes and start your job application process quickly while ensuring that your profile reflects the exact requisites of the job you have always dreamt of.
                 </p>
               </div>
             </div>
@@ -30,11 +28,11 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Resume Builder
+                        CV Curator
                       </h3>
                       <p className="text-gray-500 ">
-                        Looking for an impressive Resume Template? Find the best
-                        Artificial Intelligence-Based Services in CV Building
+                        Looking for an impressive CV Template? Find the best
+                        Artificial Intelligence-Based Services in CV Making
                         here!
                       </p>
                     </div>
@@ -42,10 +40,10 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Analyzer
+                        CV Analyser
                       </h3>
                       <p className="text-gray-500 ">
-                        Not Sure if Your Resume is Perfect for the Job you are
+                        Not Sure if Your CV is Perfect for the Job you are
                         applying for? Get your CV analysed by Industry Experts
                         now!
                       </p>
@@ -57,14 +55,14 @@ export function ServiceSection() {
                         Genie
                       </h3>
                       <p className="text-gray-500 ">
-                      Simplify your approach to Job Applications with an AI-based CV Builder that does all that you want while you sit back and relax!
+                      Simplify your approach to Job Applications with an AI-based CV Maker that does all that you want while you sit back and relax!
                       </p>
                     </div>
                   </li>
                 </ul>
                 <div>
                   <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/resume-dashboard">Start Building</a>
+                    <a href="/resume-dashboard">Curate Now</a>
                   </button>
                 </div>
               </div>
@@ -77,7 +75,7 @@ export function ServiceSection() {
                   loop
                   preload="none"
                 >
-                  <source src="/landing_video.mp4" type="video/mp4" />
+                  <source src="/builder.mp4" type="video/mp4" />
                   <track
                     src="/path/to/captions.vtt"
                     kind="subtitles"
@@ -94,17 +92,36 @@ export function ServiceSection() {
               <div className="space-y-2"></div>
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              <img
+              {/* <Image
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-first"
                 height="310"
                 src="/new_section3.png"
                 width="550"
-              />
-              <div className="flex flex-col justify-center space-y-4 ps-5">
+              /> */}
+              <div className="w-[550px] h-auto shadow-lg rounded-md pr-10">
+                <video
+                  width="1000"
+                  height="1000"
+                  autoPlay
+                  muted
+                  loop
+                  preload="none"
+                >
+                  <source src="/aigenie.mp4" type="video/mp4" />
+                  <track
+                    src="/path/to/captions.vtt"
+                    kind="subtitles"
+                    srcLang="en"
+                    label="English"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="flex flex-col justify-center space-y-4 ps-20">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
                   <h2 className="text-4xl font-bold text-blue-900">
-                    Career Genie
+                  Genie Connect
                   </h2>
                   <GiMagicLamp className="h-14 w-14 ms-5 text-blue-900" />
                 </div>
@@ -112,37 +129,30 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Career Guidance
+                      Genie Advocates
                       </h3>
                       <p className="text-gray-500 ">
-                        Genie will help you find the right job and provide you
-                        with the best career advice and builds your resume.
+                      Get recommendations from Genie on how to craft the perfect CV for the job or professional role you are aiming for. 
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Solve your problems
+                      Genie Counsels
                       </h3>
                       <p className="text-gray-500 ">
-                        Not sure how to ask for a raise, looking for your next
-                        job, or feeling stuck in your current role and unsure
-                        about what to do next? Genie is here to guide you
-                        through these challenges and help you navigate your
-                        career journey.
+                      Puzzled about your Career Choices? Get counselled by Genie and find solutions to your professional problems.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Grant your wishes
+                      Genie Sources
                       </h3>
                       <p className="text-gray-500 ">
-                        Wish to get a promotion or a raise at your next job, or
-                        just want to make a change in your current role? Genie
-                        can help you with these requests and grant your wishes.
+                      Need specific resources to get started with your professional journey? Ask the Genie and get specific resources to refer to!
                       </p>
                     </div>
                   </li>
@@ -150,7 +160,7 @@ export function ServiceSection() {
                 <div>
                   <button className="items-center flex px-7 py-2 rounded-md text-base text-white bg-blue-900 hover:bg-blue-700">
                     <a className="flex items-center" href="/genie-dashboard">
-                      Connect with Genie{" "}
+                      Connect with Genie
                       <GiMagicLamp className="h-8 w-8 ms-5 text-white" />
                     </a>
                   </button>
@@ -161,42 +171,39 @@ export function ServiceSection() {
         </section>
 
         <section
-          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20"
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
-          }}
+          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-[white] to-[#dcecff]"
+          
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Get Matched to the Job that is Right for You!
+              Looking for More?
               </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-              Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
+              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
+              Contact our Industry Experts to get additional information for a more personalised approach to Career Counselling.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
               <Link
                 className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                href="#"
+                href="/contact-us"
               >
                 Contact Expert
               </Link>
-              <Link
+              {/* <Link
                 className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
                 href="#"
               >
                 Learn more
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t  bg-opacity-25 scroll-mt-20">
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff] scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Find the Exact Job you Need with Perfectly Crafted CVs
+              <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">
+              Stay Connected with the Genie!
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                 Subscribe to our newsletter and get latest updates.
@@ -210,15 +217,13 @@ export function ServiceSection() {
                   placeholder="Enter your email"
                   type="email"
                 />
-                <Link
+                <div
                   className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                  href="#"
                 >
-                  Sign up
-                </Link>
+                  Subscribe
+                </div>
               </form>
               <p className="text-xs text-gray-500">
-                Sign up to get notified when we launch.
                 <Link className="underline underline-offset-2" href="#">
                   Terms & Conditions
                 </Link>
