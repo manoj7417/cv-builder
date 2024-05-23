@@ -142,8 +142,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
       if (event.data.type === "ZOOM_OUT") transformRef.current?.zoomOut(0.2);
       if (event.data.type === "CENTER_VIEW") transformRef.current?.centerView();
       if (event.data.type === "RESET_VIEW") {
-        // transformRef.current?.resetTransform(0);
-        // setTimeout(() => transformRef.current?.centerView(0.4, 0.4), 10);
+        transformRef.current?.resetTransform(0);
+        setTimeout(() => transformRef.current?.centerView(0.4, 0.4), 10);
       }
     };
 
@@ -172,7 +172,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
         <TransformWrapper
-          initialScale={0.5}
+          initialScale={0.8}
           initialPositionX={200}
           initialPositionY={100}
           ref={transformRef}

@@ -996,10 +996,10 @@ export default function Form({ resumeData, setResumeData }) {
                 className="w-40 h-40 object-contain"
               />
             </div>
-            <div className="flex items-center">
-              <h1 className="text-md">Compose your CV with the Genie</h1>
+            <div className="flex items-center md:flex-row flex-col md:gap-2 gap-2">
+              <h1 className="md:text-md text-sm whitespace-nowrap">Compose your CV with the Genie</h1>
               <Link href="/resumeAnalyzer-dashboard">
-                <Button className="ml-3">Create Now</Button>
+                <Button className="ml-3 md:text-base text-sm">Create Now</Button>
               </Link>
             </div>
           </div>

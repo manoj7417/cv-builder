@@ -63,13 +63,13 @@ function ImageUpload({ resumeData, setResumeData }) {
     }
 
     return (
-        <div className="relative ">
+        <div className="relative h-[100px] w-[100px]">
             {isUploading ?
-                <Skeleton className="h-[100px] w-[100px] rounded-full" />
+                <Skeleton className="h-full w-full rounded-full" />
                 : <img
                     src={avatarURL}
                     alt="Avatar"
-                    className="h-[100px] w-[100px] rounded-full" />}
+                    className="h-full w-full rounded-full" />}
 
             <form id="form" encType='multipart/form-data'>
                 <button
