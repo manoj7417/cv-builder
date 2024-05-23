@@ -9,12 +9,6 @@ import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
 import {
-  ReactZoomPanPinchRef,
-  TransformComponent,
-  TransformWrapper,
-  useControls,
-} from "react-zoom-pan-pinch";
-import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -32,38 +26,16 @@ import { AuthContext } from "../context/AuthContext";
 import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-
-const Controls = () => {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
-
-  return (
-    <div className="tools">
-      <button
-        className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-        onClick={() => zoomIn()}
-      >
-        <FiPlus className="text-white" />
-      </button>
-      <button
-        className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
-        onClick={() => zoomOut()}
-      >
-        <FiMinus />
-      </button>
-      <button
-        className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-        onClick={() => resetTransform()}
-      >
-        <CiUndo />
-      </button>
-    </div>
-  );
-};
+import { Divider } from "antd";
+import useWindowSize from "@/app/hook/useWindowSize";
 
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
-  const { userState, userlogout } = useContext(AuthContext)
-  const [scale, setScale] = useState(0.8);
-  const transformRef = useRef(null);
+  const { width, height } = useWindowSize();
+  const a4Width = 815;
+  const a4Height = 1053;
+  const scale = Math.min(width / a4Width, height / a4Height);
+
+  const { userState, userlogout } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,8 +44,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
 
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
       toast.success("User logout successfully", {
         position: "top-right",
       });
@@ -118,14 +90,15 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
 
   const handleTemplateChange = (val) => {
     const updatedResumeData = {
-      ...resumeData, metadata: {
+      ...resumeData,
+      metadata: {
         ...resumeData.metadata,
-        template: val
-      }
-    }
-    setResumeData(updatedResumeData)
+        template: val,
+      },
+    };
+    setResumeData(updatedResumeData);
     setIsDrawerOpen(false);
-  }
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -134,52 +107,10 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleMessage = (event) => {
-      if (event.origin !== window.location.origin) return;
-
-      if (event.data.type === "ZOOM_IN") transformRef.current?.zoomIn(0.2);
-      if (event.data.type === "ZOOM_OUT") transformRef.current?.zoomOut(0.2);
-      if (event.data.type === "CENTER_VIEW") transformRef.current?.centerView();
-      if (event.data.type === "RESET_VIEW") {
-        transformRef.current?.resetTransform(0);
-        setTimeout(() => transformRef.current?.centerView(0.4, 0.4), 10);
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-    console.log("running")
-  }, [transformRef]);
-
-  const pageSizeMap = {
-    a4: {
-      width: 210,
-      height: 297,
-    },
-    letter: {
-      width: 216,
-      height: 279,
-    },
-  };
-
-  const MM_TO_PX = 3.78;
-
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
-        <TransformWrapper
-          initialScale={0.8}
-          initialPositionX={200}
-          initialPositionY={100}
-          ref={transformRef}
-          centerOnInit
-          smooth
-          minScale={0.4}
-        >
+        <Divider>
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
@@ -191,7 +122,6 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </Link>
             </div>
             <div className="auth_section flex justify-end w-full gap-10 items-center">
-              <Controls />
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                 onClick={handleDownloadResume}
@@ -203,8 +133,15 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                 Download PDF
               </button>
               <div className="choose_templates xl:block hidden">
-                <Drawer direction="right" open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-                  <DrawerTrigger className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md" onClick={() => setIsDrawerOpen(true)}>
+                <Drawer
+                  direction="right"
+                  open={isDrawerOpen}
+                  onOpenChange={setIsDrawerOpen}
+                >
+                  <DrawerTrigger
+                    className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md"
+                    onClick={() => setIsDrawerOpen(true)}
+                  >
                     Templates <LuLayoutGrid className="inline" />
                   </DrawerTrigger>
                   <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
@@ -212,7 +149,10 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                       <DrawerTitle>Choose Templates</DrawerTitle>
                       <DrawerDescription>
                         <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                          <div className="image_section_1 " onClick={() => handleTemplateChange('Template3')}>
+                          <div
+                            className="image_section_1 "
+                            onClick={() => handleTemplateChange("Template3")}
+                          >
                             <Image
                               src="/newResume.png"
                               alt="pic1"
@@ -221,7 +161,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2" >
+                          <div className="image_section_2">
                             <Image
                               src="/newResume1.png"
                               alt="pic1"
@@ -230,7 +170,10 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_1" onClick={() => handleTemplateChange('Template1')}>
+                          <div
+                            className="image_section_1"
+                            onClick={() => handleTemplateChange("Template1")}
+                          >
                             <Image
                               src="/newResume2.png"
                               alt="pic1"
@@ -350,25 +293,37 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </div>
             </div>
           </div>
-          <TransformComponent>
-            <div className="shadow-2xl">
+          <div>
+            <div
+              className="shadow-2xl"
+              style={{
+                width: a4Width,
+                height: a4Height,
+                transform: `scale(${scale})`,
+                transformOrigin: "center bottom",
+                marginBottom: "140px",
+                overflow: "hidden",
+              }}
+            >
               <div
                 id="resume"
                 className={cn("relative bg-white")}
                 style={{
-                  width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                  height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                  overflowY: "scroll",
+                  width: "100%",
+                  height: "100%",
                 }}
               >
-                <GetTemplate name={resumeData?.metadata?.template} resumeData={resumeData} />
+                <GetTemplate
+                  name={resumeData?.metadata?.template}
+                  resumeData={resumeData}
+                />
                 <div className="absolute z-10  bottom-2 right-5 text-gray-500">
                   <p>@Career Genies Hub</p>
                 </div>
               </div>
             </div>
-          </TransformComponent>
-        </TransformWrapper>
+          </div>
+        </Divider>
       </div>
     </>
   );
