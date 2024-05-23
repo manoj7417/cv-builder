@@ -64,7 +64,7 @@ const Controls = () => {
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const { userState, userlogout } = useContext(AuthContext)
   const [scale, setScale] = useState(0.8);
-  
+
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

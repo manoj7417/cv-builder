@@ -3,16 +3,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
@@ -28,226 +23,24 @@ import { useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "../ui/customLabelInput";
-import Link from "next/link";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { HexColorPicker } from "react-colorful";
 import { colors } from "@/constants/colors";
 import { cn } from "@/lib/utils";
-import { Progress } from "../ui/progress";
-import { Textarea } from "../ui/textarea";
-import AiGenerateLoader from "@/app/ui/AiGenerateLoader";
 import { SkillsSelect } from "./skills-select";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
-import { AskBot } from "@/app/pages/api/api";
+import { AskBot, getBetterResume } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
-import { useRouter } from "next/navigation";
+import pdfToText from 'react-pdftotext'
+import NewResumeLoader from "@/app/ui/newResumeLoader";
+import { MultiStepForm } from "./MultiStepform";
+import dayjs from "dayjs";
 
 
-const MultiStepForm = ({ steps, formData, setFormData, setSteps, isLoading, handleGenerateProfileSummary, resumeData }) => {
-  const handleJobTitleChange = (e) => {
-    const newFormDate = { ...formData, jobTitle: e.target.value };
-    setFormData(newFormDate);
-  };
 
-  const handleskillsChange = (e) => {
-    const newFormDate = { ...formData, skills: e.target.value };
-    setFormData(newFormDate);
-  };
-
-  const handleExperienceChange = (e) => {
-    const { name, value } = e.target;
-    const newFormData = { ...formData, experience: { ...formData.experience, [name]: value } }
-    setFormData(newFormData)
-  }
-
-  if (steps === 1) {
-    return (
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>
-            <div className=" flex items-center">
-              <p className="mr-3">0%</p>
-              <Progress value={1} className=" shadow-sm h-4 border" />
-            </div>
-          </DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you are done.
-          </DialogDescription>
-        </DialogHeader>
-        <div>
-          <Label htmlFor="name" className="text-right">
-            Job Title
-          </Label>
-          <Input
-            id="jobTitle"
-            placeholder="Enter your job title"
-            className="mt-2"
-            onChange={handleJobTitleChange}
-            value={formData.jobTitle}
-          />
-        </div>
-        <DialogFooter>
-          <Button
-            onClick={() => setSteps((prev) => prev + 1)}
-            disabled={formData?.jobTitle.length == 0}
-          >
-            Next
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    );
-  } else if (steps === 2) {
-    return (
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>
-            <div className=" flex items-center">
-              <p className="mr-3">25%</p>
-              <Progress value={25} className=" shadow-sm h-4 border" />
-            </div>
-          </DialogTitle>
-          <DialogDescription>
-            Enter relevant work experience related to the job which you want to
-            apply for.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid grid-cols-2 gap-5">
-          <div className="w-full">
-            <Label htmlFor="name" className="text-right">
-              Job Title{" "}
-              <span className=" text-10px italic ml-1 text-gray-500">
-                (optional)
-              </span>
-            </Label>
-            <Input
-              name="jobTitle"
-              placeholder="Enter your job title"
-              className="mt-2"
-              value={formData.experience.jobTitle}
-              onChange={handleExperienceChange}
-            />
-          </div>
-          <div className="w-full">
-            <Label htmlFor="employer" className="text-right">
-              Comapny
-              <span className=" text-10px italic ml-1 text-gray-500">
-                (optional)
-              </span>
-            </Label>
-            <Input
-              name="companyName"
-              placeholder="Enter comapany name"
-              className="mt-2"
-            />
-          </div>
-        </div>
-        <div>
-          <div className="grid grid-cols-2 gap-5">
-            <div>
-              <Label htmlFor="employer" className="text-right">
-                Start Date
-                <span className=" text-10px italic ml-1 text-gray-500">
-                  (optional)
-                </span>
-              </Label>
-              <DatePicker placeholder="Start Date" name="startDate" />
-            </div>
-            <div>
-              <Label htmlFor="employer" className="text-right">
-                End Date
-                <span className=" text-10px italic ml-1 text-gray-500">
-                  (optional)
-                </span>
-              </Label>
-              <DatePicker placeholder="End Date" name="endDate" />
-            </div>
-          </div>
-        </div>
-        <div>
-          <Label htmlFor="employer" className="text-right">
-            Job Description
-            <span className=" text-10px italic ml-1 text-gray-500">
-              (optional)
-            </span>
-          </Label>
-          <Textarea placeholder="Job Description" />
-        </div>
-        <DialogFooter>
-          <div className="flex justify-between items-center w-full">
-            <Button onClick={() => setSteps((prev) => prev - 1)}>Back</Button>
-            <Button onClick={() => setSteps((prev) => prev + 1)}>Next</Button>
-          </div>
-        </DialogFooter>
-      </DialogContent>
-    );
-  } else if (steps === 3) {
-    return (
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>
-            <div className=" flex items-center">
-              <p className="mr-3">50%</p>
-              <Progress value={50} className=" shadow-sm h-4 border" />
-            </div>
-          </DialogTitle>
-          <DialogDescription>
-            Enter relevant skills related to your job title
-          </DialogDescription>
-        </DialogHeader>
-        <div>
-          <Textarea
-            placeholder="Enter relevant skills "
-            value={formData.skills}
-            onChange={handleskillsChange}
-          />
-        </div>
-        <DialogFooter>
-          <div className="w-full flex justify-between items-center">
-            <div>
-              <Button onClick={() => setSteps((prev) => prev - 1)}>Back</Button>
-            </div>
-            <div>
-              <Button onClick={() => {
-                handleGenerateProfileSummary()
-                setSteps(prev => prev + 1)
-              }} disabled={formData.skills.length === 0} >Submit</Button>
-            </div>
-          </div>
-        </DialogFooter>
-      </DialogContent>
-    );
-  } else if (steps === 4) {
-    return (
-      <DialogContent className="sm:max-w-[425px]">
-        {
-          isLoading ?
-            <div>
-              <AiGenerateLoader />
-              <p className="text-gray-500">Generating presonalized profile summary with <span className=" text-violet-700 font-bold">AI</span></p>
-            </div>
-            :
-            <DialogHeader>
-              <DialogTitle>
-                <div className=" flex items-center">
-                  <p className="mr-3">100%</p>
-                  <Progress value={100} className=' shadow-sm h-4 border' />
-                </div >
-              </DialogTitle >
-              <DialogDescription>
-                <div className="mt-5 text-center">
-                  AI has generated your personalised profile summary
-                </div>
-              </DialogDescription>
-            </DialogHeader >
-        }
-      </DialogContent>
-    );
-  }
-};
 
 export default function Form({ resumeData, setResumeData }) {
-  const router = useRouter()
   const { sections } = resumeData;
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -263,6 +56,9 @@ export default function Form({ resumeData, setResumeData }) {
   })
   const [steps, setSteps] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
+  const [generatingResume, setIsGeneratingResume] = useState(false)
+
+
   const handleBasicInfoChange = (e) => {
     const { name, value } = e.target;
     const updatedResumeData = {
@@ -938,10 +734,45 @@ export default function Form({ resumeData, setResumeData }) {
     }
   }
 
+  const handlepdfFileChange = (e) => {
+    setIsGeneratingResume(true)
+    let selectedFile = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = async () => {
+      pdfToText(selectedFile)
+        .then(async text => {
+          await localStorage.setItem("newResumeContent", text)
+          await getResumeData(text);
+        })
+        .catch(error => {
+          console.error("Failed to extract text from pdf")
+          setIsAnalysing(false)
+        });
+
+    };
+  }
+
+  const getResumeData = async (message) => {
+    try {
+      const response = await getBetterResume(message)
+      let value;
+      if (response.status === 200) {
+        value = JSON.parse(response.data[0].text.value)
+        console.log(value)
+        setResumeData(value)
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsGeneratingResume(false)
+    }
+  }
+
+
   useEffect(() => {
     const newResumeData = localStorage.getItem('resumeData')
     const previousPage = localStorage.getItem('previousPage')
-    console.log(previousPage)
     if (newResumeData && previousPage === '/feedback') {
       setResumeData(JSON.parse(newResumeData))
       localStorage.removeItem('previousPage')
@@ -951,6 +782,16 @@ export default function Form({ resumeData, setResumeData }) {
   return (
     <>
       <div className=" px-5 py-20">
+        {
+          generatingResume && <div
+            className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"
+            style={{
+              zIndex: 9999,
+            }}
+          >
+            <NewResumeLoader />
+          </div>
+        }
         <div className="px-10 py-5">
           <div className=" rounded-lg h-24 bg-blue-50 flex">
             <div className="w-[20%]">
@@ -961,9 +802,21 @@ export default function Form({ resumeData, setResumeData }) {
               <h1 className=" text-md">
                 Compose your CV with the Genie
               </h1>
-              <Link href='/resumeAnalyzer-dashboard'>
-                <Button className="ml-3">Create Now</Button>
-              </Link>
+              <div className="flex items-center">
+                <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue ml-3 ">
+                  <span className=" text-sm leading-normal  bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold p-3">
+                    Upload CV
+                  </span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="application/pdf"
+                    onChange={
+                      handlepdfFileChange
+                    }
+                  />
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -1186,9 +1039,9 @@ export default function Form({ resumeData, setResumeData }) {
                               </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 px-2">
-                              <div className="flex flex-col md:flex-row ">
+                              <div className="flex flex-row md:flex-col ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
-                                  <Label for="start_date" className="block">
+                                  <Label htmlFor="start_date" className="block">
                                     Start Date
                                   </Label>
                                   <div className="w-full">
@@ -1202,7 +1055,7 @@ export default function Form({ resumeData, setResumeData }) {
                                   </div>
                                 </div>
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
-                                  <Label for="end_date" className="block">
+                                  <Label htmlFor="end_date" className="block">
                                     End Date
                                   </Label>
                                   <div className="w-full">
@@ -1361,9 +1214,9 @@ export default function Form({ resumeData, setResumeData }) {
                               </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 px-2">
-                              <div className="flex flex-col md:flex-row ">
+                              <div className="flex flex-row md:flex-col ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
-                                  <Label for="start_date" className="block">
+                                  <Label htmlFor="start_date" className="block">
                                     Start Date
                                   </Label>
                                   <div className="w-full">
@@ -1379,7 +1232,7 @@ export default function Form({ resumeData, setResumeData }) {
                                   </div>
                                 </div>
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
-                                  <Label for="end_date" className="block">
+                                  <Label htmlFor="end_date" className="block">
                                     End Date
                                   </Label>
                                   <div className="w-full">
@@ -1530,9 +1383,9 @@ export default function Form({ resumeData, setResumeData }) {
                               </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 px-2">
-                              <div className="flex flex-col md:flex-row ">
+                              <div className="flex flex-row md:flex-col ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
-                                  <Label for="start_date" className="block">
+                                  <Label htmlFor="start_date" className="block">
                                     Start Date
                                   </Label>
                                   <div className="w-full">
@@ -1541,11 +1394,12 @@ export default function Form({ resumeData, setResumeData }) {
                                       onChange={(e) =>
                                         handleProjectStartDateChange(e, index)
                                       }
+
                                     />
                                   </div>
                                 </div>
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
-                                  <Label for="end_date" className="block">
+                                  <Label htmlFor="end_date" className="block">
                                     End Date
                                   </Label>
                                   <div className="w-full">
@@ -1554,6 +1408,7 @@ export default function Form({ resumeData, setResumeData }) {
                                       onChange={(e) =>
                                         handleProjectEndDateChange(e, index)
                                       }
+                                    
                                     />
                                   </div>
                                 </div>
