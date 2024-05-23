@@ -3,7 +3,6 @@ import React, { Suspense, useContext, useEffect, useState } from "react";
 import { setCookie } from "cookies-next";
 // import { ArrowRight } from 'lucide-react'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,12 +10,15 @@ import Image from "next/image";
 import { login } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
+import { Button } from "@/app/components/Button";
+import { UserStore } from '@/app/store/UserStore'
 function LoginUser() {
   const router = useRouter();
   const { userlogin, userlogout } = useContext(AuthContext);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
-
+  const userState = UserStore((state) => state.userState)
+  const loginUser = UserStore((state) => state.loginUser)
   const {
     register,
     handleSubmit,
@@ -31,6 +33,7 @@ function LoginUser() {
       if (response.status === 200) {
         toast.success(response.data.message);
         const { accessToken, refreshToken, userdata } = response?.data?.data;
+        loginUser(userdata)
         setCookie("accessToken", accessToken, {
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         });
