@@ -28,6 +28,7 @@ export function AuthProvider({ children }) {
     const userlogin = (userdata) => {
         const authuserState = { isAuthenticated: true, userdata: userdata }
         setUserState(authuserState)
+        localStorage.setItem("userState", JSON.stringify(authuserState))
     }
 
     const userlogout = () => {

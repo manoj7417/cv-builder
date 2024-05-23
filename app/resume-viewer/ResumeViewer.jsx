@@ -64,7 +64,7 @@ const Controls = () => {
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const { userState, userlogout } = useContext(AuthContext)
   const [scale, setScale] = useState(0.8);
-  const transformRef = useRef(null);
+  
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -133,26 +133,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleMessage = (event) => {
-      if (event.origin !== window.location.origin) return;
 
-      if (event.data.type === "ZOOM_IN") transformRef.current?.zoomIn(0.2);
-      if (event.data.type === "ZOOM_OUT") transformRef.current?.zoomOut(0.2);
-      if (event.data.type === "CENTER_VIEW") transformRef.current?.centerView();
-      if (event.data.type === "RESET_VIEW") {
-        // transformRef.current?.resetTransform(0);
-        // setTimeout(() => transformRef.current?.centerView(0.4, 0.4), 10);
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-    console.log("running")
-  }, [transformRef]);
 
   const pageSizeMap = {
     a4: {
@@ -174,7 +155,6 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
           initialScale={0.5}
           initialPositionX={200}
           initialPositionY={100}
-          ref={transformRef}
           centerOnInit
           smooth
           minScale={0.4}
@@ -358,6 +338,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
+                  overflowY: "scroll",
                 }}
               >
                 <GetTemplate name={resumeData?.metadata?.template} resumeData={resumeData} />
