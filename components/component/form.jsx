@@ -34,8 +34,9 @@ import { AskBot, getBetterResume } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
 import pdfToText from 'react-pdftotext'
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-import { MultiStepForm } from "./MultiStepform";
+
 import dayjs from "dayjs";
+import { MultiStepForm } from "./MultiStepForm";
 
 
 
