@@ -210,9 +210,13 @@ function Builder() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
 
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
+
   const handleMobileContent = () => {
     // setIsMobile(false);
     setMobileContent(true);
+    setIsOverlayOpen(!isOverlayOpen);
   };
 
   useEffect(() => {
@@ -254,7 +258,7 @@ function Builder() {
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
           {
-          /* <div className="mobile_section flex justify-end mb-10 mx-10 fixed bottom-5 right-0">
+          <div className="mobile_section flex justify-end mb-10 mx-10 fixed bottom-5 right-0">
             <div>
               {isMobile && (
                 <button
@@ -267,13 +271,13 @@ function Builder() {
             </div>
             <div>
               {
-                mobileContent && (<MobileResumeViewPage scale={scale} resumeData={resumeData}/>)
+                mobileContent && (<MobileResumeViewPage scale={scale} resumeData={resumeData} isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen}/>)
               }
             </div>
-          </div> */
+          </div>
           }
         </div>
-        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0 " style={{
+        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden bg-gray-300 lg:fixed lg:right-0 lg:block hidden" style={{
              backgroundImage: "url('/banner-bg.svg')",
              backgroundPosition: "bottom center",
            }}>

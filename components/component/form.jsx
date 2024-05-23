@@ -986,8 +986,8 @@ export default function Form({ resumeData, setResumeData }) {
 
   return (
     <>
-      <div className=" px-5 py-20 bg-slate-50">
-        <div className="px-10 py-5">
+      <div className="px-5 py-20 bg-slate-50">
+        <div className="lg:px-10 px-5 py-5">
           <div className=" rounded-lg h-24 bg-blue-50 flex items-center justify-around">
             <div>
               <img
@@ -1004,7 +1004,7 @@ export default function Form({ resumeData, setResumeData }) {
             </div>
           </div>
         </div>
-        <div className="px-10">
+        <div className="lg:px-10 px-5">
           <div className="w-full">
             <Label>Avatar</Label>
             <ImageUpload
@@ -1012,7 +1012,7 @@ export default function Form({ resumeData, setResumeData }) {
               setResumeData={setResumeData}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-2">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
               <Label htmlFor="name">Name</Label>
               <Input
@@ -1035,7 +1035,7 @@ export default function Form({ resumeData, setResumeData }) {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-2">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -1058,7 +1058,7 @@ export default function Form({ resumeData, setResumeData }) {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-2">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2">
               <Label htmlFor="country">Country</Label>
               <Input
@@ -1083,7 +1083,7 @@ export default function Form({ resumeData, setResumeData }) {
         </div>
 
         {/* profile section */}
-        <div className="py-5 my-5 px-10">
+        <div className="py-5 my-5 lg:px-10 px-5">
           <div className="space-y-2">
             <div className=" flex justify-between items-center">
               <div className=" w-[40%] group">
@@ -1142,7 +1142,7 @@ export default function Form({ resumeData, setResumeData }) {
 
         {/* education section */}
         <div className="py-5 my-20">
-          <div className="space-y-2 px-10">
+          <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
                 <Label className="text-2xl group-hover:hidden">
@@ -1184,8 +1184,8 @@ export default function Form({ resumeData, setResumeData }) {
                     className="flex items-start justify-center group my-5 relative"
                   >
                     <GoGrabber
-                      className=" text-3xl
-               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      className="mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                     />
                     <Accordion
                       type="single"
@@ -1216,7 +1216,7 @@ export default function Form({ resumeData, setResumeData }) {
                         </AccordionTrigger>
                         <AccordionContent>
                           <div className="w-full pt-5 px-5 pb-10">
-                            <div className="grid grid-cols-2 gap-4 px-2 py-5">
+                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
                               <div className="space-y-2">
                                 <Label htmlFor="institute">Institute</Label>
                                 <Input
@@ -1243,7 +1243,7 @@ export default function Form({ resumeData, setResumeData }) {
                                 />
                               </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-4 px-2">
+                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
                               <div className="flex flex-col md:flex-row ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                                   <Label for="start_date" className="block">
@@ -1256,10 +1256,11 @@ export default function Form({ resumeData, setResumeData }) {
                                         handleEducationStartDateChange(e, index)
                                       }
                                       name="startDate"
+                                      className="w-full"
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1270,6 +1271,7 @@ export default function Form({ resumeData, setResumeData }) {
                                         handleEducationEndDateChange(e, index)
                                       }
                                       name="endDate"
+                                      className="w-full"
                                     />
                                   </div>
                                 </div>
@@ -1308,8 +1310,8 @@ export default function Form({ resumeData, setResumeData }) {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="absolute top-2 right-1 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className="mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                       onClick={() => handleDeleteEducationSection(index)}
                     />
                   </div>
@@ -1405,7 +1407,7 @@ export default function Form({ resumeData, setResumeData }) {
                         </AccordionTrigger>
                         <AccordionContent>
                           <div className="w-full pt-5 px-5 pb-10">
-                            <div className="grid grid-cols-2 gap-4 px-2 py-5">
+                            <div className="grid lg:grid-cols-2 grid-cols-1  gap-4 px-2 py-5">
                               <div className="space-y-2">
                                 <Label htmlFor="institute">Job Title</Label>
                                 <Input
@@ -1432,9 +1434,9 @@ export default function Form({ resumeData, setResumeData }) {
                                 />
                               </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-4 px-2">
+                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                               <div className="flex flex-col md:flex-row ">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2 py-5">
                                   <Label for="start_date" className="block">
                                     Start Date
                                   </Label>
@@ -1447,10 +1449,11 @@ export default function Form({ resumeData, setResumeData }) {
                                           index
                                         )
                                       }
+                                      className="w-full"
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1460,6 +1463,7 @@ export default function Form({ resumeData, setResumeData }) {
                                       onChange={(e) =>
                                         handleExperienceEndDateChange(e, index)
                                       }
+                                      className="w-full"
                                     />
                                   </div>
                                 </div>
@@ -1588,7 +1592,7 @@ export default function Form({ resumeData, setResumeData }) {
                         </AccordionTrigger>
                         <AccordionContent>
                           <div className="w-full pt-5 px-5 pb-10">
-                            <div className="grid grid-cols-2 gap-4 px-2 py-5">
+                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
                               <div className="space-y-2">
                                 <Label htmlFor="institute">Title</Label>
                                 <Input
@@ -1615,7 +1619,7 @@ export default function Form({ resumeData, setResumeData }) {
                                 />
                               </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-4 px-2">
+                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                               <div className="flex flex-col md:flex-row ">
                                 <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
                                   <Label for="start_date" className="block">
@@ -1627,10 +1631,11 @@ export default function Form({ resumeData, setResumeData }) {
                                       onChange={(e) =>
                                         handleProjectStartDateChange(e, index)
                                       }
+                                      className="w-full"
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pl-2">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1640,6 +1645,7 @@ export default function Form({ resumeData, setResumeData }) {
                                       onChange={(e) =>
                                         handleProjectEndDateChange(e, index)
                                       }
+                                      className="w-full"
                                     />
                                   </div>
                                 </div>
@@ -1795,7 +1801,7 @@ export default function Form({ resumeData, setResumeData }) {
         </div>
 
         {/* theme */}
-        <div className="px-10 rounded-md ">
+        <div className="lg:px-10 px-5 rounded-md ">
           <div className="my-5">
             <Label className="text-2xl">Theme</Label>
           </div>

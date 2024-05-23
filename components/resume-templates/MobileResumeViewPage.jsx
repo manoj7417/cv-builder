@@ -3,64 +3,40 @@ import Template3 from "@/components/resume-templates/Template3";
 import { cn } from "@/lib/utils";
 import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { CiUndo } from "react-icons/ci";
-import { FiPlus } from "react-icons/fi";
-import { FiMinus } from "react-icons/fi";
-import { LuLayoutGrid } from "react-icons/lu";
-import {
-  ReactZoomPanPinchRef,
-  TransformComponent,
-  TransformWrapper,
-  useControls,
-} from "react-zoom-pan-pinch";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { printResume } from "@/app/pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { GetTemplate } from "@/components/resume-templates/GetTemplate";
+import { AuthContext } from "@/app/context/AuthContext";
+import { deleteCookie } from "cookies-next";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { LiaTimesSolid } from "react-icons/lia";
 
-const Controls = () => {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
 
-  return (
-    <div className="tools">
-      <button
-        className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white rounded-md"
-        onClick={() => zoomIn()}
-      >
-        <FiPlus className="text-white" />
-      </button>
-      <button
-        className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white mx-2 rounded-md"
-        onClick={() => zoomOut()}
-      >
-        <FiMinus />
-      </button>
-      <button
-        className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white rounded-md"
-        onClick={() => resetTransform()}
-      >
-        <CiUndo />
-      </button>
-    </div>
-  );
-};
-
-const MobileResumeViewPage = ({ resumeData }) => {
-  const [scale, setScale] = useState(0.8);
-  const transformRef = useRef(null);
+const ResumeViewPage = ({ resumeData, setResumeData ,isOverlayOpen,setIsOverlayOpen}) => {
+  const containerRef = useRef();
+  const [scale,setScale] = useState(0.5)
+  const { userState, userlogout } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+
+  const handleLogout = () => {
+    if (userState?.isAuthenticated) {
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      toast.success("User logout successfully", {
+        position: "top-right",
+      });
+      userlogout();
+      router.push("/");
+    }
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -96,6 +72,18 @@ const MobileResumeViewPage = ({ resumeData }) => {
     }
   };
 
+  const handleTemplateChange = (val) => {
+    const updatedResumeData = {
+      ...resumeData,
+      metadata: {
+        ...resumeData.metadata,
+        template: val,
+      },
+    };
+    setResumeData(updatedResumeData);
+    setIsDrawerOpen(false);
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -104,24 +92,31 @@ const MobileResumeViewPage = ({ resumeData }) => {
   }, []);
 
   useEffect(() => {
-    const handleMessage = (event) => {
-      if (event.origin !== window.location.origin) return;
+    const updateSize = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.clientWidth;
+        const containerHeight = containerRef.current.clientHeight;
+        const aspectRatio = 297 / 210;
 
-      if (event.data.type === "ZOOM_IN") transformRef.current?.zoomIn(0.2);
-      if (event.data.type === "ZOOM_OUT") transformRef.current?.zoomOut(0.2);
-      if (event.data.type === "CENTER_VIEW") transformRef.current?.centerView();
-      if (event.data.type === "RESET_VIEW") {
-        // transformRef.current?.resetTransform(0);
-        // setTimeout(() => transformRef.current?.centerView(0.4, 0.4), 10);
+        if (containerWidth / containerHeight > aspectRatio) {
+          setSize({
+            width: containerHeight * (210 / 297),
+            height: containerHeight,
+          });
+        } else {
+          setSize({
+            width: containerWidth,
+            height: containerWidth * (297 / 210),
+          });
+        }
       }
     };
 
-    window.addEventListener("message", handleMessage);
+    updateSize();
+    window.addEventListener("resize", updateSize);
 
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, [transformRef]);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
   const pageSizeMap = {
     a4: {
@@ -138,188 +133,35 @@ const MobileResumeViewPage = ({ resumeData }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center w-full h-screen overflow-hidden">
-        <TransformWrapper
-          initialScale={0.5}
-          initialPositionX={200}
-          initialPositionY={100}
-          ref={transformRef}
-          centerOnInit
-          smooth
-          minScale={0.4}
-        >
-          <div className="actions_button bg-gray-800 p-1 flex flex-row 2xl:justify-evenly 2xl:p-5 justify-evenly items-center fixed top-0 left-0 w-full z-20">
-            <div className="header_section w-full md:block hidden">
-              <Link
-                href={"/resume-dashboard"}
-                className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"
+    <div
+        className={`fixed inset-0 z-50 ${isOverlayOpen ? 'block' : 'hidden'}`}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)' }}
+      ></div>
+       <div className={`fixed inset-0 z-50 flex items-center justify-center ${isOverlayOpen ? 'block' : 'hidden'}`}>
+       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
+        <div>
+          <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+            <div className="auth_section flex justify-between w-full gap-10 items-center">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                onClick={handleDownloadResume}
+                disabled={isLoading}
               >
-                <MdOutlineKeyboardArrowLeft className="inline text-xl" />
-                Back
-              </Link>
-            </div>
-            <div className="auth_section flex justify-end w-full gap-10">
-            <Controls />
-            <button
-              className="2xl:p-5 md:p-2 p-1 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-base md:text-sm text-[12px] flex items-center justify-around rounded-md"
-              onClick={handleDownloadResume}
-              disabled={isLoading}
-            >
-              {isLoading && (
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Download PDF
-            </button>
-            <div className="choose_templates xl:block hidden">
-              <Drawer direction="right">
-                <DrawerTrigger className="bg-blue-900 text-white 2xl:p-5 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md">
-                  Templates <LuLayoutGrid className="inline" />
-                </DrawerTrigger>
-                <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
-                  <DrawerHeader>
-                    <DrawerTitle>Choose Templates</DrawerTitle>
-                    <DrawerDescription>
-                      <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                        <div className="image_section_1 ">
-                          <Image
-                            src="/5.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_1">
-                          <Image
-                            src="/5.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_1">
-                          <Image
-                            src="/5.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_1">
-                          <Image
-                            src="/5.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                        <div className="image_section_2">
-                          <Image
-                            src="/6.png"
-                            alt="pic1"
-                            className="cursor-pointer hover:border-sky-700 hover:border-4"
-                            width={500}
-                            height={500}
-                          />
-                        </div>
-                      </div>
-                    </DrawerDescription>
-                  </DrawerHeader>
-                </DrawerContent>
-              </Drawer>
-            </div>
-            </div>
-            
-            <div className="profile_section">
-              <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
-                {/* Avatar with Dropdown */}
-                <div className="relative" ref={dropdownRef}>
-                  <button
-                    onClick={() => setIsToggleOpen(!isToggleOpen)}
-                    className="relative inline-flex h-[2.4rem] w-10 items-center justify-center rounded-full text-white focus:outline-none"
-                  >
-                    <Image
-                      src="/avatar.jpg"
-                      alt="user name"
-                      title="user name"
-                      width={30}
-                      height={30}
-                      className="max-w-full rounded-full"
-                    />
-                    <span className="absolute bottom-0 right-0 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 p-1 text-sm text-white">
-                      <span className="sr-only"> 7 new emails </span>
-                    </span>
-                  </button>
-                  {/* Dropdown */}
-                  {isToggleOpen && (
-                    <div
-                      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="user-menu"
-                    >
-                      <div className="py-1" role="none">
-                        <Link
-                          href="/user-profile"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          role="menuitem"
-                        >
-                          Profile
-                        </Link>
-                        <Link
-                          href="/user-dashboard"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          role="menuitem"
-                        >
-                          Dashboard
-                        </Link>
-                        <div
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                          role="menuitem"
-                          // onClick={handleLogout}
-                        >
-                          Logout
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {/* End Avatar with Dropdown */}
+                {isLoading && (
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Download PDF
+              </button>
+              <div>
+                <LiaTimesSolid className="text-xl text-black mr-5 font-semibold cursor-pointer" onClick={()=>setIsOverlayOpen(false)}/>
               </div>
             </div>
           </div>
-          <TransformComponent>
-            <div className="shadow-2xl">
+          <div>
+            <div className="shadow-2xl" style={{
+              scale:`${scale}`,
+              background:"black"
+            }}>
               <div
                 id="resume"
                 className={cn("relative bg-white")}
@@ -327,16 +169,25 @@ const MobileResumeViewPage = ({ resumeData }) => {
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
+                  overflowY:"scroll"
                 }}
               >
-                <Template3 resumeData={resumeData} />
+                <GetTemplate
+                  name={resumeData?.metadata?.template}
+                  resumeData={resumeData}
+                />
+                <div className="absolute z-10  bottom-2 right-5 text-gray-500">
+                  <p>@Career Genies Hub</p>
+                </div>
               </div>
             </div>
-          </TransformComponent>
-        </TransformWrapper>
+          </div>
+        </div>
       </div>
+      </div>
+     
     </>
   );
 };
 
-export default MobileResumeViewPage;
+export default ResumeViewPage;

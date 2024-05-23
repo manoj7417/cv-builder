@@ -9,6 +9,12 @@ import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
 import {
+  ReactZoomPanPinchRef,
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
+import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -30,11 +36,8 @@ import { Divider } from "antd";
 import useWindowSize from "@/app/hook/useWindowSize";
 
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
-  const { width, height } = useWindowSize();
-  const a4Width = 815;
-  const a4Height = 1053;
-  const scale = Math.min(width / a4Width, height / a4Height);
-
+  const containerRef = useRef();
+  const [scale,setScale] = useState(0.7)
   const { userState, userlogout } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -107,10 +110,50 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.clientWidth;
+        const containerHeight = containerRef.current.clientHeight;
+        const aspectRatio = 297 / 210;
+
+        if (containerWidth / containerHeight > aspectRatio) {
+          setSize({
+            width: containerHeight * (210 / 297),
+            height: containerHeight,
+          });
+        } else {
+          setSize({
+            width: containerWidth,
+            height: containerWidth * (297 / 210),
+          });
+        }
+      }
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const pageSizeMap = {
+    a4: {
+      width: 210,
+      height: 297,
+    },
+    letter: {
+      width: 216,
+      height: 279,
+    },
+  };
+
+  const MM_TO_PX = 3.78;
+
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
-        <Divider>
+        <div>
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
@@ -294,23 +337,17 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
             </div>
           </div>
           <div>
-            <div
-              className="shadow-2xl"
-              style={{
-                width: a4Width,
-                height: a4Height,
-                transform: `scale(${scale})`,
-                transformOrigin: "center bottom",
-                marginBottom: "140px",
-                overflow: "hidden",
-              }}
-            >
+            <div className="shadow-2xl" style={{
+              scale:`${scale}`
+            }}>
               <div
                 id="resume"
                 className={cn("relative bg-white")}
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                  height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                  overflow: "hidden",
+                  overflowY:"scroll"
                 }}
               >
                 <GetTemplate
@@ -323,7 +360,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </div>
             </div>
           </div>
-        </Divider>
+        </div>
       </div>
     </>
   );
