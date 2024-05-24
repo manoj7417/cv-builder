@@ -3,15 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { UserStore } from "../store/UserStore";
 
 export default function ResumeHeader() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const dropdownRef = useRef(null);
-
-  const {userlogout} = useContext(AuthContext)
-
+  const logoutUser = UserStore((state) => state.logoutUser)
   const handleLogout = () => {
-    userlogout()
+    logoutUser();
   };
 
   const handleClickOutside = (event) => {
