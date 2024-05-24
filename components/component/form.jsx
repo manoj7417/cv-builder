@@ -1073,7 +1073,7 @@ export default function Form({ resumeData, setResumeData }) {
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 lg:py-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1249,7 +1249,7 @@ export default function Form({ resumeData, setResumeData }) {
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                               <div className="flex flex-col md:flex-row ">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2 lg:py-0 py-5">
                                   <Label for="start_date" className="block">
                                     Start Date
                                   </Label>
@@ -1448,7 +1448,7 @@ export default function Form({ resumeData, setResumeData }) {
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 lg:py-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1625,11 +1625,11 @@ export default function Form({ resumeData, setResumeData }) {
                   key={color}
                   onClick={() => handleTemplateThemeChange(color)}
                   className={cn(
-                    "flex size-6 cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
+                    "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                     resumeData?.metadata?.theme?.primary === color && "ring-1"
                   )}
                 >
-                  <div className="size-6" style={{ backgroundColor: color }} />
+                  <div className="size-8 rounded-full" style={{ backgroundColor: color }} />
                 </div>
               ))}
           </div>
@@ -1662,11 +1662,11 @@ export default function Form({ resumeData, setResumeData }) {
               }}
             />
           </div> */}
-          <div className="flex items-center space-x-4 my-2">
+          <div className="flex rounded-md items-center space-x-4 my-2">
             <Input
               id="theme.primary"
               value={resumeData.metadata.theme.primary}
-              className="pl-2 w-36"
+              className="pl-2 w-36 rounded-md"
               onChange={(event) => {
                 handleTemplateThemeChange(event.target.value);
               }}
@@ -1674,10 +1674,10 @@ export default function Form({ resumeData, setResumeData }) {
             <Popover>
               <PopoverTrigger asChild>
                 <div
-                  className="cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
+                  className="rounded-md cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
                   style={{
-                    width: "28px",
-                    height: "28px",
+                    width: "30px",
+                    height: "30px",
                     backgroundColor: resumeData.metadata.theme.primary,
                   }}
                 />
