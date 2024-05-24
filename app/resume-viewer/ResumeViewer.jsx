@@ -178,7 +178,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
-        <div>
+        <TransformWrapper initialScale={scale} initialPositionX={200} initialPositionY={100} centerOnInit smooth minScale={0.4}>
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
@@ -361,10 +361,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </div>
             </div>
           </div>
-          <div>
-            <div className="shadow-2xl" style={{
-              transform:`scale(${scale})`
-            }}>
+          <TransformComponent>
+            <div className="shadow-2xl">
               <div
                 id="resume"
                 className={cn("relative bg-white")}
@@ -385,8 +383,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </TransformComponent>
+        </TransformWrapper>
       </div>
     </>
   );
