@@ -36,7 +36,6 @@ import { useRouter } from "next/navigation";
 import { Divider } from "antd";
 import useWindowSize from "@/app/hook/useWindowSize";
 
-
 // const Controls = () => {
 //   const { zoomIn, zoomOut, resetTransform } = useControls();
 
@@ -66,7 +65,7 @@ import useWindowSize from "@/app/hook/useWindowSize";
 
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const containerRef = useRef();
-  const [scale,setScale] = useState(0.7)
+  const [scale, setScale] = useState(0.7);
   const { userState, userlogout } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -179,7 +178,6 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
 
   const MM_TO_PX = 3.78;
 
-
   const updateScale = () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -189,8 +187,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
       setScale(0.4); // Mobile devices
     } else if (width <= 1024) {
       setScale(0.4); // Tablets
-    }else if(width <= 1440){
-      setScale(0.4)
+    } else if (width <= 1440) {
+      setScale(0.4);
     } else {
       setScale(0.7); // Desktops
     }
@@ -202,6 +200,18 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
 
     return () => window.removeEventListener("resize", updateScale);
   }, []);
+
+  const handleZoomIn = () => {
+    setScale((prevScale) => Math.min(prevScale * 1.2, 3));
+  };
+
+  const handleZoomOut = () => {
+    setScale((prevScale) => Math.max(prevScale / 1.2, 0.5));
+  };
+
+  const handleReset = () => {
+    updateScale();
+  };
 
   return (
     <>
@@ -218,7 +228,27 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </Link>
             </div>
             <div className="auth_section flex justify-end w-full gap-10 items-center">
-            {/* <Controls /> */}
+              {/* <Controls /> */}
+              <div className="tools">
+                <button
+                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+                  onClick={handleZoomIn}
+                >
+                  <FiPlus className="text-white" />
+                </button>
+                <button
+                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
+                  onClick={handleZoomOut}
+                >
+                  <FiMinus />
+                </button>
+                <button
+                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+                  onClick={handleReset}
+                >
+                  <CiUndo />
+                </button>
+              </div>
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                 onClick={handleDownloadResume}
@@ -258,7 +288,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2" >
+                          <div className="image_section_2">
                             <Image
                               src="/newResume1.png"
                               alt="pic1"
@@ -391,9 +421,12 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
             </div>
           </div>
           <div>
-            <div className="shadow-2xl" style={{
-              transform:`scale(${scale})`
-            }}>
+            <div
+              className="shadow-2xl"
+              style={{
+                transform: `scale(${scale})`,
+              }}
+            >
               <div
                 id="resume"
                 className={cn("relative bg-white")}
@@ -401,7 +434,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
-                  overflowY:"scroll"
+                  overflowY: "scroll",
                 }}
               >
                 <GetTemplate
