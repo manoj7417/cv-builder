@@ -372,13 +372,14 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
+                  overflowY:"scroll"
                 }}
               >
                 <GetTemplate
                   name={resumeData?.metadata?.template}
                   resumeData={resumeData}
                 />
-                <PiArrowsOutSimple className="text-4xl text-blue-900 font-bold"/>
+                {/* <PiArrowsOutSimple className="text-4xl text-blue-900 font-bold"/> */}
                 <div className="absolute z-10  bottom-2 right-5 text-gray-500">
                   <p>@Career Genies Hub</p>
                 </div>
