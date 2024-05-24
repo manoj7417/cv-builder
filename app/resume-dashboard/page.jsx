@@ -177,15 +177,16 @@ export default function DashboardIdea() {
     <>
       <main>
         <section
-          className="flex min-h-screen flex-col items-center justify-center  "
+          className="w-full flex flex-col items-center justify-center  "
           style={{
             backgroundImage: "url('/banner-bg.svg')",
+            backgroundSize:"cover",
           }}
         >
-          <div className="container  w-full h-screen resume-dashboard">
-            <div className="flex justify-between lg:px-24 px-10">
-              <div className="space-y-2 2xl:mt-40 lg:mt-20">
-                <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mb-5 tracking-tighter text-gray-900">
+          <div className="container w-full h-full resume-dashboard">
+            <div className="flex px-24 justify-between">
+              <div className="space-y-2 2xl:mt-40 lg:mt-32">
+                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">
                   Craft the Perfect CV for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
@@ -196,14 +197,14 @@ export default function DashboardIdea() {
                   every Application Tracking Software.
                 </p>
                 <div className="flex items-center space-x-4">
-                  <button className="text-xl text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
+                  <button className="text-base text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
                     <a href="/builder">Create CV Now!</a>
                   </button>
                 </div>
               </div>
               <Image
                 src="/resume.png"
-                className="px-7 pt-7 rounded-t-3xl lg:block hidden"
+                className="w-50 h-50 px-7 mt-20 pt-7 rounded-t-3xl lg:block hidden"
                 alt="@shadcn"
                 width={600}
                 height={100}
@@ -211,8 +212,8 @@ export default function DashboardIdea() {
             </div>
           </div>
           <div className="w-full  bg-white">
-            <div className="rounded-t-3xl border-t-8 border-blue-500 p-6 shadow-xl ">
-              <h2 className="text-3xl text-center font-semibold my-5">
+            <div className="rounded-t-xl border-t-8 border-blue-500 p-6 shadow-xl ">
+              <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
                 Choose From Our Detailed Templates Options
               </h2>
               <Tabs className="w-full py-5" defaultValue="all">
@@ -2005,10 +2006,10 @@ export default function DashboardIdea() {
         </section>
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t  scroll-mt-20 bg-blue-100"
-        // style={{
-        //   backgroundImage: "url('/banner-bg.svg')",
-        //   backgroundPosition: "center",
-        // }}
+        style={{
+          backgroundImage: "url('/banner-bg.svg')",
+          backgroundPosition: "center",
+        }}
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">

@@ -14,7 +14,7 @@ import { RiShirtFill } from "react-icons/ri"
 import { Carousel, CarouselItem } from "@/components/ui/carousel"
 import Footer from "../ui/newFooter";
 import { redirect } from "next/dist/server/api-utils"
-import { Steps } from "../home/Steps"
+// import { Steps } from "../home/Steps"
 import Navbar from "../ui/newNav"
 import Slider from "@/components/component/Slider"
 import { useState } from "react"
@@ -76,7 +76,7 @@ export default function DashboardIdea() {
         {/* <Header /> */}
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')" }}>
-          <div className="container  w-fullbg-blue-300 resume-dashboard">
+          <div className="container  w-full h-full resume-dashboard">
             <div className="flex px-24 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
                 <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">An Analysed CV goes a Long Way</h1>
@@ -103,7 +103,7 @@ export default function DashboardIdea() {
           <div className="w-full  " >
             <div className="rounded-t-3xl border-t-8 border-blue-500 shadow-xl  bg-gradient-to-b from-[#dcecff] to-[white]">
 
-              <Steps />
+              {/* <Steps /> */}
               <Slider />
             </div>
           </div>
