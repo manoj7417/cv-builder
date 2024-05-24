@@ -36,6 +36,34 @@ import { useRouter } from "next/navigation";
 import { Divider } from "antd";
 import useWindowSize from "@/app/hook/useWindowSize";
 
+
+// const Controls = () => {
+//   const { zoomIn, zoomOut, resetTransform } = useControls();
+
+//   return (
+//     <div className="tools">
+//       <button
+//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+//         onClick={() => zoomIn()}
+//       >
+//         <FiPlus className="text-white" />
+//       </button>
+//       <button
+//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
+//         onClick={() => zoomOut()}
+//       >
+//         <FiMinus />
+//       </button>
+//       <button
+//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+//         onClick={() => resetTransform()}
+//       >
+//         <CiUndo />
+//       </button>
+//     </div>
+//   );
+// };
+
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const containerRef = useRef();
   const [scale,setScale] = useState(0.7)
@@ -178,7 +206,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
-        <TransformWrapper initialScale={scale} initialPositionX={200} initialPositionY={100} centerOnInit smooth minScale={0.4}>
+        <div>
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
@@ -190,6 +218,7 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </Link>
             </div>
             <div className="auth_section flex justify-end w-full gap-10 items-center">
+            {/* <Controls /> */}
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                 onClick={handleDownloadResume}
@@ -361,8 +390,10 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
               </div>
             </div>
           </div>
-          <TransformComponent>
-            <div className="shadow-2xl">
+          <div>
+            <div className="shadow-2xl" style={{
+              transform:`scale(${scale})`
+            }}>
               <div
                 id="resume"
                 className={cn("relative bg-white")}
@@ -383,8 +414,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
                 </div>
               </div>
             </div>
-          </TransformComponent>
-        </TransformWrapper>
+          </div>
+        </div>
       </div>
     </>
   );
