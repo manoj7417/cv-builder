@@ -33,6 +33,7 @@ import { AuthContext } from "../context/AuthContext";
 import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { UserStore } from "../store/UserStore";
 import { Divider } from "antd";
 import useWindowSize from "@/app/hook/useWindowSize";
 
@@ -64,9 +65,9 @@ import useWindowSize from "@/app/hook/useWindowSize";
 // };
 
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
-  const containerRef = useRef();
-  const [scale, setScale] = useState(0.7);
-  const { userState, userlogout } = useContext(AuthContext);
+  const { userState, userlogout } = useContext(AuthContext)
+  const [scale, setScale] = useState(0.8);
+
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -75,8 +76,8 @@ const ResumeViewPage = ({ resumeData, setResumeData }) => {
 
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
+      deleteCookie('accessToken')
+      deleteCookie('refreshToken')
       toast.success("User logout successfully", {
         position: "top-right",
       });

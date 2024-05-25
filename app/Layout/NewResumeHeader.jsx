@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
 import { deleteCookie } from 'cookies-next';
+import { UserStore } from "../store/UserStore";
 
 const navigation = [
   { name: "CV Curator", href: "/builder", current: true },
@@ -25,22 +26,19 @@ function classNames(...classes) {
 }
 
 export default function NewResumeHeader() {
-  const { userlogout, userState } = useContext(AuthContext);
   const router = useRouter();
 
 
-  const { isAuthenticated } = userState;
+  const logoutUser = UserStore((state) => state.logoutUser)
 
   const handleLogout = () => {
-    if (userState?.isAuthenticated) {
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
-      toast.success("User logout successfully", {
-        position: "top-right",
-      });
-      userlogout();
-      router.push("/");
-    }
+    deleteCookie('accessToken')
+    deleteCookie('refreshToken')
+    toast.success("User logout successfully", {
+      position: "top-right",
+    });
+    logoutUser();
+    // router.push("/");
   };
 
   return (
