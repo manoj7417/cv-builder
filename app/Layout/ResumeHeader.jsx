@@ -9,9 +9,7 @@ export default function ResumeHeader() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const dropdownRef = useRef(null);
   const logoutUser = UserStore((state) => state.logoutUser)
-  const handleLogout = () => {
-    logoutUser();
-  };
+
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -92,7 +90,7 @@ export default function ResumeHeader() {
                       <div
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                         role="menuitem"
-                        onClick={handleLogout}
+                        onClick={logoutUser}
                       >
                         Logout
                       </div>
