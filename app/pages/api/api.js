@@ -92,3 +92,13 @@ export const uploadImage = async (formData) => {
     throw error
   }
 }
+
+export const getUserResume = async () => {
+  try {
+    const response = await instance.get('/user/resume', { withCredentials: true });
+    return response;
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
+    throw error
+  }
+}
