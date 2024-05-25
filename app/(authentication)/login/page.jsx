@@ -10,7 +10,6 @@ import Image from "next/image";
 import { login } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
-import { Button } from "@/app/components/Button";
 import { UserStore } from '@/app/store/UserStore'
 function LoginUser() {
   const router = useRouter();

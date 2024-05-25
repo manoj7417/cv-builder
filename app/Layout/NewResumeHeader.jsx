@@ -122,7 +122,7 @@ export default function NewResumeHeader() {
                           <span className="sr-only">Open user menu</span>
                           <Image
                             className="h-8 w-8 rounded-full"
-                            src="/avatar.jpg"
+                            src="/pic.jpg"
                             alt="profile"
                             width={30}
                             height={30}
