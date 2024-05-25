@@ -1,6 +1,5 @@
 "use client";
-import React, { Suspense, useContext, useEffect, useState } from "react";
-import { setCookie } from "cookies-next";
+import React, { Suspense, useContext } from "react";
 // import { ArrowRight } from 'lucide-react'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -11,6 +10,7 @@ import { login } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
 import { UserStore } from '@/app/store/UserStore'
+import { SetTokens } from '../../actions'
 function LoginUser() {
   const router = useRouter();
   const { userlogin, userlogout } = useContext(AuthContext);
@@ -32,20 +32,25 @@ function LoginUser() {
       if (response.status === 200) {
         toast.success(response.data.message);
         const { accessToken, refreshToken, userdata } = response?.data?.data;
+        await SetTokens({ accessToken, refreshToken })
+
         loginUser(userdata)
-        setCookie("accessToken", accessToken, {
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-        });
-        setCookie("refreshToken", refreshToken, {
-          expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-        });
+        // setCookie("accessToken", accessToken, {
+        //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        // });
+        // setCookie("refreshToken", refreshToken, {
+        //   expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+        // });
         userlogin(userdata);
         router.push(redirect || "/");
       }
     } catch (error) {
-      toast.error(error.response.data.error);
+      console.log(error)
+      // toast.error(error.response.data.error || '');
     }
   };
+
+
 
   return (
     <>
