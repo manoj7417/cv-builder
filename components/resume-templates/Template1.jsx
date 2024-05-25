@@ -113,9 +113,9 @@ const Experience = ({ fontStyle, data }) => {
               //   ></div>
               // </div>
               <div className="experience_1 flex my-5" key={index}>
-                <div className="year w-[150px] pr-8 relative text-[#0175b2]">
+                <div className="year w-[30%] pr-8 relative text-[#0175b2]">
                   {item?.startDate && (
-                    <p className="text-center">
+                    <p className="">
                       {item.startDate}
                       {item?.endDate && " - "}
                     </p>
@@ -124,7 +124,7 @@ const Experience = ({ fontStyle, data }) => {
                   <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
                   <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
                 </div>
-                <div className="content pl-8 flex flex-col break-all">
+                <div className="content w-[70%] pl-8 flex flex-col break-all">
                   <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                     {item?.jobtitle}
                   </h3>

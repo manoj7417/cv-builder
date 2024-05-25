@@ -5,7 +5,7 @@ import ResumeViewPage from "../resume-viewer/ResumeViewer";
 import Template1 from "@/components/resume-templates/Template1";
 import Template2 from "@/components/resume-templates/Template2";
 import MobileResumeViewPage from "@/components/resume-templates/MobileResumeViewPage";
-
+import { IoDocumentOutline } from "react-icons/io5";
 const initialState = {
   basics: {
     name: "",
@@ -247,10 +247,10 @@ function Builder() {
             <div>
               {isMobile && (
                 <button
-                  className="px-5 py-2 bg-black text-white rounded-lg"
+                  className="px-5 py-3 bg-black text-white rounded-lg flex items-center text-base"
                   onClick={handleMobileContent}
                 >
-                  Preview and Download
+                  Preview and Download <IoDocumentOutline className="text-white text-xl inline ml-3"/>
                 </button>
               )}
             </div>

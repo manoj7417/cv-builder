@@ -5,11 +5,7 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import {
-  Dialog,
-
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
@@ -25,24 +21,24 @@ import { DatePicker } from "antd";
 import CustomLabelInput from "../ui/customLabelInput";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { HexColorPicker } from "react-colorful";
-import { colors } from "@/constants/colors";
+import { AccordianColor, colors } from "@/constants/colors";
 import { cn } from "@/lib/utils";
 import { SkillsSelect } from "./skills-select";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
 import { AskBot, getBetterResume } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
-import pdfToText from 'react-pdftotext'
+import pdfToText from "react-pdftotext";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-
 
 import dayjs from "dayjs";
 import { MultiStepForm } from "./MultiStepForm";
 import Link from "next/link";
 
-
 export default function Form({ resumeData, setResumeData }) {
+  const [showAllColors, setShowAllColors] = useState(false);
   const { sections } = resumeData;
+  const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState({
     jobTitle: "",
     experience: {
@@ -752,40 +748,52 @@ export default function Form({ resumeData, setResumeData }) {
   };
 
   const handlepdfFileChange = (e) => {
-    setIsGeneratingResume(true)
+    setIsGeneratingResume(true);
     let selectedFile = e.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = async () => {
       pdfToText(selectedFile)
-        .then(async text => {
-          await localStorage.setItem("newResumeContent", text)
+        .then(async (text) => {
+          await localStorage.setItem("newResumeContent", text);
           await getResumeData(text);
         })
-        .catch(error => {
-          console.error("Failed to extract text from pdf")
-          setIsAnalysing(false)
+        .catch((error) => {
+          console.error("Failed to extract text from pdf");
+          setIsAnalysing(false);
         });
-
     };
-  }
+  };
 
   const getResumeData = async (message) => {
     try {
-      const response = await getBetterResume(message)
+      const response = await getBetterResume(message);
       let value;
       if (response.status === 200) {
-        value = JSON.parse(response.data[0].text.value)
-        console.log(value)
-        setResumeData(value)
+        value = JSON.parse(response.data[0].text.value);
+        console.log(value);
+        setResumeData(value);
       }
     } catch (error) {
       console.error(error);
     } finally {
-      setIsGeneratingResume(false)
+      setIsGeneratingResume(false);
     }
-  }
+  };
 
+  const handleClick = (color) => {
+    const updatedResumeData = {
+      ...resumeData,
+      metadata: {
+        ...resumeData.metadata,
+        theme: {
+          ...resumeData.metadata.theme,
+          primary: color,
+        },
+      },
+    };
+    setResumeData(updatedResumeData);
+  };
 
   useEffect(() => {
     const newResumeData = localStorage.getItem("resumeData");
@@ -800,6 +808,16 @@ export default function Form({ resumeData, setResumeData }) {
   return (
     <>
       <div className="px-5 py-20 bg-slate-50">
+        {generatingResume && (
+          <div
+            className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"
+            style={{
+              zIndex: 9999,
+            }}
+          >
+            <NewResumeLoader />
+          </div>
+        )}
         <div className="lg:px-10 px-5 py-5">
           <div className=" rounded-lg h-24 bg-blue-50 flex items-center justify-around">
             <div>
@@ -810,10 +828,22 @@ export default function Form({ resumeData, setResumeData }) {
               />
             </div>
             <div className="flex items-center md:flex-row flex-col md:gap-2 gap-2">
-              <h1 className="md:text-md text-sm whitespace-nowrap">Compose your CV with the Genie</h1>
-              <Link href="/resumeAnalyzer-dashboard">
-                <Button className="ml-3 md:text-base text-sm">Create Now</Button>
-              </Link>
+              <h1 className="md:text-md text-sm whitespace-nowrap">
+                Compose your CV with the Genie
+              </h1>
+              <div className="flex items-center">
+                <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue ml-3 ">
+                  <span className=" text-sm bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold p-2">
+                    Upload CV
+                  </span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="application/pdf"
+                    onChange={handlepdfFileChange}
+                  />
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -934,9 +964,11 @@ export default function Form({ resumeData, setResumeData }) {
             </div>
             <div>
               <p className=" text-gray-400 text-sm">
-                Write 2-4 short & energetic sentences to interest the reader!
-                Mention your role, experience & most importantly - your biggest
-                achievements, best qualities and skills.
+                A short summary of your professional experiences, skills,
+                education, and achievements to interest the readers in your CV
+                will appear at the beginning of your CV. You can write the
+                summary on your own or Use the Generate with AI option to get
+                the summary written by the Genie to create a better impression!
               </p>
             </div>
             <div className="no-scrollbar">
@@ -983,8 +1015,9 @@ export default function Form({ resumeData, setResumeData }) {
             </div>
             <div>
               <p className="text-sm text-gray-500">
-                A varied education on your resume sums up the value that your
-                learnings and background will bring to job.
+                Input the details of your educational experiences, learnings,
+                institutions joined, and much more that you feel are relevant to
+                your job profile.
               </p>
             </div>
           </div>
@@ -1073,7 +1106,7 @@ export default function Form({ resumeData, setResumeData }) {
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 lg:py-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1173,9 +1206,9 @@ export default function Form({ resumeData, setResumeData }) {
             </div>
             <div>
               <p className="text-sm text-gray-500">
-                Show your relevant experience (last 10 years). Use bullet points
-                to note your achievements, if possible - use numbers/facts
-                (Achieved X, measured by Y, by doing Z).
+                Enter your experiences and professional endeavours and add
+                specific details to add to the value of your profile by
+                reflecting the necessary knowledge base.
               </p>
             </div>
           </div>
@@ -1249,7 +1282,7 @@ export default function Form({ resumeData, setResumeData }) {
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                               <div className="flex flex-col md:flex-row ">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2 lg:py-0 py-5">
                                   <Label for="start_date" className="block">
                                     Start Date
                                   </Label>
@@ -1366,7 +1399,11 @@ export default function Form({ resumeData, setResumeData }) {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Show your best projects</p>
+              <p className="text-sm text-gray-500">
+                If you have pursued any independent or relative projects
+                relevant to your job profile, mention them to create an
+                impression of thorough practical experience.{" "}
+              </p>
             </div>
           </div>
 
@@ -1380,7 +1417,7 @@ export default function Form({ resumeData, setResumeData }) {
                   >
                     <GoGrabber
                       className="mt-3 text-3xl
-               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                     />
                     <Accordion
                       type="single"
@@ -1448,7 +1485,7 @@ export default function Form({ resumeData, setResumeData }) {
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 lg:py-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
@@ -1486,7 +1523,7 @@ export default function Form({ resumeData, setResumeData }) {
                     </Accordion>
                     <MdDeleteOutline
                       className="mt-3 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                       onClick={() => handleDeleteProjectSection(index)}
                     />
                   </div>
@@ -1534,7 +1571,11 @@ export default function Form({ resumeData, setResumeData }) {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Enter your skills</p>
+              <p className="text-sm text-gray-500">
+                Choose 5 important skills that show you fit the position. Make
+                sure they match the key skills mentioned in the job listing
+                (especially when applying via an online system).
+              </p>
             </div>
           </div>
           <div>
@@ -1547,7 +1588,7 @@ export default function Form({ resumeData, setResumeData }) {
                   >
                     <GoGrabber
                       className=" text-3xl
-               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
                     />
                     <Accordion
                       type="single"
@@ -1593,7 +1634,7 @@ export default function Form({ resumeData, setResumeData }) {
                     </Accordion>
                     <MdDeleteOutline
                       className="absolute top-2 right-1 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                       onClick={() => handleDeleteSkills(index)}
                     />
                   </div>
@@ -1615,81 +1656,78 @@ export default function Form({ resumeData, setResumeData }) {
 
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
-          <div className="my-5">
+          <div className="my-5 flex justify-between w-full items-center">
             <Label className="text-2xl">Theme</Label>
+            <div className="flex rounded-md items-center space-x-4 my-2">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <div
+                    className="rounded-full cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      backgroundColor: resumeData.metadata.theme.primary,
+                    }}
+                  />
+                </PopoverTrigger>
+                <PopoverContent className="rounded-lg border-none bg-transparent p-0">
+                  <HexColorPicker
+                    color={resumeData.metadata.theme.primary}
+                    onChange={handleTemplateThemeChange}
+                  />
+                </PopoverContent>
+              </Popover>
+              <Input
+                id="theme.primary"
+                value={resumeData.metadata.theme.primary}
+                className="pl-2 w-36 rounded-md"
+                onChange={(event) => {
+                  handleTemplateThemeChange(event.target.value);
+                }}
+              />
+            </div>
           </div>
-          <div className="mb-2 grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9">
-            {colors.length > 0 &&
-              colors.map((color) => (
-                <div
-                  key={color}
-                  onClick={() => handleTemplateThemeChange(color)}
-                  className={cn(
-                    "flex size-6 cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                    resumeData?.metadata?.theme?.primary === color && "ring-1"
-                  )}
-                >
-                  <div className="size-6" style={{ backgroundColor: color }} />
+
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 bg-white"
+          >
+            <AccordionItem value="color">
+              <AccordionTrigger className="group-hover:text-blue-900">
+                <div className="grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9 w-full">
+                  {AccordianColor.map((color, index) => (
+                    <div
+                      key={color}
+                      onClick={() => handleClick(color)}
+                      className={cn(
+                        "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
+                        resumeData?.metadata?.theme?.primary === color &&
+                          "ring-1"
+                      )}
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
                 </div>
-              ))}
-          </div>
-          <div className="my-5">
-            <Label htmlFor="theme.primary" className="text-2xl">
-              Custom Color Picker
-            </Label>
-          </div>
-          {/* <div className="relative my-2">
-            <Popover>
-              <PopoverTrigger asChild>
-                <div
-                  className="absolute inset-y-0 left-3 my-2.5 size-4 cursor-pointer rounded-full ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
-                  style={{ backgroundColor: resumeData.metadata.theme.primary }}
-                />
-              </PopoverTrigger>
-              <PopoverContent className="rounded-lg border-none bg-transparent p-0">
-                <HexColorPicker
-                  color={resumeData.metadata.theme.primary}
-                  onChange={handleTemplateThemeChange}
-                />
-              </PopoverContent>
-            </Popover>
-            <Input
-              id="theme.primary"
-              value={resumeData.metadata.theme.primary}
-              className="pl-10"
-              onChange={(event) => {
-                handleTemplateThemeChange(event.target.value);
-              }}
-            />
-          </div> */}
-          <div className="flex items-center space-x-4 my-2">
-            <Input
-              id="theme.primary"
-              value={resumeData.metadata.theme.primary}
-              className="pl-2 w-36"
-              onChange={(event) => {
-                handleTemplateThemeChange(event.target.value);
-              }}
-            />
-            <Popover>
-              <PopoverTrigger asChild>
-                <div
-                  className="cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
-                  style={{
-                    width: "28px",
-                    height: "28px",
-                    backgroundColor: resumeData.metadata.theme.primary,
-                  }}
-                />
-              </PopoverTrigger>
-              <PopoverContent className="rounded-lg border-none bg-transparent p-0">
-                <HexColorPicker
-                  color={resumeData.metadata.theme.primary}
-                  onChange={handleTemplateThemeChange}
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="mb-2 grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9  pr-4 py-2">
+                  {colors.map((color, index) => (
+                    <div
+                      key={color}
+                      onClick={() => handleClick(color)}
+                      className={cn(
+                        "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
+                        resumeData?.metadata?.theme?.primary === color &&
+                          "ring-1"
+                      )}
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
           <div></div>
         </div>
       </div>
