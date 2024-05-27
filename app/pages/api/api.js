@@ -1,8 +1,8 @@
-import { ThickArrowRightIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 
 export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
 
 export const instance = axios.create({
   baseURL: `${baseURL}/api`,
@@ -89,6 +89,16 @@ export const uploadImage = async (formData) => {
     const response = await axios.post('https://api.cloudinary.com/v1_1/df6f1nbmp/image/upload', formData)
     return response;
   } catch (error) {
+    throw error
+  }
+}
+
+export const getUserResume = async () => {
+  try {
+    const response = await instance.get('/user/resume', { withCredentials: true });
+    return response;
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
     throw error
   }
 }
