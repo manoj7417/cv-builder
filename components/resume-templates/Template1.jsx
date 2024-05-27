@@ -11,13 +11,15 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 
-const Education = ({ fontStyle, data }) => {
+const Education = ({ fontStyle, data,colorStyle }) => {
   return (
     <div className="education_section py-3">
       {data.visible && data?.items?.length > 0 && (
         <>
           <div className="flex gap-5 items-center">
-            <h2 className={`${fontStyle.headingFont} font-semibold uppercase`}>
+            <h2 className={`${fontStyle.headingFont} font-semibold uppercase text-white`} style={{
+              color:colorStyle
+            }}>
               {data?.name}
             </h2>
           </div>
@@ -25,15 +27,15 @@ const Education = ({ fontStyle, data }) => {
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="education1 flex my-5" key={index}>
-                    <div className="year w-[150px] pr-8 relative text-[#0175b2]">
+                  <div className="education1 my-5" key={index}>
+                    <div className="year text-white">
                       {<p>item?.startDate</p> &&
                         `${item?.startDate}${item?.endDate && " - "}`}
                       {item?.endDate}
                       <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
                       <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
                     </div>
-                    <div className="content pl-8 flex flex-col break-all">
+                    <div className="content flex flex-col break-all text-white">
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                         {item?.degree}
                       </h3>
@@ -46,10 +48,6 @@ const Education = ({ fontStyle, data }) => {
                       ></div>
                     </div>
                   </div>
-                  {/* <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
-                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                  ></div> */}
                 </>
               );
             })}
@@ -60,14 +58,14 @@ const Education = ({ fontStyle, data }) => {
   );
 };
 
-const Experience = ({ fontStyle, data }) => {
+const Experience = ({ fontStyle, data,colorStyle }) => {
   return (
     <div className="experience_section my-2">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="experience_heading flex gap-5 items-center">
             <h2
-              style={{ fontSize: fontStyle.headingFont }}
+              style={{ fontSize: fontStyle.headingFont ,color:colorStyle}}
               className="text-xl font-bold uppercase"
             >
               {data?.name}
@@ -113,16 +111,19 @@ const Experience = ({ fontStyle, data }) => {
               //   ></div>
               // </div>
               <div className="experience_1 flex my-5" key={index}>
-                <div className="year w-[30%] pr-8 relative text-[#0175b2]">
+                <div className="year w-[30%] pr-2 relative">
                   {item?.startDate && (
                     <p className="">
+
                       {item.startDate}
                       {item?.endDate && " - "}
                     </p>
                   )}
                   {item?.endDate && <p>{item.endDate}</p>}
                   <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
-                  <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
+                  <div className="year_line absolute top-4 right-1 w-0.5 h-full" style={{
+                    background : colorStyle
+                  }}/>
                 </div>
                 <div className="content w-[70%] pl-8 flex flex-col break-all">
                   <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -145,16 +146,15 @@ const Experience = ({ fontStyle, data }) => {
   );
 };
 
-const Projects = ({ fontStyle, data }) => {
+const Projects = ({ fontStyle, data,colorStyle }) => {
   return (
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
         <>
           <div className="project_heading flex gap-5 items-center">
-            <div className="icon bg-gray-300 p-2">
-              <FaGraduationCap />
-            </div>
-            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`} style={{
+              color:colorStyle
+            }}>
               {data?.name}
             </h2>
           </div>
@@ -236,13 +236,15 @@ const Projects = ({ fontStyle, data }) => {
 //   );
 // };
 
-const Skills = ({ fontStyle, data }) => {
+const Skills = ({ fontStyle, data ,colorStyle}) => {
   return (
     <div>
       {data.visible && data.items.length > 0 && (
         <div className="skills_section border-b-2 border-gray-300 py-3">
           <h2
-            className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+            className={`${fontStyle.headingFont} text-white font-semibold uppercase`} style={{
+              color:colorStyle
+            }}
           >
             {data?.name}
           </h2>
@@ -266,7 +268,7 @@ const Skills = ({ fontStyle, data }) => {
   );
 };
 
-const Profile = ({ data, fontStyle }) => {
+const Profile = ({ data, fontStyle,colorStyle }) => {
   const htmlContent = data.content;
   return (
     <div>
@@ -274,13 +276,14 @@ const Profile = ({ data, fontStyle }) => {
         <div className="profile_section">
           <div className="profile_heading flex gap-5 items-center">
             <h2
-              className={`${fontStyle.headingFont} font-bold uppercase text-white`}
+              className={`${fontStyle.headingFont} font-bold uppercase`}
+              style={{color:colorStyle}}
             >
               {data?.name}
             </h2>
           </div>
           <div
-            className={`text-white my-5 break-words ${fontStyle.subHeadingFont}`}
+            className={`my-5 break-words ${fontStyle.subHeadingFont}`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -317,33 +320,18 @@ const Template1 = ({ resumeData }) => {
               <img
                 src={resumeData?.basics?.picture?.url}
                 alt="Resume_image"
-                className="w-24 h-24 block mx-auto my-5 rounded-full"
+                className="w-40 h-40 block mx-auto my-5 rounded-full"
               />
             )}
           </div>
           <div className="resume_bottom py-5 px-8">
             <div className="resume_item resume_profile py-5">
-              <Profile
-                data={resumeData?.sections?.summary}
+            <Education
                 fontStyle={fontStyle}
+                data={resumeData?.sections?.education}
               />
             </div>
-            <div className="resume_item resume_address py-5">
-              {(resumeData?.basics?.city || resumeData?.basics?.country) && (
-                <p className="flex items-center">
-                  <IoLocationOutline className="text-white" />
-                  <span className="text-white">{resumeData?.basics?.city}</span>
-                  <span className="text-white">
-                    {resumeData?.basics?.city &&
-                      resumeData?.basics?.country &&
-                      " , "}
-                  </span>
-                  <span className="text-white font-bold">
-                    {resumeData?.basics?.country}
-                  </span>
-                </p>
-              )}
-            </div>
+            
             <div className="resume_item resume_skills py-5">
               <div className="resume_info">
                 <Skills
@@ -357,16 +345,20 @@ const Template1 = ({ resumeData }) => {
         <div className="resume_right w-[65%] px-10 py-5 text-[#26252d]">
           <div className="resume_item resume_namerole">
             <h1
-              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
-            >
+              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`} 
+            style={{
+              color:resumeData?.metadata?.theme?.primary
+            }}>
               {resumeData?.basics?.name}
             </h1>
-            <p className={`${fontStyle.jobtitleFont} break-words uppercase`}>
+            <p className={`${fontStyle.jobtitleFont} break-words uppercase`} style={{
+              color:resumeData?.metadata?.theme?.primary
+            }}  >
               {resumeData?.basics?.jobtitle}
             </p>
-            <div className="contact_details mt-2">
+            <div className="contact_details">
               <div
-                className={`text-gray-600 my-4 ${fontStyle.contactFont} flex`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold`}
               >
                 {resumeData?.basics?.email && (
                   <a
@@ -393,11 +385,28 @@ const Template1 = ({ resumeData }) => {
               </div>
             </div>
           </div>
-          <div className="resume_item resume_education my-5">
+          <div className="resume_item resume_address font-semibold">
+              {(resumeData?.basics?.city || resumeData?.basics?.country) && (
+                <p className="flex items-center">
+                  <IoLocationOutline className="text-black" />
+                  <span>{resumeData?.basics?.city}</span>
+                  <span>
+                    {resumeData?.basics?.city &&
+                      resumeData?.basics?.country &&
+                      " , "}
+                  </span>
+                  <span className="">
+                    {resumeData?.basics?.country}
+                  </span>
+                </p>
+              )}
+            </div>
+          <div className="resume_item resume_profile my-5">
             <div className="resume_info">
-              <Education
+            <Profile
+                data={resumeData?.sections?.summary}
                 fontStyle={fontStyle}
-                data={resumeData?.sections?.education}
+                colorStyle={resumeData?.metadata?.theme?.primary}
               />
             </div>
           </div>
@@ -406,6 +415,7 @@ const Template1 = ({ resumeData }) => {
               <Experience
                 fontStyle={fontStyle}
                 data={resumeData?.sections?.experience}
+                colorStyle={resumeData?.metadata?.theme?.primary}
               />
             </div>
           </div>
@@ -414,6 +424,7 @@ const Template1 = ({ resumeData }) => {
               <Projects
                 fontStyle={fontStyle}
                 data={resumeData?.sections?.projects}
+                colorStyle={resumeData?.metadata?.theme?.primary}
               />
             </div>
           </div>
