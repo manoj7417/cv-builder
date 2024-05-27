@@ -6,18 +6,18 @@ import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import { AuthContext } from "./context/AuthContext";
-import { UserStore } from "./store/UserStore";
+import { useUserStore } from "./store/UserStore";
 // import NewResumeHeader from "./Layout/NewResumeHeader";
 const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const userState = UserStore((state) => state.userState)
+  const userState = useUserStore((state) => state.userState)
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); 
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 

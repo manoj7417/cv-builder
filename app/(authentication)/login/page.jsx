@@ -9,15 +9,16 @@ import Image from "next/image";
 import { login } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
-import { UserStore } from '@/app/store/UserStore'
 import { SetTokens } from '../../actions'
+import { useUserStore } from "@/app/store/UserStore";
+
 function LoginUser() {
   const router = useRouter();
   const { userlogin, userlogout } = useContext(AuthContext);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
-  const userState = UserStore((state) => state.userState)
-  const loginUser = UserStore((state) => state.loginUser)
+  const userState = useUserStore((state) => state.userState)
+  const loginUser = useUserStore((state) => state.loginUser)
   const {
     register,
     handleSubmit,
@@ -28,7 +29,6 @@ function LoginUser() {
   const handleLogin = async (data) => {
     try {
       const response = await login(data);
-
       if (response.status === 200) {
         toast.success(response.data.message);
         const { accessToken, refreshToken, userdata } = response?.data?.data;
