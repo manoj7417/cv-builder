@@ -3,8 +3,11 @@ import React, { useRef, useState } from 'react'
 import { TbEdit } from "react-icons/tb";
 import { Skeleton } from '../ui/skeleton';
 import { FaCamera } from 'react-icons/fa';
+import { useResumeStore } from '@/app/store/ResumeStore';
 
-function ImageUpload({ resumeData, setResumeData }) {
+function ImageUpload() {
+    const resumeData = useResumeStore((state) => state.resumeData)
+    const setResumeData = useResumeStore((state) => state.setResumeData)
     const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
     const [avatarURL, setAvatarURL] = useState(defaultImage);
     const [isUploading, setIsUploading] = useState(false)
@@ -37,16 +40,7 @@ function ImageUpload({ resumeData, setResumeData }) {
                 if (response.status === 200) {
                     const url = response.data.secure_url
                     setAvatarURL(url);
-                    setResumeData({
-                        ...resumeData,
-                        basics: {
-                            ...resumeData.basics,
-                            picture: {
-                                ...resumeData.basics.picture,
-                                url
-                            }
-                        }
-                    })
+                    setResumeData('basics.picture.url', url)
                 }
             };
 
@@ -75,8 +69,8 @@ function ImageUpload({ resumeData, setResumeData }) {
                 <button
                     type='submit'
                     onClick={handleImageUpload}
-                    className=' absolute top-16 r-0 w-[100px] h-[100px] flex items-baseline justify-end rounded-full'>
-                    <FaCamera className='bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full'/>
+                    className=' absolute top-0 r-0 w-[100px] h-[100px] flex items-baseline justify-end rounded-full'>
+                    <FaCamera className='bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full absolute top-16' />
                 </button>
                 <input
                     type="file"

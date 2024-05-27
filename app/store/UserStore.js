@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
-const myMiddlewares = (f) => devtools(persist(f, { name: 'UserStore' }))
+const myMiddlewares = (f) => devtools(persist(f, { name: 'auth' }))
 
-export const UserStore = create(
+export const useUserStore = create(
     myMiddlewares(
         (set) => ({
             userState: { isAuthenticated: false, userdata: null },
