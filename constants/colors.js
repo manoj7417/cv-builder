@@ -27,7 +27,6 @@ export const colors = [
   "#530062", //Dark Magenta
   "#AF0079", //Strong Pink
   "#E18BC7", //Light Pink
-  "#FFD9F3", //Pale Pink
   "#004B05", //Dark Green
   "#4D8951", //Sea Green
   "#75CFCC", //Light Sea Green

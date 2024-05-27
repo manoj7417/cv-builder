@@ -67,7 +67,7 @@ import useWindowSize from "@/app/hook/useWindowSize";
 const ResumeViewPage = ({ resumeData, setResumeData }) => {
   const { userState, userlogout } = useContext(AuthContext)
   const [scale, setScale] = useState(0.8);
-
+  const containerRef = useRef()
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
