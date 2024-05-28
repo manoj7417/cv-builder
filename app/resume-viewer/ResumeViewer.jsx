@@ -35,6 +35,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
 import { RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
+import { DataInteractive } from "@headlessui/react";
 
 // const Controls = () => {
 //   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -72,17 +73,17 @@ const ResumeViewPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const containerRef = useRef();
-  const resumeData = useResumeStore(state => state.resumeData);
+  const data = useResumeStore(state => state.resume.data);
   const setResumeData = useResumeStore(state => state.setResumeData);
   const logoutUser = useUserStore(state => state.logoutUser);
 
   const handleLogout = async () => {
-      await RemoveTokens()
-      toast.success("User logout successfully", {
-        position: "top-right",
-      });
-      logoutUser();
-      router.push("/");
+    await RemoveTokens()
+    toast.success("User logout successfully", {
+      position: "top-right",
+    });
+    logoutUser();
+    router.push("/");
   };
 
   const handleClickOutside = (event) => {
@@ -207,7 +208,7 @@ const ResumeViewPage = () => {
   };
 
   const toggleContentVisibility = () => {
-    
+
   };
 
   return (
@@ -227,10 +228,10 @@ const ResumeViewPage = () => {
             <div className="auth_section flex justify-end w-full gap-10 items-center">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-                onClick={()=>setIsContentVisible(true)}
+                onClick={() => setIsContentVisible(true)}
               >
                 <BsFullscreen className="h-4 w-4 text-white mr-2" />
-               <span>Full Screen</span>
+                <span>Full Screen</span>
               </button>
               {/* <Controls /> */}
               <div className="tools">
@@ -441,8 +442,8 @@ const ResumeViewPage = () => {
                 }}
               >
                 <GetTemplate
-                  name={resumeData?.metadata?.template}
-                  resumeData={resumeData}
+                  name={data?.metadata?.template}
+                  resumeData={data}
                 />
                 {/* <PiArrowsOutSimple className="text-4xl text-blue-900 font-bold"/> */}
                 <div className="absolute z-10  bottom-2 right-5 text-gray-500">
@@ -460,13 +461,13 @@ const ResumeViewPage = () => {
               <div>
                 {/*content*/}
                 <div>
-                <div onClick={()=>setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
-                 <LiaTimesSolid className=" text-white text-3xl"/>
-                 </div>
+                  <div onClick={() => setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
+                    <LiaTimesSolid className=" text-white text-3xl" />
+                  </div>
                   <div
                     className="shadow-2xl"
                     style={{
-                      transform:`scale(0.8)`
+                      transform: `scale(0.8)`
                     }}
                   >
                     <div
@@ -479,8 +480,8 @@ const ResumeViewPage = () => {
                       }}
                     >
                       <GetTemplate
-                        name={resumeData?.metadata?.template}
-                        resumeData={resumeData}
+                        name={data?.metadata?.template}
+                        resumeData={data}
                       />
                       <div className="absolute z-10  bottom-2 right-5 text-gray-500">
                         <p>@Career Genies Hub</p>

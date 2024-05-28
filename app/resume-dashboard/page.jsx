@@ -180,7 +180,7 @@ export default function DashboardIdea() {
           className="w-full flex flex-col items-center justify-center  "
           style={{
             backgroundImage: "url('/banner-bg.svg')",
-            backgroundSize:"cover",
+            backgroundSize: "cover",
           }}
         >
           <div className="container w-full h-full resume-dashboard">
@@ -198,7 +198,7 @@ export default function DashboardIdea() {
                 </p>
                 <div className="flex items-center space-x-4">
                   <button className="text-base text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
-                    <a href="/builder">Create CV Now!</a>
+                    <a href="/user-history">Create CV Now!</a>
                   </button>
                 </div>
               </div>
@@ -2006,10 +2006,10 @@ export default function DashboardIdea() {
         </section>
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t  scroll-mt-20 bg-blue-100"
-        style={{
-          backgroundImage: "url('/banner-bg.svg')",
-          backgroundPosition: "center",
-        }}
+          style={{
+            backgroundImage: "url('/banner-bg.svg')",
+            backgroundPosition: "center",
+          }}
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">

@@ -34,10 +34,10 @@ import { MultiStepForm } from "./MultiStepForm";
 import { useResumeStore } from '@/app/store/ResumeStore'
 
 export default function Form() {
-  const resumeData = useResumeStore((state) => state.resumeData);
+  const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData)
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
-  const { sections } = resumeData;
+  const { sections } = data;
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -63,7 +63,7 @@ export default function Form() {
 
   const handleEducationChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -85,7 +85,7 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -107,7 +107,7 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -120,7 +120,7 @@ export default function Form() {
   };
 
   const handleEducationDescriptionChange = (val, i) => {
-    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -136,7 +136,7 @@ export default function Form() {
 
   const handleExperienceChange = (e, i) => {
     const { name, value } = e.target;
-    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -149,7 +149,7 @@ export default function Form() {
   };
 
   const handleExperienceDescriptionChange = (val, i) => {
-    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -171,7 +171,7 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -193,7 +193,7 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -207,7 +207,7 @@ export default function Form() {
 
   const handleAddNewEducation = () => {
     const newEducationItems = [
-      ...resumeData.sections.education.items,
+      ...data.sections.education.items,
       {
         institution: "",
         area: "",
@@ -223,7 +223,7 @@ export default function Form() {
 
   const handleAddNewExperience = () => {
     const udpatedExperienceItems = [
-      ...resumeData.sections.experience.items,
+      ...data.sections.experience.items,
       {
         jobtitle: "",
         employer: "",
@@ -237,14 +237,14 @@ export default function Form() {
   };
 
   const handleDeleteExperienceSection = (i) => {
-    const udpatedExperienceItems = resumeData.sections.experience.items.filter((el, index) => {
+    const udpatedExperienceItems = data.sections.experience.items.filter((el, index) => {
       return index !== i;
     })
     setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleDeleteEducationSection = (i) => {
-    const updatedEducationItems = resumeData.sections.education.items.filter((el, index) => {
+    const updatedEducationItems = data.sections.education.items.filter((el, index) => {
       return index !== i;
     })
     setResumeData('sections.education.items', updatedEducationItems);
@@ -252,7 +252,7 @@ export default function Form() {
 
   const handleProjectChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -265,7 +265,7 @@ export default function Form() {
   };
 
   const handleProjectDescriptionChange = (val, i) => {
-    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -278,7 +278,7 @@ export default function Form() {
   };
 
   const handleDeleteProjectSection = (i) => {
-    const updatedProjectItems = resumeData.sections.projects.items.filter((el, index) => {
+    const updatedProjectItems = data.sections.projects.items.filter((el, index) => {
       return index !== i;
     })
     setResumeData('sections.projects.items', updatedProjectItems);
@@ -286,7 +286,7 @@ export default function Form() {
 
   const handleAddNewProject = () => {
     const updatedProjectItems = [
-      ...resumeData.sections.projects.items,
+      ...data.sections.projects.items,
       {
         title: "",
         subtitle: "",
@@ -308,7 +308,7 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -330,7 +330,7 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -351,10 +351,10 @@ export default function Form() {
 
   const handleSkillsLabelChange = (e) => {
     const updatedResumeData = {
-      ...resumeData,
+      ...data,
       sections: {
-        ...resumeData.sections,
-        skills: { ...resumeData.sections.skills, name: e.target.value },
+        ...data.sections,
+        skills: { ...data.sections.skills, name: e.target.value },
       },
     };
     setResumeData(updatedResumeData);
@@ -362,7 +362,7 @@ export default function Form() {
 
   const handleAddNewSkills = () => {
     const updatedSkills = [
-      ...resumeData.sections.skills.items,
+      ...data.sections.skills.items,
       {
         name: "",
         level: "",
@@ -372,7 +372,7 @@ export default function Form() {
   };
 
   const handleSkillNameChange = (val, i) => {
-    const updatedSkills = resumeData.sections.skills.items.map((item, index) => {
+    const updatedSkills = data.sections.skills.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -385,14 +385,14 @@ export default function Form() {
   };
 
   const handleDeleteSkills = (i) => {
-    const updatedSkills = resumeData.sections.skills.items.filter((el, index) => {
+    const updatedSkills = data.sections.skills.items.filter((el, index) => {
       return index !== i;
     })
     setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleSkillLevelChange = (val, i) => {
-    const updatedSkills = resumeData.sections.skills.items.map((item, index) => {
+    const updatedSkills = data.sections.skills.items.map((item, index) => {
       if (index === i) {
         return {
           ...item,
@@ -417,17 +417,7 @@ export default function Form() {
       const response = await AskBot(message);
       const data = response[0].text.value.split("\n")[2];
       if (data) {
-        const updatedResumeData = {
-          ...resumeData,
-          sections: {
-            ...resumeData.sections,
-            summary: {
-              ...resumeData.sections.summary,
-              content: data,
-            },
-          },
-        };
-        setResumeData("resumeData.sections.summary.content", updatedResumeData);
+        setResumeData("sections.summary.content", data);
       }
     } catch (error) {
       console.log(error);
@@ -518,7 +508,7 @@ export default function Form() {
         <div className="lg:px-10 px-5">
           <div className="w-full">
             <Label>Avatar</Label>
-            <ImageUpload/>
+            <ImageUpload />
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
@@ -528,7 +518,7 @@ export default function Form() {
                 placeholder="Enter your name"
                 name="name"
                 onChange={(e) => setResumeData('basics.name', e.target.value)}
-                value={resumeData?.basics?.name}
+                value={data?.basics?.name}
               />
             </div>
             <div className="space-y-2 my-2">
@@ -539,7 +529,7 @@ export default function Form() {
                 name="jobtitle"
                 type="text"
                 onChange={(e) => setResumeData('basics.jobtitle', e.target.value)}
-                value={resumeData?.basics?.jobtitle}
+                value={data?.basics?.jobtitle}
               />
             </div>
           </div>
@@ -552,7 +542,7 @@ export default function Form() {
                 type="email"
                 name="email"
                 onChange={(e) => setResumeData('basics.email', e.target.value)}
-                value={resumeData?.basics?.email}
+                value={data?.basics?.email}
               />
             </div>
             <div className="space-y-2 my-2">
@@ -561,7 +551,7 @@ export default function Form() {
                 id="phone"
                 placeholder="Enter phone number"
                 name="phone"
-                value={resumeData?.basics?.phone}
+                value={data?.basics?.phone}
                 onChange={(e) => setResumeData('basics.phone', e.target.value)}
               />
             </div>
@@ -572,7 +562,7 @@ export default function Form() {
               <Input
                 id="country"
                 placeholder="Enter Country Name"
-                value={resumeData?.basics?.country}
+                value={data?.basics?.country}
                 name="country"
                 onChange={(e) => setResumeData('basics.country', e.target.value)}
               />
@@ -584,7 +574,7 @@ export default function Form() {
                 placeholder="Enter City Name"
                 name="city"
                 onChange={(e) => setResumeData('basics.city', e.target.value)}
-                value={resumeData?.basics?.city}
+                value={data?.basics?.city}
               />
             </div>
           </div>
@@ -599,11 +589,11 @@ export default function Form() {
                   htmlFor="Profile"
                   className="text-2xl group-hover:hidden"
                 >
-                  {resumeData?.sections?.summary?.name}
+                  {data?.sections?.summary?.name}
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.summary?.name}
+                  value={data?.sections?.summary?.name}
                   onChange={(e) => setResumeData("sections.summary.name", e.target.value)}
                 />
               </div>
@@ -643,7 +633,7 @@ export default function Form() {
                   height: "200px",
                   position: "relative",
                 }}
-                value={resumeData?.sections?.summary.content}
+                value={data?.sections?.summary.content}
                 onChange={handleChangeProfileSummaryChange}
               />
             </div>
@@ -660,7 +650,7 @@ export default function Form() {
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.education?.name}
+                  value={data?.sections?.education?.name}
                   onChange={(e) => setResumeData('sections.education.name', e.target.value)}
                 />
               </div>
@@ -836,7 +826,7 @@ export default function Form() {
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
               Add one more{" "}
-              {`${resumeData?.sections?.education?.name}`.toLowerCase()}
+              {`${data?.sections?.education?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -851,7 +841,7 @@ export default function Form() {
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.experience?.name}
+                  value={data?.sections?.experience?.name}
                   onChange={(e) => setResumeData('sections.experience.name', e.target.value)}
                 />
               </div>
@@ -1029,7 +1019,7 @@ export default function Form() {
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
               Add one more{" "}
-              {`${resumeData?.sections?.experience?.name}`.toLowerCase()}
+              {`${data?.sections?.experience?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -1044,7 +1034,7 @@ export default function Form() {
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.projects?.name}
+                  value={data?.sections?.projects?.name}
                   onChange={(e) => setResumeData('sections.projects.name', e.target.value)}
                 />
               </div>
@@ -1201,7 +1191,7 @@ export default function Form() {
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
               Add one more{" "}
-              {`${resumeData?.sections?.projects?.name}`.toLowerCase()}
+              {`${data?.sections?.projects?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -1330,20 +1320,20 @@ export default function Form() {
                     style={{
                       width: "30px",
                       height: "30px",
-                      backgroundColor: resumeData.metadata.theme.primary,
+                      backgroundColor: data.metadata.theme.primary,
                     }}
                   />
                 </PopoverTrigger>
                 <PopoverContent className="rounded-lg border-none bg-transparent p-0">
                   <HexColorPicker
-                    color={resumeData.metadata.theme.primary}
+                    color={data.metadata.theme.primary}
                     onChange={handleTemplateThemeChange}
                   />
                 </PopoverContent>
               </Popover>
               <Input
                 id="theme.primary"
-                value={resumeData.metadata.theme.primary}
+                value={data.metadata.theme.primary}
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
                   setResumeData('metadata.theme.primary', event.target.value);
@@ -1366,7 +1356,7 @@ export default function Form() {
                       onClick={() => setResumeData('metadata.theme.primary', color)}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                        resumeData?.metadata?.theme?.primary === color &&
+                        data?.metadata?.theme?.primary === color &&
                         "ring-1"
                       )}
                       style={{ backgroundColor: color }}
@@ -1382,7 +1372,7 @@ export default function Form() {
                       onClick={() => setResumeData('metadata.theme.primary', color)}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                        resumeData?.metadata?.theme?.primary === color &&
+                        data?.metadata?.theme?.primary === color &&
                         "ring-1"
                       )}
 
