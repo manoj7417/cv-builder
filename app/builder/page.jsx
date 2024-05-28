@@ -249,7 +249,7 @@ function Builder() {
           {
             <div
               className={`${
-                isVisible ? "visible" : "hidden"
+                isVisible ? "visibleButton" : "hiddenButton"
               }mobile_section flex justify-end mb-10 mx-10 fixed bottom-0 right-0 transition-all opacity-50 ease-in-out`}
             >
               <div>
@@ -259,7 +259,7 @@ function Builder() {
                     onClick={handleMobileContent}
                   >
                     {isVisible && <span>Preview and Download </span>}
-                    <IoDocumentOutline className="text-white text-2xl inline ml-3" />
+                    <IoDocumentOutline className="text-white w-5 h-5 text-xl inline" />
                   </button>
                 )}
               </div>
