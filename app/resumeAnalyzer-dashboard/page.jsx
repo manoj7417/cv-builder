@@ -77,7 +77,7 @@ export default function DashboardIdea() {
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')" }}>
           <div className="container  w-full h-full resume-dashboard">
-            <div className="flex px-24 justify-between">
+            <div className="flex lg:px-24 px-10 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
                 <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">An Analysed CV goes a Long Way</h1>
                 <p className="text-gray-700 text-lg pe-10">Wondering why your CV does not get through the initial rounds of selection? Analyse your CV with our AI-based CV Analyser and get industry expertise integrated to create a flawless application profile.</p>
