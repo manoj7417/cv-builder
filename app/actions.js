@@ -23,3 +23,8 @@ export async function SetTokens({ accessToken, refreshToken
         sameSite: "none"
     })
 }
+
+export async function RemoveTokens() {
+    cookies().delete('accessToken')
+    cookies().delete('refreshToken')
+}

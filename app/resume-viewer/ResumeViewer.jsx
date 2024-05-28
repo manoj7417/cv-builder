@@ -33,6 +33,8 @@ import useWindowSize from "@/app/hook/useWindowSize";
 import { BsFullscreen } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
+import { RemoveTokens } from "../actions";
+import { useUserStore } from "../store/UserStore";
 
 // const Controls = () => {
 //   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -62,7 +64,6 @@ import { useResumeStore } from "../store/ResumeStore";
 // };
 
 const ResumeViewPage = () => {
-  const { userState, userlogout } = useContext(AuthContext)
   const [scale, setScale] = useState(0.8);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -73,17 +74,15 @@ const ResumeViewPage = () => {
   const containerRef = useRef();
   const resumeData = useResumeStore(state => state.resumeData);
   const setResumeData = useResumeStore(state => state.setResumeData);
+  const logoutUser = useUserStore(state => state.logoutUser);
 
-  const handleLogout = () => {
-    if (userState?.isAuthenticated) {
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
+  const handleLogout = async () => {
+      await RemoveTokens()
       toast.success("User logout successfully", {
         position: "top-right",
       });
-      userlogout();
+      logoutUser();
       router.push("/");
-    }
   };
 
   const handleClickOutside = (event) => {
@@ -121,14 +120,7 @@ const ResumeViewPage = () => {
   };
 
   const handleTemplateChange = (val) => {
-    const updatedResumeData = {
-      ...resumeData,
-      metadata: {
-        ...resumeData.metadata,
-        template: val,
-      },
-    };
-    setResumeData(updatedResumeData);
+    setResumeData('metadata.template', val);
     setIsDrawerOpen(false);
   };
 
