@@ -254,7 +254,7 @@ function Builder() {
                     className="p-3 bg-black text-white rounded-full flex items-center text-base justify-center"
                     onClick={handleMobileContent}
                   >
-                    {isVisible && <span>Preview and Download </span>}
+                    {isVisible && <span className="text-sm mr-2">Preview and Download </span>}
                     <IoDocumentOutline className="text-white w-5 h-5 text-xl inline" />
                   </button>
                 )}

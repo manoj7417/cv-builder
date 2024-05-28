@@ -56,20 +56,19 @@ export default function ResumeFeedback() {
   };
 
   const handleBetterResumeContent = async () => {
-    setIsLoading(true)
-    const resume = localStorage.getItem('newResumeContent');
+    setIsLoading(true);
+    const resume = localStorage.getItem("newResumeContent");
     if (resume) {
       const data = await fetchBetterResume(resume);
       if (data) {
-        localStorage.setItem('resumeData', JSON.stringify(data))
-        localStorage.setItem("previousPage", "/feedback")
-        router.push('/builder')
+        localStorage.setItem("resumeData", JSON.stringify(data));
+        localStorage.setItem("previousPage", "/feedback");
+        router.push("/builder");
       } else {
-        toast.error("Something went wrong")
+        toast.error("Something went wrong");
       }
     }
-  }
-
+  };
 
   const handleModalClose = (name) => {
     setModalsView({
@@ -92,7 +91,7 @@ export default function ResumeFeedback() {
   useEffect(() => {
     let pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
     let value = JSON.parse(localStorage.getItem("feedback"));
-    console.log(pdfFile)
+    console.log(pdfFile);
     setPDFFile(pdfFile);
     setContent(value);
   }, []);
@@ -130,10 +129,140 @@ export default function ResumeFeedback() {
             </p>
           </div>
         </div>
+        <section className="bg-slate-200 p-10">
+          <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-3 gap-4 sm:grid-cols-4 px-5 mb-5">
+            <div className="bg-white overflow-hidden shadow sm:rounded-lg ">
+              <div className="px-4 py-5 sm:p-6">
+                <dl className="mt-10 text-center">
+                  <dd className="uppercase text-xl leading-5 font-medium text-black truncate">
+                    OverAll
+                  </dd>
+                  <dd className="mt-1 text-base leading-9 font-bold text-black">
+                    {Object.keys(content).length > 0
+                      ? content?.analysis?.resume_score
+                      : "0"}
+                    /100
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div className="bg-white overflow-hidden shadow sm:rounded-lg  group">
+              <div className="px-4 py-5 sm:p-6 group ">
+                <dl className="text-center">
+                  <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                    Clarity
+                  </dt>
+                  <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
+                    {Object.keys(content).length > 0 && content?.clarity?.score}
+                    /100
+                  </dd>
+                  <dd className="pt-2">
+                    {Object.keys(content).length > 0 &&
+                    content?.clarity?.score > 80 ? (
+                      <button
+                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
+                        onClick={() => handleOpenModal("clarity")}
+                      >
+                        Excellent
+                      </button>
+                    ) : (
+                      <button
+                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
+                        onClick={() => handleOpenModal("clarity")}
+                      >
+                        Needs Work
+                      </button>
+                    )}
+                  </dd>
+                </dl>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.clarity}
+                content={content?.clarity?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("clarity")}
+              />
+            </div>
+            <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
+              <div className="px-4 py-5 sm:p-6">
+                <dl className="text-center">
+                  <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                    Relevance
+                  </dt>
+                  <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
+                    {Object.keys(content).length > 0 &&
+                      content?.relevancy?.score}
+                    /100
+                  </dd>
+                  <dd className="pt-2">
+                    {Object.keys(content).length > 0 &&
+                    content?.relevancy?.score > 80 ? (
+                      <button
+                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
+                        onClick={() => handleOpenModal("relevance")}
+                      >
+                        Excellent
+                      </button>
+                    ) : (
+                      <button
+                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
+                        onClick={() => handleOpenModal("relevance")}
+                      >
+                        Needs Work
+                      </button>
+                    )}
+                  </dd>
+                </dl>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.relevance}
+                content={content?.relevancy?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("relevance")}
+              />
+            </div>
+            <div className="bg-white hover:bg-gray-200 overflow-hidden shadow sm:rounded-lg group">
+              <div className="px-4 py-5 sm:p-6">
+                <dl className="text-center">
+                  <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                    Content
+                  </dt>
+                  <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
+                    {content?.content_quality?.score}/100
+                  </dd>
+                  <dd className="pt-2">
+                    {Object.keys(content).length > 0 &&
+                    content?.content_quality?.score > 80 ? (
+                      <button
+                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
+                        onClick={() => handleOpenModal("content")}
+                      >
+                        Excellent
+                      </button>
+                    ) : (
+                      <button
+                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
+                        onClick={() => handleOpenModal("content")}
+                      >
+                        Needs Work
+                      </button>
+                    )}
+                  </dd>
+                </dl>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.content}
+                content={content?.content_quality?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("content")}
+              />
+            </div>
+          </div>
+        </section>
         <div className="calculation_section py-10 bg-[#F1F6FA]">
           <div className="grid lg:grid-cols-12 grid-cols-1 ">
             <div className="lg:col-span-6 col-span-1">
-              <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-1 gap-4 sm:grid-cols-4 px-5 mb-5">
+              {/* <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-1 gap-4 sm:grid-cols-4 px-5 mb-5">
                 <div className="bg-white overflow-hidden shadow sm:rounded-lg ">
                   <div className="px-4 py-5 sm:p-6">
                     <dl className="mt-10 text-center">
@@ -225,7 +354,7 @@ export default function ResumeFeedback() {
                     onClose={() => handleModalClose("relevance")}
                   />
                 </div>
-                <div className="bg-gradient-to-r from-cyan-00 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
+                <div className="bg-gradient-to-r from-cyan-300 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
                   <div className="px-4 py-5 sm:p-6">
                     <dl className="text-center">
                       <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
@@ -261,16 +390,17 @@ export default function ResumeFeedback() {
                     onClose={() => handleModalClose("content")}
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="progress_bar p-5 ">
                 <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
                   <p className="tracking-wider">
                     Your resume ATS score is{" "}
                     <span
-                      className={`${content?.analysis?.resume_score > 65
-                        ? "text-green-400"
-                        : "text-red-500"
-                        } font-bold`}
+                      className={`${
+                        content?.analysis?.resume_score > 65
+                          ? "text-green-400"
+                          : "text-red-500"
+                      } font-bold`}
                     >
                       {content ? content?.analysis?.resume_score : "0"}
                     </span>{" "}
@@ -294,7 +424,7 @@ export default function ResumeFeedback() {
                   </p>
                   <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                     {Object.keys(content).length > 0 &&
-                      content?.analysis?.feedback?.length > 0 ? (
+                    content?.analysis?.feedback?.length > 0 ? (
                       <ul className="custom-counter">
                         {Object.keys(content).length > 0 &&
                           content.analysis.feedback.map((content, index) => {
@@ -345,14 +475,6 @@ export default function ResumeFeedback() {
                     )}
                   </div>
                 </div>
-                {/* <div className="recommandation_button my-10">
-                                        <button className="text-sm my-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md">
-                                            View Templates
-                                        </button>
-                                        <button className="lg:mx-3 mx-2 text-sm px-5 py-3 bg-transparent text-black rounded-md border border-gray-400">
-                                            Check the Result by Genie
-                                        </button>
-                                    </div> */}
               </div>
             </div>
             <div className="lg:col-span-6 col-span-1 lg:w-full w-4/5 mx-auto h-full">
@@ -370,16 +492,6 @@ export default function ResumeFeedback() {
           </div>
         </div>
       </section>
-      {/* <div className="resume_builder py-20">
-                <ResumeBuilder />
-            </div>
-            <div className="referal_program">
-                <Animate />
-            </div>
-            <div className="accordion_section py-10 bg-white">
-                <AccordionSection />
-            </div> */}
     </>
   );
 }
-

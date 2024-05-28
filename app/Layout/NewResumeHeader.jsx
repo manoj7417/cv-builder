@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useContext } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { AuthContext } from "../context/AuthContext";
@@ -51,7 +51,7 @@ export default function NewResumeHeader() {
                 <div className="relative flex h-16 items-center justify-between">
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     {/* Mobile menu button*/}
-                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <DisclosureButton className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
@@ -65,7 +65,7 @@ export default function NewResumeHeader() {
                           aria-hidden="true"
                         />
                       )}
-                    </Disclosure.Button>
+                    </DisclosureButton>
                   </div>
                   <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div className="flex flex-shrink-0 items-center">
@@ -117,7 +117,7 @@ export default function NewResumeHeader() {
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm">
+                        <MenuButton className="relative flex rounded-full bg-gray-800 text-sm">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
                           <Image
@@ -127,7 +127,7 @@ export default function NewResumeHeader() {
                             width={30}
                             height={30}
                           />
-                        </Menu.Button>
+                        </MenuButton>
                       </div>
                       <Transition
                         as={Fragment}
@@ -138,8 +138,8 @@ export default function NewResumeHeader() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
+                        <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <MenuItem>
                             {({ active }) => (
                               <a
                                 href="/user-profile"
@@ -151,8 +151,8 @@ export default function NewResumeHeader() {
                                 Profile
                               </a>
                             )}
-                          </Menu.Item>
-                          <Menu.Item>
+                          </MenuItem>
+                          <MenuItem>
                             {({ active }) => (
                               <a
                                 href="/user-dashboard"
@@ -164,8 +164,8 @@ export default function NewResumeHeader() {
                                 Dashboard
                               </a>
                             )}
-                          </Menu.Item>
-                          <Menu.Item>
+                          </MenuItem>
+                          <MenuItem>
                             {({ active }) => (
                               <a
                                 className={classNames(
@@ -177,18 +177,18 @@ export default function NewResumeHeader() {
                                 Logout
                               </a>
                             )}
-                          </Menu.Item>
-                        </Menu.Items>
+                          </MenuItem>
+                        </MenuItems>
                       </Transition>
                     </Menu>
                   </div>
                 </div>
               </div>
 
-              <Disclosure.Panel className="sm:hidden">
+              <DisclosurePanel className="sm:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2">
                   {navigation.map((item) => (
-                    <Disclosure.Button
+                    <DisclosureButton
                       key={item.name}
                       as="a"
                       href={item.href}
@@ -201,10 +201,10 @@ export default function NewResumeHeader() {
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
-                    </Disclosure.Button>
+                    </DisclosureButton>
                   ))}
                 </div>
-              </Disclosure.Panel>
+              </DisclosurePanel>
             </>
           )}
         </Disclosure>

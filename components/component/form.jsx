@@ -31,7 +31,7 @@ import ImageUpload from "./ImageUpload";
 import pdfToText from "react-pdftotext";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { MultiStepForm } from "./MultiStepForm";
-import { useResumeStore } from '@/app/store/ResumeStore'
+import { useResumeStore } from "@/app/store/ResumeStore";
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
@@ -54,10 +54,9 @@ export default function Form() {
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-
   const handleChangeProfileSummaryChange = (val) => {
     if (val) {
-      setResumeData('sections.summary.content', val)
+      setResumeData("sections.summary.content", val);
     }
   };
 
@@ -131,8 +130,6 @@ export default function Form() {
     })
     setResumeData('sections.education.items', updatedEducationItems);
   };
-
-
 
   const handleExperienceChange = (e, i) => {
     const { name, value } = e.target;
@@ -217,8 +214,8 @@ export default function Form() {
         city: "",
         description: "",
       },
-    ]
-    setResumeData('sections.education.items', newEducationItems);
+    ];
+    setResumeData("sections.education.items", newEducationItems);
   };
 
   const handleAddNewExperience = () => {
@@ -232,8 +229,8 @@ export default function Form() {
         description: "",
         city: "",
       },
-    ]
-    setResumeData('sections.experience.items', udpatedExperienceItems);
+    ];
+    setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
   const handleDeleteExperienceSection = (i) => {
@@ -294,8 +291,8 @@ export default function Form() {
         endDate: "",
         description: "",
       },
-    ]
-    setResumeData('sections.projects.items', updatedProjectItems);
+    ];
+    setResumeData("sections.projects.items", updatedProjectItems);
   };
 
   const handleProjectStartDateChange = (val, i) => {
@@ -342,10 +339,9 @@ export default function Form() {
     setResumeData('sections.projects.items', updatedProjectItems);
   };
 
-
   const handleTemplateThemeChange = (color) => {
     if (color) {
-      setResumeData('metadata.theme.primary', color)
+      setResumeData("metadata.theme.primary", color);
     }
   };
 
@@ -367,8 +363,8 @@ export default function Form() {
         name: "",
         level: "",
       },
-    ]
-    setResumeData('sections.skills.items', updatedSkills);
+    ];
+    setResumeData("sections.skills.items", updatedSkills);
   };
 
   const handleSkillNameChange = (val, i) => {
@@ -403,10 +399,6 @@ export default function Form() {
     })
     setResumeData('sections.skills.items', updatedSkills);
   };
-
-
-
-
 
   const handleGenerateProfileSummary = async () => {
     const data = JSON.stringify(formData);
@@ -450,7 +442,7 @@ export default function Form() {
       let value;
       if (response.status === 200) {
         value = JSON.parse(response.data[0].text.value);
-        replaceResumeData(value)
+        replaceResumeData(value);
       }
     } catch (error) {
       console.error(error);
@@ -458,10 +450,6 @@ export default function Form() {
       setIsGeneratingResume(false);
     }
   };
-
-
-
-
 
   return (
     <>
@@ -490,8 +478,8 @@ export default function Form() {
                 Compose your CV with the Genie
               </h1>
               <div className="flex items-center">
-                <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue ml-3 ">
-                  <span className=" text-sm bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold p-2">
+                <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue ml-3 text-sm">
+                  <span className=" text-sm bg-blue-900 hover:bg-blue-700  rounded-md text-white font-medium p-2">
                     Upload CV
                   </span>
                   <input
@@ -564,7 +552,9 @@ export default function Form() {
                 placeholder="Enter Country Name"
                 value={data?.basics?.country}
                 name="country"
-                onChange={(e) => setResumeData('basics.country', e.target.value)}
+                onChange={(e) =>
+                  setResumeData("basics.country", e.target.value)
+                }
               />
             </div>
             <div className="space-y-2">
@@ -658,12 +648,16 @@ export default function Form() {
                 {sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => setResumeData('sections.education.visible', false)}
+                    onClick={() =>
+                      setResumeData("sections.education.visible", false)
+                    }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => setResumeData('sections.education.visible', true)}
+                    onClick={() =>
+                      setResumeData("sections.education.visible", true)
+                    }
                   />
                 )}
               </div>
@@ -849,12 +843,16 @@ export default function Form() {
                 {sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => setResumeData('sections.experience.visible', false)}
+                    onClick={() =>
+                      setResumeData("sections.experience.visible", false)
+                    }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => setResumeData('sections.experience.visible', true)}
+                    onClick={() =>
+                      setResumeData("sections.experience.visible", true)
+                    }
                   />
                 )}
               </div>
@@ -892,7 +890,8 @@ export default function Form() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1042,12 +1041,16 @@ export default function Form() {
                 {sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => setResumeData('sections.projects.visible', false)}
+                    onClick={() =>
+                      setResumeData("sections.projects.visible", false)
+                    }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => setResumeData('sections.projects.visible', true)}
+                    onClick={() =>
+                      setResumeData("sections.projects.visible", true)
+                    }
                   />
                 )}
               </div>
@@ -1214,12 +1217,16 @@ export default function Form() {
                 {sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => setResumeData('sections.skills.visible', false)}
+                    onClick={() =>
+                      setResumeData("sections.skills.visible", false)
+                    }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => setResumeData('sections.skills.visible', true)}
+                    onClick={() =>
+                      setResumeData("sections.skills.visible", true)
+                    }
                   />
                 )}
               </div>
@@ -1336,7 +1343,7 @@ export default function Form() {
                 value={data.metadata.theme.primary}
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
-                  setResumeData('metadata.theme.primary', event.target.value);
+                  setResumeData("metadata.theme.primary", event.target.value);
                 }}
               />
             </div>
@@ -1353,7 +1360,9 @@ export default function Form() {
                   {AccordianColor.map((color, index) => (
                     <div
                       key={color}
-                      onClick={() => setResumeData('metadata.theme.primary', color)}
+                      onClick={() =>
+                        setResumeData("metadata.theme.primary", color)
+                      }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                         data?.metadata?.theme?.primary === color &&
@@ -1369,13 +1378,14 @@ export default function Form() {
                   {colors.map((color, index) => (
                     <div
                       key={color}
-                      onClick={() => setResumeData('metadata.theme.primary', color)}
+                      onClick={() =>
+                        setResumeData("metadata.theme.primary", color)
+                      }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                         data?.metadata?.theme?.primary === color &&
                         "ring-1"
                       )}
-
                       style={{ backgroundColor: color }}
                     />
                   ))}
