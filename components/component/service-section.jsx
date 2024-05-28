@@ -69,7 +69,7 @@ export function ServiceSection() {
                   </button>
                 </div>
               </div>
-              <div className="w-[600px] h-auto shadow-lg rounded-md">
+              <div className="lg:w-[600px] w-full h-auto shadow-lg rounded-md">
                 <video
                   width="1000"
                   height="1000"
@@ -102,7 +102,7 @@ export function ServiceSection() {
                 src="/new_section3.png"
                 width="550"
               /> */}
-              <div className="w-[550px] h-auto shadow-lg rounded-md pr-10">
+              <div className="lg:w-[550px] w-full h-auto shadow-lg rounded-md pr-10">
                 <video
                   width="1000"
                   height="1000"
@@ -121,9 +121,9 @@ export function ServiceSection() {
                   Your browser does not support the video tag.
                 </video>
               </div>
-              <div className="flex flex-col justify-center space-y-4 ps-20">
+              <div className="flex flex-col justify-center space-y-4 lg:ps-20 ps-1">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
-                  <h2 className="text-4xl font-bold text-blue-900">
+                  <h2 className="lg:text-4xl text-3xl font-bold text-blue-900">
                   Genie Connect
                   </h2>
                   <GiMagicLamp className="h-14 w-14 ms-5 text-blue-900" />

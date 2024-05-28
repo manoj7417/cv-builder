@@ -27,6 +27,11 @@ import { AuthContext } from "../context/AuthContext";
 import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { UserStore } from "../store/UserStore";
+import { Divider } from "antd";
+import useWindowSize from "@/app/hook/useWindowSize";
+import { BsFullscreen } from "react-icons/bs";
+import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
 import { RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
@@ -60,12 +65,13 @@ import { useUserStore } from "../store/UserStore";
 
 const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
-  const containerRef = useRef()
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
+  const containerRef = useRef();
   const resumeData = useResumeStore(state => state.resumeData);
   const setResumeData = useResumeStore(state => state.setResumeData);
   const logoutUser = useUserStore(state => state.logoutUser);
@@ -200,6 +206,10 @@ const ResumeViewPage = () => {
     updateScale();
   };
 
+  const toggleContentVisibility = () => {
+    
+  };
+
   return (
     <>
       <div className="flex justify-center items-center w-full h-screen overflow-hidden">
@@ -215,6 +225,12 @@ const ResumeViewPage = () => {
               </Link>
             </div>
             <div className="auth_section flex justify-end w-full gap-10 items-center">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
+                onClick={()=>setIsContentVisible(true)}
+              >
+                <BsFullscreen className="h-4 w-4 text-white" />
+              </button>
               {/* <Controls /> */}
               <div className="tools">
                 <button
@@ -421,7 +437,6 @@ const ResumeViewPage = () => {
                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
                   overflow: "hidden",
-                  overflowY: "scroll",
                 }}
               >
                 <GetTemplate
@@ -435,6 +450,46 @@ const ResumeViewPage = () => {
               </div>
             </div>
           </div>
+          {isContentVisible && (
+            <div
+              className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover  no-scrollbar"
+              id="modal-id"
+            >
+              <div className="absolute bg-black opacity-80 inset-0 z-0 w-full h-full" />
+              <div>
+                {/*content*/}
+                <div>
+                <div onClick={()=>setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
+                 <LiaTimesSolid className=" text-white text-3xl"/>
+                 </div>
+                  <div
+                    className="shadow-2xl"
+                    style={{
+                      transform:`scale(0.8)`
+                    }}
+                  >
+                    <div
+                      id="resume"
+                      className={cn("relative bg-white")}
+                      style={{
+                        width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                        height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                        overflow: "hidden",
+                      }}
+                    >
+                      <GetTemplate
+                        name={resumeData?.metadata?.template}
+                        resumeData={resumeData}
+                      />
+                      <div className="absolute z-10  bottom-2 right-5 text-gray-500">
+                        <p>@Career Genies Hub</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

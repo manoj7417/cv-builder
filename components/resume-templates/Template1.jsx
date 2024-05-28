@@ -14,7 +14,7 @@ import { MdOutlinePhone } from "react-icons/md";
 const Education = ({ fontStyle, data,colorStyle }) => {
   return (
     <div className="education_section py-3">
-      {data.visible && data?.items?.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="flex gap-5 items-center">
             <h2 className={`${fontStyle.headingFont} font-semibold uppercase text-white`} style={{
@@ -239,7 +239,7 @@ const Projects = ({ fontStyle, data,colorStyle }) => {
 const Skills = ({ fontStyle, data ,colorStyle}) => {
   return (
     <div>
-      {data.visible && data.items.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section border-b-2 border-gray-300 py-3">
           <h2
             className={`${fontStyle.headingFont} text-white font-semibold uppercase`} style={{
@@ -269,7 +269,7 @@ const Skills = ({ fontStyle, data ,colorStyle}) => {
 };
 
 const Profile = ({ data, fontStyle,colorStyle }) => {
-  const htmlContent = data.content;
+  const htmlContent = data?.content;
   return (
     <div>
       {data?.visible && (

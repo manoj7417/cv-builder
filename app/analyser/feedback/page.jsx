@@ -119,10 +119,10 @@ export default function ResumeFeedback() {
           }}
         >
           <div className="main_heading_section">
-            <h1 className=" text-center lg:text-6xl text-3xl font-bold leading-snug pt-10 pb-5 text-blue-900">
+            <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug pt-10 pb-5 text-blue-900">
               CV Analyser Insights
             </h1>
-            <p className="lg:w-1/2 w-3/5 mx-auto text-center lg:text-base text-sm text-gray-600">
+            <p className="lg:w-1/2 w-4/5 mx-auto text-center lg:text-xl text-base text-gray-600">
               Our CV Analyser is meticulously designed by a team of experienced
               professionals, recruiters, data analysts, and technical experts to
               curate compatible and optimized CVs. Check your CV Score, Content
