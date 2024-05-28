@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
 import { deleteCookie } from 'cookies-next';
-import { UserStore } from "../store/UserStore";
+import { useUserStore } from "../store/UserStore";
 
 const navigation = [
   { name: "CV Curator", href: "/builder", current: true },
@@ -29,7 +29,7 @@ export default function NewResumeHeader() {
   const router = useRouter();
 
 
-  const logoutUser = UserStore((state) => state.logoutUser)
+  const logoutUser = useUserStore((state) => state.logoutUser)
 
   const handleLogout = () => {
     deleteCookie('accessToken')

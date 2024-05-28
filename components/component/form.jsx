@@ -30,13 +30,13 @@ import { AskBot, getBetterResume } from "@/app/pages/api/api";
 import ImageUpload from "./ImageUpload";
 import pdfToText from "react-pdftotext";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-
-import dayjs from "dayjs";
 import { MultiStepForm } from "./MultiStepForm";
-import Link from "next/link";
+import { useResumeStore } from '@/app/store/ResumeStore'
 
-export default function Form({ resumeData, setResumeData }) {
-  const [showAllColors, setShowAllColors] = useState(false);
+export default function Form() {
+  const resumeData = useResumeStore((state) => state.resumeData);
+  const setResumeData = useResumeStore((state) => state.setResumeData)
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
   const { sections } = resumeData;
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState({
@@ -53,69 +53,26 @@ export default function Form({ resumeData, setResumeData }) {
   });
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const handleBasicInfoChange = (e) => {
-    const { name, value } = e.target;
-    const updatedResumeData = {
-      ...resumeData,
-      basics: { ...resumeData.basics, [name]: value },
-    };
-    setResumeData(updatedResumeData);
-  };
 
-  const handleProileLabelChange = (e) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        summary: { ...resumeData.sections.summary, name: e.target.value },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
   const handleChangeProfileSummaryChange = (val) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        summary: { ...resumeData.sections.summary, content: val },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
-
-  const handleEducationLabelChange = (e) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: { ...resumeData.sections.education, name: e.target.value },
-      },
-    };
-    setResumeData(updatedResumeData);
+    if (val) {
+      setResumeData('sections.summary.content', val)
+    }
   };
 
   const handleEducationChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          items: resumeData.sections.education.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                [name]: value,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleEducationStartDateChange = (val, i) => {
@@ -128,25 +85,16 @@ export default function Form({ resumeData, setResumeData }) {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          items: resumeData.sections.education.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                startDate: newDate,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          startDate: newDate,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleEducationEndDateChange = (val, i) => {
@@ -159,103 +107,58 @@ export default function Form({ resumeData, setResumeData }) {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          items: resumeData.sections.education.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                endDate: newDate,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          endDate: newDate,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleEducationDescriptionChange = (val, i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          items: resumeData.sections.education.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                description: val,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedEducationItems = resumeData.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
-  const handleExperienceLabelChange = (e) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: { ...resumeData.sections.experience, name: e.target.value },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
+
 
   const handleExperienceChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          items: resumeData.sections.experience.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                [name]: value,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleExperienceDescriptionChange = (val, i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          items: resumeData.sections.experience.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                description: val,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleExperienceStartDateChange = (val, i) => {
@@ -268,25 +171,16 @@ export default function Form({ resumeData, setResumeData }) {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          items: resumeData.sections.experience.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                startDate: newDate,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          startDate: newDate,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleExperienceEndDateChange = (val, i) => {
@@ -299,190 +193,109 @@ export default function Form({ resumeData, setResumeData }) {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          items: resumeData.sections.experience.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                endDate: newDate,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const udpatedExperienceItems = resumeData.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          endDate: newDate,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleAddNewEducation = () => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          items: [
-            ...resumeData.sections.education.items,
-            {
-              institution: "",
-              area: "",
-              studyType: "",
-              startDate: "",
-              endDate: "",
-              city: "",
-              description: "",
-            },
-          ],
-        },
+    const newEducationItems = [
+      ...resumeData.sections.education.items,
+      {
+        institution: "",
+        area: "",
+        studyType: "",
+        startDate: "",
+        endDate: "",
+        city: "",
+        description: "",
       },
-    };
-    setResumeData(updatedResumeData);
+    ]
+    setResumeData('sections.education.items', newEducationItems);
   };
 
   const handleAddNewExperience = () => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          items: [
-            ...resumeData.sections.experience.items,
-            {
-              jobtitle: "",
-              employer: "",
-              startDate: "",
-              endDate: "",
-              description: "",
-              city: "",
-            },
-          ],
-        },
+    const udpatedExperienceItems = [
+      ...resumeData.sections.experience.items,
+      {
+        jobtitle: "",
+        employer: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+        city: "",
       },
-    };
-    setResumeData(updatedResumeData);
+    ]
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleDeleteExperienceSection = (i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          items: resumeData.sections.experience.items.filter((el, index) => {
-            return index !== i;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const udpatedExperienceItems = resumeData.sections.experience.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleDeleteEducationSection = (i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          items: resumeData.sections.education.items.filter((el, index) => {
-            return index !== i;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedEducationItems = resumeData.sections.education.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleProjectChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          items: resumeData.sections.projects.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                [name]: value,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleProjectDescriptionChange = (val, i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          items: resumeData.sections.projects.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                description: val,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleDeleteProjectSection = (i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          items: resumeData.sections.projects.items.filter((el, index) => {
-            return index !== i;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedProjectItems = resumeData.sections.projects.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleAddNewProject = () => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          items: [
-            ...resumeData.sections.projects.items,
-            {
-              title: "",
-              subtitle: "",
-              startDate: "",
-              endDate: "",
-              description: "",
-            },
-          ],
-        },
+    const updatedProjectItems = [
+      ...resumeData.sections.projects.items,
+      {
+        title: "",
+        subtitle: "",
+        startDate: "",
+        endDate: "",
+        description: "",
       },
-    };
-    setResumeData(updatedResumeData);
+    ]
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleProjectStartDateChange = (val, i) => {
@@ -495,25 +308,16 @@ export default function Form({ resumeData, setResumeData }) {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          items: resumeData.sections.projects.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                startDate: newDate,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          startDate: newDate,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleProjectEndDateChange = (val, i) => {
@@ -526,50 +330,23 @@ export default function Form({ resumeData, setResumeData }) {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          items: resumeData.sections.projects.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                endDate: newDate,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedProjectItems = resumeData.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          endDate: newDate,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
-  const handleProjectLabelChange = (e) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: { ...resumeData.sections.projects, name: e.target.value },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
   const handleTemplateThemeChange = (color) => {
-    const updatedResumeData = {
-      ...resumeData,
-      metadata: {
-        ...resumeData.metadata,
-        theme: {
-          ...resumeData.metadata.theme,
-          primary: color,
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    if (color) {
+      setResumeData('metadata.theme.primary', color)
+    }
   };
 
   const handleSkillsLabelChange = (e) => {
@@ -584,140 +361,52 @@ export default function Form({ resumeData, setResumeData }) {
   };
 
   const handleAddNewSkills = () => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        skills: {
-          ...resumeData.sections.skills,
-          items: [
-            ...resumeData.sections.skills.items,
-            {
-              name: "",
-              level: "",
-            },
-          ],
-        },
+    const updatedSkills = [
+      ...resumeData.sections.skills.items,
+      {
+        name: "",
+        level: "",
       },
-    };
-    setResumeData(updatedResumeData);
+    ]
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleSkillNameChange = (val, i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        skills: {
-          ...resumeData.sections.skills,
-          items: resumeData.sections.skills.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                name: val,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedSkills = resumeData.sections.skills.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          name: val,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleDeleteSkills = (i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        skills: {
-          ...resumeData.sections.skills,
-          items: resumeData.sections.skills.items.filter((el, index) => {
-            return index !== i;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedSkills = resumeData.sections.skills.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleSkillLevelChange = (val, i) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        skills: {
-          ...resumeData.sections.skills,
-          items: resumeData.sections.skills.items.map((item, index) => {
-            if (index === i) {
-              return {
-                ...item,
-                level: val,
-              };
-            }
-            return item;
-          }),
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
+    const updatedSkills = resumeData.sections.skills.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          level: val,
+        };
+      }
+      return item;
+    })
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
-  const handleSkillsVisbility = (flag) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        skills: {
-          ...resumeData.sections.skills,
-          visible: flag,
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
-  const handleProjectsVisbility = (flag) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        projects: {
-          ...resumeData.sections.projects,
-          visible: flag,
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
-  const handleExpierenceVisbility = (flag) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        experience: {
-          ...resumeData.sections.experience,
-          visible: flag,
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
-  const handleEducationVisbility = (flag) => {
-    const updatedResumeData = {
-      ...resumeData,
-      sections: {
-        ...resumeData.sections,
-        education: {
-          ...resumeData.sections.education,
-          visible: flag,
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
   const handleGenerateProfileSummary = async () => {
     const data = JSON.stringify(formData);
@@ -738,7 +427,7 @@ export default function Form({ resumeData, setResumeData }) {
             },
           },
         };
-        setResumeData(updatedResumeData);
+        setResumeData("resumeData.sections.summary.content", updatedResumeData);
       }
     } catch (error) {
       console.log(error);
@@ -771,8 +460,7 @@ export default function Form({ resumeData, setResumeData }) {
       let value;
       if (response.status === 200) {
         value = JSON.parse(response.data[0].text.value);
-        console.log(value);
-        setResumeData(value);
+        replaceResumeData(value)
       }
     } catch (error) {
       console.error(error);
@@ -781,29 +469,9 @@ export default function Form({ resumeData, setResumeData }) {
     }
   };
 
-  const handleClick = (color) => {
-    const updatedResumeData = {
-      ...resumeData,
-      metadata: {
-        ...resumeData.metadata,
-        theme: {
-          ...resumeData.metadata.theme,
-          primary: color,
-        },
-      },
-    };
-    setResumeData(updatedResumeData);
-  };
 
-  useEffect(() => {
-    const newResumeData = localStorage.getItem("resumeData");
-    const previousPage = localStorage.getItem("previousPage");
-    console.log(previousPage);
-    if (newResumeData && previousPage === "/feedback") {
-      setResumeData(JSON.parse(newResumeData));
-      localStorage.removeItem("previousPage");
-    }
-  }, []);
+
+
 
   return (
     <>
@@ -850,10 +518,7 @@ export default function Form({ resumeData, setResumeData }) {
         <div className="lg:px-10 px-5">
           <div className="w-full">
             <Label>Avatar</Label>
-            <ImageUpload
-              resumeData={resumeData}
-              setResumeData={setResumeData}
-            />
+            <ImageUpload/>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
@@ -862,7 +527,7 @@ export default function Form({ resumeData, setResumeData }) {
                 id="name"
                 placeholder="Enter your name"
                 name="name"
-                onChange={handleBasicInfoChange}
+                onChange={(e) => setResumeData('basics.name', e.target.value)}
                 value={resumeData?.basics?.name}
               />
             </div>
@@ -873,7 +538,7 @@ export default function Form({ resumeData, setResumeData }) {
                 placeholder="Enter Job Title"
                 name="jobtitle"
                 type="text"
-                onChange={handleBasicInfoChange}
+                onChange={(e) => setResumeData('basics.jobtitle', e.target.value)}
                 value={resumeData?.basics?.jobtitle}
               />
             </div>
@@ -886,7 +551,7 @@ export default function Form({ resumeData, setResumeData }) {
                 placeholder="Enter your email address"
                 type="email"
                 name="email"
-                onChange={handleBasicInfoChange}
+                onChange={(e) => setResumeData('basics.email', e.target.value)}
                 value={resumeData?.basics?.email}
               />
             </div>
@@ -897,7 +562,7 @@ export default function Form({ resumeData, setResumeData }) {
                 placeholder="Enter phone number"
                 name="phone"
                 value={resumeData?.basics?.phone}
-                onChange={handleBasicInfoChange}
+                onChange={(e) => setResumeData('basics.phone', e.target.value)}
               />
             </div>
           </div>
@@ -909,7 +574,7 @@ export default function Form({ resumeData, setResumeData }) {
                 placeholder="Enter Country Name"
                 value={resumeData?.basics?.country}
                 name="country"
-                onChange={handleBasicInfoChange}
+                onChange={(e) => setResumeData('basics.country', e.target.value)}
               />
             </div>
             <div className="space-y-2">
@@ -918,7 +583,7 @@ export default function Form({ resumeData, setResumeData }) {
                 id="city"
                 placeholder="Enter City Name"
                 name="city"
-                onChange={handleBasicInfoChange}
+                onChange={(e) => setResumeData('basics.city', e.target.value)}
                 value={resumeData?.basics?.city}
               />
             </div>
@@ -939,7 +604,7 @@ export default function Form({ resumeData, setResumeData }) {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={resumeData?.sections?.summary?.name}
-                  onChange={handleProileLabelChange}
+                  onChange={(e) => setResumeData("sections.summary.name", e.target.value)}
                 />
               </div>
               <Dialog>
@@ -978,7 +643,7 @@ export default function Form({ resumeData, setResumeData }) {
                   height: "200px",
                   position: "relative",
                 }}
-                value={resumeData?.sections?.summary?.content}
+                value={resumeData?.sections?.summary.content}
                 onChange={handleChangeProfileSummaryChange}
               />
             </div>
@@ -996,19 +661,19 @@ export default function Form({ resumeData, setResumeData }) {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={resumeData?.sections?.education?.name}
-                  onChange={handleEducationLabelChange}
+                  onChange={(e) => setResumeData('sections.education.name', e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => handleEducationVisbility(false)}
+                    onClick={() => setResumeData('sections.education.visible', false)}
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => handleEducationVisbility(true)}
+                    onClick={() => setResumeData('sections.education.visible', true)}
                   />
                 )}
               </div>
@@ -1187,19 +852,19 @@ export default function Form({ resumeData, setResumeData }) {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={resumeData?.sections?.experience?.name}
-                  onChange={handleExperienceLabelChange}
+                  onChange={(e) => setResumeData('sections.experience.name', e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => handleExpierenceVisbility(false)}
+                    onClick={() => setResumeData('sections.experience.visible', false)}
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => handleExpierenceVisbility(true)}
+                    onClick={() => setResumeData('sections.experience.visible', true)}
                   />
                 )}
               </div>
@@ -1237,8 +902,7 @@ export default function Form({ resumeData, setResumeData }) {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1381,19 +1045,19 @@ export default function Form({ resumeData, setResumeData }) {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={resumeData?.sections?.projects?.name}
-                  onChange={handleProjectLabelChange}
+                  onChange={(e) => setResumeData('sections.projects.name', e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => handleProjectsVisbility(false)}
+                    onClick={() => setResumeData('sections.projects.visible', false)}
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => handleProjectsVisbility(true)}
+                    onClick={() => setResumeData('sections.projects.visible', true)}
                   />
                 )}
               </div>
@@ -1560,12 +1224,12 @@ export default function Form({ resumeData, setResumeData }) {
                 {sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
-                    onClick={() => handleSkillsVisbility(false)}
+                    onClick={() => setResumeData('sections.skills.visible', false)}
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
-                    onClick={() => handleSkillsVisbility(true)}
+                    onClick={() => setResumeData('sections.skills.visible', true)}
                   />
                 )}
               </div>
@@ -1682,7 +1346,7 @@ export default function Form({ resumeData, setResumeData }) {
                 value={resumeData.metadata.theme.primary}
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
-                  handleTemplateThemeChange(event.target.value);
+                  setResumeData('metadata.theme.primary', event.target.value);
                 }}
               />
             </div>
@@ -1699,11 +1363,11 @@ export default function Form({ resumeData, setResumeData }) {
                   {AccordianColor.map((color, index) => (
                     <div
                       key={color}
-                      onClick={() => handleClick(color)}
+                      onClick={() => setResumeData('metadata.theme.primary', color)}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                         resumeData?.metadata?.theme?.primary === color &&
-                          "ring-1"
+                        "ring-1"
                       )}
                       style={{ backgroundColor: color }}
                     />
@@ -1715,12 +1379,13 @@ export default function Form({ resumeData, setResumeData }) {
                   {colors.map((color, index) => (
                     <div
                       key={color}
-                      onClick={() => handleClick(color)}
+                      onClick={() => setResumeData('metadata.theme.primary', color)}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                         resumeData?.metadata?.theme?.primary === color &&
-                          "ring-1"
+                        "ring-1"
                       )}
+
                       style={{ backgroundColor: color }}
                     />
                   ))}

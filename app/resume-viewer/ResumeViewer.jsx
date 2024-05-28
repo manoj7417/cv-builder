@@ -8,13 +8,7 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
-import { PiArrowsOutSimple } from "react-icons/pi";
-import {
-  ReactZoomPanPinchRef,
-  TransformComponent,
-  TransformWrapper,
-  useControls,
-} from "react-zoom-pan-pinch";
+
 import {
   Drawer,
   DrawerClose,
@@ -38,6 +32,7 @@ import { Divider } from "antd";
 import useWindowSize from "@/app/hook/useWindowSize";
 import { BsFullscreen } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
+import { useResumeStore } from "../store/ResumeStore";
 
 // const Controls = () => {
 //   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -66,16 +61,18 @@ import { LiaTimesSolid } from "react-icons/lia";
 //   );
 // };
 
-const ResumeViewPage = ({ resumeData, setResumeData }) => {
-  const { userState, userlogout } = useContext(AuthContext);
+const ResumeViewPage = () => {
+  const { userState, userlogout } = useContext(AuthContext)
   const [scale, setScale] = useState(0.8);
-  const containerRef = useRef();
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const containerRef = useRef();
+  const resumeData = useResumeStore(state => state.resumeData);
+  const setResumeData = useResumeStore(state => state.setResumeData);
 
   const handleLogout = () => {
     if (userState?.isAuthenticated) {
