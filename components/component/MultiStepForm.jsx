@@ -22,7 +22,6 @@ export const MultiStepForm = ({
   setSteps,
   isLoading,
   handleGenerateProfileSummary,
-  resumeData,
 }) => {
   const handleJobTitleChange = (e) => {
     const newFormDate = { ...formData, jobTitle: e.target.value };

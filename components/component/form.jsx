@@ -34,10 +34,10 @@ import { MultiStepForm } from "./MultiStepForm";
 import { useResumeStore } from "@/app/store/ResumeStore";
 
 export default function Form() {
-  const resumeData = useResumeStore((state) => state.resumeData);
-  const setResumeData = useResumeStore((state) => state.setResumeData);
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
-  const { sections } = resumeData;
+  const data = useResumeStore((state) => state.resume.data);
+  const setResumeData = useResumeStore((state) => state.setResumeData)
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
+  const { sections } = data;
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -62,18 +62,16 @@ export default function Form() {
 
   const handleEducationChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedEducationItems = resumeData.sections.education.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            [name]: value,
-          };
-        }
-        return item;
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
       }
-    );
-    setResumeData("sections.education.items", updatedEducationItems);
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleEducationStartDateChange = (val, i) => {
@@ -86,18 +84,16 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedEducationItems = resumeData.sections.education.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            startDate: newDate,
-          };
-        }
-        return item;
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          startDate: newDate,
+        };
       }
-    );
-    setResumeData("sections.education.items", updatedEducationItems);
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleEducationEndDateChange = (val, i) => {
@@ -110,64 +106,56 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedEducationItems = resumeData.sections.education.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            endDate: newDate,
-          };
-        }
-        return item;
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          endDate: newDate,
+        };
       }
-    );
-    setResumeData("sections.education.items", updatedEducationItems);
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleEducationDescriptionChange = (val, i) => {
-    const updatedEducationItems = resumeData.sections.education.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            description: val,
-          };
-        }
-        return item;
+    const updatedEducationItems = data.sections.education.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
       }
-    );
-    setResumeData("sections.education.items", updatedEducationItems);
+      return item;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleExperienceChange = (e, i) => {
     const { name, value } = e.target;
-    const udpatedExperienceItems = resumeData.sections.experience.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            [name]: value,
-          };
-        }
-        return item;
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
       }
-    );
-    setResumeData("sections.experience.items", udpatedExperienceItems);
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleExperienceDescriptionChange = (val, i) => {
-    const udpatedExperienceItems = resumeData.sections.experience.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            description: val,
-          };
-        }
-        return item;
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
       }
-    );
-    setResumeData("sections.experience.items", udpatedExperienceItems);
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleExperienceStartDateChange = (val, i) => {
@@ -180,18 +168,16 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const udpatedExperienceItems = resumeData.sections.experience.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            startDate: newDate,
-          };
-        }
-        return item;
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          startDate: newDate,
+        };
       }
-    );
-    setResumeData("sections.experience.items", udpatedExperienceItems);
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleExperienceEndDateChange = (val, i) => {
@@ -204,23 +190,21 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const udpatedExperienceItems = resumeData.sections.experience.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            endDate: newDate,
-          };
-        }
-        return item;
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          endDate: newDate,
+        };
       }
-    );
-    setResumeData("sections.experience.items", udpatedExperienceItems);
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleAddNewEducation = () => {
     const newEducationItems = [
-      ...resumeData.sections.education.items,
+      ...data.sections.education.items,
       {
         institution: "",
         area: "",
@@ -236,7 +220,7 @@ export default function Form() {
 
   const handleAddNewExperience = () => {
     const udpatedExperienceItems = [
-      ...resumeData.sections.experience.items,
+      ...data.sections.experience.items,
       {
         jobtitle: "",
         employer: "",
@@ -250,66 +234,56 @@ export default function Form() {
   };
 
   const handleDeleteExperienceSection = (i) => {
-    const udpatedExperienceItems = resumeData.sections.experience.items.filter(
-      (el, index) => {
-        return index !== i;
-      }
-    );
-    setResumeData("sections.experience.items", udpatedExperienceItems);
+    const udpatedExperienceItems = data.sections.experience.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
   };
 
   const handleDeleteEducationSection = (i) => {
-    const updatedEducationItems = resumeData.sections.education.items.filter(
-      (el, index) => {
-        return index !== i;
-      }
-    );
-    setResumeData("sections.education.items", updatedEducationItems);
+    const updatedEducationItems = data.sections.education.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.education.items', updatedEducationItems);
   };
 
   const handleProjectChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedProjectItems = resumeData.sections.projects.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            [name]: value,
-          };
-        }
-        return item;
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
       }
-    );
-    setResumeData("sections.projects.items", updatedProjectItems);
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleProjectDescriptionChange = (val, i) => {
-    const updatedProjectItems = resumeData.sections.projects.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            description: val,
-          };
-        }
-        return item;
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
       }
-    );
-    setResumeData("sections.projects.items", updatedProjectItems);
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleDeleteProjectSection = (i) => {
-    const updatedProjectItems = resumeData.sections.projects.items.filter(
-      (el, index) => {
-        return index !== i;
-      }
-    );
-    setResumeData("sections.projects.items", updatedProjectItems);
+    const updatedProjectItems = data.sections.projects.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleAddNewProject = () => {
     const updatedProjectItems = [
-      ...resumeData.sections.projects.items,
+      ...data.sections.projects.items,
       {
         title: "",
         subtitle: "",
@@ -331,18 +305,16 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedProjectItems = resumeData.sections.projects.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            startDate: newDate,
-          };
-        }
-        return item;
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          startDate: newDate,
+        };
       }
-    );
-    setResumeData("sections.projects.items", updatedProjectItems);
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleProjectEndDateChange = (val, i) => {
@@ -355,18 +327,16 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedProjectItems = resumeData.sections.projects.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            endDate: newDate,
-          };
-        }
-        return item;
+    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          endDate: newDate,
+        };
       }
-    );
-    setResumeData("sections.projects.items", updatedProjectItems);
+      return item;
+    })
+    setResumeData('sections.projects.items', updatedProjectItems);
   };
 
   const handleTemplateThemeChange = (color) => {
@@ -377,10 +347,10 @@ export default function Form() {
 
   const handleSkillsLabelChange = (e) => {
     const updatedResumeData = {
-      ...resumeData,
+      ...data,
       sections: {
-        ...resumeData.sections,
-        skills: { ...resumeData.sections.skills, name: e.target.value },
+        ...data.sections,
+        skills: { ...data.sections.skills, name: e.target.value },
       },
     };
     setResumeData(updatedResumeData);
@@ -388,7 +358,7 @@ export default function Form() {
 
   const handleAddNewSkills = () => {
     const updatedSkills = [
-      ...resumeData.sections.skills.items,
+      ...data.sections.skills.items,
       {
         name: "",
         level: "",
@@ -398,42 +368,36 @@ export default function Form() {
   };
 
   const handleSkillNameChange = (val, i) => {
-    const updatedSkills = resumeData.sections.skills.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            name: val,
-          };
-        }
-        return item;
+    const updatedSkills = data.sections.skills.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          name: val,
+        };
       }
-    );
-    setResumeData("sections.skills.items", updatedSkills);
+      return item;
+    })
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleDeleteSkills = (i) => {
-    const updatedSkills = resumeData.sections.skills.items.filter(
-      (el, index) => {
-        return index !== i;
-      }
-    );
-    setResumeData("sections.skills.items", updatedSkills);
+    const updatedSkills = data.sections.skills.items.filter((el, index) => {
+      return index !== i;
+    })
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleSkillLevelChange = (val, i) => {
-    const updatedSkills = resumeData.sections.skills.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            level: val,
-          };
-        }
-        return item;
+    const updatedSkills = data.sections.skills.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          level: val,
+        };
       }
-    );
-    setResumeData("sections.skills.items", updatedSkills);
+      return item;
+    })
+    setResumeData('sections.skills.items', updatedSkills);
   };
 
   const handleGenerateProfileSummary = async () => {
@@ -445,17 +409,7 @@ export default function Form() {
       const response = await AskBot(message);
       const data = response[0].text.value.split("\n")[2];
       if (data) {
-        const updatedResumeData = {
-          ...resumeData,
-          sections: {
-            ...resumeData.sections,
-            summary: {
-              ...resumeData.sections.summary,
-              content: data,
-            },
-          },
-        };
-        setResumeData("resumeData.sections.summary.content", updatedResumeData);
+        setResumeData("sections.summary.content", data);
       }
     } catch (error) {
       console.log(error);
@@ -540,37 +494,32 @@ export default function Form() {
           </div>
         </div>
         <div className="lg:px-10 px-5">
-         
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
-            <div>
-              <div className="space-y-2 my-3">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  placeholder="Enter your name"
-                  name="name"
-                  onChange={(e) => setResumeData("basics.name", e.target.value)}
-                  value={resumeData?.basics?.name}
-                />
-              </div>
-              <div className="space-y-2 my-3">
-                <Label htmlFor="jobtitle">Job Title</Label>
-                <Input
-                  id="jobtitle"
-                  placeholder="Enter Job Title"
-                  name="jobtitle"
-                  type="text"
-                  onChange={(e) =>
-                    setResumeData("basics.jobtitle", e.target.value)
-                  }
-                  value={resumeData?.basics?.jobtitle}
-                />
-              </div>
-            </div>
-            <div className="w-full h-full flex justify-center flex-col items-center gap-3">
+          <div className="w-full">
             <Label>Avatar</Label>
             <ImageUpload />
           </div>
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
+            <div className="space-y-2 my-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Enter your name"
+                name="name"
+                onChange={(e) => setResumeData('basics.name', e.target.value)}
+                value={data?.basics?.name}
+              />
+            </div>
+            <div className="space-y-2 my-2">
+              <Label htmlFor="jobtitle">Job Title</Label>
+              <Input
+                id="jobtitle"
+                placeholder="Enter Job Title"
+                name="jobtitle"
+                type="text"
+                onChange={(e) => setResumeData('basics.jobtitle', e.target.value)}
+                value={data?.basics?.jobtitle}
+              />
+            </div>
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
@@ -580,8 +529,8 @@ export default function Form() {
                 placeholder="Enter your email address"
                 type="email"
                 name="email"
-                onChange={(e) => setResumeData("basics.email", e.target.value)}
-                value={resumeData?.basics?.email}
+                onChange={(e) => setResumeData('basics.email', e.target.value)}
+                value={data?.basics?.email}
               />
             </div>
             <div className="space-y-2 my-2">
@@ -590,8 +539,8 @@ export default function Form() {
                 id="phone"
                 placeholder="Enter phone number"
                 name="phone"
-                value={resumeData?.basics?.phone}
-                onChange={(e) => setResumeData("basics.phone", e.target.value)}
+                value={data?.basics?.phone}
+                onChange={(e) => setResumeData('basics.phone', e.target.value)}
               />
             </div>
           </div>
@@ -601,7 +550,7 @@ export default function Form() {
               <Input
                 id="country"
                 placeholder="Enter Country Name"
-                value={resumeData?.basics?.country}
+                value={data?.basics?.country}
                 name="country"
                 onChange={(e) =>
                   setResumeData("basics.country", e.target.value)
@@ -614,8 +563,8 @@ export default function Form() {
                 id="city"
                 placeholder="Enter City Name"
                 name="city"
-                onChange={(e) => setResumeData("basics.city", e.target.value)}
-                value={resumeData?.basics?.city}
+                onChange={(e) => setResumeData('basics.city', e.target.value)}
+                value={data?.basics?.city}
               />
             </div>
           </div>
@@ -630,14 +579,12 @@ export default function Form() {
                   htmlFor="Profile"
                   className="text-2xl group-hover:hidden"
                 >
-                  {resumeData?.sections?.summary?.name}
+                  {data?.sections?.summary?.name}
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.summary?.name}
-                  onChange={(e) =>
-                    setResumeData("sections.summary.name", e.target.value)
-                  }
+                  value={data?.sections?.summary?.name}
+                  onChange={(e) => setResumeData("sections.summary.name", e.target.value)}
                 />
               </div>
               <Dialog>
@@ -676,7 +623,7 @@ export default function Form() {
                   height: "200px",
                   position: "relative",
                 }}
-                value={resumeData?.sections?.summary.content}
+                value={data?.sections?.summary.content}
                 onChange={handleChangeProfileSummaryChange}
               />
             </div>
@@ -693,10 +640,8 @@ export default function Form() {
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.education?.name}
-                  onChange={(e) =>
-                    setResumeData("sections.education.name", e.target.value)
-                  }
+                  value={data?.sections?.education?.name}
+                  onChange={(e) => setResumeData('sections.education.name', e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -875,7 +820,7 @@ export default function Form() {
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
               Add one more{" "}
-              {`${resumeData?.sections?.education?.name}`.toLowerCase()}
+              {`${data?.sections?.education?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -890,10 +835,8 @@ export default function Form() {
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.experience?.name}
-                  onChange={(e) =>
-                    setResumeData("sections.experience.name", e.target.value)
-                  }
+                  value={data?.sections?.experience?.name}
+                  onChange={(e) => setResumeData('sections.experience.name', e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -1075,7 +1018,7 @@ export default function Form() {
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
               Add one more{" "}
-              {`${resumeData?.sections?.experience?.name}`.toLowerCase()}
+              {`${data?.sections?.experience?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -1090,10 +1033,8 @@ export default function Form() {
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
-                  value={resumeData?.sections?.projects?.name}
-                  onChange={(e) =>
-                    setResumeData("sections.projects.name", e.target.value)
-                  }
+                  value={data?.sections?.projects?.name}
+                  onChange={(e) => setResumeData('sections.projects.name', e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -1253,7 +1194,7 @@ export default function Form() {
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
               Add one more{" "}
-              {`${resumeData?.sections?.projects?.name}`.toLowerCase()}
+              {`${data?.sections?.projects?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -1386,20 +1327,20 @@ export default function Form() {
                     style={{
                       width: "30px",
                       height: "30px",
-                      backgroundColor: resumeData.metadata.theme.primary,
+                      backgroundColor: data.metadata.theme.primary,
                     }}
                   />
                 </PopoverTrigger>
                 <PopoverContent className="rounded-lg border-none bg-transparent p-0">
                   <HexColorPicker
-                    color={resumeData.metadata.theme.primary}
+                    color={data.metadata.theme.primary}
                     onChange={handleTemplateThemeChange}
                   />
                 </PopoverContent>
               </Popover>
               <Input
                 id="theme.primary"
-                value={resumeData.metadata.theme.primary}
+                value={data.metadata.theme.primary}
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
                   setResumeData("metadata.theme.primary", event.target.value);
@@ -1424,8 +1365,8 @@ export default function Form() {
                       }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                        resumeData?.metadata?.theme?.primary === color &&
-                          "ring-1"
+                        data?.metadata?.theme?.primary === color &&
+                        "ring-1"
                       )}
                       style={{ backgroundColor: color }}
                     />
@@ -1442,8 +1383,8 @@ export default function Form() {
                       }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                        resumeData?.metadata?.theme?.primary === color &&
-                          "ring-1"
+                        data?.metadata?.theme?.primary === color &&
+                        "ring-1"
                       )}
                       style={{ backgroundColor: color }}
                     />
