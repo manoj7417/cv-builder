@@ -33,20 +33,13 @@ function LoginUser() {
         toast.success(response.data.message);
         const { accessToken, refreshToken, userdata } = response?.data?.data;
         await SetTokens({ accessToken, refreshToken })
-
         loginUser(userdata)
-        // setCookie("accessToken", accessToken, {
-        //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-        // });
-        // setCookie("refreshToken", refreshToken, {
-        //   expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-        // });
         userlogin(userdata);
         router.push(redirect || "/");
       }
     } catch (error) {
       console.log(error)
-      // toast.error(error.response.data.error || '');
+      toast.error(error.response.data.error || '');
     }
   };
 
