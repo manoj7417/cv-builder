@@ -22,11 +22,12 @@ const TabsMain = () => {
             <section className="flex lg:flex-row flex-col lg:px-0 px-10 gap-10 justify-center">
               <div className="grid lg:grid-cols-2 grid-cols-1 border border-gray-400 p-5 rounded-md lg:w-4/5 my-5 gap-2 place-content-center place-items-center h-full">
                 <div className="file">
-                  <label htmlFor="input-file">
-                    <FaCirclePlus className="mr-3 text-xl text-blue-900" />
-                    Select a file
-                  </label>
-                  <input id="input-file" type="file" />
+                  <Link
+                    href={"/builder"}
+                    className="bg-blue-900 text-white p-3 rounded-md text-sm"
+                  >
+                    Create CV
+                  </Link>
                 </div>
 
                 <div className="text-sm">
@@ -43,11 +44,12 @@ const TabsMain = () => {
               </div>
               <div className="grid lg:grid-cols-2 grid-cols-1 border border-gray-400 p-5 rounded-md lg:w-4/5 my-5 gap-2 place-content-center place-items-center h-full">
                 <div className="file">
-                  <label htmlFor="input-file">
-                    <FaCirclePlus className="mr-3 text-xl text-blue-900" />
-                    Select a file
-                  </label>
-                  <input id="input-file" type="file" />
+                  <Link
+                    href={"/coming-soon"}
+                    className="bg-blue-900 text-white p-3 rounded-md text-sm"
+                  >
+                    Create Cover Letter
+                  </Link>
                 </div>
 
                 <div className="text-sm">
@@ -65,11 +67,11 @@ const TabsMain = () => {
             </section>
 
             <section className="overflow-hidden">
-              <div className="max-w-3xl bg-gray-50 hover:bg-gray-100 lg:p-5 p-10 rounded-md">
+              <div className="max-w-3xl bg-gray-50 hover:bg-gray-100 rounded-md">
                 <div className="mx-auto flex justify-center flex-wrap items-center lg:w-full">
                   <div className="w-full lg:w-1/2 text-center">
                     <CardContainer className="inter-var">
-                      <CardBody className="relative group/card rounded-xl p-5 cursor-pointer">
+                      <CardBody className="relative group/card rounded-xl Scursor-pointer">
                         <CardItem translateZ="100" className="w-full mt-4">
                           <img
                             alt="pic1"
@@ -80,7 +82,10 @@ const TabsMain = () => {
                       </CardBody>
                     </CardContainer>
                   </div>
-                  <div className="w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                  <div className="w-full lg:mt-0 lg:w-1/2 lg:pl-0">
+                  <h2 className="text-base font-semibold tracking-widest text-blue-900">
+                      Free Template
+                    </h2>
                     <div
                       className="flex items-center justify-between py-2 px-1"
                       contentEditable
@@ -115,11 +120,11 @@ const TabsMain = () => {
           </Tab>
           <Tab label="CV">
             <section className="overflow-hidden">
-              <div className="max-w-3xl bg-gray-50 hover:bg-gray-100 lg:p-5 p-10 rounded-md">
+              <div className="max-w-3xl bg-gray-50 hover:bg-gray-100 rounded-md">
                 <div className="mx-auto flex justify-center flex-wrap items-center lg:w-full">
                   <div className="w-full lg:w-1/2 text-center">
                     <CardContainer className="inter-var">
-                      <CardBody className="relative group/card rounded-xl p-5 cursor-pointer">
+                      <CardBody className="relative group/card rounded-xl cursor-pointer p-2">
                         <CardItem translateZ="100" className="w-full mt-4">
                           <img
                             alt="pic1"
@@ -130,7 +135,10 @@ const TabsMain = () => {
                       </CardBody>
                     </CardContainer>
                   </div>
-                  <div className="w-full lg:mt-0 lg:w-1/2 lg:pl-5">
+                  <div className="w-full lg:mt-0 lg:w-1/2 lg:pl-0">
+                    <h2 className="text-base font-semibold tracking-widest text-blue-900">
+                      Free Template
+                    </h2>
                     <div
                       className="flex items-center justify-between py-2 px-1"
                       contentEditable
@@ -164,12 +172,12 @@ const TabsMain = () => {
             </section>
           </Tab>
           <Tab label="Cover Letter">
-          <h1 className="text-xl md:text-2xl font-bold my-1 z-10">
-          Coming Soon
-        </h1>
-        <p className=" text-sm md:text-base">
-          We are working hard to bring you something amazing.Stay tuned!
-        </p>
+            <h1 className="text-xl md:text-2xl font-bold my-1 z-10">
+              Coming Soon
+            </h1>
+            <p className=" text-sm md:text-base">
+              We are working hard to bring you something amazing.Stay tuned!
+            </p>
           </Tab>
         </Tabs>
       </div>

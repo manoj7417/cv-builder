@@ -194,9 +194,9 @@ function Builder() {
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-
 
   const handleMobileContent = () => {
     // setIsMobile(false);
@@ -220,22 +220,26 @@ function Builder() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   console.log("running");
-  //   const storedResumeData = localStorage.getItem("resumeData");
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const scrollBottom =
+        document.documentElement.scrollHeight -
+        window.innerHeight -
+        window.scrollY;
 
-  //   if (storedResumeData) {
-  //     try {
-  //       const parsedResumeData = JSON.parse(storedResumeData);
-  //       // Only update state if the new data is different
-  //       if (JSON.stringify(parsedResumeData) !== JSON.stringify(resumeData)) {
-  //         setResumeData(parsedResumeData);
-  //       }
-  //     } catch (error) {
-  //       console.error("Failed to parse resume data from localStorage:", error);
-  //     }
-  //   }
-  // }, []);
+      if (scrollTop < 100 || scrollBottom < 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -243,30 +247,46 @@ function Builder() {
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
           {
-          <div className="mobile_section flex justify-end mb-10 mx-10 fixed bottom-5 right-0">
-            <div>
-              {isMobile && (
-                <button
-                  className="px-5 py-3 bg-black text-white rounded-lg flex items-center text-base"
-                  onClick={handleMobileContent}
-                >
-                  Preview and Download <IoDocumentOutline className="text-white text-xl inline ml-3"/>
-                </button>
-              )}
+            <div
+              className={`${
+                isVisible ? "visible" : "hidden"
+              }mobile_section flex justify-end mb-10 mx-10 fixed bottom-0 right-0 transition-all opacity-50 ease-in-out`}
+            >
+              <div>
+                {isMobile && (
+                  <button
+                    className="p-3 bg-black text-white rounded-full flex items-center text-base justify-center"
+                    onClick={handleMobileContent}
+                  >
+                    {isVisible && <span>Preview and Download </span>}
+                    <IoDocumentOutline className="text-white text-2xl inline ml-3" />
+                  </button>
+                )}
+              </div>
+              <div>
+                {mobileContent && (
+                  <MobileResumeViewPage
+                    scale={scale}
+                    resumeData={resumeData}
+                    isOverlayOpen={isOverlayOpen}
+                    setIsOverlayOpen={setIsOverlayOpen}
+                  />
+                )}
+              </div>
             </div>
-            <div>
-              {
-                mobileContent && (<MobileResumeViewPage scale={scale} resumeData={resumeData} isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen}/>)
-              }
-            </div>
-          </div>
           }
         </div>
-        <div className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden lg:fixed lg:right-0 lg:block hidden" style={{
-          background:`url(bigbg.svg)`,
-          backgroundPosition:"bottom"
-        }}>
-          <ResumeViewPage resumeData={resumeData} setResumeData={setResumeData} />
+        <div
+          className="resume_viewer md:w-1/2 w-full h-screen overflow-hidden lg:fixed lg:right-0 lg:block hidden"
+          style={{
+            background: `url(bigbg.svg)`,
+            backgroundPosition: "bottom",
+          }}
+        >
+          <ResumeViewPage
+            resumeData={resumeData}
+            setResumeData={setResumeData}
+          />
         </div>
       </div>
     </>

@@ -229,7 +229,8 @@ const ResumeViewPage = () => {
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
                 onClick={()=>setIsContentVisible(true)}
               >
-                <BsFullscreen className="h-4 w-4 text-white" />
+                <BsFullscreen className="h-4 w-4 text-white mr-2" />
+               <span>Full Screen</span>
               </button>
               {/* <Controls /> */}
               <div className="tools">

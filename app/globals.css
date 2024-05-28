@@ -618,4 +618,16 @@ footer a:hover svg {
   justify-content: center;
   align-items: center;
 }
+
+
+
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* Resume Tempates CSS Ends Here  */
