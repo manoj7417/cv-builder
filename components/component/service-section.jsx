@@ -121,9 +121,9 @@ export function ServiceSection() {
                   Your browser does not support the video tag.
                 </video>
               </div>
-              <div className="flex flex-col justify-center space-y-4 ps-20">
+              <div className="flex flex-col justify-center space-y-4 lg:ps-20 ps-1">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
-                  <h2 className="text-4xl font-bold text-blue-900">
+                  <h2 className="lg:text-4xl text-3xl font-bold text-blue-900">
                   Genie Connect
                   </h2>
                   <GiMagicLamp className="h-14 w-14 ms-5 text-blue-900" />

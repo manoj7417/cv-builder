@@ -17,7 +17,7 @@ export default function Homepage() {
     <>
       {/* <Navbar /> */}
       <section
-        className="flex items-center justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-gradient-to-r from-white to-[#dcecff]"
+        className="flex lg:items-center items-start justify-center w-full h-screen py-12 md:py-24 lg:py-32 bg-gradient-to-r from-white to-[#dcecff]"
         // style={{
         //   backgroundImage: "url('/banner-bg.svg')",
         //   backgroundPosition: "center",
@@ -27,7 +27,7 @@ export default function Homepage() {
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4 2xl:px-20 lg:px-0 px-5">
               <div className="space-y-2">
-                <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl font-bold tracking-tighter text-gray-900">
+                <h1 className="2xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-bold tracking-tighter text-gray-900">
                   WHERE
                   <span className="bg-gradient-to-r from-cyan-600 to-blue-900 bg-clip-text text-transparent 2xl:ml-3 lg:ml-2">
                     RIGHT JOB
@@ -42,18 +42,6 @@ export default function Homepage() {
                 </p>
               </div>
               <div className="flex lg:flex-row  flex-col gap-2 min-[400px]:flex-row ">
-                {/* <Link
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
-                  href="/resume-dashboard"
-                >
-                  CV Curator
-                </Link>
-                <Link
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 text-bold text-blue-900 font-medium shadow transition-colors border-2 border-transparent hover:border-blue-900 mx-2"
-                  href="/resumeAnalyzer-dashboard"
-                >
-                  CV Analyser
-                </Link> */}
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
                     hovered
@@ -78,13 +66,6 @@ export default function Homepage() {
                 </Link>
               </div>
             </div>
-            {/* <Image
-              alt="Hero"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
-              height="550"
-              src="https://enhancv.com/_next/static/images/resume3-fdd7e3eafb8f16ef8e0aa6f5ef523dca.webp"
-              width="550"
-            /> */}
             <div className="FoldImageAnimated_card lg:h-[60vh] 2xl:h-[55vh]">
               <div className="FoldImageAnimated_content">
                 <div className="FoldImageAnimated_front">

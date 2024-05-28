@@ -397,6 +397,11 @@
   .mobile_responsive_nav .content .row header {
     font-size: 19px;
   }
+
+  .resume-dashboard {
+    margin-bottom: 0 !important;
+    padding: 50px 0;
+  }
 }
 
 .mobile_responsive_nav nav input {
