@@ -9,6 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
 import { deleteCookie } from 'cookies-next';
 import { useUserStore } from "../store/UserStore";
+import { RemoveTokens } from "../actions";
 
 const navigation = [
   { name: "CV Curator", href: "/builder", current: true },
@@ -31,14 +32,13 @@ export default function NewResumeHeader() {
 
   const logoutUser = useUserStore((state) => state.logoutUser)
 
-  const handleLogout = () => {
-    deleteCookie('accessToken')
-    deleteCookie('refreshToken')
+  const handleLogout = async () => {
+    await RemoveTokens()
     toast.success("User logout successfully", {
       position: "top-right",
     });
     logoutUser();
-    // router.push("/");
+    router.push("/");
   };
 
   return (

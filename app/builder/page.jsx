@@ -284,8 +284,6 @@ function Builder() {
           }}
         >
           <ResumeViewPage
-            resumeData={resumeData}
-            setResumeData={setResumeData}
           />
         </div>
       </div>
