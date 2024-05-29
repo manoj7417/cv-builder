@@ -13,6 +13,7 @@ import {
   MdOutlineMenu,
 } from "react-icons/md";
 import { AuthContext } from "../context/AuthContext";
+import './header.css'
 
 const Header = () => {
 
@@ -376,7 +377,11 @@ const Header = () => {
              {/* Auth buttons  */}
             <li>
               <div className="auths_button ml-2">
-                <button className="px-4 py-2 bg-blue-900 hover:bg-blue-700  font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 text-white text-base rounded-md" onClick={handleLogin}>Login</button>
+                <button className="custom-button hover:cursor-pointer" onClick={handleLogin}>
+                    <span>Sign In</span>
+                    <div className="liquid"></div>
+                </button>
+
               </div>
             </li>
           </ul>
