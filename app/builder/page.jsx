@@ -190,7 +190,6 @@ const initialState = {
 };
 
 function Builder() {
-  const [resumeData, setResumeData] = useState(initialState);
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
@@ -212,9 +211,7 @@ function Builder() {
     };
 
     checkIfMobile();
-
     window.addEventListener("resize", checkIfMobile);
-
     return () => {
       window.removeEventListener("resize", checkIfMobile);
     };
@@ -245,7 +242,7 @@ function Builder() {
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative ">
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
-          <Form resumeData={resumeData} setResumeData={setResumeData} />
+          <Form />
           {
             <div
               className={`${
@@ -267,7 +264,6 @@ function Builder() {
                 {mobileContent && (
                   <MobileResumeViewPage
                     scale={scale}
-                    resumeData={resumeData}
                     isOverlayOpen={isOverlayOpen}
                     setIsOverlayOpen={setIsOverlayOpen}
                   />
@@ -283,8 +279,7 @@ function Builder() {
             backgroundPosition: "bottom",
           }}
         >
-          <ResumeViewPage
-          />
+          <ResumeViewPage />
         </div>
       </div>
     </>

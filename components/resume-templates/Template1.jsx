@@ -11,14 +11,14 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 
-const Education = ({ fontStyle, data,colorStyle }) => {
+const Education = ({ fontStyle, data, colorStyle }) => {
   return (
     <div className="education_section py-3">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="flex gap-5 items-center">
             <h2 className={`${fontStyle.headingFont} font-semibold uppercase text-white`} style={{
-              color:colorStyle
+              color: colorStyle
             }}>
               {data?.name}
             </h2>
@@ -32,8 +32,8 @@ const Education = ({ fontStyle, data,colorStyle }) => {
                       {<p>item?.startDate</p> &&
                         `${item?.startDate}${item?.endDate && " - "}`}
                       {item?.endDate}
-                      <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
-                      <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
+                      {/* <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
+                      <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" /> */}
                     </div>
                     <div className="content flex flex-col break-all text-white">
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -58,14 +58,14 @@ const Education = ({ fontStyle, data,colorStyle }) => {
   );
 };
 
-const Experience = ({ fontStyle, data,colorStyle }) => {
+const Experience = ({ fontStyle, data, colorStyle }) => {
   return (
     <div className="experience_section my-2">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="experience_heading flex gap-5 items-center">
             <h2
-              style={{ fontSize: fontStyle.headingFont ,color:colorStyle}}
+              style={{ fontSize: fontStyle.headingFont, color: colorStyle }}
               className="text-xl font-bold uppercase"
             >
               {data?.name}
@@ -122,8 +122,8 @@ const Experience = ({ fontStyle, data,colorStyle }) => {
                   {item?.endDate && <p>{item.endDate}</p>}
                   <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
                   <div className="year_line absolute top-4 right-1 w-0.5 h-full" style={{
-                    background : colorStyle
-                  }}/>
+                    background: colorStyle
+                  }} />
                 </div>
                 <div className="content w-[70%] pl-8 flex flex-col break-all">
                   <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -146,14 +146,14 @@ const Experience = ({ fontStyle, data,colorStyle }) => {
   );
 };
 
-const Projects = ({ fontStyle, data,colorStyle }) => {
+const Projects = ({ fontStyle, data, colorStyle }) => {
   return (
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
         <>
           <div className="project_heading flex gap-5 items-center">
             <h2 className={`${fontStyle.headingFont} font-bold uppercase`} style={{
-              color:colorStyle
+              color: colorStyle
             }}>
               {data?.name}
             </h2>
@@ -199,51 +199,15 @@ const Projects = ({ fontStyle, data,colorStyle }) => {
   );
 };
 
-// const Skills = ({ fontStyle, data }) => {
-//   return (
-//     <div className="skills_section border-b-2 border-gray-300 py-3">
-//       <h2
-//         className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
-//       >
-//         Skills
-//       </h2>
-//       <div className="text-gray-600 my-1">
-//         <ul className="list-disc pl-5">
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             React <js></js>
-//           </li>
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             Next js
-//           </li>
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             Node js
-//           </li>
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             Tailwind Css
-//           </li>
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             Redux
-//           </li>
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             Redux Toolkit
-//           </li>
-//           <li className={`font-bold text-white ${fontStyle.skillsFont}`}>
-//             React Query
-//           </li>
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// };
 
-const Skills = ({ fontStyle, data ,colorStyle}) => {
+const Skills = ({ fontStyle, data, colorStyle }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section border-b-2 border-gray-300 py-3">
           <h2
             className={`${fontStyle.headingFont} text-white font-semibold uppercase`} style={{
-              color:colorStyle
+              color: colorStyle
             }}
           >
             {data?.name}
@@ -268,7 +232,7 @@ const Skills = ({ fontStyle, data ,colorStyle}) => {
   );
 };
 
-const Profile = ({ data, fontStyle,colorStyle }) => {
+const Profile = ({ data, fontStyle, colorStyle }) => {
   const htmlContent = data?.content;
   return (
     <div>
@@ -277,7 +241,7 @@ const Profile = ({ data, fontStyle,colorStyle }) => {
           <div className="profile_heading flex gap-5 items-center">
             <h2
               className={`${fontStyle.headingFont} font-bold uppercase`}
-              style={{color:colorStyle}}
+              style={{ color: colorStyle }}
             >
               {data?.name}
             </h2>
@@ -326,12 +290,12 @@ const Template1 = ({ resumeData }) => {
           </div>
           <div className="resume_bottom py-5 px-8">
             <div className="resume_item resume_profile py-5">
-            <Education
+              <Education
                 fontStyle={fontStyle}
                 data={resumeData?.sections?.education}
               />
             </div>
-            
+
             <div className="resume_item resume_skills py-5">
               <div className="resume_info">
                 <Skills
@@ -345,14 +309,14 @@ const Template1 = ({ resumeData }) => {
         <div className="resume_right w-[65%] px-10 py-5 text-[#26252d]">
           <div className="resume_item resume_namerole">
             <h1
-              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`} 
-            style={{
-              color:resumeData?.metadata?.theme?.primary
-            }}>
+              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
+              style={{
+                color: resumeData?.metadata?.theme?.primary
+              }}>
               {resumeData?.basics?.name}
             </h1>
             <p className={`${fontStyle.jobtitleFont} break-words uppercase`} style={{
-              color:resumeData?.metadata?.theme?.primary
+              color: resumeData?.metadata?.theme?.primary
             }}  >
               {resumeData?.basics?.jobtitle}
             </p>
@@ -386,24 +350,24 @@ const Template1 = ({ resumeData }) => {
             </div>
           </div>
           <div className="resume_item resume_address font-semibold">
-              {(resumeData?.basics?.city || resumeData?.basics?.country) && (
-                <p className="flex items-center">
-                  <IoLocationOutline className="text-black" />
-                  <span>{resumeData?.basics?.city}</span>
-                  <span>
-                    {resumeData?.basics?.city &&
-                      resumeData?.basics?.country &&
-                      " , "}
-                  </span>
-                  <span className="">
-                    {resumeData?.basics?.country}
-                  </span>
-                </p>
-              )}
-            </div>
+            {(resumeData?.basics?.city || resumeData?.basics?.country) && (
+              <p className="flex items-center">
+                <IoLocationOutline className="text-black" />
+                <span>{resumeData?.basics?.city}</span>
+                <span>
+                  {resumeData?.basics?.city &&
+                    resumeData?.basics?.country &&
+                    " , "}
+                </span>
+                <span className="">
+                  {resumeData?.basics?.country}
+                </span>
+              </p>
+            )}
+          </div>
           <div className="resume_item resume_profile my-5">
             <div className="resume_info">
-            <Profile
+              <Profile
                 data={resumeData?.sections?.summary}
                 fontStyle={fontStyle}
                 colorStyle={resumeData?.metadata?.theme?.primary}
