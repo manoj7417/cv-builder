@@ -43,7 +43,6 @@ export default function NewResumeHeader() {
 
   return (
     <section className="bg-[#fafbfd] sticky top-0 z-50">
-      <div>
         <Disclosure>
           {({ open }) => (
             <>
@@ -208,7 +207,6 @@ export default function NewResumeHeader() {
             </>
           )}
         </Disclosure>
-      </div>
     </section>
   );
 }

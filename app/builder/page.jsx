@@ -245,8 +245,9 @@ function Builder() {
           <Form />
           {
             <div
-              className={`${isVisible ? "visibleButton" : "hiddenButton"
-                }mobile_section flex justify-end mb-10 mx-10 fixed bottom-0 right-0 transition-all opacity-50 ease-in-out`}
+              className={`${
+                isVisible ? "visibleButton" : "hiddenButton"
+              }mobile_section flex justify-end mb-10 mx-10 fixed bottom-0 right-0 transition-all ease-in-out`}
             >
               <div>
                 {isMobile && (

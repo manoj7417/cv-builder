@@ -37,32 +37,6 @@ import { RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { DataInteractive } from "@headlessui/react";
 
-// const Controls = () => {
-//   const { zoomIn, zoomOut, resetTransform } = useControls();
-
-//   return (
-//     <div className="tools">
-//       <button
-//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-//         onClick={() => zoomIn()}
-//       >
-//         <FiPlus className="text-white" />
-//       </button>
-//       <button
-//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
-//         onClick={() => zoomOut()}
-//       >
-//         <FiMinus />
-//       </button>
-//       <button
-//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-//         onClick={() => resetTransform()}
-//       >
-//         <CiUndo />
-//       </button>
-//     </div>
-//   );
-// };
 
 const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
@@ -207,9 +181,7 @@ const ResumeViewPage = () => {
     updateScale();
   };
 
-  const toggleContentVisibility = () => {
 
-  };
 
   return (
     <>
@@ -481,8 +453,8 @@ const ResumeViewPage = () => {
                         name={data?.metadata?.template}
                         resumeData={data}
                       />
-                      <div className="absolute z-10  bottom-2 right-5 text-gray-500">
-                        <p>@Career Genies Hub</p>
+                      <div className="fixed z-10  bottom-0 right-2 text-gray-500">
+                        <p className="text-sm">@Career Genies Hub</p>
                       </div>
                     </div>
                   </div>
