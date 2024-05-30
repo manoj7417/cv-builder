@@ -156,7 +156,7 @@ const ResumeViewPage = () => {
     } else if (width <= 1024) {
       setScale(0.4); // Tablets
     } else if (width <= 1440) {
-      setScale(0.4);
+      setScale(0.7);
     } else {
       setScale(0.7); // Desktops
     }
@@ -437,7 +437,7 @@ const ResumeViewPage = () => {
                   <div
                     className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
                     style={{
-                      transform: `scale(0.8)`
+                      scale:{scale}
                     }}
                   >
                     <div

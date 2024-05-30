@@ -276,7 +276,7 @@ export const Template5 = ({ resumeData }) => {
 
   return (
     <>
-      <div className="p-custom space-y-3">
+      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
         <div className="bg-white">
           <div className="grid grid-cols-12 p-10">
             <div className="resume_detailed_section col-span-9">
