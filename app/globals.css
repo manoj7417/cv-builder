@@ -59,8 +59,7 @@
 
 .mobile_white {
   /* background: transparent !important; */
-  background-color: #fafbfd;
-  border-bottom: 1px solid #fafbfd;
+  background-color: transparent;
 }
 
 .mobile_black {
@@ -129,7 +128,7 @@
   cursor: pointer;
   color: rgb(25, 28, 31) !important;
   /* background-color: rgb(223, 227, 231); */
-  background-color: rgb(231 224 224);
+  background-color: white;
   border-radius: 50px;
 }
 

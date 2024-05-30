@@ -37,32 +37,6 @@ import { RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { DataInteractive } from "@headlessui/react";
 
-// const Controls = () => {
-//   const { zoomIn, zoomOut, resetTransform } = useControls();
-
-//   return (
-//     <div className="tools">
-//       <button
-//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-//         onClick={() => zoomIn()}
-//       >
-//         <FiPlus className="text-white" />
-//       </button>
-//       <button
-//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
-//         onClick={() => zoomOut()}
-//       >
-//         <FiMinus />
-//       </button>
-//       <button
-//         className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-//         onClick={() => resetTransform()}
-//       >
-//         <CiUndo />
-//       </button>
-//     </div>
-//   );
-// };
 
 const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
@@ -182,7 +156,7 @@ const ResumeViewPage = () => {
     } else if (width <= 1024) {
       setScale(0.4); // Tablets
     } else if (width <= 1440) {
-      setScale(0.4);
+      setScale(0.7);
     } else {
       setScale(0.7); // Desktops
     }
@@ -206,6 +180,7 @@ const ResumeViewPage = () => {
   const handleReset = () => {
     updateScale();
   };
+
 
 
   return (
@@ -460,9 +435,9 @@ const ResumeViewPage = () => {
                     <LiaTimesSolid className=" text-white text-3xl" />
                   </div>
                   <div
-                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
+                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen relative"
                     style={{
-                      transform: `scale(0.8)`
+                      scale:{scale}
                     }}
                   >
                     <div
@@ -478,8 +453,8 @@ const ResumeViewPage = () => {
                         name={data?.metadata?.template}
                         resumeData={data}
                       />
-                      <div className="absolute z-10  bottom-2 right-5 text-gray-500">
-                        <p>@Career Genies Hub</p>
+                      <div className="fixed z-10  bottom-0 right-2 text-gray-500">
+                        <p className="text-sm">@Career Genies Hub</p>
                       </div>
                     </div>
                   </div>

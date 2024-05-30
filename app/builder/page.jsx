@@ -2,8 +2,6 @@
 import Form from "@/components/component/form";
 import React, { useEffect, useState } from "react";
 import ResumeViewPage from "../resume-viewer/ResumeViewer";
-import Template1 from "@/components/resume-templates/Template1";
-import Template2 from "@/components/resume-templates/Template2";
 import MobileResumeViewPage from "@/components/resume-templates/MobileResumeViewPage";
 import { IoDocumentOutline } from "react-icons/io5";
 import FloatingSaveIcon from "@/components/ui/FloatingSaveIcon";
@@ -64,8 +62,9 @@ function Builder() {
           <Form />
           {
             <div
-              className={`${isVisible ? "visibleButton" : "hiddenButton"
-                }mobile_section flex justify-end mb-10 mx-10 fixed bottom-0 right-0 transition-all opacity-50 ease-in-out`}
+              className={`${
+                isVisible ? "visibleButton" : "hiddenButton"
+              }mobile_section flex justify-end mb-10 mx-10 fixed bottom-0 right-0 transition-all ease-in-out`}
             >
               <div>
                 {isMobile && (

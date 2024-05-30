@@ -10,7 +10,11 @@ import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { getBetterResume } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
-import { useResumeStore } from "@/app/store/ResumeStore";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import Link from "next/link";
+import { WiStars } from "react-icons/wi";
+import './header.css'
 
 export default function ResumeFeedback() {
   const [content, setContent] = useState({});
@@ -24,6 +28,7 @@ export default function ResumeFeedback() {
     relevance: false,
     content: false,
   });
+  const percentage = 66;
 
   useEffect(() => {
     const updateHeight = () => {
@@ -112,159 +117,32 @@ export default function ResumeFeedback() {
           </div>
         )}
         <div
-          className="bg-blue-50 w-full h-[500px] flex items-center justify-center"
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
-          }}
+          className="bg-blue-50 w-full h-[400px] flex items-center justify-center"
+         
         >
           <div className="main_heading_section">
-            <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug pt-10 pb-5 text-blue-900">
+            <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug pb-5 text-blue-900 mt-24">
               CV Analyser Insights
             </h1>
-            <p className="lg:w-1/2 w-4/5 mx-auto text-center lg:text-xl text-base text-gray-600">
-              Our CV Analyser is meticulously designed by a team of experienced
-              professionals, recruiters, data analysts, and technical experts to
-              curate compatible and optimized CVs. Check your CV Score, Content
-              Suggestions, Recommendations, and more subsequently!
-            </p>
+           
+            <div className="flex justify-center text-center mt-10">
+              {/* <Link
+                href="/"
+                className="p-3 bg-blue-900 text-white rounded-md text-base"
+                onClick={handleBetterResumeContent}
+              >
+                Fix with Genie
+              </Link> */}
+              <button class="button button--pipaluk button--inverted button--round-l button--text-thick button--text-upper" onClick={handleBetterResumeContent}>Optimize Now <WiStars className="w-7 h-7" /></button>
+            </div>
           </div>
         </div>
-        <section className="bg-slate-200 p-10">
-          <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-3 gap-4 sm:grid-cols-4 px-5 mb-5">
-            <div className="bg-white overflow-hidden shadow sm:rounded-lg ">
-              <div className="px-4 py-5 sm:p-6">
-                <dl className="mt-10 text-center">
-                  <dd className="uppercase text-xl leading-5 font-medium text-black truncate">
-                    OverAll
-                  </dd>
-                  <dd className="mt-1 text-base leading-9 font-bold text-black">
-                    {Object.keys(content).length > 0
-                      ? content?.analysis?.resume_score
-                      : "0"}
-                    /100
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div className="bg-white overflow-hidden shadow sm:rounded-lg  group">
-              <div className="px-4 py-5 sm:p-6 group ">
-                <dl className="text-center">
-                  <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                    Clarity
-                  </dt>
-                  <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                    {Object.keys(content).length > 0 && content?.clarity?.score}
-                    /100
-                  </dd>
-                  <dd className="pt-2">
-                    {Object.keys(content).length > 0 &&
-                      content?.clarity?.score > 80 ? (
-                      <button
-                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
-                        onClick={() => handleOpenModal("clarity")}
-                      >
-                        Excellent
-                      </button>
-                    ) : (
-                      <button
-                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
-                        onClick={() => handleOpenModal("clarity")}
-                      >
-                        Needs Work
-                      </button>
-                    )}
-                  </dd>
-                </dl>
-              </div>
-              <FeedbackModal
-                showModal={modalsView.clarity}
-                content={content?.clarity?.pointers}
-                onClick={handleBetterResumeContent}
-                onClose={() => handleModalClose("clarity")}
-              />
-            </div>
-            <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
-              <div className="px-4 py-5 sm:p-6">
-                <dl className="text-center">
-                  <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                    Relevance
-                  </dt>
-                  <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                    {Object.keys(content).length > 0 &&
-                      content?.relevancy?.score}
-                    /100
-                  </dd>
-                  <dd className="pt-2">
-                    {Object.keys(content).length > 0 &&
-                      content?.relevancy?.score > 80 ? (
-                      <button
-                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
-                        onClick={() => handleOpenModal("relevance")}
-                      >
-                        Excellent
-                      </button>
-                    ) : (
-                      <button
-                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
-                        onClick={() => handleOpenModal("relevance")}
-                      >
-                        Needs Work
-                      </button>
-                    )}
-                  </dd>
-                </dl>
-              </div>
-              <FeedbackModal
-                showModal={modalsView.relevance}
-                content={content?.relevancy?.pointers}
-                onClick={handleBetterResumeContent}
-                onClose={() => handleModalClose("relevance")}
-              />
-            </div>
-            <div className="bg-white hover:bg-gray-200 overflow-hidden shadow sm:rounded-lg group">
-              <div className="px-4 py-5 sm:p-6">
-                <dl className="text-center">
-                  <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                    Content
-                  </dt>
-                  <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                    {content?.content_quality?.score}/100
-                  </dd>
-                  <dd className="pt-2">
-                    {Object.keys(content).length > 0 &&
-                      content?.content_quality?.score > 80 ? (
-                      <button
-                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
-                        onClick={() => handleOpenModal("content")}
-                      >
-                        Excellent
-                      </button>
-                    ) : (
-                      <button
-                        className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
-                        onClick={() => handleOpenModal("content")}
-                      >
-                        Needs Work
-                      </button>
-                    )}
-                  </dd>
-                </dl>
-              </div>
-              <FeedbackModal
-                showModal={modalsView.content}
-                content={content?.content_quality?.pointers}
-                onClick={handleBetterResumeContent}
-                onClose={() => handleModalClose("content")}
-              />
-            </div>
-          </div>
-        </section>
-        <div className="calculation_section py-10 bg-[#F1F6FA]">
-          <div className="grid lg:grid-cols-12 grid-cols-1 ">
-            <div className="lg:col-span-6 col-span-1">
-              <div className="progress_bar p-5 ">
-                <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
+
+        <div className="calculation_section bg-[#F1F6FA] pb-20">
+         
+            <div className="flex align-center px-10">
+              <div className="flex flex-col justify-around progress_bar p-5 w-2/3">
+                <div className="prograss_bar_box bg-white shadow-lg p-8  rounded-md">
                   <p className="tracking-wider">
                     Your resume ATS score is{" "}
                     <span
@@ -281,12 +159,12 @@ export default function ResumeFeedback() {
                     <div className=" relative h-7 w-full rounded-2xl">
                       <Progress
                         value={content?.analysis?.resume_score}
-                        className={"h-5"}
+                        className={"h-5 bg-gray-200"}
                       />
                     </div>
                   </div>
                 </div>
-                <div className="recommendation_section bg-white shadow-lg py-10 px-5 mt-3 rounded-md ">
+                <div className="recommendation_section bg-white shadow-lg py-10 px-5 mt-3 rounded-md">
                   <h3 className="text-xl font-bold">RECOMMENDATIONS</h3>
                   <p className="text-sm my-2">
                     Get assistance from our CV Analyser to get a profound
@@ -304,7 +182,7 @@ export default function ResumeFeedback() {
                                 className="text-sm flex items-center my-4"
                                 key={index}
                               >
-                                <span className=" shadow-2xl w-[35px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                                <span className=" shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
                                   {index + 1}
                                 </span>
                                 <p>{content}</p>
@@ -347,21 +225,421 @@ export default function ResumeFeedback() {
                   </div>
                 </div>
               </div>
+              <div className="bg-[#F1F6FA] p-5 w-1/3">
+            <div className="flex w-full justify-around">
+            <div className="flex flex-col space-y-5 justify-between">
+            <div className="bg-white transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+              <div className="px-4 sm:p-3 sm:px-8">
+                <div className="text-center">
+                  <dd className="uppercase text-md leading-5 font-medium text-black truncate mb-4">
+                    OverAll
+                  </dd>
+                </div>
+                <div>
+                  <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                    <CircularProgressbar
+                      value={
+                        Object.keys(content).length > 0
+                          ? content?.analysis?.resume_score
+                          : "0"
+                      }
+                      text={`${
+                        Object.keys(content).length > 0
+                          ? content?.analysis?.resume_score
+                          : "0"
+                      }%`}
+                    />
+                  </div>
+                </div>
+                <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-center text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("clarity")}
+                        onMouseLeave={() => handleModalClose("clarity")}
+                      >
+                        ATS Score
+                      </div>
+              </div>
             </div>
-            <div className="lg:col-span-6 col-span-1 lg:w-full w-4/5 mx-auto h-full">
-              <div>
+            <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+              <div className="px-4 py-5 sm:p-3 sm:px-8 group">
+                <div className="text-center">
+                  <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
+                    Clarity
+                  </div>
+                  <div>
+                    <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                      <CircularProgressbar
+                        value={
+                          Object.keys(content).length > 0
+                            ? content?.clarity?.score
+                            : "0"
+                        }
+                        text={`${
+                          Object.keys(content).length > 0
+                            ? content?.clarity?.score
+                            : "0"
+                        }%`}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center pt-2">
+                    {Object.keys(content).length > 0 &&
+                    content?.clarity?.score > 80 ? (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("clarity")}
+                        onMouseLeave={() => handleModalClose("clarity")}
+                      >
+                        Excellent
+                      </div>
+                    ) : (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("clarity")}
+                        onMouseLeave={() => handleModalClose("clarity")}
+                      >
+                        Needs Work
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.clarity}
+                content={content?.clarity?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("clarity")}
+              />
+            </div>
+            </div>
+            <div className="flex flex-col space-y-5">
+            <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+              <div className="px-4 py-5 sm:p-3 sm:px-8">
+                <div className="text-center">
+                  <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
+                    Relevance
+                  </div>
+                  <div>
+                    <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                      <CircularProgressbar
+                        value={
+                          Object.keys(content).length > 0
+                            ? content?.relevancy?.score
+                            : "0"
+                        }
+                        text={`${
+                          Object.keys(content).length > 0
+                            ? content?.relevancy?.score
+                            : "0"
+                        }%`}
+                        styles={buildStyles({
+                          textColor: "red",
+                          pathColor: "turquoise",
+                        })}
+                      />
+                    </div>
+                  </div>
+                  <div className="pt-2 flex justify-center items-center">
+                    {Object.keys(content).length > 0 &&
+                    content?.relevancy?.score > 80 ? (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("relevance")}
+                        onMouseLeave={() => handleModalClose("relevance")}
+                      >
+                        Excellent
+                      </div>
+                    ) : (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("relevance")}
+                        onMouseLeave={() => handleModalClose("relevance")}
+                      >
+                        Needs Work
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.relevance}
+                content={content?.relevancy?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("relevance")}
+              />
+            </div>
+            <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+              <div className="px-4 py-5 sm:p-3 sm:px-8">
+                <div className="text-center">
+                  <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
+                    Content
+                  </div>
+                  <div>
+                    <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                      <CircularProgressbar
+                        value={
+                          Object.keys(content).length > 0
+                            ? content?.content_quality?.score
+                            : "0"
+                        }
+                        text={`${
+                          Object.keys(content).length > 0
+                            ? content?.content_quality?.score
+                            : "0"
+                        }%`}
+                        styles={buildStyles({
+                          textColor: "red",
+                          pathColor: "#F89A14",
+                        })}
+                      />
+                    </div>
+                  </div>
+                  <div className="pt-2 flex justify-center items-center">
+                    {Object.keys(content).length > 0 &&
+                    content?.content_quality?.score > 80 ? (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("content")}
+                        onMouseLeave={() => handleModalClose("content")}
+                      >
+                        Excellent
+                      </div>
+                    ) : (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("content")}
+                        onMouseLeave={() => handleModalClose("content")}
+                      >
+                        Needs Work
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.content}
+                content={content?.content_quality?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("content")}
+              />
+            </div>
+            </div>
+          </div>
+              </div>
+            </div>
+            {/* <div>
+              <div
+                className="bg-white shadow-lg p-5 rounded-md"
+                // style={
+                //   {
+                //     transform:"scaleX(0.7) scaleY(1)"
+                //   }
+                // }
+              >
                 {pdfFile && (
                   <iframe
                     ref={iframeRef}
                     src={`${pdfFile}#toolbar=0`}
-                    frameBorder="0"
-                    className="w-full"
-                  ></iframe>
+                    className="w-full h-full"
+                  >
+                  </iframe>
                 )}
               </div>
+            </div> */}
+          
+        </div>
+{/* 
+        <section className="bg-[#F1F6FA] p-10">
+          <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-3 gap-4 sm:grid-cols-4 px-5 mb-5">
+            <div className="bg-white transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+              <div className="px-4">
+                <div className="text-center">
+                  <dd className="uppercase text-xl leading-5 font-medium text-black truncate my-4">
+                    OverAll
+                  </dd>
+                </div>
+                <div>
+                  <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                    <CircularProgressbar
+                      value={
+                        Object.keys(content).length > 0
+                          ? content?.analysis?.resume_score
+                          : "0"
+                      }
+                      text={`${
+                        Object.keys(content).length > 0
+                          ? content?.analysis?.resume_score
+                          : "0"
+                      }%`}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+              <div className="px-4 py-5 sm:p-3 sm:px-8 group">
+                <div className="text-center">
+                  <div className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                    Clarity
+                  </div>
+                  <div>
+                    <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                      <CircularProgressbar
+                        value={
+                          Object.keys(content).length > 0
+                            ? content?.clarity?.score
+                            : "0"
+                        }
+                        text={`${
+                          Object.keys(content).length > 0
+                            ? content?.clarity?.score
+                            : "0"
+                        }%`}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center pt-2">
+                    {Object.keys(content).length > 0 &&
+                    content?.clarity?.score > 80 ? (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("clarity")}
+                        onMouseLeave={() => handleModalClose("clarity")}
+                      >
+                        Excellent
+                      </div>
+                    ) : (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("clarity")}
+                        onMouseLeave={() => handleModalClose("clarity")}
+                      >
+                        Needs Work
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.clarity}
+                content={content?.clarity?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("clarity")}
+              />
+            </div>
+            <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+              <div className="px-4 py-5 sm:p-3 sm:px-8">
+                <div className="text-center">
+                  <div className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                    Relevance
+                  </div>
+                  <div>
+                    <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                      <CircularProgressbar
+                        value={
+                          Object.keys(content).length > 0
+                            ? content?.relevancy?.score
+                            : "0"
+                        }
+                        text={`${
+                          Object.keys(content).length > 0
+                            ? content?.relevancy?.score
+                            : "0"
+                        }%`}
+                        styles={buildStyles({
+                          textColor: "red",
+                          pathColor: "turquoise",
+                        })}
+                      />
+                    </div>
+                  </div>
+                  <div className="pt-2 flex justify-center items-center">
+                    {Object.keys(content).length > 0 &&
+                    content?.relevancy?.score > 80 ? (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("relevance")}
+                        onMouseLeave={() => handleModalClose("relevance")}
+                      >
+                        Excellent
+                      </div>
+                    ) : (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("relevance")}
+                        onMouseLeave={() => handleModalClose("relevance")}
+                      >
+                        Needs Work
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.relevance}
+                content={content?.relevancy?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("relevance")}
+              />
+            </div>
+            <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+              <div className="px-4 py-5 sm:p-3 sm:px-8">
+                <div className="text-center">
+                  <div className="text-md leading-5 font-medium text-black truncate uppercase py-2">
+                    Content
+                  </div>
+                  <div>
+                    <div style={{ width: 100, height: 100, margin: " 0 auto" }}>
+                      <CircularProgressbar
+                        value={
+                          Object.keys(content).length > 0
+                            ? content?.content_quality?.score
+                            : "0"
+                        }
+                        text={`${
+                          Object.keys(content).length > 0
+                            ? content?.content_quality?.score
+                            : "0"
+                        }%`}
+                        styles={buildStyles({
+                          textColor: "red",
+                          pathColor: "#F89A14",
+                        })}
+                      />
+                    </div>
+                  </div>
+                  <div className="pt-2 flex justify-center items-center">
+                    {Object.keys(content).length > 0 &&
+                    content?.content_quality?.score > 80 ? (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("content")}
+                        onMouseLeave={() => handleModalClose("content")}
+                      >
+                        Excellent
+                      </div>
+                    ) : (
+                      <div
+                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                        onMouseEnter={() => handleOpenModal("content")}
+                        onMouseLeave={() => handleModalClose("content")}
+                      >
+                        Needs Work
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <FeedbackModal
+                showModal={modalsView.content}
+                content={content?.content_quality?.pointers}
+                onClick={handleBetterResumeContent}
+                onClose={() => handleModalClose("content")}
+              />
             </div>
           </div>
-        </div>
+        </section> */}
+        
       </section>
     </>
   );

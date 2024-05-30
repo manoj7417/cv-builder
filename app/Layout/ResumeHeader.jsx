@@ -1,9 +1,6 @@
 'use client'
 import Image from "next/image";
-import Link from "next/link";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { UserStore } from "../store/UserStore";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function ResumeHeader() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
