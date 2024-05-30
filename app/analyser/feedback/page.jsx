@@ -22,6 +22,7 @@ export default function ResumeFeedback() {
   const [pdfFile, setPDFFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
   const [modalsView, setModalsView] = useState({
     clarity: false,
     relevance: false,
@@ -67,8 +68,7 @@ export default function ResumeFeedback() {
     if (resume) {
       const data = await fetchBetterResume(resume);
       if (data) {
-        localStorage.setItem("resumeData", JSON.stringify(data));
-        localStorage.setItem("previousPage", "/feedback");
+        replaceResumeData(data)
         router.push("/builder");
       } else {
         toast.error("Something went wrong");
@@ -146,11 +146,10 @@ export default function ResumeFeedback() {
                   <p className="tracking-wider">
                     Your resume ATS score is{" "}
                     <span
-                      className={`${
-                        content?.analysis?.resume_score > 65
-                          ? "text-green-400"
-                          : "text-red-500"
-                      } font-bold`}
+                      className={`${content?.analysis?.resume_score > 65
+                        ? "text-green-400"
+                        : "text-red-500"
+                        } font-bold`}
                     >
                       {content ? content?.analysis?.resume_score : "0"}
                     </span>{" "}
@@ -174,7 +173,7 @@ export default function ResumeFeedback() {
                   </p>
                   <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                     {Object.keys(content).length > 0 &&
-                    content?.analysis?.feedback?.length > 0 ? (
+                      content?.analysis?.feedback?.length > 0 ? (
                       <ul className="custom-counter">
                         {Object.keys(content).length > 0 &&
                           content.analysis.feedback.map((content, index) => {
