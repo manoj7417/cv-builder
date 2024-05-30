@@ -103,3 +103,33 @@ export const getUserResume = async () => {
     throw error
   }
 }
+
+export const getUserResumes = async () => {
+  try {
+    const response = await instance.get('/resume/allResume', { withCredentials: true });
+    return response;
+  } catch (error) {
+    console.error("Error getting user:", error.response || error);
+    throw error
+  }
+}
+
+export const createNewResume = async () => {
+  try {
+    const response = await instance.post('/resume/create', '', { withCredentials: true })
+    return response;
+  } catch (error) {
+    console.error("Error creating resume:", error.response || error);
+    throw error
+  }
+}
+
+export const deleteUserResume = async (id) => {
+  try {
+    const response = await instance.delete(`/resume/delete/${id}`, { withCredentials: true })
+    return response
+  } catch (error) {
+    console.error("Error deleting resume:", error.response || error);
+    throw error
+  }
+}

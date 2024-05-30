@@ -10,6 +10,7 @@ import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { getBetterResume } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
+import { useResumeStore } from "@/app/store/ResumeStore";
 
 export default function ResumeFeedback() {
   const [content, setContent] = useState({});
@@ -17,6 +18,7 @@ export default function ResumeFeedback() {
   const [pdfFile, setPDFFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
   const [modalsView, setModalsView] = useState({
     clarity: false,
     relevance: false,
@@ -61,8 +63,7 @@ export default function ResumeFeedback() {
     if (resume) {
       const data = await fetchBetterResume(resume);
       if (data) {
-        localStorage.setItem("resumeData", JSON.stringify(data));
-        localStorage.setItem("previousPage", "/feedback");
+        replaceResumeData(data)
         router.push("/builder");
       } else {
         toast.error("Something went wrong");
@@ -158,7 +159,7 @@ export default function ResumeFeedback() {
                   </dd>
                   <dd className="pt-2">
                     {Object.keys(content).length > 0 &&
-                    content?.clarity?.score > 80 ? (
+                      content?.clarity?.score > 80 ? (
                       <button
                         className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
                         onClick={() => handleOpenModal("clarity")}
@@ -196,7 +197,7 @@ export default function ResumeFeedback() {
                   </dd>
                   <dd className="pt-2">
                     {Object.keys(content).length > 0 &&
-                    content?.relevancy?.score > 80 ? (
+                      content?.relevancy?.score > 80 ? (
                       <button
                         className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
                         onClick={() => handleOpenModal("relevance")}
@@ -232,7 +233,7 @@ export default function ResumeFeedback() {
                   </dd>
                   <dd className="pt-2">
                     {Object.keys(content).length > 0 &&
-                    content?.content_quality?.score > 80 ? (
+                      content?.content_quality?.score > 80 ? (
                       <button
                         className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
                         onClick={() => handleOpenModal("content")}
@@ -262,145 +263,15 @@ export default function ResumeFeedback() {
         <div className="calculation_section py-10 bg-[#F1F6FA]">
           <div className="grid lg:grid-cols-12 grid-cols-1 ">
             <div className="lg:col-span-6 col-span-1">
-              {/* <div className="lg:pl-5 pl-0 grid grid-cols-1 lg:gap-1 gap-4 sm:grid-cols-4 px-5 mb-5">
-                <div className="bg-white overflow-hidden shadow sm:rounded-lg ">
-                  <div className="px-4 py-5 sm:p-6">
-                    <dl className="mt-10 text-center">
-                      <dd className="uppercase text-xl leading-5 font-medium text-black truncate">
-                        OverAll
-                      </dd>
-                      <dd className="mt-1 text-base leading-9 font-bold text-black">
-                        {Object.keys(content).length > 0
-                          ? content?.analysis?.resume_score
-                          : "0"}
-                        /100
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-                <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg  group">
-                  <div className="px-4 py-5 sm:p-6 group ">
-                    <dl className="text-center">
-                      <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                        Clarity
-                      </dt>
-                      <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                        {Object.keys(content).length > 0 &&
-                          content?.clarity?.score}
-                        /100
-                      </dd>
-                      <dd className="pt-2">
-                        {Object.keys(content).length > 0 &&
-                          content?.clarity?.score > 80 ? (
-                          <button
-                            className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
-                            onClick={() => handleOpenModal("clarity")}
-                          >
-                            Excellent
-                          </button>
-                        ) : (
-                          <button
-                            className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
-                            onClick={() => handleOpenModal("clarity")}
-                          >
-                            Needs Work
-                          </button>
-                        )}
-                      </dd>
-                    </dl>
-                  </div>
-                  <FeedbackModal
-                    showModal={modalsView.clarity}
-                    content={content?.clarity?.pointers}
-                    onClick={handleBetterResumeContent}
-                    onClose={() => handleModalClose("clarity")}
-                  />
-                </div>
-                <div className="bg-gradient-to-r from-cyan-300 to-blue-200 overflow-hidden shadow sm:rounded-lg group">
-                  <div className="px-4 py-5 sm:p-6">
-                    <dl className="text-center">
-                      <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                        Relevance
-                      </dt>
-                      <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                        {Object.keys(content).length > 0 &&
-                          content?.relevancy?.score}
-                        /100
-                      </dd>
-                      <dd className="pt-2">
-                        {Object.keys(content).length > 0 &&
-                          content?.relevancy?.score > 80 ? (
-                          <button
-                            className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
-                            onClick={() => handleOpenModal("relevance")}
-                          >
-                            Excellent
-                          </button>
-                        ) : (
-                          <button
-                            className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
-                            onClick={() => handleOpenModal("relevance")}
-                          >
-                            Needs Work
-                          </button>
-                        )}
-                      </dd>
-                    </dl>
-                  </div>
-                  <FeedbackModal
-                    showModal={modalsView.relevance}
-                    content={content?.relevancy?.pointers}
-                    onClick={handleBetterResumeContent}
-                    onClose={() => handleModalClose("relevance")}
-                  />
-                </div>
-                <div className="bg-gradient-to-r from-cyan-300 to-blue-300 overflow-hidden shadow sm:rounded-lg group">
-                  <div className="px-4 py-5 sm:p-6">
-                    <dl className="text-center">
-                      <dt className="text-md leading-5 font-medium text-black truncate uppercase py-2">
-                        Content
-                      </dt>
-                      <dd className="py-2 mt-1 text-base leading-5 font-bold text-black">
-                        {content?.content_quality?.score}/100
-                      </dd>
-                      <dd className="pt-2">
-                        {Object.keys(content).length > 0 &&
-                          content?.content_quality?.score > 80 ? (
-                          <button
-                            className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-base"
-                            onClick={() => handleOpenModal("content")}
-                          >
-                            Excellent
-                          </button>
-                        ) : (
-                          <button
-                            className="lg:w-[122px] w-1/2 p-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-base"
-                            onClick={() => handleOpenModal("content")}
-                          >
-                            Needs Work
-                          </button>
-                        )}
-                      </dd>
-                    </dl>
-                  </div>
-                  <FeedbackModal
-                    showModal={modalsView.content}
-                    content={content?.content_quality?.pointers}
-                    onClick={handleBetterResumeContent}
-                    onClose={() => handleModalClose("content")}
-                  />
-                </div>
-              </div> */}
               <div className="progress_bar p-5 ">
                 <div className="prograss_bar_box bg-white shadow-lg p-8 mb-8 rounded-md mt-2">
                   <p className="tracking-wider">
                     Your resume ATS score is{" "}
                     <span
-                      className={`${
-                        content?.analysis?.resume_score > 65
-                          ? "text-green-400"
-                          : "text-red-500"
-                      } font-bold`}
+                      className={`${content?.analysis?.resume_score > 65
+                        ? "text-green-400"
+                        : "text-red-500"
+                        } font-bold`}
                     >
                       {content ? content?.analysis?.resume_score : "0"}
                     </span>{" "}
@@ -424,7 +295,7 @@ export default function ResumeFeedback() {
                   </p>
                   <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                     {Object.keys(content).length > 0 &&
-                    content?.analysis?.feedback?.length > 0 ? (
+                      content?.analysis?.feedback?.length > 0 ? (
                       <ul className="custom-counter">
                         {Object.keys(content).length > 0 &&
                           content.analysis.feedback.map((content, index) => {

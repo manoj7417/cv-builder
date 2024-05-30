@@ -157,7 +157,7 @@ const Profile = ({ data, fontStyle }) => {
             </div>
             <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>{data?.name}</h2>
           </div>
-          <div className={`my-5 ${fontStyle.subHeadingFont} break-words` } dangerouslySetInnerHTML={{ __html: htmlContent }}>
+          <div className={`my-5 ${fontStyle.subHeadingFont} break-words`} dangerouslySetInnerHTML={{ __html: htmlContent }}>
           </div>
         </div>
       }
@@ -233,10 +233,8 @@ export const Template3 = ({ resumeData }) => {
                     </p>
                   </a>}
                   {
-                    (resumeData?.basics?.city || resumeData?.basics?.country) && <p className="flex items-center"><IoLocationOutline className="mr-2" />
-                      <span>{resumeData?.basics?.city}</span>
-                      <span>{resumeData?.basics?.city && resumeData?.basics?.country && ' , '}</span>
-                      <span className=" font-bold">{resumeData?.basics?.country}</span></p>
+                    (resumeData?.basics?.city || resumeData?.basics?.country) && <p className="flex items-center break-words"><IoLocationOutline className="mr-2" />
+                      {resumeData?.basics?.city}{resumeData?.basics?.city && resumeData?.basics?.country && ' , '}{resumeData?.basics?.country}</p>
                   }
                 </div>
               </div>
