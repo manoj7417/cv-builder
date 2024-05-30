@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
 export default function RootLayout({
   children,
