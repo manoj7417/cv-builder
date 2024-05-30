@@ -2,8 +2,6 @@
 import Form from "@/components/component/form";
 import React, { useEffect, useState } from "react";
 import ResumeViewPage from "../resume-viewer/ResumeViewer";
-import Template1 from "@/components/resume-templates/Template1";
-import Template2 from "@/components/resume-templates/Template2";
 import MobileResumeViewPage from "@/components/resume-templates/MobileResumeViewPage";
 import { IoDocumentOutline } from "react-icons/io5";
 const initialState = {

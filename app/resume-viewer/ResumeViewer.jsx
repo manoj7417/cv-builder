@@ -156,7 +156,7 @@ const ResumeViewPage = () => {
     } else if (width <= 1024) {
       setScale(0.4); // Tablets
     } else if (width <= 1440) {
-      setScale(0.4);
+      setScale(0.7);
     } else {
       setScale(0.7); // Desktops
     }
@@ -435,9 +435,9 @@ const ResumeViewPage = () => {
                     <LiaTimesSolid className=" text-white text-3xl" />
                   </div>
                   <div
-                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
+                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen relative"
                     style={{
-                      transform: `scale(0.8)`
+                      scale:{scale}
                     }}
                   >
                     <div
