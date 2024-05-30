@@ -5,6 +5,7 @@ import Template4 from "./Template4";
 import Template5 from "./Template5";
 import Template6 from "./Template6";
 import Template7 from "./Template7";
+import Template8 from "./Template8";
 
 export const GetTemplate = ({ name, resumeData }) => {
   switch (name) {
@@ -22,6 +23,8 @@ export const GetTemplate = ({ name, resumeData }) => {
       return <Template6 resumeData={resumeData} />;
       case "Template7":
       return <Template7 resumeData={resumeData} />;
+      case "Template8":
+        return <Template8 resumeData={resumeData} />;
     default:
       return <Template1 resumeData={resumeData} />;
   }
