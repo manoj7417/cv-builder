@@ -10,6 +10,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
+import { useResumeStore } from "@/app/store/ResumeStore";
 
 const Education = ({ fontStyle, data, colorStyle }) => {
   return (
@@ -257,6 +258,9 @@ const Profile = ({ data, fontStyle, colorStyle }) => {
 };
 
 const Template1 = ({ resumeData }) => {
+
+
+  
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",

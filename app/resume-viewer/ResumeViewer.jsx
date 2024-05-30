@@ -435,7 +435,7 @@ const ResumeViewPage = () => {
                     <LiaTimesSolid className=" text-white text-3xl" />
                   </div>
                   <div
-                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
+                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen relative"
                     style={{
                       scale:{scale}
                     }}
