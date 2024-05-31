@@ -30,7 +30,7 @@ const Education = ({ fontStyle, headingColor }) => {
               return (
                 <>
                   <div
-                    className="education1 my-1 flex justify-between items-center"
+                    className="education1 my-1"
                     key={index}
                   >
                     <div className="education_names">
@@ -51,7 +51,7 @@ const Education = ({ fontStyle, headingColor }) => {
                         {item?.institute}
                       </h4>
                     </div>
-                    <div className="education_year gap-5">
+                    <div className="education_year flex gap-5">
                       <p
                         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                       >
@@ -60,7 +60,7 @@ const Education = ({ fontStyle, headingColor }) => {
                         {item?.endDate}
                       </p>
                       {item?.city && (
-                        <p className="text-13px flex font-normal items-center justify-end text-end">
+                        <p className="text-13px flex font-normal items-center">
                           <IoLocationOutline className="mr-1" />
                           {item?.city}
                         </p>
@@ -107,7 +107,7 @@ const Experience = ({ fontStyle, headingColor }) => {
           {data?.items?.map((item, index) => {
             return (
               <div className="experience_1" key={index}>
-                <div className="post flex justify-between items-center my-2">
+                <div className="post my-2">
                   <div className="post_title">
                     <h3
                       style={{
@@ -128,7 +128,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year flex gap-5 font-bold">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >

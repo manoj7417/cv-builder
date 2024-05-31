@@ -13,26 +13,19 @@ const Education = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <h2
-            className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+            className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
               paddingBottom: "0.25rem", // Space for the underline
             }}
           >
             {data?.name}
-            <span
-              className="absolute bottom-0 left-0 w-full h-[2px]"
-              style={{ backgroundColor: headingColor }}
-            />
           </h2>
           <div className="text-gray-800 my-4">
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div
-                    className="education1 my-1 flex justify-between items-center"
-                    key={index}
-                  >
+                  <div className="education1 my-1 text-start" key={index}>
                     <div className="education_names">
                       <h3
                         className={`${fontStyle.subHeadingFont} font-bold`}
@@ -60,7 +53,7 @@ const Education = ({ fontStyle, headingColor }) => {
                         {item?.endDate}
                       </p>
                       {item?.city && (
-                        <p className="text-13px flex font-normal items-center justify-end text-end">
+                        <p className="text-13px font-normal flex gap-1 items-center">
                           <IoLocationOutline className="mr-1" />
                           {item?.city}
                         </p>
@@ -91,23 +84,19 @@ const Experience = ({ fontStyle, headingColor }) => {
         <>
           <div className="experience_heading flex gap-5 items-center">
             <h2
-              className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+              className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
                 paddingBottom: "0.25rem", // Space for the underline
               }}
             >
               {data?.name}
-              <span
-                className="absolute bottom-0 left-0 w-full h-[2px]"
-                style={{ backgroundColor: headingColor }}
-              />
             </h2>
           </div>
           {data?.items?.map((item, index) => {
             return (
               <div className="experience_1" key={index}>
-                <div className="post flex justify-between items-center my-2">
+                <div className="post my-2">
                   <div className="post_title">
                     <h3
                       style={{
@@ -128,7 +117,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year flex gap-10 font-bold">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -165,23 +154,19 @@ const Projects = ({ fontStyle, headingColor }) => {
         <>
           <div className="project_heading flex gap-5 items-center">
             <h2
-              className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+              className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
                 paddingBottom: "0.25rem", // Space for the underline
               }}
             >
               {data?.name}
-              <span
-                className="absolute bottom-0 left-0 w-full h-[2px]"
-                style={{ backgroundColor: headingColor }}
-              />
             </h2>
           </div>
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 my-3" key={index}>
-                <div className="post flex  justify-between items-center my-2">
+                <div className="post my-2">
                   <div className="post_title">
                     <h3
                       style={{
@@ -232,20 +217,16 @@ const Skills = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section py-3">
           <h2
-            className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+            className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
               paddingBottom: "0.25rem", // Space for the underline
             }}
           >
             {data?.name}
-            <span
-              className="absolute bottom-0 left-0 w-full h-[2px]"
-              style={{ backgroundColor: headingColor }}
-            />
           </h2>
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex gap-5">
+            <ul className="w-full flex gap-5 flex-wrap underline underline-offset-2">
               {data.items.map((item, i) => {
                 return (
                   <li
@@ -273,17 +254,13 @@ const Profile = ({ fontStyle, headingColor }) => {
         <div className="profile_section w-full">
           <div className="profile_heading w-full flex gap-5 items-center">
             <h2
-              className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+              className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
                 paddingBottom: "0.25rem", // Space for the underline
               }}
             >
               {data?.name}
-              <span
-                className="absolute bottom-0 left-0 w-full h-[2px]"
-                style={{ backgroundColor: headingColor }}
-              />
             </h2>
           </div>
           <div
@@ -296,7 +273,7 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Template7 = () => {
+const Template9 = () => {
   const resumeData = useResumeStore((state) => state?.resume.data);
 
   const [fontStyle, setFontStyle] = useState({
@@ -314,10 +291,16 @@ const Template7 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
-        <div className="bg-[#F1F3F4] py-10">
-          <div className="top_section flex items-start gap-1 justify-center">
-            <div className="name_profile text-center">
+      <div className="template_8 max-w-[210mm] max-h-[297mm] w-full h-full">
+        <div
+          className="w-full h-full bg-[#E0FBE2]"
+        //   style={{
+        //     backgroundImage: "url('/resumebg.jpg')",
+        //     backgroundPosition: "top",
+        //   }}
+        >
+          <div className="top_section flex items-start gap-1 justify-start px-10">
+            <div className="name_profile">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
                 style={{
@@ -387,8 +370,8 @@ const Template7 = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 px-10 py-2">
-            <div className="resume_detailed_section">
+          <div className="grid grid-cols-12 px-10 py-2 gap-10">
+            <div className="col-span-8 resume_detailed_section1">
               <div>
                 <Profile
                   data={resumeData?.sections?.summary}
@@ -405,17 +388,19 @@ const Template7 = () => {
                   data={resumeData?.sections?.projects}
                   headingColor={resumeData?.metadata?.theme?.primary}
                 />
-                <Education
-                  fontStyle={fontStyle}
-                  data={resumeData?.sections?.education}
-                  headingColor={resumeData?.metadata?.theme?.primary}
-                />
-                <Skills
-                  fontStyle={fontStyle}
-                  data={resumeData?.sections?.skills}
-                  headingColor={resumeData?.metadata?.theme?.primary}
-                />
               </div>
+            </div>
+            <div className="col-span-4 resume_other_section2">
+              <Education
+                fontStyle={fontStyle}
+                data={resumeData?.sections?.education}
+                headingColor={resumeData?.metadata?.theme?.primary}
+              />
+              <Skills
+                fontStyle={fontStyle}
+                data={resumeData?.sections?.skills}
+                headingColor={resumeData?.metadata?.theme?.primary}
+              />
             </div>
           </div>
         </div>
@@ -424,4 +409,4 @@ const Template7 = () => {
   );
 };
 
-export default Template7;
+export default Template9;
