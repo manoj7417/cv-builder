@@ -1,8 +1,9 @@
 'use client'
 import { useContext } from "react";
 import Footer from "../Layout/Footer"
-import Header from "../Layout/Header";
-import NewResumeHeader from "../Layout/NewResumeHeader"
+import dynamic from "next/dynamic";
+const Header = dynamic(()=> import("../Layout/Header"),{ssr:false})
+const NewResumeHeader = dynamic(()=>import("../Layout/NewResumeHeader"),{ssr:false})
 import { AuthContext } from "../context/AuthContext";
 
 const Layout = ({ children }) => {
