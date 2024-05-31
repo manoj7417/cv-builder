@@ -11,7 +11,7 @@ const UserHistoryPage = () => {
   return (
     <>
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-      <div className="container mx-auto bg-gradient-to-t from-[#ebeef7] to-[white]">
+      <div className=" mx-auto bg-gradient-to-t from-[#ebeef7] to-[white]">
         <div className="flex justify-center items-center w-full h-full py-20">
           <TabsMain />
         </div>
