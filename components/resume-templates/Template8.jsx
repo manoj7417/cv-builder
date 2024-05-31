@@ -230,7 +230,7 @@ const Education = ({ fontStyle, headingColor }) => {
               {data?.name}
             </h2>
             <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-              <ul className="w-full">
+              <ul className="w-full flex gap-5 flex-wrap underline underline-offset-2">
                 {data.items.map((item, i) => {
                   return (
                     <li
@@ -295,7 +295,7 @@ const Template8 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full py-10">
+      <div className="template_8 max-w-[210mm] max-h-[297mm] w-full h-full py-10">
         <div className="bg-white">
           <div className="top_section flex items-start gap-1 justify-start px-10">
             <div className="name_profile">

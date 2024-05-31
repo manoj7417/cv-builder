@@ -188,7 +188,7 @@ export default function NewResumeHeader() {
             </div>
 
             <DisclosurePanel className="sm:hidden">
-              <div className="space-y-1 px-2 pb-3 pt-2">
+              <div className="space-y-1 px-2 pb-3 pt-2 bg-white">
                 {navigation.map((item) => (
                   <DisclosureButton
                     key={item.name}
@@ -197,7 +197,7 @@ export default function NewResumeHeader() {
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        : "text-gray-800 hover:bg-gray-700 hover:text-white",
                       "block rounded-md px-3 py-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}

@@ -13,49 +13,63 @@ const Education = ({ fontStyle, data, headingColor }) => {
       {data.visible && data?.items?.length > 0 && (
         <>
           <h2
-            className={`${fontStyle.headingFont} font-semibold uppercase`}
+            className={`${fontStyle.headingFont} font-semibold uppercase underline underline-offset-8`}
             style={{
               color: headingColor,
             }}
           >
             {data?.name}
           </h2>
-          <div className="text-gray-800 my-5">
-            {data?.items?.map((item, index) => {
-              return (
-                <>
-                  <div
-                    className="education1 my-1 flex justify-between"
-                    key={index}
-                  >
-                    <div className="education_names">
-                      <h3 className={`${fontStyle.subHeadingFont} font-bold`} style={{
-                        color:headingColor
-                      }}>
-                        {item?.degree}
-                      </h3>
-                      <h4 style={{ fontSize: fontStyle.paraFont ,color:headingColor}}>
-                        {item?.institute}
-                      </h4>
-                    </div>
-                    <div className="education_year">
-                      <p
-                        className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                      >
-                        {item?.startDate &&
-                          `${item?.startDate}${item?.endDate && " - "}`}
-                        {item?.endDate}
-                      </p>
-                    </div>
+          {data?.items?.map((item, index) => {
+            return (
+              <div
+                className="experience_1 my-5 py-2 border-b-2 border-dotted border-gray-300"
+                key={index}
+              >
+                <div className="post flex  justify-between items-center my-2">
+                  <div className="post_title">
+                    <h3
+                      style={{
+                        fontSize: fontStyle.subHeadingFont,
+                        color: headingColor,
+                      }}
+                      className="font-bold"
+                    >
+                      {item?.degree}
+                    </h3>
+                    <h4
+                      style={{
+                        fontSize: fontStyle.paraFont,
+                        color: headingColor,
+                      }}
+                      className="font-semibold"
+                    >
+                      {item?.institute}
+                    </h4>
                   </div>
-                  <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
-                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                  ></div>
-                </>
-              );
-            })}
-          </div>
+                  <div className="year font-bold">
+                    <p
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                    >
+                      <span>{item?.startDate}</span>
+                      <span>{item?.startDate && item?.endDate && " - "}</span>
+                      <span>{item?.endDate}</span>
+                    </p>
+                    {item?.city && (
+                      <p className="text-13px flex font-normal items-center justify-end text-end">
+                        <IoLocationOutline className="mr-1" />
+                        {item?.city}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className={`${fontStyle.paraFont} break-words`}
+                  dangerouslySetInnerHTML={{ __html: item?.description }}
+                ></div>
+              </div>
+            );
+          })}
         </>
       )}
     </div>
@@ -70,24 +84,33 @@ const Experience = ({ fontStyle, data, headingColor }) => {
           <div className="experience_heading flex gap-5 items-center">
             <h2
               style={{ fontSize: fontStyle.headingFont, color: headingColor }}
-              className="text-xl font-bold uppercase"
+              className="text-xl font-bold uppercase underline underline-offset-8"
             >
               {data?.name}
             </h2>
           </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1 my-5" key={index}>
+              <div
+                className="experience_1 my-5 py-2 border-b-2 border-dotted border-gray-300"
+                key={index}
+              >
                 <div className="post flex  justify-between items-center my-2">
                   <div className="post_title">
                     <h3
-                      style={{ fontSize: fontStyle.subHeadingFont ,color:headingColor}}
+                      style={{
+                        fontSize: fontStyle.subHeadingFont,
+                        color: headingColor,
+                      }}
                       className="font-bold"
                     >
                       {item?.jobtitle}
                     </h3>
                     <h4
-                      style={{ fontSize: fontStyle.paraFont,color:headingColor }}
+                      style={{
+                        fontSize: fontStyle.paraFont,
+                        color: headingColor,
+                      }}
                       className="font-semibold"
                     >
                       {item?.employer}
@@ -129,7 +152,7 @@ const Projects = ({ fontStyle, data, headingColor }) => {
         <>
           <div className="project_heading flex gap-5 items-center">
             <h2
-              className={`${fontStyle.headingFont} font-bold uppercase`}
+              className={`${fontStyle.headingFont} font-bold uppercase underline underline-offset-8`}
               style={{
                 color: headingColor,
               }}
@@ -139,17 +162,26 @@ const Projects = ({ fontStyle, data, headingColor }) => {
           </div>
           {data?.items.map((item, index) => {
             return (
-              <div className="projects1 my-3" key={index}>
+              <div
+                className="projects1 my-3 border-b-2 py-2 border-dotted border-gray-300"
+                key={index}
+              >
                 <div className="post flex  justify-between items-center my-2">
                   <div className="post_title">
                     <h3
-                      style={{ fontSize: fontStyle.subHeadingFont,color:headingColor }}
+                      style={{
+                        fontSize: fontStyle.subHeadingFont,
+                        color: headingColor,
+                      }}
                       className="font-bold"
                     >
                       {item?.title}
                     </h3>
                     <h4
-                      style={{ fontSize: fontStyle.paraFont,color:headingColor }}
+                      style={{
+                        fontSize: fontStyle.paraFont,
+                        color: headingColor,
+                      }}
                       className="font-semibold"
                     >
                       {item?.subtitle}
@@ -184,7 +216,7 @@ const Skills = ({ fontStyle, data, headingColor }) => {
       {data.visible && data.items.length > 0 && (
         <div className="skills_section py-3">
           <h2
-            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
+            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase underline underline-offset-8`}
             style={{
               color: headingColor,
             }}
@@ -192,11 +224,15 @@ const Skills = ({ fontStyle, data, headingColor }) => {
             {data?.name}
           </h2>
           <div className="text-gray-600 my-1">
-            <ul>
+            <ul
+              role="list"
+              className="list-disc pl-5 text-slate-400 flex gap-10"
+              style={{ color: headingColor }}
+            >
               {data.items.map((item, i) => {
                 return (
                   <li
-                    className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}
+                    className={`font-bold text-gray-600 py-2 ${fontStyle.skillsFont}`}
                     key={i}
                   >
                     {item?.name}
@@ -219,7 +255,7 @@ const Profile = ({ data, fontStyle, headingColor }) => {
         <div className="profile_section">
           <div className="profile_heading flex gap-5 items-center">
             <h2
-              className={`${fontStyle.headingFont} font-bold uppercase`}
+              className={`${fontStyle.headingFont} font-bold uppercase underline underline-offset-8`}
               style={{
                 color: headingColor,
               }}
@@ -253,8 +289,8 @@ export const Template4 = ({ resumeData }) => {
 
   return (
     <>
-      <div className="p-custom space-y-3">
-        <div className="bg-white p-5 mx-auto">
+      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+        <div className="bg-white p-2 mx-auto">
           <div
             className="top_section flex justify-between items-center text-white rounded-md p-5"
             style={{
@@ -312,7 +348,7 @@ export const Template4 = ({ resumeData }) => {
               </div>
             </div>
           </div>
-          <div className="resume_detailed_section p-10">
+          <div className="resume_detailed_section px-10 py-8">
             <Profile
               data={resumeData?.sections?.summary}
               fontStyle={fontStyle}
@@ -328,16 +364,17 @@ export const Template4 = ({ resumeData }) => {
               data={resumeData?.sections?.projects}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
-            <Skills
-              fontStyle={fontStyle}
-              data={resumeData?.sections?.skills}
-              headingColor={resumeData?.metadata?.theme?.primary}
-            />
             <Education
               fontStyle={fontStyle}
               data={resumeData?.sections?.education}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
+            <Skills
+              fontStyle={fontStyle}
+              data={resumeData?.sections?.skills}
+              headingColor={resumeData?.metadata?.theme?.primary}
+            />
+            
           </div>
         </div>
       </div>

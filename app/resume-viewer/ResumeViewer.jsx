@@ -37,7 +37,6 @@ import { RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { DataInteractive } from "@headlessui/react";
 
-
 const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
   const dropdownRef = useRef(null);
@@ -47,12 +46,12 @@ const ResumeViewPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const containerRef = useRef();
-  const data = useResumeStore(state => state.resume.data);
-  const setResumeData = useResumeStore(state => state.setResumeData);
-  const logoutUser = useUserStore(state => state.logoutUser);
+  const data = useResumeStore((state) => state.resume.data);
+  const setResumeData = useResumeStore((state) => state.setResumeData);
+  const logoutUser = useUserStore((state) => state.logoutUser);
 
   const handleLogout = async () => {
-    await RemoveTokens()
+    await RemoveTokens();
     toast.success("User logout successfully", {
       position: "top-right",
     });
@@ -95,7 +94,7 @@ const ResumeViewPage = () => {
   };
 
   const handleTemplateChange = (val) => {
-    setResumeData('metadata.template', val);
+    setResumeData("metadata.template", val);
     setIsDrawerOpen(false);
   };
 
@@ -181,8 +180,6 @@ const ResumeViewPage = () => {
     updateScale();
   };
 
-
-
   return (
     <>
       <div className="flex justify-center items-center w-full ">
@@ -265,11 +262,14 @@ const ResumeViewPage = () => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2">
+                          <div
+                            className="image_section_2"
+                            onClick={() => handleTemplateChange("Template8")}
+                          >
                             <Image
-                              src="/newResume1.png"
+                              src="/temp1.png"
                               alt="pic1"
-                              className="hover:border-sky-700 hover:border-4 cursor-none"
+                              className="hover:border-sky-700 hover:border-4 cursor-pointer"
                               width={500}
                               height={500}
                             />
@@ -286,27 +286,36 @@ const ResumeViewPage = () => {
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2">
+                          <div
+                            className="image_section_2"
+                            onClick={() => handleTemplateChange("Template6")}
+                          >
                             <Image
-                              src="/6.png"
+                              src="/temp3.png"
                               alt="pic1"
-                              className="cursor-none hover:border-sky-700 hover:border-4"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
                               width={500}
                               height={500}
                             />
                           </div>
-                          <div className="image_section_1">
+                          <div
+                            className="image_section_1"
+                            onClick={() => handleTemplateChange("Template7")}
+                          >
                             <Image
-                              src="/5.png"
+                              src="/temp4.png"
                               alt="pic1"
-                              className="cursor-none hover:border-sky-700 hover:border-4"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
                               width={500}
                               height={500}
                             />
                           </div>
-                          <div className="image_section_2">
+                          <div
+                            className="image_section_2"
+                            onClick={() => handleTemplateChange("Template4")}
+                          >
                             <Image
-                              src="/6.png"
+                              src="/temp5.png"
                               alt="pic1"
                               className="cursor-none hover:border-sky-700 hover:border-4"
                               width={500}
@@ -410,13 +419,9 @@ const ResumeViewPage = () => {
               style={{
                 width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                 height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-
               }}
             >
-              <GetTemplate
-                name={data?.metadata?.template}
-                resumeData={data}
-              />
+              <GetTemplate name={data?.metadata?.template} resumeData={data} />
               <div className=" bottom-2 right-5 text-gray-500">
                 <p>@Career Genies Hub</p>
               </div>
@@ -431,13 +436,16 @@ const ResumeViewPage = () => {
               <div>
                 {/*content*/}
                 <div>
-                  <div onClick={() => setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
+                  <div
+                    onClick={() => setIsContentVisible(false)}
+                    className="z-50 absolute top-6 right-10 cursor-pointer"
+                  >
                     <LiaTimesSolid className=" text-white text-3xl" />
                   </div>
                   <div
                     className="shadow-2xl overflow-y-scroll no-scrollbar h-screen relative"
                     style={{
-                      scale:{scale}
+                      scale: { scale },
                     }}
                   >
                     <div
@@ -446,7 +454,6 @@ const ResumeViewPage = () => {
                       style={{
                         width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                         height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-
                       }}
                     >
                       <GetTemplate

@@ -2,18 +2,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 
 @layer components {
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
-  
+
   .btn-primary {
     @apply bg-primary outline-theme-purple inline-block rounded-full px-6 py-2 font-semibold shadow-sm;
   }
@@ -282,15 +288,15 @@
     background: #3a3b3c;
   }
 
-  .mobile_responsive_nav #menu-btn:checked ~ .nav-links {
+  .mobile_responsive_nav #menu-btn:checked~.nav-links {
     left: 0%;
   }
 
-  .mobile_responsive_nav #menu-btn:checked ~ .btn.menu-btn {
+  .mobile_responsive_nav #menu-btn:checked~.btn.menu-btn {
     display: none;
   }
 
-  .mobile_responsive_nav #close-btn:checked ~ .btn.menu-btn {
+  .mobile_responsive_nav #close-btn:checked~.btn.menu-btn {
     display: block;
   }
 
@@ -318,10 +324,10 @@
   }
 
   /* .mobile_responsive_nav #showDrop:checked~.drop-menu, */
-  .mobile_responsive_nav #resume:checked ~ .mega-box,
-  .mobile_responsive_nav #cover:checked ~ .mega-box,
-  .mobile_responsive_nav #career:checked ~ .mega-box,
-  .mobile_responsive_nav #blog:checked ~ .mega-box {
+  .mobile_responsive_nav #resume:checked~.mega-box,
+  .mobile_responsive_nav #cover:checked~.mega-box,
+  .mobile_responsive_nav #career:checked~.mega-box,
+  .mobile_responsive_nav #blog:checked~.mega-box {
     max-height: 100%;
   }
 
@@ -557,7 +563,7 @@ footer a:hover svg {
   position: absolute;
   width: 150%;
   height: 40px;
-  background-image: linear-gradient(45deg, #ff6547 0%, #ffb144  51%, #ff7053  100%);
+  background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
   transform: rotate(-45deg) translateY(-20px);
   display: flex;
   align-items: center;
@@ -566,7 +572,7 @@ footer a:hover svg {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.23);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
   z-index: 9;
 }
 
@@ -580,7 +586,7 @@ footer a:hover svg {
   height: 10px;
   z-index: -1;
   box-shadow: 140px -140px #cc3f47;
-  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%);
 }
 
 
@@ -592,11 +598,11 @@ footer a:hover svg {
   align-items: center;
 }
 
-.file > input[type='file'] {
+.file>input[type='file'] {
   display: none
 }
 
-.file > label {
+.file>label {
   font-size: 1rem;
   font-weight: 300;
   cursor: pointer;
@@ -629,4 +635,12 @@ footer a:hover svg {
   opacity: 1;
   transform: translateY(0);
 }
+
 /* Resume Tempates CSS Ends Here  */
+
+.template_8 {
+  font-family: "Playfair Display", serif;
+}
+
+
+/* Font According to Templates */
