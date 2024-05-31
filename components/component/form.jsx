@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
@@ -33,12 +33,14 @@ import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { MultiStepForm } from "./MultiStepForm";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
+import { toast } from "react-toastify";
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
+  const resumeData = useResumeStore(state => state.resume)
   const setResumeData = useResumeStore((state) => state.
     setResumeData)
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
+  const updateBasicAndSectionsData = useResumeStore((state) => state.updateBasicAndSectionsData)
   const updateResume = useUserStore(state => state.updateResume)
   const { sections } = data;
   const [generatingResume, setIsGeneratingResume] = useState(false);
@@ -424,13 +426,16 @@ export default function Form() {
 
   const handlepdfFileChange = (e) => {
     setIsGeneratingResume(true);
+    if (!resumeData._id) {
+      return setIsGeneratingResume(false)
+
+    }
     let selectedFile = e.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = async () => {
       pdfToText(selectedFile)
         .then(async (text) => {
-          await localStorage.setItem("newResumeContent", text);
           await getResumeData(text);
         })
         .catch((error) => {
@@ -441,12 +446,13 @@ export default function Form() {
   };
 
   const getResumeData = async (message) => {
+
     try {
       const response = await getBetterResume(message);
       let value;
       if (response.status === 200) {
         value = JSON.parse(response.data[0].text.value);
-        replaceResumeData(value);
+        updateBasicAndSectionsData(value.basics, value.sections)
       }
     } catch (error) {
       console.error(error);
@@ -458,6 +464,7 @@ export default function Form() {
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
+      console.log(state)
       updateResume(state.resume._id, state.resume)
     })
     return unsubs;

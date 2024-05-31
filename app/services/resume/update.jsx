@@ -5,6 +5,7 @@ import debounce from "lodash.debounce"
 
 export const updateResume = async (data) => {
     const { accessToken } = await GetTokens()
+    console.log(data)
     if (!data._id) return;
     try {
         const response = await instance.patch(`/resume/update/${data._id}`, { data: data.data }, {

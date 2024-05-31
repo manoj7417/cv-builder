@@ -44,7 +44,15 @@ export const useUserStore = create(
             getResumeById: (resumeId) => {
                 const state = useUserStore.getState();
                 return state?.userState?.resumes?.find((resume) => resume?._id === resumeId);
-            }
+            },
+            updateResumeContentById: (resumeId, newData) => set((state) => ({
+                userState: {
+                    ...state.userState,
+                    resumes: state?.userState?.resumes?.map((resume) =>
+                        resume?.id === resumeId ? { ...resume, data: newData } : resume
+                    )
+                }
+            }))
         })
     )
 
