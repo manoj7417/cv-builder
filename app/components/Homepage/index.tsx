@@ -38,7 +38,7 @@ export default function Homepage() {
                   </span>
                 </h1>
                 <p className="max-w-[600px] text-gray-700 2xl:text-xl lg:text-base">
-                Enriching Professional Experiences and Building Success Stories that Resonate with Dreams.
+                Enriching Professional Experiences and Building Success Stories that Resonate with Dreams with Premium CV Templates and Industry-Focused Career Counselling.
                 </p>
               </div>
               <div className="flex lg:flex-row  flex-col gap-2 min-[400px]:flex-row ">
