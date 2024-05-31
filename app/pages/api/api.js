@@ -1,9 +1,9 @@
 
+import { GetTokens } from "@/app/actions";
 import axios from "axios";
 
 export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-
 
 export const instance = axios.create({
   baseURL: `${baseURL}/api`,
@@ -104,9 +104,13 @@ export const getUserResume = async () => {
   }
 }
 
-export const getUserResumes = async () => {
+export const getUserResumes = async (token) => {
   try {
-    const response = await instance.get('/resume/allResume', { withCredentials: true });
+    const response = await instance.get('/resume/allResume', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     return response;
   } catch (error) {
     console.error("Error getting user:", error.response || error);
@@ -114,9 +118,13 @@ export const getUserResumes = async () => {
   }
 }
 
-export const createNewResume = async () => {
+export const createNewResume = async (token) => {
   try {
-    const response = await instance.post('/resume/create', '', { withCredentials: true })
+    const response = await instance.post('/resume/create', '', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     return response;
   } catch (error) {
     console.error("Error creating resume:", error.response || error);
@@ -124,9 +132,13 @@ export const createNewResume = async () => {
   }
 }
 
-export const deleteUserResume = async (id) => {
+export const deleteUserResume = async (id, token) => {
   try {
-    const response = await instance.delete(`/resume/delete/${id}`, { withCredentials: true })
+    const response = await instance.delete(`/resume/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     return response
   } catch (error) {
     console.error("Error deleting resume:", error.response || error);
