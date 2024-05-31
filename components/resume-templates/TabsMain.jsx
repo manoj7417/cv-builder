@@ -89,8 +89,8 @@ const TabsMain = () => {
   return (
     <>
       <div className="tabs_section">
-        <h2 className="lg:text-3xl text-xl text-center font-semibold my-5">
-          Welcome back, {userdata?.fullname}! You have 1 document
+        <h2 className="lg:text-2xl text-xl text-start my-5">
+          Welcome back, <span className="font-semibold">{userdata?.fullname}</span>
         </h2>
         <Tabs >
           <Tab label="All Documents">
@@ -177,8 +177,8 @@ const TabsMain = () => {
               }
             </section>
           </Tab>
-          <Tab label="CV">
-          </Tab>
+          {/* <Tab label="CV">
+          </Tab> */}
           <Tab label="Cover Letter">
             <h1 className="text-xl md:text-2xl font-bold my-1 z-10">
               Coming Soon
