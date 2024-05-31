@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
@@ -32,11 +32,14 @@ import pdfToText from "react-pdftotext";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { MultiStepForm } from "./MultiStepForm";
 import { useResumeStore } from "@/app/store/ResumeStore";
+import { useUserStore } from "@/app/store/UserStore";
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
-  const setResumeData = useResumeStore((state) => state.setResumeData)
+  const setResumeData = useResumeStore((state) => state.
+    setResumeData)
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
+  const updateResume = useUserStore(state => state.updateResume)
   const { sections } = data;
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState({
@@ -53,6 +56,7 @@ export default function Form() {
   });
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleChangeProfileSummaryChange = (val) => {
     if (val) {
@@ -451,6 +455,14 @@ export default function Form() {
     }
   };
 
+
+  useEffect(() => {
+    const unsubs = useResumeStore.subscribe((state) => {
+      updateResume(state.resume._id, state.resume)
+    })
+    return unsubs;
+  })
+
   return (
     <>
       <div className="px-5 py-20 bg-slate-50">
@@ -587,12 +599,12 @@ export default function Form() {
                   onChange={(e) => setResumeData("sections.summary.name", e.target.value)}
                 />
               </div>
-              <Dialog>
+              <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
                     className=" bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 border-none"
-                  >
+                    onClick={() => setIsDialogOpen(true)}>
                     Generate with AI
                     <FaCrown className=" text-yellow-500 ml-2" />
                   </Button>
@@ -636,7 +648,7 @@ export default function Form() {
             <div className="flex justify-between">
               <div className=" w-[40%] group">
                 <Label className="text-2xl group-hover:hidden">
-                  {sections.education.name}
+                  {sections?.education?.name}
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
@@ -890,8 +902,7 @@ export default function Form() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>

@@ -22,6 +22,7 @@ export default function ResumeFeedback() {
   const [pdfFile, setPDFFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
   const [modalsView, setModalsView] = useState({
     clarity: false,
     relevance: false,
@@ -67,8 +68,7 @@ export default function ResumeFeedback() {
     if (resume) {
       const data = await fetchBetterResume(resume);
       if (data) {
-        localStorage.setItem("resumeData", JSON.stringify(data));
-        localStorage.setItem("previousPage", "/feedback");
+        replaceResumeData(data)
         router.push("/builder");
       } else {
         toast.error("Something went wrong");
@@ -105,7 +105,7 @@ export default function ResumeFeedback() {
   return (
     <>
       {/* <Header/> */}
-      <section className="analyser_resume_section" suppressHydrationWarning>
+      <section className="analyser_resume_section " suppressHydrationWarning>
         {isLoading && (
           <div
             className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"

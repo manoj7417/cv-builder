@@ -190,7 +190,7 @@ const ResumeViewPage = () => {
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
-                href={"/resume-dashboard"}
+                href={"/user-history"}
                 className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"
               >
                 <MdOutlineKeyboardArrowLeft className="inline text-xl" />
@@ -397,31 +397,31 @@ const ResumeViewPage = () => {
               </div>
             </div>
           </div>
+          <div
+            className="shadow-2xl overflow-y-scroll no-scrollbar 
+               h-min-[1123px]"
+            style={{
+              transform: `scale(${scale})`,
+            }}
+          >
             <div
-              className="shadow-2xl overflow-y-scroll no-scrollbar h-screen" 
+              id="resume"
+              className={cn("relative bg-white")}
               style={{
-                transform: `scale(${scale})`,
+                width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+
               }}
             >
-              <div
-                id="resume"
-                className={cn("relative bg-white") }
-                style={{
-                  width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                  height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                  
-                }}
-              >
-                <GetTemplate
-                  name={data?.metadata?.template}
-                  resumeData={data}
-                />
-                {/* <PiArrowsOutSimple className="text-4xl text-blue-900 font-bold"/> */}
-                <div className="absolute z-10  bottom-2 right-5 text-gray-500">
-                  <p>@Career Genies Hub</p>
-                </div>
+              <GetTemplate
+                name={data?.metadata?.template}
+                resumeData={data}
+              />
+              <div className=" bottom-2 right-5 text-gray-500">
+                <p>@Career Genies Hub</p>
               </div>
             </div>
+          </div>
           {isContentVisible && (
             <div
               className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover  no-scrollbar"
@@ -446,7 +446,7 @@ const ResumeViewPage = () => {
                       style={{
                         width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                         height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                        
+
                       }}
                     >
                       <GetTemplate
