@@ -398,8 +398,7 @@ const ResumeViewPage = () => {
             </div>
           </div>
           <div
-            className="shadow-2xl overflow-y-scroll no-scrollbar 
-               h-min-[1123px]"
+            className="shadow-2xl overflow-y-scroll h-screen"
             style={{
               transform: `scale(${scale})`,
             }}
@@ -410,57 +409,53 @@ const ResumeViewPage = () => {
               style={{
                 width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                 height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-
               }}
             >
               <GetTemplate
                 name={data?.metadata?.template}
                 resumeData={data}
               />
-              <div className=" bottom-2 right-5 text-gray-500">
+              <div className=" text-center bottom-2 right-5 text-gray-500">
                 <p>@Career Genies Hub</p>
               </div>
             </div>
           </div>
           {isContentVisible && (
-            <div
-              className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover  no-scrollbar"
-              id="modal-id"
-            >
-              <div className="absolute bg-black opacity-80 inset-0 z-0 w-full h-full" />
-              <div>
-                {/*content*/}
-                <div>
-                  <div onClick={() => setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
-                    <LiaTimesSolid className=" text-white text-3xl" />
-                  </div>
-                  <div
-                    className="shadow-2xl overflow-y-scroll no-scrollbar h-screen relative"
-                    style={{
-                      scale:{scale}
-                    }}
-                  >
-                    <div
-                      id="resume"
-                      className={cn("relative bg-white")}
-                      style={{
-                        width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                        height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-
-                      }}
-                    >
-                      <GetTemplate
-                        name={data?.metadata?.template}
-                        resumeData={data}
-                      />
-                      <div className="fixed z-10  bottom-0 right-2 text-gray-500">
-                        <p className="text-sm">@Career Genies Hub</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <div
+           className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
+           id="modal-id"
+         >
+           <div className="absolute bg-black opacity-80 inset-0 z-0 w-full" />
+           
+           {/*content*/}
+           <div className="">
+             <div onClick={() => setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
+               <LiaTimesSolid className="text-white text-3xl" />
+             </div>
+             <div
+               className="shadow-2xl relative overflow-y-scroll no-scrollbar h-screen"
+               style={{
+                 scale: {scale},
+                 
+               }}
+             >
+               <div id="resume" className={cn("relative bg-white")} style={{
+                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                 }}
+               >
+                 <GetTemplate
+                   name={data?.metadata?.template}
+                   resumeData={data}
+                 />
+                 <div className="absolute z-10 bottom-2 right-2 text-gray-500">
+                   <p className="text-sm">@Career Genies Hub</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         
           )}
         </div>
       </div>
