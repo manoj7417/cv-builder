@@ -14,6 +14,7 @@ import {
 import { IoMdAddCircle } from "react-icons/io";
 import PlusIcon from "../ui/PlusIcon";
 import { toast } from "react-toastify";
+import { GetTokens } from "@/app/actions";
 
 
 
@@ -29,8 +30,9 @@ const TabsMain = () => {
   const [isCreatingResume, setisCreatingResume] = useState(false)
 
   const fetchUserResumes = async () => {
+    const { accessToken } = await GetTokens()
     try {
-      const response = await getUserResumes()
+      const response = await getUserResumes(accessToken.value)
       if (response?.data?.data) {
         setResumes(response.data.data)
       }
@@ -42,9 +44,10 @@ const TabsMain = () => {
   }
 
   const handlecreateResume = async () => {
+    const { accessToken } = await GetTokens()
     setisCreatingResume(true)
     try {
-      const response = await createNewResume()
+      const response = await createNewResume(accessToken?.value)
       if (response.data.data) {
         createResume(response.data.data)
         replaceResumeData(response.data.data)
@@ -62,8 +65,9 @@ const TabsMain = () => {
   }
 
   const handleDeleteResume = async (id) => {
+    const { accessToken } = await GetTokens()
     toast.promise(
-      deleteUserResume(id).then(response => {
+      deleteUserResume(id, accessToken.value).then(response => {
         if (response.status === 204) {
           deleteResume(id);
         }
@@ -149,7 +153,7 @@ const TabsMain = () => {
               </div>
               {
                 resumes?.length > 0 && resumes.map((item, index) => {
-                  return <div className="relative w-[200px] group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 m-5 cursor-pointer" key={index} onClick={() => handleResumeClick(item._id)}>
+                  return <div className="relative w-[200px] group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 m-5" key={index} >
                     <img
                       alt="CV Template"
                       className="object-cover w-full h-48"
@@ -162,11 +166,11 @@ const TabsMain = () => {
                       width="300"
                     />
                     <div className="bg-white p-4 flex w-full justify-between">
-                      <h3 className="font-bold text-lg text-blue-900">{item.title}</h3>
+                      <h3 className="font-bold text-sm text-blue-900">{item.title}</h3>
                       <DropdownMenu>
                         <DropdownMenuTrigger><DotsHorizontalIcon className="text-2xl text-blue-900" /></DropdownMenuTrigger>
                         <DropdownMenuContent>
-                          <DropdownMenuItem onClick={() => handleEditResume(item._id)}>
+                          <DropdownMenuItem onClick={() => handleResumeClick(item._id)}>
                             Edit </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleDeleteResume(item._id)}>Delete</DropdownMenuItem>
                         </DropdownMenuContent>

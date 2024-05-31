@@ -28,3 +28,9 @@ export async function RemoveTokens() {
     cookies().delete('accessToken')
     cookies().delete('refreshToken')
 }
+
+
+export async function GetTokens() {
+    const accessToken = cookies().get('accessToken')
+    return { accessToken }
+}

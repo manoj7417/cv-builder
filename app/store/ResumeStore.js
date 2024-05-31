@@ -11,10 +11,10 @@ export const useResumeStore = create(devtools((set) => ({
     isUploading: false,
     setIsUploading: (isUploading) => set({ isUploading }),
     setResumeData: (path, value) => set((state) => {
-        const newResumeData = { ...state.resume.data };
+        const newResumeData = { ...state?.resume?.data };
         state.resume.data = _set(newResumeData, path, value);
-        debouncedUpdateResume(JSON.parse(JSON.stringify(state.resume)))
-        return { resume: { ...state.resume, data: newResumeData } };
+        debouncedUpdateResume(JSON.parse(JSON.stringify(state?.resume)))
+        return { resume: { ...state?.resume, data: newResumeData } };
     }),
     replaceResumeData: (newData) => set((state) => {
         state.resume = newData;

@@ -15,35 +15,35 @@ export const useUserStore = create(
             createResume: (resume) => set((state) => ({
                 userState: {
                     ...state.userState,
-                    resumes: [...(state.userState.resumes || []), resume]
+                    resumes: [...(state?.userState?.resumes || []), resume]
                 }
             })),
             readResumes: () => set((state) => ({
-                userState: { ...state.userState }
+                userState: { ...state?.userState }
             })),
             updateResume: (resumeId, updatedResume) => set((state) => ({
                 userState: {
                     ...state.userState,
-                    resumes: state.userState.resumes.map((resume) =>
-                        resume.id === resumeId ? updatedResume : resume
+                    resumes: state?.userState?.resumes?.map((resume) =>
+                        resume?.id === resumeId ? updatedResume : resume
                     )
                 }
             })),
             deleteResume: (resumeId) => set((state) => ({
                 userState: {
                     ...state.userState,
-                    resumes: state.userState.resumes.filter((resume) => resume._id !== resumeId)
+                    resumes: state?.userState?.resumes.filter((resume) => resume?._id !== resumeId)
                 }
             })),
             setResumes: (resumes) => set((state) => ({
                 userState: {
-                    ...state.userState,
+                    ...state?.userState,
                     resumes: resumes
                 }
             })),
             getResumeById: (resumeId) => {
                 const state = useUserStore.getState();
-                return state.userState.resumes.find((resume) => resume._id === resumeId);
+                return state?.userState?.resumes?.find((resume) => resume?._id === resumeId);
             }
         })
     )
