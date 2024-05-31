@@ -105,7 +105,7 @@ export default function ResumeFeedback() {
   return (
     <>
       {/* <Header/> */}
-      <section className="analyser_resume_section" suppressHydrationWarning>
+      <section className="analyser_resume_section " suppressHydrationWarning>
         {isLoading && (
           <div
             className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"
@@ -117,7 +117,7 @@ export default function ResumeFeedback() {
           </div>
         )}
         <div
-          className="bg-blue-50 w-full h-[400px] flex items-center justify-center"
+          className=" bg-gradient-to-t from-[#F1F6FA] to-[white] w-full h-[400px] flex items-center justify-center"
          
         >
           <div className="main_heading_section">
@@ -313,7 +313,7 @@ export default function ResumeFeedback() {
               />
             </div>
             </div>
-            <div className="flex flex-col space-y-5">
+            <div className="flex flex-col space-y-5 justify-around">
             <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
               <div className="px-4 py-5 sm:p-3 sm:px-8">
                 <div className="text-center">
