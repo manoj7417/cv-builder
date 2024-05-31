@@ -19,7 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { printResume } from "../pages/api/api";
+import { Payment, printResume } from "../pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
@@ -33,7 +33,7 @@ import useWindowSize from "@/app/hook/useWindowSize";
 import { BsFullscreen } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
-import { RemoveTokens } from "../actions";
+import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { DataInteractive } from "@headlessui/react";
 
@@ -65,6 +65,33 @@ const ResumeViewPage = () => {
       setIsToggleOpen(false);
     }
   };
+
+//payment gateway use this function whever you want to do the payment
+
+  const handlepayment = async() => {
+
+    const {accessToken} = await GetTokens();
+    console.log(accessToken)
+    
+     Payment({
+           amount:1000, 
+        email:"aman@gmail.com",
+        name:"aman",
+        url:window.location.href,
+        cancel_url:window.location.href,
+        templateName:"Template3"
+     },accessToken.value).then(res => {
+        if (res.ok) return res.json()
+        return res.json().then(json => Promise.reject(json))
+      })
+      .then(({ url }) => {
+        window.location = url
+      })
+      .catch(e => {
+        console.log(e.error)
+      })
+  };
+
 
   const handleDownloadResume = async () => {
     const el = document.getElementById("resume");
