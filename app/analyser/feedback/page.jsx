@@ -11,6 +11,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { WiStars } from "react-icons/wi";
 import "./header.css";
+import { useResumeStore } from "@/app/store/ResumeStore";
 
 export default function ResumeFeedback() {
   const [content, setContent] = useState({});
