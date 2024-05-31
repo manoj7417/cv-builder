@@ -5,18 +5,17 @@ import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-import { getBetterResume } from "@/app/pages/api/api";
+import { generateResumeOnFeeback, getBetterResume } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { WiStars } from "react-icons/wi";
 import "./header.css";
 import { useResumeStore } from "@/app/store/ResumeStore";
+import { GetTokens } from "@/app/actions";
 
 export default function ResumeFeedback() {
   const [content, setContent] = useState({});
-  const iframeRef = useRef(null);
-  const [pdfFile, setPDFFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
@@ -27,30 +26,14 @@ export default function ResumeFeedback() {
   });
   const percentage = 66;
 
-  useEffect(() => {
-    const updateHeight = () => {
-      if (iframeRef.current) {
-        const width = iframeRef.current.offsetWidth;
-        const height = width * 1.414; // Setting height to be 1.414 times the width
-        iframeRef.current.style.height = `${height}px`;
-      }
-    };
 
-    updateHeight(); // Call the function initially
-    window.addEventListener("resize", updateHeight); // Update height on window resize
-
-    return () => {
-      window.removeEventListener("resize", updateHeight); // Clean up event listener
-    };
-  }, [pdfFile]);
 
   const fetchBetterResume = async (resume) => {
+    const { accessToken } = await GetTokens()
     try {
-      const response = await getBetterResume(resume);
-      let data;
-      if (response.status === 200) {
-        data = JSON.parse(response.data[0].text.value);
-        return data;
+      const response = await generateResumeOnFeeback(resume, accessToken.value);
+      if (response.status === 201) {
+        return response.data.data;
       }
     } catch (error) {
       console.error(error);
@@ -68,7 +51,7 @@ export default function ResumeFeedback() {
         replaceResumeData(data)
         router.push("/builder");
       } else {
-        toast.error("Something went wrong");
+        toast.error("Unable to optimize resume");
       }
     }
   };
@@ -92,10 +75,7 @@ export default function ResumeFeedback() {
   };
 
   useEffect(() => {
-    let pdfFile = JSON.parse(localStorage.getItem("pdfFile"));
     let value = JSON.parse(localStorage.getItem("feedback"));
-    console.log(pdfFile);
-    setPDFFile(pdfFile);
     setContent(value);
   }, []);
 
@@ -136,11 +116,10 @@ export default function ResumeFeedback() {
                 <p className="tracking-wider">
                   Your resume ATS score is{" "}
                   <span
-                    className={`${
-                      content?.analysis?.resume_score > 65
-                        ? "text-green-400"
-                        : "text-red-500"
-                    } font-bold`}
+                    className={`${content?.analysis?.resume_score > 65
+                      ? "text-green-400"
+                      : "text-red-500"
+                      } font-bold`}
                   >
                     {content ? content?.analysis?.resume_score : "0"}
                   </span>{" "}
@@ -163,7 +142,7 @@ export default function ResumeFeedback() {
                 </p>
                 <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
                   {Object.keys(content).length > 0 &&
-                  content?.analysis?.feedback?.length > 0 ? (
+                    content?.analysis?.feedback?.length > 0 ? (
                     <ul className="custom-counter">
                       {Object.keys(content).length > 0 &&
                         content.analysis.feedback.map((content, index) => {
@@ -235,11 +214,10 @@ export default function ResumeFeedback() {
                                 ? content?.analysis?.resume_score
                                 : "0"
                             }
-                            text={`${
-                              Object.keys(content).length > 0
-                                ? content?.analysis?.resume_score
-                                : "0"
-                            }%`}
+                            text={`${Object.keys(content).length > 0
+                              ? content?.analysis?.resume_score
+                              : "0"
+                              }%`}
                           />
                         </div>
                       </div>
@@ -270,17 +248,16 @@ export default function ResumeFeedback() {
                                   ? content?.clarity?.score
                                   : "0"
                               }
-                              text={`${
-                                Object.keys(content).length > 0
-                                  ? content?.clarity?.score
-                                  : "0"
-                              }%`}
+                              text={`${Object.keys(content).length > 0
+                                ? content?.clarity?.score
+                                : "0"
+                                }%`}
                             />
                           </div>
                         </div>
                         <div className="flex justify-center items-center pt-2">
                           {Object.keys(content).length > 0 &&
-                          content?.clarity?.score > 80 ? (
+                            content?.clarity?.score > 80 ? (
                             <div
                               className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
                               onMouseEnter={() => handleOpenModal("clarity")}
@@ -329,11 +306,10 @@ export default function ResumeFeedback() {
                                   ? content?.relevancy?.score
                                   : "0"
                               }
-                              text={`${
-                                Object.keys(content).length > 0
-                                  ? content?.relevancy?.score
-                                  : "0"
-                              }%`}
+                              text={`${Object.keys(content).length > 0
+                                ? content?.relevancy?.score
+                                : "0"
+                                }%`}
                               styles={buildStyles({
                                 textColor: "red",
                                 pathColor: "turquoise",
@@ -343,7 +319,7 @@ export default function ResumeFeedback() {
                         </div>
                         <div className="pt-2 flex justify-center items-center">
                           {Object.keys(content).length > 0 &&
-                          content?.relevancy?.score > 80 ? (
+                            content?.relevancy?.score > 80 ? (
                             <div
                               className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
                               onMouseEnter={() => handleOpenModal("relevance")}
@@ -390,11 +366,10 @@ export default function ResumeFeedback() {
                                   ? content?.content_quality?.score
                                   : "0"
                               }
-                              text={`${
-                                Object.keys(content).length > 0
-                                  ? content?.content_quality?.score
-                                  : "0"
-                              }%`}
+                              text={`${Object.keys(content).length > 0
+                                ? content?.content_quality?.score
+                                : "0"
+                                }%`}
                               styles={buildStyles({
                                 textColor: "red",
                                 pathColor: "#F89A14",
@@ -404,7 +379,7 @@ export default function ResumeFeedback() {
                         </div>
                         <div className="pt-2 flex justify-center items-center">
                           {Object.keys(content).length > 0 &&
-                          content?.content_quality?.score > 80 ? (
+                            content?.content_quality?.score > 80 ? (
                             <div
                               className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
                               onMouseEnter={() => handleOpenModal("content")}

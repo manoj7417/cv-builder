@@ -14,6 +14,20 @@ export const instance = axios.create({
   },
 });
 
+export const Payment = async (data,token) => {
+  try {
+    const response = await instance.post("/stripe/create-checkout-session", data,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
+    throw error;
+  }
+};
+
 export const AnalyzeAts = async (message) => {
   try {
     const response = await instance.post("/openai/atsCheck", { message });
@@ -63,6 +77,20 @@ export const getBetterResume = async (message) => {
     return response;
   } catch (error) {
     console.error("Error creating user:", error.response || error);
+    return error
+  }
+}
+
+export const generateResumeOnFeeback = async (message, token) => {
+  try {
+    const response = await instance.post('/openai/generateResumeOnFeeback', { message }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    return response;
+  } catch (error) {
+    console.error("Error generating feedback:", error.response || error);
     return error
   }
 }

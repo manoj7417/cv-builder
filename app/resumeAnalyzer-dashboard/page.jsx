@@ -23,6 +23,7 @@ import { AnalyzeAts } from "../pages/api/api"
 import pdfToText from 'react-pdftotext'
 import { useRouter } from "next/navigation"
 import Header from "../Layout/Header"
+import { toast } from "react-toastify"
 
 
 export default function DashboardIdea() {
@@ -34,13 +35,9 @@ export default function DashboardIdea() {
     let reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = async () => {
-      // Store the data URL in state or dispatch it to Redux store
-      localStorage.setItem("pdfFile", JSON.stringify(reader.result))
-      // Perform any additional operations you need with the file data here
-      // For example, you can pass it to your pdfToText function
       pdfToText(selectedFile)
         .then(async text => {
-          console.log(text)
+          if (!text) return toast.error("Please select a valid PDF file")
           await localStorage.setItem("newResumeContent", text)
           await getFeedback(text);
         })
@@ -55,9 +52,7 @@ export default function DashboardIdea() {
   const getFeedback = async (message) => {
     try {
       const response = await AnalyzeAts(message)
-      console.log(response)
       const value = JSON.parse(response[0].text.value)
-      console.log(value)
       if (value.analysis.resume_score) {
         localStorage.setItem('feedback', JSON.stringify(value))
         router.push('/analyser/feedback')
