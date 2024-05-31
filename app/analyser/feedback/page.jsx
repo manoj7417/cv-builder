@@ -1,7 +1,4 @@
 "use client";
-// import AccordionSection from "@/src/shared/AccordionSection";
-// import { Animate } from "@/src/shared/Animate";
-// import ResumeBuilder from "@/src/shared/ResumeBuilder";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
@@ -12,7 +9,6 @@ import { getBetterResume } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import Link from "next/link";
 import { WiStars } from "react-icons/wi";
 import "./header.css";
 import { useResumeStore } from "@/app/store/ResumeStore";
