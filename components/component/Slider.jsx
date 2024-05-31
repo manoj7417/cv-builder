@@ -17,7 +17,7 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -49,15 +49,15 @@ import ImageCarousel from "./ImageCarousel";
 export const templateType = {
   free: "Free",
   premium: "Premium",
-  dummy: "Dummy"
-}
+  dummy: "Dummy",
+};
 
 const Carousel1 = [
   {
     name: "Template3",
     src: "/newResume.png",
     alt: "newResume.png",
-    type: templateType.free
+    type: templateType.free,
   },
   {
     name: "Template2",
@@ -69,97 +69,98 @@ const Carousel1 = [
     name: "DummyTemplate1",
     src: "/5.png",
     alt: "5.png",
-    type: templateType.dummy
-  }, {
+    type: templateType.dummy,
+  },
+  {
     name: "DummyTemplate2",
     src: "/6.png",
     alt: "6.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "Template1",
     src: "/newResume2.png",
     alt: "newResume2.png",
     type: templateType.premium,
-  }
-]
+  },
+];
 
 const Carousel2 = [
   {
     name: "DummyTemplate3",
     src: "/7.png",
     alt: "7.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate4",
     src: "/8.png",
     alt: "8.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate5",
     src: "/9.png",
     alt: "9.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate6",
     src: "/10.png",
     alt: "10.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate7",
     src: "/11.png",
     alt: "11.png",
-    type: templateType.dummy
-  }
-]
+    type: templateType.dummy,
+  },
+];
 
 const Carousel3 = [
   {
     name: "DummyTemplate8",
     src: "/resume-temp-example.png",
     alt: "resume-temp-example.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate9",
     src: "/3.png",
     alt: "3.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate10",
     src: "/4.png",
     alt: "4.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate11",
     src: "/5.png",
     alt: "5.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
   {
     name: "DummyTemplate12",
     src: "/6.png",
     alt: "6.png",
-    type: templateType.dummy
+    type: templateType.dummy,
   },
-]
+];
 
 export default function Slider() {
-  const [userState, setUserState] = useState({})
+  const [userState, setUserState] = useState({});
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userState'))
+    const user = JSON.parse(localStorage.getItem("userState"));
 
     if (user) {
-      setUserState(user.userdata)
+      setUserState(user.userdata);
     }
-  }, [])
+  }, []);
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-r from-[white] to-[#dcecff]">
       <div className="container mx-auto mb-10 ">
@@ -169,9 +170,9 @@ export default function Slider() {
         <p className="text-center max-w-3xl mx-auto">
           Explore unlimited possibilities with the power of a perfectly crafted
           CV by creating one that aligns with your Professional Profile,
-          employing our customised templates. If you already have a CV, you can
-          easily rectify it to create an ATS (Application Tracking Score)
-          optimized CV.
+          employing our customised Curriculum Vitae templates. If you already
+          have a resume, you can easily rectify it to create an ATS (Application
+          Tracking Score) optimized CV with structured formatting.
         </p>
 
         <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
@@ -179,19 +180,19 @@ export default function Slider() {
             <FaUserCog className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2 " />
 
             <p className="text-base mt-2 text-center">
-              Templates Crafted by Domain Experts
+              CV Templates Crafted by Domain Experts
             </p>
           </div>
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
             <MdOutlineDesignServices className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2" />
             <p className="text-base mt-2 text-center">
-              Customized Layouts to Suit Your Preferences
+              Customized UK CV Format Template
             </p>
           </div>
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
             <MdOutlineSettingsSuggest className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2" />
             <p className="text-base mt-2 text-center">
-              Personalized Suggestions for Improvement
+              Build a CV with Personalized Suggestions
             </p>
           </div>
         </div>
@@ -200,9 +201,9 @@ export default function Slider() {
       <div className="relative w-full">
         <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>
           <CarouselContent>
-            <ImageCarousel data={Carousel1} userState={userState}  />
-            <ImageCarousel data={Carousel2} userState={userState}  />
-            <ImageCarousel data={Carousel3} userState={userState}  />
+            <ImageCarousel data={Carousel1} userState={userState} />
+            <ImageCarousel data={Carousel2} userState={userState} />
+            <ImageCarousel data={Carousel3} userState={userState} />
           </CarouselContent>
           <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2">
             <ChevronLeftIcon className="h-6 w-6" />
@@ -212,7 +213,7 @@ export default function Slider() {
           </CarouselNext>
         </Carousel>
       </div>
-    </div >
+    </div>
   );
 }
 

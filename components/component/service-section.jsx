@@ -19,7 +19,10 @@ export function ServiceSection() {
                   A Step Closer to Your Dream Job!
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                You can get your CV engineered in minutes and start your job application process quickly while ensuring that your profile reflects the exact requisites of the job you have always dreamt of.
+                  You can get your CV engineered in minutes with seamless CV
+                  Building. Start your job application process quickly while
+                  ensuring that your profile reflects the exact requisites of
+                  the job you have always dreamt of.
                 </p>
               </div>
             </div>
@@ -31,10 +34,16 @@ export function ServiceSection() {
                       <h3 className="text-xl font-bold text-blue-950">
                         CV Curator
                       </h3>
-                      <p className="text-gray-500 ">
+                      <p className="text-gray-500 text-sm">
                         Looking for an impressive CV Template? Find the best
                         Artificial Intelligence-Based Services in CV Making
-                        here!
+                        here! Check out our Sample CVs UK to generate the
+                        perfect resume that aligns with the job you are
+                        targeting. Our CV Maker is equipped with Artificial
+                        Intelligence and tools specially designed to help you
+                        with the rectification of mistakes and improve the
+                        structure and content of your resume. Build the perfect
+                        CV and approach the job with confidence.
                       </p>
                     </div>
                   </li>
@@ -43,28 +52,41 @@ export function ServiceSection() {
                       <h3 className="text-xl font-bold text-blue-950">
                         CV Analyser
                       </h3>
-                      <p className="text-gray-500 ">
+                      <p className="text-gray-500 text-sm">
                         Not Sure if Your CV is Perfect for the Job you are
                         applying for? Get your CV analysed by Industry Experts
-                        now!
+                        now! Focused on creating the best CV that helps you
+                        crack the interview code, our British Resume Templates
+                        are carefully designed to suit the job specifications.
+                        However, if you need more specific insights on content
+                        style, skill gaps, important keywords, and Application
+                        Tracking Software compatibility, the CV Analyser is the
+                        tool you must seek.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
-                      <h3 className="text-xl font-bold text-blue-950">
-                        Genie
-                      </h3>
-                      <p className="text-gray-500 ">
-                      Simplify your approach to Job Applications with an AI-based CV Maker that does all that you want while you sit back and relax!
+                      <h3 className="text-xl font-bold text-blue-950">Genie</h3>
+                      <p className="text-gray-500 text-sm">
+                        Simplify your approach to Job Applications with an
+                        AI-based CV Maker that does all that you want while you
+                        sit back and relax! This genie not only helps you create
+                        your CV as a premium CV Maker but also provides a
+                        solution to your queries. Providing you with resources
+                        and suitable recommendations, the genie will assist you
+                        in every step. Crafted with Artificial Intelligence
+                        specifications and inspired by the knowledge of Industry
+                        Experts, the genie is just exactly what you need!
                       </p>
                     </div>
                   </li>
                 </ul>
                 <div>
-                  <button className=" px-7 py-2 rounded-md text-lg text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/resume-dashboard" className="flex items-center">Curate Now
-                    <FiBox className="h-5 w-5 ms-5 text-white"/>
+                  <button className=" px-7 py-2 rounded-md text-base text-white bg-blue-900 hover:bg-blue-700">
+                    <a href="/resume-dashboard" className="flex items-center">
+                      Curate Now
+                      <FiBox className="h-5 w-5 ms-5 text-white" />
                     </a>
                   </button>
                 </div>
@@ -124,7 +146,7 @@ export function ServiceSection() {
               <div className="flex flex-col justify-center space-y-4 lg:ps-20 ps-1">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
                   <h2 className="lg:text-4xl text-3xl font-bold text-blue-900">
-                  Genie Connect
+                    Genie Connect
                   </h2>
                   <GiMagicLamp className="h-14 w-14 ms-5 text-blue-900" />
                 </div>
@@ -132,30 +154,30 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                      Genie Advocates
+                        Genie Advocates
                       </h3>
-                      <p className="text-gray-500 ">
-                      Get recommendations from Genie on how to craft the perfect CV for the job or professional role you are aiming for. 
+                      <p className="text-gray-500 text-sm">
+                      Get recommendations from Genie on how to craft the perfect CV for the job or professional role you are aiming for. The genie will help you with Curriculum Vitae samples and templates by providing suggestions and ideas by employing artificial intelligence concepts. From Content Recommendations and Grammatical Errors to CV Formatting and Skill Gap Analyses, Genie helps you with all. Trained by Industry Specialists and inculcating the qualifications of a domain expert, the Genie is truly a genie when it comes to recommending! 
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                      Genie Counsels
+                        Genie Counsels
                       </h3>
-                      <p className="text-gray-500 ">
-                      Puzzled about your Career Choices? Get counselled by Genie and find solutions to your professional problems.
+                      <p className="text-gray-500 text-sm">
+                      Puzzled about your Career Choices? Get counselled by Genie and find solutions to your professional problems. All you need to do is ask Genie a question regarding your CV Templates or Career Choices, and the Genie will carefully decode the information available on the internet as well as fed by top professionals in the domain to help you solve your career problems. Have a healthy and professional discussion with Genie and find out exactly how you must direct your career!
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                      Genie Sources
+                        Genie Sources
                       </h3>
-                      <p className="text-gray-500 ">
-                      Need specific resources to get started with your professional journey? Ask the Genie and get specific resources to refer to!
+                      <p className="text-gray-500 text-sm">
+                      Need specific resources to get started with your professional journey? Ask the Genie and get guided throughout! Artificial Intelligence-based technology comes in handy when you seek important information regarding certain career paths. The genie not only helps you find answers but also provides you with specific resources that will enable you to access the information. With the best links and the most relevant information, the genie ensures that you get to read exactly what you need to. 
                       </p>
                     </div>
                   </li>
@@ -175,18 +197,19 @@ export function ServiceSection() {
 
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-[white] to-[#dcecff]"
-           style={{
-           backgroundImage: "url('/banner-bg.svg')",
-           backgroundPosition: "center",
-        }}
+          style={{
+            backgroundImage: "url('/banner-bg.svg')",
+            backgroundPosition: "center",
+          }}
         >
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Looking for More?
+                Looking for More?
               </h2>
               <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
-              Contact our Industry Experts to get additional information for a more personalised approach to Career Counselling.
+                Contact our Industry Experts to get additional information for a
+                more personalised approach to Career Counselling.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
@@ -209,11 +232,10 @@ export function ServiceSection() {
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">
-              Stay Connected with the Genie!
+                Stay Connected with the Genie!
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                 Subscribe to our newsletter and get latest updates.
-                
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
@@ -223,9 +245,7 @@ export function ServiceSection() {
                   placeholder="Enter your email"
                   type="email"
                 />
-                <div
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                >
+                <div className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ">
                   Subscribe
                 </div>
               </form>
