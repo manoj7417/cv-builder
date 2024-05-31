@@ -165,14 +165,7 @@ const AllTemplates = [
 ]
 
 export default function DashboardIdea() {
-  const [userState, setUserState] = useState({})
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userState'))
-    if (user) {
-      setUserState(user.userdata)
-    }
-  }, [])
   return (
     <>
       <main>
@@ -243,7 +236,7 @@ export default function DashboardIdea() {
                   <Carousel>
                     {
                       AllTemplates.map((carousel, index) => {
-                        return <ImageCarousel data={carousel} key={index} userState={userState} />
+                        return <ImageCarousel data={carousel} key={index} />
                       })
                     }
                   </Carousel>

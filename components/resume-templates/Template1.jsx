@@ -12,7 +12,8 @@ import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 import { useResumeStore } from "@/app/store/ResumeStore";
 
-const Education = ({ fontStyle, data, colorStyle }) => {
+const Education = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.education)
   return (
     <div className="education_section py-3">
       {data?.visible && data?.items?.length > 0 && (
@@ -59,7 +60,8 @@ const Education = ({ fontStyle, data, colorStyle }) => {
   );
 };
 
-const Experience = ({ fontStyle, data, colorStyle }) => {
+const Experience = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.experience)
   return (
     <div className="experience_section my-2">
       {data?.visible && data?.items?.length > 0 && (
@@ -147,7 +149,8 @@ const Experience = ({ fontStyle, data, colorStyle }) => {
   );
 };
 
-const Projects = ({ fontStyle, data, colorStyle }) => {
+const Projects = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.projects)
   return (
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
@@ -201,7 +204,8 @@ const Projects = ({ fontStyle, data, colorStyle }) => {
 };
 
 
-const Skills = ({ fontStyle, data, colorStyle }) => {
+const Skills = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.skills)
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
@@ -233,7 +237,8 @@ const Skills = ({ fontStyle, data, colorStyle }) => {
   );
 };
 
-const Profile = ({ data, fontStyle, colorStyle }) => {
+const Profile = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.summary)
   const htmlContent = data?.content;
   return (
     <div>
@@ -257,10 +262,9 @@ const Profile = ({ data, fontStyle, colorStyle }) => {
   );
 };
 
-const Template1 = ({ resumeData }) => {
-
-
-  
+const Template1 = () => {
+  const metadata = useResumeStore(state => state.resume.data.metadata)
+  const basics = useResumeStore(state => state.resume.data.basics)
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
@@ -280,13 +284,13 @@ const Template1 = ({ resumeData }) => {
         <div
           className="resume_left w-[35%]"
           style={{
-            backgroundColor: resumeData?.metadata?.theme?.primary,
+            backgroundColor: metadata?.theme?.primary,
           }}
         >
           <div className="resume_image w-full">
-            {resumeData?.basics?.picture?.url && (
+            {basics?.picture?.url && (
               <img
-                src={resumeData?.basics?.picture?.url}
+                src={basics?.picture?.url}
                 alt="Resume_image"
                 className="w-40 h-40 block mx-auto my-5 rounded-full"
               />
@@ -296,7 +300,6 @@ const Template1 = ({ resumeData }) => {
             <div className="resume_item resume_profile py-5">
               <Education
                 fontStyle={fontStyle}
-                data={resumeData?.sections?.education}
               />
             </div>
 
@@ -304,7 +307,6 @@ const Template1 = ({ resumeData }) => {
               <div className="resume_info">
                 <Skills
                   fontStyle={fontStyle}
-                  data={resumeData?.sections?.skills}
                 />
               </div>
             </div>
@@ -315,38 +317,38 @@ const Template1 = ({ resumeData }) => {
             <h1
               className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
               style={{
-                color: resumeData?.metadata?.theme?.primary
+                color: metadata?.theme?.primary
               }}>
-              {resumeData?.basics?.name}
+              {basics?.name}
             </h1>
             <p className={`${fontStyle.jobtitleFont} break-words uppercase`} style={{
-              color: resumeData?.metadata?.theme?.primary
+              color: metadata?.theme?.primary
             }}  >
-              {resumeData?.basics?.jobtitle}
+              {basics?.jobtitle}
             </p>
             <div className="contact_details">
               <div
                 className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold`}
               >
-                {resumeData?.basics?.email && (
+                {basics?.email && (
                   <a
-                    href={`mailto:${resumeData?.basics?.email}`}
+                    href={`mailto:${basics?.email}`}
                     className="hover:underline flex items-center mt-1  text-wrap w-full "
                   >
                     <MdOutlineMailOutline className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
-                      {resumeData?.basics?.email}
+                      {basics?.email}
                     </p>
                   </a>
                 )}
-                {resumeData?.basics?.phone && (
+                {basics?.phone && (
                   <a
-                    href={`tel:${resumeData?.basics?.phone}`}
+                    href={`tel:${basics?.phone}`}
                     className="hover:underline flex items-center mt-1  text-wrap w-full "
                   >
                     <MdOutlinePhone className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
-                      {resumeData?.basics?.phone}
+                      {basics?.phone}
                     </p>
                   </a>
                 )}
@@ -354,17 +356,17 @@ const Template1 = ({ resumeData }) => {
             </div>
           </div>
           <div className="resume_item resume_address font-semibold">
-            {(resumeData?.basics?.city || resumeData?.basics?.country) && (
+            {(basics?.city || basics?.country) && (
               <p className="flex items-center">
                 <IoLocationOutline className="text-black" />
-                <span>{resumeData?.basics?.city}</span>
+                <span>{basics?.city}</span>
                 <span>
-                  {resumeData?.basics?.city &&
-                    resumeData?.basics?.country &&
+                  {basics?.city &&
+                    basics?.country &&
                     " , "}
                 </span>
                 <span className="">
-                  {resumeData?.basics?.country}
+                  {basics?.country}
                 </span>
               </p>
             )}
@@ -372,9 +374,8 @@ const Template1 = ({ resumeData }) => {
           <div className="resume_item resume_profile my-5">
             <div className="resume_info">
               <Profile
-                data={resumeData?.sections?.summary}
                 fontStyle={fontStyle}
-                colorStyle={resumeData?.metadata?.theme?.primary}
+                colorStyle={metadata?.theme?.primary}
               />
             </div>
           </div>
@@ -382,8 +383,7 @@ const Template1 = ({ resumeData }) => {
             <div className="resume_info">
               <Experience
                 fontStyle={fontStyle}
-                data={resumeData?.sections?.experience}
-                colorStyle={resumeData?.metadata?.theme?.primary}
+                colorStyle={metadata?.theme?.primary}
               />
             </div>
           </div>
@@ -391,8 +391,7 @@ const Template1 = ({ resumeData }) => {
             <div className="resume_info">
               <Projects
                 fontStyle={fontStyle}
-                data={resumeData?.sections?.projects}
-                colorStyle={resumeData?.metadata?.theme?.primary}
+                colorStyle={metadata?.theme?.primary}
               />
             </div>
           </div>

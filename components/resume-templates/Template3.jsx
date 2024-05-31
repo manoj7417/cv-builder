@@ -7,8 +7,10 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import { useResumeStore } from "@/app/store/ResumeStore";
 
-const Education = ({ fontStyle, data }) => {
+const Education = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.education)
   return (
     <div className="education_section py-3">
       {
@@ -37,7 +39,8 @@ const Education = ({ fontStyle, data }) => {
   )
 }
 
-const Experience = ({ fontStyle, data }) => {
+const Experience = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.experience)
   return (
     <div className="experience_section my-2">
       {
@@ -82,7 +85,8 @@ const Experience = ({ fontStyle, data }) => {
   )
 }
 
-const Projects = ({ fontStyle, data }) => {
+const Projects = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.projects)
   return (
     <div className="project_section my-4">
       {
@@ -117,7 +121,8 @@ const Projects = ({ fontStyle, data }) => {
   )
 }
 
-const Skills = ({ fontStyle, data }) => {
+const Skills = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.skills)
   return (
     <div>
       {
@@ -144,7 +149,8 @@ const Skills = ({ fontStyle, data }) => {
   )
 }
 
-const Profile = ({ data, fontStyle }) => {
+const Profile = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.summary)
   const htmlContent = data.content
   return (
     <div>
@@ -165,7 +171,9 @@ const Profile = ({ data, fontStyle }) => {
   )
 }
 
-export const Template3 = ({ resumeData }) => {
+export const Template3 = () => {
+  const metadata = useResumeStore(state => state.resume.data.metadata)
+  const basics = useResumeStore(state => state.resume.data.basics)
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
@@ -184,22 +192,22 @@ export const Template3 = ({ resumeData }) => {
       <div className="p-custom space-y-3">
         <div className="bg-white mx-auto">
           <div className="top_section flex justify-around items-center text-white  py-10" style={{
-            backgroundColor: resumeData?.metadata?.theme?.primary
+            backgroundColor: metadata?.theme?.primary
           }
           }>
             <div className="name_profile w-[70%]  h-full px-10">
               <h1 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}>
-                {resumeData?.basics?.name}
+                {basics?.name}
               </h1>
               <p className={`${fontStyle.jobtitleFont} break-words uppercase`}>
-                {resumeData?.basics?.jobtitle}
+                {basics?.jobtitle}
               </p>
             </div>
             {
-              resumeData?.basics?.picture?.url &&
+              basics?.picture?.url &&
               <div className="profile_pic w-[30%] flex items-center justify-center">
                 <img
-                  src={resumeData?.basics?.picture?.url}
+                  src={basics?.picture?.url}
                   alt="pic"
                   className="w-24 h-24 rounded-full object-cover"
                 />
@@ -214,38 +222,37 @@ export const Template3 = ({ resumeData }) => {
                 </h2>
                 <div className=
                   {`text-gray-600 my-4 ${fontStyle.contactFont}`} >
-                  {resumeData?.basics?.email && <a
-                    href={`mailto:${resumeData?.basics?.email}`}
+                  {basics?.email && <a
+                    href={`mailto:${basics?.email}`}
                     className="hover:underline flex items-center mt-1  text-wrap w-full "
                   >
                     <MdOutlineMailOutline className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
-                      {resumeData?.basics?.email}
+                      {basics?.email}
                     </p>
                   </a>}
-                  {resumeData?.basics?.phone && <a
-                    href={`tel:${resumeData?.basics?.phone}`}
+                  {basics?.phone && <a
+                    href={`tel:${basics?.phone}`}
                     className="hover:underline flex items-center mt-1  text-wrap w-full "
                   >
                     <MdOutlinePhone className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
-                      {resumeData?.basics?.phone}
+                      {basics?.phone}
                     </p>
                   </a>}
                   {
-                    (resumeData?.basics?.city || resumeData?.basics?.country) && <p className="flex items-center break-words"><IoLocationOutline className="mr-2" />
-                      {resumeData?.basics?.city}{resumeData?.basics?.city && resumeData?.basics?.country && ' , '}{resumeData?.basics?.country}</p>
+                    (basics?.city || basics?.country) && <p className="flex items-center break-words"><IoLocationOutline className="mr-2" />
+                      {basics?.city}{basics?.city && basics?.country && ' , '}{basics?.country}</p>
                   }
                 </div>
               </div>
-              <Skills fontStyle={fontStyle} data={resumeData?.sections?.skills
-              } />
-              <Education fontStyle={fontStyle} data={resumeData?.sections?.education} />
+              <Skills fontStyle={fontStyle} />
+              <Education fontStyle={fontStyle} />
             </div>
             <div className="md:w-[70%] w-full right_side p-5">
-              <Profile data={resumeData?.sections?.summary} fontStyle={fontStyle} />
-              <Experience fontStyle={fontStyle} data={resumeData?.sections?.experience} />
-              <Projects fontStyle={fontStyle} data={resumeData?.sections?.projects} />
+              <Profile fontStyle={fontStyle} />
+              <Experience fontStyle={fontStyle} />
+              <Projects fontStyle={fontStyle} />
             </div>
           </div>
         </div>

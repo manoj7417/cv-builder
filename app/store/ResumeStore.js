@@ -20,7 +20,18 @@ export const useResumeStore = create(devtools((set) => ({
         state.resume = newData;
         return { resume: newData };
     }
-    )
+    ),
+    updateResumeData: (newData) => set((state) => {
+        state.resume.data = newData;
+        debouncedUpdateResume(JSON.parse(JSON.stringify(state?.resume)))
+        return { ...state.resume }
+    }),
+    updateBasicAndSectionsData: (basics, sections) => set((state) => {
+        state.resume.data.basics = basics;
+        state.resume.data.sections = sections;
+        debouncedUpdateResume(JSON.parse(JSON.stringify(state?.resume)))
+        return { resume: { ...state.resume } }
+    })
 })))
 
 export const useTemporalResumeStore = (selector, equality) => {

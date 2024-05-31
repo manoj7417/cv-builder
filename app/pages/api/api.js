@@ -81,6 +81,20 @@ export const getBetterResume = async (message) => {
   }
 }
 
+export const generateResumeOnFeeback = async (message, token) => {
+  try {
+    const response = await instance.post('/openai/generateResumeOnFeeback', { message }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    return response;
+  } catch (error) {
+    console.error("Error generating feedback:", error.response || error);
+    return error
+  }
+}
+
 export const printResume = async (html) => {
   try {
     const response = await fetch(`${baseURL}/api/print/resume`, {
