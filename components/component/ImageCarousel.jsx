@@ -70,7 +70,7 @@ function ImageCarousel({ data }) {
                                 {loading ? <>
                                     <ImSpinner8 className=' animate-spin mr-2' />Loading
                                 </>
-                                    : "Try No"}
+                                    : "Try Now"}
                             </Button>
                             </div>
 
