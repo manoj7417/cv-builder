@@ -1,6 +1,7 @@
 import { DatePicker } from "antd";
 import { Button } from "../ui/button";
 import {
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -22,6 +23,7 @@ export const MultiStepForm = ({
   setSteps,
   isLoading,
   handleGenerateProfileSummary,
+  handleCloseAIDialog
 }) => {
   const handleJobTitleChange = (e) => {
     const newFormDate = { ...formData, jobTitle: e.target.value };
@@ -44,7 +46,7 @@ export const MultiStepForm = ({
 
   if (steps === 1) {
     return (
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent onClick={handleCloseAIDialog} className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
             <div className=" flex items-center">
@@ -211,9 +213,9 @@ export const MultiStepForm = ({
         {isLoading ? (
           <div>
             <AiGenerateLoader />
-            <p className="text-gray-500">
-              Generating presonalized profile summary with{" "}
-              <span className=" text-violet-700 font-bold">AI</span>
+            <p className="text-gray-500 text-sm">
+              Generating presonalized profile summary with
+              <span className=" text-violet-700 font-bold ml-2 text-base">AI</span>
             </p>
           </div>
         ) : (
