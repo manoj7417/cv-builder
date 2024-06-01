@@ -146,7 +146,7 @@ export function ServiceSection() {
               <div className="flex flex-col justify-center space-y-4 lg:ps-20 ps-1">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
                   <h2 className="lg:text-4xl text-3xl font-bold text-blue-900">
-                    Genie Connect
+                    CV Analyzer
                   </h2>
                   <GiMagicLamp className="h-14 w-14 ms-5 text-blue-900" />
                 </div>
@@ -154,30 +154,30 @@ export function ServiceSection() {
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Genie Advocates
+                        ATS score
                       </h3>
                       <p className="text-gray-500 text-sm">
-                      Get recommendations from Genie on how to craft the perfect CV for the job or professional role you are aiming for. The genie will help you with Curriculum Vitae samples and templates by providing suggestions and ideas by employing artificial intelligence concepts. From Content Recommendations and Grammatical Errors to CV Formatting and Skill Gap Analyses, Genie helps you with all. Trained by Industry Specialists and inculcating the qualifications of a domain expert, the Genie is truly a genie when it comes to recommending! 
+                      Ensure your CV stands out to both employers and Applicant Tracking Systems (ATS). Learn how to craft a CV tailored to the job or role you desire. Receive insights on structuring your content, fixing grammatical errors, and formatting your CV. Expert advice helps you bridge any skill gaps and present your qualifications effectively.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Genie Counsels
+                        Suggestion for CV
                       </h3>
                       <p className="text-gray-500 text-sm">
-                      Puzzled about your Career Choices? Get counselled by Genie and find solutions to your professional problems. All you need to do is ask Genie a question regarding your CV Templates or Career Choices, and the Genie will carefully decode the information available on the internet as well as fed by top professionals in the domain to help you solve your career problems. Have a healthy and professional discussion with Genie and find out exactly how you must direct your career!
+                      Confused about your career direction? Get personalized advice on your CV and career choices. Ask questions and receive guidance based on the latest industry knowledge and professional expertise. Engage in thoughtful discussions to uncover the best strategies for advancing your career.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-blue-950">
-                        Genie Sources
+                        Optimize your CV
                       </h3>
                       <p className="text-gray-500 text-sm">
-                      Need specific resources to get started with your professional journey? Ask the Genie and get guided throughout! Artificial Intelligence-based technology comes in handy when you seek important information regarding certain career paths. The genie not only helps you find answers but also provides you with specific resources that will enable you to access the information. With the best links and the most relevant information, the genie ensures that you get to read exactly what you need to. 
+                      Looking for resources to boost your professional journey? Get comprehensive support to navigate your career path. Access essential information and resources tailored to your needs. Find relevant links and practical advice to ensure you have the knowledge to succeed in your chosen field.
                       </p>
                     </div>
                   </li>
@@ -185,7 +185,7 @@ export function ServiceSection() {
                 <div>
                   <button className="items-center flex px-7 py-2 rounded-md text-base text-white bg-blue-900 hover:bg-blue-700">
                     <a className="flex items-center" href="/genie-dashboard">
-                      Connect with Genie
+                      Analyze Now
                       <GiMagicLamp className="h-6 w-6 ms-5 text-white" />
                     </a>
                   </button>

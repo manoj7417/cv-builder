@@ -163,7 +163,7 @@ export default function Footer() {
                   </a>
                 </li>
 
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     rel="noreferrer"
@@ -172,7 +172,7 @@ export default function Footer() {
                     Genie Connect
                     <MdOutlineKeyboardArrowRight className="inline text-xl"/>
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 

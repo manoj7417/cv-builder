@@ -18,7 +18,6 @@ const navigation = [
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "Genie Connect", href: "/genie-dashboard", current: false },
   { name: "Psychometric Test", href: "/coming-soon", current: false },
 ];
 
