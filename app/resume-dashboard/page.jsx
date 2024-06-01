@@ -32,13 +32,16 @@ import { IoIosStar } from "react-icons/io";
 import { templateType } from "@/components/component/Slider";
 import ImageCarousel from "@/components/component/ImageCarousel";
 import { useEffect, useState } from "react";
+import NewResumeHeader from "../Layout/NewResumeHeader";
+import Header from "../Layout/Header";
+import { useUserStore } from "../store/UserStore";
 
 const AllTemplates = [
   [
     {
       name: "Template3",
-      src: "/newResume.png",
-      alt: "newResume.png",
+      src: "/Template3.png",
+      alt: "Template3.png",
       type: templateType.premium
     },
     {
@@ -74,9 +77,9 @@ const AllTemplates = [
       type: templateType.free
     },
     {
-      name: "Template2",
-      src: "/newResume2.png",
-      alt: "/newResume2.png",
+      name: "Template3",
+      src: "/Template3.png",
+      alt: "/Template3.png",
       type: templateType.premium
     },
     {
@@ -165,9 +168,10 @@ const AllTemplates = [
 ]
 
 export default function DashboardIdea() {
-
+  const  userState= useUserStore((state) => state.userState)
   return (
     <>
+      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
       <main>
         <section
           className="w-full flex flex-col items-center justify-center  "

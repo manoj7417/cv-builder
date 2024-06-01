@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
@@ -413,7 +413,8 @@ export default function Form() {
     setIsLoading(true);
     try {
       const response = await AskBot(message);
-      const data = response[0].text.value.split("\n")[2];
+      const data = JSON.parse(response[0]?.text?.value.split("\n")[2]);
+
       if (data) {
         setResumeData("sections.summary.content", data);
       }
@@ -421,6 +422,20 @@ export default function Form() {
       console.log(error);
     } finally {
       setIsLoading(false);
+      setFormData({
+        jobTitle: "",
+        experience: {
+          startDate: "",
+          endDate: "",
+          companyName: "",
+          location: "",
+          description: "",
+          jobTitle: "",
+        },
+        skills: "",
+      })
+      setSteps(1)
+      handleCloseAIDialog()
     }
   };
 
@@ -461,10 +476,17 @@ export default function Form() {
     }
   };
 
+  const handleOpenAIDialog = () => {
+    setIsDialogOpen(true)
+  }
+
+  const handleCloseAIDialog = () => {
+    setIsDialogOpen(false)
+  }
+
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
-      console.log(state)
       updateResume(state.resume._id, state.resume)
     })
     return unsubs;
@@ -611,12 +633,13 @@ export default function Form() {
                   <Button
                     variant="outline"
                     className=" bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 border-none"
-                    onClick={() => setIsDialogOpen(true)}>
+                    onClick={handleOpenAIDialog}>
                     Generate with AI
                     <FaCrown className=" text-yellow-500 ml-2" />
                   </Button>
                 </DialogTrigger>
                 <MultiStepForm
+                  handleCloseAIDialog={handleCloseAIDialog}
                   formData={formData}
                   setFormData={setFormData}
                   steps={steps}

@@ -36,6 +36,52 @@ import { useResumeStore } from "../store/ResumeStore";
 import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { DataInteractive } from "@headlessui/react";
+import { templateType } from "@/components/component/Slider";
+
+const images = [
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium
+  }, {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "Template3.png",
+    type: templateType.premium
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "Template4.png",
+    type: templateType.premium
+  }, {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "Template5.png",
+    type: templateType.premium
+  }, {
+    name: "Template6",
+    src: "/Template6.png",
+    alt: "Template6.png",
+    type: templateType.premium
+  }, {
+    name: "Template7",
+    src: "/Template7.png",
+    alt: "Template7.png",
+    type: templateType.premium
+  }, {
+    name: "Template8",
+    src: "/Template8.png",
+    alt: "Template8.png",
+    type: templateType.premium
+  }, {
+    name: "Template9",
+    src: "/Template9.png",
+    alt: "Template9.png",
+    type: templateType.premium
+  }
+]
 
 const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
@@ -65,24 +111,24 @@ const ResumeViewPage = () => {
     }
   };
 
-//payment gateway use this function whever you want to do the payment
+  //payment gateway use this function whever you want to do the payment
 
-  const handlepayment = async() => {
+  const handlepayment = async () => {
 
-    const {accessToken} = await GetTokens();
+    const { accessToken } = await GetTokens();
     console.log(accessToken)
-    
-     Payment({
-           amount:1000, 
-        email:"aman@gmail.com",
-        name:"aman",
-        url:window.location.href,
-        cancel_url:window.location.href,
-        templateName:"Template3"
-     },accessToken.value).then(res => {
-        if (res.ok) return res.json()
-        return res.json().then(json => Promise.reject(json))
-      })
+
+    Payment({
+      amount: 1000,
+      email: "aman@gmail.com",
+      name: "aman",
+      url: window.location.href,
+      cancel_url: window.location.href,
+      templateName: "Template3"
+    }, accessToken.value).then(res => {
+      if (res.ok) return res.json()
+      return res.json().then(json => Promise.reject(json))
+    })
       .then(({ url }) => {
         window.location = url
       })
@@ -277,96 +323,24 @@ const ResumeViewPage = () => {
                       <DrawerTitle>Choose Templates</DrawerTitle>
                       <DrawerDescription>
                         <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                          <div
-                            className="image_section_1 "
-                            onClick={() => handleTemplateChange("Template3")}
-                          >
-                            <Image
-                              src="/newResume.png"
-                              alt="pic1"
-                              className="cursor-pointer hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div
-                            className="image_section_2"
-                            onClick={() => handleTemplateChange("Template8")}
-                          >
-                            <Image
-                              src="/temp1.png"
-                              alt="pic1"
-                              className="hover:border-sky-700 hover:border-4 cursor-pointer"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div
-                            className="image_section_1"
-                            onClick={() => handleTemplateChange("Template1")}
-                          >
-                            <Image
-                              src="/newResume2.png"
-                              alt="pic1"
-                              className="cursor-pointer hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div
-                            className="image_section_2"
-                            onClick={() => handleTemplateChange("Template6")}
-                          >
-                            <Image
-                              src="/temp3.png"
-                              alt="pic1"
-                              className="cursor-pointer hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div
-                            className="image_section_1"
-                            onClick={() => handleTemplateChange("Template7")}
-                          >
-                            <Image
-                              src="/temp4.png"
-                              alt="pic1"
-                              className="cursor-pointer hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div
-                            className="image_section_2"
-                            onClick={() => handleTemplateChange("Template4")}
-                          >
-                            <Image
-                              src="/temp5.png"
-                              alt="pic1"
-                              className="cursor-none hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div className="image_section_1">
-                            <Image
-                              src="/5.png"
-                              alt="pic1"
-                              className="cursor-none hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
-                          <div className="image_section_2">
-                            <Image
-                              src="/6.png"
-                              alt="pic1"
-                              className="cursor-none hover:border-sky-700 hover:border-4"
-                              width={500}
-                              height={500}
-                            />
-                          </div>
+                          {
+                            images.map((image, index) => {
+                              return (
+                                <div key={index}
+                                  className="image_section_1 "
+                                  onClick={() => handleTemplateChange(image.name)}
+                                >
+                                  <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    className="cursor-pointer hover:border-sky-700 hover:border-4"
+                                    width={500}
+                                    height={500}
+                                  />
+                                </div>
+                              )
+                            })
+                          }
                         </div>
                       </DrawerDescription>
                     </DrawerHeader>
@@ -457,44 +431,44 @@ const ResumeViewPage = () => {
             </div>
           </div>
           {isContentVisible && (
-           <div
-           className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
-           id="modal-id"
-         >
-           <div className="absolute bg-black opacity-80 inset-0 z-0 w-full" />
-           
-           {/*content*/}
-           <div className="">
-             <div onClick={() => setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
-               <LiaTimesSolid className="text-white text-3xl" />
-             </div>
-             <div
-               className="shadow-2xl relative overflow-y-scroll no-scrollbar h-screen"
-               style={{
-                 scale: {scale},
-                 
-               }}
-             >
-               <div id="resume" className={cn("relative bg-white")} style={{
-                   width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                   height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                 }}
-               >
-                 <GetTemplate
-                   name={data?.metadata?.template}
-                   resumeData={data}
-                 />
-                 <div className="absolute z-10 bottom-2 right-2 text-gray-500">
-                   <p className="text-sm">@Career Genies Hub</p>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-         
+            <div
+              className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
+              id="modal-id"
+            >
+              <div className="absolute bg-black opacity-80 inset-0 z-0 w-full" />
+
+              {/*content*/}
+              <div className="">
+                <div onClick={() => setIsContentVisible(false)} className="z-50 absolute top-6 right-10 cursor-pointer">
+                  <LiaTimesSolid className="text-white text-3xl" />
+                </div>
+                <div
+                  className="shadow-2xl relative overflow-y-scroll no-scrollbar h-screen"
+                  style={{
+                    scale: { scale },
+
+                  }}
+                >
+                  <div id="resume" className={cn("relative bg-white")} style={{
+                    width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                    height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                  }}
+                  >
+                    <GetTemplate
+                      name={data?.metadata?.template}
+                      resumeData={data}
+                    />
+                    <div className="absolute z-10 bottom-2 right-2 text-gray-500">
+                      <p className="text-sm">@Career Genies Hub</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           )}
         </div>
-      </div>
+      </div >
     </>
   );
 };
