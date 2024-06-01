@@ -1,5 +1,4 @@
 
-import { GetTokens } from "@/app/actions";
 import axios from "axios";
 
 export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -14,10 +13,10 @@ export const instance = axios.create({
   },
 });
 
-export const Payment = async (data,token) => {
+export const Payment = async (data, token) => {
   try {
-    const response = await instance.post("/stripe/create-checkout-session", data,{
-      headers:{
+    const response = await instance.post("/stripe/create-checkout-session", data, {
+      headers: {
         Authorization: `Bearer ${token}`
       }
     });
@@ -146,9 +145,9 @@ export const getUserResumes = async (token) => {
   }
 }
 
-export const createNewResume = async (token) => {
+export const createNewResume = async (token, template) => {
   try {
-    const response = await instance.post('/resume/create', '', {
+    const response = await instance.post('/resume/create', { template }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
