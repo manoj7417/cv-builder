@@ -13,6 +13,17 @@ export const instance = axios.create({
   },
 });
 
+
+export const usertemplatepurchase = async (data) => {
+  try {
+    const response = await instance.post('/user/templatepurchase', data, { withCredentials: true });
+    return response;
+  } catch (error) {
+    console.error("Error creating user:", error.response || error);
+    throw error
+  }
+}
+
 export const Payment = async (data, token) => {
   try {
     const response = await instance.post("/stripe/create-checkout-session", data, {

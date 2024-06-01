@@ -1,6 +1,22 @@
-import React from 'react'
+"use client";
+import React, { useEffect } from 'react'
+import { usertemplatepurchase } from '../pages/api/api';
 
 const page = () => {
+
+  useEffect(async() => {
+    await purchasedItem();
+  }, [])
+
+
+  const purchasedItem = () =>{
+    const purchasedItem = localStorage.getItem("purchasedItem");
+    if (purchasedItem) {
+      const data = JSON.parse(purchasedItem);
+      usertemplatepurchase(data);
+    }
+  }
+
   return (
     <div>
         

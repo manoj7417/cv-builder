@@ -95,6 +95,7 @@ const ResumeViewPage = () => {
   const data = useResumeStore(state => state.resume.data);
   const setResumeData = useResumeStore(state => state.setResumeData);
   const logoutUser = useUserStore(state => state.logoutUser);
+  const {userState} = useUserStore(state => state);
 
   const handleLogout = async () => {
     await RemoveTokens()
@@ -113,17 +114,23 @@ const ResumeViewPage = () => {
 
   //payment gateway use this function whever you want to do the payment
 
+  
+
   const handlepayment = async () => {
+
+
 
     const { accessToken } = await GetTokens();
     Payment({
       amount: 1000,
-      email: "aman@gmail.com",
+      email: userState.userdata.email,
       name: "aman",
-      url: window.location.href,
+      url: "http://localhost:3000/paymentSuccess",
       cancel_url: window.location.href,
       templateName: "Template3"
     }, accessToken.value).then(response => {
+      console.log(response.data)
+      localStorage.setItem("purchasedItem", JSON.stringify(response.data))
       const { url } = response.data;
       window.location = url;
     })
