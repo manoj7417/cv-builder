@@ -3,10 +3,10 @@ import { useStoreWithEqualityFn } from "zustand/traditional";
 import _set from "lodash.set";
 import { resumeSchema } from '@/lib/schema/resume/resume'
 import { debouncedUpdateResume } from '../services/resume/update';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware'
+const myMiddlewares = (f) => devtools(persist(f, { name: 'resume' }))
 
-
-export const useResumeStore = create(devtools((set) => ({
+export const useResumeStore = create(myMiddlewares((set) => ({
     resume: resumeSchema,
     isUploading: false,
     setIsUploading: (isUploading) => set({ isUploading }),

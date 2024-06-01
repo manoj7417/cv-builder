@@ -8,7 +8,7 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
-
+import { FaCrown } from "react-icons/fa";
 import {
   Drawer,
   DrawerClose,
@@ -116,8 +116,6 @@ const ResumeViewPage = () => {
   const handlepayment = async () => {
 
     const { accessToken } = await GetTokens();
-    console.log(accessToken)
-
     Payment({
       amount: 1000,
       email: "aman@gmail.com",
@@ -125,20 +123,18 @@ const ResumeViewPage = () => {
       url: window.location.href,
       cancel_url: window.location.href,
       templateName: "Template3"
-    }, accessToken.value).then(res => {
-      if (res.ok) return res.json()
-      return res.json().then(json => Promise.reject(json))
+    }, accessToken.value).then(response => {
+      const { url } = response.data;
+      window.location = url;
     })
-      .then(({ url }) => {
-        window.location = url
-      })
-      .catch(e => {
-        console.log(e.error)
-      })
+      .catch(error => {
+        console.error(error.response ? error.response.data.error : error.message);
+      });
   };
 
 
   const handleDownloadResume = async () => {
+    await handlepayment()
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
     const body = {
@@ -305,6 +301,7 @@ const ResumeViewPage = () => {
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 Download PDF
+                <FaCrown className="ml-1 text-yellow-300" />
               </button>
               <div className="choose_templates xl:block hidden">
                 <Drawer

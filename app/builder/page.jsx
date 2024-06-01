@@ -97,7 +97,7 @@ function Builder() {
           }}
         >
           <ResumeViewPage />
-          <FloatingSaveIcon  />
+          {/* <FloatingSaveIcon  /> */}
         </div>
       </div>
     </>
