@@ -37,6 +37,7 @@ import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { DataInteractive } from "@headlessui/react";
 
+
 const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
   const dropdownRef = useRef(null);
@@ -46,12 +47,12 @@ const ResumeViewPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const containerRef = useRef();
-  const data = useResumeStore((state) => state.resume.data);
-  const setResumeData = useResumeStore((state) => state.setResumeData);
-  const logoutUser = useUserStore((state) => state.logoutUser);
+  const data = useResumeStore(state => state.resume.data);
+  const setResumeData = useResumeStore(state => state.setResumeData);
+  const logoutUser = useUserStore(state => state.logoutUser);
 
   const handleLogout = async () => {
-    await RemoveTokens();
+    await RemoveTokens()
     toast.success("User logout successfully", {
       position: "top-right",
     });
@@ -121,7 +122,7 @@ const ResumeViewPage = () => {
   };
 
   const handleTemplateChange = (val) => {
-    setResumeData("metadata.template", val);
+    setResumeData('metadata.template', val);
     setIsDrawerOpen(false);
   };
 
@@ -207,6 +208,8 @@ const ResumeViewPage = () => {
     updateScale();
   };
 
+
+
   return (
     <>
       <div className="flex justify-center items-center w-full ">
@@ -289,14 +292,11 @@ const ResumeViewPage = () => {
                               height={500}
                             />
                           </div>
-                          <div
-                            className="image_section_2"
-                            onClick={() => handleTemplateChange("Template8")}
-                          >
+                          <div className="image_section_2">
                             <Image
-                              src="/temp1.png"
+                              src="/newResume1.png"
                               alt="pic1"
-                              className="hover:border-sky-700 hover:border-4 cursor-pointer"
+                              className="hover:border-sky-700 hover:border-4 cursor-none"
                               width={500}
                               height={500}
                             />
@@ -313,36 +313,27 @@ const ResumeViewPage = () => {
                               height={500}
                             />
                           </div>
-                          <div
-                            className="image_section_2"
-                            onClick={() => handleTemplateChange("Template6")}
-                          >
+                          <div className="image_section_2">
                             <Image
-                              src="/temp3.png"
+                              src="/6.png"
                               alt="pic1"
-                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              className="cursor-none hover:border-sky-700 hover:border-4"
                               width={500}
                               height={500}
                             />
                           </div>
-                          <div
-                            className="image_section_1"
-                            onClick={() => handleTemplateChange("Template7")}
-                          >
+                          <div className="image_section_1">
                             <Image
-                              src="/temp4.png"
+                              src="/5.png"
                               alt="pic1"
-                              className="cursor-pointer hover:border-sky-700 hover:border-4"
+                              className="cursor-none hover:border-sky-700 hover:border-4"
                               width={500}
                               height={500}
                             />
                           </div>
-                          <div
-                            className="image_section_2"
-                            onClick={() => handleTemplateChange("Template4")}
-                          >
+                          <div className="image_section_2">
                             <Image
-                              src="/temp5.png"
+                              src="/6.png"
                               alt="pic1"
                               className="cursor-none hover:border-sky-700 hover:border-4"
                               width={500}
