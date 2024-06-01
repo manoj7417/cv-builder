@@ -122,7 +122,7 @@ const ResumeViewPage = () => {
 
     const { accessToken } = await GetTokens();
     Payment({
-      amount: 1000,
+      amount: 10,
       email: userState.userdata.email,
       name: "aman",
       url: "http://localhost:3000/paymentSuccess",
