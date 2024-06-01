@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { usertemplatepurchase } from '../pages/api/api';
 
-const page = () => {
+const Page = () => {
 
   useEffect(async() => {
     await purchasedItem();
@@ -26,4 +26,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page;
