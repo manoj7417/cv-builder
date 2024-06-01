@@ -47,7 +47,7 @@ const TabsMain = () => {
     const { accessToken } = await GetTokens()
     setisCreatingResume(true)
     try {
-      const response = await createNewResume(accessToken?.value)
+      const response = await createNewResume(accessToken?.value, "Template3")
       if (response.data.data) {
         createResume(response.data.data)
         replaceResumeData(response.data.data)
