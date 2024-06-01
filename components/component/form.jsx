@@ -9,6 +9,7 @@ import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import { Progress } from "@/components/ui/progress";
 import {
   Accordion,
   AccordionContent,
@@ -504,8 +505,9 @@ export default function Form() {
           >
             <NewResumeLoader />
           </div>
-        )}
-        <div className="lg:px-10 px-5 py-5">
+        )} 
+
+        {/* <div className="lg:px-10 px-5 py-5">
           <div className=" rounded-lg h-24 bg-blue-50 flex items-center justify-around">
             <div>
               <img
@@ -533,7 +535,7 @@ export default function Form() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="lg:px-10 px-5">
           <div className="w-full">
             <Label>Avatar</Label>
