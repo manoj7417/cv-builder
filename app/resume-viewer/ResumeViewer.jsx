@@ -123,7 +123,7 @@ const ResumeViewPage = () => {
       amount: 10,
       email: userState.userdata.email,
       name: "aman",
-      url: "http://localhost:3000/paymentSuccess",
+      url: "https://career-genies-frontend.vercel.app/paymentSuccess",
       cancel_url: window.location.href,
       templateName: resumeData.metadata.template
     }, accessToken.value).then(response => {
