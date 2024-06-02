@@ -1,9 +1,8 @@
 "use client";
-import Template3 from "@/components/resume-templates/Template3";
 import { cn } from "@/lib/utils";
-import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
@@ -11,10 +10,8 @@ import { LuLayoutGrid } from "react-icons/lu";
 import { FaCrown } from "react-icons/fa";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -23,20 +20,15 @@ import { Payment, printResume } from "../pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
-import { AuthContext } from "../context/AuthContext";
-import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { UserStore } from "../store/UserStore";
-import { Divider } from "antd";
-import useWindowSize from "@/app/hook/useWindowSize";
 import { BsFullscreen } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
 import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
-import { DataInteractive } from "@headlessui/react";
 import { templateType } from "@/components/component/Slider";
+import { tempType, TempTypes } from "@/lib/templateTypes/TempTypes";
 
 const images = [
   {
@@ -117,10 +109,11 @@ const ResumeViewPage = () => {
 
 
 
-  const handlepayment = async () => {
+  const handlepayment = async (type) => {
     const { accessToken } = await GetTokens();
+    console.log(type)
     Payment({
-      amount: 10,
+      amount: type === tempType.premium ? 20 : 10,
       email: userState.userdata.email,
       name: "aman",
       url: "https://career-genies-frontend.vercel.app/paymentSuccess",
@@ -135,16 +128,18 @@ const ResumeViewPage = () => {
         console.error(error.response ? error.response.data.error : error.message);
       });
   };
+
   const checkUserTemplate = async () => {
+    const templateType = TempTypes.find(template => template.name === resumeData.metadata.template)
     setIsLoading(true)
     const temp = resumeData.metadata.template;
     const userHasTemplate = userState.userdata.premiumTemplates.includes(temp)
     if (!userHasTemplate) {
-      await handlepayment()
+      await handlepayment(templateType.type)
     } else {
       handleDownloadResume()
     }
-  }
+  };
 
 
   const handleDownloadResume = async () => {
@@ -157,7 +152,7 @@ const ResumeViewPage = () => {
     try {
       const response = await printResume(body);
       if (response.ok) {
-        const blob = await response.blob(); // Get response body as blob
+        const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
