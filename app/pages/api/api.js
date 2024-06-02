@@ -183,3 +183,16 @@ export const deleteUserResume = async (id, token) => {
     throw error
   }
 }
+
+export const PurchaseTokens = async (token) => {
+  try {
+    const response = await instance.post("/user/creditsPurchase", '', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response
+  } catch (error) {
+    throw error
+  }
+}

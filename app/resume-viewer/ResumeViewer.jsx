@@ -111,7 +111,6 @@ const ResumeViewPage = () => {
 
   const handlepayment = async (type) => {
     const { accessToken } = await GetTokens();
-    console.log(type)
     Payment({
       amount: type === tempType.premium ? 20 : 10,
       email: userState.userdata.email,
