@@ -95,7 +95,8 @@ const ResumeViewPage = () => {
   const data = useResumeStore(state => state.resume.data);
   const setResumeData = useResumeStore(state => state.setResumeData);
   const logoutUser = useUserStore(state => state.logoutUser);
-  const {userState} = useUserStore(state => state);
+  const { userState } = useUserStore(state => state);
+  const resumeData = useResumeStore(state => state.resume.data)
 
   const handleLogout = async () => {
     await RemoveTokens()
@@ -114,12 +115,9 @@ const ResumeViewPage = () => {
 
   //payment gateway use this function whever you want to do the payment
 
-  
+
 
   const handlepayment = async () => {
-
-
-
     const { accessToken } = await GetTokens();
     Payment({
       amount: 10,
@@ -127,9 +125,8 @@ const ResumeViewPage = () => {
       name: "aman",
       url: "http://localhost:3000/paymentSuccess",
       cancel_url: window.location.href,
-      templateName: "Template3"
+      templateName: resumeData.metadata.template
     }, accessToken.value).then(response => {
-      console.log(response.data)
       localStorage.setItem("purchasedItem", JSON.stringify(response.data))
       const { url } = response.data;
       window.location = url;
@@ -138,10 +135,19 @@ const ResumeViewPage = () => {
         console.error(error.response ? error.response.data.error : error.message);
       });
   };
+  const checkUserTemplate = async () => {
+    setIsLoading(true)
+    const temp = resumeData.metadata.template;
+    const userHasTemplate = userState.userdata.premiumTemplates.includes(temp)
+    if (!userHasTemplate) {
+      await handlepayment()
+    } else {
+      handleDownloadResume()
+    }
+  }
 
 
   const handleDownloadResume = async () => {
-    await handlepayment()
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
     const body = {
@@ -303,7 +309,7 @@ const ResumeViewPage = () => {
               </div>
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={handleDownloadResume}
+                onClick={checkUserTemplate}
                 disabled={isLoading}
               >
                 {isLoading && (

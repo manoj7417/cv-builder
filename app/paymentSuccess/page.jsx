@@ -1,18 +1,35 @@
 "use client";
 import React, { useEffect } from 'react';
 import { usertemplatepurchase } from '../pages/api/api';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '../store/UserStore';
+
 
 
 const Page = () => {
+  const updateUserData = useUserStore(state => state.updateUserData)
+  const router = useRouter()
+  const purchaseItem = async () => {
+    try {
 
-  useEffect(async() => {
-    const purchasedItem = await localStorage.getItem("purchasedItem");
-    if (purchasedItem) {
-      const data = JSON.parse(purchasedItem);
-      await usertemplatepurchase(data);
-      localStorage.removeItem("purchasedItem");
-      
+      const purchasedItem = localStorage.getItem("purchasedItem");
+      if (purchasedItem) {
+        const data = JSON.parse(purchasedItem);
+        const response = await usertemplatepurchase(data);
+        if (response.data.userdata) {
+          updateUserData(response.data.userdata)
+          localStorage.removeItem("purchasedItem");
+        }
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      router.push('/builder')
     }
+  }
+
+  useEffect(() => {
+    purchaseItem()
   }, []);
 
   return (
@@ -26,7 +43,7 @@ const Page = () => {
             <path className="stroke-current text-green-500" fill="none" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
           </svg>
         </div>
-        
+
       </div>
     </div>
   );
