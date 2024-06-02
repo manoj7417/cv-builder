@@ -1,17 +1,52 @@
 "use client";
-import React, { useEffect } from 'react';
-import { usertemplatepurchase } from '../pages/api/api';
+import React, { Suspense, useEffect } from 'react';
+import { PurchaseTokens, usertemplatepurchase } from '../pages/api/api';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useUserStore } from '../store/UserStore';
+import { GetTokens } from '../actions';
 
+const PaymentSuccess = () => {
+  const searchParams = useSearchParams()
+  const type = searchParams.get('type')
+  const updateUserData = useUserStore(state => state.updateUserData)
+  const router = useRouter()
+  const purchaseItem = async () => {
+    try {
+      const purchasedItem = localStorage.getItem("purchasedItem");
+      if (purchasedItem) {
+        const data = JSON.parse(purchasedItem);
+        const response = await usertemplatepurchase(data);
+        if (response.data.userdata) {
+          updateUserData(response.data.userdata)
+          localStorage.removeItem("purchasedItem");
+        }
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      router.push('/builder')
+    }
+  }
 
-const Page = () => {
+  const purchaseTokens = async () => {
+    const { accessToken } = await GetTokens()
+    try {
+      const response = await PurchaseTokens(accessToken.value)
+      if (response.status === 200) {
+        updateUserData(response.data.userdata)
+      }
+    } catch (error) {
+      throw error
+    } finally {
+      router.push('/analyser/feedback')
+    }
+  }
 
-  useEffect(async() => {
-    const purchasedItem = await localStorage.getItem("purchasedItem");
-    if (purchasedItem) {
-      const data = JSON.parse(purchasedItem);
-      await usertemplatepurchase(data);
-      localStorage.removeItem("purchasedItem");
-      
+  useEffect(() => {
+    if (type) {
+      purchaseTokens()
+    } else {
+      purchaseItem()
     }
   }, []);
 
@@ -26,10 +61,16 @@ const Page = () => {
             <path className="stroke-current text-green-500" fill="none" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
           </svg>
         </div>
-        
+
       </div>
     </div>
   );
+}
+
+const Page = () => {
+  return <Suspense >
+    <PaymentSuccess />
+  </Suspense>
 }
 
 export default Page;

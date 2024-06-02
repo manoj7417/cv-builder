@@ -52,6 +52,12 @@ export const useUserStore = create(
                         resume?.id === resumeId ? { ...resume, data: newData } : resume
                     )
                 }
+            })),
+            updateUserData: (newUserData) => set((state) => ({
+                userState: {
+                    ...state.userState,
+                    userdata: newUserData
+                }
             }))
         })
     )

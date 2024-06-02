@@ -1,9 +1,8 @@
 "use client";
-import Template3 from "@/components/resume-templates/Template3";
 import { cn } from "@/lib/utils";
-import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
@@ -11,10 +10,8 @@ import { LuLayoutGrid } from "react-icons/lu";
 import { FaCrown } from "react-icons/fa";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -23,20 +20,15 @@ import { Payment, printResume } from "../pages/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
-import { AuthContext } from "../context/AuthContext";
-import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { UserStore } from "../store/UserStore";
-import { Divider } from "antd";
-import useWindowSize from "@/app/hook/useWindowSize";
 import { BsFullscreen } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
 import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
-import { DataInteractive } from "@headlessui/react";
 import { templateType } from "@/components/component/Slider";
+import { tempType, TempTypes } from "@/lib/templateTypes/TempTypes";
 
 const images = [
   {
@@ -95,7 +87,8 @@ const ResumeViewPage = () => {
   const data = useResumeStore(state => state.resume.data);
   const setResumeData = useResumeStore(state => state.setResumeData);
   const logoutUser = useUserStore(state => state.logoutUser);
-  const {userState} = useUserStore(state => state);
+  const { userState } = useUserStore(state => state);
+  const resumeData = useResumeStore(state => state.resume.data)
 
   const handleLogout = async () => {
     await RemoveTokens()
@@ -114,22 +107,18 @@ const ResumeViewPage = () => {
 
   //payment gateway use this function whever you want to do the payment
 
-  
-
-  const handlepayment = async () => {
 
 
-
+  const handlepayment = async (type) => {
     const { accessToken } = await GetTokens();
     Payment({
-      amount: 10,
+      amount: type === tempType.premium ? 20 : 10,
       email: userState.userdata.email,
       name: "aman",
-      url: "http://localhost:3000/paymentSuccess",
+      url: "https://career-genies-frontend.vercel.app/paymentSuccess",
       cancel_url: window.location.href,
-      templateName: "Template3"
+      templateName: resumeData.metadata.template
     }, accessToken.value).then(response => {
-      console.log(response.data)
       localStorage.setItem("purchasedItem", JSON.stringify(response.data))
       const { url } = response.data;
       window.location = url;
@@ -139,9 +128,20 @@ const ResumeViewPage = () => {
       });
   };
 
+  const checkUserTemplate = async () => {
+    const templateType = TempTypes.find(template => template.name === resumeData.metadata.template)
+    setIsLoading(true)
+    const temp = resumeData.metadata.template;
+    const userHasTemplate = userState.userdata.premiumTemplates.includes(temp)
+    if (!userHasTemplate) {
+      await handlepayment(templateType.type)
+    } else {
+      handleDownloadResume()
+    }
+  };
+
 
   const handleDownloadResume = async () => {
-    await handlepayment()
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
     const body = {
@@ -151,7 +151,7 @@ const ResumeViewPage = () => {
     try {
       const response = await printResume(body);
       if (response.ok) {
-        const blob = await response.blob(); // Get response body as blob
+        const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -303,7 +303,7 @@ const ResumeViewPage = () => {
               </div>
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={handleDownloadResume}
+                onClick={checkUserTemplate}
                 disabled={isLoading}
               >
                 {isLoading && (
