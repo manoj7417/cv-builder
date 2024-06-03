@@ -38,7 +38,7 @@ const PaymentSuccess = () => {
     } catch (error) {
       throw error
     } finally {
-      router.push('/analyser/feedback')
+      router.push('/analyser/feedback?status=success')
     }
   }
 

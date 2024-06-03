@@ -83,7 +83,7 @@ export const MultiStepForm = ({
     );
   } else if (steps === 2) {
     return (
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" onClick={handleCloseAIDialog}>
         <DialogHeader>
           <DialogTitle>
             <div className=" flex items-center">
@@ -167,7 +167,7 @@ export const MultiStepForm = ({
     );
   } else if (steps === 3) {
     return (
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" onClick={handleCloseAIDialog}>
         <DialogHeader>
           <DialogTitle>
             <div className=" flex items-center">
@@ -209,7 +209,7 @@ export const MultiStepForm = ({
     );
   } else if (steps === 4) {
     return (
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" onClick={handleCloseAIDialog}>
         {isLoading ? (
           <div>
             <AiGenerateLoader />
