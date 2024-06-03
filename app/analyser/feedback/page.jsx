@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-import { generateResumeOnFeeback, getBetterResume } from "@/app/pages/api/api";
+import { generateResumeOnFeeback, getBetterResume, Payment } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -13,6 +13,9 @@ import { WiStars } from "react-icons/wi";
 import "./header.css";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { GetTokens } from "@/app/actions";
+import { FaCrown } from "react-icons/fa";
+import { useUserStore } from "@/app/store/UserStore";
+import { tempType } from "@/lib/templateTypes/TempTypes";
 
 export default function ResumeFeedback() {
   const [content, setContent] = useState({});
@@ -24,8 +27,10 @@ export default function ResumeFeedback() {
     relevance: false,
     content: false,
   });
+  const { userdata } = useUserStore(state => state.userState)
   const percentage = 66;
-
+  const updateUserData = useUserStore(state => state.updateUserData)
+  const resumeData = useResumeStore(state => state.resume.data)
 
 
   const fetchBetterResume = async (resume) => {
@@ -33,7 +38,7 @@ export default function ResumeFeedback() {
     try {
       const response = await generateResumeOnFeeback(resume, accessToken.value);
       if (response.status === 201) {
-        return response.data.data;
+        return response.data;
       }
     } catch (error) {
       console.error(error);
@@ -42,13 +47,36 @@ export default function ResumeFeedback() {
     }
   };
 
+  const handlepayment = async (type) => {
+    const { accessToken } = await GetTokens();
+
+    Payment({
+      amount: 10,
+      email: userdata.email,
+      name: "aman",
+      url: "https://career-genies-frontend.vercel.app/paymentSuccess?type=feedback",
+      cancel_url: window.location.href,
+      templateName: resumeData.metadata.template
+    }, accessToken.value).then(response => {
+      const { url } = response.data;
+      window.location = url;
+    })
+      .catch(error => {
+        console.error(error.response ? error.response.data.error : error.message);
+      });
+  };
+
   const handleBetterResumeContent = async () => {
+    if (!userdata?.tokens) {
+      return handlepayment()
+    }
     setIsLoading(true);
     const resume = localStorage.getItem("newResumeContent");
     if (resume) {
-      const data = await fetchBetterResume(resume);
+      const { data, userData } = await fetchBetterResume(resume);
       if (data) {
         replaceResumeData(data)
+        updateUserData(userData)
         router.push("/builder");
       } else {
         toast.error("Unable to optimize resume");
@@ -103,7 +131,7 @@ export default function ResumeFeedback() {
                 class="button button--pipaluk button--inverted button--round-l button--text-thick button--text-upper"
                 onClick={handleBetterResumeContent}
               >
-                Optimize Now <WiStars className="w-7 h-7" />
+                Optimize Now <FaCrown className="ml-1 text-yellow-300" />
               </button>
             </div>
           </div>

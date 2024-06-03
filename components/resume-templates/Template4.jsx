@@ -214,7 +214,7 @@ const Skills = ({ fontStyle, data, headingColor }) => {
   return (
     <div>
       {data.visible && data.items.length > 0 && (
-        <div className="skills_section py-3">
+        <div className="skills_section py-3 ">
           <h2
             className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase underline underline-offset-8`}
             style={{
@@ -226,7 +226,7 @@ const Skills = ({ fontStyle, data, headingColor }) => {
           <div className="text-gray-600 my-1">
             <ul
               role="list"
-              className="list-disc pl-5 text-slate-400 flex gap-10"
+              className="list-disc pl-5 text-slate-400 flex flex-wrap gap-10"
               style={{ color: headingColor }}
             >
               {data.items.map((item, i) => {
