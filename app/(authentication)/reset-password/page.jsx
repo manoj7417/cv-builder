@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,7 +11,7 @@ import { resetPassword } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { TbLoader } from "react-icons/tb"
 
-export default function ResetPassword() {
+const ResetPasswordFunc = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get('token') || null;
@@ -136,13 +136,9 @@ export default function ResetPassword() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700"
-                                    >
+                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700">
                                         Reset Password
                                         <MdKeyboardArrowRight className="ml-2" size={16} />
-                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-gray-500"
-                                        disabled={isLoading}
-                                    >
                                         {
                                             isLoading ?
                                                 <>
@@ -171,7 +167,14 @@ export default function ResetPassword() {
                 </div>
             </div>
         </section>
-            </div >
-        </section >
     );
+}
+
+
+export default function ResetPassword() {
+    return (
+        <Suspense>
+            <ResetPasswordFunc />
+        </Suspense>
+    )
 }
