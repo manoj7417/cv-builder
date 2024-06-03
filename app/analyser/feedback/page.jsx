@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import FeedbackModal from "@/components/component/FeedbackModal";
@@ -17,7 +17,7 @@ import { FaCrown } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
 import { tempType } from "@/lib/templateTypes/TempTypes";
 
-export default function ResumeFeedback() {
+const FeedbackFuction = () => {
   const [content, setContent] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -31,6 +31,8 @@ export default function ResumeFeedback() {
   const percentage = 66;
   const updateUserData = useUserStore(state => state.updateUserData)
   const resumeData = useResumeStore(state => state.resume.data)
+  const searchParams = useSearchParams()
+  const status = searchParams.get('status')
 
 
   const fetchBetterResume = async (resume) => {
@@ -106,6 +108,12 @@ export default function ResumeFeedback() {
     let value = JSON.parse(localStorage.getItem("feedback"));
     setContent(value);
   }, []);
+
+  useEffect(() => {
+    if (status === 'success') {
+      handleBetterResumeContent()
+    }
+  }, [status])
 
   return (
     <>
@@ -443,3 +451,11 @@ export default function ResumeFeedback() {
     </>
   );
 }
+
+export default function ResumeFeedback() {
+  return <Suspense >
+    <FeedbackFuction />
+  </Suspense>
+}
+
+
