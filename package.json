@@ -15,6 +15,7 @@
     "@coreui/react": "^5.0.0",
     "@headlessui/react": "^2.0.1",
     "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.4.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -69,6 +70,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.1",
     "webfontloader": "^1.6.28",
+    "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
