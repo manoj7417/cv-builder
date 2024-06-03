@@ -256,8 +256,8 @@ const ATSTemplates = [
     },
     {
       name: "AllTemplate3",
-      src: "/newResume1.png",
-      alt: "/newResume1.png",
+      src: "/15.png",
+      alt: "/15.png",
       type: templateType.premium,
     },
     {
@@ -282,14 +282,14 @@ const ATSTemplates = [
     },
     {
       name: "AllTemplate7",
-      src: "/4.png",
-      alt: "/4.png",
+      src: "/17.png",
+      alt: "/17.png",
       type: templateType.free,
     },
     {
       name: "AllTemplate8",
-      src: "/5.png",
-      alt: "/5.png",
+      src: "/16.png",
+      alt: "/16.png",
       type: templateType.free,
     },
     {
@@ -337,14 +337,14 @@ const DesignerTemplates = [
   [
     {
       name: "AllTempalte5",
-      src: "/resume-temp-example.png",
-      alt: "/resume-temp-example.png",
+      src: "/9.png",
+      alt: "/9.png",
       type: templateType.free,
     },
     {
       name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
+      src: "/8.png",
+      alt: "/8.png",
       type: templateType.premium,
     },
     {

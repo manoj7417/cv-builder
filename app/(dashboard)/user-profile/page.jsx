@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import React from "react";
 import {
@@ -7,8 +8,14 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
+import { useUserStore } from "@/app/store/UserStore";
 
 const ProfilePage = () => {
+
+  const userState = useUserStore((state) => state.userState);
+  console.log("userState:::",userState)
+
+
   return (
     <>
       <section className="bg-gradient-to-r from-white to-[#dcecff] py-20">
