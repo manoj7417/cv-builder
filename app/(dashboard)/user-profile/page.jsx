@@ -11,7 +11,7 @@ import {
 const ProfilePage = () => {
   return (
     <>
-      <section className="bg-gradient-to-r from-white to-[#dcecff] py-5">
+      <section className="bg-gradient-to-r from-white to-[#dcecff] py-20">
         <div className="container mx-auto px-5">
           <div className="flex flex-wrap">
             <div className="w-full lg:w-1/3 mb-4 p-5">

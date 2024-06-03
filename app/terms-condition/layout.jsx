@@ -1,11 +1,10 @@
-import Footer from "@/app/Layout/Footer"
-import NewResumeHeader from "@/app/Layout/NewResumeHeader"
-
+import Footer from "../Layout/Footer"
+import NewResumeHeader from "../Layout/NewResumeHeader"
 
 const Layout = ({ children }) => {
     return (
-      <main className="resume_dashboard" >
-        <div className="resume_dashboard_container">
+      <main className="terms_condition" >
+        <div className="terms_condition_container">
           <div className="wrapper">
             <NewResumeHeader/>
             {children}
