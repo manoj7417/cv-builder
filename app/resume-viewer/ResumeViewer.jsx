@@ -344,7 +344,7 @@ const ResumeViewPage = () => {
                             <Image
                               src="/temp5.png"
                               alt="pic1"
-                              className="cursor-none hover:border-sky-700 hover:border-4"
+                              className="cursor-pointer hover:border-sky-700 hover:border-4"
                               width={500}
                               height={500}
                             />
