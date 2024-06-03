@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { resetPassword } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
+import { TbLoader } from "react-icons/tb"
 
 export default function ResetPassword() {
     const router = useRouter();
@@ -16,6 +17,7 @@ export default function ResetPassword() {
     const token = searchParams.get('token') || null;
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setConfirmShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -47,10 +49,12 @@ export default function ResetPassword() {
 
     const hadleResetPassword = async (data) => {
         if (!token) return router.push('/login')
+        // if (!token) return router.push('/login')
         const obj = {
             newPassword: data?.password,
             token
         }
+        setIsLoading(true)
         try {
             const response = await resetPassword(obj)
             if (response.status === 200) {
@@ -60,6 +64,8 @@ export default function ResetPassword() {
         } catch (error) {
             console.log(error)
             toast.error("Something went wrong")
+        } finally {
+            setIsLoading(false)
         }
     };
 
@@ -135,6 +141,20 @@ export default function ResetPassword() {
                                     >
                                         Reset Password
                                         <MdKeyboardArrowRight className="ml-2" size={16} />
+                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-gray-500"
+                                        disabled={isLoading}
+                                    >
+                                        {
+                                            isLoading ?
+                                                <>
+                                                    <TbLoader className="mr-1  animate-spin text-white" /> Reseting Password
+                                                </>
+                                                :
+                                                <>
+                                                    Reset Password
+                                                    <MdKeyboardArrowRight className="ml-2" size={16} />
+                                                </>
+                                        }
                                     </button>
                                 </div>
                             </div>
@@ -152,5 +172,7 @@ export default function ResetPassword() {
                 </div>
             </div>
         </section>
+            </div >
+        </section >
     );
 }
