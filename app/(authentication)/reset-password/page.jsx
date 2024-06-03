@@ -62,7 +62,6 @@ export default function ResetPassword() {
                 router.push('/login')
             }
         } catch (error) {
-            console.log(error)
             toast.error("Something went wrong")
         } finally {
             setIsLoading(false)
