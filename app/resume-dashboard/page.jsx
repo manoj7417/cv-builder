@@ -349,8 +349,8 @@ const DesignerTemplates = [
     },
     {
       name: "AllTemplate7",
-      src: "/4.png",
-      alt: "/4.png",
+      src: "/6.png",
+      alt: "/6.png",
       type: templateType.free,
     },
     {
@@ -361,8 +361,8 @@ const DesignerTemplates = [
     },
     {
       name: "AllTemplate9",
-      src: "/15.png",
-      alt: "/15.png",
+      src: "/7.png",
+      alt: "/7.png",
       type: templateType.premium,
     },
   ],
