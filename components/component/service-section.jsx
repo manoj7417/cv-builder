@@ -100,7 +100,7 @@ export function ServiceSection() {
                   loop
                   preload="none"
                 >
-                  <source src="/builder.mp4" type="video/mp4" />
+                  <source src="/resumeBuilderVideo.mp4" type="video/mp4" />
                   <track
                     src="/path/to/captions.vtt"
                     kind="subtitles"
@@ -133,7 +133,7 @@ export function ServiceSection() {
                   loop
                   preload="none"
                 >
-                  <source src="/aigenie.mp4" type="video/mp4" />
+                  <source src="/analyser.mp4" type="video/mp4" />
                   <track
                     src="/path/to/captions.vtt"
                     kind="subtitles"
@@ -157,7 +157,7 @@ export function ServiceSection() {
                         ATS score
                       </h3>
                       <p className="text-gray-500 text-sm">
-                      Find out how well your CV performs with Applicant Tracking Systems (ATS). Our tool provides a detailed score, pinpointing areas for improvement to ensure your CV gets through automated screenings. Get practical tips to enhance your CV&apos;s structure, content, and formatting, making it more appealing to both ATS and hiring managers.
+                        Find out how well your CV performs with Applicant Tracking Systems (ATS). Our tool provides a detailed score, pinpointing areas for improvement to ensure your CV gets through automated screenings. Get practical tips to enhance your CV&apos;s structure, content, and formatting, making it more appealing to both ATS and hiring managers.
                       </p>
                     </div>
                   </li>
@@ -167,7 +167,7 @@ export function ServiceSection() {
                         Suggestion for CV
                       </h3>
                       <p className="text-gray-500 text-sm">
-                      Get expert recommendations to perfect your CV. Our tool reviews your CV and offers personalized suggestions to make it more effective. Whether it&apos;s adjusting the format, refining the content, or highlighting key skills, get professional advice to make your CV stand out.
+                        Get expert recommendations to perfect your CV. Our tool reviews your CV and offers personalized suggestions to make it more effective. Whether it&apos;s adjusting the format, refining the content, or highlighting key skills, get professional advice to make your CV stand out.
                       </p>
                     </div>
                   </li>
@@ -177,7 +177,7 @@ export function ServiceSection() {
                         Optimize your CV
                       </h3>
                       <p className="text-gray-500 text-sm">
-                      Enhance your CV with our comprehensive optimization service. Our tool checks for errors, ensures contextual accuracy, and provides targeted improvements. From content alignment to skill presentation, optimize every aspect of your CV to increase your chances of landing your desired job.
+                        Enhance your CV with our comprehensive optimization service. Our tool checks for errors, ensures contextual accuracy, and provides targeted improvements. From content alignment to skill presentation, optimize every aspect of your CV to increase your chances of landing your desired job.
                       </p>
                     </div>
                   </li>

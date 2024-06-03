@@ -37,7 +37,10 @@ export default function DashboardIdea() {
     reader.onloadend = async () => {
       pdfToText(selectedFile)
         .then(async text => {
-          if (!text) return toast.error("Please select a valid PDF file")
+          if (!text) {
+            setIsAnalysing(false)
+            return toast.error("Please select a valid PDF file")
+          }
           await localStorage.setItem("newResumeContent", text)
           await getFeedback(text);
         })
