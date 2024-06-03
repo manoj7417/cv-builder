@@ -26,7 +26,7 @@ export function ServiceSection() {
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+            <div className="mx-auto grid max-w-6xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
                 <ul className="grid gap-6 mb-10">
                   <li>
@@ -124,7 +124,7 @@ export function ServiceSection() {
                 src="/new_section3.png"
                 width="550"
               /> */}
-              <div className="lg:w-[550px] w-full h-auto shadow-lg rounded-md pr-10">
+              {/* <div className="lg:w-[550px] w-full h-auto shadow-lg rounded-md pr-10">
                 <video
                   width="1000"
                   height="1000"
@@ -142,8 +142,8 @@ export function ServiceSection() {
                   />
                   Your browser does not support the video tag.
                 </video>
-              </div>
-              <div className="flex flex-col justify-center space-y-4 lg:ps-20 ps-1">
+              </div> */}
+              {/* <div className="flex flex-col justify-center space-y-4 lg:ps-20 ps-1">
                 <div className="px-0 flex items-center rounded-2xl text-center py-1 ">
                   <h2 className="lg:text-4xl text-3xl font-bold text-blue-900">
                     CV Analyzer
@@ -190,7 +190,7 @@ export function ServiceSection() {
                     </a>
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -250,7 +250,7 @@ export function ServiceSection() {
                 </div>
               </form>
               <p className="text-xs text-gray-500">
-                <Link className="underline underline-offset-2" href="#">
+                <Link className="underline underline-offset-2" href="/terms-condition">
                   Terms & Conditions
                 </Link>
               </p>

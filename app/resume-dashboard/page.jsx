@@ -167,6 +167,138 @@ const AllTemplates = [
   ],
 ]
 
+
+const SimpleTemplates = [
+  [
+    {
+      name: "Template3",
+      src: "/Template3.png",
+      alt: "Template3.png",
+      type: templateType.premium
+    },
+    {
+      name: "AllTemplate1",
+      src: "/15.png",
+      alt: "/15.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate2",
+      src: "/17.png",
+      alt: "/17.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate3",
+      src: "/newResume1.png",
+      alt: "/newResume1.png",
+      type: templateType.premium
+    },
+    {
+      name: "AllTemplate4",
+      src: "/11.png",
+      alt: "/11.png",
+      type: templateType.free
+    }
+  ],
+  [
+    {
+      name: "AllTempalte5",
+      src: "/resume-temp-example.png",
+      alt: "/resume-temp-example.png",
+      type: templateType.free
+    },
+    {
+      name: "Template3",
+      src: "/Template3.png",
+      alt: "/Template3.png",
+      type: templateType.premium
+    },
+    {
+      name: "AllTemplate7",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate8",
+      src: "/5.png",
+      alt: "/5.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate9",
+      src: "/15.png",
+      alt: "/15.png",
+      type: templateType.premium
+    }
+  ],
+  [
+    {
+      name: "AllTempalte5",
+      src: "/resume-temp-example.png",
+      alt: "/resume-temp-example.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate6",
+      src: "/3.png",
+      alt: "/3.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate7",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate8",
+      src: "/5.png",
+      alt: "/5.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate9",
+      src: "/6.png",
+      alt: "/6.png",
+      type: templateType.free
+    }
+  ],
+  [
+    {
+      name: "AllTempalte5",
+      src: "/resume-temp-example.png",
+      alt: "/resume-temp-example.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate6",
+      src: "/3.png",
+      alt: "/3.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate7",
+      src: "/4.png",
+      alt: "/4.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate8",
+      src: "/5.png",
+      alt: "/5.png",
+      type: templateType.free
+    },
+    {
+      name: "AllTemplate9",
+      src: "/6.png",
+      alt: "/6.png",
+      type: templateType.free
+    }
+  ],
+]
+
 export default function DashboardIdea() {
   const  userState= useUserStore((state) => state.userState)
   return (
