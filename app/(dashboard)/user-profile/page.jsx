@@ -12,9 +12,8 @@ import { useUserStore } from "@/app/store/UserStore";
 
 const ProfilePage = () => {
 
-  const userState = useUserStore((state) => state.userState);
-  console.log("userState:::",userState)
-
+  const {userdata} = useUserStore((state) => state.userState);
+  console.log("userState:::",userdata)
 
   return (
     <>

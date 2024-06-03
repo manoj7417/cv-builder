@@ -4,7 +4,7 @@ const TermsConditionPage = () => {
   return (
     <>
       <div className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
-        <div class="container mx-auto rounded-lg">
+        <div class="container lg:max-w-6xl w-full mx-auto rounded-lg lg:p-0 p-5">
           <h1 class="text-2xl font-bold mb-4">Terms and Conditions</h1>
           <p>
             Welcome to <strong>Career Genies Hub</strong>!
