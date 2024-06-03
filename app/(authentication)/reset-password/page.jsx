@@ -137,8 +137,6 @@ const ResetPasswordFunc = () => {
                                     <button
                                         type="submit"
                                         className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700">
-                                        Reset Password
-                                        <MdKeyboardArrowRight className="ml-2" size={16} />
                                         {
                                             isLoading ?
                                                 <>

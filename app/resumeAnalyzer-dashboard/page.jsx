@@ -24,33 +24,39 @@ import pdfToText from 'react-pdftotext'
 import { useRouter } from "next/navigation"
 import Header from "../Layout/Header"
 import { toast } from "react-toastify"
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
+import Lottie from "lottie-react";
+import animation from '@/public/animations/NonAtsLoaderAnimation.json'
 
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const router = useRouter()
   const handlepdfFileChange = async (e) => {
-    setIsAnalysing(true)
     let selectedFile = e.target.files[0];
+    if (selectedFile.type !== 'application/pdf') return toast.error("Please select a valid PDF file")
+    setIsAnalysing(true)
     let reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = async () => {
-      pdfToText(selectedFile)
-        .then(async text => {
-          if (!text) {
-            setIsAnalysing(false)
-            return toast.error("Please select a valid PDF file")
-          }
-          await localStorage.setItem("newResumeContent", text)
-          await getFeedback(text);
-        })
-        .catch(error => {
-          console.error("Failed to extract text from pdf")
+      try {
+        const text = await pdfToText(selectedFile)
+        if (!text) {
           setIsAnalysing(false)
-        });
+          setIsDialogOpen(true)
+          return;
+        }
+         localStorage.setItem("newResumeContent", text)
+        await getFeedback(text);
+      } catch (error) {
 
+      } finally {
+        setIsAnalysing(false)
+      }
     };
   }
+
 
   const getFeedback = async (message) => {
     try {
@@ -67,6 +73,9 @@ export default function DashboardIdea() {
     }
   }
 
+  const handleDialogClose = () => {
+    setIsDialogOpen(false)
+  }
 
   return (
     <>
@@ -74,6 +83,24 @@ export default function DashboardIdea() {
         {/* <Header /> */}
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')" }}>
+          <Dialog open={isDialogOpen} onClose={handleDialogClose}>
+            <DialogContent onClick={handleDialogClose} className="w-[450px]">
+              <DialogTitle>
+                <div>
+                  <Lottie animationData={animation}
+                    loop={true}
+                    style={{ height: "300px" }} />
+                </div>Non ATS friendly resume found</DialogTitle>
+              <DialogDescription>
+                Your resume is not a ats friendly.You should use an ats friendly resume this isthe main reason you are not getting shortlisted
+              </DialogDescription>
+              <div className="flex w-full justify-end">
+                <Link href='/resume-dashboard' className=" inline">
+                  <Button >View Templates</Button>
+                </Link>
+              </div>
+            </DialogContent>
+          </Dialog>
           <div className="container  w-full h-full resume-dashboard">
             <div className="flex lg:px-24 px-10 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
@@ -100,8 +127,6 @@ export default function DashboardIdea() {
           </div>
           <div className="w-full  " >
             <div className="rounded-t-3xl border-t-8 border-blue-500 shadow-xl  bg-gradient-to-b from-[#dcecff] to-[white]">
-
-              {/* <Steps /> */}
               <Slider />
             </div>
           </div>
