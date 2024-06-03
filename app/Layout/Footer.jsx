@@ -203,7 +203,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/terms-condition"
                     className="text-black transition pointer-events-none"
                   >
                      Terms and Condition

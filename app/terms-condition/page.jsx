@@ -3,8 +3,8 @@ import React from "react";
 const TermsConditionPage = () => {
   return (
     <>
-      <div className="text-gray-800 my-20">
-        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <div className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
+        <div class="container mx-auto rounded-lg">
           <h1 class="text-2xl font-bold mb-4">Terms and Conditions</h1>
           <p>
             Welcome to <strong>Career Genies Hub</strong>!
