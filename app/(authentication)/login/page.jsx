@@ -1,16 +1,20 @@
 "use client";
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext, useRef, useState } from "react";
 // import { ArrowRight } from 'lucide-react'
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { login } from "@/app/pages/api/api";
+import { forgotPassword, login } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
 import { SetTokens } from '../../actions'
 import { useUserStore } from "@/app/store/UserStore";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { TbLoader } from "react-icons/tb";
 
 function LoginUser() {
   const router = useRouter();
@@ -25,6 +29,9 @@ function LoginUser() {
     watch,
     formState: { errors },
   } = useForm();
+  const [showDialog, setShowDialog] = useState(false)
+  const emailRef = useRef('')
+  const [loading, setIsLoading] = useState(false)
 
   const handleLogin = async (data) => {
     try {
@@ -43,7 +50,35 @@ function LoginUser() {
     }
   };
 
+  const handleDialogClose = () => {
+    setShowDialog(false)
+  }
 
+  const handleForgotPassword = async () => {
+    const email = emailRef.current.value;
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setIsLoading(true)
+    try {
+      const response = await forgotPassword(email)
+      if (response.status === 201) {
+        toast.success("Reset password link has been sent to your email address")
+      }
+    } catch (error) {
+      toast.error("Something went wrong")
+    } finally {
+      setShowDialog(false)
+      setIsLoading(false)
+    }
+  }
+
+  const validateEmail = (email) => {
+    // Regular expression for basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   return (
     <>
@@ -104,12 +139,30 @@ function LoginUser() {
                       >
                         Password
                       </label>
-                      <div
-                        className="cursor-pointer text-sm font-semibold text-black hover:underline"
-                        onClick={() => setShowModal(true)}
-                      >
-                        Forgot password?
-                      </div>
+                      <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
+                        <DialogTrigger className="text-sm" onClick={() => setShowDialog(true)}>Forgot Password?</DialogTrigger>
+                        <DialogContent onClick={handleDialogClose} className="w-[420px]">
+                          <DialogHeader>
+                            <DialogTitle>Forgot Password?</DialogTitle>
+                            <DialogDescription>
+                              The reset password link will be sent to your email id
+                            </DialogDescription>
+                            <div className="flex py-3">
+                              <Input
+                                ref={emailRef}
+                                placeholder="Enter your email address"
+                                onChange={(e) => { emailRef.current.value = e.target.value }}
+                                type="email"
+                              />
+                              <Button className="ml-2" onClick={handleForgotPassword} disabled={loading}>
+                                {loading ? <><TbLoader className="mr-1  animate-spin text-white" />Sending</>
+                                  : 'Submit'
+                                }
+                              </Button>
+                            </div>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                     <div className="mt-2">
                       <input

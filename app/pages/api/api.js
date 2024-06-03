@@ -81,6 +81,26 @@ export const registerUser = async (data) => {
   }
 }
 
+export const forgotPassword = async (email) => {
+  try {
+    const response = await instance.post('/user/forgetPassword', { email })
+    return response
+  } catch (error) {
+    console.log("Error sending reset password link", error)
+    throw error;
+  }
+}
+
+export const resetPassword = async (payload) => {
+  try {
+    const response = await instance.post('/user/resetPassword', payload)
+    return response;
+  } catch (error) {
+    console.log("Error reseting password", error)
+    throw error;
+  }
+}
+
 export const getBetterResume = async (message) => {
   try {
     const response = await instance.post('/openai/generateBetterResume', { message }, { withCredentials: true });
