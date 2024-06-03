@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { resetPassword } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
-import { TbLoader } from "react-icons/tb";
+import { TbLoader } from "react-icons/tb"
 
 export default function ResetPassword() {
     const router = useRouter();
@@ -48,6 +48,7 @@ export default function ResetPassword() {
     });
 
     const hadleResetPassword = async (data) => {
+        if (!token) return router.push('/login')
         // if (!token) return router.push('/login')
         const obj = {
             newPassword: data?.password,
@@ -135,6 +136,10 @@ export default function ResetPassword() {
                                 <div>
                                     <button
                                         type="submit"
+                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700"
+                                    >
+                                        Reset Password
+                                        <MdKeyboardArrowRight className="ml-2" size={16} />
                                         className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-gray-500"
                                         disabled={isLoading}
                                     >
@@ -149,7 +154,6 @@ export default function ResetPassword() {
                                                     <MdKeyboardArrowRight className="ml-2" size={16} />
                                                 </>
                                         }
-
                                     </button>
                                 </div>
                             </div>
@@ -165,6 +169,8 @@ export default function ResetPassword() {
                         alt="reset-password"
                     />
                 </div>
+            </div>
+        </section>
             </div >
         </section >
     );

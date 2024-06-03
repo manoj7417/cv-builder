@@ -391,13 +391,6 @@ const ResumeViewPage = () => {
                         >
                           Profile
                         </Link>
-                        <Link
-                          href="/user-dashboard"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          role="menuitem"
-                        >
-                          Dashboard
-                        </Link>
                         <div
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                           role="menuitem"
@@ -414,7 +407,7 @@ const ResumeViewPage = () => {
             </div>
           </div>
           <div
-            className="shadow-2xl overflow-y-scroll h-screen"
+            className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
             style={{
               transform: `scale(${scale})`,
             }}
@@ -449,7 +442,7 @@ const ResumeViewPage = () => {
                   <LiaTimesSolid className="text-white text-3xl" />
                 </div>
                 <div
-                  className="shadow-2xl relative overflow-y-scroll no-scrollbar h-screen"
+                  className="shadow-2xl relative no-scrollbar h-screen"
                   style={{
                     scale: { scale },
 

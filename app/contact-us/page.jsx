@@ -6,20 +6,16 @@ import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 const locations = [
   {
-    title: "Bengaluru office",
+    title: "Uk office",
     timings: "Mon-Sat 9am to 5pm.",
-    address: "100, Electronic City Phase-1, Bengaluru, Karnataka 560100 IN",
+    address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
+    contactNo:"0203 476 7492"
   },
   {
     title: "Head office",
     timings: "Mon-Sat 9am to 5pm.",
-    address: "12th Main Rd, Indiranagar, Bengaluru, Karnataka 560008 IN",
-  },
-  {
-    title: "Karnataka office",
-    timings: "Mon-Sat 9am to 5pm.",
-    address:
-      "42, Residency Rd, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka 560025 IN",
+    address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
+    contactNo:"0203 476 7492"
   },
 ];
 
@@ -157,6 +153,9 @@ export default function ContactPageTwo() {
                     </p>
                     <p className="text-sm font-semibold text-gray-600">
                       {location.address}
+                    </p>
+                    <p className="text-sm font-semibold text-gray-600">
+                      {location.contactNo}
                     </p>
                   </div>
                 ))}

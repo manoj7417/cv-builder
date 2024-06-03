@@ -26,7 +26,7 @@ export function ServiceSection() {
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+            <div className="mx-auto grid max-w-6xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
                 <ul className="grid gap-6 mb-10">
                   <li>
@@ -196,13 +196,13 @@ export function ServiceSection() {
         </section>
 
         <section
-          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-[white] to-[#dcecff]"
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
-          }}
+          className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-gray-100 to-[#cad7e8]"
+          // style={{
+          //   backgroundImage: "url('/banner-bg.svg')",
+          //   backgroundPosition: "center",
+          // }}
         >
-          <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
+          <div className="container mx-auto lg:max-w-[75rem] w-full grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Looking for More?
@@ -219,12 +219,6 @@ export function ServiceSection() {
               >
                 Contact Expert
               </Link>
-              {/* <Link
-                className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
-                href="#"
-              >
-                Learn more
-              </Link> */}
             </div>
           </div>
         </section>
@@ -250,7 +244,7 @@ export function ServiceSection() {
                 </div>
               </form>
               <p className="text-xs text-gray-500">
-                <Link className="underline underline-offset-2" href="#">
+                <Link className="underline underline-offset-2" href="/terms-condition">
                   Terms & Conditions
                 </Link>
               </p>
