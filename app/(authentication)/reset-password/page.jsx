@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,9 +9,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { resetPassword } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
-import { TbLoader } from "react-icons/tb";
+import { TbLoader } from "react-icons/tb"
 
-export default function ResetPassword() {
+const ResetPasswordFunc = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get('token') || null;
@@ -48,6 +48,7 @@ export default function ResetPassword() {
     });
 
     const hadleResetPassword = async (data) => {
+        if (!token) return router.push('/login')
         // if (!token) return router.push('/login')
         const obj = {
             newPassword: data?.password,
@@ -61,7 +62,6 @@ export default function ResetPassword() {
                 router.push('/login')
             }
         } catch (error) {
-            console.log(error)
             toast.error("Something went wrong")
         } finally {
             setIsLoading(false)
@@ -136,9 +136,9 @@ export default function ResetPassword() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-gray-500"
-                                        disabled={isLoading}
-                                    >
+                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700">
+                                        Reset Password
+                                        <MdKeyboardArrowRight className="ml-2" size={16} />
                                         {
                                             isLoading ?
                                                 <>
@@ -150,7 +150,6 @@ export default function ResetPassword() {
                                                     <MdKeyboardArrowRight className="ml-2" size={16} />
                                                 </>
                                         }
-
                                     </button>
                                 </div>
                             </div>
@@ -166,7 +165,16 @@ export default function ResetPassword() {
                         alt="reset-password"
                     />
                 </div>
-            </div >
-        </section >
+            </div>
+        </section>
     );
+}
+
+
+export default function ResetPassword() {
+    return (
+        <Suspense>
+            <ResetPasswordFunc />
+        </Suspense>
+    )
 }
