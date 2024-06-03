@@ -48,11 +48,12 @@ export default function ResetPassword() {
     });
 
     const hadleResetPassword = async (data) => {
-        if (!token) return router.push('/login')
+        // if (!token) return router.push('/login')
         const obj = {
             newPassword: data?.password,
             token
         }
+        setIsLoading(true)
         try {
             const response = await resetPassword(obj)
             if (response.status === 200) {
@@ -62,6 +63,8 @@ export default function ResetPassword() {
         } catch (error) {
             console.log(error)
             toast.error("Something went wrong")
+        } finally {
+            setIsLoading(false)
         }
     };
 
@@ -133,7 +136,7 @@ export default function ResetPassword() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700"
+                                        className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-gray-500"
                                         disabled={isLoading}
                                     >
                                         {
