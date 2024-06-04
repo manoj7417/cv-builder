@@ -69,7 +69,7 @@ function ImageUpload() {
                 <button
                     type='submit'
                     onClick={handleImageUpload}
-                    className=' absolute top-0 r-0 w-[100px] h-[100px] flex items-baseline justify-end rounded-full'>
+                    className='absolute top-0 r-0 w-[100px] h-[100px] flex items-baseline justify-end rounded-full'>
                     <FaCamera className='bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full absolute top-16' />
                 </button>
                 <input
