@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState,useRef } from "react";
 import {
   FaFacebook,
   FaGithub,
@@ -9,204 +9,373 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
+import { useForm } from "react-hook-form";
+
+const socialIcons = {
+  FaFacebook,
+  FaTwitter,
+  FaGithub,
+  FaInstagram,
+};
+
+const SocialLinkInput = ({ register, name, icon: Icon, url, color }) => (
+  <li className="flex justify-between items-center p-3">
+    <Icon className={`text-xl ${color}`} />
+    {/* <p className="mb-0 text-sm font-semibold">{url}</p> */}
+    <input
+      type="text"
+      defaultValue={url}
+      {...register(name)}
+      className="ml-4 text-sm font-semibold p-1 border border-gray-300 rounded"
+    />
+  </li>
+);
+
+const SocialLinkDisplay = ({ icon: Icon, url, color }) => (
+  <li className="flex justify-between items-center p-3">
+    <Icon className={`text-xl ${color}`} />
+    <p className="ml-4 text-sm font-semibold">{url}</p>
+  </li>
+);
 
 const ProfilePage = () => {
+  const [isEditable, setIsEditable] = useState(false);
 
-  const {userdata} = useUserStore((state) => state.userState);
-  console.log("userState:::",userdata)
+  const userData = {
+    userProfile: "pic.jpg",
+    fullName: "Anuj Rawat",
+    email: "text@test.com",
+    occupation: "Software Developer",
+    address: "Bay Area, San Francisco, CA",
+    socialLinks: [
+      {
+        name: "Facebook",
+        url: "www.facebook.com",
+        icon: "FaFacebook",
+        color: "text-blue-600",
+      },
+      {
+        name: "Twitter",
+        url: "www.twitter.com",
+        icon: "FaTwitter",
+        color: "text-blue-400",
+      },
+      {
+        name: "Github",
+        url: "www.github.com",
+        icon: "FaGithub",
+        color: "text-gray-800",
+      },
+      {
+        name: "Instagram",
+        url: "www.instagram.com",
+        icon: "FaInstagram",
+        color: "text-pink-600",
+      },
+    ],
+    templates: {
+      free: [
+        {
+          id: 1,
+          name: "Free Template 1",
+          images: "/5.png",
+        },
+        {
+          id: 2,
+          name: "Free Template 2",
+          images: "/6.png",
+        },
+      ],
+      premium: [
+        {
+          id: 1,
+          name: "Premium Template 1",
+          images: "/10.png",
+        },
+        {
+          id: 2,
+          name: "Premium Template 2",
+          images: "/11.png",
+        },
+      ],
+    },
+  };
+
+  const [profileImage, setProfileImage] = useState(userData.userProfile);
+
+
+  const fileUploadRef = useRef();
+
+  const handleImageUpload = (event) => {
+      event.preventDefault();
+      fileUploadRef.current.click();
+  }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      userProfile: userData?.userProfile,
+      fullName: userData?.fullName,
+      email: userData?.email,
+      occupation: userData?.occupation,
+      address: userData?.address,
+      socialLinks: userData?.socialLinks.map((link) => ({
+        name: link.name,
+        url: link.url,
+      })),
+      templates: {
+        free: userData?.templates?.free.map((template) => ({
+          id: template.id,
+          name: template.name,
+          images: template.images,
+        })),
+        premium: userData?.templates.premium.map((template) => ({
+          id: template.id,
+          name: template.name,
+          images: template.images,
+        })),
+      },
+    },
+  });
+
+  const userProfileHandler = (data) => {
+    console.log(data);
+    setIsEditable(true);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // const {userdata} = useUserStore((state) => state?.userState);
 
   return (
     <>
       <section className="bg-gradient-to-r from-white to-[#dcecff] py-20">
         <div className="container mx-auto px-5">
-          <div className="flex flex-wrap">
-            <div className="w-full lg:w-1/3 mb-4 p-5">
-              <div className="bg-white rounded shadow p-4 text-center">
-                <img
-                  src="/pic.jpg"
-                  alt="avatar"
-                  className="rounded-full mx-auto mb-4 w-32 h-32"
-                />
-                <h5 className="text-xl font-medium mb-3">Marie</h5>
-                <p className="text-gray-500 mb-1 text-sm">Full Stack Developer</p>
-                <p className="text-gray-500 mb-4 text-sm">
-                  Bay Area, San Francisco, CA
-                </p>
-                {/* <div className="flex justify-center space-x-2 mb-2">
-                  <button className="bg-blue-900 text-white py-2 px-4 rounded text-sm">
-                    Follow
-                  </button>
-                  <button className="border border-blue-900 text-blue-900 py-2 px-4 rounded text-sm">
-                    Message
-                  </button>
-                </div> */}
-              </div>
-              <div className="bg-white rounded shadow p-0 mt-4">
-                <ul className="divide-y divide-gray-200">
-                  <li className="flex justify-between items-center p-3">
-                    <FaGlobe className="text-yellow-500 text-xl" />
-                    <p className="mb-0 text-sm font-semibold">https://mdbootstrap.com</p>
-                  </li>
-                  <li className="flex justify-between items-center p-3">
-                    <FaGithub className="text-gray-800 text-xl" />
-                    <p className="mb-0 text-sm font-semibold">mdbootstrap</p>
-                  </li>
-                  <li className="flex justify-between items-center p-3">
-                    <FaTwitter className="text-blue-400 text-xl" />
-                    <p className="mb-0 text-sm font-semibold">@mdbootstrap</p>
-                  </li>
-                  <li className="flex justify-between items-center p-3">
-                    <FaInstagram className="text-pink-600 text-xl" />
-                    <p className="mb-0 text-sm font-semibold">mdbootstrap</p>
-                  </li>
-                  <li className="flex justify-between items-center p-3">
-                    <FaFacebook className="text-blue-600 text-xl" />
-                    <p className="mb-0 text-sm font-semibold">mdbootstrap</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="w-full lg:w-2/3 p-5">
-              <div className="bg-white rounded shadow mb-4 p-4">
-                <div className="flex flex-wrap items-center my-3">
-                  <div className="w-full sm:w-1/3">
-                    <p className="font-semibold text-base">Full Name</p>
-                  </div>
-                  <div className="w-full sm:w-2/3">
-                    <p className="text-gray-500">Johnatan Smith</p>
-                  </div>
+          <form onSubmit={handleSubmit(userProfileHandler)}>
+            <div className="flex flex-wrap">
+              <div className="w-full lg:w-1/3 mb-4 p-5">
+                <div className="bg-white rounded shadow p-4 text-center">
+                  <img
+                    src={profileImage}
+                    alt="avatar"
+                    className="rounded-full mx-auto mb-4 w-32 h-32"
+                  />
+                  {isEditable && (
+                    <div className="image_preview">
+                      <label for="tb-file-upload" className="w-[200px] h-[45px] bg-blue-900 text-white capitalize p-2 mb-2 text-sm cursor-pointer" onClick={handleImageUpload}>Upload Image</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={fileUploadRef}
+                        onChange={handleImageChange}
+                        className="mx-auto mb-4 hidden"
+                      />
+                    </div>
+                  )}
+                  <h5 className="text-xl font-medium my-3">
+                    {userData?.fullName}
+                  </h5>
+                  <p className="text-gray-500 mb-1 text-sm">
+                    {userData?.occupation}
+                  </p>
+                  <p className="text-gray-500 mb-4 text-sm">
+                    {userData?.address}
+                  </p>
                 </div>
-                <hr />
-                <div className="flex flex-wrap my-3 items-center">
-                  <div className="w-full sm:w-1/3">
-                    <p className="font-semibold text-base">Email</p>
-                  </div>
-                  <div className="w-full sm:w-2/3">
-                    <p className="text-gray-500">example@example.com</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="flex flex-wrap my-3 items-center">
-                  <div className="w-full sm:w-1/3">
-                    <p className="font-semibold text-base">Phone</p>
-                  </div>
-                  <div className="w-full sm:w-2/3">
-                    <p className="text-gray-500">(097) 234-5678</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="flex flex-wrap my-3 items-center">
-                  <div className="w-full sm:w-1/3">
-                    <p className="font-semibold text-base">Mobile</p>
-                  </div>
-                  <div className="w-full sm:w-2/3">
-                    <p className="text-gray-500">(098) 765-4321</p>
-                  </div>
-                </div>
-                <hr />
-                <div className="flex flex-wrap my-3 items-center">
-                  <div className="w-full sm:w-1/3">
-                    <p className="font-semibold text-base">Address</p>
-                  </div>
-                  <div className="w-full sm:w-2/3">
-                    <p className="text-gray-500">Bay Area, San Francisco, CA</p>
-                  </div>
+                <div className="bg-white rounded shadow p-0 mt-4">
+                  <ul className="divide-y divide-gray-200">
+                    {userData?.socialLinks.map((link, index) =>
+                      isEditable ? (
+                        <SocialLinkInput
+                          key={link.name}
+                          icon={socialIcons[link.icon]}
+                          name={link.name}
+                          url={link.url}
+                          color={link.color}
+                          register={register}
+                        />
+                      ) : (
+                        <SocialLinkDisplay
+                          key={link.name}
+                          icon={socialIcons[link.icon]}
+                          url={link.url}
+                          color={link.color}
+                        />
+                      )
+                    )}
+                  </ul>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <div className="w-full md:w-1/2 mb-4">
-                  <div className="bg-white rounded shadow p-4">
-                    <p className="mb-4 text-black font-semibold italic">
-                      My Free Templates
-                    </p>
-                    <div className="grid grid-cols-2 place-items-center gap-5">
-                      <div className="image_section_1 ">
-                        <Image
-                          src="/5.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
+              <div className="w-full lg:w-2/3 p-5">
+                <div className="bg-gray-50 rounded shadow mb-4 p-4">
+                  <div className="flex flex-wrap items-center my-3">
+                    <div className="w-full sm:w-1/3">
+                      <p className="font-semibold text-base">Full Name</p>
+                    </div>
+                    <div className="w-full sm:w-2/3">
+                      {/* <p className="text-gray-500">Johnatan Smith</p> */}
+                      <div className="mt-2">
+                        {isEditable ? (
+                          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset sm:max-w-md">
+                            <input
+                              type="text"
+                              {...register("fullName")}
+                              className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-gray-500">{userData.fullName}</p>
+                        )}
                       </div>
-                      <div className="image_section_2">
-                        <Image
-                          src="/6.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="flex flex-wrap my-3 items-center">
+                    <div className="w-full sm:w-1/3">
+                      <p className="font-semibold text-base">Email</p>
+                    </div>
+                    <div className="w-full sm:w-2/3">
+                      {/* <p className="text-gray-500">example@example.com</p> */}
+                      <div className="mt-2">
+                        {isEditable ? (
+                          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset sm:max-w-md">
+                            <input
+                              type="text"
+                              {...register("email")}
+                              className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-gray-500">{userData?.email}</p>
+                        )}
                       </div>
-                      <div className="image_section_1 ">
-                        <Image
-                          src="/7.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="flex flex-wrap my-3 items-center">
+                    <div className="w-full sm:w-1/3">
+                      <p className="font-semibold text-base">Occupation</p>
+                    </div>
+                    <div className="w-full sm:w-2/3">
+                      {/* <p className="text-gray-500">(098) 765-4321</p> */}
+                      <div className="mt-2">
+                        {isEditable ? (
+                          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset sm:max-w-md">
+                            <input
+                              type="text"
+                              {...register("occupation")}
+                              className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-gray-500">
+                            {userData?.occupation}
+                          </p>
+                        )}
                       </div>
-                      <div className="image_section_2">
-                        <Image
-                          src="/8.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="flex flex-wrap my-3 items-center">
+                    <div className="w-full sm:w-1/3">
+                      <p className="font-semibold text-base">Address</p>
+                    </div>
+                    <div className="w-full sm:w-2/3">
+                      {/* <p className="text-gray-500">
+                        Bay Area, San Francisco, CA
+                      </p> */}
+                      <div className="mt-2">
+                        {isEditable ? (
+                          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset sm:max-w-md">
+                            <input
+                              type="text"
+                              {...register("address")}
+                              className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-gray-500">{userData?.address}</p>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="w-full md:w-1/2 mb-4">
-                  <div className="bg-white rounded shadow p-4">
-                    <p className="mb-4 text-black font-semibold italic">
-                      My Premium Templates
-                    </p>
-                    <div className="grid grid-cols-2 place-items-center gap-5">
-                      <div className="image_section_1 ">
-                        <Image
-                          src="/10.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
+                <div className="flex gap-4">
+                  <div className="w-full md:w-1/2 mb-4">
+                    <div className="bg-white rounded shadow p-4">
+                      <p className="mb-4 text-black font-semibold italic">
+                        My Free Templates
+                      </p>
+                      <div className="grid grid-cols-2 place-items-center gap-5">
+                        {userData.templates.free.map((template) => (
+                          <div key={template.id} className="image_section_1">
+                            <Image
+                              src={template.images}
+                              alt={template.name}
+                              className="cursor-pointer hover:border-sky-700 hover:border-2"
+                              width={100}
+                              height={100}
+                            />
+                          </div>
+                        ))}
                       </div>
-                      <div className="image_section_2">
-                        <Image
-                          src="/11.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
-                      </div>
-                      <div className="image_section_1 ">
-                        <Image
-                          src="/15.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
-                      </div>
-                      <div className="image_section_2">
-                        <Image
-                          src="/16.png"
-                          alt="pic1"
-                          className="cursor-pointer hover:border-sky-700 hover:border-2"
-                          width={100}
-                          height={100}
-                        />
+                    </div>
+                  </div>
+                  <div className="w-full md:w-1/2 mb-4">
+                    <div className="bg-white rounded shadow p-4">
+                      <p className="mb-4 text-black font-semibold italic">
+                        My Premium Templates
+                      </p>
+                      <div className="grid grid-cols-2 place-items-center gap-5">
+                        {userData.templates.premium.map((template) => (
+                          <div key={template.id} className="image_section_1">
+                            <Image
+                              src={template.images}
+                              alt={template.name}
+                              className="cursor-pointer hover:border-sky-700 hover:border-2"
+                              width={100}
+                              height={100}
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
+                <div className="text-start">
+                  {!isEditable ? (
+                    <button
+                      type="button"
+                      onClick={() => setIsEditable(true)}
+                      className="bg-blue-500 text-white py-2 px-4 rounded"
+                    >
+                      Edit
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={()=>setIsEditable(false)}
+                      className="bg-green-500 text-white py-2 px-4 rounded"
+                    >
+                      Save
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </>
