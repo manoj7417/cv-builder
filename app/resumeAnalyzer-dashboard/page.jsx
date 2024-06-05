@@ -47,7 +47,7 @@ export default function DashboardIdea() {
           setIsDialogOpen(true)
           return;
         }
-         localStorage.setItem("newResumeContent", text)
+        localStorage.setItem("newResumeContent", text)
         await getFeedback(text);
       } catch (error) {
 
@@ -83,8 +83,8 @@ export default function DashboardIdea() {
         {/* <Header /> */}
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')" }}>
-          <Dialog open={isDialogOpen} onClose={handleDialogClose}>
-            <DialogContent onClick={handleDialogClose} className="w-[450px]">
+          <Dialog open={isDialogOpen} onClose={handleDialogClose} >
+            <DialogContent onClick={handleDialogClose} className="w-[450px]" showCloseButton={true}>
               <DialogTitle>
                 <div>
                   <Lottie animationData={animation}

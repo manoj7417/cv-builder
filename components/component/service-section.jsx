@@ -116,14 +116,7 @@ export function ServiceSection() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2"></div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              {/* <Image
-                alt="Image"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-first"
-                height="310"
-                src="/new_section3.png"
-                width="550"
-              /> */}
+            {/* <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
               <div className="lg:w-[550px] w-full h-auto shadow-lg rounded-md pr-10">
                 <video
                   width="1000"
@@ -191,7 +184,7 @@ export function ServiceSection() {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
 

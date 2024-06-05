@@ -31,8 +31,10 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+    showCloseButton?: boolean;
+  }
+>(({ className, children, showCloseButton, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay {...props} />
     <DialogPrimitive.Content
@@ -43,17 +45,15 @@ const DialogContent = React.forwardRef<
       )}
     >
       {children}
-      <div
-        className="absolute right-1 top-1 ring-offset-white transition-transform focus:outline-none focus:ring-2 focus:ring-gray-950 w-[30px] h-[30px] rounded-full shadow-lg disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500 flex items-center justify-center cursor-pointer z-50 bg-blue-900  hover:rotate-90"
-        style={{ transition: "transform 0.5s " }} // Adding transition property
-        {...props}
-      >
-        <X
-          className="h-4 w-4 text-white "
-        />{" "}
-        {/* Adding transition delay */}
-        <span className="sr-only">Close</span>
-      </div>
+      {showCloseButton && (
+        <div
+          className="absolute right-1 top-1 ring-offset-white transition-transform focus:outline-none focus:ring-2 focus:ring-gray-950 w-[30px] h-[30px] rounded-full shadow-lg disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500 flex items-center justify-center cursor-pointer z-50 bg-blue-900 hover:rotate-90"
+          style={{ transition: "transform 0.5s " }} // Adding transition property
+        >
+          <X className="h-4 w-4 text-white " /> {/* Adding transition delay */}
+          <span className="sr-only">Close</span>
+        </div>
+      )}
     </DialogPrimitive.Content>
   </DialogPortal>
 ));

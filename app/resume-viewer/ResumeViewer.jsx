@@ -29,6 +29,12 @@ import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { templateType } from "@/components/component/Slider";
 import { tempType, TempTypes } from "@/lib/templateTypes/TempTypes";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { ImSpinner3 } from "react-icons/im";
 
 const images = [
   {
@@ -261,6 +267,35 @@ const ResumeViewPage = () => {
   return (
     <>
       <div className="flex justify-center items-center w-full ">
+        {
+          isLoading && <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
+            <DialogContent className="sm:max-w-[425px]" onClick={() => setIsLoading(false)}>
+              <DialogHeader>
+                <DialogTitle className="flex text-gray-500"><ImSpinner3 className="mr-1 animate-spin" /> Downloading ...</DialogTitle>
+                <DialogDescription>
+                  Make changes to your profile here. Click save when youre done.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Username
+                  </Label>
+                  <Input id="username" value="@peduarte" className="col-span-3" />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button type="submit">Save changes</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        }
         <div>
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
@@ -306,9 +341,7 @@ const ResumeViewPage = () => {
                 onClick={checkUserTemplate}
                 disabled={isLoading}
               >
-                {isLoading && (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                )}
+
                 Download PDF
                 <FaCrown className="ml-1 text-yellow-300" />
               </button>

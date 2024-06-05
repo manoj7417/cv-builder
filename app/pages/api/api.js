@@ -216,3 +216,17 @@ export const PurchaseTokens = async (token) => {
     throw error
   }
 }
+
+export const uploadProfilePicture = async (formdata, token) => {
+  try {
+    const response = await instance.post('/user/upload/profile', formdata, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

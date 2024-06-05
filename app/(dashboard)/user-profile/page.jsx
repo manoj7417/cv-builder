@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState,useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   FaFacebook,
   FaGithub,
@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
 import { useForm } from "react-hook-form";
+import { uploadProfilePicture } from "@/app/pages/api/api";
+import { GetTokens } from "@/app/actions";
 
 const socialIcons = {
   FaFacebook,
@@ -40,7 +42,8 @@ const SocialLinkDisplay = ({ icon: Icon, url, color }) => (
 
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
-
+  const { userdata } = useUserStore(state => state.userState)
+  const url = process.env.NEXT_PUBLIC_BASE_URL
   const userData = {
     userProfile: "pic.jpg",
     fullName: "Anuj Rawat",
@@ -100,15 +103,14 @@ const ProfilePage = () => {
       ],
     },
   };
-
   const [profileImage, setProfileImage] = useState(userData.userProfile);
-
+  const updateUserData = useUserStore(state => state.updateUserData)
 
   const fileUploadRef = useRef();
 
   const handleImageUpload = (event) => {
-      event.preventDefault();
-      fileUploadRef.current.click();
+    event.preventDefault();
+    fileUploadRef.current.click();
   }
 
   const {
@@ -118,10 +120,10 @@ const ProfilePage = () => {
   } = useForm({
     defaultValues: {
       userProfile: userData?.userProfile,
-      fullName: userData?.fullName,
-      email: userData?.email,
-      occupation: userData?.occupation,
-      address: userData?.address,
+      fullName: userdata?.fullname,
+      email: userdata?.email,
+      occupation: userdata?.occupation,
+      address: userdata?.address,
       socialLinks: userData?.socialLinks.map((link) => ({
         name: link.name,
         url: link.url,
@@ -142,22 +144,31 @@ const ProfilePage = () => {
   });
 
   const userProfileHandler = (data) => {
-    console.log(data);
     setIsEditable(true);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
+    const { accessToken } = await GetTokens()
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+    try {
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const formData = new FormData();
+          formData.append("file", file);
+          const response = await uploadProfilePicture(formData, accessToken.value)
+          if (response.status === 200) {
+            console.log(response.data.userdata.profilePicture)
+            updateUserData(response.data.userdata)
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      throw error
     }
   };
 
-  // const {userdata} = useUserStore((state) => state?.userState);
 
   return (
     <>
@@ -168,7 +179,7 @@ const ProfilePage = () => {
               <div className="w-full lg:w-1/3 mb-4 p-5">
                 <div className="bg-white rounded shadow p-4 text-center">
                   <img
-                    src={profileImage}
+                    src={`${url}/${userdata?.profileImage}`}
                     alt="avatar"
                     className="rounded-full mx-auto mb-4 w-32 h-32"
                   />
@@ -185,13 +196,13 @@ const ProfilePage = () => {
                     </div>
                   )}
                   <h5 className="text-xl font-medium my-3">
-                    {userData?.fullName}
+                    {userdata?.fullname}
                   </h5>
                   <p className="text-gray-500 mb-1 text-sm">
-                    {userData?.occupation}
+                    {userdata?.occupation}
                   </p>
                   <p className="text-gray-500 mb-4 text-sm">
-                    {userData?.address}
+                    {userdata?.address}
                   </p>
                 </div>
                 <div className="bg-white rounded shadow p-0 mt-4">
@@ -236,7 +247,7 @@ const ProfilePage = () => {
                             />
                           </div>
                         ) : (
-                          <p className="text-gray-500">{userData.fullName}</p>
+                          <p className="text-gray-500">{userdata?.fullname}</p>
                         )}
                       </div>
                     </div>
@@ -258,7 +269,7 @@ const ProfilePage = () => {
                             />
                           </div>
                         ) : (
-                          <p className="text-gray-500">{userData?.email}</p>
+                          <p className="text-gray-500">{userdata?.email}</p>
                         )}
                       </div>
                     </div>
@@ -281,7 +292,7 @@ const ProfilePage = () => {
                           </div>
                         ) : (
                           <p className="text-gray-500">
-                            {userData?.occupation}
+                            {userdata?.occupation}
                           </p>
                         )}
                       </div>
@@ -306,7 +317,7 @@ const ProfilePage = () => {
                             />
                           </div>
                         ) : (
-                          <p className="text-gray-500">{userData?.address}</p>
+                          <p className="text-gray-500">{userdata?.address}</p>
                         )}
                       </div>
                     </div>
@@ -366,7 +377,7 @@ const ProfilePage = () => {
                   ) : (
                     <button
                       type="button"
-                      onClick={()=>setIsEditable(false)}
+                      onClick={() => setIsEditable(false)}
                       className="bg-green-500 text-white py-2 px-4 rounded"
                     >
                       Save
