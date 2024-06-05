@@ -35,6 +35,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ImSpinner3 } from "react-icons/im";
+import Lottie from "lottie-react";
+import animation from '@/public/animations/downloadLoader1.json';
+import { funfacts } from '@/constants/funfacts'
 
 const images = [
   {
@@ -95,7 +98,7 @@ const ResumeViewPage = () => {
   const logoutUser = useUserStore(state => state.logoutUser);
   const { userState } = useUserStore(state => state);
   const resumeData = useResumeStore(state => state.resume.data)
-
+  const [funfact, setFunFact] = useState(funfacts[0])
   const handleLogout = async () => {
     await RemoveTokens()
     toast.success("User logout successfully", {
@@ -110,10 +113,6 @@ const ResumeViewPage = () => {
       setIsToggleOpen(false);
     }
   };
-
-  //payment gateway use this function whever you want to do the payment
-
-
 
   const handlepayment = async (type) => {
     const { accessToken } = await GetTokens();
@@ -154,9 +153,11 @@ const ResumeViewPage = () => {
       html: resume,
     };
     setIsLoading(true);
+
     try {
       const response = await printResume(body);
       if (response.ok) {
+        generateFunfact()
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -262,6 +263,12 @@ const ResumeViewPage = () => {
     updateScale();
   };
 
+  const generateFunfact = () => {
+    const randomNumber = Math.floor(Math.random() * 9);
+    const newFuncfact = funfacts[randomNumber]
+    setFunFact(state => newFuncfact)
+  }
+
 
 
   return (
@@ -269,30 +276,28 @@ const ResumeViewPage = () => {
       <div className="flex justify-center items-center w-full ">
         {
           isLoading && <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
-            <DialogContent className="sm:max-w-[425px]" onClick={() => setIsLoading(false)}>
+            <DialogContent className="sm:max-w-[525px]" onClick={() => setIsLoading(false)} >
               <DialogHeader>
-                <DialogTitle className="flex text-gray-500"><ImSpinner3 className="mr-1 animate-spin" /> Downloading ...</DialogTitle>
+                <DialogTitle className="flex text-gray-500">Did You Know?</DialogTitle>
+                {/* <DialogTitle className="flex text-gray-500"><ImSpinner3 className="mr-1 animate-spin" /> Downloading ...</DialogTitle> */}
                 <DialogDescription>
-                  Make changes to your profile here. Click save when youre done.
+                  {funfact}
                 </DialogDescription>
               </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input id="name" value="Pedro Duarte" className="col-span-3" />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-right">
-                    Username
-                  </Label>
-                  <Input id="username" value="@peduarte" className="col-span-3" />
+              <div className="w-[300px] mx-auto">
+                <Lottie animationData={animation} />
+              </div>
+              <div className="w-full flex items-center justify-center">
+                <div className="flex item-center">
+                  <div className="flex items-center justify-center">
+                    <ImSpinner3 className="mr-1 animate-spin text-xl" />
+                  </div>
+                  <p >
+                    Downloading ...
+                  </p>
                 </div>
               </div>
-              <DialogFooter>
-                <Button type="submit">Save changes</Button>
-              </DialogFooter>
+
             </DialogContent>
           </Dialog>
         }

@@ -117,7 +117,7 @@ export const generateResumeOnFeeback = async (message, token) => {
       headers: {
         'Authorization': `Bearer ${token}`
       }
-    })
+    })  
     return response;
   } catch (error) {
     console.error("Error generating feedback:", error.response || error);

@@ -103,7 +103,6 @@ const ProfilePage = () => {
       ],
     },
   };
-  const [profileImage, setProfileImage] = useState(userData.userProfile);
   const updateUserData = useUserStore(state => state.updateUserData)
 
   const fileUploadRef = useRef();
@@ -158,7 +157,6 @@ const ProfilePage = () => {
           formData.append("file", file);
           const response = await uploadProfilePicture(formData, accessToken.value)
           if (response.status === 200) {
-            console.log(response.data.userdata.profilePicture)
             updateUserData(response.data.userdata)
           }
         };
@@ -177,21 +175,25 @@ const ProfilePage = () => {
           <form onSubmit={handleSubmit(userProfileHandler)}>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-1/3 mb-4 p-5">
-                <div className="bg-white rounded shadow p-4 text-center">
+                <div className="bg-white rounded shadow p-4 text-center border-2">
                   <img
-                    src={`${url}/${userdata?.profileImage}`}
+                    src={userdata?.profilePicture}
                     alt="avatar"
-                    className="rounded-full mx-auto mb-4 w-32 h-32"
+                    className="rounded-full mx-auto mb-4 w-32 h-32 object-cover"
                   />
                   {isEditable && (
                     <div className="image_preview">
-                      <label for="tb-file-upload" className="w-[200px] h-[45px] bg-blue-900 text-white capitalize p-2 mb-2 text-sm cursor-pointer" onClick={handleImageUpload}>Upload Image</label>
+                      {/* <label for="tb-file-upload" className="w-[200px] h-[45px] bg-blue-900 text-white capitalize p-2 mb-2 text-sm cursor-pointer" onClick={handleImageUpload}>Upload Image</label> */}
+                      <button className="border-2">
+
+                      </button>
                       <input
                         type="file"
                         accept="image/*"
                         ref={fileUploadRef}
                         onChange={handleImageChange}
                         className="mx-auto mb-4 hidden"
+                        hidden
                       />
                     </div>
                   )}
