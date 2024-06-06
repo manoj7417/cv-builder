@@ -279,7 +279,7 @@ const Profile = ({ fontStyle, headingColor }) => {
 };
 
 const Template10 = () => {
-    
+
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
 
@@ -300,21 +300,21 @@ const Template10 = () => {
 
   return (
     <>
-      <div className="template_10 container mx-auto w-[210mm] h-[297mm]">
-        <div className="bg-white mx-auto">
-          <div className="grid grid-cols-12">
-            <div className="col-span-8">
+      <div className="template_10 w-[210mm] h-[297mm]">
+        <div className="h-full">
+          <div className="grid grid-cols-12 h-full">
+            <div className="col-span-8 bg-white">
               <div className="left_side">
                 <div className="user_profile">
                   <div className="profile_section relative p-20 z-50">
                     {basics?.picture?.url && (
                       <img
-                        src={basics?.picture?.url}
+                      src={basics?.picture?.url ? basics.picture.url : '/pic.jpg'}
                         alt="pic"
                         className="w-52 h-52 rounded-full border-8 border-slate-800 bg-orange-400"
                       />
                     )}
-                    <div className="user_name bg-orange-400 text-white w-full absolute -z-10 top-32 -right-64 -mr-2 py-5 text-start pl-14">
+                    <div className="user_name h-50 bg-orange-400 text-white w-full absolute -z-10 top-32 -right-64 -mr-2 py-5 text-start pl-14">
                       <h2 className="text-4xl uppercase"> {basics?.name}</h2>
                       <p className="text-base">{basics?.jobtitle}</p>
                     </div>
@@ -345,13 +345,13 @@ const Template10 = () => {
             </div>
             <div className="col-span-4 bg-slate-800 w-full h-full">
               <div className="right_side p-10 h-full relative">
-                <div className="contact_section pt-72">
+                <div className="contact_section pt-[330px]">
                   <h2 className="text-xl text-white text-center border-2 border-orange-400 p-1 uppercase">
                     Contact Me
                   </h2>
                   <div className="contact_details flex">
                     <div
-                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col text-center`}
+                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col gap-2 text-center`}
                     >
                       {basics?.email && (
                         <a
@@ -359,7 +359,7 @@ const Template10 = () => {
                           className="hover:underline flex items-center mt-1  text-wrap w-full "
                         >
                           <MdOutlineMailOutline className="mr-2 text-orange-400" />
-                          <p className="w-[90%] text-wrap break-words">
+                          <p className="text-wrap break-words">
                             {basics?.email}
                           </p>
                         </a>
@@ -370,11 +370,19 @@ const Template10 = () => {
                           className="hover:underline flex items-center mt-1  text-wrap w-full "
                         >
                           <MdOutlinePhone className="mr-2 text-orange-400" />
-                          <p className="w-[90%] text-wrap break-words">
+                          <p className="text-wrap break-words">
                             {basics?.phone}
                           </p>
                         </a>
                       )}
+                      {(basics?.city || basics?.country) && (
+                    <p className="flex items-center break-words">
+                      <IoLocationOutline className="mr-2 text-orange-400" />
+                      {basics?.city}
+                      {basics?.city && basics?.country && " , "}
+                      {basics?.country}
+                    </p>
+                  )}
                     </div>
                   </div>
                 </div>
