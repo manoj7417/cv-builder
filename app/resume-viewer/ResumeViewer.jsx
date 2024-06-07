@@ -36,7 +36,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ImSpinner3 } from "react-icons/im";
 import Lottie from "lottie-react";
-import animation from '@/public/animations/downloadLoader1.json';
+import Loader1 from '@/public/animations/downloadLoader1.json';
+import Loader2 from '@/public/animations/downloadLoader2.json';
+import Loader3 from '@/public/animations/downloadLoader3.json';
+import Loader4 from '@/public/animations/downloadLoader4.json';
+import Loader5 from '@/public/animations/downloadLoader5.json';
 import { funfacts } from '@/constants/funfacts'
 
 const images = [
@@ -90,7 +94,11 @@ const images = [
   }
 ]
 
+const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5]
+
 const ResumeViewPage = () => {
+  const randomNumber = Math.floor(Math.random() * 9);
+  const randomAnimation = Math.floor(Math.random() * 4)
   const [scale, setScale] = useState(0.8);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -104,7 +112,8 @@ const ResumeViewPage = () => {
   const logoutUser = useUserStore(state => state.logoutUser);
   const { userState } = useUserStore(state => state);
   const resumeData = useResumeStore(state => state.resume.data)
-  const [funfact, setFunFact] = useState(funfacts[0])
+  const [funfact, setFunFact] = useState(funfacts[randomNumber])
+  const [animation, setAnimation] = useState(Loaders[randomAnimation])
   const handleLogout = async () => {
     await RemoveTokens()
     toast.success("User logout successfully", {
@@ -271,7 +280,10 @@ const ResumeViewPage = () => {
 
   const generateFunfact = () => {
     const randomNumber = Math.floor(Math.random() * 9);
+    const randomAnimation = Math.floor(Math.random() * 4)
     const newFuncfact = funfacts[randomNumber]
+    const newAnimation = Loaders[randomAnimation]
+    setAnimation(state => newAnimation)
     setFunFact(state => newFuncfact)
   }
 
@@ -282,25 +294,24 @@ const ResumeViewPage = () => {
       <div className="flex justify-center items-center w-full ">
         {
           isLoading && <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
-            <DialogContent className="sm:max-w-[525px]" onClick={() => setIsLoading(false)} >
-              <DialogHeader>
-                <DialogTitle className="flex text-gray-500">Did You Know?</DialogTitle>
-                {/* <DialogTitle className="flex text-gray-500"><ImSpinner3 className="mr-1 animate-spin" /> Downloading ...</DialogTitle> */}
-                <DialogDescription>
-                  {funfact}
-                </DialogDescription>
-              </DialogHeader>
-              <div className="w-[300px] mx-auto">
-                <Lottie animationData={animation} />
-              </div>
-              <div className="w-full flex items-center justify-center">
-                <div className="flex item-center">
-                  <div className="flex items-center justify-center">
-                    <ImSpinner3 className="mr-1 animate-spin text-xl" />
+            <DialogContent className="sm:max-w-[60vw] h-[60vh]"  >
+              <div className="flex">
+                <div className="w-[50%]">
+                  <Lottie animationData={animation} />
+                </div>
+                <div className="w-[50%] flex flex-col  justify-center">
+                  <div className="text-fancy text-5xl">
+                    <h1>
+                      Did you know?
+                    </h1>
+                    <p className="text-xl my-3">{funfact}</p>
                   </div>
-                  <p >
-                    Downloading ...
-                  </p>
+                  <div className="flex mt-10 items-center justify-center">
+                    <div className="flex items-center justify-center">
+                      < ImSpinner3 className="mr-1 animate-spin" />
+                    </div>
+                    <p>Downloading...</p>
+                  </div>
                 </div>
               </div>
 
