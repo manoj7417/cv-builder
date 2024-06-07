@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { MdOutlineMailOutline } from "react-icons/md";
+import { MdOutlineMailOutline, MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useResumeStore } from "@/app/store/ResumeStore";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaGlobe } from "react-icons/fa";
+import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
+import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
 
 const Education = ({ fontStyle, headingColor }) => {
@@ -12,24 +12,27 @@ const Education = ({ fontStyle, headingColor }) => {
     (state) => state?.resume.data.sections?.education
   );
   return (
-    <div className="education_section">
+    <div className="education_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <h2
-            className={`bg-orange-400 py-2 pr-10 text-end w-[80%] font-semibold uppercase ${fontStyle.headingFont}`}
-            style={{
-              color: headingColor,
-              paddingBottom: "0.25rem", // Space for the underline
-            }}
-          >
-            {data?.name}
-          </h2>
-          <div className="text-gray-800 px-5 py-5">
+          <div className="education_header flex items-center gap-3">
+            <FaGraduationCap className="text-blue-600 text-3xl" />
+            <h2
+              className={`font-semibold uppercase ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+              }}
+            >
+              {data?.name}
+            </h2>
+            <div className="border border-blue-600 w-full"></div>
+          </div>
+          <div className="text-gray-800 px-5">
             {data?.items?.map((item, index) => {
               return (
                 <>
                   <div className="education1 my-5" key={index}>
-                    <div className="education_names flex  justify-between items-center my-2">
+                    <div className="education_names flex  justify-between items-center my-1">
                       <div className="education_degree">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
@@ -75,23 +78,24 @@ const Experience = ({ fontStyle, headingColor }) => {
   );
 
   return (
-    <div className="experience_section">
+    <div className="experience_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="experience_heading flex gap-5 items-center">
-            <h2
-              className={`bg-orange-400 py-2 pr-10 text-end w-[80%] font-semibold uppercase ${fontStyle.headingFont}`}
-              style={{
-                color: headingColor,
-                paddingBottom: "0.25rem", // Space for the underline
-              }}
-            >
-              {data?.name}
-            </h2>
-          </div>
+            <div className="experience_header flex items-center gap-3">
+              <FaComputer className="text-blue-600 text-3xl" />
+              <h2
+                className={`font-semibold uppercase ${fontStyle.headingFont}`}
+                style={{
+                  color: headingColor,
+                }}
+              >
+                {data?.name}
+              </h2>
+              <div className="border border-blue-600 w-full"></div>
+            </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1 my-2 p-5" key={index}>
+              <div className="experience_1 w-full p-5" key={index}>
                 <div className="post flex  justify-between items-center my-2">
                   <div className="post_title">
                     <h3
@@ -142,20 +146,21 @@ const Projects = ({ fontStyle, headingColor }) => {
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
         <>
-          <div className="project_heading flex gap-5 items-center">
+          <div className="project_heading w-full flex gap-3 items-center">
+            <MdOutlineSettings className="text-blue-600 text-3xl" />
             <h2
-              className={`bg-orange-400 py-2 pr-10 text-end w-[80%] font-semibold uppercase ${fontStyle.headingFont}`}
+              className={`font-semibold uppercase ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
-                paddingBottom: "0.25rem", // Space for the underline
               }}
             >
               {data?.name}
             </h2>
+            <div className="border border-blue-600 w-full"></div>
           </div>
           {data?.items.map((item, index) => {
             return (
-              <div className="projects1 my-3 p-5" key={index}>
+              <div className="projects1 w-full my-3 p-5" key={index}>
                 <div className="post flex  justify-between items-center my-2">
                   <div className="post_title">
                     <h3
@@ -196,24 +201,22 @@ const Projects = ({ fontStyle, headingColor }) => {
 
 const Skills = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::",data)
+  console.log("skills data:::", data);
 
-
-   // Define the mapping of skill levels to percentages
-   const levelMapping = {
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
     beginner: 25,
     intermediate: 50,
     advanced: 75,
     expert: 100,
   };
 
-
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section py-3">
           <h2
-            className={`text-white text-center border-2 border-orange-400 p-1 uppercase ${fontStyle.headingFont}`}
+            className={`text-white border-4 border-blue-600 font-semibold text-center p-1 uppercase ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
               paddingBottom: "0.25rem", // Space for the underline
@@ -222,20 +225,20 @@ const Skills = ({ fontStyle, headingColor }) => {
             {data?.name}
           </h2>
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex flex-col gap-5 underline underline-offset-2">
+            <ul className="w-full">
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 0;
                 return (
                   <li
-                    className={`font-bold text-white ${fontStyle.skillsFont} my-1 py-1`}
+                    className={`flex items-center sfont-bold text-white ${fontStyle.skillsFont} my-1 py-1`}
                     key={i}
                   >
-                   <div className="mb-1">
+                    <div className="text-start w-1/2 mb-1">
                       <span>{item?.name}</span>
                     </div>
-                    <div className="w-full bg-gray-200 h-2.5">
+                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-orange-400 h-2.5"
+                        className="bg-sky-400 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -257,19 +260,20 @@ const Profile = ({ fontStyle, headingColor }) => {
     <div>
       {data?.visible && (
         <div className="profile_section w-full">
-          <div className="profile_heading w-full flex gap-5 items-center">
+          <div className="profile_heading w-full flex gap-3 items-center">
+            <FaUserAlt className="text-blue-600 text-2xl" />
             <h2
-              className={`bg-orange-400 py-2 pr-10 text-end w-[80%] font-semibold uppercase ${fontStyle.headingFont}`}
+              className={`font-semibold uppercase ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
-                paddingBottom: "0.25rem", // Space for the underline
               }}
             >
               {data?.name}
             </h2>
+            <div className="border border-blue-600 w-full"></div>
           </div>
           <div
-            className={`my-5 p-5 ${fontStyle.subHeadingFont} break-words`}
+            className={`p-5 ${fontStyle.subHeadingFont} break-words`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -278,12 +282,9 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Template10 = () => {
-
+const Template11 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
-
-
 
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
@@ -301,32 +302,83 @@ const Template10 = () => {
   return (
     <>
       <div className="template_10 w-[210mm] h-[297mm]">
-        <div className="h-full">
-          <div className="grid grid-cols-12 h-full">
-            <div className="col-span-8 bg-white">
-              <div className="left_side">
-                <div className="user_profile">
-                  <div className="profile_section relative p-20 z-50">
-                    {basics?.picture?.url && (
-                      <img
-                      src={"/pic.jpg" || basics.picture.url}
-                        alt="pic"
-                        className="w-52 h-52 rounded-full border-8 border-slate-800 bg-orange-400"
-                      />
-                    )}
-                    <div className="user_name h-50 bg-orange-400 text-white w-full absolute -z-10 top-32 -right-64 -mr-2 py-5 text-start pl-14">
-                      <h2 className="text-4xl uppercase"> {basics?.name}</h2>
-                      <p className="text-base">{basics?.jobtitle}</p>
+        <div className="bg-white">
+          <div className="flex justify-between w-full">
+            <div className="left_section w-[35%] bg-gray-700">
+              <div className="profile_section p-10">
+                {basics?.picture?.url && (
+                  <img
+                    src={"/pic.jpg" || basics.picture.url}
+                    alt="pic"
+                    className="w-40 h-40 rounded-full"
+                  />
+                )}
+              </div>
+              <div className="contact_details p-5">
+                <div className="contact_section">
+                  <h2 className="text-white border-4 border-blue-600 p-1 text-2xl text-center uppercase font-semibold my-4">
+                    Contact Me
+                  </h2>
+                  <div className="contact_details flex">
+                    <div
+                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col gap-2 text-center`}
+                    >
+                      {basics?.email && (
+                        <a
+                          href={`mailto:${basics?.email}`}
+                          className="hover:underline flex items-center mt-1  text-wrap w-full "
+                        >
+                          <MdOutlineMailOutline className="mr-2 text-emerald-200" />
+                          <p className="text-wrap break-words">
+                            {basics?.email}
+                          </p>
+                        </a>
+                      )}
+                      {basics?.phone && (
+                        <a
+                          href={`tel:${basics?.phone}`}
+                          className="hover:underline flex items-center mt-1  text-wrap w-full "
+                        >
+                          <MdOutlinePhone className="mr-2 text-emerald-300" />
+                          <p className="text-wrap break-words">
+                            {basics?.phone}
+                          </p>
+                        </a>
+                      )}
+                      {(basics?.city || basics?.country) && (
+                        <p className="flex items-center break-words">
+                          <IoLocationOutline className="mr-2 text-emerald-300" />
+                          {basics?.city}
+                          {basics?.city && basics?.country && " , "}
+                          {basics?.country}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
-                <div className="profile_detail">
+              </div>
+              <div className="skills mt-10 p-5">
+                <Skills fontStyle={fontStyle} />
+              </div>
+            </div>
+            <div className="right_section w-[65%]">
+            <div className="bg-blue-700">
+                <div className="user-detail p-10">
+                  <h2 className="text-4xl uppercase font-medium text-white">
+                  {basics?.name}
+                  </h2>
+                  <h4 className="text-base text-white">{basics?.jobtitle}</h4>
+                </div>
+                <div className="user_details h-[50px] relative clip-semi-arc"></div>
+              </div>
+              <div className="personal_details p-5">
+                <div className="profile_section mb-4">
                   <Profile
                     fontStyle={fontStyle}
                     colorStyle={metadata?.theme?.primary}
                   />
                 </div>
-                <div className="education">
+                <div className="education mb-4">
                   <Education fontStyle={fontStyle} />
                 </div>
                 <div className="experience">
@@ -343,61 +395,6 @@ const Template10 = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-4 bg-slate-800 w-full h-full">
-              <div className="right_side p-10 h-full relative">
-                <div className="contact_section pt-[330px]">
-                  <h2 className="text-xl text-white text-center border-2 border-orange-400 p-1 uppercase">
-                    Contact Me
-                  </h2>
-                  <div className="contact_details flex">
-                    <div
-                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col gap-2 text-center`}
-                    >
-                      {basics?.email && (
-                        <a
-                          href={`mailto:${basics?.email}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
-                        >
-                          <MdOutlineMailOutline className="mr-2 text-orange-400" />
-                          <p className="text-wrap break-words">
-                            {basics?.email}
-                          </p>
-                        </a>
-                      )}
-                      {basics?.phone && (
-                        <a
-                          href={`tel:${basics?.phone}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
-                        >
-                          <MdOutlinePhone className="mr-2 text-orange-400" />
-                          <p className="text-wrap break-words">
-                            {basics?.phone}
-                          </p>
-                        </a>
-                      )}
-                      {(basics?.city || basics?.country) && (
-                    <p className="flex items-center break-words">
-                      <IoLocationOutline className="mr-2 text-orange-400" />
-                      {basics?.city}
-                      {basics?.city && basics?.country && " , "}
-                      {basics?.country}
-                    </p>
-                  )}
-                    </div>
-                  </div>
-                </div>
-                <div className="skills mt-10">
-                  <Skills fontStyle={fontStyle} />
-                </div>
-                <div className="socials absolute bottom-5 border-t-2 border-white w-[70%]">
-                  <div className="flex justify-between mt-5 mx-4">
-                    <FaXTwitter className="text-base mr-2 text-white" />
-                    <MdOutlineMailOutline className="text-base mr-2 text-white" />
-                    <FaGlobe className="text-base mr-2 text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -405,4 +402,4 @@ const Template10 = () => {
   );
 };
 
-export default Template10;
+export default Template11;

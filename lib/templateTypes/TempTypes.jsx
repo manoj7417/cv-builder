@@ -40,4 +40,8 @@ export const TempTypes = [
     name: "Template10",
     type: tempType.premium,
   },
+  {
+    name: "Template11",
+    type: tempType.premium,
+  },
 ];

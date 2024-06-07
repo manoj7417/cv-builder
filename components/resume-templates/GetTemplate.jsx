@@ -1,5 +1,6 @@
 import Template1 from "./Template1";
 import Template10 from "./Template10";
+import Template11 from "./Template11";
 import Template2 from "./Template2";
 import Template3 from "./Template3";
 import Template4 from "./Template4";
@@ -31,6 +32,8 @@ export const GetTemplate = ({ name, resumeData }) => {
       return <Template9 resumeData={resumeData} />;
     case "Template10":
       return <Template10 resumeData={resumeData} />;
+      case "Template11":
+      return <Template11 resumeData={resumeData} />;
     default:
       return <Template1 resumeData={resumeData} />;
   }

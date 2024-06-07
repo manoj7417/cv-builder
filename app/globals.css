@@ -643,4 +643,13 @@ footer a:hover svg {
 }
 
 
+
+
+@layer utilities {
+	.clip-semi-arc {
+		background-color: white; /* just for visualization */
+		clip-path: ellipse(50% 100% at 50% 100%);
+	}
+  }
+
 /* Font According to Templates */
