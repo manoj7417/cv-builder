@@ -141,6 +141,19 @@ const Education = ({ fontStyle, headingColor }) => {
                     className={`${fontStyle.paraFont} break-words text-justify`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
+                  <div className="px-3">
+                  {
+                    item?.highlights?.length > 0 &&
+                    <ul className="list-disc">
+                      {
+
+                        item?.highlights?.map((item, key) => {
+                          return <li key={key} className=" break-words text-15px">{item}</li>
+                        })
+                      }
+                    </ul>
+                  }
+                </div>
                 </div>
               );
             })}

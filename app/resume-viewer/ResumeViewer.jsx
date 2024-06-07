@@ -512,7 +512,7 @@ const ResumeViewPage = () => {
                       name={data?.metadata?.template}
                       resumeData={data}
                     />
-                    <div className="absolute z-10 bottom-2 right-2 text-gray-500">
+                    <div className="bg-white text-gray-500">
                       <p className="text-sm">@Career Genies Hub</p>
                     </div>
                   </div>

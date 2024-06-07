@@ -136,6 +136,19 @@ const Experience = ({ fontStyle, data, headingColor }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3">
+                  {
+                    item?.highlights?.length > 0 &&
+                    <ul className="list-disc">
+                      {
+
+                        item?.highlights?.map((item, key) => {
+                          return <li key={key} className=" break-words text-15px">{item}</li>
+                        })
+                      }
+                    </ul>
+                  }
+                </div>
               </div>
             );
           })}
@@ -250,7 +263,7 @@ const Skills = ({ fontStyle, data, headingColor }) => {
 const Profile = ({ data, fontStyle, headingColor }) => {
   const htmlContent = data.content;
   return (
-    <div>
+    <div >
       {data?.visible && (
         <div className="profile_section">
           <div className="profile_heading flex gap-5 items-center">
@@ -374,7 +387,7 @@ export const Template4 = ({ resumeData }) => {
               data={resumeData?.sections?.skills}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
-            
+
           </div>
         </div>
       </div>
