@@ -137,6 +137,19 @@ const Experience = ({ fontStyle, headingColor }) => {
                   className={`${fontStyle.paraFont} break-words text-justify`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3">
+                  {
+                    item?.highlights?.length > 0 &&
+                    <ul className="list-disc">
+                      {
+
+                        item?.highlights?.map((item, key) => {
+                          return <li key={key} className=" break-words text-15px">{item}</li>
+                        })
+                      }
+                    </ul>
+                  }
+                </div>
               </div>
             );
           })}
@@ -291,7 +304,7 @@ const Template9 = () => {
 
   return (
     <>
-      <div className="template_8 max-w-[210mm] max-h-[297mm] w-full h-full">
+      <div className="template_8 min-w-[210mm] min-h-[297mm] ">
         <div
           className="w-full h-full bg-[#E0FBE2]"
         //   style={{
@@ -299,7 +312,7 @@ const Template9 = () => {
         //     backgroundPosition: "top",
         //   }}
         >
-          <div className="top_section flex items-start gap-1 justify-start px-10">
+          <div className="top_section flex items-start gap-1 justify-start px-10 bg-[#E0FBE2]">
             <div className="name_profile">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
