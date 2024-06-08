@@ -150,12 +150,12 @@ const ResumeViewPage = () => {
 
   const checkUserTemplate = async () => {
     const templateType = TempTypes.find(template => template.name === resumeData.metadata.template)
-    setIsLoading(true)
     const temp = resumeData.metadata.template;
     const userHasTemplate = userState.userdata.premiumTemplates.includes(temp)
     if (!userHasTemplate) {
       await handlepayment(templateType.type)
     } else {
+      setIsLoading(true)
       handleDownloadResume()
     }
   };
@@ -479,7 +479,7 @@ const ResumeViewPage = () => {
                 name={data?.metadata?.template}
                 resumeData={data}
               />
-              <div className=" text-center bottom-2 right-5 text-gray-500">
+              <div className=" text-center  text-gray-500">
                 <p>@Career Genies Hub</p>
               </div>
             </div>
@@ -510,7 +510,6 @@ const ResumeViewPage = () => {
                   >
                     <GetTemplate
                       name={data?.metadata?.template}
-                      resumeData={data}
                     />
                     <div className="bg-white text-gray-500">
                       <p className="text-sm">@Career Genies Hub</p>

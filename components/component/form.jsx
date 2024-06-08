@@ -37,6 +37,8 @@ import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "../ui/textarea";
 
+const ImageTemplates = ['Template1', "Template3"]
+
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
   const resumeData = useResumeStore(state => state.resume)
@@ -488,10 +490,10 @@ export default function Form() {
           </div>
         )}
         <div className="lg:px-10 px-5">
-          <div className="w-full">
+          {ImageTemplates.includes(data.metadata.template) && <div className="w-full ">
             <Label>Avatar</Label>
             <ImageUpload />
-          </div>
+          </div>}
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
               <Label htmlFor="name">Name</Label>

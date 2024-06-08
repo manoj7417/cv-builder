@@ -295,7 +295,7 @@ const Template1 = () => {
     <>
       <div className="resume_wrapper flex bg-white p-3 mx-auto h-min-[297mm] w-min-[210mm]">
         <div
-          className="resume_left w-[35%]"
+          className="resume_left w-[35%] min-h-[1123px]"
           style={{
             backgroundColor: metadata?.theme?.primary,
           }}
