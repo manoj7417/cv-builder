@@ -6,10 +6,10 @@ import { FaCamera } from 'react-icons/fa';
 import { useResumeStore } from '@/app/store/ResumeStore';
 
 function ImageUpload() {
-    const resumeData = useResumeStore((state) => state.resumeData)
+    const resumeData = useResumeStore((state) => state.resume.data)
     const setResumeData = useResumeStore((state) => state.setResumeData)
     const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
-    const [avatarURL, setAvatarURL] = useState(defaultImage);
+    const [avatarURL, setAvatarURL] = useState(resumeData?.basics?.picture?.url || defaultImage);
     const [isUploading, setIsUploading] = useState(false)
 
     const fileUploadRef = useRef();
