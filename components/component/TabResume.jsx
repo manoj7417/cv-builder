@@ -109,9 +109,9 @@ export default function TabResume(){
         </div>
 
         <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
-          <div className="grid grid-cols-2 place-items-center">
+          <div className="grid grid-cols-2 place-items-around items-center">
             <div className="tabs_main">
-              <TabsList className="mb-4 flex w-full justify-start flex-wrap py-10 h-auto">
+              <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
                 {TabsHeader?.map((item, index) => (
                   <TabsTrigger value={item?.name} key={index}>
                     <div className="tabs_header flex gap-2 items-center justify-start">
@@ -125,7 +125,7 @@ export default function TabResume(){
             <div className="tabs_content">
               {TabsHeader?.map((item, index) => (
                 <TabsContent value={item?.name} key={index}>
-                  <div className="group relative">
+                  <div className="flex justify-end">
                     <Tilt options={defaultOptions} style={{ height: 500, width: 350 }}>
                       <Image
                         src={item.src}
