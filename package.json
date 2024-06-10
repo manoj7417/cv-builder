@@ -63,6 +63,7 @@
     "react-lottie": "^1.2.4",
     "react-pdftotext": "^1.2.0",
     "react-quill": "^2.0.0",
+    "react-tilt": "^1.0.2",
     "react-toastify": "^10.0.5",
     "react-zoom-pan-pinch": "^3.4.4",
     "tailwind-merge": "^2.3.0",
