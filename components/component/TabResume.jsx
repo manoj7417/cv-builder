@@ -470,7 +470,7 @@ const TabResume = () => {
               </div>
               <div className="tabs_content">
                 {TabsHeader?.map((item, index) => (
-                  <TabsContent value={item?.name} key={index}>
+                  <TabsContent value={item?.name} key={index}
                     <div className="group relative">
                       <Tilt
                         options={defaultOptions}
