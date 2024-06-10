@@ -102,6 +102,19 @@ const Experience = ({ fontStyle }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3">
+                  {
+                    item?.highlights?.length > 0 &&
+                    <ul className="list-disc">
+                      {
+
+                        item?.highlights?.map((item, key) => {
+                          return <li key={key} className=" break-words text-15px">{item}</li>
+                        })
+                      }
+                    </ul>
+                  }
+                </div>
               </div>
             );
           })}
@@ -224,6 +237,7 @@ const Profile = ({ fontStyle }) => {
 
 export const Template3 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
+  const data = useResumeStore(state => state.resume.data)
   const basics = useResumeStore((state) => state.resume.data.basics);
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",

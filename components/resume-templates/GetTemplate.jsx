@@ -10,31 +10,31 @@ import Template7 from "./Template7";
 import Template8 from "./Template8";
 import Template9 from "./Template9";
 
-export const GetTemplate = ({ name, resumeData }) => {
+export const GetTemplate = ({ name }) => {
   switch (name) {
     case "Template1":
-      return <Template1 resumeData={resumeData} />;
+      return <Template1  />;
     case "Template2":
-      return <Template2 resumeData={resumeData} />;
+      return <Template2  />;
     case "Template3":
-      return <Template3 resumeData={resumeData} />;
+      return <Template3  />;
     case "Template4":
-      return <Template4 resumeData={resumeData} />;
+      return <Template4  />;
     case "Template5":
-      return <Template5 resumeData={resumeData} />;
+      return <Template5  />;
     case "Template6":
-      return <Template6 resumeData={resumeData} />;
+      return <Template6  />;
     case "Template7":
-      return <Template7 resumeData={resumeData} />;
+      return <Template7  />;
     case "Template8":
-      return <Template8 resumeData={resumeData} />;
+      return <Template8  />;
     case "Template9":
-      return <Template9 resumeData={resumeData} />;
+      return <Template9  />;
     case "Template10":
       return <Template10 resumeData={resumeData} />;
       case "Template11":
       return <Template11 resumeData={resumeData} />;
     default:
-      return <Template1 resumeData={resumeData} />;
+      return <Template1  />;
   }
 };

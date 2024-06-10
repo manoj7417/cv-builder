@@ -6,11 +6,13 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import { useResumeStore } from "@/app/store/ResumeStore";
 
-const Education = ({ fontStyle, data, headingColor }) => {
+const Education = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.education)
   return (
     <div className="education_section py-3">
-      {data.visible && data?.items?.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <>
           <h2
             className={`${fontStyle.headingFont} font-semibold uppercase underline underline-offset-8`}
@@ -76,7 +78,8 @@ const Education = ({ fontStyle, data, headingColor }) => {
   );
 };
 
-const Experience = ({ fontStyle, data, headingColor }) => {
+const Experience = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.experience)
   return (
     <div className="experience_section my-2">
       {data?.visible && data?.items?.length > 0 && (
@@ -136,6 +139,19 @@ const Experience = ({ fontStyle, data, headingColor }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3">
+                  {
+                    item?.highlights?.length > 0 &&
+                    <ul className="list-disc">
+                      {
+
+                        item?.highlights?.map((item, key) => {
+                          return <li key={key} className=" break-words text-15px">{item}</li>
+                        })
+                      }
+                    </ul>
+                  }
+                </div>
               </div>
             );
           })}
@@ -145,7 +161,8 @@ const Experience = ({ fontStyle, data, headingColor }) => {
   );
 };
 
-const Projects = ({ fontStyle, data, headingColor }) => {
+const Projects = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.projects)
   return (
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
@@ -210,10 +227,11 @@ const Projects = ({ fontStyle, data, headingColor }) => {
   );
 };
 
-const Skills = ({ fontStyle, data, headingColor }) => {
+const Skills = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.skills)
   return (
     <div>
-      {data.visible && data.items.length > 0 && (
+      {data?.visible && data?.items.length > 0 && (
         <div className="skills_section py-3 ">
           <h2
             className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase underline underline-offset-8`}
@@ -229,7 +247,7 @@ const Skills = ({ fontStyle, data, headingColor }) => {
               className="list-disc pl-5 text-slate-400 flex flex-wrap gap-10"
               style={{ color: headingColor }}
             >
-              {data.items.map((item, i) => {
+              {data?.items.map((item, i) => {
                 return (
                   <li
                     className={`font-bold text-gray-600 py-2 ${fontStyle.skillsFont}`}
@@ -247,10 +265,11 @@ const Skills = ({ fontStyle, data, headingColor }) => {
   );
 };
 
-const Profile = ({ data, fontStyle, headingColor }) => {
-  const htmlContent = data.content;
+const Profile = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.summary)
+  const htmlContent = data?.content;
   return (
-    <div>
+    <div >
       {data?.visible && (
         <div className="profile_section">
           <div className="profile_heading flex gap-5 items-center">
@@ -273,7 +292,8 @@ const Profile = ({ data, fontStyle, headingColor }) => {
   );
 };
 
-export const Template4 = ({ resumeData }) => {
+export const Template4 = () => {
+  const resumeData = useResumeStore(state => state?.resume.data);
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
@@ -374,7 +394,7 @@ export const Template4 = ({ resumeData }) => {
               data={resumeData?.sections?.skills}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
-            
+
           </div>
         </div>
       </div>

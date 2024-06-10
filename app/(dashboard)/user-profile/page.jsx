@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import {
+  FaCamera,
   FaFacebook,
   FaGithub,
   FaGlobe,
@@ -168,6 +169,8 @@ const ProfilePage = () => {
   };
 
 
+
+
   return (
     <>
       <section className="bg-gradient-to-r from-white to-[#dcecff] py-20">
@@ -175,28 +178,32 @@ const ProfilePage = () => {
           <form onSubmit={handleSubmit(userProfileHandler)}>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-1/3 mb-4 p-5">
-                <div className="bg-white rounded shadow p-4 text-center border-2">
-                  <img
-                    src={userdata?.profilePicture}
-                    alt="avatar"
-                    className="rounded-full mx-auto mb-4 w-32 h-32 object-cover"
-                  />
-                  {isEditable && (
-                    <div className="image_preview">
-                      {/* <label for="tb-file-upload" className="w-[200px] h-[45px] bg-blue-900 text-white capitalize p-2 mb-2 text-sm cursor-pointer" onClick={handleImageUpload}>Upload Image</label> */}
-                      <button className="border-2">
-
-                      </button>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        ref={fileUploadRef}
-                        onChange={handleImageChange}
-                        className="mx-auto mb-4 hidden"
-                        hidden
-                      />
-                    </div>
-                  )}
+                <div className="bg-white rounded shadow p-4 text-center ">
+                  <div className="border-2 w-30 relative">
+                    <img
+                      src={userdata?.profilePicture}
+                      alt="avatar"
+                      className="rounded-full mx-auto mb-4 w-32 h-32 object-cover"
+                    />
+                    {isEditable && (
+                      <div className="image_preview">
+                        <button
+                          type='submit'
+                          onClick={handleImageUpload}
+                          className='absolute top-0 r-0 w-[100px] h-[100px] flex items-baseline justify-end rounded-full border-2'>
+                          <FaCamera className='bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full absolute top-16' />
+                        </button>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={fileUploadRef}
+                          onChange={handleImageChange}
+                          className="mx-auto mb-4 hidden"
+                          hidden
+                        />
+                      </div>
+                    )}
+                  </div>
                   <h5 className="text-xl font-medium my-3">
                     {userdata?.fullname}
                   </h5>

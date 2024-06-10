@@ -127,6 +127,19 @@ const Experience = ({ fontStyle, headingColor }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3">
+                  {
+                    item?.highlights?.length > 0 &&
+                    <ul className="list-disc">
+                      {
+
+                        item?.highlights?.map((item, key) => {
+                          return <li key={key} className=" break-words text-15px">{item}</li>
+                        })
+                      }
+                    </ul>
+                  }
+                </div>
               </div>
             );
           })}
@@ -196,11 +209,11 @@ const Projects = ({ fontStyle, headingColor }) => {
 
 const Skills = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::",data)
+  console.log("skills data:::", data)
 
 
-   // Define the mapping of skill levels to percentages
-   const levelMapping = {
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
     beginner: 25,
     intermediate: 50,
     advanced: 75,
@@ -230,7 +243,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                     className={`font-bold text-white ${fontStyle.skillsFont} my-1 py-1`}
                     key={i}
                   >
-                   <div className="mb-1">
+                    <div className="mb-1">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-full bg-gray-200 h-2.5">

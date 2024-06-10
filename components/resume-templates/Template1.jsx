@@ -139,6 +139,19 @@ const Experience = ({ fontStyle, colorStyle }) => {
                     className={`py-2 ${fontStyle.paraFont} break-words`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
+                  <div className="px-3">
+                    {
+                      item?.highlights?.length > 0 &&
+                      <ul className="list-disc">
+                        {
+
+                          item?.highlights?.map((item, key) => {
+                            return <li key={key} className=" break-words text-15px">{item}</li>
+                          })
+                        }
+                      </ul>
+                    }
+                  </div>
                 </div>
               </div>
             );
@@ -280,9 +293,9 @@ const Template1 = () => {
 
   return (
     <>
-      <div className="resume_wrapper flex w-[210mm] h-[297mm] bg-white p-3 mx-auto">
+      <div className="resume_wrapper flex bg-white p-3 mx-auto h-min-[297mm] w-min-[210mm]">
         <div
-          className="resume_left w-[35%]"
+          className="resume_left w-[35%] min-h-[1123px]"
           style={{
             backgroundColor: metadata?.theme?.primary,
           }}

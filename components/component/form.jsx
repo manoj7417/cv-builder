@@ -35,6 +35,9 @@ import { MultiStepForm } from "./MultiStepForm";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
+import { Textarea } from "../ui/textarea";
+
+const ImageTemplates = ['Template1', "Template3"]
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
@@ -240,6 +243,21 @@ export default function Form() {
     setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
+  const handleExperienceHighlightsChange = (i, e) => {
+    let val = e.target.value;
+    const highlightsArray = val.split("\n")
+    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          highlights: highlightsArray
+        }
+      }
+      return item;
+    })
+    setResumeData('sections.experience.items', udpatedExperienceItems);
+  }
+
   const handleDeleteExperienceSection = (i) => {
     const udpatedExperienceItems = data.sections.experience.items.filter((el, index) => {
       return index !== i;
@@ -440,42 +458,7 @@ export default function Form() {
     }
   };
 
-  const handlepdfFileChange = (e) => {
-    setIsGeneratingResume(true);
-    if (!resumeData._id) {
-      return setIsGeneratingResume(false)
 
-    }
-    let selectedFile = e.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    reader.onloadend = async () => {
-      pdfToText(selectedFile)
-        .then(async (text) => {
-          await getResumeData(text);
-        })
-        .catch((error) => {
-          console.error("Failed to extract text from pdf");
-          setIsAnalysing(false);
-        });
-    };
-  };
-
-  const getResumeData = async (message) => {
-
-    try {
-      const response = await getBetterResume(message);
-      let value;
-      if (response.status === 200) {
-        value = JSON.parse(response.data[0].text.value);
-        updateBasicAndSectionsData(value.basics, value.sections)
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsGeneratingResume(false);
-    }
-  };
 
   const handleOpenAIDialog = () => {
     setIsDialogOpen(true)
@@ -505,42 +488,12 @@ export default function Form() {
           >
             <NewResumeLoader />
           </div>
-        )} 
-
-        {/* <div className="lg:px-10 px-5 py-5">
-          <div className=" rounded-lg h-24 bg-blue-50 flex items-center justify-around">
-            <div>
-              <img
-                src="https://resume.io/assets/media/target_imaged1c63cc7f36ccc827819.png"
-                alt="image"
-                className="w-40 h-40 object-contain"
-              />
-            </div>
-            <div className="flex items-center md:flex-row flex-col md:gap-2 gap-2">
-              <h1 className="md:text-md text-sm whitespace-nowrap">
-                Compose your CV with the Genie
-              </h1>
-              <div className="flex items-center">
-                <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue ml-3 text-sm">
-                  <span className=" text-sm bg-blue-900 hover:bg-blue-700  rounded-md text-white font-medium p-2">
-                    Upload CV
-                  </span>
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="application/pdf"
-                    onChange={handlepdfFileChange}
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-        </div> */}
+        )}
         <div className="lg:px-10 px-5">
-          <div className="w-full">
+          {ImageTemplates.includes(data.metadata.template) && <div className="w-full ">
             <Label>Avatar</Label>
             <ImageUpload />
-          </div>
+          </div>}
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
               <Label htmlFor="name">Name</Label>
@@ -1025,14 +978,14 @@ export default function Form() {
                                 />
                               </div>
                             </div>
-                            <div className="space-y-2 my-5 px-2">
-                              <Label htmlFor="city">Description</Label>
+                            <div className="space-y-2 mt-5 mb-12 px-2">
+                              <Label >Description</Label>
                               <ReactQuill
                                 id="Profile"
                                 theme="snow"
                                 className="no-scrollbar"
                                 style={{
-                                  height: "200px",
+                                  height: "150px",
                                 }}
                                 placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
                                 value={item.description}
@@ -1040,6 +993,10 @@ export default function Form() {
                                   handleExperienceDescriptionChange(e, index)
                                 }
                               />
+                            </div>
+                            <div className="space-y-2  mt-9 px-2">
+                              <Label >Highlights</Label>
+                              <Textarea value={item.highlights.join("\n")} className="text-10px h-[150px] no-scrollbar" onChange={(e) => handleExperienceHighlightsChange(index, e)} />
                             </div>
                           </div>
                         </AccordionContent>
