@@ -375,12 +375,14 @@ const FeedbackFuction = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="group:">
                     <FeedbackModal
                       showModal={modalsView.relevance}
                       content={content?.relevancy?.pointers}
                       onClick={handleBetterResumeContent}
                       onClose={() => handleModalClose("relevance")}
                     />
+                    </div>
                   </div>
                   <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
                     <div className="px-4 py-5 sm:p-3 sm:px-8">

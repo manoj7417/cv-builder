@@ -45,12 +45,106 @@ import { IoIosStar } from "react-icons/io";
 import { AuthContext } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import ImageCarousel from "./ImageCarousel";
+import { ImSpinner8 } from "react-icons/im";
 
 export const templateType = {
   free: "Free",
   premium: "Premium",
   dummy: "Dummy",
 };
+
+const templatesData = [
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "Template3.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "Template5.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "Template4.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template6",
+    src: "/Template6.png",
+    alt: "Template6.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template7",
+    src: "/Template7.png",
+    alt: "Template7.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template8",
+    src: "/Template8.png",
+    alt: "Template8.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template9",
+    src: "/Template9.png",
+    alt: "Template9.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template3",
+    src: "/10.png",
+    alt: "10.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template3",
+    src: "/11.png",
+    alt: "11.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template3",
+    src: "/resume-temp-example.png",
+    alt: "resume-temp-example.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template3",
+    src: "/3.png",
+    alt: "3.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template3",
+    src: "/4.png",
+    alt: "4.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template3",
+    src: "/5.png",
+    alt: "5.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template3",
+    src: "/6.png",
+    alt: "6.png",
+    type: templateType.dummy,
+  },
+]
 
 const Carousel1 = [
   {
@@ -153,6 +247,7 @@ const Carousel3 = [
 
 export default function Slider() {
   const [userState, setUserState] = useState({});
+  const [loading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
@@ -199,9 +294,50 @@ export default function Slider() {
             </p>
           </div>
         </div> */}
-      </div>
+        <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center h-full">
+           {
+            templatesData?.map((item,index)=>(
+              <div
+              className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
+              key={index}
+            >
+              {item.type === templateType.premium && (
+                <div className="card_box">
+                  <span></span>
+                </div>
+              )}
+              <Image
+                alt={item.alt}
+                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
+                src={item.src}
+                height={150}
+                width={150}
+              />
 
-      <div className="relative w-full">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <Button
+                  className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                  onClick={() => handleCreateCV(image.name)}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <ImSpinner8 className=" animate-spin mr-2" />
+                      Loading
+                    </>
+                  ) : (
+                    "Try Now"
+                  )}
+                </Button>
+              </div>
+            </div>
+            ))
+           }
+      </div>
+      </div>
+      
+
+      {/* <div className="relative w-full">
         <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>
           <CarouselContent>
             <ImageCarousel data={Carousel1} userState={userState} />
@@ -215,7 +351,7 @@ export default function Slider() {
             <ChevronRightIcon className="h-6 w-6" />
           </CarouselNext>
         </Carousel>
-      </div>
+      </div> */}
     </div>
   );
 }

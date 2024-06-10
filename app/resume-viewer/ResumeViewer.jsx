@@ -91,6 +91,12 @@ const images = [
     src: "/Template10.png",
     alt: "Template10.png",
     type: templateType.premium
+  },
+  {
+    name: "Template11",
+    src: "/Template11.png",
+    alt: "Template11.png",
+    type: templateType.premium
   }
 ]
 
@@ -149,11 +155,12 @@ const ResumeViewPage = () => {
   };
 
   const checkUserTemplate = async () => {
-    const templateType = TempTypes.find(template => template.name === resumeData.metadata.template)
-    const temp = resumeData.metadata.template;
-    const userHasTemplate = userState.userdata.premiumTemplates.includes(temp)
+    const templateType = TempTypes.find(template => template?.name === resumeData?.metadata?.template)
+    setIsLoading(true)
+    const temp = resumeData?.metadata?.template;
+    const userHasTemplate = userState?.userdata?.premiumTemplates?.includes(temp)
     if (!userHasTemplate) {
-      await handlepayment(templateType.type)
+      await handlepayment(templateType?.type)
     } else {
       setIsLoading(true)
       handleDownloadResume()

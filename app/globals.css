@@ -643,4 +643,30 @@ footer a:hover svg {
 }
 
 
+
+
+@layer utilities {
+	.clip-semi-arc {
+		background-color: white; /* just for visualization */
+		clip-path: ellipse(50% 100% at 50% 100%);
+	}
+  }
 /* Font According to Templates */
+
+
+/* Floating Button CSS Starts Here */
+.floating_button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 11;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.floating_button.hidden {
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Floating Button CSS Ends Here */

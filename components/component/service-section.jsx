@@ -5,6 +5,7 @@ import { GiMagicLamp } from "react-icons/gi";
 import { FiBox } from "react-icons/fi";
 
 export function ServiceSection() {
+  
   return (
     <div className="flex flex-col min-h-[100dvh] ">
       <main className="flex-1">
