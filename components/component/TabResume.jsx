@@ -1,11 +1,9 @@
 import React from "react";
-import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
+// import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import {
-  FaBorderAll,
-  FaPencilRuler,
+  // FaPencilRuler,
   FaRegFolderOpen,
   FaStore,
-  FaUserCog,
   FaDatabase,
   FaLaptop,
   FaPalette,
@@ -15,9 +13,11 @@ import {
 import { Tilt } from "react-tilt";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { FaCogs, FaUsersCog } from "react-icons/fa";
+import { FaCogs, FaPencilRuler, FaUsersCog } from "react-icons/fa";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "../ui/tabs";
 
-const TabResume = () => {
+export default function TabResume(){
+  
   const TabsHeader = [
     {
       id: 1,
@@ -153,4 +153,3 @@ const TabResume = () => {
 );
 };
 
-export default TabResume;
