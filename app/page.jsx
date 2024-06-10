@@ -29,8 +29,8 @@ export default function Home() {
       ) : (
         <>
           {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-          {/* <HomepageNew/> */}
-          <Homepage />
+          <HomepageNew/>
+          {/* <Homepage /> */}
           <Footer />
         </>
       )}
