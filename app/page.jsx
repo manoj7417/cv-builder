@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useState, useEffect, useContext } from "react";
 import Homepage from "./components/Homepage";
+import HomepageNew from "./components/HomepageNew";
 import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
@@ -28,6 +29,7 @@ export default function Home() {
       ) : (
         <>
           {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+          {/* <HomepageNew/> */}
           <Homepage />
           <Footer />
         </>

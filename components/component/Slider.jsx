@@ -162,12 +162,15 @@ export default function Slider() {
     }
   }, []);
   return (
-    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-r from-[white] to-[#dcecff]">
+    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 ">
       <div className="container mx-auto mb-10 ">
-        <h2 className="mb-8 text-3xl font-semibold tracking-tight text-center md:text-4xl">
-          Curating CVs that Reflect Perfection
+        <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
+          Curating CVs that Reflect 
+          <br/>
+          <span className="flex text-[#2C98CA] text-5xl justify-center">Perfection
+            <Image src="/Vector.svg" height={37} width={39} /> </span>
         </h2>
-        <p className="text-center max-w-3xl mx-auto">
+        <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">
           Explore unlimited possibilities with the power of a perfectly crafted
           CV by creating one that aligns with your Professional Profile,
           employing our customised Curriculum Vitae templates. If you already
@@ -175,7 +178,7 @@ export default function Slider() {
           Tracking Score) optimized CV with structured formatting.
         </p>
 
-        <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
+        {/* <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
           <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
             <FaUserCog className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2 " />
 
@@ -195,7 +198,7 @@ export default function Slider() {
               Build a CV with Personalized Suggestions
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="relative w-full">
