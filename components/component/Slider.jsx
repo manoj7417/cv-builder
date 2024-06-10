@@ -260,8 +260,8 @@ export default function Slider() {
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 ">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
-          Curating CVs that Reflect 
-          <br/>
+          Curating CVs that Reflect
+          <br />
           <span className="flex text-[#2C98CA] text-5xl justify-center">Perfection
             <Image src="/Vector.svg" height={37} width={39} /> </span>
         </h2>
@@ -295,47 +295,47 @@ export default function Slider() {
           </div>
         </div> */}
         <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center h-full">
-           {
-            templatesData?.map((item,index)=>(
+          {
+            templatesData?.map((item, index) => (
               <div
-              className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
-              key={index}
-            >
-              {item.type === templateType.premium && (
-                <div className="card_box">
-                  <span></span>
-                </div>
-              )}
-              <Image
-                alt={item.alt}
-                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
-                src={item.src}
-                height={150}
-                width={150}
-              />
+                className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
+                key={index}
+              >
+                {item.type === templateType.premium && (
+                  <div className="card_box">
+                    <span></span>
+                  </div>
+                )}
+                <Image
+                  alt={item.alt}
+                  className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
+                  src={item.src}
+                  height={150}
+                  width={150}
+                />
 
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <Button
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                  onClick={() => handleCreateCV(image.name)}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <ImSpinner8 className=" animate-spin mr-2" />
-                      Loading
-                    </>
-                  ) : (
-                    "Try Now"
-                  )}
-                </Button>
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <Button
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                    onClick={() => handleCreateCV(image.name)}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <ImSpinner8 className=" animate-spin mr-2" />
+                        Loading
+                      </>
+                    ) : (
+                      "Try Now"
+                    )}
+                  </Button>
+                </div>
               </div>
-            </div>
             ))
-           }
+          }
+        </div>
       </div>
-      </div>
-      
+
 
       {/* <div className="relative w-full">
         <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>
