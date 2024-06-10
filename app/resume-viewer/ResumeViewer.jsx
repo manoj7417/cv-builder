@@ -24,7 +24,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { BsFullscreen } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
-import { useResumeStore } from "../store/ResumeStore";
+import { useResumeStore, useTemporalResumeStore } from "../store/ResumeStore";
 import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { templateType } from "@/components/component/Slider";
@@ -114,6 +114,15 @@ const ResumeViewPage = () => {
   const resumeData = useResumeStore(state => state.resume.data)
   const [funfact, setFunFact] = useState(funfacts[randomNumber])
   const [animation, setAnimation] = useState(Loaders[randomAnimation])
+  const { undo, redo, canUndo, canRedo } = useTemporalResumeStore(
+    (state) => ({
+      undo: state.undo,
+      redo: state.redo,
+      canUndo: state.canUndo,
+      canRedo: state.canRedo,
+    })
+  );
+
   const handleLogout = async () => {
     await RemoveTokens()
     toast.success("User logout successfully", {
@@ -337,6 +346,12 @@ const ResumeViewPage = () => {
                 <BsFullscreen className="h-4 w-4 text-white mr-2" />
                 <span>Full Screen</span>
               </button>
+              <Button disabled={!canRedo} onClick={redo}>
+                Redo
+              </Button>
+              <Button onClick={undo} disabled={!canUndo}>
+                Undo
+              </Button>
               {/* <Controls /> */}
               <div className="tools">
                 <button

@@ -13,6 +13,9 @@ import { useUserStore } from "@/app/store/UserStore";
 import { useForm } from "react-hook-form";
 import { uploadProfilePicture } from "@/app/pages/api/api";
 import { GetTokens } from "@/app/actions";
+import { Button } from "@/components/ui/button";
+import { FaRegEdit } from "react-icons/fa";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip'
 
 const socialIcons = {
   FaFacebook,
@@ -119,32 +122,19 @@ const ProfilePage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      userProfile: userData?.userProfile,
       fullName: userdata?.fullname,
-      email: userdata?.email,
       occupation: userdata?.occupation,
       address: userdata?.address,
-      socialLinks: userData?.socialLinks.map((link) => ({
+      links: userData?.links?.map((link) => ({
         name: link.name,
         url: link.url,
-      })),
-      templates: {
-        free: userData?.templates?.free.map((template) => ({
-          id: template.id,
-          name: template.name,
-          images: template.images,
-        })),
-        premium: userData?.templates.premium.map((template) => ({
-          id: template.id,
-          name: template.name,
-          images: template.images,
-        })),
-      },
+      }))
     },
   });
 
   const userProfileHandler = (data) => {
-    setIsEditable(true);
+    console.log(data)
+    setIsEditable(false);
   };
 
   const handleImageChange = async (e) => {
@@ -179,19 +169,19 @@ const ProfilePage = () => {
             <div className="flex flex-wrap">
               <div className="w-full lg:w-1/3 mb-4 p-5">
                 <div className="bg-white rounded shadow p-4 text-center ">
-                  <div className="border-2 w-30 relative">
+                  <div className="w-30 flex items-center justify-center relative">
                     <img
                       src={userdata?.profilePicture}
                       alt="avatar"
                       className="rounded-full mx-auto mb-4 w-32 h-32 object-cover"
                     />
                     {isEditable && (
-                      <div className="image_preview">
+                      <div className="image_preview h-40 flex item-center justify-center absolute top-0">
                         <button
-                          type='submit'
+                          type='button'
                           onClick={handleImageUpload}
-                          className='absolute top-0 r-0 w-[100px] h-[100px] flex items-baseline justify-end rounded-full border-2'>
-                          <FaCamera className='bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full absolute top-16' />
+                          className='w-32 h-32 flex items-baseline justify-end rounded-full border-2 relative'>
+                          <FaCamera className='bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full absolute top-20' />
                         </button>
                         <input
                           type="file"
@@ -202,7 +192,8 @@ const ProfilePage = () => {
                           hidden
                         />
                       </div>
-                    )}
+                    )
+                    }
                   </div>
                   <h5 className="text-xl font-medium my-3">
                     {userdata?.fullname}
@@ -216,7 +207,7 @@ const ProfilePage = () => {
                 </div>
                 <div className="bg-white rounded shadow p-0 mt-4">
                   <ul className="divide-y divide-gray-200">
-                    {userData?.socialLinks.map((link, index) =>
+                    {userData?.links?.map((link, index) =>
                       isEditable ? (
                         <SocialLinkInput
                           key={link.name}
@@ -239,8 +230,33 @@ const ProfilePage = () => {
                 </div>
               </div>
               <div className="w-full lg:w-2/3 p-5">
+
                 <div className="bg-gray-50 rounded shadow mb-4 p-4">
+                  <div className="flex items-center justify-end">
+                    {isEditable ?
+                      (
+                        <Button
+                          type="submit"
+                          className="bg-green-500 text-white py-2 px-4 rounded"
+                        >
+                          Save
+                        </Button>
+                      ) :
+                      (
+                        <TooltipProvider delayDuration={0}>
+                          <Tooltip>
+                            <TooltipTrigger >
+                              <FaRegEdit onClick={() => setIsEditable(true)} className="text-2xl text-blue-900 cursor-pointer" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="bg-white py-2 px-5 border-1 shadow-lg rounded">Edit</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                  </div>
                   <div className="flex flex-wrap items-center my-3">
+
                     <div className="w-full sm:w-1/3">
                       <p className="font-semibold text-base">Full Name</p>
                     </div>
@@ -269,17 +285,8 @@ const ProfilePage = () => {
                     <div className="w-full sm:w-2/3">
                       {/* <p className="text-gray-500">example@example.com</p> */}
                       <div className="mt-2">
-                        {isEditable ? (
-                          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset sm:max-w-md">
-                            <input
-                              type="text"
-                              {...register("email")}
-                              className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                            />
-                          </div>
-                        ) : (
-                          <p className="text-gray-500">{userdata?.email}</p>
-                        )}
+                        <p className="text-gray-500">{userdata?.email}</p>
+
                       </div>
                     </div>
                   </div>
@@ -332,67 +339,8 @@ const ProfilePage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <div className="w-full md:w-1/2 mb-4">
-                    <div className="bg-white rounded shadow p-4">
-                      <p className="mb-4 text-black font-semibold italic">
-                        My Free Templates
-                      </p>
-                      <div className="grid grid-cols-2 place-items-center gap-5">
-                        {userData.templates.free.map((template) => (
-                          <div key={template.id} className="image_section_1">
-                            <Image
-                              src={template.images}
-                              alt={template.name}
-                              className="cursor-pointer hover:border-sky-700 hover:border-2"
-                              width={100}
-                              height={100}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-full md:w-1/2 mb-4">
-                    <div className="bg-white rounded shadow p-4">
-                      <p className="mb-4 text-black font-semibold italic">
-                        My Premium Templates
-                      </p>
-                      <div className="grid grid-cols-2 place-items-center gap-5">
-                        {userData.templates.premium.map((template) => (
-                          <div key={template.id} className="image_section_1">
-                            <Image
-                              src={template.images}
-                              alt={template.name}
-                              className="cursor-pointer hover:border-sky-700 hover:border-2"
-                              width={100}
-                              height={100}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-start">
-                  {!isEditable ? (
-                    <button
-                      type="button"
-                      onClick={() => setIsEditable(true)}
-                      className="bg-blue-500 text-white py-2 px-4 rounded"
-                    >
-                      Edit
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setIsEditable(false)}
-                      className="bg-green-500 text-white py-2 px-4 rounded"
-                    >
-                      Save
-                    </button>
-                  )}
-                </div>
+
+
               </div>
             </div>
           </form>
