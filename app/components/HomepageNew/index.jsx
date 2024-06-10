@@ -111,17 +111,19 @@ export default function HomepageNew() {
               </Tilt>
             </div>
             {showFloatingButton && (
-              <div className="floating_button flex justify-center text-center w-full">
-                <button className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%]">
-                  Get Started
-                </button>
+              <div className="floating_wrapper">
+                <div className="floating_button flex justify-center text-center w-full mx-auto">
+                  <button className="px-10 py-3 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[15%]">
+                    Get Started
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
         <div></div>
       </section>
-      {/* <Slider /> */}
+      <Slider />
       <TabResume />
       <ServiceSection />
     </>
