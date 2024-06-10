@@ -9,7 +9,7 @@ export function ServiceSection() {
   return (
     <div className="flex flex-col min-h-[100dvh] ">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff]  scroll-mt-20">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff]  scroll-mt-20">
           <div className=" px-4 md:px-6 mb-10">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -117,7 +117,7 @@ export function ServiceSection() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2"></div>
             </div>
-            {/* <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
               <div className="lg:w-[550px] w-full h-auto shadow-lg rounded-md pr-10">
                 <video
                   width="1000"
@@ -185,9 +185,9 @@ export function ServiceSection() {
                   </button>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
-        </section>
+        </section> */}
 
         <section
           className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-gray-100 to-[#cad7e8]"

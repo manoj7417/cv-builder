@@ -25,6 +25,7 @@ function ImageCarousel({ data }) {
   const createResume = useUserStore((state) => state.createResume);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
+  
   const handleCreateCV = async (template) => {
     const { accessToken } = await GetTokens();
 
