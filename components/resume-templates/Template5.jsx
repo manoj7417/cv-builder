@@ -306,15 +306,6 @@ export const Template5 = () => {
             <div className="resume_detailed_section col-span-9">
               <div>
                 <div className="top_section flex items-start gap-5">
-                  {resumeData?.basics?.picture?.url && (
-                    <div className="profile_pic mt-2">
-                      <img
-                        src={resumeData?.basics?.picture?.url}
-                        alt="pic"
-                        className="w-24 h-24 rounded-full object-cover"
-                      />
-                    </div>
-                  )}
                   <div className="name_profile h-full">
                     <h1
                       className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}

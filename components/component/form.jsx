@@ -37,11 +37,12 @@ import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "../ui/textarea";
 
-const ImageTemplates = ['Template1', "Template3"]
+const ImageTemplates = ['Template1', "Template3", 'Template10']
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
   const resumeData = useResumeStore(state => state.resume)
+  console.log(resumeData)
   const setResumeData = useResumeStore((state) => state.
     setResumeData)
   const updateBasicAndSectionsData = useResumeStore((state) => state.updateBasicAndSectionsData)
@@ -471,6 +472,7 @@ export default function Form() {
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
+      console.log(state)
       updateResume(state.resume._id, state.resume)
     })
     return unsubs;
@@ -996,7 +998,7 @@ export default function Form() {
                             </div>
                             <div className="space-y-2  mt-9 px-2">
                               <Label >Highlights</Label>
-                              <Textarea value={item.highlights.join("\n")} className="text-10px h-[150px] no-scrollbar" onChange={(e) => handleExperienceHighlightsChange(index, e)} />
+                              <Textarea value={item?.highlights?.join("\n") || []} className="text-10px h-[150px] no-scrollbar" onChange={(e) => handleExperienceHighlightsChange(index, e)} />
                             </div>
                           </div>
                         </AccordionContent>

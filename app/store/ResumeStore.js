@@ -4,7 +4,14 @@ import _set from "lodash.set";
 import { resumeSchema } from '@/lib/schema/resume/resume'
 import { debouncedUpdateResume } from '../services/resume/update';
 import { devtools, persist } from 'zustand/middleware'
-const myMiddlewares = (f) => devtools(persist(f, { name: 'resume' }))
+import { temporal, TemporalState } from "zundo";
+const myMiddlewares = (f) =>
+    devtools(
+        persist(
+            temporal(f),
+            { name: 'resume' }
+        )
+    );
 
 export const useResumeStore = create(myMiddlewares((set) => ({
     resume: resumeSchema,
