@@ -411,9 +411,11 @@ const TabResume = () => {
               <div className="tabs_main flex flex-col">
                 <TabsList className="mb-4 flex w-full justify-center flex-wrap py-10 h-auto">
                   {TabsHeader?.map((item, index) => (
-                    <TabsTrigger value={item?.name}>
+                    <TabsTrigger value={item?.name} key={index}>
+                      <div className="tabs_header flex gap-5 items-center justify-start">
                       {item?.icon}
                       {item?.name}
+                      </div>
                     </TabsTrigger>
                   ))}
                   <TabsTrigger value="all">
