@@ -29,6 +29,15 @@ import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import { templateType } from "@/components/component/Slider";
 import { tempType, TempTypes } from "@/lib/templateTypes/TempTypes";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { ImSpinner3 } from "react-icons/im";
+import Lottie from "lottie-react";
+import animation from '@/public/animations/downloadLoader1.json';
+import { funfacts } from '@/constants/funfacts'
 
 const images = [
   {
@@ -101,7 +110,7 @@ const ResumeViewPage = () => {
   const logoutUser = useUserStore(state => state.logoutUser);
   const { userState } = useUserStore(state => state);
   const resumeData = useResumeStore(state => state.resume.data)
-
+  const [funfact, setFunFact] = useState(funfacts[0])
   const handleLogout = async () => {
     await RemoveTokens()
     toast.success("User logout successfully", {
@@ -116,10 +125,6 @@ const ResumeViewPage = () => {
       setIsToggleOpen(false);
     }
   };
-
-  //payment gateway use this function whever you want to do the payment
-
-
 
   const handlepayment = async (type) => {
     const { accessToken } = await GetTokens();
@@ -160,9 +165,11 @@ const ResumeViewPage = () => {
       html: resume,
     };
     setIsLoading(true);
+
     try {
       const response = await printResume(body);
       if (response.ok) {
+        generateFunfact()
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -268,11 +275,44 @@ const ResumeViewPage = () => {
     updateScale();
   };
 
+  const generateFunfact = () => {
+    const randomNumber = Math.floor(Math.random() * 9);
+    const newFuncfact = funfacts[randomNumber]
+    setFunFact(state => newFuncfact)
+  }
+
 
 
   return (
     <>
       <div className="flex justify-center items-center w-full ">
+        {
+          isLoading && <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
+            <DialogContent className="sm:max-w-[525px]" onClick={() => setIsLoading(false)} >
+              <DialogHeader>
+                <DialogTitle className="flex text-gray-500">Did You Know?</DialogTitle>
+                {/* <DialogTitle className="flex text-gray-500"><ImSpinner3 className="mr-1 animate-spin" /> Downloading ...</DialogTitle> */}
+                <DialogDescription>
+                  {funfact}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="w-[300px] mx-auto">
+                <Lottie animationData={animation} />
+              </div>
+              <div className="w-full flex items-center justify-center">
+                <div className="flex item-center">
+                  <div className="flex items-center justify-center">
+                    <ImSpinner3 className="mr-1 animate-spin text-xl" />
+                  </div>
+                  <p >
+                    Downloading ...
+                  </p>
+                </div>
+              </div>
+
+            </DialogContent>
+          </Dialog>
+        }
         <div>
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
@@ -318,9 +358,7 @@ const ResumeViewPage = () => {
                 onClick={checkUserTemplate}
                 disabled={isLoading}
               >
-                {isLoading && (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                )}
+
                 Download PDF
                 <FaCrown className="ml-1 text-yellow-300" />
               </button>

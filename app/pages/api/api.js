@@ -117,7 +117,7 @@ export const generateResumeOnFeeback = async (message, token) => {
       headers: {
         'Authorization': `Bearer ${token}`
       }
-    })
+    })  
     return response;
   } catch (error) {
     console.error("Error generating feedback:", error.response || error);
@@ -214,5 +214,19 @@ export const PurchaseTokens = async (token) => {
     return response
   } catch (error) {
     throw error
+  }
+}
+
+export const uploadProfilePicture = async (formdata, token) => {
+  try {
+    const response = await instance.post('/user/upload/profile', formdata, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response;
+  } catch (error) {
+    throw error;
   }
 }

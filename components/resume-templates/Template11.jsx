@@ -16,7 +16,7 @@ const Education = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="education_header flex items-center gap-3">
-            <FaGraduationCap className="text-blue-600 text-3xl" />
+            <FaGraduationCap className="text-sky-600 text-3xl" />
             <h2
               className={`font-semibold uppercase ${fontStyle.headingFont}`}
               style={{
@@ -25,7 +25,7 @@ const Education = ({ fontStyle, headingColor }) => {
             >
               {data?.name}
             </h2>
-            <div className="border border-blue-600 w-full"></div>
+            <div className="border border-sky-600 w-full"></div>
           </div>
           <div className="text-gray-800 px-5">
             {data?.items?.map((item, index) => {
@@ -81,18 +81,18 @@ const Experience = ({ fontStyle, headingColor }) => {
     <div className="experience_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-            <div className="experience_header flex items-center gap-3">
-              <FaComputer className="text-blue-600 text-3xl" />
-              <h2
-                className={`font-semibold uppercase ${fontStyle.headingFont}`}
-                style={{
-                  color: headingColor,
-                }}
-              >
-                {data?.name}
-              </h2>
-              <div className="border border-blue-600 w-full"></div>
-            </div>
+          <div className="experience_header flex items-center gap-3">
+            <FaComputer className="text-sky-600 text-3xl" />
+            <h2
+              className={`font-semibold uppercase ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+              }}
+            >
+              {data?.name}
+            </h2>
+            <div className="border border-sky-600 w-full"></div>
+          </div>
           {data?.items?.map((item, index) => {
             return (
               <div className="experience_1 w-full p-5" key={index}>
@@ -147,7 +147,7 @@ const Projects = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items.length > 0 && (
         <>
           <div className="project_heading w-full flex gap-3 items-center">
-            <MdOutlineSettings className="text-blue-600 text-3xl" />
+            <MdOutlineSettings className="text-sky-600 text-3xl" />
             <h2
               className={`font-semibold uppercase ${fontStyle.headingFont}`}
               style={{
@@ -156,7 +156,7 @@ const Projects = ({ fontStyle, headingColor }) => {
             >
               {data?.name}
             </h2>
-            <div className="border border-blue-600 w-full"></div>
+            <div className="border border-sky-600 w-full"></div>
           </div>
           {data?.items.map((item, index) => {
             return (
@@ -216,10 +216,10 @@ const Skills = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section py-3">
           <h2
-            className={`text-white border-4 border-blue-600 font-semibold text-center p-1 uppercase ${fontStyle.headingFont}`}
+            className={`bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 font-medium my-2 uppercase text-2xl ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
-              paddingBottom: "0.25rem", // Space for the underline
+              paddingBottom: "1rem", // Space for the underline
             }}
           >
             {data?.name}
@@ -238,7 +238,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-sky-400 h-2.5"
+                        className="bg-gradient-to-r from-cyan-400 to-blue-600 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -261,7 +261,7 @@ const Profile = ({ fontStyle, headingColor }) => {
       {data?.visible && (
         <div className="profile_section w-full">
           <div className="profile_heading w-full flex gap-3 items-center">
-            <FaUserAlt className="text-blue-600 text-2xl" />
+            <FaUserAlt className="text-sky-600 text-2xl" />
             <h2
               className={`font-semibold uppercase ${fontStyle.headingFont}`}
               style={{
@@ -316,7 +316,7 @@ const Template11 = () => {
               </div>
               <div className="contact_details p-5">
                 <div className="contact_section">
-                  <h2 className="text-white border-4 border-blue-600 p-1 text-2xl text-center uppercase font-semibold my-4">
+                  <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 text-2xl uppercase font-medium my-2">
                     Contact Me
                   </h2>
                   <div className="contact_details flex">
@@ -362,10 +362,10 @@ const Template11 = () => {
               </div>
             </div>
             <div className="right_section w-[65%]">
-            <div className="bg-blue-700">
+              <div className="bg-gradient-to-t from-cyan-800 to-blue-800">
                 <div className="user-detail p-10">
                   <h2 className="text-4xl uppercase font-medium text-white">
-                  {basics?.name}
+                    {basics?.name}
                   </h2>
                   <h4 className="text-base text-white">{basics?.jobtitle}</h4>
                 </div>
