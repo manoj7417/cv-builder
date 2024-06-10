@@ -46,6 +46,11 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import ImageCarousel from "./ImageCarousel";
 import { ImSpinner8 } from "react-icons/im";
+import { GetTokens } from "@/app/actions";
+import { createNewResume } from "@/app/pages/api/api";
+import { useRouter } from "next/navigation";
+import { useResumeStore } from "@/app/store/ResumeStore";
+import { useUserStore } from "@/app/store/UserStore";
 
 export const templateType = {
   free: "Free",
@@ -146,116 +151,149 @@ const templatesData = [
   },
 ]
 
-const Carousel1 = [
-  {
-    name: "Template3",
-    src: "/Template3.png",
-    alt: "Template3.png",
-    type: templateType.free,
-  },
-  {
-    name: "Template5",
-    src: "/Template5.png",
-    alt: "Template5.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template4",
-    src: "/Template4.png",
-    alt: "Template4.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template6",
-    src: "/Template6.png",
-    alt: "Template6.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template1",
-    src: "/Template1.png",
-    alt: "Template1.png",
-    type: templateType.premium,
-  },
-];
 
-const Carousel2 = [
-  {
-    name: "Template7",
-    src: "/Template7.png",
-    alt: "Template7.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template8",
-    src: "/Template8.png",
-    alt: "Template8.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template9",
-    src: "/Template9.png",
-    alt: "Template9.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template3",
-    src: "/10.png",
-    alt: "10.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/11.png",
-    alt: "11.png",
-    type: templateType.dummy,
-  },
-];
 
-const Carousel3 = [
-  {
-    name: "Template3",
-    src: "/resume-temp-example.png",
-    alt: "resume-temp-example.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/3.png",
-    alt: "3.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/4.png",
-    alt: "4.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/5.png",
-    alt: "5.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/6.png",
-    alt: "6.png",
-    type: templateType.dummy,
-  },
-];
+
+// const Carousel1 = [
+//   {
+//     name: "Template3",
+//     src: "/Template3.png",
+//     alt: "Template3.png",
+//     type: templateType.free,
+//   },
+//   {
+//     name: "Template5",
+//     src: "/Template5.png",
+//     alt: "Template5.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template4",
+//     src: "/Template4.png",
+//     alt: "Template4.png",
+//     type: templateType.premium,
+//   },
+//   {
+//     name: "Template6",
+//     src: "/Template6.png",
+//     alt: "Template6.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template1",
+//     src: "/Template1.png",
+//     alt: "Template1.png",
+//     type: templateType.premium,
+//   },
+// ];
+
+// const Carousel2 = [
+//   {
+//     name: "Template7",
+//     src: "/Template7.png",
+//     alt: "Template7.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template8",
+//     src: "/Template8.png",
+//     alt: "Template8.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template9",
+//     src: "/Template9.png",
+//     alt: "Template9.png",
+//     type: templateType.premium,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/10.png",
+//     alt: "10.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/11.png",
+//     alt: "11.png",
+//     type: templateType.dummy,
+//   },
+// ];
+
+// const Carousel3 = [
+//   {
+//     name: "Template3",
+//     src: "/resume-temp-example.png",
+//     alt: "resume-temp-example.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/3.png",
+//     alt: "3.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/4.png",
+//     alt: "4.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/5.png",
+//     alt: "5.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/6.png",
+//     alt: "6.png",
+//     type: templateType.dummy,
+//   },
+// ];
 
 export default function Slider() {
   const [userState, setUserState] = useState({});
   const [loading, setIsLoading] = useState(false);
+  const createResume = useUserStore((state) => state.createResume);
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
+  const router = useRouter();
+
+
+  const handleCreateCV = async (template) => {
+    const { accessToken } = await GetTokens();
+  
+    if (!accessToken) {
+      toast("Please login to use this template");
+      router.push("/login");
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await createNewResume(accessToken.value, template);
+      if (response.data.data) {
+        createResume(response.data.data);
+        replaceResumeData(response.data.data);
+        router.push("/builder");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
-
     if (user) {
       setUserState(user.userdata);
     }
   }, []);
+
+
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 ">
       <div className="container mx-auto mb-10 ">
