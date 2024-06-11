@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import NewNavbar from "../../ui/newNav";
 import Slider from "../../../components/component/Slider";
@@ -80,6 +81,10 @@ export default function HomepageNew() {
               height={100}
               alt="arrowright"
               className="absolute top-[20%] left-0"
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
             />
             <Image
               src={"/arrowleft.png"}
@@ -87,6 +92,10 @@ export default function HomepageNew() {
               height={100}
               alt="arrowright"
               className="absolute top-[30%] right-0"
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
             />
             <div className="space-y-2 mx-auto">
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
@@ -122,6 +131,10 @@ export default function HomepageNew() {
                   src="/btn-arrow.svg"
                   width={42}
                   height={42}
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                  }}
                 />
               </div>
             </div>
@@ -130,7 +143,13 @@ export default function HomepageNew() {
                 options={defaultOptions}
                 style={{ height: 700, width: 1200 }}
               >
-                <Image src="/banner-img-2.png" height={700} width={1200} />
+                <Image
+                  src="/banner-img-2.png"
+                  height={700}
+                  width={1200}
+                  className="w-full h-auto"
+                  alt="banner-image"
+                />
               </Tilt>
             </div>
             {showFloatingButton && (
@@ -147,29 +166,12 @@ export default function HomepageNew() {
         </div>
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
-        {/* <Drawer className="w-full">
-          <DrawerTrigger>Open</DrawerTrigger>
-          <DrawerContent className="w-full h-[400px]">
-            <DrawerHeader>
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-              <DrawerDescription>
-                This action cannot be undone.
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer> */}
       </section>
       <Slider />
       <TabResume />
       <WorkTogether />
       <FAQSection />
-      {/* <ServiceSection /> */}
+      <ServiceSection />
     </>
   );
 }

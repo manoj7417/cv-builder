@@ -74,30 +74,30 @@ export default function NewResumeHeader() {
                     )}
                   </DisclosureButton>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start h-full">
+                  <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/gch_logo.png"}
-                        width={30}
-                        height={30}
+                        src={"/latestLogo1.png"}
+                        width={100}
+                        height={100}
                         alt="newlogo"
-                        className="w-50 h-auto object-contain"
+                        className="h-auto object-contain"
                       />
-                      <span className="text-black font-bold md:text-2xl text-sm">
+                      {/* <span className="text-black font-bold md:text-2xl text-sm">
                         Genies Career Hub
-                      </span>
+                      </span> */}
                     </a>
                   </div>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
+                  <div className="hidden sm:ml-6 sm:block h-full">
+                    <div className="flex items-center space-x-4 h-full">
                       {navigation.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? "text-black" : "text-black",
-                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-medium"
+                            item.current ? "text-blue-900" : "text-blue-900",
+                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-semibold"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
