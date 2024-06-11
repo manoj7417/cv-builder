@@ -121,7 +121,7 @@ export default function HomepageNew() {
         </div>
         <div></div>
       </section>
-      {/* <Slider /> */}
+      <Slider />
       <TabResume />
       <ServiceSection />
     </>
