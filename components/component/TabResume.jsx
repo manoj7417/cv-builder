@@ -464,7 +464,6 @@ const TabResume = () => {
               Profile, employing our customised Curriculum Vitae templates.
             </p>
           </div>
-
           <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
             <div className="grid grid-cols-2 place-items-center">
               <div className="tabs_main">
@@ -480,6 +479,10 @@ const TabResume = () => {
                 </TabsList>
               </div>
               <div className="tabs_content">
+        <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
+          <div className="grid grid-cols-2 place-items-around items-center">
+            <div className="tabs_main">
+              <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
                 {TabsHeader?.map((item, index) => (
                   <TabsContent value={item?.name} key={index}>
                     <div className="group relative">
@@ -508,6 +511,8 @@ const TabResume = () => {
             </div>
           </Tabs>
         </div>
+          </div>
+        </Tabs>
       </div>
     </>
   );
