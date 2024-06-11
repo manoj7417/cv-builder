@@ -33,7 +33,7 @@ const TabsMain = () => {
     const { accessToken } = await GetTokens()
     try {
       const response = await getUserResumes(accessToken.value)
-      if (response?.data?.data) {
+      if (response?.data) {
         setResumes(response.data.data)
       }
     } catch (error) {
@@ -48,6 +48,7 @@ const TabsMain = () => {
     setisCreatingResume(true)
     try {
       const response = await createNewResume(accessToken?.value, "Template3")
+      console.log(response.data)
       if (response.data.data) {
         createResume(response.data.data)
         replaceResumeData(response.data.data)

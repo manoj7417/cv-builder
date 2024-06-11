@@ -260,8 +260,8 @@ export default function Slider() {
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 ">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
-          Curating CVs that Reflect 
-          <br/>
+          Curating CVs that Reflect
+          <br />
           <span className="flex text-[#2C98CA] text-5xl justify-center">Perfection
             <Image src="/Vector.svg" height={37} width={39} /> </span>
         </h2>
@@ -295,8 +295,8 @@ export default function Slider() {
           </div>
         </div> */}
         <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center h-full">
-           {
-            templatesData?.map((item,index)=>(
+          {
+            templatesData?.map((item, index) => (
               <div
               className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
               key={index}
@@ -332,10 +332,10 @@ export default function Slider() {
               </div>
             </div>
             ))
-           }
+          }
+        </div>
       </div>
-      </div>
-      
+
 
       {/* <div className="relative w-full">
         <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>

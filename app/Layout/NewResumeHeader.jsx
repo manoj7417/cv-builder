@@ -12,7 +12,7 @@ import { RemoveTokens } from "../actions";
 import { FaUserLarge } from "react-icons/fa6";
 
 const navigation = [
-  { name: "CV Curator", href: "/builder", current: true },
+  { name: "CV Curator", href: "/resume-dashboard", current: true },
   {
     name: "Resume Analyser",
     href: "/resumeAnalyzer-dashboard",
