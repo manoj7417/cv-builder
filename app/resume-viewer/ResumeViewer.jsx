@@ -353,12 +353,6 @@ const ResumeViewPage = () => {
                 <BsFullscreen className="h-4 w-4 text-white mr-2" />
                 <span>Full Screen</span>
               </button>
-              <Button disabled={!canRedo} onClick={redo}>
-                Redo
-              </Button>
-              <Button onClick={undo} disabled={!canUndo}>
-                Undo
-              </Button>
               {/* <Controls /> */}
               <div className="tools">
                 <button

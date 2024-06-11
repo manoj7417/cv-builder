@@ -93,6 +93,31 @@ export default function TabResume() {
     easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
   };
 
+  const handleCreateNewCV = async (name) => {
+    const { data } = JobResumeSchema.find(job => job.name === name)
+    if (!data) return;
+    setIsLoading(true)
+    const { accessToken } = await GetTokens()
+    if (!accessToken.value) {
+      setIsLoading(false)
+      toast("Please login to use this job resume")
+      router.push('/login')
+      return;
+    }
+    try {
+      const response = await createNewJobProfileResume(accessToken.value, data)
+      if (response.status === 201) {
+        replaceResumeData(response.data.data)
+        router.push('/builder')
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+
+  }
+
   return (
     <>
       <div className="bg-gradient-to-b from-white to-[#2C98CA33]">
