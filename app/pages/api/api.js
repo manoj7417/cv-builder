@@ -117,7 +117,7 @@ export const generateResumeOnFeeback = async (message, token) => {
       headers: {
         'Authorization': `Bearer ${token}`
       }
-    })  
+    })
     return response;
   } catch (error) {
     console.error("Error generating feedback:", error.response || error);
@@ -227,6 +227,20 @@ export const uploadProfilePicture = async (formdata, token) => {
     })
     return response;
   } catch (error) {
+    throw error;
+  }
+}
+
+export const createNewJobProfileResume = async (token, resumeData) => {
+  try {
+    const response = await instance.post("/resume/jobResume", { data: resumeData }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("Error creating job resume", error.response || error);
     throw error;
   }
 }
