@@ -479,40 +479,42 @@ const TabResume = () => {
                 </TabsList>
               </div>
               <div className="tabs_content">
-        <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
-          <div className="grid grid-cols-2 place-items-around items-center">
-            <div className="tabs_main">
-              <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
-                {TabsHeader?.map((item, index) => (
-                  <TabsContent value={item?.name} key={index}>
-                    <div className="group relative">
-                      <Tilt options={defaultOptions} style={{ height: 500, width: 350 }}>
-                        <Image
-                          src={item.src}
-                          key={index}
-                          width={400}
-                          height={400}
-                          alt={item.name}
-                          className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          <Button className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]" disabled={isLoading} onClick={() => handleCreateNewCV(item.name)}>
-                            {
-                              isLoading ? "Loading..." :
-                                "Try Now"
-                            }
-                          </Button>
-                        </div>
-                      </Tilt>
+                <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
+                  <div className="grid grid-cols-2 place-items-around items-center">
+                    <div className="tabs_main">
+                      <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
+                        {TabsHeader?.map((item, index) => (
+                          <TabsContent value={item?.name} key={index}>
+                            <div className="group relative">
+                              <Tilt options={defaultOptions} style={{ height: 500, width: 350 }}>
+                                <Image
+                                  src={item.src}
+                                  key={index}
+                                  width={400}
+                                  height={400}
+                                  alt={item.name}
+                                  className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                  <Button className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]" disabled={isLoading} onClick={() => handleCreateNewCV(item.name)}>
+                                    {
+                                      isLoading ? "Loading..." :
+                                        "Try Now"
+                                    }
+                                  </Button>
+                                </div>
+                              </Tilt>
+                            </div>
+                          </TabsContent>
+                        ))}
+                      </TabsList>
                     </div>
-                  </TabsContent>
-                ))}
+                  </div>
+                </Tabs>
               </div>
             </div>
           </Tabs>
         </div>
-          </div>
-        </Tabs>
       </div>
     </>
   );
