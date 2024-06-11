@@ -681,3 +681,53 @@ footer a:hover svg {
 }
 
 /* Floating Button CSS Ends Here */
+
+
+
+/* Course Slider CSS Starts Here  */
+.steps_slider {
+  position: relative;
+}
+
+.steps_slider .mySwiper .swiper-pagination {
+  position: absolute;
+  top: 0; /* Adjust this value as needed */
+  left: 0;
+  /* transform: translateX(-50%); */
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+}
+
+.steps_slider .swiper-pagination-bullet {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 14px;
+  color: #000;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.steps_slider .swiper-pagination-bullet-active {
+  color: #fff;
+  background: #08305c;
+}
+
+
+
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
+}
+
+
+.separator {
+  width: 1px;
+  height: 100%;
+  background-color: #ccc; /* Adjust color as needed */
+  margin-left: 20px; /* Adjust margin as needed */
+}
+
+/* Course Slider CSS Ends Here  */

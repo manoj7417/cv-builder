@@ -15,9 +15,9 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { FaCogs, FaPencilRuler, FaUsersCog } from "react-icons/fa";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "../ui/tabs";
+import CourseSlider from "./CourseSlider";
 
-export default function TabResume(){
-  
+export default function TabResume() {
   const TabsHeader = [
     {
       id: 1,
@@ -95,61 +95,78 @@ export default function TabResume(){
 
   return (
     <>
-  <div className="bg-gradient-to-b from-white to-[#2C98CA33]">
-      <div className="rounded-t-xl p-6 shadow-xl">
-        <div className="tabs_heading">
-          <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
-            Discover CV that fits your job role
-          </h2>
-          <p className="w-1/2 mx-auto text-center my-4">
-            Explore unlimited possibilities with the power of a perfectly
-            crafted CV by creating one that aligns with your Professional
-            Profile, employing our customised Curriculum Vitae templates.
-          </p>
-        </div>
-
-        <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
-          <div className="grid grid-cols-2 place-items-around items-center">
-            <div className="tabs_main">
-              <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
-                {TabsHeader?.map((item, index) => (
-                  <TabsTrigger value={item?.name} key={index}>
-                    <div className="tabs_header flex gap-2 items-center justify-start">
-                      {item?.icon}
-                      {item?.name}
-                    </div>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </div>
-            <div className="tabs_content">
-              {TabsHeader?.map((item, index) => (
-                <TabsContent value={item?.name} key={index}>
-                  <div className="flex justify-end">
-                    <Tilt options={defaultOptions} style={{ height: 500, width: 350 }}>
-                      <Image
-                        src={item.src}
-                        key={index}
-                        width={400}
-                        height={400}
-                        alt={item.name}
-                        className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <Button className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]">
-                          Try Now
-                        </Button>
-                      </div>
-                    </Tilt>
-                  </div>
-                </TabsContent>
-              ))}
-            </div>
+      <div className="bg-gradient-to-b from-white to-[#2C98CA33]">
+        <div className="rounded-t-xl p-6 shadow-xl">
+          <div className="tabs_heading">
+            <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
+              Discover CV that fits your job role
+            </h2>
+            <p className="w-1/2 mx-auto text-center my-4">
+              Explore unlimited possibilities with the power of a perfectly
+              crafted CV by creating one that aligns with your Professional
+              Profile, employing our customised Curriculum Vitae templates.
+            </p>
           </div>
-        </Tabs>
+          <Tabs
+            className="max-w-5xl mx-auto py-5"
+            defaultValue="Business Analyst"
+          >
+            <div className="grid grid-cols-2 place-items-around items-center">
+              <div className="tabs_main">
+                <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
+                  {TabsHeader?.map((item, index) => (
+                    <TabsTrigger value={item?.name} key={index}>
+                      <div className="tabs_header flex gap-2 items-center justify-start">
+                        {item?.icon}
+                        {item?.name}
+                      </div>
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
+              <div className="tabs_content">
+                {TabsHeader?.map((item, index) => (
+                  <TabsContent value={item?.name} key={index}>
+                    <div className="flex justify-end">
+                      <Tilt
+                        options={defaultOptions}
+                        style={{ height: 500, width: 350 }}
+                      >
+                        <Image
+                          src={item.src}
+                          key={index}
+                          width={400}
+                          height={400}
+                          alt={item.name}
+                          className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <Button className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]">
+                            Try Now
+                          </Button>
+                        </div>
+                      </Tilt>
+                    </div>
+                  </TabsContent>
+                ))}
+              </div>
+            </div>
+          </Tabs>
+        </div>
       </div>
-    </div>
-  </>
-);
-};
-
+      <section className="grid grid-cols-2 py-20">
+        <div className="discover_image">
+          <Image
+            src={"/discover.png"}
+            width={600}
+            height={600}
+            alt="discover"
+          />
+        </div>
+        <div className="mt-20">
+          <CourseSlider/>
+        </div>
+      </section>
+    </>
+  );
+}

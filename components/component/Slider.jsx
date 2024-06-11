@@ -149,6 +149,42 @@ const templatesData = [
     alt: "6.png",
     type: templateType.dummy,
   },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "Template3.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "Template5.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "Template4.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template6",
+    src: "/Template6.png",
+    alt: "Template6.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template7",
+    src: "/Template7.png",
+    alt: "Template7.png",
+    type: templateType.dummy,
+  }
 ]
 
 
@@ -352,7 +388,7 @@ export default function Slider() {
                 width={128}
               />
 
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-50">
                 <Button
                   className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
                   onClick={() => handleCreateCV(item.name)}
