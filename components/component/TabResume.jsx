@@ -427,6 +427,7 @@ const TabResume = () => {
 
   const handleCreateNewCV = async (name) => {
     const { data } = JobResumeSchema.find(job => job.name === name)
+    if (!data) return;
     setIsLoading(true)
     const { accessToken } = await GetTokens()
     if (!accessToken.value) {
