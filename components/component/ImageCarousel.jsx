@@ -25,7 +25,7 @@ function ImageCarousel({ data }) {
   const createResume = useUserStore((state) => state.createResume);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
-  
+
   const handleCreateCV = async (template) => {
     const { accessToken } = await GetTokens();
 
@@ -49,6 +49,7 @@ function ImageCarousel({ data }) {
       setIsLoading(false);
     }
   };
+  
   return (
     <CarouselItem>
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 p-4 pt-14">

@@ -8,10 +8,33 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Tilt } from "react-tilt";
 import TabResume from "@/components/component/TabResume";
+import FAQSection from "@/components/component/FAQSection";
+import WorkTogether from "@/components/component/WorkTogether";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import GetStartedModal from "@/components/component/GetStartedModal";
 
 export default function HomepageNew() {
   const [hovered, setHovered] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const handleScroll = () => {
     if (window.scrollY > 300) {
@@ -112,7 +135,10 @@ export default function HomepageNew() {
             </div>
             {showFloatingButton && (
               <div className="floating_button flex justify-center text-center w-full">
-                <button className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%]">
+                <button
+                  className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%]"
+                  onClick={handleButtonClick}
+                >
                   Get Started
                 </button>
               </div>
@@ -120,10 +146,30 @@ export default function HomepageNew() {
           </div>
         </div>
         <div></div>
+        {showModal && <GetStartedModal onClose={handleCloseModal} />}
+        {/* <Drawer className="w-full">
+          <DrawerTrigger>Open</DrawerTrigger>
+          <DrawerContent className="w-full h-[400px]">
+            <DrawerHeader>
+              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+              <DrawerDescription>
+                This action cannot be undone.
+              </DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <Button>Submit</Button>
+              <DrawerClose>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer> */}
       </section>
       <Slider />
       <TabResume />
-      <ServiceSection />
+      <WorkTogether />
+      <FAQSection />
+      {/* <ServiceSection /> */}
     </>
   );
 }
