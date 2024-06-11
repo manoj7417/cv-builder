@@ -121,7 +121,7 @@ export default function TabResume() {
   return (
     <>
       <div className="bg-gradient-to-b from-white to-[#2C98CA33]">
-        <div className="rounded-t-xl p-6 shadow-xl">
+        <div className="rounded-t-xl p-6">
           <div className="tabs_heading">
             <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
               Discover CV that fits your job role
@@ -152,15 +152,15 @@ export default function TabResume() {
               <div className="tabs_content">
                 {TabsHeader?.map((item, index) => (
                   <TabsContent value={item?.name} key={index}>
-                    <div className="flex justify-end">
+                    <div className="flex justify-center">
                       <Tilt
                         options={defaultOptions}
-                        style={{ height: 500, width: 350 }}
+                        style={{ height: 700, width: 800 }}
                       >
                         <Image
                           src={item.src}
                           key={index}
-                          width={400}
+                          width={800}
                           height={400}
                           alt={item.name}
                           className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
