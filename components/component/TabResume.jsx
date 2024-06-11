@@ -22,10 +22,11 @@ import { useUserStore } from "@/app/store/UserStore";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
 import { GetTokens } from "@/app/actions";
+import { createNewJobProfileResume } from "@/app/pages/api/api";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
-  const createResume = useUserStore((state) => state.createResume);
+  // const createResume = useUserStore((state) => state.createResume);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
 
