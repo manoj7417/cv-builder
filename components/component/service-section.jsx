@@ -216,7 +216,7 @@ export function ServiceSection() {
             </div>
           </div>
         </section> */}
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff] scroll-mt-20">
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-t from-white to-[#2C98CA33] scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">

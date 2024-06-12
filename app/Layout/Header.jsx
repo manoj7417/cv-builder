@@ -72,7 +72,7 @@ const Header = () => {
                 width={100}
                 height={100}
                 alt="newlogo"
-                className="w-auto h-full object-contain"
+                className="h-auto object-contain"
               />
             </a>
           </div>

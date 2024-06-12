@@ -90,7 +90,7 @@ export default function NewResumeHeader() {
                     </a>
                   </div>
                   <div className="hidden sm:ml-6 sm:block h-full">
-                    <div className="flex items-center space-x-4 h-full">
+                    <div className="flex justify-center items-center space-x-4 h-full">
                       {navigation.map((item) => (
                         <a
                           key={item.name}
