@@ -202,16 +202,19 @@ export default function TabResume() {
         </div>
       </div>
       <section className="grid grid-cols-2 py-20">
-        <div className="discover_image">
+        <div className="discover_image flex align-middle overflow-hidden ">
           <Image
-            src={"/discover.png"}
-            width={600}
-            height={600}
+            src={"/home-creative-down.png"}
+            width={2000}
+            height={1500}
             alt="discover"
             loading="lazy"
+            style={{
+              marginLeft: "-150px",
+            }}
           />
         </div>
-        <div className="mt-20">
+        <div className="my-auto">
           <CourseSlider />
         </div>
       </section>
