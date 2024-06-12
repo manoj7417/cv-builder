@@ -9,7 +9,7 @@ import SearchBar from "../ui/Searchbar";
 import { RiAiGenerate } from "react-icons/ri";
 import TabMenu from "../ui/TabMenu";
 import { Dialog } from "@radix-ui/react-dialog";
-import { DialogContent,  } from "@/components/ui/dialog";
+import { DialogContent, } from "@/components/ui/dialog";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { FaWpforms } from "react-icons/fa";
 import JobMultistepForm from "@/components/component/JobMultistepForm";
@@ -162,6 +162,9 @@ export default function Home() {
   const fetchBetterResume = async (message) => {
     message = message + `generate resume for this ${jobRole}`
     const { accessToken } = await GetTokens()
+    if (!accessToken ) {
+      router.push('/login')
+    }
     try {
       const response = await generateResumeOnFeeback(message, accessToken.value);
       if (response.status === 201) {
@@ -257,7 +260,7 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <Dialog open={showMultiStepDialog}>
-            <JobMultistepForm showMultiStepDialog={showMultiStepDialog} onClick={handleCloseMultistepForm} steps={steps} setSteps={setSteps} formData={formData} setFormData={setFormData} jobRole={jobRole}/>
+            <JobMultistepForm showMultiStepDialog={showMultiStepDialog} onClick={handleCloseMultistepForm} steps={steps} setSteps={setSteps} formData={formData} setFormData={setFormData} jobRole={jobRole} />
           </Dialog>
           <Dialog open={generatingResume}>
             <DialogContent onClick showCloseButton>
