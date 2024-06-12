@@ -159,12 +159,9 @@ export default function Home() {
     inputRef.current.click()
   }
 
-  const fetchBetterResume = async (message) => {
+  const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`
-    const { accessToken } = await GetTokens()
-    if (!accessToken ) {
-      router.push('/login')
-    }
+
     try {
       const response = await generateResumeOnFeeback(message, accessToken.value);
       if (response.status === 201) {
@@ -189,14 +186,18 @@ export default function Home() {
           return;
         }
         setIsGeneratingResume(true)
-        const { data, userData } = await fetchBetterResume(text);
+        const { accessToken } = await GetTokens()
+        if (!accessToken) {
+          router.push('/login?redirect=/jobCV')
+          return;
+        }
+        const { data, userData } = await fetchBetterResume(text, accessToken);
         if (data) {
           replaceResumeData(data)
           updateUserData(userData)
           router.push("/builder");
         }
       } catch (error) {
-        console.log(error)
         toast.error("Unable to generate your CV");
       } finally {
         setIsGeneratingResume(false)
