@@ -43,7 +43,7 @@
    }
 
    .get_start_btn>div.btn_overlay {
-       background: #ededed;
+       background: #fff;
        width: 45px;
        height: calc(100% - 2px);
        display: flex;
