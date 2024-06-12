@@ -426,7 +426,7 @@ const Header = () => {
               </div> */}
               <div className="auths_button ml-2">
                 <button
-                  className="border-2 text-blue-950 border-gray-500 text-base hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 " 
+                  className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 " 
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>

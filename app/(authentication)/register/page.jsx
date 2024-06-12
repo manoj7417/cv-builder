@@ -49,7 +49,9 @@ export default function Register() {
               <h3 className="text-4xl font-bold text-white">
                 Approach your Dream Profession with <br />
                 <Link href={"/"}>
-                  <span className="bg-gradient-to-r from-blue-600 via-green-200 to-indigo-400 inline-block text-transparent bg-clip-text">Genies Career Hub!</span>
+                  <span className="bg-gradient-to-r from-blue-600 via-green-200 to-indigo-400 inline-block text-transparent bg-clip-text">
+                    Genies Career Hub!
+                  </span>
                 </Link>
               </h3>
               <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
@@ -242,6 +244,24 @@ export default function Register() {
                     </div>
                   </div>
                 </div>
+                <div className="field field-checkbox flex items-center">
+                  <input
+                    id="checkbox"
+                    type="checkbox"
+                    name="checkbox"
+                    className="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <label
+                    htmlFor="checkbox"
+                    className="ml-2 text-sm text-gray-700"
+                  >
+                    <p>
+                    By signing up you are agreeing to our 
+                      <a href="#" className="text-blue-900  underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</a>
+                    </p>
+                  </label>
+                </div>
+
                 <div>
                   <button
                     type="submit"

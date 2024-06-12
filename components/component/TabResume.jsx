@@ -174,11 +174,7 @@ export default function TabResume() {
                           width={800}
                           height={400}
                           alt={item.name}
-                          style={{
-                            width: "auto",
-                            height: "auto",
-                          }}
-                          className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
+                          className="rounded-md bg-gradient-to-t from-[#8181b9] to-[#dcecff] p-4"
                         />
                         <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                           <Button
@@ -212,7 +208,7 @@ export default function TabResume() {
             width={2000}
             height={1500}
             alt="discover"
-            className=""
+            loading="lazy"
             style={{
               marginLeft: "-150px",
             }}

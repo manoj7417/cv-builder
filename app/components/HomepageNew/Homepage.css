@@ -32,6 +32,11 @@
        text-align: center;
    }
 
+   .floating{
+       width: 180px;
+       font-size: 15px;
+   }
+
    .get_start_btn>span.btn_text {
        color: white;
        width: 100%;
@@ -58,10 +63,14 @@
        transition: all 400ms ease;
    }
 
+   .floating>div.btn_overlay{
+    width: 40px;
+   }
+
    .get_start_btn:hover>span.btn_text,
    .get_start_btn:focus>span.btn_text {
        color: #242424;
-       font-weight: 600;
+       font-weight: 500;
    }
 
    .get_start_btn:hover>div.btn_overlay,
