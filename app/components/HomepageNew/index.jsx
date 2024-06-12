@@ -80,22 +80,14 @@ export default function HomepageNew() {
               width={100}
               height={100}
               alt="arrowright"
-              className="absolute top-[20%] left-0"
-              style={{
-                width: "auto",
-                height: "auto",
-              }}
+              className="absolute top-[20%] left-0 w-auto h-full"
             />
             <Image
               src={"/arrowleft.png"}
               width={100}
               height={100}
               alt="arrowright"
-              className="absolute top-[30%] right-0"
-              style={{
-                width: "auto",
-                height: "auto",
-              }}
+              className="absolute top-[30%] right-0 w-auto h-full"
             />
             <div className="space-y-2 mx-auto">
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
@@ -127,14 +119,10 @@ export default function HomepageNew() {
               <div className="flex text-lg lh-lg items-center text-white rounded-full bg-[#2C98CA] pl-5 pr-1 py-1 mt-8 mb-10">
                 GET STARTED
                 <Image
-                  className="ml-2"
+                  className="ml-2 w-auto h-full"
                   src="/btn-arrow.svg"
                   width={42}
                   height={42}
-                  style={{
-                    width: "auto",
-                    height: "auto",
-                  }}
                 />
               </div>
             </div>
@@ -147,7 +135,7 @@ export default function HomepageNew() {
                   src="/banner-img-2.png"
                   height={700}
                   width={1200}
-                  className="w-full h-auto"
+                  className="w-auto h-full"
                   alt="banner-image"
                 />
               </Tilt>

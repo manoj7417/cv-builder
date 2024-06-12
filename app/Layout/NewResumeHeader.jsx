@@ -78,11 +78,11 @@ export default function NewResumeHeader() {
                   <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/latestLogo1.png"}
+                        src={"/latestLogorm.png"}
                         width={100}
                         height={100}
                         alt="newlogo"
-                        className="h-auto object-contain"
+                        className="w-auto h-full object-contain"
                       />
                       {/* <span className="text-black font-bold md:text-2xl text-sm">
                         Genies Career Hub
