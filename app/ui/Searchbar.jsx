@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-const SearchBar = ({ options }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchBar = ({ options, setJobRole, jobRole }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    setSearchTerm(value);
+    setJobRole(value);
     if (value) {
       const filtered = options.filter(option =>
         option.toLowerCase().includes(value.toLowerCase())
@@ -18,7 +17,7 @@ const SearchBar = ({ options }) => {
   };
 
   const handleOptionClick = (option) => {
-    setSearchTerm(option);
+    setJobRole(option);
     setFilteredOptions([]);
   };
 
@@ -26,7 +25,7 @@ const SearchBar = ({ options }) => {
     <div className="relative">
       <input
         type="text"
-        value={searchTerm}
+        value={jobRole}
         onChange={handleInputChange}
         className="p-2 border rounded w-full text-gray-500"
         placeholder="Keyword / Job Title / Job Role"
