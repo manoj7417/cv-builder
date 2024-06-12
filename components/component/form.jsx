@@ -42,7 +42,6 @@ const ImageTemplates = ['Template1', "Template3", 'Template10']
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
   const resumeData = useResumeStore(state => state.resume)
-  console.log(resumeData)
   const setResumeData = useResumeStore((state) => state.
     setResumeData)
   const updateBasicAndSectionsData = useResumeStore((state) => state.updateBasicAndSectionsData)
