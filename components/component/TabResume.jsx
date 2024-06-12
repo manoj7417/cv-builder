@@ -430,6 +430,7 @@ const TabResume = () => {
     if (!data) return;
     setIsLoading(true)
     const { accessToken } = await GetTokens()
+    console.log(accessToken)
     if (!accessToken.value) {
       setIsLoading(false)
       toast("Please login to use this job resume")

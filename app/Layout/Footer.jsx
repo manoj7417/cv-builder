@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <>
       <footer
-        className="bg-[#fafbfd] z-50 relative"
+        className="bg-[#fafbfd] z-20 relative"
         // style={{
         //   backgroundImage: "url('/banner-bg.svg')",
         //   backgroundPosition: "center",

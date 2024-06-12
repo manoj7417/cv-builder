@@ -121,7 +121,7 @@ export const generateResumeOnFeeback = async (message, token) => {
     return response;
   } catch (error) {
     console.error("Error generating feedback:", error.response || error);
-    return error
+    throw error
   }
 }
 
