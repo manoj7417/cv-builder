@@ -30,6 +30,10 @@ const PaymentSuccess = () => {
 
   const purchaseTokens = async () => {
     const { accessToken } = await GetTokens()
+    if(!accessToken ) {
+      router.push('/login')
+      return;
+    }
     try {
       const response = await PurchaseTokens(accessToken.value)
       if (response.status === 200) {
