@@ -110,7 +110,7 @@ export default function TabResume() {
     if (!data) return;
     setIsLoading(true);
     const { accessToken } = await GetTokens();
-    if (!accessToken.value) {
+    if (!accessToken) {
       setIsLoading(false);
       toast("Please login to use this job resume");
       router.push("/login");
