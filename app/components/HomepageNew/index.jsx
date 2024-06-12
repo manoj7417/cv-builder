@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import GetStartedModal from "@/components/component/GetStartedModal";
+import "./Homepage.css";
 
 export default function HomepageNew() {
   const [hovered, setHovered] = useState(false);
@@ -116,7 +117,7 @@ export default function HomepageNew() {
               </p>
             </div>
             <div className="flex lg:flex-row justify-center  flex-col gap-2 min-[400px]:flex-row ">
-              <div className="flex text-lg lh-lg items-center text-white rounded-full bg-[#2C98CA] pl-5 pr-1 py-1 mt-8 mb-10">
+              {/* <div className="flex text-lg lh-lg items-center text-white rounded-full bg-[#2C98CA] pl-5 pr-1 py-1 mt-8 mb-10">
                 GET STARTED
                 <Image
                   className="ml-2 w-auto h-full"
@@ -124,6 +125,28 @@ export default function HomepageNew() {
                   width={42}
                   height={42}
                 />
+              </div> */}
+              <div className="button_wrapper mt-8 mb-10">
+                <button className="get_start_btn">
+                  <span className="btn_text">Get Started</span>
+                  <div className="btn_overlay">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
               </div>
             </div>
             <div className="flex justify-center">
@@ -142,12 +165,34 @@ export default function HomepageNew() {
             </div>
             {showFloatingButton && (
               <div className="floating_button flex justify-center text-center w-full">
-                <button
+                {/* <button
                   className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%] z-50"
                   onClick={handleButtonClick}
                 >
                   Get Started
+                </button> */}
+                <div className="button_wrapper mt-8 mb-10">
+                <button className="get_start_btn"  onClick={handleButtonClick}>
+                  <span className="btn_text">Get Started</span>
+                  <div className="btn_overlay">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
                 </button>
+              </div>
               </div>
             )}
           </div>
