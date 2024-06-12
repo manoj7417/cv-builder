@@ -97,8 +97,8 @@ export default function NewResumeHeader() {
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? "text-blue-900" : "text-blue-900",
-                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-semibold"
+                            item.current ? "text-blue-950" : "text-blue-950",
+                            "rounded-md px-3 py-2 text-base flex items-center justify-center"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >

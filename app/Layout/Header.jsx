@@ -85,7 +85,7 @@ const Header = () => {
             {/* Resume Navs  */}
             <li>
               <a href="#" className="desktop-item hover:font-bold text-blue-950 text-base">
-                Cv Studio
+                CV Studio
                 <IoIosArrowDown className="inline ml-1" />
               </a>
 
@@ -93,7 +93,7 @@ const Header = () => {
               <label htmlFor="resume" className="mobile-item">
                 CV
               </label>
-              <div className="mega-box">
+              {/* <div className="mega-box">
                 <div className="content">
                   <div className="row">
                     <header>CV Templates</header>
@@ -212,7 +212,7 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </li>
             {/* Cover Letter  */}
             {/* <li>
@@ -319,14 +319,14 @@ const Header = () => {
             {/* Career  */}
             <li>
               <a href="#" className="desktop-item hover:font-bold text-blue-950 text-base">
-                Career Coaching
+                CV Analyzer
                 <IoIosArrowDown className="inline ml-1" />
               </a>
               <input type="checkbox" id="career" />
               <label htmlFor="career" className="mobile-item">
                 Career
               </label>
-              <div className="mega-box">
+              {/* <div className="mega-box">
                 <div className="content">
                   <div className="row">
                     <header>Career Coaching Services</header>
@@ -398,17 +398,21 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </li>
             
+            
+            {/* FeedBack  */}
+            <li>
+              <a className="hover:font-bold text-blue-950 text-base" href="#">Job-Fit CV</a>
+            </li>
+            <li>
+              <a className="hover:font-bold text-blue-950 text-base" href="#">Career Coaching</a>
+            </li>
             <li>
               <a className=" text-blue-950 text-base hover:font-bold" href="https://www.careergenies.co.uk/blog" target="_blank">
                 Blog
               </a>
-            </li>
-            {/* FeedBack  */}
-            <li>
-              <a className="hover:font-bold text-blue-950 text-base" href="#">Feedback</a>
             </li>
             {/* Auth buttons  */}
             
