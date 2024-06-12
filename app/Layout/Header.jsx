@@ -60,7 +60,7 @@ const Header = () => {
       suppressHydrationWarning
     >
       <nav
-        className={`mobile_responsive_nav ${
+        className={`py-1 border-b-2 mobile_responsive_nav ${
           showBackground ? "mobile_black" : "mobile_white"
         }`}
       >
@@ -68,11 +68,11 @@ const Header = () => {
           <div className="logo">
             <a href="/" className="flex items-center gap-2">
               <Image
-                src={"/latestLogorm.png"}
+                src={"/genies career hub logo.png"}
                 width={100}
                 height={100}
                 alt="newlogo"
-                className="h-auto object-contain"
+                className=" h-12 w-auto object-contain"
               />
             </a>
           </div>
@@ -84,8 +84,8 @@ const Header = () => {
             </label>
             {/* Resume Navs  */}
             <li>
-              <a href="#" className="desktop-item">
-                CV
+              <a href="#" className="desktop-item  text-blue-950 text-lg">
+                Cv Studio
                 <IoIosArrowDown className="inline ml-1" />
               </a>
 
@@ -215,8 +215,8 @@ const Header = () => {
               </div>
             </li>
             {/* Cover Letter  */}
-            <li>
-              <a href="#" className="desktop-item">
+            {/* <li>
+              <a href="#" className="desktop-item  text-blue-950 text-lg">
                 Cover
                 <IoIosArrowDown className="inline ml-1" />
               </a>
@@ -315,11 +315,11 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-            </li>
+            </li> */}
             {/* Career  */}
             <li>
-              <a href="#" className="desktop-item">
-                Career
+              <a href="#" className="desktop-item  text-blue-950 text-lg">
+                Career Coaching
                 <IoIosArrowDown className="inline ml-1" />
               </a>
               <input type="checkbox" id="career" />
@@ -400,106 +400,36 @@ const Header = () => {
                 </div>
               </div>
             </li>
-            {/* Blog  */}
-            {/* <li>
-              <a href="#" className="desktop-item">
-                Blog
-              </a>
-              <input type="checkbox" id="blog" />
-              <label htmlFor="blog" className="mobile-item">
-              Blog
-              </label>
-              <div className="mega-box">
-                <div className="content">
-                  <div className="row">
-                    <header>Design Services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Graphics</a>
-                      </li>
-                      <li>
-                        <a href="#">Vectors</a>
-                      </li>
-                      <li>
-                        <a href="#">Business cards</a>
-                      </li>
-                      <li>
-                        <a href="#">Custom logo</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="row">
-                    <header>Design Services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Graphics</a>
-                      </li>
-                      <li>
-                        <a href="#">Vectors</a>
-                      </li>
-                      <li>
-                        <a href="#">Business cards</a>
-                      </li>
-                      <li>
-                        <a href="#">Custom logo</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="row">
-                    <header>Email Services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Personal Email</a>
-                      </li>
-                      <li>
-                        <a href="#">Business Email</a>
-                      </li>
-                      <li>
-                        <a href="#">Mobile Email</a>
-                      </li>
-                      <li>
-                        <a href="#">Web Marketing</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="row">
-                    <header>Security services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Site Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">VPS Hosting</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">Website design</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li> */}
+            
             <li>
-              <a href="https://www.careergenies.co.uk/blog" target="_blank">
+              <a className=" text-blue-950 text-lg" href="https://www.careergenies.co.uk/blog" target="_blank">
                 Blog
               </a>
             </li>
             {/* FeedBack  */}
             <li>
-              <a href="#">Feedback</a>
+              <a className=" text-blue-950 text-lg" href="#">Feedback</a>
             </li>
             {/* Auth buttons  */}
-            <li>
-              <div className="auths_button ml-2">
+            
+          </ul>
+          <ul>
+          <li>
+              {/* <div className="auths_button ml-2">
                 <button
                   className="custom-button hover:cursor-pointer"
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>
                   <div className="liquid"></div>
+                </button>
+              </div> */}
+              <div className="auths_button ml-2">
+                <button
+                  className="border-2 text-blue-950 border-blue-950 text-lg hover:cursor-pointer px-6 py-1 " 
+                  onClick={handleLogin}
+                >
+                  <span>Sign In</span>
                 </button>
               </div>
             </li>
