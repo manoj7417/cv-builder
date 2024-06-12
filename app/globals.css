@@ -133,9 +133,10 @@
   /* background: #cbbebe; */
   cursor: pointer;
   color: rgb(25, 28, 31) !important;
+  font-weight: 600;
   /* background-color: rgb(223, 227, 231); */
-  background-color: white;
-  border-radius: 50px;
+  /* background-color: white;
+  border-radius: 50px; */
 }
 
 .mobile_responsive_nav .nav-links .mobile-item {
