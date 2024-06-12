@@ -10,6 +10,7 @@ import { deleteCookie } from 'cookies-next';
 import { useUserStore } from "../store/UserStore";
 import { RemoveTokens } from "../actions";
 import { FaUserLarge } from "react-icons/fa6";
+import "./header.css"
 
 const navigation = [
   { name: "CV Studio", href: "/resume-dashboard", current: true },
