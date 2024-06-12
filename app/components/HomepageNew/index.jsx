@@ -80,14 +80,14 @@ export default function HomepageNew() {
               width={100}
               height={100}
               alt="arrowright"
-              className="absolute top-[20%] left-0 w-auto h-full"
+              className="absolute top-[20%] left-0 w-auto h-auto"
             />
             <Image
               src={"/arrowleft.png"}
               width={100}
               height={100}
               alt="arrowright"
-              className="absolute top-[30%] right-0 w-auto h-full"
+              className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto">
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
