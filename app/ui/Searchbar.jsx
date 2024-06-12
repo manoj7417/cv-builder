@@ -28,12 +28,15 @@ const SearchBar = ({ options }) => {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        className="p-2 border rounded w-full text-gray-500 "
+        className="p-2 border rounded w-full text-gray-500"
         placeholder="Keyword / Job Title / Job Role"
         style={{ zIndex: 20 }}
       />
       {filteredOptions.length > 0 && (
-        <ul className="absolute left-0 right-0 bg-white text-gray-500 border mt-1 rounded shadow-lg z-10">
+        <ul
+          className="absolute left-0 right-0 bg-white text-gray-500 border mt-1 rounded shadow-lg z-10"
+          style={{ maxHeight: '160px', overflowY: 'auto' }}
+        >
           {filteredOptions.map((option, index) => (
             <li
               key={index}
