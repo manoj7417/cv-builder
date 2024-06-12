@@ -22,15 +22,15 @@ export default function Footer() {
             <div>
               <a href="/" className="flex items-center gap-2">
                 <Image
-                  src={"/gch_logo.png"}
-                  width={30}
-                  height={30}
+                  src={"/latestLogorm.png"}
+                  width={80}
+                  height={80}
                   alt="newlogo"
                   className="w-50 h-auto object-contain"
                 />
-                <span className="text-black font-bold text-2xl">
+                {/* <span className="text-black font-bold text-2xl">
                   Genies Career Hub
-                </span>
+                </span> */}
               </a>
             </div>
 

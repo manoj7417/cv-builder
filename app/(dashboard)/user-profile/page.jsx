@@ -125,7 +125,7 @@ const ProfilePage = () => {
       fullName: userdata?.fullname,
       occupation: userdata?.occupation,
       address: userdata?.address,
-      links: userData?.links?.map((link) => ({
+      socialLinks: userData?.socialLinks?.map((link) => ({
         name: link.name,
         url: link.url,
       }))
@@ -207,7 +207,7 @@ const ProfilePage = () => {
                 </div>
                 <div className="bg-white rounded shadow p-0 mt-4">
                   <ul className="divide-y divide-gray-200">
-                    {userData?.links?.map((link, index) =>
+                    {userData?.socialLinks?.map((link, index) =>
                       isEditable ? (
                         <SocialLinkInput
                           key={link.name}
@@ -230,7 +230,6 @@ const ProfilePage = () => {
                 </div>
               </div>
               <div className="w-full lg:w-2/3 p-5">
-
                 <div className="bg-gray-50 rounded shadow mb-4 p-4">
                   <div className="flex items-center justify-end">
                     {isEditable ?

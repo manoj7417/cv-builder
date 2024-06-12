@@ -46,6 +46,12 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import ImageCarousel from "./ImageCarousel";
 import { ImSpinner8 } from "react-icons/im";
+import { GetTokens } from "@/app/actions";
+import { createNewResume } from "@/app/pages/api/api";
+import { useRouter } from "next/navigation";
+import { useResumeStore } from "@/app/store/ResumeStore";
+import { useUserStore } from "@/app/store/UserStore";
+import { toast } from "react-toastify";
 
 export const templateType = {
   free: "Free",
@@ -144,9 +150,6 @@ const templatesData = [
     alt: "6.png",
     type: templateType.dummy,
   },
-]
-
-const Carousel1 = [
   {
     name: "Template3",
     src: "/Template3.png",
@@ -177,87 +180,159 @@ const Carousel1 = [
     alt: "Template1.png",
     type: templateType.premium,
   },
-];
-
-const Carousel2 = [
   {
     name: "Template7",
     src: "/Template7.png",
     alt: "Template7.png",
     type: templateType.dummy,
-  },
-  {
-    name: "Template8",
-    src: "/Template8.png",
-    alt: "Template8.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template9",
-    src: "/Template9.png",
-    alt: "Template9.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template3",
-    src: "/10.png",
-    alt: "10.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/11.png",
-    alt: "11.png",
-    type: templateType.dummy,
-  },
-];
+  }
+]
 
-const Carousel3 = [
-  {
-    name: "Template3",
-    src: "/resume-temp-example.png",
-    alt: "resume-temp-example.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/3.png",
-    alt: "3.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/4.png",
-    alt: "4.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/5.png",
-    alt: "5.png",
-    type: templateType.dummy,
-  },
-  {
-    name: "Template3",
-    src: "/6.png",
-    alt: "6.png",
-    type: templateType.dummy,
-  },
-];
+
+
+
+// const Carousel1 = [
+//   {
+//     name: "Template3",
+//     src: "/Template3.png",
+//     alt: "Template3.png",
+//     type: templateType.free,
+//   },
+//   {
+//     name: "Template5",
+//     src: "/Template5.png",
+//     alt: "Template5.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template4",
+//     src: "/Template4.png",
+//     alt: "Template4.png",
+//     type: templateType.premium,
+//   },
+//   {
+//     name: "Template6",
+//     src: "/Template6.png",
+//     alt: "Template6.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template1",
+//     src: "/Template1.png",
+//     alt: "Template1.png",
+//     type: templateType.premium,
+//   },
+// ];
+
+// const Carousel2 = [
+//   {
+//     name: "Template7",
+//     src: "/Template7.png",
+//     alt: "Template7.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template8",
+//     src: "/Template8.png",
+//     alt: "Template8.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template9",
+//     src: "/Template9.png",
+//     alt: "Template9.png",
+//     type: templateType.premium,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/10.png",
+//     alt: "10.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/11.png",
+//     alt: "11.png",
+//     type: templateType.dummy,
+//   },
+// ];
+
+// const Carousel3 = [
+//   {
+//     name: "Template3",
+//     src: "/resume-temp-example.png",
+//     alt: "resume-temp-example.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/3.png",
+//     alt: "3.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/4.png",
+//     alt: "4.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/5.png",
+//     alt: "5.png",
+//     type: templateType.dummy,
+//   },
+//   {
+//     name: "Template3",
+//     src: "/6.png",
+//     alt: "6.png",
+//     type: templateType.dummy,
+//   },
+// ];
 
 export default function Slider() {
   const [userState, setUserState] = useState({});
   const [loading, setIsLoading] = useState(false);
+  const createResume = useUserStore((state) => state.createResume);
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
+  const router = useRouter();
+
+
+  const handleCreateCV = async (template) => {
+    const { accessToken } = await GetTokens();
+  
+    if (!accessToken) {
+      toast("Please login to use this template");
+      router.push("/login");
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await createNewResume(accessToken.value, template);
+      if (response.data.data) {
+        createResume(response.data.data);
+        replaceResumeData(response.data.data);
+        router.push("/builder");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
-
     if (user) {
       setUserState(user.userdata);
     }
   }, []);
+
+
   return (
-    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 ">
+    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-t from-white to-[#5dcafd33]">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
           Curating CVs that Reflect
@@ -294,11 +369,11 @@ export default function Slider() {
             </p>
           </div>
         </div> */}
-        <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center h-full">
+        <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
           {
             templatesData?.map((item, index) => (
               <div
-              className="group relative overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
+              className="group relative overflow-hidden rounded-lg shadow-lg px-3 py-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
               key={index}
             >
               {item.type === templateType.premium && (
@@ -308,15 +383,17 @@ export default function Slider() {
               )}
               <Image
                 alt={item.alt}
-                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
+                className="h-full w-auto object-cover transition-all duration-300 group-hover:scale-105"
                 src={item.src}
                 height={128}
                 width={128}
               />
 
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{
+                zIndex:"1"
+              }}>
                 <Button
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                  className="inline-flex items-center justify-center rounded-md bg-[#0EA5E9] px-4 text-[12px] font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
                   onClick={() => handleCreateCV(item.name)}
                   disabled={loading}
                 >

@@ -1,40 +1,35 @@
-'use client'
 import React, { useState } from "react";
-import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
-import { templateType } from "@/components/component/Slider";
+// import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import {
-  FaBorderAll,
-  FaCogs,
-  FaPencilRuler,
+  // FaPencilRuler,
   FaRegFolderOpen,
   FaStore,
-  FaUserCog,
-} from "react-icons/fa";
-import { PiFolderSimpleUser } from "react-icons/pi";
-import { MdQueryStats } from "react-icons/md";
-import { IoShirt } from "react-icons/io5";
-import { RiShirtFill } from "react-icons/ri";
-import Image from "next/image";
-import {
   FaDatabase,
   FaLaptop,
   FaPalette,
   FaPython,
   FaSuitcase,
-} from "react-icons/fa6";
+} from "react-icons/fa6"; // Ensure all icons are imported correctly
 import { Tilt } from "react-tilt";
-import { ImSpinner8 } from "react-icons/im";
+import Image from "next/image";
 import { Button } from "../ui/button";
-import { createNewJobProfileResume } from "@/app/pages/api/api";
-import { GetTokens } from "@/app/actions";
+import { FaCogs, FaPencilRuler, FaUsersCog } from "react-icons/fa";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "../ui/tabs";
+import CourseSlider from "./CourseSlider";
+import { ImSpinner8 } from "react-icons/im";
 import { useRouter } from "next/navigation";
-import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
+import { useUserStore } from "@/app/store/UserStore";
 import { useResumeStore } from "@/app/store/ResumeStore";
+import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
+import { GetTokens } from "@/app/actions";
+import { createNewJobProfileResume } from "@/app/pages/api/api";
 
-const TabResume = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
+export default function TabResume() {
+  const [loading, setIsLoading] = useState(false);
+  // const createResume = useUserStore((state) => state.createResume);
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
+  const router = useRouter();
+
   const TabsHeader = [
     {
       id: 1,
@@ -51,7 +46,7 @@ const TabResume = () => {
     {
       id: 3,
       name: "Product Manager",
-      icon: <FaUserCog className="text-[#4CAF50]" />,
+      icon: <FaUsersCog className="text-[#4CAF50]" />,
       src: "/4.png",
     },
     {
@@ -98,321 +93,6 @@ const TabResume = () => {
     },
   ];
 
-  const AllTemplates = [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate1",
-      src: "/3.png",
-      alt: "/3.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate2",
-      src: "/4.png",
-      alt: "/4.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate3",
-      src: "/newResume1.png",
-      alt: "/newResume1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate4",
-      src: "/6.png",
-      alt: "/6.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTempalte5",
-      src: "/resume-temp-example.png",
-      alt: "/resume-temp-example.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate7",
-      src: "/4.png",
-      alt: "/4.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate8",
-      src: "/5.png",
-      alt: "/5.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate9",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.premium,
-    },
-  ];
-
-  const SimpleTemplates = [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate1",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate2",
-      src: "/17.png",
-      alt: "/17.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate3",
-      src: "/newResume1.png",
-      alt: "/newResume1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate4",
-      src: "/11.png",
-      alt: "/11.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTempalte5",
-      src: "/resume-temp-example.png",
-      alt: "/resume-temp-example.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate7",
-      src: "/4.png",
-      alt: "/4.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate8",
-      src: "/5.png",
-      alt: "/5.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate9",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.premium,
-    },
-  ];
-
-  const ATSTemplates = [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate1",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate2",
-      src: "/17.png",
-      alt: "/17.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate3",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate4",
-      src: "/11.png",
-      alt: "/11.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTempalte5",
-      src: "/resume-temp-example.png",
-      alt: "/resume-temp-example.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate7",
-      src: "/17.png",
-      alt: "/17.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate8",
-      src: "/16.png",
-      alt: "/16.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate9",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.premium,
-    },
-  ];
-
-  const DesignerTemplates = [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate1",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate2",
-      src: "/17.png",
-      alt: "/17.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate3",
-      src: "/newResume1.png",
-      alt: "/newResume1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate4",
-      src: "/11.png",
-      alt: "/11.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTempalte5",
-      src: "/9.png",
-      alt: "/9.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template3",
-      src: "/8.png",
-      alt: "/8.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate7",
-      src: "/6.png",
-      alt: "/6.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate8",
-      src: "/5.png",
-      alt: "/5.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate9",
-      src: "/7.png",
-      alt: "/7.png",
-      type: templateType.premium,
-    },
-  ];
-
-  const ProfessionalTemplates = [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate1",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate2",
-      src: "/17.png",
-      alt: "/17.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate3",
-      src: "/newResume1.png",
-      alt: "/newResume1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate4",
-      src: "/11.png",
-      alt: "/11.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTempalte5",
-      src: "/resume-temp-example.png",
-      alt: "/resume-temp-example.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "AllTemplate7",
-      src: "/4.png",
-      alt: "/4.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate8",
-      src: "/5.png",
-      alt: "/5.png",
-      type: templateType.free,
-    },
-    {
-      name: "AllTemplate9",
-      src: "/15.png",
-      alt: "/15.png",
-      type: templateType.premium,
-    },
-  ];
-
   const defaultOptions = {
     reverse: false, // reverse the tilt direction
     max: 35, // max tilt rotation (degrees)
@@ -425,36 +105,34 @@ const TabResume = () => {
     easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
   };
 
-  const handleCreateNewCV = async (name) => {
-    const { data } = JobResumeSchema.find(job => job.name === name)
+  const handleCreateCV = async (name) => {
+    const { data } = JobResumeSchema.find((job) => job.name === name);
     if (!data) return;
-    setIsLoading(true)
-    const { accessToken } = await GetTokens()
-    console.log(accessToken)
+    setIsLoading(true);
+    const { accessToken } = await GetTokens();
     if (!accessToken.value) {
-      setIsLoading(false)
-      toast("Please login to use this job resume")
-      router.push('/login')
+      setIsLoading(false);
+      toast("Please login to use this job resume");
+      router.push("/login");
       return;
     }
     try {
-      const response = await createNewJobProfileResume(accessToken.value, data)
+      const response = await createNewJobProfileResume(accessToken.value, data);
       if (response.status === 201) {
-        replaceResumeData(response.data.data)
-        router.push('/builder')
+        replaceResumeData(response.data.data);
+        router.push("/builder");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-
-  }
+  };
 
   return (
     <>
-      <div className="bg-gradient-to-b from-white to-[#2C98CA33]">
-        <div className="rounded-t-xl p-6 shadow-xl">
+      <div className="bg-white">
+        <div className="rounded-t-xl p-6">
           <div className="tabs_heading">
             <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
               Discover CV that fits your job role
@@ -465,10 +143,13 @@ const TabResume = () => {
               Profile, employing our customised Curriculum Vitae templates.
             </p>
           </div>
-          <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
-            <div className="grid grid-cols-2 place-items-center">
+          <Tabs
+            className="max-w-5xl mx-auto py-5"
+            defaultValue="Business Analyst"
+          >
+            <div className="grid grid-cols-2 place-items-around items-center">
               <div className="tabs_main">
-                <TabsList className="mb-4 flex w-full justify-start flex-wrap py-10 h-auto">
+                <TabsList className=" flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4">
                   {TabsHeader?.map((item, index) => (
                     <TabsTrigger value={item?.name} key={index}>
                       <div className="tabs_header flex gap-2 items-center justify-start">
@@ -480,45 +161,63 @@ const TabResume = () => {
                 </TabsList>
               </div>
               <div className="tabs_content">
-                <Tabs className="max-w-5xl mx-auto py-5" defaultValue="Business Analyst">
-                  <div className="grid grid-cols-2 place-items-around items-center">
-                    <div className="tabs_main">
-                      <TabsList className=" flex w-full justify-start flex-wrap py-10 h-auto gap-4">
-                        {TabsHeader?.map((item, index) => (
-                          <TabsContent value={item?.name} key={index}>
-                            <div className="group relative">
-                              <Tilt options={defaultOptions} style={{ height: 500, width: 350 }}>
-                                <Image
-                                  src={item.src}
-                                  key={index}
-                                  width={400}
-                                  height={400}
-                                  alt={item.name}
-                                  className="border-4 rounded-md border-gray-300 bg-gray-300 p-4"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                  <Button className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]" disabled={isLoading} onClick={() => handleCreateNewCV(item.name)}>
-                                    {
-                                      isLoading ? "Loading..." :
-                                        "Try Now"
-                                    }
-                                  </Button>
-                                </div>
-                              </Tilt>
-                            </div>
-                          </TabsContent>
-                        ))}
-                      </TabsList>
+                {TabsHeader?.map((item, index) => (
+                  <TabsContent value={item?.name} key={index}>
+                    <div className="flex justify-center group relative">
+                      <Tilt
+                        options={defaultOptions}
+                        style={{ height: 600, width: 500 }}
+                      >
+                        <Image
+                          src={item.src}
+                          key={index}
+                          width={800}
+                          height={400}
+                          alt={item.name}
+                          className="rounded-md bg-gradient-to-t from-[#8181b9] to-[#dcecff] p-4"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <Button
+                            className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                            onClick={() => handleCreateCV(item.name)}
+                            disabled={loading}
+                          >
+                            {loading ? (
+                              <>
+                                <ImSpinner8 className=" animate-spin mr-2" />
+                                Loading
+                              </>
+                            ) : (
+                              "Try Now"
+                            )}
+                          </Button>
+                        </div>
+                      </Tilt>
                     </div>
-                  </div>
-                </Tabs>
+                  </TabsContent>
+                ))}
               </div>
             </div>
           </Tabs>
         </div>
       </div>
+      <section className="grid grid-cols-2 py-20">
+        <div className="discover_image flex align-middle overflow-hidden ">
+          <Image
+            src={"/home-creative-down.png"}
+            width={2000}
+            height={1500}
+            alt="discover"
+            loading="lazy"
+            style={{
+              marginLeft: "-150px",
+            }}
+          />
+        </div>
+        <div className="my-auto">
+          <CourseSlider />
+        </div>
+      </section>
     </>
   );
-};
-
-export default TabResume;
+}

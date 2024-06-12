@@ -12,13 +12,13 @@ import { RemoveTokens } from "../actions";
 import { FaUserLarge } from "react-icons/fa6";
 
 const navigation = [
-  { name: "CV Curator", href: "/resume-dashboard", current: true },
+  { name: "CV Studio", href: "/resume-dashboard", current: true },
   {
-    name: "Resume Analyser",
+    name: "CV Analyser",
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "Psychometric Test", href: "/coming-soon", current: false },
+  { name: "Job File CV", href: "/coming-soon", current: false },
 ];
 
 function classNames(...classes) {
@@ -28,10 +28,10 @@ function classNames(...classes) {
 export default function NewResumeHeader() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
-  const logoutUser = useUserStore((state) => state.logoutUser)
+  const logoutUser = useUserStore((state) => state.logoutUser);
 
   const handleLogout = async () => {
-    await RemoveTokens()
+    await RemoveTokens();
     toast.success("User logout successfully", {
       position: "top-right",
     });
@@ -74,30 +74,31 @@ export default function NewResumeHeader() {
                     )}
                   </DisclosureButton>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start h-full">
+                  <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/gch_logo.png"}
-                        width={30}
-                        height={30}
+                        src={"/latestLogorm.png"}
+                        width={100}
+                        height={100}
                         alt="newlogo"
-                        className="w-50 h-auto object-contain"
+                        className="h-auto object-contain"
+                        loading="lazy"
                       />
-                      <span className="text-black font-bold md:text-2xl text-sm">
+                      {/* <span className="text-black font-bold md:text-2xl text-sm">
                         Genies Career Hub
-                      </span>
+                      </span> */}
                     </a>
                   </div>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
+                  <div className="hidden sm:ml-6 sm:block h-full w-full">
+                    <div className="flex justify-center items-center space-x-4 h-full">
                       {navigation.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? "text-black" : "text-black",
-                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-medium"
+                            item.current ? "text-blue-900" : "text-blue-900",
+                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-semibold"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -109,17 +110,65 @@ export default function NewResumeHeader() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-blue-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon
-                      className="h-6 w-6 text-white "
-                      aria-hidden="true"
-                    />
-                  </button>
+                  <Menu as="div" className="relative">
+                    <div>
+                      <MenuButton className="relative rounded-full bg-blue-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      </MenuButton>
+                    </div>
+                    <Transition
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <MenuItem>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              New comment on your post
+                            </a>
+                          )}
+                        </MenuItem>
+                        <MenuItem>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              New follower
+                            </a>
+                          )}
+                        </MenuItem>
+                        <MenuItem>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Your password was changed
+                            </a>
+                          )}
+                        </MenuItem>
+                      </MenuItems>
+                    </Transition>
+                  </Menu>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
@@ -131,7 +180,6 @@ export default function NewResumeHeader() {
                       </MenuButton>
                     </div>
                     <Transition
-                      as={Fragment}
                       enter="transition ease-out duration-100"
                       enterFrom="transform opacity-0 scale-95"
                       enterTo="transform opacity-100 scale-100"
