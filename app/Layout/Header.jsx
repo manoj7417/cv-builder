@@ -84,7 +84,7 @@ const Header = () => {
             </label>
             {/* Resume Navs  */}
             <li>
-              <a href="#" className="desktop-item  text-blue-950 text-lg">
+              <a href="#" className="desktop-item  text-blue-950 text-base">
                 Cv Studio
                 <IoIosArrowDown className="inline ml-1" />
               </a>
@@ -216,7 +216,7 @@ const Header = () => {
             </li>
             {/* Cover Letter  */}
             {/* <li>
-              <a href="#" className="desktop-item  text-blue-950 text-lg">
+              <a href="#" className="desktop-item  text-blue-950 text-base">
                 Cover
                 <IoIosArrowDown className="inline ml-1" />
               </a>
@@ -318,7 +318,7 @@ const Header = () => {
             </li> */}
             {/* Career  */}
             <li>
-              <a href="#" className="desktop-item  text-blue-950 text-lg">
+              <a href="#" className="desktop-item  text-blue-950 text-base">
                 Career Coaching
                 <IoIosArrowDown className="inline ml-1" />
               </a>
@@ -402,13 +402,13 @@ const Header = () => {
             </li>
             
             <li>
-              <a className=" text-blue-950 text-lg" href="https://www.careergenies.co.uk/blog" target="_blank">
+              <a className=" text-blue-950 text-base" href="https://www.careergenies.co.uk/blog" target="_blank">
                 Blog
               </a>
             </li>
             {/* FeedBack  */}
             <li>
-              <a className=" text-blue-950 text-lg" href="#">Feedback</a>
+              <a className=" text-blue-950 text-base" href="#">Feedback</a>
             </li>
             {/* Auth buttons  */}
             
@@ -426,7 +426,7 @@ const Header = () => {
               </div> */}
               <div className="auths_button ml-2">
                 <button
-                  className="border-2 text-blue-950 border-blue-950 text-lg hover:cursor-pointer px-6 py-1 " 
+                  className="border-2 text-blue-950 border-blue-950 text-base hover:cursor-pointer px-6 py-1 " 
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>
