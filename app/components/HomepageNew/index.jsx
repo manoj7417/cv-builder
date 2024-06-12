@@ -60,22 +60,24 @@ export default function HomepageNew() {
 
   const defaultOptions = {
     reverse: false, // reverse the tilt direction
-    max: 35, // max tilt rotation (degrees)
-    perspective: 3000, // Transform perspective, the lower the more extreme the tilt gets.
+    max: 25, // max tilt rotation (degrees)
+    perspective: 5000, // Transform perspective, the lower the more extreme the tilt gets.
     scale: 1.01, // 2 = 200%, 1.5 = 150%, etc..
     speed: 2000, // Speed of the enter/exit transition
     transition: true, // Set a transition on enter/exit.
     axis: null, // What axis should be disabled. Can be X or Y.
     reset: true, // If the tilt effect has to be reset on exit.
     easing: "cubic-bezier(.50,.98,.52,.99)", // Easing on enter/exit.
+    padding: 0,
+    margin: 0,
   };
 
   return (
     <>
       {/* <Navbar /> */}
-      <section className="flex lg:items-center items-start justify-center w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-[#2C98CA33] relative">
+      <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
         <div className="container lg:pt-0 pt-20">
-          <div className="flex flex-col justify-center space-y-4">
+          <div className="flex flex-col justify-center ">
             <Image
               src={"/arrowright.png"}
               width={100}
@@ -116,7 +118,7 @@ export default function HomepageNew() {
                 Industry-Focused Career Counselling.
               </p>
             </div>
-            <div className="flex lg:flex-row justify-center  flex-col gap-2 min-[400px]:flex-row ">
+            <div className="flex lg:flex-row justify-center  flex-col  min-[400px]:flex-row ">
               {/* <div className="flex text-lg lh-lg items-center text-white rounded-full bg-[#2C98CA] pl-5 pr-1 py-1 mt-8 mb-10">
                 GET STARTED
                 <Image
@@ -126,7 +128,7 @@ export default function HomepageNew() {
                   height={42}
                 />
               </div> */}
-              <div className="button_wrapper mt-8 mb-10">
+              <div className="button_wrapper mt-8">
                 <button className="get_start_btn">
                   <span className="btn_text">Get Started</span>
                   <div className="btn_overlay">
@@ -152,13 +154,12 @@ export default function HomepageNew() {
             <div className="flex justify-center">
               <Tilt
                 options={defaultOptions}
-                style={{ height: 700, width: 1200 }}
               >
                 <Image
-                  src="/banner-img-2.png"
-                  height={700}
-                  width={1200}
-                  className="w-auto h-full"
+                  src="/home-creative-top.png"
+                  width={1300}
+                  height={1000}
+                  className=""
                   alt="banner-image"
                 />
               </Tilt>
