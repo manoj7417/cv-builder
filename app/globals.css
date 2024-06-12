@@ -667,12 +667,8 @@ footer a:hover svg {
 
 
 .floating_button {
-  position: fixed;
-  bottom: -330px;
-  right: 20px;
   z-index: 11;
   transition: opacity 0.3s ease-in-out;
-
 }
 
 .floating_button.hidden {

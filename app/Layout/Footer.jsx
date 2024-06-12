@@ -23,8 +23,8 @@ export default function Footer() {
               <a href="/" className="flex items-center gap-2">
                 <Image
                   src={"/latestLogorm.png"}
-                  width={80}
-                  height={80}
+                  width={100}
+                  height={100}
                   alt="newlogo"
                   className="w-50 h-auto object-contain"
                 />
