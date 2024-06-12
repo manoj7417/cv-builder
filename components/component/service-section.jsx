@@ -7,7 +7,7 @@ import { FiBox } from "react-icons/fi";
 export function ServiceSection() {
   
   return (
-    <div className="flex flex-col min-h-[100dvh] ">
+    <div className="flex flex-col">
       <main className="flex-1">
         {/* <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff]  scroll-mt-20">
           <div className=" px-4 md:px-6 mb-10">
@@ -189,12 +189,12 @@ export function ServiceSection() {
           </div>
         </section> */}
 
-        <section
+        {/* <section
           className="w-full py-12 md:py-24 lg:py-32 border-t lg:px-20  scroll-mt-20 bg-gradient-to-r from-gray-100 to-[#cad7e8]"
-          // style={{
-          //   backgroundImage: "url('/banner-bg.svg')",
-          //   backgroundPosition: "center",
-          // }}
+          style={{
+            backgroundImage: "url('/banner-bg.svg')",
+            backgroundPosition: "center",
+          }}
         >
           <div className="container mx-auto lg:max-w-[75rem] w-full grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
@@ -215,7 +215,7 @@ export function ServiceSection() {
               </Link>
             </div>
           </div>
-        </section>
+        </section> */}
         <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff] scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">

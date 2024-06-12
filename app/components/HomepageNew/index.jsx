@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import NewNavbar from "../../ui/newNav";
 import Slider from "../../../components/component/Slider";
@@ -79,14 +80,14 @@ export default function HomepageNew() {
               width={100}
               height={100}
               alt="arrowright"
-              className="absolute top-[20%] left-0"
+              className="absolute top-[20%] left-0 w-auto h-full"
             />
             <Image
               src={"/arrowleft.png"}
               width={100}
               height={100}
               alt="arrowright"
-              className="absolute top-[30%] right-0"
+              className="absolute top-[30%] right-0 w-auto h-full"
             />
             <div className="space-y-2 mx-auto">
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
@@ -118,7 +119,7 @@ export default function HomepageNew() {
               <div className="flex text-lg lh-lg items-center text-white rounded-full bg-[#2C98CA] pl-5 pr-1 py-1 mt-8 mb-10">
                 GET STARTED
                 <Image
-                  className="ml-2"
+                  className="ml-2 w-auto h-full"
                   src="/btn-arrow.svg"
                   width={42}
                   height={42}
@@ -130,13 +131,19 @@ export default function HomepageNew() {
                 options={defaultOptions}
                 style={{ height: 700, width: 1200 }}
               >
-                <Image src="/banner-img-2.png" height={700} width={1200} />
+                <Image
+                  src="/banner-img-2.png"
+                  height={700}
+                  width={1200}
+                  className="w-auto h-full"
+                  alt="banner-image"
+                />
               </Tilt>
             </div>
             {showFloatingButton && (
               <div className="floating_button flex justify-center text-center w-full">
                 <button
-                  className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%]"
+                  className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%] z-50"
                   onClick={handleButtonClick}
                 >
                   Get Started
@@ -147,29 +154,12 @@ export default function HomepageNew() {
         </div>
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
-        {/* <Drawer className="w-full">
-          <DrawerTrigger>Open</DrawerTrigger>
-          <DrawerContent className="w-full h-[400px]">
-            <DrawerHeader>
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-              <DrawerDescription>
-                This action cannot be undone.
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer> */}
       </section>
       <Slider />
       <TabResume />
       <WorkTogether />
       <FAQSection />
-      {/* <ServiceSection /> */}
+      <ServiceSection />
     </>
   );
 }
