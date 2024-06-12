@@ -208,6 +208,7 @@ export default function TabResume() {
             width={600}
             height={600}
             alt="discover"
+            loading="lazy"
           />
         </div>
         <div className="mt-20">

@@ -172,7 +172,7 @@ export default function HomepageNew() {
                   Get Started
                 </button> */}
                 <div className="button_wrapper mt-8 mb-10">
-                <button className="get_start_btn"  onClick={handleButtonClick}>
+                <button className="get_start_btn floating"  onClick={handleButtonClick}>
                   <span className="btn_text">Get Started</span>
                   <div className="btn_overlay">
                     <svg
