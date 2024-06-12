@@ -82,7 +82,7 @@ export default function NewResumeHeader() {
                         width={100}
                         height={100}
                         alt="newlogo"
-                        className="w-auto h-full object-contain"
+                        className="h-auto object-contain"
                       />
                       {/* <span className="text-black font-bold md:text-2xl text-sm">
                         Genies Career Hub

@@ -51,6 +51,7 @@ import { createNewResume } from "@/app/pages/api/api";
 import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
+import { toast } from "react-toastify";
 
 export const templateType = {
   free: "Free",
@@ -382,7 +383,7 @@ export default function Slider() {
               )}
               <Image
                 alt={item.alt}
-                className="h-auto w-full object-cover transition-all duration-300 group-hover:scale-105"
+                className="h-full w-auto object-cover transition-all duration-300 group-hover:scale-105"
                 src={item.src}
                 height={128}
                 width={128}
