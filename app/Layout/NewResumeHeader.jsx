@@ -18,7 +18,7 @@ const navigation = [
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "Job File CV", href: "/coming-soon", current: false },
+  { name: "Job Fit CV", href: "/coming-soon", current: false },
 ];
 
 function classNames(...classes) {
