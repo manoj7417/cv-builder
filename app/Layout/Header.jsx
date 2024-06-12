@@ -60,7 +60,7 @@ const Header = () => {
       suppressHydrationWarning
     >
       <nav
-        className={`py-3 mobile_responsive_nav ${
+        className={`py-1 border-b-2 mobile_responsive_nav ${
           showBackground ? "mobile_black" : "mobile_white"
         }`}
       >
@@ -426,7 +426,7 @@ const Header = () => {
               </div> */}
               <div className="auths_button ml-2">
                 <button
-                  className="border-2 text-blue-950 border-blue-950 hover:cursor-pointer px-6 py-1 font-semibold" 
+                  className="border-2 text-blue-950 border-blue-950 text-lg hover:cursor-pointer px-6 py-1 " 
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>
