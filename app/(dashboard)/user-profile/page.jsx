@@ -230,7 +230,6 @@ const ProfilePage = () => {
                 </div>
               </div>
               <div className="w-full lg:w-2/3 p-5">
-
                 <div className="bg-gray-50 rounded shadow mb-4 p-4">
                   <div className="flex items-center justify-end">
                     {isEditable ?

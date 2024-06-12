@@ -61,7 +61,7 @@
    .get_start_btn:hover>span.btn_text,
    .get_start_btn:focus>span.btn_text {
        color: #242424;
-       font-weight: 600;
+       font-weight: 500;
    }
 
    .get_start_btn:hover>div.btn_overlay,
