@@ -129,7 +129,7 @@ export default function Home() {
   const [jobRole, setJobRole] = useState('')
   const userState = useUserStore((state) => state.userState);
   const [showDialog, setShowDialog] = useState(false)
-  const [showMultiStepDialog, setShowMultiStepDialog] = useState(true)
+  const [showMultiStepDialog, setShowMultiStepDialog] = useState(false)
   const [steps, setSteps] = useState(1)
   const inputRef = useRef()
   const { userdata } = useUserStore(state => state.userState)

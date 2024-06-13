@@ -389,8 +389,8 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
         return <DialogContent className='max-w-[80dvw] h-[80dvh] p-0' onClick={onClick} showCloseButton>
             <div className='flex justify-around'>
                 <div className='w-1/2 h-full'>
-                    <Image src='/2154438.jpg' width={100} height={100} className='w-full h-full'/>
-                </div>  
+                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated'  className='w-full h-full object-contain' width={600} height={600}/>
+                </div>
                 <div className=' w-1/2 py-5 h-full'>
                     <div className='shadow-xl p-10 w-full h-full rounded-lg '>
                         <div className='my-2'>
@@ -429,7 +429,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh] p-0' onClick={onClick} showCloseButton>
             <div className='flex justify-around'>
                 <div className='w-1/2 h-full'>
-                   
+                <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated'  className='w-full h-full object-contain' width={600} height={600}/>
                 </div>
                 <div className='w-1/2 h-full py-10 max-h-[80dvh]'>
                     <div className=' shadow-lg p-10 w-full h-full max-h-full rounded-lg overflow-scroll no-scrollbar  bg-white'>
@@ -587,7 +587,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
-
+                <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated'  className='w-full h-full object-contain' width={600} height={600}/>
                 </div>
                 <div className='w-1/2 h-full py-5 max-h-[80dvh]'>
                     <div className='shadow-lg p-10 w-full h-full max-h-full rounded-lg overflow-scroll no-scrollbar bg-white'>
@@ -709,7 +709,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
-
+                <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated'  className='w-full h-full object-contain' width={600} height={600}/>
                 </div>
                 <div className=' w-1/2 py-5 h-full max-h-[80dvh] '>
                     <div className='shadow-xl bg-white p-10 h-full max-h-[95%] overflow-scroll no-scrollbar rounded-lg'>
@@ -819,7 +819,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
-
+                <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated'  className='w-full h-full object-contain' width={600} height={600}/>
                 </div>
                 <div className='w-1/2 h-full'>
                     <div className='shadow-xl rounded-lg h-full p-10'>
@@ -839,7 +839,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
-
+                <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated'  className='w-full h-full object-contain' width={600} height={600}/>
                 </div>
                 <div className='w-1/2 h-full flex item-center'>
                     <div className='mx-auto flex items-center justify-center flex-col'>
