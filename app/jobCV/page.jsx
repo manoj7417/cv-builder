@@ -118,11 +118,243 @@ const options = [
 ];
 
 
-const tabs = [
-  { label: "Popular Job Roles", content: <div>Home Content</div> },
-  { label: "Industry specific job", content: <div>Profile Content</div> }
-  // Add more tabs as needed
+const jobTabs = [
+  {
+    label: "Engineering",
+    content: [
+      "Software Engineer",
+      "Data Scientist",
+      "Product Manager",
+      "Designer",
+      "Mechanical Engineer",
+      "Electrical Engineer",
+      "Civil Engineer",
+      "Chemical Engineer",
+      "Biomedical Engineer",
+      "Project Manager",
+      "AI Researcher",
+      "Machine Learning Engineer",
+      "Data Engineer",
+      "Network Engineer",
+      "DevOps Engineer",
+      "Cloud Architect",
+      "Cybersecurity Specialist",
+      "Robotics Engineer",
+      "Environmental Engineer",
+      "Quality Assurance Engineer",
+      "Safety Manager",
+      "Production Manager",
+      "Mechanical Technician",
+      "Electrical Technician",
+    ],
+  },
+  {
+    label: "Healthcare",
+    content: [
+      "Doctor",
+      "Nurse",
+      "Pharmacist",
+      "Healthcare Administrator",
+      "Biomedical Engineer",
+      "Therapist",
+      "Psychologist",
+      "Counselor",
+      "Dentist",
+      "Surgeon",
+      "Radiologist",
+      "Physiotherapist",
+      "Occupational Therapist",
+      "Chiropractor",
+      "Dietitian",
+      "Nutritionist",
+      "Veterinarian",
+      "Medical Assistant",
+      "Lab Technician",
+      "Paramedic",
+      "Healthcare Consultant",
+    ],
+  },
+  {
+    label: "Education",
+    content: [
+      "Teacher",
+      "Professor",
+      "Educational Consultant",
+      "School Administrator",
+      "Librarian",
+      "Curriculum Developer",
+      "Tutor",
+      "Educational Therapist",
+      "Instructional Coordinator",
+      "Academic Advisor",
+      "Career Counselor",
+      "Special Education Teacher",
+      "Early Childhood Educator",
+      "Substitute Teacher",
+      "Teaching Assistant",
+    ],
+  },
+  {
+    label: "Business",
+    content: [
+      "Marketing Manager",
+      "Sales Executive",
+      "HR Manager",
+      "Financial Analyst",
+      "Operations Manager",
+      "Customer Support Specialist",
+      "Business Analyst",
+      "Consultant",
+      "Accountant",
+      "Auditor",
+      "Project Manager",
+      "Office Manager",
+      "Supply Chain Manager",
+      "Logistics Coordinator",
+      "Retail Manager",
+      "Store Manager",
+      "Purchasing Manager",
+      "Quality Assurance Manager",
+    ],
+  },
+  {
+    label: "IT & Software",
+    content: [
+      "Software Developer",
+      "Systems Analyst",
+      "Database Administrator",
+      "IT Support Specialist",
+      "Web Developer",
+      "Network Administrator",
+      "Cybersecurity Analyst",
+      "Cloud Engineer",
+      "Mobile App Developer",
+      "DevOps Engineer",
+      "Full Stack Developer",
+      "Backend Developer",
+      "Frontend Developer",
+      "Game Developer",
+      "IT Project Manager",
+    ],
+  },
+  {
+    label: "Creative Arts",
+    content: [
+      "Graphic Designer",
+      "UI/UX Designer",
+      "Animator",
+      "Illustrator",
+      "Video Editor",
+      "Photographer",
+      "Videographer",
+      "Art Director",
+      "Music Producer",
+      "Sound Engineer",
+      "Film Director",
+      "Copywriter",
+      "Content Writer",
+      "Editor",
+      "Translator",
+      "Interpreter",
+    ],
+  },
+  {
+    label: "Marketing & Sales",
+    content: [
+      "Digital Marketing Specialist",
+      "SEO Specialist",
+      "Social Media Manager",
+      "Content Strategist",
+      "Brand Manager",
+      "Advertising Manager",
+      "Sales Representative",
+      "Sales Manager",
+      "Account Manager",
+      "Business Development Manager",
+      "Market Research Analyst",
+      "Public Relations Specialist",
+      "Event Planner",
+    ],
+  },
+  {
+    label: "Legal",
+    content: [
+      "Lawyer",
+      "Legal Assistant",
+      "Paralegal",
+      "Judge",
+      "Court Reporter",
+      "Legal Secretary",
+      "Compliance Officer",
+      "Contract Manager",
+      "Corporate Counsel",
+      "Legal Consultant",
+      "Mediator",
+    ],
+  },
+  {
+    label: "Real Estate & Construction",
+    content: [
+      "Real Estate Agent",
+      "Architect",
+      "Interior Designer",
+      "Construction Manager",
+      "Civil Engineer",
+      "Building Inspector",
+      "Property Manager",
+      "Surveyor",
+      "Landscape Architect",
+      "Urban Planner",
+    ],
+  },
+  {
+    label: "Hospitality & Travel",
+    content: [
+      "Travel Agent",
+      "Tour Guide",
+      "Hotel Manager",
+      "Event Coordinator",
+      "Chef",
+      "Pastry Chef",
+      "Restaurant Manager",
+      "Flight Attendant",
+      "Cruise Director",
+      "Concierge",
+      "Bartender",
+    ],
+  },
+  {
+    label: "Fitness & Wellness",
+    content: [
+      "Personal Trainer",
+      "Fitness Instructor",
+      "Yoga Instructor",
+      "Massage Therapist",
+      "Sports Coach",
+      "Athletic Trainer",
+      "Wellness Coach",
+      "Nutritionist",
+      "Chiropractor",
+    ],
+  },
+  {
+    label: "Science & Research",
+    content: [
+      "Research Scientist",
+      "Lab Technician",
+      "Biologist",
+      "Chemist",
+      "Physicist",
+      "Environmental Scientist",
+      "Geologist",
+      "Microbiologist",
+      "Data Scientist",
+      "Clinical Research Coordinator",
+    ],
+  },
 ];
+
+
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -244,7 +476,7 @@ export default function Home() {
     <main>
       <>
         {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-        <section className=" mt-16 py-10 bg-blue-900 text-white">
+        <section className="mt-16 py-20 bg-white text-black">
           <Dialog open={showDialog}>
             <DialogContent onClick={handleDialogClose}>
               <div className="w-full flex">
@@ -271,10 +503,10 @@ export default function Home() {
               </div>
             </DialogContent>
           </Dialog>
-          <div className="flex justify-center items-center ">
-            <div className="flex flex-col gap-4 w-2/3">
-              <h1 className="font-extrabold text-5xl w-2/3">Generate <span className="text-blue-500">CV</span> that will land you the job you want.</h1>
-              <div className="grid grid-cols-2 gap-10  bg-blue-900 py-3 rounded-lg">
+          <div className="flex justify-center items-center px-36">
+            <div className="flex flex-col">
+              <h1 className="font-extrabold text-5xl pe-20 mb-6">Generate <span className="text-blue-500">CV</span> that will land you the job you want.</h1>
+              <div className="grid grid-cols-2 gap-10   py-3 rounded-lg">
                 <div>
                   <SearchBar jobRole={jobRole} setJobRole={setJobRole} options={options} />
                 </div>
@@ -286,15 +518,15 @@ export default function Home() {
             </div>
             <div>
 
-              <Image src="/jobcv-img.webp" width={200} height={300} alt="Job CV" />
+              <Image src="/recruitment-concept-with-laptop.png" width={600} height={700} alt="Job CV" />
             </div>
 
           </div>
 
         </section>
-        <section className="bg-blue-900 text-white">
-          <div className=" ms-40 ">
-            <TabMenu tabs={tabs} />
+        <section className="bg-white text-black">
+          <div className="container mx-auto p-4">
+          <TabMenu tabs={jobTabs} />
 
           </div>
         </section>

@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <>
       <footer
-        className="bg-[#fafbfd] z-20 relative"
+        className="bg-[#ffffff] z-20 relative"
         // style={{
         //   backgroundImage: "url('/banner-bg.svg')",
         //   backgroundPosition: "center",
@@ -23,7 +23,7 @@ export default function Footer() {
               <a href="/" className="flex items-center gap-2">
                 <Image
                   src={"/genies-career-hub-logo.png"}
-                  width={100}
+                  width={200}
                   height={100}
                   alt="newlogo"
                   className="w-50 h-auto object-contain"
@@ -36,9 +36,7 @@ export default function Footer() {
 
             <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
               <li>
-                <div
-                  className="text-black transition hover:text-blue-500"
-                >
+                <div className="text-black transition hover:text-blue-500">
                   <span className="sr-only">Facebook</span>
 
                   <svg
@@ -55,11 +53,9 @@ export default function Footer() {
                   </svg>
                 </div>
               </li>
- 
+
               <li>
-                <div
-                  className="text-black transition hover:text-pink-500"
-                >
+                <div className="text-black transition hover:text-pink-500">
                   <span className="sr-only">Instagram</span>
 
                   <svg
@@ -78,9 +74,7 @@ export default function Footer() {
               </li>
 
               <li>
-                <div 
-                  className="text-black transition hover:text-sky-500"
-                >
+                <div className="text-black transition hover:text-sky-500">
                   <span className="sr-only">Twitter</span>
 
                   <svg
@@ -95,9 +89,7 @@ export default function Footer() {
               </li>
 
               <li>
-                <div 
-                  className="text-black transition hover:text-gray-600"
-                >
+                <div className="text-black transition hover:text-gray-600">
                   <span className="sr-only">GitHub</span>
 
                   <svg
@@ -116,9 +108,7 @@ export default function Footer() {
               </li>
 
               <li>
-                <div 
-                  className="text-black transition hover:text-red-700"
-                >
+                <div className="text-black transition hover:text-red-700">
                   <span className="sr-only">Dribbble</span>
 
                   <svg
@@ -144,12 +134,9 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="/builder"
-                    className="text-black transition"
-                  >
+                  <a href="/builder" className="text-black transition">
                     CV Curator
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -158,8 +145,8 @@ export default function Footer() {
                     href="/resumeAnalyzer-dashboard"
                     className="text-black transition"
                   >
-                     CV Analyser
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    CV Analyser
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -187,7 +174,7 @@ export default function Footer() {
                   >
                     {" "}
                     About{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -197,17 +184,14 @@ export default function Footer() {
                     className="text-black transition pointer-events-none"
                   >
                     Meet the Team
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
                 <li>
-                  <a
-                    href="/terms-condition"
-                    className="text-black transition"
-                  >
-                     Terms and Condition
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                  <a href="/terms-condition" className="text-black transition">
+                    Terms and Condition
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
               </ul>
@@ -218,12 +202,9 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="/contact-us"
-                    className="text-black transition"
-                  >
+                  <a href="/contact-us" className="text-black transition">
                     Contact
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -233,7 +214,7 @@ export default function Footer() {
                     className="text-black transition pointer-events-none"
                   >
                     FAQs
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -243,7 +224,7 @@ export default function Footer() {
                     className="text-black transition pointer-events-none"
                   >
                     Live Chat
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
               </ul>
@@ -260,7 +241,7 @@ export default function Footer() {
                   >
                     {" "}
                     Returns Policy{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -271,7 +252,7 @@ export default function Footer() {
                   >
                     {" "}
                     Refund Policy{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
 
@@ -282,7 +263,7 @@ export default function Footer() {
                   >
                     {" "}
                     Hiring Statistics{" "}
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
               </ul>
