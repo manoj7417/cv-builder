@@ -2,6 +2,7 @@ import Template1 from "./Template1";
 import Template10 from "./Template10";
 import Template11 from "./Template11";
 import Template13 from "./Template13";
+import Template15 from "./Template15";
 import Template2 from "./Template2";
 import Template3 from "./Template3";
 import Template4 from "./Template4";
@@ -37,6 +38,8 @@ export const GetTemplate = ({ name }) => {
       return <Template11 />;
       case "Template13":
         return <Template13 />;
+        case "Template15":
+        return <Template15 />;
     default:
       return <Template1  />;
   }

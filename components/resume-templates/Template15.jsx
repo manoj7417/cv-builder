@@ -267,7 +267,7 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Template13 = () => {
+const Template15 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
 
@@ -286,99 +286,174 @@ const Template13 = () => {
 
   return (
     <>
-      <div className="min-w-[210mm] min-h-[297mm] bg-white">
-        <div className="top_section bg-black p-10">
-          <div className="profile_details flex w-full h-full justify-between items-center">
-            <div className="profile_section w-1/2 mt-10">
-              <Profile
-                fontStyle={fontStyle}
-                colorStyle={metadata?.theme?.primary}
+      <div className="mx-auto w-[210mm] bg-white border-y-[15px] border-[#e4f2f2] my-20">
+        <div className="top_section bg-[#e4f2f2]">
+          <div className="bg-white py-3"></div>
+
+          <div className="user-details flex">
+            <div className="user_profile px-10">
+              <Image
+                src={"/pic.jpg"}
+                alt="pic"
+                width={150}
+                height={150}
+                className="w-100 h-100"
               />
             </div>
-            <div className="user_profile text-center">
-              <div className="user_name py-10">
-                <h1 className="text-3xl uppercase font-medium text-white tracking-widest">
-                  {basics?.name}
-                </h1>
-                <h4 className="text-base text-white tracking-widest mt-2">
-                  {basics?.jobtitle}
-                </h4>
-              </div>
-              <div className="user_image -mb-[100px]">
-                {basics?.picture?.url && (
-                  <Image
-                    src={"/pic.jpg" || basics.picture.url}
-                    width={250}
-                    height={250}
-                    alt="pic"
-                    className="mx-auto"
-                  />
-                )}
-              </div>
+            <div className="user_content px-10 py-10">
+              <h2 className="text-3xl uppercase font-medium text-black tracking-widest">
+                Michael Larsson
+              </h2>
+              <h4 className="text-base text-black tracking-widest mt-2">
+                Community Manager
+              </h4>
             </div>
           </div>
         </div>
-        <div className="bottom_section flex gap-10">
-          <div className="resume_details_1 w-1/2">
-            {/* work experiences */}
-            <section>
-              <div className="experience px-5">
-                <Experience
-                  fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
-                />
+        <div className="resume_details_section h-full p-10">
+          <div className="grid grid-cols-12">
+            <div className="col-span-4">
+              <div className="contact_details p-2">
+                <ul className="flex flex-col gap-3 mt-2 px-2">
+                  <li className="flex items-center gap-3">
+                    <FaPhone />
+                    <p className="underline underline-offset-4">+9876543210</p>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <FaLocationDot />
+                    <p className="underline underline-offset-4">
+                      123,Clock Tower,Paris
+                    </p>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <FaLinkedin />
+                    <p className="underline underline-offset-4">
+                      test@test.com
+                    </p>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <FaGlobe />
+                    <p className="underline underline-offset-4">www.test.vpm</p>
+                  </li>
+                </ul>
               </div>
-            </section>
-            {/* projects  */}
-            <section>
-              <div className="projects px-5">
-                <Projects
-                  fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
-                />
+              <div className="skills w-full px-5">
+                <div className="project_header mt-7">
+                  <h2 className="uppercase font-semibold text-xl mb-3">
+                    Skills
+                  </h2>
+                  <div className="border-b-2 border-gray-600 w-3/4"></div>
+                </div>
+                <div className="resume_info my-3">
+                  {val?.skills?.section.length > 0 &&
+                    val?.skills?.section?.map((item, idx) => (
+                      <ul
+                        className="list-disc skills_list text-center my-3 w-full h-full pl-5"
+                        key={idx}
+                      >
+                        <li className="skills_left mb-2 text-black text-start w-1/2">
+                          {item?.name}
+                        </li>
+                      </ul>
+                    ))}
+                </div>
               </div>
-            </section>
-          </div>
-          <div className="resume_details_2 w-1/2">
-            {/* education */}
-            <section>
-              <div className="education px-5 mt-20">
-                <Education fontStyle={fontStyle} />
-              </div>
-            </section>
-            {/* skill  */}
-            <div className="skills px-5 w-full">
-              <Skills fontStyle={fontStyle} />
             </div>
-          </div>
-        </div>
-        <div className="footer_section mt-4">
-          {/* contact details  */}
-          <div className="contact_details p-2">
-            <ul className="flex w-full justify-center gap-5 mt-2 px-2 ">
-              <li className="flex items-center gap-3">
-                <FaPhone />
-                {basics?.phone && <p>{basics?.phone}</p>}
-              </li>
-              <li className="flex items-center gap-3">
-                {(basics?.city || basics?.country) && (
-                  <p className="flex items-center break-words">
-                    <IoLocationOutline className="mr-2" />
-                    {basics?.city}
-                    {basics?.city && basics?.country && " , "}
-                    {basics?.country}
+            <div className="col-span-8">
+              {/* about me */}
+              <section>
+                <div className="profile_section">
+                  <div className="profile_header w-full">
+                    <h2 className="font-semibold text-xl uppercase my-2 text-gray-700">
+                      Overview
+                    </h2>
+                    <div className="border-b-2 border-gray-600 w-full"></div>
+                  </div>
+                  <p className="text-sm py-2 mt-3">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Ratione facilis enim, dolorum voluptas numquam a fugiat
+                    impedit. Itaque voluptate amet non, quis consequatur
+                    assumenda libero excepturi voluptatibus voluptatem
+                    accusantium totam?
                   </p>
-                )}
-              </li>
-              <li className="flex items-center gap-3">
-                <FaLinkedin />
-                {basics?.email && <p> {basics?.email}</p>}
-              </li>
-              <li className="flex items-center gap-3">
-                <FaGlobe />
-                <p>www.test.vpm</p>
-              </li>
-            </ul>
+                </div>
+              </section>
+              {/* projects  */}
+              <section>
+                <div className="projects">
+                  <div className="project_header my-3">
+                    <h2 className="uppercase font-semibold text-xl my-3">
+                      Projects
+                    </h2>
+                    <div className="border-b-2 border-gray-600  w-full"></div>
+                  </div>
+                  <div className="resume_info py-2 mt-3">
+                    {val?.experience?.section.length > 0 &&
+                      val?.experience?.section?.map((item, idx) => (
+                        <div className="resume_data flex mb-4 gap-5" key={idx}>
+                          <div className="year w-[30%]">
+                            <p className="font-semibold">{item?.year}</p>
+                          </div>
+                          <div className="content w-[70%]">
+                            <p className="font-bold">{item?.title}</p>
+                            <p>{item?.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </section>
+              {/* work experiences */}
+              <section>
+                <div className="experience">
+                  <div className="experience_header">
+                    <h2 className="uppercase font-semibold text-xl my-3">
+                      Work Experience
+                    </h2>
+                    <div className="border border-gray-600 w-full"></div>
+                  </div>
+                  <div className="resume_info py-2 mt-3">
+                    {val?.experience?.section.length > 0 &&
+                      val?.experience?.section?.map((item, idx) => (
+                        <div className="resume_data flex mb-4 gap-5" key={idx}>
+                          <div className="year w-[30%]">
+                            <p className="font-semibold">{item?.year}</p>
+                          </div>
+                          <div className="content w-[70%]">
+                            <p className="font-bold">{item?.title}</p>
+                            <p>{item?.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </section>
+              {/* education */}
+              <section>
+                <div className="education">
+                  <div className="education_header">
+                    <h2 className="font-semibold text-xl uppercase my-3">
+                      Education
+                    </h2>
+                    <div className="border border-gray-600 w-full"></div>
+                  </div>
+                  <div className="resume_info py-2 mt-3">
+                    {val?.education?.section.length > 0 &&
+                      val?.education?.section.map((item, idx) => (
+                        <div className="resume_data flex mb-4 gap-5" key={idx}>
+                          <div className="year w-[30%]">
+                            <p className="font-semibold">{item?.year}</p>
+                          </div>
+                          <div className="content w-[70%]">
+                            <p className="font-bold">{item?.title}</p>
+                            <p>{item?.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </div>
@@ -386,4 +461,4 @@ const Template13 = () => {
   );
 };
 
-export default Template13;
+export default Template15;
