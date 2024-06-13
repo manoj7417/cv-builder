@@ -68,7 +68,7 @@ const Header = () => {
           <div className="logo">
             <a href="/" className="flex items-center gap-2">
               <Image
-                src={"/genies career hub logo.png"}
+                src={"/genies-career-hub-logo.png"}
                 width={100}
                 height={100}
                 alt="newlogo"
@@ -88,7 +88,7 @@ const Header = () => {
                 href="/resume-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
-                CV Studio
+                CV Creator
               </Link>
             </li>
             <li>
@@ -96,13 +96,13 @@ const Header = () => {
                 href="resumeAnalyzer-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
-                CV Analyzer
+                CV Optimiser
               </Link>
             </li>
             {/* FeedBack  */}
             <li>
               <Link className="hover:font-bold text-blue-950 text-base" href="/jobCV">
-                Job-Fit CV<span className="text-sm font-bold ml-1 text-blue-900">beta</span>
+                Job-Fit CV<span className="text-sm font-bold ml-1 text-blue-900">(beta)</span>
               </Link>
             </li>
             <li>

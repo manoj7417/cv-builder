@@ -5,6 +5,7 @@ import a3 from "../../public/animations/a3.json";
 import Lottie from "lottie-react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import "./getStarted.css"; // Import the CSS file
+import Link from "next/link";
 
 const GetStartedModal = ({ onClose }) => {
   const [visible, setVisible] = useState(false);
@@ -21,16 +22,19 @@ const GetStartedModal = ({ onClose }) => {
   const animations = [a1, a2, a3];
   const descriptions = [
     {
-      title: "CV Studio",
+      title: "CV Creator",
       description: "Create stunning resumes tailored to your job search.",
+      link: "/resume-dashboard",
     },
     {
-      title: "CV Analyzer",
+      title: "CV Optimiser",
       description: "Optimize your resume to get past ATS systems.",
+      link: "resumeAnalyzer-dashboard",
     },
     {
       title: "Job Fit CV",
       description: "Customize your CV to match the job you're applying for.",
+      link: "jobCV",
     },
   ];
 
@@ -69,16 +73,19 @@ const GetStartedModal = ({ onClose }) => {
                 />
                 <div className="p-5 border-t-2 border-gray-200 bg-white text-white rounded-b-lg">
                   <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
-                    {descriptions[index].title}
+                    {descriptions[index]?.title}
                   </h5>
                   <div className="flex justify-between items-center">
                     <p className="mb-3 font-normal text-sm text-gray-700">
-                      {descriptions[index].description}
+                      {descriptions[index]?.description}
                     </p>
-                    <a href="#" className="read-more-button">
+                    <Link
+                      href={descriptions[index]?.link}
+                      className="read-more-button"
+                    >
                       Try
                       <FaArrowAltCircleRight className="arrow-icon w-3.5 h-3.5 ml-2" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -220,10 +220,10 @@ export function ServiceSection() {
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
               <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">
-                Stay Connected with the Genie!
+              Stay Ahead of the Curve!
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-                Subscribe to our newsletter and get latest updates.
+                Subscribe to our newsletter and get the latest updates.
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">

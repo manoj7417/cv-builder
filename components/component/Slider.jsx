@@ -335,17 +335,13 @@ export default function Slider() {
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-t from-white to-[#5dcafd33]">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
-          Curating CVs that Reflect
+          Creating CVs that Reflect
           <br />
           <span className="flex text-[#2C98CA] text-5xl justify-center">Perfection
             <Image src="/Vector.svg" height={37} width={39} /> </span>
         </h2>
         <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">
-          Explore unlimited possibilities with the power of a perfectly crafted
-          CV by creating one that aligns with your Professional Profile,
-          employing our customised Curriculum Vitae templates. If you already
-          have a resume, you can easily rectify it to create an ATS (Application
-          Tracking Score) optimized CV with structured formatting.
+        Explore unlimited possibilities with the power of a precision-crafted CV by creating one that aligns with your Professional Profile, employing our customised Curriculum Vitae templates.
         </p>
 
         {/* <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
