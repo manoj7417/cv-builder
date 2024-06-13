@@ -136,7 +136,7 @@ export default function TabResume() {
         <div className="rounded-t-xl p-6">
           <div className="tabs_heading">
             <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
-              Discover CV that fits your job role
+            Discover CVs that fit your Dream Job
             </h2>
             <p className="w-1/2 mx-auto text-center my-4">
               Explore unlimited possibilities with the power of a perfectly

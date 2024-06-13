@@ -15,15 +15,15 @@ export default function CourseSlider() {
   const stepsResumeData = [
     {
       id: 1,
-      stepHeading: "CV Curator",
+      stepHeading: "CV CREATOR",
       stepDetails:
-        "Looking to create a CV that impresses potential recruiters right away? Discover limitless CV creation with our AI-enhanced Genies Pro CV Creator by exploring our curated collection of CV templates. Craft a resume with expert CV designs with the assistance of Artificial Intelligence meticulously developed to rectify errors, elevate structure, enrich content and finally, discover your Curriculum Vitae making it through the cut.",
+        "Looking for an impressive CV Template? Discover limitless CV creation with our AI-enhanced CV Services. Explore our curated collection of CV templates to craft a resume that’s not just impressive, but a true reflection of your professional aspirations. Our AI-powered CV Maker is meticulously designed to rectify errors, elevate structure, and enrich content",
     },
     {
       id: 2,
       stepHeading: "CV Optimiser",
       stepDetails:
-        "Looking to create a CV that impresses potential recruiters right away? Discover limitless CV creation with our AI-enhanced Genies Pro CV Creator by exploring our curated collection of CV templates. Craft a resume with expert CV designs with the assistance of Artificial Intelligence meticulously developed to rectify errors, elevate structure, enrich content and finally, discover your Curriculum Vitae making it through the cut.",
+        "Is your CV optimised for the job you are dreaming of? Analyse, optimise and enhance your CV with our Genies Pro CV Optimizer and stand out in the competitive job market. Ensure that your CV passes through every Application Tracking Software and impresses the employer. Run it through the analyser and optimise it with the AI’s recommendations to match the exact requirements of the desired job profile.",
     },
     {
       id: 3,
@@ -44,13 +44,14 @@ export default function CourseSlider() {
     <div className="bg-white rounded-3xl p-10 steps_slider shadow-2xl">
       <div className="steps_slider_title mb-5">
         <h2 className="text-3xl text-blue-900 font-bold">
-          A Step Closer to Your <span className="font-bold text-[#2C98CA]">Dream Job</span>
+          A Step Closer to Your Dream Job with
+          <span className="font-bold text-[#2C98CA]"> Genies Pro Studio</span>
         </h2>
         <p className="text-base mt-3">
-          You can get your CV engineered in minutes with seamless CV Building.
-          Start your job application process quickly while ensuring that your
-          profile reflects the exact requisites of the job you have always
-          dreamt of.
+          Our AI-driven Genie CV Pro Studio is a comprehensive suite of three
+          pioneering, revolutionary tools. It’s your personal career coach.
+          Broaden your professional journey with dual dynamics, the CV Creator
+          and the CV Optimiser.
         </p>
       </div>
       <Swiper
@@ -74,7 +75,6 @@ export default function CourseSlider() {
               <div className="steps_details text-base font-medium">
                 {item.stepDetails}
               </div>
-              
             </div>
           </SwiperSlide>
         ))}

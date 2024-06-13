@@ -13,13 +13,13 @@ import { FaUserLarge } from "react-icons/fa6";
 import "./header.css"
 
 const navigation = [
-  { name: "CV Studio", href: "/resume-dashboard", current: true },
+  { name: "CV Creator", href: "/resume-dashboard", current: true },
   {
-    name: "CV Analyser",
+    name: "CV Optimiser",
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "Job Fit CV", href: "/coming-soon", current: false },
+  { name: "Job Fit CV", href: "/coming-soon", current: false ,isBeta:true},
 ];
 
 function classNames(...classes) {
@@ -79,7 +79,7 @@ export default function NewResumeHeader() {
                   <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/latestLogorm.png"}
+                        src={"/genies-career-hub-logo.png"}
                         width={100}
                         height={100}
                         alt="newlogo"
@@ -104,6 +104,9 @@ export default function NewResumeHeader() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
+                          {item.isBeta && (
+                            <span className="text-sm font-bold ml-1 text-blue-900">(Beta)</span>
+                          )}
                         </a>
                       ))}
                     </div>
