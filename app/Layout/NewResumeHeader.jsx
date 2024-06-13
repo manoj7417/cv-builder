@@ -51,7 +51,7 @@ export default function NewResumeHeader() {
   }, []);
 
   return (
-    <div className={`fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
+    <div className={`border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
       <Disclosure>
         {({ open }) => (
           <>

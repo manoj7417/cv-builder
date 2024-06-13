@@ -84,40 +84,40 @@ const Header = () => {
             </label>
             {/* Resume Navs  */}
             <li>
-              <a
-                href="#"
+              <Link
+                href="/resume-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
                 CV Studio
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="resumeAnalyzer-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
                 CV Analyzer
-              </a>
+              </Link>
             </li>
             {/* FeedBack  */}
             <li>
-              <a className="hover:font-bold text-blue-950 text-base" href="#">
+              <Link className="hover:font-bold text-blue-950 text-base" href="/jobCV">
                 Job-Fit CV
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="hover:font-bold text-blue-950 text-base" href="#">
+              <Link className="hover:font-bold text-blue-950 text-base" href="/coming-soon">
                 Career Coaching
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className=" text-blue-950 text-base hover:font-bold"
                 href="https://www.careergenies.co.uk/blog"
                 target="_blank"
               >
                 Blog
-              </a>
+              </Link>
             </li>
             {/* Auth buttons  */}
           </ul>
