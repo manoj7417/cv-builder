@@ -23,6 +23,7 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
 import { GetTokens } from "@/app/actions";
 import { createNewJobProfileResume } from "@/app/pages/api/api";
+import { toast } from "react-toastify";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
