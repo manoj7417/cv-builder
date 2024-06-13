@@ -294,8 +294,6 @@ const Template10 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
 
-
-
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
