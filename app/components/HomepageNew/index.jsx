@@ -113,9 +113,7 @@ export default function HomepageNew() {
                 <span className="2xl:ml-3 lg:ml-2">TALENT!</span>
               </h1>
               <p className="max-w-[800px] text-center text-[#7C7C7C] text-[18px]">
-                Enriching Professional Experiences and Building Success Stories
-                that Resonate with Dreams with Premium CV Templates and
-                Industry-Focused Career Counselling.
+              We believe in bridging the gap between your aspirations and the perfect job role that matches your skills. With our intuitive job matching system and dedicated support, we empower you to take the leap towards a career that ignites your professional drive.
               </p>
             </div>
             <div className="flex lg:flex-row justify-center  flex-col  min-[400px]:flex-row ">

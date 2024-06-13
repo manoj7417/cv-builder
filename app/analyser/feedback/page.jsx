@@ -132,7 +132,7 @@ const FeedbackFuction = () => {
         <div className="bg-blue-50 w-full h-[400px] flex items-center justify-center">
           <div className="main_heading_section">
             <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug pb-5 text-blue-900 mt-24">
-              CV Analyser Insights
+              CV Optimiser Insights
             </h1>
             <div className="flex justify-center text-center mt-10">
               <button
@@ -173,7 +173,7 @@ const FeedbackFuction = () => {
               <div className="recommendation_section bg-white shadow-lg py-10 px-5 mt-3 rounded-md">
                 <h3 className="text-xl font-bold">RECOMMENDATIONS</h3>
                 <p className="text-sm my-2">
-                  Get assistance from our CV Analyser to get a profound analysis
+                  Get assistance from our CV Optimiser to get a profound analysis
                   as per industry standards and get recommendations accordingly.
                 </p>
                 <div className="recommandation_list border-l-4 border-[#F89A14] p-5">

@@ -505,7 +505,7 @@ export default function Home() {
           </Dialog>
           <div className="flex justify-center items-center px-36">
             <div className="flex flex-col">
-              <h1 className="font-extrabold text-5xl pe-20 mb-6">Generate <span className="text-blue-500">CV</span> that will land you the job you want.</h1>
+              <h1 className="font-extrabold text-5xl pe-20 mb-6">Generate the <span className="text-blue-500">CV</span> that will land you the job you desire!</h1>
               <div className="grid grid-cols-2 gap-10   py-3 rounded-lg">
                 <div>
                   <SearchBar jobRole={jobRole} setJobRole={setJobRole} options={options} />

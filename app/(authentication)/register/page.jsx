@@ -72,7 +72,7 @@ export default function Register() {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    Curated CVs
+                    Custom CVs
                   </span>
                 </li>
                 <li className="flex items-center space-x-3">
@@ -112,7 +112,7 @@ export default function Register() {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    ATS Optimization
+                    ATS Optimisation
                   </span>
                 </li>
                 <li className="flex items-center space-x-3">
@@ -132,7 +132,7 @@ export default function Register() {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    AI-Based CV Builder
+                    AI-Based CV Creator
                   </span>
                 </li>
               </ul>
@@ -188,13 +188,13 @@ export default function Register() {
                     className="text-base font-medium text-gray-900"
                   >
                     {" "}
-                    Email address{" "}
+                    Email Address{" "}
                   </label>
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="email"
-                      placeholder="Email"
+                      placeholder="Email Address"
                       id="email"
                       {...register("email", {
                         required: {
