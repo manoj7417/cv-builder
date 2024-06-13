@@ -102,7 +102,7 @@ const Header = () => {
             {/* FeedBack  */}
             <li>
               <Link className="hover:font-bold text-blue-950 text-base" href="/jobCV">
-                Job-Fit CV<span className="text-sm font-bold ml-1 text-blue-900">(beta)</span>
+                CV Match<span className="text-sm font-bold ml-1 text-blue-900">(beta)</span>
               </Link>
             </li>
             <li>

@@ -14,7 +14,7 @@ const Education = ({ fontStyle, headingColor }) => {
     (state) => state?.resume.data.sections?.education
   );
   return (
-    <div className="education_section w-full px-10">
+    <div className="education_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="education_header">
@@ -74,7 +74,7 @@ const Experience = ({ fontStyle, headingColor }) => {
   );
 
   return (
-    <div className="experience_section w-full mt-5 px-10">
+    <div className="experience_section w-full mt-5">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="experience_header w-full">
@@ -133,7 +133,7 @@ const Experience = ({ fontStyle, headingColor }) => {
 const Projects = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
-    <div className="project_section my-4 px-10">
+    <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
         <>
           <div className="project_heading w-full">
@@ -203,16 +203,15 @@ const Skills = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
+        <div className="skills_section py-4 mt-10">
           <h2
-            className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+            className={`uppercase text-white text-2xl font-bold text-center ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
             }}
           >
             {data?.name}
           </h2>
-          <div className="border-b-2 border-gray-600"></div>
           <div className="text-gray-600 w-full flex justify-end items-center">
             <ul className="w-full">
               {data.items.map((item, i) => {
@@ -222,12 +221,12 @@ const Skills = ({ fontStyle, headingColor }) => {
                     className={`flex items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1">
+                    <div className="text-start w-1/2 mb-1 text-white">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-black h-2.5"
+                        className="bg-yellow-400 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -248,7 +247,7 @@ const Profile = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && (
-        <div className="profile_section w-full px-10">
+        <div className="profile_section w-full">
           <div className="profile_heading w-full">
             <h2
               className={`text-gray-700 font-semibold uppercase ${fontStyle.headingFont}`}
@@ -267,7 +266,7 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Template15 = () => {
+const Template17 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
 
@@ -286,13 +285,13 @@ const Template15 = () => {
 
   return (
     <>
-      <div className="mx-auto w-[210mm] bg-white border-y-[15px] border-[#e4f2f2]">
-        <div className="top_section bg-[#e4f2f2]">
-          <div className="bg-white py-3"></div>
-
-          <div className="user-details flex">
-            <div className="user_profile px-10">
-              {basics?.picture?.url && (
+      <div className="mx-auto w-[210mm] h-[297mm] bg-white">
+        <div className="w-full h-auto grid md:grid-cols-12 grid-cols-1">
+          <div className="col-span-1 md:col-span-4 bg-black flex flex-col items-center justify-start">
+            <div className="w-full h-80 bg-black">
+              <div>
+                <div className="profile-pic">
+                {basics?.picture?.url && (
                 <Image
                   src={"/pic.jpg" || basics.picture.url}
                   width={250}
@@ -301,105 +300,138 @@ const Template15 = () => {
                   className="mx-auto"
                 />
               )}
+                </div>
+              </div>
             </div>
-            <div className="user_content px-1 py-10">
-              <h2 className="text-3xl uppercase font-medium text-black tracking-widest">
-                Michael Larsson
-              </h2>
-              <h4 className="text-base text-black tracking-widest mt-2">
-                Account Manager
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div className="resume_details_section h-full p-10">
-          <div className="grid grid-cols-12">
-            <div className="col-span-4">
-              <div className="contact_details p-2">
-                <h2
-                  className={`mb-2 font-semibold uppercase ${fontStyle.headingFont}`}
-                >
-                  Contact Me
-                </h2>
-                <div className="border-b-2 border-gray-600"></div>
-                <ul className="flex flex-col gap-3 mt-2 px-2">
-                  <li className="flex items-center gap-3">
-                    {basics?.phone && (
+
+            <div className="w-full flex flex-col items-start justify-start mt-6 gap-6">
+               {/* phone */}
+              <div className="w-full grid grid-cols-12">
+                <div className="col-span-3 w-full h-6 bg-yellow-400"></div>
+                <div className="col-span-9">
+                  <div className="w-full h-6 bg-[rgba(45,45,45,0.6)] px-3 flex items-center">
+                    <p className="text-sm font-semibold text-gray-200">Phone</p>
+                  </div>
+                  {basics?.phone && (
                       <a
                         href={`tel:${basics?.phone}`}
                         className="hover:underline flex items-center mt-1  text-wrap w-full "
                       >
                         <MdOutlinePhone className="mr-2" />
-                        <p className="w-[90%] text-wrap break-words">
+                        <p className="w-[90%] text-wrap break-words text-white">
                           {basics?.phone}
                         </p>
                       </a>
                     )}
-                  </li>
-                  <li className="flex items-center gap-3">
-                    {(basics?.city || basics?.country) && (
-                      <p className="flex items-center">
-                        <IoLocationOutline className="text-black" />
-                        <span>{basics?.city}</span>
-                        <span>{basics?.city && basics?.country && " , "}</span>
-                        <span className="">{basics?.country}</span>
-                      </p>
-                    )}
-                  </li>
-                  <li className="flex items-center gap-3">
-                    {basics?.email && (
+                </div>
+              </div>
+
+              {/* email */}
+              <div className="w-full grid grid-cols-12">
+                <div className="col-span-3 w-full h-6 bg-yellow-400"></div>
+                <div className="col-span-9">
+                  <div className="w-full h-6 bg-[rgba(45,45,45,0.6)] px-3 flex items-center">
+                    <p className="text-sm font-semibold text-gray-200">Email</p>
+                  </div>
+                  {basics?.email && (
                       <a
                         href={`mailto:${basics?.email}`}
                         className="hover:underline flex items-center mt-1  text-wrap w-full "
                       >
                         <MdOutlineMailOutline className="mr-2" />
-                        <p className="w-[90%] text-wrap break-words">
+                        <p className="w-[90%] text-wrap break-words text-white">
                           {basics?.email}
                         </p>
                       </a>
                     )}
-                  </li>
-                </ul>
+                </div>
               </div>
-              <div className="skills w-full px-5">
-                <Skills fontStyle={fontStyle} />
+
+              {/* website */}
+              <div className="w-full grid grid-cols-12">
+                <div className="col-span-3 w-full h-6 bg-yellow-400"></div>
+                <div className="col-span-9">
+                  <div className="w-full h-6 bg-[rgba(45,45,45,0.6)] px-3 flex items-center">
+                    <p className="text-sm font-semibold text-gray-200">
+                      Website
+                    </p>
+                  </div>
+                  <p className="bg-transparent outline-none border-none text-xs px-3 mt-2 text-gray-200 w-full">
+                    www.test.com
+                  </p>
+                </div>
+              </div>
+
+              {/* address */}
+              <div className="w-full grid grid-cols-12">
+                <div className="col-span-3 w-full h-6 bg-yellow-400"></div>
+                <div className="col-span-9">
+                  <div className="w-full h-6 bg-[rgba(45,45,45,0.6)] px-3 flex items-center">
+                    <p className="text-sm font-semibold text-gray-200">
+                      Address
+                    </p>
+                  </div>
+                  {(basics?.city || basics?.country) && (
+                      <p className="flex items-center text-white ml-2">
+                        <IoLocationOutline className="text-white" />
+                        <span>{basics?.city}</span>
+                        <span>{basics?.city && basics?.country && " , "}</span>
+                        <span className="">{basics?.country}</span>
+                      </p>
+                    )}
+                </div>
+              </div>
+              {/* skill  */}
+              <div className="skills p-5 w-full mb-4">
+              <Skills fontStyle={fontStyle} />
               </div>
             </div>
-            <div className="col-span-8">
-              {/* about me */}
-              <section>
-                <div className="profile_section">
-                  <Profile
-                    fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
-                  />
-                </div>
-              </section>
-              {/* projects  */}
-              <section>
-                <div className="projects">
-                  <Projects
-                    fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
-                  />
-                </div>
-              </section>
-              {/* work experiences */}
-              <section>
-                <div className="experience">
-                  <Experience
-                    fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
-                  />
-                </div>
-              </section>
+          </div>
+          <div className="col-span-1 md:col-span-8 flex flex-col items-center justify-start py-6 bg-white border border-gray-400">
+            {/* User name and occupation */}
+            <div className="w-full bg-yellow-400 py-6">
+              <div className="user-details p-5">
+                <h2 className="text-3xl uppercase font-medium text-black">
+                  <span className="font-bold"> {basics?.name || "Michael"}</span>
+                </h2>
+                <h4 className="text-base text-black tracking-wider">
+                {basics?.jobtitle || "Inside Sales Manager"}
+                </h4>
+              </div>
+            </div>
+            {/* about me */}
+            <section>
+              <div className="profile_section p-5">
+              <Profile
+                fontStyle={fontStyle}
+                colorStyle={metadata?.theme?.primary}
+              />
+              </div>
+            </section>
+            {/* projects  */}
+            <section>
+              <div className="projects p-5">
+              <Projects
+                fontStyle={fontStyle}
+                colorStyle={metadata?.theme?.primary}
+              />
+              </div>
+            </section>
+            {/* work experiences */}
+            <section>
+              <div className="experience p-5">
+              <Experience
+                fontStyle={fontStyle}
+                colorStyle={metadata?.theme?.primary}
+              />
+              </div>
+            </section>
               {/* education */}
-              <section>
-                <div className="education">
-                  <Education fontStyle={fontStyle} />
-                </div>
-              </section>
-            </div>
+            <section>
+              <div className="education p-5">
+              <Education fontStyle={fontStyle} />
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -407,4 +439,4 @@ const Template15 = () => {
   );
 };
 
-export default Template15;
+export default Template17;
