@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import a1 from "../../public/animations/a1.json";
+import a2 from "../../public/animations/a2.json";
+import a3 from "../../public/animations/a3.json";
+import Lottie from "lottie-react";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import "./getStarted.css"; // Import the CSS file
 
 const GetStartedModal = ({ onClose }) => {
   const [visible, setVisible] = useState(false);
@@ -12,6 +18,22 @@ const GetStartedModal = ({ onClose }) => {
     setTimeout(onClose, 300); // Delay to match the transition duration
   };
 
+  const animations = [a1, a2, a3];
+  const descriptions = [
+    {
+      title: "CV Studio",
+      description: "Create stunning resumes tailored to your job search.",
+    },
+    {
+      title: "CV Analyzer",
+      description: "Optimize your resume to get past ATS systems.",
+    },
+    {
+      title: "Job Fit CV",
+      description: "Customize your CV to match the job you're applying for.",
+    },
+  ];
+
   return (
     <>
       <div
@@ -21,20 +43,47 @@ const GetStartedModal = ({ onClose }) => {
         onClick={handleClose}
       />
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white p-8 z-50 transition-transform duration-300 transform ${
+        className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-8 z-50 transition-transform duration-300 transform ${
           visible ? "translate-y-0" : "translate-y-full"
         }`}
       >
         {/* Modal content */}
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Modal Content</h2>
-          <p className="text-gray-600">This is the content of the modal.</p>
-          <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-            onClick={handleClose}
-          >
-            Close
-          </button>
+        <h1 className="text-3xl font-bold text-center mb-1">
+          Use the best <span className="text-blue-500">CV</span> generator tool
+        </h1>
+        <p className="text-center text-gray-500 text-lg mb-10">
+          You can reach your dream job faster with Genies Career Hub
+        </p>
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-20 ">
+            {animations.map((animation, index) => (
+              <div
+                key={index}
+                className="card glass-card max-w-xs border-2  border-gray-200 rounded-xl shadow flex flex-col items-center hover:shadow-blue-500/50 transition-shadow duration-300"
+              >
+                <Lottie
+                  animationData={animation}
+                  loop={true}
+                  autoplay={true}
+                  style={{ height: 200, width: "100%" }}
+                />
+                <div className="p-5 border-t-2 border-gray-200 bg-white text-white rounded-b-lg">
+                  <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
+                    {descriptions[index].title}
+                  </h5>
+                  <div className="flex justify-between items-center">
+                    <p className="mb-3 font-normal text-sm text-gray-700">
+                      {descriptions[index].description}
+                    </p>
+                    <a href="#" className="read-more-button">
+                      Try
+                      <FaArrowAltCircleRight className="arrow-icon w-3.5 h-3.5 ml-2" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

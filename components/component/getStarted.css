@@ -1,0 +1,44 @@
+/* getStarted.css */
+@keyframes arrowMove {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+.read-more-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background-color: black; /* bg-blue-700 */
+  border-radius: 3rem;
+  transition: background-color 0.3s;
+}
+
+.read-more-button:hover {
+  background-color: #1e40af; /* bg-blue-800 */
+}
+
+.read-more-button:hover .arrow-icon {
+  animation: arrowMove 0.5s infinite;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(10, 31, 52, 0.4); /* Blue shadow on hover */
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
