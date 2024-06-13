@@ -38,7 +38,15 @@ import { toast } from "react-toastify";
 import { Textarea } from "../ui/textarea";
 // import Template13 from "../resume-templates/Template13";
 
-const ImageTemplates = ['Template1', "Template3", 'Template10','Template11','Template13','Template17']
+const ImageTemplates = [
+  "Template1",
+  "Template3",
+  "Template10",
+  "Template11",
+  "Template13",
+  "Template14",
+  "Template18",
+];
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
