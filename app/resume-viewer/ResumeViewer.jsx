@@ -97,6 +97,12 @@ const images = [
     src: "/Template11.png",
     alt: "Template11.png",
     type: templateType.premium
+  },
+  {
+    name: "Template13",
+    src: "/Template13.png",
+    alt: "Template13.png",
+    type: templateType.premium
   }
 ]
 
