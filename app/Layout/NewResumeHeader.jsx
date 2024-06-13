@@ -28,7 +28,7 @@ const navigation = [
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "Job Fit CV", href: "/coming-soon", current: false ,isBeta:true},
+  { name: "CV Match", href: "/jobCV", current: false ,isBeta:true},
 ];
 
 function classNames(...classes) {
@@ -86,7 +86,7 @@ export default function NewResumeHeader() {
                   <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/genies career hub logo.png"}
+                        src={"/genies-career-hub-logo.png"}
                         width={100}
                         height={100}
                         alt="newlogo"

@@ -17,19 +17,19 @@ export default function CourseSlider() {
       id: 1,
       stepHeading: "CV CREATOR",
       stepDetails:
-        "Looking for an impressive CV Template? Discover limitless CV creation with our AI-enhanced CV Services. Explore our curated collection of CV templates to craft a resume that’s not just impressive, but a true reflection of your professional aspirations. Our AI-powered CV Maker is meticulously designed to rectify errors, elevate structure, and enrich content",
+        "Looking to create a CV that impresses potential recruiters right away? Discover limitless CV creation with our AI-enhanced Genies Pro CV Creator by exploring our curated collection of CV templates. Craft a resume with expert CV designs with the assistance of Artificial Intelligence meticulously developed to rectify errors, elevate structure, enrich content and finally, discover your Curriculum Vitae making it through the cut.",
     },
     {
       id: 2,
       stepHeading: "CV Optimiser",
       stepDetails:
-        "Is your CV optimised for the job you are dreaming of? Analyse, optimise and enhance your CV with our Genies Pro CV Optimizer and stand out in the competitive job market. Ensure that your CV passes through every Application Tracking Software and impresses the employer. Run it through the analyser and optimise it with the AI’s recommendations to match the exact requirements of the desired job profile.",
+        "Is your CV optimised for the job you are dreaming of? Analyse, optimise and enhance your CV with our Genies Pro CV Optimiser and stand out in the competitive job market. Ensure that your CV passes through every Application Tracking Software and impresses the employer. Run it through the analyser and optimise it with the AI’s recommendations to match the exact requirements of the desired job profile.",
     },
     {
       id: 3,
-      stepHeading: "Genie Assistant",
+      stepHeading: "CV Match",
       stepDetails:
-        "Looking to create a CV that impresses potential recruiters right away? Discover limitless CV creation with our AI-enhanced Genies Pro CV Creator by exploring our curated collection of CV templates. Craft a resume with expert CV designs with the assistance of Artificial Intelligence meticulously developed to rectify errors, elevate structure, enrich content and finally, discover your Curriculum Vitae making it through the cut.",
+        "Searching for the exact CV that matches the job profile and description? Get the perfect curriculum vitae template crafted for the Job you are applying for with the power of Artificial Intelligence. Discover the strength of a CV that is precisely tailored to the Job Role you are aiming for. Simply share your requirements and let the Genies Pro CV Match find the best resumes that reflect your skills and purpose.",
     },
   ];
 
@@ -48,10 +48,7 @@ export default function CourseSlider() {
           <span className="font-bold text-[#2C98CA]"> Genies Pro Studio</span>
         </h2>
         <p className="text-base mt-3">
-          Our AI-driven Genie CV Pro Studio is a comprehensive suite of three
-          pioneering, revolutionary tools. It’s your personal career coach.
-          Broaden your professional journey with dual dynamics, the CV Creator
-          and the CV Optimiser.
+        Our AI-driven Genie CV Pro Studio is a comprehensive suite of three pioneering, revolutionary tools. It’s your personal career coach. Broaden your professional journey with triple dynamics, the CV Creator, the CV Optimiser, and the CV Match.
         </p>
       </div>
       <Swiper

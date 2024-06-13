@@ -14,23 +14,23 @@ const FAQSection = () => {
   const faqData = [
     {
       id: 1,
-      ques: "What are the benefits of using AI-based services for CV creation?",
-      ans: "Our AI tools help you create a professional CV with ease, ensuring it stands out to potential employers.",
+      ques: "How does AI help me make better CV templates?",
+      ans: "The Genies Career Hub integrates Artificial Intelligence to create CV templates and add content that exactly matches the job role. It rules out the possibility of mistakes and automates the process of resume creation.",
     },
     {
       id: 2,
-      ques: "How can I optimize my CV for a specific job application?",
-      ans: "With our AI-powered services, you can optimize your CV for any job application, making you a top candidate.",
+      ques: "What does the Genies Career Hub’s Pro CV Curriculum Vitae Creator do?",
+      ans: "The Genies Career Hub’s Pro CV Curriculum Vitae Creator helps you create your resume with its pre-created templates and provides specific suggestions with respect to content, skills, and designs. Additionally, the AI-based Genie assists you in creating a flawless resume that is grammatically correct and skillfully loaded.",
     },
     {
       id: 3,
-      ques: "How do I tailor my CV to match the specific requirements of a job?",
-      ans: "Tailor your CV to match the specific requirements of your dream job with our advanced AI solutions.",
+      ques: "How is Genies Pro CV Optimiser different from CV Builder?",
+      ans: "The Genies Pro CV Optimiser is much different from a CV Builder. It is an AI-integrated tool that helps you analyse and refine your CV by integrating the best available resources into your CV formation. The optimised CV that you can get through the Optimiser complies with the Application Tracking Software ATS and is built to impress potential recruiters.",
     },
     {
       id: 4,
-      ques: "What tools can help highlight my strengths and experiences on my CV?",
-      ans: "Leverage our AI technology to highlight your strengths and experiences in the most effective way possible.",
+      ques: "How does CV Match help me find the CV Vitae Template for my job role? ",
+      ans: "The Genies Pro CV Match is the third tool in the CV Studio suit at the Genies Career Hub. It matches your inputs on job descriptions with the exact CV Vitae Template, as required by the job profile. Created by inculcating Artificial Intelligence, the CV Match is one of the easiest ways to automate the CV-making process while ensuring that a custom and tailored resume is produced.",
     },
     // {
     //   id: 5,
@@ -68,23 +68,23 @@ const FAQSection = () => {
       <div className="faq_section bg-gradient-to-b from-white to-[#2C98CA33] px-10 py-20">
         <div className="faq_title">
           <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
-            Frequently asked questions!
+            Frequently Asked Questions!
           </h2>
           <p className="w-1/2 mx-auto text-center my-4">
-            Explore unlimited possibilities with the power of a perfectly
-            crafted CV by creating one that aligns with your Professional
-            Profile, employing our customised Curriculum Vitae templates
+            Want to know more about Genies Career Hub, Genies Pro CV Studio, and
+            Career Coaching? <br />
+            We have answered a few of your questions.
           </p>
         </div>
         <div className="accordion_content max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 gap-10">
           {faqData?.map((item, index) => (
-                <AccordionItem
-                  open={index === open}
-                  key={index}
-                  ques={item?.ques}
-                  ans={item?.ans}
-                  toggle={() => toggle(index)}
-                />
+            <AccordionItem
+              open={index === open}
+              key={index}
+              ques={item?.ques}
+              ans={item?.ans}
+              toggle={() => toggle(index)}
+            />
           ))}
         </div>
       </div>
