@@ -88,7 +88,7 @@ const Header = () => {
                 href="/resume-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
-                CV Studio
+                CV Creator
               </Link>
             </li>
             <li>
@@ -96,7 +96,7 @@ const Header = () => {
                 href="resumeAnalyzer-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
-                CV Analyzer
+                CV Optimiser
               </Link>
             </li>
             {/* FeedBack  */}

@@ -135,22 +135,23 @@ const Experience = ({ fontStyle, headingColor }) => {
 const Projects = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
-    <div className="project_section my-4">
+    <div className="project_section my-4 px-10">
       {data?.visible && data?.items.length > 0 && (
         <>
-          <div className="project_heading w-full flex gap-3 items-center">
+          <div className="project_heading w-full">
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}
+              className={`font-semibold uppercase ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
               }}
             >
               {data?.name}
             </h2>
+            <div className="border-b-2 border-gray-600"></div>
           </div>
           {data?.items.map((item, index) => {
             return (
-              <div className="projects1 w-full my-3 px-5" key={index}>
+              <div className="projects1 w-full my-3" key={index}>
                 <div className="post my-2">
                   <div className="post_title">
                     <h3
@@ -249,10 +250,10 @@ const Profile = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && (
-        <div className="profile_section w-full">
+        <div className="profile_section w-full px-10">
           <div className="profile_heading w-full">
             <h2
-              className={`text-gray-700 font-semibold uppercase ${fontStyle.headingFont} px-5`}
+              className={`text-gray-700 font-semibold uppercase ${fontStyle.headingFont}`}
             >
               {data?.name}
             </h2>

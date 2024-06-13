@@ -22,12 +22,12 @@ const GetStartedModal = ({ onClose }) => {
   const animations = [a1, a2, a3];
   const descriptions = [
     {
-      title: "CV Studio",
+      title: "CV Creator",
       description: "Create stunning resumes tailored to your job search.",
       link: "/resume-dashboard",
     },
     {
-      title: "CV Analyzer",
+      title: "CV Optimiser",
       description: "Optimize your resume to get past ATS systems.",
       link: "resumeAnalyzer-dashboard",
     },

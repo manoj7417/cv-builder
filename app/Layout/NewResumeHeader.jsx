@@ -13,9 +13,9 @@ import { FaUserLarge } from "react-icons/fa6";
 import "./header.css"
 
 const navigation = [
-  { name: "CV Studio", href: "/resume-dashboard", current: true },
+  { name: "CV Creator", href: "/resume-dashboard", current: true },
   {
-    name: "CV Analyser",
+    name: "CV Optimiser",
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },

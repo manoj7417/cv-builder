@@ -32,36 +32,36 @@ const FAQSection = () => {
       ques: "What tools can help highlight my strengths and experiences on my CV?",
       ans: "Leverage our AI technology to highlight your strengths and experiences in the most effective way possible.",
     },
-    {
-      id: 5,
-      ques: "How can AI ensure my CV meets industry standards?",
-      ans: "Our AI-driven CV creator ensures your resume meets industry standards and catches the eye of recruiters.",
-    },
-    {
-      id: 6,
-      ques: "What are the best ways to customize my CV for different job positions?",
-      ans: "Use our AI services to customize your CV for any position, increasing your chances of landing an interview.",
-    },
-    {
-      id: 7,
-      ques: "Where can I find sample CVs to help create a standout resume?",
-      ans: "Our sample CVs and AI enhancements provide the perfect starting point to create a standout resume.",
-    },
-    {
-      id: 8,
-      ques: "How can AI tools help format and polish my CV?",
-      ans: "AI tools help you format and polish your CV to perfection, making it compelling and professional.",
-    },
-    {
-      id: 9,
-      ques: "How do I ensure my CV is error-free and impactful?",
-      ans: "Ensure your CV is error-free and impactful with the help of our intelligent CV-making services.",
-    },
-    {
-      id: 10,
-      ques: "How can AI services adapt to my specific CV needs?",
-      ans: "Our AI-based CV services adapt to your needs, helping you craft a resume that aligns perfectly with job requirements.",
-    },
+    // {
+    //   id: 5,
+    //   ques: "How can AI ensure my CV meets industry standards?",
+    //   ans: "Our AI-driven CV creator ensures your resume meets industry standards and catches the eye of recruiters.",
+    // },
+    // {
+    //   id: 6,
+    //   ques: "What are the best ways to customize my CV for different job positions?",
+    //   ans: "Use our AI services to customize your CV for any position, increasing your chances of landing an interview.",
+    // },
+    // {
+    //   id: 7,
+    //   ques: "Where can I find sample CVs to help create a standout resume?",
+    //   ans: "Our sample CVs and AI enhancements provide the perfect starting point to create a standout resume.",
+    // },
+    // {
+    //   id: 8,
+    //   ques: "How can AI tools help format and polish my CV?",
+    //   ans: "AI tools help you format and polish your CV to perfection, making it compelling and professional.",
+    // },
+    // {
+    //   id: 9,
+    //   ques: "How do I ensure my CV is error-free and impactful?",
+    //   ans: "Ensure your CV is error-free and impactful with the help of our intelligent CV-making services.",
+    // },
+    // {
+    //   id: 10,
+    //   ques: "How can AI services adapt to my specific CV needs?",
+    //   ans: "Our AI-based CV services adapt to your needs, helping you craft a resume that aligns perfectly with job requirements.",
+    // },
   ];
   return (
     <>
