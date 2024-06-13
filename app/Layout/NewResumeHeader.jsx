@@ -19,7 +19,7 @@ const navigation = [
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "CV Match", href: "/coming-soon", current: false ,isBeta:true},
+  { name: "CV Match", href: "/jobCV", current: false ,isBeta:true},
 ];
 
 function classNames(...classes) {
