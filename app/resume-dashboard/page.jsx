@@ -455,7 +455,7 @@ export default function DashboardIdea() {
                   Craft the Perfect CV for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
-                  Curated by Professionals and Industry Experts from all across
+                  Created by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
                   forward CV Template options that are custom-tailored to the
                   job you are applying for, to ensure that your CV gets through
