@@ -129,7 +129,7 @@ export default function HomepageNew() {
                 />
               </div> */}
               <div className="button_wrapper mt-8">
-                <button className="get_start_btn">
+                <button className="get_start_btn" onClick={handleButtonClick}>
                   <span className="btn_text">Get Started</span>
                   <div className="btn_overlay">
                     <svg
@@ -165,14 +165,8 @@ export default function HomepageNew() {
               </Tilt>
             </div>
             {showFloatingButton && (
-              <div className="floating_button flex justify-center text-center w-full h-full items-center">
-                {/* <button
-                  className="px-10 py-2 text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 w-[20%] z-50"
-                  onClick={handleButtonClick}
-                >
-                  Get Started
-                </button> */}
-                <div className="button_wrapper mt-8 mb-10">
+              <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
+                <div className="button_wrapper mb-5">
                 <button className="get_start_btn floating"  onClick={handleButtonClick}>
                   <span className="btn_text">Get Started</span>
                   <div className="btn_overlay">
@@ -200,7 +194,7 @@ export default function HomepageNew() {
         </div>
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
-      </section>
+      </section>  
       <Slider />
       <TabResume />
       <WorkTogether />

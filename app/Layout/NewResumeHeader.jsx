@@ -10,6 +10,7 @@ import { deleteCookie } from 'cookies-next';
 import { useUserStore } from "../store/UserStore";
 import { RemoveTokens } from "../actions";
 import { FaUserLarge } from "react-icons/fa6";
+import "./header.css"
 
 const navigation = [
   { name: "CV Studio", href: "/resume-dashboard", current: true },
@@ -18,7 +19,7 @@ const navigation = [
     href: "/resumeAnalyzer-dashboard",
     current: false,
   },
-  { name: "Job File CV", href: "/coming-soon", current: false },
+  { name: "Job Fit CV", href: "/coming-soon", current: false },
 ];
 
 function classNames(...classes) {
@@ -50,7 +51,7 @@ export default function NewResumeHeader() {
   }, []);
 
   return (
-    <div className={`fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
+    <div className={`border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
       <Disclosure>
         {({ open }) => (
           <>
@@ -97,8 +98,8 @@ export default function NewResumeHeader() {
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? "text-blue-900" : "text-blue-900",
-                            "rounded-md px-3 py-2 text-sm flex items-center justify-center font-semibold"
+                            item.current ? "text-blue-950" : "text-blue-950",
+                            "rounded-md px-3 py-2 text-base flex items-center justify-center"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >

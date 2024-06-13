@@ -43,10 +43,9 @@ export default function CourseSlider() {
   return (
     <div className="bg-white rounded-3xl p-10 steps_slider shadow-2xl">
       <div className="steps_slider_title mb-5">
-        <h3 className="text-xl text-blue-900 font-bold">
-          A Step Closer to Your
-        </h3>
-        <h2 className="text-2xl text-[#2C98CA] font-bold">Dream Job</h2>
+        <h2 className="text-3xl text-blue-900 font-bold">
+          A Step Closer to Your <span className="font-bold text-[#2C98CA]">Dream Job</span>
+        </h2>
         <p className="text-base mt-3">
           You can get your CV engineered in minutes with seamless CV Building.
           Start your job application process quickly while ensuring that your

@@ -33,7 +33,7 @@ export const GetTemplate = ({ name }) => {
     case "Template10":
       return <Template10  />;
       case "Template11":
-      return <Template11  />;
+      return <Template11 />;
     default:
       return <Template1  />;
   }
