@@ -51,7 +51,7 @@ export default function NewResumeHeader() {
   }, []);
 
   return (
-    <div className={`border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
+    <div className={`new_resume_header border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
       <Disclosure>
         {({ open }) => (
           <>
@@ -92,19 +92,18 @@ export default function NewResumeHeader() {
                     </a>
                   </div>
                   <div className="hidden sm:ml-6 sm:block h-full w-full">
-                    <div className="flex justify-center items-center space-x-4 h-full">
+                    <div className="flex justify-center items-center space-x-10 h-full">
                       {navigation.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
                           className={classNames(
                             item.current ? "text-blue-950" : "text-blue-950",
-                            "rounded-md px-3 py-2 text-base flex items-center justify-center"
+                            "rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                          <IoIosArrowDown className="inline ml-1 text-sm" />
                         </a>
                       ))}
                     </div>

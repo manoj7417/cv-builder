@@ -141,7 +141,7 @@
 }
 
 
-.mobile_responsive_nav .nav-links li a::before{
+.mobile_responsive_nav .nav-links li a::before {
   transition: 300ms;
   height: 5px;
   content: "";
@@ -709,7 +709,8 @@ footer a:hover svg {
 
 .steps_slider .mySwiper .swiper-pagination {
   position: absolute;
-  top: 0; /* Adjust this value as needed */
+  top: 0;
+  /* Adjust this value as needed */
   left: 0;
   /* transform: translateX(-50%); */
   z-index: 10;
@@ -744,8 +745,53 @@ footer a:hover svg {
 .separator {
   width: 1px;
   height: 100%;
-  background-color: #ccc; /* Adjust color as needed */
-  margin-left: 20px; /* Adjust margin as needed */
+  background-color: #ccc;
+  /* Adjust color as needed */
+  margin-left: 20px;
+  /* Adjust margin as needed */
 }
 
 /* Course Slider CSS Ends Here  */
+
+
+
+/* New Header CSS Starts Here  */
+.new_resume_header .nav-link {
+
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #031D44;
+  padding: 20px 0px;
+  margin: 0px 20px;
+  display: inline-block;
+  position: relative;
+  opacity: 0.75;
+
+}
+
+
+
+.new_resume_header .nav-link:hover {
+  opacity: 1;
+}
+
+.new_resume_header .nav-link::before {
+  transition: 300ms;
+  height: 5px;
+  content: "";
+  position: absolute;
+  background-color: #031D44;
+}
+
+
+.new_resume_header .nav-link-grow-up::before {
+  height: 0%;
+  width: 100%;
+  bottom: 0px;
+}
+
+.new_resume_header .nav-link-grow-up:hover::before {
+  height: 5px;
+}
