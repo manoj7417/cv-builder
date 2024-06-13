@@ -458,9 +458,14 @@ export default function Home() {
     setShowMultiStepDialog(true)
   }
 
-  const handleGenerateNow = () => {
+  const handleGenerateNow = async () => {
     if (!jobRole) {
       return toast.error("Please select a job role")
+    }
+    const { accessToken } = await GetTokens()
+    if (!accessToken) {
+      router.push('/login?redirect=/jobCV')
+      return;
     }
     setShowDialog(true)
   }
