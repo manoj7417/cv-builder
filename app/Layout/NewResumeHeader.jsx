@@ -1,16 +1,25 @@
 "use client";
 import { Fragment, useState, useEffect } from "react";
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-toastify";
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie } from "cookies-next";
 import { useUserStore } from "../store/UserStore";
 import { RemoveTokens } from "../actions";
 import { FaUserLarge } from "react-icons/fa6";
-import "./header.css"
+import "./header.css";
 
 const navigation = [
   { name: "CV Studio", href: "/resume-dashboard", current: true },
@@ -51,7 +60,11 @@ export default function NewResumeHeader() {
   }, []);
 
   return (
-    <div className={`new_resume_header border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? 'bg-white' : 'bg-transparent'}`}>
+    <div
+      className={`new_resume_header border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${
+        scrollY > 0 ? "bg-white" : "bg-transparent"
+      }`}
+    >
       <Disclosure>
         {({ open }) => (
           <>
@@ -63,15 +76,9 @@ export default function NewResumeHeader() {
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
-                      <XMarkIcon
-                        className="block h-6 w-6"
-                        aria-hidden="true"
-                      />
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                     ) : (
-                      <Bars3Icon
-                        className="block h-6 w-6"
-                        aria-hidden="true"
-                      />
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                     )}
                   </DisclosureButton>
                 </div>
@@ -79,7 +86,7 @@ export default function NewResumeHeader() {
                   <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/latestLogorm.png"}
+                        src={"/genies career hub logo.png"}
                         width={100}
                         height={100}
                         alt="newlogo"
@@ -115,7 +122,10 @@ export default function NewResumeHeader() {
                       <MenuButton className="relative rounded-full bg-blue-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                        <BellIcon
+                          className="h-6 w-6 text-white"
+                          aria-hidden="true"
+                        />
                       </MenuButton>
                     </div>
                     <Transition
