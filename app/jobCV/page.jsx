@@ -361,7 +361,7 @@ export default function Home() {
   const [jobRole, setJobRole] = useState('')
   const userState = useUserStore((state) => state.userState);
   const [showDialog, setShowDialog] = useState(false)
-  const [showMultiStepDialog, setShowMultiStepDialog] = useState(false)
+  const [showMultiStepDialog, setShowMultiStepDialog] = useState(true)
   const [steps, setSteps] = useState(1)
   const inputRef = useRef()
   const { userdata } = useUserStore(state => state.userState)
@@ -458,9 +458,14 @@ export default function Home() {
     setShowMultiStepDialog(true)
   }
 
-  const handleGenerateNow = () => {
+  const handleGenerateNow = async () => {
     if (!jobRole) {
       return toast.error("Please select a job role")
+    }
+    const { accessToken } = await GetTokens()
+    if (!accessToken) {
+      router.push('/login?redirect=/jobCV')
+      return;
     }
     setShowDialog(true)
   }
