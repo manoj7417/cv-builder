@@ -1283,7 +1283,7 @@ export const JobResumeSchema = [
                 }
             },
             "metadata": {
-                "template": "Template9",
+                "template": "Template15",
                 "page": {
                     "format": {
                         "type": "a4"
@@ -1479,7 +1479,7 @@ export const JobResumeSchema = [
                 }
             },
             "metadata": {
-                "template": "Template9",
+                "template": "Template13",
                 "page": {
                     "format": {
                         "type": "a4"
@@ -1677,7 +1677,7 @@ export const JobResumeSchema = [
                 }
             },
             "metadata": {
-                "template": "Template9",
+                "template": "Template16",
                 "page": {
                     "format": {
                         "type": "a4"
