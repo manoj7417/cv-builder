@@ -36,16 +36,18 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "../ui/textarea";
+// import Template13 from "../resume-templates/Template13";
 
-const ImageTemplates = ['Template1', "Template3", 'Template10']
+const ImageTemplates = ["Template1", "Template3", "Template10", "Template13"];
 
 export default function Form() {
   const data = useResumeStore((state) => state.resume.data);
-  const resumeData = useResumeStore(state => state.resume)
-  const setResumeData = useResumeStore((state) => state.
-    setResumeData)
-  const updateBasicAndSectionsData = useResumeStore((state) => state.updateBasicAndSectionsData)
-  const updateResume = useUserStore(state => state.updateResume)
+  const resumeData = useResumeStore((state) => state.resume);
+  const setResumeData = useResumeStore((state) => state.setResumeData);
+  const updateBasicAndSectionsData = useResumeStore(
+    (state) => state.updateBasicAndSectionsData
+  );
+  const updateResume = useUserStore((state) => state.updateResume);
   const { sections } = data;
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState({
@@ -72,16 +74,18 @@ export default function Form() {
 
   const handleEducationChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedEducationItems = data.sections.education.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          [name]: value,
-        };
+    const updatedEducationItems = data.sections.education.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            [name]: value,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.education.items', updatedEducationItems);
+    );
+    setResumeData("sections.education.items", updatedEducationItems);
   };
 
   const handleEducationStartDateChange = (val, i) => {
@@ -94,16 +98,18 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedEducationItems = data.sections.education.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          startDate: newDate,
-        };
+    const updatedEducationItems = data.sections.education.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            startDate: newDate,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.education.items', updatedEducationItems);
+    );
+    setResumeData("sections.education.items", updatedEducationItems);
   };
 
   const handleEducationEndDateChange = (val, i) => {
@@ -116,56 +122,64 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedEducationItems = data.sections.education.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          endDate: newDate,
-        };
+    const updatedEducationItems = data.sections.education.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            endDate: newDate,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.education.items', updatedEducationItems);
+    );
+    setResumeData("sections.education.items", updatedEducationItems);
   };
 
   const handleEducationDescriptionChange = (val, i) => {
-    const updatedEducationItems = data.sections.education.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          description: val,
-        };
+    const updatedEducationItems = data.sections.education.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            description: val,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.education.items', updatedEducationItems);
+    );
+    setResumeData("sections.education.items", updatedEducationItems);
   };
 
   const handleExperienceChange = (e, i) => {
     const { name, value } = e.target;
-    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          [name]: value,
-        };
+    const udpatedExperienceItems = data.sections.experience.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            [name]: value,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.experience.items', udpatedExperienceItems);
+    );
+    setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
   const handleExperienceDescriptionChange = (val, i) => {
-    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          description: val,
-        };
+    const udpatedExperienceItems = data.sections.experience.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            description: val,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.experience.items', udpatedExperienceItems);
+    );
+    setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
   const handleExperienceStartDateChange = (val, i) => {
@@ -178,16 +192,18 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          startDate: newDate,
-        };
+    const udpatedExperienceItems = data.sections.experience.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            startDate: newDate,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.experience.items', udpatedExperienceItems);
+    );
+    setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
   const handleExperienceEndDateChange = (val, i) => {
@@ -200,16 +216,18 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          endDate: newDate,
-        };
+    const udpatedExperienceItems = data.sections.experience.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            endDate: newDate,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.experience.items', udpatedExperienceItems);
+    );
+    setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
   const handleAddNewEducation = () => {
@@ -245,65 +263,77 @@ export default function Form() {
 
   const handleExperienceHighlightsChange = (i, e) => {
     let val = e.target.value;
-    const highlightsArray = val.split("\n")
-    const udpatedExperienceItems = data.sections.experience.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          highlights: highlightsArray
+    const highlightsArray = val.split("\n");
+    const udpatedExperienceItems = data.sections.experience.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            highlights: highlightsArray,
+          };
         }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.experience.items', udpatedExperienceItems);
-  }
+    );
+    setResumeData("sections.experience.items", udpatedExperienceItems);
+  };
 
   const handleDeleteExperienceSection = (i) => {
-    const udpatedExperienceItems = data.sections.experience.items.filter((el, index) => {
-      return index !== i;
-    })
-    setResumeData('sections.experience.items', udpatedExperienceItems);
+    const udpatedExperienceItems = data.sections.experience.items.filter(
+      (el, index) => {
+        return index !== i;
+      }
+    );
+    setResumeData("sections.experience.items", udpatedExperienceItems);
   };
 
   const handleDeleteEducationSection = (i) => {
-    const updatedEducationItems = data.sections.education.items.filter((el, index) => {
-      return index !== i;
-    })
-    setResumeData('sections.education.items', updatedEducationItems);
+    const updatedEducationItems = data.sections.education.items.filter(
+      (el, index) => {
+        return index !== i;
+      }
+    );
+    setResumeData("sections.education.items", updatedEducationItems);
   };
 
   const handleProjectChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          [name]: value,
-        };
+    const updatedProjectItems = data.sections.projects.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            [name]: value,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.projects.items', updatedProjectItems);
+    );
+    setResumeData("sections.projects.items", updatedProjectItems);
   };
 
   const handleProjectDescriptionChange = (val, i) => {
-    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          description: val,
-        };
+    const updatedProjectItems = data.sections.projects.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            description: val,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.projects.items', updatedProjectItems);
+    );
+    setResumeData("sections.projects.items", updatedProjectItems);
   };
 
   const handleDeleteProjectSection = (i) => {
-    const updatedProjectItems = data.sections.projects.items.filter((el, index) => {
-      return index !== i;
-    })
-    setResumeData('sections.projects.items', updatedProjectItems);
+    const updatedProjectItems = data.sections.projects.items.filter(
+      (el, index) => {
+        return index !== i;
+      }
+    );
+    setResumeData("sections.projects.items", updatedProjectItems);
   };
 
   const handleAddNewProject = () => {
@@ -330,16 +360,18 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          startDate: newDate,
-        };
+    const updatedProjectItems = data.sections.projects.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            startDate: newDate,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.projects.items', updatedProjectItems);
+    );
+    setResumeData("sections.projects.items", updatedProjectItems);
   };
 
   const handleProjectEndDateChange = (val, i) => {
@@ -352,16 +384,18 @@ export default function Form() {
       const monthName = date.toLocaleString("en-US", { month: "short" });
       newDate = `${monthName}-${year}`;
     }
-    const updatedProjectItems = data.sections.projects.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          endDate: newDate,
-        };
+    const updatedProjectItems = data.sections.projects.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            endDate: newDate,
+          };
+        }
+        return item;
       }
-      return item;
-    })
-    setResumeData('sections.projects.items', updatedProjectItems);
+    );
+    setResumeData("sections.projects.items", updatedProjectItems);
   };
 
   const handleTemplateThemeChange = (color) => {
@@ -401,15 +435,15 @@ export default function Form() {
         };
       }
       return item;
-    })
-    setResumeData('sections.skills.items', updatedSkills);
+    });
+    setResumeData("sections.skills.items", updatedSkills);
   };
 
   const handleDeleteSkills = (i) => {
     const updatedSkills = data.sections.skills.items.filter((el, index) => {
       return index !== i;
-    })
-    setResumeData('sections.skills.items', updatedSkills);
+    });
+    setResumeData("sections.skills.items", updatedSkills);
   };
 
   const handleSkillLevelChange = (val, i) => {
@@ -421,8 +455,8 @@ export default function Form() {
         };
       }
       return item;
-    })
-    setResumeData('sections.skills.items', updatedSkills);
+    });
+    setResumeData("sections.skills.items", updatedSkills);
   };
 
   const handleGenerateProfileSummary = async () => {
@@ -452,30 +486,27 @@ export default function Form() {
           jobTitle: "",
         },
         skills: "",
-      })
-      setSteps(1)
-      handleCloseAIDialog()
+      });
+      setSteps(1);
+      handleCloseAIDialog();
     }
   };
 
-
-
   const handleOpenAIDialog = () => {
-    setIsDialogOpen(true)
-  }
+    setIsDialogOpen(true);
+  };
 
   const handleCloseAIDialog = () => {
-    setIsDialogOpen(false)
-  }
-
+    setIsDialogOpen(false);
+  };
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
-      console.log(state)
-      updateResume(state.resume._id, state.resume)
-    })
+      console.log(state);
+      updateResume(state.resume._id, state.resume);
+    });
     return unsubs;
-  })
+  });
 
   return (
     <>
@@ -491,10 +522,12 @@ export default function Form() {
           </div>
         )}
         <div className="lg:px-10 px-5">
-          {ImageTemplates.includes(data.metadata.template) && <div className="w-full ">
-            <Label>Avatar</Label>
-            <ImageUpload />
-          </div>}
+          {ImageTemplates.includes(data.metadata.template) && (
+            <div className="w-full ">
+              <Label>Avatar</Label>
+              <ImageUpload />
+            </div>
+          )}
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
             <div className="space-y-2 my-2">
               <Label htmlFor="name">Name</Label>
@@ -502,7 +535,7 @@ export default function Form() {
                 id="name"
                 placeholder="Enter your name"
                 name="name"
-                onChange={(e) => setResumeData('basics.name', e.target.value)}
+                onChange={(e) => setResumeData("basics.name", e.target.value)}
                 value={data?.basics?.name}
               />
             </div>
@@ -513,7 +546,9 @@ export default function Form() {
                 placeholder="Enter Job Title"
                 name="jobtitle"
                 type="text"
-                onChange={(e) => setResumeData('basics.jobtitle', e.target.value)}
+                onChange={(e) =>
+                  setResumeData("basics.jobtitle", e.target.value)
+                }
                 value={data?.basics?.jobtitle}
               />
             </div>
@@ -526,7 +561,7 @@ export default function Form() {
                 placeholder="Enter your email address"
                 type="email"
                 name="email"
-                onChange={(e) => setResumeData('basics.email', e.target.value)}
+                onChange={(e) => setResumeData("basics.email", e.target.value)}
                 value={data?.basics?.email}
               />
             </div>
@@ -537,7 +572,7 @@ export default function Form() {
                 placeholder="Enter phone number"
                 name="phone"
                 value={data?.basics?.phone}
-                onChange={(e) => setResumeData('basics.phone', e.target.value)}
+                onChange={(e) => setResumeData("basics.phone", e.target.value)}
               />
             </div>
           </div>
@@ -560,7 +595,7 @@ export default function Form() {
                 id="city"
                 placeholder="Enter City Name"
                 name="city"
-                onChange={(e) => setResumeData('basics.city', e.target.value)}
+                onChange={(e) => setResumeData("basics.city", e.target.value)}
                 value={data?.basics?.city}
               />
             </div>
@@ -581,15 +616,21 @@ export default function Form() {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={data?.sections?.summary?.name}
-                  onChange={(e) => setResumeData("sections.summary.name", e.target.value)}
+                  onChange={(e) =>
+                    setResumeData("sections.summary.name", e.target.value)
+                  }
                 />
               </div>
-              <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+              <Dialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+              >
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
                     className=" bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 border-none"
-                    onClick={handleOpenAIDialog}>
+                    onClick={handleOpenAIDialog}
+                  >
                     Generate with AI
                     <FaCrown className=" text-yellow-500 ml-2" />
                   </Button>
@@ -639,7 +680,9 @@ export default function Form() {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={data?.sections?.education?.name}
-                  onChange={(e) => setResumeData('sections.education.name', e.target.value)}
+                  onChange={(e) =>
+                    setResumeData("sections.education.name", e.target.value)
+                  }
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -817,8 +860,7 @@ export default function Form() {
               onClick={handleAddNewEducation}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
-              Add one more{" "}
-              {`${data?.sections?.education?.name}`.toLowerCase()}
+              Add one more {`${data?.sections?.education?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -834,7 +876,9 @@ export default function Form() {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={data?.sections?.experience?.name}
-                  onChange={(e) => setResumeData('sections.experience.name', e.target.value)}
+                  onChange={(e) =>
+                    setResumeData("sections.experience.name", e.target.value)
+                  }
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -888,7 +932,8 @@ export default function Form() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -980,7 +1025,7 @@ export default function Form() {
                               </div>
                             </div>
                             <div className="space-y-2 mt-5 mb-12 px-2">
-                              <Label >Description</Label>
+                              <Label>Description</Label>
                               <ReactQuill
                                 id="Profile"
                                 theme="snow"
@@ -996,8 +1041,14 @@ export default function Form() {
                               />
                             </div>
                             <div className="space-y-2  mt-9 px-2">
-                              <Label >Highlights</Label>
-                              <Textarea value={item?.highlights?.join("\n") || []} className="text-10px h-[150px] no-scrollbar" onChange={(e) => handleExperienceHighlightsChange(index, e)} />
+                              <Label>Highlights</Label>
+                              <Textarea
+                                value={item?.highlights?.join("\n") || []}
+                                className="text-10px h-[150px] no-scrollbar"
+                                onChange={(e) =>
+                                  handleExperienceHighlightsChange(index, e)
+                                }
+                              />
                             </div>
                           </div>
                         </AccordionContent>
@@ -1018,8 +1069,7 @@ export default function Form() {
               onClick={handleAddNewExperience}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
-              Add one more{" "}
-              {`${data?.sections?.experience?.name}`.toLowerCase()}
+              Add one more {`${data?.sections?.experience?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -1035,7 +1085,9 @@ export default function Form() {
                 <CustomLabelInput
                   className="hidden group-hover:block"
                   value={data?.sections?.projects?.name}
-                  onChange={(e) => setResumeData('sections.projects.name', e.target.value)}
+                  onChange={(e) =>
+                    setResumeData("sections.projects.name", e.target.value)
+                  }
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -1194,8 +1246,7 @@ export default function Form() {
               onClick={handleAddNewProject}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
-              Add one more{" "}
-              {`${data?.sections?.projects?.name}`.toLowerCase()}
+              Add one more {`${data?.sections?.projects?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
@@ -1366,8 +1417,7 @@ export default function Form() {
                       }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                        data?.metadata?.theme?.primary === color &&
-                        "ring-1"
+                        data?.metadata?.theme?.primary === color && "ring-1"
                       )}
                       style={{ backgroundColor: color }}
                     />
@@ -1384,8 +1434,7 @@ export default function Form() {
                       }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
-                        data?.metadata?.theme?.primary === color &&
-                        "ring-1"
+                        data?.metadata?.theme?.primary === color && "ring-1"
                       )}
                       style={{ backgroundColor: color }}
                     />
