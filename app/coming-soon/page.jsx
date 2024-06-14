@@ -1,11 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
+import dynamic from 'next/dynamic';
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 
 const ComingSoonPage = () => {
   useEffect(() => {
-    AOS.init();
+    if (typeof window !== 'undefined') {
+      AOS.init();
+    }
   }, []);
 
   return (
@@ -27,7 +30,7 @@ const ComingSoonPage = () => {
             Coming Soon
           </h1>
           <p className="text-black text-xl md:text-2xl">
-            We are working hard to bring you something amazing.Stay tuned!
+            We are working hard to bring you something amazing. Stay tuned!
           </p>
         </div>
       </div>
@@ -35,4 +38,4 @@ const ComingSoonPage = () => {
   );
 };
 
-export default ComingSoonPage;
+export default dynamic(() => Promise.resolve(ComingSoonPage), { ssr: false });
