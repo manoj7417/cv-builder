@@ -454,21 +454,23 @@ export const JobResumeSchema = [
     {
         name: "Software Engineer",
         data: {
-            basics: "JASMINE BELL",
-            email: "name.surname@gmail.com",
-            phone: "212-312-7001",
-            country: "CA",
-            city: "Austin TX",
-            jobtitle: "Software Engineer",
-            url: {
-                label: "",
-                href: "",
-            },
-            customFields: [],
-            picture: {
-                url: "",
-                visible: true
-            },
+            basics: {
+                name: "JASMINE BELL",
+                email: "name.surname@gmail.com",
+                phone: "212-312-7001",
+                country: "CA",
+                city: "Austin TX",
+                jobtitle: "Software Engineer",
+                url: {
+                    label: "",
+                    href: "",
+                },
+                customFields: [],
+                picture: {
+                    url: "",
+                    visible: true
+                }
+            }
         },
         sections: {
             summary: {
@@ -1307,7 +1309,7 @@ export const JobResumeSchema = [
                 }
             }
         }
-        
+
     },
     {
         name: "Designer",
@@ -1503,7 +1505,7 @@ export const JobResumeSchema = [
                 }
             }
         }
-        
+
     },
     {
         name: "Marketing",
@@ -1701,6 +1703,6 @@ export const JobResumeSchema = [
                 }
             }
         }
-        
+
     },
 ]
