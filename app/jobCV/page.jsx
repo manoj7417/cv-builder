@@ -438,8 +438,9 @@ export default function Home() {
   }
 
   const handleCloseMultistepForm = () => {
+    console.log("Close Multistep Form")
     setShowMultiStepDialog(false)
-    setFormData({
+    setFormData(prevState => ({
       fullname: userdata?.fullname || '',
       email: userdata?.email || '',
       jobTitle: "",
@@ -450,7 +451,7 @@ export default function Home() {
       skills: [],
       education: [],
       projects: []
-    })
+    }))
   }
 
   const handleDontHaveCV = () => {
@@ -498,7 +499,7 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <Dialog open={showMultiStepDialog}>
-            <JobMultistepForm showMultiStepDialog={showMultiStepDialog} onClick={handleCloseMultistepForm} steps={steps} setSteps={setSteps} formData={formData} setFormData={setFormData} jobRole={jobRole} />
+            <JobMultistepForm showMultiStepDialog={showMultiStepDialog} handleCloseMultistepForm={handleCloseMultistepForm} steps={steps} setSteps={setSteps} formData={formData} setFormData={setFormData} jobRole={jobRole} />
           </Dialog>
           <Dialog open={generatingResume}>
             <DialogContent onClick showCloseButton>
@@ -531,7 +532,7 @@ export default function Home() {
         </section>
         <section className="bg-white text-black">
           <div className="container mx-auto p-4">
-          <TabMenu tabs={jobTabs} />
+            <TabMenu tabs={jobTabs} />
 
           </div>
         </section>
