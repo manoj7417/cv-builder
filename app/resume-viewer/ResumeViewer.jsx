@@ -154,14 +154,20 @@ const images = [
     type: templateType.premium,
   },
   {
+    name: "Template19",
+    src: "/Template19.png",
+    alt: "Template19.png",
+  },
+  {
     name: "Template20",
     src: "/Template20.png",
     alt: "Template20.png",
-    name: "Template19",
+    type: templateType.premium,
   },
   {
-    src: "/Template19.png",
-    alt: "Template19.png",
+    name: "Template22",
+    src: "/Template22.png",
+    alt: "Template22.png",
     type: templateType.premium,
   },
 ];

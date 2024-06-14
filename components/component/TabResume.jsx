@@ -36,13 +36,13 @@ export default function TabResume() {
       id: 1,
       name: "Business Analyst",
       icon: <FaPython className="text-[#3776AB]" />,
-      src: "/Template3.png",
+      src: "/Template20.png",
     },
     {
       id: 2,
       name: "Data Scientist",
       icon: <FaDatabase className="text-[#FF6F61]" />,
-      src: "/Template3.png",
+      src: "/Template19.png",
     },
     {
       id: 3,
@@ -66,7 +66,7 @@ export default function TabResume() {
       id: 6,
       name: "Teacher",
       icon: <FaPencilRuler className="text-[#3F51B5]" />,
-      src: "/Template5.png",
+      src: "/Template12.png",
     },
     {
       id: 7,
