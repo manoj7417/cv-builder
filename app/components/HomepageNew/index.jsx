@@ -112,7 +112,7 @@ export default function HomepageNew() {
                 <span className="2xl:ml-3 lg:ml-2">AI-POWERED </span>
                 <span className="2xl:ml-3 lg:ml-2">CV!</span>
               </h1>
-              <p className="max-w-[800px] text-center text-[#7C7C7C] text-[18px]">
+              <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
                 We believe in bridging the gap between your aspirations and the
                 perfect job role that matches your skills. With our intuitive
                 job matching system and dedicated support, we empower you to
