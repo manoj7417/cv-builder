@@ -219,7 +219,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 0;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`font-bold ${fontStyle.skillsFont} my-1`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -287,7 +287,7 @@ export const Template19 = () => {
   return (
     <>
       <div className="p-custom space-y-3">
-        <div className="bg-white mx-auto">
+        <div className="bg-white mx-auto w-full h-full">
           <div
             className="top_section flex justify-around items-center text-white py-10 clip-resume"
             style={{
@@ -314,7 +314,7 @@ export const Template19 = () => {
               </p>
             </div>
           </div>
-          <div className="resume_section flex flex-row w-[210mm] h-screen">
+          <div className="resume_section flex flex-row w-[210mm] h-full">
             <div className="md:w-[30%] w-full left_side bg-[#eee8e3] -mt-4">
               <div className="left_side p-5">
                 <div className="contact_section mt-5">

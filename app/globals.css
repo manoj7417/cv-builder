@@ -157,7 +157,7 @@
 .mobile_responsive_nav .nav-links li a::before {
   height: 0%;
   width: 80%;
-  bottom: -12px;
+  bottom: -20px;
 }
 
 .mobile_responsive_nav .nav-links li a:hover::before {
@@ -793,7 +793,7 @@ footer a:hover svg {
 .new_resume_header .nav-link-grow-up::before {
   height: 0%;
   width: 100%;
-  bottom: 0px;
+  bottom: -1px;
 }
 
 .new_resume_header .nav-link-grow-up:hover::before {

@@ -311,16 +311,26 @@ const Template20 = () => {
                 className="user_image "
                 style={{ border: "5px solid white", borderRadius: "17px" }}
               >
-                {basics?.picture?.url && (
+                {/* {basics?.picture?.url && (
                   <Image
-                    src={"/pic.jpg" || basics.picture.url}
+                    src={basics.picture.url}
                     width={250}
                     height={250}
                     alt="pic"
                     className="mx-auto"
                     style={{ borderRadius: "17px" }}
                   />
-                )}
+                )} */}
+                {basics?.picture?.url && (
+              <div className="profile_pic flex items-center justify-center">
+                <img
+                  src={basics?.picture?.url}
+                  alt="pic"
+                  className="w-250 h-250 object-cover"
+                  style={{ borderRadius: "17px" }}
+                />
+              </div>
+            )}
               </div>
             </div>
           </div>
