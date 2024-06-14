@@ -46,6 +46,7 @@ const ImageTemplates = [
   "Template13",
   "Template14",
   "Template18",
+  "Template20",
 ];
 
 export default function Form() {
