@@ -3,24 +3,24 @@ import React from "react";
 const TermsConditionPage = () => {
   return (
     <>
-      <div className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
-        <div class="container lg:max-w-6xl w-full mx-auto rounded-lg lg:p-0 p-5">
-          <h1 class="text-2xl font-bold mb-4">Terms and Conditions</h1>
+      <div classNameName="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
+        <div className="container lg:max-w-6xl w-full mx-auto rounded-lg lg:p-0 p-5">
+          <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
           <p>
             Welcome to <strong>Career Genies Hub</strong>!
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             These terms and conditions outline the rules and regulations for the
             use of <strong>Career Genies Hub</strong> Website, located at
             <strong> career-genies-hub.com</strong>.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             By accessing this website we assume you accept these terms and
             conditions. Do not continue to use
             <strong> Career Genies Hub</strong> if you do not agree to take all
             of the terms and conditions stated on this page.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">Terminology</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Terminology</h2>
           <p>
             The following terminology applies to these Terms and Conditions,
             Privacy Statement and Disclaimer Notice and all Agreements:
@@ -38,21 +38,21 @@ const TermsConditionPage = () => {
             and/or he/she or they, are taken as interchangeable and therefore as
             referring to same.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">Cookies</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Cookies</h2>
           <p>
             We employ the use of cookies. By accessing
             <strong> Career Genies Hub</strong>, you agreed to use cookies in
             agreement with the <strong>Career Genies Hub</strong> Privacy
             Policy.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             Most interactive websites use cookies to let us retrieve the
             user&apos;s details for each visit. Cookies are used by our website
             to enable the functionality of certain areas to make it easier for
             people visiting our website. Some of our affiliate/advertising
             partners may also use cookies.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">License</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">License</h2>
           <p>
             Unless otherwise stated, <strong> Career Genies Hub</strong> and/or
             its licensors own the intellectual property rights for all material
@@ -61,7 +61,7 @@ const TermsConditionPage = () => {
             <strong> Career Genies Hub</strong> for your own personal use
             subjected to restrictions set in these terms and conditions.
           </p>
-          <ul class="list-disc list-inside mt-4">
+          <ul className="list-disc list-inside mt-4">
             <li>
               Republish material from <strong>Career Genies Hub</strong>
             </li>
@@ -77,8 +77,8 @@ const TermsConditionPage = () => {
               Redistribute content from <strong>Career Genies Hub</strong>
             </li>
           </ul>
-          <p class="mt-4">This Agreement shall begin on the date hereof.</p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">Comments</h2>
+          <p className="mt-4">This Agreement shall begin on the date hereof.</p>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Comments</h2>
           <p>
             Parts of this website offer an opportunity for users to post and
             exchange opinions and information in certain areas of the website.
@@ -93,14 +93,14 @@ const TermsConditionPage = () => {
             suffered as a result of any use of and/or posting of and/or
             appearance of the Comments on this website.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             <strong>Career Genies Hub</strong> reserves the right to monitor all
             Comments and to remove any Comments which can be considered
             inappropriate, offensive or causes breach of these Terms and
             Conditions.
           </p>
-          <p class="mt-4">You warrant and represent that:</p>
-          <ul class="list-disc list-inside mt-4">
+          <p className="mt-4">You warrant and represent that:</p>
+          <ul className="list-disc list-inside mt-4">
             <li>
               You are entitled to post the Comments on our website and have all
               necessary licenses and consents to do so;
@@ -120,20 +120,20 @@ const TermsConditionPage = () => {
               custom or present commercial activities or unlawful activity.
             </li>
           </ul>
-          <p class="mt-4">
+          <p className="mt-4">
             You hereby grant <strong>Career Genies Hub</strong> a non-exclusive
             license to use, reproduce, edit and authorize others to use,
             reproduce and edit any of your Comments in any and all forms,
             formats or media.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">
+          <h2 className="text-xl font-semibold mt-6 mb-2">
             Hyperlinking to our Content
           </h2>
           <p>
             The following organizations may link to our Website without prior
             written approval:
           </p>
-          <ul class="list-disc list-inside mt-4">
+          <ul className="list-disc list-inside mt-4">
             <li>Government agencies;</li>
             <li>Search engines;</li>
             <li>News organizations;</li>
@@ -148,18 +148,18 @@ const TermsConditionPage = () => {
               groups which may not hyperlink to our Web site.
             </li>
           </ul>
-          <p class="mt-4">
+          <p className="mt-4">
             These organizations may link to our home page, to publications or to
             other Website information so long as the link: (a) is not in any way
             deceptive; (b) does not falsely imply sponsorship, endorsement or
             approval of the linking party and its products and/or services; and
             (c) fits within the context of the linking party&apos;s site.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             We may consider and approve other link requests from the following
             types of organizations:
           </p>
-          <ul class="list-disc list-inside mt-4">
+          <ul className="list-disc list-inside mt-4">
             <li>
               commonly-known consumer and/or business information sources;
             </li>
@@ -170,7 +170,7 @@ const TermsConditionPage = () => {
             <li>accounting, law and consulting firms; and</li>
             <li>educational institutions and trade associations.</li>
           </ul>
-          <p class="mt-4">
+          <p className="mt-4">
             We will approve link requests from these organizations if we decide
             that: (a) the link would not make us look unfavorably to ourselves
             or to our accredited businesses; (b) the organization does not have
@@ -179,14 +179,14 @@ const TermsConditionPage = () => {
             <strong> Career Genies Hub</strong>; and (d) the link is in the
             context of general resource information.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             These organizations may link to our home page so long as the link:
             (a) is not in any way deceptive; (b) does not falsely imply
             sponsorship, endorsement or approval of the linking party and its
             products or services; and (c) fits within the context of the linking
             party&apos;s site.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             If you are one of the organizations listed in paragraph 2 above and
             are interested in linking to our website, you must inform us by
             sending an e-mail to <strong>Career Genies Hub</strong>. Please
@@ -195,10 +195,10 @@ const TermsConditionPage = () => {
             intend to link to our Website, and a list of the URLs on our site to
             which you would like to link. Wait 2-3 weeks for a response.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             Approved organizations may hyperlink to our Website as follows:
           </p>
-          <ul class="list-disc list-inside mt-4">
+          <ul className="list-disc list-inside mt-4">
             <li>By use of our corporate name; or</li>
             <li>By use of the uniform resource locator being linked to; or</li>
             <li>
@@ -207,17 +207,17 @@ const TermsConditionPage = () => {
               linking party&apos;s site.
             </li>
           </ul>
-          <p class="mt-4">
+          <p className="mt-4">
             No use of <strong>Career Genies Hub</strong> logo or other artwork
             will be allowed for linking absent a trademark license agreement.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">iFrames</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">iFrames</h2>
           <p>
             Without prior approval and written permission, you may not create
             frames around our Webpages that alter in any way the visual
             presentation or appearance of our Website.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">Content Liability</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Content Liability</h2>
           <p>
             We shall not be hold responsible for any content that appears on
             your Website. You agree to protect and defend us against all claims
@@ -226,7 +226,7 @@ const TermsConditionPage = () => {
             which infringes, otherwise violates, or advocates the infringement
             or other violation of, any third party rights.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">Reservation of Rights</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Reservation of Rights</h2>
           <p>
             We reserve the right to request that you remove all links or any
             particular link to our Website. You approve to immediately remove
@@ -235,7 +235,7 @@ const TermsConditionPage = () => {
             time. By continuously linking to our Website, you agree to be bound
             to and follow these linking terms and conditions.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">
+          <h2 className="text-xl font-semibold mt-6 mb-2">
             Removal of links from our website
           </h2>
           <p>
@@ -244,19 +244,19 @@ const TermsConditionPage = () => {
             consider requests to remove links but we are not obligated to or so
             or to respond to you directly.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             We do not ensure that the information on this website is correct, we
             do not warrant its completeness or accuracy; nor do we promise to
             ensure that the website remains available or that the material on
             the website is kept up to date.
           </p>
-          <h2 class="text-xl font-semibold mt-6 mb-2">Disclaimer</h2>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Disclaimer</h2>
           <p>
             To the maximum extent permitted by applicable law, we exclude all
             representations, warranties and conditions relating to our website
             and the use of this website. Nothing in this disclaimer will:
           </p>
-          <ul class="list-disc list-inside mt-4">
+          <ul className="list-disc list-inside mt-4">
             <li>
               limit or exclude our or your liability for death or personal
               injury;
@@ -274,14 +274,14 @@ const TermsConditionPage = () => {
               under applicable law.
             </li>
           </ul>
-          <p class="mt-4">
+          <p className="mt-4">
             The limitations and prohibitions of liability set in this Section
             and elsewhere in this disclaimer: (a) are subject to the preceding
             paragraph; and (b) govern all liabilities arising under the
             disclaimer, including liabilities arising in contract, in tort and
             for breach of statutory duty.
           </p>
-          <p class="mt-4">
+          <p className="mt-4">
             As long as the website and the information and services on the
             website are provided free of charge, we will not be liable for any
             loss or damage of any nature.
