@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { GoArrowRight } from "react-icons/go";
 
@@ -15,9 +16,9 @@ const WorkTogether = () => {
           Is your job helping others to find a job? Connect with Us and explore better opportunities as a Career Coach with the Genies Career Hub!
           </p>
           <div className="learn-more flex gap-1 items-center mt-5">
-            <div className="text-blue-400 underline underline-offset-8">
-              Learn More{" "}
-            </div>
+            <Link className="text-blue-400 underline underline-offset-8" href={'/contact-us'}>
+              Learn More
+            </Link>
             <GoArrowRight className="text-blue-400" />
           </div>
         </div>
