@@ -35,7 +35,7 @@ function ImageUpload() {
                 // File read successfully
                 const formData = new FormData();
                 formData.append("file", uploadedFile);
-                formData.append("upload_preset", 'pptfhe4i')
+                formData.append("upload_preset", 'fr8vexzg')
                 const response = await uploadImage(formData);
                 if (response.status === 200) {
                     const url = response.data.secure_url
