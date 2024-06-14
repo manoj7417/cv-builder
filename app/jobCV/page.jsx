@@ -460,11 +460,6 @@ export default function Home() {
     });
   };
 
-  const handleDontHaveCV = () => {
-    setShowDialog(false);
-    setShowMultiStepDialog(true);
-  };
-
   const handleGenerateNow = async () => {
     if (!jobRole) {
       return toast.error("Please select a job role");
@@ -474,8 +469,8 @@ export default function Home() {
       router.push("/login?redirect=/jobCV");
       return;
     }
-    setShowDialog(true);
-  };
+    setShowMultiStepDialog(true)
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -489,33 +484,6 @@ export default function Home() {
       <>
         {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
         <section className="mt-16 py-20 bg-white text-black">
-          <Dialog open={showDialog}>
-            <DialogContent onClick={handleDialogClose}>
-              <div className="w-full flex">
-                <div
-                  className="w-1/2 h-48 shadow-lg flex flex-col items-center justify-center cursor-pointer rounded-md mr-5 hover:scale-105 duration-300 delay-400"
-                  onClick={handlefileupload}
-                >
-                  <IoDocumentTextOutline className="text-9xl text-blue-900" />
-                  Upload CV
-                  <input
-                    type="file"
-                    hidden
-                    ref={inputRef}
-                    accept="application/pdf"
-                    onChange={handleuploadResume}
-                  />
-                </div>
-                <div
-                  className="w-1/2 h-48  shadow-lg flex flex-col items-center justify-center cursor-pointer rounded-md hover:scale-105 duration-300 delay-400"
-                  onClick={handleDontHaveCV}
-                >
-                  <FaWpforms className="text-9xl text-blue-900" />
-                  Dont have a CV?
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
           <Dialog open={showMultiStepDialog}>
             <JobMultistepForm
               showMultiStepDialog={showMultiStepDialog}

@@ -454,156 +454,158 @@ export const JobResumeSchema = [
     {
         name: "Software Engineer",
         data: {
-            basics: "JASMINE BELL",
-            email: "name.surname@gmail.com",
-            phone: "212-312-7001",
-            country: "CA",
-            city: "Austin TX",
-            jobtitle: "Software Engineer",
-            url: {
-                label: "",
-                href: "",
+            basics: {
+                name: "JASMINE BELL",
+                email: "name.surname@gmail.com",
+                phone: "212-312-7001",
+                country: "CA",
+                city: "Austin TX",
+                jobtitle: "Software Engineer",
+                url: {
+                    label: "",
+                    href: "",
+                },
+                customFields: [],
+                picture: {
+                    url: "",
+                    visible: true
+                }
             },
-            customFields: [],
-            picture: {
-                url: "",
-                visible: true
-            },
-        },
-        sections: {
-            summary: {
-                name: "Profile",
-                columns: 1,
-                visible: true,
-                id: "profile",
-                content: "Passionate Software Engineer with 10+ years of experience in developing web applications and backend systems. Skilled at writing clear, concise code that is easy to maintain and troubleshoot. Experienced in working with both small and large teams across multiple projects and companies. Able to work independently of remote locations or in office environments as needed by the company.",
-            },
-            education: {
-                name: "Education",
-                columns: 1,
-                visible: true,
-                id: "education",
-                items: [
-                    {
-                        startDate: "Sep-2010",
-                        endDate: "Dec-2011",
-                        city: "Tucson, AZ",
-                        description: "",
-                        institute: "The University of Arizona",
-                        degree: "Executive MBA, Engineering Management"
-                    },
-                    {
-                        startDate: "Sep-2006",
-                        endDate: "Dec-2009",
-                        city: "Rocky Mount, NC",
-                        description: "",
-                        institute: "North Carolina Wesleyan College",
-                        degree: "Bachelor of Science, Computer Science"
-                    }
-                ],
-            },
-            experience: {
-                name: "Experience",
-                columns: 1,
-                visible: true,
-                id: "experience",
-                items: [
-                    {
-                        jobtitle: "Lead Software Engineer",
-                        employer: "Blackbaud",
-                        startDate: "Jan-2021",
-                        endDate: "present",
-                        description: "",
-                        city: "Austin, TX",
-                        highlights: ["Successfully converted whole project from python 2 to 3.8.0", 'Scripted unique test plans, test scripts and processes to remove previously known redundancy by 40% and ensured predictable outcomes', 'Developed a desktop application to automate database testing process, improved efficiency by 65%', 'Automated process to create usage graphs, saving $500,000 / year & increasing accuracy']
-                    },
-                    {
-                        jobtitle: "Senior Software Engineer",
-                        employer: "Wayfair",
-                        startDate: "Jun-2017",
-                        endDate: "Dec-2021",
-                        description: "",
-                        city: "Thousand Oaks, CA",
-                        highlights: ["Moved the automation solution into a commercial software ($60k/year)", 'Designed and developed reusable software components which used in 3 different project with reducing development effort by 50%', 'Re-engineered critical modules within a sprint to rely on a centralized library to optimize performance by 68%', 'Rated with the best annual performance rating for all the years during my stint; given to top ~5% employees']
-                    },
-                    {
-                        jobtitle: "Software Developer",
-                        employer: "Target",
-                        startDate: "Mar-2015",
-                        endDate: "May-2017",
-                        description: "",
-                        city: "San Rafael, CA",
-                        highlights: ["Helped to increase the accuracy of the reporting systems by 4%", 'Delivered configuration management tools to track server settings for performance testing which saved 25% of initial machine setup', 'Developed monitor reports that are using in-memory cache, updating the data shown to the user every 1 second', 'Optimized customer resources and reduce turnaround time by 20%', 'Performed root cause analysis for more than 10 issues to identify bugs and rolled out fixes to production within 24 hours']
-                    },
-                    {
-                        jobtitle: "Junior Software Engineer",
-                        employer: "Redfin",
-                        startDate: "Mar-2013",
-                        endDate: "May-2015",
-                        description: "",
-                        city: "Austin, TX",
-                        highlights: ["Fueled additional revenue stream through responsive customer support, generating $18k in new license sales within first three weeks of new release", 'Improved user interfaces by updating menus to be more intuitive, increasing sales by 5%', 'Reduced the time by 75% to process 70,000 to 1, 00,000 instruments from 16+ seconds to less than 4 seconds by redesigning the algorithm', 'Wrote optimized scripts for ​data-heavy & processing heavy task automation', 'Spearheaded the revamp of tech stack which resulted in 40% decrease in server costs']
-                    },
-                ],
-            },
-            projects: {
-                name: "Projects",
-                columns: 1,
-                visible: true,
-                id: "projects",
-                items: [
+            sections: {
+                summary: {
+                    name: "Profile",
+                    columns: 1,
+                    visible: true,
+                    id: "profile",
+                    content: "Passionate Software Engineer with 10+ years of experience in developing web applications and backend systems. Skilled at writing clear, concise code that is easy to maintain and troubleshoot. Experienced in working with both small and large teams across multiple projects and companies. Able to work independently of remote locations or in office environments as needed by the company.",
+                },
+                education: {
+                    name: "Education",
+                    columns: 1,
+                    visible: true,
+                    id: "education",
+                    items: [
+                        {
+                            startDate: "Sep-2010",
+                            endDate: "Dec-2011",
+                            city: "Tucson, AZ",
+                            description: "",
+                            institute: "The University of Arizona",
+                            degree: "Executive MBA, Engineering Management"
+                        },
+                        {
+                            startDate: "Sep-2006",
+                            endDate: "Dec-2009",
+                            city: "Rocky Mount, NC",
+                            description: "",
+                            institute: "North Carolina Wesleyan College",
+                            degree: "Bachelor of Science, Computer Science"
+                        }
+                    ],
+                },
+                experience: {
+                    name: "Experience",
+                    columns: 1,
+                    visible: true,
+                    id: "experience",
+                    items: [
+                        {
+                            jobtitle: "Lead Software Engineer",
+                            employer: "Blackbaud",
+                            startDate: "Jan-2021",
+                            endDate: "present",
+                            description: "",
+                            city: "Austin, TX",
+                            highlights: ["Successfully converted whole project from python 2 to 3.8.0", 'Scripted unique test plans, test scripts and processes to remove previously known redundancy by 40% and ensured predictable outcomes', 'Developed a desktop application to automate database testing process, improved efficiency by 65%', 'Automated process to create usage graphs, saving $500,000 / year & increasing accuracy']
+                        },
+                        {
+                            jobtitle: "Senior Software Engineer",
+                            employer: "Wayfair",
+                            startDate: "Jun-2017",
+                            endDate: "Dec-2021",
+                            description: "",
+                            city: "Thousand Oaks, CA",
+                            highlights: ["Moved the automation solution into a commercial software ($60k/year)", 'Designed and developed reusable software components which used in 3 different project with reducing development effort by 50%', 'Re-engineered critical modules within a sprint to rely on a centralized library to optimize performance by 68%', 'Rated with the best annual performance rating for all the years during my stint; given to top ~5% employees']
+                        },
+                        {
+                            jobtitle: "Software Developer",
+                            employer: "Target",
+                            startDate: "Mar-2015",
+                            endDate: "May-2017",
+                            description: "",
+                            city: "San Rafael, CA",
+                            highlights: ["Helped to increase the accuracy of the reporting systems by 4%", 'Delivered configuration management tools to track server settings for performance testing which saved 25% of initial machine setup', 'Developed monitor reports that are using in-memory cache, updating the data shown to the user every 1 second', 'Optimized customer resources and reduce turnaround time by 20%', 'Performed root cause analysis for more than 10 issues to identify bugs and rolled out fixes to production within 24 hours']
+                        },
+                        {
+                            jobtitle: "Junior Software Engineer",
+                            employer: "Redfin",
+                            startDate: "Mar-2013",
+                            endDate: "May-2015",
+                            description: "",
+                            city: "Austin, TX",
+                            highlights: ["Fueled additional revenue stream through responsive customer support, generating $18k in new license sales within first three weeks of new release", 'Improved user interfaces by updating menus to be more intuitive, increasing sales by 5%', 'Reduced the time by 75% to process 70,000 to 1, 00,000 instruments from 16+ seconds to less than 4 seconds by redesigning the algorithm', 'Wrote optimized scripts for ​data-heavy & processing heavy task automation', 'Spearheaded the revamp of tech stack which resulted in 40% decrease in server costs']
+                        },
+                    ],
+                },
+                projects: {
+                    name: "Projects",
+                    columns: 1,
+                    visible: true,
+                    id: "projects",
+                    items: [
 
-                ],
+                    ],
+                },
+                skills: {
+                    name: "Skills",
+                    columns: 1,
+                    visible: true,
+                    id: "skills",
+                    items: [
+                        {
+                            name: "Data Visualization",
+                            level: "Expert"
+                        }, {
+                            name: 'Agile and Scrum',
+                            level: "Expert"
+                        }, {
+                            name: 'JIRA',
+                            level: "Expert"
+                        }, {
+                            name: "SQL",
+                            level: "Expert"
+                        }, {
+                            name: 'Business Intelligence',
+                            level: "Expert"
+                        }
+                    ],
+                }
             },
-            skills: {
-                name: "Skills",
-                columns: 1,
-                visible: true,
-                id: "skills",
-                items: [
-                    {
-                        name: "Data Visualization",
-                        level: "Expert"
-                    }, {
-                        name: 'Agile and Scrum',
-                        level: "Expert"
-                    }, {
-                        name: 'JIRA',
-                        level: "Expert"
-                    }, {
-                        name: "SQL",
-                        level: "Expert"
-                    }, {
-                        name: 'Business Intelligence',
-                        level: "Expert"
-                    }
-                ],
+            metadata: {
+                template: "Template14",
+                page: {
+                    format: {
+                        type: "a4"
+                    },
+                },
+                theme: {
+                    background: "#ffffff",
+                    text: "#000000",
+                    primary: "#3797BA",
+                },
+                typography: {
+                    font: {
+                        family: "IBM Plex Sans",
+                        subset: "latin",
+                        variants: ["regular"],
+                        size: 13.2,
+                    },
+                    lineHeight: 2.45,
+                    hideIcons: false,
+                    underlineLinks: true,
+                }
             }
         },
-        metadata: {
-            template: "Template14",
-            page: {
-                format: {
-                    type: "a4"
-                },
-            },
-            theme: {
-                background: "#ffffff",
-                text: "#000000",
-                primary: "#3797BA",
-            },
-            typography: {
-                font: {
-                    family: "IBM Plex Sans",
-                    subset: "latin",
-                    variants: ["regular"],
-                    size: 13.2,
-                },
-                lineHeight: 2.45,
-                hideIcons: false,
-                underlineLinks: true,
-            }
-        }
     },
     {
         name: "Sales",
@@ -1307,7 +1309,7 @@ export const JobResumeSchema = [
                 }
             }
         }
-        
+
     },
     {
         name: "Designer",
@@ -1503,7 +1505,7 @@ export const JobResumeSchema = [
                 }
             }
         }
-        
+
     },
     {
         name: "Marketing",
@@ -1701,6 +1703,6 @@ export const JobResumeSchema = [
                 }
             }
         }
-        
+
     },
 ]
