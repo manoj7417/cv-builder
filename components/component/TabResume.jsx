@@ -84,7 +84,7 @@ export default function TabResume() {
       id: 9,
       name: "Designer",
       icon: <FaPalette className="text-[#E91E63]" />,
-      src: "/template13.png",
+      src: "/Template13.png",
     },
     {
       id: 10,
