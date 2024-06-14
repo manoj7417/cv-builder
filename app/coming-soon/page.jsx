@@ -1,15 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
-import dynamic from 'next/dynamic';
-import AOS from "aos";
-import "aos/dist/aos.css"; // You can also use <link> for styles
+import React from "react";
 
 const ComingSoonPage = () => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      AOS.init();
-    }
-  }, []);
 
   return (
     <>
@@ -38,4 +30,4 @@ const ComingSoonPage = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(ComingSoonPage), { ssr: false });
+export default ComingSoonPage;
