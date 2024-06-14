@@ -1090,7 +1090,7 @@ export const JobResumeSchema = [
                 }
             },
             "metadata": {
-                "template": "Template12",
+                "template": "Template22",
                 "page": {
                     "format": {
                         "type": "a4"
