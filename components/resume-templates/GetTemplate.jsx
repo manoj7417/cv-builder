@@ -18,6 +18,8 @@ import Template18 from "./Template18";
 import Template17 from "./Template17";
 import Template19 from "./Template19";
 import Template20 from "./Template20";
+import Template22 from "./Template22";
+import Template19 from "./Template19";
 
 export const GetTemplate = ({ name }) => {
   switch (name) {
@@ -61,6 +63,8 @@ export const GetTemplate = ({ name }) => {
       return <Template19 />;
     case "Template20":
       return <Template20 />;
+    case "Template22":
+      return <Template22 />;
     default:
       return <Template1 />;
   }

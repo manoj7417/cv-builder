@@ -164,6 +164,12 @@ const images = [
     alt: "Template20.png",
     type: templateType.premium,
   },
+  {
+    name: "Template22",
+    src: "/Template22.png",
+    alt: "Template22.png",
+    type: templateType.premium,
+  },
 ];
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
