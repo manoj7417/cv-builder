@@ -332,7 +332,7 @@ export default function Slider() {
 
 
   return (
-    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-t from-white to-[#5dcafd33]">
+    <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#e4f5fc] to-[white] rounded-2xl">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
           Creating CVs that Reflect

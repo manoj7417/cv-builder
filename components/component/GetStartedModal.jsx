@@ -23,20 +23,20 @@ const GetStartedModal = ({ onClose }) => {
   const descriptions = [
     {
       title: "CV Creator",
-      description: "Create stunning resumes tailored to your job search.",
+      description: "Create personalized CVs with our easy-to-use templates.",
       link: "/resume-dashboard",
     },
     {
       title: "CV Optimiser",
-      description: "Optimize your resume to get past ATS systems.",
+      description: "Optimize your CV to pass ATS systems and improve its format.",
       link: "/resumeAnalyzer-dashboard",
     },
     {
-      title: "Job Fit CV",
+      title: "CV Match",
       description: "Customize your CV to match the job you're applying for.",
       link: "/jobCV",
     },
-  ];
+  ];  
 
   return (
     <>
@@ -71,22 +71,22 @@ const GetStartedModal = ({ onClose }) => {
                   autoplay={true}
                   style={{ height: 200, width: "100%" }}
                 />
-                <div className="p-5 border-t-2 border-gray-200 bg-white text-white rounded-b-lg">
-                  <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
-                    {descriptions[index]?.title}
-                  </h5>
-                  <div className="flex justify-between items-center">
+                <div className="py-5 px-3 border-t-2 border-gray-200 bg-white text-white rounded-b-lg flex flex-col justify-between">
+                  <div>
+                    <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
+                      {descriptions[index]?.title}
+                    </h5>
                     <p className="mb-3 font-normal text-sm text-gray-700">
                       {descriptions[index]?.description}
                     </p>
-                    <Link
-                      href={descriptions[index]?.link}
-                      className="read-more-button"
-                    >
-                      Try
-                      <FaArrowAltCircleRight className="arrow-icon w-3.5 h-3.5 ml-2" />
-                    </Link>
                   </div>
+                  <Link
+                    href={descriptions[index]?.link}
+                    className="read-more-button mt-2 text-sm"
+                  >
+                    Try Now
+                    <FaArrowAltCircleRight className="arrow-icon w-3.5 h-3.5 ml-2" />
+                  </Link>
                 </div>
               </div>
             ))}
