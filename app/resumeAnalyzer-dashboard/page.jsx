@@ -21,7 +21,8 @@ import { GetTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 
-import WorkTogether from "@/components/component/WorkTogether";
+import WorkTogether from "@/components/component/WorkTogether"
+import Header from "../Layout/Header"
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
@@ -83,8 +84,8 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-      <main>
+      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header/>}
+      <main >
         {/* <Header /> */}
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12 bg-gradient-to-t from-[#bde3f2] to-[white]">
