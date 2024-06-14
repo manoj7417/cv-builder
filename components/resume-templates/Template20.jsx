@@ -313,7 +313,7 @@ const Template20 = () => {
               >
                 {basics?.picture?.url && (
                   <Image
-                    src={"/pic.jpg" || basics.picture.url}
+                    src={basics.picture.url}
                     width={250}
                     height={250}
                     alt="pic"
