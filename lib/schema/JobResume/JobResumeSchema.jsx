@@ -1320,7 +1320,7 @@ export const JobResumeSchema = [
                 "phone": "+1-541-754-3010",
                 "country": "US",
                 "city": "Los Angeles",
-                "jobtitle": "Financial Accountant",
+                "jobtitle": "Designer",
                 "url": {
                     "label": "LinkedIn",
                     "href": "linkedin.com"
