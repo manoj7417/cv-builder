@@ -48,7 +48,7 @@ export default function TabResume() {
       id: 3,
       name: "Product Manager",
       icon: <FaUsersCog className="text-[#4CAF50]" />,
-      src: "/Template18.png",
+      src: "/Template18.jpg",
     },
     {
       id: 4,
@@ -72,7 +72,7 @@ export default function TabResume() {
       id: 7,
       name: "Engineer",
       icon: <FaCogs className="text-[#9C27B0]" />,
-      src: "/Template12.png",
+      src: "/Template22.png",
     },
     {
       id: 8,
