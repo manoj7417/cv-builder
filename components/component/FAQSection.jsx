@@ -14,7 +14,7 @@ const FAQSection = () => {
   const faqData = [
     {
       id: 1,
-      ques: "How does AI help me make better CV templates?",
+      ques: "How does Genies Pro CV Creator with AI help me make better CV templates?",
       ans: "The Genies Career Hub integrates Artificial Intelligence to create CV templates and add content that exactly matches the job role. It rules out the possibility of mistakes and automates the process of resume creation.",
     },
     {
@@ -24,7 +24,7 @@ const FAQSection = () => {
     },
     {
       id: 3,
-      ques: "How is Genies Pro CV Optimiser different from CV Builder?",
+      ques: "How is Genies Pro CV Optimiser different from other CV builder applications?",
       ans: "The Genies Pro CV Optimiser is much different from a CV Builder. It is an AI-integrated tool that helps you analyse and refine your CV by integrating the best available resources into your CV formation. The optimised CV that you can get through the Optimiser complies with the Application Tracking Software ATS and is built to impress potential recruiters.",
     },
     {
