@@ -244,3 +244,12 @@ export const createNewJobProfileResume = async (token, resumeData) => {
     throw error;
   }
 }
+
+export const sendSubscribeEmail = async (data) => {
+  try {
+    const response = await axios.post('https://sea-turtle-app-sm5l4.ondigitalocean.app/api/sendMail/career-genie', data)
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
