@@ -5,18 +5,13 @@ import React from "react";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 const locations = [
-  {
-    title: "Uk office",
-    timings: "Mon-Sat 9am to 5pm.",
-    address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
-    contactNo:"0203 476 7492"
-  },
+ 
   {
     title: "Head office",
     timings: "Mon-Sat 9am to 5pm.",
     address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
     contactNo:"0203 476 7492"
-  },
+  }
 ];
 
 export default function ContactPageTwo() {
