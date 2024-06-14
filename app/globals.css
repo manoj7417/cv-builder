@@ -7,6 +7,10 @@
 
 @layer components {
 
+  .clip-resume{
+    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 30% 89%, 14% 100%, 0 88%, 0 91%);
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -795,3 +799,6 @@ footer a:hover svg {
 .new_resume_header .nav-link-grow-up:hover::before {
   height: 5px;
 }
+
+
+
