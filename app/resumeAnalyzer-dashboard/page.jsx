@@ -1,23 +1,9 @@
 'use client'
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import Link from "next/link"
-import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs"
-import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import NewNavbar from "../ui/newNav"
 import Image from "next/image"
-import { FaBorderAll } from "react-icons/fa"
-import { PiFolderSimpleUser } from "react-icons/pi";
-import { MdQueryStats } from "react-icons/md"
-import { IoShirt } from "react-icons/io5"
-import { RiShirtFill } from "react-icons/ri"
-import { Carousel, CarouselItem } from "@/components/ui/carousel"
-import Footer from "../ui/newFooter";
-import { redirect } from "next/dist/server/api-utils"
-// import { Steps } from "../home/Steps"
-import Navbar from "../ui/newNav"
 import Slider from "@/components/component/Slider"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Loader from "../ui/AnalyserLoader"
 import { AnalyzeAts } from "../pages/api/api"
 import pdfToText from 'react-pdftotext'
@@ -27,12 +13,27 @@ import { toast } from "react-toastify"
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import Lottie from "lottie-react";
 import animation from '@/public/animations/NonAtsLoaderAnimation.json'
+import { GetTokens } from "../actions"
+import { useUserStore } from "../store/UserStore"
+import NewResumeHeader from "../Layout/NewResumeHeader"
 
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const userState = useUserStore((state) => state.userState);
   const router = useRouter()
+  const inputref = useRef()
+
+  const handleOptimizeClick = async () => {
+    const { accessToken } = await GetTokens()
+    if (!accessToken) {
+      router.push('/login?redirect=/resumeAnalyzer-dashboard')
+      return;
+    }
+    inputref.current.click()
+  }
+
   const handlepdfFileChange = async (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile.type !== 'application/pdf') return toast.error("Please select a valid PDF file")
@@ -79,6 +80,7 @@ export default function DashboardIdea() {
 
   return (
     <>
+      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
       <main >
         {/* <Header /> */}
         {isAnalysing && <Loader />}
@@ -106,21 +108,23 @@ export default function DashboardIdea() {
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
                 <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">An Optimised CV goes a Long Way</h1>
                 <p className="text-gray-700 text-lg pe-10">Wondering why your CV does not get through the initial rounds of selection? Analyse your CV with our AI-based CV Optimiser and get industry expertise integrated to create a flawless application profile.</p>
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4 ">
                   <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
-                    <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold">
+                    <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold " onClick={handleOptimizeClick}>
                       Optimise CV Now
                     </span>
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept="application/pdf"
-                      onChange={
-                        handlepdfFileChange
-                      }
-                    />
+
                   </label>
                 </div>
+                <input
+                  type="file"
+                  ref={inputref}
+                  hidden
+                  accept="application/pdf"
+                  onChange={
+                    handlepdfFileChange
+                  }
+                />
               </div>
               <Image src="/1enhance.png" className="px-7 pt-7 rounded-t-3xl lg:block hidden" alt="@shadcn" width={600} height={100} />
             </div>
