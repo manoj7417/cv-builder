@@ -356,6 +356,8 @@ const jobTabs = [
 
 
 
+
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState('')
@@ -365,11 +367,7 @@ export default function Home() {
   const [steps, setSteps] = useState(1)
   const inputRef = useRef()
   const { userdata } = useUserStore(state => state.userState)
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
-  const router = useRouter()
-  const updateUserData = useUserStore(state => state.updateUserData)
-  const [generatingResume, setIsGeneratingResume] = useState(false)
-  const [formData, setFormData] = useState({
+  const initialState = {
     fullname: userdata?.fullname || '',
     email: userdata?.email || '',
     jobTitle: "",
@@ -380,7 +378,12 @@ export default function Home() {
     skills: [],
     education: [],
     projects: []
-  })
+  }
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
+  const router = useRouter()
+  const updateUserData = useUserStore(state => state.updateUserData)
+  const [generatingResume, setIsGeneratingResume] = useState(false)
+  const [formData, setFormData] = useState(initialState)
 
 
   const handleDialogClose = () => {
@@ -438,20 +441,9 @@ export default function Home() {
   }
 
   const handleCloseMultistepForm = () => {
-    console.log("Close Multistep Form")
     setShowMultiStepDialog(false)
-    setFormData(prevState => ({
-      fullname: userdata?.fullname || '',
-      email: userdata?.email || '',
-      jobTitle: "",
-      country: '',
-      city: '',
-      isFresher: false,
-      experience: [],
-      skills: [],
-      education: [],
-      projects: []
-    }))
+    setFormData(prevState => (initialState))
+    setSteps(1)
   }
 
   const handleDontHaveCV = () => {
