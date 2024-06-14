@@ -127,7 +127,7 @@ export const JobResumeSchema = [
                 }
             },
             metadata: {
-                template: "Template9",
+                template: "Template20",
                 page: {
                     format: {
                         type: "a4"
@@ -272,7 +272,7 @@ export const JobResumeSchema = [
                 }
             },
             metadata: {
-                template: "Template9",
+                template: "Template19",
                 page: {
                     format: {
                         type: "a4"
@@ -426,7 +426,7 @@ export const JobResumeSchema = [
                 }
             },
             metadata: {
-                template: "Template9",
+                template: "Template18",
                 page: {
                     format: {
                         type: "a4"
@@ -581,7 +581,7 @@ export const JobResumeSchema = [
             }
         },
         metadata: {
-            template: "Template9",
+            template: "Template14",
             page: {
                 format: {
                     type: "a4"
@@ -725,7 +725,7 @@ export const JobResumeSchema = [
                 }
             },
             metadata: {
-                template: "Template9",
+                template: "Template17",
                 page: {
                     format: {
                         type: "a4"
@@ -878,7 +878,7 @@ export const JobResumeSchema = [
                 }
             },
             metadata: {
-                template: "Template9",
+                template: "Template12",
                 page: {
                     format: {
                         type: "a4"
@@ -1088,7 +1088,7 @@ export const JobResumeSchema = [
                 }
             },
             "metadata": {
-                "template": "Template9",
+                "template": "Template12",
                 "page": {
                     "format": {
                         "type": "a4"

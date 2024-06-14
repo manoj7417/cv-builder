@@ -356,22 +356,20 @@ const jobTabs = [
   },
 ];
 
+
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState("");
   const userState = useUserStore((state) => state.userState);
-  const [showDialog, setShowDialog] = useState(false);
-  const [showMultiStepDialog, setShowMultiStepDialog] = useState(false);
-  const [steps, setSteps] = useState(1);
-  const inputRef = useRef();
-  const { userdata } = useUserStore((state) => state.userState);
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
-  const router = useRouter();
-  const updateUserData = useUserStore((state) => state.updateUserData);
-  const [generatingResume, setIsGeneratingResume] = useState(false);
-  const [formData, setFormData] = useState({
-    fullname: userdata?.fullname || "",
-    email: userdata?.email || "",
+  const [showDialog, setShowDialog] = useState(false)
+  const [showMultiStepDialog, setShowMultiStepDialog] = useState(false)
+  const [steps, setSteps] = useState(1)
+  const inputRef = useRef()
+  const { userdata } = useUserStore(state => state.userState)
+  const initialState = {
+    fullname: userdata?.fullname || '',
+    email: userdata?.email || '',
     jobTitle: "",
     country: "",
     city: "",
@@ -379,8 +377,14 @@ export default function Home() {
     experience: [],
     skills: [],
     education: [],
-    projects: [],
-  });
+    projects: []
+  }
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
+  const router = useRouter()
+  const updateUserData = useUserStore(state => state.updateUserData)
+  const [generatingResume, setIsGeneratingResume] = useState(false)
+  const [formData, setFormData] = useState(initialState)
+
 
   const handleDialogClose = () => {
     setShowDialog(false);
@@ -515,7 +519,7 @@ export default function Home() {
           <Dialog open={showMultiStepDialog}>
             <JobMultistepForm
               showMultiStepDialog={showMultiStepDialog}
-              onClick={handleCloseMultistepForm}
+              handleCloseMultistepForm={handleCloseMultistepForm}
               steps={steps}
               setSteps={setSteps}
               formData={formData}
@@ -612,7 +616,7 @@ export default function Home() {
         </section>
         <section className="bg-white text-black">
           <div className="container mx-auto p-4">
-            <TabMenu tabs={jobTabs} />
+              <TabMenu tabs={jobTabs} />
           </div>
         </section>
         <Footer />

@@ -149,11 +149,11 @@ export default function NewResumeHeader() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              New comment on your post
+                               No Notification 
                             </a>
                           )}
                         </MenuItem>
-                        <MenuItem>
+                        {/* <MenuItem>
                           {({ active }) => (
                             <a
                               href="#"
@@ -178,7 +178,7 @@ export default function NewResumeHeader() {
                               Your password was changed
                             </a>
                           )}
-                        </MenuItem>
+                        </MenuItem> */}
                       </MenuItems>
                     </Transition>
                   </Menu>

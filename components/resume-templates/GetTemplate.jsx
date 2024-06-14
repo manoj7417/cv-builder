@@ -58,12 +58,12 @@ export const GetTemplate = ({ name }) => {
       return <Template18 />;
     case "Template17":
       return <Template17 />;
+    case "Template19":
+      return <Template19 />;
     case "Template20":
       return <Template20 />;
     case "Template22":
       return <Template22 />;
-    case "Template19":
-      return <Template19 />;
     default:
       return <Template1 />;
   }

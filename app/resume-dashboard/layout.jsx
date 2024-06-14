@@ -1,7 +1,5 @@
 'use client'
 import Footer from "../Layout/Footer"
-import Header from "../Layout/Header";
-import NewResumeHeader from "../Layout/NewResumeHeader"
 
 
 const Layout = ({ children }) => {

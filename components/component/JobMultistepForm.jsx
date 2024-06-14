@@ -21,7 +21,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 
-function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formData, setFormData, jobRole }) {
+function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole }) {
     const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
     const router = useRouter()
     const updateUserData = useUserStore(state => state.updateUserData)
@@ -383,12 +383,12 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
             console.log(error)
             toast.error("Unable to  generate your CV");
         } finally {
-            onClick()
+            handleCloseMultistepForm()
         }
     }
 
     if (steps === 1) {
-        return <DialogContent className='max-w-[80dvw] h-[80dvh] p-0' onClick={onClick} showCloseButton>
+        return <DialogContent className='max-w-[80dvw] h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
                 <div className='w-1/2 h-full'>
                     <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
@@ -428,7 +428,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
     }
 
     if (steps === 2) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh] p-0' onClick={onClick} showCloseButton>
+        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
                 <div className='w-1/2 h-full'>
                     <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
@@ -586,7 +586,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
     }
 
     if (steps === 3) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
+        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
                     <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
@@ -708,7 +708,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
     }
 
     if (steps === 4) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
+        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
                     <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
@@ -818,7 +818,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
     }
 
     if (steps === 5) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
+        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
                     <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
@@ -838,7 +838,7 @@ function JobMultistepForm({ showMultiStepDialog, onClick, steps, setSteps, formD
     }
 
     if (steps === 6) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={onClick} showCloseButton>
+        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex'>
                 <div className='w-1/2 h-full'>
                     <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />

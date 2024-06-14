@@ -13,6 +13,13 @@
     cursor: pointer; /* Change cursor to pointer */
 }
 
+.logo-image {
+    width: 100px; /* Ensure this matches the width attribute in the Image component */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits within the specified dimensions */
+  }
+
+  
 .custom-button span {
     position: relative;
     z-index: 0;
