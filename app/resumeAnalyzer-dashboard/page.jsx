@@ -17,6 +17,7 @@ import { useUserStore } from "../store/UserStore"
 import NewResumeHeader from "../Layout/NewResumeHeader"
 
 import WorkTogether from "@/components/component/WorkTogether"
+import Header from "../Layout/Header"
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false)
@@ -80,7 +81,7 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header/>}
       <main >
         {/* <Header /> */}
         {isAnalysing && <Loader />}
