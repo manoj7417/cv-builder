@@ -93,7 +93,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="resumeAnalyzer-dashboard"
+                href="/resumeAnalyzer-dashboard"
                 className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
               >
                 CV Optimiser
