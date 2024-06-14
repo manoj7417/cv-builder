@@ -135,7 +135,7 @@ export default function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a href="/builder" className="text-black transition">
-                    CV Curator
+                    CV Creator
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
@@ -145,7 +145,7 @@ export default function Footer() {
                     href="/resumeAnalyzer-dashboard"
                     className="text-black transition"
                   >
-                    CV Analyser
+                    CV Optimiser
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
