@@ -36,19 +36,19 @@ export default function TabResume() {
       id: 1,
       name: "Business Analyst",
       icon: <FaPython className="text-[#3776AB]" />,
-      src: "/Template20.png",
+      src: "/Template20-1.png",
     },
     {
       id: 2,
       name: "Data Scientist",
       icon: <FaDatabase className="text-[#FF6F61]" />,
-      src: "/Template19.png",
+      src: "/Template19-1.png",
     },
     {
       id: 3,
       name: "Product Manager",
       icon: <FaUsersCog className="text-[#4CAF50]" />,
-      src: "/Template18.jpg",
+      src: "/Template18-1.png",
     },
     {
       id: 4,
@@ -60,13 +60,13 @@ export default function TabResume() {
       id: 5,
       name: "Sales",
       icon: <FaSuitcase className="text-[#FF9800]" />,
-      src: "/Template17.png",
+      src: "/Template17-1.png",
     },
     {
       id: 6,
       name: "Teacher",
       icon: <FaPencilRuler className="text-[#3F51B5]" />,
-      src: "/Template12.png",
+      src: "/Template12-1.png",
     },
     {
       id: 7,
@@ -78,19 +78,19 @@ export default function TabResume() {
       id: 8,
       name: "Accounting",
       icon: <FaRegFolderOpen className="text-[#009688]" />,
-      src: "/Template15.png",
+      src: "/Template15-1.png",
     },
     {
       id: 9,
       name: "Designer",
       icon: <FaPalette className="text-[#E91E63]" />,
-      src: "/template13.png",
+      src: "/Template13-1.png",
     },
     {
       id: 10,
       name: "Marketing",
       icon: <FaStore className="text-[#FF5722]" />,
-      src: "/Template16.png",
+      src: "/Template16-1.png",
     },
   ];
 

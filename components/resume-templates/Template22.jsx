@@ -301,10 +301,10 @@ const Template22 = () => {
                   background: "white",
                 }}
               >
-                Michael Larsson
+                {basics?.name}
               </h2>
               <h4 className="text-base text-black tracking-widest mt-2">
-                Account Manager
+              {basics?.jobtitle}
               </h4>
             </div>
           </div>

@@ -3,7 +3,7 @@ import React from "react";
 const TermsConditionPage = () => {
   return (
     <>
-      <div className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
+      <div classNameName="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
         <div className="container lg:max-w-6xl w-full mx-auto rounded-lg lg:p-0 p-5">
           <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
           <p>
