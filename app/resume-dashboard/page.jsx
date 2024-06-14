@@ -422,7 +422,7 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+      {userState?.isAuthenticated && <NewResumeHeader />}
       <main>
         <section className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]">
           <div className="container w-full h-full resume-dashboard">
