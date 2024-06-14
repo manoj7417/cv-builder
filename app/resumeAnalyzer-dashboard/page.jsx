@@ -153,12 +153,12 @@ export default function DashboardIdea() {
             </div>
           </div>
           <div className="w-full  " >
-            <div className="rounded-t-3xl border-t-8 border-blue-500 shadow-xl  bg-gradient-to-b from-[#dcecff] to-[white]">
+            <div className="rounded-t-3xl border-t-8 border-blue-500  bg-gradient-to-b from-[#dcecff] to-[white]">
               <Slider />
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
@@ -180,10 +180,11 @@ export default function DashboardIdea() {
                 href="#"
               >
                 Learn more
-              </Link> */}
+              </Link> 
             </div>
           </div>
-        </section>
+        </section> */}
+        <WorkTogether />
         {/* <Footer /> */}
       </main>
     </>

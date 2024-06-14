@@ -37,7 +37,7 @@ const ComingSoonPage = () => {
             Coming Soon
           </h1>
           <p className="text-black text-xl md:text-2xl">
-            We are working hard to bring you something amazing.Stay tuned!
+            We are working hard to bring you something amazing. Stay tuned!
           </p>
         </div>
       </div>

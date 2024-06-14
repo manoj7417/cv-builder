@@ -1,42 +1,32 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
-import { useRef } from "react";
 import { Progress } from "@/components/ui/progress";
-import FeedbackModal from "@/components/component/FeedbackModal";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-import { generateResumeOnFeeback, getBetterResume, Payment } from "@/app/pages/api/api";
+import { generateResumeOnFeeback, Payment } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { WiStars } from "react-icons/wi";
 import "./header.css";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { GetTokens } from "@/app/actions";
 import { FaCrown } from "react-icons/fa";
+
 import { useUserStore } from "@/app/store/UserStore";
-import { tempType } from "@/lib/templateTypes/TempTypes";
 
 const FeedbackFuction = () => {
   const [content, setContent] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
-  const [modalsView, setModalsView] = useState({
-    clarity: false,
-    relevance: false,
-    content: false,
-  });
-  const { userdata } = useUserStore(state => state.userState)
-  const percentage = 66;
-  const updateUserData = useUserStore(state => state.updateUserData)
-  const resumeData = useResumeStore(state => state.resume.data)
-  const searchParams = useSearchParams()
-  const status = searchParams.get('status')
-
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
+  const { userdata } = useUserStore((state) => state.userState);
+  const updateUserData = useUserStore((state) => state.updateUserData);
+  const resumeData = useResumeStore((state) => state.resume.data);
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
 
   const fetchBetterResume = async (resume) => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     try {
       const response = await generateResumeOnFeeback(resume, accessToken.value);
       if (response.status === 201) {
@@ -49,59 +39,45 @@ const FeedbackFuction = () => {
     }
   };
 
-  const handlepayment = async (type) => {
+  const handlepayment = async () => {
     const { accessToken } = await GetTokens();
 
-    Payment({
-      amount: 10,
-      email: userdata.email,
-      name: "aman",
-      url: "https://career-genies-frontend.vercel.app/paymentSuccess?type=feedback",
-      cancel_url: window.location.href,
-      templateName: resumeData.metadata.template
-    }, accessToken.value).then(response => {
-      const { url } = response.data;
-      window.location = url;
-    })
-      .catch(error => {
+    Payment(
+      {
+        amount: 10,
+        email: userdata.email,
+        name: "aman",
+        url: "https://career-genies-frontend.vercel.app/paymentSuccess?type=feedback",
+        cancel_url: window.location.href,
+        templateName: resumeData.metadata.template,
+      },
+      accessToken.value
+    )
+      .then((response) => {
+        const { url } = response.data;
+        window.location = url;
+      })
+      .catch((error) => {
         console.error(error.response ? error.response.data.error : error.message);
       });
   };
 
   const handleBetterResumeContent = async () => {
     if (!userdata?.tokens) {
-      return handlepayment()
+      return handlepayment();
     }
     setIsLoading(true);
     const resume = localStorage.getItem("newResumeContent");
     if (resume) {
       const { data, userData } = await fetchBetterResume(resume);
       if (data) {
-        replaceResumeData(data)
-        updateUserData(userData)
+        replaceResumeData(data);
+        updateUserData(userData);
         router.push("/builder");
       } else {
         toast.error("Unable to optimize resume");
       }
     }
-  };
-
-  const handleModalClose = (name) => {
-    setModalsView({
-      ...modalsView,
-      [name]: false,
-    });
-  };
-
-  const handleOpenModal = (name) => {
-    const modalView = {
-      clarity: false,
-      relevance: false,
-      content: false,
-      [name]: true,
-    };
-
-    setModalsView(modalView);
   };
 
   useEffect(() => {
@@ -110,14 +86,13 @@ const FeedbackFuction = () => {
   }, []);
 
   useEffect(() => {
-    if (status === 'success') {
-      handleBetterResumeContent()
+    if (status === "success") {
+      handleBetterResumeContent();
     }
-  }, [status])
+  }, [status]);
 
   return (
     <>
-      {/* <Header/> */}
       <section className="analyser_resume_section " suppressHydrationWarning>
         {isLoading && (
           <div
@@ -135,33 +110,27 @@ const FeedbackFuction = () => {
               CV <span className="text-blue-950">Insights</span>
             </h1>
             <p className="text-lg text-gray-500">Get a better understanding of your resume and improve your chances of getting hired.</p>
-            {/* <div className="flex justify-center text-center">
-              <button
-                class="button button--pipaluk button--inverted button--round-l button--text-thick button--text-upper"
-                onClick={handleBetterResumeContent}
-              >
-              Fix my CV <FaCrown className="ml-1 text-yellow-300" />
-              </button>
-            </div> */}
           </div>
         </div>
 
-       <div className="w-5/6 mx-auto mb-10  rounded-2xl" style={{
-        borderWidth:"16px",
-        borderColor:"#F1F6FA",
-        borderRadius:"40px",
-        borderStyle:"solid",
-       }}>
-        <div>
-        <div className="recommendation_section pt-10 px-5 ">
-                <div className="prograss_bar_box bg-white  rounded-md">
+        <div
+          className="w-5/6 mx-auto mb-10  rounded-2xl"
+          style={{
+            borderWidth: "16px",
+            borderColor: "#F1F6FA",
+            borderRadius: "40px",
+            borderStyle: "solid",
+          }}
+        >
+          <div>
+            <div className="recommendation_section pt-10 px-5 ">
+              <div className="prograss_bar_box bg-white  rounded-md">
                 <p className="tracking-wider">
                   Your resume ATS score is{" "}
                   <span
-                    className={`${content?.analysis?.resume_score > 65
-                      ? "text-green-400"
-                      : "text-red-500"
-                      } font-bold`}
+                    className={`${
+                      content?.analysis?.resume_score > 65 ? "text-green-400" : "text-red-500"
+                    } font-bold`}
                   >
                     {content ? content?.analysis?.resume_score : "0"}
                   </span>{" "}
@@ -169,279 +138,228 @@ const FeedbackFuction = () => {
                 </p>
                 <div className="w-full  my-2.5  overflow-hidden  ">
                   <div className=" relative h-7 w-full rounded-2xl">
-                    <Progress
-                      value={content?.analysis?.resume_score}
-                      className={"h-5 bg-gray-200"}
-                    />
+                    <Progress value={content?.analysis?.resume_score} className={"h-5 bg-gray-200"} />
                   </div>
                 </div>
               </div>
               <h3 className="text-xl font-bold">Feedback</h3>
-                <p className="text-sm my-2">
+              <p className="text-sm my-2">
                 By following the recommendations below, you can improve your resume and increase your chances of getting hired.
-                </p>
-                <div>
-                
-                <div className="flex flex-col space-y-5 justify-between">
-                  <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
-                    
-                  </div>
-                  <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
-                    <div className="px-4 py-5 sm:p-3 sm:px-8">
-                      <div className="text-center">
-                        <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
-                          Clarity
-                        </div>
-                        <div>
-                          <div
-                            style={{
-                              width: 100,
-                              height: 100,
-                              margin: " 0 auto",
-                            }}
-                          >
-                            <CircularProgressbar
-                              value={
-                                Object.keys(content).length > 0
-                                  ? content?.clarity?.score
-                                  : "0"
-                              }
-                              text={`${Object.keys(content).length > 0
-                                ? content?.clarity?.score
-                                : "0"
-                                }%`}
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-center items-center pt-2">
-                          {Object.keys(content).length > 0 &&
-                            content?.clarity?.score > 80 ? (
-                            <div
-                              className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
-                              onMouseEnter={() => handleOpenModal("clarity")}
-                              onMouseLeave={() => handleModalClose("clarity")}
-                            >
-                              Excellent
-                            </div>
-                          ) : (
-                            <div
-                              className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                              onMouseEnter={() => handleOpenModal("clarity")}
-                              onMouseLeave={() => handleModalClose("clarity")}
-                            >
-                              Needs Work
-                            </div>
-                          )}
+              </p>
+              <div className="flex flex-col space-y-5 justify-between">
+                <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+                  <div className="px-4 py-5 sm:p-3 sm:px-8">
+                    <div className="text-center">
+                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">Clarity</div>
+                      <div>
+                        <div
+                          style={{
+                            width: 100,
+                            height: 100,
+                            margin: " 0 auto",
+                          }}
+                        >
+                          <CircularProgressbar
+                            value={Object.keys(content).length > 0 ? content?.clarity?.score : "0"}
+                            text={`${Object.keys(content).length > 0 ? content?.clarity?.score : "0"}%`}
+                          />
                         </div>
                       </div>
-                    </div>
-                    <FeedbackModal
-                      showModal={modalsView.clarity}
-                      content={content?.clarity?.pointers}
-                      onClick={handleBetterResumeContent}
-                      onClose={() => handleModalClose("clarity")}
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col space-y-5">
-                  <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
-                    <div className="px-4 py-5 sm:p-3 sm:px-8">
-                      <div className="text-center">
-                        <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
-                          Relevance
-                        </div>
-                        <div>
+                      <div className="pt-2 flex justify-center items-center">
+                        {Object.keys(content).length > 0 && content?.clarity?.score > 80 ? (
                           <div
-                            style={{
-                              width: 100,
-                              height: 100,
-                              margin: " 0 auto",
-                            }}
+                            className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
                           >
-                            <CircularProgressbar
-                              value={
-                                Object.keys(content).length > 0
-                                  ? content?.relevancy?.score
-                                  : "0"
-                              }
-                              text={`${Object.keys(content).length > 0
-                                ? content?.relevancy?.score
-                                : "0"
-                                }%`}
-                              styles={buildStyles({
-                                textColor: "red",
-                                pathColor: "turquoise",
-                              })}
-                            />
+                            Excellent
                           </div>
-                        </div>
-                        <div className="pt-2 flex justify-center items-center">
-                          {Object.keys(content).length > 0 &&
-                            content?.relevancy?.score > 80 ? (
-                            <div
-                              className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
-                              onMouseEnter={() => handleOpenModal("relevance")}
-                              onMouseLeave={() => handleModalClose("relevance")}
-                            >
-                              Excellent
-                            </div>
-                          ) : (
-                            <div
-                              className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                              onMouseEnter={() => handleOpenModal("relevance")}
-                              onMouseLeave={() => handleModalClose("relevance")}
-                            >
-                              Needs Work
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="group:">
-                    <FeedbackModal
-                      showModal={modalsView.relevance}
-                      content={content?.relevancy?.pointers}
-                      onClick={handleBetterResumeContent}
-                      onClose={() => handleModalClose("relevance")}
-                    />
-                    </div>
-                  </div>
-                  <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
-                    <div className="px-4 py-5 sm:p-3 sm:px-8">
-                      <div className="text-center">
-                        <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
-                          Content
-                        </div>
-                        <div>
+                        ) : (
                           <div
-                            style={{
-                              width: 100,
-                              height: 100,
-                              margin: " 0 auto",
-                            }}
+                            className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
                           >
-                            <CircularProgressbar
-                              value={
-                                Object.keys(content).length > 0
-                                  ? content?.content_quality?.score
-                                  : "0"
-                              }
-                              text={`${Object.keys(content).length > 0
-                                ? content?.content_quality?.score
-                                : "0"
-                                }%`}
-                              styles={buildStyles({
-                                textColor: "red",
-                                pathColor: "#F89A14",
-                              })}
-                            />
+                            Needs Work
                           </div>
-                        </div>
-                        <div className="pt-2 flex justify-center items-center">
-                          {Object.keys(content).length > 0 &&
-                            content?.content_quality?.score > 80 ? (
-                            <div
-                              className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
-                              onMouseEnter={() => handleOpenModal("content")}
-                              onMouseLeave={() => handleModalClose("content")}
-                            >
-                              Excellent
-                            </div>
-                          ) : (
-                            <div
-                              className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                              onMouseEnter={() => handleOpenModal("content")}
-                              onMouseLeave={() => handleModalClose("content")}
-                            >
-                              Needs Work
-                            </div>
-                          )}
-                        </div>
+                        )}
                       </div>
-                    </div>
-                    <FeedbackModal
-                      showModal={modalsView.content}
-                      content={content?.content_quality?.pointers}
-                      onClick={handleBetterResumeContent}
-                      onClose={() => handleModalClose("content")}
-                    />
-                  </div>
-                </div>
-              
-           
-                </div>
-              </div>
-        <div className="recommendation_section bg-white shadow-lg pt-10 px-5 mt-3 rounded-md">
-                <h3 className="text-xl font-bold">Your Resume Overview</h3>
-                <p className="text-sm my-2">
-                 Here is how your resume is currently performing in terms of the ATS score, clarity, relevance and content.
-                </p>
-                <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
-                  {Object.keys(content).length > 0 &&
-                    content?.analysis?.feedback?.length > 0 ? (
-                    <ul className="custom-counter">
-                      {Object.keys(content).length > 0 &&
-                        content.analysis.feedback.map((content, index) => {
-                          return (
-                            <li
-                              className="text-sm flex items-center my-4"
-                              key={index}
-                            >
-                              <span className=" shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                      <div className="pt-2 text-left border-l-4 border-[#F89A14] p-5">
+                        <ul className="custom-counter">
+                          {content?.clarity?.pointers.map((pointer, index) => (
+                            <li key={index} className="text-sm flex items-center my-4">
+                              <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
                                 {index + 1}
                               </span>
-                              <p>{content}</p>
+                              <p>{pointer}</p>
                             </li>
-                          );
-                        })}
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+                  <div className="px-4 py-5 sm:p-3 sm:px-8">
+                    <div className="text-center">
+                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">Relevance</div>
+                      <div>
+                        <div
+                          style={{
+                            width: 100,
+                            height: 100,
+                            margin: " 0 auto",
+                          }}
+                        >
+                          <CircularProgressbar
+                            value={Object.keys(content).length > 0 ? content?.relevancy?.score : "0"}
+                            text={`${Object.keys(content).length > 0 ? content?.relevancy?.score : "0"}%`}
+                            styles={buildStyles({
+                              textColor: "red",
+                              pathColor: "turquoise",
+                            })}
+                          />
+                        </div>
+                      </div>
+                      <div className="pt-2 flex justify-center items-center">
+                        {Object.keys(content).length > 0 && content?.relevancy?.score > 80 ? (
+                          <div
+                            className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                          >
+                            Excellent
+                          </div>
+                        ) : (
+                          <div
+                            className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                          >
+                            Needs Work
+                          </div>
+                        )}
+                      </div>
+                      <div className="pt-2 text-left border-l-4 border-[#F89A14] p-5">
+                        <ul className="custom-counter">
+                          {content?.relevancy?.pointers.map((pointer, index) => (
+                            <li key={index} className="text-sm flex items-center my-4">
+                              <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                                {index + 1}
+                              </span>
+                              <p>{pointer}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
+                  <div className="px-4 py-5 sm:p-3 sm:px-8">
+                    <div className="text-center">
+                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">Content</div>
+                      <div>
+                        <div
+                          style={{
+                            width: 100,
+                            height: 100,
+                            margin: " 0 auto",
+                          }}
+                        >
+                          <CircularProgressbar
+                            value={Object.keys(content).length > 0 ? content?.content_quality?.score : "0"}
+                            text={`${Object.keys(content).length > 0 ? content?.content_quality?.score : "0"}%`}
+                            styles={buildStyles({
+                              textColor: "red",
+                              pathColor: "#F89A14",
+                            })}
+                          />
+                        </div>
+                      </div>
+                      <div className="pt-2 flex justify-center items-center">
+                        {Object.keys(content).length > 0 && content?.content_quality?.score > 80 ? (
+                          <div
+                            className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
+                          >
+                            Excellent
+                          </div>
+                        ) : (
+                          <div
+                            className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
+                          >
+                            Needs Work
+                          </div>
+                        )}
+                      </div>
+                      <div className="pt-2 text-left border-l-4 border-[#F89A14] p-5">
+                        <ul className="custom-counter">
+                          {content?.content_quality?.pointers.map((pointer, index) => (
+                            <li key={index} className="text-sm flex items-center my-4">
+                              <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                                {index + 1}
+                              </span>
+                              <p>{pointer}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="recommendation_section bg-white shadow-lg pt-10 px-5 mt-3 rounded-md">
+                <h3 className="text-xl font-bold">Your Resume Overview</h3>
+                <p className="text-sm my-2">
+                  Here is how your resume is currently performing in terms of the ATS score, clarity, relevance and content.
+                </p>
+                <div className="recommandation_list border-l-4 border-[#F89A14] p-5 mb-5">
+                  {Object.keys(content).length > 0 && content?.analysis?.feedback?.length > 0 ? (
+                    <ul className="custom-counter">
+                      {content.analysis.feedback.map((feedback, index) => (
+                        <li key={index} className="text-sm flex items-center my-4">
+                          <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                            {index + 1}
+                          </span>
+                          <p>{feedback}</p>
+                        </li>
+                      ))}
                     </ul>
                   ) : (
-                    <ul className="custom-counter">
+                    <ul className="custom-counter border-l-4 border-[#F89A14] p-5">
                       <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
+                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
+                        against those from successful candidates hired at leading global companies in our database.
                       </li>
                       <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
+                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
+                        against those from successful candidates hired at leading global companies in our database.
                       </li>
                       <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
+                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
+                        against those from successful candidates hired at leading global companies in our database.
                       </li>
                       <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
+                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
+                        against those from successful candidates hired at leading global companies in our database.
                       </li>
                     </ul>
                   )}
                 </div>
               </div>
-              
+            </div>
+          </div>
         </div>
-       </div>
-        
+        <button
+          className="fixed flex items-center bottom-5 left-1/2 transform -translate-x-1/2 bg-blue-950 text-white py-2 px-4 rounded-full shadow-lg"
+          onClick={handleBetterResumeContent}
+        >
+          Fix My CV <FaCrown className="ml-1 text-yellow-300" />
+        </button>
       </section>
     </>
   );
-}
+};
 
 export default function ResumeFeedback() {
-  return <Suspense >
-    <FeedbackFuction />
-  </Suspense>
+  return (
+    <Suspense>
+      <FeedbackFuction />
+    </Suspense>
+  );
 }
-
-

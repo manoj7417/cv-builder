@@ -510,11 +510,11 @@ export default function Home() {
             <div className="flex flex-col">
               <h1
                 className="font-extrabold text-[3.9rem] pe-20 mb-6"
-                style={{ lineHeight: "1.3 !important" }}
+                style={{ lineHeight: "1 !important" }}
               >
-                Build a <span style={{ color: "#1b2f93" }}>CV</span> that opens
+                Build a <span className="text-blue-600">CV</span> that opens
                 doors to your ideal{" "}
-                <span style={{ color: "#1b2f93" }}>career</span>!
+                <span className="text-blue-600">career</span>!
               </h1>
               <div className="grid grid-cols-2 gap-10   py-3 rounded-lg">
                 <div>
@@ -550,14 +550,14 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-12 rounded-3xl">
               <div className="text-center md:text-left ">
                 <h2
-                  className="text-2xl md:text-[2.7rem] font-bold mb-4"
-                  style={{ lineHeight: "1.4 !important" }}
+                  className="text-2xl md:text-[2.7rem] font-bold mb-6"
+                  style={{ lineHeight: "1.2 !important" }}
                 >
-                  Empower Yourself With Knowledge, Anytime, Anywhere !
+                  Connect with a<span className="text-blue-600"> Career Coach </span>for Expert Advice, Anytime, Anywhere!
                 </h2>
                 <button
-                  className=" text-black px-4 py-2 rounded"
-                  style={{ border: "1px solid black" }}
+                  className="bg-blue-700 text-white px-4 py-2 rounded"
+                  
                 >
                   <a href="/contact-us">Work With Coach</a>
                 </button>
