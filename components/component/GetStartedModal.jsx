@@ -23,17 +23,17 @@ const GetStartedModal = ({ onClose }) => {
   const descriptions = [
     {
       title: "CV Creator",
-      description: "Create personalized CVs with our easy-to-use templates.",
+      description: "Create your CV with professional templates, powered by Artificial Intelligence.",
       link: "/resume-dashboard",
     },
     {
       title: "CV Optimiser",
-      description: "Optimize your CV to pass ATS systems and improve its format.",
+      description: "Analyse your resume with AI and optimise it for your desired Job Profile.",
       link: "/resumeAnalyzer-dashboard",
     },
     {
       title: "CV Match",
-      description: "Customize your CV to match the job you're applying for.",
+      description: "Automate CV creation by matching the best template with the Job Description.",
       link: "/jobCV",
     },
   ];  
@@ -53,10 +53,10 @@ const GetStartedModal = ({ onClose }) => {
       >
         {/* Modal content */}
         <h1 className="text-3xl font-bold text-center mb-1">
-          Use the best <span className="text-blue-500">CV</span> generator tool
+        <span className="text-blue-500">Genies Pro CV Studio ,</span> Your Automated Resume Builder!
         </h1>
         <p className="text-center text-gray-500 text-lg mb-10">
-          You can reach your dream job faster with Genies Career Hub
+        Build tailored CVs and reach out to potential employers with confidence.
         </p>
         <div className="flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20 ">

@@ -429,7 +429,7 @@ export default function DashboardIdea() {
             <div className="flex lg:px-24 px-5 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20">
                 <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">
-                  Craft the Perfect CV for Your Dream Job
+                  Craft the <span className="text-[#2C98CA]">Perfect CV </span> for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
                   Created by Professionals and Industry Experts from all across
@@ -440,7 +440,7 @@ export default function DashboardIdea() {
                 </p>
                 <div className="flex items-center space-x-4">
                   <Button className="text-base text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
-                    <Link href="/user-history">Create CV Now!</Link>
+                    <Link href="/user-history">Create CV Now</Link>
                   </Button>
                 </div>
               </div>

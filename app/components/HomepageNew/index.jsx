@@ -94,7 +94,7 @@ export default function HomepageNew() {
             />
             <div className="space-y-2 mx-auto">
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
-              CRAFT YOUR
+                SKYROCKETING
                 <span
                   className="text-[#2C98CA] ml-4"
                   style={{
@@ -105,15 +105,19 @@ export default function HomepageNew() {
                     lineHeight: "1.2",
                   }}
                 >
-                 CV
+                  CAREER,
                 </span>
                 <br />
-                GET 
-                <span className="2xl:ml-3 lg:ml-2">HIRED </span>
-                <span className="2xl:ml-3 lg:ml-2">FASTER!</span>
+                WITH
+                <span className="2xl:ml-3 lg:ml-2">AI-POWERED </span>
+                <span className="2xl:ml-3 lg:ml-2">CV!</span>
               </h1>
               <p className="max-w-[800px] text-center text-[#7C7C7C] text-[18px]">
-              We believe in bridging the gap between your aspirations and the perfect job role that matches your skills. With our intuitive job matching system and dedicated support, we empower you to take the leap towards a career that ignites your professional drive.
+                We believe in bridging the gap between your aspirations and the
+                perfect job role that matches your skills. With our intuitive
+                job matching system and dedicated support, we empower you to
+                take the leap towards a career that ignites your professional
+                drive.
               </p>
             </div>
             <div className="flex lg:flex-row justify-center  flex-col  min-[400px]:flex-row ">
@@ -128,7 +132,7 @@ export default function HomepageNew() {
               </div> */}
               <div className="button_wrapper mt-8">
                 <button className="get_start_btn" onClick={handleButtonClick}>
-                  <span className="btn_text">Get Started</span>
+                  <span className="btn_text">Explore Now</span>
                   <div className="btn_overlay">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -150,9 +154,7 @@ export default function HomepageNew() {
               </div>
             </div>
             <div className="flex justify-center">
-              <Tilt
-                options={defaultOptions}
-              >
+              <Tilt options={defaultOptions}>
                 <Image
                   src="/home-creative-top.png"
                   width={1300}
@@ -165,34 +167,37 @@ export default function HomepageNew() {
             {showFloatingButton && (
               <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
                 <div className="button_wrapper mb-5">
-                <button className="get_start_btn floating"  onClick={handleButtonClick}>
-                  <span className="btn_text">Get Started</span>
-                  <div className="btn_overlay">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                </button>
-              </div>
+                  <button
+                    className="get_start_btn floating"
+                    onClick={handleButtonClick}
+                  >
+                    <span className="btn_text">Explore Now</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
-      </section>  
+      </section>
       <Slider />
       <TabResume />
       <WorkTogether />
