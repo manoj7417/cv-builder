@@ -32,7 +32,7 @@ const GetStartedModal = ({ onClose }) => {
       link: "/resumeAnalyzer-dashboard",
     },
     {
-      title: "Job Fit CV",
+      title: "CV Match",
       description: "Customize your CV to match the job you're applying for.",
       link: "/jobCV",
     },
