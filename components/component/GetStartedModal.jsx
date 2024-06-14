@@ -29,12 +29,12 @@ const GetStartedModal = ({ onClose }) => {
     {
       title: "CV Optimiser",
       description: "Optimize your resume to get past ATS systems.",
-      link: "resumeAnalyzer-dashboard",
+      link: "/resumeAnalyzer-dashboard",
     },
     {
       title: "Job Fit CV",
       description: "Customize your CV to match the job you're applying for.",
-      link: "jobCV",
+      link: "/jobCV",
     },
   ];
 
