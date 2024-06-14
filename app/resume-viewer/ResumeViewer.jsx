@@ -584,7 +584,7 @@ const ResumeViewPage = () => {
                   <LiaTimesSolid className="text-white text-3xl" />
                 </div>
                 <div
-                  className="shadow-2xl relative no-scrollbar h-screen"
+                  className="shadow-2xl relative no-scrollbar h-screen overflow-y-scroll"
                   style={{
                     scale: { scale },
                   }}
@@ -595,6 +595,7 @@ const ResumeViewPage = () => {
                     style={{
                       width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                       height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+                      
                     }}
                   >
                     <GetTemplate name={data?.metadata?.template} />
