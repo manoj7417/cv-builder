@@ -29,17 +29,15 @@ export default function DashboardIdea() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const userState = useUserStore((state) => state.userState);
   const router = useRouter()
+
+
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens()
     if (!accessToken) {
-      router.push("/login?redirect=/resumeAnalyzer-dashboard");
+      toast("Please login to use this template")
+      router.push("/login?redirect=/resumeAnalyzer-dashboard")
       return;
     }
-    inputref.current.click()
-  }
-
-  
-  const handlepdfFileChange = async (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile.type !== "application/pdf")
       return toast.error("Please select a valid PDF file");
