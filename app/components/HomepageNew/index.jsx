@@ -94,7 +94,7 @@ export default function HomepageNew() {
             />
             <div className="space-y-2 mx-auto">
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
-                WHERE
+              CRAFT YOUR
                 <span
                   className="text-[#2C98CA] ml-4"
                   style={{
@@ -105,12 +105,12 @@ export default function HomepageNew() {
                     lineHeight: "1.2",
                   }}
                 >
-                  RIGHT JOB
+                 CV
                 </span>
                 <br />
-                MEETS
-                <span className="2xl:ml-3 lg:ml-2">RIGHT</span>
-                <span className="2xl:ml-3 lg:ml-2">TALENT!</span>
+                GET 
+                <span className="2xl:ml-3 lg:ml-2">HIRED </span>
+                <span className="2xl:ml-3 lg:ml-2">FASTER!</span>
               </h1>
               <p className="max-w-[800px] text-center text-[#7C7C7C] text-[18px]">
               We believe in bridging the gap between your aspirations and the perfect job role that matches your skills. With our intuitive job matching system and dedicated support, we empower you to take the leap towards a career that ignites your professional drive.
