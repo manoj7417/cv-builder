@@ -1,4 +1,5 @@
 import Footer from "../Layout/Footer"
+import Header from "../Layout/Header";
 import NewResumeHeader from "../Layout/NewResumeHeader"
 import { useUserStore } from "../store/UserStore";
 
