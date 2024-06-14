@@ -400,7 +400,7 @@ const Template17 = () => {
               </div>
             </div>
             {/* about me */}
-            <section>
+            <section className="w-full">
               <div className="profile_section p-5">
               <Profile
                 fontStyle={fontStyle}
@@ -409,7 +409,7 @@ const Template17 = () => {
               </div>
             </section>
             {/* projects  */}
-            <section>
+            <section className="w-full">
               <div className="projects p-5">
               <Projects
                 fontStyle={fontStyle}
@@ -418,7 +418,7 @@ const Template17 = () => {
               </div>
             </section>
             {/* work experiences */}
-            <section>
+            <section className="w-full">
               <div className="experience p-5">
               <Experience
                 fontStyle={fontStyle}
@@ -427,7 +427,7 @@ const Template17 = () => {
               </div>
             </section>
               {/* education */}
-            <section>
+            <section className="w-full">
               <div className="education p-5">
               <Education fontStyle={fontStyle} />
               </div>

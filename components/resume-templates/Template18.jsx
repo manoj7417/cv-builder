@@ -345,7 +345,7 @@ const Template18 = () => {
           style={{
             backgroundColor: metadata?.theme?.primary,
             borderRadius: "9rem 9rem 0rem 0rem",
-            marginTop: "-29rem",
+            marginTop: "-17rem",
           }}
         >
           <div className="resume_image w-full">
