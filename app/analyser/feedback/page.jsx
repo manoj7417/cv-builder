@@ -13,6 +13,8 @@ import { GetTokens } from "@/app/actions";
 import { FaCrown } from "react-icons/fa";
 
 import { useUserStore } from "@/app/store/UserStore";
+import { Dialog } from "@/components/ui/dialog";
+import JobMultistepForm from "@/components/component/JobMultistepForm";
 
 const FeedbackFuction = () => {
   const [content, setContent] = useState({});
@@ -22,8 +24,23 @@ const FeedbackFuction = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const updateUserData = useUserStore((state) => state.updateUserData);
   const resumeData = useResumeStore((state) => state.resume.data);
+  const initialState = {
+    fullname: userdata?.fullname || '',
+    email: userdata?.email || '',
+    jobTitle: "",
+    country: "",
+    city: "",
+    isFresher: false,
+    experience: [],
+    skills: [],
+    education: [],
+    projects: []
+  }
+  const [steps, setSteps] = useState(1)
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
+  const [formData, setFormData] = useState(initialState)
+  const [showMultiStepDialog, setshowMultiStepDialog] = useState(false)
 
   const fetchBetterResume = async (resume) => {
     const { accessToken } = await GetTokens();
@@ -66,19 +83,26 @@ const FeedbackFuction = () => {
     if (!userdata?.tokens) {
       return handlepayment();
     }
-    setIsLoading(true);
-    const resume = localStorage.getItem("newResumeContent");
-    if (resume) {
-      const { data, userData } = await fetchBetterResume(resume);
-      if (data) {
-        replaceResumeData(data);
-        updateUserData(userData);
-        router.push("/builder");
-      } else {
-        toast.error("Unable to optimize resume");
-      }
-    }
+    setshowMultiStepDialog(true)
   };
+
+  const handleCloseMultistepForm = () => {
+    setshowMultiStepDialog(false);
+    setFormData({
+      fullname: userdata?.fullname || "",
+      email: userdata?.email || "",
+      jobTitle: "",
+      country: "",
+      city: "",
+      isFresher: false,
+      experience: [],
+      skills: [],
+      education: [],
+      projects: [],
+    });
+    setSteps(1)
+  };
+
 
   useEffect(() => {
     let value = JSON.parse(localStorage.getItem("feedback"));
@@ -93,6 +117,16 @@ const FeedbackFuction = () => {
 
   return (
     <>
+      <Dialog open={showMultiStepDialog}>
+        <JobMultistepForm
+          showMultiStepDialog={showMultiStepDialog}
+          handleCloseMultistepForm={handleCloseMultistepForm}
+          steps={steps}
+          setSteps={setSteps}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      </Dialog>
       <section className="analyser_resume_section " suppressHydrationWarning>
         {isLoading && (
           <div
@@ -128,9 +162,8 @@ const FeedbackFuction = () => {
                 <p className="tracking-wider">
                   Your resume ATS score is{" "}
                   <span
-                    className={`${
-                      content?.analysis?.resume_score > 65 ? "text-green-400" : "text-red-500"
-                    } font-bold`}
+                    className={`${content?.analysis?.resume_score > 65 ? "text-green-400" : "text-red-500"
+                      } font-bold`}
                   >
                     {content ? content?.analysis?.resume_score : "0"}
                   </span>{" "}
