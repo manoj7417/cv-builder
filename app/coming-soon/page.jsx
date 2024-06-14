@@ -2,14 +2,24 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import { useUserStore } from "../store/UserStore";
+import NewResumeHeader from "../Layout/NewResumeHeader";
+import Header from "../Layout/Header";
 
 const ComingSoonPage = () => {
+
+
+  const userState = useUserStore((state) => state.userState);
+
+
+
   useEffect(() => {
     AOS.init();
   }, []);
 
   return (
     <>
+    {userState?.isAuthenticated ? <NewResumeHeader /> : <Header/>}
       <div className="h-screen bg-white flex flex-col text-center items-center justify-center relative px-4">
         <div
           className="absolute bg-gray-200 top-0 left-0 w-full h-full bg-cover bg-center opacity-30"
