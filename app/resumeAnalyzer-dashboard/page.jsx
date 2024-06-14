@@ -27,6 +27,7 @@ import { toast } from "react-toastify"
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import Lottie from "lottie-react";
 import animation from '@/public/animations/NonAtsLoaderAnimation.json'
+import WorkTogether from "@/components/component/WorkTogether"
 
 
 export default function DashboardIdea() {
@@ -82,7 +83,7 @@ export default function DashboardIdea() {
       <main >
         {/* <Header /> */}
         {isAnalysing && <Loader />}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-12" style={{ backgroundImage: "url('/banner-bg.svg')" }}>
+        <section className="flex min-h-screen flex-col items-center justify-center pt-12 bg-gradient-to-t from-[#bde3f2] to-[white]">
           <Dialog open={isDialogOpen} onClose={handleDialogClose} >
             <DialogContent onClick={handleDialogClose} className="w-[450px]" showCloseButton={true}>
               <DialogTitle>
@@ -126,12 +127,13 @@ export default function DashboardIdea() {
             </div>
           </div>
           <div className="w-full  " >
-            <div className="rounded-t-3xl border-t-8 border-blue-500 shadow-xl  bg-gradient-to-b from-[#dcecff] to-[white]">
+            <div className="rounded-t-3xl border-t-8 border-blue-900   bg-white">
               <Slider />
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
+        <WorkTogether/>
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
           <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
@@ -153,10 +155,10 @@ export default function DashboardIdea() {
                 href="#"
               >
                 Learn more
-              </Link> */}
+              </Link> 
             </div>
           </div>
-        </section>
+        </section> */}
         {/* <Footer /> */}
       </main>
     </>

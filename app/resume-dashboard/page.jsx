@@ -35,6 +35,7 @@ import { useEffect, useState } from "react";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import Header from "../Layout/Header";
 import { useUserStore } from "../store/UserStore";
+import WorkTogether from "@/components/component/WorkTogether";
 
 const AllTemplates = [
   [
@@ -442,11 +443,11 @@ export default function DashboardIdea() {
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
       <main>
         <section
-          className="w-full flex flex-col items-center justify-center  "
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundSize: "cover",
-          }}
+          className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]"
+          // style={{
+          //   backgroundImage: "url('/banner-bg.svg')",
+          //   backgroundSize: "cover",
+          // }}
         >
           <div className="container w-full h-full resume-dashboard">
             <div className="flex lg:px-24 px-5 justify-between">
@@ -476,8 +477,8 @@ export default function DashboardIdea() {
               />
             </div>
           </div>
-          <div className="w-full  bg-white">
-            <div className="rounded-t-xl border-t-8 border-blue-500 p-6 shadow-xl ">
+          <div className="w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
+            <div className="rounded-t-xl border-t-8 border-blue-900 p-6 l ">
               <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
                 Choose From Our Detailed Templates Options
               </h2>
@@ -543,39 +544,7 @@ export default function DashboardIdea() {
             </div>
           </div>
         </section>
-        <section
-          className="w-full py-12 md:py-24 lg:py-32 border-t  scroll-mt-20 bg-blue-100"
-          style={{
-            backgroundImage: "url('/banner-bg.svg')",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Get Matched to the Job that is Right for You!
-              </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
-                Find the perfect profession and get matched with the best job
-                profile with the AI-Based Job Assistance Programme.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
-              <Link
-                className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                href="#"
-              >
-                Contact Expert
-              </Link>
-              {/* <Link
-                className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
-                href="#"
-              >
-                Learn more
-              </Link> */}
-            </div>
-          </div>
-        </section>
+       <WorkTogether/>
         {/* <Footer /> */}
       </main>
     </>
