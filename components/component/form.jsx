@@ -45,7 +45,10 @@ const ImageTemplates = [
   "Template11",
   "Template13",
   "Template14",
+  "Template15",
+  "Template17",
   "Template18",
+  "Template19",
   "Template20",
 ];
 
