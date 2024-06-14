@@ -54,7 +54,7 @@ export default function TabResume() {
       id: 4,
       name: "Software Engineer",
       icon: <FaLaptop className="text-[#795548]" />,
-      src: "/Template14.png",
+      src: "/Template14-1.png",
     },
     {
       id: 5,
@@ -72,7 +72,7 @@ export default function TabResume() {
       id: 7,
       name: "Engineer",
       icon: <FaCogs className="text-[#9C27B0]" />,
-      src: "/Template22.png",
+      src: "/Template22-1.png",
     },
     {
       id: 8,

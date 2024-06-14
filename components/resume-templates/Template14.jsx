@@ -328,9 +328,9 @@ const Template14 = () => {
             >
               {basics?.jobtitle}
             </p>
-            <div className="contact_details">
+            <div className="contact_details w-full">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-4`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-2 w-full`}
               >
                 {basics?.phone && (
                   <a
@@ -356,7 +356,7 @@ const Template14 = () => {
                 )}
 
                 {(basics?.city || basics?.country) && (
-                  <p className="flex items-center">
+                  <p className="flex items-center w-full">
                     <IoLocationOutline className="text-black" />
                     <span>{basics?.city}</span>
                     <span>{basics?.city && basics?.country && " , "}</span>
