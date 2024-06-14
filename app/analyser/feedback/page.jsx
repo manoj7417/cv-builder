@@ -129,26 +129,32 @@ const FeedbackFuction = () => {
             <NewResumeLoader />
           </div>
         )}
-        <div className="bg-blue-50 w-full h-[400px] flex items-center justify-center">
+        <div className="w-full mb-6 flex items-center justify-center">
           <div className="main_heading_section">
-            <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug pb-5 text-blue-900 mt-24">
-              CV Optimiser Insights
+            <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug mb-4 text-blue-400  mt-28">
+              CV <span className="text-blue-950">Insights</span>
             </h1>
-            <div className="flex justify-center text-center mt-10">
+            <p className="text-lg text-gray-500">Get a better understanding of your resume and improve your chances of getting hired.</p>
+            {/* <div className="flex justify-center text-center">
               <button
                 class="button button--pipaluk button--inverted button--round-l button--text-thick button--text-upper"
                 onClick={handleBetterResumeContent}
               >
-                Optimize Now <FaCrown className="ml-1 text-yellow-300" />
+              Fix my CV <FaCrown className="ml-1 text-yellow-300" />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
-        <div className="calculation_section bg-[#F1F6FA] pb-20">
-          <div className="flex align-center px-10">
-            <div className="flex flex-col justify-around progress_bar p-5 w-2/3">
-              <div className="prograss_bar_box bg-white shadow-lg p-8  rounded-md">
+       <div className="w-5/6 mx-auto mb-10  rounded-2xl" style={{
+        borderWidth:"16px",
+        borderColor:"#F1F6FA",
+        borderRadius:"40px",
+        borderStyle:"solid",
+       }}>
+        <div>
+        <div className="recommendation_section pt-10 px-5 ">
+                <div className="prograss_bar_box bg-white  rounded-md">
                 <p className="tracking-wider">
                   Your resume ATS score is{" "}
                   <span
@@ -170,99 +176,15 @@ const FeedbackFuction = () => {
                   </div>
                 </div>
               </div>
-              <div className="recommendation_section bg-white shadow-lg py-10 px-5 mt-3 rounded-md">
-                <h3 className="text-xl font-bold">RECOMMENDATIONS</h3>
+              <h3 className="text-xl font-bold">Feedback</h3>
                 <p className="text-sm my-2">
-                  Get assistance from our CV Optimiser to get a profound analysis
-                  as per industry standards and get recommendations accordingly.
+                By following the recommendations below, you can improve your resume and increase your chances of getting hired.
                 </p>
-                <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
-                  {Object.keys(content).length > 0 &&
-                    content?.analysis?.feedback?.length > 0 ? (
-                    <ul className="custom-counter">
-                      {Object.keys(content).length > 0 &&
-                        content.analysis.feedback.map((content, index) => {
-                          return (
-                            <li
-                              className="text-sm flex items-center my-4"
-                              key={index}
-                            >
-                              <span className=" shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
-                                {index + 1}
-                              </span>
-                              <p>{content}</p>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  ) : (
-                    <ul className="custom-counter">
-                      <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
-                      </li>
-                      <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
-                      </li>
-                      <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
-                      </li>
-                      <li className="text-sm">
-                        <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
-                        </span>{" "}
-                        against those from successful candidates hired at
-                        leading global companies in our database.
-                      </li>
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#F1F6FA] p-5 w-1/3">
-              <div className="flex w-full justify-around">
+                <div>
+                
                 <div className="flex flex-col space-y-5 justify-between">
                   <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
-                    <div className="px-4 sm:p-3 sm:px-8">
-                      <div className="text-center">
-                        <dd className="uppercase text-md leading-5 font-medium text-black truncate mb-4">
-                          OverAll
-                        </dd>
-                      </div>
-                      <div>
-                        <div
-                          style={{ width: 100, height: 100, margin: " 0 auto" }}
-                        >
-                          <CircularProgressbar
-                            value={
-                              Object.keys(content).length > 0
-                                ? content?.analysis?.resume_score
-                                : "0"
-                            }
-                            text={`${Object.keys(content).length > 0
-                              ? content?.analysis?.resume_score
-                              : "0"
-                              }%`}
-                          />
-                        </div>
-                      </div>
-                      <div
-                        className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-center text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                      >
-                        ATS Score
-                      </div>
-                    </div>
+                    
                   </div>
                   <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
                     <div className="px-4 py-5 sm:p-3 sm:px-8">
@@ -445,10 +367,72 @@ const FeedbackFuction = () => {
                     />
                   </div>
                 </div>
+              
+           
+                </div>
               </div>
-            </div>
-          </div>
+        <div className="recommendation_section bg-white shadow-lg pt-10 px-5 mt-3 rounded-md">
+                <h3 className="text-xl font-bold">Your Resume Overview</h3>
+                <p className="text-sm my-2">
+                 Here is how your resume is currently performing in terms of the ATS score, clarity, relevance and content.
+                </p>
+                <div className="recommandation_list border-l-4 border-[#F89A14] p-5">
+                  {Object.keys(content).length > 0 &&
+                    content?.analysis?.feedback?.length > 0 ? (
+                    <ul className="custom-counter">
+                      {Object.keys(content).length > 0 &&
+                        content.analysis.feedback.map((content, index) => {
+                          return (
+                            <li
+                              className="text-sm flex items-center my-4"
+                              key={index}
+                            >
+                              <span className=" shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                                {index + 1}
+                              </span>
+                              <p>{content}</p>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  ) : (
+                    <ul className="custom-counter">
+                      <li className="text-sm">
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
+                      </li>
+                      <li className="text-sm">
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
+                      </li>
+                      <li className="text-sm">
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
+                      </li>
+                      <li className="text-sm">
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
+                      </li>
+                    </ul>
+                  )}
+                </div>
+              </div>
+              
         </div>
+       </div>
+        
       </section>
     </>
   );
