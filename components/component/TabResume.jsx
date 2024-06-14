@@ -48,7 +48,7 @@ export default function TabResume() {
       id: 3,
       name: "Product Manager",
       icon: <FaUsersCog className="text-[#4CAF50]" />,
-      src: "/Template5.png",
+      src: "/Template18.png",
     },
     {
       id: 4,
