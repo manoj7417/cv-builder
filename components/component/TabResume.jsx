@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-// import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import {
-  // FaPencilRuler,
   FaRegFolderOpen,
   FaStore,
   FaDatabase,
@@ -9,8 +7,7 @@ import {
   FaPalette,
   FaPython,
   FaSuitcase,
-} from "react-icons/fa6"; // Ensure all icons are imported correctly
-import { Tilt } from "react-tilt";
+} from "react-icons/fa6";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { FaCogs, FaPencilRuler, FaUsersCog } from "react-icons/fa";
@@ -27,7 +24,6 @@ import { toast } from "react-toastify";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
-  // const createResume = useUserStore((state) => state.createResume);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
 
@@ -94,18 +90,6 @@ export default function TabResume() {
     },
   ];
 
-  const defaultOptions = {
-    reverse: false, // reverse the tilt direction
-    max: 35, // max tilt rotation (degrees)
-    perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
-    scale: 1.1, // 2 = 200%, 1.5 = 150%, etc..
-    speed: 1000, // Speed of the enter/exit transition
-    transition: true, // Set a transition on enter/exit.
-    axis: null, // What axis should be disabled. Can be X or Y.
-    reset: true, // If the tilt effect has to be reset on exit.
-    easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
-  };
-
   const handleCreateCV = async (name) => {
     const { data } = JobResumeSchema.find((job) => job.name === name);
     if (!data) return;
@@ -132,23 +116,23 @@ export default function TabResume() {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="">
         <div className="rounded-t-xl p-6">
           <div className="tabs_heading">
             <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
-            Discover CVs that fit your Dream Job
+              Discover CVs that fit your Dream Job
             </h2>
             <p className="w-1/2 mx-auto text-center my-4">
-            Start your journey with Genies Career Hub and unlock the door to a world where your talents are valued and your career dreams become a reality with a personalised and perfectly tailored resume.
+              Start your journey with Genies Career Hub and unlock the door to a world where your talents are valued and your career dreams become a reality with a personalised and perfectly tailored resume.
             </p>
           </div>
           <Tabs
             className="max-w-5xl mx-auto py-5"
             defaultValue="Business Analyst"
           >
-            <div className="grid grid-cols-2 place-items-around items-center">
+            <div className="grid grid-cols-2 place-items-around items-center ">
               <div className="tabs_main">
-                <TabsList className=" flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4">
+                <TabsList className="flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4">
                   {TabsHeader?.map((item, index) => (
                     <TabsTrigger value={item?.name} key={index}>
                       <div className="tabs_header flex gap-2 items-center justify-start">
@@ -162,36 +146,33 @@ export default function TabResume() {
               <div className="tabs_content">
                 {TabsHeader?.map((item, index) => (
                   <TabsContent value={item?.name} key={index}>
-                    <div className="flex justify-center group relative">
-                      <Tilt
-                        options={defaultOptions}
-                        style={{ height: 600, width: 500 }}
-                      >
+                    <div className="relative flex justify-center  overflow-hidden group p-4">
+                      <div className="relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md">
                         <Image
                           src={item.src}
                           key={index}
                           width={800}
                           height={400}
                           alt={item.name}
-                          className="rounded-md bg-gradient-to-t from-[#8181b9] to-[#dcecff] p-4"
+                          className=" object-fit h-full rounded-md"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          <Button
-                            className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                            onClick={() => handleCreateCV(item.name)}
-                            disabled={loading}
-                          >
-                            {loading ? (
-                              <>
-                                <ImSpinner8 className=" animate-spin mr-2" />
-                                Loading
-                              </>
-                            ) : (
-                              "Try Now"
-                            )}
-                          </Button>
-                        </div>
-                      </Tilt>
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <Button
+                          className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                          onClick={() => handleCreateCV(item.name)}
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <>
+                              <ImSpinner8 className="animate-spin mr-2" />
+                              Loading
+                            </>
+                          ) : (
+                            "Try Now"
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   </TabsContent>
                 ))}

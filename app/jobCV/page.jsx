@@ -582,11 +582,11 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="bg-white text-black">
+        {/* <section className="bg-white text-black">
           <div className="container mx-auto p-4">
               <TabMenu tabs={jobTabs} />
           </div>
-        </section>
+        </section> */}
         <Footer />
       </>
     </main>
