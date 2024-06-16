@@ -13,6 +13,19 @@ export const instance = axios.create({
   },
 });
 
+export const updateUserProfile = async (data, token) => {
+  try {
+    const response = await instance.patch('/user/update/userprofiledetails', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response;
+  } catch (error) {
+    console.error("Error updating user:", error.response || error);
+    throw error;
+  }
+}
 
 export const usertemplatepurchase = async (data) => {
   try {
