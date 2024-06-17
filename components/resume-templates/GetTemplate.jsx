@@ -19,6 +19,11 @@ import Template17 from "./Template17";
 import Template20 from "./Template20";
 import Template22 from "./Template22";
 import Template19 from "./Template19";
+import Template23 from "./Template23";
+import Template24 from "./Template24";
+import Template25 from "./Template25";
+import Template21 from "./Template21";
+import Template26 from "./Template26";
 
 export const GetTemplate = ({ name }) => {
   switch (name) {
@@ -62,8 +67,18 @@ export const GetTemplate = ({ name }) => {
       return <Template19 />;
     case "Template20":
       return <Template20 />;
+      case "Template21":
+      return <Template21 />;
     case "Template22":
       return <Template22 />;
+      case "Template23":
+      return <Template23 />;
+      case "Template24":
+      return <Template24 />;
+      case "Template25":
+      return <Template25 />;
+      case "Template26":
+      return <Template26 />;
     default:
       return <Template1 />;
   }

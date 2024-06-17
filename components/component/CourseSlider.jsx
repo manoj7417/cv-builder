@@ -46,7 +46,7 @@ export default function CourseSlider() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-10 steps_slider shadow-2xl">
+    <div className="bg-gray-100 rounded-3xl p-10 steps_slider shadow-xl">
       <div className="steps_slider_title mb-5">
         <h2 className="text-3xl text-blue-900 font-bold">
           A Step Closer to Your Dream Job with

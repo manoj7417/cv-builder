@@ -7,17 +7,17 @@ const TermsConditionPage = () => {
         <div className="container lg:max-w-6xl w-full mx-auto rounded-lg lg:p-0 p-5">
           <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
           <p>
-            Welcome to <strong>Career Genies Hub</strong>!
+            Welcome to <strong>Genies Career Hub</strong>!
           </p>
           <p className="mt-4">
             These terms and conditions outline the rules and regulations for the
-            use of <strong>Career Genies Hub</strong> Website, located at
-            <strong> career-genies-hub.com</strong>.
+            use of <strong>Genies Career Hub</strong> Website, located at
+            <strong> geniescareerhub.com</strong>.
           </p>
           <p className="mt-4">
             By accessing this website we assume you accept these terms and
             conditions. Do not continue to use
-            <strong> Career Genies Hub</strong> if you do not agree to take all
+            <strong> Genies Career Hub</strong> if you do not agree to take all
             of the terms and conditions stated on this page.
           </p>
           <h2 className="text-xl font-semibold mt-6 mb-2">Terminology</h2>
@@ -41,8 +41,8 @@ const TermsConditionPage = () => {
           <h2 className="text-xl font-semibold mt-6 mb-2">Cookies</h2>
           <p>
             We employ the use of cookies. By accessing
-            <strong> Career Genies Hub</strong>, you agreed to use cookies in
-            agreement with the <strong>Career Genies Hub</strong> Privacy
+            <strong> Genies Career Hub</strong>, you agreed to use cookies in
+            agreement with the <strong>Genies Career Hub</strong> Privacy
             Policy.
           </p>
           <p className="mt-4">
@@ -54,27 +54,27 @@ const TermsConditionPage = () => {
           </p>
           <h2 className="text-xl font-semibold mt-6 mb-2">License</h2>
           <p>
-            Unless otherwise stated, <strong> Career Genies Hub</strong> and/or
+            Unless otherwise stated, <strong> Genies Career Hub</strong> and/or
             its licensors own the intellectual property rights for all material
-            on <strong>Career Genies Hub</strong>. All intellectual property
+            on <strong>Genies Career Hub</strong>. All intellectual property
             rights are reserved. You may access this from
-            <strong> Career Genies Hub</strong> for your own personal use
+            <strong> Genies Career Hub</strong> for your own personal use
             subjected to restrictions set in these terms and conditions.
           </p>
           <ul className="list-disc list-inside mt-4">
             <li>
-              Republish material from <strong>Career Genies Hub</strong>
+              Republish material from <strong>Genies Career Hub</strong>
             </li>
             <li>
               Sell, rent or sub-license material from
-              <strong> Career Genies Hub</strong>
+              <strong> Genies Career Hub</strong>
             </li>
             <li>
               Reproduce, duplicate or copy material from
-              <strong> Career Genies Hub</strong>
+              <strong> Genies Career Hub</strong>
             </li>
             <li>
-              Redistribute content from <strong>Career Genies Hub</strong>
+              Redistribute content from <strong>Genies Career Hub</strong>
             </li>
           </ul>
           <p className="mt-4">This Agreement shall begin on the date hereof.</p>
@@ -82,19 +82,19 @@ const TermsConditionPage = () => {
           <p>
             Parts of this website offer an opportunity for users to post and
             exchange opinions and information in certain areas of the website.
-            <strong>Career Genies Hub</strong> does not filter, edit, publish or
+            <strong>Genies Career Hub</strong> does not filter, edit, publish or
             review Comments prior to their presence on the website. Comments do
             not reflect the views and opinions of
-            <strong> Career Genies Hub</strong>, its agents and/or affiliates.
+            <strong> Genies Career Hub</strong>, its agents and/or affiliates.
             Comments reflect the views and opinions of the person who post their
             views and opinions. To the extent permitted by applicable laws,
-            <strong> Career Genies Hub</strong> shall not be liable for the
+            <strong> Genies Career Hub</strong> shall not be liable for the
             Comments or for any liability, damages or expenses caused and/or
             suffered as a result of any use of and/or posting of and/or
             appearance of the Comments on this website.
           </p>
           <p className="mt-4">
-            <strong>Career Genies Hub</strong> reserves the right to monitor all
+            <strong>Genies Career Hub</strong> reserves the right to monitor all
             Comments and to remove any Comments which can be considered
             inappropriate, offensive or causes breach of these Terms and
             Conditions.
@@ -121,7 +121,7 @@ const TermsConditionPage = () => {
             </li>
           </ul>
           <p className="mt-4">
-            You hereby grant <strong>Career Genies Hub</strong> a non-exclusive
+            You hereby grant <strong>Genies Career Hub</strong> a non-exclusive
             license to use, reproduce, edit and authorize others to use,
             reproduce and edit any of your Comments in any and all forms,
             formats or media.
@@ -176,7 +176,7 @@ const TermsConditionPage = () => {
             or to our accredited businesses; (b) the organization does not have
             any negative records with us; (c) the benefit to us from the
             visibility of the hyperlink compensates the absence of
-            <strong> Career Genies Hub</strong>; and (d) the link is in the
+            <strong> Genies Career Hub</strong>; and (d) the link is in the
             context of general resource information.
           </p>
           <p className="mt-4">
@@ -189,7 +189,7 @@ const TermsConditionPage = () => {
           <p className="mt-4">
             If you are one of the organizations listed in paragraph 2 above and
             are interested in linking to our website, you must inform us by
-            sending an e-mail to <strong>Career Genies Hub</strong>. Please
+            sending an e-mail to <strong>Genies Career Hub</strong>. Please
             include your name, your organization name, contact information as
             well as the URL of your site, a list of any URLs from which you
             intend to link to our Website, and a list of the URLs on our site to
@@ -208,7 +208,7 @@ const TermsConditionPage = () => {
             </li>
           </ul>
           <p className="mt-4">
-            No use of <strong>Career Genies Hub</strong> logo or other artwork
+            No use of <strong>Genies Career Hub</strong> logo or other artwork
             will be allowed for linking absent a trademark license agreement.
           </p>
           <h2 className="text-xl font-semibold mt-6 mb-2">iFrames</h2>

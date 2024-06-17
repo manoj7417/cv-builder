@@ -215,7 +215,7 @@ const Skills = ({ fontStyle, headingColor }) => {
           <div className="text-gray-600 w-full flex justify-end items-center">
             <ul className="w-full">
               {data.items.map((item, i) => {
-                const level = levelMapping[item?.level.toLowerCase()] || 0;
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`flex items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}

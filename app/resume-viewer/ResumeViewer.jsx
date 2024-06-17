@@ -165,9 +165,39 @@ const images = [
     type: templateType.premium,
   },
   {
+    name: "Template21",
+    src: "/Template21.png",
+    alt: "Template21.png",
+    type: templateType.premium,
+  },
+  {
     name: "Template22",
     src: "/Template22.png",
     alt: "Template22.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template23",
+    src: "/Template23.png",
+    alt: "Template23.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template24",
+    src: "/Template24.png",
+    alt: "Template24.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template25",
+    src: "/Template25.png",
+    alt: "Template25.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template26",
+    src: "/Template26.png",
+    alt: "Template26.png",
     type: templateType.premium,
   },
 ];
@@ -564,7 +594,7 @@ const ResumeViewPage = () => {
             >
               <GetTemplate name={data?.metadata?.template} resumeData={data} />
               <div className=" text-center  text-gray-500">
-                <p>@Career Genies Hub</p>
+                <p>@Genies Career Hub</p>
               </div>
             </div>
           </div>

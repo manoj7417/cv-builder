@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProfilePage = () => {
+  
   const [isEditable, setIsEditable] = useState(false);
   const { userState, updateUserData } = useUserStore(state => ({
     userState: state.userState,
