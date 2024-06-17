@@ -1,13 +1,13 @@
-"use client";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { FaGlobe } from "react-icons/fa";
-import { FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
-import { MdOutlineMailOutline } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaLinkedin, FaLocationDot, FaPhone } from "react-icons/fa6";
+import Image from "next/image";
+import { useResumeStore } from "@/app/store/ResumeStore";
+import { MdOutlineMailOutline, MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
-import { useResumeStore } from "@/app/store/ResumeStore";
+import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
+import { FaGlobe, FaUserAlt } from "react-icons/fa";
+import { HiCube } from "react-icons/hi2";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -18,7 +18,9 @@ const Education = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="education_header">
-            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+            <h2
+              className={`font-semibold font-serif p-2 bg-orange-400 ${fontStyle.subMianHeadingFont}`}
+            >
               {data?.name}
             </h2>
           </div>
@@ -27,7 +29,7 @@ const Education = ({ fontStyle, headingColor }) => {
               return (
                 <>
                   <div className="education1 my-5" key={index}>
-                    <div className="education_names my-1">
+                    <div className="education_names flex justify-between my-1">
                       <div className="education_degree">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
@@ -36,7 +38,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year">
+                      <div className="education_year text-end">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -45,7 +47,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.endDate}
                         </p>
                         {item?.city && (
-                          <p className="text-13px flex font-normal items-center mt-1">
+                          <p className="text-13px flex font-normal items-center justify-end mt-1">
                             <IoLocationOutline className="mr-1" />
                             {item?.city}
                           </p>
@@ -73,14 +75,15 @@ const Experience = ({ fontStyle, headingColor }) => {
   );
 
   return (
-    <div className="experience_section w-full mt-5">
+    <div className="experience_section w-full mt-2">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="experience_header w-full">
-            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+            <h2
+              className={`font-semibold font-serif p-2 bg-orange-400 ${fontStyle.subMianHeadingFont}`}
+            >
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
           </div>
           {data?.items?.map((item, index) => {
             return (
@@ -100,7 +103,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -132,19 +135,18 @@ const Experience = ({ fontStyle, headingColor }) => {
 const Projects = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
-    <div className="project_section my-4">
+    <div className="project_section my-2">
       {data?.visible && data?.items.length > 0 && (
         <>
           <div className="project_heading w-full">
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont}`}
+              className={`font-semibold font-serif p-2 bg-orange-400 ${fontStyle.subMianHeadingFont}`}
               style={{
                 color: headingColor,
               }}
             >
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
           </div>
           {data?.items.map((item, index) => {
             return (
@@ -202,32 +204,30 @@ const Skills = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
-          <div className="skill_head">
-            <h2
-              className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-              style={{
-                color: headingColor,
-              }}
-            >
-              {data?.name}
-            </h2>
-          </div>
-          <div className="text-gray-600 w-full">
+        <div className="skills_section px-5 py-10">
+          <h2
+            className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="w-full flex justify-end items-center">
             <ul className="w-full">
               {data.items.map((item, i) => {
-                const level = levelMapping[item?.level.toLowerCase()] || 25;
+                const level = levelMapping[item?.level.toLowerCase()] || 0;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1`}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-2 px-4`}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1">
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap text-white">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-black h-2.5"
+                        className="bg-orange-400 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -251,11 +251,10 @@ const Profile = ({ fontStyle, headingColor }) => {
         <div className="profile_section w-full">
           <div className="profile_heading w-full">
             <h2
-              className={`text-gray-700 font-semibold uppercase ${fontStyle.headingFont}`}
+              className={`font-semibold font-serif text-white ${fontStyle.subMianHeadingFont}`}
             >
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
           </div>
           <div
             className={`text-sm py-2 mt-3 ${fontStyle.subHeadingFont} break-words`}
@@ -267,12 +266,13 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-export const Template19 = () => {
+const Template26 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
-  const data = useResumeStore((state) => state.resume.data);
   const basics = useResumeStore((state) => state.resume.data.basics);
+
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
+    subMianHeadingFont: "text-30px",
     jobtitleFont: "text-24px",
     headingFont: "text-22px",
     subHeadingFont: "text-16px",
@@ -286,87 +286,102 @@ export const Template19 = () => {
 
   return (
     <>
-      <div className="p-custom space-y-3">
-        <div className="bg-white mx-auto w-full h-full">
-          <div
-            className="top_section flex justify-around items-center text-white py-10 clip-resume"
-            style={{
-              backgroundColor: metadata?.theme?.primary,
-            }}
-          >
-            {basics?.picture?.url && (
-              <div className="profile_pic w-[30%] flex items-center justify-center">
-                <img
-                  src={basics?.picture?.url}
-                  alt="pic"
-                  className="w-24 h-24 rounded-full object-cover"
-                />
-              </div>
-            )}
-            <div className="name_profile w-[70%]  h-full px-10">
-              <h1
-                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
-              >
-                {basics?.name}
-              </h1>
-              <p className={`${fontStyle.jobtitleFont} break-words uppercase`}>
-                {basics?.jobtitle}
-              </p>
-            </div>
-          </div>
-          <div className="resume_section flex flex-row w-[210mm] h-full">
-            <div className="md:w-[30%] w-full left_side bg-[#eee8e3] -mt-4">
-              <div className="left_side p-5">
-                <div className="contact_section mt-5">
-                  <h2
-                   className={`font-semibold uppercase text-xl`}
-                  >
-                    Contact Details
-                  </h2>
-                  <div
-                    className={`text-gray-600 my-4 ${fontStyle.contactFont}`}
-                  >
-                    {basics?.email && (
-                      <a
-                        href={`mailto:${basics?.email}`}
-                        className="hover:underline flex items-center mt-1  text-wrap w-full "
-                      >
-                        <MdOutlineMailOutline className="mr-2" />
-                        <p className="w-[90%] text-wrap break-words">
-                          {basics?.email}
-                        </p>
-                      </a>
-                    )}
+      <div>
+        <div className="w-full bg-white shadow-lg rounded-lg flex">
+          <div className="bg-slate-800 p-4 w-[40%]">
+            <div>
+              <header className="px-6 py-16 whitespace-nowrap">
+                <h1 className="text-4xl font-bold text-orange-400 mb-2">
+                  {basics?.name}
+                </h1>
+                <h2 className="text-lg text-white">{basics?.jobtitle}</h2>
+              </header>
+              <section className="px-5">
+                <h2 className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}>
+                  Contact
+                </h2>
+                <ul className="flex flex-col gap-3 mt-2 px-2">
+                  <li className="flex items-center gap-3">
                     {basics?.phone && (
                       <a
                         href={`tel:${basics?.phone}`}
-                        className="hover:underline flex items-center mt-1  text-wrap w-full "
+                        className="hover:underline flex items-center mt-1 text-wrap w-full text-white"
                       >
-                        <MdOutlinePhone className="mr-2" />
+                        <MdOutlinePhone className="mr-2 text-orange-400" />
                         <p className="w-[90%] text-wrap break-words">
                           {basics?.phone}
                         </p>
                       </a>
                     )}
+                  </li>
+                  <li className="flex items-center gap-3">
                     {(basics?.city || basics?.country) && (
-                      <p className="flex items-center break-words">
-                        <IoLocationOutline className="mr-2" />
-                        {basics?.city}
-                        {basics?.city && basics?.country && " , "}
-                        {basics?.country}
+                      <p className="flex items-center text-white">
+                        <IoLocationOutline className="mr-2 text-orange-400" />
+                        <span>{basics?.city}</span>
+                        <span>{basics?.city && basics?.country && " , "}</span>
+                        <span className="">{basics?.country}</span>
                       </p>
                     )}
-                  </div>
-                </div>
-                <Education fontStyle={fontStyle} />
+                  </li>
+                  <li className="flex items-center gap-3 text-white">
+                    {basics?.email && (
+                      <a
+                        href={`mailto:${basics?.email}`}
+                        className="hover:underline flex items-center mt-1  text-wrap w-full "
+                      >
+                        <MdOutlineMailOutline className="mr-2 text-orange-400" />
+                        <p className="w-[90%] text-wrap break-words">
+                          {basics?.email}
+                        </p>
+                      </a>
+                    )}
+                  </li>
+                </ul>
+              </section>
+
+              <section className="mb-8">
                 <Skills fontStyle={fontStyle} />
+              </section>
+            </div>
+          </div>
+          <div className="p-8 w-[60%]">
+            <div className="flex justify-center rounded-full items-center mb-4 border-l-8 border-orange-400 p-6">
+              {/* <img
+                src="/pic.jpg"
+                alt="Profile"
+                className="rounded-full     h-44 object-cover"
+              /> */}
+              {basics?.picture?.url && (
+              <div className="profile_pic">
+                <img
+                  src={basics?.picture?.url}
+                  alt="pic"
+                  className="w-52 h-48 rounded-full object-cover"
+                />
               </div>
+            )}
             </div>
-            <div className="md:w-[70%] w-full right_side p-5">
-              <Profile fontStyle={fontStyle} />
-              <Experience fontStyle={fontStyle} />
-              <Projects fontStyle={fontStyle} />
-            </div>
+
+            <section className="mb-8">
+              <div className="education py-2">
+                <Education fontStyle={fontStyle} />
+              </div>
+              <div className="experience py-2">
+                <Experience
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
+              </div>
+              <div className="projects">
+                <Projects
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
+              </div>
+            </section>
+
+            <section className="mb-8"></section>
           </div>
         </div>
       </div>
@@ -374,4 +389,4 @@ export const Template19 = () => {
   );
 };
 
-export default Template19;
+export default Template26;

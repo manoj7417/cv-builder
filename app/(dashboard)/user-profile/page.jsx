@@ -13,6 +13,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix
 import { ToastContainer, toast } from "react-toastify";
 
 const ProfilePage = () => {
+  
   const [isEditable, setIsEditable] = useState(false);
   const { userState, updateUserData } = useUserStore(state => ({
     userState: state.userState,
