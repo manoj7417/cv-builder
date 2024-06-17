@@ -72,6 +72,17 @@ export default function HomepageNew() {
     margin: 0,
   };
 
+  const words = ["Create ", "Optimize ", "Match "]; // Add more words as needed
+  const interval = 3000; // 2000ms or 2 seconds for each word
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, interval);
+    return () => clearInterval(cycle);
+  }, [words, interval]);
+
   return (
     <>
       {/* <Navbar /> */}
@@ -93,24 +104,29 @@ export default function HomepageNew() {
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto">
-              <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
-                SKYROCKETING
+            <h1 className="text-[80px] mt-4 text-center  flex items-center  font-extrabold text-[#0D3572]">
+              
                 <span
-                  className="text-[#2C98CA] ml-4"
+                  className="text-[#ffffff]  mx-5 slide-text-container"
                   style={{
                     display: "inline-block",
-                    transform: "translateY(-10px) rotate(-2.76deg)",
-                    border: "2px solid #808080",
-                    padding: "0px 10px",
+
+                    background: "linear-gradient(135deg, #30B8CA, #303A72)",
+                    borderRadius: "16px",
+                    padding: "0px 40px",
                     lineHeight: "1.2",
                   }}
                 >
-                  CAREER,
+                  <span className="slide-text" key={index}>
+                    {words[index]}
+                  </span>
                 </span>
-                <br />
-                WITH
-                <span className="2xl:ml-3 lg:ml-2"> AI-POWERED </span>
-                <span className="2xl:ml-3 lg:ml-2">CV!</span>
+                your standout
+              </h1>
+              <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
+               
+                <span className="2xl:ml-3 lg:ml-2 "> CV with </span>
+                <span className="2xl:ml-3 lg:ml-2">genies</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
                 We believe in bridging the gap between your aspirations and the
@@ -156,7 +172,7 @@ export default function HomepageNew() {
             <div className="flex justify-center">
               <Tilt options={defaultOptions}>
                 <Image
-                  src="/home-creative-top.png"
+                  src="/career genie website images (2) (1).png"
                   width={1300}
                   height={1000}
                   className=""

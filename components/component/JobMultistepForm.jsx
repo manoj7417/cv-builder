@@ -388,15 +388,19 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 1) {
-        return <DialogContent className='max-w-[80dvw] h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[70dvw] h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
-                <div className='w-1/2 h-full'>
-                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
+                <div className='w-1/3 h-full '>
+               
+                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
-                <div className=' w-1/2 py-5 h-full'>
-                    <div className='shadow-xl p-10 w-full h-full rounded-lg '>
+                <div className=' w-2/3 py-5 h-full'>
+                    <div className='shadow-xl p-10 w-full h-full rounded-2xl bg-white'>
                         <div className='my-2'>
-                            <Label >Fullname</Label>
+                            <h2 className='font-bold text-2xl text-blue-950 mb-5 text-center'>Design a winning <span className='text-blue-600'>CV</span> in just minutes with <br/> <span className='text-blue-600 text-3xl'>&#x201B; Genies Career Hub &#x2019;</span></h2>
+                            </div>
+                        <div className='my-2'>
+                            <Label >Full Name</Label>
                             <Input className='my-1' placeholder='Enter full name' value={formData.fullname} onChange={handleFormDataChange} name='fullname' />
                         </div>
                         <div>
@@ -428,25 +432,27 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 2) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
-            <div className='flex justify-around'>
-                <div className='w-1/2 h-full'>
-                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
+        return <DialogContent className='max-w-[70dvw] no-scrollbar h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
+            <div className='flex justify-around overflow-hidden'>
+                <div className='w-1/3 h-full '>
+                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
-                <div className='w-1/2 h-full py-10 max-h-[80dvh]'>
-                    <div className=' shadow-lg p-10 w-full h-full max-h-full rounded-lg overflow-scroll no-scrollbar  bg-white'>
-                        <div className='flex items-center mb-5'>
+                <div className=' w-2/3 py-5 h-full overflow-hidden'>
+                
+                    <div className=' shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden  bg-white'>
+                        <div className='flex items-center'>
                             <Checkbox checked={formData?.isFresher} onCheckedChange={handleFreshercheck} id='checkbox' />
-                            <Label htmlFor='checkbox' className='text-xl ml-2'>Are you a fresher?</Label>
+                            <Label htmlFor='checkbox' className='text-lg ml-4'>Are you a fresher?</Label>
                         </div>
 
                         {
                             !formData?.isFresher &&
                             <>
+                            <div className='overflow-y-scroll no-scrollbar h-[80%]'>
                                 <div className='my-2'>
                                     <hr />
                                 </div>
-                                <div className='max-h-[85%] overflow-scroll no-scrollbar'>
+                                <div className='max-h-[85%]'>
                                     <div className='flex justify-between items-center my-4 px-1'>
                                         <p className='text-blue-900'>Add Experience</p>
                                         {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddExperience} /> */}
@@ -574,10 +580,11 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                         })
                                     }
                                 </div>
+                            </div>    
                             </>
                         }
                         <DialogFooter >
-                            <div className='w-full justify-between items-center flex'>
+                            <div className='w-full mt-5 justify-between items-center flex'>
                                 <Button onClick={handlePrevStep}>Back</Button>
                                 <Button onClick={handleChangeStep2} disabled={!formData.isFresher && formData.experience.length === 0}>Next</Button>
                             </div>
@@ -589,14 +596,14 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 3) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
-            <div className='flex'>
-                <div className='w-1/2 h-full'>
-                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
+        return <DialogContent className='max-w-[70dvw] no-scrollbar h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
+            <div className='flex justify-around overflow-hidden'>
+                <div className='w-1/3 h-full '>
+                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
-                <div className='w-1/2 h-full py-5 max-h-[80dvh]'>
-                    <div className='shadow-lg p-10 w-full h-full max-h-full rounded-lg overflow-scroll no-scrollbar bg-white'>
-                        <div className=' max-h-[80%]  overflow-scroll no-scrollbar'>
+                <div className=' w-2/3 py-5 h-full overflow-hidden'>
+                    <div className='shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
+                        <div className=' max-h-[85%]  overflow-scroll no-scrollbar'>
                             <div className='flex justify-between items-center my-4 px-1'>
                                 <p className='text-blue-900'>Add Education</p>
                                 <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddEducation}>
@@ -703,7 +710,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                 }
                             </div>
                         </div>
-                        <div className='w-full justify-between items-center flex'>
+                        <div className='w-full mt-5 justify-between items-center flex'>
                             <Button onClick={handlePrevStep}>Back</Button>
                             <Button onClick={handleChangeStep3} disabled={formData.education.length === 0}>Next</Button>
                         </div>
@@ -714,13 +721,14 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 4) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
-            <div className='flex'>
-                <div className='w-1/2 h-full'>
-                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
+        return <DialogContent className='max-w-[70dvw] p-0 no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
+            <div className='flex justify-around overflow-hidden'>
+                <div className='w-1/3 h-full '>
+                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
-                <div className=' w-1/2 py-5 h-full max-h-[80dvh] '>
-                    <div className='shadow-xl bg-white p-10 h-full max-h-[95%] overflow-scroll no-scrollbar rounded-lg'>
+                <div className=' w-2/3 py-5 h-full overflow-hidden'>
+                    <div className='shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
+                        <div className='max-h-[85%]  overflow-scroll no-scrollbar'>
                         <div className='flex justify-between items-center my-4 px-1'>
                             <p className='text-blue-900'>Add Projects</p>
                             <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddProject}>
@@ -728,7 +736,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                         </button>
                             {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddProject} /> */}
                         </div>
-                        <div className='h-[80%] max-h-[80%] overflow-scroll no-scrollbar' >
+                        <div className=' max-h-[85%] overflow-scroll no-scrollbar' >
                             {
                                 formData.projects.length > 0 && formData.projects.map((item, index) => {
                                     return <div className=' flex justify-between items-center relative my-2' key={index} >
@@ -815,7 +823,8 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                 })
                             }
                         </div>
-                        <div className='w-full justify-between items-center flex'>
+                        </div>
+                        <div className='w-full mt-5 justify-between items-center flex'>
                             <Button onClick={handlePrevStep}>Back</Button>
                             <Button onClick={handleChangeStep4} disabled={formData.projects.length === 0}>Next</Button>
                         </div>
@@ -827,15 +836,15 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 5) {
-        return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
-            <div className='flex'>
-                <div className='w-1/2 h-full'>
-                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
+        return <DialogContent className='max-w-[70dvw] no-scrollbar p-0 h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
+            <div className='flex justify-around overflow-hidden'>
+            <div className='w-1/3 h-full '>
+                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
-                <div className='w-1/2 h-full'>
-                    <div className='shadow-xl rounded-lg h-full p-10'>
+                <div className='w-2/3 py-5 h-full overflow-hidden'>
+                    <div className='shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
                         <Label >Skills</Label>
-                        <Textarea placeholder='Enter your skills' value={formData.skills.join("\n")} onChange={handleSkillsChange} className='mt-2' />
+                        <Textarea placeholder='Enter your skills' value={formData.skills.join("\n")} onChange={handleSkillsChange} className='mt-2 h-1/2' />
                         <div className='w-full justify-between items-center py-10 flex'>
                             <Button onClick={handlePrevStep}>Back</Button>
                             <Button onClick={handleSubmitForm} disabled={formData.skills.length === 0}>Submit</Button>
@@ -848,9 +857,9 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
     if (steps === 6) {
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
-            <div className='flex'>
-                <div className='w-1/2 h-full'>
-                    <Image src='/choice-worker-concept-illustrated.png' alt='choice-worker-concept-illustrated' className='w-full h-full object-contain' width={600} height={600} />
+            <div className='flex justify-around'>
+            <div className='w-1/3 h-full '>
+                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
                 <div className='w-1/2 h-full flex item-center'>
                     <div className='mx-auto flex items-center justify-center flex-col'>

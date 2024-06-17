@@ -7,7 +7,29 @@
     border: 1px solid gray;
     color: white;
    }
-
+   .slide-text-container {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+   
+  }
+  
+  .slide-text {
+    display: inline-block;
+   
+    transform: translateY(-100%);
+    animation: slideIn 1.0s forwards;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+  
+    100% {
+      transform: translateY(0%);
+    }
+  }
 
    .get_start_btn {
        font-size: 18px;
