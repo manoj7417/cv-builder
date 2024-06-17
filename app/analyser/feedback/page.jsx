@@ -15,6 +15,7 @@ import { FaCrown } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
 import { Dialog } from "@/components/ui/dialog";
 import JobMultistepForm from "@/components/component/JobMultistepForm";
+import "@/app/components/HomepageNew/Homepage.css";
 
 const FeedbackFuction = () => {
   const [content, setContent] = useState({});
@@ -25,8 +26,8 @@ const FeedbackFuction = () => {
   const updateUserData = useUserStore((state) => state.updateUserData);
   const resumeData = useResumeStore((state) => state.resume.data);
   const initialState = {
-    fullname: userdata?.fullname || '',
-    email: userdata?.email || '',
+    fullname: userdata?.fullname || "",
+    email: userdata?.email || "",
     jobTitle: "",
     country: "",
     city: "",
@@ -34,13 +35,13 @@ const FeedbackFuction = () => {
     experience: [],
     skills: [],
     education: [],
-    projects: []
-  }
-  const [steps, setSteps] = useState(1)
+    projects: [],
+  };
+  const [steps, setSteps] = useState(1);
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
-  const [formData, setFormData] = useState(initialState)
-  const [showMultiStepDialog, setshowMultiStepDialog] = useState(false)
+  const [formData, setFormData] = useState(initialState);
+  const [showMultiStepDialog, setshowMultiStepDialog] = useState(false);
 
   const fetchBetterResume = async (resume) => {
     const { accessToken } = await GetTokens();
@@ -75,7 +76,9 @@ const FeedbackFuction = () => {
         window.location = url;
       })
       .catch((error) => {
-        console.error(error.response ? error.response.data.error : error.message);
+        console.error(
+          error.response ? error.response.data.error : error.message
+        );
       });
   };
 
@@ -83,7 +86,7 @@ const FeedbackFuction = () => {
     if (!userdata?.tokens) {
       return handlepayment();
     }
-    setshowMultiStepDialog(true)
+    setshowMultiStepDialog(true);
   };
 
   const handleCloseMultistepForm = () => {
@@ -100,9 +103,8 @@ const FeedbackFuction = () => {
       education: [],
       projects: [],
     });
-    setSteps(1)
+    setSteps(1);
   };
-
 
   useEffect(() => {
     let value = JSON.parse(localStorage.getItem("feedback"));
@@ -143,7 +145,10 @@ const FeedbackFuction = () => {
             <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug mb-4 text-blue-400  mt-28">
               CV <span className="text-blue-950">Insights</span>
             </h1>
-            <p className="text-lg text-gray-500">Get a better understanding of your resume and improve your chances of getting hired.</p>
+            <p className="text-lg text-gray-500">
+              Get a better understanding of your resume and improve your chances
+              of getting hired.
+            </p>
           </div>
         </div>
 
@@ -162,8 +167,11 @@ const FeedbackFuction = () => {
                 <p className="tracking-wider">
                   Your resume ATS score is{" "}
                   <span
-                    className={`${content?.analysis?.resume_score > 65 ? "text-green-400" : "text-red-500"
-                      } font-bold`}
+                    className={`${
+                      content?.analysis?.resume_score > 65
+                        ? "text-green-400"
+                        : "text-red-500"
+                    } font-bold`}
                   >
                     {content ? content?.analysis?.resume_score : "0"}
                   </span>{" "}
@@ -171,19 +179,25 @@ const FeedbackFuction = () => {
                 </p>
                 <div className="w-full  my-2.5  overflow-hidden  ">
                   <div className=" relative h-7 w-full rounded-2xl">
-                    <Progress value={content?.analysis?.resume_score} className={"h-5 bg-gray-200"} />
+                    <Progress
+                      value={content?.analysis?.resume_score}
+                      className={"h-5 bg-gray-200"}
+                    />
                   </div>
                 </div>
               </div>
               <h3 className="text-xl font-bold">Feedback</h3>
               <p className="text-sm my-2">
-                By following the recommendations below, you can improve your resume and increase your chances of getting hired.
+                By following the recommendations below, you can improve your
+                resume and increase your chances of getting hired.
               </p>
               <div className="flex flex-col space-y-5 justify-between">
                 <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
                   <div className="px-4 py-5 sm:p-3 sm:px-8">
                     <div className="text-center">
-                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">Clarity</div>
+                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
+                        Clarity
+                      </div>
                       <div>
                         <div
                           style={{
@@ -193,22 +207,27 @@ const FeedbackFuction = () => {
                           }}
                         >
                           <CircularProgressbar
-                            value={Object.keys(content).length > 0 ? content?.clarity?.score : "0"}
-                            text={`${Object.keys(content).length > 0 ? content?.clarity?.score : "0"}%`}
+                            value={
+                              Object.keys(content).length > 0
+                                ? content?.clarity?.score
+                                : "0"
+                            }
+                            text={`${
+                              Object.keys(content).length > 0
+                                ? content?.clarity?.score
+                                : "0"
+                            }%`}
                           />
                         </div>
                       </div>
                       <div className="pt-2 flex justify-center items-center">
-                        {Object.keys(content).length > 0 && content?.clarity?.score > 80 ? (
-                          <div
-                            className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
-                          >
+                        {Object.keys(content).length > 0 &&
+                        content?.clarity?.score > 80 ? (
+                          <div className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Excellent
                           </div>
                         ) : (
-                          <div
-                            className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                          >
+                          <div className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Needs Work
                           </div>
                         )}
@@ -216,7 +235,10 @@ const FeedbackFuction = () => {
                       <div className="pt-2 text-left border-l-4 border-[#F89A14] p-5">
                         <ul className="custom-counter">
                           {content?.clarity?.pointers.map((pointer, index) => (
-                            <li key={index} className="text-sm flex items-center my-4">
+                            <li
+                              key={index}
+                              className="text-sm flex items-center my-4"
+                            >
                               <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
                                 {index + 1}
                               </span>
@@ -232,7 +254,9 @@ const FeedbackFuction = () => {
                 <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
                   <div className="px-4 py-5 sm:p-3 sm:px-8">
                     <div className="text-center">
-                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">Relevance</div>
+                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
+                        Relevance
+                      </div>
                       <div>
                         <div
                           style={{
@@ -242,8 +266,16 @@ const FeedbackFuction = () => {
                           }}
                         >
                           <CircularProgressbar
-                            value={Object.keys(content).length > 0 ? content?.relevancy?.score : "0"}
-                            text={`${Object.keys(content).length > 0 ? content?.relevancy?.score : "0"}%`}
+                            value={
+                              Object.keys(content).length > 0
+                                ? content?.relevancy?.score
+                                : "0"
+                            }
+                            text={`${
+                              Object.keys(content).length > 0
+                                ? content?.relevancy?.score
+                                : "0"
+                            }%`}
                             styles={buildStyles({
                               textColor: "red",
                               pathColor: "turquoise",
@@ -252,30 +284,32 @@ const FeedbackFuction = () => {
                         </div>
                       </div>
                       <div className="pt-2 flex justify-center items-center">
-                        {Object.keys(content).length > 0 && content?.relevancy?.score > 80 ? (
-                          <div
-                            className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
-                          >
+                        {Object.keys(content).length > 0 &&
+                        content?.relevancy?.score > 80 ? (
+                          <div className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Excellent
                           </div>
                         ) : (
-                          <div
-                            className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                          >
+                          <div className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Needs Work
                           </div>
                         )}
                       </div>
                       <div className="pt-2 text-left border-l-4 border-[#F89A14] p-5">
                         <ul className="custom-counter">
-                          {content?.relevancy?.pointers.map((pointer, index) => (
-                            <li key={index} className="text-sm flex items-center my-4">
-                              <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
-                                {index + 1}
-                              </span>
-                              <p>{pointer}</p>
-                            </li>
-                          ))}
+                          {content?.relevancy?.pointers.map(
+                            (pointer, index) => (
+                              <li
+                                key={index}
+                                className="text-sm flex items-center my-4"
+                              >
+                                <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                                  {index + 1}
+                                </span>
+                                <p>{pointer}</p>
+                              </li>
+                            )
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -285,7 +319,9 @@ const FeedbackFuction = () => {
                 <div className="bg-white overflow-hidden transition-shadow border rounded-lg shadow-sm hover:shadow-lg group">
                   <div className="px-4 py-5 sm:p-3 sm:px-8">
                     <div className="text-center">
-                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">Content</div>
+                      <div className="text-md leading-5 font-medium text-black truncate uppercase mb-2">
+                        Content
+                      </div>
                       <div>
                         <div
                           style={{
@@ -295,8 +331,16 @@ const FeedbackFuction = () => {
                           }}
                         >
                           <CircularProgressbar
-                            value={Object.keys(content).length > 0 ? content?.content_quality?.score : "0"}
-                            text={`${Object.keys(content).length > 0 ? content?.content_quality?.score : "0"}%`}
+                            value={
+                              Object.keys(content).length > 0
+                                ? content?.content_quality?.score
+                                : "0"
+                            }
+                            text={`${
+                              Object.keys(content).length > 0
+                                ? content?.content_quality?.score
+                                : "0"
+                            }%`}
                             styles={buildStyles({
                               textColor: "red",
                               pathColor: "#F89A14",
@@ -305,30 +349,32 @@ const FeedbackFuction = () => {
                         </div>
                       </div>
                       <div className="pt-2 flex justify-center items-center">
-                        {Object.keys(content).length > 0 && content?.content_quality?.score > 80 ? (
-                          <div
-                            className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm"
-                          >
+                        {Object.keys(content).length > 0 &&
+                        content?.content_quality?.score > 80 ? (
+                          <div className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Excellent
                           </div>
                         ) : (
-                          <div
-                            className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm"
-                          >
+                          <div className="lg:w-[120px] w-1/2 p-2 mt-3 bg-[#FFE9E9] text-red-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Needs Work
                           </div>
                         )}
                       </div>
                       <div className="pt-2 text-left border-l-4 border-[#F89A14] p-5">
                         <ul className="custom-counter">
-                          {content?.content_quality?.pointers.map((pointer, index) => (
-                            <li key={index} className="text-sm flex items-center my-4">
-                              <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
-                                {index + 1}
-                              </span>
-                              <p>{pointer}</p>
-                            </li>
-                          ))}
+                          {content?.content_quality?.pointers.map(
+                            (pointer, index) => (
+                              <li
+                                key={index}
+                                className="text-sm flex items-center my-4"
+                              >
+                                <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
+                                  {index + 1}
+                                </span>
+                                <p>{pointer}</p>
+                              </li>
+                            )
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -339,13 +385,18 @@ const FeedbackFuction = () => {
               <div className="recommendation_section bg-white shadow-lg pt-10 px-5 mt-3 rounded-md">
                 <h3 className="text-xl font-bold">Your Resume Overview</h3>
                 <p className="text-sm my-2">
-                  Here is how your resume is currently performing in terms of the ATS score, clarity, relevance and content.
+                  Here is how your resume is currently performing in terms of
+                  the ATS score, clarity, relevance and content.
                 </p>
                 <div className="recommandation_list border-l-4 border-[#F89A14] p-5 mb-5">
-                  {Object.keys(content).length > 0 && content?.analysis?.feedback?.length > 0 ? (
+                  {Object.keys(content).length > 0 &&
+                  content?.analysis?.feedback?.length > 0 ? (
                     <ul className="custom-counter">
                       {content.analysis.feedback.map((feedback, index) => (
-                        <li key={index} className="text-sm flex items-center my-4">
+                        <li
+                          key={index}
+                          className="text-sm flex items-center my-4"
+                        >
                           <span className="shadow-2xl w-[30px] h-[30px] p-2 border rounded-full mr-3 flex items-center justify-center">
                             {index + 1}
                           </span>
@@ -356,20 +407,32 @@ const FeedbackFuction = () => {
                   ) : (
                     <ul className="custom-counter border-l-4 border-[#F89A14] p-5">
                       <li className="text-sm">
-                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
-                        against those from successful candidates hired at leading global companies in our database.
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
                       </li>
                       <li className="text-sm">
-                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
-                        against those from successful candidates hired at leading global companies in our database.
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
                       </li>
                       <li className="text-sm">
-                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
-                        against those from successful candidates hired at leading global companies in our database.
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
                       </li>
                       <li className="text-sm">
-                        <span className="text-black font-semibold">Utilize our CV checker to compare your resume</span>{" "}
-                        against those from successful candidates hired at leading global companies in our database.
+                        <span className="text-black font-semibold">
+                          Utilize our CV checker to compare your resume
+                        </span>{" "}
+                        against those from successful candidates hired at
+                        leading global companies in our database.
                       </li>
                     </ul>
                   )}
@@ -378,12 +441,35 @@ const FeedbackFuction = () => {
             </div>
           </div>
         </div>
-        <button
+        {/* <button
           className="fixed flex items-center bottom-5 left-1/2 transform -translate-x-1/2 bg-blue-950 text-white py-2 px-4 rounded-full shadow-lg"
           onClick={handleBetterResumeContent}
         >
           Fix My CV <FaCrown className="ml-1 text-yellow-300" />
-        </button>
+        </button> */}
+        <div className="button_wrapper mb-5 fixed bottom-5 left-[44%]">
+          <button className="get_start_btn floating"  onClick={handleBetterResumeContent}>
+            <span className="btn_text">Fix My CV</span>
+            <div className="btn_overlay">
+              {/* <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-arrow-right"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg> */}
+              <FaCrown className="ml-1 text-yellow-500" />
+            </div>
+          </button>
+        </div>
       </section>
     </>
   );
