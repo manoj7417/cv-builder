@@ -599,8 +599,8 @@ const ResumeViewPage = () => {
                     }}
                   >
                     <GetTemplate name={data?.metadata?.template} />
-                    <div className="bg-white text-gray-500">
-                      <p className="text-sm">@Career Genies Hub</p>
+                    <div className="bg-white text-gray-500 text-end">
+                      <p className="text-sm">@Genies Career Hub</p>
                     </div>
                   </div>
                 </div>
