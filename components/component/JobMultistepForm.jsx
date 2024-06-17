@@ -259,7 +259,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     const handleProjectnameChange = (val, i) => {
-        let value = val.trim()
+        let value = val
         if (!value) return
         const updatedFormData = {
             ...formData, projects: formData.projects.map((item, index) => {
