@@ -193,15 +193,15 @@ export default function Home() {
                 doors to your ideal{" "}
                 <span className="text-blue-600">career</span>!
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-3 rounded-lg">
-                <div className="w-full">
+              <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
+                <div className="w-full col-span-7">
                   <SearchBar
                     jobRole={jobRole}
                     setJobRole={setJobRole}
                     options={options}
                   />
                 </div>
-                <div className="w-full">
+                <div className="w-full col-span-3">
                   <button
                     className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 w-full"
                     onClick={() => handleGenerateNow()}
