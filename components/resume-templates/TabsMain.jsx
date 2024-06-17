@@ -14,11 +14,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { IoMdAddCircle } from "react-icons/io";
 import PlusIcon from "../ui/PlusIcon";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
@@ -148,7 +146,7 @@ const TabsMain = () => {
               </div>
             </section>
 
-            <section className="overflow-hidden border border-gray-400 rounded-lg flex flex-wrap">
+            <section className="overflow-hidden justify-center border border-gray-400 rounded-lg flex flex-wrap">
               <div
                 className="relative w-[200px] group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 mx-5 cursor-pointer my-5"
                 onClick={handlecreateResume}
@@ -174,6 +172,7 @@ const TabsMain = () => {
                       className="relative w-[200px] group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 m-5"
                       key={index}
                     >
+                      
                       <img
                         alt="CV Template"
                         className="object-cover w-full h-48"
@@ -185,35 +184,37 @@ const TabsMain = () => {
                         }}
                         width="300"
                       />
-                      <div className="bg-white p-4 flex w-full justify-between">
-                        <h3 className="font-bold text-sm text-blue-900">
-                          {item.title}
-                        </h3>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <DotsHorizontalIcon className="text-2xl text-blue-900" />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem
-                              onClick={() => handleResumeClick(item._id)}
-                            >
-                              Edit{" "}
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() => handleDeleteResume(item._id)}
-                            >
-                              Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
+                     
+                        <div className="grid grid-cols-7 justify-between items-start gap-2 px-3 py-2 bg-white h-full">
+                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-words col-span-6">
+                            {item.title}
+                          </h3>
+                          <div className="col-span-1">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>
+                              <DotsHorizontalIcon className="text-2xl text-blue-900" />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem
+                                onClick={() => handleResumeClick(item._id)}
+                              >
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => handleDeleteResume(item._id)}
+                              >
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                          </div>
+                        </div>
+                    
                     </div>
                   );
                 })}
             </section>
           </Tab>
-          {/* <Tab label="CV">
-          </Tab> */}
           <Tab label="Cover Letter">
             <h1 className="text-xl md:text-2xl font-bold my-1 z-10">
               Coming Soon

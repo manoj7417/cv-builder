@@ -194,6 +194,19 @@ export default function NewResumeHeader() {
       <MenuItem>
         {({ active }) => (
           <a
+            href="/user-history"
+            className={classNames(
+              active ? "bg-gray-100" : "",
+              "block px-4 py-2 text-sm text-gray-700"
+            )}
+          >
+          CV  History
+          </a>
+        )}
+      </MenuItem>
+      <MenuItem>
+        {({ active }) => (
+          <a
             className={classNames(
               active ? "bg-gray-100" : "",
               "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
