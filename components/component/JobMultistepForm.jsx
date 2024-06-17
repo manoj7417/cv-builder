@@ -259,7 +259,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     const handleProjectnameChange = (val, i) => {
-        let value = val.trim()
+        let value = val
         if (!value) return
         const updatedFormData = {
             ...formData, projects: formData.projects.map((item, index) => {
@@ -449,7 +449,10 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                 <div className='max-h-[85%] overflow-scroll no-scrollbar'>
                                     <div className='flex justify-between items-center my-4 px-1'>
                                         <p className='text-blue-900'>Add Experience</p>
-                                        <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddExperience} />
+                                        {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddExperience} /> */}
+                                        <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddExperience}>
+                                         Add <IoIosAddCircle className='text-xl ml-2' />
+                                        </button>
                                     </div>
                                     {
                                         formData.experience.length > 0 && formData.experience.map((item, index) => {
@@ -596,7 +599,10 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                         <div className=' max-h-[80%]  overflow-scroll no-scrollbar'>
                             <div className='flex justify-between items-center my-4 px-1'>
                                 <p className='text-blue-900'>Add Education</p>
-                                <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddEducation} />
+                                <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddEducation}>
+                                         Add <IoIosAddCircle className='text-xl ml-2' />
+                                        </button>
+                                {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddEducation} /> */}
                             </div>
                             <div >
                                 {
@@ -717,7 +723,10 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                     <div className='shadow-xl bg-white p-10 h-full max-h-[95%] overflow-scroll no-scrollbar rounded-lg'>
                         <div className='flex justify-between items-center my-4 px-1'>
                             <p className='text-blue-900'>Add Projects</p>
-                            <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddProject} />
+                            <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddProject}>
+                                         Add <IoIosAddCircle className='text-xl ml-2' />
+                                        </button>
+                            {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddProject} /> */}
                         </div>
                         <div className='h-[80%] max-h-[80%] overflow-scroll no-scrollbar' >
                             {

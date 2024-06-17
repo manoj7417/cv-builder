@@ -14,21 +14,16 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast"; // Updated toast import
 import { deleteCookie } from "cookies-next";
 import { useUserStore } from "../store/UserStore";
 import { RemoveTokens } from "../actions";
-import { FaUserLarge } from "react-icons/fa6";
 import "./header.css";
 
 const navigation = [
   { name: "CV Creator", href: "/resume-dashboard", current: true },
-  {
-    name: "CV Optimiser",
-    href: "/resumeAnalyzer-dashboard",
-    current: false,
-  },
-  { name: "CV Match", href: "/jobCV", current: false ,isBeta:true},
+  { name: "CV Optimiser", href: "/resumeAnalyzer-dashboard", current: false },
+  { name: "CV Match", href: "/jobCV", current: false, isBeta: true },
 ];
 
 function classNames(...classes) {
@@ -39,6 +34,9 @@ export default function NewResumeHeader() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
   const logoutUser = useUserStore((state) => state.logoutUser);
+  const { userState } = useUserStore((state) => state);
+  const userdata = userState?.userdata || {}; // Ensure userdata is defined
+  const userImage = userdata?.profilePicture || "https://via.placeholder.com/150"; // Fallback image
 
   const handleLogout = async () => {
     await RemoveTokens();
@@ -71,7 +69,7 @@ export default function NewResumeHeader() {
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
+                  {/* Mobile menu button */}
                   <DisclosureButton className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -86,16 +84,13 @@ export default function NewResumeHeader() {
                   <div>
                     <a href="/" className="flex items-center gap-2">
                       <Image
-                        src={"/genies-career-hub-logo.png"}
+                        src="/genies-career-hub-logo.png"
                         width={100}
                         height={100}
                         alt="newlogo"
                         className="h-auto object-contain"
                         loading="lazy"
                       />
-                      {/* <span className="text-black font-bold md:text-2xl text-sm">
-                        Genies Career Hub
-                      </span> */}
                     </a>
                   </div>
                   <div className="hidden sm:ml-6 sm:block h-full w-full">
@@ -120,7 +115,7 @@ export default function NewResumeHeader() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0">
-                  <Menu as="div" className="relative">
+                  {/* <Menu as="div" className="relative">
                     <div>
                       <MenuButton className="relative rounded-full bg-blue-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
@@ -149,87 +144,84 @@ export default function NewResumeHeader() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                               No Notification 
+                              No Notification 
                             </a>
                           )}
                         </MenuItem>
-                        {/* <MenuItem>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              New follower
-                            </a>
-                          )}
-                        </MenuItem>
-                        <MenuItem>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Your password was changed
-                            </a>
-                          )}
-                        </MenuItem> */}
                       </MenuItems>
                     </Transition>
                   </Menu>
 
+                {
+                  console.log(userImage)
+                }           */}
+
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
-                    <div>
-                      <MenuButton className="relative flex rounded-full bg-blue-900 p-1.5 text-sm">
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Open user menu</span>
-                        <FaUserLarge className="h-5 w-5 rounded-full text-white" />
-                      </MenuButton>
-                    </div>
-                    <Transition
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <MenuItem>
-                          {({ active }) => (
-                            <a
-                              href="/user-profile"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Profile
-                            </a>
-                          )}
-                        </MenuItem>
-                        <MenuItem>
-                          {({ active }) => (
-                            <a
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
-                              )}
-                              onClick={handleLogout}
-                            >
-                              Logout
-                            </a>
-                          )}
-                        </MenuItem>
-                      </MenuItems>
-                    </Transition>
-                  </Menu>
+  <div>
+    <MenuButton className="relative flex items-center justify-center w-8 h-8 rounded-full   text-sm overflow-hidden">
+      <span className="sr-only">Open user menu</span>
+      <Image
+        src={userImage}
+        alt="User profile picture"
+        layout="fill" // Use fill layout to ensure it covers the entire container
+        className="rounded-full object-cover p-0.2 border-2 border-blue-800 "
+      />
+    </MenuButton>
+  </div>
+  <Transition
+    enter="transition ease-out duration-100"
+    enterFrom="transform opacity-0 scale-95"
+    enterTo="transform opacity-100 scale-100"
+    leave="transition ease-in duration-75"
+    leaveFrom="transform opacity-100 scale-100"
+    leaveTo="transform opacity-0 scale-95"
+  >
+    <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <MenuItem>
+        {({ active }) => (
+          <a
+            href="/user-profile"
+            className={classNames(
+              active ? "bg-gray-100" : "",
+              "block px-4 py-2 text-sm text-gray-700"
+            )}
+          >
+            Profile
+          </a>
+        )}
+      </MenuItem>
+      <MenuItem>
+        {({ active }) => (
+          <a
+            href="/user-history"
+            className={classNames(
+              active ? "bg-gray-100" : "",
+              "block px-4 py-2 text-sm text-gray-700"
+            )}
+          >
+          CV  History
+          </a>
+        )}
+      </MenuItem>
+      <MenuItem>
+        {({ active }) => (
+          <a
+            className={classNames(
+              active ? "bg-gray-100" : "",
+              "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+            )}
+            onClick={handleLogout}
+          >
+            Logout
+          </a>
+        )}
+      </MenuItem>
+    </MenuItems>
+  </Transition>
+</Menu>
+
+
                 </div>
               </div>
             </div>

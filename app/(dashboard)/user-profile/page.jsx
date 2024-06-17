@@ -1,16 +1,15 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import {
-  FaCamera,
-  FaRegEdit,
-} from "react-icons/fa";
+import { FaCamera, FaRegEdit } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
 import { useForm } from "react-hook-form";
 import { uploadProfilePicture, updateUserProfile, uploadImage } from "@/app/pages/api/api";
 import { GetTokens, SetTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProfilePage = () => {
   
@@ -19,19 +18,21 @@ const ProfilePage = () => {
     userState: state.userState,
     updateUserData: state.updateUserData,
   }));
-  const userdata = userState.userdata;
-  const [previewImage, setPreviewImage] = useState(userdata?.profilePicture);
-  const [selectedImage, setSelectedImage] = useState(null); // State to store the selected image file
+  const userdata = userState?.userdata || {}; // Ensure userdata is defined
+  const [previewImage, setPreviewImage] = useState(userdata?.profilePicture || "https://via.placeholder.com/150");
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const fileUploadRef = useRef();
+  const fileUploadRef = useRef(null); // Ensure fileUploadRef is properly initialized
 
   useEffect(() => {
-    setPreviewImage(userdata?.profilePicture);
+    setPreviewImage(userdata?.profilePicture || "https://via.placeholder.com/150");
   }, [userdata]);
 
   const handleImageUpload = (event) => {
     event.preventDefault();
-    fileUploadRef.current.click();
+    if (fileUploadRef.current) {
+      fileUploadRef.current.click();
+    }
   };
 
   const {
@@ -58,7 +59,6 @@ const ProfilePage = () => {
         formData.append("upload_preset", 'fr8vexzg'); // Ensure the upload preset is correct
         const uploadResponse = await uploadImage(formData);
         if (uploadResponse.status === 200) {
-          
           const imageUrl = uploadResponse.data.secure_url;
           data.profilePicture = imageUrl;
         } else {
@@ -74,10 +74,14 @@ const ProfilePage = () => {
         reset(userdata);
 
         await SetTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken });
-        toast.success("Profile updated successfully");
-      }
+        toast.success("Profile updated successfully",{
+          position: "top-right",
+        });
+      } 
+     
     } catch (error) {
       console.error("Error updating profile:", error);
+      // toast.error("Error updating profile");
     }
   };
 
@@ -237,7 +241,7 @@ const ProfilePage = () => {
           </form>
         </div>
       </section>
-      <ToastContainer />
+      <Toaster />
     </>
   );
 };
