@@ -70,3 +70,51 @@
        width: calc(100% - 2px);
        transition: width 200ms ease;
    }
+
+
+   /* Slider button CSS Starts Here  */
+   .course_button{
+    width: 150px;
+    font-size: 14px;
+    background-color: #0d3572;
+ }
+ 
+ 
+ 
+ .course_button>span.btn_text {
+   color: white;
+   width: 100%;
+   text-align: left;
+   padding-block: 10px;
+   padding-left: 15px;
+   z-index: 2;
+   transition: all 200ms ease;
+ }
+
+
+ .course_button>div.btn_overlay{
+    width: 40px;
+   }
+
+
+   .course_button:hover>span.btn_text,
+   .course_button:focus>span.btn_text {
+       color: #242424;
+   }
+
+
+   .course_button>div.btn_overlay {
+    background: #fff;
+    width: 40px;
+    height: calc(100% - 2px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 12px;
+    border-radius: inherit;
+    color: #242424;
+    position: absolute;
+    right: 1px;
+    z-index: 1;
+    transition: all 400ms ease;
+}
