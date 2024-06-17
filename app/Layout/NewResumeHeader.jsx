@@ -165,7 +165,7 @@ export default function NewResumeHeader() {
         src={userImage}
         alt="User profile picture"
         layout="fill" // Use fill layout to ensure it covers the entire container
-        className="rounded-full object-cover p-0.2 border-4 border-blue-800 "
+        className="rounded-full object-cover p-0.2 border-2 border-blue-800 "
       />
     </MenuButton>
   </div>
