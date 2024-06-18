@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
-import { generateResumeOnFeeback, Payment } from "@/app/pages/api/api";
+import { generateResumeOnFeeback, Payment } from "@/app/api/api";
 import { toast } from "react-toastify";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";

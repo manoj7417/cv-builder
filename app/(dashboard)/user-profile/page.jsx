@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaCamera, FaRegEdit } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
 import { useForm } from "react-hook-form";
-import { uploadImage, updateUserProfile } from "@/app/pages/api/api";
+import { uploadImage, updateUserProfile } from "@/app/api/api";
 import { GetTokens, SetTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';

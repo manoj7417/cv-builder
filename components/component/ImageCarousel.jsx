@@ -13,7 +13,7 @@ import { IoIosStar } from "react-icons/io";
 import { templateType } from "./Slider";
 import { Button } from "../ui/button";
 import { ImSpinner8 } from "react-icons/im";
-import { createNewResume } from "@/app/pages/api/api";
+import { createNewResume } from "@/app/api/api";
 import { GetTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";

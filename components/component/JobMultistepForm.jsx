@@ -13,7 +13,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { Input } from '../ui/input'
 import Lottie from 'lottie-react'
 import animation from '@/public/animations/JobCVLoader.json'
-import { generateResumeOnFeeback } from '@/app/pages/api/api'
+import { generateResumeOnFeeback } from '@/app/api/api'
 import { GetTokens } from '@/app/actions'
 import { useUserStore } from '@/app/store/UserStore'
 import { useResumeStore } from '@/app/store/ResumeStore'

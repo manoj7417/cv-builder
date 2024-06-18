@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { AskBot } from '@/app/pages/api/api'; // Ensure this path is correct
+import { AskBot } from '@/app/api/api'; // Ensure this path is correct
 import ChatLoader from '@/app/ui/ChatLoader';
 
 export function Chatui() {

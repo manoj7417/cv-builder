@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { registerUser } from "@/app/pages/api/api";
+import { registerUser } from "@/app/api/api";
 import { toast } from "react-toastify";
 
 export default function Register() {

@@ -47,7 +47,7 @@ import { useEffect, useState } from "react";
 import ImageCarousel from "./ImageCarousel";
 import { ImSpinner8 } from "react-icons/im";
 import { GetTokens } from "@/app/actions";
-import { createNewResume } from "@/app/pages/api/api";
+import { createNewResume } from "@/app/api/api";
 import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";

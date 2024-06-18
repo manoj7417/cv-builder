@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
 import { SkillsSelect } from "./skills-select";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
-import { AskBot, getBetterResume } from "@/app/pages/api/api";
+import { AskBot, getBetterResume } from "@/app/api/api";
 import ImageUpload from "./ImageUpload";
 import pdfToText from "react-pdftotext";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
