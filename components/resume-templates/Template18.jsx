@@ -310,11 +310,11 @@ const Template18 = () => {
               {basics?.name}
             </h1>
             <p
-              className={`${fontStyle.jobtitleFont} break-words uppercase text-[#646464]`}
+              className={`${fontStyle.jobtitleFont} break-words uppercase text-white`}
             >
               {basics?.jobtitle}
             </p>
-            <div className="resume_info w-[65%] text-white">
+            <div className="resume_info w-[65%] text-white mt-10">
               <Profile fontStyle={fontStyle} style={{ color: "white" }} />
             </div>
           </div>

@@ -258,7 +258,7 @@ const Skills = ({ fontStyle, headingColor }) => {
             />
           </h2>
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex gap-5">
+            <ul className="w-full flex flex-wrap gap-5">
               {data.items.map((item, i) => {
                 return (
                   <li
@@ -330,7 +330,7 @@ const Template7 = () => {
       <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
         <div className="bg-[#F1F3F4] py-10">
           <div className="top_section flex items-start gap-1 justify-center">
-            <div className="name_profile text-center">
+            <div className="name_profile text-center w-full">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
                 style={{
@@ -347,11 +347,11 @@ const Template7 = () => {
               >
                 {resumeData?.basics?.jobtitle}
               </p>
-              <div className={`my-2 ${fontStyle.contactFont} flex gap-5`}>
+              <div className={`my-2 ${fontStyle.contactFont} flex gap-5 justify-center`}>
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlineMailOutline
                       className="mr-2"
@@ -367,7 +367,7 @@ const Template7 = () => {
                 {resumeData?.basics?.phone && (
                   <a
                     href={`tel:${resumeData?.basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone
                       className="mr-2"

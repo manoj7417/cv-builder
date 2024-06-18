@@ -37,7 +37,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year">
+                      <div className="education_year text-end">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -101,7 +101,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -150,7 +150,7 @@ const Projects = ({ fontStyle, headingColor }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between items-center my-2">
+                <div className="post flex justify-between my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -304,10 +304,10 @@ const Template15 = () => {
             </div>
             <div className="user_content px-1 py-10">
               <h2 className="text-3xl uppercase font-medium text-black tracking-widest">
-                Michael Larsson
+                {basics?.name}
               </h2>
               <h4 className="text-base text-black tracking-widest mt-2">
-                Account Manager
+                {basics?.jobtitle}
               </h4>
             </div>
           </div>

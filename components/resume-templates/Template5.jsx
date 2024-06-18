@@ -306,7 +306,7 @@ export const Template5 = () => {
             <div className="resume_detailed_section col-span-9">
               <div>
                 <div className="top_section flex items-start gap-5">
-                  <div className="name_profile h-full">
+                  <div className="name_profile w-full h-full">
                     <h1
                       className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
                       style={{

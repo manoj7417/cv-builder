@@ -381,7 +381,7 @@ const Template6 = () => {
                   </a>
                 )}
                 {(resumeData?.basics?.city || resumeData?.basics?.country) && (
-                  <p className="flex items-center">
+                  <p className="flex items-center w-full">
                     <IoLocationOutline
                       className="mr-2"
                       style={{

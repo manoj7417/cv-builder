@@ -334,7 +334,7 @@ const Template9 = () => {
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlineMailOutline
                       className="mr-2"
@@ -350,7 +350,7 @@ const Template9 = () => {
                 {resumeData?.basics?.phone && (
                   <a
                     href={`tel:${resumeData?.basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone
                       className="mr-2"

@@ -101,14 +101,14 @@ const images = [
   },
   {
     name: "Template10",
-    src: "/Template10.png",
-    alt: "Template10.png",
+    src: "/Template10-1.png",
+    alt: "Template10-1.png",
     type: templateType.premium,
   },
   {
     name: "Template11",
-    src: "/Template11.png",
-    alt: "Template11.png",
+    src: "/Template11-1.png",
+    alt: "Template11-1.png",
     type: templateType.premium,
   },
   {
@@ -512,7 +512,7 @@ const ResumeViewPage = () => {
                                 <Image
                                   src={image.src}
                                   alt={image.alt}
-                                  className="cursor-pointer hover:border-sky-700 hover:border-4"
+                                  className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
                                   width={500}
                                   height={500}
                                 />
