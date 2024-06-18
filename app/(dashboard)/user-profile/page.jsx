@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaCamera, FaRegEdit } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
 import { useForm } from "react-hook-form";
-import { uploadProfilePicture, updateUserProfile, uploadImage, fetchUserData } from "@/app/pages/api/api";
+import { uploadImage, updateUserProfile } from "@/app/pages/api/api";
 import { GetTokens, SetTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
@@ -17,30 +17,17 @@ const ProfilePage = () => {
     userState: state.userState,
     updateUserData: state.updateUserData,
   }));
-  const [userdata, setUserdata] = useState(userState?.userdata || {});
+  const userdata = userState?.userdata || {};
   const [previewImage, setPreviewImage] = useState(userdata?.profilePicture || "https://via.placeholder.com/150");
   const [selectedImage, setSelectedImage] = useState(null);
 
   const fileUploadRef = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { accessToken } = await GetTokens();
-        const response = await fetchUserData(accessToken.value);
-        if (response.status === 200) {
-          const data = response.data;
-          setUserdata(data);
-          setPreviewImage(data.profilePicture || "https://via.placeholder.com/150");
-          updateUserData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (userState?.userdata) {
+      setPreviewImage(userState.userdata.profilePicture || "https://via.placeholder.com/150");
+    }
+  }, [userState?.userdata]);
 
   const handleImageUpload = (event) => {
     event.preventDefault();
