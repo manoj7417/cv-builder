@@ -286,8 +286,8 @@ export const Template19 = () => {
 
   return (
     <>
-      <div className="p-custom space-y-3">
-        <div className="bg-white mx-auto w-full h-full">
+      <div className="p-custom space-y-3 mx-auto h-min-[297mm] w-min-[210mm]">
+        <div className="bg-white mx-auto h-min-[297mm] w-min-[210mm]">
           <div
             className="top_section flex justify-around items-center text-white py-10 clip-resume"
             style={{

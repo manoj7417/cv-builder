@@ -168,14 +168,14 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-black transition pointer-events-none"
+                  <Link
+                    href ="/about-us"
+                    className="text-black transition"
                   >
                     {" "}
-                    About{" "}
+                    About Us
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
@@ -202,10 +202,10 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a href="/contact-us" className="text-black transition">
+                  <Link href="/contact-us" className="text-black transition">
                     Contact
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
@@ -235,25 +235,25 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-black transition pointer-events-none"
+                  <Link
+                    href="/return-policy"
+                    className="text-black transition"
                   >
                     {" "}
                     Returns Policy{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
-                    className="text-black transition pointer-events-none"
+                  <Link
+                    href="refund-policy"
+                    className="text-black transition"
                   >
                     {" "}
                     Refund Policy{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
