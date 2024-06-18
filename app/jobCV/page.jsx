@@ -28,8 +28,96 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 });
 
 const options = [
-  // ... (your options here)
+  "Accountant",
+  "Administrative Assistant",
+  "Advertising Manager",
+  "Aerospace Engineer",
+  "Agricultural Engineer",
+  "Architect",
+  "Art Director",
+  "Attorney",
+  "Auditor",
+  "Biochemist",
+  "Biomedical Engineer",
+  "Brand Manager",
+  "Business Analyst",
+  "Business Development Manager",
+  "Chemical Engineer",
+  "Civil Engineer",
+  "Clinical Psychologist",
+  "Computer Programmer",
+  "Construction Manager",
+  "Content Writer",
+  "Copywriter",
+  "Customer Service Representative",
+  "Data Analyst",
+  "Data Scientist",
+  "Database Administrator",
+  "Dental Hygienist",
+  "Dentist",
+  "Digital Marketing Specialist",
+  "Electrical Engineer",
+  "Environmental Engineer",
+  "Event Planner",
+  "Fashion Designer",
+  "Financial Analyst",
+  "Financial Manager",
+  "Graphic Designer",
+  "Healthcare Administrator",
+  "Human Resources Manager",
+  "Industrial Designer",
+  "Industrial Engineer",
+  "Information Security Analyst",
+  "Information Technology Manager",
+  "Insurance Agent",
+  "Interior Designer",
+  "Investment Banker",
+  "Journalist",
+  "Lawyer",
+  "Logistics Manager",
+  "Management Consultant",
+  "Market Research Analyst",
+  "Marketing Manager",
+  "Mechanical Engineer",
+  "Medical Assistant",
+  "Medical Doctor",
+  "Microbiologist",
+  "Network Administrator",
+  "Nurse",
+  "Occupational Therapist",
+  "Operations Manager",
+  "Pharmacist",
+  "Physical Therapist",
+  "Physician Assistant",
+  "Product Manager",
+  "Project Manager",
+  "Public Relations Specialist",
+  "Real Estate Agent",
+  "Registered Nurse",
+  "Research Scientist",
+  "Retail Manager",
+  "Sales Manager",
+  "Sales Representative",
+  "School Teacher",
+  "Software Developer",
+  "Software Engineer",
+  "Speech-Language Pathologist",
+  "Statistician",
+  "Supply Chain Manager",
+  "Systems Analyst",
+  "Tax Advisor",
+  "Technical Support Specialist",
+  "Training and Development Specialist",
+  "Translator",
+  "User Experience (UX) Designer",
+  "Veterinarian",
+  "Video Editor",
+  "Web Developer",
+  "Web Designer",
+  "Writer",
+  "Zoologist"
 ];
+
 
 const jobTabs = [
   // ... (your jobTabs here)
@@ -184,47 +272,48 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <div className="flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
-            <div className="flex flex-col items-center lg:items-start">
-              <h1
-                className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
-                style={{ lineHeight: "1 !important" }}
-              >
-                Build a <span className="text-blue-600">CV</span> that opens
-                doors to your ideal{" "}
-                <span className="text-blue-600">career</span>!
-              </h1>
-              <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
-                <div className="w-full col-span-7">
-                  <SearchBar
-                    jobRole={jobRole}
-                    setJobRole={setJobRole}
-                    options={options}
-                  />
-                </div>
-                <div className="w-full col-span-3">
-                  <button
-                    className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 w-full"
-                    onClick={() => handleGenerateNow()}
-                  >
-                    Generate Now <RiAiGenerate className="text-xl font-bold" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="mt-10 lg:mt-0">
-              <Image
-                src="/cvgenerator.png"
-                width={1300}
-                height={700}
-                alt="Job CV"
-                className="w-full lg:w-auto"
-                style={{ height: "19rem !important" }}
-              />
-            </div>
-          </div>
+  <div className="flex flex-col items-center lg:items-start">
+    <h1
+      className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
+      style={{ lineHeight: "1 !important" }}
+    >
+      Build a <span className="text-blue-600">CV</span> that opens
+      doors to your ideal{" "}
+      <span className="text-blue-600">career</span>!
+    </h1>
+    <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
+      <div className="w-full col-span-7">
+        <SearchBar
+          jobRole={jobRole}
+          setJobRole={setJobRole}
+          options={options}
+        />
+      </div>
+      <div className="w-full col-span-7 md:col-span-3 ">
+        <button
+          className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
+          onClick={() => handleGenerateNow()}
+        >
+          Generate Now <RiAiGenerate className="text-xl font-bold" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl">
+    <Image
+      src="/cvgenerator.png"
+      width={1300}
+      height={700}
+      alt="Job CV"
+      className="w-full lg:max-w-4xl"
+      style={{ height: "auto", width: "100%", maxHeight: "30rem" }}
+    />
+  </div>
+</div>
+
         </section>
         <section>
-          <div className="container mx-auto py-12 px-4 md:px-8  ">
+          <div className="container mx-auto py-12 px-4 md:px-32  ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-6 lg:p-12 rounded-3xl">
               <div className="text-center md:text-left ">
                 <h2
