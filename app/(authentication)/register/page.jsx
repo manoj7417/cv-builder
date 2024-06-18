@@ -18,6 +18,10 @@ export default function Register() {
   } = useForm();
 
   const handleRegister = async (data) => {
+    if (!data.terms) {
+      toast.error("You must agree to the terms and conditions");
+      return;
+    }
     try {
       const response = await registerUser(data);
       if (response.status === 201) {
@@ -248,8 +252,11 @@ export default function Register() {
                   <input
                     id="checkbox"
                     type="checkbox"
-                    name="checkbox"
+                    name="terms"
                     className="form-checkbox h-4 w-4 text-blue-600"
+                    {
+                      ...register("terms",{required:true})
+                    }
                   />
                   <label
                     htmlFor="checkbox"
@@ -261,6 +268,11 @@ export default function Register() {
                     </p>
                   </label>
                 </div>
+                {errors.terms && (
+                  <div className="text-red-500 text-sm my-2">
+                    You must agree to the terms and conditions
+                  </div>
+                )}
 
                 <div>
                   <button
