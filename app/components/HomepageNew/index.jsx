@@ -107,7 +107,7 @@ export default function HomepageNew() {
             <h1 className="text-[80px] mt-4 text-center  flex items-center  font-extrabold text-[#0D3572]">
               
                 <span
-                  className="text-[#ffffff]  mx-5 slide-text-container"
+                  className="text-[#ffffff] mx-10 slide-text-container"
                   style={{
                     display: "inline-block",
 
@@ -125,8 +125,8 @@ export default function HomepageNew() {
               </h1>
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
                
-                <span className="2xl:ml-3 lg:ml-2 "> CV with </span>
-                <span className="2xl:ml-3 lg:ml-2">genies</span>
+                <span className="2xl:ml-3 lg:ml-1"> CV templates with </span>
+                <span className="2xl:ml-3 lg:ml-1">genies</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
                 We believe in bridging the gap between your aspirations and the

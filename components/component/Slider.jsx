@@ -109,186 +109,84 @@ const templatesData = [
     type: templateType.premium,
   },
   {
-    name: "Template3",
-    src: "/10.png",
-    alt: "10.png",
+    name: "Template12",
+    src: "/Template12-1.png",
+    alt: "Template12-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/11.png",
-    alt: "11.png",
+    name: "Template13",
+    src: "/Template13-1.png",
+    alt: "template13-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/resume-temp-example.png",
-    alt: "resume-temp-example.png",
+    name: "Template14",
+    src: "/Template14-1.png",
+    alt: "Template14-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/3.png",
-    alt: "3.png",
+    name: "Template15",
+    src: "/Template15-1.png",
+    alt: "Template15-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/4.png",
-    alt: "4.png",
+    name: "Template16",
+    src: "/Template16-1.png",
+    alt: "Template16-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/5.png",
-    alt: "5.png",
+    name: "Template17",
+    src: "/Template17-1.png",
+    alt: "Template17-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/6.png",
-    alt: "6.png",
+    name: "Template18",
+    src: "/Template18-1.png",
+    alt: "Template18-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template3",
-    src: "/Template3.png",
-    alt: "Template3.png",
+    name: "Template19",
+    src: "/Template19-1.png",
+    alt: "Template19-1.png",
     type: templateType.free,
   },
   {
-    name: "Template5",
-    src: "/Template5.png",
-    alt: "Template5.png",
+    name: "Template20",
+    src: "/Template20-1.png",
+    alt: "Template20-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template4",
-    src: "/Template4.png",
-    alt: "Template4.png",
+    name: "Template21",
+    src: "/Template21.png",
+    alt: "Template21.png",
     type: templateType.premium,
   },
   {
-    name: "Template6",
-    src: "/Template6.png",
-    alt: "Template6.png",
+    name: "Template22",
+    src: "/Template22-1.png",
+    alt: "Template22-1.png",
     type: templateType.dummy,
   },
   {
-    name: "Template1",
-    src: "/Template1.png",
-    alt: "Template1.png",
+    name: "Template23",
+    src: "/Template23.png",
+    alt: "Template23.png",
     type: templateType.premium,
   },
   {
-    name: "Template7",
-    src: "/Template7.png",
-    alt: "Template7.png",
+    name: "Template24",
+    src: "/Template24.png",
+    alt: "Template24.png",
     type: templateType.dummy,
-  }
-]
-
-
-
-
-// const Carousel1 = [
-//   {
-//     name: "Template3",
-//     src: "/Template3.png",
-//     alt: "Template3.png",
-//     type: templateType.free,
-//   },
-//   {
-//     name: "Template5",
-//     src: "/Template5.png",
-//     alt: "Template5.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template4",
-//     src: "/Template4.png",
-//     alt: "Template4.png",
-//     type: templateType.premium,
-//   },
-//   {
-//     name: "Template6",
-//     src: "/Template6.png",
-//     alt: "Template6.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template1",
-//     src: "/Template1.png",
-//     alt: "Template1.png",
-//     type: templateType.premium,
-//   },
-// ];
-
-// const Carousel2 = [
-//   {
-//     name: "Template7",
-//     src: "/Template7.png",
-//     alt: "Template7.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template8",
-//     src: "/Template8.png",
-//     alt: "Template8.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template9",
-//     src: "/Template9.png",
-//     alt: "Template9.png",
-//     type: templateType.premium,
-//   },
-//   {
-//     name: "Template3",
-//     src: "/10.png",
-//     alt: "10.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template3",
-//     src: "/11.png",
-//     alt: "11.png",
-//     type: templateType.dummy,
-//   },
-// ];
-
-// const Carousel3 = [
-//   {
-//     name: "Template3",
-//     src: "/resume-temp-example.png",
-//     alt: "resume-temp-example.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template3",
-//     src: "/3.png",
-//     alt: "3.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template3",
-//     src: "/4.png",
-//     alt: "4.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template3",
-//     src: "/5.png",
-//     alt: "5.png",
-//     type: templateType.dummy,
-//   },
-//   {
-//     name: "Template3",
-//     src: "/6.png",
-//     alt: "6.png",
-//     type: templateType.dummy,
-//   },
-// ];
+  },
+];
 
 export default function Slider() {
   const [userState, setUserState] = useState({});
@@ -297,10 +195,9 @@ export default function Slider() {
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
 
-
   const handleCreateCV = async (template) => {
     const { accessToken } = await GetTokens();
-  
+
     if (!accessToken) {
       toast("Please login to use this template");
       router.push("/login");
@@ -322,7 +219,6 @@ export default function Slider() {
     }
   };
 
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
     if (user) {
@@ -330,18 +226,21 @@ export default function Slider() {
     }
   }, []);
 
-
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#e4f5fc] to-[white] rounded-2xl">
       <div className="container mx-auto mb-10 ">
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
           Creating CVs that Reflect
           <br />
-          <span className="flex text-[#2C98CA] text-5xl justify-center">Perfection
-            <Image src="/Vector.svg" height={37} width={39} /> </span>
+          <span className="flex text-[#2C98CA] text-5xl justify-center">
+            Perfection
+            <Image src="/Vector.svg" height={37} width={39} />{" "}
+          </span>
         </h2>
         <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">
-        Explore unlimited possibilities with the power of a precision-crafted CV by creating one that aligns with your Professional Profile, employing our customised Curriculum Vitae templates.
+          Explore unlimited possibilities with the power of a precision-crafted
+          CV by creating one that aligns with your Professional Profile,
+          employing our customised Curriculum Vitae templates.
         </p>
 
         {/* <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
@@ -366,9 +265,8 @@ export default function Slider() {
           </div>
         </div> */}
         <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
-          {
-            templatesData?.map((item, index) => (
-              <div
+          {templatesData?.map((item, index) => (
+            <div
               className="group relative overflow-hidden rounded-lg shadow-lg px-3 py-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
               key={index}
             >
@@ -377,17 +275,22 @@ export default function Slider() {
                   <span></span>
                 </div>
               )}
-              <Image
-                alt={item.alt}
-                className="h-full w-auto object-cover transition-all duration-300 group-hover:scale-105"
-                src={item.src}
-                height={128}
-                width={128}
-              />
+              <div className="images_section w-[135px] h-[200px]">
+                <Image
+                  alt={item.alt}
+                  className="h-full w-auto object-cover transition-all duration-300 group-hover:scale-105"
+                  src={item.src}
+                  height={125}
+                  width={130}
+                />
+              </div>
 
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{
-                zIndex:"1"
-              }}>
+              <div
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                  zIndex: "1",
+                }}
+              >
                 <Button
                   className="inline-flex items-center justify-center rounded-md bg-[#0EA5E9] px-4 text-[12px] font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
                   onClick={() => handleCreateCV(item.name)}
@@ -404,65 +307,9 @@ export default function Slider() {
                 </Button>
               </div>
             </div>
-            ))
-          }
+          ))}
         </div>
       </div>
-
-
-      {/* <div className="relative w-full">
-        <Carousel autoPlay className="mx-auto max-w-full" interval={5000}>
-          <CarouselContent>
-            <ImageCarousel data={Carousel1} userState={userState} />
-            <ImageCarousel data={Carousel2} userState={userState} />
-            <ImageCarousel data={Carousel3} userState={userState} />
-          </CarouselContent>
-          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2">
-            <ChevronLeftIcon className="h-6 w-6" />
-          </CarouselPrevious>
-          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2">
-            <ChevronRightIcon className="h-6 w-6" />
-          </CarouselNext>
-        </Carousel>
-      </div> */}
     </div>
-  );
-}
-
-function ChevronLeftIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m15 18-6-6 6-6" />
-    </svg>
-  );
-}
-
-function ChevronRightIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
   );
 }
