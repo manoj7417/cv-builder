@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, KeyboardEvent, ChangeEvent } from 'react';
-import { AskBot } from '@/app/pages/api/api';
+import { AskBot } from '@/app/api/api';
 import { LuBrainCircuit } from 'react-icons/lu';
 
 interface Message {

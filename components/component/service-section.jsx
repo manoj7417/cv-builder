@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { GiMagicLamp } from "react-icons/gi";
 import { FiBox } from "react-icons/fi";
 import { useRef, useState } from "react";
-import { sendSubscribeEmail } from "@/app/pages/api/api";
+import { sendSubscribeEmail } from "@/app/api/api";
 import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/app/store/UserStore";

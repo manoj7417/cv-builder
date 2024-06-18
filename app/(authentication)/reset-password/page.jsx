@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { resetPassword } from "@/app/pages/api/api";
+import { resetPassword } from "@/app/api/api";
 import { toast } from "react-toastify";
 import { TbLoader } from "react-icons/tb"
 

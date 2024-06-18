@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { printResume } from "@/app/pages/api/api";
+import { printResume } from "@/app/api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";

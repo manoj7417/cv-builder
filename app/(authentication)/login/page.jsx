@@ -1,84 +1,46 @@
 "use client";
-import React, { Suspense, useContext, useRef, useState } from "react";
-// import { ArrowRight } from 'lucide-react'
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import React, { useRef, useState, useContext, Suspense } from "react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { forgotPassword, login } from "@/app/pages/api/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/AuthContext";
-import { SetTokens } from '../../actions'
+import { SetTokens } from '../../actions';
 import { useUserStore } from "@/app/store/UserStore";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { TbLoader } from "react-icons/tb";
+import axios from "axios";
+import Link from "next/link";
 
 function LoginUser() {
   const router = useRouter();
-  const { userlogin, userlogout } = useContext(AuthContext);
+  const { userlogin } = useContext(AuthContext);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
-  const userState = useUserStore((state) => state.userState)
-  const loginUser = useUserStore((state) => state.loginUser)
+  const loginUser = useUserStore((state) => state.loginUser);
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const [showDialog, setShowDialog] = useState(false)
-  const emailRef = useRef('')
-  const [loading, setIsLoading] = useState(false)
+  
+  const [loading, setIsLoading] = useState(false);
 
   const handleLogin = async (data) => {
     try {
-      const response = await login(data);
+      const response = await axios.post('/api/login', { data });
       if (response.status === 200) {
         toast.success(response.data.message);
-        const { accessToken, refreshToken, userdata } = response?.data?.data;
-        await SetTokens({ accessToken, refreshToken })
-        loginUser(userdata)
+        const { accessToken, refreshToken, userdata } = response.data.data;
+        await SetTokens({ accessToken, refreshToken });
+        loginUser(userdata);
         userlogin(userdata);
         router.push(redirect || "/");
       }
     } catch (error) {
-      console.log(error)
-      toast.error(error.response.data.error || '');
+      console.log(error);
+      toast.error(error.response?.data?.error || 'Error logging in');
     }
   };
-
-  const handleDialogClose = () => {
-    setShowDialog(false)
-  }
-
-  const handleForgotPassword = async () => {
-    const email = emailRef.current.value;
-    if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
-    setIsLoading(true)
-    try {
-      const response = await forgotPassword(email)
-      if (response.status === 201) {
-        toast.success("Reset password link has been sent to your email address")
-      }
-    } catch (error) {
-      toast.error("Something went wrong")
-    } finally {
-      setShowDialog(false)
-      setIsLoading(false)
-    }
-  }
-
-  const validateEmail = (email) => {
-    // Regular expression for basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
 
   return (
     <>
@@ -93,7 +55,6 @@ function LoginUser() {
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
-                  title=""
                   className="font-semibold text-black transition-all duration-200 hover:underline"
                 >
                   Sign Up for Free!
@@ -102,12 +63,8 @@ function LoginUser() {
               <form className="mt-8" onSubmit={handleSubmit(handleLogin)}>
                 <div className="space-y-5">
                   <div>
-                    <label
-                      htmlFor=""
-                      className="text-base font-medium text-gray-900"
-                    >
-                      {" "}
-                      Email address{" "}
+                    <label htmlFor="" className="text-base font-medium text-gray-900">
+                      Email address
                     </label>
                     <div className="mt-2">
                       <input
@@ -120,8 +77,7 @@ function LoginUser() {
                             message: "Email is required",
                           },
                           pattern: {
-                            value:
-                              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                             message: "Email is Invalid",
                           },
                         })}
@@ -132,38 +88,9 @@ function LoginUser() {
                     </div>
                   </div>
                   <div>
-                    <div className="flex items-center justify-between">
-                      <label
-                        htmlFor=""
-                        className="text-base font-medium text-gray-900"
-                      >
-                        Password
-                      </label>
-                      <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
-                        <DialogTrigger className="text-sm" onClick={() => setShowDialog(true)}>Forgot Password?</DialogTrigger>
-                        <DialogContent onClick={handleDialogClose} className="w-[420px]">
-                          <DialogHeader>
-                            <DialogTitle>Forgot Password?</DialogTitle>
-                            <DialogDescription>
-                              The reset password link will be sent to your email id
-                            </DialogDescription>
-                            <div className="flex py-3">
-                              <Input
-                                ref={emailRef}
-                                placeholder="Enter your email address"
-                                onChange={(e) => { emailRef.current.value = e.target.value }}
-                                type="email"
-                              />
-                              <Button className="ml-2" onClick={handleForgotPassword} disabled={loading}>
-                                {loading ? <><TbLoader className="mr-1  animate-spin text-white" />Sending</>
-                                  : 'Submit'
-                                }
-                              </Button>
-                            </div>
-                          </DialogHeader>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
+                    <label htmlFor="" className="text-base font-medium text-gray-900">
+                      Password
+                    </label>
                     <div className="mt-2">
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -192,7 +119,6 @@ function LoginUser() {
                       className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700"
                     >
                       Get started
-                      <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
                     </button>
                   </div>
                 </div>
@@ -236,7 +162,6 @@ function LoginUser() {
                       </svg>
                     </div>
                     <span className="text-lg font-medium text-white">
-                      {" "}
                       Custom CVs
                     </span>
                   </li>
@@ -256,7 +181,6 @@ function LoginUser() {
                       </svg>
                     </div>
                     <span className="text-lg font-medium text-white">
-                      {" "}
                       Skill Gaps Analyser
                     </span>
                   </li>
@@ -276,7 +200,6 @@ function LoginUser() {
                       </svg>
                     </div>
                     <span className="text-lg font-medium text-white">
-                      {" "}
                       ATS Optimisation
                     </span>
                   </li>
@@ -296,7 +219,6 @@ function LoginUser() {
                       </svg>
                     </div>
                     <span className="text-lg font-medium text-white">
-                      {" "}
                       AI-Based CV Creator
                     </span>
                   </li>
@@ -304,36 +226,8 @@ function LoginUser() {
               </div>
             </div>
           </div>
-          {/* <div className="h-full w-full relative">
-            <Image
-              width={1000}
-              height={1000}
-              className="mx-auto h-full w-full rounded-md object-cover"
-              src="/newlogo12.png"
-              alt="login"
-              priority
-            />
-            <div className="absolute top-36 left-32">
-              <Link
-                href={"/"}
-                className="text-3xl font-bold leading-tight sm:text-5xl bg-gradient-to-r from-blue-600 via-green-200 to-indigo-400 inline-block text-transparent bg-clip-text hover:underline"
-              >
-                Welcome to Genies Career Hub
-              </Link>
-            </div>
-          </div> */}
         </div>
       </section>
-      <div>
-        {/* <div className="h-full flex items-center justify-center">
-          <button
-            className="bg-blue-500 p-2 rounded text-white"
-            onClick={() => setShowModal(true)}
-          >
-            Open
-          </button>
-        </div> */}
-      </div>
     </>
   );
 }

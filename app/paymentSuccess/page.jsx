@@ -1,6 +1,6 @@
 "use client";
 import React, { Suspense, useEffect } from 'react';
-import { PurchaseTokens, usertemplatepurchase } from '../pages/api/api';
+import { PurchaseTokens, usertemplatepurchase } from '../api/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserStore } from '../store/UserStore';
 import { GetTokens } from '../actions';
