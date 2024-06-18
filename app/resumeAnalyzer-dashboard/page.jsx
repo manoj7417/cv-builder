@@ -5,7 +5,7 @@ import Image from "next/image";
 import Slider from "@/components/component/Slider";
 import { useRef, useState } from "react";
 import Loader from "../ui/AnalyserLoader";
-import { AnalyzeAts } from "../pages/api/api";
+import { AnalyzeAts } from "../api/api";
 import pdfToText from "react-pdftotext";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";

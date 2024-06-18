@@ -19,7 +19,7 @@ import { useUserStore } from "@/app/store/UserStore";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
 import { GetTokens } from "@/app/actions";
-import { createNewJobProfileResume } from "@/app/pages/api/api";
+import { createNewJobProfileResume } from "@/app/api/api";
 import { toast } from "react-toastify";
 
 export default function TabResume() {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 import { GrScorecard } from 'react-icons/gr';
-import { AnalyzeAts } from '../../pages/api/api';
+import { AnalyzeAts } from '../../api/api';
 import Lottie from 'react-lottie';
 import loadingAnimation from '@/public/animations/aibrain.json';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';

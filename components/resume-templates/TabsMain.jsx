@@ -6,7 +6,7 @@ import {
   createNewResume,
   deleteUserResume,
   getUserResumes,
-} from "@/app/pages/api/api";
+} from "@/app/api/api";
 import { Button } from "../ui/button";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useRouter } from "next/navigation";
