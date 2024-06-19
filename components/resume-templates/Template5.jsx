@@ -284,7 +284,6 @@ export const Template5 = () => {
 
   const resumeData = useResumeStore(state => state?.resume.data);
 
-
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-30px",
     jobtitleFont: "text-24px",
