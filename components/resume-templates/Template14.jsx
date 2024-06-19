@@ -316,12 +316,12 @@ const Template14 = () => {
             </p>
             <div className="contact_details w-full">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-2 w-full`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold w-full justify-between items-center`}
               >
                 {basics?.phone && (
                   <a
                     href={`tel:${basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
@@ -332,7 +332,7 @@ const Template14 = () => {
                 {basics?.email && (
                   <a
                     href={`mailto:${basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlineMailOutline className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
@@ -342,8 +342,8 @@ const Template14 = () => {
                 )}
 
                 {(basics?.city || basics?.country) && (
-                  <p className="flex items-center w-full">
-                    <IoLocationOutline className="text-black" />
+                  <p className="flex items-center">
+                    <IoLocationOutline className="text-black mr-2" />
                     <span>{basics?.city}</span>
                     <span>{basics?.city && basics?.country && " , "}</span>
                     <span className="">{basics?.country}</span>
