@@ -295,7 +295,7 @@ const Template13 = () => {
                 colorStyle={metadata?.theme?.primary}
               />
             </div>
-            <div className="user_profile text-center">
+            <div className="user_profile w-1/2 text-center">
               <div className="user_name py-10">
                 <h1 className="text-3xl uppercase font-medium text-white tracking-widest">
                   {basics?.name}
@@ -307,7 +307,7 @@ const Template13 = () => {
               <div className="user_image">
                 {basics?.picture?.url && (
                   <Image
-                    src={basics.picture.url || "/pic.jpg"}
+                    src={basics?.picture?.url ||"/pic.jpg"}
                     width={250}
                     height={250}
                     alt="pic"
