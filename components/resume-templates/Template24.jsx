@@ -352,7 +352,7 @@ const Template24 = () => {
                   </li>
                 </ul>
             </section>
-            <div className="rounded-t-full h-[66%] pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
+            <div className="rounded-t-full h-[67%] pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
               <Skills fontStyle={fontStyle} />
             </div>
           </div>
