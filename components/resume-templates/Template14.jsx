@@ -154,7 +154,7 @@ const Projects = ({ fontStyle, colorStyle }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 my-3" key={index}>
-                <div className="post flex  justify-between items-center my-2">
+                <div className="post my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
