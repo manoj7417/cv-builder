@@ -377,7 +377,7 @@ const Template20 = () => {
               </div>
             </section>
             <section>
-              <div className="education px-5 mt-20">
+              <div className="education px-5">
                 <Education
                   fontStyle={fontStyle}
                   colorStyle={metadata?.theme?.primary}
