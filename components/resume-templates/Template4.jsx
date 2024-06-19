@@ -317,7 +317,7 @@ export const Template4 = () => {
               backgroundColor: resumeData?.metadata?.theme?.primary,
             }}
           >
-            <div className="name_profile h-full">
+            <div className="name_profile w-full h-full">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
               >
