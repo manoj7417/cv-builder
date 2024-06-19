@@ -286,7 +286,7 @@ const Template22 = () => {
 
   return (
     <>
-      <div className="mx-auto w-[210mm] bg-white border-y-[15px] border-[#e4f2f2]">
+      <div className="mx-auto w-[210mm] bg-white border-t-[15px] border-[#e4f2f2]">
         <div className="top_section bg-[#e4f2f2]">
           <div className="bg-white py-14"></div>
 

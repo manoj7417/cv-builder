@@ -219,7 +219,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-2`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1 whitespace-nowrap">
@@ -352,7 +352,7 @@ const Template24 = () => {
                   </li>
                 </ul>
             </section>
-            <div className="rounded-t-full h-[66%] pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
+            <div className="rounded-t-full h-[67%] pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
               <Skills fontStyle={fontStyle} />
             </div>
           </div>
