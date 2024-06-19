@@ -374,10 +374,6 @@ const Template13 = () => {
                 <FaLinkedin />
                 {basics?.email && <p> {basics?.email}</p>}
               </li>
-              <li className="flex items-center gap-3">
-                <FaGlobe />
-                <p>www.test.vpm</p>
-              </li>
             </ul>
           </div>
         </div>
