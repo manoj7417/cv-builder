@@ -219,7 +219,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-2`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1 whitespace-nowrap">
