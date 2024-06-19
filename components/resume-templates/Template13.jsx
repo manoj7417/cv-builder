@@ -287,9 +287,9 @@ const Template13 = () => {
   return (
     <>
       <div className="min-w-[210mm] min-h-[297mm] bg-white">
-        <div className="top_section bg-black p-10">
+        <div className="top_section bg-black p-5">
           <div className="profile_details flex w-full h-full justify-between items-center">
-            <div className="profile_section w-1/2 mt-10">
+            <div className="profile_section w-1/2">
               <Profile
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
@@ -304,7 +304,7 @@ const Template13 = () => {
                   {basics?.jobtitle}
                 </h4>
               </div>
-              <div className="user_image -mb-[100px]">
+              <div className="user_image">
                 {basics?.picture?.url && (
                   <Image
                     src={basics.picture.url || "/pic.jpg"}
