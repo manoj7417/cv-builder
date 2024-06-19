@@ -29,8 +29,8 @@ const Education = ({ fontStyle, headingColor }) => {
               return (
                 <>
                   <div className="education1 my-5" key={index}>
-                    <div className="education_names flex justify-between my-1">
-                      <div className="education_degree">
+                    <div className="education_names flex w-full justify-between my-1">
+                      <div className="education_degree w-full">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
@@ -38,7 +38,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year text-end">
+                      <div className="education_year text-end w-full">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -151,8 +151,8 @@ const Projects = ({ fontStyle, headingColor }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between items-center my-2">
-                  <div className="post_title">
+                <div className="post flex justify-between my-2 w-full">
+                  <div className="post_title w-full">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
                       className="font-bold"
@@ -166,7 +166,7 @@ const Projects = ({ fontStyle, headingColor }) => {
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className="year w-full text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -251,7 +251,7 @@ const Profile = ({ fontStyle, headingColor }) => {
         <div className="profile_section w-full">
           <div className="profile_heading w-full">
             <h2
-              className={`font-semibold font-serif text-white ${fontStyle.subMianHeadingFont}`}
+              className={`font-semibold font-serif p-2 bg-orange-400 ${fontStyle.subMianHeadingFont}`}
             >
               {data?.name}
             </h2>
@@ -297,7 +297,9 @@ const Template26 = () => {
                 <h2 className="text-lg text-white">{basics?.jobtitle}</h2>
               </header>
               <section className="px-5">
-                <h2 className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}>
+                <h2
+                  className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}
+                >
                   Contact
                 </h2>
                 <ul className="flex flex-col gap-3 mt-2 px-2">
@@ -353,17 +355,24 @@ const Template26 = () => {
                 className="rounded-full     h-44 object-cover"
               /> */}
               {basics?.picture?.url && (
-              <div className="profile_pic">
-                <img
-                  src={basics?.picture?.url}
-                  alt="pic"
-                  className="w-52 h-48 rounded-full object-cover"
-                />
-              </div>
-            )}
+                <div className="profile_pic">
+                  <img
+                    src={basics?.picture?.url}
+                    alt="pic"
+                    className="w-52 h-48 rounded-full object-cover"
+                  />
+                </div>
+              )}
             </div>
 
             <section className="mb-8">
+              <div className="profile">
+                <Profile
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                  className="mt-0 pl-0"
+                />
+              </div>
               <div className="education py-2">
                 <Education fontStyle={fontStyle} />
               </div>

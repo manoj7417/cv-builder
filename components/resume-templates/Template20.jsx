@@ -305,7 +305,6 @@ const Template20 = () => {
                 className="mt-0 pl-0"
               />
             </div>
-
             <div className="user_profile text-center w-[30%]">
               <div
                 className="user_image "
