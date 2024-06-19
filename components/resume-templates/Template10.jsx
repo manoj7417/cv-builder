@@ -318,7 +318,7 @@ const Template10 = () => {
                   <div className="profile_section relative p-20 z-50">
                     {basics?.picture?.url && (
                       <img
-                      src={"/pic.jpg" || basics.picture.url}
+                      src={basics.picture.url || "/pic.jpg"}
                         alt="pic"
                         className="w-52 h-52 rounded-full border-8 border-slate-800 bg-orange-400"
                       />
