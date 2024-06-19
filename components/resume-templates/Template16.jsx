@@ -345,9 +345,9 @@ const Template16 = () => {
             >
               {basics?.jobtitle}
             </p>
-            <div className="contact_details">
+            <div className="contact_details w-full">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-[6px]`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-[6px] w-full`}
               >
                 {basics?.phone && (
                   <a
