@@ -21,13 +21,14 @@ const Education = ({ fontStyle, headingColor }) => {
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
+            <div className="border-b-2 border-gray-600"></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
               return (
                 <>
                   <div className="education1 my-5" key={index}>
-                    <div className="education_names my-1">
+                    <div className="education_names flex justify-between my-1">
                       <div className="education_degree">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
@@ -36,7 +37,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year">
+                      <div className="education_year text-end">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -45,7 +46,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.endDate}
                         </p>
                         {item?.city && (
-                          <p className="text-13px flex font-normal items-center mt-1">
+                          <p className="text-13px flex font-normal items-center justify-end text-end mt-1">
                             <IoLocationOutline className="mr-1" />
                             {item?.city}
                           </p>
@@ -100,7 +101,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -149,7 +150,7 @@ const Projects = ({ fontStyle, headingColor }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between items-center my-2">
+                <div className="post flex justify-between my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -318,9 +319,7 @@ export const Template19 = () => {
             <div className="md:w-[30%] w-full left_side bg-[#eee8e3] -mt-4">
               <div className="left_side p-5">
                 <div className="contact_section mt-5">
-                  <h2
-                   className={`font-semibold uppercase text-xl`}
-                  >
+                  <h2 className={`font-semibold uppercase text-xl`}>
                     Contact Details
                   </h2>
                   <div
@@ -358,12 +357,12 @@ export const Template19 = () => {
                     )}
                   </div>
                 </div>
-                <Education fontStyle={fontStyle} />
                 <Skills fontStyle={fontStyle} />
               </div>
             </div>
             <div className="md:w-[70%] w-full right_side p-5">
               <Profile fontStyle={fontStyle} />
+              <Education fontStyle={fontStyle} />
               <Experience fontStyle={fontStyle} />
               <Projects fontStyle={fontStyle} />
             </div>
