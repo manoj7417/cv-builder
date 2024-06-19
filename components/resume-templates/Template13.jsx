@@ -252,7 +252,7 @@ const Profile = ({ fontStyle, headingColor }) => {
         <div className="profile_section w-full">
           <div className="profile_heading w-full h-full flex gap-3 items-center justify-start mt-10">
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont} text-white px-5`}
+              className={`font-semibold uppercase ${fontStyle.headingFont} text-white px-5 py-2`}
             >
               {data?.name}
             </h2>
@@ -286,7 +286,7 @@ const Template13 = () => {
 
   return (
     <>
-      <div className="min-w-[210mm] min-h-[297mm] bg-white">
+      <div className="w-[210mm] bg-white">
         <div className="top_section bg-black p-10">
           <div className="profile_details flex w-full h-full justify-between items-center">
             <div className="profile_section w-1/2 mt-10">
@@ -304,7 +304,7 @@ const Template13 = () => {
                   {basics?.jobtitle}
                 </h4>
               </div>
-              <div className="user_image -mb-[100px]">
+              <div className="user_image -mb-[120px]">
                 {basics?.picture?.url && (
                   <Image
                     src={basics.picture.url}
