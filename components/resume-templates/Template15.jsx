@@ -28,8 +28,8 @@ const Education = ({ fontStyle, headingColor }) => {
               return (
                 <>
                   <div className="education1 my-5" key={index}>
-                    <div className="education_names flex justify-between my-1">
-                      <div className="education_degree">
+                    <div className="education_names flex justify-between w-full my-1">
+                      <div className="education_degree w-full">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
@@ -37,7 +37,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year text-end">
+                      <div className="education_year text-end w-full">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -150,8 +150,8 @@ const Projects = ({ fontStyle, headingColor }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between my-2">
-                  <div className="post_title">
+                <div className="post flex justify-between my-2 w-full">
+                  <div className="post_title w-full">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
                       className="font-bold"
@@ -165,7 +165,7 @@ const Projects = ({ fontStyle, headingColor }) => {
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className="year w-full text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -213,16 +213,16 @@ const Skills = ({ fontStyle, headingColor }) => {
             {data?.name}
           </h2>
           <div className="border-b-2 border-gray-600"></div>
-          <div className="text-gray-600 w-full flex justify-end items-center">
+          <div className="text-gray-600 w-full">
             <ul className="w-full">
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`flex items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1">
+                    <div className="text-start mb-2">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
@@ -294,7 +294,7 @@ const Template15 = () => {
             <div className="user_profile px-10">
               {basics?.picture?.url && (
                 <Image
-                  src={"/pic.jpg" || basics.picture.url}
+                  src={basics.picture.url || "/pic.jpg"}
                   width={250}
                   height={250}
                   alt="pic"
