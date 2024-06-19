@@ -110,7 +110,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -323,7 +323,7 @@ export const Template5 = () => {
                     >
                       {resumeData?.basics?.jobtitle}
                     </p>
-                    <div className={`my-2 ${fontStyle.contactFont} flex gap-5`}>
+                    <div className={`my-2 ${fontStyle.contactFont} flex justify-between gap-5`}>
                       {resumeData?.basics?.email && (
                         <a
                           href={`mailto:${resumeData?.basics?.email}`}
