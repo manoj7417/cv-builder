@@ -29,8 +29,8 @@ const Education = ({ fontStyle, headingColor }) => {
               return (
                 <>
                   <div className="education1 my-5" key={index}>
-                    <div className="education_names flex justify-between my-1">
-                      <div className="education_degree">
+                    <div className="education_names flex w-full justify-between my-1">
+                      <div className="education_degree w-full">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
@@ -38,7 +38,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year text-end">
+                      <div className="education_year text-end w-full">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -151,7 +151,7 @@ const Projects = ({ fontStyle, headingColor }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between items-center my-2">
+                <div className="post flex justify-between w-full my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -166,7 +166,7 @@ const Projects = ({ fontStyle, headingColor }) => {
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className="year text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -287,7 +287,7 @@ const Template24 = () => {
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="h-[1122px] w-[793px] shadow-lg rounded-lg flex ">
+        <div className="h-auto w-[793px] shadow-lg rounded-lg flex">
           <div className="bg-gray-200 mx-10">
             <div className="rounded-b-full pt-10 bg-[#5bbf83] text-white">
               <header className="font-serif text-center mb-4">
@@ -352,7 +352,7 @@ const Template24 = () => {
                   </li>
                 </ul>
             </section>
-            <div className="rounded-t-full pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
+            <div className="rounded-t-full h-[66%] pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
               <Skills fontStyle={fontStyle} />
             </div>
           </div>
