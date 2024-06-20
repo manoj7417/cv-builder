@@ -77,14 +77,14 @@ const images = [
   },
   {
     name: "Template6",
-    src: "/Template6.png",
-    alt: "Template6.png",
+    src: "/Template6-1.png",
+    alt: "Template6-1.png",
     type: templateType.premium,
   },
   {
     name: "Template7",
-    src: "/Template7.png",
-    alt: "Template7.png",
+    src: "/Template7-1.png",
+    alt: "Template7-1.png",
     type: templateType.premium,
   },
   {
