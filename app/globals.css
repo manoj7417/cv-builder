@@ -57,6 +57,9 @@
   --resume-control-bar-height: 3rem;
   --resume-padding: 1.5rem;
 }
+html{
+  scroll-behavior: smooth;
+}
 
 /* Mobile Responsive Css Starts Here */
 

@@ -76,7 +76,9 @@ const ComingSoonPage = () => {
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
                 <div className="button_wrapper mt-8">
                   <button className="get_start_btn">
-                    <span className="btn_text">Find My Coach</span>
+                    <span className="btn_text">
+                      <a href="/contact-us">Hire My Coach</a>
+                    </span>
                     <div className="btn_overlay">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -97,26 +99,28 @@ const ComingSoonPage = () => {
                   </button>
                 </div>
                 <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
-                  <button className="get_start_btn">
-                    <span className="btn_text">Learn More</span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <a href="#learnmore">
+                    <button className="get_start_btn">
+                      <span className="btn_text">Learn More</span>
+                      <div className="btn_overlay">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -249,7 +253,10 @@ const ComingSoonPage = () => {
           </div>
         </div>
       </section>
-      <section className="flex lg:items-center px-5 items-start justify-center pb-8 mb:pb-24 lg:pb-32 w-full pt-12 md:pt-16 lg:pt-20 relative">
+      <section
+        id="learnmore"
+        className="flex lg:items-center px-5 items-start justify-center pb-8 mb:pb-24 lg:pb-32 w-full pt-12 md:pt-16 lg:pt-20 relative"
+      >
         <div className="container lg:pt-0 pt-20">
           <div className="flex flex-col justify-center">
             <div className="space-y-2 mx-auto">
@@ -269,7 +276,7 @@ const ComingSoonPage = () => {
                 <img
                   src="/careergrowth.png"
                   alt="Career Growth"
-                  className="w-full h-72 object-cover rounded-md bg-[#88e48d]"
+                  className="w-full h-96 object-cover rounded-md bg-[#88e48d]"
                 />
                 <h2 className="text-2xl font-bold mt-4">Career Growth</h2>
                 <p className="mt-2 text-gray-600">
@@ -281,7 +288,9 @@ const ComingSoonPage = () => {
                     className="get_start_btn "
                     style={{ background: "black" }}
                   >
-                    <span className="btn_text">Learn More</span>
+                    <span className="btn_text">
+                      <a href="/contact-us">Hire Coach</a>
+                    </span>
                     <div className="btn_overlay">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -306,7 +315,7 @@ const ComingSoonPage = () => {
                 <img
                   src="/leadership.png"
                   alt="Leadership Skills"
-                  className="w-full h-72 object-cover rounded-md bg-[#ff914c]"
+                  className="w-full h-96 object-cover rounded-md bg-[#ff914c]"
                 />
                 <h2 className="text-2xl font-bold mt-4">Leadership Skills</h2>
                 <p className="mt-2 text-gray-600">
@@ -318,7 +327,9 @@ const ComingSoonPage = () => {
                     className="get_start_btn "
                     style={{ background: "black" }}
                   >
-                    <span className="btn_text">Learn More</span>
+                    <span className="btn_text">
+                      <a href="/contact-us">Hire Coach</a>
+                    </span>
                     <div className="btn_overlay">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -343,7 +354,7 @@ const ComingSoonPage = () => {
                 <img
                   src="/jobtransition.png"
                   alt="Job Transition"
-                  className="w-full h-72 object-cover rounded-md bg-[#fe9e9f]"
+                  className="w-full h-96 object-cover rounded-md bg-[#fe9e9f]"
                 />
                 <h2 className="text-2xl font-bold mt-4">Job Transition</h2>
                 <p className="mt-2 text-gray-600">
@@ -355,7 +366,9 @@ const ComingSoonPage = () => {
                     className="get_start_btn "
                     style={{ background: "black" }}
                   >
-                    <span className="btn_text">Learn More</span>
+                    <span className="btn_text">
+                      <a href="/contact-us">Hire Coach</a>
+                    </span>
                     <div className="btn_overlay">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -380,7 +393,7 @@ const ComingSoonPage = () => {
                 <img
                   src="/perfomance.png"
                   alt="Performance Enhancement"
-                  className="w-full h-72 object-cover rounded-md bg-[#8d9df1]"
+                  className="w-full h-96 object-cover rounded-md bg-[#8d9df1]"
                 />
                 <h2 className="text-2xl font-bold mt-4">
                   Performance Enhancement
@@ -394,7 +407,9 @@ const ComingSoonPage = () => {
                     className="get_start_btn "
                     style={{ background: "black" }}
                   >
-                    <span className="btn_text">Learn More</span>
+                    <span className="btn_text">
+                      <a href="/contact-us">Hire Coach</a>
+                    </span>
                     <div className="btn_overlay">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -463,7 +478,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/vetted.png"
                     alt="Vetted Coaches"
-                    className="w-20 h-20"
+                    className="w-40 h-40"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
@@ -478,7 +493,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/instantly.png"
                     alt="Instantly Schedule"
-                    className="w-20 h-20"
+                    className="w-40 h-40"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
@@ -493,7 +508,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/easymeeting.png"
                     alt="Easy Meeting"
-                    className="w-25 h-20"
+                    className="w-40 h-30"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
@@ -508,7 +523,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/easymessage.png"
                     alt="Easy Message"
-                    className="w-20 h-20"
+                    className="w-40 h-30"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
