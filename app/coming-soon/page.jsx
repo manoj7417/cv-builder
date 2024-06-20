@@ -260,7 +260,7 @@ const ComingSoonPage = () => {
             {/* Left Column - Text */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                A seamless, <span className="text-[#0D3572]">Modern</span>{" "}
+                A seamless, <span className="text-[#0D3572]">Modern</span>
                 Experience
               </h2>
               <p className="mt-4 text-gray-600">
@@ -368,7 +368,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className="text-2xl font-medium text-white ">
-                      "Earlier, I was facing certain struggles with my job
+                      Earlier, I was facing certain struggles with my job
                       applications. Perhaps my CV was not up to the mark. A
                       friend of mine suggested this new website named Genies
                       Career Hub. They use AI for CV Creation and it is so fine.
@@ -377,7 +377,7 @@ const ComingSoonPage = () => {
                       witnessed a rise in the callbacks for Interviews which was
                       very helpful. The pricing is better than many others in
                       the market. Really can not wait to use the other parts of
-                      the services as well."
+                      the services as well.
                     </p>
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
@@ -411,14 +411,14 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className="text-2xl font-medium text-white ">
-                      "I was wondering why CV-making is so tough and I really
-                      get lethargic during it. But Genies Career Hub was so
-                      quick with it. The use of AI is good and it suggests you
-                      the skills that your CV needs. Also, I did not know about
-                      the ATS thing but maybe that is why my applications were
-                      not getting accepted. I am sending out job applications
-                      and receiving calls for interview. It really puts me out
-                      on the spot."
+                      I was wondering why CV-making is so tough and I really get
+                      lethargic during it. But Genies Career Hub was so quick
+                      with it. The use of AI is good and it suggests you the
+                      skills that your CV needs. Also, I did not know about the
+                      ATS thing but maybe that is why my applications were not
+                      getting accepted. I am sending out job applications and
+                      receiving calls for interview. It really puts me out on
+                      the spot.
                     </p>
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
@@ -452,7 +452,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className="text-2xl font-medium text-white ">
-                      "Earlier, I was facing certain struggles with my job
+                      Earlier, I was facing certain struggles with my job
                       applications. Perhaps my CV was not up to the mark. A
                       friend of mine suggested this new website named Genies
                       Career Hub. They use AI for CV Creation and it is so fine.
@@ -460,7 +460,7 @@ const ComingSoonPage = () => {
                       templates are crafted perfectly for the job roles. I
                       witnessed a rise in the callbacks for Interviews which was
                       very helpful. The pricing is better than many others in
-                      the market."
+                      the market.
                     </p>
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
