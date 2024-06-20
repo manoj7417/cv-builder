@@ -1312,18 +1312,18 @@ export const JobResumeSchema = [
 
     },
     {
-        name: "Designer",
-        data: {
+        "name": "Designer",
+        "data": {
             "basics": {
-                "name": "Charlotte May",
+                "name": "Ava Williams",
                 "email": "help@enhancv.com",
                 "phone": "+1-541-754-3010",
                 "country": "US",
-                "city": "Los Angeles",
-                "jobtitle": "Designer",
+                "city": "New York",
+                "jobtitle": "Senior UX/UI Designer",
                 "url": {
-                    "label": "LinkedIn",
-                    "href": "linkedin.com"
+                    "label": "Portfolio",
+                    "href": "avawilliams.co/portfolio"
                 },
                 "customFields": [],
                 "picture": {
@@ -1337,7 +1337,7 @@ export const JobResumeSchema = [
                     "columns": 1,
                     "visible": true,
                     "id": "profile",
-                    "content": "A results-driven financial accountant with 10 years of experience in both US GAAP and K-IFRS accounting. Skilled in SAP and MS-Office, able to design and improve accounting systems and processes for new business transactions. Detail-oriented and analytical, with a talent for problem-solving and effective communication."
+                    "content": "With over 5 years of experience in UX/UI design, I'm driven to create engaging, user-centered web experiences. My expertise in user research, prototyping with Figma, and conducting usability testing has significantly improved product adoption rates. I am passionate about leveraging insights to design intuitive interfaces that meet business goals."
                 },
                 "education": {
                     "name": "Education",
@@ -1346,12 +1346,20 @@ export const JobResumeSchema = [
                     "id": "education",
                     "items": [
                         {
-                            "startDate": "2010",
-                            "endDate": "2011",
-                            "city": "New York, USA",
+                            "startDate": "2009",
+                            "endDate": "2013",
+                            "city": "Providence, RI",
                             "description": "",
-                            "institute": "Columbia University",
-                            "degree": "Master of Science in Accounting"
+                            "institute": "Rhode Island School of Design",
+                            "degree": "Bachelor's Degree in Graphic Design"
+                        },
+                        {
+                            "startDate": "2013",
+                            "endDate": "2015",
+                            "city": "Pittsburgh, PA",
+                            "description": "",
+                            "institute": "Carnegie Mellon University",
+                            "degree": "Master's Degree in Human-Computer Interaction"
                         }
                     ]
                 },
@@ -1362,78 +1370,49 @@ export const JobResumeSchema = [
                     "id": "experience",
                     "items": [
                         {
-                            "jobtitle": "Senior Financial Accountant",
-                            "employer": "Samsung Electronics",
-                            "startDate": "2018",
-                            "endDate": "2022",
+                            "jobtitle": "Senior UX Designer",
+                            "employer": "Adobe",
+                            "startDate": "2020",
+                            "endDate": "Present",
                             "description": "",
-                            "city": "Seoul, South Korea",
+                            "city": "New York, NY",
                             "highlights": [
-                                "Responsible for maintaining and reporting on the financial records of the company, ensuring compliance with US GAAP and K-IFRS standards.",
-                                "Oversaw a team of 5 accountants and collaborated with various departments to improve efficiency and accuracy of financial reporting.",
-                                "Reduced errors in financial reports by 20% through implementation of new processes and controls.",
-                                "Managed the successful implementation of a new accounting system, resulting in a 30% decrease in processing time.",
-                                "Collaborated with the tax department to identify and reduce the company's tax liability, resulting in a savings of $500,000."
+                                "Led the redesign of Adobe's main product page, increasing user engagement by 30% through improved UX and clearer CTA placements.",
+                                "Conducted over 50 user interviews and 10 usability tests to gather insights, leading to a 25% decrease in bounce rates.",
+                                "Implemented a new design system using Figma, enhancing brand consistency across all web platforms.",
+                                "Collaborated with product managers to refine user personas, resulting in a more targeted and effective product development strategy.",
+                                "Initiated and led a cross-functional team to integrate accessibility features, making the website fully compliant with WCAG 2.1.",
+                                "Spearheaded a project to utilize atomic design principles, shortening the development cycle for new features by 20%."
                             ]
                         },
                         {
-                            "jobtitle": "Financial Analyst",
-                            "employer": "LG Electronics",
+                            "jobtitle": "Graphic Designer",
+                            "employer": "Shopify",
+                            "startDate": "2017",
+                            "endDate": "2019",
+                            "description": "",
+                            "city": "Remote",
+                            "highlights": [
+                                "Redesigned the checkout process, resulting in a 15% increase in conversion rates.",
+                                "Developed comprehensive user flows and wireframes to streamline navigation, reducing user frustration and support tickets by 40%.",
+                                "Conducted A/B testing on various design elements, which informed the final design decisions and improved user satisfaction scores by 20%.",
+                                "Created and maintained a UI library in Figma to accelerate the design process and ensure consistency across teams.",
+                                "Facilitated user research sessions to understand pain points in the shopping experience, leading to significant UI improvements."
+                            ]
+                        },
+                        {
+                            "jobtitle": "UX Researcher",
+                            "employer": "IBM",
                             "startDate": "2015",
-                            "endDate": "2018",
+                            "endDate": "2017",
                             "description": "",
-                            "city": "Seoul, South Korea",
+                            "city": "New York, NY",
                             "highlights": [
-                                "Conducted financial analysis and modeling to support decision-making processes.",
-                                "Created monthly and quarterly reports on financial performance and provided recommendations for improvement.",
-                                "Worked with cross-functional teams to implement cost-saving measures.",
-                                "Implemented a new budgeting process, reducing budget variances by 15%.",
-                                "Developed financial models to support the launch of a new product line, resulting in a projected revenue increase of $2 million.",
-                                "Collaborated with the procurement department to negotiate new supplier contracts, resulting in a cost savings of $1 million."
+                                "Implemented a new user research framework that increased the efficiency of user studies by 25%.",
+                                "Analyzed user behavior data to inform the design team, resulting in a 10% increase in user retention.",
+                                "Collaborated with the UX design team to translate research findings into actionable design improvements.",
+                                "Led usability testing sessions that informed the iteration of key product features."
                             ]
-                        },
-                        {
-                            "jobtitle": "Staff Accountant",
-                            "employer": "Deloitte",
-                            "startDate": "2012",
-                            "endDate": "2015",
-                            "description": "",
-                            "city": "New York, USA",
-                            "highlights": [
-                                "Provided accounting services to various clients, including tax preparation, financial statement analysis, and audit support.",
-                                "Conducted research on new accounting standards and regulations to ensure compliance.",
-                                "Prepared tax returns for individual and corporate clients, resulting in $500,000 in tax savings.",
-                                "Conducted financial statement analysis and identified areas for improvement, resulting in a 10% increase in revenue for a client.",
-                                "Assisted with audit support for a client and helped to identify $1 million in cost savings through process improvement."
-                            ]
-                        }
-                    ]
-                },
-                "skills": {
-                    "name": "Skills",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "skills",
-                    "items": [
-                        {
-                            "name": "US GAAP",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "K-IFRS",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "SAP",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "MS-Office",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Data Analysis",
-                            "level": "Expert"
                         }
                     ]
                 },
@@ -1444,38 +1423,92 @@ export const JobResumeSchema = [
                     "id": "projects",
                     "items": [
                         {
-                            "title": "Process Improvement Initiative",
+                            "title": "Mobile App Redesign for Wellness Tracker",
                             "subtitle": "",
-                            "startDate": "",
-                            "endDate": "",
-                            "description": "<p>Identified and implemented new process resulting in a 40% reduction in processing time.</p>"
+                            "startDate": "2018",
+                            "endDate": "2019",
+                            "description": "<p>Lead UI Designer, responsible for conceptualizing and implementing a fresh, user-friendly design. Achieved a 40% increase in daily active users and a 25% improvement in user retention within the first three months post-launch.</p>"
                         },
                         {
-                            "title": "Successful Audit Completion",
+                            "title": "30% User Engagement Increase",
                             "subtitle": "",
                             "startDate": "",
                             "endDate": "",
-                            "description": "<p>Successfully completed an external audit resulting in no findings and a clean audit report.</p>"
+                            "description": "<p>Led the redesign of Adobe's main product page, significantly enhancing user interaction and clarity of calls to action.</p>"
+                        },
+                        {
+                            "title": "15% Conversion Rate Boost",
+                            "subtitle": "",
+                            "startDate": "",
+                            "endDate": "",
+                            "description": "<p>Redesigned Shopify's checkout process, drastically improving the conversion rate through user-centered design principles.</p>"
+                        },
+                        {
+                            "title": "WCAG 2.1 Compliance",
+                            "subtitle": "",
+                            "startDate": "",
+                            "endDate": "",
+                            "description": "<p>Initiated and led a cross-functional team to integrate accessibility features, making the website fully compliant with WCAG 2.1.</p>"
                         }
                     ]
                 },
-                "languages": {
-                    "name": "Languages",
+                "skills": {
+                    "name": "Skills",
                     "columns": 1,
                     "visible": true,
-                    "id": "languages",
+                    "id": "skills",
                     "items": [
                         {
-                            "name": "Korean",
-                            "level": "Native"
+                            "name": "Figma",
+                            "level": "Expert"
                         },
                         {
-                            "name": "English",
-                            "level": "Proficient"
+                            "name": "User Research",
+                            "level": "Expert"
                         },
                         {
-                            "name": "Chinese",
+                            "name": "Prototyping",
+                            "level": "Expert"
+                        },
+                        {
+                            "name": "Usability Testing",
+                            "level": "Expert"
+                        },
+                        {
+                            "name": "Adobe Creative Cloud",
+                            "level": "Expert"
+                        },
+                        {
+                            "name": "Design Systems",
+                            "level": "Expert"
+                        },
+                        {
+                            "name": "Sketch",
+                            "level": "Advanced"
+                        },
+                        {
+                            "name": "3D Modeling",
                             "level": "Intermediate"
+                        },
+                        {
+                            "name": "Brand Identity",
+                            "level": "Expert"
+                        }
+                    ]
+                },
+                "certifications": {
+                    "name": "Certifications",
+                    "columns": 1,
+                    "visible": true,
+                    "id": "certifications",
+                    "items": [
+                        {
+                            "title": "Advanced Figma for UX/UI",
+                            "description": "An in-depth course focusing on mastering Figma for complex UX/UI design projects, provided by UX Design Institute."
+                        },
+                        {
+                            "title": "User Research & Testing",
+                            "description": "A comprehensive certification on modern user research methods and usability testing techniques, offered by Nielsen Norman Group."
                         }
                     ]
                 }
@@ -1505,8 +1538,8 @@ export const JobResumeSchema = [
                 }
             }
         }
-
-    },
+    }
+    ,
     {
         name: "Marketing",
         data: {

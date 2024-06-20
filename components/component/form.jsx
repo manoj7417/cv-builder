@@ -517,6 +517,11 @@ export default function Form() {
     setIsDialogOpen(false);
   };
 
+  const handleChangeHobbies = (e) => {
+    const hobbies = e.target.value.split("\n")
+    setResumeData("sections.hobbies.items", hobbies)
+  }
+
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
       console.log(state);
@@ -949,8 +954,7 @@ export default function Form() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1381,6 +1385,37 @@ export default function Form() {
                 Add Skills
               </Button>
             </div>
+          </div>
+        </div>
+
+        <div className="lg:px-10 px-5 rounded-md">
+          <div className="my-5 flex justify-between w-full items-center">
+            <Label className="text-2xl">Hobbies</Label>
+            <div className="flex items-center justify-center text-gray-400 text-lg">
+              {sections?.hobbies?.visible ? (
+                <GoEyeClosed
+                  className=" cursor-pointer"
+                  onClick={() =>
+                    setResumeData("sections.hobbies.visible", false)
+                  }
+                />
+              ) : (
+                <GoEye
+                  className="cursor-pointer"
+                  onClick={() =>
+                    setResumeData("sections.hobbies.visible", true)
+                  }
+                />
+              )}
+            </div>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              List your hobbies, interests, and passions.
+            </p>
+          </div>
+          <div className="my-4">
+            <Textarea placeholder="Enter your hobbies" value={sections?.hobbies?.items.join("\n") || []} onChange={handleChangeHobbies} />
           </div>
         </div>
 
