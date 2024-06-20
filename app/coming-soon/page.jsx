@@ -16,6 +16,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
+import "../components/HomepageNew/Homepage.css";
 
 const ComingSoonPage = () => {
   const userState = useUserStore((state) => state.userState);
@@ -72,13 +73,51 @@ const ComingSoonPage = () => {
                 take the leap towards a career that ignites your professional
                 drive.
               </p>
-              <div className="flex gap-8 justify-center items-center">
-                <button className="mt-6 px-4 py-2 bg-[#0D3572] text-white rounded-full shadow hover:bg-[#0D3572] transition duration-300">
-                  Learn More
-                </button>
-                <button className="mt-6 px-4 py-2 bg-white text-blue rounded-full shadow hover:bg-[#0D3572] hover:text-white transition duration-300">
-                  Learn More
-                </button>
+              <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
+                <div className="button_wrapper mt-8">
+                  <button className="get_start_btn">
+                    <span className="btn_text">Find My Coach</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+                <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
+                  <button className="get_start_btn">
+                    <span className="btn_text">Learn More</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -103,9 +142,28 @@ const ComingSoonPage = () => {
                 a world-class coach to grow as a leader, find career clarity, or
                 accelerate your job search
               </p>
-              <button className="mt-6 px-4 py-2 bg-[#0D3572] text-white rounded-full shadow hover:bg-[#0D3572] transition duration-300">
-                Learn More
-              </button>
+              <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
+                <button className="get_start_btn">
+                  <span className="btn_text">Learn More</span>
+                  <div className="btn_overlay">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -123,9 +181,28 @@ const ComingSoonPage = () => {
                 employees will love. Work with a world-class coach to grow as a
                 leader, find career clarity, or accelerate your job search.
               </p>
-              <button className="mt-6 px-4 py-2 bg-[#0D3572] text-white rounded-full shadow hover:bg-[#0D3572] transition duration-300">
-                Learn More
-              </button>
+              <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
+                <button className="get_start_btn">
+                  <span className="btn_text">Learn More</span>
+                  <div className="btn_overlay">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
             </div>
             {/* Left Column - Image */}
             <div className="w-full md:w-1/2 flex justify-center md:justify-start">
@@ -199,9 +276,31 @@ const ComingSoonPage = () => {
                   Discover the best strategies to enhance your career growth
                   with our expert coaching.
                 </p>
-                <button className="mt-6 px-4 py-2  bg-black text-white rounded-full shadow transition duration-300">
-                  Learn More
-                </button>
+                <div className="button_wrapper mt-8">
+                  <button
+                    className="get_start_btn "
+                    style={{ background: "black" }}
+                  >
+                    <span className="btn_text">Learn More</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
               </div>
               <div className=" p-6 rounded-lg shadow-md bg-[#f1b38c]">
                 <img
@@ -214,9 +313,31 @@ const ComingSoonPage = () => {
                   Develop your leadership skills with our comprehensive coaching
                   programs.
                 </p>
-                <button className="mt-6 px-4 py-2  bg-black text-white rounded-full shadow transition duration-300">
-                  Learn More
-                </button>
+                <div className="button_wrapper mt-8">
+                  <button
+                    className="get_start_btn "
+                    style={{ background: "black" }}
+                  >
+                    <span className="btn_text">Learn More</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
               </div>
               <div className="p-6 rounded-lg shadow-md bg-[#ffe1e1]">
                 <img
@@ -229,9 +350,31 @@ const ComingSoonPage = () => {
                   Navigate your job transitions smoothly with our tailored
                   coaching support.
                 </p>
-                <button className="mt-6 px-4 py-2  bg-black text-white rounded-full shadow transition duration-300">
-                  Learn More
-                </button>
+                <div className="button_wrapper mt-8">
+                  <button
+                    className="get_start_btn "
+                    style={{ background: "black" }}
+                  >
+                    <span className="btn_text">Learn More</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
               </div>
               <div className=" p-6 rounded-lg shadow-md bg-[#bac2f1]">
                 <img
@@ -246,9 +389,31 @@ const ComingSoonPage = () => {
                   Boost your performance at work with our personalized coaching
                   solutions.
                 </p>
-                <button className="mt-6 px-4 py-2  bg-black text-white rounded-full shadow transition duration-300">
-                  Learn More
-                </button>
+                <div className="button_wrapper mt-8">
+                  <button
+                    className="get_start_btn "
+                    style={{ background: "black" }}
+                  >
+                    <span className="btn_text">Learn More</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -268,9 +433,28 @@ const ComingSoonPage = () => {
                 a world-class coach to grow as a leader, find career clarity, or
                 accelerate your job search.
               </p>
-              <button className="mt-6 px-4 py-2 bg-[#0D3572] text-white rounded-full shadow hover:bg-[#0D3572] transition duration-300">
-                Learn More
-              </button>
+              <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
+                <button className="get_start_btn">
+                  <span className="btn_text">Learn More</span>
+                  <div className="btn_overlay">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
             </div>
             {/* Right Column - Image and Features */}
             <div className="w-full md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-10">
@@ -382,10 +566,17 @@ const ComingSoonPage = () => {
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
                     <div className="flex items-center divide-x-2 divide-gray-500 ">
-                      <div className="pr-3 font-medium text-white ">
+                      <div className="pr-3">
+                        <img
+                          className="h-10 w-10 rounded-full object-cover"
+                          src="/user.png"
+                          alt="User Avatar"
+                        />
+                      </div>
+                      <div className="px-3 font-medium text-white">
                         Elizabeth
                       </div>
-                      <div className="pl-3 text-sm font-light text-white ">
+                      <div className="pl-3 text-sm font-light text-white">
                         Los Angeles, CA
                       </div>
                     </div>
@@ -423,10 +614,17 @@ const ComingSoonPage = () => {
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
                     <div className="flex items-center divide-x-2 divide-gray-500 ">
-                      <div className="pr-3 font-medium text-white ">
+                      <div className="pr-3">
+                        <img
+                          className="h-10 w-10 rounded-full object-cover"
+                          src="/user.png"
+                          alt="User Avatar"
+                        />
+                      </div>
+                      <div className="px-3 font-medium text-white">
                         Elizabeth
                       </div>
-                      <div className="pl-3 text-sm font-light text-white ">
+                      <div className="pl-3 text-sm font-light text-white">
                         Los Angeles, CA
                       </div>
                     </div>
@@ -465,10 +663,17 @@ const ComingSoonPage = () => {
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
                     <div className="flex items-center divide-x-2 divide-gray-500 ">
-                      <div className="pr-3 font-medium text-white ">
+                      <div className="pr-3">
+                        <img
+                          className="h-10 w-10 rounded-full object-cover"
+                          src="/user.png"
+                          alt="User Avatar"
+                        />
+                      </div>
+                      <div className="px-3 font-medium text-white">
                         Elizabeth
                       </div>
-                      <div className="pl-3 text-sm font-light text-white ">
+                      <div className="pl-3 text-sm font-light text-white">
                         Los Angeles, CA
                       </div>
                     </div>
