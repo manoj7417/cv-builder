@@ -304,16 +304,16 @@ const Template9 = () => {
 
   return (
     <>
-      <div className="template_8 min-w-[210mm] min-h-[297mm] ">
+      <div className="template_8 w-[210mm] h-full">
         <div
-          className="w-full h-full bg-[#E0FBE2]"
+          className="w-full bg-[#E0FBE2]"
         //   style={{
         //     backgroundImage: "url('/resumebg.jpg')",
         //     backgroundPosition: "top",
         //   }}
         >
           <div className="top_section flex items-start gap-1 justify-start px-10 bg-[#E0FBE2]">
-            <div className="name_profile">
+            <div className="name_profile mt-2">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
                 style={{
@@ -334,7 +334,7 @@ const Template9 = () => {
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlineMailOutline
                       className="mr-2"
@@ -350,7 +350,7 @@ const Template9 = () => {
                 {resumeData?.basics?.phone && (
                   <a
                     href={`tel:${resumeData?.basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone
                       className="mr-2"

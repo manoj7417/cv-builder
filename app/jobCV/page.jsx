@@ -18,7 +18,7 @@ import { useResumeStore } from "../store/ResumeStore";
 import { useRouter } from "next/navigation";
 import pdfToText from "react-pdftotext";
 import { GetTokens } from "../actions";
-import { generateResumeOnFeeback } from "../pages/api/api";
+import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";

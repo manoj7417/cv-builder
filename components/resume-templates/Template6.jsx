@@ -258,7 +258,7 @@ const Skills = ({ fontStyle, headingColor }) => {
             />
           </h2>
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex gap-5">
+            <ul className="w-full flex flex-wrap gap-5">
               {data.items.map((item, i) => {
                 return (
                   <li
@@ -381,7 +381,7 @@ const Template6 = () => {
                   </a>
                 )}
                 {(resumeData?.basics?.city || resumeData?.basics?.country) && (
-                  <p className="flex items-center">
+                  <p className="flex items-center w-full">
                     <IoLocationOutline
                       className="mr-2"
                       style={{

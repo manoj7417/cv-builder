@@ -317,7 +317,7 @@ export const Template4 = () => {
               backgroundColor: resumeData?.metadata?.theme?.primary,
             }}
           >
-            <div className="name_profile h-full">
+            <div className="name_profile w-full h-full">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
               >
@@ -352,7 +352,7 @@ export const Template4 = () => {
                   </a>
                 )}
                 {(resumeData?.basics?.city || resumeData?.basics?.country) && (
-                  <p className="flex items-center">
+                  <p className="flex items-center w-full">
                     <IoLocationOutline className="mr-2" />
                     <span>{resumeData?.basics?.city}</span>
                     <span>
@@ -360,7 +360,7 @@ export const Template4 = () => {
                         resumeData?.basics?.country &&
                         " , "}
                     </span>
-                    <span className=" font-bold">
+                    <span>
                       {resumeData?.basics?.country}
                     </span>
                   </p>

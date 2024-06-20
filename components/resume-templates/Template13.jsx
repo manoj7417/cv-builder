@@ -252,7 +252,7 @@ const Profile = ({ fontStyle, headingColor }) => {
         <div className="profile_section w-full">
           <div className="profile_heading w-full h-full flex gap-3 items-center justify-start mt-10">
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont} text-white px-5`}
+              className={`font-semibold uppercase ${fontStyle.headingFont} text-white px-5 py-2`}
             >
               {data?.name}
             </h2>
@@ -286,99 +286,97 @@ const Template13 = () => {
 
   return (
     <>
-      <div className="min-w-[210mm] min-h-[297mm] bg-white">
-        <div className="top_section bg-black p-10">
-          <div className="profile_details flex w-full h-full justify-between items-center">
-            <div className="profile_section w-1/2 mt-10">
-              <Profile
-                fontStyle={fontStyle}
-                colorStyle={metadata?.theme?.primary}
-              />
-            </div>
-            <div className="user_profile text-center">
-              <div className="user_name py-10">
-                <h1 className="text-3xl uppercase font-medium text-white tracking-widest">
-                  {basics?.name}
-                </h1>
-                <h4 className="text-base text-white tracking-widest mt-2">
-                  {basics?.jobtitle}
-                </h4>
+      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+        <div className="bg-white">
+          <div className="top_section bg-black p-10">
+            <div className="profile_details flex w-full h-auto justify-between items-center">
+              <div className="profile_section w-1/2 mt-10">
+                <Profile
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
               </div>
-              <div className="user_image -mb-[100px]">
-                {basics?.picture?.url && (
-                  <Image
-                    src={"/pic.jpg" || basics.picture.url}
-                    width={250}
-                    height={250}
-                    alt="pic"
-                    className="mx-auto"
+              <div className="user_profile text-center">
+                <div className="user_name py-10">
+                  <h1 className="text-3xl uppercase font-medium text-white tracking-widest">
+                    {basics?.name}
+                  </h1>
+                  <h4 className="text-base text-white tracking-widest mt-2">
+                    {basics?.jobtitle}
+                  </h4>
+                </div>
+                <div className="user_image -mb-[120px]">
+                  {basics?.picture?.url && (
+                    <img
+                      src={basics.picture.url}
+                      width={250}
+                      height={250}
+                      alt="pic"
+                      className="mx-auto"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bottom_section flex gap-10">
+            <div className="resume_details_1 w-1/2">
+              {/* work experiences */}
+              <section>
+                <div className="experience px-5">
+                  <Experience
+                    fontStyle={fontStyle}
+                    colorStyle={metadata?.theme?.primary}
                   />
-                )}
+                </div>
+              </section>
+              {/* projects  */}
+              <section>
+                <div className="projects px-5">
+                  <Projects
+                    fontStyle={fontStyle}
+                    colorStyle={metadata?.theme?.primary}
+                  />
+                </div>
+              </section>
+            </div>
+            <div className="resume_details_2 w-1/2">
+              {/* education */}
+              <section>
+                <div className="education px-5 mt-20">
+                  <Education fontStyle={fontStyle} />
+                </div>
+              </section>
+              {/* skill  */}
+              <div className="skills px-5 w-full">
+                <Skills fontStyle={fontStyle} />
               </div>
             </div>
           </div>
-        </div>
-        <div className="bottom_section flex gap-10">
-          <div className="resume_details_1 w-1/2">
-            {/* work experiences */}
-            <section>
-              <div className="experience px-5">
-                <Experience
-                  fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
-                />
-              </div>
-            </section>
-            {/* projects  */}
-            <section>
-              <div className="projects px-5">
-                <Projects
-                  fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
-                />
-              </div>
-            </section>
-          </div>
-          <div className="resume_details_2 w-1/2">
-            {/* education */}
-            <section>
-              <div className="education px-5 mt-20">
-                <Education fontStyle={fontStyle} />
-              </div>
-            </section>
-            {/* skill  */}
-            <div className="skills px-5 w-full">
-              <Skills fontStyle={fontStyle} />
+          <div className="footer_section mt-4">
+            {/* contact details  */}
+            <div className="contact_details p-2">
+              <ul className="flex w-full justify-center gap-5 mt-2 px-2 ">
+                <li className="flex items-center gap-3">
+                  <FaPhone />
+                  {basics?.phone && <p>{basics?.phone}</p>}
+                </li>
+                <li className="flex items-center gap-3">
+                  {(basics?.city || basics?.country) && (
+                    <p className="flex items-center break-words">
+                      <IoLocationOutline className="mr-2" />
+                      {basics?.city}
+                      {basics?.city && basics?.country && " , "}
+                      {basics?.country}
+                    </p>
+                  )}
+                </li>
+                <li className="flex items-center gap-3">
+                  <FaLinkedin />
+                  {basics?.email && <p> {basics?.email}</p>}
+                </li>
+              </ul>
             </div>
-          </div>
-        </div>
-        <div className="footer_section mt-4">
-          {/* contact details  */}
-          <div className="contact_details p-2">
-            <ul className="flex w-full justify-center gap-5 mt-2 px-2 ">
-              <li className="flex items-center gap-3">
-                <FaPhone />
-                {basics?.phone && <p>{basics?.phone}</p>}
-              </li>
-              <li className="flex items-center gap-3">
-                {(basics?.city || basics?.country) && (
-                  <p className="flex items-center break-words">
-                    <IoLocationOutline className="mr-2" />
-                    {basics?.city}
-                    {basics?.city && basics?.country && " , "}
-                    {basics?.country}
-                  </p>
-                )}
-              </li>
-              <li className="flex items-center gap-3">
-                <FaLinkedin />
-                {basics?.email && <p> {basics?.email}</p>}
-              </li>
-              <li className="flex items-center gap-3">
-                <FaGlobe />
-                <p>www.test.vpm</p>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

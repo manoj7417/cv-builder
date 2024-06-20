@@ -47,7 +47,7 @@ import { useEffect, useState } from "react";
 import ImageCarousel from "./ImageCarousel";
 import { ImSpinner8 } from "react-icons/im";
 import { GetTokens } from "@/app/actions";
-import { createNewResume } from "@/app/pages/api/api";
+import { createNewResume } from "@/app/api/api";
 import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
@@ -107,6 +107,18 @@ const templatesData = [
     src: "/Template9.png",
     alt: "Template9.png",
     type: templateType.premium,
+  },
+  {
+    name: "Template10",
+    src: "/Template10-1.png",
+    alt: "Template10-1.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template11",
+    src: "/Template11-1.png",
+    alt: "Template11-1.png",
+    type: templateType.dummy,
   },
   {
     name: "Template12",
@@ -184,6 +196,18 @@ const templatesData = [
     name: "Template24",
     src: "/Template24.png",
     alt: "Template24.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template25",
+    src: "/Template25.png",
+    alt: "Template25.png",
+    type: templateType.dummy,
+  },
+  {
+    name: "Template26",
+    src: "/Template26.png",
+    alt: "Template26.png",
     type: templateType.dummy,
   },
 ];
@@ -275,7 +299,7 @@ export default function Slider() {
                   <span></span>
                 </div>
               )}
-              <div className="images_section w-[135px] h-[200px]">
+              <div className="images_section w-auto h-[200px]">
                 <Image
                   alt={item.alt}
                   className="h-full w-auto object-cover transition-all duration-300 group-hover:scale-105"

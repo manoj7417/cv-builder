@@ -16,7 +16,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Payment, printResume } from "../pages/api/api";
+import { Payment, printResume } from "../api/api";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
@@ -101,14 +101,14 @@ const images = [
   },
   {
     name: "Template10",
-    src: "/Template10.png",
-    alt: "Template10.png",
+    src: "/Template10-1.png",
+    alt: "Template10-1.png",
     type: templateType.premium,
   },
   {
     name: "Template11",
-    src: "/Template11.png",
-    alt: "Template11.png",
+    src: "/Template11-1.png",
+    alt: "Template11-1.png",
     type: templateType.premium,
   },
   {
@@ -422,7 +422,7 @@ const ResumeViewPage = () => {
                   <Lottie animationData={animation} />
                 </div>
                 <div className="w-[50%] flex flex-col  justify-center">
-                  <div className="text-fancy text-5xl">
+                  <div className="text-fancy text-5xl text-white">
                     <h1>Did you know?</h1>
                     <p className="text-xl my-3">{funfact}</p>
                   </div>
@@ -430,7 +430,7 @@ const ResumeViewPage = () => {
                     <div className="flex items-center justify-center">
                       <ImSpinner3 className="mr-1 animate-spin" />
                     </div>
-                    <p>Downloading...</p>
+                    <p className="text-white">Downloading...</p>
                   </div>
                 </div>
               </div>
@@ -512,7 +512,7 @@ const ResumeViewPage = () => {
                                 <Image
                                   src={image.src}
                                   alt={image.alt}
-                                  className="cursor-pointer hover:border-sky-700 hover:border-4"
+                                  className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
                                   width={500}
                                   height={500}
                                 />

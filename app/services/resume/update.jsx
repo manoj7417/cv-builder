@@ -1,5 +1,5 @@
 import { GetTokens } from "@/app/actions"
-import { instance } from "@/app/pages/api/api"
+import { instance } from "@/app/api/api"
 import debounce from "lodash.debounce"
 
 

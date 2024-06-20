@@ -38,7 +38,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year">
+                      <div className="education_year text-end">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -103,7 +103,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -213,13 +213,13 @@ const Skills = ({ fontStyle, headingColor }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 w-full flex justify-end items-center">
+          <div className="text-white w-full flex justify-end items-center">
             <ul className="w-full">
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`flex items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`flex items-center gap-2 font-medium ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -257,7 +257,7 @@ const Profile = ({ fontStyle, headingColor }) => {
             </h2>
           </div>
           <div
-            className={`text-sm py-2 mt-3 ${fontStyle.subHeadingFont} break-words`}
+            className={`text-sm py-2 ${fontStyle.subHeadingFont} break-words`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -287,7 +287,7 @@ const Template23 = () => {
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-[#ffffff] h-[1122px] w-[793px] mx-auto shadow-lg rounded-lg flex relative">
+        <div className="bg-[#ffffff] h-auto w-[793px] mx-auto shadow-lg rounded-lg flex relative">
           <div className="text-white w-full">
             <div className="h-full mx-6 px-4 py-10 bg-[#959a88] relative z-20">
               <div className="flex items-center justify-center mb-8">
@@ -308,7 +308,7 @@ const Template23 = () => {
                 <h2 className="-ml-10 text-3xl font-semibold border-t-2 border-b-2 border-r-2 p-2 mb-4 pl-8 font-serif text-[#64665e]">
                   Contact
                 </h2>
-                <ul className="flex flex-col gap-3 mt-2 px-2">
+                <ul className="flex flex-col gap-5 mt-5 px-2">
                   <li className="flex items-center gap-3">
                     {basics?.phone && (
                       <a
@@ -352,19 +352,18 @@ const Template23 = () => {
           <div className="w-full absolute top-30 transform translate-y-10 bg-[#e6e5db]">
             <div className="text-center py-6 pl-56">
               <h1 className="text-6xl italic font-semibold">{basics?.name}</h1>
-              <p className="text-2xl pt-2">{basics?.jobtitle}</p>
+              <p className="text-2xl pt-2 font-semibold">{basics?.jobtitle}</p>
             </div>
           </div>
           <div className="px-4 py-44 relative z-20">
-            <section className="py-6">
-              <div className="profile_section">
+            <section>
+              <div className="profile_section pt-5">
                 <Profile
                   fontStyle={fontStyle}
                   colorStyle={metadata?.theme?.primary}
                 />
               </div>
-            </section>
-
+            </section>  
             <section className="mb-8">
               <div className="education">
                 <Education fontStyle={fontStyle} />

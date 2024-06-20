@@ -82,43 +82,6 @@ const Experience = ({ fontStyle, colorStyle }) => {
           </div>
           {data?.items?.map((item, index) => {
             return (
-              // <div className="experience_1 my-5" key={index}>
-              //   <div className="post flex  justify-between items-center my-2">
-              //     <div className="post_title">
-              //       <h3
-              //         style={{ fontSize: fontStyle.subHeadingFont }}
-              //         className="font-bold"
-              //       >
-              //         {item?.jobtitle}
-              //       </h3>
-              //       <h4
-              //         style={{ fontSize: fontStyle.paraFont }}
-              //         className="font-semibold"
-              //       >
-              //         {item?.employer}
-              //       </h4>
-              //     </div>
-              //     <div className="year font-bold">
-              //       <p
-              //         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-              //       >
-              //         <span>{item?.startDate}</span>
-              //         <span>{item?.startDate && item?.endDate && " - "}</span>
-              //         <span>{item?.endDate}</span>
-              //       </p>
-              //       {item?.city && (
-              //         <p className="text-13px flex font-normal items-center justify-end text-end">
-              //           <IoLocationOutline className="mr-1" />
-              //           {item?.city}
-              //         </p>
-              //       )}
-              //     </div>
-              //   </div>
-              //   <div
-              //     className={`${fontStyle.paraFont} break-words`}
-              //     dangerouslySetInnerHTML={{ __html: item?.description }}
-              //   ></div>
-              // </div>
               <div className="experience_1 flex my-5" key={index}>
                 <div className="content w-[100%]  flex flex-col break-all">
                   <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -191,7 +154,7 @@ const Projects = ({ fontStyle, colorStyle }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 my-3" key={index}>
-                <div className="post flex  justify-between items-center my-2">
+                <div className="post my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -229,29 +192,52 @@ const Projects = ({ fontStyle, colorStyle }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorStyle }) => {
-  const data = useResumeStore((state) => state.resume.data.sections.skills);
+const Skills = ({ fontStyle, headingColor, colorStyle }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.skills);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section border-b-2 border-gray-300 py-3">
+        <div className="skills_section py-4">
           <h2
-            className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+            className={`${fontStyle.headingFont} font-semibold uppercase text-white`}
             style={{
-              color: colorStyle,
+              color: headingColor,
             }}
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1">
-            <ul className="list-disc pl-5">
+          <div className="w-full flex justify-end items-center">
+            <ul className="w-full">
               {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold text-white ${fontStyle.skillsFont}`}
+                    className={`font-bold text-white ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    {item?.name}
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div
+                      className="w-1/2 text-end h-2.5 border"
+                      style={{
+                        backgroundColor: colorStyle,
+                      }}
+                    >
+                      <div
+                        className="bg-white h-2.5"
+                        style={{ width: `${level}%` }}
+                      ></div>
+                    </div>
                   </li>
                 );
               })}
@@ -330,12 +316,12 @@ const Template14 = () => {
             </p>
             <div className="contact_details w-full">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-2 w-full`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold w-full justify-between items-center`}
               >
                 {basics?.phone && (
                   <a
                     href={`tel:${basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
@@ -346,7 +332,7 @@ const Template14 = () => {
                 {basics?.email && (
                   <a
                     href={`mailto:${basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlineMailOutline className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
@@ -356,8 +342,8 @@ const Template14 = () => {
                 )}
 
                 {(basics?.city || basics?.country) && (
-                  <p className="flex items-center w-full">
-                    <IoLocationOutline className="text-black" />
+                  <p className="flex items-center">
+                    <IoLocationOutline className="text-black mr-2" />
                     <span>{basics?.city}</span>
                     <span>{basics?.city && basics?.country && " , "}</span>
                     <span className="">{basics?.country}</span>
@@ -409,13 +395,15 @@ const Template14 = () => {
             )}
           </div>
           <div className="resume_bottom py-5 px-8">
-            <div className="resume_item resume_profile py-5">
+            <div className="resume_item resume_profile py-2">
               <Education fontStyle={fontStyle} />
             </div>
-
-            <div className="resume_item resume_skills py-5">
+            <div className="resume_item resume_skills py-2">
               <div className="resume_info">
-                <Skills fontStyle={fontStyle} />
+                <Skills
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
               </div>
             </div>
           </div>

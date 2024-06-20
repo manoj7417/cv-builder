@@ -217,7 +217,7 @@ const Skills = ({ fontStyle, headingColor }) => {
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
             <ul className="w-full">
               {data.items.map((item, i) => {
-                const level = levelMapping[item?.level.toLowerCase()] || 0;
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`flex items-center sfont-bold ${fontStyle.skillsFont} my-1 py-1 px-5`}
@@ -289,7 +289,7 @@ const Template20 = () => {
       <div className="min-w-[210mm] min-h-[297mm] bg-white">
         <div className="top_section bg-[#182f42] p-10">
           <div className="profile_details flex w-full h-full justify-between items-center">
-            <div className="profile_section w-[75%] ">
+            <div className="profile_section w-[70%] ">
               <div className="user_name px-5">
                 <h1 className="text-3xl uppercase font-medium text-white tracking-widest">
                   {basics?.name}
@@ -305,28 +305,17 @@ const Template20 = () => {
                 className="mt-0 pl-0"
               />
             </div>
-
-            <div className="user_profile text-center w-[25%]">
+            <div className="user_profile text-center w-[30%]">
               <div
                 className="user_image "
                 style={{ border: "5px solid white", borderRadius: "17px" }}
               >
-                {/* {basics?.picture?.url && (
-                  <Image
-                    src={basics.picture.url}
-                    width={250}
-                    height={250}
-                    alt="pic"
-                    className="mx-auto"
-                    style={{ borderRadius: "17px" }}
-                  />
-                )} */}
                 {basics?.picture?.url && (
               <div className="profile_pic flex items-center justify-center">
                 <img
                   src={basics?.picture?.url}
                   alt="pic"
-                  className="w-250 h-250 object-cover"
+                  className="w-300 h-300 object-cover"
                   style={{ borderRadius: "17px" }}
                 />
               </div>
@@ -387,7 +376,7 @@ const Template20 = () => {
               </div>
             </section>
             <section>
-              <div className="education px-5 mt-20">
+              <div className="education px-5">
                 <Education
                   fontStyle={fontStyle}
                   colorStyle={metadata?.theme?.primary}

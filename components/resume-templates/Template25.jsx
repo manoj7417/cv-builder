@@ -194,7 +194,6 @@ const Projects = ({ fontStyle, headingColor }) => {
 
 const Skills = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::", data);
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {
@@ -219,7 +218,7 @@ const Skills = ({ fontStyle, headingColor }) => {
           <div className="w-full flex justify-end items-center">
             <ul className="w-full">
               {data.items.map((item, i) => {
-                const level = levelMapping[item?.level.toLowerCase()] || 0;
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}

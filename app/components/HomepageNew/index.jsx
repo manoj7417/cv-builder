@@ -104,13 +104,12 @@ export default function HomepageNew() {
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto">
-            <h1 className="text-[80px] mt-4 text-center  flex items-center  font-extrabold text-[#0D3572]">
+            <h1 className="text-[80px] mt-4 text-center  flex  lg:flex-row flex-col items-center  font-extrabold text-[#0D3572]">
               
                 <span
                   className="text-[#ffffff] mx-10 slide-text-container"
                   style={{
                     display: "inline-block",
-
                     background: "linear-gradient(135deg, #30B8CA, #303A72)",
                     borderRadius: "16px",
                     padding: "0px 40px",

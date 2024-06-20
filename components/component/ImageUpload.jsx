@@ -1,4 +1,4 @@
-import { uploadImage } from '@/app/pages/api/api';
+import { uploadImage } from '@/app/api/api';
 import React, { useRef, useState } from 'react'
 import { TbEdit } from "react-icons/tb";
 import { Skeleton } from '../ui/skeleton';

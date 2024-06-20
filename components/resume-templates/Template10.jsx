@@ -38,7 +38,7 @@ const Education = ({ fontStyle, headingColor }) => {
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year">
+                      <div className="education_year text-end">
                         <p
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
@@ -107,7 +107,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -318,7 +318,7 @@ const Template10 = () => {
                   <div className="profile_section relative p-20 z-50">
                     {basics?.picture?.url && (
                       <img
-                      src={"/pic.jpg" || basics.picture.url}
+                      src={basics.picture.url || "/pic.jpg"}
                         alt="pic"
                         className="w-52 h-52 rounded-full border-8 border-slate-800 bg-orange-400"
                       />

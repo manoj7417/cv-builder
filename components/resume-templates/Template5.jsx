@@ -110,7 +110,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year font-bold text-end">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -284,7 +284,6 @@ export const Template5 = () => {
 
   const resumeData = useResumeStore(state => state?.resume.data);
 
-
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-30px",
     jobtitleFont: "text-24px",
@@ -306,7 +305,7 @@ export const Template5 = () => {
             <div className="resume_detailed_section col-span-9">
               <div>
                 <div className="top_section flex items-start gap-5">
-                  <div className="name_profile h-full">
+                  <div className="name_profile w-full h-full">
                     <h1
                       className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
                       style={{
@@ -323,7 +322,7 @@ export const Template5 = () => {
                     >
                       {resumeData?.basics?.jobtitle}
                     </p>
-                    <div className={`my-2 ${fontStyle.contactFont} flex gap-5`}>
+                    <div className={`my-2 ${fontStyle.contactFont} flex justify-between gap-5`}>
                       {resumeData?.basics?.email && (
                         <a
                           href={`mailto:${resumeData?.basics?.email}`}
