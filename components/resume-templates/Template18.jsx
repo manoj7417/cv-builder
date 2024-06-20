@@ -234,14 +234,14 @@ const Profile = ({ fontStyle, colorStyle }) => {
     <div>
       {data?.visible && (
         <div className="profile_section">
-          <div className="profile_heading flex gap-5 items-center">
+          {/* <div className="profile_heading flex gap-5 items-center">
             <h2
               className={`${fontStyle.headingFont} font-bold uppercase`}
               style={{ color: colorStyle }}
             >
               {data?.name}
             </h2>
-          </div>
+          </div> */}
           <div
             className={`my-5 break-words ${fontStyle.subHeadingFont}`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
