@@ -115,9 +115,8 @@ const options = [
   "Web Developer",
   "Web Designer",
   "Writer",
-  "Zoologist"
+  "Zoologist",
 ];
-
 
 const jobTabs = [
   // ... (your jobTabs here)
@@ -127,14 +126,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState("");
   const userState = useUserStore((state) => state.userState);
-  const [showDialog, setShowDialog] = useState(false)
-  const [showMultiStepDialog, setShowMultiStepDialog] = useState(false)
-  const [steps, setSteps] = useState(1)
-  const inputRef = useRef()
-  const { userdata } = useUserStore(state => state.userState)
+  const [showDialog, setShowDialog] = useState(false);
+  const [showMultiStepDialog, setShowMultiStepDialog] = useState(false);
+  const [steps, setSteps] = useState(1);
+  const inputRef = useRef();
+  const { userdata } = useUserStore((state) => state.userState);
   const initialState = {
-    fullname: userdata?.fullname || '',
-    email: userdata?.email || '',
+    fullname: userdata?.fullname || "",
+    email: userdata?.email || "",
     jobTitle: "",
     country: "",
     city: "",
@@ -142,14 +141,13 @@ export default function Home() {
     experience: [],
     skills: [],
     education: [],
-    projects: []
-  }
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
-  const router = useRouter()
-  const updateUserData = useUserStore(state => state.updateUserData)
-  const [generatingResume, setIsGeneratingResume] = useState(false)
-  const [formData, setFormData] = useState(initialState)
-
+    projects: [],
+  };
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
+  const router = useRouter();
+  const updateUserData = useUserStore((state) => state.updateUserData);
+  const [generatingResume, setIsGeneratingResume] = useState(false);
+  const [formData, setFormData] = useState(initialState);
 
   const handleDialogClose = () => {
     setShowDialog(false);
@@ -234,8 +232,8 @@ export default function Home() {
       router.push("/login?redirect=/jobCV");
       return;
     }
-    setShowMultiStepDialog(true)
-  }
+    setShowMultiStepDialog(true);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -261,7 +259,7 @@ export default function Home() {
             />
           </Dialog>
           <Dialog open={generatingResume}>
-            <DialogContent onClick showCloseButton>
+            <DialogContent onClick showCloseButton className="bg-blue-900">
               <div className="mx-auto flex items-center flex-col">
                 <Lottie
                   animationData={animation}
@@ -272,45 +270,44 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <div className="flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
-  <div className="flex flex-col items-center lg:items-start">
-    <h1
-      className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
-      style={{ lineHeight: "1 !important" }}
-    >
-      Build a <span className="text-blue-600">CV</span> that opens
-      doors to your ideal{" "}
-      <span className="text-blue-600">career</span>!
-    </h1>
-    <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
-      <div className="w-full col-span-7">
-        <SearchBar
-          jobRole={jobRole}
-          setJobRole={setJobRole}
-          options={options}
-        />
-      </div>
-      <div className="w-full col-span-7 md:col-span-3 ">
-        <button
-          className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
-          onClick={() => handleGenerateNow()}
-        >
-          Generate Now <RiAiGenerate className="text-xl font-bold" />
-        </button>
-      </div>
-    </div>
-  </div>
-  <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl">
-    <Image
-      src="/cvgenerator.png"
-      width={1300}
-      height={700}
-      alt="Job CV"
-      className="w-full lg:max-w-4xl"
-      style={{ height: "auto", width: "100%", maxHeight: "30rem" }}
-    />
-  </div>
-</div>
-
+            <div className="flex flex-col items-center lg:items-start">
+              <h1
+                className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
+                style={{ lineHeight: "1 !important" }}
+              >
+                Build a <span className="text-blue-600">CV</span> that opens
+                doors to your ideal{" "}
+                <span className="text-blue-600">career</span>!
+              </h1>
+              <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
+                <div className="w-full col-span-7">
+                  <SearchBar
+                    jobRole={jobRole}
+                    setJobRole={setJobRole}
+                    options={options}
+                  />
+                </div>
+                <div className="w-full col-span-7 md:col-span-3 ">
+                  <button
+                    className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
+                    onClick={() => handleGenerateNow()}
+                  >
+                    Generate Now <RiAiGenerate className="text-xl font-bold" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl">
+              <Image
+                src="/cvgenerator.png"
+                width={1300}
+                height={700}
+                alt="Job CV"
+                className="w-full lg:max-w-4xl"
+                style={{ height: "auto", width: "100%", maxHeight: "30rem" }}
+              />
+            </div>
+          </div>
         </section>
         <section>
           <div className="container mx-auto py-12 px-4 md:px-32  ">
@@ -320,11 +317,11 @@ export default function Home() {
                   className="text-2xl md:text-[2.7rem] font-bold mb-6"
                   style={{ lineHeight: "1.2 !important" }}
                 >
-                  Connect with a<span className="text-blue-600"> Career Coach </span>for Expert Advice, Anytime, Anywhere!
+                  Connect with a
+                  <span className="text-blue-600"> Career Coach </span>for
+                  Expert Advice, Anytime, Anywhere!
                 </h2>
-                <button
-                  className="bg-blue-700 text-white px-4 py-2 rounded"
-                >
+                <button className="bg-blue-700 text-white px-4 py-2 rounded">
                   <a href="/contact-us">Work With Coach</a>
                 </button>
               </div>
