@@ -41,7 +41,7 @@ const ComingSoonPage = () => {
   return (
     <>
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-      <section className="flex lg:items-center items-start justify-center pb-8 w-full pt-12 md:pt-16 lg:pt-20  px-5 relative">
+      <section className="flex lg:items-center items-start justify-center pb-8 w-full pt-24 md:pt-16 lg:pt-20  px-5 relative">
         <div className="container lg:pt-0 pt-20">
           <div className="flex flex-col justify-center ">
             <Image
@@ -60,10 +60,10 @@ const ComingSoonPage = () => {
             />
             <div className="space-y-2 mx-auto">
               <h1
-                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center  font-extrabold text-[#0D3572]"
+                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 text-center justify-center flex items-center  font-extrabold text-[#0D3572]"
                 style={{ WebkitTextStrokeWidth: "thin" }}
               >
-                GROW<br></br> FASTER <br></br>WITH A COACH
+                GROW FASTER <br></br>WITH A COACH
               </h1>
 
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
@@ -210,7 +210,7 @@ const ComingSoonPage = () => {
             </div>
             {/* Left Column - Image */}
             <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-              <img src="/carrercoaching.webp" alt="Description of the image" />
+              <img src="/cghbo.png" alt="Description of the image" />
             </div>
 
             {/* Right Column - Text */}
