@@ -56,7 +56,7 @@ function ImageCarousel({ data }) {
         {data.map((image, index) => {
           return (
             <div
-              className="group relative h-[500px] w-[350px] overflow-hidden rounded-lg shadow-lg p-4 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
+              className="group relative 2xl:h-[500px] h-[280px] 2xl:w-[350px] w-[200px] overflow-hidden rounded-lg shadow-lg 2xl:p-4 p-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
               key={index}
             >
               {image.type === templateType.premium && (
@@ -68,8 +68,8 @@ function ImageCarousel({ data }) {
                   alt={image.alt}
                   className="h-full w-full object-contain transition-all duration-300 group-hover:scale-105"
                   src={image.src}
-                  height={400}
-                  width={400}
+                  height={500}
+                  width={500}
                 />
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <Button

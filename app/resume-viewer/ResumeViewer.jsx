@@ -422,7 +422,7 @@ const ResumeViewPage = () => {
                   <Lottie animationData={animation} />
                 </div>
                 <div className="w-[50%] flex flex-col  justify-center">
-                  <div className="text-fancy text-5xl">
+                  <div className="text-fancy text-5xl text-white">
                     <h1>Did you know?</h1>
                     <p className="text-xl my-3">{funfact}</p>
                   </div>
@@ -430,7 +430,7 @@ const ResumeViewPage = () => {
                     <div className="flex items-center justify-center">
                       <ImSpinner3 className="mr-1 animate-spin" />
                     </div>
-                    <p>Downloading...</p>
+                    <p className="text-white">Downloading...</p>
                   </div>
                 </div>
               </div>
