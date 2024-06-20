@@ -73,7 +73,7 @@ const Experience = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
-
+  console.log("data::",data)
   return (
     <div className="experience_section w-full mt-2">
       {data?.visible && data?.items?.length > 0 && (
@@ -314,45 +314,45 @@ const Template24 = () => {
                 CONTACT ME
               </h2>
               <ul className="flex flex-col gap-3 mt-2 px-2">
-                  <li className="flex items-center gap-3">
-                    {basics?.phone && (
-                      <a
-                        href={`tel:${basics?.phone}`}
-                        className="hover:underline flex items-center mt-1  text-wrap w-full "
-                      >
-                        <MdOutlinePhone className="mr-2" />
-                        <p className="w-[90%] text-wrap break-words">
-                          {basics?.phone}
-                        </p>
-                      </a>
-                    )}
-                  </li>
-                  <li className="flex items-center gap-3">
-                    {(basics?.city || basics?.country) && (
-                      <p className="flex items-center">
-                        <IoLocationOutline className="mr-2" />
-                        <span>{basics?.city}</span>
-                        <span>{basics?.city && basics?.country && " , "}</span>
-                        <span className="">{basics?.country}</span>
+                <li className="flex items-center gap-3">
+                  {basics?.phone && (
+                    <a
+                      href={`tel:${basics?.phone}`}
+                      className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    >
+                      <MdOutlinePhone className="mr-2" />
+                      <p className="w-[90%] text-wrap break-words">
+                        {basics?.phone}
                       </p>
-                    )}
-                  </li>
-                  <li className="flex items-center gap-3">
-                    {basics?.email && (
-                      <a
-                        href={`mailto:${basics?.email}`}
-                        className="hover:underline flex items-center mt-1  text-wrap w-full "
-                      >
-                        <MdOutlineMailOutline className="mr-2" />
-                        <p className="w-[90%] text-wrap break-words">
-                          {basics?.email}
-                        </p>
-                      </a>
-                    )}
-                  </li>
-                </ul>
+                    </a>
+                  )}
+                </li>
+                <li className="flex items-center gap-3">
+                  {(basics?.city || basics?.country) && (
+                    <p className="flex items-center">
+                      <IoLocationOutline className="mr-2" />
+                      <span>{basics?.city}</span>
+                      <span>{basics?.city && basics?.country && " , "}</span>
+                      <span className="">{basics?.country}</span>
+                    </p>
+                  )}
+                </li>
+                <li className="flex items-center gap-3">
+                  {basics?.email && (
+                    <a
+                      href={`mailto:${basics?.email}`}
+                      className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    >
+                      <MdOutlineMailOutline className="mr-2" />
+                      <p className="w-[90%] text-wrap break-words">
+                        {basics?.email}
+                      </p>
+                    </a>
+                  )}
+                </li>
+              </ul>
             </section>
-            <div className="rounded-t-full h-[70.4%] pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
+            <div className="rounded-t-full max-h-full h-screen pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
               <Skills fontStyle={fontStyle} />
             </div>
           </div>
@@ -365,7 +365,6 @@ const Template24 = () => {
                 />
               </div>
             </section>
-
             <section>
               <div className="projects py-2">
                 <Projects
