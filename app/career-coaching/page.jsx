@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 import { useUserStore } from "../store/UserStore";
@@ -22,9 +22,6 @@ const ComingSoonPage = () => {
   const userState = useUserStore((state) => state.userState);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
 
-  useEffect(() => {
-    AOS.init();
-  }, []);
   const defaultOptions = {
     reverse: false, // reverse the tilt direction
     max: 25, // max tilt rotation (degrees)
@@ -440,7 +437,7 @@ const ComingSoonPage = () => {
             {/* Left Column - Text */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                A seamless, <span className="text-[#0D3572]">Modern</span>
+                A seamless, <span className="text-[#0D3572]">Modern</span>{" "}
                 Experience
               </h2>
               <p className="mt-4 text-gray-600">
