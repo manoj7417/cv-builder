@@ -9,7 +9,7 @@ const Education = ({ fontStyle, headingColor }) => {
     (state) => state?.resume.data.sections?.education
   );
   return (
-    <div className="education_section">
+    <div className="education_section my-4">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <h2
@@ -29,48 +29,47 @@ const Education = ({ fontStyle, headingColor }) => {
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div
-                    className="education1 my-1"
-                    key={index}
-                  >
-                    <div className="education_names">
-                      <h3
-                        className={`${fontStyle.subHeadingFont} font-bold`}
-                        style={{
-                          color: headingColor,
-                        }}
-                      >
-                        {item?.degree}
-                      </h3>
-                      <h4
-                        style={{
-                          fontSize: fontStyle.paraFont,
-                          color: headingColor,
-                        }}
-                      >
-                        {item?.institute}
-                      </h4>
-                    </div>
-                    <div className="education_year flex gap-5">
-                      <p
-                        className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                      >
-                        {item?.startDate &&
-                          `${item?.startDate}${item?.endDate && " - "}`}
-                        {item?.endDate}
-                      </p>
-                      {item?.city && (
-                        <p className="text-13px flex font-normal items-center">
-                          <IoLocationOutline className="mr-1" />
-                          {item?.city}
+                  <div className="education_section my-4">
+                    <div className="education flex justify-between" key={index}>
+                      <div className="education_names">
+                        <h3
+                          className={`${fontStyle.subHeadingFont} font-bold`}
+                          style={{
+                            color: headingColor,
+                          }}
+                        >
+                          {item?.degree}
+                        </h3>
+                        <h4
+                          style={{
+                            fontSize: fontStyle.paraFont,
+                            color: headingColor,
+                          }}
+                        >
+                          {item?.institute}
+                        </h4>
+                      </div>
+                      <div className="education_year">
+                        <p
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                        >
+                          {item?.startDate &&
+                            `${item?.startDate}${item?.endDate && " - "}`}
+                          {item?.endDate}
                         </p>
-                      )}
+                        {item?.city && (
+                          <p className="text-13px flex font-normal items-center justify-end">
+                            <IoLocationOutline className="mr-1" />
+                            {item?.city}
+                          </p>
+                        )}
+                      </div>
                     </div>
+                    <div
+                      className={`${fontStyle.paraFont} break-words text-justify`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
                   </div>
-                  <div
-                    className={`py-2 ${fontStyle.paraFont} break-words text-justify`}
-                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                  ></div>
                 </>
               );
             })}
@@ -86,7 +85,7 @@ const Experience = ({ fontStyle, headingColor }) => {
     (state) => state?.resume.data.sections?.experience
   );
   return (
-    <div className="experience_section">
+    <div className="experience_section my-4">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="experience_heading flex gap-5 items-center">
@@ -106,8 +105,8 @@ const Experience = ({ fontStyle, headingColor }) => {
           </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1" key={index}>
-                <div className="post my-2">
+              <div className="experience_1 my-4" key={index}>
+                <div className="post flex justify-between my-2">
                   <div className="post_title">
                     <h3
                       style={{
@@ -128,7 +127,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year flex gap-5 font-bold">
+                  <div className="year font-bold">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -149,17 +148,17 @@ const Experience = ({ fontStyle, headingColor }) => {
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
                 <div className="px-3">
-                  {
-                    item?.highlights?.length > 0 &&
+                  {item?.highlights?.length > 0 && (
                     <ul className="list-disc">
-                      {
-
-                        item?.highlights?.map((item, key) => {
-                          return <li key={key} className=" break-words text-15px">{item}</li>
-                        })
-                      }
+                      {item?.highlights?.map((item, key) => {
+                        return (
+                          <li key={key} className=" break-words text-15px">
+                            {item}
+                          </li>
+                        );
+                      })}
                     </ul>
-                  }
+                  )}
                 </div>
               </div>
             );
@@ -408,14 +407,14 @@ const Template6 = () => {
                   fontStyle={fontStyle}
                   headingColor={resumeData?.metadata?.theme?.primary}
                 />
-                <Experience
-                  fontStyle={fontStyle}
-                  data={resumeData?.sections?.experience}
-                  headingColor={resumeData?.metadata?.theme?.primary}
-                />
                 <Projects
                   fontStyle={fontStyle}
                   data={resumeData?.sections?.projects}
+                  headingColor={resumeData?.metadata?.theme?.primary}
+                />
+                <Experience
+                  fontStyle={fontStyle}
+                  data={resumeData?.sections?.experience}
                   headingColor={resumeData?.metadata?.theme?.primary}
                 />
                 <Education
