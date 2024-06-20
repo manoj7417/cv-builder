@@ -57,10 +57,12 @@ const ComingSoonPage = () => {
             />
             <div className="space-y-2 mx-auto">
               <h1
-                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 text-center justify-center flex items-center  font-extrabold text-[#0D3572]"
-                style={{ WebkitTextStrokeWidth: "thin" }}
+                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 text-center justify-center  items-center  font-extrabold text-[#0D3572]"
+                style={{ WebkitTextStrokeWidth: "thin", wordSpacing: "0.8rem" }}
               >
-                GROW FASTER <br></br>WITH A COACH
+                GROW {""}
+                <span className="text-[#3c72b9]">FASTER</span> <br></br>WITH A
+                COACH
               </h1>
 
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
@@ -435,7 +437,7 @@ const ComingSoonPage = () => {
         <div className="max-w-6xl mx-auto py-10">
           <div className="flex flex-col justify-center text-center md:text-left sm:text-left md:flex-row items-center gap-4">
             {/* Left Column - Text */}
-            <div className="w-full md:w-1/2 mt-8 md:mt-0 md:pl-8">
+            <div className="w-full md:w-[40%] mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
                 A seamless, <span className="text-[#0D3572]">Modern</span>{" "}
                 Experience
@@ -469,13 +471,13 @@ const ComingSoonPage = () => {
               </div>
             </div>
             {/* Right Column - Image and Features */}
-            <div className="w-full md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-10">
+            <div className="w-full md:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-10">
               <div className="flex flex-col items-center sm:items-start gap-4">
                 <div className="flex justify-center sm:justify-start w-full">
                   <img
                     src="/vetted.png"
                     alt="Vetted Coaches"
-                    className="w-40 h-40"
+                    className="w-60 h-48"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
@@ -490,7 +492,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/instantly.png"
                     alt="Instantly Schedule"
-                    className="w-40 h-40"
+                    className="w-60 h-48"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
@@ -505,7 +507,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/easymeeting.png"
                     alt="Easy Meeting"
-                    className="w-40 h-30"
+                    className="w-60 h-48"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
@@ -520,7 +522,7 @@ const ComingSoonPage = () => {
                   <img
                     src="/easymessage.png"
                     alt="Easy Message"
-                    className="w-40 h-30"
+                    className="w-60 h-48"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 text-center sm:text-left">
