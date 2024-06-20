@@ -210,7 +210,7 @@ const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
