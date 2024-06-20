@@ -858,4 +858,15 @@ footer a:hover svg {
   /* transform: translateY(-30px); */
   transition-duration: 0.3s;
 }
+.trust{
+  font-size: 3rem;
+}
+.swiper-pagination-bullet-active {
+  opacity: var(--swiper-pagination-bullet-opacity, 1);
+  background: #fff !important;
+}
 
+.swiper-pagination-bullet {
+
+  background: #a1a1aa !important;
+}
