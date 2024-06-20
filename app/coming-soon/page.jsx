@@ -376,8 +376,8 @@ const ComingSoonPage = () => {
                       templates are crafted perfectly for the job roles. I
                       witnessed a rise in the callbacks for Interviews which was
                       very helpful. The pricing is better than many others in
-                      the market. Really can't wait to use the other parts of
-                      the services as well.""
+                      the market. Really can not wait to use the other parts of
+                      the services as well."
                     </p>
                   </blockquote>
                   <figcaption className="flex items-center justify-center mt-6 space-x-3">
