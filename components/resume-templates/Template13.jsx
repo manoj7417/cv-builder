@@ -307,7 +307,7 @@ const Template13 = () => {
                 </div>
                 <div className="user_image -mb-[120px]">
                   {basics?.picture?.url && (
-                    <Image
+                    <img
                       src={basics.picture.url}
                       width={250}
                       height={250}
