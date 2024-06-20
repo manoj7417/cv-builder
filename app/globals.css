@@ -861,6 +861,11 @@ footer a:hover svg {
 .trust{
   font-size: 3rem;
 }
+@media only screen and (max-width: 600px) {
+  .trust {
+    font-size: 2rem;
+  }
+}
 .swiper-pagination-bullet-active {
   opacity: var(--swiper-pagination-bullet-opacity, 1);
   background: #fff !important;
