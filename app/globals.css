@@ -59,6 +59,8 @@
 }
 html{
   scroll-behavior: smooth;
+      overflow: auto !important;
+      padding-right: 0px !important;
 }
 
 /* Mobile Responsive Css Starts Here */
