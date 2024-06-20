@@ -210,7 +210,7 @@ const ResumeViewPage = () => {
   const [scale, setScale] = useState(0.8);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
@@ -416,13 +416,13 @@ const ResumeViewPage = () => {
       <div className="flex justify-center items-center w-full ">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
-            <DialogContent className="sm:max-w-[60vw] h-[60vh]">
+            <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
               <div className="flex">
                 <div className="w-[50%]">
                   <Lottie animationData={animation} />
                 </div>
                 <div className="w-[50%] flex flex-col  justify-center">
-                  <div className="text-fancy text-5xl text-white">
+                  <div className="text-fancy text-5xl">
                     <h1>Did you know?</h1>
                     <p className="text-xl my-3">{funfact}</p>
                   </div>
@@ -430,7 +430,7 @@ const ResumeViewPage = () => {
                     <div className="flex items-center justify-center">
                       <ImSpinner3 className="mr-1 animate-spin" />
                     </div>
-                    <p className="text-white">Downloading...</p>
+                    <p>Downloading...</p>
                   </div>
                 </div>
               </div>
