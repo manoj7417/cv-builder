@@ -235,6 +235,30 @@ const Profile = ({ fontStyle }) => {
   );
 };
 
+const Hobbies = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.hobbies)
+
+  return <div className="border-b-2 border-gray-300 py-3">
+    {data?.visible && data?.items.length > 0 && (
+      <div className="hobbies_section">
+        <h2
+            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
+          >
+            {data?.name}
+          </h2>
+        <ul className="list-disc pl-5">
+          {
+            data?.items?.map((item, index) => {
+              return <li key={index} className="break-words text-15px font-bold text-gray-600">{item}</li>
+            })
+          }
+        </ul>
+      </div>)
+    }
+  </div>
+}
+
+
 export const Template3 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const data = useResumeStore(state => state.resume.data)
@@ -325,6 +349,7 @@ export const Template3 = () => {
               </div>
               <Skills fontStyle={fontStyle} />
               <Education fontStyle={fontStyle} />
+              <Hobbies fontStyle={fontStyle} />
             </div>
             <div className="md:w-[70%] w-full right_side p-5">
               <Profile fontStyle={fontStyle} />
