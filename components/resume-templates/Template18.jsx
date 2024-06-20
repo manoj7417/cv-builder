@@ -79,45 +79,8 @@ const Experience = ({ fontStyle, colorStyle }) => {
           </div>
           {data?.items?.map((item, index) => {
             return (
-              // <div className="experience_1 my-5" key={index}>
-              //   <div className="post flex  justify-between items-center my-2">
-              //     <div className="post_title">
-              //       <h3
-              //         style={{ fontSize: fontStyle.subHeadingFont }}
-              //         className="font-bold"
-              //       >
-              //         {item?.jobtitle}
-              //       </h3>
-              //       <h4
-              //         style={{ fontSize: fontStyle.paraFont }}
-              //         className="font-semibold"
-              //       >
-              //         {item?.employer}
-              //       </h4>
-              //     </div>
-              //     <div className="year font-bold">
-              //       <p
-              //         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-              //       >
-              //         <span>{item?.startDate}</span>
-              //         <span>{item?.startDate && item?.endDate && " - "}</span>
-              //         <span>{item?.endDate}</span>
-              //       </p>
-              //       {item?.city && (
-              //         <p className="text-13px flex font-normal items-center justify-end text-end">
-              //           <IoLocationOutline className="mr-1" />
-              //           {item?.city}
-              //         </p>
-              //       )}
-              //     </div>
-              //   </div>
-              //   <div
-              //     className={`${fontStyle.paraFont} break-words`}
-              //     dangerouslySetInnerHTML={{ __html: item?.description }}
-              //   ></div>
-              // </div>
               <div className="experience_1 flex my-5" key={index}>
-                <div className="year w-[10%] pr-2 relative">
+                <div className="year relative">
                   <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
                   <div
                     className="year_line absolute top-4 right-1 w-0.5 h-full"
@@ -126,20 +89,26 @@ const Experience = ({ fontStyle, colorStyle }) => {
                     }}
                   />
                 </div>
-                <div className="content w-[90%] pl-8 flex flex-col break-all">
-                  <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                    {item?.jobtitle}
-                  </h3>
-                  <h4 style={{ fontSize: fontStyle.paraFont }}>
-                    {item?.employer}
-                  </h4>
-                  {item?.startDate && (
-                    <p className="">
-                      {item.startDate}
-                      {item?.endDate && " - "}
+                <div className="content pl-8 break-all">
+                  <div className="experience_conetnt flex justify-between w-full">
+                    <div className="experience_title">
+                      <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                        {item?.jobtitle}
+                      </h3>
+                      <h4 style={{ fontSize: fontStyle.paraFont }}>
+                        {item?.employer}
+                      </h4>
+                    </div>
+                    <div className="experience_year">
+                    <p
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                    >
+                      {item?.startDate &&
+                        `${item.startDate}${item.endDate && " - "}`}
+                      {item?.endDate}
                     </p>
-                  )}
-                  {item?.endDate && <p>{item.endDate}</p>}
+                    </div>
+                  </div>
                   <div
                     className={`py-2 ${fontStyle.paraFont} break-words`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
@@ -186,7 +155,7 @@ const Projects = ({ fontStyle, colorStyle }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 my-3" key={index}>
-                <div className="post flex  justify-between items-center my-2">
+                <div className="post flex  justify-between my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -324,7 +293,7 @@ const Template18 = () => {
         <div className="resume_right w-[65%] px-10 py-5 text-[#26252d]">
           <div className="resume_item resume_profile my-5"></div>
           <div className="resume_item resume_experience my-5">
-            <div className="resume_info">
+            <div className="resume_info mb-3">
               <Experience
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
