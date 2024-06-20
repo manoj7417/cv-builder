@@ -292,6 +292,23 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Hobbies = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.hobbies)
+  return <div >
+    {data?.visible && data?.items.length > 0 && (
+      <div className="hobbies_section">
+        <ul>
+          {
+            data?.items?.map((item, index) => {
+              return <li key={index} className="text-15px">{item}</li>
+            })
+          }
+        </ul>
+      </div>)
+    }
+  </div>
+}
+
 export const Template4 = () => {
   const resumeData = useResumeStore(state => state?.resume.data);
   const [fontStyle, setFontStyle] = useState({
@@ -370,31 +387,27 @@ export const Template4 = () => {
           </div>
           <div className="resume_detailed_section px-10 py-8">
             <Profile
-              data={resumeData?.sections?.summary}
               fontStyle={fontStyle}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
             <Experience
               fontStyle={fontStyle}
-              data={resumeData?.sections?.experience}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
             <Projects
               fontStyle={fontStyle}
-              data={resumeData?.sections?.projects}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
             <Education
               fontStyle={fontStyle}
-              data={resumeData?.sections?.education}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
             <Skills
               fontStyle={fontStyle}
-              data={resumeData?.sections?.skills}
               headingColor={resumeData?.metadata?.theme?.primary}
             />
-
+            <Hobbies fontStyle={fontStyle}
+              headingColor={resumeData?.metadata?.theme?.primary} />
           </div>
         </div>
       </div>
