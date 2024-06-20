@@ -80,8 +80,8 @@ const templatesData = [
   },
   {
     name: "Template6",
-    src: "/Template6.png",
-    alt: "Template6.png",
+    src: "/Template6-1.png",
+    alt: "Template6-1.png",
     type: templateType.dummy,
   },
   {
@@ -92,8 +92,8 @@ const templatesData = [
   },
   {
     name: "Template7",
-    src: "/Template7.png",
-    alt: "Template7.png",
+    src: "/Template7-1.png",
+    alt: "Template7-1.png",
     type: templateType.dummy,
   },
   {
@@ -299,10 +299,10 @@ export default function Slider() {
                   <span></span>
                 </div>
               )}
-              <div className="images_section w-auto h-[200px]">
+              <div className="images_section w-[200px] h-[300px]">
                 <Image
                   alt={item.alt}
-                  className="h-full w-auto object-cover transition-all duration-300 group-hover:scale-105"
+                  className="h-full w-full object-fill transition-all duration-300 group-hover:scale-105"
                   src={item.src}
                   height={125}
                   width={130}
