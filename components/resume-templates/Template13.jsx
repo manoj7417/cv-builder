@@ -289,7 +289,7 @@ const Template13 = () => {
       <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
         <div className="bg-white">
           <div className="top_section bg-black p-10">
-            <div className="profile_details flex w-full h-full justify-between items-center">
+            <div className="profile_details flex w-full h-auto justify-between items-center">
               <div className="profile_section w-1/2 mt-10">
                 <Profile
                   fontStyle={fontStyle}
