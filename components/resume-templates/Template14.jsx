@@ -290,13 +290,13 @@ const Template14 = () => {
     dates: "text-14px",
     datesStyle: "text-gray-500 font-normal",
     skillsFont: "text-15px",
-    contactFont: "text-12px",
+    contactFont: "text-13px",
   });
 
   return (
     <>
       <div className="resume_wrapper flex bg-white  mx-auto h-min-[297mm] w-min-[210mm]">
-        <div className="resume_right w-[65%] px-5 py-5 text-[#26252d]">
+        <div className="resume_right w-[65%] px-10 py-5 text-[#26252d]">
           <div className="resume_item resume_namerole">
             <h1
               className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
@@ -324,7 +324,7 @@ const Template14 = () => {
                     className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="text-wrap break-words">
                       {basics?.phone}
                     </p>
                   </a>
@@ -335,7 +335,7 @@ const Template14 = () => {
                     className="hover:underline flex items-center mt-1  text-wrap whitespace-nowrap"
                   >
                     <MdOutlineMailOutline className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="text-wrap break-words">
                       {basics?.email}
                     </p>
                   </a>
