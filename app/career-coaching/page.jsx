@@ -35,6 +35,23 @@ const ComingSoonPage = () => {
     padding: 0,
     margin: 0,
   };
+
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const { offsetX, offsetY, target } = e.nativeEvent;
+    const { offsetWidth, offsetHeight } = target;
+    const centerX = offsetWidth / 2;
+    const centerY = offsetHeight / 2;
+    const moveX = (offsetX - centerX) / 20;
+    const moveY = (offsetY - centerY) / 20;
+    setOffset({ x: moveX, y: moveY });
+  };
+
+  const handleMouseLeave = () => {
+    setOffset({ x: 0, y: 0 });
+  };
+
   return (
     <>
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
@@ -57,7 +74,7 @@ const ComingSoonPage = () => {
             />
             <div className="space-y-2 mx-auto">
               <h1
-                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 flex text-center justify-center  items-center  font-extrabold text-[#0D3572]"
+                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 flex text-center justify-center items-center font-extrabold text-[#0D3572]"
                 style={{ WebkitTextStrokeWidth: "thin", wordSpacing: "0.8rem" }}
               >
                 <span>
@@ -66,7 +83,7 @@ const ComingSoonPage = () => {
                   COACH
                 </span>
                 <span>
-                  <img src="/coach.png" className="h-64 ml-4" />
+                  <img src="/coach.png" className="h-64 ml-4 image-animation" />
                 </span>
               </h1>
 
@@ -135,8 +152,20 @@ const ComingSoonPage = () => {
         <div className="max-w-6xl mx-auto  py-10">
           <div className="flex text-center md:text-left sm:text-left flex-col md:flex-row items-center gap-4">
             {/* Left Column - Image */}
-            <div className="w-full text-center md:w-1/2 flex justify-center md:justify-start">
-              <img src="/carrercoaching.webp" alt="Description of the image" />
+            <div
+              className="w-full text-center md:w-1/2 flex justify-center md:justify-start parallax-container"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <img
+                src="/cghbo1.png"
+                alt="Description of the image"
+                className="parallax-image"
+                style={{
+                  transform: `translate(${offset.x}px, ${offset.y}px)`,
+                  transition: "transform 0.1s",
+                }}
+              />
             </div>
 
             {/* Right Column - Text */}
@@ -150,28 +179,6 @@ const ComingSoonPage = () => {
                 a world-class coach to grow as a leader, find career clarity, or
                 accelerate your job search
               </p>
-              <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
-                <button className="get_start_btn">
-                  <span className="btn_text">Learn More</span>
-                  <div className="btn_overlay">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -189,43 +196,45 @@ const ComingSoonPage = () => {
                 employees will love. Work with a world-class coach to grow as a
                 leader, find career clarity, or accelerate your job search.
               </p>
-              <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
-                <button className="get_start_btn">
-                  <span className="btn_text">Learn More</span>
-                  <div className="btn_overlay">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                </button>
-              </div>
             </div>
             {/* Left Column - Image */}
-            <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-              <img src="/cghbo.png" alt="Description of the image" />
+            <div
+              className="w-full text-center md:w-1/2 flex justify-center md:justify-start parallax-container"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <img
+                src="/cghbo.png"
+                alt="Description of the image"
+                className="parallax-image"
+                style={{
+                  transform: `translate(${offset.x}px, ${offset.y}px)`,
+                  transition: "transform 0.1s",
+                }}
+              />
             </div>
 
             {/* Right Column - Text */}
           </div>
         </div>
       </section>
-      <section className="flex lg:items-center px-5 items-start justify-center pb-8 mb:pb-24 lg:pb-32 w-full pt-12 md:pt-16 lg:pt-20 bg-[#0D3572] relative">
-        <div className="container lg:pt-0 pt-20">
+      <section className="flex area lg:items-center px-5 items-start justify-center pb-8 md:pb-24 lg:pb-32 w-full pt-12 md:pt-16 lg:pt-20 relative">
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <div className="container lg:pt-0 pt-20 z-10">
           <div className="flex flex-col justify-center">
             <div className="space-y-2 mx-auto">
-              <h1 className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white ">
+              <h1 className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white">
                 99% Satisfaction
               </h1>
               <div className="flex justify-center mt-4">
@@ -233,7 +242,7 @@ const ComingSoonPage = () => {
                   <svg
                     key={index}
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="#FFD700" // gold color for stars
+                    fill="#FFD700"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="#FFD700"
@@ -249,14 +258,17 @@ const ComingSoonPage = () => {
               </div>
               <p className="max-w-[800px] mx-auto text-center text-white text-[18px] pt-4">
                 Regardless of job title, experience, or location, Placement has
-                you<br></br> covered. Our 100% remote coaching experience has
-                90%<br></br>
+                you
+                <br />
+                covered. Our 100% remote coaching experience has 99%
+                <br />
                 satisfaction.
               </p>
             </div>
           </div>
         </div>
       </section>
+
       <section
         id="learnmore"
         className="flex lg:items-center px-5 items-start justify-center pb-8 mb:pb-24 lg:pb-32 w-full pt-12 md:pt-16 lg:pt-20 relative"
@@ -276,7 +288,7 @@ const ComingSoonPage = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-6xl mx-auto py-10">
-              <div className=" p-6 rounded-lg shadow-md bg-[#ceefd0]">
+              <div className="p-6 rounded-lg shadow-md bg-[#ceefd0] hover:shadow-custom-dark transition-shadow duration-300">
                 <img
                   src="/careergrowth.png"
                   alt="Career Growth"
@@ -289,8 +301,8 @@ const ComingSoonPage = () => {
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
-                    className="get_start_btn "
-                    style={{ background: "black" }}
+                    className="get_start_btn"
+                    style={{ background: "#88e48d", border: "none" }}
                   >
                     <span className="btn_text">
                       <a href="/contact-us">Hire Coach</a>
@@ -315,7 +327,8 @@ const ComingSoonPage = () => {
                   </button>
                 </div>
               </div>
-              <div className=" p-6 rounded-lg shadow-md bg-[#f1b38c]">
+
+              <div className="p-6 rounded-lg shadow-md bg-[#f1b38c] hover:shadow-custom-dark transition-shadow duration-300">
                 <img
                   src="/leadership.png"
                   alt="Leadership Skills"
@@ -328,8 +341,8 @@ const ComingSoonPage = () => {
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
-                    className="get_start_btn "
-                    style={{ background: "black" }}
+                    className="get_start_btn"
+                    style={{ background: "#ff914c", border: "none" }}
                   >
                     <span className="btn_text">
                       <a href="/contact-us">Hire Coach</a>
@@ -354,7 +367,8 @@ const ComingSoonPage = () => {
                   </button>
                 </div>
               </div>
-              <div className="p-6 rounded-lg shadow-md bg-[#ffe1e1]">
+
+              <div className="p-6 rounded-lg shadow-md bg-[#ffe1e1] hover:shadow-custom-dark transition-shadow duration-300">
                 <img
                   src="/jobtransition.png"
                   alt="Job Transition"
@@ -367,8 +381,8 @@ const ComingSoonPage = () => {
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
-                    className="get_start_btn "
-                    style={{ background: "black" }}
+                    className="get_start_btn"
+                    style={{ background: "#fe9e9f", border: "none" }}
                   >
                     <span className="btn_text">
                       <a href="/contact-us">Hire Coach</a>
@@ -393,7 +407,8 @@ const ComingSoonPage = () => {
                   </button>
                 </div>
               </div>
-              <div className=" p-6 rounded-lg shadow-md bg-[#bac2f1]">
+
+              <div className="p-6 rounded-lg shadow-md bg-[#bac2f1] hover:shadow-custom-dark transition-shadow duration-300">
                 <img
                   src="/perfomance.png"
                   alt="Performance Enhancement"
@@ -408,8 +423,8 @@ const ComingSoonPage = () => {
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
-                    className="get_start_btn "
-                    style={{ background: "black" }}
+                    className="get_start_btn"
+                    style={{ background: "#8d9df1", border: "none" }}
                   >
                     <span className="btn_text">
                       <a href="/contact-us">Hire Coach</a>
