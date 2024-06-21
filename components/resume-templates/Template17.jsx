@@ -394,7 +394,7 @@ const Template17 = () => {
                 <h2 className="text-3xl uppercase font-medium text-black">
                   <span className="font-bold"> {basics?.name || "Michael"}</span>
                 </h2>
-                <h4 className="text-base text-black tracking-wider">
+                <h4 className="text-base text-black ">
                 {basics?.jobtitle || "Inside Sales Manager"}
                 </h4>
               </div>
