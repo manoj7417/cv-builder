@@ -903,11 +903,10 @@ footer a:hover svg {
 }
 
 .area {
-  background: #4e54c8;
-  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
   width: 100%;
   position: relative;
   overflow: hidden;
+background: linear-gradient(to top, #4e54c8, #4980b8, #ffffff);  /* Updated gradient */
 }
 
 .circles {
@@ -1018,4 +1017,29 @@ footer a:hover svg {
     opacity: 0;
     border-radius: 50%;
   }
+}
+
+.acard{
+  background-color: white;
+}
+.aicon {
+  color: #031D44;
+}
+.apara{
+  color: gray;
+}
+
+.acard:hover{
+  background-color: #031D44;
+  color: white;
+}
+.aicon:hover {
+  color: #ffffff;
+}
+.acard:hover .aicon {
+  background-color: #031D44;
+  color: white;
+}
+.acard:hover .apara {
+  color: white;
 }
