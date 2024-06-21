@@ -127,7 +127,7 @@ export default function DashboardIdea() {
                   application profile.
                 </p>
                 <div className="flex items-center space-x-4 ">
-                  <label className="flex flex-col items-start bg-transparent text-blue rounded-lg tracking-wide uppercase cursor-pointer hover:bg-blue">
+                  <label className="flex flex-col items-start bg-transparent text-blue rounded-lg  uppercase cursor-pointer hover:bg-blue">
                     <span className="lg:mt-2 mt-1 text-sm leading-normal px-5 py-3 bg-blue-900 hover:bg-blue-700  rounded-md text-white font-semibold">
                       Optimise CV Now
                     </span>

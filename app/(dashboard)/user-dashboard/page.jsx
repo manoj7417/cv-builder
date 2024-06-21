@@ -92,7 +92,7 @@ const UserDashboardPage = () => {
                 <ul className="flex flex-col py-4 space-y-1">
                   <li className="px-5 hidden md:block">
                     <div className="flex flex-row items-center h-8">
-                      <div className="text-sm tracking-wide text-black font-semibold uppercase">
+                      <div className="text-sm  text-black font-semibold uppercase">
                         Main
                       </div>
                     </div>
@@ -118,7 +118,7 @@ const UserDashboardPage = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">
+                      <span className="ml-2 text-sm  truncate">
                         Dashboard
                       </span>
                     </a>
@@ -144,10 +144,10 @@ const UserDashboardPage = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">
+                      <span className="ml-2 text-sm  truncate">
                         Board
                       </span>
-                      <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">
+                      <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium  text-blue-500 bg-indigo-50 rounded-full">
                         New
                       </span>
                     </a>
@@ -173,7 +173,7 @@ const UserDashboardPage = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">
+                      <span className="ml-2 text-sm  truncate">
                         Messages
                       </span>
                     </a>
@@ -199,17 +199,17 @@ const UserDashboardPage = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">
+                      <span className="ml-2 text-sm  truncate">
                         Notifications
                       </span>
-                      <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
+                      <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium  text-red-500 bg-red-50 rounded-full">
                         1.2k
                       </span>
                     </a>
                   </li>
                   <li className="px-5 hidden md:block">
                     <div className="flex flex-row items-center mt-5 h-8">
-                      <div className="text-sm font-semibold tracking-wide text-black uppercase">
+                      <div className="text-sm font-semibold  text-black uppercase">
                         Settings
                       </div>
                     </div>
@@ -235,7 +235,7 @@ const UserDashboardPage = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">
+                      <span className="ml-2 text-sm  truncate">
                         Profile
                       </span>
                     </a>
@@ -267,7 +267,7 @@ const UserDashboardPage = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-2 text-sm tracking-wide truncate">
+                      <span className="ml-2 text-sm  truncate">
                         Settings
                       </span>
                     </a>
@@ -727,7 +727,7 @@ const UserDashboardPage = () => {
                   <div className="w-full overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="text-xs font-semibold tracking-wide text-left text-black uppercase border-b bg-white">
+                        <tr className="text-xs font-semibold  text-left text-black uppercase border-b bg-white">
                           <th className="px-4 py-3">Templates</th>
                           <th className="px-4 py-3">Amount</th>
                           <th className="px-4 py-3">Status</th>
@@ -883,7 +883,7 @@ const UserDashboardPage = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-black uppercase border-t bg-gray-50 sm:grid-cols-9">
+                  <div className="grid px-4 py-3 text-xs font-semibold  text-black uppercase border-t bg-gray-50 sm:grid-cols-9">
                     <span className="flex items-center col-span-3">
                       {" "}
                       Showing 21-30 of 100{" "}

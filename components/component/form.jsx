@@ -1415,7 +1415,14 @@ export default function Form() {
             </p>
           </div>
           <div className="my-4">
-            <Textarea placeholder="Enter your hobbies" value={sections?.hobbies?.items.join("\n") || []} onChange={handleChangeHobbies} />
+            {
+              sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
+                return <div key={index} className="">
+                  <Label>{item}</Label>
+                  <Input value={item} onChange={(e) => handleChangeHobbies(e.target.value, index)} />
+                </div>
+              })
+            }
           </div>
         </div>
 

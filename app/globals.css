@@ -172,7 +172,7 @@ html{
 }
 
 .mobile_responsive_nav .nav-links li a:hover::before {
-  height: 4px;
+  height: 3px;
 }
 
 .mobile_responsive_nav .nav-links .mobile-item {
@@ -808,7 +808,7 @@ footer a:hover svg {
 }
 
 .new_resume_header .nav-link-grow-up:hover::before {
-  height: 5px;
+  height: 3px;
 }
 
 
