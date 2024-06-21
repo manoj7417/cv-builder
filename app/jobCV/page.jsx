@@ -22,6 +22,10 @@ import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
+import axios from "axios";
+import { MdOutlineCloudUpload } from "react-icons/md";
+import uploadAnimation from '@/public/animations/uploadCVLoader.json';
+import scratchAnimation from '@/public/animations/startfromStratch.json';
 
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
@@ -155,18 +159,19 @@ export default function Home() {
     setShowDialog(false);
   };
 
+
   const handlefileupload = () => {
     inputRef.current.click();
   };
 
   const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`;
-
     try {
-      const response = await generateResumeOnFeeback(
-        message,
-        accessToken.value
-      );
+      const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken.value
+        }
+      })
       if (response.status === 201) {
         return response.data;
       }
@@ -234,7 +239,12 @@ export default function Home() {
       router.push("/login?redirect=/jobCV");
       return;
     }
+    setShowDialog(true)
+  }
+
+  const handleOpenMultiStepForm = () => {
     setShowMultiStepDialog(true)
+    setShowDialog(false)
   }
 
   useEffect(() => {
@@ -260,6 +270,30 @@ export default function Home() {
               jobRole={jobRole}
             />
           </Dialog>
+          <Dialog open={showDialog} >
+            <DialogContent className="max-w-[60dvw]  p-0" showCloseButton={true} onClick={() => setShowDialog(false)}>
+              <div className="flex w-full bg-gradient-to-r bg-gray-100 p-6 rounded-xl justify-around">
+                <div className="flex flex-col  items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 hover:scale-105 ease-in-out cursor-pointer bg-white" onClick={handlefileupload}>
+                  <div className="w-full h-[70%]">
+                    <Lottie animationData={uploadAnimation} className="h-full w-full" />
+                  </div>
+                  <div className="w-full h-[30%]  justify-center items-center flex">
+                    <p className="font-bold text-2xl text-blue-900">Upload CV</p>
+                    <input type="file" hidden ref={inputRef} onChange={handleuploadResume} />
+                  </div>
+
+                </div>
+                <div className="flex flex-col justify-center items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer hover:scale-105 bg-white" onClick={handleOpenMultiStepForm}>
+                  <div className="w-full h-[70%]">
+                    <Lottie animationData={scratchAnimation} />
+                  </div>
+                  <div className="w-full h-[30%] justify-center items-center flex">
+                    <p className="font-bold text-2xl text-blue-900">Start Afresh</p>
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
           <Dialog open={generatingResume}>
             <DialogContent onClick showCloseButton>
               <div className="mx-auto flex items-center flex-col">
@@ -272,44 +306,44 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <div className="flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
-  <div className="flex flex-col items-center lg:items-start">
-    <h1
-      className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
-      style={{ lineHeight: "1 !important" }}
-    >
-      Build a <span className="text-blue-600">CV</span> that opens
-      doors to your ideal{" "}
-      <span className="text-blue-600">career</span>!
-    </h1>
-    <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
-      <div className="w-full col-span-7">
-        <SearchBar
-          jobRole={jobRole}
-          setJobRole={setJobRole}
-          options={options}
-        />
-      </div>
-      <div className="w-full col-span-7 md:col-span-3 ">
-        <button
-          className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
-          onClick={() => handleGenerateNow()}
-        >
-          Generate Now <RiAiGenerate className="text-xl font-bold" />
-        </button>
-      </div>
-    </div>
-  </div>
-  <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl">
-    <Image
-      src="/cvgenerator.png"
-      width={1300}
-      height={700}
-      alt="Job CV"
-      className="w-full lg:max-w-4xl"
-      style={{ height: "auto", width: "100%", maxHeight: "30rem" }}
-    />
-  </div>
-</div>
+            <div className="flex flex-col items-center lg:items-start">
+              <h1
+                className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
+                style={{ lineHeight: "1 !important" }}
+              >
+                Build a <span className="text-blue-600">CV</span> that opens
+                doors to your ideal{" "}
+                <span className="text-blue-600">career</span>!
+              </h1>
+              <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
+                <div className="w-full col-span-7">
+                  <SearchBar
+                    jobRole={jobRole}
+                    setJobRole={setJobRole}
+                    options={options}
+                  />
+                </div>
+                <div className="w-full col-span-7 md:col-span-3 ">
+                  <button
+                    className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
+                    onClick={() => handleGenerateNow()}
+                  >
+                    Generate Now <RiAiGenerate className="text-xl font-bold" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl">
+              <Image
+                src="/cvgenerator.png"
+                width={1300}
+                height={700}
+                alt="Job CV"
+                className="w-full lg:max-w-4xl"
+                style={{ height: "auto", width: "100%", maxHeight: "30rem" }}
+              />
+            </div>
+          </div>
 
         </section>
         <section>
@@ -356,6 +390,6 @@ export default function Home() {
         </section> */}
         <Footer />
       </>
-    </main>
+    </main >
   );
 }
