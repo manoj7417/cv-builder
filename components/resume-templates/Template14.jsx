@@ -332,7 +332,7 @@ const Template14 = () => {
                 {basics?.email && (
                   <a
                     href={`mailto:${basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap"
+                    className="hover:underline flex items-center mt-1  text-wrap whitespace-nowrap"
                   >
                     <MdOutlineMailOutline className="mr-2" />
                     <p className="w-[90%] text-wrap break-words">
