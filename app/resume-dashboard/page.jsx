@@ -428,7 +428,7 @@ export default function DashboardIdea() {
           <div className="container w-full h-full resume-dashboard">
             <div className="flex lg:px-24 px-5 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20">
-                <h1 className="text-3xl font-bold mb-5 tracking-tighter text-gray-900 sm:text-5xl 2xl:text-6xl">
+                <h1 className="text-3xl font-bold mb-5 text-gray-900 sm:text-5xl 2xl:text-6xl">
                   Craft the <span className="text-[#2C98CA]">Perfect CV </span> for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-lg pe-10">
