@@ -24,6 +24,11 @@ const navigation = [
   { name: "CV Creator", href: "/resume-dashboard", current: true },
   { name: "CV Optimiser", href: "/resumeAnalyzer-dashboard", current: false },
   { name: "CV Match", href: "/jobCV", current: false, isBeta: true },
+  {
+    name: "Career Coaching",
+    href: "/career-coaching",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -36,7 +41,8 @@ export default function NewResumeHeader() {
   const logoutUser = useUserStore((state) => state.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
-  const userImage = userdata?.profilePicture || "https://via.placeholder.com/150"; // Fallback image
+  const userImage =
+    userdata?.profilePicture || "https://via.placeholder.com/150"; // Fallback image
 
   const handleLogout = async () => {
     await RemoveTokens();
@@ -59,8 +65,9 @@ export default function NewResumeHeader() {
 
   return (
     <div
-      className={`new_resume_header border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${scrollY > 0 ? "bg-white" : "bg-transparent"
-        }`}
+      className={`new_resume_header border-2 border-gray-200 fixed w-full top-0 z-30 transition-colors duration-300 ${
+        scrollY > 0 ? "bg-white" : "bg-transparent"
+      }`}
     >
       <Disclosure>
         {({ open }) => (
@@ -106,7 +113,9 @@ export default function NewResumeHeader() {
                         >
                           {item.name}
                           {item.isBeta && (
-                            <span className="text-sm font-bold ml-1 text-blue-900">(Beta)</span>
+                            <span className="text-sm font-bold ml-1 text-blue-900">
+                              (Beta)
+                            </span>
                           )}
                         </a>
                       ))}
@@ -114,57 +123,20 @@ export default function NewResumeHeader() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0">
-                  {/* <Menu as="div" className="relative">
-                    <div>
-                      <MenuButton className="relative rounded-full bg-blue-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon
-                          className="h-6 w-6 text-white"
-                          aria-hidden="true"
-                        />
-                      </MenuButton>
-                    </div>
-                    <Transition
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <MenuItem>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              No Notification 
-                            </a>
-                          )}
-                        </MenuItem>
-                      </MenuItems>
-                    </Transition>
-                  </Menu>
-
-                {
-                  console.log(userImage)
-                }           */}
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <MenuButton className="relative flex items-center justify-center w-8 h-8 rounded-full   text-sm overflow-hidden">
+                      <MenuButton className="relative flex items-center justify-center w-8 h-8 rounded-full text-sm overflow-hidden">
+                        <span className="absolute -inset-1.5"/>
                         <span className="sr-only">Open user menu</span>
                         <img
-                          src={userImage || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s'}
+                          src={
+                            userImage ||
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
+                          }
                           alt="User profile picture"
                           layout="fill"
-                          className="rounded-full object-cover p-0.2 border-2 border-blue-800 "
+                          className="w-full h-full rounded-full object-cover p-0.2 border-2 border-blue-800 "
                         />
                       </MenuButton>
                     </div>
@@ -199,7 +171,7 @@ export default function NewResumeHeader() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              CV  History
+                              CV History
                             </a>
                           )}
                         </MenuItem>
@@ -219,8 +191,6 @@ export default function NewResumeHeader() {
                       </MenuItems>
                     </Transition>
                   </Menu>
-
-
                 </div>
               </div>
             </div>

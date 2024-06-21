@@ -288,7 +288,7 @@ const Template20 = () => {
     <>
       <div className="min-w-[210mm] min-h-[297mm] bg-white">
         <div className="top_section bg-[#182f42] p-10">
-          <div className="profile_details flex w-full h-full justify-between items-center">
+          <div className="profile_details flex w-full h-auto justify-between items-center">
             <div className="profile_section w-[70%] ">
               <div className="user_name px-5">
                 <h1 className="text-3xl uppercase font-medium text-white tracking-widest">

@@ -316,15 +316,15 @@ const Template14 = () => {
             </p>
             <div className="contact_details w-full">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold w-full justify-between items-center`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold w-full justify-between items-center gap-3`}
               >
                 {basics?.phone && (
                   <a
                     href={`tel:${basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap"
+                    className="hover:underline flex items-center"
                   >
                     <MdOutlinePhone className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="text-wrap break-words">
                       {basics?.phone}
                     </p>
                   </a>
@@ -332,10 +332,10 @@ const Template14 = () => {
                 {basics?.email && (
                   <a
                     href={`mailto:${basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap"
+                    className="hover:underline flex items-center"
                   >
                     <MdOutlineMailOutline className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="text-wrap break-words">
                       {basics?.email}
                     </p>
                   </a>

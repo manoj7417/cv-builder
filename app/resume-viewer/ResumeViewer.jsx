@@ -77,14 +77,14 @@ const images = [
   },
   {
     name: "Template6",
-    src: "/Template6.png",
-    alt: "Template6.png",
+    src: "/Template6-1.png",
+    alt: "Template6-1.png",
     type: templateType.premium,
   },
   {
     name: "Template7",
-    src: "/Template7.png",
-    alt: "Template7.png",
+    src: "/Template7-1.png",
+    alt: "Template7-1.png",
     type: templateType.premium,
   },
   {
@@ -416,7 +416,7 @@ const ResumeViewPage = () => {
       <div className="flex justify-center items-center w-full ">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
-            <DialogContent className="sm:max-w-[60vw] h-[60vh]">
+            <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
               <div className="flex">
                 <div className="w-[50%]">
                   <Lottie animationData={animation} />

@@ -353,53 +353,7 @@ export const Template2 = ({resumeData}) => {
                 fontStyle={fontStyle}
                 data={resumeData?.sections?.experience}
               />
-              {/* <div className="mt-8">
-                <h4 className="font-medium text-green text-xl">
-                  Junior Front-end engineer
-                </h4>
-                <h5 className="text-base text-green">
-                  <a href="https://renetal.com" className="hover:underline">
-                    Renetal
-                  </a>{" "}
-                  | <i>2019 - JULY 2020</i>
-                </h5>
-                <ul className="text-white list-disc list-inside mt-4">
-                  <li> Designed high-performant UI Components </li>
-                  <li> Complete SaaS app redesign using VueJs </li>
-                  <li>
-                    {" "}
-                    Worked with an amazing remote-team from SIngapore in an
-                    agile environment.
-                  </li>
-                </ul>
-              </div>
-              <div className="mt-8">
-                <h4 className="font-medium text-green text-xl">
-                  Founder &lt; CEO
-                </h4>
-                <h5 className="text-base  text-green">
-                  <a
-                    href="https://justifyagency.com"
-                    className="hover:underline"
-                  >
-                    Justify Agency
-                  </a>{" "}
-                  | <i>2020 - Present</i>
-                </h5>
-                <ul className="text-white list-disc list-inside mt-4">
-                  <li>
-                    {" "}
-                    Meeting with clients to discuss project requirements and
-                    workflow. (Includes Startups &amp; Products){" "}
-                  </li>
-                  <li> Working with distributed network of freelancers </li>
-                  <li>
-                    &nbsp;Complete Branding &amp; Design System (Email, Social
-                    Media, Website, Print){" "}
-                  </li>
-                </ul>
-              </div> */}
-              <section className="mt-5">
+              <div className="mt-5">
                 <h3 className="uppercase text-white font-medium text-2xl">
                   Projects
                 </h3>
@@ -408,67 +362,7 @@ export const Template2 = ({resumeData}) => {
                 fontStyle={fontStyle}
                 data={resumeData?.sections?.projects}
               />
-                {/* <div className="mt-5">
-                  <h4 className="font-medium text-green text-xl mb-5">
-                    Shopify Freelance Associate
-                  </h4>
-                  <p className="text-white text-sm">
-                    Proud member of the shopify community, and their partner
-                    program. Setting up Shopify stores and making custom themes
-                    from a long time.
-                  </p>
-                </div>
-                <div className="mt-5">
-                  <h4 className="font-medium text-green text-xl">
-                    <a
-                      href="https://dev.to/justaashir"
-                      className="hover:underline"
-                    >
-                      DEV Community
-                    </a>{" "}
-                    (Volunteer &amp; Technical Writer)
-                  </h4>
-                  <ul className="text-white list-disc list-inside mt-4 text-base">
-                    <li>
-                      Have written about Vuejs, career advice and resources...
-                    </li>
-                    <li> Top 500 Author (Award)</li>
-                    <li> 16,000+ Followers + 150K+ Views</li>
-                    <li> 5 Badges</li>
-                  </ul>
-                </div> */}
-              </section>
-              {/* <section className="mt-5">
-                <div className="mt-8">
-                  <h4 className="font-medium text-green text-xl">
-                    <a
-                      href="https://tailwindcssuikit.com"
-                      className="hover:underline"
-                    >
-                      Tailwind CSS Ui Kit
-                    </a>
-                  </h4>
-                  <p className="text-white mt-2">
-                    Building this, in my free time. Making modern design systems
-                    and kits possible with TailwindCSS
-                  </p>
-                </div>
-                <div className="mt-5">
-                  <h4 className="font-medium text-green text-xl">
-                    <a
-                      href="https://remoteworkjar.com"
-                      className="hover:underline"
-                    >
-                      RemoteWorkJar
-                    </a>
-                  </h4>
-                  <p className="text-white mt-2">
-                    Remote Job Board, where the main focus is to manually screen
-                    every job posted and help candidates get high-quality
-                    remote-only job postings.
-                  </p>
-                </div>
-              </section> */}
+              </div>
             </section>
           </div>
         </div>

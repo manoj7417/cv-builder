@@ -392,7 +392,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 1) {
-        return <DialogContent className='max-w-[70dvw] h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[70dvw] h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
                 <div className='w-1/3 h-full '>
 
