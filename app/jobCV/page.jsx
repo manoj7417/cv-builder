@@ -22,6 +22,10 @@ import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
+import axios from "axios";
+import { MdOutlineCloudUpload } from "react-icons/md";
+import uploadAnimation from '@/public/animations/uploadCVLoader.json';
+import scratchAnimation from '@/public/animations/startfromStratch.json';
 
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
@@ -153,18 +157,19 @@ export default function Home() {
     setShowDialog(false);
   };
 
+
   const handlefileupload = () => {
     inputRef.current.click();
   };
 
   const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`;
-
     try {
-      const response = await generateResumeOnFeeback(
-        message,
-        accessToken.value
-      );
+      const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken.value
+        }
+      })
       if (response.status === 201) {
         return response.data;
       }
@@ -232,8 +237,14 @@ export default function Home() {
       router.push("/login?redirect=/jobCV");
       return;
     }
-    setShowMultiStepDialog(true);
-  };
+    setShowDialog(true)
+  }
+
+  const handleOpenMultiStepForm = () => {
+    setShowMultiStepDialog(true)
+    setShowDialog(false)
+  }
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -257,6 +268,30 @@ export default function Home() {
               setFormData={setFormData}
               jobRole={jobRole}
             />
+          </Dialog>
+          <Dialog open={showDialog} >
+            <DialogContent className="max-w-[60dvw]  p-0" showCloseButton={true} onClick={() => setShowDialog(false)}>
+              <div className="flex w-full bg-gradient-to-r bg-gray-100 p-6 rounded-xl justify-around">
+                <div className="flex flex-col  items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 hover:scale-105 ease-in-out cursor-pointer bg-white" onClick={handlefileupload}>
+                  <div className="w-full h-[70%]">
+                    <Lottie animationData={uploadAnimation} className="h-full w-full" />
+                  </div>
+                  <div className="w-full h-[30%]  justify-center items-center flex">
+                    <p className="font-bold text-2xl text-blue-900">Upload CV</p>
+                    <input type="file" hidden ref={inputRef} onChange={handleuploadResume} />
+                  </div>
+
+                </div>
+                <div className="flex flex-col justify-center items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer hover:scale-105 bg-white" onClick={handleOpenMultiStepForm}>
+                  <div className="w-full h-[70%]">
+                    <Lottie animationData={scratchAnimation} />
+                  </div>
+                  <div className="w-full h-[30%] justify-center items-center flex">
+                    <p className="font-bold text-2xl text-blue-900">Start Afresh</p>
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
           </Dialog>
           <Dialog open={generatingResume}>
             <DialogContent onClick showCloseButton className="bg-blue-900">
@@ -353,6 +388,6 @@ export default function Home() {
         </section> */}
         <Footer />
       </>
-    </main>
+    </main >
   );
 }

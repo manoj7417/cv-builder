@@ -235,7 +235,7 @@ const Profile = ({ fontStyle }) => {
   );
 };
 
-const Hobbies = ({ fontStyle, headingColor }) => {
+const Hobbies = ({ fontStyle }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.hobbies)
 
   return <div className="border-b-2 border-gray-300 py-3">
