@@ -301,7 +301,7 @@ export const Template5 = () => {
     <>
       <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
         <div className="bg-white">
-          <div className="grid grid-cols-12 p-10">
+          <div className="grid grid-cols-12 px-10 py-5">
             <div className="resume_detailed_section col-span-9">
               <div>
                 <div className="top_section flex items-start gap-5">
