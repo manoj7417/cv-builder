@@ -56,7 +56,7 @@ function ImageCarousel({ data }) {
         {data.map((image, index) => {
           return (
             <div
-              className="group relative 2xl:h-[500px] h-[280px] 2xl:w-[350px] w-[200px] overflow-hidden rounded-lg shadow-lg 2xl:p-4 p-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
+              className="group relative 2xl:h-[500px] md:h-[210px] h-[280px] 2xl:w-[350px] md:w-[170px] w-[200px] overflow-hidden rounded-lg shadow-lg 2xl:p-4 p-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
               key={index}
             >
               {image.type === templateType.premium && (

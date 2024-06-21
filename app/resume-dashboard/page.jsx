@@ -456,7 +456,7 @@ export default function DashboardIdea() {
           </div>
           <div className="w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
             <div className="rounded-t-xl border-t-8 border-blue-900 p-6">
-              <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
+              <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-gray-900 text-center">
                 Choose From Our Detailed Templates Options
               </h2>
               <Tabs className="w-full py-5" defaultValue="all">
