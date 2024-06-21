@@ -326,10 +326,10 @@ export const Template5 = () => {
                       {resumeData?.basics?.email && (
                         <a
                           href={`mailto:${resumeData?.basics?.email}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
+                          className="hover:underline flex items-center text-wrap"
                         >
                           <MdOutlineMailOutline className="mr-2" />
-                          <p className="w-[90%] text-wrap break-words">
+                          <p className="text-wrap break-words">
                             {resumeData?.basics?.email}
                           </p>
                         </a>
@@ -337,10 +337,10 @@ export const Template5 = () => {
                       {resumeData?.basics?.phone && (
                         <a
                           href={`tel:${resumeData?.basics?.phone}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
+                          className="hover:underline flex items-center text-wrap"
                         >
                           <MdOutlinePhone className="mr-2" />
-                          <p className="w-[90%] text-wrap break-words">
+                          <p className="text-wrap break-words">
                             {resumeData?.basics?.phone}
                           </p>
                         </a>
