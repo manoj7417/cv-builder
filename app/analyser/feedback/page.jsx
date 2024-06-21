@@ -13,9 +13,15 @@ import { GetTokens } from "@/app/actions";
 import { FaCrown } from "react-icons/fa";
 
 import { useUserStore } from "@/app/store/UserStore";
-import { Dialog } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import JobMultistepForm from "@/components/component/JobMultistepForm";
 import "@/app/components/HomepageNew/Homepage.css";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { FaWpforms } from "react-icons/fa6";
+import axios from "axios";
+import Lottie from "lottie-react";
+import uploadAnimation from '@/public/animations/uploadCVLoader.json'
+import scratchAnimation from '@/public/animations/startfromStratch.json'
 
 const FeedbackFuction = () => {
   const [content, setContent] = useState({});
@@ -42,11 +48,18 @@ const FeedbackFuction = () => {
   const status = searchParams.get("status");
   const [formData, setFormData] = useState(initialState);
   const [showMultiStepDialog, setshowMultiStepDialog] = useState(false);
-
-  const fetchBetterResume = async (resume) => {
+  const [showDialog, setShowDialog] = useState(false);
+  const fetchBetterResume = async () => {
     const { accessToken } = await GetTokens();
+    const message = localStorage.getItem('newResumeContent')
+    setShowDialog(false)
+    setIsLoading(true)
     try {
-      const response = await generateResumeOnFeeback(resume, accessToken.value);
+      const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken.value
+        }
+      })
       if (response.status === 201) {
         return response.data;
       }
@@ -59,7 +72,6 @@ const FeedbackFuction = () => {
 
   const handlepayment = async () => {
     const { accessToken } = await GetTokens();
-
     Payment(
       {
         amount: 10,
@@ -106,6 +118,11 @@ const FeedbackFuction = () => {
     setSteps(1);
   };
 
+  const handleShowMultiStepForm = () => {
+    setshowMultiStepDialog(true);
+    setShowDialog(false)
+  }
+
   useEffect(() => {
     let value = JSON.parse(localStorage.getItem("feedback"));
     setContent(value);
@@ -119,6 +136,30 @@ const FeedbackFuction = () => {
 
   return (
     <>
+      <Dialog open={showDialog} >
+<DialogContent className="max-w-[60dvw]  p-0" showCloseButton={true} onClick={() => setShowDialog(false)}>
+          <div className="flex w-full bg-gradient-to-r bg-gray-100 p-6 rounded-xl justify-around">
+            <div className="flex flex-col  items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 hover:scale-105 ease-in-out cursor-pointer bg-white" onClick={fetchBetterResume}>
+              <div className="w-full h-[70%]">
+                <Lottie animationData={uploadAnimation} className="h-full w-full" />
+              </div>
+              <div className="w-full h-[30%]  justify-center items-center flex">
+                <p className="font-bold text-2xl text-blue-900">Optimize current CV</p>
+              </div>
+
+            </div>
+            <div className="flex flex-col justify-center items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer hover:scale-105 bg-white" onClick={handleShowMultiStepForm}>
+              <div className="w-full h-[70%]">
+                <Lottie animationData={scratchAnimation} />
+              </div>
+              <div clas
+                sName="w-full h-[30%] justify-center items-center flex">
+                <p className="font-bold text-2xl text-blue-900">Build from scratch</p>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       <Dialog open={showMultiStepDialog}>
         <JobMultistepForm
           showMultiStepDialog={showMultiStepDialog}
@@ -167,11 +208,10 @@ const FeedbackFuction = () => {
                 <p className="tracking-wider">
                   Your resume ATS score is{" "}
                   <span
-                    className={`${
-                      content?.analysis?.resume_score > 65
-                        ? "text-green-400"
-                        : "text-red-500"
-                    } font-bold`}
+                    className={`${content?.analysis?.resume_score > 65
+                      ? "text-green-400"
+                      : "text-red-500"
+                      } font-bold`}
                   >
                     {content ? content?.analysis?.resume_score : "0"}
                   </span>{" "}
@@ -212,17 +252,16 @@ const FeedbackFuction = () => {
                                 ? content?.clarity?.score
                                 : "0"
                             }
-                            text={`${
-                              Object.keys(content).length > 0
-                                ? content?.clarity?.score
-                                : "0"
-                            }%`}
+                            text={`${Object.keys(content).length > 0
+                              ? content?.clarity?.score
+                              : "0"
+                              }%`}
                           />
                         </div>
                       </div>
                       <div className="pt-2 flex justify-center items-center">
                         {Object.keys(content).length > 0 &&
-                        content?.clarity?.score > 80 ? (
+                          content?.clarity?.score > 80 ? (
                           <div className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Excellent
                           </div>
@@ -271,11 +310,10 @@ const FeedbackFuction = () => {
                                 ? content?.relevancy?.score
                                 : "0"
                             }
-                            text={`${
-                              Object.keys(content).length > 0
-                                ? content?.relevancy?.score
-                                : "0"
-                            }%`}
+                            text={`${Object.keys(content).length > 0
+                              ? content?.relevancy?.score
+                              : "0"
+                              }%`}
                             styles={buildStyles({
                               textColor: "red",
                               pathColor: "turquoise",
@@ -285,7 +323,7 @@ const FeedbackFuction = () => {
                       </div>
                       <div className="pt-2 flex justify-center items-center">
                         {Object.keys(content).length > 0 &&
-                        content?.relevancy?.score > 80 ? (
+                          content?.relevancy?.score > 80 ? (
                           <div className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Excellent
                           </div>
@@ -336,11 +374,10 @@ const FeedbackFuction = () => {
                                 ? content?.content_quality?.score
                                 : "0"
                             }
-                            text={`${
-                              Object.keys(content).length > 0
-                                ? content?.content_quality?.score
-                                : "0"
-                            }%`}
+                            text={`${Object.keys(content).length > 0
+                              ? content?.content_quality?.score
+                              : "0"
+                              }%`}
                             styles={buildStyles({
                               textColor: "red",
                               pathColor: "#F89A14",
@@ -350,7 +387,7 @@ const FeedbackFuction = () => {
                       </div>
                       <div className="pt-2 flex justify-center items-center">
                         {Object.keys(content).length > 0 &&
-                        content?.content_quality?.score > 80 ? (
+                          content?.content_quality?.score > 80 ? (
                           <div className="lg:w-[120px] w-1/2 p-2 bg-[#FFE9E9] text-green-600 font-bold rounded-md whitespace-nowrap text-sm">
                             Excellent
                           </div>
@@ -390,7 +427,7 @@ const FeedbackFuction = () => {
                 </p>
                 <div className="recommandation_list border-l-4 border-[#F89A14] p-5 mb-5">
                   {Object.keys(content).length > 0 &&
-                  content?.analysis?.feedback?.length > 0 ? (
+                    content?.analysis?.feedback?.length > 0 ? (
                     <ul className="custom-counter">
                       {content.analysis.feedback.map((feedback, index) => (
                         <li
@@ -448,7 +485,7 @@ const FeedbackFuction = () => {
           Fix My CV <FaCrown className="ml-1 text-yellow-300" />
         </button> */}
         <div className="button_wrapper mb-5 fixed bottom-5 left-[44%]">
-          <button className="get_start_btn floating"  onClick={handleBetterResumeContent}>
+          <button className="get_start_btn floating" onClick={() => setShowDialog(true)}>
             <span className="btn_text">Fix My CV</span>
             <div className="btn_overlay">
               {/* <svg

@@ -360,7 +360,11 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     const fetchBetterResume = async (message) => {
         const { accessToken } = await GetTokens()
         try {
-            const response = await generateResumeOnFeeback(message, accessToken.value);
+            const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken.value
+                }
+            });
             if (response.status === 201) {
                 return response.data;
             }
@@ -391,14 +395,14 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         return <DialogContent className='max-w-[70dvw] h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
                 <div className='w-1/3 h-full '>
-               
+
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
                 <div className=' w-2/3 py-5 h-full'>
                     <div className='shadow-xl p-10 w-full h-full rounded-2xl bg-white'>
                         <div className='my-2'>
-                            <h2 className='font-bold text-2xl text-blue-950 mb-5 text-center'>Design a winning <span className='text-blue-600'>CV</span> in just minutes with <br/> <span className='text-blue-600 text-3xl'>&#x201B; Genies Career Hub &#x2019;</span></h2>
-                            </div>
+                            <h2 className='font-bold text-2xl text-blue-950 mb-5 text-center'>Design a winning <span className='text-blue-600'>CV</span> in just minutes with <br /> <span className='text-blue-600 text-3xl'>&#x201B; Genies Career Hub &#x2019;</span></h2>
+                        </div>
                         <div className='my-2'>
                             <Label >Full Name</Label>
                             <Input className='my-1' placeholder='Enter full name' value={formData.fullname} onChange={handleFormDataChange} name='fullname' />
@@ -438,7 +442,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
                 <div className=' w-2/3 py-5 h-full overflow-hidden'>
-                
+
                     <div className=' shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden  bg-white'>
                         <div className='flex items-center'>
                             <Checkbox checked={formData?.isFresher} onCheckedChange={handleFreshercheck} id='checkbox' />
@@ -448,139 +452,139 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                         {
                             !formData?.isFresher &&
                             <>
-                            <div className='overflow-y-scroll no-scrollbar h-[80%]'>
-                                <div className='my-2'>
-                                    <hr />
-                                </div>
-                                <div className='max-h-[85%]'>
-                                    <div className='flex justify-between items-center my-4 px-1'>
-                                        <p className='text-blue-900'>Add Experience</p>
-                                        {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddExperience} /> */}
-                                        <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddExperience}>
-                                         Add <IoIosAddCircle className='text-xl ml-2' />
-                                        </button>
+                                <div className='overflow-y-scroll no-scrollbar h-[80%]'>
+                                    <div className='my-2'>
+                                        <hr />
                                     </div>
-                                    {
-                                        formData.experience.length > 0 && formData.experience.map((item, index) => {
-                                            return <div className=' flex justify-between items-center relative my-2' key={index} >
-                                                <Accordion
-                                                    type="single"
-                                                    collapsible
-                                                    className="w-[92%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                                    <div className='max-h-[85%]'>
+                                        <div className='flex justify-between items-center my-4 px-1'>
+                                            <p className='text-blue-900'>Add Experience</p>
+                                            {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddExperience} /> */}
+                                            <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddExperience}>
+                                                Add <IoIosAddCircle className='text-xl ml-2' />
+                                            </button>
+                                        </div>
+                                        {
+                                            formData.experience.length > 0 && formData.experience.map((item, index) => {
+                                                return <div className=' flex justify-between items-center relative my-2' key={index} >
+                                                    <Accordion
+                                                        type="single"
+                                                        collapsible
+                                                        className="w-[92%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
 
-                                                >
-                                                    <AccordionItem value={`item-${index}`}>
-                                                        <AccordionTrigger>
-                                                            <div className=" px-3 flex flex-col items-start">
-                                                                {item?.jobtitle || item?.employer ? (
-                                                                    <p>
-                                                                        {item?.jobtitle &&
-                                                                            `${item?.jobtitle}${item?.employer && ` at `
-                                                                            } `}
-                                                                        {item?.employer}
+                                                    >
+                                                        <AccordionItem value={`item-${index}`}>
+                                                            <AccordionTrigger>
+                                                                <div className=" px-3 flex flex-col items-start">
+                                                                    {item?.jobtitle || item?.employer ? (
+                                                                        <p>
+                                                                            {item?.jobtitle &&
+                                                                                `${item?.jobtitle}${item?.employer && ` at `
+                                                                                } `}
+                                                                            {item?.employer}
+                                                                        </p>
+                                                                    ) : (
+                                                                        <p>(Not Specified)</p>
+                                                                    )}
+                                                                    <p className="text-gray-500 text-sm">
+                                                                        {item?.startDate && `${item.startDate} - `}
+                                                                        {item?.endDate}
                                                                     </p>
-                                                                ) : (
-                                                                    <p>(Not Specified)</p>
-                                                                )}
-                                                                <p className="text-gray-500 text-sm">
-                                                                    {item?.startDate && `${item.startDate} - `}
-                                                                    {item?.endDate}
-                                                                </p>
-                                                            </div>
-                                                        </AccordionTrigger>
-                                                        <AccordionContent>
-                                                            <div className="w-full">
-                                                                <div className="grid lg:grid-cols-2 grid-cols-1  gap-4 px-2 py-5">
-                                                                    <div className="space-y-1">
-                                                                        <Label htmlFor="institute">Job Title</Label>
-                                                                        <Input className='my-1'
-                                                                            id="institute"
-                                                                            placeholder="Enter Job title"
-                                                                            value={item.jobtitle}
-                                                                            name="jobtitle"
-                                                                            onChange={(e) =>
-                                                                                handleExperienceChange(e, index)
-                                                                            }
-                                                                        />
-                                                                    </div>
-                                                                    <div className="space-y-1">
-                                                                        <Label htmlFor="degree">Employer</Label>
-                                                                        <Input className='my-1'
-                                                                            id="degree"
-                                                                            placeholder="Employer name"
-                                                                            type="text"
-                                                                            value={item.employer}
-                                                                            name="employer"
-                                                                            onChange={(e) =>
-                                                                                handleExperienceChange(e, index)
-                                                                            }
-                                                                        />
-                                                                    </div>
                                                                 </div>
-                                                                <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
-                                                                    <div className="flex flex-col md:flex-row ">
-                                                                        <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around  pr-2 lg:py-0 py-1">
-                                                                            <Label for="start_date" className="block">
-                                                                                Start Date
-                                                                            </Label>
-                                                                            <div className="w-full">
-                                                                                <DatePicker
-                                                                                    picker="month"
-                                                                                    onChange={(e) =>
-                                                                                        handleExperienceStartDateChange(
-                                                                                            e,
-                                                                                            index
-                                                                                        )
-                                                                                    }
-
-                                                                                    className="w-full"
-                                                                                />
-                                                                            </div>
+                                                            </AccordionTrigger>
+                                                            <AccordionContent>
+                                                                <div className="w-full">
+                                                                    <div className="grid lg:grid-cols-2 grid-cols-1  gap-4 px-2 py-5">
+                                                                        <div className="space-y-1">
+                                                                            <Label htmlFor="institute">Job Title</Label>
+                                                                            <Input className='my-1'
+                                                                                id="institute"
+                                                                                placeholder="Enter Job title"
+                                                                                value={item.jobtitle}
+                                                                                name="jobtitle"
+                                                                                onChange={(e) =>
+                                                                                    handleExperienceChange(e, index)
+                                                                                }
+                                                                            />
                                                                         </div>
-                                                                        <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around  lg:pl-2 pl-0">
-                                                                            <Label for="end_date" className="block">
-                                                                                End Date
-                                                                            </Label>
-                                                                            <div className="w-full">
-                                                                                <DatePicker
-                                                                                    picker="month"
-                                                                                    onChange={(e) =>
-                                                                                        handleExperienceEndDateChange(e, index)
-                                                                                    }
-                                                                                    className="w-full"
-                                                                                />
-                                                                            </div>
+                                                                        <div className="space-y-1">
+                                                                            <Label htmlFor="degree">Employer</Label>
+                                                                            <Input className='my-1'
+                                                                                id="degree"
+                                                                                placeholder="Employer name"
+                                                                                type="text"
+                                                                                value={item.employer}
+                                                                                name="employer"
+                                                                                onChange={(e) =>
+                                                                                    handleExperienceChange(e, index)
+                                                                                }
+                                                                            />
                                                                         </div>
                                                                     </div>
+                                                                    <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
+                                                                        <div className="flex flex-col md:flex-row ">
+                                                                            <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around  pr-2 lg:py-0 py-1">
+                                                                                <Label for="start_date" className="block">
+                                                                                    Start Date
+                                                                                </Label>
+                                                                                <div className="w-full">
+                                                                                    <DatePicker
+                                                                                        picker="month"
+                                                                                        onChange={(e) =>
+                                                                                            handleExperienceStartDateChange(
+                                                                                                e,
+                                                                                                index
+                                                                                            )
+                                                                                        }
 
-                                                                    <div className="space-y-2">
-                                                                        <Label htmlFor="city">City</Label>
-                                                                        <Input className='my-1'
-                                                                            id="city"
-                                                                            placeholder="Enter city name"
-                                                                            type="text"
-                                                                            value={item.city}
-                                                                            name="city"
-                                                                            onChange={(e) =>
-                                                                                handleExperienceChange(e, index)
-                                                                            }
-                                                                        />
+                                                                                        className="w-full"
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around  lg:pl-2 pl-0">
+                                                                                <Label for="end_date" className="block">
+                                                                                    End Date
+                                                                                </Label>
+                                                                                <div className="w-full">
+                                                                                    <DatePicker
+                                                                                        picker="month"
+                                                                                        onChange={(e) =>
+                                                                                            handleExperienceEndDateChange(e, index)
+                                                                                        }
+                                                                                        className="w-full"
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="space-y-2">
+                                                                            <Label htmlFor="city">City</Label>
+                                                                            <Input className='my-1'
+                                                                                id="city"
+                                                                                placeholder="Enter city name"
+                                                                                type="text"
+                                                                                value={item.city}
+                                                                                name="city"
+                                                                                onChange={(e) =>
+                                                                                    handleExperienceChange(e, index)
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="space-y-2  mt-2 px-2">
+                                                                        <Label >Highlights</Label>
+                                                                        <Textarea value={item?.highlights?.join("\n") || []} className="text-10px h-[150px] no-scrollbar" onChange={(e) => handleExperienceHighlightsChange(index, e.target.value)} />
                                                                     </div>
                                                                 </div>
-                                                                <div className="space-y-2  mt-2 px-2">
-                                                                    <Label >Highlights</Label>
-                                                                    <Textarea value={item?.highlights?.join("\n") || []} className="text-10px h-[150px] no-scrollbar" onChange={(e) => handleExperienceHighlightsChange(index, e.target.value)} />
-                                                                </div>
-                                                            </div>
-                                                        </AccordionContent>
-                                                    </AccordionItem>
-                                                </Accordion>
-                                                <MdDeleteOutline className='absolute z-[200] right-0 top-6 cursor-pointer text-2xl text-red-600' onClick={() => handleDeleteExperience(index)} />
-                                            </div>
-                                        })
-                                    }
+                                                            </AccordionContent>
+                                                        </AccordionItem>
+                                                    </Accordion>
+                                                    <MdDeleteOutline className='absolute z-[200] right-0 top-6 cursor-pointer text-2xl text-red-600' onClick={() => handleDeleteExperience(index)} />
+                                                </div>
+                                            })
+                                        }
+                                    </div>
                                 </div>
-                            </div>    
                             </>
                         }
                         <DialogFooter >
@@ -607,8 +611,8 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                             <div className='flex justify-between items-center my-4 px-1'>
                                 <p className='text-blue-900'>Add Education</p>
                                 <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddEducation}>
-                                         Add <IoIosAddCircle className='text-xl ml-2' />
-                                        </button>
+                                    Add <IoIosAddCircle className='text-xl ml-2' />
+                                </button>
                                 {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddEducation} /> */}
                             </div>
                             <div >
@@ -729,100 +733,100 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                 <div className=' w-2/3 py-5 h-full overflow-hidden'>
                     <div className='shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
                         <div className='max-h-[85%]  overflow-scroll no-scrollbar'>
-                        <div className='flex justify-between items-center my-4 px-1'>
-                            <p className='text-blue-900'>Add Projects</p>
-                            <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddProject}>
-                                         Add <IoIosAddCircle className='text-xl ml-2' />
-                                        </button>
-                            {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddProject} /> */}
-                        </div>
-                        <div className=' max-h-[85%] overflow-scroll no-scrollbar' >
-                            {
-                                formData.projects.length > 0 && formData.projects.map((item, index) => {
-                                    return <div className=' flex justify-between items-center relative my-2' key={index} >
-                                        <Accordion
-                                            type="single"
-                                            collapsible
-                                            className="w-[95%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
-                                        >
-                                            <AccordionItem value={`item-${index}`}>
-                                                <AccordionTrigger>
-                                                    <div className=" px-3 flex flex-col items-start">
-                                                        {item?.name ? (
-                                                            <p>
-                                                                {item?.name}
+                            <div className='flex justify-between items-center my-4 px-1'>
+                                <p className='text-blue-900'>Add Projects</p>
+                                <button className='flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500' onClick={handleAddProject}>
+                                    Add <IoIosAddCircle className='text-xl ml-2' />
+                                </button>
+                                {/* <IoIosAddCircle className='text-2xl text-blue-900 cursor-pointer' onClick={handleAddProject} /> */}
+                            </div>
+                            <div className=' max-h-[85%] overflow-scroll no-scrollbar' >
+                                {
+                                    formData.projects.length > 0 && formData.projects.map((item, index) => {
+                                        return <div className=' flex justify-between items-center relative my-2' key={index} >
+                                            <Accordion
+                                                type="single"
+                                                collapsible
+                                                className="w-[95%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                                            >
+                                                <AccordionItem value={`item-${index}`}>
+                                                    <AccordionTrigger>
+                                                        <div className=" px-3 flex flex-col items-start">
+                                                            {item?.name ? (
+                                                                <p>
+                                                                    {item?.name}
+                                                                </p>
+                                                            ) : (
+                                                                <p>(Not Specified)</p>
+                                                            )}
+                                                            <p className="text-gray-500 text-sm">
+                                                                {item?.startDate && `${item.startDate} - `}
+                                                                {item?.endDate}
                                                             </p>
-                                                        ) : (
-                                                            <p>(Not Specified)</p>
-                                                        )}
-                                                        <p className="text-gray-500 text-sm">
-                                                            {item?.startDate && `${item.startDate} - `}
-                                                            {item?.endDate}
-                                                        </p>
-                                                    </div>
-                                                </AccordionTrigger>
-                                                <AccordionContent>
-                                                    <div className="w-full pt-5 px-5 pb-10">
-                                                        <div className="my-3 px-2">
-                                                            <Label htmlFor="institute">Project name</Label>
-                                                            <Input className='my-1'
-                                                                id="institute"
-                                                                placeholder="Enter Job title"
-                                                                value={item.name}
-                                                                name="name"
-                                                                onChange={(e) =>
-                                                                    handleProjectnameChange(e.target.value, index)
-                                                                }
-                                                            />
                                                         </div>
+                                                    </AccordionTrigger>
+                                                    <AccordionContent>
+                                                        <div className="w-full pt-5 px-5 pb-10">
+                                                            <div className="my-3 px-2">
+                                                                <Label htmlFor="institute">Project name</Label>
+                                                                <Input className='my-1'
+                                                                    id="institute"
+                                                                    placeholder="Enter Job title"
+                                                                    value={item.name}
+                                                                    name="name"
+                                                                    onChange={(e) =>
+                                                                        handleProjectnameChange(e.target.value, index)
+                                                                    }
+                                                                />
+                                                            </div>
 
 
-                                                        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
-                                                            <div className="flex flex-col w-full  space-y-2 justify-around  pr-2 lg:py-0 py-5">
-                                                                <Label for="start_date" className="block">
-                                                                    Start Date
-                                                                </Label>
-                                                                <div className="w-full">
-                                                                    <DatePicker
-                                                                        picker="month"
-                                                                        onChange={(e) =>
-                                                                            handleProjectStartDateChange(
-                                                                                e,
-                                                                                index
-                                                                            )
-                                                                        }
-                                                                        className="w-full"
-                                                                    />
+                                                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
+                                                                <div className="flex flex-col w-full  space-y-2 justify-around  pr-2 lg:py-0 py-5">
+                                                                    <Label for="start_date" className="block">
+                                                                        Start Date
+                                                                    </Label>
+                                                                    <div className="w-full">
+                                                                        <DatePicker
+                                                                            picker="month"
+                                                                            onChange={(e) =>
+                                                                                handleProjectStartDateChange(
+                                                                                    e,
+                                                                                    index
+                                                                                )
+                                                                            }
+                                                                            className="w-full"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex flex-col w-full  space-y-2 justify-around  lg:pl-2 pl-0">
+                                                                    <Label for="end_date" className="block">
+                                                                        End Date
+                                                                    </Label>
+                                                                    <div className="w-full">
+                                                                        <DatePicker
+                                                                            picker="month"
+                                                                            onChange={(e) =>
+                                                                                handleProjectEndDateChange(e, index)
+                                                                            }
+                                                                            className="w-full"
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="flex flex-col w-full  space-y-2 justify-around  lg:pl-2 pl-0">
-                                                                <Label for="end_date" className="block">
-                                                                    End Date
-                                                                </Label>
-                                                                <div className="w-full">
-                                                                    <DatePicker
-                                                                        picker="month"
-                                                                        onChange={(e) =>
-                                                                            handleProjectEndDateChange(e, index)
-                                                                        }
-                                                                        className="w-full"
-                                                                    />
-                                                                </div>
+                                                            <div className='m-2'>
+                                                                <Label>Description</Label>
+                                                                <Textarea value={item.highlights.join("\n")} onChange={(e) => handleProjectHighlightsChange(e.target.value, index)} />
                                                             </div>
                                                         </div>
-                                                        <div className='m-2'>
-                                                            <Label>Description</Label>
-                                                            <Textarea value={item.highlights.join("\n")} onChange={(e) => handleProjectHighlightsChange(e.target.value, index)} />
-                                                        </div>
-                                                    </div>
-                                                </AccordionContent>
-                                            </AccordionItem>
-                                        </Accordion>
-                                        <MdDeleteOutline className='absolute right-0 top-6 cursor-pointer text-2xl text-red-600' onClick={() => handleDeleteProjects(index)} />
-                                    </div>
-                                })
-                            }
-                        </div>
+                                                    </AccordionContent>
+                                                </AccordionItem>
+                                            </Accordion>
+                                            <MdDeleteOutline className='absolute right-0 top-6 cursor-pointer text-2xl text-red-600' onClick={() => handleDeleteProjects(index)} />
+                                        </div>
+                                    })
+                                }
+                            </div>
                         </div>
                         <div className='w-full mt-5 justify-between items-center flex'>
                             <Button onClick={handlePrevStep}>Back</Button>
@@ -838,7 +842,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     if (steps === 5) {
         return <DialogContent className='max-w-[70dvw] no-scrollbar p-0 h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around overflow-hidden'>
-            <div className='w-1/3 h-full '>
+                <div className='w-1/3 h-full '>
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
                 <div className='w-2/3 py-5 h-full overflow-hidden'>
@@ -858,7 +862,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     if (steps === 6) {
         return <DialogContent className='max-w-[80dvw] no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
-            <div className='w-1/3 h-full '>
+                <div className='w-1/3 h-full '>
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
                 </div>
                 <div className='w-1/2 h-full flex item-center'>
