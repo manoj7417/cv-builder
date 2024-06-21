@@ -296,7 +296,7 @@ const Template14 = () => {
   return (
     <>
       <div className="resume_wrapper flex bg-white  mx-auto h-min-[297mm] w-min-[210mm]">
-        <div className="resume_right w-[65%] px-10 py-5 text-[#26252d]">
+        <div className="resume_right w-[65%] px-5 py-5 text-[#26252d]">
           <div className="resume_item resume_namerole">
             <h1
               className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}

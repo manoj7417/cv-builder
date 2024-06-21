@@ -28,7 +28,6 @@ const navigation = [
     name: "Career Coaching",
     href: "/career-coaching",
     current: false,
-    isBeta: true,
   },
 ];
 
