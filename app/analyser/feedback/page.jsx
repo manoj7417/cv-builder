@@ -205,7 +205,7 @@ const FeedbackFuction = () => {
           <div>
             <div className="recommendation_section pt-10 px-5 ">
               <div className="prograss_bar_box bg-white  rounded-md">
-                <p className="tracking-wider">
+                <p className="">
                   Your resume ATS score is{" "}
                   <span
                     className={`${content?.analysis?.resume_score > 65

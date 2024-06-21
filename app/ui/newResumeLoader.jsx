@@ -8,7 +8,7 @@ function NewResumeLoader() {
             <Lottie animationData={animation}
                 loop={true}
                 style={{ height: "300px" }} />
-            <p className='text-white text-2xl tracking-wider'>Rectifying your CV</p>
+            <p className='text-white text-2xl '>Rectifying your CV</p>
         </div>
     )
 }   
