@@ -290,7 +290,7 @@ const Template14 = () => {
     dates: "text-14px",
     datesStyle: "text-gray-500 font-normal",
     skillsFont: "text-15px",
-    contactFont: "text-13px",
+    contactFont: "text-12px",
   });
 
   return (
