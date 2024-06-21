@@ -57,12 +57,17 @@ const ComingSoonPage = () => {
             />
             <div className="space-y-2 mx-auto">
               <h1
-                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 text-center justify-center  items-center  font-extrabold text-[#0D3572]"
+                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 flex text-center justify-center  items-center  font-extrabold text-[#0D3572]"
                 style={{ WebkitTextStrokeWidth: "thin", wordSpacing: "0.8rem" }}
               >
-                GROW {""}
-                <span className="text-[#3c72b9]">FASTER</span> <br></br>WITH A
-                COACH
+                <span>
+                  GROW {""}
+                  <span className="text-[#3c72b9]">FASTER</span> <br></br>WITH A
+                  COACH
+                </span>
+                <span>
+                  <img src="/coach.png" className="h-64 ml-4" />
+                </span>
               </h1>
 
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
