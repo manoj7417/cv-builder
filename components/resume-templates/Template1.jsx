@@ -13,15 +13,18 @@ import { MdOutlinePhone } from "react-icons/md";
 import { useResumeStore } from "@/app/store/ResumeStore";
 
 const Education = ({ fontStyle, colorStyle }) => {
-  const data = useResumeStore(state => state.resume.data.sections.education)
+  const data = useResumeStore((state) => state.resume.data.sections.education);
   return (
     <div className="education_section py-3">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="flex gap-5 items-center">
-            <h2 className={`${fontStyle.headingFont} font-semibold uppercase text-white`} style={{
-              color: colorStyle
-            }}>
+            <h2
+              className={`${fontStyle.headingFont} font-semibold uppercase text-white`}
+              style={{
+                color: colorStyle,
+              }}
+            >
               {data?.name}
             </h2>
           </div>
@@ -61,7 +64,7 @@ const Education = ({ fontStyle, colorStyle }) => {
 };
 
 const Experience = ({ fontStyle, colorStyle }) => {
-  const data = useResumeStore(state => state.resume.data.sections.experience)
+  const data = useResumeStore((state) => state.resume.data.sections.experience);
   return (
     <div className="experience_section my-2">
       {data?.visible && data?.items?.length > 0 && (
@@ -117,16 +120,18 @@ const Experience = ({ fontStyle, colorStyle }) => {
                 <div className="year w-[30%] pr-2 relative">
                   {item?.startDate && (
                     <p className="">
-
                       {item.startDate}
                       {item?.endDate && " - "}
                     </p>
                   )}
                   {item?.endDate && <p>{item.endDate}</p>}
                   <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
-                  <div className="year_line absolute top-4 right-1 w-0.5 h-full" style={{
-                    background: colorStyle
-                  }} />
+                  <div
+                    className="year_line absolute top-4 right-1 w-0.5 h-full"
+                    style={{
+                      background: colorStyle,
+                    }}
+                  />
                 </div>
                 <div className="content w-[70%] pl-8 flex flex-col break-all">
                   <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -140,17 +145,17 @@ const Experience = ({ fontStyle, colorStyle }) => {
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
                   <div className="px-3">
-                    {
-                      item?.highlights?.length > 0 &&
+                    {item?.highlights?.length > 0 && (
                       <ul className="list-disc">
-                        {
-
-                          item?.highlights?.map((item, key) => {
-                            return <li key={key} className=" break-words text-15px">{item}</li>
-                          })
-                        }
+                        {item?.highlights?.map((item, key) => {
+                          return (
+                            <li key={key} className=" break-words text-15px">
+                              {item}
+                            </li>
+                          );
+                        })}
                       </ul>
-                    }
+                    )}
                   </div>
                 </div>
               </div>
@@ -163,15 +168,18 @@ const Experience = ({ fontStyle, colorStyle }) => {
 };
 
 const Projects = ({ fontStyle, colorStyle }) => {
-  const data = useResumeStore(state => state.resume.data.sections.projects)
+  const data = useResumeStore((state) => state.resume.data.sections.projects);
   return (
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
         <>
           <div className="project_heading flex gap-5 items-center">
-            <h2 className={`${fontStyle.headingFont} font-bold uppercase`} style={{
-              color: colorStyle
-            }}>
+            <h2
+              className={`${fontStyle.headingFont} font-bold uppercase`}
+              style={{
+                color: colorStyle,
+              }}
+            >
               {data?.name}
             </h2>
           </div>
@@ -216,16 +224,16 @@ const Projects = ({ fontStyle, colorStyle }) => {
   );
 };
 
-
 const Skills = ({ fontStyle, colorStyle }) => {
-  const data = useResumeStore(state => state.resume.data.sections.skills)
+  const data = useResumeStore((state) => state.resume.data.sections.skills);
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section border-b-2 border-gray-300 py-3">
           <h2
-            className={`${fontStyle.headingFont} text-white font-semibold uppercase`} style={{
-              color: colorStyle
+            className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+            style={{
+              color: colorStyle,
             }}
           >
             {data?.name}
@@ -251,7 +259,7 @@ const Skills = ({ fontStyle, colorStyle }) => {
 };
 
 const Profile = ({ fontStyle, colorStyle }) => {
-  const data = useResumeStore(state => state.resume.data.sections.summary)
+  const data = useResumeStore((state) => state.resume.data.sections.summary);
   const htmlContent = data?.content;
   return (
     <div>
@@ -276,8 +284,8 @@ const Profile = ({ fontStyle, colorStyle }) => {
 };
 
 const Template1 = () => {
-  const metadata = useResumeStore(state => state.resume.data.metadata)
-  const basics = useResumeStore(state => state.resume.data.basics)
+  const metadata = useResumeStore((state) => state.resume.data.metadata);
+  const basics = useResumeStore((state) => state.resume.data.basics);
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
@@ -311,16 +319,12 @@ const Template1 = () => {
           </div>
           <div className="resume_bottom py-5 px-8">
             <div className="resume_item resume_profile py-5">
-              <Education
-                fontStyle={fontStyle}
-              />
+              <Education fontStyle={fontStyle} />
             </div>
 
             <div className="resume_item resume_skills py-5">
               <div className="resume_info">
-                <Skills
-                  fontStyle={fontStyle}
-                />
+                <Skills fontStyle={fontStyle} />
               </div>
             </div>
           </div>
@@ -330,59 +334,51 @@ const Template1 = () => {
             <h1
               className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
               style={{
-                color: metadata?.theme?.primary
-              }}>
+                color: metadata?.theme?.primary,
+              }}
+            >
               {basics?.name}
             </h1>
-            <p className={`${fontStyle.jobtitleFont} break-words uppercase`} style={{
-              color: metadata?.theme?.primary
-            }}  >
+            <p
+              className={`${fontStyle.jobtitleFont} break-words uppercase`}
+              style={{
+                color: metadata?.theme?.primary,
+              }}
+            >
               {basics?.jobtitle}
             </p>
             <div className="contact_details">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-2`}
               >
                 {basics?.email && (
                   <a
                     href={`mailto:${basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center text-wrap"
                   >
                     <MdOutlineMailOutline className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
-                      {basics?.email}
-                    </p>
+                    <p className="text-wrap break-words">{basics?.email}</p>
                   </a>
                 )}
                 {basics?.phone && (
                   <a
                     href={`tel:${basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center text-wrap w-full "
                   >
                     <MdOutlinePhone className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
-                      {basics?.phone}
-                    </p>
+                    <p className="text-wrap break-words">{basics?.phone}</p>
                   </a>
+                )}
+                {(basics?.city || basics?.country) && (
+                  <p className="flex items-center">
+                    <IoLocationOutline className="text-black mr-2" />
+                    <span>{basics?.city}</span>
+                    <span>{basics?.city && basics?.country && " , "}</span>
+                    <span className="">{basics?.country}</span>
+                  </p>
                 )}
               </div>
             </div>
-          </div>
-          <div className="resume_item resume_address font-semibold">
-            {(basics?.city || basics?.country) && (
-              <p className="flex items-center">
-                <IoLocationOutline className="text-black" />
-                <span>{basics?.city}</span>
-                <span>
-                  {basics?.city &&
-                    basics?.country &&
-                    " , "}
-                </span>
-                <span className="">
-                  {basics?.country}
-                </span>
-              </p>
-            )}
           </div>
           <div className="resume_item resume_profile my-5">
             <div className="resume_info">
