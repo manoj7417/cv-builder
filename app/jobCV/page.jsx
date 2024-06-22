@@ -23,9 +23,6 @@ import Lottie from "lottie-react";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
 import axios from "axios";
-import { MdOutlineCloudUpload } from "react-icons/md";
-import uploadAnimation from '@/public/animations/uploadCVLoader.json';
-import scratchAnimation from '@/public/animations/startfromStratch.json';
 
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
@@ -157,7 +154,6 @@ export default function Home() {
     setShowDialog(false);
   };
 
-
   const handlefileupload = () => {
     inputRef.current.click();
   };
@@ -165,11 +161,15 @@ export default function Home() {
   const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`;
     try {
-      const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
-        headers: {
-          Authorization: 'Bearer ' + accessToken.value
+      const response = await axios.post(
+        "/api/generateResumeOnFeedback",
+        { message },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+          },
         }
-      })
+      );
       if (response.status === 201) {
         return response.data;
       }
@@ -237,14 +237,13 @@ export default function Home() {
       router.push("/login?redirect=/jobCV");
       return;
     }
-    setShowDialog(true)
-  }
+    setShowDialog(true);
+  };
 
   const handleOpenMultiStepForm = () => {
-    setShowMultiStepDialog(true)
-    setShowDialog(false)
-  }
-
+    setShowMultiStepDialog(true);
+    setShowDialog(false);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -269,25 +268,91 @@ export default function Home() {
               jobRole={jobRole}
             />
           </Dialog>
-          <Dialog open={showDialog} >
-            <DialogContent className="max-w-[60dvw]  p-0" showCloseButton={true} onClick={() => setShowDialog(false)}>
-              <div className="flex w-full bg-gradient-to-r bg-gray-100 p-6 rounded-xl justify-around">
-                <div className="flex flex-col  items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 hover:scale-105 ease-in-out cursor-pointer bg-white" onClick={handlefileupload}>
-                  <div className="w-full h-[70%]">
-                    <Lottie animationData={uploadAnimation} className="h-full w-full" />
-                  </div>
-                  <div className="w-full h-[30%]  justify-center items-center flex">
-                    <p className="font-bold text-2xl text-blue-900">Upload CV</p>
-                    <input type="file" hidden ref={inputRef} onChange={handleuploadResume} />
-                  </div>
-
+          <Dialog open={showDialog}>
+            <DialogContent
+              className="max-w-[60dvw]  p-0"
+              showCloseButton={true}
+              onClick={() => setShowDialog(false)}
+            >
+              <h1 className="text-center pt-4 text-xl font-bold text-gray-500">
+                Upload and attach files, or start with afresh!
+              </h1>
+              <p className="text-center px-12 text-gray-500">
+                Drag and drop your resume file or upload from Google Drive or
+                Dropbox. We can also send you an email to reply with your
+                attachment whenever you are ready.
+              </p>
+              <div className="flex w-full gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
+                <div
+                  class="flex items-center justify-center w-[50%]"
+                  onClick={handlefileupload}
+                >
+                  <label
+                    for="dropzone-file"
+                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  >
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                      <svg
+                        class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 16"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                        />
+                      </svg>
+                      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <span class="font-semibold">Click to upload</span> or
+                        drag and drop
+                      </p>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">
+                        SVG, PNG, JPG or GIF (MAX. 800x400px)
+                      </p>
+                    </div>
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      class="hidden"
+                      ref={inputRef}
+                      onChange={handleuploadResume}
+                    />
+                  </label>
                 </div>
-                <div className="flex flex-col justify-center items-center w-[45%] shadow-lg rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer hover:scale-105 bg-white" onClick={handleOpenMultiStepForm}>
-                  <div className="w-full h-[70%]">
-                    <Lottie animationData={scratchAnimation} />
-                  </div>
-                  <div className="w-full h-[30%] justify-center items-center flex">
-                    <p className="font-bold text-2xl text-blue-900">Start Afresh</p>
+
+                <div
+                  className="flex flex-col justify-center items-center w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  onClick={handleOpenMultiStepForm}
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 4v16m0 0-3-3m3 3 3-3M4 12h16m0 0-3 3m3-3-3-3"
+                      />
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold">
+                        Start with a Fresh...
+                      </span>
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Personalized career advice, CV building, and more.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -388,6 +453,6 @@ export default function Home() {
         </section> */}
         <Footer />
       </>
-    </main >
+    </main>
   );
 }
