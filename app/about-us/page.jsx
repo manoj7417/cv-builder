@@ -91,7 +91,7 @@ export default function AboutUs() {
         <div className="relative w-full bg-white">
           <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
             <div className="flex flex-col justify-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
-              <h1 className="mt-8 text-3xl font-bold -tight text-black md:text-4xl lg:text-6xl">
+              <h1 className="mt-8 text-3xl font-bold -tight text-[#005599] md:text-4xl lg:text-6xl">
                 People who care about your growth
               </h1>
               <p className="mt-8 text-lg text-gray-700">
@@ -106,16 +106,13 @@ export default function AboutUs() {
                     placeholder="Enter your email"
                     id="email"
                   ></input>
-                  <p className="mt-2 text-sm text-gray-500">
-                    We care about your privacy
-                  </p>
                 </div>
-                <div>
+                <div className=" w-full">
                   <button
                     type="button"
-                    className="rounded-md bg-black px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white hover:text-[#005599] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
-                    Subscribe
+                    Connect with us!
                   </button>
                 </div>
               </form>
