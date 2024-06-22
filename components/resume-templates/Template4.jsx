@@ -244,7 +244,7 @@ const Skills = ({ fontStyle, headingColor }) => {
           <div className="text-gray-600 my-1">
             <ul
               role="list"
-              className="list-disc pl-5 text-slate-400 flex flex-wrap gap-10"
+              className="list-disc pl-5 text-slate-400 flex flex-wrap w-full h-full gap-8"
               style={{ color: headingColor }}
             >
               {data?.items.map((item, i) => {

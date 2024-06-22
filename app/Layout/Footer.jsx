@@ -134,7 +134,7 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a href="/builder" className="text-black transition">
+                  <a href="/resume-builder" className="text-black transition">
                     CV Creator
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>

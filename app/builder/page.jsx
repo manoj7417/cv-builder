@@ -11,7 +11,6 @@ function Builder() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContent, setMobileContent] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   const handleMobileContent = () => {
@@ -57,7 +56,7 @@ function Builder() {
 
   return (
     <>
-      <div className="flex md:flex-row flex-col w-full h-full relative ">
+      <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="lg:w-1/2 md:w-full w-full  h-full overflow-auto ">
           <Form />
           {

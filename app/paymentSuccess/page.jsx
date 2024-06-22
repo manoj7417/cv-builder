@@ -24,7 +24,7 @@ const PaymentSuccess = () => {
     } catch (error) {
       throw error;
     } finally {
-      router.push('/builder')
+      router.push('/resume-builder')
     }
   }
 

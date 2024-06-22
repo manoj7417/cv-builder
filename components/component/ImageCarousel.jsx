@@ -41,7 +41,7 @@ function ImageCarousel({ data }) {
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
-        router.push("/builder");
+        router.push("/resume-builder");
       }
     } catch (error) {
       console.log(error);
