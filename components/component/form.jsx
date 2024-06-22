@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "../ui/customLabelInput";
@@ -36,6 +36,7 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "../ui/textarea";
+import { RxCross2 } from "react-icons/rx";
 // import Template13 from "../resume-templates/Template13";
 
 const ImageTemplates = [
@@ -79,6 +80,7 @@ export default function Form() {
     },
     skills: "",
   });
+  const hobbiesRef = useRef('')
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -518,8 +520,24 @@ export default function Form() {
   };
 
   const handleChangeHobbies = (e) => {
-    const hobbies = e.target.value.split("\n")
-    setResumeData("sections.hobbies.items", hobbies)
+    hobbiesRef.current.value = e.target.value
+  }
+
+  const handleAddNewHobbies = () => {
+    const newHobbie = hobbiesRef.current.value.trim()
+    if (!newHobbie) {
+      return;
+    }
+    const updatedHobbies = [...data.sections.hobbies.items, newHobbie]
+    setResumeData('sections.hobbies.items', updatedHobbies)
+    hobbiesRef.current.value = ''
+  }
+
+  const handleDeleteHobbies = (i) => {
+    const updatedHobbies = data.sections.hobbies.items.filter((el, index) => {
+      return index !== i
+    })
+    setResumeData('sections.hobbies.items', updatedHobbies)
   }
 
   useEffect(() => {
@@ -708,18 +726,18 @@ export default function Form() {
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {sections?.education?.visible ? (
+                {!sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.education.visible", false)
+                      setResumeData("sections.education.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.education.visible", true)
+                      setResumeData("sections.education.visible", false)
                     }
                   />
                 )}
@@ -904,18 +922,18 @@ export default function Form() {
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {sections?.experience?.visible ? (
+                {!sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.experience.visible", false)
+                      setResumeData("sections.experience.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.experience.visible", true)
+                      setResumeData("sections.experience.visible", false)
                     }
                   />
                 )}
@@ -1112,18 +1130,18 @@ export default function Form() {
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {sections?.projects?.visible ? (
+                {!sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.projects.visible", false)
+                      setResumeData("sections.projects.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.projects.visible", true)
+                      setResumeData("sections.projects.visible", false)
                     }
                   />
                 )}
@@ -1287,18 +1305,18 @@ export default function Form() {
                 />
               </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
-                {sections?.skills?.visible ? (
+                {!sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.skills.visible", false)
+                      setResumeData("sections.skills.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.skills.visible", true)
+                      setResumeData("sections.skills.visible", false)
                     }
                   />
                 )}
@@ -1388,22 +1406,22 @@ export default function Form() {
           </div>
         </div>
 
-        <div className="lg:px-10 px-5 rounded-md">
+        <div className="lg:px-10 p-5 rounded-md">
           <div className="my-5 flex justify-between w-full items-center">
             <Label className="text-2xl">Hobbies</Label>
             <div className="flex items-center justify-center text-gray-400 text-lg">
-              {sections?.hobbies?.visible ? (
+              {!sections?.hobbies?.visible ? (
                 <GoEyeClosed
                   className=" cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", false)
+                    setResumeData("sections.hobbies.visible", true)
                   }
                 />
               ) : (
                 <GoEye
                   className="cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", true)
+                    setResumeData("sections.hobbies.visible", false)
                   }
                 />
               )}
@@ -1415,16 +1433,50 @@ export default function Form() {
             </p>
           </div>
           <div className="my-4">
-            {
-              sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
-                return <div key={index} className="">
-                  <Label>{item}</Label>
-                  <Input value={item} onChange={(e) => handleChangeHobbies(e.target.value, index)} />
-                </div>
-              })
-            }
+            <div className=" flex w-full flex-wrap py-4">
+              {
+                sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
+                  return <p key={index} className=" bg-white border  py-2 px-6 items-center justify-center flex rounded-3xl my-2 mr-3">
+                    <span className="mr-4">{item}</span><span className=" cursor-pointer" onClick={() => handleDeleteHobbies(index)}><RxCross2 className='text-red-600' /></span>
+                  </p>
+                })
+              }
+            </div>
+            <div className="flex justify-between">
+              <Input onChange={handleChangeHobbies} ref={hobbiesRef} className="w-[80%]" />
+              <Button className="flex justify-center" onClick={handleAddNewHobbies}><IoIosAddCircleOutline className="mr-2 text-xl" />Add</Button>
+            </div>
           </div>
         </div>
+
+        <div className="lg:px-10 p-5 rounded-md">
+          <div className="my-5 flex justify-between w-full items-center">
+            <Label className="text-2xl">Awards</Label>
+            <div className="flex items-center justify-center text-gray-400 text-lg">
+              {!sections?.awards?.visible ? (
+                <GoEyeClosed
+                  className=" cursor-pointer"
+                  onClick={() =>
+                    setResumeData("sections.awards.visible", true)
+                  }
+                />
+              ) : (
+                <GoEye
+                  className="cursor-pointer"
+                  onClick={() =>
+                    setResumeData("sections.awards.visible", false)
+                  }
+                />
+              )}
+            </div>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              List your awards, achievements, and honors.
+            </p>
+          </div>
+        </div>
+
 
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
