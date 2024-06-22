@@ -243,8 +243,11 @@ const Skills = ({ fontStyle, headingColor }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-gradient-to-r from-cyan-400 to-blue-600 h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: headingColor,
+                        }}
                       ></div>
                     </div>
                   </li>

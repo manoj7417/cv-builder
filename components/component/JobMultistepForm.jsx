@@ -381,7 +381,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             if (data) {
                 replaceResumeData(data)
                 updateUserData(userData)
-                router.push("/builder");
+                router.push("/resume-builder");
             }
         } catch (error) {
             console.log(error)

@@ -55,7 +55,7 @@ const TabsMain = () => {
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
-        router.push("/builder");
+        router.push("/resume-builder");
       }
     } catch (error) {
       console.log(error);
@@ -87,7 +87,7 @@ const TabsMain = () => {
   const handleResumeClick = (resumeId) => {
     const resume = getResumeById(resumeId);
     replaceResumeData(resume);
-    router.push("/builder");
+    router.push("/resume-builder");
   };
 
   useEffect(() => {

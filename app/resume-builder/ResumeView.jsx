@@ -7,7 +7,7 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
-import { FaCrown } from "react-icons/fa";
+import { FaCrown, FaRegFilePdf } from "react-icons/fa";
 import {
   Drawer,
   DrawerContent,
@@ -49,6 +49,12 @@ import Loader3 from "@/public/animations/downloadLoader3.json";
 import Loader4 from "@/public/animations/downloadLoader4.json";
 import Loader5 from "@/public/animations/downloadLoader5.json";
 import { funfacts } from "@/constants/funfacts";
+// import ResumeTooltip from "@/components/component/ResumeTooltip";
+import dynamic from "next/dynamic";
+const ResumeTooltip = dynamic(
+  () => import("@/components/component/ResumeTooltip"),
+  { ssr: false }
+);
 
 const images = [
   {
@@ -621,7 +627,6 @@ const ResumeView = () => {
                     style={{
                       width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                       height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                      
                     }}
                   >
                     <GetTemplate name={data?.metadata?.template} />
@@ -634,53 +639,140 @@ const ResumeView = () => {
             </div>
           )}
         </div>
-        <div className="floating_button absolute bottom-5 bg-white p-5 w-[75%] rounded-2xl shadow-2xl">
-            <div className="auth_section flex justify-center w-full gap-10 items-center">
+        {/* <div className="floating_button absolute bottom-5 bg-white w-[50%] rounded-full shadow-2xl">
+          <div className="auth_section flex justify-center w-full gap-10 items-center">
+            <button
+              className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
+              onClick={() => setIsContentVisible(true)}
+            >
+              <BsFullscreen className="h-4 w-4 text-black" />
+            </button>
+            <div className="tools">
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
+                className="2xl:p-3 md:p-2 p-2 rounded-md"
+                onClick={handleZoomIn}
+              >
+                <FiPlus className="h-4 w-4 text-black" />
+              </button>
+              <button
+                className="2xl:p-3 md:p-2 p-2 mx-2 rounded-md"
+                onClick={handleZoomOut}
+              >
+                <FiMinus className="h-4 w-4 text-black" />
+              </button>
+              <button
+                className="2xl:p-3 md:p-2 p-2 rounded-md"
+                onClick={handleReset}
+              >
+                <CiUndo className="h-4 w-4 text-black" />
+              </button>
+            </div>
+            <button
+              className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+              onClick={checkUserTemplate}
+              disabled={isLoading}
+            >
+              <FaRegFilePdf className="h-4 w-4 text-black" />
+            </button>
+            <div className="choose_templates xl:block hidden">
+              <Drawer
+                direction="right"
+                open={isDrawerOpen}
+                onOpenChange={setIsDrawerOpen}
+              >
+                <DrawerTrigger
+                  className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
+                  onClick={() => setIsDrawerOpen(true)}
+                >
+                  <LuLayoutGrid className="h-4 w-4 text-black inline" />
+                </DrawerTrigger>
+                <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
+                  <DrawerHeader>
+                    <DrawerTitle>Choose Templates</DrawerTitle>
+                    <DrawerDescription>
+                      <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
+                        {images.map((image, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className="image_section_1 "
+                              onClick={() => handleTemplateChange(image.name)}
+                            >
+                              <Image
+                                src={image.src}
+                                alt={image.alt}
+                                className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
+                                width={500}
+                                height={500}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </DrawerDescription>
+                  </DrawerHeader>
+                </DrawerContent>
+              </Drawer>
+            </div>
+          </div>
+        </div> */}
+        <div className="floating_button absolute bottom-5 bg-slate-200 w-[50%] rounded-full shadow-2xl">
+          <div className="auth_section flex justify-center w-full gap-10 items-center">
+            <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
                 onClick={() => setIsContentVisible(true)}
               >
-                <BsFullscreen className="h-4 w-4 text-white" />
+                <BsFullscreen className="h-4 w-4 text-black" />
               </button>
-              <div className="tools">
+            </ResumeTooltip>
+            <div className="tools">
+              <ResumeTooltip icon={FiPlus} title="Zoom In">
                 <button
-                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+                  className="2xl:p-3 md:p-2 p-2 rounded-md"
                   onClick={handleZoomIn}
                 >
-                  <FiPlus className="text-white" />
+                  <FiPlus className="h-4 w-4 text-black" />
                 </button>
+              </ResumeTooltip>
+              <ResumeTooltip icon={FiMinus} title="Zoom Out">
                 <button
-                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
+                  className="2xl:p-3 md:p-2 p-2 mx-2 rounded-md"
                   onClick={handleZoomOut}
                 >
-                  <FiMinus />
+                  <FiMinus className="h-4 w-4 text-black" />
                 </button>
+              </ResumeTooltip>
+              <ResumeTooltip icon={CiUndo} title="Reset">
                 <button
-                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
+                  className="2xl:p-3 md:p-2 p-2 rounded-md"
                   onClick={handleReset}
                 >
-                  <CiUndo />
+                  <CiUndo className="h-4 w-4 text-black" />
                 </button>
-              </div>
+              </ResumeTooltip>
+            </div>
+            <ResumeTooltip icon={FaRegFilePdf} title="Download Template">
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                 onClick={checkUserTemplate}
                 disabled={isLoading}
               >
-                Download PDF
-                <FaCrown className="ml-1 text-yellow-300" />
+                <FaRegFilePdf className="h-4 w-4 text-black" />
               </button>
-              <div className="choose_templates xl:block hidden">
+            </ResumeTooltip>
+            <div className="choose_templates xl:block hidden">
+              <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
                 <Drawer
                   direction="right"
                   open={isDrawerOpen}
                   onOpenChange={setIsDrawerOpen}
                 >
                   <DrawerTrigger
-                    className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md"
+                    className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
                     onClick={() => setIsDrawerOpen(true)}
                   >
-                    Templates <LuLayoutGrid className="inline" />
+                    <LuLayoutGrid className="h-4 w-4 text-black inline" />
                   </DrawerTrigger>
                   <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                     <DrawerHeader>
@@ -709,8 +801,9 @@ const ResumeView = () => {
                     </DrawerHeader>
                   </DrawerContent>
                 </Drawer>
-              </div>
+              </ResumeTooltip>
             </div>
+          </div>
         </div>
       </div>
     </>

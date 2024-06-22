@@ -270,6 +270,7 @@ const Profile = ({ fontStyle, headingColor }) => {
 const Template15 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
+  console.log("image url",basics?.picture?.url)
 
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
@@ -289,16 +290,15 @@ const Template15 = () => {
       <div className="mx-auto w-[210mm] bg-white border-t-[20px] border-[#e4f2f2]">
         <div className="top_section bg-[#e4f2f2]">
           <div className="bg-white py-3"></div>
-
           <div className="user-details flex">
             <div className="user_profile px-10">
               {basics?.picture?.url && (
-                <Image
-                  src={basics.picture.url || "/pic.jpg"}
+                <img
+                  src={basics?.picture?.url}
                   width={250}
                   height={250}
                   alt="pic"
-                  className="mx-auto"
+                  className="w-100 h-auto mx-auto"
                 />
               )}
             </div>
@@ -339,7 +339,7 @@ const Template15 = () => {
                   <li className="flex items-center gap-3">
                     {(basics?.city || basics?.country) && (
                       <p className="flex items-center">
-                        <IoLocationOutline className="text-black" />
+                        <IoLocationOutline className="text-black mr-2" />
                         <span>{basics?.city}</span>
                         <span>{basics?.city && basics?.country && " , "}</span>
                         <span className="">{basics?.country}</span>

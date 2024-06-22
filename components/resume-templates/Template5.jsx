@@ -219,88 +219,32 @@ const Projects = ({ fontStyle, headingColor }) => {
   );
 };
 
-// const Skills = ({ fontStyle, headingColor }) => {
-//   const data = useResumeStore((state)=>state?.resume.data.sections?.skills)
-//   return (
-//     <div>
-//       {data?.visible && data?.items?.length > 0 && (
-//         <div className="skills_section py-3 mt-24">
-//           <h2
-//             className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
-//             style={{
-//               color: headingColor,
-//             }}
-//           >
-//             {data?.name}
-//           </h2>
-//           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-//             <ul>
-//               {data.items.map((item, i) => {
-//                 return (
-//                   <li
-//                     className={`font-bold text-gray-600 ${fontStyle.skillsFont} border-b-4 border-dotted my-1 py-1`}
-//                     key={i}
-//                     style={{
-//                       borderColor:headingColor
-//                     }}
-//                   >
-//                     {item?.name}
-//                   </li>
-//                 );
-//               })}
-//             </ul>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
 const Skills = ({ fontStyle, headingColor }) => {
-  const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::", data);
-
-  // Define the mapping of skill levels to percentages
-  const levelMapping = {
-    beginner: 25,
-    intermediate: 50,
-    advanced: 75,
-    expert: 100,
-  };
-
+  const data = useResumeStore((state)=>state?.resume.data.sections?.skills)
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section">
           <h2
-            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase text-start`}
+            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
             style={{
               color: headingColor,
             }}
           >
             {data?.name}
           </h2>
-          <div className="w-full">
-            <ul className="w-full">
+          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
+            <ul>
               {data.items.map((item, i) => {
-                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-2 text-end`}
+                    className={`font-bold text-gray-600 ${fontStyle.skillsFont} border-b-4 border-dotted my-1 py-2`}
                     key={i}
+                    style={{
+                      borderColor:headingColor
+                    }}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
-                      <span>{item?.name}</span>
-                    </div>
-                    <div className="w-1/2 text-end h-2.5">
-                      <div
-                        className="border-b-8 border-dotted"
-                        style={{
-                          width: `${level}%`,
-                          borderColor: headingColor,
-                        }}
-                      ></div>
-                    </div>
+                    {item?.name}
                   </li>
                 );
               })}
@@ -311,6 +255,8 @@ const Skills = ({ fontStyle, headingColor }) => {
     </div>
   );
 };
+
+
 
 const Profile = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
@@ -359,7 +305,7 @@ export const Template5 = () => {
     <>
       <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
         <div className="bg-white">
-          <div className="top_section flex items-start gap-5 py-5 px-10">
+          <div className="top_section flex items-start gap-5 py-5 px-5">
             <div className="name_profile w-full h-full">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}

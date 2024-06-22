@@ -105,7 +105,7 @@ export default function TabResume() {
       const response = await createNewJobProfileResume(accessToken.value, data);
       if (response.status === 201) {
         replaceResumeData(response.data.data);
-        router.push("/builder");
+        router.push("/resume-builder");
       }
     } catch (error) {
       console.log(error);

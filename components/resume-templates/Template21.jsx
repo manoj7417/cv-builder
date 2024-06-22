@@ -219,7 +219,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`flex text-[#f07b5f] items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`flex text-white items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -292,7 +292,7 @@ const Template21 = () => {
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="h-auto w-[793px] mx-auto shadow-lg rounded-lg flex bg-[#dddddd]">
-          <div className="bg-black text-[#f07b5f]">
+          <div className="bg-black text-white w-[35%]  border-r-[20px] border-[#f07b5f]">
             <div className="text-center mb-8">
               <div className="mb-4">
                 {/* <img src="/myself.jpg" alt="Profile" className="w-96" /> */}
@@ -325,7 +325,7 @@ const Template21 = () => {
                 <li className="flex items-center gap-3">
                   {(basics?.city || basics?.country) && (
                     <p className="flex items-center">
-                      <IoLocationOutline className="text-black" />
+                      <IoLocationOutline className="mr-2"/>
                       <span>{basics?.city}</span>
                       <span>{basics?.city && basics?.country && " , "}</span>
                       <span className="">{basics?.country}</span>
@@ -351,8 +351,8 @@ const Template21 = () => {
               <Skills fontStyle={fontStyle} />
             </section>
           </div>
-          <div className="bg-[#f07b5f] w-8"></div>
-          <div className="pt-20">
+          {/* <div className="bg-[#f07b5f] w-8"></div> */}
+          <div className="pt-20 w-[65%] bg-white">
             <h1 className="px-6 text-6xl font-bold text-[#f07b5f]">
             {firstName} <span className="text-black">{surname}</span>
             </h1>
