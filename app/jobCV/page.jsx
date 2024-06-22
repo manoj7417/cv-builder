@@ -280,7 +280,7 @@ export default function Home() {
               <p className="text-center px-12 text-gray-500">
                 Drag and drop your resume file or upload from Google Drive or
                 Dropbox. We can also send you an email to reply with your
-                attachment whenever you're ready.
+                attachment whenever you are ready.
               </p>
               <div className="flex w-full gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
                 <div
