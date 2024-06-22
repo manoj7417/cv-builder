@@ -23,9 +23,6 @@ import Lottie from "lottie-react";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
 import axios from "axios";
-import { MdOutlineCloudUpload } from "react-icons/md";
-import uploadAnimation from "@/public/animations/uploadCVLoader.json";
-import scratchAnimation from "@/public/animations/startfromStratch.json";
 
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
