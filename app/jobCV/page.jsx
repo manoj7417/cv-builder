@@ -270,21 +270,21 @@ export default function Home() {
           </Dialog>
           <Dialog open={showDialog}>
             <DialogContent
-              className="max-w-[60dvw]  p-0"
+              className="max-w-[92dvw] md:max-w-[60dvw] sm:max-w-[60dvw] p-0"
               showCloseButton={true}
               onClick={() => setShowDialog(false)}
             >
               <h1 className="text-center pt-4 text-xl font-bold text-gray-500">
                 Upload and attach files, or start with afresh!
               </h1>
-              <p className="text-center px-12 text-gray-500">
+              <p className="text-center px-6 md:px-12 sm:px-12 text-gray-500">
                 Drag and drop your resume file or upload from Google Drive or
                 Dropbox. We can also send you an email to reply with your
                 attachment whenever you are ready.
               </p>
-              <div className="flex w-full gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
+              <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
                 <div
-                  class="flex items-center justify-center w-[50%]"
+                  class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]"
                   onClick={handlefileupload}
                 >
                   <label
@@ -326,7 +326,7 @@ export default function Home() {
                 </div>
 
                 <div
-                  className="flex flex-col justify-center items-center w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  className="flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   onClick={handleOpenMultiStepForm}
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -350,7 +350,7 @@ export default function Home() {
                         Start with a Fresh...
                       </span>
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                       Personalized career advice, CV building, and more.
                     </p>
                   </div>
@@ -373,11 +373,11 @@ export default function Home() {
             <div className="flex flex-col items-center lg:items-start">
               <h1
                 className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
-                style={{ lineHeight: "1 !important" }}
+                style={{ lineHeight: "1.3 !important" }}
               >
                 Build a <span className="text-blue-600">CV</span> that opens
                 doors to your ideal{" "}
-                <span className="text-blue-600">career</span>!
+                <span className="text-blue-600">career!</span>
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
                 <div className="w-full col-span-7">
@@ -415,7 +415,7 @@ export default function Home() {
               <div className="text-center md:text-left ">
                 <h2
                   className="text-2xl md:text-[2.7rem] font-bold mb-6"
-                  style={{ lineHeight: "1.2 !important" }}
+                  style={{ lineHeight: "1.3 !important" }}
                 >
                   Connect with a
                   <span className="text-blue-600"> Career Coach </span>for
