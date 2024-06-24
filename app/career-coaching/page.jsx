@@ -74,7 +74,7 @@ const ComingSoonPage = () => {
             />
             <div className="space-y-2 mx-auto">
               <h1
-                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 flex text-center justify-center items-center font-extrabold text-[#0D3572]"
+                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]"
                 style={{ WebkitTextStrokeWidth: "thin", wordSpacing: "0.8rem" }}
               >
                 <span>
@@ -88,11 +88,12 @@ const ComingSoonPage = () => {
               </h1>
 
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
-                We believe in bridging the gap between your aspirations and the
-                perfect job role that matches your skills. With our intuitive
-                job matching system and dedicated support, we empower you to
-                take the leap towards a career that ignites your professional
-                drive.
+                Find the right guidance channel with Career Coaching.
+                Constructed to suit your expectations for your professional
+                journey, our system helps you connect with the best coach. Get
+                assistance to achieve the desired level of success by choosing
+                the correct pathway that ensures skill upgradation and learning
+                experiences.
               </p>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
                 <div className="button_wrapper mt-8">
@@ -175,9 +176,12 @@ const ComingSoonPage = () => {
                 Around The Globe
               </h2>
               <p className="mt-4 text-gray-600">
-                Trusted by talent from top companies across the globe. Work with
-                a world-class coach to grow as a leader, find career clarity, or
-                accelerate your job search
+                Tried and tested by talented candidates all across the globe,
+                our services in Coaching are intricately woven around the
+                requirements of students and professionals. The Genies Career
+                Hub builds a community of Career Coaches who have meticulous
+                experience with different candidates with distinctive
+                requirements.
               </p>
             </div>
           </div>
@@ -192,9 +196,12 @@ const ComingSoonPage = () => {
                 <span className="text-[#0D3572]">Organizations</span>
               </h2>
               <p className="mt-4 text-gray-600">
-                Grow your leaders, retain star performers, and provide a benefit
-                employees will love. Work with a world-class coach to grow as a
-                leader, find career clarity, or accelerate your job search.
+                Looking to upskill your star employees and performers? Connect
+                with Genies Career Hub and get access to comprehensive
+                consultation and caching services to elevate your organisational
+                structure dynamically. Our global community of Career Coaches
+                have an empirical understanding of distinctive professional
+                paradigms to assist you navigate corporate situations.
               </p>
             </div>
             {/* Left Column - Image */}
@@ -235,7 +242,7 @@ const ComingSoonPage = () => {
           <div className="flex flex-col justify-center">
             <div className="space-y-2 mx-auto">
               <h1 className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white">
-                99% Satisfaction
+                Complete Satisfaction
               </h1>
               <div className="flex justify-center mt-4">
                 {[...Array(5)].map((_, index) => (
@@ -257,12 +264,11 @@ const ComingSoonPage = () => {
                 ))}
               </div>
               <p className="max-w-[800px] mx-auto text-center text-white text-[18px] pt-4">
-                Regardless of job title, experience, or location, Placement has
-                you
+                Our expert solutions have assisted many students, professionals,
+                and organisations.
                 <br />
-                covered. Our 100% remote coaching experience has 99%
-                <br />
-                satisfaction.
+                Career Coaches within our reach have lateral experience and
+                knowledge of different arenas of professions. <br />
               </p>
             </div>
           </div>
@@ -277,14 +283,16 @@ const ComingSoonPage = () => {
           <div className="flex flex-col justify-center">
             <div className="space-y-2 mx-auto">
               <h1 className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center items-center font-extrabold">
-                Coaching For Every <br />
-                <span className="text-[#0D3572]">Career</span> Goal
+                Build Your Expertise In
+                <br />
+                <span className="text-[#0D3572]">Every</span> Domain
               </h1>
               <div className="flex justify-center mt-4"></div>
               <p className="max-w-[800px] mx-auto text-center text-gray text-[18px] pt-4">
-                Trusted by talent from top companies across the globe. Work with
-                a <br />
-                world-class coach to grow as a leader.
+                Our services in Coaching and Consultation are not just limited
+                to career growth and projection. Our community of coaches
+                assists in different domains and provides you with the perfect
+                advisory depending on your present skill set and provisions.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-6xl mx-auto py-10">
@@ -296,8 +304,9 @@ const ComingSoonPage = () => {
                 />
                 <h2 className="text-2xl font-bold mt-4">Career Growth</h2>
                 <p className="mt-2 text-gray-600">
-                  Discover the best strategies to enhance your career growth
-                  with our expert coaching.
+                  Find the best solutions for career progression with our
+                  Coaches and build your professional pathway with structured
+                  coaching.
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
@@ -336,8 +345,8 @@ const ComingSoonPage = () => {
                 />
                 <h2 className="text-2xl font-bold mt-4">Leadership Skills</h2>
                 <p className="mt-2 text-gray-600">
-                  Develop your leadership skills with our comprehensive coaching
-                  programs.
+                  Develop the leadership skills your Career needs to achieve the
+                  multitudes of success that you have always desired.
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
@@ -376,8 +385,8 @@ const ComingSoonPage = () => {
                 />
                 <h2 className="text-2xl font-bold mt-4">Job Transition</h2>
                 <p className="mt-2 text-gray-600">
-                  Navigate your job transitions smoothly with our tailored
-                  coaching support.
+                  Switch jobs in a structured pathway by seeking guidance from
+                  Industry Professionals to ensure an easy transition.
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
@@ -418,8 +427,8 @@ const ComingSoonPage = () => {
                   Performance Enhancement
                 </h2>
                 <p className="mt-2 text-gray-600">
-                  Boost your performance at work with our personalized coaching
-                  solutions.
+                  Enhance your professional performance card and grow
+                  dynamically in your career and within your organisation.
                 </p>
                 <div className="button_wrapper mt-8">
                   <button
@@ -459,13 +468,14 @@ const ComingSoonPage = () => {
             {/* Left Column - Text */}
             <div className="w-full md:w-[40%] mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                A seamless, <span className="text-[#0D3572]">Modern</span>{" "}
-                Experience
+                A Traditional &{" "}
+                <span className="text-[#0D3572]">Transparent</span> Career
+                Coaching
               </h2>
               <p className="mt-4 text-gray-600">
-                Trusted by talent from top companies across the globe. Work with
-                a world-class coach to grow as a leader, find career clarity, or
-                accelerate your job search.
+                Experience the quality of Career Consultancy with us at Genies
+                Career Hub. Our supportive community will assist you in
+                achieving heights in your career dynamically!
               </p>
               <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
                 <button className="get_start_btn">
@@ -504,7 +514,8 @@ const ComingSoonPage = () => {
                   Vetted Coaches
                 </h3>
                 <p className="mt-2 text-gray-600 text-center sm:text-left">
-                  Connect with highly vetted coaches to ensure quality guidance.
+                  Connect with vetted coaches who have lateral experience in
+                  myriad professions.
                 </p>
               </div>
               <div className="flex flex-col items-center sm:items-start gap-4">
@@ -519,7 +530,8 @@ const ComingSoonPage = () => {
                   Instantly Schedule
                 </h3>
                 <p className="mt-2 text-gray-600 text-center sm:text-left">
-                  Schedule meetings instantly without any hassle.
+                  Do not get stuck in the appointment hassle. With us, you
+                  instantly schedule.
                 </p>
               </div>
               <div className="flex flex-col items-center sm:items-start gap-4">
@@ -534,7 +546,8 @@ const ComingSoonPage = () => {
                   Easy Meeting
                 </h3>
                 <p className="mt-2 text-gray-600 text-center sm:text-left">
-                  Set up and attend meetings with ease.
+                  Easy meeting structure decoded to ease and automate the
+                  connection processes.
                 </p>
               </div>
               <div className="flex flex-col items-center sm:items-start gap-4">
@@ -549,7 +562,8 @@ const ComingSoonPage = () => {
                   Easy Message
                 </h3>
                 <p className="mt-2 text-gray-600 text-center sm:text-left">
-                  Easily communicate with your coach through our platform.
+                  Experience smooth connection flow with rapid and easy texting
+                  with your coach.
                 </p>
               </div>
             </div>

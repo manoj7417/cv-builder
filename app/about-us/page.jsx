@@ -92,11 +92,12 @@ export default function AboutUs() {
           <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
             <div className="flex flex-col justify-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
               <h1 className="mt-8 text-3xl font-bold -tight text-[#005599] md:text-4xl lg:text-6xl">
-                People who care about your growth
+                We Envisage your Growth with You!
               </h1>
               <p className="mt-8 text-lg text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Consequatur modi blanditiis dolores quasi eaque explicabo!
+                We aim to be the bridge between you and your progressive career.
+                We dream with you and assist you as strive to achieve every step
+                of success.
               </p>
               <form action="" className="mt-8 flex items-start space-x-2">
                 <div className="w-full">
@@ -136,7 +137,7 @@ export default function AboutUs() {
               </div>
               <h2 className="text-xl font-bold mb-2">Career Growth</h2>
               <p className="apara">
-                Enhance your career with our expert coaching.
+                Start your Career progression today, with Us!
               </p>
             </div>
 
@@ -146,9 +147,7 @@ export default function AboutUs() {
                 <FaBriefcase className="aicon w-12 h-12" />
               </div>
               <h2 className="text-xl font-bold mb-2">Job Transition</h2>
-              <p className="apara">
-                Navigate job transitions smoothly with our support.
-              </p>
+              <p className="apara">Easily switch jobs with expert guidance.</p>
             </div>
 
             {/* Card 3 */}
@@ -160,7 +159,7 @@ export default function AboutUs() {
                 Performance Enhancement
               </h2>
               <p className="apara">
-                Boost your performance with personalized coaching.
+                Achieve heights professionally by elevating your performance.
               </p>
             </div>
           </div>
@@ -171,41 +170,43 @@ export default function AboutUs() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                Coach For <span className="text-[#0D3572]">Businesses</span>&{" "}
-                <span className="text-[#0D3572]">Organizations</span>
+                Organisational{" "}
+                <span className="text-[#0D3572]">Connect for </span>
+                {""}
+                <span className="text-[#0D3572]"> </span>Career Coach
               </h2>
               <p className="mt-4 text-gray-600">
-                At GINIES CAREER HUB, we pride ourselves on being a trusted
-                partner for professionals worldwide. Our comprehensive career
-                counselling services and cutting-edge CV builder tools are
-                designed to help you stand out in a competitive job market.
-                Whether you are just starting your career or looking to make a
-                significant leap, our expert guidance and personalized resources
-                will empower you to achieve your goals. Our team of seasoned
-                career coaches offers tailored advice and strategies, ensuring
-                that your career path aligns with your aspirations and
-                strengths. <br></br>
-                <br></br>Our CV builder is more than just a template; it is a
-                sophisticated tool that helps you highlight your unique skills
-                and achievements, making you the ideal candidate for your dream
-                job. With real-time feedback and industry-specific
-                recommendations, you can craft a CV that truly reflects your
-                potential. <br></br>
-                <br></br>Join thousands of satisfied clients who have
-                transformed their careers with our support. Our success stories
-                range from recent graduates landing their first job to
-                experienced professionals climbing the corporate ladder. We
-                understand the nuances of different industries and job markets,
-                providing you with insights that are both relevant and
-                actionable.<br></br>
-                <br></br> In todays globalized world, the competition for top
-                positions is fiercer than ever. Thats why having a trusted ally
-                like GINIES CAREER HUB is crucial. We are dedicated to helping
-                you navigate the complexities of career advancement, ensuring
-                that you are well-prepared and confident in your journey. Let us
-                help you showcase your unique skills and experience, ensuring
-                that you make a lasting impression on potential employers.
-                Together, we can turn your career aspirations into reality.
+                At Genies Career Hub, we are centred on helping you build your
+                professional journeys in the direction of success. We have
+                accordingly devised a comprehensive set of services in Job
+                Application, Career Assistance, Job Match, and much more. With
+                time, we have rendered a global approach that promulgates a
+                lateral strategy to progress in Career. Our Career Coaching
+                provision is categorically designed to help you achieve the goal
+                that you have set for yourself in the way. With internationally
+                cognizant and intricately experienced professionals, we have
+                built a community for you to connect with and seek comprehensive
+                consultation. <br></br>
+                <br></br>In an organisational premise, it is only requisite and
+                empirical that there is a constant growth of skills to suit the
+                increasing demands and opportunities that the markets bring
+                forward. This requirement can only met if the employees within
+                an organisation consistently upskill themselves. Therefore, our
+                support through Career Coaching is necessarily built to assist
+                businesses in upgrading the skill set that the employees have.
+                Our Career Coaches can very adeptly help you do that. <br></br>
+                <br></br>Bringing the experience of years of handling candidates
+                and organisations with professional journeys, the Career Coaches
+                at Genies Career Hub are dedicated to providing the best
+                consultation. With thousands of satisfied individuals and
+                organisations, our services have evidently contributed to
+                enhancing professional journeys. <br></br>
+                <br></br> In this globalization-inclined world, it is crucial to
+                have access to balanced guidance that can assist you in every
+                aspect of your progressive envisage. At Genies Career Hub, we
+                ensure that your organisation gets the meticulous Coaching you
+                deserve to move ahead in the way and stand out in the market
+                with dexterity and professional acumen.
               </p>
             </div>
             {/* Left Column - Image */}
