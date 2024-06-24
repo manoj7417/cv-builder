@@ -220,14 +220,15 @@ export default function AboutUs() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-full text-center md:text-left sm:text-left md:w-1/2 mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                We Offer <span className="text-[#0D3572]">Career Coaching</span>{" "}
-                From{" "}
-                <span className="text-[#0D3572]">Professional advisors</span>
+                Coaching that is inspired by{" "}
+                <span className="text-[#0D3572]">Experience</span> and{" "}
+                <span className="text-[#0D3572]">Expertise </span>
               </h2>
               <p className="mt-4 text-gray-600">
-                Grow your leaders, retain star performers, and provide a benefit
-                employees will love. Work with a world-class coach to grow as a
-                leader, find career clarity, or accelerate your job search.
+                Our community of Career Coaches is not only expertly trained in
+                assisting candidates with distinctive professional dreams and
+                aspirations, but also has experience in comprehending different
+                mindsets.
               </p>
               <ul className="space-y-2 py-8">
                 <li className="flex items-center">
@@ -245,7 +246,7 @@ export default function AboutUs() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  Grow your leaders, retain star performers
+                  Coaches with Expertise in a myriad of professional domains.
                 </li>
                 <li className="flex items-center">
                   <svg
@@ -262,15 +263,15 @@ export default function AboutUs() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  and provide a benefit employees will love.
+                  Trusted by Students, Professionals, and Employers worldwide.
                 </li>
               </ul>
               <div className="flex gap-2">
                 <PercentageCircle
-                  percentage={82}
+                  percentage={92}
                   label="Clients Satisfaction"
                 />
-                <PercentageCircle percentage={90} label="Testing and Support" />
+                <PercentageCircle percentage={99} label="Instant Support " />
               </div>
             </div>
             {/* Left Column - Image */}
@@ -291,42 +292,38 @@ export default function AboutUs() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                We Offer <span className="text-[#0D3572]">Career Coaching</span>{" "}
-                From{" "}
-                <span className="text-[#0D3572]">Professional advisors</span>
+                We Bring{" "}
+                <span className="text-[#0D3572]">Professional Advisors</span> to
+                your Table, <span className="text-[#0D3572]">Instantly!</span>
               </h2>
               <p className="mt-4 text-gray-600">
-                At GINIES CAREER HUB, we pride ourselves on being a trusted
-                partner for professionals worldwide. Our comprehensive career
-                counselling services and cutting-edge CV builder tools are
-                designed to help you stand out in a competitive job market.
-                Whether you are just starting your career or looking to make a
-                significant leap, our expert guidance and personalized resources
-                will empower you to achieve your goals. Our team of seasoned
-                career coaches offers tailored advice and strategies, ensuring
-                that your career path aligns with your aspirations and
-                strengths. <br></br>
-                <br></br>Our CV builder is more than just a template; it is a
-                sophisticated tool that helps you highlight your unique skills
-                and achievements, making you the ideal candidate for your dream
-                job. With real-time feedback and industry-specific
-                recommendations, you can craft a CV that truly reflects your
-                potential. <br></br>
-                <br></br>Join thousands of satisfied clients who have
-                transformed their careers with our support. Our success stories
-                range from recent graduates landing their first job to
-                experienced professionals climbing the corporate ladder. We
-                understand the nuances of different industries and job markets,
-                providing you with insights that are both relevant and
-                actionable.<br></br>
-                <br></br> In todays globalized world, the competition for top
-                positions is fiercer than ever. Thats why having a trusted ally
-                like GINIES CAREER HUB is crucial. We are dedicated to helping
-                you navigate the complexities of career advancement, ensuring
-                that you are well-prepared and confident in your journey. Let us
-                help you showcase your unique skills and experience, ensuring
-                that you make a lasting impression on potential employers.
-                Together, we can turn your career aspirations into reality.
+                Genies Career Hub is established with a envision to
+                revolutionize the linearity of the professional career coaching
+                industry. The traditional career consultation methods are very
+                inefficient given the requirements of the students,
+                professionals, and employers today. Our services in Career
+                Coaching are very well developed to offer a compelling solution
+                to any such gaps that a candidate might experience with the
+                available services. <br></br>
+                <br></br>Limited options in Career Counselling and Coaching have
+                always been an obstacle to career development and progression.
+                The prime issue with the Career Consultation Services that are
+                prominent in the existing marketing is that the services are
+                channelled towards figuring out the right career. However, with
+                the Genies Career Hub, the focus is dynamically on all sorts of
+                Career relevant issues such as Performance Enhancement, Career
+                Transitions, Professional Alignment Identification, and much
+                more.<br></br>
+                <br></br>The community of Career Coaches at the Genies Career
+                Hub has eclectic knowledge. The Coaches are equipped with
+                expertise and experience beyond the normality. The curated list
+                of Consultants is specifically devised to provide you with the
+                most suitable assistance. All you need to do is connect with us
+                and we shall assist in connecting you with the best possible
+                resource that can help you solve your problems. With the Genies
+                Career Hub, your Career Problems are solved in a flicker of a
+                moment because we ensure that the best resources depending on
+                your requisites are brought to your table.
               </p>
             </div>
             {/* Left Column - Image */}
