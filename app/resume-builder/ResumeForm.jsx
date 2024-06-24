@@ -90,10 +90,8 @@ export default function ResumeForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleChangeProfileSummaryChange = (val) => {
-    if (val) {
-      setResumeData("sections.summary.content", val);
-    }
+  const handleChangeProfileSummaryChange = (e) => {
+    setResumeData("sections.summary.content", e.htmlValue);
   };
 
   const handleEducationChange = (e, i) => {
@@ -757,6 +755,19 @@ export default function ResumeForm() {
     setResumeData("sections.certificates.items", updatedCertificates);
   }
 
+  const handlecertificateDescription = (val, i) => {
+    const updatedCertificates = data.sections.certificates.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
+
 
 
   useEffect(() => {
@@ -923,19 +934,19 @@ export default function ResumeForm() {
               </p>
             </div>
             <div className="no-scrollbar">
-              <ReactQuill
+              <Editor
                 className="no-scrollbar"
                 style={{
                   height: "200px",
                   position: "relative",
                 }}
                 value={data?.sections?.summary.content}
-                onChange={handleChangeProfileSummaryChange}
+                onTextChange={handleChangeProfileSummaryChange}
               />
             </div>
           </div>
         </div>
-        <div className="border-b-2 border-gray-200 w-[90%] mx-auto my-20"></div>
+
 
         {/* education section */}
         <div className="py-5 mt-0 mb-10">
@@ -1097,16 +1108,11 @@ export default function ResumeForm() {
                             </div>
                             <div className="space-y-2 my-5 px-2">
                               <Label htmlFor="city">Description</Label>
-                              <ReactQuill
-                                id="Profile"
-                                className="no-scrollbar"
-                                style={{
-                                  height: "200px",
-                                }}
+                              <Editor
                                 placeholder="eg. Graduated from the University "
                                 value={item.description}
-                                onChange={(e) =>
-                                  handleEducationDescriptionChange(e, index)
+                                onTextChange={(e) =>
+                                  handleEducationDescriptionChange(e.htmlValue, index)
                                 }
                               />
                             </div>
@@ -1133,7 +1139,7 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
-        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
+
 
         {/* experience section */}
         <div className="py-5 mt-0 mb-10">
@@ -1296,17 +1302,11 @@ export default function ResumeForm() {
                             </div>
                             <div className="space-y-2 mt-5 mb-12 px-2">
                               <Label>Description</Label>
-                              <ReactQuill
-                                id="Profile"
-                                theme="snow"
-                                className="no-scrollbar"
-                                style={{
-                                  height: "150px",
-                                }}
+                              <Editor
                                 placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
                                 value={item.description}
-                                onChange={(e) =>
-                                  handleExperienceDescriptionChange(e, index)
+                                onTextChange={(e) =>
+                                  handleExperienceDescriptionChange(e.htmlValue, index)
                                 }
                               />
                             </div>
@@ -1343,7 +1343,7 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
-        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
+
 
         {/* Projects */}
         <div className="py-5 mt-0 mb-10">
@@ -1485,17 +1485,11 @@ export default function ResumeForm() {
                             </div>
                             <div className="space-y-2 my-5 px-2">
                               <Label htmlFor="city">Description</Label>
-                              <ReactQuill
-                                id="Profile"
-                                theme="snow"
-                                className="no-scrollbar"
-                                style={{
-                                  height: "200px",
-                                }}
+                              <Editor
                                 placeholder="e.g.Created and implemented lesson plans based on child-led interests and curiosities."
-                                value={item.description}
-                                onChange={(e) =>
-                                  handleProjectDescriptionChange(e, index)
+                                value={item?.description}
+                                onTextChange={(e) =>
+                                  handleProjectDescriptionChange(e.htmlValue, index)
                                 }
                               />
                             </div>
@@ -1522,7 +1516,6 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
-        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
         {/* Skills */}
         <div className="py-5 mt-0 mb-10">
@@ -1640,7 +1633,7 @@ export default function ResumeForm() {
             </div>
           </div>
         </div>
-        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
+
 
         {/* Hobbies */}
         <div className="lg:px-10 p-5 rounded-md">
@@ -1770,12 +1763,7 @@ export default function ResumeForm() {
                               </div>
                               <div className="px-4 py-2">
                                 <Label>Description</Label>
-                                <Editor style={{
-                                  border: '1.5px solid rgb(229 231 235) !important',
-                                  borderRadius: '0 0 10px 10px',
-                                  height: "200px",
-                                  borderColor: 'rgb(229 231 235)'
-                                }}
+                                <Editor
                                   value={award?.description} onTextChange={(e) => handleAwardDescription(e.htmlValue, index)} name="description" />
                               </div>
                             </div>
@@ -1929,7 +1917,7 @@ export default function ResumeForm() {
 
 
         {/* certificates */}
-        <div>
+        <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <Label className="text-2xl">Certificates</Label>
@@ -2001,8 +1989,8 @@ export default function ResumeForm() {
                                 </div>
                                 <Button className="w-[15%]"><FiLink /></Button>
                               </div>
-                              <div>
-                                <Editor />
+                              <div className="px-4 py-6">
+                                <Editor value={certificate?.description} onTextChange={(e) => handlecertificateDescription(e.htmlValue, index)} />
                               </div>
                             </div>
                           </AccordionContent>

@@ -893,7 +893,7 @@ footer a:hover svg {
   width: 100%;
   position: relative;
   overflow: hidden;
-background: #1b2f93
+  background: #1b2f93;
 }
 
 .circles {
@@ -1035,4 +1035,15 @@ background: #1b2f93
   border: 1.5px solid rgb(229 231 235) !important;
   border-radius: 5px 5px 0 0;
   border-color: rgb(229 231 235);
+}
+
+.p-editor-content {
+  border: 1.5px solid rgb(229 231 235) !important;
+  border-radius: 0 0 10px 10px;
+  height: 150px !important;
+  border-color: rgb(229 231 235);
+}
+
+ol > li{
+  display: list-item !important;
 }
