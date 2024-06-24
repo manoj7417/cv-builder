@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "@/components/ui/customLabelInput";
@@ -87,6 +87,7 @@ export default function ResumeForm() {
     },
     skills: "",
   });
+  const hobbiesRef = useRef("")
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
