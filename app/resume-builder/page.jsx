@@ -25,7 +25,7 @@ const ResumeBuilderPage = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="actions_button bg-slate-50 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
           <div className="2xl:w-[95%] xl:w-[92%] mx-auto flex flex-row justify-between items-center">
@@ -111,7 +111,7 @@ const ResumeBuilderPage = () => {
           <ResumeView />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
