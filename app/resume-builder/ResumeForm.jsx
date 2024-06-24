@@ -8,7 +8,7 @@ import "react-quill/dist/quill.snow.css";
 import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { Progress } from "@/components/ui/progress";
 import {
   Accordion,
@@ -16,11 +16,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "@/components/ui/customLabelInput";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { HexColorPicker } from "react-colorful";
 import { AccordianColor, colors } from "@/constants/colors";
 import { cn } from "@/lib/utils";
@@ -36,7 +40,9 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "@/components/ui/textarea";
-// import Template13 from "../resume-templates/Template13";
+import { RxCross2 } from "react-icons/rx";
+import { FiLink } from "react-icons/fi";
+import { Editor } from 'primereact/editor';
 
 const ImageTemplates = [
   "Template1",
@@ -54,7 +60,7 @@ const ImageTemplates = [
   "Template23",
   "Template24",
   "Template25",
-  "Template26"
+  "Template26",
 ];
 
 export default function ResumeForm() {
@@ -79,14 +85,13 @@ export default function ResumeForm() {
     },
     skills: "",
   });
+  const hobbiesRef = useRef('')
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleChangeProfileSummaryChange = (val) => {
-    if (val) {
-      setResumeData("sections.summary.content", val);
-    }
+  const handleChangeProfileSummaryChange = (e) => {
+    setResumeData("sections.summary.content", e.htmlValue);
   };
 
   const handleEducationChange = (e, i) => {
@@ -518,9 +523,252 @@ export default function ResumeForm() {
   };
 
   const handleChangeHobbies = (e) => {
-    const hobbies = e.target.value.split("\n")
-    setResumeData("sections.hobbies.items", hobbies)
+    hobbiesRef.current.value = e.target.value
   }
+
+  const handleAddNewHobbies = () => {
+    const newHobbie = hobbiesRef.current.value.trim()
+    if (!newHobbie) {
+      return;
+    }
+    const updatedHobbies = [...data.sections.hobbies.items, newHobbie]
+    setResumeData('sections.hobbies.items', updatedHobbies)
+    hobbiesRef.current.value = ''
+  }
+
+  const handleDeleteHobbies = (i) => {
+    const updatedHobbies = data.sections.hobbies.items.filter((el, index) => {
+      return index !== i
+    })
+    setResumeData('sections.hobbies.items', updatedHobbies)
+  }
+
+  const handleAwardNameChange = (val, i) => {
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          name: val,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleDeleteAward = (i) => {
+    const updatedAwards = data.sections.awards.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleAddNewAwards = () => {
+    const updatedAwards = [
+      ...data.sections.awards.items,
+      {
+        name: "",
+        url: "",
+        data: '',
+        issuer: "",
+        description: ''
+      },
+    ];
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handlelanguageLabelChange = (e) => {
+    const updatedResumeData = {
+      ...data,
+      sections: {
+        ...data.sections,
+        language: { ...data.sections.language, name: e.target.value },
+      },
+    };
+    setResumeData(updatedResumeData);
+  }
+
+  const handlelanguageLevelChange = (val, i) => {
+    const updatedLanguages = data.sections.language.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          level: val,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handlelanguageNameChange = (val, i) => {
+    const updatedLanguages = data.sections.language.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          name: val,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handleDeletelanguage = (i) => {
+    const updatedLanguages = data.sections.language.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handleAddNewLanguage = () => {
+    const updatedLanguages = [
+      ...data.sections.language.items,
+      {
+        name: "",
+        level: "",
+      },
+    ];
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handleAwardInfoChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+
+  const handleAwardDescription = (val, i) => {
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleAwardDateChange = (val, i) => {
+    let newDate;
+    if (!val) {
+      newDate = "";
+    } else {
+      let date = val["$d"];
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString("en-US", { month: "short" });
+      newDate = `${monthName}-${year}`;
+    }
+
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          date: newDate,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleReferenceInfoChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedReferences = data.sections.reference.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.reference.items", updatedReferences);
+  }
+
+  const handleDeleteReference = (i) => {
+    const updatedReferences = data.sections.references.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.reference.items", updatedReferences);
+  }
+
+  const handleAddNewreference = () => {
+    const updatedAwards = [
+      ...data.sections.reference.items,
+      {
+        name: "",
+        url: "",
+        jobTitle: '',
+        organization: "",
+        email: '',
+        phone: ""
+      },
+    ];
+    setResumeData("sections.reference.items", updatedAwards);
+  }
+
+
+  const handleAddNewcertificate = () => {
+    const updatedCertificates = [
+      ...data.sections.certificates.items,
+      {
+        name: "",
+        url: "",
+        description: ""
+      },
+    ];
+    setResumeData("sections.certificates.items", updatedCertificates);
+
+  }
+
+  const handleDeletecertificate = (i) => {
+    const updatedCertificates = data.sections.certificates.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
+
+
+  const handlecertificateInfoChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedCertificates = data.sections.certificates.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
+
+  const handlecertificateDescription = (val, i) => {
+    const updatedCertificates = data.sections.certificates.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
+
+
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
@@ -543,10 +791,17 @@ export default function ResumeForm() {
             <NewResumeLoader />
           </div>
         )}
+        {/* Basics Information  */}
         <div className="lg:px-10 px-5">
+          <div className="flex justify-between py-3 rounded-md">
+            <div className="group">
+              <Label className="text-2xl text-black font-bold">
+                Basics Information
+              </Label>
+            </div>
+          </div>
           {ImageTemplates.includes(data.metadata.template) && (
-            <div className="w-full ">
-              <Label>Avatar</Label>
+            <div className="w-full mt-5">
               <ImageUpload />
             </div>
           )}
@@ -627,16 +882,17 @@ export default function ResumeForm() {
         {/* profile section */}
         <div className="py-5 my-5 lg:px-10 px-5">
           <div className="space-y-2">
-            <div className=" flex justify-between items-center">
-              <div className=" w-[40%] group">
+            <div className=" flex justify-between items-center py-3">
+              <div className="group">
                 <Label
                   htmlFor="Profile"
-                  className="text-2xl group-hover:hidden"
+                  className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2"
                 >
                   {data?.sections?.summary?.name}
+                  <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.summary?.name}
                   onChange={(e) =>
                     setResumeData("sections.summary.name", e.target.value)
@@ -650,7 +906,7 @@ export default function ResumeForm() {
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
-                    className=" bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 border-none"
+                    className=" bg-white text-blue-950 border-none"
                     onClick={handleOpenAIDialog}
                   >
                     Generate with AI
@@ -678,36 +934,38 @@ export default function ResumeForm() {
               </p>
             </div>
             <div className="no-scrollbar">
-              <ReactQuill
+              <Editor
                 className="no-scrollbar"
                 style={{
                   height: "200px",
                   position: "relative",
                 }}
                 value={data?.sections?.summary.content}
-                onChange={handleChangeProfileSummaryChange}
+                onTextChange={handleChangeProfileSummaryChange}
               />
             </div>
           </div>
         </div>
 
+
         {/* education section */}
-        <div className="py-5 my-20">
+        <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.education?.name}
+                  <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.education?.name}
                   onChange={(e) =>
                     setResumeData("sections.education.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -850,16 +1108,11 @@ export default function ResumeForm() {
                             </div>
                             <div className="space-y-2 my-5 px-2">
                               <Label htmlFor="city">Description</Label>
-                              <ReactQuill
-                                id="Profile"
-                                className="no-scrollbar"
-                                style={{
-                                  height: "200px",
-                                }}
+                              <Editor
                                 placeholder="eg. Graduated from the University "
                                 value={item.description}
-                                onChange={(e) =>
-                                  handleEducationDescriptionChange(e, index)
+                                onTextChange={(e) =>
+                                  handleEducationDescriptionChange(e.htmlValue, index)
                                 }
                               />
                             </div>
@@ -878,7 +1131,7 @@ export default function ResumeForm() {
           </div>
           <div className="px-10 ">
             <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent text-blue-900 p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewEducation}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -887,23 +1140,25 @@ export default function ResumeForm() {
           </div>
         </div>
 
+
         {/* experience section */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.experience?.name}
+                  <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.experience?.name}
                   onChange={(e) =>
                     setResumeData("sections.experience.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1047,17 +1302,11 @@ export default function ResumeForm() {
                             </div>
                             <div className="space-y-2 mt-5 mb-12 px-2">
                               <Label>Description</Label>
-                              <ReactQuill
-                                id="Profile"
-                                theme="snow"
-                                className="no-scrollbar"
-                                style={{
-                                  height: "150px",
-                                }}
+                              <Editor
                                 placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
                                 value={item.description}
-                                onChange={(e) =>
-                                  handleExperienceDescriptionChange(e, index)
+                                onTextChange={(e) =>
+                                  handleExperienceDescriptionChange(e.htmlValue, index)
                                 }
                               />
                             </div>
@@ -1086,7 +1335,7 @@ export default function ResumeForm() {
           </div>
           <div className="px-10 ">
             <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent p-2 text-blue-900 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewExperience}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1095,23 +1344,25 @@ export default function ResumeForm() {
           </div>
         </div>
 
+
         {/* Projects */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.projects?.name}
+                  <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.projects?.name}
                   onChange={(e) =>
                     setResumeData("sections.projects.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1234,17 +1485,11 @@ export default function ResumeForm() {
                             </div>
                             <div className="space-y-2 my-5 px-2">
                               <Label htmlFor="city">Description</Label>
-                              <ReactQuill
-                                id="Profile"
-                                theme="snow"
-                                className="no-scrollbar"
-                                style={{
-                                  height: "200px",
-                                }}
+                              <Editor
                                 placeholder="e.g.Created and implemented lesson plans based on child-led interests and curiosities."
-                                value={item.description}
-                                onChange={(e) =>
-                                  handleProjectDescriptionChange(e, index)
+                                value={item?.description}
+                                onTextChange={(e) =>
+                                  handleProjectDescriptionChange(e.htmlValue, index)
                                 }
                               />
                             </div>
@@ -1263,7 +1508,7 @@ export default function ResumeForm() {
           </div>
           <div className="px-10 ">
             <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewProject}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1275,18 +1520,19 @@ export default function ResumeForm() {
         {/* Skills */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.skills?.name}
+                  <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={sections?.skills?.name}
                   onChange={handleSkillsLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1378,7 +1624,7 @@ export default function ResumeForm() {
           <div className="mt-5 px-10">
             <div>
               <Button
-                className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
                 onClick={handleAddNewSkills}
               >
                 <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1388,22 +1634,24 @@ export default function ResumeForm() {
           </div>
         </div>
 
-        <div className="lg:px-10 px-5 rounded-md">
+
+        {/* Hobbies */}
+        <div className="lg:px-10 p-5 rounded-md">
           <div className="my-5 flex justify-between w-full items-center">
             <Label className="text-2xl">Hobbies</Label>
             <div className="flex items-center justify-center text-gray-400 text-lg">
-              {sections?.hobbies?.visible ? (
+              {!sections?.hobbies?.visible ? (
                 <GoEyeClosed
                   className=" cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", false)
+                    setResumeData("sections.hobbies.visible", true)
                   }
                 />
               ) : (
                 <GoEye
                   className="cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", true)
+                    setResumeData("sections.hobbies.visible", false)
                   }
                 />
               )}
@@ -1415,16 +1663,477 @@ export default function ResumeForm() {
             </p>
           </div>
           <div className="my-4">
-            {
-              sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
-                return <div key={index} className="">
-                  <Label>{item}</Label>
-                  <Input value={item} onChange={(e) => handleChangeHobbies(e.target.value, index)} />
-                </div>
-              })
-            }
+            <div className=" flex w-full flex-wrap py-4">
+              {
+                sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
+                  return <p key={index} className=" bg-white border  py-2 px-6 items-center justify-center flex rounded-3xl my-2 mr-3">
+                    <span className="mr-4">{item}</span><span className=" cursor-pointer" onClick={() => handleDeleteHobbies(index)}><RxCross2 className='text-red-600' /></span>
+                  </p>
+                })
+              }
+            </div>
+            <div className="flex justify-between">
+              <Input onChange={handleChangeHobbies} ref={hobbiesRef} className="w-[80%]" />
+              <Button className="flex justify-center" onClick={handleAddNewHobbies}><IoIosAddCircleOutline className="mr-2 text-xl" />Add</Button>
+            </div>
           </div>
         </div>
+
+        {/* Awards */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="lg:px-10 p-5 rounded-md">
+            <div className="my-5 flex justify-between w-full items-center">
+              <Label className="text-2xl">Awards</Label>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.awards?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.awards.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.awards.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div >
+              <p className="text-sm text-gray-500">
+                Awards like student competitions or industry accolades belong here.
+              </p>
+            </div>
+
+          </div>
+          <div>
+            <div className="w-full">
+              {
+                sections?.awards?.items?.length > 0 && sections?.awards?.items.map((award, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-start justify-center group my-5 relative w-full"
+                    >
+                      <GoGrabber
+                        className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      />
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        defaultValue={`item-${index}`}
+                        defaultChecked
+                      >
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="group-hover:text-blue-900">
+                            <div className=" px-3 flex flex-col items-start ">
+                              <p>{award.name || "(Not Specified)"}</p>
+                              <p>{award.date}</p>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                              <div className="w-full flex items-end justify-between px-4">
+                                <div className="w-[80%]">
+                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Input
+                                    value={award?.name}
+                                    onChange={(e) =>
+                                      handleAwardNameChange(e.target.value, index)
+                                    }
+                                    className="w-full"
+                                  />
+                                </div>
+                                <Button className="w-[15%]"><FiLink /></Button>
+                              </div>
+                              <div className="w-full my-3 px-4 flex items-end justify-between">
+                                <div className="w-[48%]">
+                                  <Label>Issuer</Label>
+                                  <Input placeholder="Enter Issuer" value={award?.issuer} onChange={(e) => handleAwardInfoChange(e, index)} name="issuer" />
+                                </div>
+                                <div className="w-[48%]  flex flex-col">
+                                  <Label>Date</Label>
+                                  <DatePicker picker="month" className="h-10" onChange={(e) => handleAwardDateChange(e, index)} />
+                                </div>
+                              </div>
+                              <div className="px-4 py-2">
+                                <Label>Description</Label>
+                                <Editor
+                                  value={award?.description} onTextChange={(e) => handleAwardDescription(e.htmlValue, index)} name="description" />
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <MdDeleteOutline
+                        className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        onClick={() => handleDeleteAward(index)}
+                      />
+                    </div>
+                  );
+                })
+              }
+            </div>
+            <div className="mt-5 px-10">
+              <div>
+                <Button
+                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  onClick={handleAddNewAwards}
+                >
+                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  Add new award
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reference */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="lg:px-10 p-5 rounded-md">
+            <div className="my-5 flex justify-between w-full items-center">
+              <Label className="text-2xl">Reference</Label>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.reference?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.reference.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.reference.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div >
+              <p className="text-sm text-gray-500">
+                If you have former colleagues or bosses that vouch for you, list them.
+              </p>
+            </div>
+
+          </div>
+          <div>
+            <div className="w-full">
+              {
+                sections?.reference?.items?.length > 0 && sections?.reference?.items.map((reference, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-start justify-center group my-5 relative w-full"
+                    >
+                      <GoGrabber
+                        className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      />
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        defaultValue={`item-${index}`}
+                        defaultChecked
+                      >
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="group-hover:text-blue-900">
+                            <div className=" px-3 flex flex-col items-start ">
+                              <p>{reference.name || "(Not Specified)"}</p>
+                              <p>{reference.date}</p>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                              <div className="w-full flex items-end justify-between px-4">
+                                <div className="w-[80%]">
+                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Input
+                                    value={reference?.name}
+                                    onChange={(e) =>
+                                      handleReferenceInfoChange(e, index)
+                                    }
+                                    name="name"
+                                    className="w-full"
+                                  />
+                                </div>
+                                <Button className="w-[15%]"><FiLink /></Button>
+                              </div>
+                              <div className="w-full my-3 px-4 flex items-end justify-between">
+                                <div className="w-[48%]">
+                                  <Label>JobTitle</Label>
+                                  <Input placeholder="Enter Issuer" value={reference?.jobTitle} onChange={(e) => handleReferenceInfoChange(e, index)} name="jobTitle" />
+                                </div>
+                                <div className="w-[48%]  flex flex-col">
+                                  <Label>Organization</Label>
+                                  <Input placeholder="Enter Organization" value={reference?.organization} onChange={(e) => handleReferenceInfoChange(e, index)} name="organization" />
+                                </div>
+                              </div>
+                              <div className="w-full my-3 px-4 flex items-end justify-between">
+                                <div className="w-[48%]">
+                                  <Label>Email</Label>
+                                  <Input placeholder="Enter email" value={reference?.email} onChange={(e) => handleReferenceInfoChange(e, index)} name="email" />
+                                </div>
+                                <div className="w-[48%]  flex flex-col">
+                                  <Label>Phone</Label>
+                                  <Input placeholder="Enter a phone number" value={reference?.phone} onChange={(e) => handleReferenceInfoChange(e, index)} name="phone" />
+                                </div>
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <MdDeleteOutline
+                        className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        onClick={() => handleDeleteReference(index)}
+                      />
+                    </div>
+                  );
+                })
+              }
+            </div>
+            <div className="mt-5 px-10">
+              <div>
+                <Button
+                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  onClick={handleAddNewreference}
+                >
+                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  Add new reference
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {/* certificates */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="lg:px-10 p-5 rounded-md">
+            <div className="my-5 flex justify-between w-full items-center">
+              <Label className="text-2xl">Certificates</Label>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.certificate?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.certificates.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.certificates.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div >
+              <p className="text-sm text-gray-500">
+                Drivers licenses and other industry-specific certificates you have belong here.
+              </p>
+            </div>
+
+          </div>
+          <div>
+            <div className="w-full">
+              {
+                sections?.certificates?.items?.length > 0 && sections?.certificates?.items.map((certificate, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-start justify-center group my-5 relative w-full"
+                    >
+                      <GoGrabber
+                        className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      />
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        defaultValue={`item-${index}`}
+                        defaultChecked
+                      >
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="group-hover:text-blue-900">
+                            <div className=" px-3 flex flex-col items-start ">
+                              <p>{certificate.name || "(Not Specified)"}</p>
+                              <p>{certificate.date}</p>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                              <div className="w-full flex items-end justify-between px-4">
+                                <div className="w-[80%]">
+                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Input
+                                    value={certificate?.name}
+                                    onChange={(e) =>
+                                      handlecertificateInfoChange(e, index)
+                                    }
+                                    name="name"
+                                    className="w-full"
+                                  />
+                                </div>
+                                <Button className="w-[15%]"><FiLink /></Button>
+                              </div>
+                              <div className="px-4 py-6">
+                                <Editor value={certificate?.description} onTextChange={(e) => handlecertificateDescription(e.htmlValue, index)} />
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <MdDeleteOutline
+                        className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        onClick={() => handleDeletecertificate(index)}
+                      />
+                    </div>
+                  );
+                })
+              }
+            </div>
+            <div className="mt-5 px-10">
+              <div>
+                <Button
+                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  onClick={handleAddNewcertificate}
+                >
+                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  Add new certificate
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* languages */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="space-y-2 px-10">
+            <div className="flex justify-between">
+              <div className=" w-[40%] group">
+                <Label className="text-2xl flex group-hover:hidden">
+                  {sections?.language?.name}
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={sections?.language?.name}
+                  onChange={handlelanguageLabelChange}
+                />
+              </div>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.language?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.language.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.language.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">
+                Select languages
+              </p>
+            </div>
+          </div>
+          <div >
+            {sections?.language?.items?.length > 0 &&
+              sections.language.items.map((Language, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start justify-center group my-5 relative"
+                  >
+                    <GoGrabber
+                      className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                    />
+                    <Accordion
+                      type="single"
+                      collapsible
+                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                      defaultValue={`item-${index}`}
+                      defaultChecked
+                    >
+                      <AccordionItem value={`item-${index}`}>
+                        <AccordionTrigger className="group-hover:text-blue-900">
+                          <div className=" px-3 flex flex-col items-start ">
+                            <p>{Language.name || "(Not Specified)"}</p>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className=" grid-cols-2 gap-2 flex px-2">
+                            <div className=" w-1/2">
+                              <Label htmlFor={`Language-${index}`}>Name</Label>
+                              <Input
+                                value={Language?.name}
+                                onChange={(e) =>
+                                  handlelanguageNameChange(e.target.value, index)
+                                }
+                              />
+                            </div>
+                            <div className=" w-1/2 flex flex-col items-start justify-center">
+                              <Label
+                                htmlFor={`Language-${index}`}
+                                className="mb-1"
+                              >
+                                Level
+                              </Label>
+                              <SkillsSelect
+                                className="w-full"
+                                onSelectChange={handlelanguageLevelChange}
+                                index={index}
+                                value={Language?.level}
+                              />
+                            </div>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                    <MdDeleteOutline
+                      className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      onClick={() => handleDeletelanguage(index)}
+                    />
+                  </div>
+                );
+              })}
+          </div>
+          <div className="mt-5 px-10">
+            <div>
+              <Button
+                className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                onClick={handleAddNewLanguage}
+              >
+                <IoIosAddCircleOutline className="text-xl mr-2" />
+                Add new language
+              </Button>
+            </div>
+          </div>
+        </div>
+
 
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">

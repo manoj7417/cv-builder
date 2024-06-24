@@ -7,7 +7,7 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
-import { FaCrown, FaRegFilePdf } from "react-icons/fa";
+import { FaCrown, FaDownload, FaRegFilePdf } from "react-icons/fa";
 import {
   Drawer,
   DrawerContent,
@@ -444,7 +444,7 @@ const ResumeView = () => {
           </Dialog>
         )}
         <div>
-          <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+          {/* <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
                 href={"/user-history"}
@@ -454,84 +454,6 @@ const ResumeView = () => {
                 Back
               </Link>
             </div>
-            {/* <div className="auth_section flex justify-end w-full gap-10 items-center">
-              <button
-                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-                onClick={() => setIsContentVisible(true)}
-              >
-                <BsFullscreen className="h-4 w-4 text-white mr-2" />
-                <span>Full Screen</span>
-              </button>
-              <div className="tools">
-                <button
-                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-                  onClick={handleZoomIn}
-                >
-                  <FiPlus className="text-white" />
-                </button>
-                <button
-                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white mx-2 rounded-md"
-                  onClick={handleZoomOut}
-                >
-                  <FiMinus />
-                </button>
-                <button
-                  className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
-                  onClick={handleReset}
-                >
-                  <CiUndo />
-                </button>
-              </div>
-              <button
-                className="2xl:p-3 md:p-2 text-sm p-2 bg-blue-900 text-white disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={checkUserTemplate}
-                disabled={isLoading}
-              >
-                Download PDF
-                <FaCrown className="ml-1 text-yellow-300" />
-              </button>
-              <div className="choose_templates xl:block hidden">
-                <Drawer
-                  direction="right"
-                  open={isDrawerOpen}
-                  onOpenChange={setIsDrawerOpen}
-                >
-                  <DrawerTrigger
-                    className="bg-blue-900 text-white 2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md"
-                    onClick={() => setIsDrawerOpen(true)}
-                  >
-                    Templates <LuLayoutGrid className="inline" />
-                  </DrawerTrigger>
-                  <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
-                    <DrawerHeader>
-                      <DrawerTitle>Choose Templates</DrawerTitle>
-                      <DrawerDescription>
-                        <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                          {images.map((image, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="image_section_1 "
-                                onClick={() => handleTemplateChange(image.name)}
-                              >
-                                <Image
-                                  src={image.src}
-                                  alt={image.alt}
-                                  className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
-                                  width={500}
-                                  height={500}
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </DrawerDescription>
-                    </DrawerHeader>
-                  </DrawerContent>
-                </Drawer>
-              </div>
-            </div> */}
-
             <div className="profile_section">
               <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
                 <div className="relative" ref={dropdownRef}>
@@ -579,7 +501,7 @@ const ResumeView = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div
             className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
             style={{
@@ -716,14 +638,14 @@ const ResumeView = () => {
             </div>
           </div>
         </div> */}
-        <div className="floating_button absolute bottom-5 bg-slate-200 w-[50%] rounded-full shadow-2xl">
+        <div className="floating_button absolute bottom-5 bg-white/80 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
           <div className="auth_section flex justify-center w-full gap-10 items-center">
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
                 onClick={() => setIsContentVisible(true)}
               >
-                <BsFullscreen className="h-4 w-4 text-black" />
+                <BsFullscreen className="h-5 w-5 text-black font-bold" />
               </button>
             </ResumeTooltip>
             <div className="tools">
@@ -732,7 +654,7 @@ const ResumeView = () => {
                   className="2xl:p-3 md:p-2 p-2 rounded-md"
                   onClick={handleZoomIn}
                 >
-                  <FiPlus className="h-4 w-4 text-black" />
+                  <FiPlus className="h-5 w-5 text-black font-bold" />
                 </button>
               </ResumeTooltip>
               <ResumeTooltip icon={FiMinus} title="Zoom Out">
@@ -740,7 +662,7 @@ const ResumeView = () => {
                   className="2xl:p-3 md:p-2 p-2 mx-2 rounded-md"
                   onClick={handleZoomOut}
                 >
-                  <FiMinus className="h-4 w-4 text-black" />
+                  <FiMinus className="h-5 w-5 text-black font-bold" />
                 </button>
               </ResumeTooltip>
               <ResumeTooltip icon={CiUndo} title="Reset">
@@ -748,17 +670,18 @@ const ResumeView = () => {
                   className="2xl:p-3 md:p-2 p-2 rounded-md"
                   onClick={handleReset}
                 >
-                  <CiUndo className="h-4 w-4 text-black" />
+                  <CiUndo className="h-5 w-5 text-black font-bold" />
                 </button>
               </ResumeTooltip>
             </div>
-            <ResumeTooltip icon={FaRegFilePdf} title="Download Template">
+            <ResumeTooltip icon={FaDownload} title="Download Template">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                 onClick={checkUserTemplate}
                 disabled={isLoading}
               >
-                <FaRegFilePdf className="h-4 w-4 text-black" />
+                {/* <FaRegFilePdf className="h-4 w-4 text-black" /> */}
+                <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
             <div className="choose_templates xl:block hidden">
@@ -772,7 +695,7 @@ const ResumeView = () => {
                     className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
                     onClick={() => setIsDrawerOpen(true)}
                   >
-                    <LuLayoutGrid className="h-4 w-4 text-black inline" />
+                    <LuLayoutGrid className="h-5 w-5 text-black inline" />
                   </DrawerTrigger>
                   <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
                     <DrawerHeader>
