@@ -43,6 +43,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RxCross2 } from "react-icons/rx";
 import { FiLink } from "react-icons/fi";
 import { Editor } from 'primereact/editor';
+import { ContextMenu, ContextMenuContent, ContextMenuTrigger } from "@/components/ui/context-menu";
 
 const ImageTemplates = [
   "Template1",
@@ -991,7 +992,7 @@ export default function ResumeForm() {
               </p>
             </div>
           </div>
-          <div className=" my-5 h-auto ">
+          <div className="my-5 h-auto ">
             {sections?.education?.items.length > 0 &&
               sections?.education?.items.map((item, index) => {
                 return (
@@ -1031,7 +1032,7 @@ export default function ResumeForm() {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className="w-full pt-5 px-5 pb-10">
+                          <div className="w-full pt-5 pb-10">
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
                               <div className="space-y-2">
                                 <Label htmlFor="institute">Institute</Label>
@@ -1223,7 +1224,7 @@ export default function ResumeForm() {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className="w-full pt-5 px-5 pb-10">
+                          <div className="w-full pt-5 pb-10">
                             <div className="grid lg:grid-cols-2 grid-cols-1  gap-4 px-2 py-5">
                               <div className="space-y-2">
                                 <Label htmlFor="institute">Job Title</Label>
@@ -1423,7 +1424,7 @@ export default function ResumeForm() {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className="w-full pt-5 px-5 pb-10">
+                          <div className="w-full pt-5 pb-10">
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
                               <div className="space-y-2">
                                 <Label htmlFor="institute">Title</Label>
@@ -1707,7 +1708,6 @@ export default function ResumeForm() {
                 Awards like student competitions or industry accolades belong here.
               </p>
             </div>
-
           </div>
           <div>
             <div className="w-full">
@@ -1737,7 +1737,7 @@ export default function ResumeForm() {
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                            <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
                               <div className="w-full flex items-end justify-between px-4">
                                 <div className="w-[80%]">
                                   <Label htmlFor={`skills-${index}`}>Name</Label>
@@ -1749,7 +1749,17 @@ export default function ResumeForm() {
                                     className="w-full"
                                   />
                                 </div>
-                                <Button className="w-[15%]"><FiLink /></Button>
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button variant="outline" className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"><FiLink />Link</Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-80 space-y-4 p-4">
+                                    <div className="flex items-center justify-between">
+                                      <h4 className="text-lg font-medium">Enter Link</h4>
+                                    </div>
+                                    <Input placeholder="Enter url" value={award?.url} onChange={(e) => handleAwardInfoChange(e, index)} name="url" />
+                                  </PopoverContent>
+                                </Popover>
                               </div>
                               <div className="w-full my-3 px-4 flex items-end justify-between">
                                 <div className="w-[48%]">
@@ -1847,12 +1857,12 @@ export default function ResumeForm() {
                         <AccordionItem value={`item-${index}`}>
                           <AccordionTrigger className="group-hover:text-blue-900">
                             <div className=" px-3 flex flex-col items-start ">
-                              <p>{reference.name || "(Not Specified)"}</p>
-                              <p>{reference.date}</p>
+                              <p>{reference?.name || "(Not Specified)"}</p>
+                              <p>{reference?.date}</p>
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                            <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
                               <div className="w-full flex items-end justify-between px-4">
                                 <div className="w-[80%]">
                                   <Label htmlFor={`skills-${index}`}>Name</Label>
@@ -1865,7 +1875,17 @@ export default function ResumeForm() {
                                     className="w-full"
                                   />
                                 </div>
-                                <Button className="w-[15%]"><FiLink /></Button>
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button variant="outline" className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"><FiLink />Link</Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-80 space-y-4 p-4">
+                                    <div className="flex items-center justify-between">
+                                      <h4 className="text-lg font-medium">Enter Link</h4>
+                                    </div>
+                                    <Input placeholder="Enter url" value={reference?.url} onChange={(e) => handleReferenceInfoChange(e, index)} name="url" />
+                                  </PopoverContent>
+                                </Popover>
                               </div>
                               <div className="w-full my-3 px-4 flex items-end justify-between">
                                 <div className="w-[48%]">
@@ -1914,7 +1934,6 @@ export default function ResumeForm() {
             </div>
           </div>
         </div>
-
 
         {/* certificates */}
         <div className="py-5 mt-0 mb-10">
@@ -1974,7 +1993,7 @@ export default function ResumeForm() {
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                            <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
                               <div className="w-full flex items-end justify-between px-4">
                                 <div className="w-[80%]">
                                   <Label htmlFor={`skills-${index}`}>Name</Label>
@@ -1987,7 +2006,17 @@ export default function ResumeForm() {
                                     className="w-full"
                                   />
                                 </div>
-                                <Button className="w-[15%]"><FiLink /></Button>
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button variant="outline" className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"><FiLink />Link</Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-80 space-y-4 p-4">
+                                    <div className="flex items-center justify-between">
+                                      <h4 className="text-lg font-medium">Enter Link</h4>
+                                    </div>
+                                    <Input placeholder="Enter url" value={certificate.url} onChange={(e) => handlecertificateInfoChange(e, index)} name="url" />
+                                  </PopoverContent>
+                                </Popover>
                               </div>
                               <div className="px-4 py-6">
                                 <Editor value={certificate?.description} onTextChange={(e) => handlecertificateDescription(e.htmlValue, index)} />
