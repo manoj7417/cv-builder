@@ -558,7 +558,6 @@ export default function ResumeForm() {
           </div>
           {ImageTemplates.includes(data.metadata.template) && (
             <div className="w-full mt-5">
-              <Label>Avatar</Label>
               <ImageUpload />
             </div>
           )}
