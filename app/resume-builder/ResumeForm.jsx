@@ -8,7 +8,7 @@ import "react-quill/dist/quill.snow.css";
 import { Dialog, DialogClose, DialogTrigger } from "@/components/ui/dialog";
 import { GoGrabber } from "react-icons/go";
 import { FaCrown } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { Progress } from "@/components/ui/progress";
 import {
   Accordion,
@@ -20,7 +20,11 @@ import { useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { DatePicker } from "antd";
 import CustomLabelInput from "@/components/ui/customLabelInput";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { HexColorPicker } from "react-colorful";
 import { AccordianColor, colors } from "@/constants/colors";
 import { cn } from "@/lib/utils";
@@ -54,7 +58,7 @@ const ImageTemplates = [
   "Template23",
   "Template24",
   "Template25",
-  "Template26"
+  "Template26",
 ];
 
 export default function ResumeForm() {
@@ -518,9 +522,9 @@ export default function ResumeForm() {
   };
 
   const handleChangeHobbies = (e) => {
-    const hobbies = e.target.value.split("\n")
-    setResumeData("sections.hobbies.items", hobbies)
-  }
+    const hobbies = e.target.value.split("\n");
+    setResumeData("sections.hobbies.items", hobbies);
+  };
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
@@ -543,9 +547,17 @@ export default function ResumeForm() {
             <NewResumeLoader />
           </div>
         )}
+        {/* Basics Information  */}
         <div className="lg:px-10 px-5">
+          <div className="flex justify-between py-3 rounded-md">
+            <div className="group">
+              <Label className="text-2xl text-black font-bold">
+                Basics Information
+              </Label>
+            </div>
+          </div>
           {ImageTemplates.includes(data.metadata.template) && (
-            <div className="w-full ">
+            <div className="w-full mt-5">
               <Label>Avatar</Label>
               <ImageUpload />
             </div>
@@ -627,16 +639,17 @@ export default function ResumeForm() {
         {/* profile section */}
         <div className="py-5 my-5 lg:px-10 px-5">
           <div className="space-y-2">
-            <div className=" flex justify-between items-center">
-              <div className=" w-[40%] group">
+            <div className=" flex justify-between items-center py-3">
+              <div className="group">
                 <Label
                   htmlFor="Profile"
-                  className="text-2xl group-hover:hidden"
+                  className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2"
                 >
                   {data?.sections?.summary?.name}
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.summary?.name}
                   onChange={(e) =>
                     setResumeData("sections.summary.name", e.target.value)
@@ -650,7 +663,7 @@ export default function ResumeForm() {
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
-                    className=" bg-blue-100 text-blue-500 hover:bg-blue-200 hover:text-blue-700 border-none"
+                    className=" bg-white text-blue-950 border-none"
                     onClick={handleOpenAIDialog}
                   >
                     Generate with AI
@@ -690,24 +703,26 @@ export default function ResumeForm() {
             </div>
           </div>
         </div>
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto my-20"></div>
 
         {/* education section */}
-        <div className="py-5 my-20">
+        <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.education?.name}
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.education?.name}
                   onChange={(e) =>
                     setResumeData("sections.education.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -878,7 +893,7 @@ export default function ResumeForm() {
           </div>
           <div className="px-10 ">
             <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent text-blue-900 p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewEducation}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -886,24 +901,26 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
         {/* experience section */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.experience?.name}
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.experience?.name}
                   onChange={(e) =>
                     setResumeData("sections.experience.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -954,7 +971,8 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1086,7 +1104,7 @@ export default function ResumeForm() {
           </div>
           <div className="px-10 ">
             <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent p-2 text-blue-900 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewExperience}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1094,24 +1112,26 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
         {/* Projects */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.projects?.name}
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={data?.sections?.projects?.name}
                   onChange={(e) =>
                     setResumeData("sections.projects.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1263,7 +1283,7 @@ export default function ResumeForm() {
           </div>
           <div className="px-10 ">
             <Button
-              className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewProject}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1271,22 +1291,24 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
         {/* Skills */}
         <div className="py-5 mt-0 mb-10">
           <div className="space-y-2 px-10">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden">
+            <div className="flex justify-between py-3">
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.skills?.name}
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
                   value={sections?.skills?.name}
                   onChange={handleSkillsLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1378,7 +1400,7 @@ export default function ResumeForm() {
           <div className="mt-5 px-10">
             <div>
               <Button
-                className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
                 onClick={handleAddNewSkills}
               >
                 <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1387,11 +1409,15 @@ export default function ResumeForm() {
             </div>
           </div>
         </div>
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
-        <div className="lg:px-10 px-5 rounded-md">
-          <div className="my-5 flex justify-between w-full items-center">
-            <Label className="text-2xl">Hobbies</Label>
-            <div className="flex items-center justify-center text-gray-400 text-lg">
+        {/* Hobbies  */}
+        <div className="lg:px-8 px-5">
+          <div className="my-5 flex justify-between w-full items-center p-3">
+            <Label className="text-2xl text-black font-bold flex items-center gap-2">Hobbies
+            <MdEdit className="text-xl"/>
+            </Label>
+            <div className="flex items-center justify-center text-white text-lg">
               {sections?.hobbies?.visible ? (
                 <GoEyeClosed
                   className=" cursor-pointer"
@@ -1410,21 +1436,28 @@ export default function ResumeForm() {
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 pl-2">
               List your hobbies, interests, and passions.
             </p>
           </div>
           <div className="my-4">
-            {
-              sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
-                return <div key={index} className="">
-                  <Label>{item}</Label>
-                  <Input value={item} onChange={(e) => handleChangeHobbies(e.target.value, index)} />
-                </div>
-              })
-            }
+            {sections?.hobbies?.items.length > 0 &&
+              sections.hobbies.items.map((item, index) => {
+                return (
+                  <div key={index} className="">
+                    <Label>{item}</Label>
+                    <Input
+                      value={item}
+                      onChange={(e) =>
+                        handleChangeHobbies(e.target.value, index)
+                      }
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
