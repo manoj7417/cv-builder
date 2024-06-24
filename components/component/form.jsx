@@ -37,7 +37,8 @@ import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "../ui/textarea";
 import { RxCross2 } from "react-icons/rx";
-// import Template13 from "../resume-templates/Template13";
+import { FiLink } from "react-icons/fi";
+import { Editor } from 'primereact/editor';
 
 const ImageTemplates = [
   "Template1",
@@ -540,9 +541,223 @@ export default function Form() {
     setResumeData('sections.hobbies.items', updatedHobbies)
   }
 
+  const handleAwardNameChange = (val, i) => {
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          name: val,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleDeleteAward = (i) => {
+    const updatedAwards = data.sections.awards.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleAddNewAwards = () => {
+    const updatedAwards = [
+      ...data.sections.awards.items,
+      {
+        name: "",
+        url: "",
+        data: '',
+        issuer: "",
+        description: ''
+      },
+    ];
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handlelanguageLabelChange = (e) => {
+    const updatedResumeData = {
+      ...data,
+      sections: {
+        ...data.sections,
+        language: { ...data.sections.language, name: e.target.value },
+      },
+    };
+    setResumeData(updatedResumeData);
+  }
+
+  const handlelanguageLevelChange = (val, i) => {
+    const updatedLanguages = data.sections.language.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          level: val,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handlelanguageNameChange = (val, i) => {
+    const updatedLanguages = data.sections.language.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          name: val,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handleDeletelanguage = (i) => {
+    const updatedLanguages = data.sections.language.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handleAddNewLanguage = () => {
+    const updatedLanguages = [
+      ...data.sections.language.items,
+      {
+        name: "",
+        level: "",
+      },
+    ];
+    setResumeData("sections.language.items", updatedLanguages);
+  }
+
+  const handleAwardInfoChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+
+  const handleAwardDescription = (val, i) => {
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          description: val,
+        };
+      }
+      return item;
+    })
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleAwardDateChange = (val, i) => {
+    let newDate;
+    if (!val) {
+      newDate = "";
+    } else {
+      let date = val["$d"];
+      const year = date.getFullYear();
+      const monthName = date.toLocaleString("en-US", { month: "short" });
+      newDate = `${monthName}-${year}`;
+    }
+
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          date: newDate,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
+  const handleReferenceInfoChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedReferences = data.sections.reference.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.reference.items", updatedReferences);
+  }
+
+  const handleDeleteReference = (i) => {
+    const updatedReferences = data.sections.references.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.reference.items", updatedReferences);
+  }
+
+  const handleAddNewreference = () => {
+    const updatedAwards = [
+      ...data.sections.reference.items,
+      {
+        name: "",
+        url: "",
+        jobTitle: '',
+        organization: "",
+        email: '',
+        phone: ""
+      },
+    ];
+    setResumeData("sections.reference.items", updatedAwards);
+  }
+
+
+  const handleAddNewcertificate = () => {
+    const updatedCertificates = [
+      ...data.sections.certificates.items,
+      {
+        name: "",
+        url: "",
+        description: ""
+      },
+    ];
+    setResumeData("sections.certificates.items", updatedCertificates);
+
+  }
+
+  const handleDeletecertificate = (i) => {
+    const updatedCertificates = data.sections.certificates.items.filter((el, index) => {
+      return index !== i;
+    });
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
+
+
+  const handlecertificateInfoChange = (e, i) => {
+    const { name, value } = e.target;
+    const updatedCertificates = data.sections.certificates.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          [name]: value,
+        };
+      }
+      return item;
+    });
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
+
+
+
+
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
-      console.log(state);
       updateResume(state.resume._id, state.resume);
     });
     return unsubs;
@@ -1330,7 +1545,7 @@ export default function Form() {
               </p>
             </div>
           </div>
-          <div>
+          <div >
             {sections.skills.items.length > 0 &&
               sections.skills.items.map((skills, index) => {
                 return (
@@ -1406,6 +1621,7 @@ export default function Form() {
           </div>
         </div>
 
+        {/* Hobbies */}
         <div className="lg:px-10 p-5 rounded-md">
           <div className="my-5 flex justify-between w-full items-center">
             <Label className="text-2xl">Hobbies</Label>
@@ -1449,31 +1665,463 @@ export default function Form() {
           </div>
         </div>
 
-        <div className="lg:px-10 p-5 rounded-md">
-          <div className="my-5 flex justify-between w-full items-center">
-            <Label className="text-2xl">Awards</Label>
-            <div className="flex items-center justify-center text-gray-400 text-lg">
-              {!sections?.awards?.visible ? (
-                <GoEyeClosed
-                  className=" cursor-pointer"
-                  onClick={() =>
-                    setResumeData("sections.awards.visible", true)
-                  }
-                />
-              ) : (
-                <GoEye
-                  className="cursor-pointer"
-                  onClick={() =>
-                    setResumeData("sections.awards.visible", false)
-                  }
-                />
-              )}
+        {/* Awards */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="lg:px-10 p-5 rounded-md">
+            <div className="my-5 flex justify-between w-full items-center">
+              <Label className="text-2xl">Awards</Label>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.awards?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.awards.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.awards.visible", false)
+                    }
+                  />
+                )}
+              </div>
             </div>
+            <div >
+              <p className="text-sm text-gray-500">
+                Awards like student competitions or industry accolades belong here.
+              </p>
+            </div>
+
           </div>
           <div>
-            <p className="text-sm text-gray-500">
-              List your awards, achievements, and honors.
-            </p>
+            <div className="w-full">
+              {
+                sections?.awards?.items?.length > 0 && sections?.awards?.items.map((award, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-start justify-center group my-5 relative w-full"
+                    >
+                      <GoGrabber
+                        className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      />
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        defaultValue={`item-${index}`}
+                        defaultChecked
+                      >
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="group-hover:text-blue-900">
+                            <div className=" px-3 flex flex-col items-start ">
+                              <p>{award.name || "(Not Specified)"}</p>
+                              <p>{award.date}</p>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                              <div className="w-full flex items-end justify-between px-4">
+                                <div className="w-[80%]">
+                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Input
+                                    value={award?.name}
+                                    onChange={(e) =>
+                                      handleAwardNameChange(e.target.value, index)
+                                    }
+                                    className="w-full"
+                                  />
+                                </div>
+                                <Button className="w-[15%]"><FiLink /></Button>
+                              </div>
+                              <div className="w-full my-3 px-4 flex items-end justify-between">
+                                <div className="w-[48%]">
+                                  <Label>Issuer</Label>
+                                  <Input placeholder="Enter Issuer" value={award?.issuer} onChange={(e) => handleAwardInfoChange(e, index)} name="issuer" />
+                                </div>
+                                <div className="w-[48%]  flex flex-col">
+                                  <Label>Date</Label>
+                                  <DatePicker picker="month" className="h-10" onChange={(e) => handleAwardDateChange(e, index)} />
+                                </div>
+                              </div>
+                              <div className="px-4 py-2">
+                                <Label>Description</Label>
+                                <Editor style={{
+                                  border: '1.5px solid rgb(229 231 235) !important',
+                                  borderRadius: '0 0 10px 10px',
+                                  height: "200px",
+                                  borderColor: 'rgb(229 231 235)'
+                                }}
+                                  value={award?.description} onTextChange={(e) => handleAwardDescription(e.htmlValue, index)} name="description" />
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <MdDeleteOutline
+                        className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        onClick={() => handleDeleteAward(index)}
+                      />
+                    </div>
+                  );
+                })
+              }
+            </div>
+            <div className="mt-5 px-10">
+              <div>
+                <Button
+                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  onClick={handleAddNewAwards}
+                >
+                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  Add new award
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reference */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="lg:px-10 p-5 rounded-md">
+            <div className="my-5 flex justify-between w-full items-center">
+              <Label className="text-2xl">Reference</Label>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.reference?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.reference.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.reference.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div >
+              <p className="text-sm text-gray-500">
+                If you have former colleagues or bosses that vouch for you, list them.
+              </p>
+            </div>
+
+          </div>
+          <div>
+            <div className="w-full">
+              {
+                sections?.reference?.items?.length > 0 && sections?.reference?.items.map((reference, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-start justify-center group my-5 relative w-full"
+                    >
+                      <GoGrabber
+                        className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      />
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        defaultValue={`item-${index}`}
+                        defaultChecked
+                      >
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="group-hover:text-blue-900">
+                            <div className=" px-3 flex flex-col items-start ">
+                              <p>{reference.name || "(Not Specified)"}</p>
+                              <p>{reference.date}</p>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                              <div className="w-full flex items-end justify-between px-4">
+                                <div className="w-[80%]">
+                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Input
+                                    value={reference?.name}
+                                    onChange={(e) =>
+                                      handleReferenceInfoChange(e, index)
+                                    }
+                                    name="name"
+                                    className="w-full"
+                                  />
+                                </div>
+                                <Button className="w-[15%]"><FiLink /></Button>
+                              </div>
+                              <div className="w-full my-3 px-4 flex items-end justify-between">
+                                <div className="w-[48%]">
+                                  <Label>JobTitle</Label>
+                                  <Input placeholder="Enter Issuer" value={reference?.jobTitle} onChange={(e) => handleReferenceInfoChange(e, index)} name="jobTitle" />
+                                </div>
+                                <div className="w-[48%]  flex flex-col">
+                                  <Label>Organization</Label>
+                                  <Input placeholder="Enter Organization" value={reference?.organization} onChange={(e) => handleReferenceInfoChange(e, index)} name="organization" />
+                                </div>
+                              </div>
+                              <div className="w-full my-3 px-4 flex items-end justify-between">
+                                <div className="w-[48%]">
+                                  <Label>Email</Label>
+                                  <Input placeholder="Enter email" value={reference?.email} onChange={(e) => handleReferenceInfoChange(e, index)} name="email" />
+                                </div>
+                                <div className="w-[48%]  flex flex-col">
+                                  <Label>Phone</Label>
+                                  <Input placeholder="Enter a phone number" value={reference?.phone} onChange={(e) => handleReferenceInfoChange(e, index)} name="phone" />
+                                </div>
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <MdDeleteOutline
+                        className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        onClick={() => handleDeleteReference(index)}
+                      />
+                    </div>
+                  );
+                })
+              }
+            </div>
+            <div className="mt-5 px-10">
+              <div>
+                <Button
+                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  onClick={handleAddNewreference}
+                >
+                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  Add new reference
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {/* certificates */}
+        <div>
+          <div className="lg:px-10 p-5 rounded-md">
+            <div className="my-5 flex justify-between w-full items-center">
+              <Label className="text-2xl">Certificates</Label>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.certificate?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.certificates.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.certificates.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div >
+              <p className="text-sm text-gray-500">
+                Drivers licenses and other industry-specific certificates you have belong here.
+              </p>
+            </div>
+
+          </div>
+          <div>
+            <div className="w-full">
+              {
+                sections?.certificates?.items?.length > 0 && sections?.certificates?.items.map((certificate, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-start justify-center group my-5 relative w-full"
+                    >
+                      <GoGrabber
+                        className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      />
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        defaultValue={`item-${index}`}
+                        defaultChecked
+                      >
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="group-hover:text-blue-900">
+                            <div className=" px-3 flex flex-col items-start ">
+                              <p>{certificate.name || "(Not Specified)"}</p>
+                              <p>{certificate.date}</p>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="pt-5 px-5 pb-10 flex justify-between items-baseline w-full flex-col">
+                              <div className="w-full flex items-end justify-between px-4">
+                                <div className="w-[80%]">
+                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Input
+                                    value={certificate?.name}
+                                    onChange={(e) =>
+                                      handlecertificateInfoChange(e, index)
+                                    }
+                                    name="name"
+                                    className="w-full"
+                                  />
+                                </div>
+                                <Button className="w-[15%]"><FiLink /></Button>
+                              </div>
+                              <div>
+                                <Editor />
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <MdDeleteOutline
+                        className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        onClick={() => handleDeletecertificate(index)}
+                      />
+                    </div>
+                  );
+                })
+              }
+            </div>
+            <div className="mt-5 px-10">
+              <div>
+                <Button
+                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  onClick={handleAddNewcertificate}
+                >
+                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  Add new certificate
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* languages */}
+        <div className="py-5 mt-0 mb-10">
+          <div className="space-y-2 px-10">
+            <div className="flex justify-between">
+              <div className=" w-[40%] group">
+                <Label className="text-2xl flex group-hover:hidden">
+                  {sections?.language?.name}
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={sections?.language?.name}
+                  onChange={handlelanguageLabelChange}
+                />
+              </div>
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.language?.visible ? (
+                  <GoEyeClosed
+                    className=" cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.language.visible", true)
+                    }
+                  />
+                ) : (
+                  <GoEye
+                    className="cursor-pointer"
+                    onClick={() =>
+                      setResumeData("sections.language.visible", false)
+                    }
+                  />
+                )}
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">
+                Select languages
+              </p>
+            </div>
+          </div>
+          <div >
+            {sections?.language?.items?.length > 0 &&
+              sections.language.items.map((Language, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start justify-center group my-5 relative"
+                  >
+                    <GoGrabber
+                      className=" text-3xl
+                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                    />
+                    <Accordion
+                      type="single"
+                      collapsible
+                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                      defaultValue={`item-${index}`}
+                      defaultChecked
+                    >
+                      <AccordionItem value={`item-${index}`}>
+                        <AccordionTrigger className="group-hover:text-blue-900">
+                          <div className=" px-3 flex flex-col items-start ">
+                            <p>{Language.name || "(Not Specified)"}</p>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className=" grid-cols-2 gap-2 flex px-2">
+                            <div className=" w-1/2">
+                              <Label htmlFor={`Language-${index}`}>Name</Label>
+                              <Input
+                                value={Language?.name}
+                                onChange={(e) =>
+                                  handlelanguageNameChange(e.target.value, index)
+                                }
+                              />
+                            </div>
+                            <div className=" w-1/2 flex flex-col items-start justify-center">
+                              <Label
+                                htmlFor={`Language-${index}`}
+                                className="mb-1"
+                              >
+                                Level
+                              </Label>
+                              <SkillsSelect
+                                className="w-full"
+                                onSelectChange={handlelanguageLevelChange}
+                                index={index}
+                                value={Language?.level}
+                              />
+                            </div>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                    <MdDeleteOutline
+                      className="absolute top-2 right-1 text-2xl
+                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      onClick={() => handleDeletelanguage(index)}
+                    />
+                  </div>
+                );
+              })}
+          </div>
+          <div className="mt-5 px-10">
+            <div>
+              <Button
+                className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                onClick={handleAddNewLanguage}
+              >
+                <IoIosAddCircleOutline className="text-xl mr-2" />
+                Add new language
+              </Button>
+            </div>
           </div>
         </div>
 
