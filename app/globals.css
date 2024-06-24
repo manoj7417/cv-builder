@@ -893,12 +893,7 @@ footer a:hover svg {
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    to top,
-    #4e54c8,
-    #4980b8,
-    #ffffff
-  ); /* Updated gradient */
+background: #1b2f93
 }
 
 .circles {

@@ -289,7 +289,7 @@ const Template23 = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="bg-[#ffffff] h-auto w-[793px] mx-auto shadow-lg rounded-lg flex relative">
           <div className="text-white w-full">
-            <div className="h-full mx-6 px-4 py-10 bg-[#959a88] relative z-20">
+            <div className="w-[250px] h-full mx-6 px-4 py-10 bg-[#959a88] relative z-20">
               <div className="flex items-center justify-center mb-8">
                 {basics?.picture?.url && (
                   <div className="profile_pic">

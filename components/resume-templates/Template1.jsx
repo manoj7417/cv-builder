@@ -349,7 +349,7 @@ const Template1 = () => {
             </p>
             <div className="contact_details">
               <div
-                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex font-semibold gap-2`}
+                className={`text-gray-800 my-4 ${fontStyle.contactFont} flex justify-between items-center font-semibold gap-2`}
               >
                 {basics?.email && (
                   <a
@@ -363,7 +363,7 @@ const Template1 = () => {
                 {basics?.phone && (
                   <a
                     href={`tel:${basics?.phone}`}
-                    className="hover:underline flex items-center text-wrap w-full "
+                    className="hover:underline flex items-center text-wrap"
                   >
                     <MdOutlinePhone className="mr-2" />
                     <p className="text-wrap break-words">{basics?.phone}</p>
