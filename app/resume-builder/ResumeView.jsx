@@ -419,7 +419,7 @@ const ResumeView = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative">
+      <div className="flex justify-center items-center flex-col w-full relative bg-gray-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
@@ -538,7 +538,7 @@ const ResumeView = () => {
                   <LiaTimesSolid className="text-white text-3xl" />
                 </div>
                 <div
-                  className="shadow-2xl relative no-scrollbar h-screen overflow-y-scroll"
+                  className="shadow-lg relative no-scrollbar h-screen overflow-y-scroll"
                   style={{
                     scale: { scale },
                   }}
@@ -638,7 +638,7 @@ const ResumeView = () => {
             </div>
           </div>
         </div> */}
-        <div className="floating_button absolute bottom-5 bg-white/80 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
+        <div className="floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
           <div className="auth_section flex justify-center w-full gap-10 items-center">
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button

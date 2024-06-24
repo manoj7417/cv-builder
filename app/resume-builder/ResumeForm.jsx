@@ -40,6 +40,7 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Textarea } from "@/components/ui/textarea";
+import { BsStars } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { FiLink } from "react-icons/fi";
 import { Editor } from 'primereact/editor';
@@ -86,7 +87,7 @@ export default function ResumeForm() {
     },
     skills: "",
   });
-  const hobbiesRef = useRef('')
+  const hobbiesRef = useRef("")
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -803,6 +804,7 @@ export default function ResumeForm() {
           </div>
           {ImageTemplates.includes(data.metadata.template) && (
             <div className="w-full mt-5">
+              <Label>Avatar</Label>
               <ImageUpload />
             </div>
           )}
@@ -890,7 +892,7 @@ export default function ResumeForm() {
                   className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2"
                 >
                   {data?.sections?.summary?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
@@ -905,14 +907,13 @@ export default function ResumeForm() {
                 onClose={() => setIsDialogOpen(false)}
               >
                 <DialogTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className=" bg-white text-blue-950 border-none"
+                  <button
+                    className="generate-ai flex"
                     onClick={handleOpenAIDialog}
                   >
                     Generate with AI
-                    <FaCrown className=" text-yellow-500 ml-2" />
-                  </Button>
+                    <BsStars className=" text-yellow-500 ml-2" />
+                  </button>
                 </DialogTrigger>
                 <MultiStepForm
                   handleCloseAIDialog={handleCloseAIDialog}
@@ -956,7 +957,7 @@ export default function ResumeForm() {
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.education?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
@@ -1149,7 +1150,7 @@ export default function ResumeForm() {
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.experience?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
@@ -1210,7 +1211,8 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1353,7 +1355,7 @@ export default function ResumeForm() {
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.projects?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
@@ -1525,7 +1527,7 @@ export default function ResumeForm() {
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.skills?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
@@ -1636,30 +1638,32 @@ export default function ResumeForm() {
         </div>
 
 
-        {/* Hobbies */}
-        <div className="lg:px-10 p-5 rounded-md">
-          <div className="my-5 flex justify-between w-full items-center">
-            <Label className="text-2xl">Hobbies</Label>
-            <div className="flex items-center justify-center text-gray-400 text-lg">
-              {!sections?.hobbies?.visible ? (
+        {/* Hobbies  */}
+        <div className="lg:px-8 px-5">
+          <div className="my-5 flex justify-between w-full items-center p-3">
+            <Label className="text-2xl text-black font-bold flex items-center gap-2">Hobbies
+            <MdEdit className="text-xl"/>
+            </Label>
+            <div className="flex items-center justify-center text-white text-lg">
+              {sections?.hobbies?.visible ? (
                 <GoEyeClosed
                   className=" cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", true)
+                    setResumeData("sections.hobbies.visible", false)
                   }
                 />
               ) : (
                 <GoEye
                   className="cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", false)
+                    setResumeData("sections.hobbies.visible", true)
                   }
                 />
               )}
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 pl-2">
               List your hobbies, interests, and passions.
             </p>
           </div>
@@ -2091,78 +2095,20 @@ export default function ResumeForm() {
             {sections?.language?.items?.length > 0 &&
               sections.language.items.map((Language, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="flex items-start justify-center group my-5 relative"
-                  >
-                    <GoGrabber
-                      className=" text-3xl
-                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
-                    />
-                    <Accordion
-                      type="single"
-                      collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
-                      defaultValue={`item-${index}`}
-                      defaultChecked
-                    >
-                      <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
-                          <div className=" px-3 flex flex-col items-start ">
-                            <p>{Language.name || "(Not Specified)"}</p>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <div className=" grid-cols-2 gap-2 flex px-2">
-                            <div className=" w-1/2">
-                              <Label htmlFor={`Language-${index}`}>Name</Label>
-                              <Input
-                                value={Language?.name}
-                                onChange={(e) =>
-                                  handlelanguageNameChange(e.target.value, index)
-                                }
-                              />
-                            </div>
-                            <div className=" w-1/2 flex flex-col items-start justify-center">
-                              <Label
-                                htmlFor={`Language-${index}`}
-                                className="mb-1"
-                              >
-                                Level
-                              </Label>
-                              <SkillsSelect
-                                className="w-full"
-                                onSelectChange={handlelanguageLevelChange}
-                                index={index}
-                                value={Language?.level}
-                              />
-                            </div>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                    <MdDeleteOutline
-                      className="absolute top-2 right-1 text-2xl
-                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
-                      onClick={() => handleDeletelanguage(index)}
+                  <div key={index} className="">
+                    <Label>{item}</Label>
+                    <Input
+                      value={item}
+                      onChange={(e) =>
+                        handleChangeHobbies(e.target.value, index)
+                      }
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="mt-5 px-10">
-            <div>
-              <Button
-                className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
-                onClick={handleAddNewLanguage}
-              >
-                <IoIosAddCircleOutline className="text-xl mr-2" />
-                Add new language
-              </Button>
-            </div>
-          </div>
         </div>
-
+        <div className="border-b-2 border-gray-200 w-[90%] mx-auto"></div>
 
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
