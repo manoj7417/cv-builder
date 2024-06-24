@@ -638,7 +638,7 @@ const ResumeView = () => {
             </div>
           </div>
         </div> */}
-        <div className="floating_button absolute bottom-5 bg-slate-100 w-[50%] rounded-full shadow-2xl">
+        <div className="floating_button absolute bottom-5 bg-white/80 2xl:w-[50%] xl:w-[60%] w-full rounded-full shadow-2xl">
           <div className="auth_section flex justify-center w-full gap-10 items-center">
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button

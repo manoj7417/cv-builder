@@ -25,18 +25,11 @@ const ResumeBuilderPage = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
-        <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-          <div className="max-w-[111rem] w-full mx-auto flex flex-row justify-between items-center">
+        <div className="actions_button bg-slate-50 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+          <div className="2xl:w-[95%] xl:w-[92%] mx-auto flex flex-row justify-between items-center">
             <div className="header_section w-full md:block hidden">
-              {/* <Link
-          href={"/user-history"}
-          className="px-5 py-2 bg-black text-white text-sm rounded-md btn-back"
-        >
-          <MdOutlineKeyboardArrowLeft className="inline text-xl" />
-          Back
-        </Link> */}
               <Link href="/user-history" className="group relative inline-flex items-center justify-center overflow-hidden border-2 border-blue-950 px-8 py-1 rounded-md font-medium text-white shadow-md transition duration-300 ease-out hover:border-4">
                 <span className="ease absolute inset-0 flex h-full w-full translate-x-full items-center justify-center bg-blue-950 text-white duration-300 group-hover:translate-x-0">
                   <svg
@@ -118,7 +111,7 @@ const ResumeBuilderPage = () => {
           <ResumeView />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
