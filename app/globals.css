@@ -1042,14 +1042,13 @@ footer a:hover svg {
 
 
 
-.floating_button {
-  background: rgba(255, 255, 255, 0.8);
+.toolbar_floating_button {
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
 
 .generate-ai {
   background: #1e3a8a;
@@ -1057,12 +1056,13 @@ footer a:hover svg {
   font-size: 14px;
   font-weight: 600;
   border-radius: 50px;
-  padding: 10px;
-  box-shadow: 0 0 0 0 #1e3a8a;
-  -webkit-animation: glow 1.4s ease-out infinite;
-          animation: glow 1.4s ease-out infinite;
+  padding: 10px 20px;
+  transition: box-shadow 0.2s ease-out; /* Smooth transition for box-shadow */
 }
 
+.generate-ai:hover {
+  animation: glow 1.4s ease-out infinite; /* Apply the glow animation on hover */
+}
 
 @keyframes glow {
   0% {
