@@ -429,6 +429,7 @@ export default function ResumeForm() {
   const handleTemplateThemeChange = (color) => {
     if (color) {
       setResumeData("metadata.theme.primary", color);
+      handleTextColor()
     }
   };
 
@@ -714,7 +715,7 @@ export default function ResumeForm() {
   };
 
   const handleDeleteReference = (i) => {
-    const updatedReferences = data.sections.references.items.filter(
+    const updatedReferences = data.sections.reference.items.filter(
       (el, index) => {
         return index !== i;
       }
@@ -793,13 +794,48 @@ export default function ResumeForm() {
     setResumeData("sections.certificates.items", updatedCertificates);
   };
 
+  function hexToRgb(hex) {
+    let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  function getLuminance(r, g, b) {
+    const a = [r, g, b].map((v) => {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+  }
+
+  const handleTextColor = () => {
+    const rgb = hexToRgb(data.metadata.theme.primary);
+    if (rgb) {
+      const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
+      const calculatedTextColor = luminance > 0.5 ? '#484747' : '#FFFFFF';
+      console.log(calculatedTextColor);
+      setResumeData('metadata.theme.text', calculatedTextColor)
+    }
+  }
+
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
-      console.log(state);
       updateResume(state.resume._id, state.resume);
     });
     return unsubs;
   });
+
+
+
+  useEffect(() => {
+    handleTextColor()
+  }, [])
 
   return (
     <>
@@ -987,18 +1023,18 @@ export default function ResumeForm() {
                 />
               </div>
               <div className="flex items-center justify-center text-blue-900 text-lg">
-                {sections?.education?.visible ? (
+                {!sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.education.visible", false)
+                      setResumeData("sections.education.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.education.visible", true)
+                      setResumeData("sections.education.visible", false)
                     }
                   />
                 )}
@@ -1182,18 +1218,18 @@ export default function ResumeForm() {
                 />
               </div>
               <div className="flex items-center justify-center text-blue-900 text-lg">
-                {sections?.experience?.visible ? (
+                {!sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.experience.visible", false)
+                      setResumeData("sections.experience.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.experience.visible", true)
+                      setResumeData("sections.experience.visible", false)
                     }
                   />
                 )}
@@ -1388,18 +1424,18 @@ export default function ResumeForm() {
                 />
               </div>
               <div className="flex items-center justify-center text-blue-900 text-lg">
-                {sections?.projects?.visible ? (
+                {!sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.projects.visible", false)
+                      setResumeData("sections.projects.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.projects.visible", true)
+                      setResumeData("sections.projects.visible", false)
                     }
                   />
                 )}
@@ -1561,18 +1597,18 @@ export default function ResumeForm() {
                 />
               </div>
               <div className="flex items-center justify-center text-blue-900 text-lg">
-                {sections?.skills?.visible ? (
+                {!sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.skills.visible", false)
+                      setResumeData("sections.skills.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
                     className="cursor-pointer"
                     onClick={() =>
-                      setResumeData("sections.skills.visible", true)
+                      setResumeData("sections.skills.visible", false)
                     }
                   />
                 )}
@@ -1677,18 +1713,18 @@ export default function ResumeForm() {
               />
             </div>
             <div className="flex items-center justify-center text-white text-lg">
-              {sections?.hobbies?.visible ? (
+              {!sections?.hobbies?.visible ? (
                 <GoEyeClosed
                   className=" cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", false)
+                    setResumeData("sections.hobbies.visible", true)
                   }
                 />
               ) : (
                 <GoEye
                   className="cursor-pointer"
                   onClick={() =>
-                    setResumeData("sections.hobbies.visible", true)
+                    setResumeData("sections.hobbies.visible", false)
                   }
                 />
               )}
@@ -2287,7 +2323,7 @@ export default function ResumeForm() {
           <div>
             {sections?.language?.items?.length > 0 &&
               sections.language.items.map((language, index) => {
-                console.log("langaugae::",language)
+                console.log("langaugae::", language)
                 return (
                   <div
                     key={index}
@@ -2392,6 +2428,7 @@ export default function ResumeForm() {
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
                   setResumeData("metadata.theme.primary", event.target.value);
+                  handleTextColor()
                 }}
               />
             </div>
@@ -2408,8 +2445,10 @@ export default function ResumeForm() {
                   {AccordianColor.map((color, index) => (
                     <div
                       key={color}
-                      onClick={() =>
+                      onClick={() => {
                         setResumeData("metadata.theme.primary", color)
+                        handleTextColor()
+                      }
                       }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
@@ -2425,8 +2464,10 @@ export default function ResumeForm() {
                   {colors.map((color, index) => (
                     <div
                       key={color}
-                      onClick={() =>
+                      onClick={() => {
                         setResumeData("metadata.theme.primary", color)
+                        handleTextColor()
+                      }
                       }
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",

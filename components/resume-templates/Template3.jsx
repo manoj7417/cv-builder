@@ -242,10 +242,10 @@ const Hobbies = ({ fontStyle }) => {
     {data?.visible && data?.items.length > 0 && (
       <div className="hobbies_section">
         <h2
-            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
-          >
-            {data?.name}
-          </h2>
+          className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
+        >
+          {data?.name}
+        </h2>
         <ul className="list-disc pl-5">
           {
             data?.items?.map((item, index) => {
@@ -281,14 +281,15 @@ export const Template3 = () => {
       <div className="p-custom space-y-3">
         <div className="bg-white mx-auto">
           <div
-            className="top_section flex justify-around items-center text-white  py-10"
+            className="top_section flex justify-around items-center py-10"
             style={{
               backgroundColor: metadata?.theme?.primary,
+
             }}
           >
-            <div className="name_profile w-[70%]  h-full px-10">
+            <div className="name_profile w-[70%] h-full px-10" style={{ color: metadata?.theme?.text }}>
               <h1
-                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
+                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words `}
               >
                 {basics?.name}
               </h1>
