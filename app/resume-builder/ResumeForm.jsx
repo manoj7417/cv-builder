@@ -2244,8 +2244,8 @@ export default function ResumeForm() {
             </div>
           </div>
           <div>
-            {sections.language.items.length > 0 &&
-              sections.language.items.map((language, index) => {
+            {sections?.language?.items?.length > 0 &&
+              sections.language.items.map((Language, index) => {
                 return (
                   <div
                     key={index}
