@@ -1666,7 +1666,7 @@ export default function ResumeForm() {
         <div className="lg:px-8 px-5">
           <div className="my-5 flex justify-between w-full items-center p-3">
             <div className="group">
-              <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+              <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                 {sections?.hobbies?.name}
                 <MdEdit className="text-xl" />
               </Label>
@@ -1741,7 +1741,7 @@ export default function ResumeForm() {
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.awards?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -1915,7 +1915,7 @@ export default function ResumeForm() {
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.reference?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -2104,7 +2104,7 @@ export default function ResumeForm() {
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.certificates?.name}
                   <MdEdit className="text-xl" />
                 </Label>
