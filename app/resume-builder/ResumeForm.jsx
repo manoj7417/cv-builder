@@ -712,6 +712,27 @@ export default function ResumeForm() {
     setResumeData("sections.reference.items", updatedReferences);
   };
 
+  const handleReferenceUrlChange = (e, i) => {
+
+    let val = e.target.value;
+    if (!/^https?:\/\//i.test(val)) {
+      val = 'https://' + val;
+    }
+
+    const updatedReferences = data.sections.reference.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            url: val,
+          };
+        }
+        return item;
+      }
+    );
+    setResumeData("sections.reference.items", updatedReferences);
+  }
+
   const handleDeleteReference = (i) => {
     const updatedReferences = data.sections.reference.items.filter(
       (el, index) => {
@@ -735,6 +756,25 @@ export default function ResumeForm() {
     ];
     setResumeData("sections.reference.items", updatedAwards);
   };
+
+  const handlecertificateurlChange = (e, i) => {
+    let val = e.target.value;
+    if (!/^https?:\/\//i.test(val)) {
+      val = 'https://' + val;
+    }
+
+    const updatedCertificates = data.sections.certificates.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            url: val,
+          };
+        }
+        return item;
+      })
+    setResumeData("sections.certificates.items", updatedCertificates);
+  }
 
   const handlecertificatesLabelChange = (e) => {
     setResumeData("sections.certificates.name", e.target.value);
@@ -818,10 +858,13 @@ export default function ResumeForm() {
     const rgb = hexToRgb(data.metadata.theme.primary);
     if (rgb) {
       const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
-      const calculatedTextColor = luminance > 0.5 ? "#484747" : "#FFFFFF";
-      console.log(calculatedTextColor);
-      setResumeData("metadata.theme.text", calculatedTextColor);
+      const calculatedTextColor = luminance > 0.5 ? '#484747' : '#FFFFFF';
+      setResumeData('metadata.theme.text', calculatedTextColor)
     }
+  };
+
+  const stripProtocol = (url) => {
+    return url.replace(/^https?:\/\//i, '');
   };
 
   useEffect(() => {
@@ -2046,11 +2089,10 @@ export default function ResumeForm() {
                                     </div>
                                     <Input
                                       placeholder="Enter url"
-                                      value={reference?.url}
+                                      value={stripProtocol(reference?.url)}
                                       onChange={(e) =>
-                                        handleReferenceInfoChange(e, index)
+                                        handleReferenceUrlChange(e, index)
                                       }
-                                      name="url"
                                     />
                                   </PopoverContent>
                                 </Popover>
@@ -2149,8 +2191,8 @@ export default function ResumeForm() {
                   onChange={handlecertificatesLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
-                {!sections?.certificate?.visible ? (
+              <div className="flex items-center justify-center text-gray-400 text-lg">
+                {!sections?.certificates?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
                     onClick={() =>
@@ -2235,11 +2277,11 @@ export default function ResumeForm() {
                                     </div>
                                     <Input
                                       placeholder="Enter url"
-                                      value={certificate.url}
+                                      value={stripProtocol(certificate.url)}
                                       onChange={(e) =>
-                                        handlecertificateInfoChange(e, index)
+                                        handlecertificateurlChange(e, index)
                                       }
-                                      name="url"
+
                                     />
                                   </PopoverContent>
                                 </Popover>
@@ -2322,7 +2364,6 @@ export default function ResumeForm() {
           <div>
             {sections?.language?.items?.length > 0 &&
               sections.language.items.map((language, index) => {
-                console.log("langaugae::", language);
                 return (
                   <div
                     key={index}

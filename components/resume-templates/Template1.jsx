@@ -293,7 +293,6 @@ const Profile = ({ fontStyle, colorStyle }) => {
 
 const Template1 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
-  console.log(metadata.theme.text)
   const basics = useResumeStore((state) => state.resume.data.basics);
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
