@@ -28,7 +28,7 @@ const ResumeBuilderPage = () => {
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="actions_button bg-white p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-          <div className="2xl:w-[95%] xl:w-[91%] mx-auto flex flex-row justify-between items-center">
+          <div className="w-full mx-[40px] flex flex-row justify-between items-center">
             <div className="header_section w-full md:block hidden">
               <Link
                 href="/user-history"

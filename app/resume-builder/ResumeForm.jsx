@@ -429,7 +429,7 @@ export default function ResumeForm() {
   const handleTemplateThemeChange = (color) => {
     if (color) {
       setResumeData("metadata.theme.primary", color);
-      handleTextColor()
+      handleTextColor();
     }
   };
 
@@ -522,10 +522,9 @@ export default function ResumeForm() {
     setIsDialogOpen(false);
   };
 
-
   const handlehobbieslevelChange = (e) => {
-    setResumeData('sections.hobbies.name', e.target.value);
-  }
+    setResumeData("sections.hobbies.name", e.target.value);
+  };
 
   const handleChangeHobbies = (e) => {
     hobbiesRef.current.value = e.target.value;
@@ -629,8 +628,8 @@ export default function ResumeForm() {
   };
 
   const handleawardslevelChange = (e) => {
-    setResumeData('sections.awards.name', e.target.value);
-  }
+    setResumeData("sections.awards.name", e.target.value);
+  };
 
   const handleAddNewLanguage = () => {
     const updatedLanguages = [
@@ -693,10 +692,9 @@ export default function ResumeForm() {
     setResumeData("sections.awards.items", updatedAwards);
   };
 
-
   const handlereferencelevelChange = (e) => {
-    setResumeData('sections.reference.name', e.target.value);
-  }
+    setResumeData("sections.reference.name", e.target.value);
+  };
 
   const handleReferenceInfoChange = (e, i) => {
     const { name, value } = e.target;
@@ -739,8 +737,8 @@ export default function ResumeForm() {
   };
 
   const handlecertificatesLabelChange = (e) => {
-    setResumeData('sections.certificates.name', e.target.value)
-  }
+    setResumeData("sections.certificates.name", e.target.value);
+  };
 
   const handleAddNewcertificate = () => {
     const updatedCertificates = [
@@ -799,11 +797,13 @@ export default function ResumeForm() {
     hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
 
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null;
   }
 
   function getLuminance(r, g, b) {
@@ -818,11 +818,11 @@ export default function ResumeForm() {
     const rgb = hexToRgb(data.metadata.theme.primary);
     if (rgb) {
       const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
-      const calculatedTextColor = luminance > 0.5 ? '#484747' : '#FFFFFF';
+      const calculatedTextColor = luminance > 0.5 ? "#484747" : "#FFFFFF";
       console.log(calculatedTextColor);
-      setResumeData('metadata.theme.text', calculatedTextColor)
+      setResumeData("metadata.theme.text", calculatedTextColor);
     }
-  }
+  };
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
@@ -831,11 +831,9 @@ export default function ResumeForm() {
     return unsubs;
   });
 
-
-
   useEffect(() => {
-    handleTextColor()
-  }, [])
+    handleTextColor();
+  }, []);
 
   return (
     <>
@@ -1268,7 +1266,8 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1787,7 +1786,7 @@ export default function ResumeForm() {
                   onChange={handleawardslevelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {!sections?.awards?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1961,7 +1960,7 @@ export default function ResumeForm() {
                   onChange={handlereferencelevelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {!sections?.reference?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2150,7 +2149,7 @@ export default function ResumeForm() {
                   onChange={handlecertificatesLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {!sections?.certificate?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2298,7 +2297,7 @@ export default function ResumeForm() {
                   onChange={handlelanguageLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {!sections?.language?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2323,7 +2322,7 @@ export default function ResumeForm() {
           <div>
             {sections?.language?.items?.length > 0 &&
               sections.language.items.map((language, index) => {
-                console.log("langaugae::", language)
+                console.log("langaugae::", language);
                 return (
                   <div
                     key={index}
@@ -2353,7 +2352,10 @@ export default function ResumeForm() {
                               <Input
                                 value={language?.name}
                                 onChange={(e) =>
-                                  handlelanguageNameChange(e.target.value, index)
+                                  handlelanguageNameChange(
+                                    e.target.value,
+                                    index
+                                  )
                                 }
                                 className="mt-2"
                               />
@@ -2398,7 +2400,6 @@ export default function ResumeForm() {
           </div>
         </div>
 
-
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
           <div className="my-5 flex justify-between w-full items-center">
@@ -2428,7 +2429,7 @@ export default function ResumeForm() {
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
                   setResumeData("metadata.theme.primary", event.target.value);
-                  handleTextColor()
+                  handleTextColor();
                 }}
               />
             </div>
@@ -2437,7 +2438,7 @@ export default function ResumeForm() {
           <Accordion
             type="single"
             collapsible
-            className="w-full group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 bg-white"
+            className="w-full group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border-none bg-white"
           >
             <AccordionItem value="color">
               <AccordionTrigger className="group-hover:text-blue-900">
@@ -2446,10 +2447,9 @@ export default function ResumeForm() {
                     <div
                       key={color}
                       onClick={() => {
-                        setResumeData("metadata.theme.primary", color)
-                        handleTextColor()
-                      }
-                      }
+                        setResumeData("metadata.theme.primary", color);
+                        handleTextColor();
+                      }}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                         data?.metadata?.theme?.primary === color && "ring-1"
@@ -2465,10 +2465,9 @@ export default function ResumeForm() {
                     <div
                       key={color}
                       onClick={() => {
-                        setResumeData("metadata.theme.primary", color)
-                        handleTextColor()
-                      }
-                      }
+                        setResumeData("metadata.theme.primary", color);
+                        handleTextColor();
+                      }}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
                         data?.metadata?.theme?.primary === color && "ring-1"
