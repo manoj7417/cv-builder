@@ -3,7 +3,7 @@ import React from 'react'
 
 function CustomLabelInput({ className, children, ...props }) {
     return (
-        <input className={cn("text-2xl border-b-2 text-blue-900 border-blue-900 font-medium focus:outline-none w-full", className)} {...props} type='text' />
+        <input className={cn("focus:outline-none w-full bg-transparent  border-b-2 border-blue-900 text-2xl font-bold text-blue-900", className)} {...props} type='text' />
     )
 }
 

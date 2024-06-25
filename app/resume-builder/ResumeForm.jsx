@@ -433,14 +433,7 @@ export default function ResumeForm() {
   };
 
   const handleSkillsLabelChange = (e) => {
-    const updatedResumeData = {
-      ...data,
-      sections: {
-        ...data.sections,
-        skills: { ...data.sections.skills, name: e.target.value },
-      },
-    };
-    setResumeData(updatedResumeData);
+    setResumeData("sections.skills.name", e.target.value);
   };
 
   const handleAddNewSkills = () => {
@@ -527,6 +520,11 @@ export default function ResumeForm() {
   const handleCloseAIDialog = () => {
     setIsDialogOpen(false);
   };
+
+
+  const handlehobbieslevelChange = (e) => {
+    setResumeData('sections.hobbies.name', e.target.value);
+  }
 
   const handleChangeHobbies = (e) => {
     hobbiesRef.current.value = e.target.value;
@@ -629,6 +627,10 @@ export default function ResumeForm() {
     setResumeData("sections.language.items", updatedLanguages);
   };
 
+  const handleawardslevelChange = (e) => {
+    setResumeData('sections.awards.name', e.target.value);
+  }
+
   const handleAddNewLanguage = () => {
     const updatedLanguages = [
       ...data.sections.language.items,
@@ -690,6 +692,11 @@ export default function ResumeForm() {
     setResumeData("sections.awards.items", updatedAwards);
   };
 
+
+  const handlereferencelevelChange = (e) => {
+    setResumeData('sections.reference.name', e.target.value);
+  }
+
   const handleReferenceInfoChange = (e, i) => {
     const { name, value } = e.target;
     const updatedReferences = data.sections.reference.items.map(
@@ -729,6 +736,10 @@ export default function ResumeForm() {
     ];
     setResumeData("sections.reference.items", updatedAwards);
   };
+
+  const handlecertificatesLabelChange = (e) => {
+    setResumeData('sections.certificates.name', e.target.value)
+  }
 
   const handleAddNewcertificate = () => {
     const updatedCertificates = [
@@ -904,7 +915,7 @@ export default function ResumeForm() {
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
+                  className="hidden group-hover:block "
                   value={data?.sections?.summary?.name}
                   onChange={(e) =>
                     setResumeData("sections.summary.name", e.target.value)
@@ -968,7 +979,7 @@ export default function ResumeForm() {
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
+                  className="hidden group-hover:block "
                   value={data?.sections?.education?.name}
                   onChange={(e) =>
                     setResumeData("sections.education.name", e.target.value)
@@ -1163,7 +1174,7 @@ export default function ResumeForm() {
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
+                  className="hidden group-hover:block "
                   value={data?.sections?.experience?.name}
                   onChange={(e) =>
                     setResumeData("sections.experience.name", e.target.value)
@@ -1369,7 +1380,7 @@ export default function ResumeForm() {
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
+                  className="hidden group-hover:block "
                   value={data?.sections?.projects?.name}
                   onChange={(e) =>
                     setResumeData("sections.projects.name", e.target.value)
@@ -1544,7 +1555,7 @@ export default function ResumeForm() {
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
+                  className="hidden group-hover:block "
                   value={sections?.skills?.name}
                   onChange={handleSkillsLabelChange}
                 />
@@ -1654,10 +1665,17 @@ export default function ResumeForm() {
         {/* Hobbies  */}
         <div className="lg:px-8 px-5">
           <div className="my-5 flex justify-between w-full items-center p-3">
-            <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
-              Hobbies
-              <MdEdit className="text-xl" />
-            </Label>
+            <div className="group">
+              <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                {sections?.hobbies?.name}
+                <MdEdit className="text-xl" />
+              </Label>
+              <CustomLabelInput
+                className="hidden group-hover:block "
+                value={sections?.hobbies?.name}
+                onChange={handlehobbieslevelChange}
+              />
+            </div>
             <div className="flex items-center justify-center text-white text-lg">
               {sections?.hobbies?.visible ? (
                 <GoEyeClosed
@@ -1722,10 +1740,17 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
-                Awards
-                <MdEdit className="text-xl" />
-              </Label>
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                  {sections?.awards?.name}
+                  <MdEdit className="text-xl" />
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block "
+                  value={sections?.awards?.name}
+                  onChange={handleawardslevelChange}
+                />
+              </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {!sections?.awards?.visible ? (
                   <GoEyeClosed
@@ -1889,9 +1914,17 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
-                Reference <MdEdit className="text-xl" />
-              </Label>
+              <div className="group">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                  {sections?.reference?.name}
+                  <MdEdit className="text-xl" />
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block "
+                  value={sections?.reference?.name}
+                  onChange={handlereferencelevelChange}
+                />
+              </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {!sections?.reference?.visible ? (
                   <GoEyeClosed
@@ -2070,9 +2103,17 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
-                Certificates <MdEdit className="text-xl" />
-              </Label>
+              <div className=" w-[40%] group">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                  {sections?.certificates?.name}
+                  <MdEdit className="text-xl" />
+                </Label>
+                <CustomLabelInput
+                  className="hidden group-hover:block"
+                  value={sections?.certificates?.name}
+                  onChange={handlecertificatesLabelChange}
+                />
+              </div>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {!sections?.certificate?.visible ? (
                   <GoEyeClosed
@@ -2213,7 +2254,7 @@ export default function ResumeForm() {
               <div className=" w-[40%] group">
                 <Label className="text-2xl flex group-hover:hidden text-blue-900 font-bold items-center gap-2">
                   {sections?.language?.name}
-                  <MdEdit className="text-xl"/>
+                  <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
