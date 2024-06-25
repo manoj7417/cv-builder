@@ -638,17 +638,19 @@ const ResumeView = () => {
             </div>
           </div>
         </div> */}
-        <div className="toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
-          <div className="auth_section flex justify-center w-full gap-10 items-center">
-            <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
-              <button
-                className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-                onClick={() => setIsContentVisible(true)}
-              >
-                <BsFullscreen className="h-5 w-5 text-black font-bold" />
-              </button>
-            </ResumeTooltip>
-            <div className="tools">
+        <div className="toolbar_floating_button absolute bottom-5 w-auto rounded-full shadow-2xl h-auto mx-auto px-10">
+          <div className="auth_section flex justify-center w-full items-center">
+            <div className="fullscreen">
+              <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
+                <button
+                  className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
+                  onClick={() => setIsContentVisible(true)}
+                >
+                  <BsFullscreen className="h-5 w-5 text-black font-bold" />
+                </button>
+              </ResumeTooltip>
+            </div>
+            <div className="tools border-x-2 border-gray-200">
               <ResumeTooltip icon={FiPlus} title="Zoom In">
                 <button
                   className="2xl:p-3 md:p-2 p-2 rounded-md"
@@ -674,57 +676,61 @@ const ResumeView = () => {
                 </button>
               </ResumeTooltip>
             </div>
-            <ResumeTooltip icon={FaDownload} title="Download Template">
-              <button
-                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={checkUserTemplate}
-                disabled={isLoading}
-              >
-                {/* <FaRegFilePdf className="h-4 w-4 text-black" /> */}
-                <FaDownload className="h-4 w-4 text-black" />
-              </button>
-            </ResumeTooltip>
-            <div className="choose_templates xl:block hidden">
-              <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
-                <Drawer
-                  direction="right"
-                  open={isDrawerOpen}
-                  onOpenChange={setIsDrawerOpen}
+            <div className="download_template flex items-center">
+              <ResumeTooltip icon={FaDownload} title="Download Template">
+                <button
+                  className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                  onClick={checkUserTemplate}
+                  disabled={isLoading}
                 >
-                  <DrawerTrigger
-                    className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
-                    onClick={() => setIsDrawerOpen(true)}
-                  >
-                    <LuLayoutGrid className="h-5 w-5 text-black inline" />
-                  </DrawerTrigger>
-                  <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
-                    <DrawerHeader>
-                      <DrawerTitle>Choose Templates</DrawerTitle>
-                      <DrawerDescription>
-                        <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                          {images.map((image, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="image_section_1 "
-                                onClick={() => handleTemplateChange(image.name)}
-                              >
-                                <Image
-                                  src={image.src}
-                                  alt={image.alt}
-                                  className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
-                                  width={500}
-                                  height={500}
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </DrawerDescription>
-                    </DrawerHeader>
-                  </DrawerContent>
-                </Drawer>
+                  {/* <FaRegFilePdf className="h-4 w-4 text-black" /> */}
+                  <FaDownload className="h-4 w-4 text-black" />
+                </button>
               </ResumeTooltip>
+              <div className="choose_templates xl:block hidden">
+                <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
+                  <Drawer
+                    direction="right"
+                    open={isDrawerOpen}
+                    onOpenChange={setIsDrawerOpen}
+                  >
+                    <DrawerTrigger
+                      className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
+                      onClick={() => setIsDrawerOpen(true)}
+                    >
+                      <LuLayoutGrid className="h-5 w-5 text-black inline" />
+                    </DrawerTrigger>
+                    <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
+                      <DrawerHeader>
+                        <DrawerTitle>Choose Templates</DrawerTitle>
+                        <DrawerDescription>
+                          <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
+                            {images.map((image, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="image_section_1 "
+                                  onClick={() =>
+                                    handleTemplateChange(image.name)
+                                  }
+                                >
+                                  <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
+                                    width={500}
+                                    height={500}
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </DrawerDescription>
+                      </DrawerHeader>
+                    </DrawerContent>
+                  </Drawer>
+                </ResumeTooltip>
+              </div>
             </div>
           </div>
         </div>
