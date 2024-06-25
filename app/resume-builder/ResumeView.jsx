@@ -419,7 +419,7 @@ const ResumeView = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative bg-gray-100">
+      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-gray-100 to-blue-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
@@ -638,7 +638,7 @@ const ResumeView = () => {
             </div>
           </div>
         </div> */}
-        <div className="floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
+        <div className="toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
           <div className="auth_section flex justify-center w-full gap-10 items-center">
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button

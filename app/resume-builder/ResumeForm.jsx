@@ -43,8 +43,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { BsStars } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { FiLink } from "react-icons/fi";
-import { Editor } from 'primereact/editor';
-import { ContextMenu, ContextMenuContent, ContextMenuTrigger } from "@/components/ui/context-menu";
+import { Editor } from "primereact/editor";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 const ImageTemplates = [
   "Template1",
@@ -87,7 +91,7 @@ export default function ResumeForm() {
     },
     skills: "",
   });
-  const hobbiesRef = useRef("")
+  const hobbiesRef = useRef("");
   const [steps, setSteps] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -525,25 +529,25 @@ export default function ResumeForm() {
   };
 
   const handleChangeHobbies = (e) => {
-    hobbiesRef.current.value = e.target.value
-  }
+    hobbiesRef.current.value = e.target.value;
+  };
 
   const handleAddNewHobbies = () => {
-    const newHobbie = hobbiesRef.current.value.trim()
+    const newHobbie = hobbiesRef.current.value.trim();
     if (!newHobbie) {
       return;
     }
-    const updatedHobbies = [...data.sections.hobbies.items, newHobbie]
-    setResumeData('sections.hobbies.items', updatedHobbies)
-    hobbiesRef.current.value = ''
-  }
+    const updatedHobbies = [...data.sections.hobbies.items, newHobbie];
+    setResumeData("sections.hobbies.items", updatedHobbies);
+    hobbiesRef.current.value = "";
+  };
 
   const handleDeleteHobbies = (i) => {
     const updatedHobbies = data.sections.hobbies.items.filter((el, index) => {
-      return index !== i
-    })
-    setResumeData('sections.hobbies.items', updatedHobbies)
-  }
+      return index !== i;
+    });
+    setResumeData("sections.hobbies.items", updatedHobbies);
+  };
 
   const handleAwardNameChange = (val, i) => {
     const updatedAwards = data.sections.awards.items.map((item, index) => {
@@ -556,14 +560,14 @@ export default function ResumeForm() {
       return item;
     });
     setResumeData("sections.awards.items", updatedAwards);
-  }
+  };
 
   const handleDeleteAward = (i) => {
     const updatedAwards = data.sections.awards.items.filter((el, index) => {
       return index !== i;
     });
     setResumeData("sections.awards.items", updatedAwards);
-  }
+  };
 
   const handleAddNewAwards = () => {
     const updatedAwards = [
@@ -571,13 +575,13 @@ export default function ResumeForm() {
       {
         name: "",
         url: "",
-        data: '',
+        data: "",
         issuer: "",
-        description: ''
+        description: "",
       },
     ];
     setResumeData("sections.awards.items", updatedAwards);
-  }
+  };
 
   const handlelanguageLabelChange = (e) => {
     const updatedResumeData = {
@@ -588,7 +592,7 @@ export default function ResumeForm() {
       },
     };
     setResumeData(updatedResumeData);
-  }
+  };
 
   const handlelanguageLevelChange = (val, i) => {
     const updatedLanguages = data.sections.language.items.map((item, index) => {
@@ -601,7 +605,7 @@ export default function ResumeForm() {
       return item;
     });
     setResumeData("sections.language.items", updatedLanguages);
-  }
+  };
 
   const handlelanguageNameChange = (val, i) => {
     const updatedLanguages = data.sections.language.items.map((item, index) => {
@@ -614,14 +618,16 @@ export default function ResumeForm() {
       return item;
     });
     setResumeData("sections.language.items", updatedLanguages);
-  }
+  };
 
   const handleDeletelanguage = (i) => {
-    const updatedLanguages = data.sections.language.items.filter((el, index) => {
-      return index !== i;
-    });
+    const updatedLanguages = data.sections.language.items.filter(
+      (el, index) => {
+        return index !== i;
+      }
+    );
     setResumeData("sections.language.items", updatedLanguages);
-  }
+  };
 
   const handleAddNewLanguage = () => {
     const updatedLanguages = [
@@ -632,7 +638,7 @@ export default function ResumeForm() {
       },
     ];
     setResumeData("sections.language.items", updatedLanguages);
-  }
+  };
 
   const handleAwardInfoChange = (e, i) => {
     const { name, value } = e.target;
@@ -646,8 +652,7 @@ export default function ResumeForm() {
       return item;
     });
     setResumeData("sections.awards.items", updatedAwards);
-  }
-
+  };
 
   const handleAwardDescription = (val, i) => {
     const updatedAwards = data.sections.awards.items.map((item, index) => {
@@ -658,9 +663,9 @@ export default function ResumeForm() {
         };
       }
       return item;
-    })
+    });
     setResumeData("sections.awards.items", updatedAwards);
-  }
+  };
 
   const handleAwardDateChange = (val, i) => {
     let newDate;
@@ -683,28 +688,32 @@ export default function ResumeForm() {
       return item;
     });
     setResumeData("sections.awards.items", updatedAwards);
-  }
+  };
 
   const handleReferenceInfoChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedReferences = data.sections.reference.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          [name]: value,
-        };
+    const updatedReferences = data.sections.reference.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            [name]: value,
+          };
+        }
+        return item;
       }
-      return item;
-    });
+    );
     setResumeData("sections.reference.items", updatedReferences);
-  }
+  };
 
   const handleDeleteReference = (i) => {
-    const updatedReferences = data.sections.references.items.filter((el, index) => {
-      return index !== i;
-    });
+    const updatedReferences = data.sections.references.items.filter(
+      (el, index) => {
+        return index !== i;
+      }
+    );
     setResumeData("sections.reference.items", updatedReferences);
-  }
+  };
 
   const handleAddNewreference = () => {
     const updatedAwards = [
@@ -712,15 +721,14 @@ export default function ResumeForm() {
       {
         name: "",
         url: "",
-        jobTitle: '',
+        jobTitle: "",
         organization: "",
-        email: '',
-        phone: ""
+        email: "",
+        phone: "",
       },
     ];
     setResumeData("sections.reference.items", updatedAwards);
-  }
-
+  };
 
   const handleAddNewcertificate = () => {
     const updatedCertificates = [
@@ -728,49 +736,51 @@ export default function ResumeForm() {
       {
         name: "",
         url: "",
-        description: ""
+        description: "",
       },
     ];
     setResumeData("sections.certificates.items", updatedCertificates);
-
-  }
+  };
 
   const handleDeletecertificate = (i) => {
-    const updatedCertificates = data.sections.certificates.items.filter((el, index) => {
-      return index !== i;
-    });
+    const updatedCertificates = data.sections.certificates.items.filter(
+      (el, index) => {
+        return index !== i;
+      }
+    );
     setResumeData("sections.certificates.items", updatedCertificates);
-  }
-
+  };
 
   const handlecertificateInfoChange = (e, i) => {
     const { name, value } = e.target;
-    const updatedCertificates = data.sections.certificates.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          [name]: value,
-        };
+    const updatedCertificates = data.sections.certificates.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            [name]: value,
+          };
+        }
+        return item;
       }
-      return item;
-    });
+    );
     setResumeData("sections.certificates.items", updatedCertificates);
-  }
+  };
 
   const handlecertificateDescription = (val, i) => {
-    const updatedCertificates = data.sections.certificates.items.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          description: val,
-        };
+    const updatedCertificates = data.sections.certificates.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            description: val,
+          };
+        }
+        return item;
       }
-      return item;
-    })
+    );
     setResumeData("sections.certificates.items", updatedCertificates);
-  }
-
-
+  };
 
   useEffect(() => {
     const unsubs = useResumeStore.subscribe((state) => {
@@ -804,7 +814,6 @@ export default function ResumeForm() {
           </div>
           {ImageTemplates.includes(data.metadata.template) && (
             <div className="w-full mt-5">
-              <Label>Avatar</Label>
               <ImageUpload />
             </div>
           )}
@@ -908,7 +917,7 @@ export default function ResumeForm() {
               >
                 <DialogTrigger asChild>
                   <button
-                    className="generate-ai flex"
+                    className="generate-ai flex items-center"
                     onClick={handleOpenAIDialog}
                   >
                     Generate with AI
@@ -948,7 +957,6 @@ export default function ResumeForm() {
             </div>
           </div>
         </div>
-
 
         {/* education section */}
         <div className="py-5 mt-0 mb-10">
@@ -1114,7 +1122,10 @@ export default function ResumeForm() {
                                 placeholder="eg. Graduated from the University "
                                 value={item.description}
                                 onTextChange={(e) =>
-                                  handleEducationDescriptionChange(e.htmlValue, index)
+                                  handleEducationDescriptionChange(
+                                    e.htmlValue,
+                                    index
+                                  )
                                 }
                               />
                             </div>
@@ -1141,7 +1152,6 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
-
 
         {/* experience section */}
         <div className="py-5 mt-0 mb-10">
@@ -1308,7 +1318,10 @@ export default function ResumeForm() {
                                 placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
                                 value={item.description}
                                 onTextChange={(e) =>
-                                  handleExperienceDescriptionChange(e.htmlValue, index)
+                                  handleExperienceDescriptionChange(
+                                    e.htmlValue,
+                                    index
+                                  )
                                 }
                               />
                             </div>
@@ -1345,7 +1358,6 @@ export default function ResumeForm() {
             </Button>
           </div>
         </div>
-
 
         {/* Projects */}
         <div className="py-5 mt-0 mb-10">
@@ -1491,7 +1503,10 @@ export default function ResumeForm() {
                                 placeholder="e.g.Created and implemented lesson plans based on child-led interests and curiosities."
                                 value={item?.description}
                                 onTextChange={(e) =>
-                                  handleProjectDescriptionChange(e.htmlValue, index)
+                                  handleProjectDescriptionChange(
+                                    e.htmlValue,
+                                    index
+                                  )
                                 }
                               />
                             </div>
@@ -1636,7 +1651,6 @@ export default function ResumeForm() {
           </div>
         </div>
 
-
         {/* Hobbies  */}
         <div className="lg:px-8 px-5">
           <div className="my-5 flex justify-between w-full items-center p-3">
@@ -1668,17 +1682,37 @@ export default function ResumeForm() {
           </div>
           <div className="my-4">
             <div className=" flex w-full flex-wrap py-4">
-              {
-                sections?.hobbies?.items.length > 0 && sections.hobbies.items.map((item, index) => {
-                  return <p key={index} className=" bg-white border  py-2 px-6 items-center justify-center flex rounded-3xl my-2 mr-3">
-                    <span className="mr-4">{item}</span><span className=" cursor-pointer" onClick={() => handleDeleteHobbies(index)}><RxCross2 className='text-red-600' /></span>
-                  </p>
-                })
-              }
+              {sections?.hobbies?.items.length > 0 &&
+                sections.hobbies.items.map((item, index) => {
+                  return (
+                    <p
+                      key={index}
+                      className=" bg-white border  py-2 px-6 items-center justify-center flex rounded-3xl my-2 mr-3"
+                    >
+                      <span className="mr-4">{item}</span>
+                      <span
+                        className=" cursor-pointer"
+                        onClick={() => handleDeleteHobbies(index)}
+                      >
+                        <RxCross2 className="text-red-600" />
+                      </span>
+                    </p>
+                  );
+                })}
             </div>
             <div className="flex justify-between">
-              <Input onChange={handleChangeHobbies} ref={hobbiesRef} className="w-[80%]" />
-              <Button className="flex justify-center" onClick={handleAddNewHobbies}><IoIosAddCircleOutline className="mr-2 text-xl" />Add</Button>
+              <Input
+                onChange={handleChangeHobbies}
+                ref={hobbiesRef}
+                className="w-[80%]"
+              />
+              <Button
+                className="flex justify-center"
+                onClick={handleAddNewHobbies}
+              >
+                <IoIosAddCircleOutline className="mr-2 text-xl" />
+                Add
+              </Button>
             </div>
           </div>
         </div>
@@ -1687,7 +1721,10 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl">Awards</Label>
+              <Label className="text-2xl text-black font-bold flex items-center gap-2">
+                Awards
+                <MdEdit className="text-xl" />
+              </Label>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {!sections?.awards?.visible ? (
                   <GoEyeClosed
@@ -1706,16 +1743,17 @@ export default function ResumeForm() {
                 )}
               </div>
             </div>
-            <div >
+            <div>
               <p className="text-sm text-gray-500">
-                Awards like student competitions or industry accolades belong here.
+                Awards like student competitions or industry accolades belong
+                here.
               </p>
             </div>
           </div>
           <div>
             <div className="w-full">
-              {
-                sections?.awards?.items?.length > 0 && sections?.awards?.items.map((award, index) => {
+              {sections?.awards?.items?.length > 0 &&
+                sections?.awards?.items.map((award, index) => {
                   return (
                     <div
                       key={index}
@@ -1743,41 +1781,81 @@ export default function ResumeForm() {
                             <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
                               <div className="w-full flex items-end justify-between px-4">
                                 <div className="w-[80%]">
-                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Label htmlFor={`skills-${index} my-2`}>
+                                    Name
+                                  </Label>
                                   <Input
                                     value={award?.name}
                                     onChange={(e) =>
-                                      handleAwardNameChange(e.target.value, index)
+                                      handleAwardNameChange(
+                                        e.target.value,
+                                        index
+                                      )
                                     }
-                                    className="w-full"
+                                    className="w-full mt-2"
                                   />
                                 </div>
                                 <Popover>
                                   <PopoverTrigger asChild>
-                                    <Button variant="outline" className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"><FiLink />Link</Button>
+                                    <Button
+                                      variant="outline"
+                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
+                                    >
+                                      <FiLink />
+                                      Link
+                                    </Button>
                                   </PopoverTrigger>
                                   <PopoverContent className="w-80 space-y-4 p-4">
                                     <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-medium">Enter Link</h4>
+                                      <h4 className="text-lg font-medium">
+                                        Enter Link
+                                      </h4>
                                     </div>
-                                    <Input placeholder="Enter url" value={award?.url} onChange={(e) => handleAwardInfoChange(e, index)} name="url" />
+                                    <Input
+                                      placeholder="Enter url"
+                                      value={award?.url}
+                                      onChange={(e) =>
+                                        handleAwardInfoChange(e, index)
+                                      }
+                                      name="url"
+                                    />
                                   </PopoverContent>
                                 </Popover>
                               </div>
                               <div className="w-full my-3 px-4 flex items-end justify-between">
                                 <div className="w-[48%]">
                                   <Label>Issuer</Label>
-                                  <Input placeholder="Enter Issuer" value={award?.issuer} onChange={(e) => handleAwardInfoChange(e, index)} name="issuer" />
+                                  <Input
+                                    placeholder="Enter Issuer"
+                                    value={award?.issuer}
+                                    onChange={(e) =>
+                                      handleAwardInfoChange(e, index)
+                                    }
+                                    name="issuer"
+                                    className="mt-2"
+                                  />
                                 </div>
                                 <div className="w-[48%]  flex flex-col">
                                   <Label>Date</Label>
-                                  <DatePicker picker="month" className="h-10" onChange={(e) => handleAwardDateChange(e, index)} />
+                                  <DatePicker
+                                    picker="month"
+                                    className="h-10 mt-2"
+                                    onChange={(e) =>
+                                      handleAwardDateChange(e, index)
+                                    }
+                                  />
                                 </div>
                               </div>
-                              <div className="px-4 py-2">
+                              <div className="px-4 py-2 w-full">
                                 <Label>Description</Label>
                                 <Editor
-                                  value={award?.description} onTextChange={(e) => handleAwardDescription(e.htmlValue, index)} name="description" />
+                                  value={award?.description}
+                                  onTextChange={(e) =>
+                                    handleAwardDescription(e.htmlValue, index)
+                                  }
+                                  name="description"
+                                  className="mt-2"
+                                />
                               </div>
                             </div>
                           </AccordionContent>
@@ -1790,13 +1868,12 @@ export default function ResumeForm() {
                       />
                     </div>
                   );
-                })
-              }
+                })}
             </div>
             <div className="mt-5 px-10">
               <div>
                 <Button
-                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  className="w-full bg-transparent text-blue-950 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
                   onClick={handleAddNewAwards}
                 >
                   <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1811,7 +1888,9 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl">Reference</Label>
+              <Label className="text-2xl text-black font-bold flex items-center gap-2">
+                Reference <MdEdit className="text-xl" />
+              </Label>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {!sections?.reference?.visible ? (
                   <GoEyeClosed
@@ -1830,17 +1909,17 @@ export default function ResumeForm() {
                 )}
               </div>
             </div>
-            <div >
+            <div>
               <p className="text-sm text-gray-500">
-                If you have former colleagues or bosses that vouch for you, list them.
+                If you have former colleagues or bosses that vouch for you, list
+                them.
               </p>
             </div>
-
           </div>
           <div>
             <div className="w-full">
-              {
-                sections?.reference?.items?.length > 0 && sections?.reference?.items.map((reference, index) => {
+              {sections?.reference?.items?.length > 0 &&
+                sections?.reference?.items.map((reference, index) => {
                   return (
                     <div
                       key={index}
@@ -1868,7 +1947,9 @@ export default function ResumeForm() {
                             <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
                               <div className="w-full flex items-end justify-between px-4">
                                 <div className="w-[80%]">
-                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Label htmlFor={`skills-${index}`}>
+                                    Name
+                                  </Label>
                                   <Input
                                     value={reference?.name}
                                     onChange={(e) =>
@@ -1880,34 +1961,77 @@ export default function ResumeForm() {
                                 </div>
                                 <Popover>
                                   <PopoverTrigger asChild>
-                                    <Button variant="outline" className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"><FiLink />Link</Button>
+                                    <Button
+                                      variant="outline"
+                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
+                                    >
+                                      <FiLink />
+                                      Link
+                                    </Button>
                                   </PopoverTrigger>
                                   <PopoverContent className="w-80 space-y-4 p-4">
                                     <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-medium">Enter Link</h4>
+                                      <h4 className="text-lg font-medium">
+                                        Enter Link
+                                      </h4>
                                     </div>
-                                    <Input placeholder="Enter url" value={reference?.url} onChange={(e) => handleReferenceInfoChange(e, index)} name="url" />
+                                    <Input
+                                      placeholder="Enter url"
+                                      value={reference?.url}
+                                      onChange={(e) =>
+                                        handleReferenceInfoChange(e, index)
+                                      }
+                                      name="url"
+                                    />
                                   </PopoverContent>
                                 </Popover>
                               </div>
                               <div className="w-full my-3 px-4 flex items-end justify-between">
                                 <div className="w-[48%]">
                                   <Label>JobTitle</Label>
-                                  <Input placeholder="Enter Issuer" value={reference?.jobTitle} onChange={(e) => handleReferenceInfoChange(e, index)} name="jobTitle" />
+                                  <Input
+                                    placeholder="Enter Issuer"
+                                    value={reference?.jobTitle}
+                                    onChange={(e) =>
+                                      handleReferenceInfoChange(e, index)
+                                    }
+                                    name="jobTitle"
+                                  />
                                 </div>
                                 <div className="w-[48%]  flex flex-col">
                                   <Label>Organization</Label>
-                                  <Input placeholder="Enter Organization" value={reference?.organization} onChange={(e) => handleReferenceInfoChange(e, index)} name="organization" />
+                                  <Input
+                                    placeholder="Enter Organization"
+                                    value={reference?.organization}
+                                    onChange={(e) =>
+                                      handleReferenceInfoChange(e, index)
+                                    }
+                                    name="organization"
+                                  />
                                 </div>
                               </div>
                               <div className="w-full my-3 px-4 flex items-end justify-between">
                                 <div className="w-[48%]">
                                   <Label>Email</Label>
-                                  <Input placeholder="Enter email" value={reference?.email} onChange={(e) => handleReferenceInfoChange(e, index)} name="email" />
+                                  <Input
+                                    placeholder="Enter email"
+                                    value={reference?.email}
+                                    onChange={(e) =>
+                                      handleReferenceInfoChange(e, index)
+                                    }
+                                    name="email"
+                                  />
                                 </div>
                                 <div className="w-[48%]  flex flex-col">
                                   <Label>Phone</Label>
-                                  <Input placeholder="Enter a phone number" value={reference?.phone} onChange={(e) => handleReferenceInfoChange(e, index)} name="phone" />
+                                  <Input
+                                    placeholder="Enter a phone number"
+                                    value={reference?.phone}
+                                    onChange={(e) =>
+                                      handleReferenceInfoChange(e, index)
+                                    }
+                                    name="phone"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -1921,8 +2045,7 @@ export default function ResumeForm() {
                       />
                     </div>
                   );
-                })
-              }
+                })}
             </div>
             <div className="mt-5 px-10">
               <div>
@@ -1942,7 +2065,9 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl">Certificates</Label>
+              <Label className="text-2xl text-black font-bold flex items-center gap-2">
+                Certificates <MdEdit className="text-xl" />
+              </Label>
               <div className="flex items-center justify-center text-gray-400 text-lg">
                 {!sections?.certificate?.visible ? (
                   <GoEyeClosed
@@ -1961,17 +2086,17 @@ export default function ResumeForm() {
                 )}
               </div>
             </div>
-            <div >
+            <div>
               <p className="text-sm text-gray-500">
-                Drivers licenses and other industry-specific certificates you have belong here.
+                Drivers licenses and other industry-specific certificates you
+                have belong here.
               </p>
             </div>
-
           </div>
           <div>
             <div className="w-full">
-              {
-                sections?.certificates?.items?.length > 0 && sections?.certificates?.items.map((certificate, index) => {
+              {sections?.certificates?.items?.length > 0 &&
+                sections?.certificates?.items.map((certificate, index) => {
                   return (
                     <div
                       key={index}
@@ -1999,7 +2124,9 @@ export default function ResumeForm() {
                             <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
                               <div className="w-full flex items-end justify-between px-4">
                                 <div className="w-[80%]">
-                                  <Label htmlFor={`skills-${index}`}>Name</Label>
+                                  <Label htmlFor={`skills-${index}`}>
+                                    Name
+                                  </Label>
                                   <Input
                                     value={certificate?.name}
                                     onChange={(e) =>
@@ -2011,18 +2138,41 @@ export default function ResumeForm() {
                                 </div>
                                 <Popover>
                                   <PopoverTrigger asChild>
-                                    <Button variant="outline" className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"><FiLink />Link</Button>
+                                    <Button
+                                      variant="outline"
+                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
+                                    >
+                                      <FiLink />
+                                      Link
+                                    </Button>
                                   </PopoverTrigger>
                                   <PopoverContent className="w-80 space-y-4 p-4">
                                     <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-medium">Enter Link</h4>
+                                      <h4 className="text-lg font-medium">
+                                        Enter Link
+                                      </h4>
                                     </div>
-                                    <Input placeholder="Enter url" value={certificate.url} onChange={(e) => handlecertificateInfoChange(e, index)} name="url" />
+                                    <Input
+                                      placeholder="Enter url"
+                                      value={certificate.url}
+                                      onChange={(e) =>
+                                        handlecertificateInfoChange(e, index)
+                                      }
+                                      name="url"
+                                    />
                                   </PopoverContent>
                                 </Popover>
                               </div>
                               <div className="px-4 py-6">
-                                <Editor value={certificate?.description} onTextChange={(e) => handlecertificateDescription(e.htmlValue, index)} />
+                                <Editor
+                                  value={certificate?.description}
+                                  onTextChange={(e) =>
+                                    handlecertificateDescription(
+                                      e.htmlValue,
+                                      index
+                                    )
+                                  }
+                                />
                               </div>
                             </div>
                           </AccordionContent>
@@ -2035,8 +2185,7 @@ export default function ResumeForm() {
                       />
                     </div>
                   );
-                })
-              }
+                })}
             </div>
             <div className="mt-5 px-10">
               <div>
@@ -2057,8 +2206,9 @@ export default function ResumeForm() {
           <div className="space-y-2 px-10">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl flex group-hover:hidden">
+                <Label className="text-2xl flex group-hover:hidden text-black font-bold items-center gap-2">
                   {sections?.language?.name}
+                  <MdEdit className="text-xl"/>
                 </Label>
                 <CustomLabelInput
                   className="hidden group-hover:block"
@@ -2085,14 +2235,12 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
-                Select languages
-              </p>
+              <p className="text-sm text-gray-500">Select languages</p>
             </div>
           </div>
           <div>
-            {sections.language.items.length > 0 &&
-              sections.language.items.map((language, index) => {
+            {sections?.language?.items?.length > 0 &&
+              sections.language.items.map((Language, index) => {
                 return (
                   <div
                     key={index}
