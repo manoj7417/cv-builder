@@ -643,7 +643,7 @@ const ResumeView = () => {
             <div className="fullscreen">
               <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
                 <button
-                  className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
+                  className="mr-3 2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
                   onClick={() => setIsContentVisible(true)}
                 >
                   <BsFullscreen className="h-5 w-5 text-black font-bold" />
@@ -679,7 +679,7 @@ const ResumeView = () => {
             <div className="download_template flex items-center">
               <ResumeTooltip icon={FaDownload} title="Download Template">
                 <button
-                  className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                  className="ml-3 2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
                   onClick={checkUserTemplate}
                   disabled={isLoading}
                 >
