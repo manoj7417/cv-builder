@@ -47,10 +47,10 @@ const ResumeBuilderPage = () => {
                     />
                   </svg>
                 </span>
-                <span className="ease absolute flex h-full w-full text-sm transform items-center justify-center text-blue-950 transition-all duration-300 group-hover:-translate-x-full">
+                <span className="ease absolute flex h-full w-full text-sm transform items-center justify-center text-blue-950 font-bold transition-all duration-300 group-hover:-translate-x-full">
                   Back
                 </span>
-                <span className="invisible relative">Back</span>
+                <span className="invisible relative text-blue-900 font-bold">Back</span>
               </Link>
             </div>
             <div className="profile_section">

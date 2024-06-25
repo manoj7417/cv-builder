@@ -792,7 +792,7 @@ export default function ResumeForm() {
 
   return (
     <>
-      <div className="px-5 py-20 bg-slate-50">
+      <div className="px-5 py-20 bg-white">
         {generatingResume && (
           <div
             className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"
@@ -807,7 +807,7 @@ export default function ResumeForm() {
         <div className="lg:px-10 px-5">
           <div className="flex justify-between py-3 rounded-md">
             <div className="group">
-              <Label className="text-2xl text-black font-bold">
+              <Label className="text-2xl text-blue-900 font-bold">
                 Basics Information
               </Label>
             </div>
@@ -898,13 +898,13 @@ export default function ResumeForm() {
               <div className="group">
                 <Label
                   htmlFor="Profile"
-                  className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2"
+                  className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2"
                 >
                   {data?.sections?.summary?.name}
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
+                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
                   value={data?.sections?.summary?.name}
                   onChange={(e) =>
                     setResumeData("sections.summary.name", e.target.value)
@@ -963,19 +963,19 @@ export default function ResumeForm() {
           <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.education?.name}
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
+                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
                   value={data?.sections?.education?.name}
                   onChange={(e) =>
                     setResumeData("sections.education.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-black text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1158,19 +1158,19 @@ export default function ResumeForm() {
           <div className="space-y-2 px-10">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.experience?.name}
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
+                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
                   value={data?.sections?.experience?.name}
                   onChange={(e) =>
                     setResumeData("sections.experience.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-black text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1364,19 +1364,19 @@ export default function ResumeForm() {
           <div className="space-y-2 px-10">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.projects?.name}
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
+                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
                   value={data?.sections?.projects?.name}
                   onChange={(e) =>
                     setResumeData("sections.projects.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-black text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1539,17 +1539,17 @@ export default function ResumeForm() {
           <div className="space-y-2 px-10">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                   {sections?.skills?.name}
                   <MdEdit className="text-xl" />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block bg-transparent text-black border-b-2 border-black text-2xl font-bold"
+                  className="hidden group-hover:block bg-transparent text-blue-900 border-b-2 border-blue-900 text-2xl font-bold"
                   value={sections?.skills?.name}
                   onChange={handleSkillsLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-black text-lg">
+              <div className="flex items-center justify-center text-blue-900 text-lg">
                 {sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1654,7 +1654,7 @@ export default function ResumeForm() {
         {/* Hobbies  */}
         <div className="lg:px-8 px-5">
           <div className="my-5 flex justify-between w-full items-center p-3">
-            <Label className="text-2xl text-black font-bold flex items-center gap-2">
+            <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
               Hobbies
               <MdEdit className="text-xl" />
             </Label>
@@ -1722,7 +1722,7 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl text-black font-bold flex items-center gap-2">
+              <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
                 Awards
                 <MdEdit className="text-xl" />
               </Label>
@@ -1889,7 +1889,7 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl text-black font-bold flex items-center gap-2">
+              <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
                 Reference <MdEdit className="text-xl" />
               </Label>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -1957,7 +1957,7 @@ export default function ResumeForm() {
                                       handleReferenceInfoChange(e, index)
                                     }
                                     name="name"
-                                    className="w-full"
+                                    className="w-full mt-2"
                                   />
                                 </div>
                                 <Popover>
@@ -1997,6 +1997,7 @@ export default function ResumeForm() {
                                       handleReferenceInfoChange(e, index)
                                     }
                                     name="jobTitle"
+                                    className="mt-2"
                                   />
                                 </div>
                                 <div className="w-[48%]  flex flex-col">
@@ -2008,6 +2009,7 @@ export default function ResumeForm() {
                                       handleReferenceInfoChange(e, index)
                                     }
                                     name="organization"
+                                    className="mt-2"
                                   />
                                 </div>
                               </div>
@@ -2021,6 +2023,7 @@ export default function ResumeForm() {
                                       handleReferenceInfoChange(e, index)
                                     }
                                     name="email"
+                                    className="mt-2"
                                   />
                                 </div>
                                 <div className="w-[48%]  flex flex-col">
@@ -2032,6 +2035,7 @@ export default function ResumeForm() {
                                       handleReferenceInfoChange(e, index)
                                     }
                                     name="phone"
+                                    className="mt-2"
                                   />
                                 </div>
                               </div>
@@ -2051,7 +2055,7 @@ export default function ResumeForm() {
             <div className="mt-5 px-10">
               <div>
                 <Button
-                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
                   onClick={handleAddNewreference}
                 >
                   <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2066,7 +2070,7 @@ export default function ResumeForm() {
         <div className="py-5 mt-0 mb-10">
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
-              <Label className="text-2xl text-black font-bold flex items-center gap-2">
+              <Label className="text-2xl text-blue-900 font-bold flex items-center gap-2">
                 Certificates <MdEdit className="text-xl" />
               </Label>
               <div className="flex items-center justify-center text-gray-400 text-lg">
@@ -2134,7 +2138,7 @@ export default function ResumeForm() {
                                       handlecertificateInfoChange(e, index)
                                     }
                                     name="name"
-                                    className="w-full"
+                                    className="w-full mt-2"
                                   />
                                 </div>
                                 <Popover>
@@ -2164,7 +2168,7 @@ export default function ResumeForm() {
                                   </PopoverContent>
                                 </Popover>
                               </div>
-                              <div className="px-4 py-6">
+                              <div className="px-4 py-6 w-full">
                                 <Editor
                                   value={certificate?.description}
                                   onTextChange={(e) =>
@@ -2191,7 +2195,7 @@ export default function ResumeForm() {
             <div className="mt-5 px-10">
               <div>
                 <Button
-                  className="w-full bg-white text-blue-900 hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
                   onClick={handleAddNewcertificate}
                 >
                   <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2207,7 +2211,7 @@ export default function ResumeForm() {
           <div className="space-y-2 px-10">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl flex group-hover:hidden text-black font-bold items-center gap-2">
+                <Label className="text-2xl flex group-hover:hidden text-blue-900 font-bold items-center gap-2">
                   {sections?.language?.name}
                   <MdEdit className="text-xl"/>
                 </Label>
@@ -2273,6 +2277,7 @@ export default function ResumeForm() {
                                 onChange={(e) =>
                                   handlelanguageNameChange(e.target.value, index)
                                 }
+                                className="mt-2"
                               />
                             </div>
                             <div className=" w-1/2 flex flex-col items-start justify-center">
@@ -2283,7 +2288,7 @@ export default function ResumeForm() {
                                 Level
                               </Label>
                               <SkillsSelect
-                                className="w-full"
+                                className="w-full mt-2"
                                 onSelectChange={handlelanguageLevelChange}
                                 index={index}
                                 value={language?.level}
@@ -2319,7 +2324,7 @@ export default function ResumeForm() {
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
           <div className="my-5 flex justify-between w-full items-center">
-            <Label className="text-2xl">Theme</Label>
+            <Label className="text-2xl text-blue-900 font-bold">Theme</Label>
             <div className="flex rounded-md items-center space-x-4 my-2">
               <Popover>
                 <PopoverTrigger asChild>

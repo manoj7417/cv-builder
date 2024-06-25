@@ -419,7 +419,7 @@ const ResumeView = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-gray-100 to-blue-100">
+      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-white to-blue-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
