@@ -11,7 +11,7 @@ import { FaStar } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaRocket, FaCrown } from "react-icons/fa";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../components/HomepageNew/Homepage.css";
 
 const Page = () => {
@@ -54,6 +54,18 @@ const Page = () => {
       borderColor: "border-green-200",
     },
   ];
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 5000); // 5 seconds delay
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -144,11 +156,13 @@ const Page = () => {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="text-gray-500">30 TESTS</p>
-                      <p className="text-gray-500">480 QUESTIONS</p>
+                      <p className="text-gray-500">450 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        View more
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -157,7 +171,6 @@ const Page = () => {
                   </div>
                   <div className="absolute bottom-0 left-0 h-1 w-full bg-blue-950 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 </div>
-
                 <div className="bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative">
                   <h2 className="text-xl font-bold mb-2">Verbal Reasoning</h2>
                   <p className="text-gray-700 mb-4">
