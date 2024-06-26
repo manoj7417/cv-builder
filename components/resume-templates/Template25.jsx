@@ -71,6 +71,59 @@ const Education = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Awards = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.awards
+  );
+  return (
+    <div className="education_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="education_header">
+            <h2
+              className={`font-semibold font-serif text-[#64665e] ${fontStyle.subMianHeadingFont}`}
+            >
+              {data?.name}
+            </h2>
+            <div className="border-b-2 border-gray-600"></div>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="education1 my-5" key={index}>
+                    <div className="education_names flex justify-between my-1">
+                      <div className="education_degree">
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                          {item?.name}
+                        </h3>
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.issuer}
+                        </h4>
+                      </div>
+                      <div className="education_year text-end">
+                        <p
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                        >
+                          {item?.date}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 const Experience = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
@@ -518,6 +571,12 @@ const Template25 = () => {
               </div>
               <div className="projects">
                   <Projects
+                    fontStyle={fontStyle}
+                    colorStyle={metadata?.theme?.primary}
+                  />
+                </div>
+                <div className="awrds">
+                  <Awards
                     fontStyle={fontStyle}
                     colorStyle={metadata?.theme?.primary}
                   />

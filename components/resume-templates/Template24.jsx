@@ -69,11 +69,44 @@ const Education = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Hobbies = ({ fontStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div className="px-5 py-10">
+      <h2
+        className={`text-3xl font-semibold p-2 mb-4 font-serif text-white ${fontStyle.headingFont}`}
+      >
+        {data?.name}
+      </h2>
+      <div className="hobbies_section">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul>
+              {data?.items?.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="text-15px text-white pl-4 py-2 font-semibold"
+                  >
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Experience = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
-  console.log("data::",data)
+  console.log("data::", data);
   return (
     <div className="experience_section w-full mt-2">
       {data?.visible && data?.items?.length > 0 && (
@@ -242,6 +275,58 @@ const Skills = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Languages = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.language);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-4">
+          <h2
+            className={`text-3xl font-semibold p-2 mb-4 font-serif text-white text-center ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-white w-full flex justify-end items-center">
+            <ul className="w-full">
+              {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
+                return (
+                  <li
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-2`}
+                    key={i}
+                  >
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div className="w-1/2 text-end bg-white h-2.5">
+                      <div
+                        className="bg-green-800 h-2.5"
+                        style={{ width: `${level}%` }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Profile = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
@@ -352,8 +437,10 @@ const Template24 = () => {
                 </li>
               </ul>
             </section>
-            <div className="rounded-t-full max-h-full h-screen pt-16 px-8 mx-2 bg-[#5bbf83] text-white">
+            <div className="rounded-t-full max-h-full h-screen pt-16 px-8 bg-[#5bbf83] text-white">
               <Skills fontStyle={fontStyle} />
+              <Hobbies fontStyle={fontStyle} />
+              <Languages fontStyle={fontStyle} />
             </div>
           </div>
           <div className="pt-10 px-5">
