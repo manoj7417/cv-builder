@@ -669,6 +669,27 @@ export default function ResumeForm() {
     setResumeData("sections.awards.items", updatedAwards);
   };
 
+  const handleAwardurlChange = (e, i) => {
+
+    let val = e.target.value;
+    if (!/^https?:\/\//i.test(val)) {
+      val = 'https://' + val;
+    }
+
+    const updatedAwards = data.sections.awards.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            url: val,
+          };
+        }
+        return item;
+      }
+    );
+    setResumeData("sections.awards.items", updatedAwards);
+  }
+
   const handleAwardDateChange = (val, i) => {
     let newDate;
     if (!val) {
@@ -839,10 +860,10 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
       : null;
   }
 
@@ -1309,8 +1330,7 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1917,11 +1937,10 @@ export default function ResumeForm() {
                                     </div>
                                     <Input
                                       placeholder="Enter url"
-                                      value={award?.url}
+                                      value={stripProtocol(award?.url)}
                                       onChange={(e) =>
-                                        handleAwardInfoChange(e, index)
+                                        handleAwardurlChange(e, index)
                                       }
-                                      name="url"
                                     />
                                   </PopoverContent>
                                 </Popover>
