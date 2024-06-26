@@ -29,10 +29,13 @@ const ResumeBuilderPage = () => {
   return (
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
-        <div className="actions_button bg-slate-50 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-          <div className="2xl:w-[95%] xl:w-[92%] mx-auto flex flex-row justify-between items-center">
+        <div className="actions_button bg-white p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+          <div className="w-full mx-[40px] flex flex-row justify-between items-center">
             <div className="header_section w-full md:block hidden">
-              <Link href="/user-history" className="group relative inline-flex items-center justify-center overflow-hidden border-2 border-blue-950 px-8 py-2 rounded-md font-medium text-white shadow-md transition duration-300 ease-out">
+              <Link
+                href="/user-history"
+                className="group relative inline-flex items-center justify-center overflow-hidden border-2 border-blue-950 px-8 py-1 rounded-md font-medium text-white shadow-md transition duration-300 ease-out"
+              >
                 <span className="ease absolute inset-0 flex h-full w-full translate-x-full items-center justify-center bg-blue-950 text-white duration-300 group-hover:translate-x-0">
                   <svg
                     className="h-4 w-4"
@@ -52,7 +55,9 @@ const ResumeBuilderPage = () => {
                 <span className="ease absolute flex h-full w-full text-sm transform items-center justify-center text-blue-950 font-bold transition-all duration-300 group-hover:-translate-x-full">
                   Back
                 </span>
-                <span className="invisible relative text-blue-900 font-bold">Back</span>
+                <span className="invisible relative text-blue-900 font-bold">
+                  Back
+                </span>
               </Link>
             </div>
             <div className="profile_section">

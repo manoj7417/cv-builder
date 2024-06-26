@@ -310,7 +310,9 @@ const Hobbies = ({ fontStyle, headingColor }) => {
 }
 
 export const Template4 = () => {
+
   const resumeData = useResumeStore(state => state?.resume.data);
+
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
