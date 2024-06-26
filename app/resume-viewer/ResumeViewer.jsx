@@ -438,6 +438,7 @@ const ResumeViewPage = () => {
           </Dialog>
         )}
         <div>
+
           <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
             <div className="header_section w-full md:block hidden">
               <Link
@@ -456,7 +457,6 @@ const ResumeViewPage = () => {
                 <BsFullscreen className="h-4 w-4 text-white mr-2" />
                 <span>Full Screen</span>
               </button>
-              {/* <Controls /> */}
               <div className="tools">
                 <button
                   className="2xl:p-3 md:p-2 p-2 bg-blue-900 text-white rounded-md"
@@ -529,7 +529,6 @@ const ResumeViewPage = () => {
 
             <div className="profile_section">
               <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
-                {/* Avatar with Dropdown */}
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setIsToggleOpen(!isToggleOpen)}
@@ -547,7 +546,6 @@ const ResumeViewPage = () => {
                       <span className="sr-only"> 7 new emails </span>
                     </span>
                   </button>
-                  {/* Dropdown */}
                   {isToggleOpen && (
                     <div
                       className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
@@ -574,10 +572,11 @@ const ResumeViewPage = () => {
                     </div>
                   )}
                 </div>
-                {/* End Avatar with Dropdown */}
+
               </div>
             </div>
           </div>
+
           <div
             className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
             style={{
@@ -598,47 +597,50 @@ const ResumeViewPage = () => {
               </div>
             </div>
           </div>
-          {isContentVisible && (
-            <div
-              className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
-              id="modal-id"
-            >
-              <div className="absolute bg-black opacity-80 inset-0 z-0 w-full" />
 
-              {/*content*/}
-              <div className="">
-                <div
-                  onClick={() => setIsContentVisible(false)}
-                  className="z-50 absolute top-6 right-10 cursor-pointer"
-                >
-                  <LiaTimesSolid className="text-white text-3xl" />
-                </div>
-                <div
-                  className="shadow-2xl relative no-scrollbar h-screen overflow-y-scroll"
-                  style={{
-                    scale: { scale },
-                  }}
-                >
-                  <div
-                    id="resume"
-                    className={cn("relative bg-white")}
-                    style={{
-                      width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                      height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                      
-                    }}
-                  >
-                    <GetTemplate name={data?.metadata?.template} />
-                    <div className="bg-white text-gray-500 text-end">
-                      <p className="text-sm">@Genies Career Hub</p>
-                    </div>
-                  </div>
+        </div>
+      </div>
+
+      {isContentVisible && (
+        <div
+          className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster absolute left-0 top-0 flex justify-center items-center inset-0 z-[100] outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
+          id="modal-id"
+        >
+          <div className="absolute bg-black opacity-80 inset-0 w-full" />
+
+
+          <div className="">
+            <div
+              onClick={() => setIsContentVisible(false)}
+              className="z-50 absolute top-6 right-10 cursor-pointer"
+            >
+              <LiaTimesSolid className="text-white text-3xl" />
+            </div>
+            <div
+              className="shadow-2xl relative no-scrollbar h-screen overflow-y-scroll"
+              style={{
+                scale: { scale },
+              }}
+            >
+              <div
+                id="resume"
+                className={cn("relative bg-white")}
+                style={{
+                  width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
+                  height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
+
+                }}
+              >
+                <GetTemplate name={data?.metadata?.template} />
+                <div className="bg-white text-gray-500 text-end">
+                  <p className="text-sm">@Genies Career Hub</p>
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
+
     </>
   );
 };

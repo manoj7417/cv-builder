@@ -210,7 +210,7 @@ const images = [
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 
-const ResumeView = () => {
+const ResumeView = ({ setIsContentVisible }) => {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [scale, setScale] = useState(0.8);
@@ -219,7 +219,7 @@ const ResumeView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
+
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
@@ -522,44 +522,7 @@ const ResumeView = () => {
               </div>
             </div>
           </div>
-          {isContentVisible && (
-            <div
-              className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
-              id="modal-id"
-            >
-              <div className="absolute bg-black opacity-80 inset-0 z-0 w-full" />
 
-              {/*content*/}
-              <div className="">
-                <div
-                  onClick={() => setIsContentVisible(false)}
-                  className="z-50 absolute top-6 right-10 cursor-pointer"
-                >
-                  <LiaTimesSolid className="text-white text-3xl" />
-                </div>
-                <div
-                  className="shadow-lg relative no-scrollbar h-screen overflow-y-scroll"
-                  style={{
-                    scale: { scale },
-                  }}
-                >
-                  <div
-                    id="resume"
-                    className={cn("relative bg-white")}
-                    style={{
-                      width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                      height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                    }}
-                  >
-                    <GetTemplate name={data?.metadata?.template} />
-                    <div className="bg-white text-gray-500 text-end">
-                      <p className="text-sm">@Genies Career Hub</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
         {/* <div className="floating_button absolute bottom-5 bg-white w-[50%] rounded-full shadow-2xl">
           <div className="auth_section flex justify-center w-full gap-10 items-center">
@@ -676,12 +639,22 @@ const ResumeView = () => {
                 </button>
               </ResumeTooltip>
             </div>
-            <div className="download_template flex items-center">
-              <ResumeTooltip icon={FaDownload} title="Download Template">
-                <button
-                  className="ml-3 2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                  onClick={checkUserTemplate}
-                  disabled={isLoading}
+            <ResumeTooltip icon={FaDownload} title="Download Template">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                onClick={checkUserTemplate}
+                disabled={isLoading}
+              >
+
+                <FaDownload className="h-4 w-4 text-black" />
+              </button>
+            </ResumeTooltip>
+            <div className="choose_templates xl:block hidden">
+              <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
+                <Drawer
+                  direction="right"
+                  open={isDrawerOpen}
+                  onOpenChange={setIsDrawerOpen}
                 >
                   {/* <FaRegFilePdf className="h-4 w-4 text-black" /> */}
                   <FaDownload className="h-4 w-4 text-black" />
@@ -735,6 +708,7 @@ const ResumeView = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };
