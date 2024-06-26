@@ -8,6 +8,7 @@ import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useResumeStore } from "@/app/store/ResumeStore";
+import Link from "next/link";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -206,7 +207,7 @@ const Skills = ({ fontStyle, headingColor }) => {
         <div className="skills_section py-4">
           <div className="skill_head">
             <h2
-              className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+              className={`uppercase font-bold ${fontStyle.headingFont}`}
               style={{
                 color: headingColor,
               }}
@@ -220,7 +221,7 @@ const Skills = ({ fontStyle, headingColor }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1`}
+                    className={`font-bold ${fontStyle.skillsFont} my-2 py-2`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -239,6 +240,130 @@ const Skills = ({ fontStyle, headingColor }) => {
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+const Hobbies = ({ fontStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div>
+      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="-pl-5">
+              {data?.items?.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="text-15px py-2 font-semibold text-gray-600"
+                  >
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Languages = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.language);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-4">
+          <div className="skill_head">
+            <h2
+              className={`uppercase font-bold ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+              }}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          <div className="text-gray-600 w-full">
+            <ul className="w-full">
+              {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
+                return (
+                  <li
+                    className={`font-bold ${fontStyle.skillsFont} my-2 py-2`}
+                    key={i}
+                  >
+                    <div className="text-start w-1/2 mb-1">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div className="w-1/2 text-end bg-white h-2.5">
+                      <div
+                        className="bg-black h-2.5"
+                        style={{ width: `${level}%` }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Certificates = ({ fontStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.certificates
+  );
+  return (
+    <div>
+      <h2 className={`uppercase font-bold ${fontStyle.headingFont}`}>
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="">
+              {data?.items?.map((item, index) => {
+                return (
+                  <div className="certificate_section" key={index}>
+                    <h2 className="certificate_title text-xl font-semibold">
+                      {item?.name}
+                    </h2>
+                    <h2 className="url text-sm font-semibold underline my-2">
+                      <Link href={item?.url} target="_blank">
+                        {item?.url}
+                      </Link>
+                    </h2>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -268,6 +393,55 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Awards = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.awards);
+  return (
+    <div className="awards_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="awards_header w-full">
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+              {data?.name}
+            </h2>
+            <div className="border-b-2 border-gray-600"></div>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="awards my-5" key={index}>
+                    <div className="awards_names flex w-full justify-between my-1">
+                      <div className="awards_degree w-full">
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                          {item?.name}
+                        </h3>
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.issuer}
+                        </h4>
+                      </div>
+                      <div className="awards_year text-end w-full">
+                        <p
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                        >
+                          {item?.date}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 export const Template19 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const data = useResumeStore((state) => state.resume.data);
@@ -290,7 +464,7 @@ export const Template19 = () => {
       <div className="p-custom space-y-3 mx-auto h-min-[297mm] w-min-[210mm]">
         <div className="bg-white mx-auto h-min-[297mm] w-min-[210mm]">
           <div
-            className="top_section flex justify-around items-center text-white py-10 clip-resume"
+            className="top_section flex justify-around items-center text-white py-10"
             style={{
               backgroundColor: metadata?.theme?.primary,
             }}
@@ -316,15 +490,15 @@ export const Template19 = () => {
             </div>
           </div>
           <div className="resume_section flex flex-row w-[210mm] h-full">
-            <div className="md:w-[30%] w-full left_side bg-[#eee8e3] -mt-4">
+            <div className="md:w-[30%] w-full left_side bg-[#eee8e3]">
               <div className="left_side p-5">
                 <div className="contact_section mt-5">
-                  <h2 className={`font-semibold uppercase text-xl`}>
+                  <h2
+                    className={`uppercase font-bold ${fontStyle.headingFont}`}
+                  >
                     Contact Details
                   </h2>
-                  <div
-                    className={`text-gray-600 my-4 ${fontStyle.contactFont}`}
-                  >
+                  <div className={`my-4 ${fontStyle.contactFont}`}>
                     {basics?.email && (
                       <a
                         href={`mailto:${basics?.email}`}
@@ -358,6 +532,9 @@ export const Template19 = () => {
                   </div>
                 </div>
                 <Skills fontStyle={fontStyle} />
+                <Hobbies fontStyle={fontStyle} />
+                <Languages fontStyle={fontStyle} />
+                <Certificates fontStyle={fontStyle} />
               </div>
             </div>
             <div className="md:w-[70%] w-full right_side p-5">
@@ -365,6 +542,7 @@ export const Template19 = () => {
               <Education fontStyle={fontStyle} />
               <Experience fontStyle={fontStyle} />
               <Projects fontStyle={fontStyle} />
+              <Awards fontStyle={fontStyle} />
             </div>
           </div>
         </div>

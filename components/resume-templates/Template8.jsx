@@ -3,134 +3,58 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useResumeStore } from "@/app/store/ResumeStore";
-
+import Link from "next/link";
 
 const Education = ({ fontStyle, headingColor }) => {
-    const data = useResumeStore(
-      (state) => state?.resume.data.sections?.education
-    );
-    return (
-      <div className="education_section">
-        {data?.visible && data?.items?.length > 0 && (
-          <>
-            <h2
-              className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
-              style={{
-                color: headingColor,
-                paddingBottom: "0.25rem", // Space for the underline
-              }}
-            >
-              {data?.name}
-            </h2>
-            <div className="text-gray-800 my-4">
-              {data?.items?.map((item, index) => {
-                return (
-                  <>
-                    <div
-                      className="education1 my-1 text-start"
-                      key={index}
-                    >
-                      <div className="education_names">
-                        <h3
-                          className={`${fontStyle.subHeadingFont} font-bold`}
-                          style={{
-                            color: headingColor,
-                          }}
-                        >
-                          {item?.degree}
-                        </h3>
-                        <h4
-                          style={{
-                            fontSize: fontStyle.paraFont,
-                            color: headingColor,
-                          }}
-                        >
-                          {item?.institute}
-                        </h4>
-                      </div>
-                      <div className="education_year gap-5">
-                        <p
-                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                        >
-                          {item?.startDate &&
-                            `${item?.startDate}${item?.endDate && " - "}`}
-                          {item?.endDate}
-                        </p>
-                        {item?.city && (
-                          <p className="text-13px font-normal flex gap-1 items-center">
-                            <IoLocationOutline className="mr-1" />
-                            {item?.city}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    <div
-                      className={`py-2 ${fontStyle.paraFont} break-words text-justify`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
-                  </>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </div>
-    );
-  };
-  
-  const Experience = ({ fontStyle, headingColor }) => {
-    const data = useResumeStore(
-      (state) => state?.resume.data.sections?.experience
-    );
-    return (
-      <div className="experience_section">
-        {data?.visible && data?.items?.length > 0 && (
-          <>
-            <div className="experience_heading flex gap-5 items-center">
-              <h2
-                className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
-                style={{
-                  color: headingColor,
-                  paddingBottom: "0.25rem", // Space for the underline
-                }}
-              >
-                {data?.name}
-              </h2>
-            </div>
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.education
+  );
+  return (
+    <div className="education_section">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <h2
+            className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+              paddingBottom: "0.25rem", // Space for the underline
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-gray-800 my-4">
             {data?.items?.map((item, index) => {
               return (
-                <div className="experience_1" key={index}>
-                  <div className="post my-2">
-                    <div className="post_title">
+                <>
+                  <div className="education1 my-1 text-start" key={index}>
+                    <div className="education_names">
                       <h3
+                        className={`${fontStyle.subHeadingFont} font-bold`}
                         style={{
-                          fontSize: fontStyle.subHeadingFont,
                           color: headingColor,
                         }}
-                        className="font-bold"
                       >
-                        {item?.jobtitle}
+                        {item?.degree}
                       </h3>
                       <h4
                         style={{
                           fontSize: fontStyle.paraFont,
                           color: headingColor,
                         }}
-                        className="font-semibold"
                       >
-                        {item?.employer}
+                        {item?.institute}
                       </h4>
                     </div>
-                    <div className="year flex gap-10 font-bold">
+                    <div className="education_year gap-5">
                       <p
                         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                       >
-                        <span>{item?.startDate}</span>
-                        <span>{item?.startDate && item?.endDate && " - "}</span>
-                        <span>{item?.endDate}</span>
+                        {item?.startDate &&
+                          `${item?.startDate}${item?.endDate && " - "}`}
+                        {item?.endDate}
                       </p>
                       {item?.city && (
-                        <p className="text-13px flex justify-end items-center font-normal">
+                        <p className="text-13px font-normal flex gap-1 items-center">
                           <IoLocationOutline className="mr-1" />
                           {item?.city}
                         </p>
@@ -138,101 +62,28 @@ const Education = ({ fontStyle, headingColor }) => {
                     </div>
                   </div>
                   <div
-                    className={`${fontStyle.paraFont} break-words text-justify`}
+                    className={`py-2 ${fontStyle.paraFont} break-words text-justify`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
-                  <div className="px-3">
-                  {
-                    item?.highlights?.length > 0 &&
-                    <ul className="list-disc">
-                      {
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-                        item?.highlights?.map((item, key) => {
-                          return <li key={key} className=" break-words text-15px">{item}</li>
-                        })
-                      }
-                    </ul>
-                  }
-                </div>
-                </div>
-              );
-            })}
-          </>
-        )}
-      </div>
-    );
-  };
-  
-  const Projects = ({ fontStyle, headingColor }) => {
-    const data = useResumeStore((state) => state?.resume.data.sections?.projects);
-    return (
-      <div className="project_section my-4">
-        {data?.visible && data?.items.length > 0 && (
-          <>
-            <div className="project_heading flex gap-5 items-center">
-              <h2
-                className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
-                style={{
-                  color: headingColor,
-                  paddingBottom: "0.25rem", // Space for the underline
-                }}
-              >
-                {data?.name}
-              </h2>
-            </div>
-            {data?.items.map((item, index) => {
-              return (
-                <div className="projects1 my-3" key={index}>
-                  <div className="post my-2">
-                    <div className="post_title">
-                      <h3
-                        style={{
-                          fontSize: fontStyle.subHeadingFont,
-                          color: headingColor,
-                        }}
-                        className="font-bold"
-                      >
-                        {item?.title}
-                      </h3>
-                      <h4
-                        style={{
-                          fontSize: fontStyle.paraFont,
-                          color: headingColor,
-                        }}
-                        className="font-semibold"
-                      >
-                        {item?.subtitle}
-                      </h4>
-                    </div>
-                    <div className="year">
-                      <p
-                        className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                      >
-                        {item?.startDate &&
-                          `${item.startDate}${item.endDate && " - "}`}
-                        {item?.endDate}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={`key_points ${fontStyle.paraFont} break-words`}
-                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                  ></div>
-                </div>
-              );
-            })}
-          </>
-        )}
-      </div>
-    );
-  };
-  
-  const Skills = ({ fontStyle, headingColor }) => {
-    const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-    return (
-      <div>
-        {data?.visible && data?.items?.length > 0 && (
-          <div className="skills_section py-3">
+const Experience = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.experience
+  );
+  return (
+    <div className="experience_section">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="experience_heading flex gap-5 items-center">
             <h2
               className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
               style={{
@@ -242,53 +93,377 @@ const Education = ({ fontStyle, headingColor }) => {
             >
               {data?.name}
             </h2>
-            <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-              <ul className="w-full flex gap-5 flex-wrap underline underline-offset-2">
-                {data.items.map((item, i) => {
-                  return (
-                    <li
-                      className={`font-bold text-gray-600 ${fontStyle.skillsFont} my-1 py-1`}
-                      key={i}
+          </div>
+          {data?.items?.map((item, index) => {
+            return (
+              <div className="experience_1" key={index}>
+                <div className="post my-2">
+                  <div className="post_title">
+                    <h3
+                      style={{
+                        fontSize: fontStyle.subHeadingFont,
+                        color: headingColor,
+                      }}
+                      className="font-bold"
                     >
-                      {item?.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                      {item?.jobtitle}
+                    </h3>
+                    <h4
+                      style={{
+                        fontSize: fontStyle.paraFont,
+                        color: headingColor,
+                      }}
+                      className="font-semibold"
+                    >
+                      {item?.employer}
+                    </h4>
+                  </div>
+                  <div className="year flex gap-10 font-bold">
+                    <p
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                    >
+                      <span>{item?.startDate}</span>
+                      <span>{item?.startDate && item?.endDate && " - "}</span>
+                      <span>{item?.endDate}</span>
+                    </p>
+                    {item?.city && (
+                      <p className="text-13px flex justify-end items-center font-normal">
+                        <IoLocationOutline className="mr-1" />
+                        {item?.city}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className={`${fontStyle.paraFont} break-words text-justify`}
+                  dangerouslySetInnerHTML={{ __html: item?.description }}
+                ></div>
+                <div className="px-3">
+                  {item?.highlights?.length > 0 && (
+                    <ul className="list-disc">
+                      {item?.highlights?.map((item, key) => {
+                        return (
+                          <li key={key} className=" break-words text-15px">
+                            {item}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </>
+      )}
+    </div>
+  );
+};
+
+const Projects = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.projects);
+  return (
+    <div className="project_section my-4">
+      {data?.visible && data?.items.length > 0 && (
+        <>
+          <div className="project_heading flex gap-5 items-center">
+            <h2
+              className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+                paddingBottom: "0.25rem", // Space for the underline
+              }}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          {data?.items.map((item, index) => {
+            return (
+              <div className="projects1 my-3" key={index}>
+                <div className="post my-2">
+                  <div className="post_title">
+                    <h3
+                      style={{
+                        fontSize: fontStyle.subHeadingFont,
+                        color: headingColor,
+                      }}
+                      className="font-bold"
+                    >
+                      {item?.title}
+                    </h3>
+                    <h4
+                      style={{
+                        fontSize: fontStyle.paraFont,
+                        color: headingColor,
+                      }}
+                      className="font-semibold"
+                    >
+                      {item?.subtitle}
+                    </h4>
+                  </div>
+                  <div className="year">
+                    <p
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                    >
+                      {item?.startDate &&
+                        `${item.startDate}${item.endDate && " - "}`}
+                      {item?.endDate}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className={`key_points ${fontStyle.paraFont} break-words`}
+                  dangerouslySetInnerHTML={{ __html: item?.description }}
+                ></div>
+              </div>
+            );
+          })}
+        </>
+      )}
+    </div>
+  );
+};
+
+const Skills = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.skills);
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-3">
+          <h2
+            className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+              paddingBottom: "0.25rem", // Space for the underline
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
+            <ul className="w-full flex gap-5 flex-wrap underline underline-offset-2">
+              {data.items.map((item, i) => {
+                return (
+                  <li
+                    className={`font-bold text-gray-600 ${fontStyle.skillsFont} my-1 py-1`}
+                    key={i}
+                  >
+                    {item?.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Profile = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.summary);
+  const htmlContent = data?.content;
+  return (
+    <div>
+      {data?.visible && (
+        <div className="profile_section w-full">
+          <div className="profile_heading w-full flex gap-5 items-center">
+            <h2
+              className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+                paddingBottom: "0.25rem", // Space for the underline
+              }}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          <div
+            className={`my-5 ${fontStyle.subHeadingFont} break-words`}
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+          ></div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Languages = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state.resume.data.sections.language);
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-3">
+          <h2
+            className={`${fontStyle.headingFont} font-semibold uppercase underline underline-offset-8`}
+            style={{
+              color: headingColor,
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-gray-600 my-1">
+            <ul className="list-disc pl-5">
+              {data.items.map((item, i) => {
+                return (
+                  <li
+                    className={`font-bold  ${fontStyle.skillsFont} py-2`}
+                    key={i}
+                  >
+                    {item?.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Hobbies = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div className="my-5">
+      <h2
+        className={`uppercase text-2xl font-bold ${fontStyle.headingFont} underline underline-offset-4`}
+        style={{
+          color: headingColor,
+        }}
+      >
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="pl-5 list-disc">
+              {data?.items?.map((item, index) => {
+                return (
+                  <li key={index} className="text-15px py-2 font-semibold">
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         )}
       </div>
-    );
-  };
-  
-  const Profile = ({ fontStyle, headingColor }) => {
-    const data = useResumeStore((state) => state?.resume.data.sections?.summary);
-    const htmlContent = data?.content;
-    return (
+    </div>
+  );
+};
+
+const Awards = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.awards);
+  return (
+    <div className="awards_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="awards_header w-full">
+            <h2
+              className={`${fontStyle.headingFont} font-bold uppercase underline underline-offset-8`}
+              style={{
+                color: headingColor,
+              }}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="awards my-5" key={index}>
+                    <div className="awards_names flex w-full justify-between my-1">
+                      <div
+                        className="awards_degree w-full"
+                        style={{
+                          color: headingColor,
+                        }}
+                      >
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                          {item?.name}
+                        </h3>
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.issuer}
+                        </h4>
+                      </div>
+                      <div className="awards_year text-end w-full">
+                        <p
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                        >
+                          {item?.date}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+const Certificates = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.certificates
+  );
+  return (
+    <div>
       <div>
-        {data?.visible && (
-          <div className="profile_section w-full">
-            <div className="profile_heading w-full flex gap-5 items-center">
-              <h2
-                className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
-                style={{
-                  color: headingColor,
-                  paddingBottom: "0.25rem", // Space for the underline
-                }}
-              >
-                {data?.name}
-              </h2>
-            </div>
-            <div
-              className={`my-5 ${fontStyle.subHeadingFont} break-words`}
-              dangerouslySetInnerHTML={{ __html: htmlContent }}
-            ></div>
+        <h2
+          className={`${fontStyle.headingFont} font-bold uppercase underline underline-offset-8`}
+          style={{
+            color: headingColor,
+          }}
+        >
+          {data?.name}
+        </h2>
+      </div>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="">
+              {data?.items?.map((item, index) => {
+                return (
+                  <div className="certificate_section px-2" key={index}>
+                    <div
+                      className="certification"
+                      style={{
+                        color: headingColor,
+                      }}
+                    >
+                      <h2 className="certificate_title text-xl font-semibold">
+                        {item?.name}
+                      </h2>
+                      <h2 className="url text-sm font-semibold underline my-2">
+                        <Link href={item?.url} target="_blank">
+                          {item?.url}
+                        </Link>
+                      </h2>
+                    </div>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </ul>
           </div>
         )}
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 const Template8 = () => {
   const resumeData = useResumeStore((state) => state?.resume.data);
@@ -399,6 +574,16 @@ const Template8 = () => {
                   data={resumeData?.sections?.projects}
                   headingColor={resumeData?.metadata?.theme?.primary}
                 />
+                <Awards
+                  fontStyle={fontStyle}
+                  data={resumeData?.sections?.projects}
+                  headingColor={resumeData?.metadata?.theme?.primary}
+                />
+                <Certificates
+                  fontStyle={fontStyle}
+                  data={resumeData?.sections?.projects}
+                  headingColor={resumeData?.metadata?.theme?.primary}
+                />
               </div>
             </div>
             <div className="col-span-4 resume_other_section2">
@@ -408,6 +593,16 @@ const Template8 = () => {
                 headingColor={resumeData?.metadata?.theme?.primary}
               />
               <Skills
+                fontStyle={fontStyle}
+                data={resumeData?.sections?.skills}
+                headingColor={resumeData?.metadata?.theme?.primary}
+              />
+              <Hobbies
+                fontStyle={fontStyle}
+                data={resumeData?.sections?.skills}
+                headingColor={resumeData?.metadata?.theme?.primary}
+              />
+              <Languages
                 fontStyle={fontStyle}
                 data={resumeData?.sections?.skills}
                 headingColor={resumeData?.metadata?.theme?.primary}
