@@ -266,7 +266,7 @@ const Certificates = ({ fontStyle }) => {
   return (
     <>
       {
-        data.visible &&
+        data.visible && data.items.length > 0 &&
         (< div className="border-b-2 border-gray-300 py-3" >
           <h2
             className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont} break-words`}
@@ -304,7 +304,7 @@ const Reference = ({ fontStyle }) => {
   return (
     <>
       {
-        data.visible &&
+        data.visible && data?.items.length > 0 &&
         (< div className="py-3" >
           <div className="project_heading flex gap-5 items-center">
             <div className="icon bg-gray-300 p-2">

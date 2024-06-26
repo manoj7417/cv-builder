@@ -6,11 +6,13 @@ import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
+import ContentDialog from "./ContentDialog";
 
 const ResumeBuilderPage = () => {
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { userState } = useUserStore((state) => state);
+  const [isContentVisible, setIsContentVisible] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =
     userdata?.profilePicture || "https://via.placeholder.com/150";
@@ -108,8 +110,9 @@ const ResumeBuilderPage = () => {
           <ResumeForm />
         </div>
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
-          <ResumeView />
+          <ResumeView setIsContentVisible={setIsContentVisible}/>
         </div>
+        <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible} />
       </div>
     </>
   );
