@@ -160,7 +160,7 @@ const Page = () => {
                     </div>
                     <a href="/mcq">
                       <button className="text-blue-500 font-semibold">
-                        View more
+                        Start Now!
                       </button>
                     </a>
                   </div>
@@ -183,9 +183,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">450 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -208,9 +210,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">300 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -236,9 +240,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">480 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -259,9 +265,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">450 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -282,9 +290,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">300 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -309,9 +319,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">480 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -335,9 +347,11 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">450 QUESTIONS</p>
                     </div>
-                    <button className="text-blue-500 font-semibold">
-                      View more
-                    </button>
+                    <a href="/mcq">
+                      <button className="text-blue-500 font-semibold">
+                        Start Now!
+                      </button>
+                    </a>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (

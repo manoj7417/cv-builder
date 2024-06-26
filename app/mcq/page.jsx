@@ -95,8 +95,9 @@ const Page = () => {
   return isLoading ? (
     <Preloader />
   ) : (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12">
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-2xl w-full">
+    <div className="min-h-screen flex flex-col items-center justify-center py-12 relative">
+      <div className="animated-bg"></div>
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-2xl w-full z-10">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Work Experience Analysis</h1>
           <span className="text-gray-500">
@@ -151,10 +152,30 @@ const Page = () => {
         </div>
       </div>
       {isSubmitted && (
-        <div className="mt-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-md">
+        <div className="mt-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-md z-10">
           Answers successfully submitted! The page will refresh shortly.
         </div>
       )}
+      <style jsx>{`
+        .animated-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: url("/hexa.jpg") repeat;
+          animation: move 40s linear infinite;
+          z-index: 0;
+        }
+        @keyframes move {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 100% 100%;
+          }
+        }
+      `}</style>
     </div>
   );
 };
