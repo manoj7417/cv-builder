@@ -8,6 +8,9 @@ import { FaUser } from "react-icons/fa";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useResumeStore } from "@/app/store/ResumeStore";
+import { isValidUrl } from './ValidateUrl'
+import { BiSolidGroup } from "react-icons/bi";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle }) => {
   const data = useResumeStore((state) => state.resume.data.sections.education);
@@ -15,7 +18,7 @@ const Education = ({ fontStyle }) => {
     <div className="education_section py-3">
       {data.visible && data?.items?.length > 0 && (
         <>
-          <h2 className={`${fontStyle.headingFont} font-semibold uppercase`}>
+          <h2 className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont}`}>
             {data?.name}
           </h2>
           <div className="text-gray-800 my-5">
@@ -186,7 +189,7 @@ const Skills = ({ fontStyle }) => {
       {data.visible && data.items.length > 0 && (
         <div className="skills_section border-b-2 border-gray-300 py-3">
           <h2
-            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
+            className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont}`}
           >
             {data?.name}
           </h2>
@@ -242,10 +245,10 @@ const Hobbies = ({ fontStyle }) => {
     {data?.visible && data?.items.length > 0 && (
       <div className="hobbies_section">
         <h2
-            className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
-          >
-            {data?.name}
-          </h2>
+          className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase`}
+        >
+          {data?.name}
+        </h2>
         <ul className="list-disc pl-5">
           {
             data?.items?.map((item, index) => {
@@ -258,6 +261,126 @@ const Hobbies = ({ fontStyle }) => {
   </div>
 }
 
+const Certificates = ({ fontStyle }) => {
+  const data = useResumeStore((state) => state.resume.data.sections.certificates);
+  return (
+    <>
+      {
+        data.visible && data.items.length > 0 &&
+        (< div className="border-b-2 border-gray-300 py-3" >
+          <h2
+            className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont} break-words`}
+          >
+            {data?.name}
+          </h2>
+          <div >
+            {
+              data?.items?.map((item, index) => {
+                return <div key={index} className="break-words text-13px font-bold text-gray-600 my-2">
+                  <>
+                    {isValidUrl(item?.url) ?
+                      <a href={item?.url} target="_blank" className="break-words text-15px font-bold text-gray-600">
+                        {item?.name}
+                      </a> : <p className="break-words text-15px font-bold text-gray-600">{item.name}</p>}
+                  </>
+                  <div dangerouslySetInnerHTML={{ __html: item?.description }} className="w-full font-normal">
+
+                  </div>
+                </div>
+              })
+            }
+          </div>
+
+        </div >)
+      }
+    </>
+  )
+
+}
+
+const Awards = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.awards)
+  console.log(data)
+  return (
+    <div className=''>{
+      data.visible && data?.items.length > 0 && (
+        < div className="py-3" >
+          <div className="project_heading flex gap-5 items-center">
+            <div className="icon bg-gray-300 p-2">
+              <FaGraduationCap />
+            </div>
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
+              {data?.name}
+            </h2>
+          </div>
+          {
+            data?.items?.map((item, index) => {
+              return <div key={index} className="break-words text-13px font-bold text-gray-600 my-3">
+                <>
+                  <div className="mt-2 flex justify-between">
+                    {isValidUrl(item?.url) ?
+                      <a href={item?.url} target="_blank" className="break-words text-16px items-center font-bold text-gray-600 inline-flex">
+                        {item?.name}<AiOutlineLink className="ml-1" />
+                      </a> : <p className="break-words text-15px font-bold text-gray-600">{item.name}</p>}
+                    <p className="break-words text-14px font-thin text-gray-600">{item?.date}</p>
+                  </div>
+                </>
+                <div className="w-full ">
+                  <p className="text-15px"> {item.issuer}
+                  </p>
+                  <div dangerouslySetInnerHTML={{ __html: item?.description }}></div>
+                </div>
+              </div>
+            })}
+        </div>
+      )
+    } </div>
+  )
+}
+
+
+const Reference = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.reference)
+  return (
+    <>
+      {
+        data.visible && data?.items.length > 0 &&
+        (< div className="py-3" >
+          <div className="project_heading flex gap-5 items-center">
+            <div className="icon bg-gray-300 p-2">
+              <FaGraduationCap />
+            </div>
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
+              {data?.name}
+            </h2>
+          </div>
+          {
+            data?.items?.map((item, index) => {
+              return <div key={index} className="break-words text-13px font-bold text-gray-600 my-3">
+                <>
+                  <div className="mt-2">
+                    {isValidUrl(item?.url) ?
+                      <a href={item?.url} target="_blank" className="break-words text-16px items-center font-bold text-gray-600 inline-flex">
+                        {item?.name}<AiOutlineLink className="ml-1" />
+                      </a> : <p className="break-words text-15px font-bold text-gray-600">{item.name}</p>}
+                  </div>
+                </>
+                <div className="w-full ">
+                  <p className="text-16px"> {item.jobTitle} , <span>
+                    {item.organization}
+                  </span>
+                  </p>
+                  <p>{item.email}</p>
+                  <p>{item.phone}</p>
+                </div>
+              </div>
+            })}
+        </div>
+        )
+      }
+    </>
+  )
+}
 
 export const Template3 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
@@ -281,14 +404,15 @@ export const Template3 = () => {
       <div className="p-custom space-y-3">
         <div className="bg-white mx-auto">
           <div
-            className="top_section flex justify-around items-center text-white  py-10"
+            className="top_section flex justify-around items-center py-10"
             style={{
               backgroundColor: metadata?.theme?.primary,
+
             }}
           >
-            <div className="name_profile w-[70%]  h-full px-10">
+            <div className="name_profile w-[70%] h-full px-10" style={{ color: metadata?.theme?.text }}>
               <h1
-                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
+                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words `}
               >
                 {basics?.name}
               </h1>
@@ -350,11 +474,14 @@ export const Template3 = () => {
               <Skills fontStyle={fontStyle} />
               <Education fontStyle={fontStyle} />
               <Hobbies fontStyle={fontStyle} />
+              <Certificates fontStyle={fontStyle} />
             </div>
             <div className="md:w-[70%] w-full right_side p-5">
               <Profile fontStyle={fontStyle} />
               <Experience fontStyle={fontStyle} />
               <Projects fontStyle={fontStyle} />
+              <Reference fontStyle={fontStyle} />
+              <Awards fontStyle={fontStyle} />
             </div>
           </div>
         </div>

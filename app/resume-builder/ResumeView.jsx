@@ -210,7 +210,7 @@ const images = [
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 
-const ResumeView = () => {
+const ResumeView = ({ setIsContentVisible }) => {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [scale, setScale] = useState(0.8);
@@ -219,7 +219,7 @@ const ResumeView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
+
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
@@ -419,7 +419,7 @@ const ResumeView = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative">
+      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-white to-blue-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
@@ -444,64 +444,6 @@ const ResumeView = () => {
           </Dialog>
         )}
         <div>
-          {/* <div className="actions_button bg-slate-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-            <div className="header_section w-full md:block hidden">
-              <Link
-                href={"/user-history"}
-                className="px-5 py-2 bg-blue-900 text-white hover:bg-blue-700 text-sm rounded-md"
-              >
-                <MdOutlineKeyboardArrowLeft className="inline text-xl" />
-                Back
-              </Link>
-            </div>
-            <div className="profile_section">
-              <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
-                <div className="relative" ref={dropdownRef}>
-                  <button
-                    onClick={() => setIsToggleOpen(!isToggleOpen)}
-                    className="relative inline-flex h-[2.4rem] w-10 items-center justify-center rounded-full text-white focus:outline-none"
-                  >
-                    <Image
-                      src="/pic.jpg"
-                      alt="user name"
-                      title="user name"
-                      width={30}
-                      height={30}
-                      className="max-w-full rounded-full"
-                    />
-                    <span className="absolute bottom-0 right-0 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 p-1 text-sm text-white">
-                      <span className="sr-only"> 7 new emails </span>
-                    </span>
-                  </button>
-                  {isToggleOpen && (
-                    <div
-                      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="user-menu"
-                    >
-                      <div className="py-1" role="none">
-                        <Link
-                          href="/user-profile"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          role="menuitem"
-                        >
-                          Profile
-                        </Link>
-                        <div
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                          role="menuitem"
-                          onClick={handleLogout}
-                        >
-                          Logout
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div> */}
           <div
             className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
             style={{
@@ -522,123 +464,9 @@ const ResumeView = () => {
               </div>
             </div>
           </div>
-          {isContentVisible && (
-            <div
-              className="min-w-screen h-auto h-min-[100vh] animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
-              id="modal-id"
-            >
-              <div className="absolute bg-black opacity-80 inset-0 z-0 w-full" />
 
-              {/*content*/}
-              <div className="">
-                <div
-                  onClick={() => setIsContentVisible(false)}
-                  className="z-50 absolute top-6 right-10 cursor-pointer"
-                >
-                  <LiaTimesSolid className="text-white text-3xl" />
-                </div>
-                <div
-                  className="shadow-2xl relative no-scrollbar h-screen overflow-y-scroll"
-                  style={{
-                    scale: { scale },
-                  }}
-                >
-                  <div
-                    id="resume"
-                    className={cn("relative bg-white")}
-                    style={{
-                      width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                      height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                    }}
-                  >
-                    <GetTemplate name={data?.metadata?.template} />
-                    <div className="bg-white text-gray-500 text-end">
-                      <p className="text-sm">@Genies Career Hub</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
-        {/* <div className="floating_button absolute bottom-5 bg-white w-[50%] rounded-full shadow-2xl">
-          <div className="auth_section flex justify-center w-full gap-10 items-center">
-            <button
-              className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-              onClick={() => setIsContentVisible(true)}
-            >
-              <BsFullscreen className="h-4 w-4 text-black" />
-            </button>
-            <div className="tools">
-              <button
-                className="2xl:p-3 md:p-2 p-2 rounded-md"
-                onClick={handleZoomIn}
-              >
-                <FiPlus className="h-4 w-4 text-black" />
-              </button>
-              <button
-                className="2xl:p-3 md:p-2 p-2 mx-2 rounded-md"
-                onClick={handleZoomOut}
-              >
-                <FiMinus className="h-4 w-4 text-black" />
-              </button>
-              <button
-                className="2xl:p-3 md:p-2 p-2 rounded-md"
-                onClick={handleReset}
-              >
-                <CiUndo className="h-4 w-4 text-black" />
-              </button>
-            </div>
-            <button
-              className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-              onClick={checkUserTemplate}
-              disabled={isLoading}
-            >
-              <FaRegFilePdf className="h-4 w-4 text-black" />
-            </button>
-            <div className="choose_templates xl:block hidden">
-              <Drawer
-                direction="right"
-                open={isDrawerOpen}
-                onOpenChange={setIsDrawerOpen}
-              >
-                <DrawerTrigger
-                  className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
-                  onClick={() => setIsDrawerOpen(true)}
-                >
-                  <LuLayoutGrid className="h-4 w-4 text-black inline" />
-                </DrawerTrigger>
-                <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
-                  <DrawerHeader>
-                    <DrawerTitle>Choose Templates</DrawerTitle>
-                    <DrawerDescription>
-                      <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
-                        {images.map((image, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className="image_section_1 "
-                              onClick={() => handleTemplateChange(image.name)}
-                            >
-                              <Image
-                                src={image.src}
-                                alt={image.alt}
-                                className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
-                                width={500}
-                                height={500}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </DrawerDescription>
-                  </DrawerHeader>
-                </DrawerContent>
-              </Drawer>
-            </div>
-          </div>
-        </div> */}
-        <div className="floating_button absolute bottom-5 bg-white/80 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
+        <div className="toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
           <div className="auth_section flex justify-center w-full gap-10 items-center">
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button
@@ -680,7 +508,7 @@ const ResumeView = () => {
                 onClick={checkUserTemplate}
                 disabled={isLoading}
               >
-                {/* <FaRegFilePdf className="h-4 w-4 text-black" /> */}
+
                 <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
@@ -729,6 +557,7 @@ const ResumeView = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };

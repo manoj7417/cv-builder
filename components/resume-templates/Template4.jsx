@@ -310,7 +310,9 @@ const Hobbies = ({ fontStyle, headingColor }) => {
 }
 
 export const Template4 = () => {
+
   const resumeData = useResumeStore(state => state?.resume.data);
+
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
     jobtitleFont: "text-24px",
@@ -329,9 +331,10 @@ export const Template4 = () => {
       <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
         <div className="bg-white p-2 mx-auto">
           <div
-            className="top_section flex justify-between items-center text-white rounded-md p-5"
+            className="top_section flex justify-between items-center rounded-md p-5"
             style={{
               backgroundColor: resumeData?.metadata?.theme?.primary,
+              color: resumeData?.metadata?.theme?.text
             }}
           >
             <div className="name_profile w-full h-full">

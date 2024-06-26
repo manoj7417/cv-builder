@@ -6,11 +6,13 @@ import Link from "next/link";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
+import ContentDialog from "./ContentDialog";
 
 const ResumeBuilderPage = () => {
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { userState } = useUserStore((state) => state);
+  const [isContentVisible, setIsContentVisible] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =
     userdata?.profilePicture || "https://via.placeholder.com/150";
@@ -27,10 +29,13 @@ const ResumeBuilderPage = () => {
   return (
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
-        <div className="actions_button bg-slate-50 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-          <div className="2xl:w-[95%] xl:w-[92%] mx-auto flex flex-row justify-between items-center">
+        <div className="actions_button bg-white p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+          <div className="w-full mx-[40px] flex flex-row justify-between items-center">
             <div className="header_section w-full md:block hidden">
-              <Link href="/user-history" className="group relative inline-flex items-center justify-center overflow-hidden border-2 border-blue-950 px-8 py-1 rounded-md font-medium text-white shadow-md transition duration-300 ease-out hover:border-4">
+              <Link
+                href="/user-history"
+                className="group relative inline-flex items-center justify-center overflow-hidden border-2 border-blue-950 px-8 py-1 rounded-md font-medium text-white shadow-md transition duration-300 ease-out"
+              >
                 <span className="ease absolute inset-0 flex h-full w-full translate-x-full items-center justify-center bg-blue-950 text-white duration-300 group-hover:translate-x-0">
                   <svg
                     className="h-4 w-4"
@@ -47,10 +52,12 @@ const ResumeBuilderPage = () => {
                     />
                   </svg>
                 </span>
-                <span className="ease absolute flex h-full w-full text-sm transform items-center justify-center text-blue-950 transition-all duration-300 group-hover:-translate-x-full">
+                <span className="ease absolute flex h-full w-full text-sm transform items-center justify-center text-blue-950 font-bold transition-all duration-300 group-hover:-translate-x-full">
                   Back
                 </span>
-                <span className="invisible relative">Back</span>
+                <span className="invisible relative text-blue-900 font-bold">
+                  Back
+                </span>
               </Link>
             </div>
             <div className="profile_section">
@@ -108,8 +115,9 @@ const ResumeBuilderPage = () => {
           <ResumeForm />
         </div>
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
-          <ResumeView />
+          <ResumeView setIsContentVisible={setIsContentVisible}/>
         </div>
+        <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible} />
       </div>
     </>
   );
