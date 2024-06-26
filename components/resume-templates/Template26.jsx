@@ -452,7 +452,7 @@ const Certificates = ({ fontStyle }) => {
             <ul>
               {data?.items?.map((item, index) => {
                 return (
-                  <div className="certificate_section px-2">
+                  <div className="certificate_section px-2" key={index}>
                     <h2 className="certificate_title text-white text-xl font-semibold">
                       {item?.name}
                     </h2>
