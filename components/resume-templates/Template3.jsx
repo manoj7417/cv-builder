@@ -266,7 +266,7 @@ const Certificates = ({ fontStyle }) => {
   return (
     <>
       {
-        data.visible &&
+        data.visible && data.items.length > 0 &&
         (< div className="border-b-2 border-gray-300 py-3" >
           <h2
             className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont} break-words`}
@@ -298,13 +298,53 @@ const Certificates = ({ fontStyle }) => {
 
 }
 
+const Awards = ({ fontStyle }) => {
+  const data = useResumeStore(state => state.resume.data.sections.awards)
+  console.log(data)
+  return (
+    <div className=''>{
+      data.visible && data?.items.length > 0 && (
+        < div className="py-3" >
+          <div className="project_heading flex gap-5 items-center">
+            <div className="icon bg-gray-300 p-2">
+              <FaGraduationCap />
+            </div>
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
+              {data?.name}
+            </h2>
+          </div>
+          {
+            data?.items?.map((item, index) => {
+              return <div key={index} className="break-words text-13px font-bold text-gray-600 my-3">
+                <>
+                  <div className="mt-2 flex justify-between">
+                    {isValidUrl(item?.url) ?
+                      <a href={item?.url} target="_blank" className="break-words text-16px items-center font-bold text-gray-600 inline-flex">
+                        {item?.name}<AiOutlineLink className="ml-1" />
+                      </a> : <p className="break-words text-15px font-bold text-gray-600">{item.name}</p>}
+                    <p className="break-words text-14px font-thin text-gray-600">{item?.date}</p>
+                  </div>
+                </>
+                <div className="w-full ">
+                  <p className="text-15px"> {item.issuer}
+                  </p>
+                  <div dangerouslySetInnerHTML={{ __html: item?.description }}></div>
+                </div>
+              </div>
+            })}
+        </div>
+      )
+    } </div>
+  )
+}
+
 
 const Reference = ({ fontStyle }) => {
   const data = useResumeStore(state => state.resume.data.sections.reference)
   return (
     <>
       {
-        data.visible &&
+        data.visible && data?.items.length > 0 &&
         (< div className="py-3" >
           <div className="project_heading flex gap-5 items-center">
             <div className="icon bg-gray-300 p-2">
@@ -441,6 +481,7 @@ export const Template3 = () => {
               <Experience fontStyle={fontStyle} />
               <Projects fontStyle={fontStyle} />
               <Reference fontStyle={fontStyle} />
+              <Awards fontStyle={fontStyle} />
             </div>
           </div>
         </div>
