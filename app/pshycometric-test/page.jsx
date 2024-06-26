@@ -340,6 +340,83 @@ const Page = () => {
           </div>
         </div>
       </section>
+      <section className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative">
+        <div className="container lg:pt-0 pt-20">
+          <div className="flex  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="w-full">
+              <div className="container mx-auto px-4 py-12">
+                <h2 className="text-2xl font-bold text-center mb-6">
+                  Essential tests for exceptional roles
+                </h2>
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                    <div>
+                      <ul className="space-y-4">
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Flexible practice 24/7
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          1000s of up-to-date questions
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Written by accredited psychologists
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Industry and employer specific tests
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul className="space-y-4">
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Full solutions and explanations
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Online timed test simulator
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Intelligent learning platform
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Dashboard performance tracking
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul className="space-y-4">
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Tips, tricks, guides and resources
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Available on any device, any time
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          98% recommend Psychometric Tests
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          30 day money back guarantee
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full   px-5 relative"
@@ -450,83 +527,6 @@ const Page = () => {
                     <FaCrown className="mr-2 animate-pulse" />
                     TRY WITH US
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative">
-        <div className="container lg:pt-0 pt-20">
-          <div className="flex  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="w-full">
-              <div className="container mx-auto px-4 py-12">
-                <h2 className="text-2xl font-bold text-center mb-6">
-                  Essential tests for exceptional roles
-                </h2>
-                <div className="bg-white rounded-lg shadow-lg p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                    <div>
-                      <ul className="space-y-4">
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Flexible practice 24/7
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          1000s of up-to-date questions
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Written by accredited psychologists
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Industry and employer specific tests
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <ul className="space-y-4">
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Full solutions and explanations
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Online timed test simulator
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Intelligent learning platform
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Dashboard performance tracking
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <ul className="space-y-4">
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Tips, tricks, guides and resources
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Available on any device, any time
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          98% recommend Psychometric Tests
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          30 day money back guarantee
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
