@@ -122,6 +122,14 @@ const Header = () => {
             </li>
             <li>
               <Link
+                className="hover:font-bold text-blue-950 text-base"
+                href="/pshycometric-test"
+              >
+                Pshycometric Test
+              </Link>
+            </li>
+            <li>
+              <Link
                 className=" text-blue-950 text-base hover:font-bold"
                 href="https://www.careergenies.co.uk/blog"
                 target="_blank"

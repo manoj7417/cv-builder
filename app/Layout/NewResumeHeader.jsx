@@ -29,6 +29,11 @@ const navigation = [
     href: "/career-coaching",
     current: false,
   },
+  {
+    name: "Pshycometric Test",
+    href: "/pshycometric-test",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -127,7 +132,7 @@ export default function NewResumeHeader() {
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <MenuButton className="relative flex items-center justify-center w-8 h-8 rounded-full text-sm overflow-hidden">
-                        <span className="absolute -inset-1.5"/>
+                        <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
                         <img
                           src={
