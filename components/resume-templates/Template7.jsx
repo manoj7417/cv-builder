@@ -4,6 +4,8 @@ import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import Link from "next/link";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -422,9 +424,21 @@ const Awards = ({ fontStyle, headingColor }) => {
                           color: headingColor,
                         }}
                       >
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          {item?.name}
-                        </h3>
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
+
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.issuer}
                         </h4>
@@ -486,14 +500,20 @@ const Certificates = ({ fontStyle, headingColor }) => {
                         color: headingColor,
                       }}
                     >
-                      <h2 className="certificate_title text-xl font-semibold">
-                        {item?.name}
-                      </h2>
-                      <h2 className="url text-sm font-semibold underline my-2">
-                        <Link href={item?.url} target="_blank">
-                          {item?.url}
-                        </Link>
-                      </h2>
+                      {isValidUrl(item?.url) ? (
+                        <a
+                          href={item?.url}
+                          target="_blank"
+                          className="break-words text-16px items-center font-bold inline-flex"
+                        >
+                          {item?.name}
+                          <AiOutlineLink className="ml-1" />
+                        </a>
+                      ) : (
+                        <p className="break-words text-15px font-bold">
+                          {item.name}
+                        </p>
+                      )}
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -506,6 +526,77 @@ const Certificates = ({ fontStyle, headingColor }) => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="references_header">
+            <h2
+              className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+                paddingBottom: "0.25rem", // Space for the underline
+              }}
+            >
+              {data?.name}
+              <span
+                className="absolute bottom-0 left-0 w-full h-[2px]"
+                style={{ backgroundColor: headingColor }}
+              />
+            </h2>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5" key={index}>
+                    <div className="references_names w-full my-1">
+                      <div className="references w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                            style={{
+                              color: headingColor,
+                            }}
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
+                        <h3 className={`${fontStyle.subHeadingFont}`}>
+                          {item.jobTitle} ,{item?.organization}
+                        </h3>
+                      </div>
+                      <div className="references w-full flex justify-between">
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.email}
+                        </h4>
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -647,6 +738,11 @@ const Template7 = () => {
                   headingColor={resumeData?.metadata?.theme?.primary}
                 />
                 <Certificates
+                  fontStyle={fontStyle}
+                  data={resumeData?.sections?.skills}
+                  headingColor={resumeData?.metadata?.theme?.primary}
+                />
+                <References
                   fontStyle={fontStyle}
                   data={resumeData?.sections?.skills}
                   headingColor={resumeData?.metadata?.theme?.primary}

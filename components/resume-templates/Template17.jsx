@@ -9,6 +9,8 @@ import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
 import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
 import Link from "next/link";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -333,7 +335,9 @@ const Certificates = ({ fontStyle }) => {
   );
   return (
     <div>
-      <h2 className={`uppercase text-white text-center text-2xl font-bold ${fontStyle.headingFont}`}>
+      <h2
+        className={`uppercase text-white text-center text-2xl font-bold ${fontStyle.headingFont}`}
+      >
         {data?.name}
       </h2>
       <div className="hobbies_section mt-5">
@@ -342,18 +346,26 @@ const Certificates = ({ fontStyle }) => {
             <ul className="">
               {data?.items?.map((item, index) => {
                 return (
-                  <div className="certificate_section px-2" key={index}>
-                  <h2 className="certificate_title text-white text-xl font-semibold">
-                    {item?.name}
-                  </h2>
-                  <h2 className="url text-sm text-white font-semibold underline my-2">
-                    <Link href={item?.url} target="_blank">{item?.url}</Link>
-                  </h2>
-                  <div
-                    className={`py-2 ${fontStyle.paraFont} break-words text-white`}
-                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                  ></div>
-                </div>
+                  <div className="certificate_section px-2 py-4" key={index}>
+                    {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-xl items-center font-bold text-white inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-xl font-bold text-white">
+                        {item.name}
+                      </p>
+                    )}
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words text-white`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
                 );
               })}
             </ul>
@@ -408,9 +420,20 @@ const Awards = ({ fontStyle, headingColor }) => {
                   <div className="awards my-5" key={index}>
                     <div className="awards_names flex w-full justify-between my-1">
                       <div className="awards_degree w-full">
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          {item?.name}
-                        </h3>
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.issuer}
                         </h4>
@@ -427,6 +450,71 @@ const Awards = ({ fontStyle, headingColor }) => {
                       className={`py-2 ${fontStyle.paraFont} break-words`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
                     ></div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="references_header w-full">
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+              {data?.name}
+            </h2>
+            <div className="border-b-2 border-gray-600"></div>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5" key={index}>
+                    <div className="references_names w-full my-1">
+                      <div className="references w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
+                        <h3 className={`${fontStyle.subHeadingFont}`}>
+                          {item.jobTitle} ,{item?.organization}
+                        </h3>
+                      </div>
+                      <div className="references w-full flex justify-between">
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className=""
+                        >
+                          {item?.email}
+                        </h4>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className=""
+                        >
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
                   </div>
                 </>
               );
@@ -619,10 +707,16 @@ const Template17 = () => {
                 <Education fontStyle={fontStyle} />
               </div>
             </section>
-             {/* award */}
-             <section className="w-full">
+            {/* award */}
+            <section className="w-full">
               <div className="education p-5">
                 <Awards fontStyle={fontStyle} />
+              </div>
+            </section>
+            {/* references */}
+            <section className="w-full">
+              <div className="education p-5">
+                <References fontStyle={fontStyle} />
               </div>
             </section>
           </div>
