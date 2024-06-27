@@ -249,12 +249,14 @@ const ResumeView = ({ setIsContentVisible }) => {
     const temp = resumeData?.metadata?.template;
     Payment(
       {
-        amount: type === tempType.premium ? 20 : 0,
+        amount: type === tempType.premium ? 20 : 10,
         email: userState.userdata.email,
         name: temp,
-        url: "https://career-genies-frontend.vercel.app/paymentSuccess",
+        // url: "https://career-genies-frontend.vercel.app/paymentSuccess",
+        url: "http://localhost:3000/paymentSuccess",
         cancel_url: window.location.href,
         templateName: resumeData.metadata.template,
+        temp_type: type
       },
       accessToken.value
     )
