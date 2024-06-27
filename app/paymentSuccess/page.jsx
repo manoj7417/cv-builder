@@ -4,6 +4,7 @@ import { PurchaseTokens, usertemplatepurchase } from '../api/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserStore } from '../store/UserStore';
 import { GetTokens } from '../actions';
+import axios from 'axios';
 
 const PaymentSuccess = () => {
   const searchParams = useSearchParams()
@@ -11,26 +12,27 @@ const PaymentSuccess = () => {
   const updateUserData = useUserStore(state => state.updateUserData)
   const router = useRouter()
   const purchaseItem = async () => {
+    const { accessToken } = await GetTokens()
     try {
       const purchasedItem = localStorage.getItem("purchasedItem");
       if (purchasedItem) {
         const data = JSON.parse(purchasedItem);
-        const response = await usertemplatepurchase(data);
-        if (response.data.userdata) {
-          updateUserData(response.data.userdata)
-          localStorage.removeItem("purchasedItem");
-        }
+        const response = await axios.post('/api/CheckPaymentStatus', { sessionId: data.sessionId }, {
+          headers: {
+            Authorization: 'Bearer ' + accessToken.value
+          }
+        })
+        console.log(response)
       }
     } catch (error) {
       throw error;
     } finally {
-      router.push('/resume-builder')
     }
   }
 
   const purchaseTokens = async () => {
     const { accessToken } = await GetTokens()
-    if(!accessToken ) {
+    if (!accessToken) {
       router.push('/login')
       return;
     }
