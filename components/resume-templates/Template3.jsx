@@ -295,10 +295,10 @@ const Certificates = ({ fontStyle }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-15px font-bold text-gray-600 inline-flex"
+                        className="break-words text-15px font-bold text-gray-600"
                       >
                         {item?.name}
-                        <AiOutlineLink className="ml-1 mt-1" />
+                        <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
                       <p className="break-words text-15px font-bold text-gray-600">
@@ -322,7 +322,6 @@ const Certificates = ({ fontStyle }) => {
 
 const Awards = ({ fontStyle }) => {
   const data = useResumeStore((state) => state.resume.data.sections.awards);
-  console.log(data);
   return (
     <div className="">
       {data.visible && data?.items.length > 0 && (
