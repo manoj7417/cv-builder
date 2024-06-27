@@ -9,6 +9,8 @@ import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
 import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
 import Link from "next/link";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -72,9 +74,7 @@ const Education = ({ fontStyle, headingColor }) => {
 };
 
 const Awards = ({ fontStyle, headingColor }) => {
-  const data = useResumeStore(
-    (state) => state?.resume.data.sections?.awards
-  );
+  const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
     <div className="education_section w-full">
       {data?.visible && data?.items?.length > 0 && (
@@ -94,9 +94,20 @@ const Awards = ({ fontStyle, headingColor }) => {
                   <div className="education1 my-5" key={index}>
                     <div className="education_names flex justify-between my-1">
                       <div className="education_degree">
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          {item?.name}
-                        </h3>
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.issuer}
                         </h4>
@@ -403,12 +414,20 @@ const Certificates = ({ fontStyle }) => {
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
-                    <h2 className="certificate_title text-xl font-semibold">
-                      {item?.name}
-                    </h2>
-                    <h2 className="url text-xl font-semibold underline my-2">
-                      <Link href={item?.url} target="_blank">{item?.url}</Link>
-                    </h2>
+                    {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-xl items-center font-bold inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-xl font-bold">
+                        {item.name}
+                      </p>
+                    )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
@@ -420,6 +439,73 @@ const Certificates = ({ fontStyle }) => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="reference_header">
+            <h2
+              className={`font-semibold font-serif text-[#64665e] ${fontStyle.subMianHeadingFont}`}
+            >
+              {data?.name}
+            </h2>
+            <div className="border-b-2 border-gray-600"></div>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5" key={index}>
+                    <div className="references_names w-full my-1">
+                      <div className="references w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                          {item.jobTitle} ,{item?.organization}
+                        </h3>
+                      </div>
+                      <div className="references w-full flex justify-between">
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-bold"
+                        >
+                          {item?.email}
+                        </h4>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-bold"
+                        >
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -566,21 +652,24 @@ const Template25 = () => {
                   colorStyle={metadata?.theme?.primary}
                 />
               </div>
-                <div className="education py-2">
+              <div className="education py-2">
                 <Education fontStyle={fontStyle} />
               </div>
               <div className="projects">
-                  <Projects
-                    fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
-                  />
-                </div>
-                <div className="awrds">
-                  <Awards
-                    fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
-                  />
-                </div>
+                <Projects
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
+              </div>
+              <div className="awrds">
+                <Awards
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
+              </div>
+              <div className="awrds">
+                <References fontStyle={fontStyle} />
+              </div>
             </section>
           </div>
         </div>

@@ -9,6 +9,8 @@ import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
 import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
 import Link from "next/link";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -303,9 +305,7 @@ const Hobbies = ({ fontStyle }) => {
   );
   return (
     <div className="my-5 px-5">
-      <h2
-        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-      >
+      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
         {data?.name}
       </h2>
       <div className="hobbies_section mt-5">
@@ -314,10 +314,7 @@ const Hobbies = ({ fontStyle }) => {
             <ul className="pl-5 list-disc">
               {data?.items?.map((item, index) => {
                 return (
-                  <li
-                    key={index}
-                    className="text-15px py-2 font-semibold"
-                  >
+                  <li key={index} className="text-15px py-2 font-semibold">
                     {item}
                   </li>
                 );
@@ -336,12 +333,8 @@ const Awards = ({ fontStyle, colorStyle }) => {
     <div className="awards_section w-full px-5">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div
-            className="awards_header w-full"
-          >
-            <h2
-              className={`${fontStyle.headingFont} font-bold uppercase`}
-            >
+          <div className="awards_header w-full">
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
               {data?.name}
             </h2>
           </div>
@@ -352,9 +345,20 @@ const Awards = ({ fontStyle, colorStyle }) => {
                   <div className="awards my-5" key={index}>
                     <div className="awards_names flex w-full justify-between my-1">
                       <div className="awards_degree w-full">
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          {item?.name}
-                        </h3>
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.issuer}
                         </h4>
@@ -406,7 +410,6 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-
 const Certificates = ({ fontStyle, colorStyle }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
@@ -414,9 +417,7 @@ const Certificates = ({ fontStyle, colorStyle }) => {
   return (
     <div className="certificate_section w-full px-5">
       <div>
-        <h2
-          className={`${fontStyle.headingFont} font-bold uppercase`}
-        >
+        <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
           {data?.name}
         </h2>
       </div>
@@ -427,14 +428,20 @@ const Certificates = ({ fontStyle, colorStyle }) => {
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
-                    <h2 className="certificate_title text-xl font-semibold">
-                      {item?.name}
-                    </h2>
-                    <h2 className="url text-sm font-semibold underline my-2">
-                      <Link href={item?.url} target="_blank">
-                        {item?.url}
-                      </Link>
-                    </h2>
+                    {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-xl items-center font-bold inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-xl font-bold">
+                        {item.name}
+                      </p>
+                    )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
@@ -446,6 +453,74 @@ const Certificates = ({ fontStyle, colorStyle }) => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="references_header">
+            <h2
+              className={`my-2 uppercase text-2xl font-bold px-5 ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+                paddingBottom: "1rem", // Space for the underline
+              }}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5 px-5" key={index}>
+                    <div className="references_names w-full my-1">
+                      <div className="references w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
+                        <h3 className={`${fontStyle.subHeadingFont}`}>
+                          {item.jobTitle} ,<span>{item?.organization}</span>
+                        </h3>
+                      </div>
+                      <div className="references w-full">
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                        >
+                          {item?.email}
+                        </h4>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                        >
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -503,7 +578,7 @@ const Template13 = () => {
             </div>
           </div>
           <div className="bottom_section flex gap-10">
-            <div className="resume_details_1 w-1/2">
+            <div className="resume_details_1 w-[60%]">
               {/* work experiences */}
               <section>
                 <div className="experience px-5">
@@ -522,8 +597,8 @@ const Template13 = () => {
                   />
                 </div>
               </section>
-               {/* awards  */}
-               <section>
+              {/* awards  */}
+              <section>
                 <div className="projects px-5">
                   <Awards
                     fontStyle={fontStyle}
@@ -531,8 +606,8 @@ const Template13 = () => {
                   />
                 </div>
               </section>
-               {/* certificate  */}
-               <section>
+              {/* certificate  */}
+              <section>
                 <div className="projects px-5">
                   <Certificates
                     fontStyle={fontStyle}
@@ -541,7 +616,7 @@ const Template13 = () => {
                 </div>
               </section>
             </div>
-            <div className="resume_details_2 w-1/2">
+            <div className="resume_details_2 w-[40%]">
               {/* education */}
               <section>
                 <div className="education px-5 mt-20">
@@ -559,6 +634,10 @@ const Template13 = () => {
               {/* language  */}
               <div className="skills px-5 w-full">
                 <Languages fontStyle={fontStyle} />
+              </div>
+              {/* references  */}
+              <div className="skills px-5 w-full">
+                <References fontStyle={fontStyle} />
               </div>
             </div>
           </div>

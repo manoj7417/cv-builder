@@ -7,6 +7,8 @@ import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
 import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
 import Link from "next/link";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -318,9 +320,20 @@ const Awards = ({ fontStyle, colorStyle }) => {
                   <div className="awards my-5" key={index}>
                     <div className="awards_names flex w-full justify-between my-1">
                       <div className="awards_degree w-full">
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          {item?.name}
-                        </h3>
+                      {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.issuer}
                         </h4>
@@ -405,14 +418,20 @@ const Certificates = ({ fontStyle, colorStyle }) => {
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
-                    <h2 className="certificate_title text-xl font-semibold">
-                      {item?.name}
-                    </h2>
-                    <h2 className="url text-sm font-semibold underline my-2">
-                      <Link href={item?.url} target="_blank">
-                        {item?.url}
-                      </Link>
-                    </h2>
+                    {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-xl items-center inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-xl">
+                        {item.name}
+                      </p>
+                    )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
@@ -485,6 +504,75 @@ const Languages = ({ fontStyle, headingColor }) => {
     </div>
   );
 };
+
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="references_header">
+          <h2
+            className={`font-semibold uppercase ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+              borderBottom: "3px solid black", // Space for the underline
+            }}
+          >
+            {data?.name}
+          </h2>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5" key={index}>
+                    <div className="references_names w-full my-1">
+                      <div className="references w-full">
+                      {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-16px items-center text-gray-600 inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-15px text-gray-600">
+                        {item.name}
+                      </p>
+                    )}
+                        <h3 className={`${fontStyle.subHeadingFont}`}>
+                           {item.jobTitle} ,{item?.organization}
+                        </h3>
+                      </div>
+                      <div className="references w-full flex justify-between">
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                        >
+                          {item?.email}
+                        </h4>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                        >
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 
 const Template12 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
@@ -671,6 +759,12 @@ const Template12 = () => {
                       </div>
                       <div className="languages mb-4">
                         <Languages
+                          fontStyle={fontStyle}
+                          headingColor={metadata?.theme?.primary}
+                        />
+                      </div>
+                      <div className="references mb-4">
+                        <References
                           fontStyle={fontStyle}
                           headingColor={metadata?.theme?.primary}
                         />
