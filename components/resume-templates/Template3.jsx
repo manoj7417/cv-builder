@@ -280,7 +280,7 @@ const Certificates = ({ fontStyle }) => {
                   <>
                     {isValidUrl(item?.url) ?
                       <a href={item?.url} target="_blank" className="break-words text-15px font-bold text-gray-600">
-                        {item?.name}
+                        {item?.name}<AiOutlineLink className="ml-1" />
                       </a> : <p className="break-words text-15px font-bold text-gray-600">{item.name}</p>}
                   </>
                   <div dangerouslySetInnerHTML={{ __html: item?.description }} className="w-full font-normal">
@@ -300,7 +300,6 @@ const Certificates = ({ fontStyle }) => {
 
 const Awards = ({ fontStyle }) => {
   const data = useResumeStore(state => state.resume.data.sections.awards)
-  console.log(data)
   return (
     <div className=''>{
       data.visible && data?.items.length > 0 && (
