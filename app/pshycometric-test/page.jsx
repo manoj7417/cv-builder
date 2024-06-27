@@ -155,10 +155,10 @@ const Page = () => {
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
-                      <p className="text-gray-500">30 TESTS</p>
-                      <p className="text-gray-500">450 QUESTIONS</p>
+                      <p className="text-gray-500">1 TEST</p>
+                      <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq">
+                    <a href="/mcq?name=NumericalReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
@@ -180,10 +180,10 @@ const Page = () => {
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
-                      <p className="text-gray-500">30 TESTS</p>
-                      <p className="text-gray-500">450 QUESTIONS</p>
+                      <p className="text-gray-500">1 TEST</p>
+                      <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq">
+                    <a href="/mcq?name=VerbalReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
@@ -210,7 +210,7 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">300 QUESTIONS</p>
                     </div>
-                    <a href="/mcq">
+                    <a href="/mcq?name=DiagrammaticReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
@@ -240,7 +240,7 @@ const Page = () => {
                       <p className="text-gray-500">30 TESTS</p>
                       <p className="text-gray-500">480 QUESTIONS</p>
                     </div>
-                    <a href="/mcq">
+                    <a href="/mcq?name=SituationalJudgement">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
