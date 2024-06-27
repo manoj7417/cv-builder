@@ -3,9 +3,19 @@ import { MdOutlineMailOutline, MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useResumeStore } from "@/app/store/ResumeStore";
-import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
+import {
+  FaAward,
+  FaComputer,
+  FaGraduationCap,
+  FaXTwitter,
+} from "react-icons/fa6";
 import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
+import Link from "next/link";
+import { GrCertificate } from "react-icons/gr";
+import { PiCertificateFill } from "react-icons/pi";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -31,7 +41,7 @@ const Education = ({ fontStyle, headingColor }) => {
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="education1 my-5" key={index}>
+                  <div className="education1 my-5 px-5" key={index}>
                     <div className="education_names flex  justify-between items-center my-1">
                       <div className="education_degree">
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -95,7 +105,7 @@ const Experience = ({ fontStyle, headingColor }) => {
           </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1 w-full p-5" key={index}>
+              <div className="experience_1 w-full px-10" key={index}>
                 <div className="post flex  justify-between items-center my-2">
                   <div className="post_title">
                     <h3
@@ -140,6 +150,67 @@ const Experience = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Awards = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.awards);
+  return (
+    <div className="awards_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="awards_header flex items-center gap-3">
+            <FaAward className="text-sky-600 text-3xl" />
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+              {data?.name}
+            </h2>
+            <div className="border border-sky-600 w-full"></div>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="awards my-5 px-10" key={index}>
+                    <div className="awards_names flex w-full justify-between my-1">
+                      <div className="awards_degree w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.issuer}
+                        </h4>
+                      </div>
+                      <div className="awards_year text-end w-full">
+                        <p
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                        >
+                          {item?.date}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 const Projects = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
@@ -160,7 +231,7 @@ const Projects = ({ fontStyle, headingColor }) => {
           </div>
           {data?.items.map((item, index) => {
             return (
-              <div className="projects1 w-full my-3 p-5" key={index}>
+              <div className="projects1 w-full my-3 px-10" key={index}>
                 <div className="post flex  justify-between items-center my-2">
                   <div className="post_title">
                     <h3
@@ -214,9 +285,9 @@ const Skills = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-3">
+        <div className="skills_section py-2">
           <h2
-            className={`bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 font-medium my-2 uppercase text-2xl ${fontStyle.headingFont}`}
+            className={`bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 font-bold my-2 uppercase text-2xl ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
               paddingBottom: "1rem", // Space for the underline
@@ -253,6 +324,39 @@ const Skills = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Hobbies = ({ fontStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div className="py-2">
+      <h2
+        className={`bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600  uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+      >
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="">
+              {data?.items?.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="text-15px py-2 font-semibold text-white"
+                  >
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Profile = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
@@ -273,10 +377,178 @@ const Profile = ({ fontStyle, headingColor }) => {
             <div className="border border-blue-600 w-full"></div>
           </div>
           <div
-            className={`p-5 ${fontStyle.subHeadingFont} break-words`}
+            className={`mt-2 px-10 ${fontStyle.subHeadingFont} break-words`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
+      )}
+    </div>
+  );
+};
+
+const Languages = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.language);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-4">
+          <h2
+            className={`bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 font-bold my-2 uppercase text-2xl ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+              paddingBottom: "1rem", // Space for the underline
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
+            <ul className="w-full">
+              {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
+                return (
+                  <li
+                    className={`flex items-center sfont-bold text-white ${fontStyle.skillsFont} my-1 py-1`}
+                    key={i}
+                  >
+                    <div className="text-start w-1/2 mb-1">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
+                      <div
+                        className="bg-gradient-to-r from-cyan-400 to-blue-600 h-2.5"
+                        style={{ width: `${level}%` }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Certificates = ({ fontStyle, colorStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.certificates
+  );
+  return (
+    <div>
+      <div className="awards_header flex items-center gap-3">
+        <PiCertificateFill className="text-sky-600 text-3xl" />
+        <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+          {data?.name}
+        </h2>
+        <div className="border border-sky-600 w-full"></div>
+      </div>
+      <div className="hobbies_section mt-5 px-10">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="">
+              {data?.items?.map((item, index) => {
+                return (
+                  <div className="certificate_section px-2" key={index}>
+                    {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-xl items-center font-bold inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-xl font-bold">
+                        {item.name}
+                      </p>
+                    )}
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="awards_header flex items-center gap-3">
+            <PiCertificateFill className="text-sky-600 text-3xl" />
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+              {data?.name}
+            </h2>
+            <div className="border border-sky-600 w-full"></div>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5" key={index}>
+                    <div className="references_names w-full my-1 px-10">
+                      <div className="references w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                          {item.jobTitle} ,{item?.organization}
+                        </h3>
+                      </div>
+                      <div className="references w-full flex justify-between">
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-bold"
+                        >
+                          {item?.email}
+                        </h4>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-bold"
+                        >
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
       )}
     </div>
   );
@@ -316,7 +588,7 @@ const Template11 = () => {
               </div>
               <div className="contact_details p-5">
                 <div className="contact_section">
-                  <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 text-2xl uppercase font-medium my-2">
+                  <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 text-2xl uppercase font-bold my-2">
                     Contact Me
                   </h2>
                   <div className="contact_details flex">
@@ -357,8 +629,14 @@ const Template11 = () => {
                   </div>
                 </div>
               </div>
-              <div className="skills mt-10 p-5">
+              <div className="skills px-5 py-4">
                 <Skills fontStyle={fontStyle} />
+              </div>
+              <div className="hobbies px-5 py-4">
+                <Hobbies fontStyle={fontStyle} />
+              </div>
+              <div className="language px-5 py-4">
+                <Languages fontStyle={fontStyle} />
               </div>
             </div>
             <div className="right_section w-[65%]">
@@ -369,7 +647,7 @@ const Template11 = () => {
                   </h2>
                   <h4 className="text-base text-white">{basics?.jobtitle}</h4>
                 </div>
-                <div className="user_details h-[50px] relative clip-semi-arc"></div>
+                <div className="user_details h-[50px] relative"></div>
               </div>
               <div className="personal_details p-5">
                 <div className="profile_section mb-4">
@@ -389,6 +667,24 @@ const Template11 = () => {
                 </div>
                 <div className="projects">
                   <Projects
+                    fontStyle={fontStyle}
+                    colorStyle={metadata?.theme?.primary}
+                  />
+                </div>
+                <div className="award">
+                  <Awards
+                    fontStyle={fontStyle}
+                    colorStyle={metadata?.theme?.primary}
+                  />
+                </div>
+                <div className="certificate">
+                  <Certificates
+                    fontStyle={fontStyle}
+                    colorStyle={metadata?.theme?.primary}
+                  />
+                </div>
+                <div className="references">
+                  <References
                     fontStyle={fontStyle}
                     colorStyle={metadata?.theme?.primary}
                   />

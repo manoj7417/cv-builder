@@ -8,6 +8,9 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
 import { FaGlobe, FaUserAlt } from "react-icons/fa";
 import { HiCube } from "react-icons/hi2";
+import Link from "next/link";
+import { isValidUrl } from "./ValidateUrl";
+import { AiOutlineLink } from "react-icons/ai";
 
 const Education = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
@@ -242,6 +245,195 @@ const Skills = ({ fontStyle, headingColor }) => {
   );
 };
 
+const Hobbies = ({ fontStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div>
+      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="-pl-5">
+              {data?.items?.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="text-15px py-2 font-semibold text-white"
+                  >
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Languages = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.language);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-4">
+          <h2
+            className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+            style={{
+              color: headingColor,
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="text-gray-600 w-full flex justify-end items-center">
+            <ul className="w-full">
+              {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
+                return (
+                  <li
+                    className={`flex text-white items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    key={i}
+                  >
+                    <div className="text-start w-1/2 mb-1">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
+                      <div
+                        className="bg-[#f07b5f] h-2.5"
+                        style={{ width: `${level}%` }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Certificates = ({ fontStyle }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.certificates
+  );
+  return (
+    <div>
+      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="">
+              {data?.items?.map((item, index) => {
+                return (
+                  <div className="certificate_section px-2" key={index}>
+                    {isValidUrl(item?.url) ? (
+                      <a
+                        href={item?.url}
+                        target="_blank"
+                        className="break-words text-xl items-center font-bold text-white inline-flex"
+                      >
+                        {item?.name}
+                        <AiOutlineLink className="ml-1" />
+                      </a>
+                    ) : (
+                      <p className="break-words text-xl font-bold text-white">
+                        {item.name}
+                      </p>
+                    )}
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Awards = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.awards);
+  return (
+    <div className="awards_section w-full mt-5 px-10">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="awards_header w-full">
+            <h2
+              className={`font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="awards my-5" key={index}>
+                    <div className="awards_names flex w-full justify-between my-1">
+                      <div className="awards_degree w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold">
+                            {item.name}
+                          </p>
+                        )}
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                          {item?.issuer}
+                        </h4>
+                      </div>
+                      <div className="awards_year text-end w-full">
+                        <p
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
+                        >
+                          {item?.date}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      dangerouslySetInnerHTML={{ __html: item?.description }}
+                    ></div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 const Profile = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
@@ -266,13 +458,78 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
+const References = ({ fontStyle, headingColor }) => {
+  const data = useResumeStore(
+    (state) => state?.resume.data.sections?.reference
+  );
+  return (
+    <div className="references_section w-full">
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div className="references_header">
+            <h2
+              className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+            >
+              {data?.name}
+            </h2>
+          </div>
+          <div className="text-gray-800">
+            {data?.items?.map((item, index) => {
+              return (
+                <>
+                  <div className="references my-5" key={index}>
+                    <div className="references_names w-full my-1">
+                      <div className="references w-full">
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-white inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-white">
+                            {item.name}
+                          </p>
+                        )}
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold text-white`}>
+                          {item.jobTitle} ,{item?.organization}
+                        </h3>
+                      </div>
+                      <div className="references w-full text-white">
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-bold"
+                        >
+                          {item?.email}
+                        </h4>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-bold"
+                        >
+                          {item?.phone}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 const Template21 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
-  
 
-  const [firstName, ...rest] = basics.name.split(' ');
-  const surname = rest.join(' ');
+  const [firstName, ...rest] = basics.name.split(" ");
+  const surname = rest.join(" ");
 
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
@@ -307,7 +564,12 @@ const Template21 = () => {
                 )}
               </div>
             </div>
-            <section className="m-6 leading-9">
+            <section className="px-5 py-5 leading-9">
+              <h2
+                className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+              >
+                Contacts
+              </h2>
               <ul className="flex flex-col gap-3 mt-2 px-2">
                 <li className="flex items-center gap-3">
                   {basics?.phone && (
@@ -325,7 +587,7 @@ const Template21 = () => {
                 <li className="flex items-center gap-3">
                   {(basics?.city || basics?.country) && (
                     <p className="flex items-center">
-                      <IoLocationOutline className="mr-2"/>
+                      <IoLocationOutline className="mr-2" />
                       <span>{basics?.city}</span>
                       <span>{basics?.city && basics?.country && " , "}</span>
                       <span className="">{basics?.country}</span>
@@ -347,17 +609,31 @@ const Template21 = () => {
                 </li>
               </ul>
             </section>
-            <section className="m-8 py-10">
+            <section className="px-5 py-5">
               <Skills fontStyle={fontStyle} />
+            </section>
+            <section className="px-5 py-5">
+              <Hobbies fontStyle={fontStyle} />
+            </section>
+            <section className="px-5 py-5">
+              <Languages fontStyle={fontStyle} />
+            </section>
+            <section className="px-5 py-5">
+              <Certificates fontStyle={fontStyle} />
+            </section>
+            <section className="px-5 py-5">
+              <References fontStyle={fontStyle} />
             </section>
           </div>
           {/* <div className="bg-[#f07b5f] w-8"></div> */}
           <div className="pt-20 w-[65%] bg-white">
             <h1 className="px-6 text-6xl font-bold text-[#f07b5f]">
-            {firstName} <span className="text-black">{surname}</span>
+              {firstName} <span className="text-black">{surname}</span>
             </h1>
             <div className="px-6 py-2">
-              <p className="text-xl font-bold text-[#f07b5f] pl-4">{basics?.jobtitle}</p>
+              <p className="text-xl font-bold text-[#f07b5f] pl-4">
+                {basics?.jobtitle}
+              </p>
             </div>
             <section className="py-3">
               <div className="profile_section">
@@ -379,6 +655,12 @@ const Template21 = () => {
               </div>
               <div className="projects py-2">
                 <Projects
+                  fontStyle={fontStyle}
+                  colorStyle={metadata?.theme?.primary}
+                />
+              </div>
+              <div className="projects py-2">
+                <Awards
                   fontStyle={fontStyle}
                   colorStyle={metadata?.theme?.primary}
                 />
