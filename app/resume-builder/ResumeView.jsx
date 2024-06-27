@@ -17,13 +17,10 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Payment, printResume } from "../api/api";
-import Link from "next/link";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { BsFullscreen } from "react-icons/bs";
-import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore, useTemporalResumeStore } from "../store/ResumeStore";
 import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
@@ -37,10 +34,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { DialogDescription } from "@radix-ui/react-dialog";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+;
 import { ImSpinner3 } from "react-icons/im";
 import Lottie from "lottie-react";
 import Loader1 from "@/public/animations/downloadLoader1.json";
@@ -252,11 +246,12 @@ const ResumeView = ({ setIsContentVisible }) => {
 
   const handlepayment = async (type) => {
     const { accessToken } = await GetTokens();
+    const temp = resumeData?.metadata?.template;
     Payment(
       {
-        amount: type === tempType.premium ? 20 : 10,
+        amount: type === tempType.premium ? 20 : 0,
         email: userState.userdata.email,
-        name: "aman",
+        name: temp,
         url: "https://career-genies-frontend.vercel.app/paymentSuccess",
         cancel_url: window.location.href,
         templateName: resumeData.metadata.template,
@@ -269,6 +264,7 @@ const ResumeView = ({ setIsContentVisible }) => {
         window.location = url;
       })
       .catch((error) => {
+        toast.error("Template already purchased")
         console.error(
           error.response ? error.response.data.error : error.message
         );
@@ -279,6 +275,8 @@ const ResumeView = ({ setIsContentVisible }) => {
     const templateType = TempTypes.find(
       (template) => template?.name === resumeData?.metadata?.template
     );
+    await handlepayment(templateType?.type);
+    return;
     setIsLoading(true);
     const temp = resumeData?.metadata?.template;
     const userHasTemplate =
@@ -467,7 +465,7 @@ const ResumeView = ({ setIsContentVisible }) => {
 
         </div>
         <div className="toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
-          <div className="auth_section flex justify-center w-full gap-10 items-center">
+          <div className="auth_section flex justify-around w-full  items-center px-2">
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
@@ -476,32 +474,30 @@ const ResumeView = ({ setIsContentVisible }) => {
                 <BsFullscreen className="h-5 w-5 text-black font-bold" />
               </button>
             </ResumeTooltip>
-            <div className="tools">
-              <ResumeTooltip icon={FiPlus} title="Zoom In">
-                <button
-                  className="2xl:p-3 md:p-2 p-2 rounded-md"
-                  onClick={handleZoomIn}
-                >
-                  <FiPlus className="h-5 w-5 text-black font-bold" />
-                </button>
-              </ResumeTooltip>
-              <ResumeTooltip icon={FiMinus} title="Zoom Out">
-                <button
-                  className="2xl:p-3 md:p-2 p-2 mx-2 rounded-md"
-                  onClick={handleZoomOut}
-                >
-                  <FiMinus className="h-5 w-5 text-black font-bold" />
-                </button>
-              </ResumeTooltip>
-              <ResumeTooltip icon={CiUndo} title="Reset">
-                <button
-                  className="2xl:p-3 md:p-2 p-2 rounded-md"
-                  onClick={handleReset}
-                >
-                  <CiUndo className="h-5 w-5 text-black font-bold" />
-                </button>
-              </ResumeTooltip>
-            </div>
+            <ResumeTooltip icon={FiPlus} title="Zoom In">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                onClick={handleZoomIn}
+              >
+                <FiPlus className="h-5 w-5 text-black font-bold" />
+              </button>
+            </ResumeTooltip>
+            <ResumeTooltip icon={FiMinus} title="Zoom Out">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                onClick={handleZoomOut}
+              >
+                <FiMinus className="h-5 w-5 text-black font-bold" />
+              </button>
+            </ResumeTooltip>
+            <ResumeTooltip icon={CiUndo} title="Reset">
+              <button
+                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                onClick={handleReset}
+              >
+                <CiUndo className="h-5 w-5 text-black font-bold" />
+              </button>
+            </ResumeTooltip>
             <ResumeTooltip icon={FaDownload} title="Download Template">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
