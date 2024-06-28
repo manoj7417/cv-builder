@@ -13,6 +13,7 @@ import {
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 export default function Page() {
   return (
@@ -24,14 +25,14 @@ export default function Page() {
               <TooltipTrigger asChild>
                 <Link
                   href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg font-semibold text-primary-foreground transition-colors hover:bg-primary/90 md:h-8 md:w-8 md:text-base"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg font-semibold  transition-colors hover:bg-primary/90 md:h-8 md:w-8 md:text-base"
                   prefetch={false}
                 >
-                  <WebcamIcon className="h-5 w-5" />
-                  <span className="sr-only">Career Counselor</span>
+                  <IoArrowBackCircleOutline />
+                  <span className="sr-only">Go Back</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Career Counselor</TooltipContent>
+              <TooltipContent side="right">Go back</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -41,10 +42,10 @@ export default function Page() {
                   prefetch={false}
                 >
                   <BriefcaseIcon className="h-5 w-5" />
-                  <span className="sr-only">Job Search</span>
+                  <span className="sr-only">Job Cv</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Job Search</TooltipContent>
+              <TooltipContent side="right">Job Cv</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -54,10 +55,10 @@ export default function Page() {
                   prefetch={false}
                 >
                   <GraduationCapIcon className="h-5 w-5" />
-                  <span className="sr-only">Education</span>
+                  <span className="sr-only">Cv Builder</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Education</TooltipContent>
+              <TooltipContent side="right">Cv Builder</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -67,10 +68,10 @@ export default function Page() {
                   prefetch={false}
                 >
                   <CompassIcon className="h-5 w-5" />
-                  <span className="sr-only">Career Exploration</span>
+                  <span className="sr-only">Cv Analyser</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Career Exploration</TooltipContent>
+              <TooltipContent side="right">Cv Analyser</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -80,10 +81,10 @@ export default function Page() {
                   prefetch={false}
                 >
                   <ClipboardIcon className="h-5 w-5" />
-                  <span className="sr-only">Resume Building</span>
+                  <span className="sr-only">Report</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Resume Building</TooltipContent>
+              <TooltipContent side="right">Report</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </nav>
@@ -122,7 +123,7 @@ export default function Page() {
                   prefetch={false}
                 >
                   <WebcamIcon className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Career Counselor</span>
+                  <span className="sr-only">Back</span>
                 </Link>
                 <Link
                   href="#"
@@ -130,7 +131,7 @@ export default function Page() {
                   prefetch={false}
                 >
                   <BriefcaseIcon className="h-5 w-5" />
-                  Job Search
+                  Job Cv
                 </Link>
                 <Link
                   href="#"
@@ -138,7 +139,7 @@ export default function Page() {
                   prefetch={false}
                 >
                   <GraduationCapIcon className="h-5 w-5" />
-                  Education
+                  Cv Builder
                 </Link>
                 <Link
                   href="#"
@@ -146,7 +147,7 @@ export default function Page() {
                   prefetch={false}
                 >
                   <CompassIcon className="h-5 w-5" />
-                  Career Exploration
+                  Cv Analyser
                 </Link>
                 <Link
                   href="#"
@@ -154,7 +155,7 @@ export default function Page() {
                   prefetch={false}
                 >
                   <ClipboardIcon className="h-5 w-5" />
-                  Resume Building
+                  Report
                 </Link>
               </nav>
             </SheetContent>
@@ -194,10 +195,7 @@ export default function Page() {
                   </Avatar>
                   <div className="font-medium">Career Counselor</div>
                 </div>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <MoveHorizontalIcon className="h-4 w-4" />
-                  <span className="sr-only">More options</span>
-                </Button>
+               
               </CardHeader>
               <CardContent className="flex-1 overflow-auto p-4">
                 <div className="grid gap-4">
@@ -276,52 +274,13 @@ export default function Page() {
           <div className="w-full lg:w-1/3">
             <Card className="h-full w-full overflow-hidden">
               <CardHeader className="flex items-center justify-between border-b bg-muted px-6 py-4">
-                <div className="font-medium">Chat History</div>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <MoveHorizontalIcon className="h-4 w-4" />
-                  <span className="sr-only">More options</span>
-                </Button>
+                <div className="font-medium">Career Counselor</div>
+                
+                
+                  
+               
               </CardHeader>
-              <CardContent className="flex-1 overflow-auto p-4">
-                <div className="grid gap-4">
-                  <Link
-                    href="#"
-                    className="flex items-center gap-3 rounded-md bg-muted p-3 transition-colors hover:bg-accent hover:text-accent-foreground"
-                    prefetch={false}
-                  >
-                    <Avatar className="w-8 h-8 border">
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 truncate">
-                      <div className="font-medium">Jane Doe</div>
-                      <div className="text-sm text-muted-foreground">
-                        Hi, I&apos;m looking for some guidance on transitioning to a new career. Can you help me explore my
-                        options?
-                      </div>
-                    </div>
-                    <div className="text-xs text-muted-foreground">2:30 PM</div>
-                  </Link>
-                  <Link
-                    href="#"
-                    className="flex items-center gap-3 rounded-md bg-muted p-3 transition-colors hover:bg-accent hover:text-accent-foreground"
-                    prefetch={false}
-                  >
-                    <Avatar className="w-8 h-8 border">
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 truncate">
-                      <div className="font-medium">John Doe</div>
-                      <div className="text-sm text-muted-foreground">
-                        I&apos;m interested in exploring a career in data analytics. Can we discuss my options?
-                      </div>
-                    </div>
-                    <div className="text-xs text-muted-foreground">1:45 PM</div>
-                  </Link>
-                  {/* Add more chat history items as needed */}
-                </div>
-              </CardContent>
+              
             </Card>
           </div>
         </main>
