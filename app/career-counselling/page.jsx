@@ -209,7 +209,7 @@ export default function Page() {
                     <div className="grid gap-1 rounded-lg bg-muted p-3 text-sm">
                       <div className="font-medium">Jane Doe</div>
                       <div>
-                        Hi, I'm looking for some guidance on transitioning to a new career. Can you help me explore my
+                        Hi, I&apos;m looking for some guidance on transitioning to a new career. Can you help me explore my
                         options?
                       </div>
                     </div>
@@ -218,7 +218,7 @@ export default function Page() {
                     <div className="grid gap-1 rounded-lg bg-primary p-3 text-sm text-primary-foreground">
                       <div className="font-medium">Career Counselor</div>
                       <div>
-                        Absolutely, I'd be happy to help. Let's start by discussing your current skills and interests.
+                        Absolutely, I&apos;d be happy to help. Let&apos;s start by discussing your current skills and interests.
                         What kind of work are you most passionate about?
                       </div>
                     </div>
@@ -235,8 +235,8 @@ export default function Page() {
                     <div className="grid gap-1 rounded-lg bg-muted p-3 text-sm">
                       <div className="font-medium">Jane Doe</div>
                       <div>
-                        Well, I've always been interested in technology and problem-solving. I have a background in
-                        marketing, but I've been feeling unfulfilled lately.
+                        Well, I&apos;ve always been interested in technology and problem-solving. I have a background in
+                        marketing, but I&apos;ve been feeling unfulfilled lately.
                       </div>
                     </div>
                   </div>
@@ -244,7 +244,7 @@ export default function Page() {
                     <div className="grid gap-1 rounded-lg bg-primary p-3 text-sm text-primary-foreground">
                       <div className="font-medium">Career Counselor</div>
                       <div>
-                        That's great, technology and problem-solving are valuable skills. Have you considered roles in
+                        That&apos;s great, technology and problem-solving are valuable skills. Have you considered roles in
                         software development, product management, or user experience design? Those could be a good fit
                         based on your interests and background.
                       </div>
@@ -296,7 +296,7 @@ export default function Page() {
                     <div className="flex-1 truncate">
                       <div className="font-medium">Jane Doe</div>
                       <div className="text-sm text-muted-foreground">
-                        Hi, I'm looking for some guidance on transitioning to a new career. Can you help me explore my
+                        Hi, I&apos;m looking for some guidance on transitioning to a new career. Can you help me explore my
                         options?
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export default function Page() {
                     <div className="flex-1 truncate">
                       <div className="font-medium">John Doe</div>
                       <div className="text-sm text-muted-foreground">
-                        I'm interested in exploring a career in data analytics. Can we discuss my options?
+                        I&apos;m interested in exploring a career in data analytics. Can we discuss my options?
                       </div>
                     </div>
                     <div className="text-xs text-muted-foreground">1:45 PM</div>
