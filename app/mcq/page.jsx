@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { FaRocket, FaCrown } from "react-icons/fa";
+
 import "react-circular-progressbar/dist/styles.css";
 
 const tests = {
@@ -761,6 +763,7 @@ const Page = () => {
   const [results, setResults] = useState([]);
   const [score, setScore] = useState(0);
   const [numbers, setNumbers] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -773,6 +776,16 @@ const Page = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      const popupTimer = setTimeout(() => {
+        setShowPopup(true);
+      }, 5000);
+
+      return () => clearTimeout(popupTimer);
+    }
+  }, [isSubmitted]);
 
   const handleOptionClick = (index) => {
     const newAnswers = [...answers];
@@ -933,6 +946,63 @@ const Page = () => {
           </div>
         )}
       </div>
+      {showPopup && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+          style={{ background: "url(/repopup.jpg)" }}
+        >
+          <div className="bg-white flex flex-col md:flex-row rounded-lg shadow-lg justify-center items-center overflow-hidden w-full md:w-[60%] relative">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-2 right-2"
+              aria-label="Close"
+            >
+              <svg
+                className="h-6 w-6 text-gray-700 hover:text-gray-900"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <div className="px-6 py-4 w-[90%] md:w-[50%]">
+              <h2 className="text-2xl font-semibold mb-4 uppercase text-blue-950">
+                Looking for career counseling? Take an AI-personalized test
+                today!
+              </h2>
+              <p className="text-gray-700 mb-4">
+                Are you seeking career guidance? Take our AI-personalized test
+                to discover your ideal career path. Our advanced AI technology
+                analyzes your strengths, interests, and preferences to provide
+                tailored advice and recommendations. Start your journey towards
+                a fulfilling career today with our customized counseling
+                solutions.
+              </p>
+              <a href="/career-coaching">
+                {" "}
+                <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
+                  <FaCrown className="mr-2 animate-pulse" />
+                  TRY NOW !
+                </button>
+              </a>
+            </div>
+            <div className="px-6 py-4  w-[90%] md:w-[50%]">
+              <img
+                src="/aipersonalized.gif"
+                alt="aipersonalized"
+                className="w-full rounded"
+              />
+            </div>
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .animated-bg {
           position: absolute;
@@ -951,6 +1021,41 @@ const Page = () => {
           100% {
             background-position: 100% 100%;
           }
+        }
+        .popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 50;
+        }
+        .popup {
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border: 1px solid #ccc;
+          position: relative;
+          width: 300px;
+          max-width: 90%;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .popup:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #ccc;
+          z-index: -1;
+          border-radius: 10px;
         }
       `}</style>
     </div>
