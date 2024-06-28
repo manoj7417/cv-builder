@@ -519,7 +519,7 @@ const Profile = ({ fontStyle, headingColor }) => {
         <div className="profile_section w-full">
           <div className="profile_heading w-full">
             <h2
-              className={`font-semibold font-serif text-white ${fontStyle.subMianHeadingFont}`}
+              className={`font-semibold font-serif  ${fontStyle.subMianHeadingFont}`}
             >
               {data?.name}
             </h2>
@@ -551,12 +551,17 @@ const Template25 = () => {
     skillsFont: "text-15px",
     contactFont: "text-13px",
   });
+  
+  
 
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="h-auto w-[793px] mx-auto bg-white shadow-lg rounded-lg flex">
-          <div className="bg-[#dec597] p-6 w-5/12">
+          <div className={`p-6 w-5/12 `} style={{
+            backgroundColor : metadata.theme.background,
+          
+          }}>
             <div className="flex items-center justify-center mb-8">
               {basics?.picture?.url && (
                 <div className="profile_pic">
@@ -569,7 +574,12 @@ const Template25 = () => {
               )}
             </div>
 
-            <section className="bg-[#a78039] p-4">
+            <section
+              className=" p-4"
+              style={{
+                backgroundColor: metadata.theme.primary,
+              }}
+            >
               <h2 className="flex justify-between items-center text-xl text-white font-semibold border-b-2 pb-2">
                 CONTACT ME
               </h2>
@@ -614,21 +624,47 @@ const Template25 = () => {
             </section>
 
             <section>
-              <Skills fontStyle={fontStyle} />
+              <Skills
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
             <section>
-              <Hobbies fontStyle={fontStyle} />
+              <Hobbies
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
             <section>
-              <Languages fontStyle={fontStyle} />
+              <Languages
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
             <section>
-              <Certificates fontStyle={fontStyle} />
+              <Certificates
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
           </div>
           <div className="bg-[#f0f0f0] w-2/3">
-            <header className="px-6 text-[#a78039] text-center pt-4">
-              <h1 className="text-left text-6xl border-b-2 border-[#a78039] p-2">
+            <header
+              className="px-6  text-center pt-4"
+              style={{
+                color: metadata.theme.primary,
+              }}
+            >
+              <h1
+                className="text-left text-6xl border-b-2  p-2"
+                style={{
+                  borderColor: metadata.theme.primary,
+                }}
+              >
                 {basics?.name}
               </h1>
               <p className="font-semibold text-left text-2xl text-black py-4 px-4">
@@ -636,11 +672,15 @@ const Template25 = () => {
               </p>
             </header>
 
-            <section className="bg-[#a78039] text-white px-8 py-4">
+            <section className="  px-8 py-4" style={{
+              backgroundColor  : metadata.theme.primary,
+              color : metadata.theme.text
+            }}>
               <div className="profile_section">
                 <Profile
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
             </section>
@@ -649,26 +689,37 @@ const Template25 = () => {
               <div className="experience py-2">
                 <Experience
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
               <div className="education py-2">
-                <Education fontStyle={fontStyle} />
+                <Education
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
               <div className="projects">
                 <Projects
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
               <div className="awrds">
                 <Awards
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
               <div className="awrds">
-                <References fontStyle={fontStyle} />
+                <References
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
             </section>
           </div>
