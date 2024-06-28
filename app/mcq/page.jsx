@@ -907,7 +907,7 @@ const Page = () => {
                   text={`${Math.round(score)}%`}
                   styles={buildStyles({
                     textColor: "#000",
-                    pathColor: "#00aaff",
+                    pathColor: "#3b5189",
                     trailColor: "#d6d6d6",
                   })}
                 />
@@ -939,19 +939,17 @@ const Page = () => {
             </ul>
             <button
               onClick={() => setIsSubmitted(false)}
-              className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+              className="flex mt-6 items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105"
             >
+              <FaCrown className="mr-2 animate-pulse" />
               Retake Test
             </button>
           </div>
         )}
       </div>
       {showPopup && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
-          style={{ background: "url(/repopup.jpg)" }}
-        >
-          <div className="bg-white flex flex-col md:flex-row rounded-lg shadow-lg justify-center items-center overflow-hidden w-full md:w-[60%] relative">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 animation-slide-in">
+          <div className="bg-white flex flex-col  rounded-lg shadow-lg justify-center items-center overflow-hidden w-full md:w-[60%] relative">
             <button
               onClick={() => setShowPopup(false)}
               className="absolute top-2 right-2"
@@ -972,33 +970,19 @@ const Page = () => {
                 />
               </svg>
             </button>
-            <div className="px-6 py-4 w-[90%] md:w-[50%]">
-              <h2 className="text-2xl font-semibold mb-4 uppercase text-blue-950">
-                Looking for career counseling? Take an AI-personalized test
-                today!
-              </h2>
-              <p className="text-gray-700 mb-4">
-                Are you seeking career guidance? Take our AI-personalized test
-                to discover your ideal career path. Our advanced AI technology
-                analyzes your strengths, interests, and preferences to provide
-                tailored advice and recommendations. Start your journey towards
-                a fulfilling career today with our customized counseling
-                solutions.
-              </p>
-              <a href="/career-coaching">
-                {" "}
-                <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
+            <div className="px-6 py-4 w-[90%] md:w-[80%] justify-center flex flex-col">
+              <img
+                src="/aipersonalized.png"
+                alt="aipersonalized"
+                className="w-full h-[20%] rounded"
+              />
+
+              <a href="/career-coaching pb-8 mb-8 flex flex-col justify-center">
+                <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l transition duration-300 transform hover:scale-105">
                   <FaCrown className="mr-2 animate-pulse" />
-                  TRY NOW !
+                  TRY NOW!
                 </button>
               </a>
-            </div>
-            <div className="px-6 py-4  w-[90%] md:w-[50%]">
-              <img
-                src="/aipersonalized.gif"
-                alt="aipersonalized"
-                className="w-full rounded"
-              />
             </div>
           </div>
         </div>
@@ -1056,6 +1040,17 @@ const Page = () => {
           background: #ccc;
           z-index: -1;
           border-radius: 10px;
+        }
+        @keyframes slide-in {
+          from {
+            transform: translateY(-100%);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+        .animation-slide-in {
+          animation: slide-in 0.5s ease-out;
         }
       `}</style>
     </div>
