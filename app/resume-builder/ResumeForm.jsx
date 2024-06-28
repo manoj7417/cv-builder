@@ -429,7 +429,6 @@ export default function ResumeForm() {
   const handleTemplateThemeChange = (color) => {
     if (color) {
       setResumeData("metadata.theme.primary", color);
-      handleTextColor();
     }
   };
 
@@ -897,7 +896,7 @@ export default function ResumeForm() {
 
   useEffect(() => {
     handleTextColor();
-  }, []);
+  }, [data.metadata.theme.primary]);
 
   return (
     <>
@@ -2489,7 +2488,6 @@ export default function ResumeForm() {
                 className="pl-2 w-36 rounded-md"
                 onChange={(event) => {
                   setResumeData("metadata.theme.primary", event.target.value);
-                  handleTextColor();
                 }}
               />
             </div>
@@ -2508,7 +2506,6 @@ export default function ResumeForm() {
                       key={color}
                       onClick={() => {
                         setResumeData("metadata.theme.primary", color);
-                        handleTextColor();
                       }}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
@@ -2526,7 +2523,7 @@ export default function ResumeForm() {
                       key={color}
                       onClick={() => {
                         setResumeData("metadata.theme.primary", color);
-                        handleTextColor();
+                        
                       }}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
