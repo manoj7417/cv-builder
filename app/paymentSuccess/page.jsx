@@ -14,16 +14,16 @@ const PaymentSuccess = () => {
   const purchaseItem = async () => {
     const { accessToken } = await GetTokens()
     try {
-      const purchasedItem = localStorage.getItem("purchasedItem");
-      if (purchasedItem) {
-        const data = JSON.parse(purchasedItem);
-        const response = await axios.post('/api/CheckPaymentStatus', { sessionId: data.sessionId }, {
-          headers: {
-            Authorization: 'Bearer ' + accessToken.value
-          }
-        })
-        console.log(response)
-      }
+      // const purchasedItem = localStorage.getItem("purchasedItem");
+      // if (purchasedItem) {
+      //   const data = JSON.parse(purchasedItem);
+      //   const response = await axios.post('/api/CheckPaymentStatus', { sessionId: data.sessionId }, {
+      //     headers: {
+      //       Authorization: 'Bearer ' + accessToken.value
+      //     }
+      //   })
+      //   console.log(response)
+      // }
     } catch (error) {
       throw error;
     } finally {
