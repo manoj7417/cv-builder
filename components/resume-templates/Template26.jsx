@@ -25,7 +25,7 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -87,7 +87,7 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2  ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -154,7 +154,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -183,7 +183,9 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
@@ -227,7 +229,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -338,7 +340,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle,  colorBackground,colorText }) => {
+const Skills = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
 
   // Define the mapping of skill levels to percentages
@@ -362,9 +364,12 @@ const Skills = ({ fontStyle,  colorBackground,colorText }) => {
             {data?.name}
           </h2>
           <div className="w-full flex justify-end items-center">
-            <ul className="w-full" style={{
-              color: colorText,
-            }}>
+            <ul
+              className="w-full"
+              style={{
+                color: colorText,
+              }}
+            >
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -392,7 +397,7 @@ const Skills = ({ fontStyle,  colorBackground,colorText }) => {
   );
 };
 
-const Languages = ({ fontStyle, colorBackground,colorText }) => {
+const Languages = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.language
   );
@@ -418,9 +423,12 @@ const Languages = ({ fontStyle, colorBackground,colorText }) => {
             {data?.name}
           </h2>
           <div className="w-full flex justify-end items-center">
-            <ul className="w-full" style={{
-              color:colorText
-            }}>
+            <ul
+              className="w-full"
+              style={{
+                color: colorText,
+              }}
+            >
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -448,7 +456,7 @@ const Languages = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Hobbies = ({ fontStyle, colorBackground,colorText }) => {
+const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.hobbies
   );
@@ -457,7 +465,7 @@ const Hobbies = ({ fontStyle, colorBackground,colorText }) => {
       <h2
         className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
         style={{
-          color:colorText
+          color: colorText,
         }}
       >
         {data?.name}
@@ -465,15 +473,14 @@ const Hobbies = ({ fontStyle, colorBackground,colorText }) => {
       <div className="hobbies_section">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul style={{
-                  color:colorText
-                }}>
+            <ul
+              style={{
+                color: colorText,
+              }}
+            >
               {data?.items?.map((item, index) => {
                 return (
-                  <li
-                    key={index}
-                    className="text-15px pl-4 py-2 font-semibold"
-                  >
+                  <li key={index} className="text-15px pl-4 py-2 font-semibold">
                     {item}
                   </li>
                 );
@@ -486,7 +493,7 @@ const Hobbies = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Certificates = ({ fontStyle, colorBackground,colorText }) => {
+const Certificates = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
   );
@@ -495,7 +502,7 @@ const Certificates = ({ fontStyle, colorBackground,colorText }) => {
       <h2
         className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
         style={{
-          color:colorText
+          color: colorText,
         }}
       >
         {data?.name}
@@ -503,9 +510,11 @@ const Certificates = ({ fontStyle, colorBackground,colorText }) => {
       <div className="hobbies_section">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul style={{
-              color:colorText
-            }}>
+            <ul
+              style={{
+                color: colorText,
+              }}
+            >
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
@@ -550,7 +559,7 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -589,11 +598,12 @@ const Template26 = () => {
     <>
       <div>
         <div className="w-full bg-white shadow-lg rounded-lg flex">
-          <div className="p-4 w-[40%]" style={
-            {
-              backgroundColor: metadata?.theme?.primary
-            }
-          }>
+          <div
+            className="p-4 w-[40%]"
+            style={{
+              backgroundColor: metadata?.theme?.primary,
+            }}
+          >
             <div>
               <header className="px-6 py-16 whitespace-nowrap" style={{
                   color:metadata?.theme?.text
@@ -607,14 +617,17 @@ const Template26 = () => {
                 <h2
                   className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
                   style={{
-                    color: metadata?.theme?.text
+                    color: metadata?.theme?.text,
                   }}
                 >
                   Contact
                 </h2>
-                <ul className="flex flex-col gap-3 mt-2 px-2" style={{
-                  color: metadata?.theme?.text
-                }}>
+                <ul
+                  className="flex flex-col gap-3 mt-2 px-2"
+                  style={{
+                    color: metadata?.theme?.text,
+                  }}
+                >
                   <li className="flex items-center gap-3">
                     {basics?.phone && (
                       <a
@@ -684,9 +697,12 @@ const Template26 = () => {
             </div>
           </div>
           <div className="p-8 w-[60%]">
-            <div className="flex justify-center rounded-full items-center mb-4 border-l-8 p-6" style={{
-              borderColor: metadata?.theme?.primary
-            }}>
+            <div
+              className="flex justify-center rounded-full items-center mb-4 border-l-8 p-6"
+              style={{
+                borderColor: metadata?.theme?.primary,
+              }}
+            >
               {/* <img
                 src="/pic.jpg"
                 alt="Profile"
