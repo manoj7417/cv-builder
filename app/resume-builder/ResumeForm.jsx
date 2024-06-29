@@ -906,7 +906,7 @@ export default function ResumeForm() {
 
   const handlesetSecondayColor = () => {
     const primaryColor = data.metadata.theme.primary;
-    const secondaryColor = lightenColor(primaryColor, 0.8);
+    const secondaryColor = lightenColor(primaryColor, 0.5);
     // console.log("primaryColor", primaryColor);
     // console.log("secondaryColor", secondaryColor);
     setResumeData("metadata.theme.background", secondaryColor);

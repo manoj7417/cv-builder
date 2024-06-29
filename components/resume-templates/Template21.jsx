@@ -12,7 +12,7 @@ import Link from "next/link";
 import { isValidUrl } from "./ValidateUrl";
 import { AiOutlineLink } from "react-icons/ai";
 
-const Education = ({ fontStyle, headingColor }) => {
+const Education = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.education
   );
@@ -20,7 +20,7 @@ const Education = ({ fontStyle, headingColor }) => {
     <div className="education_section w-full px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="education_header">
+          <div className="education_header" style={{ color: colorBackground }}>
             <h2
               className={`font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
             >
@@ -72,7 +72,7 @@ const Education = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Experience = ({ fontStyle, headingColor }) => {
+const Experience = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
@@ -81,7 +81,10 @@ const Experience = ({ fontStyle, headingColor }) => {
     <div className="experience_section w-full mt-5 px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="experience_header w-full">
+          <div
+            className="experience_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2
               className={`font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
             >
@@ -135,7 +138,7 @@ const Experience = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Projects = ({ fontStyle, headingColor }) => {
+const Projects = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
     <div className="project_section my-4 px-10">
@@ -145,7 +148,7 @@ const Projects = ({ fontStyle, headingColor }) => {
             <h2
               className={`font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
               style={{
-                color: headingColor,
+                color: colorBackground,
               }}
             >
               {data?.name}
@@ -192,7 +195,7 @@ const Projects = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Skills = ({ fontStyle, headingColor }) => {
+const Skills = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
   console.log("skills data:::", data);
 
@@ -211,18 +214,18 @@ const Skills = ({ fontStyle, headingColor }) => {
           <h2
             className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
             style={{
-              color: headingColor,
+              color: colorText,
             }}
           >
             {data?.name}
           </h2>
           <div className="text-gray-600 w-full flex justify-end items-center">
-            <ul className="w-full">
+            <ul className="w-full" style={{ color: colorText }}>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`flex text-white items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`flex items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -245,25 +248,25 @@ const Skills = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Hobbies = ({ fontStyle }) => {
+const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
     <div>
-      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+      <h2
+        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+        style={{ color: colorText }}
+      >
         {data?.name}
       </h2>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul className="-pl-5">
+            <ul className="-pl-5" style={{ color: colorText }}>
               {data?.items?.map((item, index) => {
                 return (
-                  <li
-                    key={index}
-                    className="text-15px py-2 font-semibold text-white"
-                  >
+                  <li key={index} className="text-15px py-2 font-semibold">
                     {item}
                   </li>
                 );
@@ -276,7 +279,7 @@ const Hobbies = ({ fontStyle }) => {
   );
 };
 
-const Languages = ({ fontStyle, headingColor }) => {
+const Languages = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -294,18 +297,18 @@ const Languages = ({ fontStyle, headingColor }) => {
           <h2
             className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
             style={{
-              color: headingColor,
+              color: colorText,
             }}
           >
             {data?.name}
           </h2>
           <div className="text-gray-600 w-full flex justify-end items-center">
-            <ul className="w-full">
+            <ul className="w-full" style={{ color: colorText }}>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`flex text-white items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`flex items-center font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -328,19 +331,22 @@ const Languages = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Certificates = ({ fontStyle }) => {
+const Certificates = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
     <div>
-      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+      <h2
+        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+        style={{ color: colorBackground }}
+      >
         {data?.name}
       </h2>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul className="">
+            <ul>
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
@@ -348,13 +354,13 @@ const Certificates = ({ fontStyle }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold text-white inline-flex"
+                        className="break-words text-xl items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold text-white">
+                      <p className="break-words text-xl font-bold">
                         {item.name}
                       </p>
                     )}
@@ -373,13 +379,16 @@ const Certificates = ({ fontStyle }) => {
   );
 };
 
-const Awards = ({ fontStyle, headingColor }) => {
+const Awards = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
     <div className="awards_section w-full mt-5 px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="awards_header w-full">
+          <div
+            className="awards_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2
               className={`font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
             >
@@ -434,16 +443,19 @@ const Awards = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Profile = ({ fontStyle, headingColor }) => {
+const Profile = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
   return (
     <div>
       {data?.visible && (
         <div className="profile_section w-full px-10">
-          <div className="profile_heading w-full">
+          <div
+            className="profile_heading w-full"
+            style={{ color: colorBackground }}
+          >
             <h2
-              className={`text-gray-700 font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
+              className={`font-semibold uppercase ${fontStyle.subMainHeadingFont}`}
             >
               {data?.name}
             </h2>
@@ -458,7 +470,7 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-const References = ({ fontStyle, headingColor }) => {
+const References = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -466,7 +478,7 @@ const References = ({ fontStyle, headingColor }) => {
     <div className="references_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header">
+          <div className="references_header" style={{ color: colorText }}>
             <h2
               className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
             >
@@ -479,26 +491,32 @@ const References = ({ fontStyle, headingColor }) => {
                 <>
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
-                      <div className="references w-full">
+                      <div
+                        className="references w-full"
+                        style={{ color: colorText }}
+                      >
                         {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold text-white inline-flex"
+                            className="break-words text-16px items-center font-bold inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold text-white">
+                          <p className="break-words text-15px font-bold">
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold text-white`}>
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
-                      <div className="references w-full text-white">
+                      <div
+                        className="references w-full"
+                        style={{ color: colorText }}
+                      >
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
                           className="font-bold"
@@ -549,7 +567,10 @@ const Template21 = () => {
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="h-auto w-[793px] mx-auto shadow-lg rounded-lg flex bg-[#dddddd]">
-          <div className="bg-black text-white w-[35%]  border-r-[20px] border-[#f07b5f]">
+          <div
+            className="bg-black text-white w-[35%]  border-r-[20px] border-[#f07b5f]"
+            style={{ backgroundColor: metadata?.theme?.primary }}
+          >
             <div className="text-center mb-8">
               <div className="mb-4">
                 {/* <img src="/myself.jpg" alt="Profile" className="w-96" /> */}
@@ -564,7 +585,10 @@ const Template21 = () => {
                 )}
               </div>
             </div>
-            <section className="px-5 py-5 leading-9">
+            <section
+              className="px-5 py-5 leading-9"
+              style={{ color: metadata?.theme?.text }}
+            >
               <h2
                 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
               >
@@ -610,19 +634,32 @@ const Template21 = () => {
               </ul>
             </section>
             <section className="px-5 py-5">
-              <Skills fontStyle={fontStyle} />
+              <Skills
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
             <section className="px-5 py-5">
-              <Hobbies fontStyle={fontStyle} />
+              <Hobbies
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
             <section className="px-5 py-5">
-              <Languages fontStyle={fontStyle} />
+              <Languages
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
             <section className="px-5 py-5">
-              <Certificates fontStyle={fontStyle} />
-            </section>
-            <section className="px-5 py-5">
-              <References fontStyle={fontStyle} />
+              <References
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
             </section>
           </div>
           {/* <div className="bg-[#f07b5f] w-8"></div> */}
@@ -639,7 +676,8 @@ const Template21 = () => {
               <div className="profile_section">
                 <Profile
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
             </section>
@@ -647,22 +685,36 @@ const Template21 = () => {
               <div className="experience py-2">
                 <Experience
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
               <div className="education py-2">
-                <Education fontStyle={fontStyle} />
+                <Education
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
               <div className="projects py-2">
                 <Projects
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="projects py-2">
+              <div className="awards py-2">
                 <Awards
                   fontStyle={fontStyle}
-                  colorStyle={metadata?.theme?.primary}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
+              </div>
+              <div className="certificates py-2">
+                <Certificates
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
                 />
               </div>
             </section>
