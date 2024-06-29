@@ -99,7 +99,7 @@ const ComingSoonPage = () => {
                 <div className="button_wrapper mt-8">
                   <button className="get_start_btn">
                     <span className="btn_text">
-                      <a href="/contact-us">Hire My Coach</a>
+                      <a href="/contact-us">Hire Coach</a>
                     </span>
                     <div className="btn_overlay">
                       <svg
@@ -478,26 +478,28 @@ const ComingSoonPage = () => {
                 achieving heights in your career dynamically!
               </p>
               <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
-                <button className="get_start_btn">
-                  <span className="btn_text">Learn More</span>
-                  <div className="btn_overlay">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
-                </button>
+                <a href="/about-us">
+                  <button className="get_start_btn">
+                    <span className="btn_text">Learn More</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </a>
               </div>
             </div>
             {/* Right Column - Image and Features */}
