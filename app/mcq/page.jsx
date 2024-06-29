@@ -949,7 +949,7 @@ const Page = () => {
       </div>
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 animation-slide-in">
-          <div className="bg-white flex flex-col  rounded-lg shadow-lg justify-center items-center overflow-hidden w-full md:w-[60%] relative">
+          <div className="bg-white flex flex-col md:flex-row rounded-lg shadow-lg justify-center items-center overflow-hidden w-full md:w-[60%] relative">
             <button
               onClick={() => setShowPopup(false)}
               className="absolute top-2 right-2"
@@ -970,19 +970,25 @@ const Page = () => {
                 />
               </svg>
             </button>
-            <div className="px-6 py-4 w-[90%] md:w-[80%] justify-center flex flex-col">
-              <img
-                src="/aipersonalized.png"
-                alt="aipersonalized"
-                className="w-full h-[20%] rounded"
-              />
+            <div className="px-6 py-4 w-[90%] md:w-[50%]">
+              <h2 className="font-semibold mb-4 text-blue-950 text-[28px]">
+                Looking for career counseling? Take an AI-personalized test
+                today!
+              </h2>
 
-              <a href="/career-coaching pb-8 mb-8 flex flex-col justify-center">
+              <a href="/career-counselling">
                 <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l transition duration-300 transform hover:scale-105">
                   <FaCrown className="mr-2 animate-pulse" />
                   TRY NOW!
                 </button>
               </a>
+            </div>
+            <div className="px-6 py-4 w-[90%] md:w-[50%]">
+              <img
+                src="/aipersonalized.gif"
+                alt="aipersonalized"
+                className="w-full rounded"
+              />
             </div>
           </div>
         </div>
