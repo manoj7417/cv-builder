@@ -487,7 +487,7 @@ const Certificates = ({ fontStyle, colorStyle }) => {
   );
 };
 
-const References = ({ fontStyle,headingColor }) => {
+const References = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -496,11 +496,11 @@ const References = ({ fontStyle,headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="references_header">
-          <h2
-            className={`text-white text-center border-2 border-orange-400 p-1 uppercase ${fontStyle.headingFont}`}
-          >
-            {data?.name}
-          </h2>
+            <h2
+              className={`text-white text-center border-2 border-orange-400 p-1 uppercase ${fontStyle.headingFont}`}
+            >
+              {data?.name}
+            </h2>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -509,25 +509,28 @@ const References = ({ fontStyle,headingColor }) => {
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
                       <div className="references w-full">
-                      {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-words text-16px items-center text-orange-400 inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-words text-15px text-orange-400">
-                        {item.name}
-                      </p>
-                    )}
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center text-orange-400 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px text-orange-400">
+                            {item.name}
+                          </p>
+                        )}
                         <h3 className={`${fontStyle.subHeadingFont} text-white`}>
-                           {item.jobTitle}
+                          {item.jobTitle}
                         </h3>
                         <h3 className={`${fontStyle.subHeadingFont} text-white`}>
-                           {item?.organization}
+                          {item.jobTitle && item?.organization && ',' }
+                        </h3>
+                        <h3 className={`${fontStyle.subHeadingFont} text-white`}>
+                          {item?.organization}
                         </h3>
                       </div>
                       <div className="references w-full text-white">
@@ -681,7 +684,7 @@ const Template10 = () => {
                   <Languages fontStyle={fontStyle} />
                 </div>
                 <div className="references mt-10">
-                  <References fontStyle={fontStyle} headingColor={metadata?.theme?.primary}/>
+                  <References fontStyle={fontStyle} headingColor={metadata?.theme?.primary} />
                 </div>
                 <div className="socials absolute bottom-5 border-t-2 border-white w-[70%]">
                   <div className="flex justify-between mt-5 mx-4">

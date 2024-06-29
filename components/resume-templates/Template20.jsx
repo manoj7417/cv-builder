@@ -264,7 +264,7 @@ const Awards = ({ fontStyle, headingColor }) => {
                   <div className="awards my-5" key={index}>
                     <div className="awards_names flex w-full justify-between my-1">
                       <div className="awards_degree w-full">
-                      {isValidUrl(item?.url) ? (
+                        {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
                             target="_blank"
@@ -439,9 +439,9 @@ const References = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="references_header">
-          <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
-          {data?.name}
-        </h2>
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
+              {data?.name}
+            </h2>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -450,22 +450,24 @@ const References = ({ fontStyle, headingColor }) => {
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
                       <div className="references w-full">
-                      {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-words text-15px font-bold text-gray-600">
-                        {item.name}
-                      </p>
-                    )}
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                        {item.jobTitle} ,{item?.organization}
+                          <span>{item.jobTitle}</span>
+                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">

@@ -320,7 +320,7 @@ const Awards = ({ fontStyle, colorStyle }) => {
                   <div className="awards my-5" key={index}>
                     <div className="awards_names flex w-full justify-between my-1">
                       <div className="awards_degree w-full">
-                      {isValidUrl(item?.url) ? (
+                        {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
                             target="_blank"
@@ -361,7 +361,7 @@ const Awards = ({ fontStyle, colorStyle }) => {
   );
 };
 
-const Hobbies = ({ fontStyle,headingColor }) => {
+const Hobbies = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.hobbies
   );
@@ -514,15 +514,15 @@ const References = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="references_header">
-          <h2
-            className={`font-semibold uppercase ${fontStyle.headingFont}`}
-            style={{
-              color: headingColor,
-              borderBottom: "3px solid black", // Space for the underline
-            }}
-          >
-            {data?.name}
-          </h2>
+            <h2
+              className={`font-semibold uppercase ${fontStyle.headingFont}`}
+              style={{
+                color: headingColor,
+                borderBottom: "3px solid black", // Space for the underline
+              }}
+            >
+              {data?.name}
+            </h2>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -531,22 +531,24 @@ const References = ({ fontStyle, headingColor }) => {
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
                       <div className="references w-full">
-                      {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-words text-16px items-center text-gray-600 inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-words text-15px text-gray-600">
-                        {item.name}
-                      </p>
-                    )}
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
-                           {item.jobTitle} ,{item?.organization}
+                          <span>{item.jobTitle}</span>
+                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">
