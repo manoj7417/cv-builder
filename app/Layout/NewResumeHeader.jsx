@@ -30,7 +30,7 @@ const navigation = [
     current: false,
   },
   {
-    name: "Pshycometric Test",
+    name: "Psychometric Test",
     href: "/pshycometric-test",
     current: false,
   },

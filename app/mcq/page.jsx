@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { FaRocket, FaCrown } from "react-icons/fa";
+
 import "react-circular-progressbar/dist/styles.css";
 
 const tests = {
@@ -309,6 +311,418 @@ const tests = {
       },
     ],
   },
+  DiagrammaticReasoning: {
+    title: "Work Experience Analysis - Diagrammatic Reasoning",
+    questions: [
+      {
+        question: "Which is the next logical image in the sequence?",
+        image_url: "/d1.webp",
+        options: ["A", "B", "C", "D", "E", "F"],
+        correct_option: "E",
+        description:
+          "There is a central circle surrounded by eight circles. The central circle changes colour from grey to having a dotted outline to black. At each step in the series one circle is removed in the order of white, black, grey circles. The order of the remaining circles is randomised.",
+      },
+      {
+        question: "Which is the next logical image in the sequence?",
+        image_url: "/d2.webp",
+        options: ["A", "B", "C", "D", "E", "F"],
+        correct_option: "F",
+        description:
+          "There are four arrows. At each step in the series: the first arrow rotates 45-degrees clockwise; the second arrow rotates 45-degrees clockwise; the third arrow and the fourth arrow are reflections of the first two arrows in the horizontal plane.",
+      },
+      {
+        question: "Which is the next logical image in the sequence?",
+        image_url: "/d3.webp",
+        options: ["A", "B", "C", "D", "E", "F"],
+        correct_option: "B",
+        description:
+          "There are two figures: a triangle and a circle. At each step in the series both the circle and the triangle move a step down a vertical line. As each shape reaches the bottom of a block it returns’ to the top of the next block.",
+      },
+      {
+        question: "Which is the next logical image in the sequence?",
+        image_url: "/d4.webp",
+        options: ["A", "B", "C", "D", "E", "F"],
+        correct_option: "D",
+        description:
+          "There are three rows of three squares; one row in each square is black. At each step, every row moves down one place. The row which leaves the bottom of the block reappears at the top.",
+      },
+      {
+        question: "Which is the next logical image in the sequence?",
+        image_url: "/d5.webp",
+        options: ["A", "B", "C", "D", "E", "F"],
+        correct_option: "E",
+        description:
+          "Each block in the series contains an arrow in each corner. At each step in the series two adjacent arrows reverse their direction. This process starts with the top left-hand corner and bottom left-hand corner arrows. Then the next two adjacent arrows - moving one figure anticlockwise – are the bottom left-hand corner and right-hand corner arrows.",
+      },
+    ],
+  },
+  AbstractReasoning: {
+    title: "Work Experience Analysis - Abstract Reasoning",
+    questions: [
+      {
+        question:
+          "Choose the image that completes the pattern (From left to right):",
+        image_url: "/q1.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "D",
+        description:
+          "Each circle is divided into six portions; three pairs of identical shapes are located in opposite cells; the grey pieces rotate clockwise. All the inner parts rotate in a counter-clockwise direction. It is not easy to recognise the presence of the three pairs. However, one can reach the same conclusions using other clues. For instance, one may note that the same couple of shapes appear in the first and fourth items of the sequence, as is the second and fifth items. It is only logical that the next item of the series will include two hearts located in the right and left cells. This reasoning should lead us to narrow the possible answer to options (A) and (D). Figuring out the grey portions' movement pattern leaves us with possible options (B) and (D). Combining these two conclusions, and we're left with choice (D) as the only option to comply with this problem's reasoning.",
+      },
+      {
+        question:
+          "Choose the image that completes the pattern (From left to right):",
+        image_url: "/q2.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "A",
+        description:
+          "The logic: The inner shape in one frame becomes the middle shape in the next frame; the central form becomes the outer shape in the next frame, and the external form becomes the inner shape two frames later.Thus, the outer shape in the missing frame should be a square (just like the middle shape in the 5th frame), the central form should be a triangle (like the inner shape in the 5th frame), and the internal structure should be a diamond (like the outer shape in the 4th frame).",
+      },
+      {
+        question: "Which shape comes next in the sequence?",
+        image_url: "/q3.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "E",
+        description:
+          "The black and white dots are alternating between 5 and 7 in number. In the last picture there are 5 white dots and 7 black ones, meaning the following image should contain 7 white dots and 5 black ones.",
+      },
+      {
+        question: "Complete the sequence.",
+        image_url: "/q4.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "B",
+        description:
+          "Each tile contains 2 overlapping shapes, 1 larger than the other. As the 2 shapes overlap a new, smaller shape if created inside the first large shape. The large shape in the following tile corresponds directly with this new shape that was created. When the shapes overlap the largest bisection is always within the biggest shape.",
+      },
+      {
+        question: "Complete the sequence.",
+        image_url: "/q5.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "C",
+        description:
+          "The first two rules are relatively easy to work out. The shape in the centre alternates between orange and white and the navy dot is moving around the tile corners in a clockwise direction. The real challenge is spotting that the big black square is moving around the sides and corners of the tile in alternating directions, first anti-clockwise, then clock-wise. It also increases how many spaces it moves in increments of one. First it moves anti-clockwise one position, next it moves 2 spaces clockwise, then 3 anti-clockwise and so on.",
+      },
+      {
+        question: "Which of the boxes comes next in the sequence?",
+        image_url: "/q6.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "B",
+        description:
+          "Circle, maintains same position in top right segment for one turn, and then is not present for the following three turns. Triangle, maintains same position in bottom left segment for one turn, and then is not present for the following two turns. So the correct answer is B).",
+      },
+      {
+        question: "Which shape follows in the sequence?",
+        image_url: "/q7.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "A",
+        description:
+          "Diagonal line changes direction from top left corner to bottom right corner, then from top right corner to bottom left corner with each turn. Square moves around corner of the frame in an anti-clockwise direction with each turn. Circle appears on diagonal line in every third frame with each turn. So the correct answer is A).",
+      },
+      {
+        question: "Which box follows the sequence?",
+        image_url: "/q8.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "D",
+        description:
+          "’U’ shape rotates by 90 degrees with each turn. Circle changes position in the ’U’ shape as it appears in each segment with each turn. Triangle appears in same position within the ‘U’ shape on each alternate turn. So the correct answer is D).",
+      },
+      {
+        question:
+          "Select a suitable option that would complete the figure matrix.",
+        image_url: "/q9.svg",
+        options: ["A", "B", "C", "D"],
+        correct_option: "D",
+        description:
+          "With each step along the row, an additional radial line is added to the polar grid. Note: A radial line is a line that extends from the center of the grid to the outer edge.With each step along the column, an additional circle is added to the polar grid.",
+      },
+    ],
+  },
+  SpatialReasoning: {
+    title: "Work Experience Analysis - Spatial Reasoning",
+    questions: [
+      {
+        question: "What would the 3D shape look like from above?",
+        image_url: "/S1.webp",
+        options: ["A", "B", "C", "D"],
+        correct_option: "A",
+        description:
+          "When looking from above, height doesn’t matter so the simplest thing to do is work out the outline of the shape. Once you have this you can see that it must be A which is a triangle with a kind of jagged edge.",
+      },
+      {
+        question: "Which of the given shapes is the correct mirror image?",
+        image_url: "/s2.webp",
+        options: ["A", "B", "C", "D"],
+        correct_option: "A",
+        description:
+          "The easiest approach is to start as close to the mirror line as possible and work further away. You can see in this case that there are two circles slightly on top of each other so the answer must be A or D. If you assess the positioning of the outer circles, you can see the answer must be A.",
+      },
+      {
+        question:
+          " Which of the given shapes is the same 3D shape but in a different position?",
+        image_url: "/s3.webp",
+        options: ["A", "B", "C", "D", "E"],
+        correct_option: "D",
+        description:
+          "You can see that the two large blocks are adjacent which rules out B. The thinner block sits inside the larger block which rules out A and C so the answer must be B.",
+      },
+      {
+        question:
+          "Choose the shape that could be the result if these two shapes were combined and no other changes were made.",
+        image_url: "/s4.webp",
+        options: ["A", "B", "C", "D"],
+        correct_option: "B",
+        description:
+          "The simplest way to figure this out, is to try fitting the shapes together in your mind until you hit a solution. Doing this, you can see B is a combination of the two shapes back to back.",
+      },
+      {
+        question:
+          "If the net was folded into a cube, which of the given shapes would it look like?",
+        image_url: "/s5.webp",
+        options: ["A", "B", "C", "D"],
+        correct_option: "D",
+        description:
+          "To get the answer you need to fold the cube together in your mind. Doing this, you can see that the 3 circles and the square will be adjacent and there will be a blank square adjacent to both of them.",
+      },
+      {
+        question: "Count the number of squares in the given figure.",
+        image_url: "/s6.png",
+        options: ["13", "16", "19", "20", "E"],
+        correct_option: "16",
+        description:
+          "The simplest squares are BCNM, CDON, PQIJ and QRHI i.e. 4 in number.The squares composed of two components each are MNTS, NOUT, STQP and TURQ i.e. 4 in number.The squares composed of five components each are ACTL, CEFT, TFGI and LTIK i.e. 4 in number.The squares composed of six components each are BDUS and SUHJ i.e. 2 in number.There is only one square i.e. MORP composed of eight components.There is only one square i.e. AEGK composed of twenty components.Total number of squares in the figure = 4 + 4 + 4 + 2+1 + 1 = 16.",
+      },
+      {
+        question: "How many circles are there in the adjoining figure.",
+        image_url: "/s7.png",
+        options: ["11", "12", "13", "14"],
+        correct_option: "13",
+        description:
+          "The figure may be labelled as shown.There are 13 circles in the given figure. This is clear from the adjoining figure in which the centres of all the circles in the given figure have been numbered from 1 to 13.",
+      },
+      {
+        question: "Count the number of squares in the given figure.",
+        image_url: "/s8.png",
+        options: ["6", "7", "9", "10"],
+        correct_option: "9",
+        description:
+          "The figure may be labelled as shown.The squares composed of two components each are ABKJ, BCLK, CDEL, LEFG, KLGH and JKHI i.e.6 in number.There is only one square i.e. CEGK composed of four components.The squares composed of eight components each are ACGI and BDFH i.e. 2 in number.There are 6 + 1 + 2 = 9 squares in the figure.",
+      },
+      {
+        question: "Count the number of rectangles in the given figure.",
+        image_url: "/s9.png",
+        options: ["8", "17", "18", "20"],
+        correct_option: "18",
+        description:
+          "The figure may be labelled as shown.The simplest rectangles are ABQP, PQNO, BCDN, NDEM, MEFL, LFJK, FGHR and RHIJ i.e. 8 in number.The rectangles composed of two components each are ABNO, BCEM, NDFL, MEJK and FGIJ i.e. 5 in number.The rectangles composed of three components each are ACDO, BCFL, NDJK and LGIK i.e. 4 in number.There is only one rectangle i.e. BCJK composed of four components.Total number of rectangles in the figure = 8 + 5 + 4 + 1 = 18.",
+      },
+      {
+        question:
+          "Count the number of triangles and squares in the given figure.",
+        image_url: "/s10.png",
+        options: [
+          "44 triangles, 10 squares",
+          "14 triangles, 16 squares",
+          "27 triangles, 6 squares",
+          "36 triangles, 9 squares",
+        ],
+        correct_option: "44 triangles, 10 squares",
+        description:
+          "Triangles :The simplest triangles are AEI, EOI, OHI, HAI, EBJ, BFJ, FOJ, OEJ, HOL, OGL, GDL, DHL, OFK, FCK, CGK and GOK i.e. 16 in number.The triangles composed of two components each are HAE, AEO, EOH, OHA, OEB, EBF, BFO, FOE, DHO, HOG, OGD, GDH, GOF, OFC, FCG and CGO i.e. 16 in number.The triangles composed of four components each are HEF, EFG, FGH, GHE, ABO, BGO, CDO and DAO i.e. 8 in number.The triangles composed of eight components each are DAB, ABC, BCD and CDA i.e. 4 in number.Total number of triangles in the figure = 16 + 16 + 8 + 4 = 44.Squares :The squares composed of two components are HIOL, IEJO, JFKO and KGLO i.e. 4 in number.The squares composed of four components are AEOH, EBFO, OFGC and HOGD i.e.4 in number.There is only one square EFGH which is composed of eight components.There is only one square ABCD which is composed of sixteen components.Total number of squares in the figure = 4 + 4 + 1 + 1 = 10.",
+      },
+    ],
+  },
+  LogicalReasoning: {
+    title: "Work Experience Analysis - Logical Reasoning",
+    questions: [
+      {
+        question:
+          "All roses are flowers. Some flowers fade quickly. Therefore, some roses fade quickly. Is this conclusion correct?",
+        options: ["Yes", "No"],
+        correct_option: "No",
+        description:
+          "The conclusion is not necessarily correct because it assumes all roses are included in the subset of flowers that fade quickly.",
+      },
+      {
+        question:
+          "If all cats are animals and some animals are pets, can we conclude that some cats are pets?",
+        options: ["Yes", "No"],
+        correct_option: "No",
+        description:
+          "The conclusion is not necessarily correct because it does not account for whether the subset of cats overlaps with the subset of pets.",
+      },
+      {
+        question:
+          "Tom is older than Jim, and Jim is older than Sue. Therefore, Tom is older than Sue. Is this conclusion correct?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion is logically correct based on the given statements.",
+      },
+      {
+        question:
+          "All pencils are writing tools. All writing tools are instruments. Therefore, all pencils are instruments. Is this conclusion correct?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion follows logically from the premises that all pencils are writing tools and all writing tools are instruments.",
+      },
+      {
+        question:
+          "If all birds can fly and some birds are sparrows, can we conclude that some sparrows can fly?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion is logically correct because sparrows are included in the subset of birds that can fly.",
+      },
+      {
+        question:
+          "No fish are mammals. All salmon are fish. Therefore, no salmon are mammals. Is this conclusion correct?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion is logically correct based on the given statements.",
+      },
+      {
+        question:
+          "If no athletes are lazy and some students are athletes, can we conclude that some students are not lazy?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion is logically correct because the subset of students who are athletes are included in the subset of non-lazy individuals.",
+      },
+      {
+        question:
+          "All squares are rectangles. No rectangles are circles. Therefore, no squares are circles. Is this conclusion correct?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion follows logically from the premises that no rectangles are circles and all squares are rectangles.",
+      },
+      {
+        question:
+          "Some doctors are not surgeons. All surgeons are doctors. Therefore, some doctors are not surgeons. Is this conclusion correct?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion is logically correct based on the given statements.",
+      },
+      {
+        question:
+          "If all roses are red and some flowers are roses, can we conclude that some flowers are red?",
+        options: ["Yes", "No"],
+        correct_option: "Yes",
+        description:
+          "The conclusion is logically correct because the subset of flowers that are roses are included in the subset of red flowers.",
+      },
+    ],
+  },
+  MechanicalReasoning: {
+    title: "Work Experience Analysis - Mechanical Reasoning",
+    questions: [
+      {
+        question:
+          "Which gear will turn faster if Gear A has 10 teeth and Gear B has 20 teeth?",
+        options: [
+          "Gear A",
+          "Gear B",
+          "Both turn at the same speed",
+          "Cannot be determined",
+        ],
+        correct_option: "Gear A",
+        description: "Gear A will turn faster because it has fewer teeth.",
+      },
+      {
+        question:
+          "If you apply force to a lever arm at a greater distance from the fulcrum, the effort required to lift an object:",
+        options: [
+          "Increases",
+          "Decreases",
+          "Stays the same",
+          "Cannot be determined",
+        ],
+        correct_option: "Decreases",
+        description:
+          "Applying force farther from the fulcrum decreases the effort required.",
+      },
+      {
+        question:
+          "In a pulley system, increasing the number of pulleys used will:",
+        options: [
+          "Increase the effort required",
+          "Decrease the effort required",
+          "Have no effect on the effort",
+          "None of the above",
+        ],
+        correct_option: "Decrease the effort required",
+        description:
+          "Using more pulleys in a system reduces the effort needed to lift a load.",
+      },
+      {
+        question:
+          "A block and tackle system with 4 ropes will reduce the effort needed to lift a load by:",
+        options: ["2 times", "3 times", "4 times", "5 times"],
+        correct_option: "4 times",
+        description:
+          "The effort is reduced by a factor equal to the number of ropes.",
+      },
+      {
+        question:
+          "If two objects have the same volume but different masses, the denser object will:",
+        options: ["Float", "Sink", "Stay suspended", "Cannot be determined"],
+        correct_option: "Sink",
+        description:
+          "The denser object will sink because it has a higher mass per unit volume.",
+      },
+      {
+        question:
+          "What is the mechanical advantage of an inclined plane with a length of 10 meters and a height of 2 meters?",
+        options: ["2", "5", "10", "20"],
+        correct_option: "5",
+        description:
+          "The mechanical advantage of an inclined plane is the ratio of the length to the height (10/2).",
+      },
+      {
+        question:
+          "In a hydraulic system, if the small piston has an area of 2 cm² and the large piston has an area of 10 cm², applying a force of 5 N to the small piston will result in a force of:",
+        options: ["10 N", "20 N", "25 N", "50 N"],
+        correct_option: "25 N",
+        description:
+          "The force is multiplied by the ratio of the areas of the pistons (10/2) * 5 N = 25 N.",
+      },
+      {
+        question: "Which type of simple machine is a screw?",
+        options: ["Lever", "Wheel and axle", "Inclined plane", "Pulley"],
+        correct_option: "Inclined plane",
+        description:
+          "A screw is a type of inclined plane wrapped around a cylinder.",
+      },
+      {
+        question:
+          "If a wheelbarrow is a second-class lever, where is the fulcrum located?",
+        options: [
+          "At the wheel",
+          "At the handles",
+          "At the middle of the load",
+          "None of the above",
+        ],
+        correct_option: "At the wheel",
+        description:
+          "In a second-class lever, the fulcrum is at one end (the wheel).",
+      },
+      {
+        question:
+          "In a series circuit with three resistors, the total resistance is:",
+        options: [
+          "The sum of all resistances",
+          "The average of all resistances",
+          "The highest resistance",
+          "None of the above",
+        ],
+        correct_option: "The sum of all resistances",
+        description:
+          "In a series circuit, the total resistance is the sum of all individual resistances.",
+      },
+    ],
+  },
 };
 
 const Preloader = () => (
@@ -345,21 +759,33 @@ const Page = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(Array(10).fill(null));
-  const [currentTest, setCurrentTest] = useState("NumericalReasoning"); // Default to 'NumericalReasoning'
+  const [currentTest, setCurrentTest] = useState("NumericalReasoning");
   const [results, setResults] = useState([]);
   const [score, setScore] = useState(0);
+  const [numbers, setNumbers] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const testName = params.get("name") || "NumericalReasoning"; // Default to 'NumericalReasoning' if not specified
+    const testName = params.get("name") || "NumericalReasoning";
     setCurrentTest(testName);
 
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000); // 5 seconds delay
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      const popupTimer = setTimeout(() => {
+        setShowPopup(true);
+      }, 5000);
+
+      return () => clearTimeout(popupTimer);
+    }
+  }, [isSubmitted]);
 
   const handleOptionClick = (index) => {
     const newAnswers = [...answers];
@@ -390,6 +816,8 @@ const Page = () => {
     setResults(newResults);
 
     const correctAnswers = newResults.filter((result) => result.correct).length;
+    const numbers = `${correctAnswers}/${newResults.length}`;
+    setNumbers(numbers);
     const percentage = (correctAnswers / newResults.length) * 100;
     setScore(percentage);
 
@@ -415,6 +843,13 @@ const Page = () => {
               <p className="text-lg">
                 {tests[currentTest].questions[currentQuestion].question}
               </p>
+              {tests[currentTest].questions[currentQuestion].image_url && (
+                <img
+                  src={tests[currentTest].questions[currentQuestion].image_url}
+                  alt="Question"
+                  className="mt-4"
+                />
+              )}
             </div>
             <div className="space-y-4">
               {tests[currentTest].questions[currentQuestion].options.map(
@@ -464,23 +899,21 @@ const Page = () => {
           </>
         ) : (
           <div>
-            <h2 className="text-2xl font-bold mb-4 ">Result</h2>
-            <div className="flex  items-center mb-6 w-full">
+            <h2 className="text-2xl font-bold mb-4">Result</h2>
+            <div className="flex items-center mb-6 w-full">
               <div className="h-[10%] w-[15%]">
                 <CircularProgressbar
                   value={score}
                   text={`${Math.round(score)}%`}
                   styles={buildStyles({
                     textColor: "#000",
-                    pathColor: "#00aaff",
+                    pathColor: "#3b5189",
                     trailColor: "#d6d6d6",
                   })}
                 />
               </div>
             </div>
-            <p className="text-xl font-semibold mb-6">
-              Score: {score.toFixed(2)}%
-            </p>
+            <p className="text-xl font-semibold mb-6">Score: {numbers}</p>
             <ul className="space-y-4">
               {results.map((result, index) => (
                 <li
@@ -498,21 +931,62 @@ const Page = () => {
                   <p>
                     <strong>Correct answer:</strong> {result.correct_option}
                   </p>
-                  <p>{result.description}</p>
+                  <p>
+                    <strong>Explanation:</strong> {result.description}
+                  </p>
                 </li>
               ))}
             </ul>
-            <div className="mt-6">
-              <button
-                onClick={() => window.location.reload()}
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-              >
-                Retake Test
-              </button>
-            </div>
+            <button
+              onClick={() => setIsSubmitted(false)}
+              className="flex mt-6 items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105"
+            >
+              <FaCrown className="mr-2 animate-pulse" />
+              Retake Test
+            </button>
           </div>
         )}
       </div>
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 animation-slide-in">
+          <div className="bg-white flex flex-col  rounded-lg shadow-lg justify-center items-center overflow-hidden w-full md:w-[60%] relative">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-2 right-2"
+              aria-label="Close"
+            >
+              <svg
+                className="h-6 w-6 text-gray-700 hover:text-gray-900"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <div className="px-6 py-4 w-[90%] md:w-[80%] justify-center flex flex-col">
+              <img
+                src="/aipersonalized.png"
+                alt="aipersonalized"
+                className="w-full h-[20%] rounded"
+              />
+
+              <a href="/career-coaching pb-8 mb-8 flex flex-col justify-center">
+                <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l transition duration-300 transform hover:scale-105">
+                  <FaCrown className="mr-2 animate-pulse" />
+                  TRY NOW!
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .animated-bg {
           position: absolute;
@@ -531,6 +1005,52 @@ const Page = () => {
           100% {
             background-position: 100% 100%;
           }
+        }
+        .popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 50;
+        }
+        .popup {
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border: 1px solid #ccc;
+          position: relative;
+          width: 300px;
+          max-width: 90%;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .popup:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #ccc;
+          z-index: -1;
+          border-radius: 10px;
+        }
+        @keyframes slide-in {
+          from {
+            transform: translateY(-100%);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
+        .animation-slide-in {
+          animation: slide-in 0.5s ease-out;
         }
       `}</style>
     </div>
