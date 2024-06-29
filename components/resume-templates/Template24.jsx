@@ -226,6 +226,15 @@ const References = ({ fontStyle, headingColor, colorText }) => {
                         >
                           {item.jobTitle}
                         </h3>
+
+                        <h3
+                          className={`${fontStyle.subHeadingFont}`}
+                          style={{
+                            color: colorText,
+                          }}
+                        >
+                          {item.jobTitle && item.organization && ','}
+                        </h3>
                         <h3
                           className={`${fontStyle.subHeadingFont}`}
                           style={{
@@ -533,8 +542,9 @@ const Languages = ({ fontStyle, headingColor, colorText }) => {
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
                         className="bg-gray-600 h-2.5"
-                        style={{ width: `${level}%`,
-                       }}
+                        style={{
+                          width: `${level}%`,
+                        }}
                       ></div>
                     </div>
                   </li>

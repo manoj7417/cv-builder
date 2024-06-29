@@ -455,19 +455,19 @@ const Certificates = ({ fontStyle, headingColor }) => {
                       }}
                     >
                       {isValidUrl(item?.url) ? (
-                          <a
-                            href={item?.url}
-                            target="_blank"
-                            className="break-words text-16px items-center font-bold inline-flex"
-                          >
-                            {item?.name}
-                            <AiOutlineLink className="ml-1" />
-                          </a>
-                        ) : (
-                          <p className="break-words text-15px font-bold">
-                            {item.name}
-                          </p>
-                        )}
+                        <a
+                          href={item?.url}
+                          target="_blank"
+                          className="break-words text-16px items-center font-bold inline-flex"
+                        >
+                          {item?.name}
+                          <AiOutlineLink className="ml-1" />
+                        </a>
+                      ) : (
+                        <p className="break-words text-15px font-bold">
+                          {item.name}
+                        </p>
+                      )}
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -493,14 +493,14 @@ const References = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="references_header">
-          <h2
-            className={`${fontStyle.headingFont} font-semibold uppercase underline underline-offset-4`}
-            style={{
-              color: headingColor,
-            }}
-          >
-            {data?.name}
-          </h2>
+            <h2
+              className={`${fontStyle.headingFont} font-semibold uppercase underline underline-offset-4`}
+              style={{
+                color: headingColor,
+              }}
+            >
+              {data?.name}
+            </h2>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -509,22 +509,24 @@ const References = ({ fontStyle, headingColor }) => {
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
                       <div className="references w-full">
-                      {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-words text-15px text-gray-600">
-                        {item.name}
-                      </p>
-                    )}
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px text-gray-600">
+                            {item.name}
+                          </p>
+                        )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
-                           {item.jobTitle} ,{item?.organization}
+                          <span>{item.jobTitle}</span>
+                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full">
@@ -572,10 +574,10 @@ const Template9 = () => {
       <div className="template_8 w-[210mm] h-full">
         <div
           className="w-full bg-[#E0FBE2]"
-          //   style={{
-          //     backgroundImage: "url('/resumebg.jpg')",
-          //     backgroundPosition: "top",
-          //   }}
+        //   style={{
+        //     backgroundImage: "url('/resumebg.jpg')",
+        //     backgroundPosition: "top",
+        //   }}
         >
           <div className="top_section flex items-start gap-1 justify-start px-10 bg-[#E0FBE2]">
             <div className="name_profile mt-2">

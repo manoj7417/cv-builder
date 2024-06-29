@@ -496,20 +496,20 @@ const Certificates = ({ fontStyle, headingColor }) => {
                         color: headingColor,
                       }}
                     >
-                       {isValidUrl(item?.url) ? (
-                          <a
-                            href={item?.url}
-                            target="_blank"
-                            className="break-words text-16px items-center font-bold inline-flex"
-                          >
-                            {item?.name}
-                            <AiOutlineLink className="ml-1" />
-                          </a>
-                        ) : (
-                          <p className="break-words text-15px font-bold">
-                            {item.name}
-                          </p>
-                        )}
+                      {isValidUrl(item?.url) ? (
+                        <a
+                          href={item?.url}
+                          target="_blank"
+                          className="break-words text-16px items-center font-bold inline-flex"
+                        >
+                          {item?.name}
+                          <AiOutlineLink className="ml-1" />
+                        </a>
+                      ) : (
+                        <p className="break-words text-15px font-bold">
+                          {item.name}
+                        </p>
+                      )}
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -575,7 +575,9 @@ const References = ({ fontStyle, headingColor }) => {
                           </p>
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
-                          {item.jobTitle} ,{item?.organization}
+                          <span>{item.jobTitle}</span>
+                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">

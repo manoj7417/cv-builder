@@ -412,7 +412,7 @@ const Certificates = ({ fontStyle, colorStyle }) => {
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
-                     {isValidUrl(item?.url) ? (
+                    {isValidUrl(item?.url) ? (
                       <a
                         href={item?.url}
                         target="_blank"
@@ -451,11 +451,11 @@ const References = ({ fontStyle, colorStyle }) => {
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="references_header">
-          <h2
-            className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
-          >
-            {data?.name}
-          </h2>
+            <h2
+              className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+            >
+              {data?.name}
+            </h2>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -464,22 +464,24 @@ const References = ({ fontStyle, colorStyle }) => {
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
                       <div className="references w-full">
-                      {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-words text-16px items-center font-bold text-white inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-words text-15px font-bold text-white">
-                        {item.name}
-                      </p>
-                    )}
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target="_blank"
+                            className="break-words text-16px items-center font-bold text-white inline-flex"
+                          >
+                            {item?.name}
+                            <AiOutlineLink className="ml-1" />
+                          </a>
+                        ) : (
+                          <p className="break-words text-15px font-bold text-white">
+                            {item.name}
+                          </p>
+                        )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold text-white`}>
-                           {item.jobTitle} ,{item?.organization}
+                          <span>{item.jobTitle}</span>
+                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full text-white">
