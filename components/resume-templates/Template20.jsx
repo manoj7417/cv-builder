@@ -456,7 +456,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
     <div className="references_section w-full px-5 mt-5">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header">
+          <div className="references_header" style={{ color: colorBackground }}>
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
@@ -483,9 +483,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                           </p>
                         )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
-                          <span>{item?.organization}</span>
+                          {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">

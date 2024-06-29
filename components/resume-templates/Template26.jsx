@@ -605,14 +605,12 @@ const Template26 = () => {
             }}
           >
             <div>
-              <header className="px-6 py-16 whitespace-nowrap">
-                <h1
-                  className="text-4xl font-bold mb-2"
-                  style={{
-                    color: metadata?.theme?.text,
-                  }}
-                ></h1>
-                <h1 className="text-4xl font-bold mb-2">{basics?.name}</h1>
+              <header className="px-6 py-16 whitespace-nowrap" style={{
+                  color:metadata?.theme?.text
+                }}>
+                <h1 className="text-4xl font-bold mb-2">
+                  {basics?.name}
+                </h1>
                 <h2 className="text-lg">{basics?.jobtitle}</h2>
               </header>
               <section className="px-5">

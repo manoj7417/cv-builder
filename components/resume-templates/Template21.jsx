@@ -195,7 +195,7 @@ const Projects = ({ fontStyle, colorText, colorBackground }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorText, colorBackground }) => {
+const Skills = ({ fontStyle, colorText, colorBackground,secondaryBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
   console.log("skills data:::", data);
 
@@ -233,7 +233,7 @@ const Skills = ({ fontStyle, colorText, colorBackground }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-[#f07b5f] h-2.5"
+                        className="h-2.5 bg-gray-700"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -279,7 +279,7 @@ const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
   );
 };
 
-const Languages = ({ fontStyle, colorText, colorBackground }) => {
+const Languages = ({ fontStyle, colorText, colorBackground,secondaryBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -316,7 +316,7 @@ const Languages = ({ fontStyle, colorText, colorBackground }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-[#f07b5f] h-2.5"
+                        className="bg-gray-700 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -509,10 +509,8 @@ const References = ({ fontStyle, colorText, colorBackground }) => {
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold text-white`}>
-                          <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
-                          <span>{item?.organization}</span>
+                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                          {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
                       <div
@@ -571,7 +569,7 @@ const Template21 = () => {
         <div className="h-auto w-[793px] mx-auto shadow-lg rounded-lg flex bg-[#dddddd]">
           <div
             className="bg-black text-white w-[35%]  border-r-[20px] border-[#f07b5f]"
-            style={{ backgroundColor: metadata?.theme?.primary }}
+            style={{ backgroundColor: metadata?.theme?.primary,borderColor:metadata?.theme?.background }}
           >
             <div className="text-center mb-8">
               <div className="mb-4">
@@ -640,6 +638,7 @@ const Template21 = () => {
                 fontStyle={fontStyle}
                 colorBackground={metadata?.theme?.primary}
                 colorText={metadata?.theme?.text}
+                secondaryBackground={metadata?.theme?.background}
               />
             </section>
             <section className="px-5 py-5">
@@ -654,6 +653,7 @@ const Template21 = () => {
                 fontStyle={fontStyle}
                 colorBackground={metadata?.theme?.primary}
                 colorText={metadata?.theme?.text}
+                secondaryBackground={metadata?.theme?.background}
               />
             </section>
             <section className="px-5 py-5">
@@ -666,11 +666,11 @@ const Template21 = () => {
           </div>
           {/* <div className="bg-[#f07b5f] w-8"></div> */}
           <div className="pt-20 w-[65%] bg-white">
-            <h1 className="px-6 text-6xl font-bold text-[#f07b5f]">
+            <h1 className="px-6 text-6xl font-bold" style={{color:metadata?.theme?.primary}}>
               {firstName} <span className="text-black">{surname}</span>
             </h1>
             <div className="px-6 py-2">
-              <p className="text-xl font-bold text-[#f07b5f] pl-4">
+              <p className="text-xl font-bold pl-4" style={{color:metadata?.theme?.primary}}>
                 {basics?.jobtitle}
               </p>
             </div>

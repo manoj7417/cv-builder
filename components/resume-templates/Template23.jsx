@@ -505,9 +505,7 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
                           </p>
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
-                          <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
-                          <span>{item?.organization}</span>
+                          {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">

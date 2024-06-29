@@ -440,9 +440,9 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
     <div className="references_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header">
+          <div className="references_header" style={{color:colorText}}>
             <h2
-              className={`${fontStyle.headingFont} text-white font-semibold uppercase`}
+              className={`${fontStyle.headingFont} font-semibold uppercase`}
             >
               {data?.name}
             </h2>
@@ -453,25 +453,25 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
                 <>
                   <div className="references my-5" key={index}>
                     <div className="references_names w-full my-1">
-                      <div className="references w-full">
+                      <div className="references w-full" style={{color:colorText}}>
                         {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold text-white inline-flex"
+                            className="break-words text-16px items-center font-bold inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold text-white">
+                          <p className="break-words text-15px font-bold">
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold text-white`}>
-                          <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
-                          <span>{item?.organization}</span>
+                        <h3
+                          className={`${fontStyle.subHeadingFont} font-bold`}
+                        >
+                          {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
                       <div className="references w-full" style={{color:colorText}}>

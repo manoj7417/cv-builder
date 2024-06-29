@@ -500,7 +500,7 @@ const Certificates = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const References = ({ fontStyle, headingColor }) => {
+const References = ({ fontStyle, colorBackground,colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -510,7 +510,8 @@ const References = ({ fontStyle, headingColor }) => {
         <>
           <div className="references_header">
             <h2
-              className={`text-white text-center border-2 border-orange-400 p-1 uppercase ${fontStyle.headingFont}`}
+              className={`text-white text-center border-2 p-1 uppercase ${fontStyle.headingFont}`}
+              style={{borderColor:colorBackground}}
             >
               {data?.name}
             </h2>
@@ -526,23 +527,24 @@ const References = ({ fontStyle, headingColor }) => {
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center text-orange-400 inline-flex"
+                            className="break-words text-16px items-center text-white inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px text-orange-400">
+                          <p className="break-words text-15px text-white">
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} text-white`}>
+                        <h3
+                          className={`${fontStyle.subHeadingFont} text-white`}
+                        >
                           {item.jobTitle}
                         </h3>
-                        <h3 className={`${fontStyle.subHeadingFont} text-white`}>
-                          {item.jobTitle && item?.organization && ',' }
-                        </h3>
-                        <h3 className={`${fontStyle.subHeadingFont} text-white`}>
+                        <h3
+                          className={`${fontStyle.subHeadingFont} text-white`}
+                        >
                           {item?.organization}
                         </h3>
                       </div>
@@ -719,8 +721,16 @@ const Template10 = () => {
                     colorText={metadata?.theme?.text}
                   />
                 </div>
-                <div className="references mt-10">
-                  <References fontStyle={fontStyle} headingColor={metadata?.theme?.primary} />
+                <div
+                  className="references mt-10"
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                >
+                  <References
+                    fontStyle={fontStyle}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
+                  />
                 </div>
                 <div className="socials absolute bottom-5 border-t-2 border-white w-[70%]">
                   <div className="flex justify-between mt-5 mx-4">

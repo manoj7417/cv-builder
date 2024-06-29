@@ -513,9 +513,8 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                           </p>
                         )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
-                          <span>{item?.organization}</span>
+                          {item.jobTitle} ,<br />
+                          {item?.organization}
                         </h3>
                       </div>
                       <div className="references w-full">
