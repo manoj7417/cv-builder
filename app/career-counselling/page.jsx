@@ -1,3 +1,4 @@
+'use client'
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
@@ -13,9 +14,42 @@ import {
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { GetTokens } from "../actions";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 export default function Page() {
+  const [questions, setQuestions] = useState({
+    'Current Pursuits and Activities': {
+      1: { question: "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?", answer: "" },
+      2: { question: 'What is your highest level of education?', answer: '' },
+      3: { question: 'Which subjects or areas do you feel most confident in?', answer: '' },
+      4: { question: 'Can you share any notable achievements or activities you have participated in recently?', answer: '' }
+    },
+    'Hobbies and Interests': {
+      1: { question: 'What hobbies or activities do you enjoy in your free time?', answer: '' },
+      2: { question: 'Are there any subjects or topics you are particularly passionate about?', answer: '' }
+    },
+    'Strengths and Weaknesses': {
+      1: { question: 'What do you consider to be your greatest strengths or skills?', answer: '' },
+      2: { question: 'Are there any areas where you feel you need improvement?', answer: '' }
+    },
+    'Career Aspirations': {
+      1: { question: 'What are your career goals or aspirations?', answer: '' },
+      2: { question: 'Is there a specific career path you are interested in?', answer: '' },
+    },
+    'Location and Age': {
+      1: { question: 'Which country do you currently reside in?', answer: '' },
+      2: { question: 'How old are you?', answer: '' }
+    }
+  })
+  const [currentSection, setCurrentSection] = useState('')
+  const [chat, setChat] = useState({
+    section: "",
+    chat: [ ]
+  })
+
   return (
     <div className="flex min-h-screen w-full bg-background">
       <div className="hidden w-16 flex-col border-r bg-background sm:flex">
@@ -197,8 +231,11 @@ export default function Page() {
                 </div>
                
               </CardHeader>
-              <CardContent className="flex-1 overflow-auto p-4">
+              <CardContent className="flex-1 overflow-scroll p-4 h-[70%] no-scrollbar">
                 <div className="grid gap-4">
+                  {
+                    Object.keys(questions).length > 0
+                  }
                   <div className="flex items-start gap-4">
                     <Avatar className="w-8 h-8 border">
                       <AvatarImage src="/placeholder-user.jpg" />

@@ -12,7 +12,7 @@ import Link from "next/link";
 import { isValidUrl } from "./ValidateUrl";
 import { AiOutlineLink } from "react-icons/ai";
 
-const Education = ({ fontStyle, colorBackground,colorText }) => {
+const Education = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.education
   );
@@ -24,8 +24,8 @@ const Education = ({ fontStyle, colorBackground,colorText }) => {
             <h2
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
-                backgroundColor:colorBackground,
-                color:colorText
+                backgroundColor: colorBackground,
+                color: colorText
               }}
             >
               {data?.name}
@@ -76,7 +76,7 @@ const Education = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Awards = ({ fontStyle, colorBackground,colorText }) => {
+const Awards = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
     <div className="education_section w-full">
@@ -86,8 +86,8 @@ const Awards = ({ fontStyle, colorBackground,colorText }) => {
             <h2
               className={`font-semibold font-serif p-2  ${fontStyle.subMianHeadingFont}`}
               style={{
-                backgroundColor:colorBackground,
-                color:colorText
+                backgroundColor: colorBackground,
+                color: colorText
               }}
             >
               {data?.name}
@@ -141,7 +141,7 @@ const Awards = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const References = ({ fontStyle, colorBackground,colorText }) => {
+const References = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -153,8 +153,8 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
             <h2
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
-                backgroundColor:colorBackground,
-                color:colorText
+                backgroundColor: colorBackground,
+                color: colorText
               }}
             >
               {data?.name}
@@ -182,7 +182,9 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
                           </p>
                         )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
-                          {item.jobTitle} ,{item?.organization}
+                          <span>{item.jobTitle}</span>
+                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">
@@ -211,7 +213,7 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Experience = ({ fontStyle, colorBackground,colorText }) => {
+const Experience = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
@@ -224,8 +226,8 @@ const Experience = ({ fontStyle, colorBackground,colorText }) => {
             <h2
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
-                backgroundColor:colorBackground,
-                color:colorText
+                backgroundColor: colorBackground,
+                color: colorText
               }}
             >
               {data?.name}
@@ -278,7 +280,7 @@ const Experience = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Projects = ({ fontStyle, colorBackground,colorText }) => {
+const Projects = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
     <div className="project_section my-2">
@@ -288,7 +290,7 @@ const Projects = ({ fontStyle, colorBackground,colorText }) => {
             <h2
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
-                backgroundColor:colorBackground,
+                backgroundColor: colorBackground,
                 color: colorText,
               }}
             >
@@ -536,7 +538,7 @@ const Certificates = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Profile = ({ fontStyle, colorBackground,colorText }) => {
+const Profile = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
   return (
@@ -547,8 +549,8 @@ const Profile = ({ fontStyle, colorBackground,colorText }) => {
             <h2
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
-                backgroundColor:colorBackground,
-                color:colorText
+                backgroundColor: colorBackground,
+                color: colorText
               }}
             >
               {data?.name}
@@ -589,7 +591,7 @@ const Template26 = () => {
         <div className="w-full bg-white shadow-lg rounded-lg flex">
           <div className="p-4 w-[40%]" style={
             {
-              backgroundColor:metadata?.theme?.primary
+              backgroundColor: metadata?.theme?.primary
             }
           }>
             <div>
@@ -605,13 +607,13 @@ const Template26 = () => {
                 <h2
                   className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
                   style={{
-                    color:metadata?.theme?.text
+                    color: metadata?.theme?.text
                   }}
                 >
                   Contact
                 </h2>
                 <ul className="flex flex-col gap-3 mt-2 px-2" style={{
-                  color:metadata?.theme?.text
+                  color: metadata?.theme?.text
                 }}>
                   <li className="flex items-center gap-3">
                     {basics?.phone && (
@@ -683,7 +685,7 @@ const Template26 = () => {
           </div>
           <div className="p-8 w-[60%]">
             <div className="flex justify-center rounded-full items-center mb-4 border-l-8 p-6" style={{
-              borderColor:metadata?.theme?.primary
+              borderColor: metadata?.theme?.primary
             }}>
               {/* <img
                 src="/pic.jpg"

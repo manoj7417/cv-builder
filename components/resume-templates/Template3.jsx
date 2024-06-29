@@ -416,8 +416,9 @@ const Reference = ({ fontStyle }) => {
                 </>
                 <div className="w-full ">
                   <p className="text-16px">
-                    {" "}
-                    {item.jobTitle} , <span>{item.organization}</span>
+                    <span>{item.jobTitle}</span>
+                    <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                    <span>{item?.organization}</span>
                   </p>
                   <p>{item.email}</p>
                   <p>{item.phone}</p>
