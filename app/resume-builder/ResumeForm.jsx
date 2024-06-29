@@ -1434,7 +1434,7 @@ export default function ResumeForm() {
                               />
                             </div>
                             <div className="space-y-2  mt-9 px-2">
-                              <Label>Highlights</Label>
+                              <Label>Achievements</Label>
                               <Textarea
                                 value={item?.highlights?.join("\n") || []}
                                 className="text-10px h-[150px] no-scrollbar"
@@ -1773,17 +1773,17 @@ export default function ResumeForm() {
                 onChange={handlehobbieslevelChange}
               />
             </div>
-            <div className="flex items-center justify-center text-white text-lg">
+            <div className="flex items-center justify-center text-blue-900 text-lg">
               {!sections?.hobbies?.visible ? (
                 <GoEyeClosed
-                  className=" cursor-pointer"
+                  className=" cursor-pointer text-blue-900"
                   onClick={() =>
                     setResumeData("sections.hobbies.visible", true)
                   }
                 />
               ) : (
                 <GoEye
-                  className="cursor-pointer"
+                  className="cursor-pointer text-blue-900"
                   onClick={() =>
                     setResumeData("sections.hobbies.visible", false)
                   }
@@ -2523,7 +2523,7 @@ export default function ResumeForm() {
                       key={color}
                       onClick={() => {
                         setResumeData("metadata.theme.primary", color);
-                        
+
                       }}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",
