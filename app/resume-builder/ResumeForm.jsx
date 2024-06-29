@@ -669,25 +669,22 @@ export default function ResumeForm() {
   };
 
   const handleAwardurlChange = (e, i) => {
-
     let val = e.target.value;
     if (!/^https?:\/\//i.test(val)) {
-      val = 'https://' + val;
+      val = "https://" + val;
     }
 
-    const updatedAwards = data.sections.awards.items.map(
-      (item, index) => {
-        if (index === i) {
-          return {
-            ...item,
-            url: val,
-          };
-        }
-        return item;
+    const updatedAwards = data.sections.awards.items.map((item, index) => {
+      if (index === i) {
+        return {
+          ...item,
+          url: val,
+        };
       }
-    );
+      return item;
+    });
     setResumeData("sections.awards.items", updatedAwards);
-  }
+  };
 
   const handleAwardDateChange = (val, i) => {
     let newDate;
@@ -733,10 +730,9 @@ export default function ResumeForm() {
   };
 
   const handleReferenceUrlChange = (e, i) => {
-
     let val = e.target.value;
     if (!/^https?:\/\//i.test(val)) {
-      val = 'https://' + val;
+      val = "https://" + val;
     }
 
     const updatedReferences = data.sections.reference.items.map(
@@ -751,7 +747,7 @@ export default function ResumeForm() {
       }
     );
     setResumeData("sections.reference.items", updatedReferences);
-  }
+  };
 
   const handleDeleteReference = (i) => {
     const updatedReferences = data.sections.reference.items.filter(
@@ -780,7 +776,7 @@ export default function ResumeForm() {
   const handlecertificateurlChange = (e, i) => {
     let val = e.target.value;
     if (!/^https?:\/\//i.test(val)) {
-      val = 'https://' + val;
+      val = "https://" + val;
     }
 
     const updatedCertificates = data.sections.certificates.items.map(
@@ -792,9 +788,10 @@ export default function ResumeForm() {
           };
         }
         return item;
-      })
+      }
+    );
     setResumeData("sections.certificates.items", updatedCertificates);
-  }
+  };
 
   const handlecertificatesLabelChange = (e) => {
     setResumeData("sections.certificates.name", e.target.value);
@@ -859,11 +856,18 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
       : null;
+  }
+
+  function rgbToHex(r, g, b) {
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b)
+      .toString(16)
+      .slice(1)
+      .toUpperCase()}`;
   }
 
   function getLuminance(r, g, b) {
@@ -878,13 +882,34 @@ export default function ResumeForm() {
     const rgb = hexToRgb(data.metadata.theme.primary);
     if (rgb) {
       const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
-      const calculatedTextColor = luminance > 0.5 ? '#484747' : '#FFFFFF';
-      setResumeData('metadata.theme.text', calculatedTextColor)
+      const calculatedTextColor = luminance > 0.5 ? "#484747" : "#FFFFFF";
+      setResumeData("metadata.theme.text", calculatedTextColor);
     }
   };
 
+  function lightenColor(hex, percent) {
+    const rgb = hexToRgb(hex);
+    if (!rgb) return null;
+
+    const { r, g, b } = rgb;
+
+    const newR = Math.min(255, Math.floor(r + (255 - r) * percent));
+    const newG = Math.min(255, Math.floor(g + (255 - g) * percent));
+    const newB = Math.min(255, Math.floor(b + (255 - b) * percent));
+
+    return rgbToHex(newR, newG, newB);
+  }
+
   const stripProtocol = (url) => {
-    return url.replace(/^https?:\/\//i, '');
+    return url.replace(/^https?:\/\//i, "");
+  };
+
+  const handlesetSecondayColor = () => {
+    const primaryColor = data.metadata.theme.primary;
+    const secondaryColor = lightenColor(primaryColor, 0.5);
+    // console.log("primaryColor", primaryColor);
+    // console.log("secondaryColor", secondaryColor);
+    setResumeData("metadata.theme.background", secondaryColor);
   };
 
   useEffect(() => {
@@ -896,6 +921,7 @@ export default function ResumeForm() {
 
   useEffect(() => {
     handleTextColor();
+    handlesetSecondayColor();
   }, [data.metadata.theme.primary]);
 
   return (
@@ -1329,7 +1355,8 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -2299,7 +2326,6 @@ export default function ResumeForm() {
                                       onChange={(e) =>
                                         handlecertificateurlChange(e, index)
                                       }
-
                                     />
                                   </PopoverContent>
                                 </Popover>
@@ -2523,7 +2549,6 @@ export default function ResumeForm() {
                       key={color}
                       onClick={() => {
                         setResumeData("metadata.theme.primary", color);
-
                       }}
                       className={cn(
                         "flex size-8 rounded-full cursor-pointer items-center justify-center ring-primary ring-offset-4 ring-offset-background transition-shadow hover:ring-1",

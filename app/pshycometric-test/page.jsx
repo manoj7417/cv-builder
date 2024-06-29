@@ -466,9 +466,11 @@ const Page = () => {
                     <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
                       WATCH VIDEO
                     </button>
-                    <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
-                      TRY NOW
-                    </button>
+                    <a href="/career-counselling">
+                      <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
+                        TRY NOW
+                      </button>
+                    </a>
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center md:justify-end">
@@ -550,10 +552,12 @@ const Page = () => {
                   </div>
                 </div>
                 <div className="mt-12 flex justify-center">
-                  <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
-                    <FaCrown className="mr-2 animate-pulse" />
-                    TRY WITH US
-                  </button>
+                  <a href="/career-counselling">
+                    <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
+                      <FaCrown className="mr-2 animate-pulse" />
+                      TRY WITH US
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

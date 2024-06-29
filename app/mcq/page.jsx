@@ -937,13 +937,21 @@ const Page = () => {
                 </li>
               ))}
             </ul>
-            <button
-              onClick={() => setIsSubmitted(false)}
-              className="flex mt-6 items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105"
-            >
-              <FaCrown className="mr-2 animate-pulse" />
-              Retake Test
-            </button>
+            <div className="flex justify-between">
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="flex mt-6 items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105"
+              >
+                <FaCrown className="mr-2 animate-pulse" />
+                Retake Test
+              </button>
+              <a href="/career-counselling">
+                <button className="flex mt-6 items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
+                  <FaCrown className="mr-2 animate-pulse" />
+                  Career Counselling!
+                </button>
+              </a>
+            </div>
           </div>
         )}
       </div>
@@ -985,7 +993,7 @@ const Page = () => {
             </div>
             <div className="px-6 py-4 w-[90%] md:w-[50%]">
               <img
-                src="/aipersonalized.gif"
+                src="/aipopup.webp"
                 alt="aipersonalized"
                 className="w-full rounded"
               />
