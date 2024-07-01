@@ -1,18 +1,16 @@
-import Footer from "../Layout/Footer"
-import NewResumeHeader from "../Layout/NewResumeHeader"
+import Footer from "../Layout/Footer";
 
 const Layout = ({ children }) => {
-    return (
-      <main className="terms_condition" >
-        <div className="terms_condition_container">
-          <div className="wrapper">
-            <NewResumeHeader/>
-            {children}
-            <Footer/>
-          </div>
+  return (
+    <main className="terms_condition">
+      <div className="terms_condition_container">
+        <div className="wrapper">
+          {children}
+          <Footer />
         </div>
-      </main>
-    )
-  }
-  
-  export default Layout
+      </div>
+    </main>
+  );
+};
+
+export default Layout;
