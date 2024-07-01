@@ -123,7 +123,7 @@ const Page = () => {
                 </a>
               </div>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
-                <img src="/students.png" className="w-full" />
+                <img src="/students.png" />
               </div>
             </div>
           </div>
