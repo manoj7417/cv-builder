@@ -25,7 +25,7 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -87,7 +87,7 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2  ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -154,7 +154,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -183,7 +183,9 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
@@ -227,7 +229,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -338,9 +340,8 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle, headingColor }) => {
+const Skills = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::", data);
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {
@@ -355,15 +356,20 @@ const Skills = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section px-5 py-10">
           <h2
-            className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}
+            className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
             style={{
-              color: headingColor,
+              color: colorText,
             }}
           >
             {data?.name}
           </h2>
           <div className="w-full flex justify-end items-center">
-            <ul className="w-full">
+            <ul
+              className="w-full"
+              style={{
+                color: colorText,
+              }}
+            >
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -371,12 +377,12 @@ const Skills = ({ fontStyle, headingColor }) => {
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-2 px-4`}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap text-white">
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-orange-400 h-2.5"
+                        className="bg-gray-500 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -391,7 +397,7 @@ const Skills = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Languages = ({ fontStyle, headingColor }) => {
+const Languages = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.language
   );
@@ -409,15 +415,20 @@ const Languages = ({ fontStyle, headingColor }) => {
       {data?.visible && data?.items?.length > 0 && (
         <div className="language_section px-5 py-10">
           <h2
-            className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}
+            className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
             style={{
-              color: headingColor,
+              color: colorText,
             }}
           >
             {data?.name}
           </h2>
           <div className="w-full flex justify-end items-center">
-            <ul className="w-full">
+            <ul
+              className="w-full"
+              style={{
+                color: colorText,
+              }}
+            >
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -425,12 +436,12 @@ const Languages = ({ fontStyle, headingColor }) => {
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-2 px-4`}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap text-white">
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-orange-400 h-2.5"
+                        className="bg-gray-500 h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>
@@ -445,27 +456,31 @@ const Languages = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Hobbies = ({ fontStyle }) => {
+const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
     <div className="px-5 py-10">
       <h2
-        className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}
+        className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
+        style={{
+          color: colorText,
+        }}
       >
         {data?.name}
       </h2>
       <div className="hobbies_section">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul>
+            <ul
+              style={{
+                color: colorText,
+              }}
+            >
               {data?.items?.map((item, index) => {
                 return (
-                  <li
-                    key={index}
-                    className="text-15px text-white pl-4 py-2 font-semibold"
-                  >
+                  <li key={index} className="text-15px pl-4 py-2 font-semibold">
                     {item}
                   </li>
                 );
@@ -478,21 +493,28 @@ const Hobbies = ({ fontStyle }) => {
   );
 };
 
-const Certificates = ({ fontStyle }) => {
+const Certificates = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
     <div className="px-5 py-10">
       <h2
-        className={`text-3xl font-semibold p-2 mb-4 font-serif text-orange-400 ${fontStyle.headingFont}`}
+        className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
+        style={{
+          color: colorText,
+        }}
       >
         {data?.name}
       </h2>
       <div className="hobbies_section">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul>
+            <ul
+              style={{
+                color: colorText,
+              }}
+            >
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section px-2" key={index}>
@@ -500,18 +522,18 @@ const Certificates = ({ fontStyle }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold text-white inline-flex"
+                        className="break-words text-xl items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold text-white">
+                      <p className="break-words text-xl font-bold">
                         {item.name}
                       </p>
                     )}
                     <div
-                      className={`py-2 ${fontStyle.paraFont} break-words text-white`}
+                      className={`py-2 ${fontStyle.paraFont} break-words`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
                     ></div>
                   </div>
@@ -537,7 +559,7 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
               className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
               style={{
                 backgroundColor: colorBackground,
-                color: colorText
+                color: colorText,
               }}
             >
               {data?.name}
@@ -576,37 +598,41 @@ const Template26 = () => {
     <>
       <div>
         <div className="w-full bg-white shadow-lg rounded-lg flex">
-          <div className="p-4 w-[40%]" style={
-            {
-              backgroundColor: metadata?.theme?.primary
-            }
-          }>
+          <div
+            className="p-4 w-[40%]"
+            style={{
+              backgroundColor: metadata?.theme?.primary,
+            }}
+          >
             <div>
-              <header className="px-6 py-16 whitespace-nowrap">
-                <h1 className="text-4xl font-bold mb-2" style={{
-                  color: metadata?.theme?.text
+              <header className="px-6 py-16 whitespace-nowrap" style={{
+                  color:metadata?.theme?.text
                 }}>
+                <h1 className="text-4xl font-bold mb-2">
                   {basics?.name}
                 </h1>
-                <h2 className="text-lg text-white">{basics?.jobtitle}</h2>
+                <h2 className="text-lg">{basics?.jobtitle}</h2>
               </header>
               <section className="px-5">
                 <h2
                   className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
                   style={{
-                    color: metadata?.theme?.text
+                    color: metadata?.theme?.text,
                   }}
                 >
                   Contact
                 </h2>
-                <ul className="flex flex-col gap-3 mt-2 px-2" style={{
-                  color: metadata?.theme?.text
-                }}>
+                <ul
+                  className="flex flex-col gap-3 mt-2 px-2"
+                  style={{
+                    color: metadata?.theme?.text,
+                  }}
+                >
                   <li className="flex items-center gap-3">
                     {basics?.phone && (
                       <a
                         href={`tel:${basics?.phone}`}
-                        className="hover:underline flex items-center mt-1 text-wrap w-full text-white"
+                        className="hover:underline flex items-center mt-1 text-wrap w-full"
                       >
                         <MdOutlinePhone className="mr-2" />
                         <p className="w-[90%] text-wrap break-words">
@@ -617,7 +643,7 @@ const Template26 = () => {
                   </li>
                   <li className="flex items-center gap-3">
                     {(basics?.city || basics?.country) && (
-                      <p className="flex items-center text-white">
+                      <p className="flex items-center">
                         <IoLocationOutline className="mr-2 " />
                         <span>{basics?.city}</span>
                         <span>{basics?.city && basics?.country && " , "}</span>
@@ -625,7 +651,7 @@ const Template26 = () => {
                       </p>
                     )}
                   </li>
-                  <li className="flex items-center gap-3 text-white">
+                  <li className="flex items-center gap-3">
                     {basics?.email && (
                       <a
                         href={`mailto:${basics?.email}`}
@@ -671,9 +697,12 @@ const Template26 = () => {
             </div>
           </div>
           <div className="p-8 w-[60%]">
-            <div className="flex justify-center rounded-full items-center mb-4 border-l-8 p-6" style={{
-              borderColor: metadata?.theme?.primary
-            }}>
+            <div
+              className="flex justify-center rounded-full items-center mb-4 border-l-8 p-6"
+              style={{
+                borderColor: metadata?.theme?.primary,
+              }}
+            >
               {/* <img
                 src="/pic.jpg"
                 alt="Profile"

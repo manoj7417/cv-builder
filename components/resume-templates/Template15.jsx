@@ -12,7 +12,7 @@ import Link from "next/link";
 import { isValidUrl } from "./ValidateUrl";
 import { AiOutlineLink } from "react-icons/ai";
 
-const Education = ({ fontStyle, headingColor }) => {
+const Education = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.education
   );
@@ -20,11 +20,14 @@ const Education = ({ fontStyle, headingColor }) => {
     <div className="education_section w-full px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="education_header">
+          <div className="education_header" style={{ color: colorBackground }}>
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -71,7 +74,7 @@ const Education = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Experience = ({ fontStyle, headingColor }) => {
+const Experience = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
@@ -80,11 +83,17 @@ const Experience = ({ fontStyle, headingColor }) => {
     <div className="experience_section w-full mt-5 px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="experience_header w-full">
+          <div
+            className="experience_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           {data?.items?.map((item, index) => {
             return (
@@ -133,22 +142,23 @@ const Experience = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Projects = ({ fontStyle, headingColor }) => {
+const Projects = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
     <div className="project_section my-4 px-10">
       {data?.visible && data?.items.length > 0 && (
         <>
-          <div className="project_heading w-full">
-            <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont}`}
-              style={{
-                color: headingColor,
-              }}
-            >
+          <div
+            className="project_heading w-full"
+            style={{ color: colorBackground }}
+          >
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           {data?.items.map((item, index) => {
             return (
@@ -191,7 +201,7 @@ const Projects = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Skills = ({ fontStyle, headingColor }) => {
+const Skills = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
 
   // Define the mapping of skill levels to percentages
@@ -205,16 +215,16 @@ const Skills = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
+        <div className="skills_section py-4" style={{ color: colorBackground }}>
           <h2
-            className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-            style={{
-              color: headingColor,
-            }}
+            className={`uppercase mb-2 text-2xl font-bold ${fontStyle.headingFont}`}
           >
             {data?.name}
           </h2>
-          <div className="border-b-2 border-gray-600"></div>
+          <div
+            className="border-b-2"
+            style={{ borderColor: colorBackground }}
+          ></div>
           <div className="text-gray-600 w-full">
             <ul className="w-full">
               {data.items.map((item, i) => {
@@ -229,8 +239,11 @@ const Skills = ({ fontStyle, headingColor }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: colorBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -244,20 +257,24 @@ const Skills = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Profile = ({ fontStyle, headingColor }) => {
+const Profile = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
   return (
     <div>
       {data?.visible && (
         <div className="profile_section w-full px-10">
-          <div className="profile_heading w-full">
-            <h2
-              className={`text-gray-700 font-semibold uppercase ${fontStyle.headingFont}`}
-            >
+          <div
+            className="profile_heading w-full"
+            style={{ color: colorBackground }}
+          >
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div
             className={`text-sm py-2 mt-3 ${fontStyle.subHeadingFont} break-words`}
@@ -269,7 +286,7 @@ const Profile = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Languages = ({ fontStyle, headingColor }) => {
+const Languages = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -283,16 +300,16 @@ const Languages = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
+        <div className="skills_section py-4" style={{ color: colorBackground }}>
           <h2
-            className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-            style={{
-              color: headingColor,
-            }}
+            className={`uppercase mb-2 text-2xl font-bold ${fontStyle.headingFont}`}
           >
             {data?.name}
           </h2>
-          <div className="border-b-2 border-gray-600"></div>
+          <div
+            className="border-b-2"
+            style={{ borderColor: colorBackground }}
+          ></div>
           <div className="text-gray-600 w-full">
             <ul className="w-full">
               {data.items.map((item, i) => {
@@ -307,8 +324,11 @@ const Languages = ({ fontStyle, headingColor }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: colorBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -322,7 +342,7 @@ const Languages = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Awards = ({ fontStyle, colorStyle }) => {
+const Awards = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
     <div className="awards_section w-full mt-5 px-10">
@@ -330,14 +350,12 @@ const Awards = ({ fontStyle, colorStyle }) => {
         <>
           <div
             className="awards_header w-full"
-            style={{ borderBottom: "1px solid black" }}
+            style={{
+              borderBottom: `1px solid ${colorBackground}`,
+              color: colorBackground,
+            }}
           >
-            <h2
-              className={`${fontStyle.headingFont} font-bold uppercase`}
-              style={{
-                color: colorStyle,
-              }}
-            >
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
               {data?.name}
             </h2>
           </div>
@@ -389,19 +407,19 @@ const Awards = ({ fontStyle, colorStyle }) => {
   );
 };
 
-const Certificates = ({ fontStyle, colorStyle }) => {
+const Certificates = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
     <div className="certificate_section w-full mt-5 px-10">
-      <div style={{ borderBottom: "1px solid black" }}>
-        <h2
-          className={`${fontStyle.headingFont} font-bold uppercase`}
-          style={{
-            color: colorStyle,
-          }}
-        >
+      <div
+        style={{
+          borderBottom: `1px solid ${colorBackground}`,
+          color: colorBackground,
+        }}
+      >
+        <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
           {data?.name}
         </h2>
       </div>
@@ -439,15 +457,19 @@ const Certificates = ({ fontStyle, colorStyle }) => {
   );
 };
 
-const Hobbies = ({ fontStyle }) => {
+const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
     <div className="my-5">
-      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+      <h2
+        className={`uppercase text-2xl mb-2 font-bold ${fontStyle.headingFont}`}
+        style={{ color: colorBackground }}
+      >
         {data?.name}
       </h2>
+      <div className="border-b-2" style={{borderColor:colorBackground}}></div>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -467,7 +489,7 @@ const Hobbies = ({ fontStyle }) => {
   );
 };
 
-const References = ({ fontStyle, headingColor }) => {
+const References = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -475,13 +497,13 @@ const References = ({ fontStyle, headingColor }) => {
     <div className="references_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header">
+          <div className="references_header" style={{color:colorBackground}}>
             <h2
-              className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+              className={`uppercase mb-2 text-2xl font-bold ${fontStyle.headingFont}`}
             >
               {data?.name}
             </h2>
-            <div className="border-b-2 border-gray-600"></div>
+            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -511,14 +533,10 @@ const References = ({ fontStyle, headingColor }) => {
                         </h3>
                       </div>
                       <div className="references w-full">
-                        <h4
-                          style={{ fontSize: fontStyle.paraFont }}
-                        >
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
-                        <h4
-                          style={{ fontSize: fontStyle.paraFont }}
-                        >
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.phone}
                         </h4>
                       </div>
@@ -537,7 +555,6 @@ const References = ({ fontStyle, headingColor }) => {
 const Template15 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
-  console.log("image url", basics?.picture?.url);
 
   const [fontStyle, setFontStyle] = useState({
     mainHeadingFont: "text-40px",
@@ -554,8 +571,19 @@ const Template15 = () => {
 
   return (
     <>
-      <div className="mx-auto w-[210mm] bg-white border-t-[20px] border-[#e4f2f2]">
-        <div className="top_section bg-[#e4f2f2]">
+      <div
+        className="mx-auto w-[210mm] bg-white border-t-[20px] border-[#e4f2f2]"
+        style={{
+          borderColor: metadata?.theme?.primary,
+        }}
+      >
+        <div
+          className="top_section"
+          style={{
+            backgroundColor: metadata?.theme?.primary,
+            color: metadata?.theme?.text,
+          }}
+        >
           <div className="bg-white py-3"></div>
           <div className="user-details flex">
             <div className="user_profile px-10">
@@ -570,10 +598,10 @@ const Template15 = () => {
               )}
             </div>
             <div className="user_content px-1 py-10">
-              <h2 className="text-3xl uppercase font-medium text-black tracking-widest">
+              <h2 className="text-3xl uppercase font-medium tracking-widest">
                 {basics?.name}
               </h2>
-              <h4 className="text-base text-black tracking-widest mt-2">
+              <h4 className="text-base tracking-widest mt-2">
                 {basics?.jobtitle}
               </h4>
             </div>
@@ -582,13 +610,19 @@ const Template15 = () => {
         <div className="resume_details_section h-full p-10">
           <div className="grid grid-cols-12">
             <div className="col-span-4">
-              <div className="contact_details p-2">
+              <div className="contact_details px-4">
                 <h2
                   className={`mb-2 font-semibold uppercase ${fontStyle.headingFont}`}
+                  style={{
+                    color: metadata?.theme?.primary,
+                  }}
                 >
                   Contact Me
                 </h2>
-                <div className="border-b-2 border-gray-600"></div>
+                <div
+                  className="border-b-2"
+                  style={{ borderColor: metadata?.theme?.primary }}
+                ></div>
                 <ul className="flex flex-col gap-3 mt-2 px-2">
                   <li className="flex items-center gap-3">
                     {basics?.phone && (
@@ -629,16 +663,32 @@ const Template15 = () => {
                 </ul>
               </div>
               <div className="skills w-full px-5">
-                <Skills fontStyle={fontStyle} />
+                <Skills
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
               <div className="hobbies w-full px-5">
-                <Hobbies fontStyle={fontStyle} />
+                <Hobbies
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
               <div className="language w-full px-5">
-                <Languages fontStyle={fontStyle} />
+                <Languages
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
               <div className="references w-full px-5">
-                <References fontStyle={fontStyle} />
+                <References
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
               </div>
             </div>
             <div className="col-span-8">
@@ -647,7 +697,8 @@ const Template15 = () => {
                 <div className="profile_section">
                   <Profile
                     fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
                   />
                 </div>
               </section>
@@ -656,7 +707,8 @@ const Template15 = () => {
                 <div className="projects">
                   <Projects
                     fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
                   />
                 </div>
               </section>
@@ -665,26 +717,39 @@ const Template15 = () => {
                 <div className="experience">
                   <Experience
                     fontStyle={fontStyle}
-                    colorStyle={metadata?.theme?.primary}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
                   />
                 </div>
               </section>
               {/* education */}
               <section>
                 <div className="education">
-                  <Education fontStyle={fontStyle} />
+                  <Education
+                    fontStyle={fontStyle}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
+                  />
                 </div>
               </section>
               {/* award */}
               <section>
                 <div className="award">
-                  <Awards fontStyle={fontStyle} />
+                  <Awards
+                    fontStyle={fontStyle}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
+                  />
                 </div>
               </section>
               {/* certification */}
               <section>
                 <div className="award">
-                  <Certificates fontStyle={fontStyle} />
+                  <Certificates
+                    fontStyle={fontStyle}
+                    colorBackground={metadata?.theme?.primary}
+                    colorText={metadata?.theme?.text}
+                  />
                 </div>
               </section>
             </div>

@@ -104,7 +104,7 @@ export default function HomepageNew() {
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto">
-            <h1 className="text-[80px] mt-4 text-center  flex  lg:flex-row flex-col items-center  font-extrabold text-[#0D3572]">
+            <h1 className="text-[75px] mt-4 text-center  flex  lg:flex-row flex-col items-center  font-extrabold text-[#0D3572]">
               
                 <span
                   className="text-[#ffffff] mx-10 slide-text-container"
@@ -112,7 +112,7 @@ export default function HomepageNew() {
                     display: "inline-block",
                     background: "linear-gradient(135deg, #30B8CA, #303A72)",
                     borderRadius: "16px",
-                    padding: "0px 40px",
+                    padding: "0px 30px",
                     lineHeight: "1.2",
                   }}
                 >
@@ -120,12 +120,11 @@ export default function HomepageNew() {
                     {words[index]}
                   </span>
                 </span>
-                your standout
+                CV Templates
               </h1>
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
                
-                <span className="2xl:ml-3 lg:ml-1"> CV templates with </span>
-                <span className="2xl:ml-3 lg:ml-1">genies</span>
+                <span className="2xl:ml-3 lg:ml-1">that Stand Out</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
                 We believe in bridging the gap between your aspirations and the
