@@ -31,7 +31,7 @@ const Pricing = () => {
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
                   Pricing Page
                 </h2>
-                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
                   Our pricing is simple with no hidden fees
                 </p>
                 <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
@@ -170,7 +170,7 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹3,351.6" : "₹399"}
+                    {enabled ? "₹8,391.6" : "₹999"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
                         ₹4788
@@ -456,11 +456,11 @@ const Pricing = () => {
                 ></path>
               </svg>
             </div>
-            <div className="relative max-w-7xl z-10 flex flex-col md:flex-row justify-around items-center">
-              <div className="text-center md:text-left">
+            <div className="relative  z-10 flex flex-col md:flex-row justify-center items-center">
+              <div className="text-center">
                 <h2 className="text-4xl font-extrabold mb-4">
-                  Start your <span className="text-green-500">7-day</span> free
-                  trial
+                  Start your <span className="text-green-500">Journey</span>{" "}
+                  Today!
                 </h2>
                 <p className="text-lg">From 300+ Customer Reviews</p>
                 <div className="mt-4">
@@ -468,25 +468,6 @@ const Pricing = () => {
                     Get Started
                   </button>
                 </div>
-              </div>
-              <div className="mt-8 md:mt-0 text-center md:text-left">
-                <h3 className="text-lg font-bold text-green-500 mb-2">
-                  LETS TRY!
-                </h3>
-                <ul className="space-y-2">
-                  <li>
-                    <span className="text-green-500">&#10003;</span> Free 7-day
-                    trial
-                  </li>
-                  <li>
-                    <span className="text-green-500">&#10003;</span> No credit
-                    card required
-                  </li>
-                  <li>
-                    <span className="text-green-500">&#10003;</span> Cancel
-                    anytime
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
