@@ -20,17 +20,17 @@ const Page = () => {
     {
       title: "Positive Personality Traits",
       description:
-        "Psychometric personality test to assess & identify key personality traits that can influence cultural fitment, trainability and job performance.",
+        "Estimate the Personality of the potential candidates with a Positive Personality Test that examines the cultural fitment, demeanour, and socialising traits of the candidates.",
       linkText: "POSITIVE PERSONALITY TRAITS",
       link: "#",
       bgColor: "bg-blue-100",
       borderColor: "border-blue-200",
     },
     {
-      title: "Dark Personality Traits",
+      title: "Negative Personality Traits",
       description:
-        "Measure and identify the key negative traits that impact the safety of employees, customers and work culture as a whole.",
-      linkText: "DARK PERSONALITY TRAITS",
+        "Dodge the unpredictability and lack of cognizance of Negative Personality Traits of your candidates with Psychometric Tests that analyse the negative and darker character traits.",
+      linkText: "Negative Personality Traits",
       link: "#",
       bgColor: "bg-purple-100",
       borderColor: "border-purple-200",
@@ -38,7 +38,7 @@ const Page = () => {
     {
       title: "Motivation, Value, Preferences",
       description:
-        "Understand what drives and motivates a person to perform at work by measuring motivation, values and preferences.",
+        "Uncover the secret of the Motivation and Drive of your ideal candidate by measuring their perception and employment of traits within Motivational, Values, and Preferential aspects. ",
       linkText: "MOTIVATION, VALUE, PREFERENCES",
       link: "#",
       bgColor: "bg-pink-100",
@@ -47,7 +47,7 @@ const Page = () => {
     {
       title: "Cognitive Ability",
       description:
-        "Measures an individual capacity to think logically and their ability to analyse any given situation and derive logical conclusions.",
+        "Comprehension, Application, and Conceptual capabilities of a candidate will go a long way and to filter out the perfect candidates, examine the cognitive abilities with specialised tests. ",
       linkText: "COGNITIVE ABILITY",
       link: "#",
       bgColor: "bg-green-100",
@@ -97,12 +97,12 @@ const Page = () => {
                   <span className="text-[#3c72b9]">FASTER</span> <br></br>WITH A
                   COACH
                 </span> */}
-                Unlock the secrets of your true <br></br>self with our proven
-                tests!
+                Comprehend Your Career with the <br></br>Power of Science!
               </h1>
 
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
-                Discover the real you, 1M+ People has joined the test already
+                Make Informed Decisions, Join 1 Million candidates who are
+                almost there!
               </p>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center pt-8 pb-6">
                 {/* Try it Free Button */}
@@ -123,7 +123,7 @@ const Page = () => {
                 </a>
               </div>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
-                <img src="/students.png" className="w-full" />
+                <img src="/students.png" />
               </div>
             </div>
           </div>
@@ -136,10 +136,11 @@ const Page = () => {
         <div className="container lg:pt-0 pt-20">
           <div className="  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <h3 className="text-[45px] md:text-[52px] sm:text-[52px] font-bold">
-              Watch your<br></br> confidence skyrocket
+              Witness the Magic of Science <br></br> inspire your Career
             </h3>
             <p className="text-[#7C7C7C] font-bold">
-              Try an example of any of our aptitude packages for free.
+              Try and Test the free psychometric tests to explore the
+              possibilities of an organised career
             </p>
           </div>
           <div className="  flex pt-4 justify-center">
@@ -150,8 +151,9 @@ const Page = () => {
                     Numerical Reasoning
                   </h2>
                   <p className="text-gray-700 mb-4">
-                    Numerical reasoning tests gauge how adept you are at dealing
-                    with a variety of different mathematical problems.
+                    Discover your adeptness with Numerical Values and
+                    Mathematical Calculations by testing your conceptual basics
+                    with the Numerical Reasoning Psychometric Test.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -174,9 +176,9 @@ const Page = () => {
                 <div className="bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative">
                   <h2 className="text-xl font-bold mb-2">Verbal Reasoning</h2>
                   <p className="text-gray-700 mb-4">
-                    Verbal reasoning tests examine your ability to quickly read,
-                    understand and pull out key information from dense passages
-                    of text.
+                    Check your compatibility with language comprehension and
+                    communicative verbal skills with the Verbal Reasoning Test
+                    to figure out your strengths and weaknesses.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -202,8 +204,9 @@ const Page = () => {
                     Diagrammatic Reasoning
                   </h2>
                   <p className="text-gray-700 mb-4">
-                    Diagrammatic reasoning tests are all about applying logic to
-                    a series of different flow charts or diagrams.
+                    Initiate your career dynamically with the Diagrammatic
+                    Reasoning proficiency test by analysing your aptitude with
+                    image-based patterns and pictorial representations.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -232,8 +235,9 @@ const Page = () => {
                     Situational Judgement
                   </h2>
                   <p className="text-gray-700 mb-4">
-                    Situational judgement tests assess how you deal with
-                    scenarios and challenges that come up in the workplace.
+                    Test your ability to navigate through tough situations and
+                    challenges that come up in the workplace by opting for the
+                    Situational Judgement Psychometric Test.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -257,8 +261,9 @@ const Page = () => {
                 <div className="relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden">
                   <h2 className="text-xl font-bold mb-2">Abstract Reasoning</h2>
                   <p className="text-gray-700 mb-4">
-                    Abstract reasoning tests are also known as diagrammatic or
-                    inductive reasoning tests.
+                    Check your skills with abstract and inductive reasoning with
+                    Abstract Psychometric Tests that are based on logic that
+                    require your professional judgement.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -282,8 +287,9 @@ const Page = () => {
                 <div className="relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden">
                   <h2 className="text-xl font-bold mb-2">Spatial Reasoning</h2>
                   <p className="text-gray-700 mb-4">
-                    Spatial reasoning tests are also known as logical or
-                    abstract reasoning tests.
+                    Unlock your understanding of 3D movements and find out the
+                    due gaps with Psychometric Tests that analyse your Spatial
+                    Reasoning capabilities.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -311,8 +317,9 @@ const Page = () => {
                 <div className="relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden">
                   <h2 className="text-xl font-bold mb-2">Logical Reasoning</h2>
                   <p className="text-gray-700 mb-4">
-                    Logical reasoning tests are designed to examine your logical
-                    thinking skills.
+                    Examine your proficiency in Logically analysing situations
+                    and finding out the best possible solutions by attempting a
+                    Logical Reasoning-based Psychometric Test.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -338,9 +345,9 @@ const Page = () => {
                     Mechanical Reasoning
                   </h2>
                   <p className="text-gray-700 mb-4">
-                    Mechanical reasoning tests examine your ability to
-                    understand mechanical and electrical concepts in order to
-                    solve challenges.
+                    Check your compatibility with Machine-based situations and
+                    reasoning activities with the Mechanical Reasoning Test and
+                    identify the potential gaps in no time!
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -373,7 +380,7 @@ const Page = () => {
             <div className="w-full">
               <div className="container mx-auto px-4 py-12">
                 <h2 className="text-2xl font-bold text-center mb-6">
-                  Essential tests for exceptional roles
+                  Tests that Call out, and Indicate
                 </h2>
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
@@ -381,39 +388,19 @@ const Page = () => {
                       <ul className="space-y-4">
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          Flexible practice 24/7
+                          24/7 Accessibility
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          1000s of up-to-date questions
+                          Myriad and Updated Questions
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          Written by accredited psychologists
+                          Formulated by Accredited Psychometricians
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          Industry and employer specific tests
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <ul className="space-y-4">
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Full solutions and explanations
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Online timed test simulator
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Intelligent learning platform
-                        </li>
-                        <li className="flex items-center">
-                          <FaCheckCircle className="text-blue-950 mr-2" />
-                          Dashboard performance tracking
+                          Industry and Profession-Specific Tests
                         </li>
                       </ul>
                     </div>
@@ -421,19 +408,39 @@ const Page = () => {
                       <ul className="space-y-4">
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          Tips, tricks, guides and resources
+                          Descriptive Results for Clarity
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          Available on any device, any time
+                          Electronically Timed Test Stimulator
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          98% recommend Psychometric Tests
+                          Intelligent Logics for Total Comprehension
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          30 day money back guarantee
+                          Performance Tracking Dashboard
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul className="space-y-4">
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Recommendations for Assisting Resources
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Just a Click Away!
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          98% Recommendations from Industry Experts
+                        </li>
+                        <li className="flex items-center">
+                          <FaCheckCircle className="text-blue-950 mr-2" />
+                          Relative Money Back Guarantee Policy
                         </li>
                       </ul>
                     </div>
@@ -455,17 +462,18 @@ const Page = () => {
               <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
                   <h1 className="text-4xl font-bold mb-4">
-                    AI powered talent assessments for better people decisions
+                    Talent Assessments Powered by AI for Flawless Judgement
                   </h1>
                   <p className="text-gray-700 mb-6">
-                    Know your candidates 10x better in just 10% of time and
-                    costs! Measure job-fitment using soft skills, behavioural
-                    and psychometric traits and spend time only with the best.
+                    Hire candidates that are worthy of selection and escape the
+                    matrix of faulty hiring by analysing the relative skills of
+                    your candidates with professionally accredited Psychometric
+                    Tests by Genies Career Hub.
                   </p>
                   <div className="flex justify-center md:justify-start space-x-4">
-                    <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
+                    {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
                       WATCH VIDEO
-                    </button>
+                    </button> */}
                     <a href="/career-counselling">
                       <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
                         TRY NOW
@@ -492,12 +500,12 @@ const Page = () => {
               <div className="min-h-screen p-6">
                 <div className="text-center mb-12">
                   <h1 className="text-3xl font-bold">
-                    Psychometric Assessment Tools Used in<br></br> Hiring and
-                    Employee Development
+                    Perfect Hiring and Progressive Employee <br></br>{" "}
+                    Development with Psychometric Assessment Tools
                   </h1>
                   <p className="mt-2 text-lg">
-                    Make Better Hiring Decisions Using the Four Types of
-                    Psychometric Assessment Tools
+                    Employ the perfect 4 Psychometric Assessment Tools to filter
+                    out perfect candidates and inspire competent employees.
                   </p>
                 </div>
                 <div className="flex flex-col lg:flex-row justify-center">
