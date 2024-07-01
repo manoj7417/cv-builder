@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { FaTimesCircle } from "react-icons/fa";
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
 
@@ -50,29 +51,97 @@ const Pricing = () => {
                 </span>
               </div>
 
-              <div className="mt-10 flex justify-center space-x-8">
-                <div className=" p-6 w-full md:w-[50%] rounded-lg shadow-lg text-center border-gray-100">
+              <div className="mt-10 flex  space-x-8">
+                <div className=" p-6 w-full md:w-[50%] rounded-lg shadow-lg  border-gray-100">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     FREE
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    $0
+                    ₹0
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per yearly
                   </p>
                   <ul className="mt-4 space-y-2">
-                    <li className="flex items-center justify-center text-sm text-gray-600">
+                    <li className="flex items-center  text-sm text-gray-600">
                       <FaCheckCircle className="text-blue-950 mr-2" />
-                      Lorem ipsum dolor
+                      Unlimited resumes and cover letters
                     </li>
-                    <li className="flex items-center justify-center text-sm text-gray-600">
+                    <li className="flex items-center  text-sm text-gray-600">
                       <FaCheckCircle className="text-blue-950 mr-2" />
-                      Lorem ipsum dolor
+                      All premium templates and colors
                     </li>
-                    <li className="flex items-center justify-center text-sm text-gray-600">
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />1 Cv
+                      Analyzer free
+                    </li>{" "}
+                    <li className="flex items-center  text-sm text-gray-600">
                       <FaCheckCircle className="text-blue-950 mr-2" />
-                      Lorem ipsum dolor
+                      Free Psycometric Tests
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      24 X 7 Support Service
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaTimesCircle className="text-red-500 mr-2" /> No AI
+                      Analyzer
+                    </li>{" "}
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaTimesCircle className="text-red-500 mr-2" />
+                      No AI Psycometric Tests
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaTimesCircle className="text-red-500 mr-2" />
+                      No career coaching
+                    </li>
+                  </ul>
+                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
+                    Start for free
+                  </button>
+                </div>
+                <div className=" p-6 rounded-lg shadow-lg  w-full md:w-[50%]">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    BASIC
+                  </h3>
+                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
+                    {enabled ? "₹1671.6" : "₹199"}
+                  </p>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Per member, per {enabled ? "yearly" : "monthly"}
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      Download Unlimited resumes and cover letters
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      Download All premium templates and colors
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      10 Cv Analyzer free
+                    </li>{" "}
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      Free Psycometric Tests
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      24 X 7 Support Service
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" /> 10 AI
+                      Analyzer
+                    </li>{" "}
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaTimesCircle className="text-red-500 mr-2" />
+                      No AI Psycometric Tests
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaTimesCircle className="text-red-500 mr-2" />
+                      No career coaching
                     </li>
                   </ul>
                   <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
@@ -85,23 +154,43 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$99" : "$10"}
+                    {enabled ? "₹3,351.6" : "₹399"}
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per {enabled ? "yearly" : "monthly"}
                   </p>
                   <ul className="mt-4 space-y-2">
-                    <li className="flex items-center justify-center text-sm text-gray-600">
+                    <li className="flex items-center  text-sm text-gray-600">
                       <FaCheckCircle className="text-blue-950 mr-2" />
-                      Lorem ipsum dolor
+                      Download Unlimited resumes and cover letters
                     </li>
-                    <li className="flex items-center justify-center text-sm text-gray-600">
+                    <li className="flex items-center  text-sm text-gray-600">
                       <FaCheckCircle className="text-blue-950 mr-2" />
-                      Lorem ipsum dolor
+                      Download All premium templates and colors
                     </li>
-                    <li className="flex items-center justify-center text-sm text-gray-600">
+                    <li className="flex items-center  text-sm text-gray-600">
                       <FaCheckCircle className="text-blue-950 mr-2" />
-                      Lorem ipsum dolor
+                      Unlimited Cv Analyzer free
+                    </li>{" "}
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      Free Psycometric Tests
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      24 X 7 Support Service
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" /> Unlimited
+                      AI Analyzer
+                    </li>{" "}
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      Unlimited AI Psycometric Tests
+                    </li>
+                    <li className="flex items-center  text-sm text-gray-600">
+                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      Unlimited career coaching
                     </li>
                   </ul>
                   <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
