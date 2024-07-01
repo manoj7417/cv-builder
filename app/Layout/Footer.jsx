@@ -139,6 +139,21 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
+                <li>
+                  <a href="/career-coaching" className="text-black transition">
+                    Career Coaching
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/pshycometric-test"
+                    className="text-black transition"
+                  >
+                    Psycometric Test
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
 
                 <li>
                   <a
@@ -181,13 +196,6 @@ export default function Footer() {
                     className="text-black transition pointer-events-none"
                   >
                     Meet the Team
-                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
-                </li>
-
-                <li>
-                  <a href="/terms-condition" className="text-black transition">
-                    Terms and Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
@@ -260,6 +268,36 @@ export default function Footer() {
                   >
                     {" "}
                     Hiring Statistics{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/terms-condition" className="text-black transition">
+                    Terms and Condition
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/gdpr" className="text-black transition">
+                    GDPR
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/editorial-guidlines"
+                    className="text-black transition"
+                  >
+                    Editorial Guidlines
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/cookies-&-tracking-policy"
+                    className="text-black transition"
+                  >
+                    Cookies & tracking policy
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
