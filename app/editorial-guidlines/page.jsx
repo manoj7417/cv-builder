@@ -6,7 +6,7 @@ const Page = () => {
   return (
     <>
       <section
-        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
+        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative bg-gradient-to-r from-white to-[#dcecff]"
         id="free"
       >
         <div className="container lg:pt-0 pt-20">
