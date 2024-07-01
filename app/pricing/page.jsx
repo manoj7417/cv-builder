@@ -2,13 +2,24 @@
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaTimesCircle } from "react-icons/fa";
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useState, useEffect, useRef } from "react";
+
+import { useUserStore } from "../store/UserStore";
+import Header from "../Layout/Header";
+
 import { Switch } from "@headlessui/react";
+const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
+  ssr: false,
+});
 
 const Pricing = () => {
   const [enabled, setEnabled] = useState(true);
+  const userState = useUserStore((state) => state.userState);
+
   return (
     <>
+      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
@@ -97,7 +108,7 @@ const Pricing = () => {
                     </li>
                   </ul>
                   <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
-                    Start for free
+                    Current Plan
                   </button>
                 </div>
                 <div className=" p-6 rounded-lg shadow-lg  w-full md:w-[50%]">
@@ -106,6 +117,11 @@ const Pricing = () => {
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
                     {enabled ? "₹1671.6" : "₹199"}
+                    {enabled && (
+                      <span className="text-xl line-through text-gray-500 ml-2">
+                        ₹2388
+                      </span>
+                    )}
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per {enabled ? "yearly" : "monthly"}
@@ -145,7 +161,7 @@ const Pricing = () => {
                     </li>
                   </ul>
                   <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
-                    Start for free
+                    Upgrade Now!
                   </button>
                 </div>
 
@@ -155,7 +171,13 @@ const Pricing = () => {
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
                     {enabled ? "₹3,351.6" : "₹399"}
+                    {enabled && (
+                      <span className="text-xl line-through text-gray-500 ml-2">
+                        ₹4788
+                      </span>
+                    )}
                   </p>
+
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per {enabled ? "yearly" : "monthly"}
                   </p>
@@ -194,7 +216,7 @@ const Pricing = () => {
                     </li>
                   </ul>
                   <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
-                    Start for free
+                    Upgrade Now!
                   </button>
                 </div>
               </div>
@@ -206,7 +228,7 @@ const Pricing = () => {
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
       >
-        <div className="container lg:pt-0 pt-20">
+        <div className="container ">
           <div className="py-16 ">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
@@ -219,111 +241,6 @@ const Pricing = () => {
               </div>
 
               <div className="mt-10">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-blue-950">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                        >
-                          Products
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                        >
-                          Free
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                        >
-                          Premium
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                        >
-                          Enterprise
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          25,000
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          50,000
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          125,000
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Free
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Free
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Free
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Free
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Free
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Free
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
                 <div className="mt-10 overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-blue-950">
@@ -344,20 +261,20 @@ const Pricing = () => {
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                         >
-                          Premium
+                          Basic
                         </th>
                         <th
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                         >
-                          Enterprise
+                          Premium
                         </th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
+                          Unlimited resumes and cover letters
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -371,7 +288,50 @@ const Pricing = () => {
                       </tr>
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
+                          Download Unlimited resumes and cover letters
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Download All premium templates and colors
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Unlimited Cv Analyzer free
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Free Psycometric Tests
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -385,13 +345,13 @@ const Pricing = () => {
                       </tr>
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
+                          Unlimited AI Analyzer
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
+                          <span className="text-red-500">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
+                          <span className="text-red-500">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -399,13 +359,27 @@ const Pricing = () => {
                       </tr>
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Lorem ipsum dolor
+                          AI Psycometric Tests
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
                         </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Career coaching
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-green-500">&#10003;</span>
+                          <span className="text-red-500">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-red-500">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
