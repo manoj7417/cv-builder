@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { FaCheckCircle } from "react-icons/fa";
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
 
@@ -62,15 +63,15 @@ const Pricing = () => {
                   </p>
                   <ul className="mt-4 space-y-2">
                     <li className="flex items-center justify-center text-sm text-gray-600">
-                      <span className="material-icons">check_circle</span>
+                      <FaCheckCircle className="text-blue-950 mr-2" />
                       Lorem ipsum dolor
                     </li>
                     <li className="flex items-center justify-center text-sm text-gray-600">
-                      <span className="material-icons">check_circle</span>
+                      <FaCheckCircle className="text-blue-950 mr-2" />
                       Lorem ipsum dolor
                     </li>
                     <li className="flex items-center justify-center text-sm text-gray-600">
-                      <span className="material-icons">check_circle</span>
+                      <FaCheckCircle className="text-blue-950 mr-2" />
                       Lorem ipsum dolor
                     </li>
                   </ul>
@@ -91,15 +92,15 @@ const Pricing = () => {
                   </p>
                   <ul className="mt-4 space-y-2">
                     <li className="flex items-center justify-center text-sm text-gray-600">
-                      <span className="material-icons">check_circle</span>
+                      <FaCheckCircle className="text-blue-950 mr-2" />
                       Lorem ipsum dolor
                     </li>
                     <li className="flex items-center justify-center text-sm text-gray-600">
-                      <span className="material-icons">check_circle</span>
+                      <FaCheckCircle className="text-blue-950 mr-2" />
                       Lorem ipsum dolor
                     </li>
                     <li className="flex items-center justify-center text-sm text-gray-600">
-                      <span className="material-icons">check_circle</span>
+                      <FaCheckCircle className="text-blue-950 mr-2" />
                       Lorem ipsum dolor
                     </li>
                   </ul>
@@ -364,7 +365,7 @@ const Pricing = () => {
               </div>
               <div className="mt-8 md:mt-0 text-center md:text-left">
                 <h3 className="text-lg font-bold text-green-500 mb-2">
-                  LET'S TRY!
+                  LETS TRY!
                 </h3>
                 <ul className="space-y-2">
                   <li>
