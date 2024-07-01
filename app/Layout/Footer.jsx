@@ -168,10 +168,7 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <Link
-                    href ="/about-us"
-                    className="text-black transition"
-                  >
+                  <Link href="/about-us" className="text-black transition">
                     {" "}
                     About Us
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
@@ -217,6 +214,12 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
+                <li>
+                  <Link href="/pricing" className="text-black transition">
+                    Pricing
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </Link>
+                </li>
 
                 <li>
                   <a
@@ -235,10 +238,7 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <Link
-                    href="/return-policy"
-                    className="text-black transition"
-                  >
+                  <Link href="/return-policy" className="text-black transition">
                     {" "}
                     Returns Policy{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
@@ -246,10 +246,7 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <Link
-                    href="refund-policy"
-                    className="text-black transition"
-                  >
+                  <Link href="refund-policy" className="text-black transition">
                     {" "}
                     Refund Policy{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
