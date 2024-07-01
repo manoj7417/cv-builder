@@ -1,0 +1,13 @@
+.circle-outer {
+    border: 2px solid #545556;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    transition: border-color 300ms;
+    width: 20px;
+}
+
+
+input[type=radio] .circle-outer {
+    accent-color: #FF0000 !important;
+}
