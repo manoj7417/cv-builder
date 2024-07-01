@@ -277,8 +277,8 @@ export default function Page() {
       )
     ) {
       // All questions are answered, proceed with submission logic
-      console.log("Submitting form...");
       setShowDialog(true);
+      console.log("Submitting form...");
       // Example: You might want to send data to a backend or display a success message
     } else {
       setIsValid(true); // Display validation message if any question is unanswered
@@ -436,7 +436,7 @@ export default function Page() {
             <div className="w-full lg:w-1/3 mt-24">
               <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-100">
                 <CardHeader className="">
-                  <h1 className="text-4xl font-bold text-blue-950">
+                  <h1 className="xl:text-4xl text-2xl font-bold text-blue-950">
                     Career Counselor Steps
                   </h1>
                 </CardHeader>
