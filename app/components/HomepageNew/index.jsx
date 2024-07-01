@@ -124,7 +124,7 @@ export default function HomepageNew() {
               </h1>
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
                
-                <span className="2xl:ml-3 lg:ml-1">that Stand Out</span>
+                <span className="2xl:ml-3 lg:ml-1">That Stand Out</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
                 We believe in bridging the gap between your aspirations and the
