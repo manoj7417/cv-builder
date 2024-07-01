@@ -225,6 +225,49 @@ const Pricing = () => {
         </div>
       </section>
       <section
+        className="flex lg:items-center items-start pb-0 justify-center  w-full   px-5 relative"
+        id="premium"
+      >
+        <div className="container lg:pt-0 pt-20">
+          <div className="flex  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className=" flex items-center justify-center py-12">
+              <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
+                <div className="md:w-[60%]  w-full text-center md:text-left mb-8 md:mb-0">
+                  <h1 className="text-4xl font-bold mb-4">
+                    Looking for an enterprise solution?Contact us for the
+                    enterprise version!
+                  </h1>
+                  <p className="text-gray-700 mb-6">
+                    Looking for an enterprise solution? Our CV builder offers
+                    tailored features and robust capabilities designed
+                    specifically to meet the needs of large organizations. .
+                    Dont miss out on the opportunity to leverage our premium
+                    solutions tailored for enterprise success!
+                  </p>
+                  <div className="flex justify-center md:justify-start space-x-4">
+                    {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
+                      WATCH VIDEO
+                    </button> */}
+                    <a href="/contact-us">
+                      <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
+                        Contact Us
+                      </button>
+                    </a>
+                  </div>
+                </div>
+                <div className="md:w-[40%] w-full flex justify-center md:justify-end">
+                  <img
+                    src="/enterprise.webp"
+                    alt="AI Assessment"
+                    className="w-full "
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
       >
