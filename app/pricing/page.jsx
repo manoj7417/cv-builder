@@ -13,7 +13,7 @@ const Pricing = () => {
         id="free"
       >
         <div className="container lg:pt-0 pt-20">
-          <div className="py-16 bg-gray-50">
+          <div className="py-16 ">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
@@ -51,7 +51,7 @@ const Pricing = () => {
               </div>
 
               <div className="mt-10 flex justify-center space-x-8">
-                <div className="bg-blue-50 p-6 w-full md:w-[50%] rounded-lg shadow-lg text-center">
+                <div className=" p-6 w-full md:w-[50%] rounded-lg shadow-lg text-center border-gray-100">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     FREE
                   </h3>
@@ -80,7 +80,7 @@ const Pricing = () => {
                   </button>
                 </div>
 
-                <div className="bg-pink-50 p-6 rounded-lg shadow-lg text-center w-full md:w-[50%]">
+                <div className=" p-6 rounded-lg shadow-lg text-center w-full md:w-[50%]">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     PREMIUM
                   </h3>
@@ -118,7 +118,7 @@ const Pricing = () => {
         id="free"
       >
         <div className="container lg:pt-0 pt-20">
-          <div className="py-16 bg-gray-50">
+          <div className="py-16 ">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
