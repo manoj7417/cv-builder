@@ -1,5 +1,10 @@
-'use client'
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+"use client";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -11,302 +16,471 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GetTokens } from "../actions";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { TiTick } from "react-icons/ti";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Image from "next/image";
+import CustomLoader from "../ui/CustomLoader";
+import "./CareerCounselling.css";
 
 export default function Page() {
-  const [categoryIndex, setCategoryIndex] = useState(0);
-  const [questionIndex, setQuestionIndex] = useState(1);
+  // const [categoryIndex, setCategoryIndex] = useState(0);
+  // const [questionIndex, setQuestionIndex] = useState(1);
+  // const [isOpen, setIsOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isValid, setIsValid] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  // const [answers, setAnswers] = useState({
+  //   "Current Pursuits and Activities": [
+  //     {
+  //       question:
+  //         "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
+  //       answer: "",
+  //       type: "input", // Example: input type
+  //     },
+  //     { question: "What is your highest level of education?", answer: "", type: "input" },
+  //     {
+  //       question: "Which subjects or areas do you feel most confident in?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question:
+  //         "Can you share any notable achievements or activities you have participated in recently?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Hobbies and Interests": [
+  //     {
+  //       question: "What hobbies or activities do you enjoy in your free time?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question:
+  //         "Are there any subjects or topics you are particularly passionate about?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Strengths and Weaknesses": [
+  //     {
+  //       question:
+  //         "What do you consider to be your greatest strengths or skills?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question: "Are there any areas where you feel you need improvement?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Career Aspirations": [
+  //     { question: "What are your career goals or aspirations?", answer: "", type: "input" },
+  //     {
+  //       question: "Is there a specific career path you are interested in?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Location and Age": [
+  //     { question: "Which country do you currently reside in?", answer: "", type: "input" },
+  //     { question: "How old are you?", answer: "", type: "input" },
+  //   ],
+  // });
+
   const [answers, setAnswers] = useState({
-    'Current Pursuits and Activities': [{ question: "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?", answer: "" }, { question: 'What is your highest level of education?', answer: '' }, { question: 'Which subjects or areas do you feel most confident in?', answer: '' }, { question: 'Can you share any notable achievements or activities you have participated in recently?', answer: '' }],
-    'Hobbies and Interests': [{ question: 'What hobbies or activities do you enjoy in your free time?', answer: '' }, { question: 'Are there any subjects or topics you are particularly passionate about?', answer: '' }],
-    'Strengths and Weaknesses': [{ question: 'What do you consider to be your greatest strengths or skills?', answer: '' }, { question: 'Are there any areas where you feel you need improvement?', answer: '' }],
-    'Career Aspirations': [{ question: 'What are your career goals or aspirations?', answer: '' },
-    { question: 'Is there a specific career path you are interested in?', answer: '' }],
-    'Location and Age': [{ question: 'Which country do you currently reside in?', answer: '' },
-    { question: 'How old are you?', answer: '' }]
-  })
+    "Current Pursuits and Activities": [
+      {
+        question:
+          "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "What is your highest level of education?",
+        options: ["High School", "Bachelor's Degree", "Master's Degree", "PhD"],
+        answer: "",
+        type: "mcq",
+      },
+      {
+        question: "Which subjects or areas do you feel most confident in?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question:
+          "Can you share any notable achievements or activities you have participated in recently?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question:
+          "What skills or knowledge are you currently working on improving?",
+        options: [
+          "Programming",
+          "Project Management",
+          "Language Skills",
+          "Design",
+        ],
+        answer: "",
+        type: "mcq",
+      },
+    ],
+    "Hobbies and Interests": [
+      {
+        question: "What hobbies or activities do you enjoy in your free time?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question:
+          "Are there any subjects or topics you are particularly passionate about?",
+        options: ["History", "Environment", "Politics", "Healthcare"],
+        answer: "",
+        type: "mcq",
+      },
+    ],
+    "Strengths and Weaknesses": [
+      {
+        question:
+          "What do you consider to be your greatest strengths or skills?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "Are there any areas where you feel you need improvement?",
+        options: [
+          "Time Management",
+          "Technical Skills",
+          "Public Speaking",
+          "Teamwork",
+        ],
+        answer: "",
+        type: "mcq",
+      },
+    ],
+    "Career Aspirations": [
+      {
+        question: "What are your career goals or aspirations?",
+        options: [
+          "Entrepreneurship",
+          "Corporate Career",
+          "Academia",
+          "Nonprofit Sector",
+        ],
+        answer: "",
+        type: "mcq",
+      },
+      {
+        question: "Is there a specific career path you are interested in?",
+        options: [
+          "Software Development",
+          "Marketing",
+          "Healthcare",
+          "Education",
+        ],
+        answer: "",
+        type: "mcq",
+      },
+    ],
+    "Location and Age": [
+      {
+        question: "Which country do you currently reside in?",
+        options: ["United States", "United Kingdom", "Canada", "Other"],
+        answer: "",
+        type: "mcq",
+      },
+      {
+        question: "How old are you?",
+        options: ["Under 18", "18-25", "26-35", "Over 35"],
+        answer: "",
+        type: "mcq",
+      },
+    ],
+  });
 
+  const categories = Object.keys(answers);
 
+  // Function to handle input changes
+  const handleInputChange = (category, questionIndex, newAnswer) => {
+    setAnswers((prevAnswers) => {
+      const updatedCategory = prevAnswers[category].map((q, i) =>
+        i === questionIndex ? { ...q, answer: newAnswer } : q
+      );
+      return {
+        ...prevAnswers,
+        [category]: updatedCategory,
+      };
+    });
+  };
 
+  // const handleNext = () => {
+  //   window.scrollTo(0, 0);
+  //   if (currentStep < categories.length - 1) {
+  //     setCurrentStep((prevStep) => prevStep + 1);
+  //   }
+  // };
+
+  const handleNext = () => {
+    window.scrollTo(0, 0);
+    if (
+      answers[categories[currentStep]].every(
+        (questionObj) => questionObj.answer.trim() !== ""
+      )
+    ) {
+      setIsValid(false); // Reset validation state
+      setCurrentStep((prevStep) => prevStep + 1);
+    } else {
+      setIsValid(true); // Display validation message
+    }
+  };
+
+  // const handlePrevious = () => {
+  //   window.scrollTo(0, 0);
+  //   if (currentStep > 0) {
+  //     setCurrentStep((prevStep) => prevStep - 1);
+  //   }
+  // };
+
+  const handlePrevious = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+    setIsValid(false); // Reset validation state when going back
+  };
+
+  const handleSubmit = () => {
+    if (
+      answers[categories[currentStep]].every(
+        (questionObj) => questionObj.answer.trim() !== ""
+      )
+    ) {
+      // All questions are answered, proceed with submission logic
+      console.log("Submitting form...");
+      setShowDialog(true);
+      // Example: You might want to send data to a backend or display a success message
+    } else {
+      setIsValid(true); // Display validation message if any question is unanswered
+    }
+  };
+
+  const handleClose = () => {
+    setShowDialog(false);
+  };
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      <div className="hidden w-16 flex-col border-r bg-background sm:flex">
-        <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg font-semibold  transition-colors hover:bg-primary/90 md:h-8 md:w-8 md:text-base"
-                  prefetch={false}
-                >
-                  <IoArrowBackCircleOutline />
-                  <span className="sr-only">Go Back</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Go back</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <BriefcaseIcon className="h-5 w-5" />
-                  <span className="sr-only">Job Cv</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Job Cv</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <GraduationCapIcon className="h-5 w-5" />
-                  <span className="sr-only">Cv Builder</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Cv Builder</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <CompassIcon className="h-5 w-5" />
-                  <span className="sr-only">Cv Analyser</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Cv Analyser</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <ClipboardIcon className="h-5 w-5" />
-                  <span className="sr-only">Report</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Report</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </nav>
-        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                  prefetch={false}
-                >
-                  <SettingsIcon className="h-5 w-5" />
-                  <span className="sr-only">Settings</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Settings</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </nav>
+    <>
+      <div className="flex min-h-screen w-full bg-background">
+        <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
+          <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
+            {showIntro && (
+              <div className="flex justify-center items-center flex-1">
+                <div className="text-center">
+                  <h1 className="text-5xl font-bold text-blue-950">
+                    Welcome to the Career Counselling
+                  </h1>
+                  <p className="mt-4 w-1/2 mx-auto">
+                    Please take a few moments to answer the following questions.
+                    Your responses will help us better understand your current
+                    pursuits, hobbies, strengths, and career aspirations.
+                  </p>
+                  <button
+                    onClick={() => setShowIntro(false)}
+                    className="mt-6 bg-blue-950 text-white px-10 py-2 rounded"
+                  >
+                    Start
+                  </button>
+                </div>
+              </div>
+            )}
+            {!showIntro && (
+              <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24 ">
+                <div className="space-y-4">
+                  <h2 className="text-4xl font-semibold">
+                    {categories[currentStep]}
+                  </h2>
+                  {answers[categories[currentStep]].map(
+                    (questionObj, quesIndex) => (
+                      <div key={quesIndex} className="space-y-2">
+                        <label className="block text-sm font-medium">
+                          {questionObj.question}
+                        </label>
+                        {questionObj.type === "input" ? (
+                          <Textarea
+                            required
+                            value={questionObj.answer}
+                            onChange={(e) =>
+                              handleInputChange(
+                                categories[currentStep],
+                                quesIndex,
+                                e.target.value
+                              )
+                            }
+                            placeholder="Type your answer here..."
+                            className="w-full resize-none"
+                          />
+                        ) : (
+                          <div className="space-y-2">
+                            {questionObj.options.map((option, optionIndex) => (
+                              <div key={optionIndex}>
+                                <label className="flex items-center space-x-3">
+                                  <input
+                                    type="radio"
+                                    name={`question-${quesIndex}`}
+                                    value={option}
+                                    required
+                                    checked={questionObj.answer === option}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        categories[currentStep],
+                                        quesIndex,
+                                        e.target.value
+                                      )
+                                    }
+                                    className="text-2xl circle-outer accent-blue-700 cursor-pointer"
+                                  />
+                                  <span>{option}</span>
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {isValid && questionObj.answer.trim() === "" && (
+                          <p className="text-red-500 text-sm">
+                            Please provide an answer.
+                          </p>
+                        )}
+                      </div>
+                    )
+                  )}
+                </div>
+                {/* submit buttons  */}
+                <div className="flex justify-between p-4">
+                  <button
+                    onClick={handlePrevious}
+                    disabled={currentStep === 0}
+                    className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  {currentStep < categories.length - 1 ? (
+                    <button
+                      onClick={handleNext}
+                      className="bg-blue-950 text-white px-4 py-2 rounded"
+                    >
+                      Next
+                    </button>
+                  ) : (
+                    <>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button
+                            onClick={handleSubmit}
+                            className="bg-green-500 text-white px-4 py-2 rounded"
+                          >
+                            Submit
+                          </button>
+                        </DialogTrigger>
+                        {showDialog && (
+                          <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
+                            <div className="flex items-center space-x-2">
+                              <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                                <div className="ai-image">
+                                  <Image
+                                    src="/aipowered2.gif"
+                                    width={500}
+                                    height={500}
+                                    alt="ai"
+                                    className="w-full h-auto"
+                                  />
+                                </div>
+                                <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                                  <p className="text-center mx-auto text-xl">
+                                    Please wait for a moment... <br /> while we
+                                    are generating the personalised test based
+                                    on your input.
+                                  </p>
+                                  <CustomLoader />
+                                </div>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        )}
+                      </Dialog>
+                    </>
+                  )}
+                </div>
+              </section>
+            )}
+            <div className="w-full lg:w-1/3 mt-24">
+              <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-100">
+                <CardHeader className="">
+                  <h1 className="text-4xl font-bold text-blue-950">
+                    Career Counselor Steps
+                  </h1>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-center items-center flex-1 w-full h-full">
+                    <div>
+                      <p className="my-4 font-medium text-center">
+                        Please follow these instructions to provide answers to
+                        the questionnaire:
+                      </p>
+                      <ul className="list-disc pl-6">
+                        <li className="mb-2 py-2 flex items-center font-medium">
+                          <TiTick className="text-green-500 text-2xl mr-2" />
+                          Click on "Start" to start the quiz.
+                        </li>
+                        <li className="mb-2 py-2 flex items-center font-medium">
+                          <TiTick className="text-green-500 text-2xl mr-2" />
+                          Click on "Next" to move to the next question.
+                        </li>
+                        <li className="mb-2 py-2 flex items-center font-medium">
+                          <TiTick className="text-green-500 text-2xl mr-2" />
+                          Click on "Previous" to go back to the previous
+                          question.
+                        </li>
+                        <li className="mb-2 py-2 flex items-center font-medium">
+                          <TiTick className="text-green-500 text-2xl mr-2" />
+                          Fill in your answers in the text area provided for
+                          each question.
+                        </li>
+                        <li className="mb-2 py-2 flex items-center font-medium">
+                          <TiTick className="text-green-500 text-2xl mr-2" />
+                          Once you have answered all questions, click on
+                          "Submit".
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </main>
+        </div>
       </div>
-      <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="outline" className="sm:hidden">
-                <MenuIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs">
-              <nav className="grid gap-6 text-lg font-medium">
-                <Link
-                  href="#"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                  prefetch={false}
-                >
-                  <WebcamIcon className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Back</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                  prefetch={false}
-                >
-                  <BriefcaseIcon className="h-5 w-5" />
-                  Job Cv
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                  prefetch={false}
-                >
-                  <GraduationCapIcon className="h-5 w-5" />
-                  Cv Builder
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                  prefetch={false}
-                >
-                  <CompassIcon className="h-5 w-5" />
-                  Cv Analyser
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                  prefetch={false}
-                >
-                  <ClipboardIcon className="h-5 w-5" />
-                  Report
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
-          <div className="ml-auto flex-1 md:grow-0">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-                  <img
-                    src="/placeholder.svg"
-                    width={36}
-                    height={36}
-                    alt="Avatar"
-                    className="overflow-hidden rounded-full"
-                  />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Jane Doe</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </header>
-        <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
-          <div className="flex-1">
-            <Card className="h-full w-full overflow-hidden">
-              <CardHeader className="flex items-center justify-between border-b bg-muted px-6 py-4">
-                <div className="flex items-center gap-2">
-                  <Avatar className="w-8 h-8 border">
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>CC</AvatarFallback>
-                  </Avatar>
-                  <div className="font-medium">Career Counselor</div>
-                </div>
-
-              </CardHeader>
-              <CardContent className="flex-1 overflow-scroll p-4 h-[70%] no-scrollbar">
-
-                <div className="grid gap-4">
-
-                  <div className="flex items-start gap-4">
-                    <Avatar className="w-8 h-8 border">
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="grid gap-1 rounded-lg bg-muted p-3 text-sm">
-                      <div className="font-medium">Jane Doe</div>
-                      <div>
-                        Hi, I&apos;m looking for some guidance on transitioning to a new career. Can you help me explore my
-                        options?
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4 justify-end">
-                    <div className="grid gap-1 rounded-lg bg-primary p-3 text-sm text-primary-foreground">
-                      <div className="font-medium">Career Counselor</div>
-                      <div>
-                        Absolutely, I&apos;d be happy to help. Let&apos;s start by discussing your current skills and interests.
-                        What kind of work are you most passionate about?
-                      </div>
-                    </div>
-                    <Avatar className="w-8 h-8 border">
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>CC</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Avatar className="w-8 h-8 border">
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div className="grid gap-1 rounded-lg bg-muted p-3 text-sm">
-                      <div className="font-medium">Jane Doe</div>
-                      <div>
-                        Well, I&apos;ve always been interested in technology and problem-solving. I have a background in
-                        marketing, but I&apos;ve been feeling unfulfilled lately.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4 justify-end">
-                    <div className="grid gap-1 rounded-lg bg-primary p-3 text-sm text-primary-foreground">
-                      <div className="font-medium">Career Counselor</div>
-                      <div>
-                        That&apos;s great, technology and problem-solving are valuable skills. Have you considered roles in
-                        software development, product management, or user experience design? Those could be a good fit
-                        based on your interests and background.
-                      </div>
-                    </div>
-                    <Avatar className="w-8 h-8 border">
-                      <AvatarImage src="/placeholder-user.jpg" />
-                      <AvatarFallback>CC</AvatarFallback>
-                    </Avatar>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="border-t bg-muted px-6 py-3">
-                <div className="relative">
-                  <Textarea
-                    placeholder="Type your message..."
-                    name="message"
-                    id="message"
-                    rows={1}
-                    className="min-h-[48px] w-full rounded-2xl resize-none p-4 pr-16 border border-neutral-400 shadow-sm"
-                  />
-                  <Button type="submit" size="icon" className="absolute w-8 h-8 top-3 right-3">
-                    <SendIcon className="h-4 w-4" />
-                    <span className="sr-only">Send</span>
-                  </Button>
-                </div>
-              </CardFooter>
-            </Card>
-          </div>
-          <div className="w-full lg:w-1/3">
-            <Card className="h-full w-full overflow-hidden">
-              <CardHeader className="flex items-center justify-between border-b bg-muted px-6 py-4">
-                <div className="font-medium">Career Counselor</div>
-
-
-
-
-              </CardHeader>
-
-            </Card>
-          </div>
-        </main>
-      </div>
-    </div>
+    </>
   );
 }
 

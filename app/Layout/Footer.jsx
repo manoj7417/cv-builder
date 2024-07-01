@@ -220,10 +220,11 @@ export default function Footer() {
 
                 <li>
                   <a
-                    href="#"
-                    className="text-black transition pointer-events-none"
+                   href="https://www.careergenies.co.uk/blog"
+                    className="text-black transition"
+                    target="_blank"
                   >
-                    Live Chat
+                    Blog
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>

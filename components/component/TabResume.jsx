@@ -119,11 +119,13 @@ export default function TabResume() {
       <div className="">
         <div className="rounded-t-xl p-6">
           <div className="tabs_heading">
-            <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
+            <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-gray-900 text-center">
               Discover CVs that fit your Dream Job
             </h2>
             <p className="w-1/2 mx-auto text-center my-4">
-              Start your journey with Genies Career Hub and unlock the door to a world where your talents are valued and your career dreams become a reality with a personalised and perfectly tailored resume.
+              Start your journey with Genies Career Hub and unlock the door to a
+              world where your talents are valued and your career dreams become
+              a reality with a personalised and perfectly tailored resume.
             </p>
           </div>
           <Tabs

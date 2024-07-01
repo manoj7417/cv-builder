@@ -128,7 +128,7 @@ const Header = () => {
                 Psychometric Test
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 className=" text-blue-950 text-base hover:font-bold"
                 href="https://www.careergenies.co.uk/blog"
@@ -136,7 +136,7 @@ const Header = () => {
               >
                 Blog
               </Link>
-            </li>
+            </li> */}
             {/* Auth buttons  */}
           </ul>
           <ul>
