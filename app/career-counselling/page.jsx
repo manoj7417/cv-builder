@@ -41,76 +41,17 @@ import {
 import Image from "next/image";
 import CustomLoader from "../ui/CustomLoader";
 import "./CareerCounselling.css";
+import UserData from "./UserData";
 
 export default function Page() {
-  // const [categoryIndex, setCategoryIndex] = useState(0);
-  // const [questionIndex, setQuestionIndex] = useState(1);
-  // const [isOpen, setIsOpen] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  // const [answers, setAnswers] = useState({
-  //   "Current Pursuits and Activities": [
-  //     {
-  //       question:
-  //         "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
-  //       answer: "",
-  //       type: "input", // Example: input type
-  //     },
-  //     { question: "What is your highest level of education?", answer: "", type: "input" },
-  //     {
-  //       question: "Which subjects or areas do you feel most confident in?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question:
-  //         "Can you share any notable achievements or activities you have participated in recently?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Hobbies and Interests": [
-  //     {
-  //       question: "What hobbies or activities do you enjoy in your free time?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question:
-  //         "Are there any subjects or topics you are particularly passionate about?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Strengths and Weaknesses": [
-  //     {
-  //       question:
-  //         "What do you consider to be your greatest strengths or skills?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question: "Are there any areas where you feel you need improvement?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Career Aspirations": [
-  //     { question: "What are your career goals or aspirations?", answer: "", type: "input" },
-  //     {
-  //       question: "Is there a specific career path you are interested in?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Location and Age": [
-  //     { question: "Which country do you currently reside in?", answer: "", type: "input" },
-  //     { question: "How old are you?", answer: "", type: "input" },
-  //   ],
-  // });
-
+  const [userData,setUserData] = useState(false)
+  
+  
+//api response data
   const [answers, setAnswers] = useState({
     "Current Pursuits and Activities": [
       {
@@ -302,7 +243,7 @@ export default function Page() {
                 </div>
               </div>
             )}
-            {!showIntro && (
+            { userData ? (!showIntro && <UserData/>) : ( !showIntro &&
               <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24 ">
                 <div className="space-y-4">
                   <h2 className="text-4xl font-semibold">
