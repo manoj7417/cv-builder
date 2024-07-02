@@ -72,7 +72,7 @@ export default function HomepageNew() {
     margin: 0,
   };
 
-  const words = ["Create ", "Optimize ", "Match "]; // Add more words as needed
+  const words = ["Create ", "Optimise ", "Match "]; // Add more words as needed
   const interval = 3000; // 2000ms or 2 seconds for each word
   const [index, setIndex] = useState(0);
 
