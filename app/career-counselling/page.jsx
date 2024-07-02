@@ -237,12 +237,6 @@ export default function Page() {
     });
   };
 
-  // const handleNext = () => {
-  //   window.scrollTo(0, 0);
-  //   if (currentStep < categories.length - 1) {
-  //     setCurrentStep((prevStep) => prevStep + 1);
-  //   }
-  // };
 
   const handleNext = () => {
     window.scrollTo(0, 0);
@@ -258,12 +252,6 @@ export default function Page() {
     }
   };
 
-  // const handlePrevious = () => {
-  //   window.scrollTo(0, 0);
-  //   if (currentStep > 0) {
-  //     setCurrentStep((prevStep) => prevStep - 1);
-  //   }
-  // };
 
   const handlePrevious = () => {
     setCurrentStep((prevStep) => prevStep - 1);
@@ -450,15 +438,15 @@ export default function Page() {
                       <ul className="list-disc pl-6">
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on  <span className="font-bold">Start</span> to start the quiz.
+                          Click on  <span className="font-bold mx-2">Start</span> to start the quiz.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold"> Next</span> to move to the next question.
+                          Click on <span className="font-bold mx-2"> Next</span> to move to the next question.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold">Previous</span> to go back to the previous
+                          Click on <span className="font-bold mx-2">Previous</span> to go back to the previous
                           question.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
@@ -469,7 +457,7 @@ export default function Page() {
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
                           Once you have answered all questions, click on
-                          "Submit".
+                          <span className="font-bold mx-2">Submit.</span>
                         </li>
                       </ul>
                     </div>
