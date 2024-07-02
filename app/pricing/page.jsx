@@ -9,6 +9,10 @@ import { useUserStore } from "../store/UserStore";
 import Header from "../Layout/Header";
 
 import { Switch } from "@headlessui/react";
+import { GetTokens } from "../actions";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { UpgradePricing } from "../api/api";
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
 });
@@ -16,6 +20,30 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 const Pricing = () => {
   const [enabled, setEnabled] = useState(true);
   const userState = useUserStore((state) => state.userState);
+  const router = useRouter();
+
+  const UpgradePlan = async (plan) => {
+    const { accessToken } = await GetTokens()
+    if (!accessToken) {
+      return router.push('/login?redirect=pricing')
+    }
+    const data = {
+      email: userState?.userdata?.email,
+      plan,
+      success_url: 'http://localhost:3000/paymentSuccess',
+      cancel_url: window.location.href,
+      duration: enabled ? 'yearly' : 'monthly'
+    }
+    try {
+      const response = await UpgradePricing(data, accessToken.value)
+      const { stripeCheckoutUrl } = response.data;
+      if (stripeCheckoutUrl) {
+        router.replace(stripeCheckoutUrl)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -46,14 +74,12 @@ const Pricing = () => {
                 <Switch
                   checked={enabled}
                   onChange={setEnabled}
-                  className={`${
-                    enabled ? "bg-indigo-600" : "bg-gray-200"
-                  } relative inline-flex items-center h-6 rounded-full w-11`}
+                  className={`${enabled ? "bg-indigo-600" : "bg-gray-200"
+                    } relative inline-flex items-center h-6 rounded-full w-11`}
                 >
                   <span
-                    className={`${
-                      enabled ? "translate-x-6" : "translate-x-1"
-                    } inline-block w-4 h-4 transform bg-white rounded-full`}
+                    className={`${enabled ? "translate-x-6" : "translate-x-1"
+                      } inline-block w-4 h-4 transform bg-white rounded-full`}
                   />
                 </Switch>
                 <span className="ml-2 text-sm font-medium text-gray-700">
@@ -116,10 +142,10 @@ const Pricing = () => {
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹1671.6" : "₹199"}
+                    {enabled ? "₹3351.6" : "₹399"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹2388
+                        ₹4788
                       </span>
                     )}
                   </p>
@@ -160,7 +186,7 @@ const Pricing = () => {
                       No career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
+                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md" onClick={() => UpgradePlan('basic')}>
                     Upgrade Now!
                   </button>
                 </div>
@@ -173,7 +199,7 @@ const Pricing = () => {
                     {enabled ? "₹8,391.6" : "₹999"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹4788
+                        ₹11988
                       </span>
                     )}
                   </p>
@@ -215,7 +241,7 @@ const Pricing = () => {
                       Unlimited career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
+                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md" onClick={() => UpgradePlan('premium')}>
                     Upgrade Now!
                   </button>
                 </div>
