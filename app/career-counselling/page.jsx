@@ -237,12 +237,6 @@ export default function Page() {
     });
   };
 
-  // const handleNext = () => {
-  //   window.scrollTo(0, 0);
-  //   if (currentStep < categories.length - 1) {
-  //     setCurrentStep((prevStep) => prevStep + 1);
-  //   }
-  // };
 
   const handleNext = () => {
     window.scrollTo(0, 0);
@@ -258,12 +252,6 @@ export default function Page() {
     }
   };
 
-  // const handlePrevious = () => {
-  //   window.scrollTo(0, 0);
-  //   if (currentStep > 0) {
-  //     setCurrentStep((prevStep) => prevStep - 1);
-  //   }
-  // };
 
   const handlePrevious = () => {
     setCurrentStep((prevStep) => prevStep - 1);
