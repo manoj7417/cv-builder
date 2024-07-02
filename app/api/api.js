@@ -144,7 +144,7 @@ export const printResume = async (html, token) => {
   try {
     const response = await fetch(`${baseURL}/api/print/resume`, {
       method: "POST",
-      body: JSON.stringify({ html }),
+      body: JSON.stringify(html),
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
