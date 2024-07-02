@@ -53,7 +53,7 @@ export default function CourseSlider() {
           <span className="font-bold text-[#2C98CA]"> Genies Pro Studio</span>
         </h2>
         <p className="text-base mt-3">
-          Our AI-driven Genie CV Pro Studio is a comprehensive suite of three
+          Our AI-driven Genies CV Pro Studio is a comprehensive suite of three
           pioneering, revolutionary tools. It’s your personal career coach.
           Broaden your professional journey with triple dynamics, the CV
           Creator, the CV Optimiser, and the CV Match.
