@@ -312,7 +312,7 @@ export default function Home() {
                         drag and drop
                       </p>
                       <p class="text-xs text-gray-500 dark:text-gray-400">
-                        SVG, PNG, JPG or GIF (MAX. 800x400px)
+                        PDF
                       </p>
                     </div>
                     <input
@@ -324,7 +324,6 @@ export default function Home() {
                     />
                   </label>
                 </div>
-
                 <div
                   className="flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   onClick={handleOpenMultiStepForm}
