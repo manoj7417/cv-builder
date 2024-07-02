@@ -450,15 +450,15 @@ export default function Page() {
                       <ul className="list-disc pl-6">
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on "Start" to start the quiz.
+                          Click on  <span className="font-bold">Start</span> to start the quiz.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on "Next" to move to the next question.
+                          Click on <span className="font-bold"> Next</span> to move to the next question.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on "Previous" to go back to the previous
+                          Click on <span className="font-bold">Previous</span> to go back to the previous
                           question.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
