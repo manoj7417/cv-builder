@@ -70,11 +70,11 @@ const Page = () => {
                   apps”), services, tools and other applications that link to
                   this notice (collectively, the “Site”). This Cookie and
                   Tracking Technology Policy governs your consent to our, as
-                  well as third-party partners' and vendors' use, of a variety
+                  well as third-party partners and vendors use, of a variety
                   of cookies and tracking technologies. You can find out more
                   about these types of technology and how to control them in the
                   information below. This Cookie and Tracking Technology Policy
-                  forms part of the Provider's Privacy Policy, available
+                  forms part of the Providers Privacy Policy, available
                   at&nbsp;
                 </span>
                 <strong>
@@ -573,7 +573,7 @@ const Page = () => {
                           >
                             Used to track visitors on multiple websites, in
                             order to present relevant advertisements based on
-                            the visitor's preferences.
+                            the visitors preferences.
                           </span>
                         </p>
                       </td>
@@ -720,7 +720,7 @@ const Page = () => {
                           <span
                             style={{ color: "rgb(0, 0, 0)", fontSize: "9pt" }}
                           >
-                            Analytics cookie that's used to pass user action
+                            Analytics cookie thats used to pass user action
                             information to the Bing advertising network.
                           </span>
                         </p>
@@ -1365,8 +1365,8 @@ const Page = () => {
                           >
                             Used by Google AdSense for experimenting with
                             advertisement efficiency across websites using their
-                            services. It’s the first-party cookie for
-                            'Conversion Linker' functionality – it takes
+                            services. Its the first-party cookie for
+                            Conversion Linker functionality it takes
                             information in ad clicks and stores it in a
                             first-party cookie so that conversions can be
                             attributed outside the landing page.
@@ -2079,7 +2079,7 @@ const Page = () => {
                             style={{ color: "rgb(0, 0, 0)", fontSize: "9pt" }}
                           >
                             This cookie is used by the mixpanel to capture the
-                            user's traits/properties.
+                            users traits/properties.
                           </span>
                         </p>
                       </td>
@@ -2364,7 +2364,7 @@ const Page = () => {
                             style={{ color: "rgb(0, 0, 0)", fontSize: "9pt" }}
                           >
                             This cookie is created and maintained by accounts
-                            for user's claim (encrypted).
+                            for users claim (encrypted).
                           </span>
                         </p>
                       </td>
@@ -3553,7 +3553,7 @@ const Page = () => {
                             style={{ color: "rgb(0, 0, 0)", fontSize: "9pt" }}
                           >
                             This cookie is created and maintained by accounts
-                            for user's info.
+                            for users info.
                           </span>
                         </p>
                       </td>
@@ -3647,7 +3647,7 @@ const Page = () => {
                           <span
                             style={{ color: "rgb(0, 0, 0)", fontSize: "9pt" }}
                           >
-                            Created by visitor service for the visitor's info.
+                            Created by visitor service for the visitors info.
                           </span>
                         </p>
                       </td>
@@ -3694,7 +3694,7 @@ const Page = () => {
                           <span
                             style={{ color: "rgb(0, 0, 0)", fontSize: "9pt" }}
                           >
-                            Created by visitor service for the visitor's session
+                            Created by visitor service for the visitors session
                             ID.
                           </span>
                         </p>
