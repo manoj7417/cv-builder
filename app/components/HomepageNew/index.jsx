@@ -72,7 +72,7 @@ export default function HomepageNew() {
     margin: 0,
   };
 
-  const words = ["Create ", "Optimize ", "Match "]; // Add more words as needed
+  const words = ["Create ", "Optimise ", "Match "]; // Add more words as needed
   const interval = 3000; // 2000ms or 2 seconds for each word
   const [index, setIndex] = useState(0);
 
@@ -124,7 +124,7 @@ export default function HomepageNew() {
               </h1>
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
                
-                <span className="2xl:ml-3 lg:ml-1">that Stand Out</span>
+                <span className="2xl:ml-3 lg:ml-1">That Stand Out</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
                 We believe in bridging the gap between your aspirations and the

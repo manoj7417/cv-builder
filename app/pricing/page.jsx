@@ -59,7 +59,7 @@ const Pricing = () => {
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
                   Pricing Page
                 </h2>
-                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
                   Our pricing is simple with no hidden fees
                 </p>
                 <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
@@ -196,7 +196,7 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹3,351.6" : "₹399"}
+                    {enabled ? "₹8,391.6" : "₹999"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
                         ₹4788
@@ -244,6 +244,49 @@ const Pricing = () => {
                   <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md" onClick={() => UpgradePlan('premium')}>
                     Upgrade Now!
                   </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        className="flex lg:items-center items-start pb-0 justify-center  w-full   px-5 relative"
+        id="premium"
+      >
+        <div className="container lg:pt-0 pt-20">
+          <div className="flex  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className=" flex items-center justify-center py-12">
+              <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
+                <div className="md:w-[60%]  w-full text-center md:text-left mb-8 md:mb-0">
+                  <h1 className="text-4xl font-bold mb-4">
+                    Looking for an enterprise solution?Contact us for the
+                    enterprise version!
+                  </h1>
+                  <p className="text-gray-700 mb-6">
+                    Looking for an enterprise solution? Our CV builder offers
+                    tailored features and robust capabilities designed
+                    specifically to meet the needs of large organizations. .
+                    Dont miss out on the opportunity to leverage our premium
+                    solutions tailored for enterprise success!
+                  </p>
+                  <div className="flex justify-center md:justify-start space-x-4">
+                    {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
+                      WATCH VIDEO
+                    </button> */}
+                    <a href="/contact-us">
+                      <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
+                        Contact Us
+                      </button>
+                    </a>
+                  </div>
+                </div>
+                <div className="md:w-[40%] w-full flex justify-center md:justify-end">
+                  <img
+                    src="/enterprise.webp"
+                    alt="AI Assessment"
+                    className="w-full "
+                  />
                 </div>
               </div>
             </div>
@@ -439,11 +482,11 @@ const Pricing = () => {
                 ></path>
               </svg>
             </div>
-            <div className="relative max-w-7xl z-10 flex flex-col md:flex-row justify-around items-center">
-              <div className="text-center md:text-left">
+            <div className="relative  z-10 flex flex-col md:flex-row justify-center items-center">
+              <div className="text-center">
                 <h2 className="text-4xl font-extrabold mb-4">
-                  Start your <span className="text-green-500">7-day</span> free
-                  trial
+                  Start your <span className="text-green-500">Journey</span>{" "}
+                  Today!
                 </h2>
                 <p className="text-lg">From 300+ Customer Reviews</p>
                 <div className="mt-4">
@@ -451,25 +494,6 @@ const Pricing = () => {
                     Get Started
                   </button>
                 </div>
-              </div>
-              <div className="mt-8 md:mt-0 text-center md:text-left">
-                <h3 className="text-lg font-bold text-green-500 mb-2">
-                  LETS TRY!
-                </h3>
-                <ul className="space-y-2">
-                  <li>
-                    <span className="text-green-500">&#10003;</span> Free 7-day
-                    trial
-                  </li>
-                  <li>
-                    <span className="text-green-500">&#10003;</span> No credit
-                    card required
-                  </li>
-                  <li>
-                    <span className="text-green-500">&#10003;</span> Cancel
-                    anytime
-                  </li>
-                </ul>
               </div>
             </div>
           </div>

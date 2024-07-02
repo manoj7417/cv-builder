@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 
-const protectedRoutes = ['/resume-builder', '/analyser/feedback', '/user-history', '/user-profile', '/career-counselling'];
+const protectedRoutes = ['/resume-builder', '/analyser/feedback', '/user-history', '/user-profile', '/career-counselling','/mcq'];
 
 export const config = {
   matcher: [
