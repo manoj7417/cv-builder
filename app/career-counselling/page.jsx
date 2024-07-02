@@ -48,7 +48,7 @@ export default function Page() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const [userData,setUserData] = useState(false)
+  const [userData,setUserData] = useState(true)
   
   
 //api response data
