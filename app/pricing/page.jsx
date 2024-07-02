@@ -142,10 +142,10 @@ const Pricing = () => {
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹1671.6" : "₹199"}
+                    {enabled ? "₹3351.6" : "₹399"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹2388
+                        ₹4788
                       </span>
                     )}
                   </p>
@@ -199,7 +199,7 @@ const Pricing = () => {
                     {enabled ? "₹8,391.6" : "₹999"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹4788
+                        ₹11988
                       </span>
                     )}
                   </p>
