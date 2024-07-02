@@ -19,6 +19,7 @@ import { useUserStore } from '@/app/store/UserStore'
 import { useResumeStore } from '@/app/store/ResumeStore'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import axios from 'axios'
 
 
 function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole }) {
@@ -369,7 +370,9 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                 return response.data;
             }
         } catch (error) {
-            console.error(error);
+            if (error.response.status === 400 && error.response.data.error === "Insufficient optimizer tokens") {
+                router.push('/pricing')
+            }
         }
     };
 
@@ -385,7 +388,6 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             }
         } catch (error) {
             console.log(error)
-            toast.error("Unable to  generate your CV");
         } finally {
             handleCloseMultistepForm()
         }

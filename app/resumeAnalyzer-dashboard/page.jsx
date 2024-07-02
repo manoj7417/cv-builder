@@ -30,13 +30,14 @@ export default function DashboardIdea() {
   const userState = useUserStore((state) => state.userState);
   const router = useRouter()
 
-
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens()
     if (!accessToken) {
       toast("Please login to use this template")
-      router.push("/login?redirect=/resumeAnalyzer-dashboard")
-      return;
+      return router.push("/login?redirect=/resumeAnalyzer-dashboard")
+    }
+    if (userState.userdata.subscription.status !== 'Active') {
+      return router.push('/pricing')
     }
     let selectedFile = e.target.files[0];
     if (selectedFile.type !== "application/pdf")
@@ -53,7 +54,7 @@ export default function DashboardIdea() {
           return;
         }
         localStorage.setItem("newResumeContent", text);
-        await getFeedback(text);
+        await getFeedback(text, accessToken.value);
       } catch (error) {
       } finally {
         setIsAnalysing(false);
@@ -61,15 +62,18 @@ export default function DashboardIdea() {
     };
   };
 
-  const getFeedback = async (message) => {
+  const getFeedback = async (message, token) => {
     try {
-      const response = await AnalyzeAts(message);
+      const response = await AnalyzeAts(message, token);
       const value = JSON.parse(response[0].text.value);
       if (value.analysis.resume_score) {
         localStorage.setItem("feedback", JSON.stringify(value));
         router.push("/analyser/feedback");
       }
     } catch (error) {
+      if (error.response.status === 400 && error.response.data.error === "Insufficient tokens") {
+        router.push('/pricing')
+      }
     } finally {
       setIsAnalysing(false);
     }

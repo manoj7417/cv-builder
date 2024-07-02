@@ -9,12 +9,15 @@ import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { RemoveTokens } from "../actions";
+import { toast } from "react-toastify";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { userState } = useUserStore((state) => state);
+  const logoutUser = useUserStore(state => state.logoutUser)
   const [isContentVisible, setIsContentVisible] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =

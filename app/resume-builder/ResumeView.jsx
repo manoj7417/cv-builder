@@ -45,6 +45,7 @@ import Loader5 from "@/public/animations/downloadLoader5.json";
 import { funfacts } from "@/constants/funfacts";
 // import ResumeTooltip from "@/components/component/ResumeTooltip";
 import dynamic from "next/dynamic";
+import axios from "axios";
 const ResumeTooltip = dynamic(
   () => import("@/components/component/ResumeTooltip"),
   { ssr: false }
@@ -217,8 +218,8 @@ const ResumeView = ({ setIsContentVisible }) => {
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
-  const logoutUser = useUserStore((state) => state.logoutUser);
   const { userState } = useUserStore((state) => state);
+  const { userdata } = useUserStore(state => state.userState)
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
@@ -229,14 +230,6 @@ const ResumeView = ({ setIsContentVisible }) => {
     canRedo: state.canRedo,
   }));
 
-  const handleLogout = async () => {
-    await RemoveTokens();
-    toast.success("User logout successfully", {
-      position: "top-right",
-    });
-    logoutUser();
-    router.push("/");
-  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -266,32 +259,42 @@ const ResumeView = ({ setIsContentVisible }) => {
         window.location = url;
       })
       .catch((error) => {
-        toast.error("Template already purchased")
         console.error(
           error.response ? error.response.data.error : error.message
         );
       });
   };
 
+
+  const TemplateCheck = async (templateName, token) => {
+    try {
+      const response = await axios.post('/api/checkUserTemplate', { templateName }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      if (response.status === 200) {
+        return true
+      }
+    } catch (error) {
+      throw new Error(error.response.data.message)
+    }
+  }
+
   const checkUserTemplate = async () => {
-    const templateType = TempTypes.find(
-      (template) => template?.name === resumeData?.metadata?.template
-    );
-    await handlepayment(templateType?.type);
-    return;
-    setIsLoading(true);
-    const temp = resumeData?.metadata?.template;
-    const userHasTemplate =
-      userState?.userdata?.premiumTemplates?.includes(temp);
-    if (!userHasTemplate) {
-      await handlepayment(templateType?.type);
+    const { accessToken } = await GetTokens()
+    const templateName = resumeData.metadata.template;
+    if (!userdata?.subscription.status) {
+      return router.push('/login')
+    }
+    if (userdata.subscription.status !== 'Active') {
+      return router.push('/pricing')
     } else {
-      setIsLoading(true);
-      handleDownloadResume();
+      handleDownloadResume(accessToken.value)
     }
   };
 
-  const handleDownloadResume = async () => {
+  const handleDownloadResume = async (token) => {
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
     const body = {
@@ -300,7 +303,7 @@ const ResumeView = ({ setIsContentVisible }) => {
     setIsLoading(true);
 
     try {
-      const response = await printResume(body);
+      const response = await printResume(body, token);
       if (response.ok) {
         generateFunfact();
         const blob = await response.blob();
@@ -315,7 +318,8 @@ const ResumeView = ({ setIsContentVisible }) => {
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
+      toast.error("Something went wrong")
     } finally {
       setIsLoading(false);
     }
@@ -506,7 +510,6 @@ const ResumeView = ({ setIsContentVisible }) => {
                 onClick={checkUserTemplate}
                 disabled={isLoading}
               >
-
                 <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
