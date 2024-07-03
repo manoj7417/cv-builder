@@ -23,27 +23,27 @@ const Pricing = () => {
   const router = useRouter();
 
   const UpgradePlan = async (plan) => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     if (!accessToken) {
-      return router.push('/login?redirect=pricing')
+      return router.push("/login?redirect=pricing");
     }
     const data = {
       email: userState?.userdata?.email,
       plan,
-      success_url: 'http://localhost:3000/paymentSuccess',
+      success_url: "http://localhost:3000/paymentSuccess",
       cancel_url: window.location.href,
-      duration: enabled ? 'yearly' : 'monthly'
-    }
+      duration: enabled ? "yearly" : "monthly",
+    };
     try {
-      const response = await UpgradePricing(data, accessToken.value)
+      const response = await UpgradePricing(data, accessToken.value);
       const { stripeCheckoutUrl } = response.data;
       if (stripeCheckoutUrl) {
-        router.replace(stripeCheckoutUrl)
+        router.replace(stripeCheckoutUrl);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -57,13 +57,14 @@ const Pricing = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
-                  Pricing Page
+                  Our Pricing
                 </h2>
-                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-                  Our pricing is simple with no hidden fees
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+                  Simple Pricing, Easy Access, Better Career!
                 </p>
                 <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                  Pricing plans for businesses at every stage of growth.
+                  Our simple pricing with secured payment measures ensures
+                  accessing the dream career has never been easier.
                 </p>
               </div>
 
@@ -74,12 +75,14 @@ const Pricing = () => {
                 <Switch
                   checked={enabled}
                   onChange={setEnabled}
-                  className={`${enabled ? "bg-indigo-600" : "bg-gray-200"
-                    } relative inline-flex items-center h-6 rounded-full w-11`}
+                  className={`${
+                    enabled ? "bg-indigo-600" : "bg-gray-200"
+                  } relative inline-flex items-center h-6 rounded-full w-11`}
                 >
                   <span
-                    className={`${enabled ? "translate-x-6" : "translate-x-1"
-                      } inline-block w-4 h-4 transform bg-white rounded-full`}
+                    className={`${
+                      enabled ? "translate-x-6" : "translate-x-1"
+                    } inline-block w-4 h-4 transform bg-white rounded-full`}
                   />
                 </Switch>
                 <span className="ml-2 text-sm font-medium text-gray-700">
@@ -186,7 +189,10 @@ const Pricing = () => {
                       No career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md" onClick={() => UpgradePlan('basic')}>
+                  <button
+                    className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                    onClick={() => UpgradePlan("basic")}
+                  >
                     Upgrade Now!
                   </button>
                 </div>
@@ -241,7 +247,10 @@ const Pricing = () => {
                       Unlimited career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md" onClick={() => UpgradePlan('premium')}>
+                  <button
+                    className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                    onClick={() => UpgradePlan("premium")}
+                  >
                     Upgrade Now!
                   </button>
                 </div>
@@ -260,15 +269,14 @@ const Pricing = () => {
               <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
                 <div className="md:w-[60%]  w-full text-center md:text-left mb-8 md:mb-0">
                   <h1 className="text-4xl font-bold mb-4">
-                    Looking for an enterprise solution?Contact us for the
-                    enterprise version!
+                    Want to try out our Business Model Services? Connect with us
+                    Today!
                   </h1>
                   <p className="text-gray-700 mb-6">
-                    Looking for an enterprise solution? Our CV builder offers
-                    tailored features and robust capabilities designed
-                    specifically to meet the needs of large organizations. .
-                    Dont miss out on the opportunity to leverage our premium
-                    solutions tailored for enterprise success!
+                    Want to integrate our services into your enterprise? Contact
+                    us today and subscribe to the set of services personalised
+                    for your relevance and requirements at appropriate pricing
+                    solutions.
                   </p>
                   <div className="flex justify-center md:justify-start space-x-4">
                     {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">

@@ -520,12 +520,6 @@ const Page = () => {
                             {tool.title}
                           </h3>
                           <p className="mb-4">{tool.description}</p>
-                          <a
-                            href={tool.link}
-                            className="text-indigo-600 font-semibold"
-                          >
-                            {tool.linkText} &rarr;
-                          </a>
                         </div>
                       ))}
                     </div>
@@ -548,12 +542,6 @@ const Page = () => {
                             {tool.title}
                           </h3>
                           <p className="mb-4">{tool.description}</p>
-                          <a
-                            href={tool.link}
-                            className="text-indigo-600 font-semibold"
-                          >
-                            {tool.linkText} &rarr;
-                          </a>
                         </div>
                       ))}
                     </div>
