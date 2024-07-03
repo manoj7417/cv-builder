@@ -28,7 +28,7 @@ export const updateUserProfile = async (data, token) => {
 
 export const getCareerCounselling = async (data,token) => {
   try{
-    const response = await instance.post('/openai/aicounselling', data, {
+    const response = await instance.post('/openai/generateCounsellingTest', data, {
       headers: {
         Authorization: `Bearer ${token}`
       }
