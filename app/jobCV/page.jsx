@@ -202,7 +202,7 @@ export default function Home() {
         if (data) {
           replaceResumeData(data);
           updateUserData(userData);
-          router.push("/resume-builder");
+          return router.push("/resume-builder");
         }
       } catch (error) {
         toast.error("Unable to generate your CV");

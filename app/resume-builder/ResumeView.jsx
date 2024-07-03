@@ -229,6 +229,7 @@ const ResumeView = ({ setIsContentVisible }) => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
+  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
 
 
   const handleClickOutside = (event) => {
@@ -288,6 +289,7 @@ const ResumeView = ({ setIsContentVisible }) => {
       return router.push('/login')
     }
     if (userdata.subscription.status !== 'Active') {
+      updateRedirectPricingRoute('resume-builder')
       return router.push('/pricing')
     } else {
       handleDownloadResume(accessToken.value)

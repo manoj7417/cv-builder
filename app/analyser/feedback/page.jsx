@@ -49,6 +49,8 @@ const FeedbackFuction = () => {
   const [formData, setFormData] = useState(initialState);
   const [showMultiStepDialog, setshowMultiStepDialog] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
+
   const fetchBetterResume = async () => {
     const { accessToken } = await GetTokens();
     const message = localStorage.getItem('newResumeContent')
@@ -65,6 +67,7 @@ const FeedbackFuction = () => {
       }
     } catch (error) {
       if (error.response.status === 400 && error.response.data.error === "Insufficient optimizer tokens") {
+        updateRedirectPricingRoute('analyser/feedback')
         router.push('/pricing')
       }
     } finally {

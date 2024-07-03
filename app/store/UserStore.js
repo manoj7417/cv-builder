@@ -5,7 +5,7 @@ const myMiddlewares = (f) => devtools(persist(f, { name: 'auth' }))
 export const useUserStore = create(
     myMiddlewares(
         (set) => ({
-            userState: { isAuthenticated: false, userdata: null, resumes: [] },
+            userState: { isAuthenticated: false, userdata: null, resumes: [], pricingRedirectRoute: null },
             loginUser: (userdata) => set((state) => ({
                 userState: { isAuthenticated: true, userdata: userdata, resumes: [] }
             })),
@@ -57,6 +57,12 @@ export const useUserStore = create(
                 userState: {
                     ...state.userState,
                     userdata: newUserData
+                }
+            })),
+            updateRedirectPricingRoute: (route) => set((state) => ({
+                userState: {
+                    ...state.userState,
+                    pricingRedirectRoute: route
                 }
             }))
         })
