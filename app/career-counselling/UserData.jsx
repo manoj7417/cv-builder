@@ -13,7 +13,7 @@ import Image from "next/image";
 import { GetTokens } from "../actions";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-export default function UserData({ setAnswers,setUserData }) {
+export default function UserData({ setAnswers, setUserData }) {
   const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
@@ -100,27 +100,35 @@ export default function UserData({ setAnswers,setUserData }) {
 
   const transformApiResponse = (apiResponse) => {
     // Transform the API response to match the expected structure
-    console.log("apiResponse:::",apiResponse?.data)
+    console.log("apiResponse:::", apiResponse?.data);
     const transformedResponse = {
-      "Career Aptitude Assessment": apiResponse?.data?.["Career Aptitude Assessment"].map((q) => ({
+      "Career Aptitude Assessment": apiResponse?.data?.[
+        "Career Aptitude Assessment"
+      ].map((q) => ({
         question: q.question,
         options: q.options || [],
         answer: "",
         type: q.type,
       })),
-      "Interest Inventory": apiResponse?.data?.["Interest Inventory"].map((q) => ({
+      "Interest Inventory": apiResponse?.data?.["Interest Inventory"].map(
+        (q) => ({
+          question: q.question,
+          options: q.options || [],
+          answer: "",
+          type: q.type,
+        })
+      ),
+      "Personality Assessment": apiResponse?.data?.[
+        "Personality Assessment"
+      ].map((q) => ({
         question: q.question,
         options: q.options || [],
         answer: "",
         type: q.type,
       })),
-      "Personality Assessment": apiResponse?.data?.["Personality Assessment"].map((q) => ({
-        question: q.question,
-        options: q.options || [],
-        answer: "",
-        type: q.type,
-      })),
-      "Values and Motivations": apiResponse?.data?.["Values and Motivations"].map((q) => ({
+      "Values and Motivations": apiResponse?.data?.[
+        "Values and Motivations"
+      ].map((q) => ({
         question: q.question,
         options: q.options || [],
         answer: "",
@@ -174,7 +182,7 @@ export default function UserData({ setAnswers,setUserData }) {
         const data = await getCareerCounselling(bioData, token);
         const transformedResponse = transformApiResponse(data);
         setAnswers(transformedResponse); // Update answers in the parent component
-        setUserData(false)
+        setUserData(false);
       } catch (error) {
         console.error("Error submitting form:", error);
       } finally {
@@ -250,31 +258,27 @@ export default function UserData({ setAnswers,setUserData }) {
                 </DialogTrigger>
                 {showDialog && (
                   <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                    <DialogHeader>
-                      <DialogTitle>
-                        <div className="flex items-center space-x-2">
-                          <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
-                            <div className="ai-image">
-                              <Image
-                                src="/aipowered2.gif"
-                                width={500}
-                                height={500}
-                                alt="ai"
-                                className="w-full h-auto"
-                              />
-                            </div>
-                            <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
-                              <p className="text-center mx-auto text-xl">
-                                Please wait for a moment... <br /> while we are
-                                generating the personalised test based on your
-                                input.
-                              </p>
-                              <CustomLoader />
-                            </div>
-                          </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                        <div className="ai-image">
+                          <Image
+                            src="/aipowered2.gif"
+                            width={500}
+                            height={500}
+                            alt="ai"
+                            className="w-full h-auto"
+                          />
                         </div>
-                      </DialogTitle>
-                    </DialogHeader>
+                        <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                          <p className="text-center mx-auto text-xl">
+                            Please wait for a moment... <br /> while we are
+                            generating the personalised test based on your
+                            input.
+                          </p>
+                          <CustomLoader />
+                        </div>
+                      </div>
+                    </div>
                   </DialogContent>
                 )}
               </Dialog>

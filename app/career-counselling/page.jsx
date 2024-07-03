@@ -196,7 +196,7 @@ export default function Page() {
     setIsValid(false);
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     if (
       answers[categories[currentStep]].every(
         (questionObj) => questionObj.answer.trim() !== ""
@@ -207,18 +207,18 @@ export default function Page() {
         const { accessToken } = await GetTokens();
         const token = accessToken.value;
 
-         // Transform answers into the format expected by the API
-      const content = categories.flatMap((category) =>
-        answers[category].map((questionObj) => ({
-          question: questionObj.question,
-          answer: questionObj.answer,
-        }))
-      )
+        // Transform answers into the format expected by the API
+        const content = categories.flatMap((category) =>
+          answers[category].map((questionObj) => ({
+            question: questionObj.question,
+            answer: questionObj.answer,
+          }))
+        );
         const data = await generateCareerAdvice(content, token);
-        console.log("Answers data::",data);
+        console.log("Answers data::", data);
         setApiResponse(data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
       // setApiResponse(data);
       setUserData(false);
@@ -355,32 +355,27 @@ export default function Page() {
                             </DialogTrigger>
                             {showDialog && (
                               <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                                <DialogHeader>
-                                  <DialogTitle>
-                                    <div className="flex items-center space-x-2">
-                                      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
-                                        <div className="ai-image">
-                                          <Image
-                                            src="/aipowered2.gif"
-                                            width={500}
-                                            height={500}
-                                            alt="ai"
-                                            className="w-full h-auto"
-                                          />
-                                        </div>
-                                        <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
-                                          <p className="text-center mx-auto text-xl">
-                                            Please wait for a moment... <br />{" "}
-                                            while we are generating the
-                                            personalised test based on your
-                                            input.
-                                          </p>
-                                          <CustomLoader />
-                                        </div>
-                                      </div>
+                                <div className="flex items-center space-x-2">
+                                  <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                                    <div className="ai-image">
+                                      <Image
+                                        src="/aipowered2.gif"
+                                        width={500}
+                                        height={500}
+                                        alt="ai"
+                                        className="w-full h-auto"
+                                      />
                                     </div>
-                                  </DialogTitle>
-                                </DialogHeader>
+                                    <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                                      <p className="text-center mx-auto text-xl">
+                                        Please wait for a moment... <br /> while
+                                        we are generating the personalised test
+                                        based on your input.
+                                      </p>
+                                      <CustomLoader />
+                                    </div>
+                                  </div>
+                                </div>
                               </DialogContent>
                             )}
                           </Dialog>
