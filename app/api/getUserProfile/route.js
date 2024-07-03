@@ -13,8 +13,10 @@ export async function GET(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: "Error getting user details" }), {
-            status: error.response.status || 500,
+        const status = error.response ? error.response.status : 500;
+        const message = error.response ? error.response.data : { error: "Error getting user details" };
+        return new Response(JSON.stringify(message), {
+            status,
             headers: { 'Content-Type': 'application/json' }
         });
     }

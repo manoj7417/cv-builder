@@ -188,7 +188,7 @@ const Skills = ({ fontStyle }) => {
   const data = useResumeStore((state) => state.resume.data.sections.skills);
   return (
     <div>
-      {data.visible && data.items.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section border-b-2 border-gray-300 py-3">
           <h2
             className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont}`}
@@ -276,7 +276,7 @@ const Certificates = ({ fontStyle }) => {
   );
   return (
     <>
-      {data.visible && data.items.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <div className="border-b-2 border-gray-300 py-3">
           <h2
             className={`text-xl text-gray-600 font-semibold uppercase ${fontStyle.headingFont} break-words`}
@@ -324,7 +324,7 @@ const Awards = ({ fontStyle }) => {
   const data = useResumeStore((state) => state.resume.data.sections.awards);
   return (
     <div className="">
-      {data.visible && data?.items.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <div className="py-3">
           <div className="project_heading flex gap-5 items-center">
             <div className="icon bg-gray-300 p-2">
@@ -380,7 +380,7 @@ const Reference = ({ fontStyle }) => {
   const data = useResumeStore((state) => state.resume.data.sections.reference);
   return (
     <>
-      {data.visible && data?.items.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && (
         <div className="py-3">
           <div className="project_heading flex gap-5 items-center">
             <div className="icon bg-gray-300 p-2">
@@ -448,6 +448,7 @@ export const Template3 = () => {
     skillsFont: "text-15px",
     contactFont: "text-13px",
   });
+  console.log(data);
 
   return (
     <>
