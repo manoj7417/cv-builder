@@ -1,92 +1,134 @@
-'use client';
+"use client";
 import { useState } from "react";
 import { getCareerCounselling } from "../api/api";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import CustomLoader from "../ui/CustomLoader";
 import Image from "next/image";
 import { GetTokens } from "../actions";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
-export default function UserData({ setAnswers }) {
+export default function UserData({ setAnswers,setUserData }) {
   const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
   const [bioData, setBioData] = useState({
-"Current Pursuits and Activities": [
-        {
-          question: "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "What is your highest level of education?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "Which subjects or areas do you feel most confident in?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "Can you share any notable achievements or activities you have participated in recently?",
-          answer: "",
-          type: "input"
-        },
-      ],
-      "Hobbies and Interests": [
-        {
-          question: "What hobbies or activities do you enjoy in your free time?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "Are there any subjects or topics you are particularly passionate about?",
-          answer: "",
-          type: "input"
-        },
-      ],
-      "Strengths and Weaknesses": [
-        {
-          question: "What do you consider to be your greatest strengths or skills?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "Are there any areas where you feel you need improvement?",
-          answer: "",
-          type: "input"
-        },
-      ],
-      "Career Aspirations": [
-        {
-          question: "What are your career goals or aspirations?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "Is there a specific career path you are interested in?",
-          answer: "",
-          type: "input"
-        },
-      ],
-      "Location and Age": [
-        {
-          question: "Which country do you currently reside in?",
-          answer: "",
-          type: "input"
-        },
-        {
-          question: "How old are you?",
-          answer: "",
-          type: "input"
-        },
-      ],
+    "Current Pursuits and Activities": [
+      {
+        question:
+          "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "What is your highest level of education?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "Which subjects or areas do you feel most confident in?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question:
+          "Can you share any notable achievements or activities you have participated in recently?",
+        answer: "",
+        type: "input",
+      },
+    ],
+    "Hobbies and Interests": [
+      {
+        question: "What hobbies or activities do you enjoy in your free time?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question:
+          "Are there any subjects or topics you are particularly passionate about?",
+        answer: "",
+        type: "input",
+      },
+    ],
+    "Strengths and Weaknesses": [
+      {
+        question:
+          "What do you consider to be your greatest strengths or skills?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "Are there any areas where you feel you need improvement?",
+        answer: "",
+        type: "input",
+      },
+    ],
+    "Career Aspirations": [
+      {
+        question: "What are your career goals or aspirations?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "Is there a specific career path you are interested in?",
+        answer: "",
+        type: "input",
+      },
+    ],
+    "Location and Age": [
+      {
+        question: "Which country do you currently reside in?",
+        answer: "",
+        type: "input",
+      },
+      {
+        question: "How old are you?",
+        answer: "",
+        type: "input",
+      },
+    ],
   });
 
   const categories = Object.keys(bioData);
+
+  const transformApiResponse = (apiResponse) => {
+    // Transform the API response to match the expected structure
+    console.log("apiResponse:::",apiResponse?.data)
+    const transformedResponse = {
+      "Career Aptitude Assessment": apiResponse?.data?.["Career Aptitude Assessment"].map((q) => ({
+        question: q.question,
+        options: q.options || [],
+        answer: "",
+        type: q.type,
+      })),
+      "Interest Inventory": apiResponse?.data?.["Interest Inventory"].map((q) => ({
+        question: q.question,
+        options: q.options || [],
+        answer: "",
+        type: q.type,
+      })),
+      "Personality Assessment": apiResponse?.data?.["Personality Assessment"].map((q) => ({
+        question: q.question,
+        options: q.options || [],
+        answer: "",
+        type: q.type,
+      })),
+      "Values and Motivations": apiResponse?.data?.["Values and Motivations"].map((q) => ({
+        question: q.question,
+        options: q.options || [],
+        answer: "",
+        type: q.type,
+      })),
+    };
+    return transformedResponse;
+  };
 
   const handleInputChange = (category, questionIndex, newAnswer) => {
     setBioData((prevAnswers) => {
@@ -127,13 +169,12 @@ export default function UserData({ setAnswers }) {
     ) {
       setShowDialog(true);
       try {
-
-        const {accessToken} = await GetTokens();
+        const { accessToken } = await GetTokens();
         const token = accessToken.value;
-
-        const data = await getCareerCounselling(bioData,token);
-        console.log(data);
-        setAnswers(data); // Update answers in the parent component
+        const data = await getCareerCounselling(bioData, token);
+        const transformedResponse = transformApiResponse(data);
+        setAnswers(transformedResponse); // Update answers in the parent component
+        setUserData(false)
       } catch (error) {
         console.error("Error submitting form:", error);
       } finally {
@@ -209,27 +250,31 @@ export default function UserData({ setAnswers }) {
                 </DialogTrigger>
                 {showDialog && (
                   <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                    <div className="flex items-center space-x-2">
-                      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
-                        <div className="ai-image">
-                          <Image
-                            src="/aipowered2.gif"
-                            width={500}
-                            height={500}
-                            alt="ai"
-                            className="w-full h-auto"
-                          />
+                    <DialogHeader>
+                      <DialogTitle>
+                        <div className="flex items-center space-x-2">
+                          <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                            <div className="ai-image">
+                              <Image
+                                src="/aipowered2.gif"
+                                width={500}
+                                height={500}
+                                alt="ai"
+                                className="w-full h-auto"
+                              />
+                            </div>
+                            <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                              <p className="text-center mx-auto text-xl">
+                                Please wait for a moment... <br /> while we are
+                                generating the personalised test based on your
+                                input.
+                              </p>
+                              <CustomLoader />
+                            </div>
+                          </div>
                         </div>
-                        <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
-                          <p className="text-center mx-auto text-xl">
-                            Please wait for a moment... <br /> while we are
-                            generating the personalised test based on your
-                            input.
-                          </p>
-                          <CustomLoader />
-                        </div>
-                      </div>
-                    </div>
+                      </DialogTitle>
+                    </DialogHeader>
                   </DialogContent>
                 )}
               </Dialog>
