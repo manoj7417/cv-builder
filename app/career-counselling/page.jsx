@@ -208,12 +208,14 @@ export default function Page() {
         const token = accessToken.value;
 
          // Transform answers into the format expected by the API
-      const content = categories.flatMap((category) =>
+      let content = categories.map((category) =>
         answers[category].map((questionObj) => ({
           question: questionObj.question,
           answer: questionObj.answer,
         }))
       )
+
+      content = JSON.stringify(content);
         const data = await generateCareerAdvice(content, token);
         console.log("Answers data::",data);
         setApiResponse(data);

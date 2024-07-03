@@ -26,8 +26,8 @@ export const updateUserProfile = async (data, token) => {
   }
 }
 
-export const getCareerCounselling = async (data,token) => {
-  try{
+export const getCareerCounselling = async (data, token) => {
+  try {
     const response = await instance.post('/openai/generateCounsellingTest', data, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -42,8 +42,8 @@ export const getCareerCounselling = async (data,token) => {
 }
 
 
-export const generateCareerAdvice = async (data,token) => {
-  try{
+export const generateCareerAdvice = async (data, token) => {
+  try {
     const response = await instance.post('/openai/generateCareerAdvice', data, {
       headers: {
         Authorization: `Bearer ${token}`
