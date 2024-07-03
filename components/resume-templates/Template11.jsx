@@ -326,7 +326,7 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-gray-600 h-2.5"
+                        className="bg-black h-2.5"
                         style={{ width: `${level}%` }}
                       ></div>
                     </div>

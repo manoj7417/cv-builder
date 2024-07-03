@@ -48,7 +48,7 @@ export default function Page() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const [userData,setUserData] = useState(false)
+  const [userData,setUserData] = useState(true)
   
   
 //api response data
@@ -186,17 +186,17 @@ export default function Page() {
         (questionObj) => questionObj.answer.trim() !== ""
       )
     ) {
-      setIsValid(false); // Reset validation state
+      setIsValid(false);
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
-      setIsValid(true); // Display validation message
+      setIsValid(true);
     }
   };
 
 
   const handlePrevious = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    setIsValid(false); // Reset validation state when going back
+    setIsValid(false);
   };
 
   const handleSubmit = () => {
@@ -205,12 +205,10 @@ export default function Page() {
         (questionObj) => questionObj.answer.trim() !== ""
       )
     ) {
-      // All questions are answered, proceed with submission logic
       setShowDialog(true);
       console.log("Submitting form...");
-      // Example: You might want to send data to a backend or display a success message
     } else {
-      setIsValid(true); // Display validation message if any question is unanswered
+      setIsValid(true);
     }
   };
 

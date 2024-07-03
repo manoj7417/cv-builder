@@ -193,7 +193,7 @@ const ComingSoonPage = () => {
             <div className="w-full text-center md:text-left sm:text-left md:w-1/2 mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
                 Coach For <span className="text-[#0D3572]">Businesses</span> &{" "}
-                <span className="text-[#0D3572]">Organizations</span>
+                <span className="text-[#0D3572]">Organisations</span>
               </h2>
               <p className="mt-4 text-gray-600">
                 Looking to upskill your star employees and performers? Connect
