@@ -63,46 +63,22 @@ const FeedbackFuction = () => {
         }
       })
       if (response.status === 201) {
-        return response.data;
+        updateUserData(response.data.data)
+        return router.push('/resume-builder')
       }
     } catch (error) {
       if (error.response.status === 400 && error.response.data.error === "Insufficient optimizer tokens") {
         updateRedirectPricingRoute('analyser/feedback')
-        router.push('/pricing')
+        return router.push('/pricing')
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handlepayment = async () => {
-    const { accessToken } = await GetTokens();
-    Payment(
-      {
-        amount: 10,
-        email: userdata.email,
-        name: "aman",
-        url: "https://career-genies-frontend.vercel.app/paymentSuccess?type=feedback",
-        cancel_url: window.location.href,
-        templateName: resumeData.metadata.template,
-      },
-      accessToken.value
-    )
-      .then((response) => {
-        const { url } = response.data;
-        window.location = url;
-      })
-      .catch((error) => {
-        console.error(
-          error.response ? error.response.data.error : error.message
-        );
-      });
-  };
+
 
   const handleBetterResumeContent = async () => {
-    if (!userdata?.tokens) {
-      return handlepayment();
-    }
     setshowMultiStepDialog(true);
   };
 

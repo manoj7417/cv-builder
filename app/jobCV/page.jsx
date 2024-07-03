@@ -151,19 +151,16 @@ export default function Home() {
   const [formData, setFormData] = useState(initialState);
 
   const handleDialogClose = () => {
-    setShowDialog(false);
+    setIsGeneratingResume(false);
   };
 
-  const handlefileupload = () => {
-    inputRef.current.click();
-  };
 
   const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`;
     try {
       const response = await axios.post(
         "/api/generateResumeOnFeedback",
-        { message },
+        { message, type: "JobCV" },
         {
           headers: {
             Authorization: "Bearer " + accessToken.value,
@@ -285,7 +282,6 @@ export default function Home() {
               <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
                 <div
                   class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]"
-                  onClick={handlefileupload}
                 >
                   <label
                     for="dropzone-file"
@@ -319,7 +315,6 @@ export default function Home() {
                       id="dropzone-file"
                       type="file"
                       class="hidden"
-                      ref={inputRef}
                       onChange={handleuploadResume}
                     />
                   </label>
@@ -358,7 +353,7 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <Dialog open={generatingResume}>
-            <DialogContent onClick showCloseButton className="bg-blue-900">
+            <DialogContent onClick={handleDialogClose}  >
               <div className="mx-auto flex items-center flex-col">
                 <Lottie
                   animationData={animation}
