@@ -1,4 +1,6 @@
-"use client";
+'use client';
+import { useEffect, useState } from "react";
+import UserData from "./UserData";
 import {
   TooltipProvider,
   Tooltip,
@@ -24,7 +26,6 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { GetTokens } from "../actions";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
@@ -41,17 +42,14 @@ import {
 import Image from "next/image";
 import CustomLoader from "../ui/CustomLoader";
 import "./CareerCounselling.css";
-import UserData from "./UserData";
 
 export default function Page() {
   const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const [userData,setUserData] = useState(false)
-  
-  
-//api response data
+  const [userData, setUserData] = useState(true);
+
   const [answers, setAnswers] = useState({
     "Current Pursuits and Activities": [
       {
@@ -162,10 +160,8 @@ export default function Page() {
       },
     ],
   });
-
   const categories = Object.keys(answers);
 
-  // Function to handle input changes
   const handleInputChange = (category, questionIndex, newAnswer) => {
     setAnswers((prevAnswers) => {
       const updatedCategory = prevAnswers[category].map((q, i) =>
@@ -177,7 +173,6 @@ export default function Page() {
       };
     });
   };
-
 
   const handleNext = () => {
     window.scrollTo(0, 0);
@@ -192,7 +187,6 @@ export default function Page() {
       setIsValid(true);
     }
   };
-
 
   const handlePrevious = () => {
     setCurrentStep((prevStep) => prevStep - 1);
@@ -241,124 +235,131 @@ export default function Page() {
                 </div>
               </div>
             )}
-            { userData ? (!showIntro && <UserData/>) : ( !showIntro &&
-              <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24 ">
-                <div className="space-y-4">
-                  <h2 className="text-4xl font-semibold">
-                    {categories[currentStep]}
-                  </h2>
-                  {answers[categories[currentStep]].map(
-                    (questionObj, quesIndex) => (
-                      <div key={quesIndex} className="space-y-2">
-                        <label className="block text-sm font-medium">
-                          {questionObj.question}
-                        </label>
-                        {questionObj.type === "input" ? (
-                          <Textarea
-                            required
-                            value={questionObj.answer}
-                            onChange={(e) =>
-                              handleInputChange(
-                                categories[currentStep],
-                                quesIndex,
-                                e.target.value
-                              )
-                            }
-                            placeholder="Type your answer here..."
-                            className="w-full resize-none"
-                          />
-                        ) : (
-                          <div className="space-y-2">
-                            {questionObj.options.map((option, optionIndex) => (
-                              <div key={optionIndex}>
-                                <label className="flex items-center space-x-3">
-                                  <input
-                                    type="radio"
-                                    name={`question-${quesIndex}`}
-                                    value={option}
-                                    required
-                                    checked={questionObj.answer === option}
-                                    onChange={(e) =>
-                                      handleInputChange(
-                                        categories[currentStep],
-                                        quesIndex,
-                                        e.target.value
-                                      )
-                                    }
-                                    className="text-2xl circle-outer accent-blue-700 cursor-pointer"
-                                  />
-                                  <span>{option}</span>
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        {isValid && questionObj.answer.trim() === "" && (
-                          <p className="text-red-500 text-sm">
-                            Please provide an answer.
-                          </p>
-                        )}
-                      </div>
-                    )
-                  )}
-                </div>
-                {/* submit buttons  */}
-                <div className="flex justify-between p-4">
-                  <button
-                    onClick={handlePrevious}
-                    disabled={currentStep === 0}
-                    className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
-                  >
-                    Previous
-                  </button>
-                  {currentStep < categories.length - 1 ? (
-                    <button
-                      onClick={handleNext}
-                      className="bg-blue-950 text-white px-4 py-2 rounded"
-                    >
-                      Next
-                    </button>
-                  ) : (
-                    <>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <button
-                            onClick={handleSubmit}
-                            className="bg-green-500 text-white px-4 py-2 rounded"
-                          >
-                            Submit
-                          </button>
-                        </DialogTrigger>
-                        {showDialog && (
-                          <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                            <div className="flex items-center space-x-2">
-                              <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
-                                <div className="ai-image">
-                                  <Image
-                                    src="/aipowered2.gif"
-                                    width={500}
-                                    height={500}
-                                    alt="ai"
-                                    className="w-full h-auto"
-                                  />
-                                </div>
-                                <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
-                                  <p className="text-center mx-auto text-xl">
-                                    Please wait for a moment... <br /> while we
-                                    are generating the personalised test based
-                                    on your input.
-                                  </p>
-                                  <CustomLoader />
-                                </div>
-                              </div>
+            {userData ? (
+              !showIntro && <UserData setAnswers={setAnswers} />
+            ) : (
+              !showIntro && (
+                <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24 ">
+                  <div className="space-y-4">
+                    <h2 className="text-4xl font-semibold">
+                      {categories[currentStep]}
+                    </h2>
+                    {answers[categories[currentStep]].map(
+                      (questionObj, quesIndex) => (
+                        <div key={quesIndex} className="space-y-2">
+                          <label className="block text-sm font-medium">
+                            {questionObj.question}
+                          </label>
+                          {questionObj.type === "input" ? (
+                            <Textarea
+                              required
+                              value={questionObj.answer}
+                              onChange={(e) =>
+                                handleInputChange(
+                                  categories[currentStep],
+                                  quesIndex,
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Type your answer here..."
+                              className="w-full resize-none"
+                            />
+                          ) : (
+                            <div className="space-y-2">
+                              {questionObj.options.map(
+                                (option, optionIndex) => (
+                                  <div key={optionIndex}>
+                                    <label className="flex items-center space-x-3">
+                                      <input
+                                        type="radio"
+                                        name={`question-${quesIndex}`}
+                                        value={option}
+                                        required
+                                        checked={
+                                          questionObj.answer === option
+                                        }
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            categories[currentStep],
+                                            quesIndex,
+                                            e.target.value
+                                          )
+                                        }
+                                        className="text-2xl circle-outer accent-blue-700 cursor-pointer"
+                                      />
+                                      <span>{option}</span>
+                                    </label>
+                                  </div>
+                                )
+                              )}
                             </div>
-                          </DialogContent>
-                        )}
-                      </Dialog>
-                    </>
-                  )}
-                </div>
-              </section>
+                          )}
+                          {isValid && questionObj.answer.trim() === "" && (
+                            <p className="text-red-500 text-sm">
+                              Please provide an answer.
+                            </p>
+                          )}
+                        </div>
+                      )
+                    )}
+                  </div>
+                  <div className="flex justify-between p-4">
+                    <button
+                      onClick={handlePrevious}
+                      disabled={currentStep === 0}
+                      className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
+                    >
+                      Previous
+                    </button>
+                    {currentStep < categories.length - 1 ? (
+                      <button
+                        onClick={handleNext}
+                        className="bg-blue-950 text-white px-4 py-2 rounded"
+                      >
+                        Next
+                      </button>
+                    ) : (
+                      <>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <button
+                              onClick={handleSubmit}
+                              className="bg-green-500 text-white px-4 py-2 rounded"
+                            >
+                              Submit
+                            </button>
+                          </DialogTrigger>
+                          {showDialog && (
+                            <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
+                              <div className="flex items-center space-x-2">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                                  <div className="ai-image">
+                                    <Image
+                                      src="/aipowered2.gif"
+                                      width={500}
+                                      height={500}
+                                      alt="ai"
+                                      className="w-full h-auto"
+                                    />
+                                  </div>
+                                  <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                                    <p className="text-center mx-auto text-xl">
+                                      Please wait for a moment... <br /> while
+                                      we are generating the personalised test
+                                      based on your input.
+                                    </p>
+                                    <CustomLoader />
+                                  </div>
+                                </div>
+                              </div>
+                            </DialogContent>
+                          )}
+                        </Dialog>
+                      </>
+                    )}
+                  </div>
+                </section>
+              )
             )}
             <div className="w-full lg:w-1/3 mt-24">
               <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-100">
@@ -377,16 +378,21 @@ export default function Page() {
                       <ul className="list-disc pl-6">
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on  <span className="font-bold mx-2">Start</span> to start the quiz.
+                          Click on{" "}
+                          <span className="font-bold mx-2">Start</span> to start
+                          the quiz.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold mx-2"> Next</span> to move to the next question.
+                          Click on{" "}
+                          <span className="font-bold mx-2"> Next</span> to move
+                          to the next question.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold mx-2">Previous</span> to go back to the previous
-                          question.
+                          Click on{" "}
+                          <span className="font-bold mx-2">Previous</span> to go
+                          back to the previous question.
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
                           <TiTick className="text-green-500 text-2xl mr-2" />
@@ -408,190 +414,5 @@ export default function Page() {
         </div>
       </div>
     </>
-  );
-}
-
-function BriefcaseIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-      <rect width="20" height="14" x="2" y="6" rx="2" />
-    </svg>
-  );
-}
-
-function ClipboardIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-    </svg>
-  );
-}
-
-function CompassIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" />
-      <circle cx="12" cy="12" r="10" />
-    </svg>
-  );
-}
-
-function GraduationCapIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-      <path d="M22 10v6" />
-      <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-    </svg>
-  );
-}
-
-function MenuIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  );
-}
-
-function MoveHorizontalIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="18 8 22 12 18 16" />
-      <polyline points="6 8 2 12 6 16" />
-      <line x1="2" x2="22" y1="12" y2="12" />
-    </svg>
-  );
-}
-
-function SendIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m22 2-7 20-4-9-9-4Z" />
-      <path d="M22 2 11 13" />
-    </svg>
-  );
-}
-
-function SettingsIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-function WebcamIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="10" r="8" />
-      <circle cx="12" cy="10" r="3" />
-      <path d="M7 22h10" />
-      <path d="M12 22v-4" />
-    </svg>
   );
 }
