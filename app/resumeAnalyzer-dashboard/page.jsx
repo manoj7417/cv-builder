@@ -27,8 +27,9 @@ import Header from "../Layout/Header"
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const userState = useUserStore((state) => state.userState);
   const router = useRouter()
+  const userState = useUserStore((state) => state.userState)
+  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens()
@@ -37,6 +38,7 @@ export default function DashboardIdea() {
       return router.push("/login?redirect=/resumeAnalyzer-dashboard")
     }
     if (userState.userdata.subscription.status !== 'Active') {
+      updateRedirectPricingRoute('resumeAnalyzer-dashboard')
       return router.push('/pricing')
     }
     let selectedFile = e.target.files[0];

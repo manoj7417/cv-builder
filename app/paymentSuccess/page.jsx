@@ -1,14 +1,37 @@
 "use client";
 import React, { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import axios from 'axios';
+import { GetTokens } from '../actions';
+import { useUserStore } from '../store/UserStore';
 
 
 const PaymentSuccess = () => {
   const router = useRouter()
+  const updateUserData = useUserStore(state => state.updateUserData)
+  const userState = useUserStore(state => state.userState)
 
+  const fetchUserDetials = async () => {
+    const { accessToken } = await GetTokens()
+    const token = accessToken?.value;
+    // Fetch user details from API or database
+    const response = await axios.get("/api/getUserProfile", {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+    if (response.status === 200) {
+      updateUserData(response.data.data)
+      if (userState.pricingRedirectRoute) {
+
+        return router.push(`/${userState.pricingRedirectRoute}`)
+      }
+      router.push('/resume-builder')
+    }
+  }
 
   useEffect(() => {
-    router.push('/resume-builder')
+    fetchUserDetials()
   })
 
   return (
