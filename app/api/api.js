@@ -65,12 +65,15 @@ export const Payment = async (data, token) => {
   }
 };
 
-export const AnalyzeAts = async (message) => {
+export const AnalyzeAts = async (message, token) => {
   try {
-    const response = await instance.post("/openai/atsCheck", { message });
+    const response = await instance.post("/openai/atsCheck", { message }, {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
     return response.data;
   } catch (error) {
-    console.error("Error creating user:", error.response || error);
     throw error;
   }
 };
@@ -152,20 +155,21 @@ export const generateResumeOnFeeback = async (message, token) => {
   }
 }
 
-export const printResume = async (html) => {
+export const printResume = async (html, token) => {
   try {
     const response = await fetch(`${baseURL}/api/print/resume`, {
-      method: 'POST',
+      method: "POST",
+      body: JSON.stringify(html),
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': "careerGenie_Key"
-      },
-      body: JSON.stringify(html)
-    })
+        'x-api-key': apiKey,
+        'Authorization': `Bearer ${token}`
+      }
+    }
+    )
     return response;
   } catch (error) {
-    console.error("Error creating user:", error.response || error);
-    return error
+    throw error
   }
 }
 
@@ -275,6 +279,19 @@ export const createNewJobProfileResume = async (token, resumeData) => {
 export const sendSubscribeEmail = async (data) => {
   try {
     const response = await axios.post('https://sea-turtle-app-sm5l4.ondigitalocean.app/api/sendMail/career-genie', data)
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const UpgradePricing = async (data, token) => {
+  try {
+    const response = await instance.post('/stripe/createSubscription', data, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    })
     return response;
   } catch (error) {
     throw error;

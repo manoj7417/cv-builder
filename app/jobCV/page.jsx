@@ -312,7 +312,7 @@ export default function Home() {
                         drag and drop
                       </p>
                       <p class="text-xs text-gray-500 dark:text-gray-400">
-                        SVG, PNG, JPG or GIF (MAX. 800x400px)
+                        PDF
                       </p>
                     </div>
                     <input
@@ -324,7 +324,6 @@ export default function Home() {
                     />
                   </label>
                 </div>
-
                 <div
                   className="flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   onClick={handleOpenMultiStepForm}
@@ -375,9 +374,9 @@ export default function Home() {
                 className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
                 style={{ lineHeight: "1.3 !important" }}
               >
-                Build a <span className="text-blue-600">CV</span> that opens
+                Build a <span className="text-blue-900">CV</span> that opens
                 doors to your ideal{" "}
-                <span className="text-blue-600">career!</span>
+                <span className="text-blue-900">career!</span>
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
                 <div className="w-full col-span-7">
@@ -389,7 +388,7 @@ export default function Home() {
                 </div>
                 <div className="w-full col-span-7 md:col-span-3 ">
                   <button
-                    className="bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
+                    className="bg-blue-900 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
                     onClick={() => handleGenerateNow()}
                   >
                     Generate Now <RiAiGenerate className="text-xl font-bold" />
@@ -418,10 +417,10 @@ export default function Home() {
                   style={{ lineHeight: "1.3 !important" }}
                 >
                   Connect with a
-                  <span className="text-blue-600"> Career Coach </span>for
+                  <span className="text-blue-900"> Career Coach </span>for
                   Expert Advice, Anytime, Anywhere!
                 </h2>
-                <button className="bg-blue-700 text-white px-4 py-2 rounded">
+                <button className="bg-blue-900 text-white px-4 py-2 rounded">
                   <a href="/contact-us">Work With Coach</a>
                 </button>
               </div>

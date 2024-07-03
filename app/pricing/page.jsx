@@ -9,6 +9,10 @@ import { useUserStore } from "../store/UserStore";
 import Header from "../Layout/Header";
 
 import { Switch } from "@headlessui/react";
+import { GetTokens } from "../actions";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { UpgradePricing } from "../api/api";
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
 });
@@ -16,6 +20,30 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 const Pricing = () => {
   const [enabled, setEnabled] = useState(true);
   const userState = useUserStore((state) => state.userState);
+  const router = useRouter();
+
+  const UpgradePlan = async (plan) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken) {
+      return router.push("/login?redirect=pricing");
+    }
+    const data = {
+      email: userState?.userdata?.email,
+      plan,
+      success_url: "http://localhost:3000/paymentSuccess",
+      cancel_url: window.location.href,
+      duration: enabled ? "yearly" : "monthly",
+    };
+    try {
+      const response = await UpgradePricing(data, accessToken.value);
+      const { stripeCheckoutUrl } = response.data;
+      if (stripeCheckoutUrl) {
+        router.replace(stripeCheckoutUrl);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -29,13 +57,14 @@ const Pricing = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
-                  Pricing Page
+                  Our Pricing
                 </h2>
-                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-                  Our pricing is simple with no hidden fees
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+                  Simple Pricing, Easy Access, Better Career!
                 </p>
                 <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                  Pricing plans for businesses at every stage of growth.
+                  Our simple pricing with secured payment measures ensures
+                  accessing the dream career has never been easier.
                 </p>
               </div>
 
@@ -116,10 +145,10 @@ const Pricing = () => {
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹1671.6" : "₹199"}
+                    {enabled ? "₹3351.6" : "₹399"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹2388
+                        ₹4788
                       </span>
                     )}
                   </p>
@@ -160,7 +189,10 @@ const Pricing = () => {
                       No career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
+                  <button
+                    className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                    onClick={() => UpgradePlan("basic")}
+                  >
                     Upgrade Now!
                   </button>
                 </div>
@@ -173,7 +205,7 @@ const Pricing = () => {
                     {enabled ? "₹8,391.6" : "₹999"}
                     {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹4788
+                        ₹11988
                       </span>
                     )}
                   </p>
@@ -215,7 +247,10 @@ const Pricing = () => {
                       Unlimited career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
+                  <button
+                    className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                    onClick={() => UpgradePlan("premium")}
+                  >
                     Upgrade Now!
                   </button>
                 </div>
@@ -234,15 +269,14 @@ const Pricing = () => {
               <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
                 <div className="md:w-[60%]  w-full text-center md:text-left mb-8 md:mb-0">
                   <h1 className="text-4xl font-bold mb-4">
-                    Looking for an enterprise solution?Contact us for the
-                    enterprise version!
+                    Want to try out our Business Model Services? Connect with us
+                    Today!
                   </h1>
                   <p className="text-gray-700 mb-6">
-                    Looking for an enterprise solution? Our CV builder offers
-                    tailored features and robust capabilities designed
-                    specifically to meet the needs of large organizations. .
-                    Dont miss out on the opportunity to leverage our premium
-                    solutions tailored for enterprise success!
+                    Want to integrate our services into your enterprise? Contact
+                    us today and subscribe to the set of services personalised
+                    for your relevance and requirements at appropriate pricing
+                    solutions.
                   </p>
                   <div className="flex justify-center md:justify-start space-x-4">
                     {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
