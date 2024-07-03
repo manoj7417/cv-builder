@@ -204,15 +204,15 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
     <div>
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section py-4">
-          <div className="skill_head">
+          <div className="skill_head" style={{color:colorText}}>
             <h2
               className={`uppercase font-bold ${fontStyle.headingFont}`}
             >
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-600 w-full">
-            <ul className="w-full">
+          <div className="w-full">
+            <ul className="w-full" style={{color:colorText}}>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -225,8 +225,8 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{ width: `${level}%` ,backgroundColor:colorBackground}}
                       ></div>
                     </div>
                   </li>
@@ -245,7 +245,7 @@ const Hobbies = ({ fontStyle,colorBackground,colorText }) => {
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
-    <div>
+    <div style={{color:colorText}} className="my-4">
       <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
         {data?.name}
       </h2>
@@ -328,13 +328,13 @@ const Certificates = ({ fontStyle,colorBackground,colorText }) => {
   );
   return (
     <div>
-      <h2 className={`uppercase font-bold ${fontStyle.headingFont}`}>
+      <h2 className={`uppercase font-bold ${fontStyle.headingFont}`} style={{color:colorText}}>
         {data?.name}
       </h2>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul className="">
+            <ul style={{color:colorText}}>
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section" key={index}>
@@ -572,9 +572,10 @@ export const Template19 = () => {
           <div className="resume_section flex flex-row w-[210mm] h-full">
             <div className="md:w-[35%] w-full left_side" style={{backgroundColor:metadata?.theme?.background}}>
               <div className="left_side p-5">
-                <div className="contact_section mt-5">
+                <div className="contact_section mt-5" style={{ color:metadata?.theme?.text}}>
                   <h2
                     className={`uppercase font-bold ${fontStyle.headingFont}`}
+                    style={{color:metadata?.theme?.colorText}}
                   >
                     Contact Details
                   </h2>
