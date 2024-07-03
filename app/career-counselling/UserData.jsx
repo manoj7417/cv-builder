@@ -1,134 +1,93 @@
-"use client";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
-import Link from "next/link";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+'use client';
+import { useState } from "react";
+import { getCareerCounselling } from "../api/api";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { GetTokens } from "../actions";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { TiTick } from "react-icons/ti";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import Image from "next/image";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CustomLoader from "../ui/CustomLoader";
-import "./CareerCounselling.css";
+import Image from "next/image";
+import { GetTokens } from "../actions";
 
-export default function UserData() {
+export default function UserData({ setAnswers }) {
   const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
-  //user data
   const [bioData, setBioData] = useState({
-    "Current Pursuits and Activities": [
-      {
-        question:
-          "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question: "What is your highest level of education?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question: "Which subjects or areas do you feel most confident in?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question:
-          "Can you share any notable achievements or activities you have participated in recently?",
-        answer: "",
-        type:"input"
-      },
-    ],
-    "Hobbies and Interests": [
-      {
-        question: "What hobbies or activities do you enjoy in your free time?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question:
-          "Are there any subjects or topics you are particularly passionate about?",
-        answer: "",
-        type:"input"
-      },
-    ],
-    "Strengths and Weaknesses": [
-      {
-        question:
-          "What do you consider to be your greatest strengths or skills?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question: "Are there any areas where you feel you need improvement?",
-        answer: "",
-        type:"input"
-      },
-    ],
-    "Career Aspirations": [
-      {
-        question: "What are your career goals or aspirations?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question: "Is there a specific career path you are interested in?",
-        answer: "",
-        type:"input"
-      },
-    ],
-    "Location and Age": [
-      {
-        question: "Which country do you currently reside in?",
-        answer: "",
-        type:"input"
-      },
-      {
-        question: "How old are you?",
-        answer: "",
-        type:"input"    
-      },
-    ],
+"Current Pursuits and Activities": [
+        {
+          question: "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "What is your highest level of education?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "Which subjects or areas do you feel most confident in?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "Can you share any notable achievements or activities you have participated in recently?",
+          answer: "",
+          type: "input"
+        },
+      ],
+      "Hobbies and Interests": [
+        {
+          question: "What hobbies or activities do you enjoy in your free time?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "Are there any subjects or topics you are particularly passionate about?",
+          answer: "",
+          type: "input"
+        },
+      ],
+      "Strengths and Weaknesses": [
+        {
+          question: "What do you consider to be your greatest strengths or skills?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "Are there any areas where you feel you need improvement?",
+          answer: "",
+          type: "input"
+        },
+      ],
+      "Career Aspirations": [
+        {
+          question: "What are your career goals or aspirations?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "Is there a specific career path you are interested in?",
+          answer: "",
+          type: "input"
+        },
+      ],
+      "Location and Age": [
+        {
+          question: "Which country do you currently reside in?",
+          answer: "",
+          type: "input"
+        },
+        {
+          question: "How old are you?",
+          answer: "",
+          type: "input"
+        },
+      ],
   });
 
   const categories = Object.keys(bioData);
 
-  // Function to handle input changes
   const handleInputChange = (category, questionIndex, newAnswer) => {
     setBioData((prevAnswers) => {
       const updatedCategory = prevAnswers[category].map((q, i) =>
@@ -148,30 +107,40 @@ export default function UserData() {
         (questionObj) => questionObj.answer.trim() !== ""
       )
     ) {
-      setIsValid(false); // Reset validation state
+      setIsValid(false);
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
-      setIsValid(true); // Display validation message
+      setIsValid(true);
     }
   };
 
   const handlePrevious = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    setIsValid(false); // Reset validation state when going back
+    setIsValid(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       bioData[categories[currentStep]].every(
         (questionObj) => questionObj.answer.trim() !== ""
       )
     ) {
-      // All questions are answered, proceed with submission logic
       setShowDialog(true);
-      console.log("Submitting form...");
-      // Example: You might want to send data to a backend or display a success message
+      try {
+
+        const {accessToken} = await GetTokens();
+        const token = accessToken.value;
+
+        const data = await getCareerCounselling(bioData,token);
+        console.log(data);
+        setAnswers(data); // Update answers in the parent component
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      } finally {
+        setShowDialog(false);
+      }
     } else {
-      setIsValid(true); // Display validation message if any question is unanswered
+      setIsValid(true);
     }
   };
 
@@ -212,7 +181,6 @@ export default function UserData() {
             </div>
           ))}
         </div>
-        {/* submit buttons  */}
         <div className="flex justify-between p-4">
           <button
             onClick={handlePrevious}
