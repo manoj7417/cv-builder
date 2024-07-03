@@ -97,28 +97,28 @@ const ComingSoonPage = () => {
               </p>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
                 <div className="button_wrapper mt-8">
-                  <button className="get_start_btn">
-                    <span className="btn_text">
-                      <a href="/contact-us">Hire Coach</a>
-                    </span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <a href="/contact-us">
+                    <button className="get_start_btn">
+                      <span className="btn_text">Hire Coach</span>
+                      <div className="btn_overlay">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  </a>
                 </div>
                 <div className="button_wrapper mt-8 flex justify-center lg:justify-start">
                   <a href="#learnmore">
@@ -309,31 +309,31 @@ const ComingSoonPage = () => {
                   coaching.
                 </p>
                 <div className="button_wrapper mt-8">
-                  <button
-                    className="get_start_btn"
-                    style={{ background: "#88e48d", border: "none" }}
-                  >
-                    <span className="btn_text">
-                      <a href="/contact-us">Hire Coach</a>
-                    </span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <a href="/contact-us">
+                    <button
+                      className="get_start_btn"
+                      style={{ background: "#88e48d", border: "none" }}
+                    >
+                      <span className="btn_text">Hire Coach</span>
+                      <div className="btn_overlay">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  </a>
                 </div>
               </div>
 
@@ -349,31 +349,31 @@ const ComingSoonPage = () => {
                   multitudes of success that you have always desired.
                 </p>
                 <div className="button_wrapper mt-8">
-                  <button
-                    className="get_start_btn"
-                    style={{ background: "#ff914c", border: "none" }}
-                  >
-                    <span className="btn_text">
-                      <a href="/contact-us">Hire Coach</a>
-                    </span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <a href="/contact-us">
+                    <button
+                      className="get_start_btn"
+                      style={{ background: "#ff914c", border: "none" }}
+                    >
+                      <span className="btn_text">Hire Coach</span>
+                      <div className="btn_overlay">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  </a>
                 </div>
               </div>
 
@@ -389,31 +389,32 @@ const ComingSoonPage = () => {
                   Industry Professionals to ensure an easy transition.
                 </p>
                 <div className="button_wrapper mt-8">
-                  <button
-                    className="get_start_btn"
-                    style={{ background: "#fe9e9f", border: "none" }}
-                  >
-                    <span className="btn_text">
-                      <a href="/contact-us">Hire Coach</a>
-                    </span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <a href="/contact-us">
+                    {" "}
+                    <button
+                      className="get_start_btn"
+                      style={{ background: "#fe9e9f", border: "none" }}
+                    >
+                      <span className="btn_text">Hire Coach</span>
+                      <div className="btn_overlay">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  </a>
                 </div>
               </div>
 
@@ -431,31 +432,32 @@ const ComingSoonPage = () => {
                   dynamically in your career and within your organisation.
                 </p>
                 <div className="button_wrapper mt-8">
-                  <button
-                    className="get_start_btn"
-                    style={{ background: "#8d9df1", border: "none" }}
-                  >
-                    <span className="btn_text">
-                      <a href="/contact-us">Hire Coach</a>
-                    </span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <a href="/contact-us">
+                    {" "}
+                    <button
+                      className="get_start_btn"
+                      style={{ background: "#8d9df1", border: "none" }}
+                    >
+                      <span className="btn_text">Hire Coach</span>
+                      <div className="btn_overlay">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-arrow-right"
+                        >
+                          <path d="M5 12h14" />
+                          <path d="m12 5 7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

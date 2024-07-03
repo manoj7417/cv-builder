@@ -70,12 +70,11 @@ const Page = () => {
                   apps”), services, tools and other applications that link to
                   this notice (collectively, the “Site”). This Cookie and
                   Tracking Technology Policy governs your consent to our, as
-                  well as third-party partners and vendors use, of a variety
-                  of cookies and tracking technologies. You can find out more
-                  about these types of technology and how to control them in the
+                  well as third-party partners and vendors use, of a variety of
+                  cookies and tracking technologies. You can find out more about
+                  these types of technology and how to control them in the
                   information below. This Cookie and Tracking Technology Policy
-                  forms part of the Providers Privacy Policy, available
-                  at&nbsp;
+                  forms part of the Providers Privacy Policy, available at&nbsp;
                 </span>
                 <strong>
                   <a href="/privacy-policy" style={{ color: "transparent" }}>
@@ -331,7 +330,7 @@ const Page = () => {
               >
                 &nbsp;
               </p>
-              <div align="left">
+              <div align="left" className="overflow-scroll">
                 <table style={{ border: "none", borderCollapse: "collapse" }}>
                   <tbody>
                     <tr>
@@ -1365,11 +1364,11 @@ const Page = () => {
                           >
                             Used by Google AdSense for experimenting with
                             advertisement efficiency across websites using their
-                            services. Its the first-party cookie for
-                            Conversion Linker functionality it takes
-                            information in ad clicks and stores it in a
-                            first-party cookie so that conversions can be
-                            attributed outside the landing page.
+                            services. Its the first-party cookie for Conversion
+                            Linker functionality it takes information in ad
+                            clicks and stores it in a first-party cookie so that
+                            conversions can be attributed outside the landing
+                            page.
                           </span>
                         </p>
                       </td>
