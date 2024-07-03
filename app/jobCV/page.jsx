@@ -388,7 +388,7 @@ export default function Home() {
                 </div>
                 <div className="w-full col-span-7 md:col-span-3 ">
                   <button
-                    className="bg-blue-900 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
+                    className="bg-blue-900 text-white 2xl:px-3 xl:px-2 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
                     onClick={() => handleGenerateNow()}
                   >
                     Generate Now <RiAiGenerate className="text-xl font-bold" />
