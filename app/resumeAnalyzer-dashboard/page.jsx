@@ -21,23 +21,23 @@ import { GetTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 
-import WorkTogether from "@/components/component/WorkTogether"
-import Header from "../Layout/Header"
+import WorkTogether from "@/components/component/WorkTogether";
+import Header from "../Layout/Header";
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const userState = useUserStore((state) => state.userState);
-  const router = useRouter()
+  const router = useRouter();
 
   const handlepdfFileChange = async (e) => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     if (!accessToken) {
-      toast("Please login to use this template")
-      return router.push("/login?redirect=/resumeAnalyzer-dashboard")
+      toast("Please login to use this template");
+      return router.push("/login?redirect=/resumeAnalyzer-dashboard");
     }
-    if (userState.userdata.subscription.status !== 'Active') {
-      return router.push('/pricing')
+    if (userState.userdata.subscription.status !== "Active") {
+      return router.push("/pricing");
     }
     let selectedFile = e.target.files[0];
     if (selectedFile.type !== "application/pdf")
@@ -71,8 +71,11 @@ export default function DashboardIdea() {
         router.push("/analyser/feedback");
       }
     } catch (error) {
-      if (error.response.status === 400 && error.response.data.error === "Insufficient tokens") {
-        router.push('/pricing')
+      if (
+        error.response.status === 400 &&
+        error.response.data.error === "Insufficient tokens"
+      ) {
+        router.push("/pricing");
       }
     } finally {
       setIsAnalysing(false);
@@ -86,7 +89,7 @@ export default function DashboardIdea() {
   return (
     <>
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-      <main >
+      <main>
         {/* <Header /> */}
         {isAnalysing && <Loader />}
         <section className="flex min-h-screen flex-col items-center justify-center pt-12 bg-gradient-to-t from-[#bde3f2] to-[white]">
@@ -139,9 +142,7 @@ export default function DashboardIdea() {
                       type="file"
                       className="hidden"
                       accept="application/pdf"
-                      onChange={
-                        handlepdfFileChange
-                      }
+                      onChange={handlepdfFileChange}
                     />
                   </label>
                 </div>
@@ -156,7 +157,7 @@ export default function DashboardIdea() {
               />
             </div>
           </div>
-          <div className="w-full  " >
+          <div className="w-full  ">
             <div className="rounded-t-3xl border-t-8 border-blue-500  bg-gradient-to-b from-[#dcecff] to-[white]">
               <Slider />
             </div>
@@ -212,9 +213,8 @@ function LinkIcon(props) {
       <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
       <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
     </svg>
-  )
+  );
 }
-
 
 function LocateIcon(props) {
   return (
@@ -236,5 +236,5 @@ function LocateIcon(props) {
       <line x1="12" x2="12" y1="19" y2="22" />
       <circle cx="12" cy="12" r="7" />
     </svg>
-  )
+  );
 }
