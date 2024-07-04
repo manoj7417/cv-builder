@@ -13,6 +13,7 @@ import { FaRocket, FaCrown } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 import "../components/HomepageNew/Homepage.css";
+import Link from "next/link";
 
 const Page = () => {
   const userState = useUserStore((state) => state.userState);
@@ -114,13 +115,13 @@ const Page = () => {
                 </a>
 
                 {/* Premium Button */}
-                <a href="#premium">
+                <Link href='/career-counselling'>
                   {" "}
                   <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
                     <FaCrown className="mr-2 animate-pulse" />
                     Premium
                   </button>
-                </a>
+                </Link>
               </div>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
                 <img src="/students.png" />
