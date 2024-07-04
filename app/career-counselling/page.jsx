@@ -222,6 +222,9 @@ export default function Page() {
       } catch (error) {
         console.log(error);
       }
+      finally {
+        setShowDialog(false);
+      }
       // setApiResponse(data);
       setUserData(false);
     } else {
