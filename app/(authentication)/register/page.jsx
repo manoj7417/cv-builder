@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { registerUser } from "@/app/api/api";
 import { toast } from "react-toastify";
+import { ImSpinner3 } from "react-icons/im";
 
 export default function Register() {
   const router = useRouter();
@@ -16,12 +17,14 @@ export default function Register() {
     watch,
     formState: { errors },
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleRegister = async (data) => {
     if (!data.terms) {
       toast.error("You must agree to the terms and conditions");
       return;
     }
+    setIsLoading(true)
     try {
       const response = await registerUser(data);
       if (response.status === 201) {
@@ -30,6 +33,8 @@ export default function Register() {
       }
     } catch (error) {
       toast.error(error.response.data.error);
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -217,37 +222,6 @@ export default function Register() {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="password"
-                      className="text-base font-medium text-gray-900"
-                    >
-                      Password
-                    </label>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="password"
-                      placeholder="Password"
-                      id="password"
-                      {...register("password", {
-                        required: {
-                          value: true,
-                          message: "Password is required",
-                        },
-                        minLength: {
-                          value: 8,
-                          message: "Password must have at least 8 characters",
-                        },
-                      })}
-                    />
-                    <div className="text-red-500 text-sm my-2">
-                      {errors?.password?.message}
-                    </div>
-                  </div>
-                </div>
                 <div className="field field-checkbox flex items-center">
                   <input
                     id="checkbox"
@@ -255,7 +229,7 @@ export default function Register() {
                     name="terms"
                     className="form-checkbox h-4 w-4 text-blue-600"
                     {
-                      ...register("terms",{required:true})
+                    ...register("terms", { required: true })
                     }
                   />
                   <label
@@ -263,7 +237,7 @@ export default function Register() {
                     className="ml-2 text-sm text-gray-700"
                   >
                     <p>
-                    By signing up you are agreeing to our 
+                      By signing up you are agreeing to our
                       <a href="#" className="text-blue-900  underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</a>
                     </p>
                   </label>
@@ -277,10 +251,21 @@ export default function Register() {
                 <div>
                   <button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue/80"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue/80 disabled:bg-opacity-80"
+                    disabled={isLoading}
                   >
-                    Create Account{" "}
-                    <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                    {
+                      isLoading ?
+                        <>
+                          Creating Account
+                          <ImSpinner3 className="animate-spin ml-2" size={16} />
+                        </>
+                        :
+                        <>
+                          Create Account
+                          <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                        </>
+                    }
                   </button>
                 </div>
               </div>

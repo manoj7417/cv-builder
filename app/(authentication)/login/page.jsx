@@ -9,6 +9,8 @@ import { SetTokens } from '../../actions';
 import { useUserStore } from "@/app/store/UserStore";
 import axios from "axios";
 import Link from "next/link";
+import { ImSpinner3 } from "react-icons/im";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 function LoginUser() {
   const router = useRouter();
@@ -22,10 +24,11 @@ function LoginUser() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const [loading, setIsLoading] = useState(false);
 
   const handleLogin = async (data) => {
+    setIsLoading(true);
     try {
       const response = await axios.post('/api/login', { data });
       if (response.status === 200) {
@@ -39,6 +42,8 @@ function LoginUser() {
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.error || 'Error logging in');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -116,9 +121,21 @@ function LoginUser() {
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700"
+                      className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-opacity-85"
+                      disabled={loading}
                     >
-                      Get started
+                      {
+                        loading ?
+                          <>
+                            Getting Started
+                            <ImSpinner3 className="animate-spin ml-2" size={16} />
+                          </>
+                          :
+                          <>
+                            Get Started
+                            <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                          </>
+                      }
                     </button>
                   </div>
                 </div>
