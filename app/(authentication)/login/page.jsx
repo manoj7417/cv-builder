@@ -11,6 +11,9 @@ import axios from "axios";
 import Link from "next/link";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 function LoginUser() {
   const router = useRouter();
@@ -18,14 +21,22 @@ function LoginUser() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const loginUser = useUserStore((state) => state.loginUser);
+  const [showDialog, setShowDialog] = useState(false);
+  const email = useRef(null)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const [loading, setIsLoading] = useState(false);
+  const [sendingMail, setIsSendingMail] = useState(false)
+
+  const handleDialogClose = () => {
+    setShowDialog(false);
+  }
+
+
 
   const handleLogin = async (data) => {
     setIsLoading(true);
@@ -44,11 +55,44 @@ function LoginUser() {
       toast.error(error.response?.data?.error || 'Error logging in');
     } finally {
       setIsLoading(false);
+      
     }
   };
 
+  const handleSendResetEmail = async () => {
+    const userEmail = email.current.value
+    setIsSendingMail(true);
+    try {
+      const response = await axios.post('/api/resetpassword', { email: userEmail });
+      if (response.status === 200) {
+        email.current.value = null
+        toast.success('Reset password link sent to your email');
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Error sending reset password email');
+    } finally {
+      setIsSendingMail(false);
+      setShowDialog(false)
+    }
+  }
+
   return (
     <>
+      <Dialog open={showDialog} >
+        <DialogContent className=" w-96" onClick={handleDialogClose} showCloseButton >
+          <div>
+            <h1>Reset Password</h1>
+            <Input placeholder="Enter your email address" className="mt-4" ref={email} />
+            <div className="w-full my-3 flex justify-end items-center">
+              <Button className=" disabled:bg-opacity-85" disabled={sendingMail} onClick={handleSendResetEmail}>{sendingMail ?
+                <>
+                  Sending<ImSpinner3 className="animate-spin ml-2" size={16} />
+                </>
+                : "Send"}</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
           <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -117,6 +161,9 @@ function LoginUser() {
                         {errors?.password?.message}
                       </div>
                     </div>
+                  </div>
+                  <div >
+                    <p className="text-14px text-blue-950 hover:underline cursor-pointer" onClick={() => setShowDialog(true)}>Forgot password?</p>
                   </div>
                   <div>
                     <button
