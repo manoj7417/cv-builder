@@ -171,7 +171,9 @@ export default function Home() {
         return response.data;
       }
     } catch (error) {
-      console.error(error);
+      if (error.response.status === 400 && (error.response.data.error === 'Insufficient JobCV tokens' || error.response.data.error === "Subscription is inactive or expired")) {
+        router.push('/pricing')
+      }
     }
   };
 
@@ -195,13 +197,14 @@ export default function Home() {
           router.push("/login?redirect=/jobCV");
           return;
         }
-        const { data, userData } = await fetchBetterResume(text, accessToken);
-        if (data) {
-          replaceResumeData(data);
-          updateUserData(userData);
+        const response = await fetchBetterResume(text, accessToken);
+        if (response?.data && response?.userData) {
+          replaceResumeData(response?.data);
+          updateUserData(response?.userData);
           return router.push("/resume-builder");
         }
       } catch (error) {
+        console.log(error)
         toast.error("Unable to generate your CV");
       } finally {
         setIsGeneratingResume(false);
@@ -263,6 +266,7 @@ export default function Home() {
               formData={formData}
               setFormData={setFormData}
               jobRole={jobRole}
+              type={"JobCV"}
             />
           </Dialog>
           <Dialog open={showDialog}>

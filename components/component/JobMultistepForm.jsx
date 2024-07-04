@@ -22,7 +22,7 @@ import Image from 'next/image'
 import axios from 'axios'
 
 
-function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole }) {
+function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole, type }) {
     const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
     const router = useRouter()
     const updateUserData = useUserStore(state => state.updateUserData)
@@ -361,7 +361,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     const fetchBetterResume = async (message) => {
         const { accessToken } = await GetTokens()
         try {
-            const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
+            const response = await axios.post('/api/generateResumeOnFeedback', { message, type }, {
                 headers: {
                     Authorization: 'Bearer ' + accessToken.value
                 }
@@ -370,7 +370,8 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                 return response.data;
             }
         } catch (error) {
-            if (error.response.status === 400 && error.response.data.error === "Insufficient optimizer tokens") {
+            console.log(error)
+            if (error.response.status === 400 && (error.response.data.error === 'Insufficient JobCV tokens' || error.response.data.error === "Subscription is inactive or expired" || error.response.data.error === "Insufficient optimizer tokens")) {
                 router.push('/pricing')
             }
         }
@@ -380,16 +381,17 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         setSteps(6)
         const message = JSON.stringify(formData) + `generate resume for this ${jobRole}`
         try {
-            const { data, userData } = await fetchBetterResume(message);
-            if (data) {
-                replaceResumeData(data)
-                updateUserData(userData)
-                router.push("/resume-builder");
+            const response = await fetchBetterResume(message);
+            if (response?.data && response?.userdata) {
+                replaceResumeData(response?.data)
+                updateUserData(response?.userdata)
+                return router.push("/resume-builder");
             }
         } catch (error) {
             console.log(error)
         } finally {
             handleCloseMultistepForm()
+            setSteps(1)
         }
     }
 
@@ -438,7 +440,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 2) {
-        return <DialogContent className='max-w-[70dvw] no-scrollbar h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[70dvw] no-scrollbar h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around overflow-hidden'>
                 <div className='w-1/3 h-full '>
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
@@ -602,7 +604,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 3) {
-        return <DialogContent className='max-w-[70dvw] no-scrollbar h-[80dvh] p-0' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[70dvw] no-scrollbar h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around overflow-hidden'>
                 <div className='w-1/3 h-full '>
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
@@ -727,7 +729,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 4) {
-        return <DialogContent className='max-w-[70dvw] p-0 no-scrollbar h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[70dvw] p-0 no-scrollbar h-[80dvh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around overflow-hidden'>
                 <div className='w-1/3 h-full '>
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
@@ -842,7 +844,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 5) {
-        return <DialogContent className='max-w-[70dvw] no-scrollbar p-0 h-[80dvh]' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[70dvw] no-scrollbar p-0 h-[80dvh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around overflow-hidden'>
                 <div className='w-1/3 h-full '>
                     <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
