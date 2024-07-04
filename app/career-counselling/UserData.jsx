@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCareerCounselling } from "../api/api";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -98,43 +98,110 @@ export default function UserData({ setAnswers, setUserData }) {
 
   const categories = Object.keys(bioData);
 
+  // const transformApiResponse = (apiResponse) => {
+  //   console.log("apiResponse:::", apiResponse?.data);
+  //   const transformedResponse = {
+  //     "Career Aptitude Assessment": apiResponse?.data?.[
+  //       "Career Aptitude Assessment"
+  //     ].map((q) => ({
+  //       question: q.question,
+  //       options: q.options || [],
+  //       answer: "",
+  //       type: q.type,
+  //     })),
+  //     "Interest Inventory": apiResponse?.data?.["Interest Inventory"].map(
+  //       (q) => ({
+  //         question: q.question,
+  //         options: q.options || [],
+  //         answer: "",
+  //         type: q.type,
+  //       })
+  //     ),
+  //     "Personality Assessment": apiResponse?.data?.[
+  //       "Personality Assessment"
+  //     ].map((q) => ({
+  //       question: q.question,
+  //       options: q.options || [],
+  //       answer: "",
+  //       type: q.type,
+  //     })),
+  //     "Values and Motivations": apiResponse?.data?.[
+  //       "Values and Motivations"
+  //     ].map((q) => ({
+  //       question: q.question,
+  //       options: q.options || [],
+  //       answer: "",
+  //       type: q.type,
+  //     })),
+  //   };
+  //   return transformedResponse;
+  // };
+
+  // Update localStorage whenever bioData changes
+
+  // Load data from localStorage on component mount
+
+  // Load data from localStorage on component mount
+
+ 
+
   const transformApiResponse = (apiResponse) => {
-    // Transform the API response to match the expected structure
-    console.log("apiResponse:::", apiResponse?.data);
-    const transformedResponse = {
-      "Career Aptitude Assessment": apiResponse?.data?.[
-        "Career Aptitude Assessment"
-      ].map((q) => ({
-        question: q.question,
-        options: q.options || [],
-        answer: "",
-        type: q.type,
-      })),
-      "Interest Inventory": apiResponse?.data?.["Interest Inventory"].map(
-        (q) => ({
-          question: q.question,
-          options: q.options || [],
-          answer: "",
-          type: q.type,
-        })
-      ),
-      "Personality Assessment": apiResponse?.data?.[
-        "Personality Assessment"
-      ].map((q) => ({
-        question: q.question,
-        options: q.options || [],
-        answer: "",
-        type: q.type,
-      })),
-      "Values and Motivations": apiResponse?.data?.[
-        "Values and Motivations"
-      ].map((q) => ({
-        question: q.question,
-        options: q.options || [],
-        answer: "",
-        type: q.type,
-      })),
-    };
+    // Initialize an empty object to store transformed data
+    const transformedResponse = {};
+
+    // Define the categories and their corresponding keys in the API response
+    const categories = [
+      {
+        key: "Career Aptitude Assessment",
+        possibleKeys: ["Career Aptitude Assessment"],
+      },
+      {
+        key: "Interest Inventory",
+        possibleKeys: [
+          "Interest Inventory (RIASEC - Holland Codes)",
+          "Interest Inventory",
+        ],
+      },
+      {
+        key: "Personality Assessment",
+        possibleKeys: [
+          "Personality Assessment (Big Five - OCEAN)",
+          "Personality Assessment",
+        ],
+      },
+      {
+        key: "Values and Motivations",
+        possibleKeys: ["Values and Motivations"],
+      },
+    ];
+
+    // Check if apiResponse and apiResponse.data exist
+    if (apiResponse && apiResponse.data) {
+      // Process each category
+      categories.forEach(({ key, possibleKeys }) => {
+        // Find the first matching key in apiResponse.data
+        const foundKey = possibleKeys.find(
+          (apiKey) => apiKey in apiResponse.data
+        );
+
+        if (foundKey && Array.isArray(apiResponse.data[foundKey])) {
+          transformedResponse[key] = apiResponse.data[foundKey].map((q) => ({
+            question: q.question,
+            options: q.options || [],
+            answer: "",
+            type: q.type,
+          }));
+        } else {
+          // Handle case where category is missing or not an array
+          transformedResponse[key] = [];
+        }
+      });
+    } else {
+      // Handle case where apiResponse or apiResponse.data is undefined or null
+      console.error("API response or its data is undefined or null.");
+      // Optionally throw an error or return a default transformedResponse
+    }
+
     return transformedResponse;
   };
 
@@ -196,6 +263,29 @@ export default function UserData({ setAnswers, setUserData }) {
   const handleClose = () => {
     setShowDialog(false);
   };
+
+
+
+  useEffect(() => {
+    const storedBioData = localStorage.getItem('bioData');
+    if (storedBioData) {
+      setBioData(JSON.parse(storedBioData));
+    }
+
+    const storedCurrentStep = localStorage.getItem('currentStep');
+    if (storedCurrentStep !== null) {
+      setCurrentStep(parseInt(storedCurrentStep, 10));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('bioData', JSON.stringify(bioData));
+  }, [bioData]);
+
+  useEffect(() => {
+    localStorage.setItem('currentStep', currentStep.toString());
+  }, [currentStep]);
+
 
   return (
     <>
