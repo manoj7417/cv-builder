@@ -37,10 +37,6 @@ export default function DashboardIdea() {
       toast("Please login to use this template")
       return router.push("/login?redirect=/resumeAnalyzer-dashboard")
     }
-    if (userState.userdata.subscription.status !== 'Active') {
-      updateRedirectPricingRoute('resumeAnalyzer-dashboard')
-      return router.push('/pricing')
-    }
     let selectedFile = e.target.files[0];
     if (selectedFile.type !== "application/pdf")
       return toast.error("Please select a valid PDF file");
