@@ -57,7 +57,7 @@ const FeedbackFuction = () => {
     setShowDialog(false)
     setIsLoading(true)
     try {
-      const response = await axios.post('/api/generateResumeOnFeedback', { message }, {
+      const response = await axios.post('/api/generateResumeOnFeedback', { message, type: "optimizer" }, {
         headers: {
           Authorization: 'Bearer ' + accessToken.value
         }
@@ -67,6 +67,7 @@ const FeedbackFuction = () => {
         return router.push('/resume-builder')
       }
     } catch (error) {
+      console.log(error)
       if (error.response.status === 400 && error.response.data.error === "Insufficient optimizer tokens") {
         updateRedirectPricingRoute('analyser/feedback')
         return router.push('/pricing')
@@ -129,14 +130,14 @@ const FeedbackFuction = () => {
           </p>
           <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
             <div
-              class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]"
+              className="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]"
               onClick={fetchBetterResume}
             >
               <label
                 for="dropzone-file"
                 class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
               >
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
                     class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
@@ -199,6 +200,7 @@ const FeedbackFuction = () => {
           setSteps={setSteps}
           formData={formData}
           setFormData={setFormData}
+          type={'optimizer'}
         />
       </Dialog>
       <section className="analyser_resume_section " suppressHydrationWarning>

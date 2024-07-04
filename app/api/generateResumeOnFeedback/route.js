@@ -14,8 +14,12 @@ export async function POST(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: error.response.status === 400 ? "Insufficient optimizer tokens" : "Error generating feedback" }), {
-            status: error.response.status || 500,
+        console.log(error)
+        const errorMessage = error.response ? error.response.data : { error: "Error generating feedback" };
+        const statusCode = error.response ? error.response.status : 500;
+
+        return new Response(JSON.stringify(errorMessage), {
+            status: statusCode,
             headers: { 'Content-Type': 'application/json' }
         });
     }
