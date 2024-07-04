@@ -151,19 +151,16 @@ export default function Home() {
   const [formData, setFormData] = useState(initialState);
 
   const handleDialogClose = () => {
-    setShowDialog(false);
+    setIsGeneratingResume(false);
   };
 
-  const handlefileupload = () => {
-    inputRef.current.click();
-  };
 
   const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`;
     try {
       const response = await axios.post(
         "/api/generateResumeOnFeedback",
-        { message },
+        { message, type: "JobCV" },
         {
           headers: {
             Authorization: "Bearer " + accessToken.value,
@@ -174,7 +171,9 @@ export default function Home() {
         return response.data;
       }
     } catch (error) {
-      console.error(error);
+      if (error.response.status === 400 && (error.response.data.error === 'Insufficient JobCV tokens' || error.response.data.error === "Subscription is inactive or expired")) {
+        router.push('/pricing')
+      }
     }
   };
 
@@ -198,13 +197,14 @@ export default function Home() {
           router.push("/login?redirect=/jobCV");
           return;
         }
-        const { data, userData } = await fetchBetterResume(text, accessToken);
-        if (data) {
-          replaceResumeData(data);
-          updateUserData(userData);
-          router.push("/resume-builder");
+        const response = await fetchBetterResume(text, accessToken);
+        if (response?.data && response?.userData) {
+          replaceResumeData(response?.data);
+          updateUserData(response?.userData);
+          return router.push("/resume-builder");
         }
       } catch (error) {
+        console.log(error)
         toast.error("Unable to generate your CV");
       } finally {
         setIsGeneratingResume(false);
@@ -266,6 +266,7 @@ export default function Home() {
               formData={formData}
               setFormData={setFormData}
               jobRole={jobRole}
+              type={"JobCV"}
             />
           </Dialog>
           <Dialog open={showDialog}>
@@ -285,7 +286,6 @@ export default function Home() {
               <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
                 <div
                   class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]"
-                  onClick={handlefileupload}
                 >
                   <label
                     for="dropzone-file"
@@ -319,7 +319,6 @@ export default function Home() {
                       id="dropzone-file"
                       type="file"
                       class="hidden"
-                      ref={inputRef}
                       onChange={handleuploadResume}
                     />
                   </label>
@@ -358,7 +357,7 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <Dialog open={generatingResume}>
-            <DialogContent onClick showCloseButton className="bg-blue-900">
+            <DialogContent onClick={handleDialogClose}  >
               <div className="mx-auto flex items-center flex-col">
                 <Lottie
                   animationData={animation}
@@ -388,7 +387,7 @@ export default function Home() {
                 </div>
                 <div className="w-full col-span-7 md:col-span-3 ">
                   <button
-                    className="bg-blue-900 text-white px-3 py-2 rounded-lg flex items-center gap-2 mx-auto"
+                    className="bg-blue-900 text-white 2xl:px-3 xl:px-2 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
                     onClick={() => handleGenerateNow()}
                   >
                     Generate Now <RiAiGenerate className="text-xl font-bold" />

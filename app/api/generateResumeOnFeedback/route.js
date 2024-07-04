@@ -2,9 +2,9 @@ import { serverInstance } from '@/lib/serverApi';
 
 export async function POST(req, res) {
     try {
-        const { message } = await req.json();
+        const { message, type } = await req.json();
         const token = req.headers.get('Authorization');
-        const response = await serverInstance.post('/openai/generateResumeOnFeeback', { message }, {
+        const response = await serverInstance.post('/openai/generateResumeOnFeeback', { message, type }, {
             headers: {
                 'Authorization': token
             }
@@ -14,8 +14,12 @@ export async function POST(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: error.response.status === 400 ? "Insufficient optimizer tokens" : "Error generating feedback" }), {
-            status: error.response.status || 500,
+        console.log(error)
+        const errorMessage = error.response ? error.response.data : { error: "Error generating feedback" };
+        const statusCode = error.response ? error.response.status : 500;
+
+        return new Response(JSON.stringify(errorMessage), {
+            status: statusCode,
             headers: { 'Content-Type': 'application/json' }
         });
     }

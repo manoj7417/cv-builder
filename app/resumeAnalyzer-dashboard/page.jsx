@@ -27,8 +27,9 @@ import Header from "../Layout/Header";
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const userState = useUserStore((state) => state.userState);
   const router = useRouter();
+  const userState = useUserStore((state) => state.userState)
+  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens();

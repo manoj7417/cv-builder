@@ -229,6 +229,7 @@ const ResumeView = ({ setIsContentVisible }) => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
+  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
 
 
   const handleClickOutside = (event) => {
@@ -284,10 +285,11 @@ const ResumeView = ({ setIsContentVisible }) => {
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens()
     const templateName = resumeData.metadata.template;
-    if (!userdata?.subscription.status) {
+        if (!userdata?.subscription.status) {
       return router.push('/login')
     }
     if (userdata.subscription.status !== 'Active') {
+      updateRedirectPricingRoute('resume-builder')
       return router.push('/pricing')
     } else {
       handleDownloadResume(accessToken.value)
@@ -432,8 +434,8 @@ const ResumeView = ({ setIsContentVisible }) => {
                   <Lottie animationData={animation} />
                 </div>
                 <div className="w-[50%] flex flex-col  justify-center">
-                  <div className="text-fancy text-5xl">
-                    <h1>Did you know?</h1>
+                  <div className="text-fancy text-5xl text-center">
+                    <h1 className="my-2">Did you know?</h1>
                     <p className="text-xl my-3">{funfact}</p>
                   </div>
                   <div className="flex mt-10 items-center justify-center">
