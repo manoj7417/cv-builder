@@ -46,7 +46,8 @@ import { generateCareerAdvice } from "../api/api";
 import CareerSummary from "./CareerSummary";
 
 export default function Page() {
-  const [showIntro, setShowIntro] = useState(true);
+  
+  const [showIntro, setShowIntro] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -224,7 +225,7 @@ export default function Page() {
         // Save parsedData into localStorage
         localStorage.setItem("careerAdviceData", JSON.stringify(parsedData));
         setApiResponse(parsedData);
-      } catch (error) {
+      } catch (error) { 
         console.log(error);
       } finally {
         setShowDialog(false);
@@ -240,8 +241,6 @@ export default function Page() {
     setShowDialog(false);
   };
 
-  
-
   console.log("ParsedData Api Response::::", apiResponse);
 
   return (
@@ -249,7 +248,7 @@ export default function Page() {
       <div className="flex min-h-screen w-full bg-background p-5">
         <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
           <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
-            {showIntro && (
+            {currentStep === 0 && showIntro && (
               <div className="flex justify-center items-center flex-1">
                 <div className="text-center">
                   <h1 className="text-5xl font-bold text-blue-950">
