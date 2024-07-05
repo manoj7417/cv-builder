@@ -15,88 +15,87 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import {useUserDataStore} from "@/app/store/useUserDataStore"
 
 export default function UserData({ setAnswers, setUserData }) {
-  const [showIntro, setShowIntro] = useState(true);
-  const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   
-
-  const [bioData, setBioData] = useState({
-    "Current Pursuits and Activities": [
-      {
-        question:
-          "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "What is your highest level of education?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "Which subjects or areas do you feel most confident in?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question:
-          "Can you share any notable achievements or activities you have participated in recently?",
-        answer: "",
-        type: "input",
-      },
-    ],
-    "Hobbies and Interests": [
-      {
-        question: "What hobbies or activities do you enjoy in your free time?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question:
-          "Are there any subjects or topics you are particularly passionate about?",
-        answer: "",
-        type: "input",
-      },
-    ],
-    "Strengths and Weaknesses": [
-      {
-        question:
-          "What do you consider to be your greatest strengths or skills?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "Are there any areas where you feel you need improvement?",
-        answer: "",
-        type: "input",
-      },
-    ],
-    "Career Aspirations": [
-      {
-        question: "What are your career goals or aspirations?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "Is there a specific career path you are interested in?",
-        answer: "",
-        type: "input",
-      },
-    ],
-    "Location and Age": [
-      {
-        question: "Which country do you currently reside in?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "How old are you?",
-        answer: "",
-        type: "input",
-      },
-    ],
-  });
+  const { bioData, setBioData, currentStep, nextStep, previousStep } = useUserDataStore();
+  
+  // const [bioData, setBioData] = useState({
+  //   "Current Pursuits and Activities": [
+  //     {
+  //       question:
+  //         "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question: "What is your highest level of education?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question: "Which subjects or areas do you feel most confident in?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question:
+  //         "Can you share any notable achievements or activities you have participated in recently?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Hobbies and Interests": [
+  //     {
+  //       question: "What hobbies or activities do you enjoy in your free time?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question:
+  //         "Are there any subjects or topics you are particularly passionate about?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Strengths and Weaknesses": [
+  //     {
+  //       question:
+  //         "What do you consider to be your greatest strengths or skills?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question: "Are there any areas where you feel you need improvement?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Career Aspirations": [
+  //     {
+  //       question: "What are your career goals or aspirations?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question: "Is there a specific career path you are interested in?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  //   "Location and Age": [
+  //     {
+  //       question: "Which country do you currently reside in?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //     {
+  //       question: "How old are you?",
+  //       answer: "",
+  //       type: "input",
+  //     },
+  //   ],
+  // });
 
   const categories = Object.keys(bioData);
 
@@ -141,7 +140,6 @@ export default function UserData({ setAnswers, setUserData }) {
 
 
     // Update localStorage whenever bioData changes
-
 
 
   const transformApiResponse = (apiResponse) => {
@@ -204,17 +202,23 @@ export default function UserData({ setAnswers, setUserData }) {
     return transformedResponse;
   };
 
+  // const handleInputChange = (category, questionIndex, newAnswer) => {
+  //   setBioData((prevAnswers) => {
+  //     const updatedCategory = prevAnswers[category].map((q, i) =>
+  //       i === questionIndex ? { ...q, answer: newAnswer } : q
+  //     );
+  //     return {
+  //       ...prevAnswers,
+  //       [category]: updatedCategory,
+  //     };
+  //   });
+  // };
+
+
   const handleInputChange = (category, questionIndex, newAnswer) => {
-    setBioData((prevAnswers) => {
-      const updatedCategory = prevAnswers[category].map((q, i) =>
-        i === questionIndex ? { ...q, answer: newAnswer } : q
-      );
-      return {
-        ...prevAnswers,
-        [category]: updatedCategory,
-      };
-    });
-  };
+    setBioData(category, questionIndex, newAnswer);
+  }
+
 
   const handleNext = () => {
     window.scrollTo(0, 0);
@@ -224,15 +228,17 @@ export default function UserData({ setAnswers, setUserData }) {
       )
     ) {
       setIsValid(false);
-      setCurrentStep((prevStep) => prevStep + 1);
+      nextStep();
+      // setCurrentStep((prevStep) => prevStep + 1);
     } else {
       setIsValid(true);
     }
   };
 
   const handlePrevious = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
     setIsValid(false);
+    previousStep();
+    // setCurrentStep((prevStep) => prevStep - 1);
   };
 
   const handleSubmit = async () => {
@@ -247,13 +253,7 @@ export default function UserData({ setAnswers, setUserData }) {
         const token = accessToken.value;
         const data = await getCareerCounselling(bioData, token);
         const transformedResponse = transformApiResponse(data);
-        // Store transformedResponse in localStorage
-        localStorage.setItem(
-          "careerCounsellingData",
-          JSON.stringify(transformedResponse)
-        );
-
-        setAnswers(transformedResponse); // Update answers in the parent component
+        setAnswers(transformedResponse);
         setUserData(false);
       } catch (error) {
         console.error("Error submitting form:", error);
