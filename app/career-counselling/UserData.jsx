@@ -12,12 +12,14 @@ import CustomLoader from "../ui/CustomLoader";
 import Image from "next/image";
 import { GetTokens } from "../actions";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import {useUserDataStore} from "@/app/store/useUserDataStore"
 
 export default function UserData({ setAnswers, setUserData }) {
   const [showIntro, setShowIntro] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  
 
   const [bioData, setBioData] = useState({
     "Current Pursuits and Activities": [
@@ -137,13 +139,10 @@ export default function UserData({ setAnswers, setUserData }) {
   //   return transformedResponse;
   // };
 
-  // Update localStorage whenever bioData changes
 
-  // Load data from localStorage on component mount
+    // Update localStorage whenever bioData changes
 
-  // Load data from localStorage on component mount
 
- 
 
   const transformApiResponse = (apiResponse) => {
     // Initialize an empty object to store transformed data
@@ -248,6 +247,12 @@ export default function UserData({ setAnswers, setUserData }) {
         const token = accessToken.value;
         const data = await getCareerCounselling(bioData, token);
         const transformedResponse = transformApiResponse(data);
+        // Store transformedResponse in localStorage
+        localStorage.setItem(
+          "careerCounsellingData",
+          JSON.stringify(transformedResponse)
+        );
+
         setAnswers(transformedResponse); // Update answers in the parent component
         setUserData(false);
       } catch (error) {
@@ -265,27 +270,9 @@ export default function UserData({ setAnswers, setUserData }) {
   };
 
 
-
   useEffect(() => {
-    const storedBioData = localStorage.getItem('bioData');
-    if (storedBioData) {
-      setBioData(JSON.parse(storedBioData));
-    }
-
-    const storedCurrentStep = localStorage.getItem('currentStep');
-    if (storedCurrentStep !== null) {
-      setCurrentStep(parseInt(storedCurrentStep, 10));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('bioData', JSON.stringify(bioData));
+    localStorage.setItem("careerCounsellingData", JSON.stringify(bioData));
   }, [bioData]);
-
-  useEffect(() => {
-    localStorage.setItem('currentStep', currentStep.toString());
-  }, [currentStep]);
-
 
   return (
     <>
