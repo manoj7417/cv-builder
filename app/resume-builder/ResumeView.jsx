@@ -285,7 +285,7 @@ const ResumeView = ({ setIsContentVisible }) => {
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens()
     const templateName = resumeData.metadata.template;
-    if (!userdata?.subscription.status) {
+        if (!userdata?.subscription.status) {
       return router.push('/login')
     }
     if (userdata.subscription.status !== 'Active') {

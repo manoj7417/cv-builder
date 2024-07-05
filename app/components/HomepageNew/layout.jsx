@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
+
 export const metadata = {
-  title: "Best Resumé Template, CV Building Tool, & CV Enhancer",
+  title: "Advanced CV Maker | Build Your Resume Instantly ",
   description:
-    "Create a Resume for Freshers with Resume Generator, Resume Editor, and Resume Enhancer at Genies Career Hub and skyrocket your chances of getting dream job. ",
+    "Try our Resume Builder to create your resume with perfection and build a flawless Curriculum Vitae application profile. Explore more features of CV Maker here.  ",
 };
 const Layout = ({ children }) => {
   return (

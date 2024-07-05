@@ -1,8 +1,9 @@
 import React from "react";
+
 export const metadata = {
-  title: "Best Resumé Template, CV Building Tool, & CV Enhancer",
+  title: "Genies Pro Intelligent AI Based CV Match and CV Creators  ",
   description:
-    "Create a Resume for Freshers with Resume Generator, Resume Editor, and Resume Enhancer at Genies Career Hub and skyrocket your chances of getting dream job. ",
+    "Match your job role with best professional curriculum vitae by Genies Career Hub’s CV Match services and AI-based CV Creators for impressive job application.  ",
 };
 const Layout = ({ children }) => {
   return (

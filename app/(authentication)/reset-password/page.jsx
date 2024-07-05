@@ -68,6 +68,10 @@ const ResetPasswordFunc = () => {
         }
     };
 
+    useEffect(() => {
+        if (!token) return router.push('/login')
+    }, [])
+
 
     return (
         <section>
