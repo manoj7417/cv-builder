@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
