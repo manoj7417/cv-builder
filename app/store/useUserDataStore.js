@@ -87,6 +87,7 @@ export const useUserDataStore = create(
             },
           ],
         },
+        answers: {},
         currentStep: 0,
         setBioData: (category, questionIndex, newAnswer) =>
           set((state) => {
@@ -107,6 +108,10 @@ export const useUserDataStore = create(
         previousStep: () =>
           set((state) => ({
             currentStep: state.currentStep - 1,
+          })),
+        setAnswers: (newAnswers) =>
+          set((state) => ({
+            answers: newAnswers,
           })),
       }),
       {

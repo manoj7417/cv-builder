@@ -12,14 +12,25 @@ import CustomLoader from "../ui/CustomLoader";
 import Image from "next/image";
 import { GetTokens } from "../actions";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import {useUserDataStore} from "@/app/store/useUserDataStore"
+import { useUserDataStore } from "@/app/store/useUserDataStore";
 
-export default function UserData({ setAnswers, setUserData }) {
+export default function UserData({ setUserData }) {
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  
-  const { bioData, setBioData, currentStep, nextStep, previousStep } = useUserDataStore();
-  
+
+  const {
+    bioData,
+    setBioData,
+    currentStep,
+    nextStep,
+    previousStep,
+    answers,
+    setAnswers,
+  } = useUserDataStore();
+
+  console.log("answers:::", answers);
+  // console.log("currentstep:::",currentStep)
+
   // const [bioData, setBioData] = useState({
   //   "Current Pursuits and Activities": [
   //     {
@@ -138,9 +149,7 @@ export default function UserData({ setAnswers, setUserData }) {
   //   return transformedResponse;
   // };
 
-
-    // Update localStorage whenever bioData changes
-
+  // Update localStorage whenever bioData changes
 
   const transformApiResponse = (apiResponse) => {
     // Initialize an empty object to store transformed data
@@ -214,11 +223,9 @@ export default function UserData({ setAnswers, setUserData }) {
   //   });
   // };
 
-
   const handleInputChange = (category, questionIndex, newAnswer) => {
     setBioData(category, questionIndex, newAnswer);
-  }
-
+  };
 
   const handleNext = () => {
     window.scrollTo(0, 0);
@@ -252,9 +259,11 @@ export default function UserData({ setAnswers, setUserData }) {
         const { accessToken } = await GetTokens();
         const token = accessToken.value;
         const data = await getCareerCounselling(bioData, token);
-        const transformedResponse = transformApiResponse(data);
-        setAnswers(transformedResponse);
-        setUserData(false);
+        console.log("data:::", data?.data);
+        // const answerData = JSON.parse(data?.data);
+        // const transformedResponse = transformApiResponse(data);
+        // setAnswers(answerData);
+        // setUserData(false);
       } catch (error) {
         console.error("Error submitting form:", error);
       } finally {
@@ -268,7 +277,6 @@ export default function UserData({ setAnswers, setUserData }) {
   const handleClose = () => {
     setShowDialog(false);
   };
-
 
   useEffect(() => {
     localStorage.setItem("careerCounsellingData", JSON.stringify(bioData));
