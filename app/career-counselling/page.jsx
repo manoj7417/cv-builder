@@ -44,128 +44,19 @@ import CustomLoader from "../ui/CustomLoader";
 import "./CareerCounselling.css";
 import { generateCareerAdvice } from "../api/api";
 import CareerSummary from "./CareerSummary";
+import { useUserDataStore } from "../store/useUserDataStore";
 
 export default function Page() {
-  
   const [showIntro, setShowIntro] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [userData, setUserData] = useState(true);
   const [apiResponse, setApiResponse] = useState(null);
+  const { answers } = useUserDataStore();
 
-  const [answers, setAnswers] = useState({
-    "Current Pursuits and Activities": [
-      {
-        question:
-          "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "What is your highest level of education?",
-        options: ["High School", "Bachelor's Degree", "Master's Degree", "PhD"],
-        answer: "",
-        type: "mcq",
-      },
-      {
-        question: "Which subjects or areas do you feel most confident in?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question:
-          "Can you share any notable achievements or activities you have participated in recently?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question:
-          "What skills or knowledge are you currently working on improving?",
-        options: [
-          "Programming",
-          "Project Management",
-          "Language Skills",
-          "Design",
-        ],
-        answer: "",
-        type: "mcq",
-      },
-    ],
-    "Hobbies and Interests": [
-      {
-        question: "What hobbies or activities do you enjoy in your free time?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question:
-          "Are there any subjects or topics you are particularly passionate about?",
-        options: ["History", "Environment", "Politics", "Healthcare"],
-        answer: "",
-        type: "mcq",
-      },
-    ],
-    "Strengths and Weaknesses": [
-      {
-        question:
-          "What do you consider to be your greatest strengths or skills?",
-        answer: "",
-        type: "input",
-      },
-      {
-        question: "Are there any areas where you feel you need improvement?",
-        options: [
-          "Time Management",
-          "Technical Skills",
-          "Public Speaking",
-          "Teamwork",
-        ],
-        answer: "",
-        type: "mcq",
-      },
-    ],
-    "Career Aspirations": [
-      {
-        question: "What are your career goals or aspirations?",
-        options: [
-          "Entrepreneurship",
-          "Corporate Career",
-          "Academia",
-          "Nonprofit Sector",
-        ],
-        answer: "",
-        type: "mcq",
-      },
-      {
-        question: "Is there a specific career path you are interested in?",
-        options: [
-          "Software Development",
-          "Marketing",
-          "Healthcare",
-          "Education",
-        ],
-        answer: "",
-        type: "mcq",
-      },
-    ],
-    "Location and Age": [
-      {
-        question: "Which country do you currently reside in?",
-        options: ["United States", "United Kingdom", "Canada", "Other"],
-        answer: "",
-        type: "mcq",
-      },
-      {
-        question: "How old are you?",
-        options: ["Under 18", "18-25", "26-35", "Over 35"],
-        answer: "",
-        type: "mcq",
-      },
-    ],
-  });
-
-  const categories = Object.keys(answers);
+  const categories =
+    Object.keys(answers).length > 0 ? Object.keys(answers) : null;
 
   const handleInputChange = (category, questionIndex, newAnswer) => {
     setAnswers((prevAnswers) => {
@@ -225,7 +116,7 @@ export default function Page() {
         // Save parsedData into localStorage
         localStorage.setItem("careerAdviceData", JSON.stringify(parsedData));
         setApiResponse(parsedData);
-      } catch (error) { 
+      } catch (error) {
         console.log(error);
       } finally {
         setShowDialog(false);
@@ -271,12 +162,7 @@ export default function Page() {
             {!apiResponse && (
               <>
                 {userData
-                  ? !showIntro && (
-                      <UserData
-                        setAnswers={setAnswers}
-                        setUserData={setUserData}
-                      />
-                    )
+                  ? !showIntro && <UserData setUserData={setUserData} />
                   : !showIntro && (
                       <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
                         <div className="space-y-4">
@@ -385,7 +271,8 @@ export default function Page() {
                                         <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
                                           <p className="text-center mx-auto text-xl">
                                             Please wait for a moment... <br />{" "}
-                                            while we are generating summary for this test.
+                                            while we are generating summary for
+                                            this test.
                                           </p>
                                           <CustomLoader />
                                         </div>
@@ -403,7 +290,7 @@ export default function Page() {
             )}
             {apiResponse && (
               <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
-                <CareerSummary data={apiResponse} />
+                {/* <CareerSummary data={apiResponse} /> */}
               </section>
             )}
             <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
