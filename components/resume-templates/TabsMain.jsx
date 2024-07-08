@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { FaEllipsisVertical } from "react-icons/fa6";
 import PlusIcon from "../ui/PlusIcon";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
@@ -64,11 +64,10 @@ const TabsMain = () => {
     }
   };
 
-  const handleEditResume = (id) => {
-    console.log(id);
-  };
 
-  const handleDeleteResume = async (id) => {
+
+  const handleDeleteResume = async (e, id) => {
+    e.stopPropagation()
     const { accessToken } = await GetTokens();
     toast.promise(
       deleteUserResume(id, accessToken.value).then((response) => {
@@ -169,10 +168,10 @@ const TabsMain = () => {
                 resumes.map((item, index) => {
                   return (
                     <div
-                      className="relative w-[200px] group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 m-5"
+                      className="relative w-[200px] group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 m-5 cursor-pointer"
                       key={index}
+                      onClick={() => handleResumeClick(item._id)}
                     >
-                      
                       <img
                         alt="CV Template"
                         className="object-cover w-full h-48"
@@ -184,32 +183,27 @@ const TabsMain = () => {
                         }}
                         width="300"
                       />
-                     
-                        <div className="grid grid-cols-7 justify-between items-start gap-2 px-3 py-2 bg-white h-full">
-                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-words col-span-6">
-                            {item.title}
-                          </h3>
-                          <div className="col-span-1">
+
+                      <div className="grid grid-cols-7 justify-between items-start gap-2 px-3 py-2 bg-white h-full">
+                        <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-words col-span-6">
+                          {item.title}
+                        </h3>
+                        <div className="col-span-1">
                           <DropdownMenu>
                             <DropdownMenuTrigger>
-                              <DotsHorizontalIcon className="text-2xl text-blue-900" />
+                              <FaEllipsisVertical className="text-md text-blue-900" />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                               <DropdownMenuItem
-                                onClick={() => handleResumeClick(item._id)}
-                              >
-                                Edit
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleDeleteResume(item._id)}
+                                onClick={(e) => handleDeleteResume(e, item._id)}
                               >
                                 Delete
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
-                          </div>
                         </div>
-                    
+                      </div>
+
                     </div>
                   );
                 })}

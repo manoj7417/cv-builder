@@ -4,6 +4,9 @@ import Image from "next/image";
 import React from "react";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 const locations = [
  
   {
@@ -38,8 +41,7 @@ export default function ContactPageTwo() {
                       >
                         First Name
                       </label>
-                      <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                      <Input
                         type="text"
                         id="first_name"
                         placeholder="First Name"
@@ -52,8 +54,7 @@ export default function ContactPageTwo() {
                       >
                         Last Name
                       </label>
-                      <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                      <Input
                         type="text"
                         id="last_name"
                         placeholder="Last Name"
@@ -67,8 +68,7 @@ export default function ContactPageTwo() {
                     >
                       Email
                     </label>
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                    <Input
                       type="text"
                       id="email"
                       placeholder="Email"
@@ -81,8 +81,7 @@ export default function ContactPageTwo() {
                     >
                       Phone number
                     </label>
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                    <Input
                       type="tel"
                       id="phone_number"
                       placeholder="Phone number"
@@ -95,19 +94,19 @@ export default function ContactPageTwo() {
                     >
                       Message
                     </label>
-                    <textarea
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                    <Textarea
+                      className="flex h-10 w-full"
                       id="message"
                       placeholder="Leave us a message"
                       cols={3}
                     />
                   </div>
-                  <button
+                  <Button
                     type="button"
                     className="w-full rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     Send Message
-                  </button>
+                  </Button>
                 </form>
               </div>
             </div>
