@@ -4,7 +4,7 @@ import { RxComponent1, RxDashboard, RxPaperPlane } from "react-icons/rx";
 
 const CareerSummary = ({ data }) => {
   const summaryData = data ? data : {};
-  console.log("this is summary page::::", data);
+
   return (
     <>
       <div>
