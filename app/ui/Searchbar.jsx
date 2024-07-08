@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 
 const SearchBar = ({ options, setJobRole, jobRole }) => {
@@ -23,7 +24,7 @@ const SearchBar = ({ options, setJobRole, jobRole }) => {
 
   return (
     <div className="relative">
-      <input
+      <Input
         type="text"
         value={jobRole}
         onChange={handleInputChange}

@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
@@ -27,6 +27,7 @@ const FeedbackFuction = () => {
   const [content, setContent] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { id } = useParams();
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const { userdata } = useUserStore((state) => state.userState);
   const updateUserData = useUserStore((state) => state.updateUserData);
@@ -45,11 +46,11 @@ const FeedbackFuction = () => {
   };
   const [steps, setSteps] = useState(1);
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");
   const [formData, setFormData] = useState(initialState);
   const [showMultiStepDialog, setshowMultiStepDialog] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
+
 
   const fetchBetterResume = async () => {
     const { accessToken } = await GetTokens();
@@ -105,16 +106,25 @@ const FeedbackFuction = () => {
     setShowDialog(false)
   }
 
-  useEffect(() => {
-    let value = JSON.parse(localStorage.getItem("feedback"));
-    setContent(value);
-  }, []);
+
+  const fetchAnalysisScore = async (id) => {
+    const { accessToken } = await GetTokens();
+    try {
+      const response = await axios.post('/api/analysisScore', { id }, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken.value
+        }
+      })
+      console.log(response.data.data);
+      setContent(response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    if (status === "success") {
-      handleBetterResumeContent();
-    }
-  }, [status]);
+    fetchAnalysisScore(id)
+  }, [id]);
 
   return (
     <>

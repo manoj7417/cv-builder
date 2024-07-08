@@ -41,7 +41,8 @@ export default function DashboardIdea() {
       return router.push("/pricing");
     }
     let selectedFile = e.target.files[0];
-    if (selectedFile.type !== "application/pdf")
+    if (!selectedFile) return;
+    if (selectedFile?.type !== "application/pdf")
       return toast.error("Please select a valid PDF file");
     setIsAnalysing(true);
     let reader = new FileReader();
@@ -66,11 +67,10 @@ export default function DashboardIdea() {
   const getFeedback = async (message, token) => {
     try {
       const response = await AnalyzeAts(message, token);
-      const value = JSON.parse(response[0].text.value);
-      if (value.analysis.resume_score) {
-        localStorage.setItem("feedback", JSON.stringify(value));
-        router.push("/analyser/feedback");
+      if (response.status === "SUCCESS") {
+        router.push(`/analyser/${response.analysisId}`)
       }
+      const value = JSON.parse(response[0].text.value);
     } catch (error) {
       if (
         error.response.status === 400 &&

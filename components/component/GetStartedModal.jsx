@@ -36,27 +36,25 @@ const GetStartedModal = ({ onClose }) => {
       description: "Automate CV creation by matching the best template with the Job Description.",
       link: "/jobCV",
     },
-  ];  
+  ];
 
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
-          visible ? "opacity-100" : "opacity-0"
-        }`}
+        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"
+          }`}
         onClick={handleClose}
       />
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-8 z-50 transition-transform duration-300 transform ${
-          visible ? "translate-y-0" : "translate-y-full"
-        }`}
+        className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-8 z-50 transition-transform duration-300 transform ${visible ? "translate-y-0" : "translate-y-full"
+          }`}
       >
         {/* Modal content */}
         <h1 className="text-3xl font-bold text-center mb-1">
-        <span className="text-blue-500">Genies Pro CV Studio ,</span> Your Automated Resume Builder!
+          <span className="text-[#2C98CA]">Genies Pro CV Studio ,</span> Your Automated Resume Builder!
         </h1>
         <p className="text-center text-gray-500 text-lg mb-10">
-        Build tailored CVs and reach out to potential employers with confidence.
+          Build tailored CVs and reach out to potential employers with confidence.
         </p>
         <div className="flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20 ">
