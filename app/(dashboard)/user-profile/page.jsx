@@ -9,9 +9,14 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 import toast, { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import { Card } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import { Flat, Heat, Nested } from '@alptugidin/react-circular-progress-bar'
 
 const ProfilePage = () => {
-  
+
   const [isEditable, setIsEditable] = useState(false);
   const { userState, updateUserData } = useUserStore(state => ({
     userState: state.userState,
@@ -20,6 +25,8 @@ const ProfilePage = () => {
   const userdata = userState?.userdata || {};
   const [previewImage, setPreviewImage] = useState(userdata?.profilePicture || "https://via.placeholder.com/150");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [analysisData, setAnalysisData] = useState([])
+  const router = useRouter()
 
   const fileUploadRef = useRef(null);
 
@@ -75,11 +82,11 @@ const ProfilePage = () => {
         reset(userdata);
 
         await SetTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken });
-        toast.success("Profile updated successfully",{
+        toast.success("Profile updated successfully", {
           position: "top-right",
         });
-      } 
-     
+      }
+
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -97,13 +104,35 @@ const ProfilePage = () => {
     }
   };
 
+  const fetchUserAnalysisHistory = async () => {
+    const { accessToken } = await GetTokens()
+    try {
+      const response = await axios.get('/api/userCvAnalysis', {
+        headers: {
+          Authorization: 'Bearer ' + accessToken.value
+        }
+      })
+      setAnalysisData(response.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleUserAnalysis = (id) => {
+    router.push(`/analyser/${id}`)
+  }
+
+  useEffect(() => {
+    fetchUserAnalysisHistory()
+  }, [])
+
   return (
     <>
-      <section className="bg-gradient-to-r from-white to-[#dcecff] py-20">
+      <section className="bg-gradient-to-r from-white to-[#dcecff] pt-32">
         <div className="container mx-auto px-5">
           <form onSubmit={handleSubmit(userProfileHandler)}>
             <div className="flex flex-wrap">
-              <div className="w-full lg:w-1/3 mb-4 p-5">
+              <div className="w-full lg:w-1/3 mb-4 p-5 h-auto">
                 <div className="bg-white rounded shadow p-4 text-center">
                   <div className="w-30 flex items-center justify-center relative">
                     <img
@@ -136,7 +165,7 @@ const ProfilePage = () => {
                   <p className="text-gray-500 mb-4 text-sm">{userdata?.address}</p>
                 </div>
               </div>
-              <div className="w-full lg:w-2/3 p-5">
+              <div className="w-full lg:w-2/3 p-5 h-auto">
                 <div className="bg-gray-50 rounded shadow mb-4 p-4">
                   <div className="flex items-center justify-end">
                     {isEditable ? (
@@ -239,6 +268,49 @@ const ProfilePage = () => {
               </div>
             </div>
           </form>
+        </div>
+      </section>
+      <section className="w-full border-2 py-10 px-20">
+        <h1 className="text-blue-950 text-2xl ">CV Analyser History</h1>
+        <div className="flex flex-wrap py-10">
+          {
+            analysisData.length > 0 && analysisData.map((item, index) => {
+              return (
+                <Card className="w-[200px] mr-10 my-4 cursor-pointer" key={item._id} onClick={() => handleUserAnalysis(item._id)}>
+                  <div className="p-4">
+                    <div className="p-4">
+                      <Heat
+                        progress={item.analysis.resume_score}
+                        range={{ from: 0, to: 100 }}
+                        sign={{ value: '%', position: 'end' }}
+                        showValue={true}
+                        revertBackground={false}
+                        text={'Score'}
+                        sx={{
+                          barWidth: 10,
+                          bgColor: '#2FA0E0',
+                          shape: 'half',
+                          valueSize: 13,
+                          textSize: 13,
+                          valueFamily: 'Trebuchet MS',
+                          textFamily: 'Trebuchet MS',
+                          valueWeight: 'normal',
+                          textWeight: 'normal',
+                          textColor: '#000000',
+                          valueColor: '#000000',
+                          loadingTime: 1000,
+                          strokeLinecap: 'round',
+                          valueAnimation: true,
+                          intersectionEnabled: true
+                        }}
+                      />
+                    </div>
+                    <p >{item.createdAt}</p>
+                  </div>
+                </Card>
+              )
+            })
+          }
         </div>
       </section>
       <Toaster />
