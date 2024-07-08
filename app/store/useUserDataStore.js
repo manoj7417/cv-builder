@@ -89,6 +89,7 @@ export const useUserDataStore = create(
         },
         answers: {},
         currentStep: 0,
+        contentType: "Intro",
         setBioData: (category, questionIndex, newAnswer) =>
           set((state) => {
             const updatedCategory = state.bioData[category].map((q, i) =>
@@ -113,6 +114,14 @@ export const useUserDataStore = create(
           set((state) => ({
             answers: newAnswers,
           })),
+        setContentType: (newContentType) =>
+          set((state) => ({
+            contentType: newContentType,
+          })),
+        resetSteps: () =>
+          set((state) => ({
+            currentStep: 0
+          }))
       }),
       {
         enabled: true,
