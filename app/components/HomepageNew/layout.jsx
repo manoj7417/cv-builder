@@ -2,9 +2,9 @@
 import React from "react";
 
 export const metadata = {
-  title: "Advanced CV Maker | Build Your Resume Instantly ",
+  title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
   description:
-    "Try our Resume Builder to create your resume with perfection and build a flawless Curriculum Vitae application profile. Explore more features of CV Maker here.  ",
+    "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
 };
 const Layout = ({ children }) => {
   return (

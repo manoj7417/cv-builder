@@ -1,9 +1,9 @@
 import React from "react";
 
 export const metadata = {
-  title: "Genies Pro Intelligent AI Based CV Match and CV Creators  ",
+  title: "Professional CV Creators, Resume Coach, and Curriculum Vitae",
   description:
-    "Match your job role with best professional curriculum vitae by Genies Career Hub’s CV Match services and AI-based CV Creators for impressive job application.  ",
+    "Build best professional curriculum vitae with Professional CV Creators, Resume Coach, and Job Description relevant CVs with Genies Career Hub’s Pro CV Match.",
 };
 const Layout = ({ children }) => {
   return (

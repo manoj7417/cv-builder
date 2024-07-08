@@ -1,5 +1,10 @@
 import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
+export const metadata = {
+  title: "GDPR Policy: Genies Career Hub",
+  description:
+    "We completely comply with the General Data Protection Regulation GDPR. Read about the protection of your personal data and information at Genies Career Hub.",
+};
 
 const Layout = ({ children }) => {
   return (

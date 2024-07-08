@@ -5,9 +5,9 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 });
 
 export const metadata = {
-  title: "ATS CV Resume Checker Online for Best Resume Formatting  ",
+  title: "Build ATS Friendly Resume with ATS CV Resume Checker Online",
   description:
-    "Create an enhanced Application Tracking System ATS Friendly Resume with Genies Career Hub’s ATS Resume Checker and crack the job application code immediately.  ",
+    "Create an enhanced Application Tracking System ATS Friendly Resume with Genies Career Hub’s ATS Resume Checker and crack the Job Code with ATS Friendly Resume.",
 };
 const Layout = ({ children }) => {
   return (
