@@ -14,7 +14,7 @@ import { GetTokens } from "../actions";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useUserDataStore } from "@/app/store/useUserDataStore";
 
-export default function UserData({ setUserData }) {
+export default function UserData() {
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
@@ -26,130 +26,16 @@ export default function UserData({ setUserData }) {
     previousStep,
     answers,
     setAnswers,
+    resetSteps,
+    setContentType
   } = useUserDataStore();
 
-  console.log("answers:::", answers);
-  // console.log("currentstep:::",currentStep)
 
-  // const [bioData, setBioData] = useState({
-  //   "Current Pursuits and Activities": [
-  //     {
-  //       question:
-  //         "Are you studying? If yes, what are you studying? If you are working, what is your role and describe your work?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question: "What is your highest level of education?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question: "Which subjects or areas do you feel most confident in?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question:
-  //         "Can you share any notable achievements or activities you have participated in recently?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Hobbies and Interests": [
-  //     {
-  //       question: "What hobbies or activities do you enjoy in your free time?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question:
-  //         "Are there any subjects or topics you are particularly passionate about?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Strengths and Weaknesses": [
-  //     {
-  //       question:
-  //         "What do you consider to be your greatest strengths or skills?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question: "Are there any areas where you feel you need improvement?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Career Aspirations": [
-  //     {
-  //       question: "What are your career goals or aspirations?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question: "Is there a specific career path you are interested in?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  //   "Location and Age": [
-  //     {
-  //       question: "Which country do you currently reside in?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //     {
-  //       question: "How old are you?",
-  //       answer: "",
-  //       type: "input",
-  //     },
-  //   ],
-  // });
+
+
 
   const categories = Object.keys(bioData);
 
-  // const transformApiResponse = (apiResponse) => {
-  //   console.log("apiResponse:::", apiResponse?.data);
-  //   const transformedResponse = {
-  //     "Career Aptitude Assessment": apiResponse?.data?.[
-  //       "Career Aptitude Assessment"
-  //     ].map((q) => ({
-  //       question: q.question,
-  //       options: q.options || [],
-  //       answer: "",
-  //       type: q.type,
-  //     })),
-  //     "Interest Inventory": apiResponse?.data?.["Interest Inventory"].map(
-  //       (q) => ({
-  //         question: q.question,
-  //         options: q.options || [],
-  //         answer: "",
-  //         type: q.type,
-  //       })
-  //     ),
-  //     "Personality Assessment": apiResponse?.data?.[
-  //       "Personality Assessment"
-  //     ].map((q) => ({
-  //       question: q.question,
-  //       options: q.options || [],
-  //       answer: "",
-  //       type: q.type,
-  //     })),
-  //     "Values and Motivations": apiResponse?.data?.[
-  //       "Values and Motivations"
-  //     ].map((q) => ({
-  //       question: q.question,
-  //       options: q.options || [],
-  //       answer: "",
-  //       type: q.type,
-  //     })),
-  //   };
-  //   return transformedResponse;
-  // };
-
-  // Update localStorage whenever bioData changes
 
   const transformApiResponse = (apiResponse) => {
     // Initialize an empty object to store transformed data
@@ -259,11 +145,10 @@ export default function UserData({ setUserData }) {
         const { accessToken } = await GetTokens();
         const token = accessToken.value;
         const data = await getCareerCounselling(bioData, token);
-        console.log("data:::", data?.data);
-        // const answerData = JSON.parse(data?.data);
-        // const transformedResponse = transformApiResponse(data);
-        // setAnswers(answerData);
-        // setUserData(false);
+        const answerData = data?.data
+        setAnswers(answerData);
+        setContentType('generateQuestions')
+        resetSteps()
       } catch (error) {
         console.error("Error submitting form:", error);
       } finally {
