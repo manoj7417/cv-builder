@@ -1,8 +1,8 @@
 import Footer from "../Layout/Footer";
 export const metadata = {
-  title: "Online Career Counselling | Business, Job and Career Coach ",
+  title: "Expert Career Advisor for Career Change and Life Coach ",
   description:
-    "Try out the Resume Professional Career Counselling available at Genies Career Hub Job and Career Coach for Resume Help and other Job Counselling services. ",
+    "Choose Career Counselling and Coach and get help from a professional job and career advisor on how to proceed with Career Change, Resume Services, and more.",
 };
 const Layout = ({ children }) => {
   return (

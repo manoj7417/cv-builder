@@ -1,5 +1,10 @@
 import Footer from "../Layout/Footer"
 import NewResumeHeader from "../Layout/NewResumeHeader"
+export const metadata = {
+  title: "Returns Policy: Genies Career Hub",
+  description:
+    "Want to register a return or exchange an unwanted purchase? Check out terms, conditions, and policies for returns for complete details regarding your purchase.",
+};
 
 const Layout = ({ children }) => {
     return (

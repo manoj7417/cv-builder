@@ -2,6 +2,8 @@ import Footer from "../Layout/Footer"
 import NewResumeHeader from "../Layout/NewResumeHeader"
 import ResumeHeader from "../Layout/ResumeHeader"
 
+
+
 const Layout = ({ children }) => {
     return (
       <main className="resume_dashboard" >
