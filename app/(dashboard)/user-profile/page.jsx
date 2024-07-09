@@ -611,7 +611,7 @@ const ProfilePage = () => {
               <div className="summary_cards relative" key={index}>
                 <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">
-                    <h5 className="mb-2 text-base font-bold text-gray-900">
+                    <h5 className="mb-2 text-xl font-bold text-gray-900">
                       User Summary
                     </h5>
                   </a>
