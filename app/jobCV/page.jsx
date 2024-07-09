@@ -159,7 +159,7 @@ export default function Home() {
     message = message + `generate resume for this ${jobRole}`;
     try {
       const response = await axios.post(
-        "/api/generateResumeOnFeedback",
+        "/api/generateMultiStepFeedback",
         { message, type: "JobCV" },
         {
           headers: {
@@ -198,9 +198,9 @@ export default function Home() {
           return;
         }
         const response = await fetchBetterResume(text, accessToken);
-        if (response?.data && response?.userData) {
+        if (response?.data && response?.userdata) {
           replaceResumeData(response?.data);
-          updateUserData(response?.userData);
+          updateUserData(response?.userdata);
           return router.push("/resume-builder");
         }
       } catch (error) {
