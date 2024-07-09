@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { uploadImage, updateUserProfile } from "@/app/api/api";
 import { GetTokens, SetTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
@@ -608,7 +609,7 @@ const ProfilePage = () => {
           <div className="grid grid-cols-4 gap-10">
             {testSummary?.map((val, index) => (
               <div className="summary_cards" key={index}>
-                <div className="max-w-sm p-6 min-h-[200px] bg-white border border-gray-200 rounded-lg shadow">
+                <div className="max-w-sm p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">
                     <h5 className="mb-2 text-xl font-bold text-gray-900">
                       User Summary
@@ -644,49 +645,256 @@ const ProfilePage = () => {
             ))}
 
             {showPopup && popupData && (
-              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white max-w-3xl w-full p-6 rounded-lg shadow-lg">
-                  <div className="summary_header text-center mb-6">
-                    <h2 className="text-2xl font-bold">Detailed Summary</h2>
-                  </div>
-                  <div className="flex">
-                    <div className="bg-gray-100 p-4 rounded-l-lg w-1/4">
-                      <ul className="space-y-3">
-                        <li>
-                          <strong>Interests:</strong>
-                        </li>
-                        <li>
-                          <strong>Strengths:</strong>
-                        </li>
-                        <li>
-                          <strong>Values:</strong>
-                        </li>
-                        <li>
-                          <strong>Weaknesses:</strong>
-                        </li>
-                        <li>
-                          <strong>Goals:</strong>
-                        </li>
-                        <li>
-                          <strong>Preferences:</strong>
-                        </li>
-                      </ul>
+              <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white max-w-5xl h-[500px] w-full p-6 rounded-lg shadow-lg">
+                  <button
+                    onClick={closePopup}
+                    className="absolute top-[4rem] right-[8rem] text-gray-400 hover:text-gray-600 focus:outline-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <Tabs
+                    className="w-full py-5"
+                    defaultValue="actionableInsights"
+                  >
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto">
+                      <TabsTrigger
+                        value="actionableInsights"
+                        className=" text-blue-950 rounded-md text-base"
+                      >
+                        Actionable Insights
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="training"
+                        className=" text-blue-950 rounded-md text-base"
+                      >
+                        Training
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="careerSuggestions"
+                        className=" text-blue-950 rounded-md text-base"
+                      >
+                        Career Suggestions
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="summary"
+                        className=" text-blue-950 rounded-md text-base"
+                      >
+                        Summary
+                      </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="actionableInsights" className="mb-4">
+                      <div className="actions_section max-w-4xl mx-auto">
+                        <div>
+                          <h2 className="text-xl font-bold mb-6 text-blue-950">
+                            Actionable Insights
+                          </h2>
+                          <ul className="space-y-3 text-sm">
+                            <li>
+                              <strong>Skill Development:</strong>{" "}
+                              {popupData.actionableInsights.experience}
+                            </li>
+                            <li>
+                              <strong>Networking:</strong>
+                              {popupData.actionableInsights.skillDevelopment}
+                            </li>
+                            <li>
+                              <strong>Experience:</strong>
+                              {popupData.actionableInsights.networking}
+                            </li>
+                            <li>
+                              <strong>Weaknesses:</strong>
+                              {popupData.summary.weaknesses}
+                            </li>
+                            <li>
+                              <strong>Goals:</strong>
+                              {popupData.summary.goals}
+                            </li>
+                            <li>
+                              <strong>Preferences:</strong>
+                              {popupData.summary.preferences}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent className="mb-6" value="training">
+                      <div className="training_section max-w-4xl mx-auto summary_section">
+                        <div>
+                          <h2 className="text-xl font-bold mb-6 text-blue-950">
+                            Training
+                          </h2>
+
+                          <ul className="space-y-3 text-sm">
+                            <li>
+                              <strong>Courses:</strong>
+                              {popupData.training.courses}
+                            </li>
+                            <li>
+                              <strong>Workshops:</strong>
+                              {popupData.training.workshops}
+                            </li>
+                            <li>
+                              <strong>Certifications:</strong>
+                              {popupData.training.certifications}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent className="mb-6" value="careerSuggestions">
+                      <div className="career_section max-w-4xl mx-auto">
+                        <div className="space-y-3">
+                          <h2 className="text-xl font-bold text-blue-950 flex items-center gap-3">
+                            Career Suggestions
+                          </h2>
+                          <ul className="space-y-3 text-sm">
+                            {popupData?.careerSuggestions.map(
+                              (career, index) => (
+                                <li key={index} className="py-2 space-y-2">
+                                  <strong>Career:</strong> {career.career}
+                                  <br />
+                                  <strong>Reason:</strong> {career.reason}
+                                  <br />
+                                  <strong>Actions:</strong> {career.actions}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent className="mb-6" value="summary">
+                      <div className="max-w-4xl mx-auto summary_section">
+                        <div>
+                          <h2 className="text-xl font-bold mb-6 text-blue-950">
+                            Summary
+                          </h2>
+                          <ul className="space-y-3 text-sm">
+                            <li>
+                              <strong>Interests :</strong>
+                              {popupData.summary.interests}
+                            </li>
+                            <li>
+                              <strong>Strengths:</strong>
+                              {popupData.summary.strengths}
+                            </li>
+                            <li>
+                              <strong>Values:</strong>
+                              {popupData.summary.values}
+                            </li>
+                            <li>
+                              <strong>Weaknesses:</strong>
+                              {popupData.summary.weaknesses}
+                            </li>
+                            <li>
+                              <strong>Goals:</strong>
+                              {popupData.summary.goals}
+                            </li>
+                            <li>
+                              <strong>Preferences:</strong>
+                              {popupData.summary.preferences}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                  {/* <div className="summary_section">
+                    <div className="summary_header mb-6">
+                      <h2 className="text-2xl font-bold">Summary</h2>
                     </div>
-                    <div className="p-4 w-3/4 space-y-3 text-sm">
-                      <p>{popupData.summary.interests}</p>
-                      <p>{popupData.summary.strengths}</p>
-                      <p>{popupData.summary.values}</p>
-                      <p>{popupData.summary.weaknesses}</p>
-                      <p>{popupData.summary.goals}</p>
-                      <p>{popupData.summary.preferences}</p>
-                      <button
+                    <div className="flex">
+                      <div className="bg-gray-100 p-4 rounded-l-lg w-1/4">
+                        <ul className="space-y-3">
+                          <li>
+                            <strong>Interests:</strong>
+                          </li>
+                          <li>
+                            <strong>Strengths:</strong>
+                          </li>
+                          <li>
+                            <strong>Values:</strong>
+                          </li>
+                          <li>
+                            <strong>Weaknesses:</strong>
+                          </li>
+                          <li>
+                            <strong>Goals:</strong>
+                          </li>
+                          <li>
+                            <strong>Preferences:</strong>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="p-4 w-3/4 space-y-3 text-sm">
+                        <p>{popupData.summary.interests}</p>
+                        <p>{popupData.summary.strengths}</p>
+                        <p>{popupData.summary.values}</p>
+                        <p>{popupData.summary.weaknesses}</p>
+                        <p>{popupData.summary.goals}</p>
+                        <p>{popupData.summary.preferences}</p>
+                        <button
                         onClick={closePopup}
                         className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-md hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300"
                       >
                         Close
                       </button>
+                      </div>
                     </div>
                   </div>
+                  <div className="actions_section">
+                    <div className="summary_header mb-6">
+                      <h2 className="text-2xl font-bold">
+                        Actionable Insights
+                      </h2>
+                    </div>
+                    <div className="flex">
+                      <div className="bg-gray-100 p-4 rounded-l-lg w-1/4">
+                        <ul className="space-y-3">
+                          <li>
+                            <strong>Skill Development:</strong>
+                          </li>
+                          <li>
+                            <strong>Networking:</strong>
+                          </li>
+                          <li>
+                            <strong>Experience:</strong>
+                          </li>
+                          <li>
+                            <strong>Weaknesses:</strong>
+                          </li>
+                          <li>
+                            <strong>Goals:</strong>
+                          </li>
+                          <li>
+                            <strong>Preferences:</strong>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="p-4 w-3/4 space-y-3 text-sm">
+                        <p>{popupData.actionableInsights.experience}</p>
+                        <p>{popupData.actionableInsights.skillDevelopment}</p>
+                        <p>{popupData.actionableInsights.networking}</p>
+                        <p>{popupData.summary.weaknesses}</p>
+                        <p>{popupData.summary.goals}</p>
+                        <p>{popupData.summary.preferences}</p>
+                      </div>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             )}
