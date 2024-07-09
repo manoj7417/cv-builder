@@ -608,38 +608,39 @@ const ProfilePage = () => {
         <div className="summary_cards_wrapper">
           <div className="grid grid-cols-4 gap-10">
             {testSummary?.map((val, index) => (
-              <div className="summary_cards" key={index}>
-                <div className="max-w-sm p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+              <div className="summary_cards relative" key={index}>
+                <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">
-                    <h5 className="mb-2 text-xl font-bold text-gray-900">
+                    <h5 className="mb-2 text-base font-bold text-gray-900">
                       User Summary
                     </h5>
                   </a>
                   <p className="mb-3 font-normal text-sm text-gray-700">
                     Interests: {val.summary.interests}
                   </p>
-                  <a
-                    href="#"
-                    className="inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-blue-950 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300"
-                    onClick={() => handleReadMore(val)}
-                  >
-                    Read more
-                    <svg
-                      className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 14 10"
+                  <div className="summary_card_footer absolute bottom-6 left-6 right-6">
+                    <div
+                      className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
+                      onClick={() => handleReadMore(val)}
                     >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M1 5h12m0 0L9 1m4 4L9 9"
-                      />
-                    </svg>
-                  </a>
+                      Read more
+                      <svg
+                        className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
