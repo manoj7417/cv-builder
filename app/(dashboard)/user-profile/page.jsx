@@ -33,6 +33,8 @@ const ProfilePage = () => {
   );
   const [selectedImage, setSelectedImage] = useState(null);
   const [analysisData, setAnalysisData] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupData, setPopupData] = useState(null);
   const router = useRouter();
 
   const fileUploadRef = useRef(null);
@@ -329,6 +331,16 @@ const ProfilePage = () => {
     },
   ];
 
+  const handleReadMore = (data) => {
+    setPopupData(data);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupData(null);
+  };
+
   useEffect(() => {
     fetchUserAnalysisHistory();
   }, []);
@@ -594,21 +606,21 @@ const ProfilePage = () => {
         </h1>
         <div className="summary_cards_wrapper">
           <div className="grid grid-cols-4 gap-10">
-            {
-              testSummary?.map((val,index)=>(
-                <div className="summary_cards">
-                <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+            {testSummary?.map((val, index) => (
+              <div className="summary_cards">
+                <div className="max-w-sm p-6 min-h-[200px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">
-                    <h5 className="mb-2 text-base font-bold text-gray-900">
-                    Career Summary
+                    <h5 className="mb-2 text-xl font-bold text-gray-900">
+                      User Summary
                     </h5>
                   </a>
                   <p className="mb-3 font-normal text-sm text-gray-700">
-                  Interests: {val.summary.interests}
+                    Interests: {val.summary.interests}
                   </p>
                   <a
                     href="#"
-                    className="inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-blue-950 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                    className="inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-blue-950 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300"
+                    onClick={() => handleReadMore(val)}
                   >
                     Read more
                     <svg
@@ -629,9 +641,55 @@ const ProfilePage = () => {
                   </a>
                 </div>
               </div>
-              ))
-            }
-           
+            ))}
+
+            {showPopup && popupData && (
+              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white max-w-3xl w-full p-6 rounded-lg shadow-lg">
+                  <div className="summary_header text-center mb-6">
+                    <h2 className="text-2xl font-bold">Detailed Summary</h2>
+                  </div>
+                  <div className="flex">
+                    <div className="bg-gray-100 p-4 rounded-l-lg w-1/4">
+                      <ul className="space-y-3">
+                        <li>
+                          <strong>Interests:</strong>
+                        </li>
+                        <li>
+                          <strong>Strengths:</strong>
+                        </li>
+                        <li>
+                          <strong>Values:</strong>
+                        </li>
+                        <li>
+                          <strong>Weaknesses:</strong>
+                        </li>
+                        <li>
+                          <strong>Goals:</strong>
+                        </li>
+                        <li>
+                          <strong>Preferences:</strong>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="p-4 w-3/4 space-y-3 text-sm">
+                      <p>{popupData.summary.interests}</p>
+                      <p>{popupData.summary.strengths}</p>
+                      <p>{popupData.summary.values}</p>
+                      <p>{popupData.summary.weaknesses}</p>
+                      <p>{popupData.summary.goals}</p>
+                      <p>{popupData.summary.preferences}</p>
+                      <button
+                        onClick={closePopup}
+                        className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-md hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
