@@ -27,7 +27,7 @@ export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
   const [userData, setUserData] = useState(true);
   const [apiResponse, setApiResponse] = useState(null);
-  const { answers, setAnswers, contentType, setContentType, nextStep, previousStep, currentStep } = useUserDataStore();
+  const { answers, setAnswers, contentType, setContentType, nextStep, previousStep, currentStep, setSummary } = useUserDataStore();
   const categories = Object.keys(answers).length > 0 ? Object.keys(answers) : null;
 
   const handleInputChange = (category, questionIndex, newAnswer) => {
@@ -92,11 +92,8 @@ export default function Page() {
 
         content = JSON.stringify(content);
         const responseData = await generateCareerAdvice(content, token);
-        console.log("Answers data::", responseData);
         const parsedData = JSON.parse(responseData.data[0].text.value);
-        console.log("parsedData data::", parsedData);
-        // Save parsedData into localStorage
-        localStorage.setItem("careerAdviceData", JSON.stringify(parsedData));
+        setSummary(parsedData)
         setContentType('summary')
         setApiResponse(parsedData);
       } catch (error) {
