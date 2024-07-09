@@ -54,17 +54,18 @@ const FeedbackFuction = () => {
 
   const fetchBetterResume = async () => {
     const { accessToken } = await GetTokens();
-    const message = content?.resumeContent;
+    const analysisId = content?._id;
     setShowDialog(false)
     setIsLoading(true)
     try {
-      const response = await axios.post('/api/generateResumeOnFeedback', { message, type: "optimizer" }, {
+      const response = await axios.post('/api/generateResumeOnFeedback', { analysisId, type: "optimizer" }, {
         headers: {
           Authorization: 'Bearer ' + accessToken.value
         }
       })
       if (response.status === 201) {
-        updateUserData(response.data.data)
+        replaceResumeData(response.data.data)
+        updateUserData(response.data.userdata)
         return router.push('/resume-builder')
       }
     } catch (error) {

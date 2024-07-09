@@ -2,9 +2,9 @@ import { serverInstance } from '@/lib/serverApi';
 
 export async function POST(req, res) {
     try {
-        const { analysisId, type } = await req.json();
+        const { message, type } = await req.json();
         const token = req.headers.get('Authorization');
-        const response = await serverInstance.post('/openai/generateResumeOnFeeback', { analysisId, type }, {
+        const response = await serverInstance.post('/openai/generateFreshResume', { message, type }, {
             headers: {
                 'Authorization': token
             }

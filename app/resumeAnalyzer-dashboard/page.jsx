@@ -74,7 +74,7 @@ export default function DashboardIdea() {
     } catch (error) {
       if (
         error.response.status === 400 &&
-        error.response.data.error === "Insufficient tokens"
+        (error.response.data.error === "Insufficient tokens" || error.response.data.error === "Subscription is inactive or expired")
       ) {
         router.push("/pricing");
       }

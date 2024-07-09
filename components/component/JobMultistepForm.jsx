@@ -361,7 +361,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     const fetchBetterResume = async (message) => {
         const { accessToken } = await GetTokens()
         try {
-            const response = await axios.post('/api/generateResumeOnFeedback', { message, type }, {
+            const response = await axios.post('/api/generateMultiStepFeedback', { message, type }, {
                 headers: {
                     Authorization: 'Bearer ' + accessToken.value
                 }
