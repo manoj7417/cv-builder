@@ -90,6 +90,7 @@ export const useUserDataStore = create(
         answers: {},
         currentStep: 0,
         contentType: "Intro",
+        careerSummary: {},
         setBioData: (category, questionIndex, newAnswer) =>
           set((state) => {
             const updatedCategory = state.bioData[category].map((q, i) =>
@@ -121,6 +122,10 @@ export const useUserDataStore = create(
         resetSteps: () =>
           set((state) => ({
             currentStep: 0
+          })),
+        setSummary: (newSummary) =>
+          set((state) => ({
+            careerSummary: newSummary,
           }))
       }),
       {

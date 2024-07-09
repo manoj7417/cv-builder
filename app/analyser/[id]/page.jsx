@@ -54,7 +54,7 @@ const FeedbackFuction = () => {
 
   const fetchBetterResume = async () => {
     const { accessToken } = await GetTokens();
-    const message = localStorage.getItem('newResumeContent')
+    const message = content?.resumeContent;
     setShowDialog(false)
     setIsLoading(true)
     try {
@@ -115,7 +115,6 @@ const FeedbackFuction = () => {
           Authorization: 'Bearer ' + accessToken.value
         }
       })
-      console.log(response.data.data);
       setContent(response.data.data)
     } catch (error) {
       console.log(error);
