@@ -11,11 +11,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
-export const metadata = {
-  title: "Professional Resume Template and Builder | CV Enhancer",
-  description:
-    "Find the best resumé template on the Genies Career Hub résumé builder. Make your resume online with expert CV Builder, CV Enhancer, and CV Building Tools.",
-};s
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
