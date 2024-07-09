@@ -607,7 +607,7 @@ const ProfilePage = () => {
         <div className="summary_cards_wrapper">
           <div className="grid grid-cols-4 gap-10">
             {testSummary?.map((val, index) => (
-              <div className="summary_cards">
+              <div className="summary_cards" key={index}>
                 <div className="max-w-sm p-6 min-h-[200px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">
                     <h5 className="mb-2 text-xl font-bold text-gray-900">

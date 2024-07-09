@@ -5,6 +5,7 @@ import { useUserDataStore } from "../store/useUserDataStore";
 
 const CareerSummary = () => {
   const { careerSummary } = useUserDataStore();
+
   return (
     <>
       <div>
