@@ -64,9 +64,10 @@ const FeedbackFuction = () => {
         }
       })
       if (response.status === 201) {
+        console.log(response)
         replaceResumeData(response.data.data)
         updateUserData(response.data.userdata)
-        return router.push('/resume-builder')
+        router.push('/resume-builder')
       }
     } catch (error) {
       console.log(error)
