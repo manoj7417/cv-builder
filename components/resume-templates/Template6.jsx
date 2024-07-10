@@ -618,7 +618,7 @@ const Template6 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+      <div className="w-full min-h-screen">
         <div className="bg-white">
           <div className="top_section flex items-start gap-10">
             <div className="name_profile px-10 py-5 w-full h-full">

@@ -571,8 +571,8 @@ const Template8 = () => {
 
   return (
     <>
-      <div className="template_8 max-w-[210mm] max-h-[297mm] w-full h-full py-10">
-        <div className="bg-white">
+      <div className="template_8 py-10">
+        <div className="bg-white w-full min-h-screen ">
           <div className="top_section flex items-start gap-1 justify-start px-10">
             <div className="name_profile">
               <h1

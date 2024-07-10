@@ -465,7 +465,7 @@ const ResumeView = ({ setIsContentVisible }) => {
               }}
             >
               <GetTemplate name={data?.metadata?.template} resumeData={data} />
-              <div className=" text-center  text-gray-500">
+              <div className="text-center  text-gray-500">
                 <p>@Genies Career Hub</p>
               </div>
             </div>
@@ -515,7 +515,7 @@ const ResumeView = ({ setIsContentVisible }) => {
                 <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
-            <div className="choose_templates xl:block hidden">
+            <div className="choose_templates">
               <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
                 <Drawer
                   direction="right"

@@ -571,7 +571,7 @@ const Template9 = () => {
 
   return (
     <>
-      <div className="template_8 w-[210mm] h-full">
+      <div className="template_8 w-full min-h-screen">
         <div
           className="w-full bg-[#E0FBE2]"
         //   style={{

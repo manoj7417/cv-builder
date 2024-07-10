@@ -238,7 +238,7 @@ const Skills = ({ fontStyle, headingColor }) => {
   return (
     <div>
       {data?.visible && data?.items.length > 0 && (
-        <div className="skills_section py-3 ">
+        <div className="skills_section py-2">
           <h2
             className={`${fontStyle.headingFont} text-gray-600 font-semibold uppercase underline underline-offset-8`}
             style={{
@@ -249,8 +249,7 @@ const Skills = ({ fontStyle, headingColor }) => {
           </h2>
           <div className="text-gray-600 my-1">
             <ul
-              role="list"
-              className="list-disc pl-5 text-slate-400 flex flex-wrap w-full h-full gap-8"
+              className="text-slate-400 w-full flex flex-wrap gap-5"
               style={{ color: headingColor }}
             >
               {data?.items.map((item, i) => {
@@ -338,7 +337,7 @@ const Hobbies = ({ fontStyle, headingColor }) => {
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
-    <div className="my-5">
+    <div className="py-2">
       <h2
         className={`relative inline-block font-bold uppercase w-full ${fontStyle.headingFont} underline underline-offset-8`}
         style={{
@@ -584,7 +583,7 @@ export const Template4 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+      <div className="w-full min-h-screen">
         <div className="bg-white p-2 mx-auto">
           <div
             className="top_section flex justify-between items-center rounded-md p-5"
