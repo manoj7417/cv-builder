@@ -529,30 +529,6 @@ const ProfilePage = () => {
                     <div className="p-4 flex justify-center items-center">
                       <div className="md:w-[40%] w-full graph">
                         <div className="p-4 relative z-10">
-                          {/* <Heat
-                          progress={item.analysis.resume_score}
-                          range={{ from: 0, to: 100 }}
-                          sign={{ value: "%", position: "end" }}
-                          showValue={true}
-                          revertBackground={false}
-                          text={"Score"}
-                          sx={{
-                            barWidth: 10,
-                            shape: "half",
-                            valueSize: 13,
-                            textSize: 13,
-                            valueFamily: "Trebuchet MS",
-                            textFamily: "Trebuchet MS",
-                            valueWeight: "normal",
-                            textWeight: "normal", 
-                            textColor: "#000000",
-                            valueColor: "#000000",
-                            loadingTime: 1000,
-                            strokeLinecap: "round",
-                            valueAnimation: true,
-                            intersectionEnabled: true,
-                          }}
-                        /> */}
                           <Flat
                             progress={item.analysis.resume_score}
                             text={"Score"}
@@ -589,13 +565,6 @@ const ProfilePage = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* <div>
-                      <div className="text-blue-600 text-end mx-2 text-sm p-2">
-                        <span className="ml-2 ">
-                          {formatDate(item.createdAt)}
-                        </span>
-                      </div>
-                    </div> */}
                   </Card>
                 );
               })}

@@ -59,7 +59,6 @@ export const generateCareerAdvice = async (data, token) => {
 
 
 
-
 export const usertemplatepurchase = async (data) => {
   try {
     const response = await instance.post('/user/templatepurchase', data, { withCredentials: true });

@@ -610,7 +610,7 @@ const Template13 = () => {
                     {basics?.jobtitle}
                   </h4>
                 </div>
-                <div className="user_image -mb-[220px]">
+                <div className="user_image 2xl:-mb-[220px] -mb-[100px]">
                   {basics?.picture?.url && (
                     <img
                       src={basics.picture.url}
