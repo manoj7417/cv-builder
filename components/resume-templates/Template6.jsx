@@ -375,7 +375,7 @@ const Hobbies = ({ fontStyle, headingColor }) => {
             <ul className="w-full flex flex-wrap gap-5">
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-semibold">
+                  <li key={index} className="text-gray-600 text-15px py-2 font-bold">
                     {item}
                   </li>
                 );
