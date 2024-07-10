@@ -281,7 +281,7 @@ export default function Page() {
                   </h1>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex justify-center items-center flex-1 w-full h-full">
+                  <div className="flex justify-center items-center flex-1 w-full">
                     <div>
                       <p className="my-4 font-medium text-center">
                         Please follow these instructions to provide answers to
@@ -289,30 +289,40 @@ export default function Page() {
                       </p>
                       <ul className="list-disc pl-6">
                         <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold mx-1">Start</span>
-                          to start the quiz.
+                          <p className="flex">
+                            <TiTick className="text-green-500 text-2xl mr-2" />
+                            Click on <span className="font-bold mx-1">Start</span>
+                            to start the quiz.
+                          </p>
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold mx-1">Next</span>
-                          to move to the next question.
+                          <p className="flex">
+                            <TiTick className="text-green-500 text-2xl mr-2" />
+                            Click on <span className="font-bold mx-1">Next</span>
+                            to move to the next question.
+                          </p>
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on
-                          <span className="font-bold mx-1">Previous</span> to go
-                          back to the previous question.
+                          <p className="flex">
+                            <TiTick className="text-green-500 text-2xl mr-2" />
+                            Click on
+                            <span className="font-bold mx-1">Previous</span> to go
+                            back to the previous question.
+                          </p>
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Fill in your answers in the text area provided for
-                          each question.
+                          <p className="flex">
+                            <TiTick className="text-green-500 text-2xl mr-2" />
+                            Fill in your answers in the text area provided for
+                            each question.
+                          </p>
                         </li>
                         <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Once you have answered all questions, click on
-                          <span className="font-bold mx-1">Submit.</span>
+                          <p className="flex">
+                            <TiTick className="text-green-500 text-2xl mr-2" />
+                            Once you have answered all questions, click on
+                            <span className="font-bold mx-1">Submit.</span>
+                          </p>
                         </li>
                       </ul>
                     </div>
