@@ -942,7 +942,7 @@ export default function ResumeForm() {
           <div className="flex justify-between py-3 rounded-md">
             <div className="group">
               <Label className="text-2xl text-blue-900 font-bold">
-                Basics Information
+                Basic Information
               </Label>
             </div>
           </div>
