@@ -378,7 +378,7 @@ const Hobbies = ({ fontStyle, headingColor }) => {
             <ul className="w-full flex flex-wrap gap-5">
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-semibold">
+                  <li key={index} className="text-15px py-2 text-gray-600 font-bold">
                     {item}
                   </li>
                 );
@@ -621,7 +621,7 @@ const Template7 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+      <div className="w-full min-h-screen">
         <div className="bg-[#F1F3F4] py-10">
           <div className="top_section flex items-start gap-1 justify-center">
             <div className="name_profile text-center w-full">

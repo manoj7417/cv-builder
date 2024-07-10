@@ -341,11 +341,13 @@ const Hobbies = ({ fontStyle, headingColor }) => {
       </h2>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
-          <div>
-            <ul className="w-full flex flex-col gap-5">
+          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
+            <ul>
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-semibold">
+                  <li key={index} className="text-15px py-2 font-semibold border-b-4 border-dotted"  style={{
+                    borderColor:headingColor
+                  }}>
                     {item}
                   </li>
                 );
@@ -576,7 +578,7 @@ export const Template5 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+      <div className="w-full min-h-screen">
         <div className="bg-white">
           <div className="top_section flex items-start gap-5 py-5 px-5">
             <div className="name_profile w-full h-full">

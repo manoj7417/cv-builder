@@ -593,7 +593,7 @@ const Template10 = () => {
 
   return (
     <>
-      <div className="template_10 w-[210mm] h-[297mm]">
+      <div className="template_10 w-full min-h-screen">
         <div className="h-full">
           <div className="grid grid-cols-12 h-full">
             <div className="col-span-8 bg-white">

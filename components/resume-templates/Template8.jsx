@@ -241,8 +241,8 @@ const Skills = ({ fontStyle, headingColor }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex gap-5 flex-wrap underline underline-offset-2">
+          <div className="text-gray-600 my-1 w-full flex justify-start items-center">
+            <ul className="pl-5 list-disc">
               {data.items.map((item, i) => {
                 return (
                   <li
@@ -343,7 +343,7 @@ const Hobbies = ({ fontStyle, headingColor }) => {
             <ul className="pl-5 list-disc">
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-semibold">
+                  <li key={index} className="text-15px py-2 font-bold text-gray-600">
                     {item}
                   </li>
                 );
@@ -571,8 +571,8 @@ const Template8 = () => {
 
   return (
     <>
-      <div className="template_8 max-w-[210mm] max-h-[297mm] w-full h-full py-10">
-        <div className="bg-white">
+      <div className="template_8 py-10">
+        <div className="bg-white w-full min-h-screen ">
           <div className="top_section flex items-start gap-1 justify-start px-10">
             <div className="name_profile">
               <h1
