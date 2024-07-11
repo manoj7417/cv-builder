@@ -505,7 +505,7 @@ const Page = () => {
                     Development with Psychometric Assessment Tools
                   </h1>
                   <p className="mt-2 text-lg">
-                    Employ the perfect 4 Psychometric Assessment Test Tools to filter
+                    Employ the perfect four Psychometric Assessment Test Tools to filter
                     out perfect candidates and inspire competent employees.
                   </p>
                 </div>
