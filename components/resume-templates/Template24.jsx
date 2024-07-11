@@ -118,7 +118,7 @@ const Awards = ({ fontStyle, headingColor }) => {
         <>
           <div className="education_header">
             <h2
-              className={`font-semibold font-serif p-2 ${fontStyle.subMianHeadingFont}`}
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
             >
               {data?.name}
             </h2>
@@ -134,13 +134,13 @@ const Awards = ({ fontStyle, headingColor }) => {
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold inline-flex"
+                            className="break-words text-base items-center font-bold inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold">
+                          <p className="break-words text-base font-bold">
                             {item.name}
                           </p>
                         )}
@@ -270,7 +270,7 @@ const References = ({ fontStyle, headingColor, colorText }) => {
 };
 
 const Certificates = ({ fontStyle }) => {
-  const data = useResumeStore(
+  const data = useResumeStore(  
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
@@ -286,18 +286,18 @@ const Certificates = ({ fontStyle }) => {
             <ul>
               {data?.items?.map((item, index) => {
                 return (
-                  <div className="certificate_section px-2" key={index}>
+                  <div className="certificate_section px-2 py-2" key={index}>
                     {isValidUrl(item?.url) ? (
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold">
+                      <p className="break-words text-base font-bold">
                         {item.name}
                       </p>
                     )}

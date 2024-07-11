@@ -20,10 +20,10 @@ export default function Page() {
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [userData, setUserData] = useState(true);
-  const [apiResponse, setApiResponse] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popupData, setPopupData] = useState(null);
   const [cardData, setCardData] = useState(null);
+  const [testSummary, setTestSummary] = useState(false);
   const {
     answers,
     setAnswers,
@@ -33,6 +33,8 @@ export default function Page() {
     previousStep,
     currentStep,
     setSummary,
+    careerSummary,
+    resetData,
   } = useUserDataStore();
   const categories =
     Object.keys(answers).length > 0 ? Object.keys(answers) : null;
@@ -101,11 +103,15 @@ export default function Page() {
         content = JSON.stringify(content);
         const responseData = await generateCareerAdvice(content, token);
         const parsedData = JSON.parse(responseData.data[0].text.value);
+        console.log(parsedData);
         setSummary(parsedData);
         setContentType("summary");
-        setApiResponse(parsedData);
+        setShowPopup(true);
+        setCardData(parsedData);
         // Fetch the updated summary data
         await fetchSummary();
+        resetData();
+        setTestSummary(true);
       } catch (error) {
         console.log(error);
       } finally {
@@ -157,7 +163,7 @@ export default function Page() {
           <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
             <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
               {contentType === "Intro" && (
-                <div className="flex justify-center items-center flex-1">
+                <div className="flex justify-center items-center flex-1 mt-10">
                   <div className="text-center">
                     <h1 className="text-5xl font-bold text-blue-950">
                       Welcome to the Career Counselling
@@ -172,7 +178,7 @@ export default function Page() {
                       onClick={() => setContentType("userData")}
                       className="mt-6 bg-blue-950 text-white px-10 py-2 rounded"
                     >
-                      Start
+                      Start Test
                     </button>
                   </div>
                 </div>
@@ -297,14 +303,18 @@ export default function Page() {
                   </div>
                 </section>
               )}
-              {contentType === "summary" &&  (
+              {/* {contentType === "summary" && (
                 <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
                   <div>
                     <h2>Hello</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, excepturi atque temporibus quaerat fugit tempora distinctio. Deleniti suscipit error adipisci?</p>
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Omnis, excepturi atque temporibus quaerat fugit tempora
+                      distinctio. Deleniti suscipit error adipisci?
+                    </p>
                   </div>
                 </section>
-              )}
+              )} */}
               {(contentType === "userData" ||
                 contentType === "generateQuestions") && (
                 <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
@@ -363,8 +373,8 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section className="w-full h-full py-10 px-20">
-        <h1 className="text-blue-950 text-2xl py-5">
+      <section className="w-full h-full py-10 px-20 bg-gray-100">
+        <h1 className="text-blue-950 text-5xl py-5 font-bold text-center mb-6">
           Psychometric Test Summary
         </h1>
         <div className="summary_cards_wrapper">
@@ -378,7 +388,7 @@ export default function Page() {
                     </h5>
                   </a>
                   <p className="mb-5 font-normal text-sm text-gray-700">
-                    Interests: {val.summary.interests}
+                    <strong>Interests</strong>: {val.summary.interests?.slice(0,50)}
                   </p>
                   <div className="summary_card_footer absolute bottom-6 left-6 right-6 mt-5">
                     <div

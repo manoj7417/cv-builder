@@ -336,7 +336,7 @@ const Certificates = ({ fontStyle, colorText, colorBackground }) => {
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
-    <div>
+    <div className="certificate_section w-full mt-5 px-10">
       <h2
         className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
         style={{ color: colorBackground }}
@@ -568,7 +568,7 @@ const Template21 = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="h-auto w-[793px] mx-auto shadow-lg rounded-lg flex bg-[#dddddd]">
           <div
-            className="bg-black text-white w-[35%]  border-r-[20px] border-[#f07b5f]"
+            className="bg-black text-white w-[40%]  border-r-[20px] border-[#f07b5f]"
             style={{ backgroundColor: metadata?.theme?.primary,borderColor:metadata?.theme?.background }}
           >
             <div className="text-center mb-8">
@@ -665,7 +665,7 @@ const Template21 = () => {
             </section>
           </div>
           {/* <div className="bg-[#f07b5f] w-8"></div> */}
-          <div className="pt-20 w-[65%] bg-white">
+          <div className="pt-20 w-[60%] bg-white">
             <h1 className="px-6 text-6xl font-bold" style={{color:metadata?.theme?.primary}}>
               {firstName} <span className="text-black">{surname}</span>
             </h1>
