@@ -272,9 +272,9 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
+        <div className="skills_section pt-10">
           <h2
-            className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
+            className={`text-3xl font-semibold mb-4 font-serif ${fontStyle.headingFont}`}
             style={{color:colorText}}
           >
             {data?.name}
@@ -285,7 +285,7 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-3`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1 whitespace-nowrap">
@@ -324,9 +324,9 @@ const Languages = ({ fontStyle, colorBackground,colorText }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="language_section py-10">
+        <div className="language_section pt-10">
           <h2
-            className={`text-3xl font-semibold p-2 mb-4 font-serif  ${fontStyle.headingFont}`}
+            className={`text-3xl font-semibold mb-4 font-serif  ${fontStyle.headingFont}`}
             style={{color:colorText}}
           >
             {data?.name}
@@ -337,7 +337,7 @@ const Languages = ({ fontStyle, colorBackground,colorText }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-2 px-4`}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-3`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1 whitespace-nowrap">
@@ -365,9 +365,9 @@ const Hobbies = ({ fontStyle ,colorBackground,colorText}) => {
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
-    <div className="py-10">
+    <div className="pt-10">
       <h2
-        className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
+        className={`text-3xl font-semibold mb-4 font-serif ${fontStyle.headingFont}`}
         style={{color:colorText}}
       >
         {data?.name}
@@ -380,7 +380,7 @@ const Hobbies = ({ fontStyle ,colorBackground,colorText}) => {
                 return (
                   <li
                     key={index}
-                    className="text-15px pl-4 py-2 font-semibold"
+                    className="text-15px pl-1 py-3 font-semibold"
                   >
                     {item}
                   </li>
@@ -399,9 +399,9 @@ const Certificates = ({ fontStyle ,colorText,colorBackground}) => {
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
-    <div className="py-10">
+    <div className="pt-10">
       <h2
-        className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
+        className={`text-3xl font-semibold mb-4 font-serif ${fontStyle.headingFont}`}
         style={{color:colorText}}
       >
         {data?.name}
@@ -412,7 +412,7 @@ const Certificates = ({ fontStyle ,colorText,colorBackground}) => {
             <ul style={{color:colorText}}>
               {data?.items?.map((item, index) => {
                 return (
-                  <div className="certificate_section px-2" key={index}>
+                  <div className="certificate_section py-2" key={index}>
                     {isValidUrl(item?.url) ? (
                       <a
                         href={item?.url}

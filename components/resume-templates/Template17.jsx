@@ -395,12 +395,15 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
         <div className="profile_section w-full">
           <div
             className="profile_heading w-full"
-            style={{ color:colorBackground }}
+            style={{ color: colorBackground }}
           >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div
             className={`text-sm py-2 mt-3 ${fontStyle.subHeadingFont} break-words`}
@@ -412,17 +415,23 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Awards = ({ fontStyle, colorBackground,colorText }) => {
+const Awards = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
     <div className="awards_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="awards_header w-full" style={{color:colorBackground}}>
+          <div
+            className="awards_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -472,7 +481,7 @@ const Awards = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const References = ({ fontStyle, colorBackground,colorText }) => {
+const References = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -480,15 +489,21 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
     <div className="references_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header w-full" style={{
-            color:colorBackground
-          }}>
+          <div
+            className="references_header w-full"
+            style={{
+              color: colorBackground,
+            }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{
-            borderColor:colorBackground
-          }}></div>
+            <div
+              className="border-b-2"
+              style={{
+                borderColor: colorBackground,
+              }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -513,7 +528,9 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
@@ -562,15 +579,15 @@ const Template17 = () => {
 
   return (
     <>
-      <div className="mx-auto w-[210mm] h-[297mm] bg-white">
+      <div className="w-full min-h-screen bg-white">
         <div className="w-full h-auto grid md:grid-cols-12 grid-cols-1">
           <div className="col-span-1 md:col-span-4 bg-black flex flex-col items-center justify-start">
             <div className="w-full h-80 bg-black">
               <div>
                 <div className="profile-pic">
                   {basics?.picture?.url && (
-                    <Image
-                      src={basics.picture.url || "/pic.jpg"}
+                    <img
+                      src={basics.picture.url}
                       width={250}
                       height={250}
                       alt="pic"

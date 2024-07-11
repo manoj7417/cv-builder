@@ -18,7 +18,7 @@ import { AiOutlineLink } from "react-icons/ai";
 const Education = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state.resume.data.sections.education);
   return (
-    <div className="education_section py-3">
+    <div className="education_section">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="flex gap-5 items-center" style={{ color: colorText }}>
@@ -26,12 +26,12 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800 my-5">
+          <div className="text-gray-800 my-2">
             {data?.items?.map((item, index) => {
               return (
                 <>
                   <div
-                    className="education1 my-5"
+                    className="education1 my-2"
                     key={index}
                     style={{ color: colorText }}
                   >
@@ -197,7 +197,7 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-3">
+        <div className="skills_section">
           <h2
             className={`${fontStyle.headingFont} font-semibold uppercase`}
             style={{
@@ -533,8 +533,8 @@ const Template16 = () => {
             {basics?.name}
           </h1>
 
-          <div className="resume_bottom py-5 px-8">
-            <div className="resume_item resume_profile py-5">
+          <div className="resume_bottom px-8">
+            <div className="resume_item resume_profile">
               <Education
                 fontStyle={fontStyle}
                 colorBackground={metadata?.theme?.primary}
@@ -542,15 +542,15 @@ const Template16 = () => {
               />
             </div>
 
-            <div className="resume_item resume_skills py-5">
-              <div className="resume_info">
+            <div className="resume_item resume_skills">
+              <div className="resume_info my-5">
                 <Skills
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="resume_info">
+              <div className="resume_info my-5">
                 <Hobbies
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}

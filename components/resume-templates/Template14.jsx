@@ -46,8 +46,6 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                       {<p>item?.startDate</p> &&
                         `${item?.startDate}${item?.endDate && " - "}`}
                       {item?.endDate}
-                      {/* <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
-                      <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" /> */}
                     </div>
                     <div className="content flex flex-col break-all">
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -106,14 +104,6 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                       {item?.endDate && <p>{item.endDate}</p>}
                     </p>
                   )}
-
-                  {/* <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" /> */}
-                  <div
-                    className="year_line absolute top-4 right-1 w-0.5 h-full"
-                    style={{
-                      background: colorBackground,
-                    }}
-                  />
                   <div
                     className={`py-2 ${fontStyle.paraFont} break-words`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
@@ -232,14 +222,14 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                       <span>{item?.name}</span>
                     </div>
                     <div
-                      className="w-1/2 text-end h-2.5 border"
+                      className="w-1/2 text-end h-2.5"
                       style={{
                         backgroundColor: colorText,
                       }}
                     >
                       <div
-                        className="bg-gray-700 h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{ width: `${level}%` ,backgroundColor:colorBackground }}
                       ></div>
                     </div>
                   </li>
@@ -430,14 +420,14 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
                       <span>{item?.name}</span>
                     </div>
                     <div
-                      className="w-1/2 text-end h-2.5 border"
+                      className="w-1/2 text-end h-2.5"
                       style={{
-                        backgroundColor: colorBackground,
+                        backgroundColor: colorText,
                       }}
                     >
                       <div
-                        className="bg-gray-700 h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{ width: `${level}%`,backgroundColor:colorBackground }}
                       ></div>
                     </div>
                   </li>
@@ -683,7 +673,7 @@ const Template14 = () => {
         <div
           className="resume_left w-[35%] min-h-[1123px]"
           style={{
-            backgroundColor: metadata?.theme?.primary,
+            backgroundColor: metadata?.theme?.background,
           }}
         >
           <div style={{ height: "15px", background: "#004747" }}></div>
