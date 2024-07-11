@@ -3,13 +3,12 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { RxComponent1, RxDashboard, RxPaperPlane } from "react-icons/rx";
 import { useUserDataStore } from "../store/useUserDataStore";
 
-const CareerSummary = () => {
-  const { careerSummary } = useUserDataStore();
-  console.log("summary::",careerSummary)
+const CareerSummary = ({cardData}) => {
+  console.log("cardData:::",cardData)
 
   return (
     <>
-      <div>
+      {/* <div>
         <div className="summary-title">
           <h1 className="text-4xl font-bold text-blue-950">Your Personalised Summary</h1>
         </div>
@@ -64,7 +63,7 @@ const CareerSummary = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

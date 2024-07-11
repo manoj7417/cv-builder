@@ -321,7 +321,7 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-15px font-bold text-gray-600"
+                        className="break-words text-15px font-bold text-gray-600 flex items-center"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
