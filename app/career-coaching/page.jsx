@@ -86,13 +86,13 @@ const ComingSoonPage = () => {
                   <img src="/coach.png" className="h-64 ml-4 image-animation" />
                 </span>
               </h1>
-
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
-                Find the right guidance channel with Career Coaching.
+                Find the right guidance channel with Career Counseling.
                 Constructed to suit your expectations for your professional
-                journey, our system helps you connect with the best coach. Get
-                assistance to achieve the desired level of success by choosing
-                the correct pathway that ensures skill upgradation and learning
+                journey, our system helps you connect with the best life career
+                coach. Get assistance from a job and career, and a business
+                coach to achieve the desired level of success by choosing the
+                correct pathway that ensures skill upgradation and learning
                 experiences.
               </p>
               <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">

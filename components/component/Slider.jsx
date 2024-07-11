@@ -256,38 +256,16 @@ export default function Slider() {
         <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
           Creating CVs that Reflect
           <br />
-          <span className="flex text-[#2C98CA] text-5xl justify-center">
+          <span className="flex text-[#2C98CA] text-5xl justify-center mt-2">
             Perfection
             <Image src="/Vector.svg" height={37} width={39} />{" "}
           </span>
         </h2>
         <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">
           Explore unlimited possibilities with the power of a precision-crafted
-          CV by creating one that aligns with your Professional Profile,
-          employing our customised Curriculum Vitae templates.
+          CV by creating a resume that aligns with your Professional Profile,
+          employing our customised Curriculum Vitae template.
         </p>
-
-        {/* <div className="flex lg:flex-row flex-col justify-center lg:gap-8 gap-2 mt-20">
-          <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
-            <FaUserCog className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2 " />
-
-            <p className="text-base mt-2 text-center">
-              CV Templates Crafted by Domain Experts
-            </p>
-          </div>
-          <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
-            <MdOutlineDesignServices className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2" />
-            <p className="text-base mt-2 text-center">
-              Customized UK CV Format Template
-            </p>
-          </div>
-          <div className="flex flex-col items-center flex-1 p-5 rounded-2xl">
-            <MdOutlineSettingsSuggest className="h-14 w-14 bg-indigo-500 rounded-full text-white p-2" />
-            <p className="text-base mt-2 text-center">
-              Build a CV with Personalized Suggestions
-            </p>
-          </div>
-        </div> */}
         <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
           {templatesData?.map((item, index) => (
             <div
@@ -308,7 +286,6 @@ export default function Slider() {
                   width={130}
                 />
               </div>
-
               <div
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 style={{

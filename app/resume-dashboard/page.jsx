@@ -438,9 +438,9 @@ export default function DashboardIdea() {
                 <p className="text-gray-700 text-lg pe-10">
                   Created by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
-                  forward CV Template options that are custom-tailored to the
-                  job you are applying for, to ensure that your CV gets through
-                  every Application Tracking Software.
+                  forward Resume Template options that are custom-tailored to
+                  the job you are applying for, to ensure that your CV gets
+                  through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center space-x-4">
                   <Button className="text-base text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">

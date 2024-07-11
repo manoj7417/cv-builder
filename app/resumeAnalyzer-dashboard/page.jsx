@@ -28,8 +28,10 @@ export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
-  const userState = useUserStore((state) => state.userState)
-  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
+  const userState = useUserStore((state) => state.userState);
+  const updateRedirectPricingRoute = useUserStore(
+    (state) => state.updateRedirectPricingRoute
+  );
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens();
@@ -68,13 +70,14 @@ export default function DashboardIdea() {
     try {
       const response = await AnalyzeAts(message, token);
       if (response.status === "SUCCESS") {
-        router.push(`/analyser/${response.analysisId}`)
+        router.push(`/analyser/${response.analysisId}`);
       }
       const value = JSON.parse(response[0].text.value);
     } catch (error) {
       if (
         error.response.status === 400 &&
-        (error.response.data.error === "Insufficient tokens" || error.response.data.error === "Subscription is inactive or expired")
+        (error.response.data.error === "Insufficient tokens" ||
+          error.response.data.error === "Subscription is inactive or expired")
       ) {
         router.push("/pricing");
       }
@@ -131,8 +134,9 @@ export default function DashboardIdea() {
                 <p className="text-gray-700 text-lg pe-10">
                   Wondering why your CV does not get through the initial rounds
                   of selection? Analyse your CV with our AI-based CV Optimiser
-                  and get industry expertise integrated to create a flawless
-                  application profile.
+                  and get industry expertise integrated to create an Application
+                  Tracking System ATS friendly resume and flawless application
+                  profile that gets passed through ATS CV Checker.
                 </p>
                 <div className="flex items-center space-x-4 ">
                   <label className="flex flex-col items-start bg-transparent text-blue rounded-lg  uppercase cursor-pointer hover:bg-blue">
