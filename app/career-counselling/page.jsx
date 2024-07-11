@@ -1,19 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import UserData from "./UserData";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { GetTokens } from "../actions";
 import { TiTick } from "react-icons/ti";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import CustomLoader from "../ui/CustomLoader";
 import "./CareerCounselling.css";
@@ -23,193 +15,6 @@ import CareerSummary from "./CareerSummary";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import axios from "axios";
 
-const testSummary = [
-  {
-    actionableInsights: {
-      skillDevelopment:
-        "Focus on improving subject-specific knowledge through self-study or additional courses, and develop practical skills relevant to the careers suggested.",
-      networking:
-        "Join professional networks and attend industry conferences to build connections.",
-      experience:
-        "Seek internships and volunteer opportunities to gain practical experience.",
-    },
-    training: {
-      courses:
-        "Enroll in courses related to scientific research, public relations, or project management, depending on the chosen career path.",
-      workshops:
-        "Attend workshops and seminars to stay updated with industry trends.",
-      certifications:
-        "Pursue relevant certifications to enhance your qualifications.",
-    },
-    careerSuggestions: [
-      {
-        career: "Research Scientist",
-        reason:
-          "Strong interest in scientific theories and solving complex problems.",
-        actions:
-          "Pursue higher education in a scientific field, engage in independent research projects, and seek internships in research laboratories.",
-        requiredSkills:
-          "Analytical thinking, data analysis, research methodologies.",
-        relevantCourses:
-          "Advanced Chemistry, Molecular Biology, Data Science.",
-      },
-      {
-        career: "Public Relations Specialist",
-        reason:
-          "Enjoys being the center of attention and energized by social interactions.",
-        actions:
-          "Take courses in communications and marketing, gain experience through internships with PR firms, and develop a strong portfolio.",
-        requiredSkills: "Communication, marketing, social media management.",
-        relevantCourses:
-          "Public Relations, Digital Marketing, Media Relations.",
-      },
-      {
-        career: "Project Manager",
-        reason:
-          "High value on work-life balance, enjoys solving complex problems, and is energized by social interactions.",
-        actions:
-          "Obtain a certification in project management (such as PMP), and develop soft skills such as leadership and communication.",
-        requiredSkills: "Leadership, time management, problem-solving.",
-        relevantCourses:
-          "Project Management, Leadership Skills, Agile Methodologies.",
-      },
-    ],
-    summary: {
-      interests:
-        "Solving complex problems, exploring scientific theories, social interactions.",
-      strengths:
-        "Enjoys solving complex problems, high interest in scientific theories, enjoys being the center of attention, energized by social interactions.",
-      values:
-        "High importance on work-life balance, prioritizes high salary.",
-      weaknesses:
-        "Responses indicate possible lack of detailed understanding in some subjects, as evidenced by the vague answers provided.",
-      goals:
-        "Achieve a balance between professional success and personal well-being, attain a high level of expertise in chosen field.",
-      preferences:
-        "Prefer roles with a mix of independent and team work, value opportunities for continuous learning.",
-    },
-  },
-  {
-    actionableInsights: {
-      skillDevelopment:
-        "Enhance communication skills and technical knowledge through workshops and online courses.",
-      networking:
-        "Participate in industry meetups and online forums to connect with professionals.",
-      experience:
-        "Engage in volunteer work and freelance projects to build a robust portfolio.",
-    },
-    training: {
-      courses:
-        "Enroll in courses related to software development, digital marketing, or healthcare administration.",
-      workshops:
-        "Attend bootcamps and hackathons to develop practical skills.",
-      certifications:
-        "Obtain certifications in areas such as cloud computing, digital marketing, or healthcare management.",
-    },
-    careerSuggestions: [
-      {
-        career: "Software Developer",
-        reason:
-          "Strong logical thinking and interest in technology and coding.",
-        actions:
-          "Learn programming languages, build projects, and contribute to open-source communities.",
-        requiredSkills: "Programming, problem-solving, debugging.",
-        relevantCourses:
-          "Computer Science, Web Development, Data Structures and Algorithms.",
-      },
-      {
-        career: "Digital Marketing Specialist",
-        reason:
-          "Creative mindset and strong interest in online trends and social media.",
-        actions:
-          "Take digital marketing courses, gain experience through internships, and build a portfolio showcasing your work.",
-        requiredSkills: "SEO, content creation, analytics.",
-        relevantCourses:
-          "Digital Marketing, Content Strategy, Social Media Management.",
-      },
-      {
-        career: "Healthcare Administrator",
-        reason: "Interest in healthcare and strong organizational skills.",
-        actions:
-          "Pursue a degree in healthcare administration, gain experience through internships, and develop leadership skills.",
-        requiredSkills:
-          "Leadership, healthcare policies, financial management.",
-        relevantCourses:
-          "Healthcare Administration, Public Health, Financial Management in Healthcare.",
-      },
-    ],
-    summary: {
-      interests: "Technology, online marketing, healthcare management.",
-      strengths:
-        "Logical thinking, creativity, strong organizational skills.",
-      values:
-        "Commitment to professional growth, desire to make a positive impact.",
-      weaknesses:
-        "Needs to develop deeper expertise in certain technical areas.",
-      goals:
-        "Become a leader in the chosen field, continuously learn and adapt to new challenges.",
-      preferences:
-        "Roles that offer a mix of creative and analytical tasks, opportunities for professional development.",
-    },
-  },
-  {
-    actionableInsights: {
-      skillDevelopment:
-        "Improve problem-solving and analytical skills through challenging projects and advanced courses.",
-      networking:
-        "Engage in online communities and attend webinars to stay updated with industry trends.",
-      experience:
-        "Pursue part-time jobs and internships to gain hands-on experience.",
-    },
-    training: {
-      courses:
-        "Enroll in courses related to business analysis, graphic design, or cybersecurity.",
-      workshops: "Participate in hands-on workshops and seminars.",
-      certifications:
-        "Achieve certifications in business analysis, design software, or cybersecurity.",
-    },
-    careerSuggestions: [
-      {
-        career: "Business Analyst",
-        reason:
-          "Strong analytical skills and interest in improving business processes.",
-        actions:
-          "Study business analysis techniques, gain experience through internships, and work on real-world projects.",
-        requiredSkills: "Data analysis, process improvement, communication.",
-        relevantCourses:
-          "Business Analysis, Data Analytics, Process Improvement.",
-      },
-      {
-        career: "Graphic Designer",
-        reason: "Creative flair and interest in visual communication.",
-        actions:
-          "Learn design software, build a portfolio, and gain experience through freelance projects.",
-        requiredSkills:
-          "Creativity, software proficiency, visual communication.",
-        relevantCourses: "Graphic Design, Typography, Adobe Creative Suite.",
-      },
-      {
-        career: "Cybersecurity Specialist",
-        reason: "Interest in technology and protecting digital information.",
-        actions:
-          "Study cybersecurity principles, gain hands-on experience through labs and simulations, and earn relevant certifications.",
-        requiredSkills: "Network security, ethical hacking, risk assessment.",
-        relevantCourses: "Cybersecurity, Ethical Hacking, Network Security.",
-      },
-    ],
-    summary: {
-      interests: "Business processes, visual arts, digital security.",
-      strengths: "Analytical thinking, creativity, attention to detail.",
-      values: "High value on job security and professional growth.",
-      weaknesses: "Needs to improve technical skills in specific areas.",
-      goals:
-        "Excel in a professional role, contribute to significant projects, and achieve a healthy work-life balance.",
-      preferences:
-        "Roles with a focus on problem-solving and creativity, opportunities for continuous learning.",
-    },
-  },
-];
-
 export default function Page() {
   const [showIntro, setShowIntro] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -218,18 +23,30 @@ export default function Page() {
   const [apiResponse, setApiResponse] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popupData, setPopupData] = useState(null);
-  const { answers, setAnswers, contentType, setContentType, nextStep, previousStep, currentStep, setSummary } = useUserDataStore();
-  const categories = Object.keys(answers).length > 0 ? Object.keys(answers) : null;
+  const [cardData, setCardData] = useState(null);
+  const {
+    answers,
+    setAnswers,
+    contentType,
+    setContentType,
+    nextStep,
+    previousStep,
+    currentStep,
+    setSummary,
+  } = useUserDataStore();
+  const categories =
+    Object.keys(answers).length > 0 ? Object.keys(answers) : null;
 
   const handleInputChange = (category, questionIndex, newAnswer) => {
     const newAnswers = {
-      ...answers, [category]: answers[category].map((item, index) => {
+      ...answers,
+      [category]: answers[category].map((item, index) => {
         if (index === questionIndex) {
-          return { ...item, answer: newAnswer }
+          return { ...item, answer: newAnswer };
         }
-        return item
-      })
-    }
+        return item;
+      }),
+    };
     setAnswers(newAnswers);
   };
 
@@ -242,7 +59,7 @@ export default function Page() {
     // Check if every question in the current category has a non-empty answer
     const allAnswered = currentCategoryQuestions.every((questionObj) => {
       // First, check if the answer key exists
-      if (!questionObj.hasOwnProperty('answer')) {
+      if (!questionObj.hasOwnProperty("answer")) {
         return false;
       }
       // Then, check if the answer is not empty
@@ -284,9 +101,11 @@ export default function Page() {
         content = JSON.stringify(content);
         const responseData = await generateCareerAdvice(content, token);
         const parsedData = JSON.parse(responseData.data[0].text.value);
-        setSummary(parsedData)
-        setContentType('summary')
+        setSummary(parsedData);
+        setContentType("summary");
         setApiResponse(parsedData);
+        // Fetch the updated summary data
+        await fetchSummary();
       } catch (error) {
         console.log(error);
       } finally {
@@ -304,66 +123,62 @@ export default function Page() {
   };
 
   const handleReadMore = (data) => {
-    setPopupData(data);
+    setCardData(data);
     setShowPopup(true);
   };
 
   const closePopup = () => {
     setShowPopup(false);
-    setPopupData(null);
   };
 
-
   const fetchSummary = async () => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     const token = accessToken?.value;
     // Fetch user details from API or database
     const response = await axios.get("/api/getSummary", {
       headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-    console.log("response:::",response);
-    // return response
-  }
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log("responses:::", response?.data?.data);
+    setPopupData(response?.data?.data);
+  };
 
   useEffect(() => {
-    fetchSummary()
-  })
+    fetchSummary();
+  }, []);
+
+  console.log("cardData:::", cardData);
 
   return (
     <>
-       <section className="career_counselling">
-      <div className="flex min-h-screen w-full bg-background p-5">
-        <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
-          <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
-            {
-              contentType === 'Intro' && (
+      <section className="career_counselling">
+        <div className="flex min-h-[500px] w-full bg-background p-5">
+          <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
+            <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
+              {contentType === "Intro" && (
                 <div className="flex justify-center items-center flex-1">
                   <div className="text-center">
                     <h1 className="text-5xl font-bold text-blue-950">
                       Welcome to the Career Counselling
                     </h1>
                     <p className="mt-4 w-1/2 mx-auto">
-                      Please take a few moments to answer the following questions.
-                      Your responses will help us better understand your current
-                      pursuits, hobbies, strengths, and career aspirations.
+                      Please take a few moments to answer the following
+                      questions. Your responses will help us better understand
+                      your current pursuits, hobbies, strengths, and career
+                      aspirations.
                     </p>
                     <button
-                      onClick={() => setContentType('userData')}
+                      onClick={() => setContentType("userData")}
                       className="mt-6 bg-blue-950 text-white px-10 py-2 rounded"
                     >
                       Start
                     </button>
                   </div>
                 </div>
-              )
-            }
-            {
-              contentType === 'userData' && <UserData />
-            }
-            {
-              contentType === 'generateQuestions' && (
+              )}
+              {contentType === "userData" && <UserData />}
+              {contentType === "generateQuestions" && (
                 <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
                   <div className="space-y-4">
                     <h2 className="text-4xl font-semibold">
@@ -400,9 +215,7 @@ export default function Page() {
                                         name={`question-${quesIndex}`}
                                         value={option}
                                         required
-                                        checked={
-                                          questionObj.answer === option
-                                        }
+                                        checked={questionObj.answer === option}
                                         onChange={(e) =>
                                           handleInputChange(
                                             categories[currentStep],
@@ -419,12 +232,11 @@ export default function Page() {
                               )}
                             </div>
                           )}
-                          {isValid &&
-                            questionObj.answer?.trim() === "" && (
-                              <p className="text-red-500 text-sm">
-                                Please provide an answer.
-                              </p>
-                            )}
+                          {isValid && questionObj.answer?.trim() === "" && (
+                            <p className="text-red-500 text-sm">
+                              Please provide an answer.
+                            </p>
+                          )}
                         </div>
                       )
                     )}
@@ -470,9 +282,8 @@ export default function Page() {
                                   </div>
                                   <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
                                     <p className="text-center mx-auto text-xl">
-                                      Please wait for a moment... <br />{" "}
-                                      while we are generating summary for
-                                      this test.
+                                      Please wait for a moment... <br /> while
+                                      we are generating summary for this test.
                                     </p>
                                     <CustomLoader />
                                   </div>
@@ -485,71 +296,80 @@ export default function Page() {
                     )}
                   </div>
                 </section>
-              )
-            }
-            {contentType === 'summary' && (
-              <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
-                <CareerSummary data={apiResponse} />
-              </section>
-            )}
-            <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
-              <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
-                <CardHeader className="">
-                  <h1 className="xl:text-4xl text-2xl font-bold text-blue-950">
-                    Career Counselor Steps
-                  </h1>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-center items-center flex-1 w-full h-full">
-                    <div>
-                      <p className="my-4 font-medium text-center">
-                        Please follow these instructions to provide answers to
-                        the questionnaire:
-                      </p>
-                      <ul className="list-disc pl-6">
-                        <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold mx-1">Start</span>
-                          to start the quiz.
-                        </li>
-                        <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on <span className="font-bold mx-1">Next</span>
-                          to move to the next question.
-                        </li>
-                        <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Click on
-                          <span className="font-bold mx-1">Previous</span> to go
-                          back to the previous question.
-                        </li>
-                        <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Fill in your answers in the text area provided for
-                          each question.
-                        </li>
-                        <li className="mb-2 py-2 flex items-center font-medium">
-                          <TiTick className="text-green-500 text-2xl mr-2" />
-                          Once you have answered all questions, click on
-                          <span className="font-bold mx-1">Submit.</span>
-                        </li>
-                      </ul>
-                    </div>
+              )}
+              {contentType === "summary" &&  (
+                <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
+                  <div>
+                    <h2>Hello</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, excepturi atque temporibus quaerat fugit tempora distinctio. Deleniti suscipit error adipisci?</p>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          </main>
+                </section>
+              )}
+              {(contentType === "userData" ||
+                contentType === "generateQuestions") && (
+                <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
+                  <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
+                    <CardHeader className="">
+                      <h1 className="xl:text-4xl text-2xl font-bold text-blue-950">
+                        Career Counselor Steps
+                      </h1>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex justify-center items-center flex-1 w-full h-full">
+                        <div>
+                          <p className="my-4 font-medium text-center">
+                            Please follow these instructions to provide answers
+                            to the questionnaire:
+                          </p>
+                          <ul className="list-disc pl-6">
+                            <li className="mb-2 py-2 flex items-center font-medium">
+                              <TiTick className="text-green-500 text-2xl mr-2" />
+                              Click on{" "}
+                              <span className="font-bold mx-1">Start</span>
+                              to start the quiz.
+                            </li>
+                            <li className="mb-2 py-2 flex items-center font-medium">
+                              <TiTick className="text-green-500 text-2xl mr-2" />
+                              Click on{" "}
+                              <span className="font-bold mx-1">Next</span>
+                              to move to the next question.
+                            </li>
+                            <li className="mb-2 py-2 flex items-center font-medium">
+                              <TiTick className="text-green-500 text-2xl mr-2" />
+                              Click on
+                              <span className="font-bold mx-1">
+                                Previous
+                              </span>{" "}
+                              to go back to the previous question.
+                            </li>
+                            <li className="mb-2 py-2 flex items-center font-medium">
+                              <TiTick className="text-green-500 text-2xl mr-2" />
+                              Fill in your answers in the text area provided for
+                              each question.
+                            </li>
+                            <li className="mb-2 py-2 flex items-center font-medium">
+                              <TiTick className="text-green-500 text-2xl mr-2" />
+                              Once you have answered all questions, click on
+                              <span className="font-bold mx-1">Submit.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
+            </main>
+          </div>
         </div>
-      </div>
       </section>
       <section className="w-full h-full py-10 px-20">
         <h1 className="text-blue-950 text-2xl py-5">
           Psychometric Test Summary
         </h1>
         <div className="summary_cards_wrapper">
-          <div className="grid grid-cols-4 gap-10">
-            {testSummary?.map((val, index) => (
+          <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10">
+            {popupData?.map((val, index) => (
               <div className="summary_cards relative" key={index}>
                 <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">
@@ -557,10 +377,10 @@ export default function Page() {
                       User Summary
                     </h5>
                   </a>
-                  <p className="mb-3 font-normal text-sm text-gray-700">
+                  <p className="mb-5 font-normal text-sm text-gray-700">
                     Interests: {val.summary.interests}
                   </p>
-                  <div className="summary_card_footer absolute bottom-6 left-6 right-6">
+                  <div className="summary_card_footer absolute bottom-6 left-6 right-6 mt-5">
                     <div
                       className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
                       onClick={() => handleReadMore(val)}
@@ -589,7 +409,7 @@ export default function Page() {
 
             {showPopup && popupData && (
               <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white max-w-5xl h-[500px] w-full p-6 rounded-lg shadow-lg">
+                <div className="bg-white max-w-5xl min-h-[500px] w-full p-6 rounded-lg shadow-lg">
                   <button
                     onClick={closePopup}
                     className="absolute top-[5rem] right-[11rem] text-gray-400 hover:text-gray-600 focus:outline-none"
@@ -621,12 +441,6 @@ export default function Page() {
                         Actionable Insights
                       </TabsTrigger>
                       <TabsTrigger
-                        value="training"
-                        className=" text-blue-950 rounded-md text-base"
-                      >
-                        Training
-                      </TabsTrigger>
-                      <TabsTrigger
                         value="careerSuggestions"
                         className=" text-blue-950 rounded-md text-base"
                       >
@@ -646,54 +460,17 @@ export default function Page() {
                             Actionable Insights
                           </h2>
                           <ul className="space-y-3 text-sm">
-                            <li>
-                              <strong>Skill Development:</strong>{" "}
-                              {popupData.actionableInsights.experience}
-                            </li>
-                            <li>
-                              <strong>Networking:</strong>
-                              {popupData.actionableInsights.skillDevelopment}
-                            </li>
-                            <li>
-                              <strong>Experience:</strong>
-                              {popupData.actionableInsights.networking}
-                            </li>
-                            <li>
-                              <strong>Weaknesses:</strong>
-                              {popupData.summary.weaknesses}
-                            </li>
-                            <li>
-                              <strong>Goals:</strong>
-                              {popupData.summary.goals}
-                            </li>
-                            <li>
-                              <strong>Preferences:</strong>
-                              {popupData.summary.preferences}
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </TabsContent>
-                    <TabsContent className="mb-6" value="training">
-                      <div className="training_section max-w-4xl mx-auto summary_section">
-                        <div>
-                          <h2 className="text-xl font-bold mb-6 text-blue-950">
-                            Training
-                          </h2>
-
-                          <ul className="space-y-3 text-sm">
-                            <li>
-                              <strong>Courses:</strong>
-                              {popupData.training.courses}
-                            </li>
-                            <li>
-                              <strong>Workshops:</strong>
-                              {popupData.training.workshops}
-                            </li>
-                            <li>
-                              <strong>Certifications:</strong>
-                              {popupData.training.certifications}
-                            </li>
+                            {Object.entries(cardData?.actionableInsights).map(
+                              ([key, value], idx) => (
+                                <li key={idx}>
+                                  <strong>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </strong>{" "}
+                                  <p>{value}</p>
+                                </li>
+                              )
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -705,7 +482,7 @@ export default function Page() {
                             Career Suggestions
                           </h2>
                           <ul className="space-y-3 text-sm">
-                            {popupData?.careerSuggestions.map(
+                            {cardData?.careerSuggestions?.map(
                               (career, index) => (
                                 <li key={index} className="py-2 space-y-2">
                                   <strong>Career:</strong> {career.career}
@@ -727,30 +504,17 @@ export default function Page() {
                             Summary
                           </h2>
                           <ul className="space-y-3 text-sm">
-                            <li>
-                              <strong>Interests :</strong>
-                              {popupData.summary.interests}
-                            </li>
-                            <li>
-                              <strong>Strengths:</strong>
-                              {popupData.summary.strengths}
-                            </li>
-                            <li>
-                              <strong>Values:</strong>
-                              {popupData.summary.values}
-                            </li>
-                            <li>
-                              <strong>Weaknesses:</strong>
-                              {popupData.summary.weaknesses}
-                            </li>
-                            <li>
-                              <strong>Goals:</strong>
-                              {popupData.summary.goals}
-                            </li>
-                            <li>
-                              <strong>Preferences:</strong>
-                              {popupData.summary.preferences}
-                            </li>
+                            {Object.entries(cardData?.summary).map(
+                              ([key, value], idx) => (
+                                <li key={idx}>
+                                  <strong>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </strong>{" "}
+                                  <p>{value}</p>
+                                </li>
+                              )
+                            )}
                           </ul>
                         </div>
                       </div>
