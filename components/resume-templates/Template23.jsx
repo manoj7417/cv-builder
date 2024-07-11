@@ -347,7 +347,7 @@ const Certificates = ({ fontStyle ,colorBackground,colorText}) => {
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
-    <div>
+    <div className="my-2">
       <div className="certificate_title my-2" style={{color:colorBackground}}>
         <h2
           className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
@@ -361,18 +361,18 @@ const Certificates = ({ fontStyle ,colorBackground,colorText}) => {
             <ul>
               {data?.items?.map((item, index) => {
                 return (
-                  <div className="certificate_section px-2" key={index}>
+                  <div className="certificate_section py-2" key={index}>
                     {isValidUrl(item?.url) ? (
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold">
+                      <p className="break-words text-base font-bold">
                         {item.name}
                       </p>
                     )}
@@ -673,7 +673,7 @@ const Template23 = () => {
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="certificated mb-8">
+              <div className="certificated">
                 <Certificates
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
