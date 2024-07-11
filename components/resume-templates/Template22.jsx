@@ -424,13 +424,13 @@ const Certificates = ({ fontStyle, colorText, colorBackground }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold">
+                      <p className="break-words text-base font-bold">
                         {item.name}
                       </p>
                     )}
@@ -563,7 +563,7 @@ const Template22 = () => {
   return (
     <>
       <div
-        className="mx-auto w-[210mm] bg-white border-t-[15px]"
+        className="mx-auto w-[210mm] min-h-screen bg-white border-t-[15px]"
         style={{ borderColor: metadata?.theme?.primary }}
       >
         <div

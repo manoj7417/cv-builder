@@ -307,8 +307,8 @@ const Languages = ({ fontStyle, colorBackground,colorText }) => {
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{ width: `${level}%`,backgroundColor:colorBackground }}
                       ></div>
                     </div>
                   </li>
