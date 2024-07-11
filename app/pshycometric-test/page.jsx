@@ -115,7 +115,7 @@ const Page = () => {
                 </a>
 
                 {/* Premium Button */}
-                <Link href='/career-counselling'>
+                <Link href="/career-counselling">
                   {" "}
                   <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
                     <FaCrown className="mr-2 animate-pulse" />
@@ -140,8 +140,8 @@ const Page = () => {
               Witness the Magic of Science <br></br> inspire your Career
             </h3>
             <p className="text-[#7C7C7C] font-bold">
-              Try and Test the free psychometric tests to explore the
-              possibilities of an organised career
+              Try and Test the free psychometric examination to explore the
+              possibilities of an organised career.
             </p>
           </div>
           <div className="  flex pt-4 justify-center">
@@ -178,8 +178,8 @@ const Page = () => {
                   <h2 className="text-xl font-bold mb-2">Verbal Reasoning</h2>
                   <p className="text-gray-700 mb-4">
                     Check your compatibility with language comprehension and
-                    communicative verbal skills with the Verbal Reasoning Test
-                    to figure out your strengths and weaknesses.
+                    communicative skills with the Verbal Personality Assessment
+                    Test to figure out your strengths and weaknesses.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -206,7 +206,7 @@ const Page = () => {
                   </h2>
                   <p className="text-gray-700 mb-4">
                     Initiate your career dynamically with the Diagrammatic
-                    Reasoning proficiency test by analysing your aptitude with
+                    Reasoning aptitude questions by analysing your aptitude with
                     image-based patterns and pictorial representations.
                   </p>
                   <div className="flex justify-between items-center">
@@ -263,8 +263,8 @@ const Page = () => {
                   <h2 className="text-xl font-bold mb-2">Abstract Reasoning</h2>
                   <p className="text-gray-700 mb-4">
                     Check your skills with abstract and inductive reasoning with
-                    Abstract Psychometric Tests that are based on logic that
-                    require your professional judgement.
+                    the Abstract Psychometric Career Exam which is based on the
+                    logic that requires your professional judgement.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -319,8 +319,8 @@ const Page = () => {
                   <h2 className="text-xl font-bold mb-2">Logical Reasoning</h2>
                   <p className="text-gray-700 mb-4">
                     Examine your proficiency in Logically analysing situations
-                    and finding out the best possible solutions by attempting a
-                    Logical Reasoning-based Psychometric Test.
+                    and finding out the best solutions by attempting the Logical
+                    Reasoning Psychometric Assessment Test.
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -347,8 +347,8 @@ const Page = () => {
                   </h2>
                   <p className="text-gray-700 mb-4">
                     Check your compatibility with Machine-based situations and
-                    reasoning activities with the Mechanical Reasoning Test and
-                    identify the potential gaps in no time!
+                    reasoning activities with the Mechanical Psychometric
+                    Examination and identify the potential gaps in no time!
                   </p>
                   <div className="flex justify-between items-center">
                     <div>
@@ -437,7 +437,7 @@ const Page = () => {
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
-                          98% Recommendations from Industry Experts
+                          Recommendations from Industry Experts
                         </li>
                         <li className="flex items-center">
                           <FaCheckCircle className="text-blue-950 mr-2" />
@@ -468,8 +468,8 @@ const Page = () => {
                   <p className="text-gray-700 mb-6">
                     Hire candidates that are worthy of selection and escape the
                     matrix of faulty hiring by analysing the relative skills of
-                    your candidates with professionally accredited Psychometric
-                    Tests by Genies Career Hub.
+                    your candidates with a professionally accredited
+                    Psychometric Examination by Genies Career Hub.
                   </p>
                   <div className="flex justify-center md:justify-start space-x-4">
                     {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
@@ -505,7 +505,7 @@ const Page = () => {
                     Development with Psychometric Assessment Tools
                   </h1>
                   <p className="mt-2 text-lg">
-                    Employ the perfect 4 Psychometric Assessment Tools to filter
+                    Employ the perfect 4 Psychometric Assessment Test Tools to filter
                     out perfect candidates and inspire competent employees.
                   </p>
                 </div>

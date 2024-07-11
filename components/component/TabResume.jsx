@@ -123,9 +123,10 @@ export default function TabResume() {
               Discover CVs that fit your Dream Job
             </h2>
             <p className="w-1/2 mx-auto text-center my-4">
-              Start your journey with Genies Career Hub and unlock the door to a
-              world where your talents are valued and your career dreams become
-              a reality with a personalised and perfectly tailored resume.
+              Start your journey with Genies Career Hub CV Maker and unlock the
+              door to a world where your talents are valued and your career
+              dreams become a reality with a personalised and perfectly tailored
+              resume.
             </p>
           </div>
           <Tabs

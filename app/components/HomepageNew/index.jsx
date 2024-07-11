@@ -72,7 +72,13 @@ export default function HomepageNew() {
     margin: 0,
   };
 
-  const words = ["Build your CV", "Find career path", "Identify skill gaps","Get career counselling","Take personality test"]; // Add more words as needed
+  const words = [
+    "Build your CV",
+    "Find career path",
+    "Identify skill gaps",
+    "Get career counselling",
+    "Take personality test",
+  ]; // Add more words as needed
   const interval = 3000; // 2000ms or 2 seconds for each word
   const [index, setIndex] = useState(0);
 
@@ -87,7 +93,7 @@ export default function HomepageNew() {
     <>
       <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
         <div className="container lg:pt-0 pt-20">
-          <div className="flex flex-col justify-center ">
+          <div className="flex flex-col justify-center items-center">
             <Image
               src={"/arrowright.png"}
               width={100}
@@ -102,8 +108,8 @@ export default function HomepageNew() {
               alt="arrowright"
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
-            <div className="space-y-2 mx-auto">
-              <h1 className="text-[75px] mt-4 text-center  flex  lg:flex-row flex-col items-center  font-extrabold text-[#0D3572]">
+            <div className="space-y-2 mx-auto text-center">
+              <h1 className="text-[75px] mt-4 text-center flex  lg:flex-row flex-col items-center justify-center  font-extrabold text-[#0D3572]">
                 <span
                   className="text-[#ffffff] mx-10 slide-text-container"
                   style={{
@@ -118,17 +124,15 @@ export default function HomepageNew() {
                     {words[index]}
                   </span>
                 </span>
-                with
               </h1>
               <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
-                <span className="2xl:ml-3 lg:ml-1">Genies Career Hub</span>
+                <span className="2xl:ml-3 lg:ml-1">with Genies Career Hub</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
-                We believe in bridging the gap between your aspirations and the
-                perfect job role that matches your skills. With our intuitive
-                job matching system and dedicated support, we empower you to
-                take the leap towards a career that ignites your professional
-                drive.
+                Stand out in the Job Market with Genies Career Hub’s integrated
+                services in Career Assistance. We help you find the right Career
+                Path, maximise your professional skills, build your job-winning
+                resume, and grow your career dynamically.
               </p>
             </div>
             <div className="flex lg:flex-row justify-center  flex-col  min-[400px]:flex-row ">

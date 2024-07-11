@@ -1,6 +1,7 @@
 import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Collapse } from "react-collapse";
+import parse from 'html-react-parser';
 
 const AccordionItem = ({ open, toggle, ques, ans }) => {
   return (
@@ -18,7 +19,7 @@ const AccordionItem = ({ open, toggle, ques, ans }) => {
           </div>
         </div>
         <Collapse isOpened={open}>
-          <div className="bg-white text-[15px] font-medium px-5 py-4">{ans}</div>
+          <div className="bg-white text-[15px] font-medium px-5 py-4 accordion_item">{ans}</div>
         </Collapse>
       </div>
     </>
