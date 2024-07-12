@@ -434,13 +434,13 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center inline-flex"
+                        className="break-words text-base items-center inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl">{item.name}</p>
+                      <p className="break-words text-base">{item.name}</p>
                     )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -572,7 +572,7 @@ const Template15 = () => {
   return (
     <>
       <div
-        className="mx-auto w-[210mm] bg-white border-t-[20px] border-[#e4f2f2]"
+        className="mx-auto w-[210mm] bg-white border-y-[20px] border-[#e4f2f2]"
         style={{
           borderColor: metadata?.theme?.primary,
         }}

@@ -251,7 +251,7 @@ const Projects = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorText,colorBackground }) => {
+const Skills = ({ fontStyle, colorText,colorBackground ,secondaryBackground}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
   console.log("skills data:::", data);
 
@@ -291,7 +291,7 @@ const Skills = ({ fontStyle, colorText,colorBackground }) => {
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
                         className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        style={{ width: `${level}%`,backgroundColor:secondaryBackground }}
                       ></div>
                     </div>
                   </li>
@@ -391,7 +391,7 @@ const Certificates = ({ fontStyle ,colorBackground,colorText}) => {
   );
 };
 
-const Languages = ({ fontStyle, colorBackground,colorText }) => {
+const Languages = ({ fontStyle, colorBackground,colorText,secondaryBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -429,8 +429,8 @@ const Languages = ({ fontStyle, colorBackground,colorText }) => {
                     </div>
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
-                        className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{ width: `${level}%` , backgroundColor:secondaryBackground }}
                       ></div>
                     </div>
                   </li>
@@ -573,6 +573,7 @@ const Template23 = () => {
                 <Skills
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
+                  secondaryBackground={metadata?.theme?.background}
                   colorText={metadata?.theme?.text}
                 />
               </section>
@@ -631,6 +632,7 @@ const Template23 = () => {
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
+                  secondaryBackground={metadata?.theme?.background}
                 />
               </section>
             </div>

@@ -422,13 +422,13 @@ const Certificates = ({ fontStyle, colorStyle }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center inline-flex"
+                        className="break-words text-base items-center inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl">
+                      <p className="break-words text-base">
                         {item.name}
                       </p>
                     )}
@@ -595,66 +595,9 @@ const Template12 = () => {
 
   return (
     <>
-      <div className="template_10 w-[210mm] h-[297mm]">
+      <div className="template_10 w-full min-h-screen">
         <div className="bg-white">
           <div className="flex justify-between w-full">
-            {/* <div className="left_section w-[35%] bg-gray-700">
-              <div className="profile_section p-10">
-                {basics?.picture?.url && (
-                  <img
-                    src={"/pic.jpg" || basics.picture.url}
-                    alt="pic"
-                    className="w-40 h-40 rounded-full"
-                  />
-                )}
-              </div>
-              <div className="contact_details p-5">
-                <div className="contact_section">
-                  <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 text-2xl uppercase font-medium my-2">
-                    Contact Me
-                  </h2>
-                  <div className="contact_details flex">
-                    <div
-                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col gap-2 text-center`}
-                    >
-                      {basics?.email && (
-                        <a
-                          href={`mailto:${basics?.email}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
-                        >
-                          <MdOutlineMailOutline className="mr-2 text-emerald-200" />
-                          <p className="text-wrap break-words">
-                            {basics?.email}
-                          </p>
-                        </a>
-                      )}
-                      {basics?.phone && (
-                        <a
-                          href={`tel:${basics?.phone}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
-                        >
-                          <MdOutlinePhone className="mr-2 text-emerald-300" />
-                          <p className="text-wrap break-words">
-                            {basics?.phone}
-                          </p>
-                        </a>
-                      )}
-                      {(basics?.city || basics?.country) && (
-                        <p className="flex items-center break-words">
-                          <IoLocationOutline className="mr-2 text-emerald-300" />
-                          {basics?.city}
-                          {basics?.city && basics?.country && " , "}
-                          {basics?.country}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="skills mt-10 p-5">
-                <Skills fontStyle={fontStyle} />
-              </div>
-            </div> */}
             <div className="right_section w-[100%]">
               <div>
                 <div className="user-detail p-10">
@@ -671,12 +614,12 @@ const Template12 = () => {
                     <div className="contact_section">
                       <div className="contact_details">
                         <div
-                          className={`text-black my-4 ${fontStyle.contactFont} flex  gap-2 text-center`}
+                          className={`text-black my-4 ${fontStyle.contactFont} flex justify-between gap-2 text-center`}
                         >
                           {basics?.email && (
                             <a
                               href={`mailto:${basics?.email}`}
-                              className="hover:underline flex items-center mt-1  text-wrap w-full "
+                              className="hover:underline flex items-center mt-1 text-wrap"
                             >
                               <MdOutlineMailOutline className="mr-2 text-black" />
                               <p className="text-wrap break-words">
@@ -687,7 +630,7 @@ const Template12 = () => {
                           {basics?.phone && (
                             <a
                               href={`tel:${basics?.phone}`}
-                              className="hover:underline flex items-center mt-1  text-wrap w-full "
+                              className="hover:underline flex items-center mt-1 text-wrap"
                             >
                               <MdOutlinePhone className="mr-2 text-black" />
                               <p className="text-wrap break-words">
@@ -696,7 +639,7 @@ const Template12 = () => {
                             </a>
                           )}
                           {(basics?.city || basics?.country) && (
-                            <p className="flex items-center w-full">
+                            <p className="flex items-center">
                               <IoLocationOutline className="mr-2 text-black" />
                               {basics?.city}
                               {basics?.city && basics?.country && " , "}

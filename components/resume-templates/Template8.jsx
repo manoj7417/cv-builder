@@ -236,17 +236,16 @@ const Skills = ({ fontStyle, headingColor }) => {
             className={`relative inline-block font-bold uppercase w-full underline underline-offset-8 ${fontStyle.headingFont}`}
             style={{
               color: headingColor,
-              paddingBottom: "0.25rem", // Space for the underline
             }}
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1 w-full flex justify-start items-center">
+          <div className="mt-3 list-disc">
             <ul className="pl-5 list-disc">
               {data.items.map((item, i) => {
                 return (
                   <li
-                    className={`font-bold text-gray-600 ${fontStyle.skillsFont} my-1 py-1`}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-1 text-black`}
                     key={i}
                   >
                     {item?.name}
@@ -303,12 +302,12 @@ const Languages = ({ fontStyle, headingColor }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1">
+          <div className="my-1 mt-3">
             <ul className="list-disc pl-5">
               {data.items.map((item, i) => {
                 return (
                   <li
-                    className={`font-bold  ${fontStyle.skillsFont} py-2`}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-1 text-black`}
                     key={i}
                   >
                     {item?.name}
@@ -337,13 +336,13 @@ const Hobbies = ({ fontStyle, headingColor }) => {
       >
         {data?.name}
       </h2>
-      <div className="hobbies_section mt-5">
+      <div className="hobbies_section mt-2">
         {data?.visible && data?.items.length > 0 && (
           <div>
             <ul className="pl-5 list-disc">
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-bold text-gray-600">
+                  <li key={index} className="text-15px py-2 font-bold">
                     {item}
                   </li>
                 );

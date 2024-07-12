@@ -186,7 +186,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorBackground, colorText }) => {
+const Skills = ({ fontStyle, colorBackground, colorText,secondaryBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
 
   // Define the mapping of skill levels to percentages
@@ -229,7 +229,7 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                     >
                       <div
                         className="h-2.5"
-                        style={{ width: `${level}%` ,backgroundColor:colorBackground }}
+                        style={{ width: `${level}%` ,backgroundColor:secondaryBackground }}
                       ></div>
                     </div>
                   </li>
@@ -354,13 +354,13 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center inline-flex"
+                        className="break-words text-base items-center inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl">
+                      <p className="break-words text-base">
                         {item.name}
                       </p>
                     )}
@@ -379,7 +379,7 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Languages = ({ fontStyle, colorBackground, colorText }) => {
+const Languages = ({ fontStyle, colorBackground, colorText ,secondaryBackground}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -427,7 +427,7 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
                     >
                       <div
                         className="h-2.5"
-                        style={{ width: `${level}%`,backgroundColor:colorBackground }}
+                        style={{ width: `${level}%`,backgroundColor:secondaryBackground }}
                       ></div>
                     </div>
                   </li>
@@ -673,7 +673,7 @@ const Template14 = () => {
         <div
           className="resume_left w-[35%] min-h-[1123px]"
           style={{
-            backgroundColor: metadata?.theme?.background,
+            backgroundColor: metadata?.theme?.primary,
           }}
         >
           <div style={{ height: "15px", background: "#004747" }}></div>
@@ -699,6 +699,7 @@ const Template14 = () => {
                 <Skills
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
+                  secondaryBackground={metadata?.theme?.background}
                   colorText={metadata?.theme?.text}
                 />
               </div>
@@ -714,6 +715,7 @@ const Template14 = () => {
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
+                  secondaryBackground={metadata?.theme?.background}
                 />
               </div>
             </div>

@@ -247,15 +247,15 @@ const Skills = ({ fontStyle, headingColor }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1">
+          <div className="my-1">
             <ul
-              className="text-slate-400 w-full flex flex-wrap gap-5"
+              className="w-full flex flex-wrap gap-5"
               style={{ color: headingColor }}
             >
               {data?.items.map((item, i) => {
                 return (
                   <li
-                    className={`font-bold text-gray-600 py-2 ${fontStyle.skillsFont}`}
+                    className={`font-bold text-black py-2 ${fontStyle.skillsFont}`}
                     key={i}
                   >
                     {item?.name}
@@ -312,12 +312,12 @@ const Languages = ({ fontStyle, headingColor }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1">
-            <ul className="w-full flex flex-wrap gap-10 pl-5 list-disc">
+          <div className="my-1">
+            <ul className="w-full flex flex-wrap gap-5">
               {data.items.map((item, i) => {
                 return (
                   <li
-                    className={`font-bold  ${fontStyle.skillsFont} py-2`}
+                    className={`font-bold  ${fontStyle.skillsFont} py-2 font-semibold`}
                     key={i}
                   >
                     {item?.name}
@@ -342,12 +342,11 @@ const Hobbies = ({ fontStyle, headingColor }) => {
         className={`relative inline-block font-bold uppercase w-full ${fontStyle.headingFont} underline underline-offset-8`}
         style={{
           color: headingColor,
-          paddingBottom: "0.25rem", // Space for the underline
         }}
       >
         {data?.name}
       </h2>
-      <div className="hobbies_section mt-5">
+      <div className="hobbies_section py-2">
         {data?.visible && data?.items.length > 0 && (
           <div>
             <ul className="w-full flex flex-wrap gap-5">

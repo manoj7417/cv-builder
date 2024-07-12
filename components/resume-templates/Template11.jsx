@@ -288,7 +288,12 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorBackground, colorText }) => {
+const Skills = ({
+  fontStyle,
+  colorBackground,
+  colorText,
+  secondaryBackground,
+}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
 
   // Define the mapping of skill levels to percentages
@@ -327,7 +332,10 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
                         className="bg-black h-2.5"
-                        style={{ width: `${level}%` }}
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: secondaryBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -356,13 +364,10 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul style={{color:colorText}}>
+            <ul style={{ color: colorText }}>
               {data?.items?.map((item, index) => {
                 return (
-                  <li
-                    key={index}
-                    className="text-15px py-2 font-semibold"
-                  >
+                  <li key={index} className="text-15px py-2 font-semibold">
                     {item}
                   </li>
                 );
@@ -410,7 +415,12 @@ const Profile = ({ fontStyle, colorText, colorBackground }) => {
   );
 };
 
-const Languages = ({ fontStyle, colorText,colorBackground }) => {
+const Languages = ({
+  fontStyle,
+  colorText,
+  colorBackground,
+  secondaryBackground,
+}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -449,7 +459,10 @@ const Languages = ({ fontStyle, colorText,colorBackground }) => {
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
                         className="bg-gray-600 h-2.5"
-                        style={{ width: `${level}%` }}
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: secondaryBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -496,13 +509,13 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold">
+                      <p className="break-words text-base font-bold">
                         {item.name}
                       </p>
                     )}
@@ -568,7 +581,9 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
@@ -617,7 +632,7 @@ const Template11 = () => {
 
   return (
     <>
-      <div className="template_10 w-[210mm] h-[297mm]">
+      <div className="template_10 w-full min-h-screen ">
         <div className="bg-white">
           <div className="flex justify-between w-full">
             <div
@@ -689,6 +704,7 @@ const Template11 = () => {
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
+                  secondaryBackground={metadata?.theme?.background}
                 />
               </div>
               <div className="hobbies px-5 py-4">
@@ -703,6 +719,7 @@ const Template11 = () => {
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
+                  secondaryBackground={metadata?.theme?.background}
                 />
               </div>
             </div>

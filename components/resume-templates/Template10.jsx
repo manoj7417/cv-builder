@@ -608,7 +608,7 @@ const Template10 = () => {
                       />
                     )}
                     <div
-                      className="user_name h-[120px] w-full absolute -z-10 top-32 -right-64 -mr-2 py-5 text-start pl-14"
+                      className="user_name h-[125px] w-full absolute -z-10 top-32 -right-64 -mr-2 py-5 text-start pl-14"
                       style={{
                         backgroundColor: metadata?.theme?.primary,
                         color: metadata?.theme?.text,

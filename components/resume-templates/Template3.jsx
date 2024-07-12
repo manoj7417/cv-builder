@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaGlobe } from "react-icons/fa";
-import { FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
+import { FaAward, FaGraduationCap, FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -11,11 +11,14 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { isValidUrl } from "./ValidateUrl";
 import { BiSolidGroup } from "react-icons/bi";
 import { AiOutlineLink } from "react-icons/ai";
+import { GrCertificate, GrTestDesktop } from "react-icons/gr";
+import { GoCrossReference } from "react-icons/go";
+import { VscReferences } from "react-icons/vsc";
 
 const Education = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state.resume.data.sections.education);
   return (
-    <div className="education_section py-3">
+    <div className="education_section py-3 border-b-2 border-gray-300">
       {data.visible && data?.items?.length > 0 && (
         <>
           <h2
@@ -149,7 +152,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
               className="icon p-2"
               style={{ backgroundColor: colorBackground }}
             >
-              <FaGraduationCap style={{ color: colorText }} />
+              <GrTestDesktop  style={{ color: colorText }} />
             </div>
             <h2
               className={`${fontStyle.headingFont} font-bold uppercase`}
@@ -218,7 +221,41 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
               {data.items.map((item, i) => {
                 return (
                   <li
-                    className={`font-bold text-gray-600 ${fontStyle.skillsFont}`}
+                    className={`font-bold text-gray-600 py-1 ${fontStyle.skillsFont}`}
+                    key={i}
+                  >
+                    {item?.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Languages = ({ fontStyle, colorBackground, colorText }) => {
+  const data = useResumeStore((state) => state.resume.data.sections.language);
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="language_section py-3 border-b-2 border-gray-300">
+          <h2
+            className={`relative inline-block font-bold uppercase w-full  ${fontStyle.headingFont}`}
+            style={{
+              color: colorBackground,
+            }}
+          >
+            {data?.name}
+          </h2>
+          <div className="my-1">
+            <ul className="w-full list-disc pl-5">
+              {data.items.map((item, i) => {
+                return (
+                  <li
+                    className={`font-bold  ${fontStyle.skillsFont} py-2 font-semibold`}
                     key={i}
                   >
                     {item?.name}
@@ -268,7 +305,7 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.hobbies);
 
   return (
-    <div className="border-b-2 border-gray-300 py-3">
+    <div className="py-3">
       {data?.visible && data?.items.length > 0 && (
         <div className="hobbies_section">
           <h2
@@ -282,7 +319,7 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
               return (
                 <li
                   key={index}
-                  className="break-words text-15px font-bold text-gray-600"
+                  className="break-words py-1 text-15px font-bold text-gray-600"
                 >
                   {item}
                 </li>
@@ -302,19 +339,27 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
   return (
     <>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="border-b-2 border-gray-300 py-3">
-          <h2
-            className={`text-xl font-semibold uppercase ${fontStyle.headingFont} break-words`}
-            style={{ color: colorBackground }}
-          >
-            {data?.name}
-          </h2>
+        <div className="py-3">
+         <div className="project_heading flex gap-5 items-center">
+            <div
+              className="icon bg-gray-300 p-2"
+              style={{ backgroundColor: colorBackground }}
+            >
+              <GrCertificate style={{ color: colorText }} />
+            </div>
+            <h2
+              className={`${fontStyle.headingFont} font-bold uppercase`}
+              style={{ color: colorBackground }}
+            >
+              {data?.name}
+            </h2>
+          </div>
           <div>
             {data?.items?.map((item, index) => {
               return (
                 <div
                   key={index}
-                  className="break-words text-13px font-bold text-gray-600 my-2"
+                  className="break-words text-13px font-bold text-gray-600 py-4 mt-2"
                 >
                   <>
                     {isValidUrl(item?.url) ? (
@@ -357,7 +402,7 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
               className="icon bg-gray-300 p-2"
               style={{ backgroundColor: colorBackground }}
             >
-              <FaGraduationCap style={{ color: colorText }} />
+              <FaAward  style={{ color: colorText }} />
             </div>
             <h2
               className={`${fontStyle.headingFont} font-bold uppercase`}
@@ -370,7 +415,7 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
             return (
               <div
                 key={index}
-                className="break-words text-13px font-bold text-gray-600 my-3"
+                className="break-words text-13px font-bold text-gray-600 py-5"
               >
                 <>
                   <div className="mt-2 flex justify-between">
@@ -419,7 +464,7 @@ const Reference = ({ fontStyle, colorBackground, colorText }) => {
               className="icon p-2"
               style={{ backgroundColor: colorBackground }}
             >
-              <FaGraduationCap style={{ color: colorText }} />
+              <VscReferences  style={{ color: colorText }} />
             </div>
             <h2
               className={`${fontStyle.headingFont} font-bold uppercase`}
@@ -492,7 +537,7 @@ export const Template3 = () => {
 
   return (
     <>
-      <div className="w-full h-full p-custom space-y-3">
+      <div className="w-full min-h-screen p-custom space-y-3">
         <div className="bg-white mx-auto">
           <div
             className="top_section flex justify-around items-center py-10"
@@ -567,22 +612,24 @@ export const Template3 = () => {
                   )}
                 </div>
               </div>
-              <Skills
-                fontStyle={fontStyle}
-                colorBackground={metadata?.theme?.primary}
-                colorText={metadata?.theme?.text}
-              />
+              
               <Education
                 fontStyle={fontStyle}
                 colorBackground={metadata?.theme?.primary}
                 colorText={metadata?.theme?.text}
               />
-              <Hobbies
+                
+                <Skills
                 fontStyle={fontStyle}
                 colorBackground={metadata?.theme?.primary}
                 colorText={metadata?.theme?.text}
               />
-              <Certificates
+              <Languages
+                fontStyle={fontStyle}
+                colorBackground={metadata?.theme?.primary}
+                colorText={metadata?.theme?.text}
+              />
+              <Hobbies
                 fontStyle={fontStyle}
                 colorBackground={metadata?.theme?.primary}
                 colorText={metadata?.theme?.text}
@@ -614,6 +661,11 @@ export const Template3 = () => {
                 colorBackground={metadata?.theme?.primary}
                 colorText={metadata?.theme?.text}
               />
+              <Certificates
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
             </div>
           </div>
         </div>
