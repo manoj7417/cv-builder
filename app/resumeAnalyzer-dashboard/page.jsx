@@ -23,6 +23,7 @@ import NewResumeHeader from "../Layout/NewResumeHeader";
 
 import WorkTogether from "@/components/component/WorkTogether";
 import Header from "../Layout/Header";
+import Footer from "../Layout/Footer";
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
@@ -195,7 +196,7 @@ export default function DashboardIdea() {
           </div>
         </section> */}
         <WorkTogether />
-        {/* <Footer /> */}
+        <Footer />
       </main>
     </>
   );
