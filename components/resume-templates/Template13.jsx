@@ -466,13 +466,13 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold">
+                      <p className="break-words text-base font-bold">
                         {item.name}
                       </p>
                     )}
@@ -580,7 +580,7 @@ const Template13 = () => {
 
   return (
     <>
-      <div className="max-w-[210mm] max-h-[297mm] w-full h-full">
+      <div className="w-full min-h-screen">
         <div className="bg-white">
           <div
             className="top_section p-10"

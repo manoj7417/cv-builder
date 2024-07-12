@@ -465,7 +465,7 @@ const ResumeView = ({ setIsContentVisible }) => {
               }}
             >
               <GetTemplate name={data?.metadata?.template} resumeData={data} />
-              <div className="text-center  text-gray-500">
+              <div className="text-center">
                 <p>@Genies Career Hub</p>
               </div>
             </div>

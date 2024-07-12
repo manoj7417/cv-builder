@@ -12,7 +12,7 @@ import Link from "next/link";
 import { isValidUrl } from "./ValidateUrl";
 import { AiOutlineLink } from "react-icons/ai";
 
-const Education = ({ fontStyle, colorBackground,colorText }) => {
+const Education = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.education
   );
@@ -20,11 +20,14 @@ const Education = ({ fontStyle, colorBackground,colorText }) => {
     <div className="education_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="education_header" style={{color:colorBackground}}>
+          <div className="education_header" style={{ color: colorBackground }}>
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -71,7 +74,7 @@ const Education = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Experience = ({ fontStyle, colorBackground,colorText }) => {
+const Experience = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
@@ -80,11 +83,17 @@ const Experience = ({ fontStyle, colorBackground,colorText }) => {
     <div className="experience_section w-full mt-5">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="experience_header w-full" style={{color:colorBackground}}>
+          <div
+            className="experience_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           {data?.items?.map((item, index) => {
             return (
@@ -133,19 +142,23 @@ const Experience = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Projects = ({ fontStyle, colorBackground,colorText }) => {
+const Projects = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
     <div className="project_section my-4">
       {data?.visible && data?.items.length > 0 && (
         <>
-          <div className="project_heading w-full" style={{color:colorBackground}}>
-            <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont}`}
-            >
+          <div
+            className="project_heading w-full"
+            style={{ color: colorBackground }}
+          >
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           {data?.items.map((item, index) => {
             return (
@@ -188,7 +201,7 @@ const Projects = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorBackground,colorText }) => {
+const Skills = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
   console.log("skills data:::", data);
 
@@ -204,9 +217,92 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
     <div>
       {data?.visible && data?.items?.length > 0 && (
         <div className="skills_section py-4">
-          <div className="skill_head" style={{color:colorText}}>
+          <div className="skill_head" style={{ color: colorText }}>
+            <h2 className={`uppercase font-bold ${fontStyle.headingFont}`}>
+              {data?.name}
+            </h2>
+          </div>
+          <div className="w-full">
+            <ul className="w-full" style={{ color: colorText }}>
+              {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
+                return (
+                  <li
+                    className={`font-bold ${fontStyle.skillsFont} my-2 py-2`}
+                    key={i}
+                  >
+                    <div className="text-start w-1/2 mb-1">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div className="w-1/2 text-end bg-white h-2.5">
+                      <div
+                        className="h-2.5"
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: colorBackground,
+                        }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div style={{ color: colorText }} className="my-4">
+      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+        {data?.name}
+      </h2>
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul className="-pl-5">
+              {data?.items?.map((item, index) => {
+                return (
+                  <li key={index} className="text-15px py-2 font-semibold">
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Languages = ({ fontStyle, colorBackground, colorText }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.language);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
+  return (
+    <div>
+      {data?.visible && data?.items?.length > 0 && (
+        <div className="skills_section py-4">
+          <div className="skill_head">
             <h2
               className={`uppercase font-bold ${fontStyle.headingFont}`}
+              style={{
+                color: colorText,
+              }}
             >
               {data?.name}
             </h2>
@@ -226,7 +322,10 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
                         className="h-2.5"
-                        style={{ width: `${level}%` ,backgroundColor:colorBackground}}
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: colorBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -240,101 +339,22 @@ const Skills = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Hobbies = ({ fontStyle,colorBackground,colorText }) => {
-  const data = useResumeStore(
-    (state) => state?.resume?.data?.sections?.hobbies
-  );
-  return (
-    <div style={{color:colorText}} className="my-4">
-      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
-        {data?.name}
-      </h2>
-      <div className="hobbies_section mt-5">
-        {data?.visible && data?.items.length > 0 && (
-          <div>
-            <ul className="-pl-5">
-              {data?.items?.map((item, index) => {
-                return (
-                  <li
-                    key={index}
-                    className="text-15px py-2 font-semibold"
-                  >
-                    {item}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-const Languages = ({ fontStyle, colorBackground,colorText }) => {
-  const data = useResumeStore((state) => state?.resume.data.sections?.language);
-
-  // Define the mapping of skill levels to percentages
-  const levelMapping = {
-    beginner: 25,
-    intermediate: 50,
-    advanced: 75,
-    expert: 100,
-  };
-
-  return (
-    <div>
-      {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
-          <div className="skill_head">
-            <h2
-              className={`uppercase font-bold ${fontStyle.headingFont} text-black`}
-            >
-              {data?.name}
-            </h2>
-          </div>
-          <div className="w-full">
-            <ul className="w-full">
-              {data.items.map((item, i) => {
-                const level = levelMapping[item?.level.toLowerCase()] || 25;
-                return (
-                  <li
-                    className={`font-bold ${fontStyle.skillsFont} my-2 py-2`}
-                    key={i}
-                  >
-                    <div className="text-start w-1/2 mb-1">
-                      <span>{item?.name}</span>
-                    </div>
-                    <div className="w-1/2 text-end bg-white h-2.5">
-                      <div
-                        className="h-2.5"
-                        style={{ width: `${level}%`,backgroundColor:colorBackground }}
-                      ></div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const Certificates = ({ fontStyle,colorBackground,colorText }) => {
+const Certificates = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
     <div>
-      <h2 className={`uppercase font-bold ${fontStyle.headingFont}`} style={{color:colorText}}>
+      <h2
+        className={`uppercase font-bold ${fontStyle.headingFont}`}
+        style={{ color: colorText }}
+      >
         {data?.name}
       </h2>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul style={{color:colorText}}>
+            <ul style={{ color: colorText }}>
               {data?.items?.map((item, index) => {
                 return (
                   <div className="certificate_section" key={index}>
@@ -367,20 +387,24 @@ const Certificates = ({ fontStyle,colorBackground,colorText }) => {
   );
 };
 
-const Profile = ({ fontStyle, colorBackground,colorText }) => {
+const Profile = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.summary);
   const htmlContent = data?.content;
   return (
     <div>
       {data?.visible && (
         <div className="profile_section w-full">
-          <div className="profile_heading w-full" style={{color:colorBackground}}>
-            <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont}`}
-            >
+          <div
+            className="profile_heading w-full"
+            style={{ color: colorBackground }}
+          >
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div
             className={`text-sm py-2 mt-3 ${fontStyle.subHeadingFont} break-words`}
@@ -392,17 +416,23 @@ const Profile = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Awards = ({ fontStyle, colorBackground,colorText }) => {
+const Awards = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
     <div className="awards_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="awards_header w-full" style={{color:colorBackground}}>
+          <div
+            className="awards_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -452,7 +482,7 @@ const Awards = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const References = ({ fontStyle, colorBackground,colorText }) => {
+const References = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore(
     (state) => state?.resume.data.sections?.reference
   );
@@ -460,11 +490,17 @@ const References = ({ fontStyle, colorBackground,colorText }) => {
     <div className="references_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header w-full" style={{color:colorBackground}}>
+          <div
+            className="references_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -546,7 +582,7 @@ export const Template19 = () => {
             className="top_section flex justify-around items-center py-10"
             style={{
               backgroundColor: metadata?.theme?.primary,
-              color:metadata?.theme?.text
+              color: metadata?.theme?.text,
             }}
           >
             {basics?.picture?.url && (
@@ -570,12 +606,18 @@ export const Template19 = () => {
             </div>
           </div>
           <div className="resume_section flex flex-row w-[210mm] h-full">
-            <div className="md:w-[35%] w-full left_side" style={{backgroundColor:metadata?.theme?.background}}>
+            <div
+              className="md:w-[35%] w-full left_side"
+              style={{ backgroundColor: metadata?.theme?.background }}
+            >
               <div className="left_side p-5">
-                <div className="contact_section mt-5" style={{ color:metadata?.theme?.text}}>
+                <div
+                  className="contact_section mt-5"
+                  style={{ color: metadata?.theme?.text }}
+                >
                   <h2
                     className={`uppercase font-bold ${fontStyle.headingFont}`}
-                    style={{color:metadata?.theme?.colorText}}
+                    style={{ color: metadata?.theme?.colorText }}
                   >
                     Contact Details
                   </h2>

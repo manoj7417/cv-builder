@@ -192,12 +192,21 @@ const Projects = ({ fontStyle, colorBackground,colorText }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorBackground, colorText }) => {
-  const data = useResumeStore((state) => state.resume.data.sections.skills);
+const Skills = ({ fontStyle, colorBackground, colorText,secondaryBackground }) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.skills);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section">
+        <div className="skills_section py-4">
           <h2
             className={`${fontStyle.headingFont} font-semibold uppercase`}
             style={{
@@ -206,15 +215,29 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1">
-            <ul className="list-disc pl-5" style={{ color: colorText }}>
+          <div className="w-full flex justify-end items-center">
+            <ul className="w-full" style={{ color: colorText }}>
               {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} py-2`}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    {item?.name}
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div
+                      className="w-1/2 text-end h-2.5"
+                      style={{
+                        backgroundColor: colorText,
+                      }}
+                    >
+                      <div
+                        className="h-2.5"
+                        style={{ width: `${level}%` ,backgroundColor:secondaryBackground }}
+                      ></div>
+                    </div>
                   </li>
                 );
               })}
@@ -226,12 +249,21 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
-const Languages = ({ fontStyle, colorBackground, colorText }) => {
-  const data = useResumeStore((state) => state.resume.data.sections.language);
+const Languages = ({ fontStyle, colorBackground, colorText ,secondaryBackground}) => {
+  const data = useResumeStore((state) => state?.resume.data.sections?.language);
+
+  // Define the mapping of skill levels to percentages
+  const levelMapping = {
+    beginner: 25,
+    intermediate: 50,
+    advanced: 75,
+    expert: 100,
+  };
+
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-3">
+        <div className="skills_section py-4">
           <h2
             className={`${fontStyle.headingFont} font-semibold uppercase`}
             style={{
@@ -240,15 +272,34 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
           >
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1">
-            <ul className="list-disc pl-5" style={{ color: colorText }}>
+          <div className="w-full flex justify-end items-center">
+            <ul
+              className="w-full"
+              style={{
+                color: colorText,
+              }}
+            >
               {data.items.map((item, i) => {
+                const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} py-2`}
+                    className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    {item?.name}
+                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                      <span>{item?.name}</span>
+                    </div>
+                    <div
+                      className="w-1/2 text-end h-2.5"
+                      style={{
+                        backgroundColor: colorText,
+                      }}
+                    >
+                      <div
+                        className="h-2.5"
+                        style={{ width: `${level}%`,backgroundColor:secondaryBackground }}
+                      ></div>
+                    </div>
                   </li>
                 );
               })}
@@ -409,13 +460,13 @@ const Certificates = ({ fontStyle, colorBackground,colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl">{item.name}</p>
+                      <p className="break-words text-base">{item.name}</p>
                     )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -518,7 +569,7 @@ const Template16 = () => {
 
   return (
     <>
-      <div className="resume_wrapper flex bg-white  mx-auto h-min-[297mm] w-min-[210mm]">
+      <div className="resume_wrapper flex bg-white  mx-auto w-full min-h-screen">
         <div
           className="resume_left w-[35%] min-h-[1123px]"
           style={{
@@ -548,6 +599,7 @@ const Template16 = () => {
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
+                  secondaryBackground={metadata?.theme?.background}
                 />
               </div>
               <div className="resume_info my-5">
@@ -561,6 +613,7 @@ const Template16 = () => {
                 <Languages
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
+                  secondaryBackground={metadata?.theme?.background}
                   colorText={metadata?.theme?.text}
                 />
               </div>

@@ -615,7 +615,7 @@ const Template17 = () => {
                       className="hover:underline flex items-center mt-1  text-wrap w-full "
                     >
                       <MdOutlinePhone className="mr-2" />
-                      <p className="w-[90%] text-wrap break-words text-white">
+                      <p className="w-[80%] text-wrap break-words text-white">
                         {basics?.phone}
                       </p>
                     </a>
@@ -639,7 +639,7 @@ const Template17 = () => {
                       className="hover:underline flex items-center mt-1  text-wrap w-full "
                     >
                       <MdOutlineMailOutline className="mr-2" />
-                      <p className="w-[90%] text-wrap break-words text-white">
+                      <p className="w-[80%] text-wrap break-words text-white">
                         {basics?.email}
                       </p>
                     </a>
