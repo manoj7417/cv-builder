@@ -15,6 +15,7 @@ import NewResumeHeader from "../Layout/NewResumeHeader";
 import Header from "../Layout/Header";
 import { useUserStore } from "../store/UserStore";
 import WorkTogether from "@/components/component/WorkTogether";
+import Footer from "../Layout/Footer";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -526,7 +527,7 @@ export default function DashboardIdea() {
           </div>
         </section>
         <WorkTogether />
-        {/* <Footer /> */}
+        <Footer />
       </main>
     </>
   );
