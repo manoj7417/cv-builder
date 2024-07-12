@@ -79,6 +79,13 @@ export default function HomepageNew() {
     "Get career counselling",
     "Take personality test",
   ]; // Add more words as needed
+  const images = [
+    "/build-your-cv.png",
+    "/find-career-path.png",
+    "/identify-skill-gap.png",
+    "/get-career-councelling.png",
+    "/take-personality-test.png",
+  ];
   const interval = 3000; // 2000ms or 2 seconds for each word
   const [index, setIndex] = useState(0);
 
@@ -111,21 +118,28 @@ export default function HomepageNew() {
             <div className="space-y-2 mx-auto text-center">
               <h1 className="text-[75px] mt-4 text-center flex  lg:flex-row flex-col items-center justify-center  font-extrabold text-[#0D3572]">
                 <span
-                  className="text-[#ffffff] mx-10 slide-text-container"
+                  className="mx-10 slide-text-container"
                   style={{
-                    display: "inline-block",
-                    background: "linear-gradient(135deg, #30B8CA, #303A72)",
-                    borderRadius: "16px",
-                    padding: "0px 30px",
-                    lineHeight: "1.2",
+                    // display: "inline-block",
+                    // background: "linear-gradient(135deg, #30B8CA, #303A72)",
+                    // borderRadius: "16px",
+                    // padding: "0px 30px",
+                    // lineHeight: "1.2",
                   }}
                 >
                   <span className="slide-text" key={index}>
                     {words[index]}
+                    <Image
+                      src={images[index]}
+                      width={350}
+                      height={350}
+                      alt={words[index]}
+                      className="ml-4"
+                    />
                   </span>
                 </span>
               </h1>
-              <h1 className="text-[80px] mt-4 text-center   font-extrabold text-[#0D3572]">
+              <h1 className="text-[100px] text-center font-extrabold text-[#0D3572]">
                 <span className="2xl:ml-3 lg:ml-1">with Genies Career Hub</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">

@@ -1099,28 +1099,3 @@ footer a:hover svg {
 ol > li {
   display: list-item !important;
 }
-
-
-
-
-
-/* Apply the animation to the slide text */
-.slide-text {
-  animation: colorChange 5s infinite;
-}
-
-
-@keyframes colorChange {
-  0%, 100% {
-    color: #801515;
-  }
-  25% {
-    color: #30B8CA;
-  }
-  50% {
-    color: #303A72;
-  }
-  75% {
-    color: #0D3572;
-  }
-}
