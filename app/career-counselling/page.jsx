@@ -15,6 +15,9 @@ import CareerSummary from "./CareerSummary";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+
 
 export default function Page() {
   const [showIntro, setShowIntro] = useState(false);
@@ -38,6 +41,7 @@ export default function Page() {
     careerSummary,
     resetData,
   } = useUserDataStore();
+  const router = useRouter()
   const categories =
     Object.keys(answers).length > 0 ? Object.keys(answers) : null;
 
@@ -130,7 +134,8 @@ export default function Page() {
     setShowDialog(false);
   };
 
-  const handleReadMore = (data) => {
+  const handleReadMore = (e, data) => {
+    e.stopPropagation()
     setCardData(data);
     setShowPopup(true);
   };
@@ -141,6 +146,7 @@ export default function Page() {
 
   const fetchSummary = async () => {
     const { accessToken } = await GetTokens();
+    if (!accessToken) return;
     const token = accessToken?.value;
     // Fetch user details from API or database
     const response = await axios.get("/api/getSummary", {
@@ -153,17 +159,44 @@ export default function Page() {
     setLoading(false)
   };
 
+  const handleStartTest = async () => {
+    const { accessToken } = await GetTokens()
+    const token = accessToken.value
+    try {
+      const response = await axios.get('/api/checkEligibility', {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      console.log(response)
+      if (response.status === 200) {
+        setContentType("userData");
+      }
+    } catch (error) {
+      console.log(error.response.status === 403)
+      error.response.status === 403 && router.push('/pricing')
+    }
+  }
+
+
+
   useEffect(() => {
+
     fetchSummary();
   }, []);
 
-  console.log("cardData:::", cardData);
 
   return (
     <>
       <section className="career_counselling">
         <div className="flex min-h-[500px] w-full bg-background p-5">
           <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
+            {
+              contentType !== "Intro" &&
+              <div className="mt-20 flex justify-end px-20">
+                <Button onClick={() => resetData()}>Cancel</Button>
+              </div>
+            }
             <main className="flex flex-1 flex-col lg:flex-row gap-4 p-4 sm:px-6 sm:py-0">
               {contentType === "Intro" && (
                 <div className="flex justify-center items-center flex-1 mt-10">
@@ -178,7 +211,8 @@ export default function Page() {
                       aspirations.
                     </p>
                     <button
-                      onClick={() => setContentType("userData")}
+                      onClick={
+                        handleStartTest}
                       className="mt-6 bg-blue-950 text-white px-10 py-2 rounded"
                     >
                       Start Test
@@ -306,76 +340,64 @@ export default function Page() {
                   </div>
                 </section>
               )}
-              {/* {contentType === "summary" && (
-                <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24">
-                  <div>
-                    <h2>Hello</h2>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Omnis, excepturi atque temporibus quaerat fugit tempora
-                      distinctio. Deleniti suscipit error adipisci?
-                    </p>
-                  </div>
-                </section>
-              )} */}
               {(contentType === "userData" ||
                 contentType === "generateQuestions") && (
-                <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
-                  <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
-                    <CardHeader className="">
-                      <h1 className="xl:text-4xl text-2xl font-bold text-blue-950">
-                        Career Counselor Steps
-                      </h1>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex justify-center items-center flex-1 w-full h-full">
-                        <div>
-                          <p className="my-4 font-medium text-center">
-                            Please follow these instructions to provide answers
-                            to the questionnaire:
-                          </p>
-                          <ul className="list-disc pl-6">
-                            <li className="mb-2 py-2 flex items-center font-medium">
-                              <TiTick className="text-green-500 text-2xl mr-2" />
-                              Click on{" "}
-                              <span className="font-bold mx-1">Start</span>
-                              to start the quiz.
-                            </li>
-                            <li className="mb-2 py-2 flex items-center font-medium">
-                              <TiTick className="text-green-500 text-2xl mr-2" />
-                              Click on{" "}
-                              <span className="font-bold mx-1">Next</span>
-                              to move to the next question.
-                            </li>
-                            <li className="mb-2 py-2 flex items-center font-medium">
-                              <TiTick className="text-green-500 text-2xl mr-2" />
-                              Click on
-                              <span className="font-bold mx-1">
-                                Previous
-                              </span>{" "}
-                              to go back to the previous question.
-                            </li>
-                            <li className="mb-2 py-2 flex items-center font-medium">
-                              <TiTick className="text-green-500 text-2xl mr-2" />
-                              Fill in your answers in the text area provided for
-                              each question.
-                            </li>
-                            <li className="mb-2 py-2 flex items-center font-medium">
-                              <TiTick className="text-green-500 text-2xl mr-2" />
-                              Once you have answered all questions, click on
-                              <span className="font-bold mx-1">Submit.</span>
-                            </li>
-                          </ul>
+                  <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
+                    <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
+                      <CardHeader className="">
+                        <h1 className="xl:text-4xl text-2xl font-bold text-blue-950">
+                          Career Counselor Steps
+                        </h1>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex justify-center items-center flex-1 w-full h-full">
+                          <div>
+                            <p className="my-4 font-medium text-center">
+                              Please follow these instructions to provide answers
+                              to the questionnaire:
+                            </p>
+                            <ul className="list-disc pl-6">
+                              <li className="mb-2 py-2 flex items-center font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                Click on{" "}
+                                <span className="font-bold mx-1">Start</span>
+                                to start the quiz.
+                              </li>
+                              <li className="mb-2 py-2 flex items-center font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                Click on{" "}
+                                <span className="font-bold mx-1">Next</span>
+                                to move to the next question.
+                              </li>
+                              <li className="mb-2 py-2 flex items-center font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                Click on
+                                <span className="font-bold mx-1">
+                                  Previous
+                                </span>{" "}
+                                to go back to the previous question.
+                              </li>
+                              <li className="mb-2 py-2 flex items-center font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                Fill in your answers in the text area provided for
+                                each question.
+                              </li>
+                              <li className="mb-2 py-2 flex items-center font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                Once you have answered all questions, click on
+                                <span className="font-bold mx-1">Submit.</span>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
             </main>
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
       <section className="w-full h-full py-10 px-20 bg-gray-100">
         <h1 className="text-blue-950 text-5xl py-5 font-bold text-center mb-6">
           Psychometric Test Summary
@@ -405,12 +427,12 @@ export default function Page() {
                     </h5>
                   </a>
                   <p className="mb-5 font-normal text-sm text-gray-700">
-                    <strong>Interests</strong>: {val.summary.interests?.slice(0,50)}
+                    <strong>Interests</strong>: {val.summary.interests?.slice(0, 50)}
                   </p>
                   <div className="summary_card_footer absolute bottom-6 left-6 right-6 mt-5">
                     <div
                       className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
-                      onClick={() => handleReadMore(val)}
+                      onClick={(e) => handleReadMore(e, val)}
                     >
                       Read more
                       <svg
@@ -435,8 +457,8 @@ export default function Page() {
             ))}
 
             {showPopup && popupData && (
-              <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white max-w-5xl min-h-[500px] w-full p-6 rounded-lg shadow-lg">
+              <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50" onClick={closePopup} >
+                <div className="bg-white max-w-5xl min-h-[500px] w-full p-6 rounded-lg shadow-lg" onClick={(e) => e.stopPropagation()}>
                   <button
                     onClick={closePopup}
                     className="absolute top-[5rem] right-[11rem] text-gray-400 hover:text-gray-600 focus:outline-none"
@@ -459,23 +481,27 @@ export default function Page() {
                   <Tabs
                     className="w-full py-5"
                     defaultValue="actionableInsights"
+
                   >
                     <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto">
                       <TabsTrigger
                         value="actionableInsights"
                         className=" text-blue-950 rounded-md text-base"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         Actionable Insights
                       </TabsTrigger>
                       <TabsTrigger
                         value="careerSuggestions"
                         className=" text-blue-950 rounded-md text-base"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         Career Suggestions
                       </TabsTrigger>
                       <TabsTrigger
                         value="summary"
                         className=" text-blue-950 rounded-md text-base"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         Summary
                       </TabsTrigger>
