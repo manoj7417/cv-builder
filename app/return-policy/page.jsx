@@ -4,135 +4,177 @@ const ReturnPolicyPage = () => {
   return (
     <>
       <section className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
-        <div className="container lg:max-w-6xl w-full mx-auto rounded-lg lg:p-0 p-5">
-          <h1 className="text-3xl font-bold mb-5 mt-10">
-            Returns and Cancellation Policy
-          </h1>
-          <div className="md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            <h2 className="text-2xl font-bold">Returns Policy</h2>
-            <p className="text-base my-2">
-              While we strive to achieve complete compliance with policies and
-              ensure the satisfaction of the consumers with our services, we
-              comprehend how certain situations can lead to an unsatisfied
-              experience. Thus, we offer returns to confirm complete fulfilment.
+        <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-bold mb-6">Returns Policy</h1>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">
+              Understand the Importance of Returns
+            </h2>
+          </section>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">Return to Work:</h2>
+            <h3 className="text-xl font-semibold mb-2">Recent Purchases</h3>
+            <p className="text-lg">
+              All services purchased in the last 14 days will receive a full
+              refund.
             </p>
-            <h2 className="text-2xl font-bold">Eligibility for Returns</h2>
-            <ul className="list-disc ml-5">
-              <li className="text-base my-2">
-                Services purchased within the last 14 days are eligible for a
-                full refund.
-              </li>
-              <li className="text-base my-2">
-                Services that have not been accessed or utilized may be refunded
-                in full.
-              </li>
-              <li className="text-base my-2">
-                Partial refunds may be issued for services accessed or utilized
-                partially, at the discretion of Genies Career Hub.
-              </li>
-            </ul>
-            <h2 className="text-2xl font-bold">Process for Returns</h2>
-            <ol className="list-decimal ml-5">
-              <li className="text-base my-2">
-                To initiate a return, please contact our customer support team
-                at{" "}
+            <p className="text-lg">
+              If you're not happy with your purchase, we will refund it.
+            </p>
+          </section>
+          <section className="mb-8">
+            <h3 className="text-xl font-semibold mb-2">Unused Services</h3>
+            <p className="text-lg">
+              If you don't use or access a service, we will refund your full
+              payment.
+            </p>
+            <p className="text-lg">We are fair-minded and flexible.</p>
+          </section>
+          <section className="mb-8">
+            <h3 className="text-xl font-semibold mb-2">Partial Refunds</h3>
+            <p className="text-lg">
+              We may consider partial refunds of services partially used.
+            </p>
+            <p className="text-lg">
+              We are committed to finding a solution that is mutually
+              beneficial.
+            </p>
+          </section>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">
+              How can I get a refund for my purchase?
+            </h2>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li className="text-lg">
+                Contact Us: Reach out to our friendly customer support team at{" "}
                 <a
                   href="mailto:support@geniescareerhub.com"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   support@geniescareerhub.com
                 </a>{" "}
                 with your order details.
               </li>
-              <li className="text-base my-2">
-                Our team will review your request and guide you through the
-                steps to process the return.
+              <li className="text-lg">
+                Review &amp; Approval: We will review your request, approve it,
+                and guide you through the process.
               </li>
-              <li className="text-base my-2">
-                Once your return is approved, the refund will be processed to
-                your original method of payment within 14 business days.
+              <li className="text-lg">
+                If your application is approved, you can expect to receive a
+                refund within 14 business days.
               </li>
             </ol>
-            <h2 className="text-2xl font-bold">Exceptions</h2>
-            <p className="text-base my-2">
-              - Services that are fully utilized are not eligible for a return.
-              - Refunds may not be granted if the service has been significantly
-              consumed or if the user has benefited from the service.
+          </section>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">Exceptions</h2>
+            <p className="text-lg">
+              Services that have been used to the fullest extent are not
+              eligible for returns.
             </p>
-
-            <h2 className="text-2xl font-bold">Cancellation Policy</h2>
-            <p className="text-base my-2">
-              At Genies Career Hub, we strive to offer flexible and
-              user-friendly services. We understand that plans can change, and
-              we are here to accommodate your needs.
+            <p className="text-lg">
+              If you have benefited significantly from the service, we may amend
+              your refund.
             </p>
-            <h2 className="text-2xl font-bold">Cancellation Terms</h2>
-            <ul className="list-disc ml-5">
-              <li className="text-base my-2">
-                Users may cancel their service subscriptions at any time.
-              </li>
-              <li className="text-base my-2">
-                Cancellations made within 24 hours of service purchase will be
-                eligible for a full refund.
-              </li>
-              <li className="text-base my-2">
-                For cancellations made after 24 hours, a prorated refund will be
-                issued based on the unused portion of the service.
-              </li>
-            </ul>
-            <h2 className="text-2xl font-bold">Process for Cancellation</h2>
-            <ol className="list-decimal ml-5">
-              <li className="text-base my-2">
-                To cancel a service, please contact our customer support team at{" "}
+          </section>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">Cancellation Policy</h2>
+            <p className="text-lg">
+              We get it--plans change! Our cancellation policy is as follows:
+            </p>
+            <h3 className="text-xl font-semibold mb-2">Flexible for You:</h3>
+            <p className="text-lg">Your order can be canceled at any time.</p>
+            <p className="text-lg">
+              Refunds in Full within 24 Hours. Your order can be canceled at any
+              time.
+            </p>
+            <p className="text-lg">
+              Refunds are made in full within 24 hours. You can cancel your
+              order within 24 hours and receive a full refund.
+            </p>
+          </section>
+          <section className="mb-8">
+            <h3 className="text-xl font-semibold mb-2">How to Cancel:</h3>
+            <ol className="list-decimal pl-5 space-y-2">
+              <li className="text-lg">
+                Contact Us: Email our helpful support team at{" "}
                 <a
                   href="mailto:support@geniescareerhub.com"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   support@geniescareerhub.com
                 </a>{" "}
                 with your subscription details.
               </li>
-              <li className="text-base my-2">
-                Our team will assist you with the cancellation process and
-                inform you about any applicable refunds.
+              <li className="text-lg">
+                This page will guide you through the steps to cancel your
+                subscription.
               </li>
-              <li className="text-base my-2">
-                Refunds will be processed to the original method of payment
-                within 14 business days of the cancellation confirmation.
+              <li className="text-lg">
+                Timeframe for refund: Your refund will be processed within 14
+                days of the confirmation date.
               </li>
             </ol>
-            <h2 className="text-2xl font-bold">Non-refundable Services</h2>
-            <ul className="list-disc ml-5">
-              <li className="text-base my-2">
-                Certain services, such as personalized career coaching sessions,
-                may be non-refundable once the session has been completed.
-              </li>
-              <li className="text-base my-2">
-                Additionally, services that are part of a promotional bundle may
-                have specific cancellation terms, which will be communicated at
-                the time of purchase.
-              </li>
-            </ul>
-            <h2 className="text-2xl font-bold">Contact Information</h2>
-            <p className="text-base my-2">
-              For any questions or concerns regarding our returns and
-              cancellation policy, please reach out to our customer support team
-              at{" "}
-              <a
-                href="mailto:support@geniescareerhub.com"
-                className="text-blue-600 hover:underline"
-              >
-                support@geniescareerhub.com
-              </a>
-              . We are here to assist you and ensure your satisfaction with our
+          </section>
+          <section className="mb-8">
+            <h3 className="text-xl font-semibold mb-2">
+              Non-refundable Services:
+            </h3>
+            <p className="text-lg">
+              After completion, some services, such as career coaching, may not
+              be refundable.
+            </p>
+            <p className="text-lg">
+              Do not worry; we will explain the cancellation policy for
+              promotional bundles when you make your purchase.
+            </p>
+          </section>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
+            <p className="text-lg">
+              Questions or any other concerns? Contact our team. We care about
+              your satisfaction!
+            </p>
+          </section>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">Data Protection Law</h2>
+            <p className="text-lg">
+              The Data Protection Law gives you the right to keep track of the
+              information that a particular organization or a government agency
+              stores on your behalf. The information that the organizations
+              collect will be noted in order to maintain a record of your data
+              and utilize the information for the purpose of processing your
               services.
             </p>
-            <p className="text-base my-2">
-              Thank you for choosing Genies Career Hub. Your satisfaction is our
-              priority, and we aim to provide you with the flexibility you need
-              to navigate your career path confidently.
+            <p className="text-lg">
+              You shall be informed concerning the essential information that
+              the organization and government agencies shall record. They are as
+              follows:
             </p>
-          </div>
+            <ul className="list-disc pl-5 space-y-2">
+              <li className="text-lg">
+                The way in which your data is used and employed by organizations
+                and agencies.
+              </li>
+              <li className="text-lg">
+                The manner in which your personal information and data are
+                accessed by the organization.
+              </li>
+              <li className="text-lg">
+                Any incorrect information or data that might be recorded.
+              </li>
+              <li className="text-lg">Any particular data that was erased.</li>
+              <li className="text-lg">
+                Restriction or resistance to the processing of personal
+                information.
+              </li>
+              <li className="text-lg">
+                Data portability that seeks permission for data reuse.
+              </li>
+              <li className="text-lg">
+                Objection to data process in certain situations and occasions.
+              </li>
+            </ul>
+          </section>
         </div>
       </section>
     </>
