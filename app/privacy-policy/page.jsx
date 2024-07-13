@@ -381,7 +381,7 @@ const PrivacyPage = () => {
               </li>
             </ul>
             <p className="text-lg">
-              In most cases, you don't have to pay anything to exercise your
+              In most cases, you do not have to pay anything to exercise your
               rights. We have one month to answer your request.
             </p>
             <p className="text-lg">
@@ -400,7 +400,7 @@ const PrivacyPage = () => {
             <p className="text-lg">
               <strong>ICO Address:</strong>
             </p>
-            <p className="text-lg">Information Commissioner's Office</p>
+            <p className="text-lg">Information Commissioner&aposs Office</p>
             <p className="text-lg">Wycliffe House</p>
             <p className="text-lg">Water Lane</p>
             <p className="text-lg">Wilmslow</p>

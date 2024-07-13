@@ -70,7 +70,7 @@ const ResetPasswordFunc = () => {
 
     useEffect(() => {
         if (!token) return router.push('/login')
-    }, [])
+    }, [token])
 
 
     return (
