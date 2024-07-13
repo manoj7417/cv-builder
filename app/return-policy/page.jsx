@@ -19,13 +19,13 @@ const ReturnPolicyPage = () => {
               refund.
             </p>
             <p className="text-lg">
-              If you're not happy with your purchase, we will refund it.
+              If you are not happy with your purchase, we will refund it.
             </p>
           </section>
           <section className="mb-8">
             <h3 className="text-xl font-semibold mb-2">Unused Services</h3>
             <p className="text-lg">
-              If you don't use or access a service, we will refund your full
+              If you do not use or access a service, we will refund your full
               payment.
             </p>
             <p className="text-lg">We are fair-minded and flexible.</p>
