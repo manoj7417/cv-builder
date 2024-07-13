@@ -19,7 +19,6 @@
     align-items: center;
     transform: translateY(-100%);
     animation: slideIn 1.0s forwards;
-    height: 100%;
     font-size: 60x;
   }
 

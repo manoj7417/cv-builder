@@ -36,6 +36,9 @@ const ProfilePage = () => {
   const [analysisData, setAnalysisData] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [popupData, setPopupData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [cardData, setCardData] = useState(null);
+
   const router = useRouter();
 
   const fileUploadRef = useRef(null);
@@ -131,10 +134,29 @@ const ProfilePage = () => {
         },
       });
       setAnalysisData(response.data.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const fetchSummary = async () => {
+    const { accessToken } = await GetTokens();
+    const token = accessToken?.value;
+    // Fetch user details from API or database
+    const response = await axios.get("/api/getSummary", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log("responses:::", response?.data?.data);
+    setPopupData(response?.data?.data);
+    setLoading(false)
+  };
+
+  useEffect(() => {
+    fetchSummary();
+  }, []);
 
   const handleUserAnalysis = (id) => {
     router.push(`/analyser/${id}`);
@@ -333,17 +355,20 @@ const ProfilePage = () => {
   ];
 
   const handleReadMore = (data) => {
-    setPopupData(data);
+    setCardData(data);
     setShowPopup(true);
   };
 
   const closePopup = () => {
     setShowPopup(false);
-    setPopupData(null);
   };
 
   useEffect(() => {
     fetchUserAnalysisHistory();
+  }, []);
+
+  useEffect(() => {
+    fetchSummary();
   }, []);
 
   return (
@@ -507,119 +532,143 @@ const ProfilePage = () => {
         </div>
       </section>
       <section className="w-full py-10 px-20">
-        <h1 className="text-blue-950 text-2xl ">CV Analyser History</h1>
+        <h1 className="text-blue-950 text-4xl font-medium">CV Analyser History</h1>
 
         <div className="flex flex-wrap">
-          {analysisData.length === 0
-            ? Array(5)
+          {loading ? (
+            Array(5)
+              .fill()
+              .map((_, index) => (
+                <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                  <Skeleton width="100%" height={200} />
+                </div>
+              ))
+          ) : analysisData.length === 0 ? (
+            <div className="w-[350px] mr-10 my-4">
+              <Card className="w-full h-[200px] flex items-center justify-center">
+                <span>No analyzer data yet</span>
+              </Card>
+            </div>
+          ) : (
+            analysisData.map((item, index) => {
+              console.log("items:::", item);
+              return (
+                <Card
+                  className="w-[350px] mr-10 my-4 cursor-pointer hover:shadow-2xl"
+                  key={item._id}
+                  onClick={() => handleUserAnalysis(item._id)}
+                >
+                  <div className="p-4 flex justify-center items-center">
+                    <div className="md:w-[40%] w-full graph">
+                      <div className="p-4 relative z-10">
+                        <Flat
+                          progress={item.analysis.resume_score}
+                          text={"Score"}
+                          sx={{
+                            strokeColor: "#0075ff",
+                            barWidth: 4,
+                            valueSize: 20,
+                            textSize: 10,
+                            miniCircleColor: "#3b75ba",
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="md:w-[60%] w-full analyser_content">
+                      <ul className="text-sm list-disc pl-10">
+                        <li className="my-1 text-red-400 flex justify-between">
+                          <span className="font-medium">Analysis</span>
+                          <span className="ml-2 text-blue-600">
+                            {item.analysis.resume_score}
+                          </span>
+                        </li>
+                        <li className="my-1 text-red-400 flex justify-between">
+                          <span className="font-medium">Clarity</span>
+                          <span className="text-blue-600 ml-2">
+                            {item.clarity.score}
+                          </span>
+                        </li>
+                        <li className="my-1 text-red-400 flex justify-between">
+                          <span className="font-medium">Content Quality</span>
+                          <span className="text-blue-600 ml-2">
+                            {item.content_quality.score}
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+              );
+            })
+          )}
+        </div>
+      </section>
+      <section className="w-full h-full py-10 px-20">
+        <h1 className="text-blue-950 text-4xl py-5 font-medium">
+          Psychometric Test Summary
+        </h1>
+        <div className="summary_cards_wrapper">
+          <div className="grid grid-cols-4 gap-10">
+            {loading ? (
+              Array(5)
                 .fill()
                 .map((_, index) => (
                   <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
                     <Skeleton width="100%" height={200} />
                   </div>
                 ))
-            : analysisData.map((item, index) => {
-                console.log("items:::", item);
-                return (
-                  <Card
-                    className="w-[350px] mr-10 my-4 cursor-pointer hover:shadow-2xl"
-                    key={item._id}
-                    onClick={() => handleUserAnalysis(item._id)}
-                  >
-                    <div className="p-4 flex justify-center items-center">
-                      <div className="md:w-[40%] w-full graph">
-                        <div className="p-4 relative z-10">
-                          <Flat
-                            progress={item.analysis.resume_score}
-                            text={"Score"}
-                            sx={{
-                              strokeColor: "#0075ff",
-                              barWidth: 4,
-                              valueSize: 20,
-                              textSize: 10,
-                              miniCircleColor: "#3b75ba",
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="md:w-[60%] w-full analyser_content">
-                        <ul className="text-sm list-disc pl-10">
-                          <li className="my-1 text-red-400 flex justify-between">
-                            <span className="font-medium">Analysis</span>
-                            <span className="ml-2 text-blue-600">
-                              {item.analysis.resume_score}
-                            </span>
-                          </li>
-                          <li className="my-1 text-red-400 flex justify-between">
-                            <span className="font-medium">Clarity</span>
-                            <span className="text-blue-600 ml-2">
-                              {item.clarity.score}
-                            </span>
-                          </li>
-                          <li className="my-1 text-red-400 flex justify-between">
-                            <span className="font-medium">Content Quality</span>
-                            <span className="text-blue-600 ml-2">
-                              {item.content_quality.score}
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </Card>
-                );
-              })}
-        </div>
-      </section>
-      <section className="w-full h-full py-10 px-20">
-        <h1 className="text-blue-950 text-2xl py-5">
-          Psychometric Test Summary
-        </h1>
-        <div className="summary_cards_wrapper">
-          <div className="grid grid-cols-4 gap-10">
-            {testSummary?.map((val, index) => (
-              <div className="summary_cards relative" key={index}>
-                <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
-                  <a href="#">
-                    <h5 className="mb-2 text-xl font-bold text-gray-900">
-                      User Summary
-                    </h5>
-                  </a>
-                  <p className="mb-3 font-normal text-sm text-gray-700">
-                    Interests: {val.summary.interests}
-                  </p>
-                  <div className="summary_card_footer absolute bottom-6 left-6 right-6">
-                    <div
-                      className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
-                      onClick={() => handleReadMore(val)}
-                    >
-                      Read more
-                      <svg
-                        className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 10"
+            ) : popupData.length === 0 ? (
+              <div className="w-[350px] mr-10 my-4">
+                <Card className="w-full h-[200px] flex items-center justify-center">
+                  <span>No Test Summary data yet</span>
+                </Card>
+              </div>
+            ) : (
+              popupData?.map((val, index) => (
+                <div className="summary_cards relative" key={index}>
+                  <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+                    <a href="#">
+                      <h5 className="mb-2 text-xl font-bold text-gray-900">
+                        User Summary
+                      </h5>
+                    </a>
+                    <p className="mb-3 font-normal text-sm text-gray-700">
+                      Interests: {val.summary.interests.slice(0,100)}
+                    </p>
+                    <div className="summary_card_footer absolute bottom-6 left-6 right-6">
+                      <div
+                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
+                        onClick={() => handleReadMore(val)}
                       >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M1 5h12m0 0L9 1m4 4L9 9"
-                        />
-                      </svg>
+                        Read more
+                        <svg
+                          className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 10"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M1 5h12m0 0L9 1m4 4L9 9"
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
 
             {showPopup && popupData && (
               <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white max-w-5xl h-[500px] w-full p-6 rounded-lg shadow-lg">
+                <div className="bg-white max-w-5xl min-h-[500px] w-full p-6 rounded-lg shadow-lg relative">
                   <button
                     onClick={closePopup}
-                    className="absolute top-[4rem] right-[8rem] text-gray-400 hover:text-gray-600 focus:outline-none"
+                    className="absolute top-[1rem] right-[1rem] text-gray-400 hover:text-gray-600 focus:outline-none"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -648,12 +697,6 @@ const ProfilePage = () => {
                         Actionable Insights
                       </TabsTrigger>
                       <TabsTrigger
-                        value="training"
-                        className=" text-blue-950 rounded-md text-base"
-                      >
-                        Training
-                      </TabsTrigger>
-                      <TabsTrigger
                         value="careerSuggestions"
                         className=" text-blue-950 rounded-md text-base"
                       >
@@ -673,54 +716,17 @@ const ProfilePage = () => {
                             Actionable Insights
                           </h2>
                           <ul className="space-y-3 text-sm">
-                            <li>
-                              <strong>Skill Development:</strong>{" "}
-                              {popupData.actionableInsights.experience}
-                            </li>
-                            <li>
-                              <strong>Networking:</strong>
-                              {popupData.actionableInsights.skillDevelopment}
-                            </li>
-                            <li>
-                              <strong>Experience:</strong>
-                              {popupData.actionableInsights.networking}
-                            </li>
-                            <li>
-                              <strong>Weaknesses:</strong>
-                              {popupData.summary.weaknesses}
-                            </li>
-                            <li>
-                              <strong>Goals:</strong>
-                              {popupData.summary.goals}
-                            </li>
-                            <li>
-                              <strong>Preferences:</strong>
-                              {popupData.summary.preferences}
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </TabsContent>
-                    <TabsContent className="mb-6" value="training">
-                      <div className="training_section max-w-4xl mx-auto summary_section">
-                        <div>
-                          <h2 className="text-xl font-bold mb-6 text-blue-950">
-                            Training
-                          </h2>
-
-                          <ul className="space-y-3 text-sm">
-                            <li>
-                              <strong>Courses:</strong>
-                              {popupData.training.courses}
-                            </li>
-                            <li>
-                              <strong>Workshops:</strong>
-                              {popupData.training.workshops}
-                            </li>
-                            <li>
-                              <strong>Certifications:</strong>
-                              {popupData.training.certifications}
-                            </li>
+                            {Object.entries(cardData?.actionableInsights).map(
+                              ([key, value], idx) => (
+                                <li key={idx}>
+                                  <strong>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </strong>{" "}
+                                  <p>{value}</p>
+                                </li>
+                              )
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -732,7 +738,7 @@ const ProfilePage = () => {
                             Career Suggestions
                           </h2>
                           <ul className="space-y-3 text-sm">
-                            {popupData?.careerSuggestions.map(
+                            {cardData?.careerSuggestions?.map(
                               (career, index) => (
                                 <li key={index} className="py-2 space-y-2">
                                   <strong>Career:</strong> {career.career}
@@ -754,117 +760,22 @@ const ProfilePage = () => {
                             Summary
                           </h2>
                           <ul className="space-y-3 text-sm">
-                            <li>
-                              <strong>Interests :</strong>
-                              {popupData.summary.interests}
-                            </li>
-                            <li>
-                              <strong>Strengths:</strong>
-                              {popupData.summary.strengths}
-                            </li>
-                            <li>
-                              <strong>Values:</strong>
-                              {popupData.summary.values}
-                            </li>
-                            <li>
-                              <strong>Weaknesses:</strong>
-                              {popupData.summary.weaknesses}
-                            </li>
-                            <li>
-                              <strong>Goals:</strong>
-                              {popupData.summary.goals}
-                            </li>
-                            <li>
-                              <strong>Preferences:</strong>
-                              {popupData.summary.preferences}
-                            </li>
+                            {Object.entries(cardData?.summary).map(
+                              ([key, value], idx) => (
+                                <li key={idx}>
+                                  <strong>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </strong>{" "}
+                                  <p>{value}</p>
+                                </li>
+                              )
+                            )}
                           </ul>
                         </div>
                       </div>
                     </TabsContent>
                   </Tabs>
-                  {/* <div className="summary_section">
-                    <div className="summary_header mb-6">
-                      <h2 className="text-2xl font-bold">Summary</h2>
-                    </div>
-                    <div className="flex">
-                      <div className="bg-gray-100 p-4 rounded-l-lg w-1/4">
-                        <ul className="space-y-3">
-                          <li>
-                            <strong>Interests:</strong>
-                          </li>
-                          <li>
-                            <strong>Strengths:</strong>
-                          </li>
-                          <li>
-                            <strong>Values:</strong>
-                          </li>
-                          <li>
-                            <strong>Weaknesses:</strong>
-                          </li>
-                          <li>
-                            <strong>Goals:</strong>
-                          </li>
-                          <li>
-                            <strong>Preferences:</strong>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="p-4 w-3/4 space-y-3 text-sm">
-                        <p>{popupData.summary.interests}</p>
-                        <p>{popupData.summary.strengths}</p>
-                        <p>{popupData.summary.values}</p>
-                        <p>{popupData.summary.weaknesses}</p>
-                        <p>{popupData.summary.goals}</p>
-                        <p>{popupData.summary.preferences}</p>
-                        <button
-                        onClick={closePopup}
-                        className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-md hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300"
-                      >
-                        Close
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="actions_section">
-                    <div className="summary_header mb-6">
-                      <h2 className="text-2xl font-bold">
-                        Actionable Insights
-                      </h2>
-                    </div>
-                    <div className="flex">
-                      <div className="bg-gray-100 p-4 rounded-l-lg w-1/4">
-                        <ul className="space-y-3">
-                          <li>
-                            <strong>Skill Development:</strong>
-                          </li>
-                          <li>
-                            <strong>Networking:</strong>
-                          </li>
-                          <li>
-                            <strong>Experience:</strong>
-                          </li>
-                          <li>
-                            <strong>Weaknesses:</strong>
-                          </li>
-                          <li>
-                            <strong>Goals:</strong>
-                          </li>
-                          <li>
-                            <strong>Preferences:</strong>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="p-4 w-3/4 space-y-3 text-sm">
-                        <p>{popupData.actionableInsights.experience}</p>
-                        <p>{popupData.actionableInsights.skillDevelopment}</p>
-                        <p>{popupData.actionableInsights.networking}</p>
-                        <p>{popupData.summary.weaknesses}</p>
-                        <p>{popupData.summary.goals}</p>
-                        <p>{popupData.summary.preferences}</p>
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             )}

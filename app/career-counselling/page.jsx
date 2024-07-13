@@ -14,6 +14,7 @@ import { useUserDataStore } from "../store/useUserDataStore";
 import CareerSummary from "./CareerSummary";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
@@ -27,6 +28,7 @@ export default function Page() {
   const [popupData, setPopupData] = useState(null);
   const [cardData, setCardData] = useState(null);
   const [testSummary, setTestSummary] = useState(false);
+  const [loading,setLoading] = useState(true)
   const {
     answers,
     setAnswers,
@@ -147,16 +149,14 @@ export default function Page() {
     if (!accessToken) return;
     const token = accessToken?.value;
     // Fetch user details from API or database
-    try {
-      const response = await axios.get("/api/getSummary", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      setPopupData(response?.data?.data);
-    } catch (error) {
-      console.log(error)
-    }
+    const response = await axios.get("/api/getSummary", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log("responses:::", response?.data?.data);
+    setPopupData(response?.data?.data);
+    setLoading(false)
   };
 
   const handleStartTest = async () => {
@@ -404,7 +404,21 @@ export default function Page() {
         </h1>
         <div className="summary_cards_wrapper">
           <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10">
-            {popupData?.map((val, index) => (
+            {loading ? (
+              Array(5)
+                .fill()
+                .map((_, index) => (
+                  <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                    <Skeleton width="100%" height={200} />
+                  </div>
+                ))
+            ) : popupData.length === 0 ? (
+              <div className="w-[350px] mr-10 my-4">
+                <Card className="w-full h-[200px] flex items-center justify-center">
+                  <span>No Test Summary data yet</span>
+                </Card>
+              </div>
+            ) : popupData?.map((val, index) => (
               <div className="summary_cards relative" key={index}>
                 <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                   <a href="#">

@@ -119,13 +119,6 @@ export default function HomepageNew() {
               <h1 className="text-[75px] mt-4 text-center flex  lg:flex-row flex-col items-center justify-center  font-extrabold text-[#0D3572]">
                 <span
                   className="mx-10 slide-text-container"
-                  style={{
-                    // display: "inline-block",
-                    // background: "linear-gradient(135deg, #30B8CA, #303A72)",
-                    // borderRadius: "16px",
-                    // padding: "0px 30px",
-                    // lineHeight: "1.2",
-                  }}
                 >
                   <span className="slide-text" key={index}>
                     {words[index]}
@@ -134,12 +127,14 @@ export default function HomepageNew() {
                       width={350}
                       height={350}
                       alt={words[index]}
-                      className="ml-4"
+                      className="ml-4 min-h-[200px] min-w-[200px]"
                     />
                   </span>
                 </span>
               </h1>
-              <h1 className="text-[100px] text-center font-extrabold text-[#0D3572]">
+              <h1 className="text-[100px] text-center font-extrabold text-[#0D3572]" style={{
+                marginTop:"-75px"
+              }}>
                 <span className="2xl:ml-3 lg:ml-1">with Genies Career Hub</span>
               </h1>
               <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
@@ -150,15 +145,6 @@ export default function HomepageNew() {
               </p>
             </div>
             <div className="flex lg:flex-row justify-center  flex-col  min-[400px]:flex-row ">
-              {/* <div className="flex text-lg lh-lg items-center text-white rounded-full bg-[#2C98CA] pl-5 pr-1 py-1 mt-8 mb-10">
-                GET STARTED
-                <Image
-                  className="ml-2 w-auto h-full"
-                  src="/btn-arrow.svg"
-                  width={42}
-                  height={42}
-                />
-              </div> */}
               <div className="button_wrapper mt-8">
                 <button className="get_start_btn" onClick={handleButtonClick}>
                   <span className="btn_text">Explore Now</span>
