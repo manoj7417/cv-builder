@@ -10,8 +10,7 @@ const Page = () => {
       >
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-6">
-            Genies Career Hub GDPR Privacy Policy – Updated on the 10th of July
-            2024
+            Genies Career Hub GDPR Privacy Policy
           </h1>
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
