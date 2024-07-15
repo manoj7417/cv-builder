@@ -575,11 +575,11 @@ const Template21 = () => {
               <div className="mb-4">
                 {/* <img src="/myself.jpg" alt="Profile" className="w-96" /> */}
                 {basics?.picture?.url && (
-                  <div className="profile_pic">
+                  <div className="profile_pic w-[300px] h-[400px]">
                     <img
                       src={basics?.picture?.url}
                       alt="pic"
-                      className="w-96  object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
