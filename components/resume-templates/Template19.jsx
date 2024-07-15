@@ -260,9 +260,11 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   );
   return (
     <div style={{ color: colorText }} className="my-4">
-      <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2 className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}>
+          {data?.name}
+        </h2>
+      )}
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -308,7 +310,7 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
             </h2>
           </div>
           <div className="w-full">
-            <ul className="w-full" style={{color:colorText}}>
+            <ul className="w-full" style={{ color: colorText }}>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (

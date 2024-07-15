@@ -359,26 +359,31 @@ const Hobbies = ({ fontStyle, headingColor }) => {
   );
   return (
     <div className="my-5">
-      <h2
-        className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
-        style={{
-          color: headingColor,
-          paddingBottom: "0.25rem", // Space for the underline
-        }}
-      >
-        {data?.name}
-        <span
-          className="absolute bottom-0 left-0 w-full h-[2px]"
-          style={{ backgroundColor: headingColor }}
-        />
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`relative inline-block font-bold uppercase w-full text-center ${fontStyle.headingFont}`}
+          style={{
+            color: headingColor,
+            paddingBottom: "0.25rem", // Space for the underline
+          }}
+        >
+          {data?.name}
+          <span
+            className="absolute bottom-0 left-0 w-full h-[2px]"
+            style={{ backgroundColor: headingColor }}
+          />
+        </h2>
+      )}
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
             <ul className="w-full flex flex-wrap gap-5">
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 text-gray-600 font-bold">
+                  <li
+                    key={index}
+                    className="text-15px py-2 text-gray-600 font-bold"
+                  >
                     {item}
                   </li>
                 );
@@ -579,7 +584,9 @@ const References = ({ fontStyle, headingColor }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>

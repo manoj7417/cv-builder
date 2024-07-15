@@ -463,13 +463,18 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   );
   return (
     <div className="my-5">
-      <h2
-        className={`uppercase text-2xl mb-2 font-bold ${fontStyle.headingFont}`}
-        style={{ color: colorBackground }}
-      >
-        {data?.name}
-      </h2>
-      <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl mb-2 font-bold ${fontStyle.headingFont}`}
+          style={{ color: colorBackground }}
+        >
+          {data?.name}
+        </h2>
+      )}
+      <div
+        className="border-b-2"
+        style={{ borderColor: colorBackground }}
+      ></div>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -497,13 +502,16 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
     <div className="references_section w-full">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header" style={{color:colorBackground}}>
+          <div className="references_header" style={{ color: colorBackground }}>
             <h2
               className={`uppercase mb-2 text-2xl font-bold ${fontStyle.headingFont}`}
             >
               {data?.name}
             </h2>
-            <div className="border-b-2" style={{borderColor:colorBackground}}></div>
+            <div
+              className="border-b-2"
+              style={{ borderColor: colorBackground }}
+            ></div>
           </div>
           <div className="text-gray-800">
             {data?.items?.map((item, index) => {
@@ -528,7 +536,9 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
