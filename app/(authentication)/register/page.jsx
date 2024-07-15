@@ -29,6 +29,7 @@ export default function Register() {
       const response = await registerUser(data);
       if (response.status === 201) {
         toast.success("Registration successful");
+        toast.success("Your password has been to your registered email address");
         router.push("/login");
       }
     } catch (error) {
