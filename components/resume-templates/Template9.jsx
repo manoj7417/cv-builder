@@ -329,14 +329,16 @@ const Hobbies = ({ fontStyle, headingColor }) => {
   );
   return (
     <div className="my-5">
-      <h2
-        className={`uppercase text-2xl font-bold w-full underline underline-offset-8 ${fontStyle.headingFont}`}
-        style={{
-          color: headingColor,
-        }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold w-full underline underline-offset-8 ${fontStyle.headingFont}`}
+          style={{
+            color: headingColor,
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -525,19 +527,17 @@ const References = ({ fontStyle, headingColor }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full">
-                        <h4
-                          style={{ fontSize: fontStyle.paraFont }}
-                        >
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
-                        <h4
-                          style={{ fontSize: fontStyle.paraFont }}
-                        >
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.phone}
                         </h4>
                       </div>
@@ -574,10 +574,10 @@ const Template9 = () => {
       <div className="template_8 w-full min-h-screen">
         <div
           className="w-full bg-[#E0FBE2]"
-        //   style={{
-        //     backgroundImage: "url('/resumebg.jpg')",
-        //     backgroundPosition: "top",
-        //   }}
+          //   style={{
+          //     backgroundImage: "url('/resumebg.jpg')",
+          //     backgroundPosition: "top",
+          //   }}
         >
           <div className="top_section flex items-start gap-1 justify-start px-10 bg-[#E0FBE2]">
             <div className="name_profile mt-2">

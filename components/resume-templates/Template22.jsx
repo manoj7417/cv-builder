@@ -80,7 +80,10 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
     <div className="experience_section w-full mt-5 px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="experience_header w-full" style={{color:colorBackground}}>
+          <div
+            className="experience_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
@@ -139,7 +142,10 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
     <div className="awards_section w-full mt-5 px-10">
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="awards_header w-full" style={{color:colorBackground}}>
+          <div
+            className="awards_header w-full"
+            style={{ color: colorBackground }}
+          >
             <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
@@ -199,10 +205,11 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
     <div className="project_section my-4 px-10">
       {data?.visible && data?.items.length > 0 && (
         <>
-          <div className="project_heading w-full" style={{color:colorBackground}}>
-            <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont}`}
-            >
+          <div
+            className="project_heading w-full"
+            style={{ color: colorBackground }}
+          >
+            <h2 className={`font-semibold uppercase ${fontStyle.headingFont}`}>
               {data?.name}
             </h2>
             <div className="border-b-2 border-gray-600"></div>
@@ -311,14 +318,16 @@ const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
   );
   return (
     <div>
-      <h2
-        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-        style={{
-          color: colorBackground,
-        }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+          style={{
+            color: colorBackground,
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
       <div className="border-b-2 border-gray-600"></div>
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (

@@ -338,14 +338,16 @@ const Hobbies = ({ fontStyle, headingColor }) => {
   );
   return (
     <div className="py-2">
-      <h2
-        className={`relative inline-block font-bold uppercase w-full ${fontStyle.headingFont} underline underline-offset-8`}
-        style={{
-          color: headingColor,
-        }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`relative inline-block font-bold uppercase w-full ${fontStyle.headingFont} underline underline-offset-8`}
+          style={{
+            color: headingColor,
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
       <div className="hobbies_section py-2">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -540,7 +542,9 @@ const References = ({ fontStyle, headingColor }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>

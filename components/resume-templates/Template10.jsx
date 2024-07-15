@@ -304,12 +304,14 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   );
   return (
     <div className="my-5">
-      <h2
-        className={`text-white text-center border-2 p-1 uppercase ${fontStyle.headingFont}`}
-        style={{ borderColor: colorBackground }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`text-white text-center border-2 p-1 uppercase ${fontStyle.headingFont}`}
+          style={{ borderColor: colorBackground }}
+        >
+          {data?.name}
+        </h2>
+      )}
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
