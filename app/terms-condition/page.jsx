@@ -38,7 +38,7 @@ const TermsConditionPage = () => {
                   for discrepancies.
                 </li>
                 <li>
-                  It's your responsibility to ensure that the information
+                  It is your responsibility to ensure that the information
                   matches your qualifications.
                 </li>
               </ul>
