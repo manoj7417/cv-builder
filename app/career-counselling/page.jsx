@@ -28,7 +28,7 @@ export default function Page() {
   const [popupData, setPopupData] = useState(null);
   const [cardData, setCardData] = useState(null);
   const [testSummary, setTestSummary] = useState(false);
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const {
     answers,
     setAnswers,
@@ -149,14 +149,18 @@ export default function Page() {
     if (!accessToken) return;
     const token = accessToken?.value;
     // Fetch user details from API or database
-    const response = await axios.get("/api/getSummary", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    console.log("responses:::", response?.data?.data);
-    setPopupData(response?.data?.data);
-    setLoading(false)
+    try {
+      const response = await axios.get("/api/getSummary", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      console.log("responses:::", response?.data?.data);
+      setPopupData(response?.data?.data);
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const handleStartTest = async () => {
@@ -181,7 +185,6 @@ export default function Page() {
 
 
   useEffect(() => {
-
     fetchSummary();
   }, []);
 
