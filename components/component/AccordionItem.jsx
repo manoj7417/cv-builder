@@ -12,14 +12,14 @@ const AccordionItem = ({ open, toggle, ques, ans }) => {
           onClick={toggle}
         >
           <div>
-            <p className="text-base font-semibold">{ques}</p>
+            <p className="lg:text-base text-sm font-semibold">{ques}</p>
           </div>
           <div className="text-sm bg-blue-900 text-white p-2">
             {open ? <FaMinus /> : <FaPlus />}
           </div>
         </div>
         <Collapse isOpened={open}>
-          <div className="bg-white text-[15px] font-medium px-5 py-4 accordion_item">{ans}</div>
+          <div className="bg-white lg:text-[15px] text-[12px] font-medium px-5 py-4 accordion_item">{ans}</div>
         </Collapse>
       </div>
     </>

@@ -99,7 +99,7 @@ export default function NewResumeHeader() {
                         width={100}
                         height={100}
                         alt="newlogo"
-                        className="h-auto object-contain"
+                        className="h-auto object-contain new-header-mobile"
                         loading="lazy"
                       />
                     </a>

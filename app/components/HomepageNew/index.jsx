@@ -98,7 +98,121 @@ export default function HomepageNew() {
 
   return (
     <>
-      <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
+      <section className="flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
+        <div className="container lg:pt-0 pt-20">
+          <div className="flex flex-col justify-center items-center relative">
+            <Image
+              src={"/arrowright.png"}
+              width={100}
+              height={100}
+              alt="arrowright"
+              className="absolute top-[20%] left-0 w-auto h-auto"
+            />
+            <Image
+              src={"/arrowleft.png"}
+              width={100}
+              height={100}
+              alt="arrowright"
+              className="absolute top-[30%] right-0 w-auto h-auto"
+            />
+            <div className="space-y-2 mx-auto text-center">
+              <h1 className="text-[32px] md:text-[50px] lg:text-[75px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
+                <span className="mx-2 md:mx-4 lg:mx-10 slide-text-container">
+                  <span className="slide-text" key={index}>
+                    {words[index]}
+                    <Image
+                      src={images[index]}
+                      width={350}
+                      height={350}
+                      alt={words[index]}
+                      className="ml-4 min-h-[150px] min-w-[150px] md:min-h-[200px] md:min-w-[200px]"
+                    />
+                  </span>
+                </span>
+              </h1>
+              <h1
+                className="text-[30px] md:text-[60px] lg:text-[100px] font-extrabold text-[#0D3572] fixed_content"
+              >
+                <span className="2xl:ml-3 lg:ml-1 lg:px-0 px-2">with Genies Career Hub</span>
+              </h1>
+              <p className="max-w-[800px] mx-auto text-center text-[#7C7C7C] text-[14px] md:text-[16px] lg:text-[18px] lg:px-0 px-5">
+                Stand out in the Job Market with Genies Career Hub’s integrated
+                services in Career Assistance. We help you find the right Career
+                Path, maximise your professional skills, build your job-winning
+                resume, and grow your career dynamically.
+              </p>
+            </div>
+            <div className="flex flex-col lg:flex-row justify-center min-[400px]:flex-row mt-8">
+              <div className="button_wrapper">
+                <button className="get_start_btn" onClick={handleButtonClick}>
+                  <span className="btn_text">Explore Now</span>
+                  <div className="btn_overlay">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div className="flex justify-center mt-10">
+              <Tilt options={defaultOptions}>
+                <Image
+                  src="/career genie website images (2) (1).png"
+                  width={1300}
+                  height={1000}
+                  className="w-full h-auto max-w-full"
+                  alt="banner-image"
+                />
+              </Tilt>
+            </div>
+            {showFloatingButton && (
+              <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
+                <div className="button_wrapper mb-5">
+                  <button
+                    className="get_start_btn floating"
+                    onClick={handleButtonClick}
+                  >
+                    <span className="btn_text">Explore Now</span>
+                    <div className="btn_overlay">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div></div>
+        {showModal && <GetStartedModal onClose={handleCloseModal} />}
+      </section>
+
+      {/* <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
         <div className="container lg:pt-0 pt-20">
           <div className="flex flex-col justify-center items-center">
             <Image
@@ -212,7 +326,7 @@ export default function HomepageNew() {
         </div>
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
-      </section>
+      </section> */}
       <Slider />
       <TabResume />
       <WorkTogether />
