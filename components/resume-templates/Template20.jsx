@@ -512,6 +512,47 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
   );
 };
 
+const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
+  const data = useResumeStore(
+    (state) => state?.resume?.data?.sections?.hobbies
+  );
+  return (
+    <div className="my-5 px-5">
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+          style={{
+            color: colorBackground,
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
+
+      <div className="hobbies_section mt-5">
+        {data?.visible && data?.items.length > 0 && (
+          <div>
+            <ul
+              className="pl-5 list-disc"
+              style={{
+                color: colorText,
+              }}
+            >
+              {data?.items?.map((item, index) => {
+                return (
+                  <li key={index} className="text-15px py-2 font-semibold">
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Template20 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);
   const basics = useResumeStore((state) => state.resume.data.basics);
@@ -662,7 +703,7 @@ const Template20 = () => {
             </section>
             {/* refernces  */}
             <section>
-              <div className="awards px-5">
+              <div className="references px-5">
                 <References
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -672,8 +713,18 @@ const Template20 = () => {
             </section>
             {/* languages  */}
             <section>
-              <div className="awards px-5">
+              <div className="language px-5">
                 <Languages
+                  fontStyle={fontStyle}
+                  colorBackground={metadata?.theme?.primary}
+                  colorText={metadata?.theme?.text}
+                />
+              </div>
+            </section>
+            {/* hobbies  */}
+            <section>
+              <div className="hobbies px-5">
+                <Hobbies
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}

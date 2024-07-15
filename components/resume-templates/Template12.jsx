@@ -367,15 +367,17 @@ const Hobbies = ({ fontStyle, headingColor }) => {
   );
   return (
     <div className="my-5">
-      <h2
-        className={`font-semibold uppercase ${fontStyle.headingFont}`}
-        style={{
-          color: headingColor,
-          borderBottom: "3px solid black",
-        }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`font-semibold uppercase ${fontStyle.headingFont}`}
+          style={{
+            color: headingColor,
+            borderBottom: "3px solid black",
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -428,9 +430,7 @@ const Certificates = ({ fontStyle, colorStyle }) => {
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-base">
-                        {item.name}
-                      </p>
+                      <p className="break-words text-base">{item.name}</p>
                     )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -446,7 +446,6 @@ const Certificates = ({ fontStyle, colorStyle }) => {
     </div>
   );
 };
-
 
 const Languages = ({ fontStyle, headingColor }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
@@ -547,19 +546,17 @@ const References = ({ fontStyle, headingColor }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
                       <div className="references w-full flex justify-between">
-                        <h4
-                          style={{ fontSize: fontStyle.paraFont }}
-                        >
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
-                        <h4
-                          style={{ fontSize: fontStyle.paraFont }}
-                        >
+                        <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.phone}
                         </h4>
                       </div>
@@ -574,7 +571,6 @@ const References = ({ fontStyle, headingColor }) => {
     </div>
   );
 };
-
 
 const Template12 = () => {
   const metadata = useResumeStore((state) => state.resume.data.metadata);

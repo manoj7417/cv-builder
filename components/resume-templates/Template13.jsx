@@ -300,7 +300,10 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
                     <div className="w-1/2 text-end bg-gray-200 h-2.5">
                       <div
                         className="h-2.5"
-                        style={{ width: `${level}%`,backgroundColor: colorBackground }}
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: colorBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -320,14 +323,17 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   );
   return (
     <div className="my-5 px-5">
-      <h2
-        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-        style={{
-          color: colorBackground,
-        }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+          style={{
+            color: colorBackground,
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
+
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -537,7 +543,9 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">{item.jobTitle && item.organization && ','}</span>
+                          <span className="mx-1">
+                            {item.jobTitle && item.organization && ","}
+                          </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
