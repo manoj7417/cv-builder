@@ -7,7 +7,7 @@ export async function POST(req, res) {
         
         const response = await serverInstance.post('/openai/generateResumeOnFeeback', 
             { analysisId, type }, 
-            { headers: { 'Authorization': token } , timeout : 20000 },
+            { headers: { 'Authorization': token } },
             
         );
         
