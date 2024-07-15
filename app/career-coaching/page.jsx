@@ -37,6 +37,7 @@ const ComingSoonPage = () => {
   };
 
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [offset2, setOffset2] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
     const { offsetX, offsetY, target } = e.nativeEvent;
@@ -52,11 +53,26 @@ const ComingSoonPage = () => {
     setOffset({ x: 0, y: 0 });
   };
 
+
+  const handleMouseMove2 = (e) => {
+    const { offsetX, offsetY, target } = e.nativeEvent;
+    const { offsetWidth, offsetHeight } = target;
+    const centerX = offsetWidth / 2;
+    const centerY = offsetHeight / 2;
+    const moveX = (offsetX - centerX) / 20;
+    const moveY = (offsetY - centerY) / 20;
+    setOffset2({ x: moveX, y: moveY });
+  };
+
+  const handleMouseLeave2 = () => {
+    setOffset2({ x: 0, y: 0 });
+  };
+
   return (
     <>
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-      <section className="flex lg:items-center items-start justify-center pb-8 w-full pt-24 md:pt-16 lg:pt-20  px-5 relative">
-        <div className="container lg:pt-0 pt-20">
+      <section className="flex lg:items-center items-start justify-center pb-8 w-full pt-10 md:pt-10 lg:pt-10  px-5 relative">
+        <div className="container lg:pt-0 pt-10">
           <div className="flex flex-col justify-center ">
             <Image
               src={"/arrowright.png"}
@@ -72,9 +88,9 @@ const ComingSoonPage = () => {
               alt="arrowright"
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
-            <div className="space-y-2 mx-auto">
+            <div className="space-y-2 lg:mx-auto mx-0 lg:py-20 py-5">
               <h1
-                className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 pt-16 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]"
+                className="lg:text-[80px] text-[40px] mt-4 lg:py-10 py-5 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]"
                 style={{ WebkitTextStrokeWidth: "thin", wordSpacing: "0.8rem" }}
               >
                 <span>
@@ -86,7 +102,7 @@ const ComingSoonPage = () => {
                   <img src="/coach.png" className="h-64 ml-4 image-animation" />
                 </span>
               </h1>
-              <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
+              <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] lg:text-[18px] text-sm">
                 Find the right guidance channel with Career Counseling.
                 Constructed to suit your expectations for your professional
                 journey, our system helps you connect with the best life career
@@ -95,7 +111,7 @@ const ComingSoonPage = () => {
                 correct pathway that ensures skill upgradation and learning
                 experiences.
               </p>
-              <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center">
+              <div className="flex lg:flex-row flex-col gap-2 md:gap-8 sm:gap-8 justify-center items-center">
                 <div className="button_wrapper mt-8">
                   <a href="/contact-us">
                     <button className="get_start_btn">
@@ -149,7 +165,7 @@ const ComingSoonPage = () => {
           </div>
         </div>
       </section>
-      <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-16 lg:pt-20 px-5 relative">
+      <section className="flex lg:items-center items-start justify-center w-full pt-12 lg:pt-5 px-5 relative">
         <div className="max-w-6xl mx-auto  py-10">
           <div className="flex text-center md:text-left sm:text-left flex-col md:flex-row items-center gap-4">
             {/* Left Column - Image */}
@@ -187,7 +203,7 @@ const ComingSoonPage = () => {
           </div>
         </div>
       </section>
-      <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-16 lg:pt-20 px-5 relative">
+      <section className="flex lg:items-center items-start justify-center w-full pt-12 lg:pt-5 px-5 relative">
         <div className="max-w-6xl mx-auto  py-10">
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-full text-center md:text-left sm:text-left md:w-1/2 mt-8 md:mt-0 md:pl-8">
@@ -206,17 +222,17 @@ const ComingSoonPage = () => {
             </div>
             {/* Left Column - Image */}
             <div
-              className="w-full text-center md:w-1/2 flex justify-center md:justify-start parallax-container"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
+              className="w-full text-center md:w-1/2 flex justify-center md:justify-start parallax-container order-first md:order-last"
+              onMouseMove={handleMouseMove2}
+              onMouseLeave={handleMouseLeave2}
             >
               <img
                 src="/cghbo.png"
                 alt="Description of the image"
                 className="parallax-image"
                 style={{
-                  transform: `translate(${offset.x}px, ${offset.y}px)`,
-                  transition: "transform 0.1s",
+                  transform: `translate(${offset2.x}px, ${offset2.y}px)`,
+                  transition: 'transform 0.1s',
                 }}
               />
             </div>
@@ -238,7 +254,7 @@ const ComingSoonPage = () => {
           <li></li>
           <li></li>
         </ul>
-        <div className="container lg:pt-0 pt-20 z-10">
+        <div className="container lg:pt-0 py-10 z-10">
           <div className="flex flex-col justify-center">
             <div className="space-y-2 mx-auto">
               <h1 className="text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white">
@@ -603,7 +619,7 @@ const ComingSoonPage = () => {
                     />
                   </svg>
                   <blockquote>
-                    <p className="text-2xl font-medium text-white ">
+                    <p className="lg:text-2xl text-sm font-medium text-white ">
                       Earlier, I was facing certain struggles with my job
                       applications. Perhaps my CV was not up to the mark. A
                       friend of mine suggested this new website named Genies
@@ -653,7 +669,7 @@ const ComingSoonPage = () => {
                     />
                   </svg>
                   <blockquote>
-                    <p className="text-2xl font-medium text-white ">
+                    <p className="lg:text-2xl text-sm font-medium text-white ">
                       I was wondering why CV-making is so tough and I really get
                       lethargic during it. But Genies Career Hub was so quick
                       with it. The use of AI is good and it suggests you the
@@ -701,7 +717,7 @@ const ComingSoonPage = () => {
                     />
                   </svg>
                   <blockquote>
-                    <p className="text-2xl font-medium text-white ">
+                    <p className="lg:text-2xl text-sm font-medium text-white ">
                       Earlier, I was facing certain struggles with my job
                       applications. Perhaps my CV was not up to the mark. A
                       friend of mine suggested this new website named Genies

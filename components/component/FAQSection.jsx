@@ -109,13 +109,13 @@ const FAQSection = () => {
 
   return (
     <>
-      <div className="faq_section bg-gradient-to-b from-white to-[#2C98CA33] px-10 py-20">
+      <div className="faq_section bg-gradient-to-b from-white to-[#2C98CA33] lg:px-10 px-5 py-20">
         <div className="faq_title">
           <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-gray-900 text-center">
             Frequently Asked Questions!
           </h2>
-          <p className="w-1/2 mx-auto text-center my-4">
-            Want to know more about Genies Career Hub? <br /> We have answered a
+          <p className="lg:w-1/2 w-full mx-auto text-center my-4">
+            Want to know more about Genies Career Hub? <br className="lg:block hidden"/> We have answered a
             few of your questions.
           </p>
         </div>

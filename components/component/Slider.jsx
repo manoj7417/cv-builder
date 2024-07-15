@@ -253,10 +253,10 @@ export default function Slider() {
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#e4f5fc] to-[white] rounded-2xl">
       <div className="container mx-auto mb-10 ">
-        <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold tracking-tight text-center md:text-4xl">
+        <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold text-center md:text-4xl">
           Creating CVs that Reflect
           <br />
-          <span className="flex text-[#2C98CA] text-5xl justify-center mt-2">
+          <span className="flex text-[#2C98CA] lg:text-5xl text-3xl justify-center mt-2">
             Perfection
             <Image src="/Vector.svg" height={37} width={39} />{" "}
           </span>

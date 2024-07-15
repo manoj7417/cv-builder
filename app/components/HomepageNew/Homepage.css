@@ -22,6 +22,12 @@
     font-size: 60x;
   }
 
+
+  .fixed_content {
+    margin-top: -75px !important;
+  }
+
+
   
   @keyframes slideIn {
     0% {
@@ -143,13 +149,33 @@
     transition: all 400ms ease;
 }
 @media only screen and (max-width: 600px) {
+
+  .fixed_content {
+    margin-top: 0px !important;
+  }
+
+  .slide-text {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-100%);
+    animation: slideIn 1.0s forwards;
+    font-size: 60x;
+  }
+
+
+  .slide-text img {
+    width: 100px;
+    height: 100px;
+  }
+
+
   .get_start_btn {
     font-size: 12px;
     line-height: 1.5;
     font-weight: 500;
     width: 174px;
     border-radius: 9999rem;
-    background: #efefef;
+    /* background: #efefef; */
     position: relative;
     display: flex;
     justify-content: center;

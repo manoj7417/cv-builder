@@ -12,15 +12,11 @@ export default function Footer() {
     <>
       <footer
         className="bg-[#ffffff] z-20 relative"
-        // style={{
-        //   backgroundImage: "url('/banner-bg.svg')",
-        //   backgroundPosition: "center",
-        // }}
       >
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div>
-              <a href="/" className="flex items-center gap-2">
+              <a href="/" className="flex items-center gap-2 mobile_footer">
                 <Image
                   src={"/genies-career-hub-logo.png"}
                   width={200}
@@ -140,6 +136,24 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
+                  <a
+                    href="/resumeAnalyzer-dashboard"
+                    className="text-black transition"
+                  >
+                    CV Optimiser
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/jobCv"
+                    className="text-black transition"
+                  >
+                    CV Match(beta)
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </a>
+                </li>
+                <li>
                   <a href="/career-coaching" className="text-black transition">
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
@@ -155,15 +169,9 @@ export default function Footer() {
                   </a>
                 </li>
 
-                <li>
-                  <a
-                    href="/resumeAnalyzer-dashboard"
-                    className="text-black transition"
-                  >
-                    CV Optimiser
-                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
-                </li>
+               
+
+                
 
                 {/* <li>
                   <a
