@@ -441,7 +441,7 @@ const tests = {
     questions: [
       {
         question: "What would the 3D shape look like from above?",
-        image_url: "/S1.webp",
+        image_url: "/s1.webp",
         options: ["A", "B", "C", "D"],
         correct_option: "A",
         description:
