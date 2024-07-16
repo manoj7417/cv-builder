@@ -77,14 +77,17 @@ const Hobbies = ({ fontStyle, colorText }) => {
   );
   return (
     <div className="py-10">
-      <h2
-        className={`text-3xl font-semibold p-2 mb-4 font-serif text-center ${fontStyle.headingFont}`}
-        style={{
-          color: colorText,
-        }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`text-3xl font-semibold p-2 mb-4 font-serif text-center ${fontStyle.headingFont}`}
+          style={{
+            color: colorText,
+          }}
+        >
+          {data?.name}
+        </h2>
+      )}
+
       <div className="hobbies_section">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -233,7 +236,7 @@ const References = ({ fontStyle, headingColor, colorText }) => {
                             color: colorText,
                           }}
                         >
-                          {item.jobTitle && item.organization && ','}
+                          {item.jobTitle && item.organization && ","}
                         </h3>
                         <h3
                           className={`${fontStyle.subHeadingFont}`}
@@ -270,7 +273,7 @@ const References = ({ fontStyle, headingColor, colorText }) => {
 };
 
 const Certificates = ({ fontStyle }) => {
-  const data = useResumeStore(  
+  const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (

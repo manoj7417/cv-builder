@@ -72,10 +72,10 @@ const Page = () => {
     <>
       {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
       <section
-        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
+        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-10 md:pt-16 lg:pt-20  px-5 relative"
         style={{ background: "url(/ptest.jpg)" }}
       >
-        <div className="container lg:pt-0 pt-20">
+        <div className="container lg:pt-0 pt-10">
           <div className="flex flex-col justify-center ">
             <Image
               src={"/arrowright.png"}
@@ -91,13 +91,8 @@ const Page = () => {
               alt="arrowright"
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
-            <div className="space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
-              <h1 className="text-[45px] md:text-[62px] sm:text-[62px] mt-4 pt-16 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]">
-                {/* <span>
-                  GROW {""}
-                  <span className="text-[#3c72b9]">FASTER</span> <br></br>WITH A
-                  COACH
-                </span> */}
+            <div className="space-y-2 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:py-0 py-10">
+              <h1 className="text-[30px] md:text-[62px] sm:text-[62px] mt-4 pt-5 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]">
                 Comprehend Your Career with the <br></br>Power of Science!
               </h1>
 
@@ -105,10 +100,10 @@ const Page = () => {
                 Make Informed Decisions, Join 1 Million candidates who are
                 almost there!
               </p>
-              <div className="flex gap-4 md:gap-8 sm:gap-8 justify-center items-center pt-8 pb-6">
+              <div className="flex lg:flex-row flex-col gap-4 md:gap-8 sm:gap-8 justify-center items-center pt-8 pb-6">
                 {/* Try it Free Button */}
                 <a href="#free">
-                  <button className="flex items-center bg-blue-950 text-white py-4 px-8 rounded shadow-lg hover:bg-blue-950 transition duration-300 transform hover:scale-105">
+                  <button className="flex items-center bg-blue-950 text-white lg:py-4 lg:px-8 p-3 rounded shadow-lg hover:bg-blue-950 transition duration-300 transform hover:scale-105">
                     <FaRocket className="mr-2" />
                     Try it Free
                   </button>
@@ -117,7 +112,7 @@ const Page = () => {
                 {/* Premium Button */}
                 <Link href="/career-counselling">
                   {" "}
-                  <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
+                  <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white lg:py-4 lg:px-8 p-3 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
                     <FaCrown className="mr-2 animate-pulse" />
                     Premium
                   </button>
@@ -131,12 +126,12 @@ const Page = () => {
         </div>
       </section>
       <section
-        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
+        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-10 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
       >
-        <div className="container lg:pt-0 pt-20">
+        <div className="container lg:pt-0 pt-10">
           <div className="  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <h3 className="text-[45px] md:text-[52px] sm:text-[52px] font-bold">
+            <h3 className="text-[30px] md:text-[52px] sm:text-[52px] font-bold">
               Witness the Magic of Science <br></br> inspire your Career
             </h3>
             <p className="text-[#7C7C7C] font-bold">

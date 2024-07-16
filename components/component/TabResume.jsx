@@ -122,7 +122,7 @@ export default function TabResume() {
             <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-gray-900 text-center">
               Discover CVs that fit your Dream Job
             </h2>
-            <p className="w-1/2 mx-auto text-center my-4">
+            <p className="lg:w-1/2 w-full mx-auto text-center my-4">
               Start your journey with Genies Career Hub CV Maker and unlock the
               door to a world where your talents are valued and your career
               dreams become a reality with a personalised and perfectly tailored
@@ -133,7 +133,7 @@ export default function TabResume() {
             className="max-w-5xl mx-auto py-5"
             defaultValue="Business Analyst"
           >
-            <div className="grid grid-cols-2 place-items-around items-center ">
+            <div className="grid lg:grid-cols-2 grid-cols-1 place-items-around items-center ">
               <div className="tabs_main">
                 <TabsList className="flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4">
                   {TabsHeader?.map((item, index) => (
@@ -184,8 +184,8 @@ export default function TabResume() {
           </Tabs>
         </div>
       </div>
-      <section className="grid grid-cols-2 py-20">
-        <div className="discover_image flex align-middle overflow-hidden ">
+      <section className="grid lg:grid-cols-2 grid-cols-1 py-20">
+        <div className="discover_image lg:flex align-middle overflow-hidden hidden">
           <Image
             src={"/home-creative-down.png"}
             width={2000}

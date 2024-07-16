@@ -52,7 +52,7 @@ export default function CourseSlider() {
           A Step Closer to Your Dream Job with
           <span className="font-bold text-[#2C98CA]"> Genies Pro Studio</span>
         </h2>
-        <p className="text-base mt-3">
+        <p className="lg:text-base text-sm mt-3">
           Our AI-driven Genies CV Pro Studio is a comprehensive suite of three
           pioneering, revolutionary tools. It’s your personal all-in-one
           Curriculum Vitae CV builder. Broaden your professional journey with
@@ -77,7 +77,7 @@ export default function CourseSlider() {
               <div className="title text-xl text-blue-900 font-bold my-3">
                 {item.stepHeading}
               </div>
-              <div className="steps_details text-base font-medium mb-4">
+              <div className="steps_details lg:text-base text-sm font-medium mb-4">
                 {item.stepDetails}
                 <div className="button_wrapper mt-5">
                   <Link

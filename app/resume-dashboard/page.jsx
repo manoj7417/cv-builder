@@ -436,7 +436,7 @@ export default function DashboardIdea() {
                   Craft the <span className="text-[#2C98CA]">Perfect CV </span>{" "}
                   for Your Dream Job
                 </h1>
-                <p className="text-gray-700 text-lg pe-10">
+                <p className="text-gray-700 lg:text-lg text-sm pe-10">
                   Created by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
                   forward Resume Template options that are custom-tailored to
@@ -444,7 +444,7 @@ export default function DashboardIdea() {
                   through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center space-x-4">
-                  <Button className="text-base text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
+                  <Button className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
                     <Link href="/user-history">Create CV Now</Link>
                   </Button>
                 </div>
@@ -461,7 +461,7 @@ export default function DashboardIdea() {
           </div>
           <div className="w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
             <div className="rounded-t-xl border-t-8 border-blue-900 p-6">
-              <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-gray-900 text-center">
+              <h2 className="2xl:text-6xl lg:text-5xl text-2xl font-bold mt-5 text-gray-900 text-center">
                 Choose From Our Detailed Templates Options
               </h2>
               <Tabs className="w-full py-5" defaultValue="all">

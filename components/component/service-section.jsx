@@ -255,17 +255,17 @@ export function ServiceSection() {
         <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-t from-white to-[#2C98CA33] scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
-              <h2 className="text-4xl font-bold tracking-tighter md:text-5xl/tight">
+              <h2 className="lg:text-4xl text-2xl font-bold tracking-tighter md:text-5xl/tight">
                 Stay Ahead of the Curve!
               </h2>
-              <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
+              <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-sm">
                 Subscribe to our newsletter and get the latest updates.
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
-              <div className="flex space-x-2 mb-5">
+              <div className="flex lg:flex-row flex-col space-x-2 mb-5 gap-5">
                 <input
-                  className="max-w-lg flex-1 px-3 bg-blue-900 bg-opacity-10 rounded-lg text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 opacity-55"
+                  className="max-w-lg lg:py-0 py-2 flex-1 px-3 bg-blue-900 bg-opacity-10 rounded-lg text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 opacity-55"
                   
                   placeholder="Enter your email"
                   type="email"

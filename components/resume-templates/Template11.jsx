@@ -355,12 +355,15 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
   );
   return (
     <div className="py-2">
-      <h2
-        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-        style={{ color: colorText }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+          style={{ color: colorText }}
+        >
+          {data?.name}
+        </h2>
+      )}
+
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>

@@ -8,18 +8,24 @@
     overflow: hidden;
     border-radius: 32px;
     transition: 0.2s;
-    background: none; /* Remove default button background */
-    border: none; /* Remove default button border */
-    cursor: pointer; /* Change cursor to pointer */
+    background: none;
+    /* Remove default button background */
+    border: none;
+    /* Remove default button border */
+    cursor: pointer;
+    /* Change cursor to pointer */
 }
 
 .logo-image {
-    width: 100px; /* Ensure this matches the width attribute in the Image component */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain; /* Ensure the image fits within the specified dimensions */
-  }
+    width: 100px;
+    /* Ensure this matches the width attribute in the Image component */
+    height: auto;
+    /* Maintain aspect ratio */
+    object-fit: contain;
+    /* Ensure the image fits within the specified dimensions */
+}
 
-  
+
 .custom-button span {
     position: relative;
     z-index: 0;
@@ -68,6 +74,7 @@
     0% {
         transform: translate(-25%, -75%) rotate(0);
     }
+
     100% {
         transform: translate(-25%, -75%) rotate(360deg);
     }
@@ -80,4 +87,15 @@
 .custom-button:hover {
     box-shadow: 0 0 5px #7293ff, inset 0 0 5px #7293ff;
     transition-delay: 0.2s;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .new-header-mobile,
+    .logo-image {
+        width: 70px;
+        height: 70px;
+    }
 }

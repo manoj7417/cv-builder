@@ -195,7 +195,12 @@ const Projects = ({ fontStyle, colorText, colorBackground }) => {
   );
 };
 
-const Skills = ({ fontStyle, colorText, colorBackground,secondaryBackground }) => {
+const Skills = ({
+  fontStyle,
+  colorText,
+  colorBackground,
+  secondaryBackground,
+}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
   console.log("skills data:::", data);
 
@@ -254,12 +259,15 @@ const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
   );
   return (
     <div>
-      <h2
-        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-        style={{ color: colorText }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+          style={{ color: colorText }}
+        >
+          {data?.name}
+        </h2>
+      )}
+
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>
@@ -279,7 +287,12 @@ const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
   );
 };
 
-const Languages = ({ fontStyle, colorText, colorBackground,secondaryBackground }) => {
+const Languages = ({
+  fontStyle,
+  colorText,
+  colorBackground,
+  secondaryBackground,
+}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -569,17 +582,20 @@ const Template21 = () => {
         <div className="h-auto w-[793px] mx-auto shadow-lg rounded-lg flex bg-[#dddddd]">
           <div
             className="bg-black text-white w-[40%]  border-r-[20px] border-[#f07b5f]"
-            style={{ backgroundColor: metadata?.theme?.primary,borderColor:metadata?.theme?.background }}
+            style={{
+              backgroundColor: metadata?.theme?.primary,
+              borderColor: metadata?.theme?.background,
+            }}
           >
             <div className="text-center mb-8">
               <div className="mb-4">
                 {/* <img src="/myself.jpg" alt="Profile" className="w-96" /> */}
                 {basics?.picture?.url && (
-                  <div className="profile_pic">
+                  <div className="profile_pic w-[300px] h-[400px]">
                     <img
                       src={basics?.picture?.url}
                       alt="pic"
-                      className="w-96  object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
@@ -666,11 +682,17 @@ const Template21 = () => {
           </div>
           {/* <div className="bg-[#f07b5f] w-8"></div> */}
           <div className="pt-20 w-[60%] bg-white">
-            <h1 className="px-6 text-6xl font-bold" style={{color:metadata?.theme?.primary}}>
+            <h1
+              className="px-6 text-6xl font-bold"
+              style={{ color: metadata?.theme?.primary }}
+            >
               {firstName} <span className="text-black">{surname}</span>
             </h1>
             <div className="px-6 py-2">
-              <p className="text-xl font-bold pl-4" style={{color:metadata?.theme?.primary}}>
+              <p
+                className="text-xl font-bold pl-4"
+                style={{ color: metadata?.theme?.primary }}
+              >
                 {basics?.jobtitle}
               </p>
             </div>
