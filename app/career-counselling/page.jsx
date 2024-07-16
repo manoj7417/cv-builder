@@ -154,7 +154,6 @@ export default function Page() {
           Authorization: "Bearer " + token,
         },
       });
-      console.log("responses:::", response?.data?.data);
       setPopupData(response?.data?.data);
       setLoading(false);
     } catch (error) {
@@ -168,10 +167,10 @@ export default function Page() {
     try {
       const response = await axios.get("/api/checkEligibility", {
         headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      console.log(response);
+          Authorization: 'Bearer ' + token
+        }
+      })
+
       if (response.status === 200) {
         setContentType("userData");
       }
@@ -189,7 +188,7 @@ export default function Page() {
     <>
       <section className="career_counselling">
         <div className="flex min-h-[500px] w-full bg-background p-5">
-          <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
+          <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14 mt-20">
             <main className="flex flex-1 flex-row lg:flex-col gap-4 p-4 sm:px-6 sm:py-0">
               <div className="w-full flex lg:flex-row flex-col mt-20">
                 {contentType === "Intro" && (

@@ -90,7 +90,7 @@ export const AnalyzeAts = async (message, token) => {
         Authorization: "Bearer " + token
       }
     });
-    
+
     return response.data;
   } catch (error) {
     throw error;
@@ -160,9 +160,9 @@ export const getBetterResume = async (message) => {
   }
 }
 
-export const generateResumeOnFeeback = async (message, token) => {
+export const generateResumeOnFeeback = async (analysisId, type, token) => {
   try {
-    const response = await instance.post('/openai/generateResumeOnFeeback', { message }, {
+    const response = await instance.post('/openai/generateResumeOnFeeback', { analysisId, type }, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -309,6 +309,20 @@ export const UpgradePricing = async (data, token) => {
     const response = await instance.post('/stripe/createSubscription', data, {
       headers: {
         Authorization: 'Bearer ' + token
+      }
+    })
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+export const generateFreshResume = async (message, type, token) => {
+  try {
+    const response = await instance.post('/openai/generateFreshResume', { message, type }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
     })
     return response;
