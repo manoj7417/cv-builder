@@ -28,6 +28,7 @@ const nextConfig = {
     config.resolve.alias.encoding = false;
     return config;
   },
+  pageExtensions: ['jsx', 'js', 'tsx', 'ts']
 };
 
 module.exports = nextConfig;
