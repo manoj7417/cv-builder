@@ -1,4 +1,3 @@
-// app/api/generateResumeOnFeedback/route.js
 import { serverInstance } from '@/lib/serverApi';
 
 export async function POST(req, res) {
@@ -23,4 +22,4 @@ export async function POST(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     }
-
+}
