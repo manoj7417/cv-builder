@@ -23,7 +23,10 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { Flat, Heat, Nested } from "@alptugidin/react-circular-progress-bar";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { GoKey } from "react-icons/go";
-
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ImSpinner3 } from "react-icons/im";
+import { FaChevronRight } from "react-icons/fa6";
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const { userState, updateUserData } = useUserStore((state) => ({
@@ -40,8 +43,15 @@ const ProfilePage = () => {
   const [popupData, setPopupData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [cardData, setCardData] = useState(null);
-  const [showDialog, setShowDialog] = useState(true)
-
+  const [showDialog, setShowDialog] = useState(false)
+  const [passwords, setPasswords] = useState({
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  })
+  const [isChangingPassword, setIsChangingPassword] = useState(false)
+  const [passwordError, setPasswordError] = useState('')
+  const [oldPasswordError, setOldPasswordError] = useState('')
   const router = useRouter();
 
   const fileUploadRef = useRef(null);
@@ -116,6 +126,12 @@ const ProfilePage = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    let { name, value } = e.target;
+    value = value.trim()
+    setPasswords({ ...passwords, [name]: value })
+  }
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -152,7 +168,6 @@ const ProfilePage = () => {
         Authorization: "Bearer " + token,
       },
     });
-    console.log("responses:::", response?.data?.data);
     setPopupData(response?.data?.data);
     setLoading(false)
   };
@@ -366,13 +381,56 @@ const ProfilePage = () => {
     setShowPopup(false);
   };
 
-  const handleChangePassword = () => {
+  const handleResetPassword = () => {
+    setPasswordError('')
+    setOldPasswordError('')
+  }
 
+  const handleChangePassword = async () => {
+    const { accessToken } = await GetTokens()
+    let token = accessToken.value;
+    handleResetPassword()
+    let { oldPassword, newPassword, confirmPassword } = passwords
+    if (oldPassword === '' || newPassword === '' || confirmPassword === '') {
+      setPasswordError('Please fill in all fields.')
+      return
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordError('Please re-enter correct password.')
+      return
+    }
+    setIsChangingPassword(true)
+    try {
+      const response = await axios.post('/api/changePassword', { oldPassword, newPassword }, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      if (response.status === 200) {
+        toast.success("Password changed successfully")
+        handleDialogClose()
+        setIsChangingPassword(false)
+        setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' })
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        setOldPasswordError("Incorrect old password")
+      }
+    }
   }
 
   const handleDialogClose = () => {
     setShowDialog(false);
+    setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' })
+    setPasswordError('')
+    setOldPasswordError('')
   }
+
+  const handleForgotPassword = () => {
+
+  }
+
+
 
   useEffect(() => {
     fetchUserAnalysisHistory();
@@ -388,14 +446,55 @@ const ProfilePage = () => {
         <Dialog open={showDialog} >
           <DialogContent showCloseButton onClick={handleDialogClose} className="w-96">
             <div className="w-full flex flex-col items-center">
-              <div className="w-24 border h-24 flex items-center justify-center">
-                <GoKey className=""/>
+              <div className="w-24  h-24 flex items-center justify-center rounded-full bg-blue-100">
+                <GoKey className="text-5xl text-blue-800" />
               </div>
+              <div className="py-4 text-xl w-full px-4 flex flex-col items-center">
+                <h1>Set your new password</h1>
+                <div className="w-full my-1">
+                  <Label className=" text-sm">Old password</Label>
+                  <Input type="password" className="mt-1" onChange={handleInputChange} name="oldPassword" value={passwords.oldPassword} />
+                  <div className="w-full">
+                    {oldPasswordError && <p className="text-xs text-red-600 text-start">{oldPasswordError}</p>}
+                  </div>
+                </div>
+
+                <div className="w-full my-1">
+                  <Label className=" text-sm">New password</Label>
+                  <Input type="password" className="mt-1" onChange={handleInputChange} name="newPassword" value={passwords.newPassword} />
+                </div>
+                <div className="w-full my-1">
+                  <Label className="mb-1">Confirm new password</Label>
+                  <Input type="password" className="mt-1" onChange={handleInputChange} name="confirmPassword" value={passwords.confirmPassword} />
+                </div>
+                <div className="w-full">
+                  {passwordError && <p className="text-xs text-red-600 text-start">{passwordError}</p>}
+                </div>
+                <div className="w-full my-2" >
+                  <p className="text-sm cursor-pointer" onClick={handleForgotPassword}>Forgot password?</p>
+                </div>
+                <div className="pt-5 w-full">
+                  <Button className="w-full" onClick={handleChangePassword} disabled={isChangingPassword}>
+                    {
+                      isChangingPassword ? (
+                        <>
+                          Changing Password<ImSpinner3 className="animate-spin w-3 h-3 text-white ml-1" />
+                        </>
+                      ) : (
+                        <>
+                          Change password<FaChevronRight className="w-3 h-3 text-white ml-1" />
+                        </>
+                      )
+                    }
+                  </Button>
+                </div>
+              </div>
+
             </div>
           </DialogContent>
         </Dialog>
         <div className="flex justify-end px-10">
-          <Button className="" onClick={handleChangePassword}>Change Password</Button>
+          <Button className="" onClick={() => setShowDialog(true)}>Change Password</Button>
         </div>
         <div className="container mx-auto px-5">
           <form onSubmit={handleSubmit(userProfileHandler)}>
