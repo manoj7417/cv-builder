@@ -21,6 +21,8 @@ import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { Flat, Heat, Nested } from "@alptugidin/react-circular-progress-bar";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { GoKey } from "react-icons/go";
 
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
@@ -38,6 +40,7 @@ const ProfilePage = () => {
   const [popupData, setPopupData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [cardData, setCardData] = useState(null);
+  const [showDialog, setShowDialog] = useState(true)
 
   const router = useRouter();
 
@@ -363,6 +366,14 @@ const ProfilePage = () => {
     setShowPopup(false);
   };
 
+  const handleChangePassword = () => {
+
+  }
+
+  const handleDialogClose = () => {
+    setShowDialog(false);
+  }
+
   useEffect(() => {
     fetchUserAnalysisHistory();
   }, []);
@@ -373,7 +384,19 @@ const ProfilePage = () => {
 
   return (
     <>
-      <section className="bg-gradient-to-r from-white to-[#dcecff] pt-32">
+      <section className="bg-gradient-to-r from-white to-[#dcecff] pt-28">
+        <Dialog open={showDialog} >
+          <DialogContent showCloseButton onClick={handleDialogClose} className="w-96">
+            <div className="w-full flex flex-col items-center">
+              <div className="w-24 border h-24 flex items-center justify-center">
+                <GoKey className=""/>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+        <div className="flex justify-end px-10">
+          <Button className="" onClick={handleChangePassword}>Change Password</Button>
+        </div>
         <div className="container mx-auto px-5">
           <form onSubmit={handleSubmit(userProfileHandler)}>
             <div className="flex flex-wrap">
@@ -525,15 +548,15 @@ const ProfilePage = () => {
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
           </form>
         </div>
-      </section>
+      </section >
       <section className="w-full py-10 px-20">
         <h1 className="text-blue-950 text-4xl font-medium">CV Analyser History</h1>
-
         <div className="flex flex-wrap">
           {loading ? (
             Array(5)
@@ -551,7 +574,6 @@ const ProfilePage = () => {
             </div>
           ) : (
             analysisData.map((item, index) => {
-              console.log("items:::", item);
               return (
                 <Card
                   className="w-[350px] mr-10 my-4 cursor-pointer hover:shadow-2xl"
@@ -633,7 +655,7 @@ const ProfilePage = () => {
                       </h5>
                     </a>
                     <p className="mb-3 font-normal text-sm text-gray-700">
-                      Interests: {val.summary.interests.slice(0,100)}
+                      Interests: {val.summary.interests.slice(0, 100)}
                     </p>
                     <div className="summary_card_footer absolute bottom-6 left-6 right-6">
                       <div
