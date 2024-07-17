@@ -87,7 +87,7 @@ const Pricing = () => {
                 </Switch>
                 <span className="ml-2 text-sm font-medium text-gray-700">
                   Yearly
-                  <span className="ml-1 text-green-500">(Get 30% OFF)</span>
+                  {/* <span className="ml-1 text-green-500">(Get 30% OFF)</span> */}
                 </span>
               </div>
 
@@ -97,7 +97,7 @@ const Pricing = () => {
                     FREE
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    ₹0
+                    $0
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per yearly
@@ -145,12 +145,12 @@ const Pricing = () => {
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹3351.6" : "₹399"}
-                    {enabled && (
+                    {enabled ? "$48" : "$4"}
+                    {/* {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹4788
+                        $42.12
                       </span>
-                    )}
+                    )} */}
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per {enabled ? "yearly" : "monthly"}
@@ -202,12 +202,12 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹8,391.6" : "₹999"}
-                    {enabled && (
+                    {enabled ? "$120" : "$10"}
+                    {/* {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
-                        ₹11988
+                        $64.80
                       </span>
-                    )}
+                    )} */}
                   </p>
 
                   <p className="mt-2 text-sm text-gray-500">
