@@ -5,13 +5,15 @@ const protectedRoutes = ['/resume-builder', '/analyser/feedback', '/user-history
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|public).*)',
   ],
 }
 
 export async function middleware(req) {
   const { pathname } = req.nextUrl
   let cookie = req.cookies.get('accessToken')
+  console.log("cookie",cookie)
+  console.log("pathname",pathname)
   if (protectedRoutes.includes(pathname)) {
     if (!cookie?.value) {
       return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, req.nextUrl));
