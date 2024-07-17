@@ -45,7 +45,6 @@ function LoginUser() {
         const { accessToken, refreshToken, userdata } = response.data.data;
         await SetTokens({ accessToken, refreshToken });
         loginUser(userdata);
-        userlogin(userdata);
         router.push(redirect || "/");
       }
     } catch (error) {

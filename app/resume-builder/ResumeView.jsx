@@ -285,15 +285,7 @@ const ResumeView = ({ setIsContentVisible }) => {
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens()
     const templateName = resumeData.metadata.template;
-        if (!userdata?.subscription.status) {
-      return router.push('/login')
-    }
-    if (userdata.subscription.status !== 'Active') {
-      updateRedirectPricingRoute('resume-builder')
-      return router.push('/pricing')
-    } else {
-      handleDownloadResume(accessToken.value)
-    }
+    handleDownloadResume(accessToken.value)
   };
 
   const handleDownloadResume = async (token) => {
@@ -306,6 +298,7 @@ const ResumeView = ({ setIsContentVisible }) => {
 
     try {
       const response = await printResume(body, token);
+      
       if (response.ok) {
         generateFunfact();
         const blob = await response.blob();
@@ -318,9 +311,13 @@ const ResumeView = ({ setIsContentVisible }) => {
         a.click();
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
+        return;
+      }
+      if (response.status !== 500) {
+        updateRedirectPricingRoute('/resume-builder')
+        return router.push('/pricing')
       }
     } catch (error) {
-      console.log(error)
       toast.error("Something went wrong")
     } finally {
       setIsLoading(false);
