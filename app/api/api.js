@@ -195,7 +195,7 @@ export const printResume = async (html, token) => {
 
 export const uploadImage = async (formData) => {
   try {
-    const response = await axios.post('https://api.cloudinary.com/v1_1/dnocsoxp1/image/upload', formData)
+    const response = await axios.post('https://api.cloudinary.com/v1_1/dqsalbg0o/image/upload', formData)
     return response;
   } catch (error) {
     throw error
