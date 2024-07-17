@@ -30,7 +30,7 @@ export default function ContactPageTwo() {
                   Get in touch
                 </p>
                 <p className="mt-4 text-lg text-gray-600">
-                  Our friendly team would love to hear from you.
+                Our team would love to hear from you!
                 </p>
                 <form action="" className="mt-8 space-y-4">
                   <div className="grid w-full gap-y-4 md:gap-x-4 lg:grid-cols-2">

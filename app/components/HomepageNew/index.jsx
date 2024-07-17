@@ -116,7 +116,7 @@ export default function HomepageNew() {
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto text-center">
-              <h1 className="text-[32px] md:text-[50px] lg:text-[75px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
+              <h1 className="text-[32px] md:text-[50px] lg:text-[60px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
                 <span className="mx-2 md:mx-4 lg:mx-10 slide-text-container">
                   <span className="slide-text" key={index}>
                     {words[index]}
@@ -131,7 +131,7 @@ export default function HomepageNew() {
                 </span>
               </h1>
               <h1
-                className="text-[30px] md:text-[60px] lg:text-[100px] font-extrabold text-[#0D3572] fixed_content"
+                className="text-[30px] md:text-[60px] lg:text-[80px] font-extrabold text-[#0D3572] fixed_content"
               >
                 <span className="2xl:ml-3 lg:ml-1 lg:px-0 px-2">with Genies Career Hub</span>
               </h1>

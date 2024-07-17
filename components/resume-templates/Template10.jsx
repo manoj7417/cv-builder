@@ -556,7 +556,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                           {item?.organization}
                         </h3>
                       </div>
-                      <div className="references w-full text-white">
+                      <div className="references w-full text-white break-all">
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
@@ -681,19 +681,19 @@ const Template10 = () => {
                   </h2>
                   <div className="contact_details flex">
                     <div
-                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col gap-2 text-center`}
+                      className={`text-white my-4 ${fontStyle.contactFont} flex flex-col gap-2`}
                     >
                       {basics?.email && (
                         <a
                           href={`mailto:${basics?.email}`}
-                          className="hover:underline flex items-center mt-1  text-wrap w-full "
+                          className="hover:underline flex items-center mt-1 text-wrap w-full break-all"
                         >
                           <MdOutlineMailOutline className="mr-2 text-white" />
-                          <p className="text-wrap break-words">
+                          <p className="flex flex-wrap break-words">
                             {basics?.email}
                           </p>
                         </a>
-                      )}
+                      )} 
                       {basics?.phone && (
                         <a
                           href={`tel:${basics?.phone}`}

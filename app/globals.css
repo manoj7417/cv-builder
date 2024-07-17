@@ -164,14 +164,16 @@ html {
   text-align: center;
 }
 
-.mobile_responsive_nav .nav-links li a:hover {
+.mobile_responsive_nav .nav-links li a:hover,
+.mobile_responsive_nav .nav-links li a.active-link {
   cursor: pointer;
   color: rgb(25, 28, 31) !important;
   font-weight: 600;
   opacity: 1;
 }
 
-.mobile_responsive_nav .nav-links li a::before {
+.mobile_responsive_nav .nav-links li a::before,
+.mobile_responsive_nav .nav-links li a.active-link::before {
   transition: 300ms;
   height: 5px;
   content: "";
@@ -185,7 +187,8 @@ html {
   bottom: -20px;
 }
 
-.mobile_responsive_nav .nav-links li a:hover::before {
+.mobile_responsive_nav .nav-links li a:hover::before,
+.mobile_responsive_nav .nav-links li a.active-link::before {
   height: 3px;
 }
 
@@ -802,6 +805,15 @@ footer a:hover svg {
 }
 
 .new_resume_header .nav-link-grow-up:hover::before {
+  height: 3px;
+}
+
+
+.new_resume_header .active-link {
+  opacity: 1;
+}
+
+.new_resume_header .active-link::before {
   height: 3px;
 }
 

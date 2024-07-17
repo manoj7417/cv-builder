@@ -268,10 +268,10 @@ const Skills = ({
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-2`}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                    <div className="text-start w-full mb-1 flex flex-wrap">
                       <span>{item?.name}</span>
                     </div>
-                    <div className="w-1/2 text-end bg-white h-2.5">
+                    <div className="w-[60%] text-end bg-white h-2.5">
                       <div
                         className="bg-gray-500 h-2.5"
                         style={{

@@ -3,7 +3,7 @@ import { LinkBreak1Icon } from "@radix-ui/react-icons";
 import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import {
   FiBox,
@@ -29,6 +29,7 @@ const Header = () => {
 
   const {} = userState;
   const router = useRouter();
+  const pathname = usePathname()
   const TOP_OFFSET = 50;
   const [showBackground, setShowBackground] = useState(false);
 
@@ -51,6 +52,9 @@ const Header = () => {
   const handleLogin = () => {
     router.push("/login");
   };
+
+  const isActiveLink = (path) => pathname === path ? "active-link" : "";
+  console.log("isActiveLink:::",isActiveLink)
 
   return (
     <div
@@ -87,7 +91,7 @@ const Header = () => {
             <li>
               <Link
                 href="/resume-dashboard"
-                className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume-dashboard")}`}
               >
                 CV Creator
               </Link>
@@ -95,7 +99,7 @@ const Header = () => {
             <li>
               <Link
                 href="/resumeAnalyzer-dashboard"
-                className="desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up"
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resumeAnalyzer-dashboard")}`}
               >
                 CV Optimiser
               </Link>
@@ -103,7 +107,7 @@ const Header = () => {
             {/* FeedBack  */}
             <li>
               <Link
-                className="hover:font-bold text-blue-950 text-base"
+                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/jobCV")}`}
                 href="/jobCV"
               >
                 CV Match
@@ -114,7 +118,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                className="hover:font-bold text-blue-950 text-base"
+                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/career-coaching")}`}
                 href="/career-coaching"
               >
                 Career Coaching
@@ -122,22 +126,12 @@ const Header = () => {
             </li>
             <li>
               <Link
-                className="hover:font-bold text-blue-950 text-base"
+                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/pshycometric-test")}`}
                 href="/pshycometric-test"
               >
                 Psychometric Test
               </Link>
             </li>
-            {/* <li>
-              <Link
-                className=" text-blue-950 text-base hover:font-bold"
-                href="https://www.careergenies.co.uk/blog"
-                target="_blank"
-              >
-                Blog
-              </Link>
-            </li> */}
-            {/* Auth buttons  */}
           </ul>
           <ul>
             <li>

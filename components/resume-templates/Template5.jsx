@@ -546,7 +546,7 @@ const References = ({ fontStyle, headingColor }) => {
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
-                      <div className="references w-full">
+                      <div className="references w-full break-all">
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
@@ -644,7 +644,7 @@ export const Template5 = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-12 px-5 py-5">
+          <div className="grid grid-cols-12 px-5 py-5 gap-10">
             <div className="resume_detailed_section col-span-9">
               <div>
                 <Profile

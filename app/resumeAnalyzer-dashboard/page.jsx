@@ -126,7 +126,7 @@ export default function DashboardIdea() {
             </DialogContent>
           </Dialog>
           <div className="container  w-full h-full resume-dashboard">
-            <div className="flex lg:px-24 px-10 justify-between">
+            <div className="flex lg:px-10 px-10 justify-between">
               <div className="space-y-2 2xl:mt-40 lg:mt-32">
                 <h1 className="text-3xl font-bold mb-5 text-gray-900 sm:text-5xl 2xl:text-6xl">
                   An <span className="text-[#2C98CA]">Optimised CV </span> goes
