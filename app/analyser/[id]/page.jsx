@@ -64,7 +64,6 @@ const FeedbackFuction = () => {
         }
       })
       if (response.status === 201) {
-        console.log(response)
         replaceResumeData(response.data.data)
         updateUserData(response.data.userdata)
         router.push('/resume-builder')
