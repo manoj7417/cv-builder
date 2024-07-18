@@ -367,7 +367,7 @@ export default function Home() {
               </div>
             </DialogContent>
           </Dialog>
-          <div className="flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
+          <div className="max-w-[100rem] mx-auto flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
             <div className="flex flex-col items-center lg:items-start">
               <h1
                 className="font-extrabold text-[2rem] md:text-[3rem] lg:pe-20 mb-6 text-center lg:text-left"
@@ -395,7 +395,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl">
+            <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl p-10">
               <Image
                 src="/cvgenerator.png"
                 width={1300}
