@@ -1,5 +1,5 @@
-import Footer from "@/app/Layout/Footer"
-import NewResumeHeader from "@/app/Layout/NewResumeHeader"
+import Footer from "../../Layout/Footer"
+import NewResumeHeader from "../../Layout/NewResumeHeader"
 
 
 const Layout = ({ children }) => {

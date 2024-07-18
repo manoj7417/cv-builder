@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { registerUser } from "@/app/api/api";
+
 import { toast } from "react-toastify";
 import { ImSpinner3 } from "react-icons/im";
+import { registerUser } from "../../api/api";
 
 export default function Register() {
   const router = useRouter();

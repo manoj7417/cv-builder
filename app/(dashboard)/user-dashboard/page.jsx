@@ -1,11 +1,10 @@
 'use client'
-import { AuthContext } from "@/app/context/AuthContext";
+
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 
 const UserDashboardPage = () => {
-  const { userlogout, userState } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogout = () => {

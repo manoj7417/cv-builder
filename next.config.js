@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
 const nextConfig = {
   output: "standalone",
   images: {
@@ -26,6 +27,12 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     config.resolve.alias.encoding = false;
+    config.module.rules.push({
+      test: /\.node$/,
+      use: 'ignore-loader'
+    });
+
+    config.resolve.alias['@'] = path.resolve(__dirname, '.');
     return config;
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts']
