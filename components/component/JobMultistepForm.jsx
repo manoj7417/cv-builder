@@ -477,7 +477,7 @@ function JobMultistepForm({
                 <h2 className="font-bold text-2xl text-blue-950 mb-5 text-center">
                   Design a winning <span className="text-blue-600">CV</span> in
                   just minutes with <br />{" "}
-                  <span className="text-blue-600 text-3xl">
+                  <span className="text-blue-600 text-3xl mt-5">
                     &#x201B; Genies Career Hub &#x2019;
                   </span>
                 </h2>
