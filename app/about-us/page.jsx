@@ -194,9 +194,10 @@ export default function AboutUs() {
                 opportunities in the market. This growth can only be achieved if
                 employees consistently upskill themselves. Our Career Coaching
                 support is designed to assist businesses in upgrading their
-                employees' skill sets. Our Career Coaches are adept at helping
-                you achieve this.
+                employees&rsquo; skill sets. Our Career Coaches are adept at
+                helping you achieve this.
               </p>
+
               <p className="mt-4 text-gray-600">
                 With years of experience handling candidates and organizations,
                 the Career Coaches at Genies Career Hub are committed to
@@ -205,11 +206,11 @@ export default function AboutUs() {
                 leading to high levels of satisfaction.
               </p>
               <p className="mt-4 text-gray-600">
-                In today's globalized world, balanced guidance is crucial for
-                your professional growth. At Genies Career Hub, we ensure that
-                your organization receives the meticulous coaching needed to
-                advance and stand out in the market with skill and professional
-                expertise.
+                In today&apos;s globalized world, balanced guidance is crucial
+                for your professional growth. At Genies Career Hub, we ensure
+                that your organization receives the meticulous coaching needed
+                to advance and stand out in the market with skill and
+                professional expertise.
               </p>
             </div>
             {/* Left Column - Image */}
