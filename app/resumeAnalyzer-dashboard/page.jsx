@@ -163,7 +163,7 @@ export default function DashboardIdea() {
               />
             </div>
           </div>
-          <div className="w-full  ">
+          <div className="w-full pt-10">
             <div className="rounded-t-3xl border-t-8 border-blue-500  bg-gradient-to-b from-[#dcecff] to-[white]">
               <Slider />
             </div>

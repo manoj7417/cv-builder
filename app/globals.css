@@ -1115,3 +1115,23 @@ ol>li {
     height: 100px;
   }
 }
+
+
+/* target the active bullet */
+.cv_slider .swiper-pagination-bullet-active {
+  /* background-color: blue !important; */
+  opacity: 1 !important;
+}
+
+/* target all bullets */
+.cv_slider .swiper-pagination-bullet {
+  background-color: #0d3572 !important;
+  opacity: 1 !important;
+  bottom: 0px !important;
+}
+
+
+.cv_slider .swiper {
+  height: 75%;
+}
+
