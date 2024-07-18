@@ -5,14 +5,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { SetTokens } from '../../actions';
-import { useUserStore } from "@/app/store/UserStore";
+import { useUserStore } from "../../../app/store/UserStore";
 import axios from "axios";
 import Link from "next/link";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "../../../components/ui/dialog";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
 
 function LoginUser() {
   const router = useRouter();

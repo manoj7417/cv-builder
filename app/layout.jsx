@@ -1,5 +1,5 @@
 // import type { Metadata } from "next";
-// import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,12 +12,12 @@ export const metadata = {
     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
 };
 
-// const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] });
-//className={inter.className}
+const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] });
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <AuthProvider>{children}</AuthProvider>
         <ToastContainer />
       </body>
