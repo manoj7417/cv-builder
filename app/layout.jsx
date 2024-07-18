@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 
 export const metadata = {
   title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
@@ -14,11 +14,7 @@ export const metadata = {
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
