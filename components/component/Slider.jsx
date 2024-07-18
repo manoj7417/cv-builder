@@ -52,6 +52,16 @@ import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 export const templateType = {
   free: "Free",
@@ -253,7 +263,7 @@ export default function Slider() {
   return (
     <div className="w-full mx-auto px-4 py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#e4f5fc] to-[white] rounded-2xl">
       <div className="container mx-auto mb-10 ">
-        <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold text-center md:text-4xl">
+        <h2 className="mb-8 text-3xl text-[#0D3572] font-extrabold text-center lg:text-5xl">
           Creating CVs that Reflect
           <br />
           <span className="flex text-[#2C98CA] lg:text-5xl text-3xl justify-center mt-2">
@@ -267,48 +277,72 @@ export default function Slider() {
           employing our customised Curriculum Vitae template.
         </p>
         <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
-          {templatesData?.map((item, index) => (
-            <div
-              className="group relative overflow-hidden rounded-lg shadow-lg px-3 py-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]"
-              key={index}
+          <div className="mt-10 max-w-7xl mx-auto h-[500px] cv_slider">
+            <Swiper
+              // spaceBetween={30}
+              centeredSlides={false}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              pagination={{ clickable: true, dynamicBullets: true }}
+              navigation={false}
+              loop={true}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 30,
+                },
+              }}
+              modules={[Autoplay, Pagination, Navigation]}
+              className="mySwiper"
             >
-              {item.type === templateType.premium && (
-                <div className="card_box">
-                  <span></span>
-                </div>
-              )}
-              <div className="images_section w-[200px] h-[300px]">
-                <Image
-                  alt={item.alt}
-                  className="h-full w-full object-fill transition-all duration-300 group-hover:scale-105"
-                  src={item.src}
-                  height={125}
-                  width={130}
-                />
-              </div>
-              <div
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{
-                  zIndex: "1",
-                }}
-              >
-                <Button
-                  className="inline-flex items-center justify-center rounded-md bg-[#0EA5E9] px-4 text-[12px] font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                  onClick={() => handleCreateCV(item.name)}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <ImSpinner8 className=" animate-spin mr-2" />
-                      Loading
-                    </>
-                  ) : (
-                    "Try Now"
-                  )}
-                </Button>
-              </div>
-            </div>
-          ))}
+              {templatesData.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div className="group relative overflow-hidden rounded-lg shadow-lg px-3 py-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                    {item.type === templateType.premium && (
+                      <div className="card_box">
+                        <span></span>
+                      </div>
+                    )}
+                    <div className="images_section w-[200px] h-[300px]">
+                      <Image
+                        alt={item.alt}
+                        className="h-full w-full object-fill transition-all duration-300 group-hover:scale-105"
+                        src={item.src}
+                        height={125}
+                        width={130}
+                      />
+                    </div>
+                    <div
+                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      style={{ zIndex: "1" }}
+                    >
+                      <Button
+                        className="inline-flex items-center justify-center rounded-md bg-[#0EA5E9] px-4 text-[12px] font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                        onClick={() => handleCreateCV(item.name)}
+                        disabled={loading}
+                      >
+                        {loading ? (
+                          <>
+                            <ImSpinner8 className="animate-spin mr-2" />
+                            Loading
+                          </>
+                        ) : (
+                          "Try Now"
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </div>

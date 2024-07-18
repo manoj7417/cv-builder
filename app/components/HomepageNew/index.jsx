@@ -24,6 +24,7 @@ import {
 import { Button } from "@/components/ui/button";
 import GetStartedModal from "@/components/component/GetStartedModal";
 import "./Homepage.css";
+import CourseSlider from "@/components/component/CourseSlider";
 
 export default function HomepageNew() {
   const [hovered, setHovered] = useState(false);
@@ -116,7 +117,7 @@ export default function HomepageNew() {
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto text-center">
-              <h1 className="text-[32px] md:text-[50px] lg:text-[75px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
+              <h1 className="text-[32px] md:text-[50px] lg:text-[60px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
                 <span className="mx-2 md:mx-4 lg:mx-10 slide-text-container">
                   <span className="slide-text" key={index}>
                     {words[index]}
@@ -130,10 +131,10 @@ export default function HomepageNew() {
                   </span>
                 </span>
               </h1>
-              <h1
-                className="text-[30px] md:text-[60px] lg:text-[100px] font-extrabold text-[#0D3572] fixed_content"
-              >
-                <span className="2xl:ml-3 lg:ml-1 lg:px-0 px-2">with Genies Career Hub</span>
+              <h1 className="text-[30px] md:text-[60px] lg:text-[80px] font-extrabold text-[#0D3572] fixed_content">
+                <span className="2xl:ml-3 lg:ml-1 lg:px-0 px-2">
+                  with Genies Career Hub
+                </span>
               </h1>
               <p className="max-w-[800px] mx-auto text-center text-[#7C7C7C] text-[14px] md:text-[16px] lg:text-[18px] lg:px-0 px-5">
                 Stand out in the Job Market with Genies Career Hub’s integrated
@@ -166,7 +167,8 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-            <div className="flex justify-center mt-10">
+
+            {/* <div className="flex justify-center mt-10">
               <Tilt options={defaultOptions}>
                 <Image
                   src="/career genie website images (2) (1).png"
@@ -176,7 +178,7 @@ export default function HomepageNew() {
                   alt="banner-image"
                 />
               </Tilt>
-            </div>
+            </div> */}
             {showFloatingButton && (
               <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
                 <div className="button_wrapper mb-5">
@@ -210,6 +212,23 @@ export default function HomepageNew() {
         </div>
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
+      </section>
+      <section className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-gradient-to-t from-blue-100 to-[#5dcafd33]">
+        <div className="discover_image lg:flex align-middle overflow-hidden hidden">
+          <Image
+            src={"/home-creative-down.png"}
+            width={2000}
+            height={1500}
+            alt="discover"
+            loading="lazy"
+            style={{
+              marginLeft: "-150px",
+            }}
+          />
+        </div>
+        <div className="my-auto px-10">
+          <CourseSlider />
+        </div>
       </section>
 
       {/* <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">

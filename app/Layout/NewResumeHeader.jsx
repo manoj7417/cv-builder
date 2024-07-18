@@ -12,7 +12,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "react-hot-toast"; // Updated toast import
 import { deleteCookie } from "cookies-next";
@@ -43,6 +43,7 @@ function classNames(...classes) {
 export default function NewResumeHeader() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
+  const pathname = usePathname()
   const logoutUser = useUserStore((state) => state.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
@@ -111,10 +112,12 @@ export default function NewResumeHeader() {
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? "text-blue-950" : "text-blue-950",
+                            pathname === item.href
+                            ? "text-blue-950 active-link"
+                            : "text-blue-950",
                             "rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
                           )}
-                          aria-current={item.current ? "page" : undefined}
+                          aria-current={pathname === item.href ? "page" : undefined}
                         >
                           {item.name}
                           {item.isBeta && (

@@ -230,14 +230,14 @@ const References = ({ fontStyle, headingColor, colorText }) => {
                           {item.jobTitle}
                         </h3>
 
-                        <h3
+                        {/* <h3
                           className={`${fontStyle.subHeadingFont}`}
                           style={{
                             color: colorText,
                           }}
                         >
                           {item.jobTitle && item.organization && ","}
-                        </h3>
+                        </h3> */}
                         <h3
                           className={`${fontStyle.subHeadingFont}`}
                           style={{
@@ -248,7 +248,7 @@ const References = ({ fontStyle, headingColor, colorText }) => {
                         </h3>
                       </div>
                       <div
-                        className="references w-full"
+                        className="references w-full break-all"
                         style={{
                           color: colorText,
                         }}
@@ -478,7 +478,7 @@ const Skills = ({ fontStyle, headingColor, colorText }) => {
                     key={i}
                   >
                     <div
-                      className="text-start w-1/2 mb-1 whitespace-nowrap"
+                      className="text-start w-full mb-1 flex flex-wrap"
                       style={{
                         color: colorText,
                       }}

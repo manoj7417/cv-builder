@@ -53,7 +53,6 @@ const ComingSoonPage = () => {
     setOffset({ x: 0, y: 0 });
   };
 
-
   const handleMouseMove2 = (e) => {
     const { offsetX, offsetY, target } = e.nativeEvent;
     const { offsetWidth, offsetHeight } = target;
@@ -232,7 +231,7 @@ const ComingSoonPage = () => {
                 className="parallax-image"
                 style={{
                   transform: `translate(${offset2.x}px, ${offset2.y}px)`,
-                  transition: 'transform 0.1s',
+                  transition: "transform 0.1s",
                 }}
               />
             </div>
@@ -642,10 +641,10 @@ const ComingSoonPage = () => {
                         />
                       </div>
                       <div className="px-3 font-medium text-white">
-                        Elizabeth
+                        Nicholas
                       </div>
                       <div className="pl-3 text-sm font-light text-white">
-                        Los Angeles, CA
+                        Bath,UK
                       </div>
                     </div>
                   </figcaption>
@@ -689,11 +688,9 @@ const ComingSoonPage = () => {
                           alt="User Avatar"
                         />
                       </div>
-                      <div className="px-3 font-medium text-white">
-                        Elizabeth
-                      </div>
+                      <div className="px-3 font-medium text-white">Debbie</div>
                       <div className="pl-3 text-sm font-light text-white">
-                        Los Angeles, CA
+                        Brighton, UK
                       </div>
                     </div>
                   </figcaption>
@@ -738,11 +735,9 @@ const ComingSoonPage = () => {
                           alt="User Avatar"
                         />
                       </div>
-                      <div className="px-3 font-medium text-white">
-                        Elizabeth
-                      </div>
+                      <div className="px-3 font-medium text-white">Salome</div>
                       <div className="pl-3 text-sm font-light text-white">
-                        Los Angeles, CA
+                        Livingston, CA
                       </div>
                     </div>
                   </figcaption>

@@ -16,6 +16,17 @@ import Header from "../Layout/Header";
 import { useUserStore } from "../store/UserStore";
 import WorkTogether from "@/components/component/WorkTogether";
 import Footer from "../Layout/Footer";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import NewSlider from "@/components/component/NewSlider";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -23,402 +34,378 @@ const ImageCarousel = dynamic(
 );
 
 const AllTemplates = [
-  [
-    {
-      name: "Template1",
-      src: "/Template1.png",
-      alt: "Template1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template4",
-      src: "/Template4.png",
-      alt: "/Template4.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template5",
-      src: "/Template5.png",
-      alt: "/Template5.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template6",
-      src: "/Template6-1.png",
-      alt: "/Template6-1.png",
-      type: templateType.free,
-    },
-  ],
-  [
-    {
-      name: "Template7",
-      src: "/Template7-1.png",
-      alt: "/Template7-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template8",
-      src: "/Template8.png",
-      alt: "/Template8.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template9",
-      src: "/Template9.png",
-      alt: "/Template9.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template10",
-      src: "/Template10-1.png",
-      alt: "/Template10-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template11",
-      src: "/Template11-1.png",
-      alt: "/Template11-1.png",
-      type: templateType.premium,
-    },
-  ],
-  [
-    {
-      name: "Template12",
-      src: "/Template12-1.png",
-      alt: "/Template.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template13",
-      src: "/Template13-1.png",
-      alt: "/Template13-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template14",
-      src: "/Template14-1.png",
-      alt: "/Template14-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template15",
-      src: "/Template15-1.png",
-      alt: "/Template15-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template16",
-      src: "/Template16-1.png",
-      alt: "/Template16-1.png",
-      type: templateType.free,
-    },
-  ],
-  [
-    {
-      name: "Template17",
-      src: "/Template17-1.png",
-      alt: "/Template17-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template18",
-      src: "/Template18-1.png",
-      alt: "/Template18-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template19",
-      src: "/Template19-1.png",
-      alt: "/Template19-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template20",
-      src: "/Template20-1.png",
-      alt: "/Template20-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template21",
-      src: "/Template21.png",
-      alt: "/Template21.png",
-      type: templateType.free,
-    },
-  ],
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "/Template3.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "/Template4.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "/Template5.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template6",
+    src: "/Template6-1.png",
+    alt: "/Template6-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template7",
+    src: "/Template7-1.png",
+    alt: "/Template7-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template8",
+    src: "/Template8.png",
+    alt: "/Template8.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template9",
+    src: "/Template9.png",
+    alt: "/Template9.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template10",
+    src: "/Template10-1.png",
+    alt: "/Template10-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template11",
+    src: "/Template11-1.png",
+    alt: "/Template11-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template12",
+    src: "/Template12-1.png",
+    alt: "/Template.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template13",
+    src: "/Template13-1.png",
+    alt: "/Template13-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template14",
+    src: "/Template14-1.png",
+    alt: "/Template14-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template15",
+    src: "/Template15-1.png",
+    alt: "/Template15-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template16",
+    src: "/Template16-1.png",
+    alt: "/Template16-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template17",
+    src: "/Template17-1.png",
+    alt: "/Template17-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template18",
+    src: "/Template18-1.png",
+    alt: "/Template18-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template19",
+    src: "/Template19-1.png",
+    alt: "/Template19-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template20",
+    src: "/Template20-1.png",
+    alt: "/Template20-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template21",
+    src: "/Template21.png",
+    alt: "/Template21.png",
+    type: templateType.free,
+  },
 ];
 
 const SimpleTemplates = [
-  [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template4",
-      src: "/Template4.png",
-      alt: "/Template4.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template5",
-      src: "/Template5.png",
-      alt: "/Template5.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template6",
-      src: "/Template6-1.png",
-      alt: "/Template6-1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template7",
-      src: "/Template7-1.png",
-      alt: "/Template7-1.png",
-      type: templateType.free,
-    },
-  ],
-  [
-    {
-      name: "Template8",
-      src: "/Template8.png",
-      alt: "/Template8.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template9",
-      src: "/Template9.png",
-      alt: "/Template9.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template12",
-      src: "/Template12-1.png",
-      alt: "/Template12-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template22",
-      src: "/Template22-1.png",
-      alt: "/Template22-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template15",
-      src: "/Template15-1.png",
-      alt: "/Template15-1.png",
-      type: templateType.premium,
-    },
-  ],
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "Template3.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "/Template4.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "/Template5.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template6",
+    src: "/Template6-1.png",
+    alt: "/Template6-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template7",
+    src: "/Template7-1.png",
+    alt: "/Template7-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template8",
+    src: "/Template8.png",
+    alt: "/Template8.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template9",
+    src: "/Template9.png",
+    alt: "/Template9.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template12",
+    src: "/Template12-1.png",
+    alt: "/Template12-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template22",
+    src: "/Template22-1.png",
+    alt: "/Template22-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template15",
+    src: "/Template15-1.png",
+    alt: "/Template15-1.png",
+    type: templateType.premium,
+  },
 ];
 
 const ATSTemplates = [
-  [
-    {
-      name: "Template8",
-      src: "/Template8.png",
-      alt: "/Template8.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template9",
-      src: "/Template9.png",
-      alt: "/Template9.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template12",
-      src: "/Template12-1.png",
-      alt: "/Template12-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template22",
-      src: "/Template22-1.png",
-      alt: "/Template22-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template15",
-      src: "/Template15-1.png",
-      alt: "/Template15-1.png",
-      type: templateType.premium,
-    },
-  ],
-  [
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template4",
-      src: "/Template4.png",
-      alt: "/Template4.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template5",
-      src: "/Template5.png",
-      alt: "/Template5.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template6",
-      src: "/Template6-1.png",
-      alt: "/Template6-1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template7",
-      src: "/Template7-1.png",
-      alt: "/Template7-1.png",
-      type: templateType.free,
-    },
-  ],
+  {
+    name: "Template8",
+    src: "/Template8.png",
+    alt: "/Template8.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template9",
+    src: "/Template9.png",
+    alt: "/Template9.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template12",
+    src: "/Template12-1.png",
+    alt: "/Template12-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template22",
+    src: "/Template22-1.png",
+    alt: "/Template22-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template15",
+    src: "/Template15-1.png",
+    alt: "/Template15-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "Template3.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "/Template4.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "/Template5.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template6",
+    src: "/Template6-1.png",
+    alt: "/Template6-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template7",
+    src: "/Template7-1.png",
+    alt: "/Template7-1.png",
+    type: templateType.free,
+  },
 ];
 
 const DesignerTemplates = [
-  [
-    {
-      name: "Template18",
-      src: "/Template18-1.png",
-      alt: "Template18-1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template20",
-      src: "/Template20-1.png",
-      alt: "/Template20-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template21",
-      src: "/Template21.png",
-      alt: "/Template21.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template23",
-      src: "/Template23.png",
-      alt: "/Template23.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template24",
-      src: "/Template24.png",
-      alt: "/Template24.png",
-      type: templateType.free,
-    },
-  ],
-  [
-    {
-      name: "Template25",
-      src: "/Template25.png",
-      alt: "/Template25.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template26",
-      src: "/Template26.png",
-      alt: "/Template26.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template19",
-      src: "/Template19-1.png",
-      alt: "/Template19-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template17",
-      src: "/Template17-1.png",
-      alt: "/Template17.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template13",
-      src: "/Template13-1.png",
-      alt: "/Template13-1.png",
-      type: templateType.premium,
-    },
-  ],
+  {
+    name: "Template18",
+    src: "/Template18-1.png",
+    alt: "Template18-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template20",
+    src: "/Template20-1.png",
+    alt: "/Template20-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template21",
+    src: "/Template21.png",
+    alt: "/Template21.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template23",
+    src: "/Template23.png",
+    alt: "/Template23.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template24",
+    src: "/Template24.png",
+    alt: "/Template24.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template25",
+    src: "/Template25.png",
+    alt: "/Template25.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template26",
+    src: "/Template26.png",
+    alt: "/Template26.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template19",
+    src: "/Template19-1.png",
+    alt: "/Template19-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template17",
+    src: "/Template17-1.png",
+    alt: "/Template17.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template13",
+    src: "/Template13-1.png",
+    alt: "/Template13-1.png",
+    type: templateType.premium,
+  },
 ];
 
 const ProfessionalTemplates = [
-  [
-    {
-      name: "Template1",
-      src: "/Template1.png",
-      alt: "Template1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template14",
-      src: "/Template14-1.png",
-      alt: "/Template14-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template11",
-      src: "/Template11-1.png",
-      alt: "/Template11-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template16",
-      src: "/Template16-1.png",
-      alt: "/Template16-1.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template22",
-      src: "/Template22-1.png",
-      alt: "/Template22-1.png",
-      type: templateType.free,
-    },
-  ],
-  [
-    {
-      name: "Template20",
-      src: "/Template20-1.png",
-      alt: "/Template20-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template3",
-      src: "/Template3.png",
-      alt: "/Template3.png",
-      type: templateType.premium,
-    },
-    {
-      name: "Template18",
-      src: "/Template18-1.png",
-      alt: "/Template18-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template15",
-      src: "/Template15-1.png",
-      alt: "/Template15-1.png",
-      type: templateType.free,
-    },
-    {
-      name: "Template12",
-      src: "/Template12-1.png",
-      alt: "/Template12-1.png",
-      type: templateType.premium,
-    },
-  ],
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template14",
+    src: "/Template14-1.png",
+    alt: "/Template14-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template11",
+    src: "/Template11-1.png",
+    alt: "/Template11-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template16",
+    src: "/Template16-1.png",
+    alt: "/Template16-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template22",
+    src: "/Template22-1.png",
+    alt: "/Template22-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template20",
+    src: "/Template20-1.png",
+    alt: "/Template20-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "/Template3.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template18",
+    src: "/Template18-1.png",
+    alt: "/Template18-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template15",
+    src: "/Template15-1.png",
+    alt: "/Template15-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template12",
+    src: "/Template12-1.png",
+    alt: "/Template12-1.png",
+    type: templateType.premium,
+  },
 ];
 
 export default function DashboardIdea() {
@@ -459,9 +446,9 @@ export default function DashboardIdea() {
               />
             </div>
           </div>
-          <div className="w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
+          <div className="py-10 w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
             <div className="rounded-t-xl border-t-8 border-blue-900 p-6">
-              <h2 className="2xl:text-6xl lg:text-5xl text-2xl font-bold mt-5 text-gray-900 text-center">
+              <h2 className="2xl:text-6xl lg:text-5xl text-2xl font-bold mt-10 text-[#0D3572] text-center">
                 Choose From Our Detailed Templates Options
               </h2>
               <Tabs className="w-full py-5" defaultValue="all">
@@ -476,7 +463,7 @@ export default function DashboardIdea() {
                   </TabsTrigger>
                   <TabsTrigger value="ats">
                     <MdQueryStats className="text-orange-600 h-8 w-8 me-3" />
-                    Ats
+                     ATS
                   </TabsTrigger>
                   <TabsTrigger value="designer">
                     <IoShirt className="text-green-700 h-8 w-8 me-3" />
@@ -488,39 +475,19 @@ export default function DashboardIdea() {
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent className="py-7" value="all">
-                  <Carousel>
-                    {AllTemplates.map((carousel, index) => (
-                      <ImageCarousel data={carousel} key={index} />
-                    ))}
-                  </Carousel>
+                  <NewSlider data={AllTemplates} />
                 </TabsContent>
-                <TabsContent value="simple">
-                  <Carousel>
-                    {SimpleTemplates?.map((carousel, index) => (
-                      <ImageCarousel data={carousel} key={index} />
-                    ))}
-                  </Carousel>
+                <TabsContent className="py-7" value="simple">
+                  <NewSlider data={SimpleTemplates} />
                 </TabsContent>
-                <TabsContent value="ats">
-                  <Carousel>
-                    {ATSTemplates?.map((carousel, index) => (
-                      <ImageCarousel data={carousel} key={index} />
-                    ))}
-                  </Carousel>
+                <TabsContent className="py-7" value="ats">
+                  <NewSlider data={ATSTemplates} />
                 </TabsContent>
-                <TabsContent value="designer">
-                  <Carousel>
-                    {DesignerTemplates?.map((carousel, index) => (
-                      <ImageCarousel data={carousel} key={index} />
-                    ))}
-                  </Carousel>
+                <TabsContent className="py-7" value="designer">
+                  <NewSlider data={DesignerTemplates} />
                 </TabsContent>
-                <TabsContent value="professional">
-                  <Carousel>
-                    {ProfessionalTemplates?.map((carousel, index) => (
-                      <ImageCarousel data={carousel} key={index} />
-                    ))}
-                  </Carousel>
+                <TabsContent className="py-7" value="professional">
+                  <NewSlider data={ProfessionalTemplates} />
                 </TabsContent>
               </Tabs>
             </div>

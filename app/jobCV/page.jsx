@@ -345,7 +345,7 @@ export default function Home() {
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                       <span className="font-semibold">
-                        Start with a Fresh...
+                        Start with Afresh...
                       </span>
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
@@ -370,27 +370,27 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
             <div className="flex flex-col items-center lg:items-start">
               <h1
-                className="font-extrabold text-[2rem] md:text-[3.9rem] lg:pe-20 mb-6 text-center lg:text-left"
+                className="font-extrabold text-[2rem] md:text-[3rem] lg:pe-20 mb-6 text-center lg:text-left"
                 style={{ lineHeight: "1.3 !important" }}
               >
                 Build a <span className="text-blue-900">CV</span> that opens
                 doors to your ideal{" "}
                 <span className="text-blue-900">career!</span>
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-10 gap-10 py-3 rounded-lg">
-                <div className="w-full col-span-7">
+              <div className="flex gap-2 py-3 rounded-lg w-full">
+                <div className="w-full">
                   <SearchBar
                     jobRole={jobRole}
                     setJobRole={setJobRole}
                     options={options}
                   />
                 </div>
-                <div className="w-full col-span-7 md:col-span-3 ">
+                <div className="w-full flex items-center">
                   <button
                     className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
                     onClick={() => handleGenerateNow()}
                   >
-                    Generate Now <RiAiGenerate className="text-xl font-bold" />
+                    Generate Now <RiAiGenerate className="text-base font-bold" />
                   </button>
                 </div>
               </div>
@@ -412,30 +412,30 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-6 lg:p-12 rounded-3xl">
               <div className="text-center md:text-left ">
                 <h2
-                  className="text-2xl md:text-[2.7rem] font-bold mb-6"
+                  className="text-2xl md:text-[2rem] font-bold mb-6"
                   style={{ lineHeight: "1.3 !important" }}
                 >
                   Connect with a
                   <span className="text-blue-900"> Career Coach </span>for
                   Expert Advice, Anytime, Anywhere!
                 </h2>
-                <button className="bg-blue-900 text-white px-4 py-2 rounded">
+                <button className="bg-blue-900 text-white px-4 py-2 rounded text-sm">
                   <a href="/contact-us">Work With Coach</a>
                 </button>
               </div>
-              <div className="flex flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl">
-                <div className="text-4xl font-bold text-black mb-6 md:mb-0">
+              <div className="flex flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl gap-5">
+                <div className="text-2xl font-bold text-black mb-6 md:mb-0 text-center">
                   <CountUp start={1} end={200} duration={2} />+
                   <p className="text-lg font-semibold">Templates</p>
                 </div>
 
-                <div className="text-4xl font-bold text-black mb-6 md:mb-0">
+                <div className="text-2xl font-bold text-black mb-6 md:mb-0 text-center">
                   <CountUp start={1} end={40} duration={2} />
                   k+
                   <p className="text-lg font-semibold">Users</p>
                 </div>
 
-                <div className="text-4xl font-bold text-black">
+                <div className="text-2xl font-bold text-black text-center">
                   <CountUp start={1} end={50} duration={2} />+
                   <p className="text-lg font-semibold">Coaches</p>
                 </div>

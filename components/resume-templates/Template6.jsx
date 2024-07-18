@@ -644,7 +644,7 @@ const Template6 = () => {
               >
                 {resumeData?.basics?.jobtitle}
               </p>
-              <div className={`my-2 ${fontStyle.contactFont} flex gap-5`}>
+              <div className={`my-2 ${fontStyle.contactFont} flex justify-between gap-5`}>
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}
@@ -656,7 +656,7 @@ const Template6 = () => {
                         color: resumeData?.metadata?.theme?.primary,
                       }}
                     />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="text-wrap">
                       {resumeData?.basics?.email}
                     </p>
                   </a>
@@ -664,7 +664,7 @@ const Template6 = () => {
                 {resumeData?.basics?.phone && (
                   <a
                     href={`tel:${resumeData?.basics?.phone}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlinePhone
                       className="mr-2"
@@ -678,7 +678,7 @@ const Template6 = () => {
                   </a>
                 )}
                 {(resumeData?.basics?.city || resumeData?.basics?.country) && (
-                  <p className="flex items-center w-full">
+                  <p className="flex items-center">
                     <IoLocationOutline
                       className="mr-2"
                       style={{

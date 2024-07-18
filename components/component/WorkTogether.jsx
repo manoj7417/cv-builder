@@ -12,7 +12,7 @@ const WorkTogether = () => {
             Connect with Us,
             <br /> Join the Community
           </h2>
-          <p className="text-sm mt-3 w-3/4">
+          <p className="text-sm mt-3 w-3/4 text-[#7C7C7C]">
             Is your job helping others to find a job? Connect with Us and
             explore better opportunities as a Career Coach with the Genies
             Career Hub!

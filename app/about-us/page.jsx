@@ -137,7 +137,7 @@ export default function AboutUs() {
               </div>
               <h2 className="text-xl font-bold mb-2">Career Growth</h2>
               <p className="apara">
-                Start your Career progression today, with Us!
+                Start your Career progression effortlessly, with Us!
               </p>
             </div>
 
@@ -147,7 +147,9 @@ export default function AboutUs() {
                 <FaBriefcase className="aicon w-12 h-12" />
               </div>
               <h2 className="text-xl font-bold mb-2">Job Transition</h2>
-              <p className="apara">Easily switch jobs with expert guidance.</p>
+              <p className="apara">
+                Easily switch jobs with expert guidance and no hassle.
+              </p>
             </div>
 
             {/* Card 3 */}
@@ -159,7 +161,7 @@ export default function AboutUs() {
                 Performance Enhancement
               </h2>
               <p className="apara">
-                Achieve heights professionally by elevating your performance.
+                Achieve heights professionally by elevating performance.
               </p>
             </div>
           </div>
@@ -176,37 +178,38 @@ export default function AboutUs() {
                 <span className="text-[#0D3572]"> </span>Career Coach
               </h2>
               <p className="mt-4 text-gray-600">
-                At Genies Career Hub, we are centred on helping you build your
-                professional journeys in the direction of success. We have
-                accordingly devised a comprehensive set of services in Job
-                Application, Career Assistance, Job Match, and much more. With
-                time, we have rendered a global approach that promulgates a
-                lateral strategy to progress in Career. Our Career Coaching
-                provision is categorically designed to help you achieve the goal
-                that you have set for yourself in the way. With internationally
-                cognizant and intricately experienced professionals, we have
-                built a community for you to connect with and seek comprehensive
-                consultation. <br></br>
-                <br></br>In an organisational premise, it is only requisite and
-                empirical that there is a constant growth of skills to suit the
-                increasing demands and opportunities that the markets bring
-                forward. This requirement can only met if the employees within
-                an organisation consistently upskill themselves. Therefore, our
-                support through Career Coaching is necessarily built to assist
-                businesses in upgrading the skill set that the employees have.
-                Our Career Coaches can very adeptly help you do that. <br></br>
-                <br></br>Bringing the experience of years of handling candidates
-                and organisations with professional journeys, the Career Coaches
-                at Genies Career Hub are dedicated to providing the best
-                consultation. With thousands of satisfied individuals and
-                organisations, our services have evidently contributed to
-                enhancing professional journeys. <br></br>
-                <br></br> In this globalization-inclined world, it is crucial to
-                have access to balanced guidance that can assist you in every
-                aspect of your progressive envisage. At Genies Career Hub, we
-                ensure that your organisation gets the meticulous Coaching you
-                deserve to move ahead in the way and stand out in the market
-                with dexterity and professional acumen.
+                At Genies Career Hub, we are dedicated to helping you build
+                successful professional journeys. Our comprehensive set of
+                services includes Job Application, Career Assistance, Job Match,
+                and more. Over time, we have adopted a global approach that
+                promotes a strategic path to career progress. Our Career
+                Coaching service is specifically designed to help you achieve
+                your goals with the guidance of internationally aware and
+                experienced professionals. We have built a community for you to
+                connect with and receive comprehensive consultation.
+              </p>
+              <p className="mt-4 text-gray-600">
+                In an organizational setting, it is essential for employees to
+                continually grow their skills to meet the increasing demands and
+                opportunities in the market. This growth can only be achieved if
+                employees consistently upskill themselves. Our Career Coaching
+                support is designed to assist businesses in upgrading their
+                employees' skill sets. Our Career Coaches are adept at helping
+                you achieve this.
+              </p>
+              <p className="mt-4 text-gray-600">
+                With years of experience handling candidates and organizations,
+                the Career Coaches at Genies Career Hub are committed to
+                providing the best consultation. Our services have enhanced the
+                professional journeys of many individuals and organizations,
+                leading to high levels of satisfaction.
+              </p>
+              <p className="mt-4 text-gray-600">
+                In today's globalized world, balanced guidance is crucial for
+                your professional growth. At Genies Career Hub, we ensure that
+                your organization receives the meticulous coaching needed to
+                advance and stand out in the market with skill and professional
+                expertise.
               </p>
             </div>
             {/* Left Column - Image */}

@@ -17,14 +17,10 @@ export default function Footer() {
     <>
       <footer
         className="bg-[#ffffff] z-20 relative"
-      // style={{
-      //   backgroundImage: "url('/banner-bg.svg')",
-      //   backgroundPosition: "center",
-      // }}
       >
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <div>
+          <div className="sm:flex sm:items-center sm:justify-center">
+            {/* <div>
               <a href="/" className="flex items-center gap-2 mobile_footer">
                 <Image
                   src={"/genies-career-hub-logo.png"}
@@ -33,13 +29,13 @@ export default function Footer() {
                   alt="newlogo"
                   className="w-50 h-auto object-contain"
                 />
-                {/* <span className="text-black font-bold text-2xl">
+                <span className="text-black font-bold text-2xl">
                   Genies Career Hub
-                </span> */}
+                </span>
               </a>
-            </div>
+            </div> */}
 
-            <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
+            <ul className="mt-8 flex justify-center gap-6 sm:mt-0">
               <li>
                 <a href="https://www.facebook.com/profile.php?id=61560696226983" target="_blank">
                   <div className="text-black  hover:text-blue-500">
@@ -96,7 +92,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
+          <div className="grid grid-cols-1 gap-8 border-t border-gray-300 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
             <div>
               <p className="font-bold text-gray-900">Services</p>
 
@@ -140,21 +136,6 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
-
-               
-
-                
-
-                {/* <li>
-                  <a
-                    href="#"
-                    rel="noreferrer"
-                    className="text-black transition pointer-events-none"
-                  >
-                    Genie Connect
-                    <MdOutlineKeyboardArrowRight className="inline text-xl"/>
-                  </a>
-                </li> */}
               </ul>
             </div>
 

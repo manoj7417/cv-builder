@@ -533,7 +533,7 @@ const References = ({ fontStyle, headingColor }) => {
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
-                      <div className="references w-full">
+                      <div className="references w-full break-words">
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
@@ -580,7 +580,7 @@ const Template9 = () => {
           //   }}
         >
           <div className="top_section flex items-start gap-1 justify-start px-10 bg-[#E0FBE2]">
-            <div className="name_profile mt-2">
+            <div className="name_profile w-full mt-2">
               <h1
                 className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
                 style={{
@@ -597,7 +597,7 @@ const Template9 = () => {
               >
                 {resumeData?.basics?.jobtitle}
               </p>
-              <div className={`my-2 ${fontStyle.contactFont} flex gap-5`}>
+              <div className={`my-2 ${fontStyle.contactFont} flex justify-between gap-5`}>
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}

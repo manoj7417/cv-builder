@@ -650,7 +650,7 @@ const Template17 = () => {
               </div>
 
               {/* website */}
-              <div className="w-full grid grid-cols-12">
+              {/* <div className="w-full grid grid-cols-12">
                 <div
                   className="col-span-3 w-full h-6"
                   style={{ backgroundColor: metadata?.theme?.primary }}
@@ -665,7 +665,7 @@ const Template17 = () => {
                     www.test.com
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               {/* address */}
               <div className="w-full grid grid-cols-12">

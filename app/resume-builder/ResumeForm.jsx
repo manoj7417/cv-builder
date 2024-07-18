@@ -2256,8 +2256,7 @@ export default function ResumeForm() {
             </div>
             <div>
               <p className="text-sm text-gray-500">
-                Drivers licenses and other industry-specific certificates you
-                have belong here.
+              Add Industry-relevant certifications and accreditations that you have.
               </p>
             </div>
           </div>
