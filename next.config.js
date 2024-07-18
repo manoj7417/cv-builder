@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
 const path = require('path');
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
   images: {
@@ -27,6 +28,8 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     config.resolve.alias.encoding = false;
+
+    // Add ignore-loader for binary files
     config.module.rules.push({
       test: /\.node$/,
       use: 'ignore-loader'
