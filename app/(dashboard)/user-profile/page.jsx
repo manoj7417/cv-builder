@@ -17,14 +17,14 @@ import Skeleton from "react-loading-skeleton";
 import toast, { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { Card } from "@/components/ui/card";
+import { Card } from "../../../components/ui/card";
 import { useRouter } from "next/navigation";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { Flat, Heat, Nested } from "@alptugidin/react-circular-progress-bar";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "../../../components/ui/dialog";
 import { GoKey } from "react-icons/go";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
 import { ImSpinner3 } from "react-icons/im";
 import { FaChevronRight } from "react-icons/fa6";
 const ProfilePage = () => {
@@ -427,7 +427,7 @@ const ProfilePage = () => {
   }
 
   const handleForgotPassword = () => {
-    
+
     try {
 
     } catch (error) {
