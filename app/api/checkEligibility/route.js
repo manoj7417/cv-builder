@@ -1,14 +1,15 @@
 import { serverInstance } from '@/lib/serverApi';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req, res) {
     try {
         const token = req.headers.get('Authorization');
-        const response = await serverInstance.get('/user/eligiblity/careerCounselling',  {
+        const response = await serverInstance.get('/user/eligiblity/careerCounselling', {
             headers: {
                 'Authorization': token
             }
         });
-        console.log(response)
         return new Response(JSON.stringify(response.data), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }

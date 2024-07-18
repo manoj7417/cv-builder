@@ -13,6 +13,7 @@ import Image from "next/image";
 import { GetTokens } from "../actions";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useUserDataStore } from "@/app/store/useUserDataStore";
+import { Button } from "@/components/ui/button";
 
 export default function UserData() {
   const [isValid, setIsValid] = useState(false);
@@ -27,7 +28,8 @@ export default function UserData() {
     answers,
     setAnswers,
     resetSteps,
-    setContentType
+    setContentType,
+    resetData
   } = useUserDataStore();
 
 
@@ -169,7 +171,32 @@ export default function UserData() {
 
   return (
     <>
-      <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 mt-24 ">
+      <Dialog open={showDialog}>
+        <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
+          <div className="flex items-center space-x-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+              <div className="ai-image">
+                <Image
+                  src="/aipowered2.gif"
+                  width={500}
+                  height={500}
+                  alt="ai"
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                <p className="text-center mx-auto text-xl">
+                  Please wait for a moment... <br /> while we are
+                  generating the personalised test based on your
+                  input.
+                </p>
+                <CustomLoader />
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+      <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 ">
         <div className="space-y-4">
           <h2 className="text-4xl font-semibold">{categories[currentStep]}</h2>
           {bioData[categories[currentStep]].map((questionObj, quesIndex) => (
@@ -201,59 +228,36 @@ export default function UserData() {
           ))}
         </div>
         <div className="flex justify-between p-4">
-          <button
-            onClick={handlePrevious}
-            disabled={currentStep === 0}
-            className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-          {currentStep < categories.length - 1 ? (
+          <div>
+            <Button onClick={() => resetData()}>Cancel</Button>
+          </div>
+          <div className="flex justify-between items-center">
             <button
-              onClick={handleNext}
-              className="bg-blue-950 text-white px-4 py-2 rounded"
+              onClick={handlePrevious}
+              disabled={currentStep === 0}
+              className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50 mr-3"
             >
-              Next
+              Previous
             </button>
-          ) : (
-            <>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <button
-                    onClick={handleSubmit}
-                    className="bg-green-500 text-white px-4 py-2 rounded"
-                  >
-                    Submit
-                  </button>
-                </DialogTrigger>
-                {showDialog && (
-                  <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                    <div className="flex items-center space-x-2">
-                      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
-                        <div className="ai-image">
-                          <Image
-                            src="/aipowered2.gif"
-                            width={500}
-                            height={500}
-                            alt="ai"
-                            className="w-full h-auto"
-                          />
-                        </div>
-                        <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
-                          <p className="text-center mx-auto text-xl">
-                            Please wait for a moment... <br /> while we are
-                            generating the personalised test based on your
-                            input.
-                          </p>
-                          <CustomLoader />
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                )}
-              </Dialog>
-            </>
-          )}
+            {currentStep < categories.length - 1 ? (
+              <button
+                onClick={handleNext}
+                className="bg-blue-900 text-white px-4 py-2 rounded"
+              >
+                Next
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={handleSubmit}
+                  className="bg-green-500 text-white px-4 py-2 rounded"
+                >
+                  Submit
+                </button>
+              </>
+            )}
+          </div>
+
         </div>
       </section>
     </>

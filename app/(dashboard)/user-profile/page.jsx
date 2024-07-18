@@ -427,7 +427,12 @@ const ProfilePage = () => {
   }
 
   const handleForgotPassword = () => {
+    
+    try {
 
+    } catch (error) {
+
+    }
   }
 
 

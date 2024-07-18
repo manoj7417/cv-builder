@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
-import { AuthContext } from "@/app/context/AuthContext";
 import { SetTokens } from '../../actions';
 import { useUserStore } from "@/app/store/UserStore";
 import axios from "axios";
@@ -17,7 +16,6 @@ import { Button } from "@/components/ui/button";
 
 function LoginUser() {
   const router = useRouter();
-  const { userlogin } = useContext(AuthContext);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const loginUser = useUserStore((state) => state.loginUser);
@@ -47,7 +45,6 @@ function LoginUser() {
         const { accessToken, refreshToken, userdata } = response.data.data;
         await SetTokens({ accessToken, refreshToken });
         loginUser(userdata);
-        userlogin(userdata);
         router.push(redirect || "/");
       }
     } catch (error) {
