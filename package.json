@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "npx @next/codemod built-in-next-font",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prebuild && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "npm install"
   },
   "dependencies": {
     "@alptugidin/react-circular-progress-bar": "^1.1.2",
