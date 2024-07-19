@@ -28,7 +28,7 @@ const SearchBar = ({ options, setJobRole, jobRole }) => {
         type="text"
         value={jobRole}
         onChange={handleInputChange}
-        className="p-2 border rounded w-full text-gray-500"
+        className="p-2 border rounded w-full text-gray-500 caret-blue-900"
         placeholder="Job Title / Job Role / Profession"
         style={{ zIndex: 20 }}
       />
