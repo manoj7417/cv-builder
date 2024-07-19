@@ -6,7 +6,6 @@ import HomepageNew from "./components/HomepageNew";
 import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
-import { AuthContext } from "./context/AuthContext";
 import { useUserStore } from "./store/UserStore";
 // import NewResumeHeader from "./Layout/NewResumeHeader";
 const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
@@ -14,7 +13,6 @@ const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr:
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const userState = useUserStore((state) => state.userState)
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);

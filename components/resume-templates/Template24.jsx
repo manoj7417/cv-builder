@@ -323,7 +323,7 @@ const Experience = ({ fontStyle, headingColor }) => {
   const data = useResumeStore(
     (state) => state?.resume.data?.sections?.experience
   );
-  console.log("data::", data);
+
   return (
     <div className="experience_section w-full mt-2">
       {data?.visible && data?.items?.length > 0 && (
@@ -441,8 +441,6 @@ const Projects = ({ fontStyle, headingColor }) => {
 
 const Skills = ({ fontStyle, headingColor, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::", data);
-
   // Define the mapping of skill levels to percentages
   const levelMapping = {
     beginner: 25,
