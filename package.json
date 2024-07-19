@@ -91,7 +91,8 @@
     "webfontloader": "^1.6.28",
     "yup": "^1.4.0",
     "zundo": "^2.1.0",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "autoprefixer": "^10.4.19"
   },
   "devDependencies": {
     "@types/cookie": "^0.6.0",
