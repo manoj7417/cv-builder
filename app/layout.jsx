@@ -7,7 +7,7 @@ import "./globals.css";
 // import "swiper/css/navigation";
 
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export const metadata = {
