@@ -257,7 +257,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
 
 const Skills = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-  console.log("skills data:::", data);
+
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {

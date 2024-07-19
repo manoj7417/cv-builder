@@ -42,7 +42,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { IoIosStar } from "react-icons/io";
-import { AuthContext } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import ImageCarousel from "./ImageCarousel";
 import { ImSpinner8 } from "react-icons/im";

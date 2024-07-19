@@ -1,4 +1,3 @@
-const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -28,14 +27,6 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     config.resolve.alias.encoding = false;
-
-    // Add ignore-loader for binary files
-    config.module.rules.push({
-      test: /\.node$/,
-      use: 'ignore-loader'
-    });
-
-    config.resolve.alias['@'] = path.resolve(__dirname, '.');
     return config;
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts']

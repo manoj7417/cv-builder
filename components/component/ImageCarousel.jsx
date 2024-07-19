@@ -21,7 +21,7 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 
 function ImageCarousel({ data }) {
-  console.log("data:::", data);
+
 
   const [loading, setIsLoading] = useState(false);
   const createResume = useUserStore((state) => state.createResume);

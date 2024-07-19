@@ -172,7 +172,7 @@ const templatesData = [
 ];
 
 export default function NewSlider({ data }) {
-  console.log("data::", data);
+
   return (
     <>
       <Swiper
