@@ -20,7 +20,6 @@ import animation from "@/public/animations/NonAtsLoaderAnimation.json";
 import { GetTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import NewResumeHeader from "../Layout/NewResumeHeader";
-
 import WorkTogether from "@/components/component/WorkTogether";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";

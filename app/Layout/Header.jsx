@@ -1,10 +1,8 @@
 "use client";
-import { LinkBreak1Icon } from "@radix-ui/react-icons";
-import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import {
   FiBox,
   FiCamera,
@@ -21,13 +19,9 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineMenu,
 } from "react-icons/md";
-import { AuthContext } from "../context/AuthContext";
 import "./header.css";
 
 const Header = () => {
-  const { userlogout, userState } = useContext(AuthContext);
-
-  const {} = userState;
   const router = useRouter();
   const pathname = usePathname()
   const TOP_OFFSET = 50;
@@ -54,7 +48,7 @@ const Header = () => {
   };
 
   const isActiveLink = (path) => pathname === path ? "active-link" : "";
-  console.log("isActiveLink:::",isActiveLink)
+
 
   return (
     <div

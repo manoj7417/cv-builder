@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import React, { useContext } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
 const UserDashboardPage = () => {
@@ -12,7 +12,6 @@ const UserDashboardPage = () => {
       toast.success("User logout successfully", {
         position: "top-right",
       });
-      userlogout();
       router.push("/");
     }
   };

@@ -18,7 +18,6 @@ import { LiaTimesSolid } from "react-icons/lia";
 const ResumeViewPage = ({ resumeData, setResumeData ,isOverlayOpen,setIsOverlayOpen}) => {
   const containerRef = useRef();
   const [scale,setScale] = useState(0.5)
-  const { userState, userlogout } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +32,7 @@ const ResumeViewPage = ({ resumeData, setResumeData ,isOverlayOpen,setIsOverlayO
       toast.success("User logout successfully", {
         position: "top-right",
       });
-      userlogout();
+      
       router.push("/");
     }
   };
