@@ -16,16 +16,6 @@ import Header from "../Layout/Header";
 import { useUserStore } from "../store/UserStore";
 import WorkTogether from "@/components/component/WorkTogether";
 import Footer from "../Layout/Footer";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import NewSlider from "@/components/component/NewSlider";
 
 const ImageCarousel = dynamic(
