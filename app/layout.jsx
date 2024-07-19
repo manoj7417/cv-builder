@@ -16,8 +16,8 @@ const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "70
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={inter.className}>
+      <body >
         <ToastContainer />
       </body>
     </html>
