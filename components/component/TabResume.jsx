@@ -21,6 +21,8 @@ import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
 import { GetTokens } from "@/app/actions";
 import { createNewJobProfileResume } from "@/app/api/api";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import { MdOutlineKeyboardArrowRight, MdOutlineReadMore } from "react-icons/md";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
@@ -64,12 +66,12 @@ export default function TabResume() {
       icon: <FaPencilRuler className="text-[#3F51B5]" />,
       src: "/Template12-1.png",
     },
-    {
-      id: 7,
-      name: "Engineer",
-      icon: <FaCogs className="text-[#9C27B0]" />,
-      src: "/Template22-1.png",
-    },
+    // {
+    //   id: 7,
+    //   name: "Engineer",
+    //   icon: <FaCogs className="text-[#9C27B0]" />,
+    //   src: "/Template22-1.png",
+    // },
     {
       id: 8,
       name: "Accounting",
@@ -82,12 +84,12 @@ export default function TabResume() {
       icon: <FaPalette className="text-[#E91E63]" />,
       src: "/Template-design.png",
     },
-    {
-      id: 10,
-      name: "Marketing",
-      icon: <FaStore className="text-[#FF5722]" />,
-      src: "/Template16-1.png",
-    },
+    // {
+    //   id: 10,
+    //   name: "Marketing",
+    //   icon: <FaStore className="text-[#FF5722]" />,
+    //   src: "/Template16-1.png",
+    // },
   ];
 
   const handleCreateCV = async (name) => {
@@ -137,13 +139,21 @@ export default function TabResume() {
               <div className="tabs_main">
                 <TabsList className="flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4">
                   {TabsHeader?.map((item, index) => (
-                    <TabsTrigger value={item?.name} key={index}>
-                      <div className="tabs_header flex gap-2 items-center justify-start">
-                        {item?.icon}
-                        {item?.name}
-                      </div>
-                    </TabsTrigger>
+                    <>
+                      <TabsTrigger value={item?.name} key={index}>
+                        <div className="tabs_header flex gap-2 items-center justify-start">
+                          {item?.icon}
+                          {item?.name}
+                        </div>
+                      </TabsTrigger>
+                    </>
                   ))}
+                  <div className="view_more pl-6 pt-2">
+                    <Link href="/resume-dashboard" className="text-[18px]">
+                      <MdOutlineReadMore className="inline-flex text-3xl text-orange-400 mr-2" /> View
+                      More
+                    </Link>
+                  </div>
                 </TabsList>
               </div>
               <div className="tabs_content">
@@ -158,6 +168,7 @@ export default function TabResume() {
                           height={400}
                           alt={item.name}
                           className=" object-fit h-full rounded-md"
+                          priority
                         />
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">

@@ -226,7 +226,7 @@ export default function HomepageNew() {
             }}
           />
         </div>
-        <div className="my-auto px-10">
+        <div className="my-auto p-10">
           <CourseSlider />
         </div>
       </section>

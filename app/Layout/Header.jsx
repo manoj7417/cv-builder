@@ -113,7 +113,7 @@ const Header = () => {
                 </span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/career-coaching")}`}
                 href="/career-coaching"
@@ -130,7 +130,7 @@ const Header = () => {
               >
                 Psychometric Test
               </Link>
-            </li>
+            </li> */}
           </ul>
           <ul>
             <li>
