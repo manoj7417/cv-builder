@@ -2,9 +2,9 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,7 +16,7 @@ export const metadata = {
     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
 };
 
-const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] ,preload:false});
+const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] ,preload:true});
 
 export default function RootLayout({ children }) {
   return (
