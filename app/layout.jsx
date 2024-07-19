@@ -16,7 +16,7 @@ export const metadata = {
     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
 };
 
-const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] ,preload:true});
+const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"]});
 
 export default function RootLayout({ children }) {
   return (
