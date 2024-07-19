@@ -449,19 +449,19 @@ export default function DashboardIdea() {
                   </TabsTrigger>
                   <TabsTrigger value="simple">
                     <PiFolderSimpleUser className="text-blue-700 h-8 w-8 me-3" />
-                    Simple
+                    Student
                   </TabsTrigger>
                   <TabsTrigger value="ats">
                     <MdQueryStats className="text-orange-600 h-8 w-8 me-3" />
-                     ATS
+                     Professional
                   </TabsTrigger>
                   <TabsTrigger value="designer">
                     <IoShirt className="text-green-700 h-8 w-8 me-3" />
-                    Designer
+                    Creative
                   </TabsTrigger>
                   <TabsTrigger value="professional">
                     <RiShirtFill className="text-red-700 h-8 w-8 me-3" />
-                    Professional
+                    Graduate
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent className="py-7" value="all">

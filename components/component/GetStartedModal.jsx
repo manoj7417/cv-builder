@@ -34,10 +34,11 @@ const GetStartedModal = ({ onClose }) => {
       link: "/resumeAnalyzer-dashboard",
     },
     {
-      title: "Psychometric Test",
+      title: "CV Match",
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
-      link: "/pshycometric-test",
+    current: false,
+      link: "/jobCV",
     },
   ];
 

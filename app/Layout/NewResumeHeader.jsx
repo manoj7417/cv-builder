@@ -24,16 +24,16 @@ const navigation = [
   { name: "CV Creator", href: "/resume-dashboard", current: true },
   { name: "CV Optimiser", href: "/resumeAnalyzer-dashboard", current: false },
   { name: "CV Match", href: "/jobCV", current: false, isBeta: true },
-  {
-    name: "Career Coaching",
-    href: "/career-coaching",
-    current: false,
-  },
-  {
-    name: "Psychometric Test",
-    href: "/pshycometric-test",
-    current: false,
-  },
+  // {
+  //   name: "Career Coaching",
+  //   href: "/career-coaching",
+  //   current: false,
+  // },
+  // {
+  //   name: "Psychometric Test",
+  //   href: "/pshycometric-test",
+  //   current: false,
+  // },
 ];
 
 function classNames(...classes) {
@@ -43,7 +43,7 @@ function classNames(...classes) {
 export default function NewResumeHeader() {
   const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
   const logoutUser = useUserStore((state) => state.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
@@ -108,25 +108,43 @@ export default function NewResumeHeader() {
                   <div className="hidden sm:ml-6 sm:block h-full w-full">
                     <div className="flex justify-center items-center space-x-10 h-full">
                       {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            pathname === item.href
-                            ? "text-blue-950 active-link"
-                            : "text-blue-950",
-                            "rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
-                          )}
-                          aria-current={pathname === item.href ? "page" : undefined}
-                        >
-                          {item.name}
-                          {item.isBeta && (
-                            <span className="text-sm font-bold ml-1 text-blue-900">
-                              (Beta)
-                            </span>
-                          )}
-                        </a>
+                        <>
+                          <a
+                            key={item.name}
+                            href={item.href}
+                            className={classNames(
+                              pathname === item.href
+                                ? "text-blue-950 active-link"
+                                : "text-blue-950",
+                              "rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
+                            )}
+                            aria-current={
+                              pathname === item.href ? "page" : undefined
+                            }
+                          >
+                            {item.name}
+                            {item.isBeta && (
+                              <span className="text-sm font-bold ml-1 text-blue-900">
+                                (Beta)
+                              </span>
+                            )}
+                          </a>
+                        </>
                       ))}
+                      <a
+                        href="/coming-soon"
+                        className="text-blue-950
+                            rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
+                      >
+                       Career Coaching
+                      </a>
+                      <a
+                        href="/coming-soon"
+                        className="text-blue-950
+                            rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
+                      >
+                       Psychometric Test
+                      </a>
                     </div>
                   </div>
                 </div>

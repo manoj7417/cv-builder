@@ -122,14 +122,14 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/career-coaching" className="text-black transition">
+                  <a href="/coming-soon" className="text-black transition">
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/pshycometric-test"
+                    href="/coming-soon"
                     className="text-black transition"
                   >
                     Psycometric Test
