@@ -92,6 +92,7 @@ const Header = () => {
               <Link
                 href="/resume-dashboard"
                 className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume-dashboard")}`}
+                prefetch={false}
               >
                 CV Creator
               </Link>
@@ -100,6 +101,7 @@ const Header = () => {
               <Link
                 href="/resumeAnalyzer-dashboard"
                 className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resumeAnalyzer-dashboard")}`}
+                prefetch={false}
               >
                 CV Optimiser
               </Link>
@@ -109,6 +111,7 @@ const Header = () => {
               <Link
                 className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/jobCV")}`}
                 href="/jobCV"
+                prefetch={false}
               >
                 CV Match
                 <span className="text-sm font-bold ml-1 text-blue-900">
@@ -120,6 +123,7 @@ const Header = () => {
               <Link
                 className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/career-coaching")}`}
                 href="/career-coaching"
+                prefetch={false}
               >
                 Career Coaching
               </Link>
@@ -128,6 +132,7 @@ const Header = () => {
               <Link
                 className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/pshycometric-test")}`}
                 href="/pshycometric-test"
+                prefetch={false}
               >
                 Psychometric Test
               </Link>
