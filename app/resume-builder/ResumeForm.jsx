@@ -49,6 +49,7 @@ import {
   ContextMenuContent,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import dayjs from "dayjs";
 
 const ImageTemplates = [
   "Template1",
@@ -68,6 +69,8 @@ const ImageTemplates = [
   "Template25",
   "Template26",
 ];
+
+const dateFormat = 'YYYY-MM'
 
 export default function ResumeForm() {
   const data = useResumeStore((state) => state.resume.data);
@@ -121,10 +124,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
     const updatedEducationItems = data.sections.education.items.map(
       (item, index) => {
@@ -145,10 +145,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
     const updatedEducationItems = data.sections.education.items.map(
       (item, index) => {
@@ -163,6 +160,11 @@ export default function ResumeForm() {
     );
     setResumeData("sections.education.items", updatedEducationItems);
   };
+
+  const disabledEducationEndDate = (current, item) => {
+    const startDate = dayjs(item.startDate, dateFormat);
+    return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+  }
 
   const handleEducationDescriptionChange = (val, i) => {
     const updatedEducationItems = data.sections.education.items.map(
@@ -215,10 +217,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
     const udpatedExperienceItems = data.sections.experience.items.map(
       (item, index) => {
@@ -239,10 +238,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
     const udpatedExperienceItems = data.sections.experience.items.map(
       (item, index) => {
@@ -257,6 +253,11 @@ export default function ResumeForm() {
     );
     setResumeData("sections.experience.items", udpatedExperienceItems);
   };
+
+  const handledisableExperienceDate = (current, item) => {
+    const startDate = dayjs(item.startDate, dateFormat);
+    return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+  }
 
   const handleAddNewEducation = () => {
     const newEducationItems = [
@@ -383,10 +384,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
     const updatedProjectItems = data.sections.projects.items.map(
       (item, index) => {
@@ -407,10 +405,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
     const updatedProjectItems = data.sections.projects.items.map(
       (item, index) => {
@@ -425,6 +420,11 @@ export default function ResumeForm() {
     );
     setResumeData("sections.projects.items", updatedProjectItems);
   };
+
+  const handleDisableProjectEndDate = (current, item) => {
+    const startDate = dayjs(item.startDate, dateFormat);
+    return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+  }
 
   const handleTemplateThemeChange = (color) => {
     if (color) {
@@ -691,10 +691,7 @@ export default function ResumeForm() {
     if (!val) {
       newDate = "";
     } else {
-      let date = val["$d"];
-      const year = date.getFullYear();
-      const monthName = date.toLocaleString("en-US", { month: "short" });
-      newDate = `${monthName}-${year}`;
+      newDate = dayjs(val).format("YYYY-MM");
     }
 
     const updatedAwards = data.sections.awards.items.map((item, index) => {
@@ -856,10 +853,10 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
       : null;
   }
 
@@ -1215,8 +1212,9 @@ export default function ResumeForm() {
                                       onChange={(e) =>
                                         handleEducationStartDateChange(e, index)
                                       }
+                                      maxDate={dayjs()}
                                       name="startDate"
-                                      className="w-full"
+                                      className="w-full h-10"
                                     />
                                   </div>
                                 </div>
@@ -1230,8 +1228,11 @@ export default function ResumeForm() {
                                       onChange={(e) =>
                                         handleEducationEndDateChange(e, index)
                                       }
+                                      disabled={!item?.startDate}
+                                      disabledDate={(e) => disabledEducationEndDate(e, item)}
                                       name="endDate"
-                                      className="w-full"
+                                      maxDate={dayjs()}
+                                      className="w-full h-10"
                                     />
                                   </div>
                                 </div>
@@ -1355,8 +1356,7 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1413,7 +1413,8 @@ export default function ResumeForm() {
                                           index
                                         )
                                       }
-                                      className="w-full"
+                                      className="w-full h-10"
+                                      maxDate={dayjs()}
                                     />
                                   </div>
                                 </div>
@@ -1427,7 +1428,10 @@ export default function ResumeForm() {
                                       onChange={(e) =>
                                         handleExperienceEndDateChange(e, index)
                                       }
-                                      className="w-full"
+                                      className="w-full h-10"
+                                      maxDate={dayjs()}
+                                      disabled={!item.startDate}
+                                      disabledDate={(e) => handledisableExperienceDate(e, item)}
                                     />
                                   </div>
                                 </div>
@@ -1612,7 +1616,8 @@ export default function ResumeForm() {
                                       onChange={(e) =>
                                         handleProjectStartDateChange(e, index)
                                       }
-                                      className="w-full"
+                                      className="w-full h-10"
+                                      maxDate={dayjs()}
                                     />
                                   </div>
                                 </div>
@@ -1626,7 +1631,10 @@ export default function ResumeForm() {
                                       onChange={(e) =>
                                         handleProjectEndDateChange(e, index)
                                       }
-                                      className="w-full"
+                                      disabled={!item.startDate}
+                                      disabledDate={(e) => handleDisableProjectEndDate(e, item)}
+                                      className="w-full h-10"
+                                      maxDate={dayjs()}
                                     />
                                   </div>
                                 </div>
@@ -1992,6 +2000,7 @@ export default function ResumeForm() {
                                     onChange={(e) =>
                                       handleAwardDateChange(e, index)
                                     }
+                                    maxDate={dayjs()}
                                   />
                                 </div>
                               </div>
@@ -2256,7 +2265,7 @@ export default function ResumeForm() {
             </div>
             <div>
               <p className="text-sm text-gray-500">
-              Add Industry-relevant certifications and accreditations that you have.
+                Add Industry-relevant certifications and accreditations that you have.
               </p>
             </div>
           </div>
