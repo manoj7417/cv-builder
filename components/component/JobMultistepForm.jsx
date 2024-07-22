@@ -20,7 +20,10 @@ import { useResumeStore } from '@/app/store/ResumeStore'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
+
+const dateFormat = "YYYY-MM";
 
 function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole, type }) {
     const replaceResumeData = useResumeStore((state) => state.replaceResumeData)
@@ -83,10 +86,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         if (!val) {
             newDate = "";
         } else {
-            let date = val["$d"];
-            const year = date.getFullYear();
-            const monthName = date.toLocaleString("en-US", { month: "short" });
-            newDate = `${monthName}-${year}`;
+            newDate = dayjs(val).format("YYYY-MM");
         }
         const updatedFormData = {
             ...formData, experience: formData.experience.map((item, index) => {
@@ -108,10 +108,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         if (!val) {
             newDate = "";
         } else {
-            let date = val["$d"];
-            const year = date.getFullYear();
-            const monthName = date.toLocaleString("en-US", { month: "short" });
-            newDate = `${monthName}-${year}`;
+            newDate = dayjs(val).format("YYYY-MM");
         }
         const updatedFormData = {
             ...formData, experience: formData.experience.map((item, index) => {
@@ -127,6 +124,11 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         setFormData(updatedFormData)
     }
 
+    const disabledExperienceEndDate = (current, item) => {
+        const startDate = dayjs(item.startDate, dateFormat);
+        return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+    };
+
     const handleExperienceHighlightsChange = (i, val) => {
         let highlights = val.split("\n")
         const updatedFormData = {
@@ -138,6 +140,18 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                     }
                 }
                 return item
+            })
+        }
+        setFormData(updatedFormData)
+    }
+
+    const handleExperienceCheckChange = (index) => {
+        const updatedFormData = {
+            ...formData, experience: formData.experience.map((exp, expIndex) => {
+                if (expIndex === index) {
+                    return { ...exp, present: !exp.present, endDate: !exp.present ? "present" : "" }
+                }
+                return exp
             })
         }
         setFormData(updatedFormData)
@@ -197,34 +211,32 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         if (!val) {
             newDate = "";
         } else {
-            let date = val["$d"];
-            const year = date.getFullYear();
-            const monthName = date.toLocaleString("en-US", { month: "short" });
-            newDate = `${monthName}-${year}`;
+            newDate = dayjs(val).format("YYYY-MM");
         }
+
         const updatedFormData = {
-            ...formData, education: formData.education.map((item, index) => {
+            ...formData,
+            education: formData.education.map((item, index) => {
                 if (index === i) {
                     return {
                         ...item,
                         startDate: newDate
-                    }
+                    };
                 }
-                return item
+                return item;
             })
-        }
-        setFormData(updatedFormData)
-    }
+        };
+
+        setFormData(updatedFormData);
+    };
+
 
     const handleEducationEndDateChange = (val, i) => {
         let newDate;
         if (!val) {
             newDate = "";
         } else {
-            let date = val["$d"];
-            const year = date.getFullYear();
-            const monthName = date.toLocaleString("en-US", { month: "short" });
-            newDate = `${monthName}-${year}`;
+            newDate = dayjs(val).format("YYYY-MM");
         }
         const updatedFormData = {
             ...formData, education: formData.education.map((item, index) => {
@@ -240,6 +252,23 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         setFormData(updatedFormData)
     }
 
+    const disableEducationEndDate = (current, item) => {
+        const startDate = dayjs(item.startDate, dateFormat);
+        // Disable dates before the start date and in the same month as the start date
+        return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+    }
+
+    const handleEducationCheckChange = (index) => {
+        const updatedFormData = {
+            ...formData, education: formData.education.map((edu, eduIndex) => {
+                if (eduIndex === index) {
+                    return { ...edu, present: !edu.present, endDate: !edu.present ? "present" : "" }
+                }
+                return edu
+            })
+        }
+        setFormData(updatedFormData)
+    }
     const handleDeleteEducation = (i) => {
         const updatedFromData = {
             ...formData, education: formData.education.filter((item, index) => index !== i)
@@ -456,7 +485,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                         {
                             !formData?.isFresher &&
                             <>
-                                <div className='overflow-y-scroll no-scrollbar h-[80%]'>
+                                <div className='overflow-y-scroll  h-[80%]'>
                                     <div className='my-2'>
                                         <hr />
                                     </div>
@@ -527,7 +556,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                     </div>
                                                                     <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                                                                         <div className="flex flex-col md:flex-row ">
-                                                                            <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around  pr-2 lg:py-0 py-1">
+                                                                            <div className="flex flex-col w-full md:w-1/2 space-y-1   pr-2 lg:py-0 py-1">
                                                                                 <Label for="start_date" className="block">
                                                                                     Start Date
                                                                                 </Label>
@@ -540,8 +569,8 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                                                 index
                                                                                             )
                                                                                         }
-
-                                                                                        className="w-full"
+                                                                                        maxDate={dayjs()}
+                                                                                        className="w-full h-10"
                                                                                     />
                                                                                 </div>
                                                                             </div>
@@ -550,13 +579,27 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                                     End Date
                                                                                 </Label>
                                                                                 <div className="w-full">
-                                                                                    <DatePicker
-                                                                                        picker="month"
-                                                                                        onChange={(e) =>
-                                                                                            handleExperienceEndDateChange(e, index)
-                                                                                        }
-                                                                                        className="w-full"
-                                                                                    />
+                                                                                    {
+                                                                                        item?.present ?
+                                                                                            <div className=' h-10 rounded-md flex items-center pl-2'>
+                                                                                                <p className='text-xl text-gray-600'>Present</p>
+                                                                                            </div> :
+                                                                                            <DatePicker
+                                                                                                picker="month"
+                                                                                                onChange={(e) =>
+                                                                                                    handleExperienceEndDateChange(e, index)
+                                                                                                }
+                                                                                                className="w-full h-10"
+                                                                                                disabledDate={(e) => disabledExperienceEndDate(e, item)}
+                                                                                                maxDate={dayjs()}
+                                                                                                disabled={!item?.startDate}
+                                                                                            />
+                                                                                    }
+                                                                                </div>
+                                                                                <div className='flex items-center '>
+                                                                                    <Checkbox className='mr-2 font-thin'
+                                                                                        checked={item?.present}
+                                                                                        onCheckedChange={() => handleExperienceCheckChange(index)} /><p className=' font-mono italic'>present</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -676,7 +719,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                 </div>
                                                             </div>
                                                             <div className="flex px-2">
-                                                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2 lg:py-0 py-5">
+                                                                <div className="flex flex-col w-full md:w-1/2 space-y-1   pr-2 lg:py-0 py-5">
                                                                     <Label for="start_date" className="block">
                                                                         Start Date
                                                                     </Label>
@@ -689,24 +732,40 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                                     index
                                                                                 )
                                                                             }
-                                                                            className="w-full"
+                                                                            className="w-full h-10"
+                                                                            maxDate={dayjs()}
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0">
+                                                                <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around  lg:pl-2 pl-0">
                                                                     <Label for="end_date" className="block">
                                                                         End Date
                                                                     </Label>
                                                                     <div className="w-full">
-                                                                        <DatePicker
-                                                                            picker="month"
-                                                                            onChange={(e) =>
-                                                                                handleEducationEndDateChange(e, index)
-                                                                            }
-                                                                            className="w-full"
-                                                                        />
+                                                                        {
+                                                                            item?.present ?
+                                                                                <div className=' h-10 rounded-md flex items-center pl-2'>
+                                                                                    <p className='text-xl text-gray-600'>Present</p>
+                                                                                </div> :
+                                                                                <DatePicker
+                                                                                    picker="month"
+                                                                                    onChange={(e) =>
+                                                                                        handleEducationEndDateChange(e, index)
+                                                                                    }
+                                                                                    className="w-full h-10"
+                                                                                    disabledDate={(e) => disableEducationEndDate(e, item)}
+                                                                                    maxDate={dayjs()}
+                                                                                    disabled={!item?.startDate}
+                                                                                />
+                                                                        }
+                                                                    </div>
+                                                                    <div className='flex items-center '>
+                                                                        <Checkbox className='mr-2 font-thin'
+                                                                            checked={item?.present}
+                                                                            onCheckedChange={() => handleEducationCheckChange(index)} /><p className=' font-mono italic'>present</p>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </AccordionContent>
