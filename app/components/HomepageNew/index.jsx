@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import Link from "next/link";
 import NewNavbar from "../../ui/newNav";
@@ -89,79 +91,98 @@ export default function HomepageNew() {
   ];
   const interval = 3000; // 2000ms or 2 seconds for each word
   const [index, setIndex] = useState(0);
+  const [wordOpacity, setWordOpacity] = useState(1);
+
+  // useEffect(() => {
+  //   const cycle = setInterval(() => {
+  //     setIndex((prevIndex) => (prevIndex + 1) % words.length);
+  //   }, interval);
+  //   return () => clearInterval(cycle);
+  // }, [words, interval]);
 
   useEffect(() => {
+    const fadeOut = setTimeout(() => {
+      setWordOpacity(0);
+    }, interval - 500); // Start fade-out 0.5s before interval ends
+
     const cycle = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
+      setWordOpacity(1);
     }, interval);
-    return () => clearInterval(cycle);
-  }, [words, interval]);
+
+    return () => {
+      clearInterval(cycle);
+      clearTimeout(fadeOut);
+    };
+  }, [index, interval]);
 
   return (
     <>
-      <section className="flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
-        <div className="container lg:pt-0 pt-20">
-          <div className="flex flex-col justify-center items-center relative">
+      <section className='flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative'>
+        <div className='container lg:pt-0 pt-20'>
+          <div className='flex flex-col justify-center items-center'>
             <Image
               src={"/arrowright.png"}
               width={100}
               height={100}
-              alt="arrowright"
-              className="absolute top-[20%] left-0 w-auto h-auto"
+              alt='arrowright'
+              className='absolute top-[20%] left-0 w-auto h-auto'
             />
             <Image
               src={"/arrowleft.png"}
               width={100}
               height={100}
-              alt="arrowright"
-              className="absolute top-[30%] right-0 w-auto h-auto"
+              alt='arrowright'
+              className='absolute top-[30%] right-0 w-auto h-auto'
             />
-            <div className="space-y-2 mx-auto text-center">
-              <h1 className="text-[32px] md:text-[50px] lg:text-[60px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
-                <span className="mx-2 md:mx-4 lg:mx-10 slide-text-container">
-                  <span className="slide-text" key={index}>
+            <div className='space-y-2 mx-auto text-center'>
+              <h1 className='text-[32px] md:text-[50px] lg:text-[70px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]'>
+                <span
+                  className={`mx-2 md:mx-4 lg:mx-10 slide-text-container ${
+                    wordOpacity === 1 ? "opacity-100" : "opacity-0"
+                  } transition-opacity duration-500`}>
+                  <span className='slide-text' key={index}>
                     {words[index]}
                     <Image
                       src={images[index]}
-                      width={350}
-                      height={350}
+                      width={500}
+                      height={500}
                       alt={words[index]}
-                      className="ml-4 min-h-[150px] min-w-[150px] md:min-h-[200px] md:min-w-[200px]"
+                      className='ml-4 min-h-[400px] min-w-[400px] md:min-h-[400px] md:min-w-[400px]'
                     />
                   </span>
                 </span>
               </h1>
-              <h1 className="text-[30px] md:text-[60px] lg:text-[80px] font-extrabold text-[#0D3572] fixed_content">
-                <span className="2xl:ml-3 lg:ml-1 lg:px-0 px-2">
+              <h1 className='text-[30px] md:text-[60px] lg:text-[100px] font-extrabold text-[#0D3572] fixed_content'>
+                <span className='2xl:ml-3 lg:ml-1 lg:px-0 px-2'>
                   with Genies Career Hub
                 </span>
               </h1>
-              <p className="max-w-[800px] mx-auto text-center text-[#7C7C7C] text-[14px] md:text-[16px] lg:text-[18px] lg:px-0 px-5">
+              <p className='max-w-[800px] mx-auto text-center text-[#7C7C7C] text-[14px] md:text-[16px] lg:text-[18px] lg:px-0 px-5'>
                 Stand out in the Job Market with Genies Career Hub’s integrated
                 services in Career Assistance. We help you find the right Career
                 Path, maximise your professional skills, build your job-winning
                 resume, and grow your career dynamically.
               </p>
             </div>
-            <div className="flex flex-col lg:flex-row justify-center min-[400px]:flex-row mt-8">
-              <div className="button_wrapper">
-                <button className="get_start_btn" onClick={handleButtonClick}>
-                  <span className="btn_text">Explore Now</span>
-                  <div className="btn_overlay">
+            <div className='flex flex-col lg:flex-row justify-center min-[400px]:flex-row mt-8'>
+              <div className='button_wrapper'>
+                <button className='get_start_btn' onClick={handleButtonClick}>
+                  <span className='btn_text'>Explore Now</span>
+                  <div className='btn_overlay'>
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns='http://www.w3.org/2000/svg'
                       width={24}
                       height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
                       strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      className='lucide lucide-arrow-right'>
+                      <path d='M5 12h14' />
+                      <path d='m12 5 7 7-7 7' />
                     </svg>
                   </div>
                 </button>
@@ -180,28 +201,26 @@ export default function HomepageNew() {
               </Tilt>
             </div> */}
             {showFloatingButton && (
-              <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
-                <div className="button_wrapper mb-5">
+              <div className='floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center'>
+                <div className='button_wrapper mb-5'>
                   <button
-                    className="get_start_btn floating"
-                    onClick={handleButtonClick}
-                  >
-                    <span className="btn_text">Explore Now</span>
-                    <div className="btn_overlay">
+                    className='get_start_btn floating'
+                    onClick={handleButtonClick}>
+                    <span className='btn_text'>Explore Now</span>
+                    <div className='btn_overlay'>
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns='http://www.w3.org/2000/svg'
                         width={24}
                         height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        stroke='currentColor'
                         strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        className='lucide lucide-arrow-right'>
+                        <path d='M5 12h14' />
+                        <path d='m12 5 7 7-7 7' />
                       </svg>
                     </div>
                   </button>
@@ -213,20 +232,20 @@ export default function HomepageNew() {
         <div></div>
         {showModal && <GetStartedModal onClose={handleCloseModal} />}
       </section>
-      <section className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-gradient-to-t from-blue-100 to-[#5dcafd33]">
-        <div className="discover_image lg:flex align-middle overflow-hidden hidden">
+      <section className='grid lg:grid-cols-2 grid-cols-1 py-20 bg-gradient-to-t from-blue-100 to-[#5dcafd33]'>
+        <div className='discover_image lg:flex align-middle overflow-hidden hidden'>
           <Image
             src={"/home-creative-down.png"}
             width={2000}
             height={1500}
-            alt="discover"
-            loading="lazy"
+            alt='discover'
+            loading='lazy'
             style={{
               marginLeft: "-150px",
             }}
           />
         </div>
-        <div className="my-auto p-10">
+        <div className='my-auto p-10'>
           <CourseSlider />
         </div>
       </section>
