@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import {
   FaRegFolderOpen,
@@ -26,6 +28,7 @@ import { MdOutlineKeyboardArrowRight, MdOutlineReadMore } from "react-icons/md";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
+  // const [imageLoading, setImageLoading] = useState(true);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
 
@@ -33,37 +36,37 @@ export default function TabResume() {
     {
       id: 1,
       name: "Business Analyst",
-      icon: <FaPython className="text-[#3776AB]" />,
+      icon: <FaPython className='text-[#3776AB]' />,
       src: "/Template20-1.png",
     },
     {
       id: 2,
       name: "Data Scientist",
-      icon: <FaDatabase className="text-[#FF6F61]" />,
+      icon: <FaDatabase className='text-[#FF6F61]' />,
       src: "/Template19-1.png",
     },
     {
       id: 3,
       name: "Product Manager",
-      icon: <FaUsersCog className="text-[#4CAF50]" />,
+      icon: <FaUsersCog className='text-[#4CAF50]' />,
       src: "/Template18-1.png",
     },
     {
       id: 4,
       name: "Software Engineer",
-      icon: <FaLaptop className="text-[#795548]" />,
+      icon: <FaLaptop className='text-[#795548]' />,
       src: "/Template14-1.png",
     },
     {
       id: 5,
       name: "Sales",
-      icon: <FaSuitcase className="text-[#FF9800]" />,
+      icon: <FaSuitcase className='text-[#FF9800]' />,
       src: "/Template17-1.png",
     },
     {
       id: 6,
       name: "Teacher",
-      icon: <FaPencilRuler className="text-[#3F51B5]" />,
+      icon: <FaPencilRuler className='text-[#3F51B5]' />,
       src: "/Template12-1.png",
     },
     // {
@@ -75,13 +78,13 @@ export default function TabResume() {
     {
       id: 8,
       name: "Accounting",
-      icon: <FaRegFolderOpen className="text-[#009688]" />,
+      icon: <FaRegFolderOpen className='text-[#009688]' />,
       src: "/Template15-1.png",
     },
     {
       id: 9,
       name: "Designer",
-      icon: <FaPalette className="text-[#E91E63]" />,
+      icon: <FaPalette className='text-[#E91E63]' />,
       src: "/Template-design.png",
     },
     // {
@@ -118,13 +121,13 @@ export default function TabResume() {
 
   return (
     <>
-      <div className="">
-        <div className="rounded-t-xl p-6">
-          <div className="tabs_heading">
-            <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-[#0D3572] text-center">
+      <div className=''>
+        <div className='rounded-t-xl p-6'>
+          <div className='tabs_heading'>
+            <h2 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-[#0D3572] text-center'>
               Discover CVs that fit your Dream Job
             </h2>
-            <p className="lg:w-1/2 w-full mx-auto text-center my-4 text-[#7C7C7C]">
+            <p className='lg:w-1/2 w-full mx-auto text-center my-4 text-[#7C7C7C]'>
               Start your journey with Genies Career Hub CV Maker and unlock the
               door to a world where your talents are valued and your career
               dreams become a reality with a personalised and perfectly tailored
@@ -132,64 +135,113 @@ export default function TabResume() {
             </p>
           </div>
           <Tabs
-            className="max-w-5xl mx-auto py-5"
-            defaultValue="Business Analyst"
-          >
-            <div className="grid lg:grid-cols-2 grid-cols-1 place-items-around items-center ">
-              <div className="tabs_main">
-                <TabsList className="flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4">
+            className='max-w-5xl mx-auto py-5'
+            defaultValue='Business Analyst'>
+            <div className='grid lg:grid-cols-2 grid-cols-1 place-items-around items-center '>
+              <div className='tabs_main'>
+                <TabsList className='flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4'>
                   {TabsHeader?.map((item, index) => (
                     <>
                       <TabsTrigger value={item?.name} key={index}>
-                        <div className="tabs_header flex gap-2 items-center justify-start">
+                        <div className='tabs_header flex gap-2 items-center justify-start'>
                           {item?.icon}
                           {item?.name}
                         </div>
                       </TabsTrigger>
                     </>
                   ))}
-                  <div className="view_more pl-6 pt-2">
-                    <Link href="/resume-dashboard" className="text-[18px]">
-                      <MdOutlineReadMore className="inline-flex text-3xl text-orange-400 mr-2" /> View
-                      More
+                  <div className='view_more pl-6 pt-2'>
+                    <Link href='/resume-dashboard' className='text-[18px]'>
+                      <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2' />{" "}
+                      View More
                     </Link>
                   </div>
                 </TabsList>
               </div>
-              <div className="tabs_content">
-                {TabsHeader?.map((item, index) => (
-                  <TabsContent value={item?.name} key={index}>
-                    <div className="relative flex justify-center  overflow-hidden group p-4">
-                      <div className="relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md">
-                        <Image
-                          src={item.src}
-                          key={index}
-                          width={800}
-                          height={400}
-                          alt={item.name}
-                          className=" object-fit h-full rounded-md"
-                          priority
-                        />
+              <div className='tabs_content'>
+                {/* {TabsHeader.length > 0 &&
+                  TabsHeader?.map((item, index) => (
+                    <TabsContent value={item?.name} key={index}>
+                      <div className='relative flex justify-center  overflow-hidden group p-4'>
+                        <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
+                          <Image
+                            src={item.src}
+                            key={index}
+                            width={800}
+                            height={400}
+                            alt={item.name}
+                            className='object-fit h-full rounded-md'
+                            loading='lazy'
+                          />
+                        </div>
+                        <div className='absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                          <Button
+                            className='inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]'
+                            onClick={() => handleCreateCV(item.name)}
+                            disabled={loading}>
+                            {loading ? (
+                              <>
+                                <ImSpinner8 className='animate-spin mr-2' />
+                                Loading
+                              </>
+                            ) : (
+                              "Try Now"
+                            )}
+                          </Button>
+                        </div>
                       </div>
-                      <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <Button
-                          className="inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                          onClick={() => handleCreateCV(item.name)}
-                          disabled={loading}
-                        >
-                          {loading ? (
-                            <>
-                              <ImSpinner8 className="animate-spin mr-2" />
-                              Loading
-                            </>
-                          ) : (
-                            "Try Now"
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </TabsContent>
-                ))}
+                    </TabsContent>
+                  ))} */}
+                {TabsHeader.length > 0 &&
+                  TabsHeader.map((item, index) => {
+                    // State to manage image loading
+                    const [isLoading, setIsLoading] = useState(true);
+
+                    return (
+                      <TabsContent value={item?.name} key={index}>
+                        <div className='relative flex justify-center overflow-hidden group p-4'>
+                          <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
+                            {isLoading && (
+                              <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9'>
+                                <ImSpinner8 className='animate-spin text-black text-2xl' />
+                                <span className='mx-2'>Loading...</span>
+                              </div>
+                            )}
+                            <Image
+                              src={item.src}
+                              width={800}
+                              height={400}
+                              alt={item.name}
+                              className={`object-fit rounded-md h-full ${
+                                isLoading ? "hidden" : ""
+                              }`}
+                              onLoadingComplete={() => setIsLoading(false)}
+                              priority={true}
+                              placeholder='blur' // Use a blurred placeholder while loading
+                              blurDataURL={`data:image/svg+xml;base64,${btoa(
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><rect width="100%" height="100%" fill="#f0f0f0"/></svg>'
+                              )}`} // A placeholder to improve perceived performance
+                            />
+                          </div>
+                          <div className='absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                            <Button
+                              className='inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]'
+                              onClick={() => handleCreateCV(item.name)}
+                              disabled={loading}>
+                              {loading ? (
+                                <>
+                                  <ImSpinner8 className='animate-spin mr-2' />
+                                  Loading
+                                </>
+                              ) : (
+                                "Try Now"
+                              )}
+                            </Button>
+                          </div>
+                        </div>
+                      </TabsContent>
+                    );
+                  })}
               </div>
             </div>
           </Tabs>
