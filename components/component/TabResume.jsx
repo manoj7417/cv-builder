@@ -29,6 +29,8 @@ import { MdOutlineKeyboardArrowRight, MdOutlineReadMore } from "react-icons/md";
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
   // const [imageLoading, setImageLoading] = useState(true);
+  // State to manage image loading
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
 
@@ -194,14 +196,11 @@ export default function TabResume() {
                   ))} */}
                 {TabsHeader.length > 0 &&
                   TabsHeader.map((item, index) => {
-                    // State to manage image loading
-                    const [isLoading, setIsLoading] = useState(true);
-
                     return (
                       <TabsContent value={item?.name} key={index}>
                         <div className='relative flex justify-center overflow-hidden group p-4'>
                           <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
-                            {isLoading && (
+                            {isImageLoading && (
                               <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9'>
                                 <ImSpinner8 className='animate-spin text-black text-2xl' />
                                 <span className='mx-2'>Loading...</span>
@@ -213,9 +212,9 @@ export default function TabResume() {
                               height={400}
                               alt={item.name}
                               className={`object-fit rounded-md h-full ${
-                                isLoading ? "hidden" : ""
+                                isImageLoading ? "hidden" : ""
                               }`}
-                              onLoadingComplete={() => setIsLoading(false)}
+                              onLoadingComplete={() => setIsImageLoading(false)}
                               priority={true}
                               placeholder='blur' // Use a blurred placeholder while loading
                               blurDataURL={`data:image/svg+xml;base64,${btoa(
