@@ -93,6 +93,25 @@ export default function HomepageNew() {
   const [index, setIndex] = useState(0);
   const [wordOpacity, setWordOpacity] = useState(1);
 
+  //  Handle opacity transitions
+  useEffect(() => {
+    const fadeOut = setTimeout(() => {
+      setWordOpacity(0);
+    }, interval - 500); // Start fade-out 0.5s before interval ends
+
+    return () => clearTimeout(fadeOut);
+  }, [index, interval]);
+
+  // Handle index cycling and reset opacity
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+      setWordOpacity(1); // Reset opacity when index changes
+    }, interval);
+
+    return () => clearInterval(cycle);
+  }, [words.length, interval]);
+
   // useEffect(() => {
   //   const cycle = setInterval(() => {
   //     setIndex((prevIndex) => (prevIndex + 1) % words.length);
@@ -100,25 +119,25 @@ export default function HomepageNew() {
   //   return () => clearInterval(cycle);
   // }, [words, interval]);
 
-  useEffect(() => {
-    const fadeOut = setTimeout(() => {
-      setWordOpacity(0);
-    }, interval - 500); // Start fade-out 0.5s before interval ends
+  // useEffect(() => {
+  //   const fadeOut = setTimeout(() => {
+  //     setWordOpacity(0);
+  //   }, interval - 500); // Start fade-out 0.5s before interval ends
 
-    const cycle = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
-      setWordOpacity(1);
-    }, interval);
+  //   const cycle = setInterval(() => {
+  //     setIndex((prevIndex) => (prevIndex + 1) % words.length);
+  //     setWordOpacity(1);
+  //   }, interval);
 
-    return () => {
-      clearInterval(cycle);
-      clearTimeout(fadeOut);
-    };
-  }, [index, interval]);
+  //   return () => {
+  //     clearInterval(cycle);
+  //     clearTimeout(fadeOut);
+  //   };
+  // }, [index, interval]);
 
   return (
     <>
-      <section className='flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative'>
+      <section className='flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-10 bg-gradient-to-b from-white to-[#5dcafd33] relative'>
         <div className='container lg:pt-0 pt-20'>
           <div className='flex flex-col justify-center items-center'>
             <Image
@@ -135,13 +154,13 @@ export default function HomepageNew() {
               alt='arrowright'
               className='absolute top-[30%] right-0 w-auto h-auto'
             />
-            <div className='space-y-2 mx-auto text-center'>
-              <h1 className='text-[32px] md:text-[50px] lg:text-[70px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]'>
+            <div className='space-y-2 mx-auto text-center h-[300px] mt-40'>
+              <h1 className='text-[32px] md:text-[50px] lg:text-[70px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572] h-[100px]'>
                 <span
                   className={`mx-2 md:mx-4 lg:mx-10 slide-text-container ${
                     wordOpacity === 1 ? "opacity-100" : "opacity-0"
                   } transition-opacity duration-500`}>
-                  <span className='slide-text' key={index}>
+                  <span className='slide-text fade-text' key={index}>
                     {words[index]}
                     <Image
                       src={images[index]}
