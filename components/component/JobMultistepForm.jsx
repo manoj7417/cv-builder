@@ -310,10 +310,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         if (!val) {
             newDate = "";
         } else {
-            let date = val["$d"];
-            const year = date.getFullYear();
-            const monthName = date.toLocaleString("en-US", { month: "short" });
-            newDate = `${monthName}-${year}`;
+            newDate = dayjs(val).format("YYYY-MM");
         }
         const updatedFormData = {
             ...formData, projects: formData.projects.map((item, index) => {
@@ -334,10 +331,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         if (!val) {
             newDate = "";
         } else {
-            let date = val["$d"];
-            const year = date.getFullYear();
-            const monthName = date.toLocaleString("en-US", { month: "short" });
-            newDate = `${monthName}-${year}`;
+            newDate = dayjs(val).format("YYYY-MM");
         }
         const updatedFormData = {
             ...formData, projects: formData.projects.map((item, index) => {
@@ -353,6 +347,12 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         setFormData(updatedFormData)
     }
 
+    const disableProjectEndDate = (current, item) => {
+        const startDate = dayjs(item.startDate, dateFormat);
+        // Disable dates before the start date and in the same month as the start date
+        return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+    }
+
     const handleProjectHighlightsChange = (val, i) => {
         let highlights = val.split("\n")
         const updatedFormData = {
@@ -364,6 +364,18 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                     }
                 }
                 return item
+            })
+        }
+        setFormData(updatedFormData)
+    }
+
+    const handleProjectCheckChange = (i) => {
+        const updatedFormData = {
+            ...formData, projects: formData.projects.map((pro, proIndex) => {
+                if (proIndex === i) {
+                    return { ...pro, present: !pro.present, endDate: !pro.present ? "present" : "" }
+                }
+                return pro
             })
         }
         setFormData(updatedFormData)
@@ -399,9 +411,10 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                 return response.data;
             }
         } catch (error) {
-            console.log(error)
             if (error.response.status === 400 && (error.response.data.error === 'Insufficient JobCV tokens' || error.response.data.error === "Subscription is inactive or expired" || error.response.data.error === "Insufficient optimizer tokens")) {
                 router.push('/pricing')
+            } else {
+                toast.error("Unable to generate JobCV , Please try again")
             }
         }
     };
@@ -845,7 +858,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
 
                                                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
-                                                                <div className="flex flex-col w-full  space-y-2 justify-around  pr-2 lg:py-0 py-5">
+                                                                <div className="flex flex-col w-full  space-y-2   pr-2 lg:py-0 py-5">
                                                                     <Label for="start_date" className="block">
                                                                         Start Date
                                                                     </Label>
@@ -858,7 +871,8 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                                     index
                                                                                 )
                                                                             }
-                                                                            className="w-full"
+                                                                            className="w-full h-10"
+                                                                            maxDate={dayjs()}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -867,13 +881,27 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                         End Date
                                                                     </Label>
                                                                     <div className="w-full">
-                                                                        <DatePicker
-                                                                            picker="month"
-                                                                            onChange={(e) =>
-                                                                                handleProjectEndDateChange(e, index)
-                                                                            }
-                                                                            className="w-full"
-                                                                        />
+                                                                        {
+                                                                            item?.present ?
+                                                                                <div className=' h-10 rounded-md flex items-center pl-2'>
+                                                                                    <p className='text-xl text-gray-600'>Present</p>
+                                                                                </div> :
+                                                                                <DatePicker
+                                                                                    picker="month"
+                                                                                    onChange={(e) =>
+                                                                                        handleProjectEndDateChange(e, index)
+                                                                                    }
+                                                                                    disabled={!item?.startDate}
+                                                                                    className="w-full h-10"
+                                                                                    maxDate={dayjs()}
+                                                                                    disabledDate={(e) => disableProjectEndDate(e, item)}
+                                                                                />
+                                                                        }
+                                                                    </div>
+                                                                    <div className='flex items-center '>
+                                                                        <Checkbox className='mr-2 font-thin'
+                                                                            checked={item?.present}
+                                                                            onCheckedChange={() => handleProjectCheckChange(index)} /><p className=' font-mono italic'>present</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
