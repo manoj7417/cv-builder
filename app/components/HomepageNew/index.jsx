@@ -79,7 +79,7 @@ export default function HomepageNew() {
     "Build your CV",
     "Find career path",
     "Identify skill gaps",
-    "Get career counselling",
+    "Get career coach",
     "Take personality test",
   ]; // Add more words as needed
   const images = [
@@ -138,7 +138,7 @@ export default function HomepageNew() {
   return (
     <>
       <section className='flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-10 bg-gradient-to-b from-white to-[#5dcafd33] relative'>
-        <div className='container lg:pt-0 pt-20'>
+        <div className='container lg:pt-32 pt-20'>
           <div className='flex flex-col justify-center items-center'>
             <Image
               src={"/arrowright.png"}
@@ -168,6 +168,7 @@ export default function HomepageNew() {
                       height={500}
                       alt={words[index]}
                       className='ml-4 min-h-[400px] min-w-[400px] md:min-h-[400px] md:min-w-[400px]'
+                      priority
                     />
                   </span>
                 </span>
