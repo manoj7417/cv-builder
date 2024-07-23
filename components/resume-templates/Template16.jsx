@@ -46,7 +46,7 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                         {item?.degree}
                       </h3>
-                      <h4 style={{ fontSize: fontStyle.paraFont }}>
+                      <h4 style={{ fontSize: fontStyle.paraFont }} className="font-medium">
                         {item?.institute}
                       </h4>
                       <div
@@ -92,7 +92,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                     {item?.jobtitle}
                   </h3>
-                  <h4 style={{ fontSize: fontStyle.paraFont }}>
+                  <h4 style={{ fontSize: fontStyle.paraFont }} className="font-medium">
                     {item?.employer}
                   </h4>
                   {item?.startDate && (
@@ -112,12 +112,12 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     className={`py-2 ${fontStyle.paraFont} break-words`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
-                  <div className="px-3">
+                  <div className="px-3 py-2">
                     {item?.highlights?.length > 0 && (
-                      <ul className="list-disc">
+                      <ul className="list-disc pl-2">
                         {item?.highlights?.map((item, key) => {
                           return (
-                            <li key={key} className=" break-words text-15px">
+                            <li key={key} className="py-2 break-words text-15px">
                               {item}
                             </li>
                           );
@@ -165,7 +165,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -230,7 +230,7 @@ const Skills = ({
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                    <div className="text-start mb-1">
                       <span>{item?.name}</span>
                     </div>
                     <div
@@ -541,7 +541,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                        <h3 className={`${fontStyle.subHeadingFont}`}>
                           {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
@@ -551,13 +551,11 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                       >
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className="font-bold"
                         >
                           {item?.email}
                         </h4>
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className="font-bold"
                         >
                           {item?.phone}
                         </h4>

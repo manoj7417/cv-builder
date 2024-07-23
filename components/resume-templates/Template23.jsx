@@ -37,7 +37,10 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
-                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-medium"
+                        >
                           {item?.institute}
                         </h4>
                       </div>
@@ -104,7 +107,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
@@ -129,6 +132,19 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3 py-2">
+                  {item?.highlights?.length > 0 && (
+                    <ul className="list-disc pl-2">
+                      {item?.highlights?.map((item, key) => {
+                        return (
+                          <li key={key} className="py-2 break-words text-15px">
+                            {item}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -226,7 +242,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -261,7 +277,6 @@ const Skills = ({
   secondaryBackground,
 }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
-
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {
@@ -678,9 +693,12 @@ const Template23 = () => {
             className="w-full absolute top-30 transform translate-y-10"
             style={{ backgroundColor: metadata?.theme?.background }}
           >
-            <div className="text-center py-6 pl-56">
-              <h1 className="text-6xl italic font-semibold">{basics?.name}</h1>
-              <p className="text-2xl pt-2 font-semibold">{basics?.jobtitle}</p>
+            <div
+              className="text-center py-6 pl-56"
+              style={{ color: metadata?.theme?.primary }}
+            >
+              <h1 className="text-6xl italic font-bold">{basics?.name}</h1>
+              <p className="text-xl pt-2 font-semibold">{basics?.jobtitle}</p>
             </div>
           </div>
           <div className="px-4 py-44 relative z-20">

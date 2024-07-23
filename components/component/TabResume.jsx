@@ -45,7 +45,7 @@ export default function TabResume() {
       id: 2,
       name: "Data Scientist",
       icon: <FaDatabase className='text-[#FF6F61]' />,
-      src: "/Template19-1.png",
+      src: "/Template19-(new).png",
     },
     {
       id: 3,

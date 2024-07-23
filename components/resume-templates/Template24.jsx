@@ -36,7 +36,10 @@ const Education = ({ fontStyle, headingColor }) => {
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
-                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-medium"
+                        >
                           {item?.institute}
                         </h4>
                       </div>
@@ -121,7 +124,7 @@ const Awards = ({ fontStyle, headingColor }) => {
         <>
           <div className="education_header">
             <h2
-              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
+              className={`font-semibold font-serif text-[#64665e] ${fontStyle.subMianHeadingFont}`}
             >
               {data?.name}
             </h2>
@@ -179,7 +182,7 @@ const References = ({ fontStyle, headingColor, colorText }) => {
     (state) => state?.resume.data.sections?.reference
   );
   return (
-    <div className="references_section w-full">
+    <div className="references_section w-full mt-5">
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div className="references_header">
@@ -279,7 +282,7 @@ const Certificates = ({ fontStyle }) => {
   return (
     <div>
       <h2
-        className={`text-3xl font-semibold p-2 mb-4 font-serif ${fontStyle.headingFont}`}
+        className={`text-3xl font-semibold p-2 mb-4 font-serif text-[#64665e] ${fontStyle.headingFont}`}
       >
         {data?.name}
       </h2>
@@ -348,7 +351,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
@@ -373,6 +376,19 @@ const Experience = ({ fontStyle, headingColor }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3 py-2">
+                  {item?.highlights?.length > 0 && (
+                    <ul className="list-disc pl-2">
+                      {item?.highlights?.map((item, key) => {
+                        return (
+                          <li key={key} className="py-2 break-words text-15px">
+                            {item}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -411,7 +427,7 @@ const Projects = ({ fontStyle, headingColor }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -439,7 +455,12 @@ const Projects = ({ fontStyle, headingColor }) => {
   );
 };
 
-const Skills = ({ fontStyle, headingColor, colorText }) => {
+const Skills = ({
+  fontStyle,
+  headingColor,
+  colorText,
+  secondaryBackground,
+}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
   // Define the mapping of skill levels to percentages
   const levelMapping = {
@@ -485,8 +506,11 @@ const Skills = ({ fontStyle, headingColor, colorText }) => {
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-gray-600 h-2.5"
-                        style={{ width: `${level}%` }}
+                        className="h-2.5"
+                        style={{
+                          width: `${level}%`,
+                          backgroundColor: secondaryBackground,
+                        }}
                       ></div>
                     </div>
                   </li>
@@ -500,7 +524,12 @@ const Skills = ({ fontStyle, headingColor, colorText }) => {
   );
 };
 
-const Languages = ({ fontStyle, headingColor, colorText }) => {
+const Languages = ({
+  fontStyle,
+  headingColor,
+  colorText,
+  secondaryBackground,
+}) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.language);
 
   // Define the mapping of skill levels to percentages
@@ -542,9 +571,10 @@ const Languages = ({ fontStyle, headingColor, colorText }) => {
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
                       <div
-                        className="bg-gray-600 h-2.5"
+                        className="h-2.5"
                         style={{
                           width: `${level}%`,
+                          backgroundColor: secondaryBackground,
                         }}
                       ></div>
                     </div>
@@ -681,7 +711,11 @@ const Template24 = () => {
                 backgroundColor: metadata?.theme?.primary,
               }}
             >
-              <Skills fontStyle={fontStyle} colorText={metadata?.theme?.text} />
+              <Skills
+                fontStyle={fontStyle}
+                colorText={metadata?.theme?.text}
+                secondaryBackground={metadata?.theme?.background}
+              />
               <Hobbies
                 fontStyle={fontStyle}
                 colorText={metadata?.theme?.text}
@@ -689,6 +723,7 @@ const Template24 = () => {
               <Languages
                 fontStyle={fontStyle}
                 colorText={metadata?.theme?.text}
+                secondaryBackground={metadata?.theme?.background}
               />
               <References
                 fontStyle={fontStyle}

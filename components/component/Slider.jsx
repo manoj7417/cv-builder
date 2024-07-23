@@ -35,8 +35,6 @@ import { toast } from "react-toastify";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
-
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -103,8 +101,8 @@ const templatesData = [
   },
   {
     name: "Template11",
-    src: "/Template11-1.png",
-    alt: "Template11-1.png",
+    src: "/Template11-(new).png",
+    alt: "Template11-(new).png",
     type: templateType.dummy,
   },
   {
@@ -151,8 +149,8 @@ const templatesData = [
   },
   {
     name: "Template19",
-    src: "/Template19-1.png",
-    alt: "Template19-1.png",
+    src: "/Template19-(new).png",
+    alt: "Template19-(new).png",
     type: templateType.free,
   },
   {
@@ -256,9 +254,8 @@ export default function Slider() {
         <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
           <div className="mt-10 max-w-7xl mx-auto h-[500px] cv_slider">
             <Swiper
-              // spaceBetween={30}
               centeredSlides={false}
-              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              autoplay={{ delay: 7000, disableOnInteraction: false }}
               pagination={{ clickable: true, dynamicBullets: true }}
               navigation={false}
               loop={true}

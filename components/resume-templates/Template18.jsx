@@ -94,16 +94,16 @@ const Experience = ({ fontStyle, colorStyle }) => {
                   />
                 </div>
                 <div className="content pl-8 break-all">
-                  <div className="experience_conetnt flex justify-between w-full">
+                  <div className="experience_conetnt flex justify-between w-full gap-5 items-baseline">
                     <div className="experience_title">
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                         {item?.jobtitle}
                       </h3>
-                      <h4 style={{ fontSize: fontStyle.paraFont }}>
+                      <h4 style={{ fontSize: fontStyle.paraFont }} className="font-medium">
                         {item?.employer}
                       </h4>
                     </div>
-                    <div className="experience_year">
+                    <div className="experience_year whitespace-nowrap">
                       <p
                         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                       >
@@ -159,7 +159,7 @@ const Projects = ({ fontStyle, colorStyle }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 my-3" key={index}>
-                <div className="post flex  justify-between my-2">
+                <div className="post flex  justify-between my-2 gap-5 items-baseline">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -169,12 +169,12 @@ const Projects = ({ fontStyle, colorStyle }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className="year whitespace-nowrap">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -229,11 +229,11 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                    <div className="text-start mb-1">
                       <span>{item?.name}</span>
                     </div>
                     <div
-                      className="w-1/2 text-end h-2.5"
+                      className="w-[60%] text-end h-2.5"
                       style={{
                         backgroundColor: colorText,
                       }}
@@ -464,18 +464,18 @@ const Certificates = ({ fontStyle, colorStyle }) => {
             <ul className="">
               {data?.items?.map((item, index) => {
                 return (
-                  <div className="certificate_section px-2" key={index}>
+                  <div className="certificate_section px-2 py-2" key={index}>
                     {isValidUrl(item?.url) ? (
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center inline-flex"
+                        className="break-words text-16px font-bold items-center inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl">{item.name}</p>
+                      <p className="break-words text-15px">{item.name}</p>
                     )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}
@@ -648,7 +648,7 @@ const Template18 = () => {
             marginTop: "-17rem",
           }}
         >
-          <div className="resume_image w-full">
+          <div className="resume_image w-full h-auto">
             {basics?.picture?.url && (
               <img
                 src={basics?.picture?.url}

@@ -42,7 +42,10 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
-                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-medium"
+                        >
                           {item?.institute}
                         </h4>
                       </div>
@@ -111,7 +114,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
@@ -136,6 +139,19 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3 py-2">
+                  {item?.highlights?.length > 0 && (
+                    <ul className="list-disc pl-2">
+                      {item?.highlights?.map((item, key) => {
+                        return (
+                          <li key={key} className="py-2 break-words text-15px">
+                            {item}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -176,7 +192,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -207,7 +223,6 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
 const Skills = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.skills);
 
-
   // Define the mapping of skill levels to percentages
   const levelMapping = {
     beginner: 25,
@@ -235,7 +250,7 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`flex items-center sfont-bold ${fontStyle.skillsFont} my-1 py-1 px-5`}
+                    className={`flex items-center gap-2 ${fontStyle.skillsFont} my-1 py-1 px-5`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1">
@@ -340,7 +355,7 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
             <ul className="pl-5 list-disc">
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-semibold">
+                  <li key={index} className="text-15px py-2">
                     {item}
                   </li>
                 );

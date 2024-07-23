@@ -167,7 +167,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
           {data?.items?.map((item, index) => {
             return (
               <div className="experience_1 w-full py-2" key={index}>
-                <div className="post flex  justify-between my-2">
+                <div className="post flex gap-5 items-baseline justify-between my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -177,12 +177,12 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold text-end">
+                  <div className="year font-bold text-end whitespace-nowrap">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -202,6 +202,19 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
+                <div className="px-3 py-2">
+                  {item?.highlights?.length > 0 && (
+                    <ul className="list-disc pl-2">
+                      {item?.highlights?.map((item, key) => {
+                        return (
+                          <li key={key} className="py-2 break-words text-15px">
+                            {item}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -236,7 +249,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
           {data?.items.map((item, index) => {
             return (
               <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between items-center my-2">
+                <div className="post flex gap-5 justify-between items-baseline my-2">
                   <div className="post_title">
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
@@ -246,12 +259,12 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className="year whitespace-nowrap">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -301,10 +314,10 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-3`}
+                    className={`${fontStyle.skillsFont} my-1 py-3`}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                    <div className="text-start mb-1">
                       <span>{item?.name}</span>
                     </div>
                     <div className="w-1/2 text-end bg-white h-2.5">
@@ -356,7 +369,7 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
-                    className={`font-bold ${fontStyle.skillsFont} my-1 py-3`}
+                    className={`${fontStyle.skillsFont} my-1 py-3`}
                     key={i}
                   >
                     <div className="text-start w-1/2 mb-1 whitespace-nowrap">
@@ -402,7 +415,7 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
             <ul style={{ color: colorText }}>
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px pl-1 py-3 font-semibold">
+                  <li key={index} className="text-15px pl-1 py-3">
                     {item}
                   </li>
                 );
@@ -503,7 +516,7 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                        <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
                           <span className="mx-1">
                             {item.jobTitle && item.organization && ","}
@@ -514,13 +527,11 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                       <div className="references w-full flex justify-between">
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className="font-bold"
                         >
                           {item?.email}
                         </h4>
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className="font-bold"
                         >
                           {item?.phone}
                         </h4>

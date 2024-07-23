@@ -67,43 +67,6 @@ const Experience = ({ fontStyle, data }) => {
           </div>
           {data?.items?.map((item, index) => {
             return (
-              // <div className="experience_1 my-5" key={index}>
-              //   <div className="post flex  justify-between items-center my-2">
-              //     <div className="post_title">
-              //       <h3
-              //         style={{ fontSize: fontStyle.subHeadingFont }}
-              //         className="font-bold"
-              //       >
-              //         {item?.jobtitle}
-              //       </h3>
-              //       <h4
-              //         style={{ fontSize: fontStyle.paraFont }}
-              //         className="font-semibold"
-              //       >
-              //         {item?.employer}
-              //       </h4>
-              //     </div>
-              //     <div className="year font-bold">
-              //       <p
-              //         className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-              //       >
-              //         <span>{item?.startDate}</span>
-              //         <span>{item?.startDate && item?.endDate && " - "}</span>
-              //         <span>{item?.endDate}</span>
-              //       </p>
-              //       {item?.city && (
-              //         <p className="text-13px flex font-normal items-center justify-end text-end">
-              //           <IoLocationOutline className="mr-1" />
-              //           {item?.city}
-              //         </p>
-              //       )}
-              //     </div>
-              //   </div>
-              //   <div
-              //     className={`${fontStyle.paraFont} break-words`}
-              //     dangerouslySetInnerHTML={{ __html: item?.description }}
-              //   ></div>
-              // </div>
               <div className="experience_1 flex my-5" key={index}>
                 <div className="year w-[150px] pr-8 relative text-[#0175b2]">
                   {item?.startDate && (
@@ -117,7 +80,7 @@ const Experience = ({ fontStyle, data }) => {
                   <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" />
                 </div>
                 <div className="content pl-8 flex flex-col break-all">
-                  <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
+                  <h3 className={`${fontStyle.subHeadingFont} font-medium`}>
                     {item?.jobtitle}
                   </h3>
                   <h4 style={{ fontSize: fontStyle.paraFont }}>
