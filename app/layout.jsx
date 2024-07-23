@@ -22,10 +22,10 @@ const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "70
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" >
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWEWJM4JYM"></script>
-        <script>
+        <script
           dangerouslySetInnerHTML={{
             __html: `
                window.dataLayer = window.dataLayer || [];
@@ -33,12 +33,11 @@ export default function RootLayout({ children }) {
                gtag('js', new Date());
                gtag('config', 'G-NWEWJM4JYM');
             `,
-          }}
-        </script>
+          }} />
         <meta name="google-site-verification" content="3rLr-hJyNEY32xTuNgCpZ615tYr0yriig4N3sfvNi_E" />
 
       </head>
-      <body >
+      <body className={inter.className}>
         <ToastContainer />
         {children}
       </body>
