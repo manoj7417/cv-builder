@@ -275,20 +275,20 @@ export default function ResumeForm() {
     return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
   }
 
- const  handleExperienceCheckChange = (e, i)=>{
-  const updatedExperienceItems = data.sections.experience.items.map(
-    (item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          endDate: e ? "present" : "",
-        };
+  const handleExperienceCheckChange = (e, i) => {
+    const updatedExperienceItems = data.sections.experience.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            endDate: e ? "present" : "",
+          };
+        }
+        return item;
       }
-      return item;
-    }
-  );
-  setResumeData("sections.experience.items", updatedExperienceItems);
- }
+    );
+    setResumeData("sections.experience.items", updatedExperienceItems);
+  }
 
   const handleAddNewEducation = () => {
     const newEducationItems = [
@@ -455,6 +455,20 @@ export default function ResumeForm() {
   const handleDisableProjectEndDate = (current, item) => {
     const startDate = dayjs(item.startDate, dateFormat);
     return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
+  }
+
+  const handleProjectCheckChange = (e, i) => {
+    const updatedProjectItems = data.sections.projects.items.map(
+      (item, index) => {
+        if (index === i) {
+          return {
+            ...item,
+            endDate: e ? "present" : "",
+          };
+        }
+        return item;
+      })
+    setResumeData("sections.projects.items", updatedProjectItems);
   }
 
   const handleTemplateThemeChange = (color) => {
@@ -1276,7 +1290,7 @@ export default function ResumeForm() {
                                   <div className='flex items-center '>
                                     <Checkbox className='mr-2 font-thin'
                                       checked={item.endDate === 'present'}
-                                      onCheckedChange={(e) => handleEducationCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>present</p>
+                                      onCheckedChange={(e) => handleEducationCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>Present</p>
                                   </div>
                                 </div>
                               </div>
@@ -1487,7 +1501,7 @@ export default function ResumeForm() {
                                   <div className='flex items-center '>
                                     <Checkbox className='mr-2 font-thin'
                                       checked={item.endDate === 'present'}
-                                      onCheckedChange={(e) => handleExperienceCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>present</p>
+                                      onCheckedChange={(e) => handleExperienceCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>Present</p>
                                   </div>
                                 </div>
                               </div>
@@ -1661,7 +1675,7 @@ export default function ResumeForm() {
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                               <div className="flex flex-col md:flex-row ">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  pr-2">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2 pr-2">
                                   <Label htmlFor="start_date" className="block">
                                     Start Date
                                   </Label>
@@ -1676,21 +1690,33 @@ export default function ResumeForm() {
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 justify-around  lg:pl-2 pl-0 lg:py-0 py-5">
+                                <div className="flex flex-col w-full md:w-1/2 space-y-2  lg:pl-2 pl-0 lg:py-0 py-5">
                                   <Label for="end_date" className="block">
                                     End Date
                                   </Label>
                                   <div className="w-full">
-                                    <DatePicker
-                                      picker="month"
-                                      onChange={(e) =>
-                                        handleProjectEndDateChange(e, index)
-                                      }
-                                      disabled={!item.startDate}
-                                      disabledDate={(e) => handleDisableProjectEndDate(e, item)}
-                                      className="w-full h-10"
-                                      maxDate={dayjs()}
-                                    />
+                                    {
+                                      item.endDate === 'present' ?
+                                        <div className=' h-10 rounded-md flex items-center pl-2'>
+                                          <p className='text-xl text-gray-500'>Present</p>
+                                        </div>
+                                        :
+                                        <DatePicker
+                                          picker="month"
+                                          onChange={(e) =>
+                                            handleProjectEndDateChange(e, index)
+                                          }
+                                          disabled={!item.startDate}
+                                          disabledDate={(e) => handleDisableProjectEndDate(e, item)}
+                                          className="w-full h-10"
+                                          maxDate={dayjs()}
+                                        />
+                                    }
+                                  </div>
+                                  <div className='flex items-center '>
+                                    <Checkbox className='mr-2 font-thin'
+                                      checked={item.endDate === 'present'}
+                                      onCheckedChange={(e) => handleProjectCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>Present</p>
                                   </div>
                                 </div>
                               </div>
