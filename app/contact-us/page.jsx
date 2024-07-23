@@ -1,23 +1,69 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { ImSpinner3 } from "react-icons/im";
+import { toast } from "react-toastify";
+import axios from "axios";
 const locations = [
- 
+
   {
     title: "Head office",
     timings: "Mon-Sat 9am to 5pm.",
     address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
-    contactNo:"0203 476 7492"
+    contactNo: "0203 476 7492"
   }
 ];
 
 export default function ContactPageTwo() {
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [messageData, setMessageData] = useState({
+    firstName: '',
+    lastName: "",
+    email: '',
+    phone: '',
+    message: ""
+  })
+
+  const checkFields = () => {
+    for (const [key, value] of Object.entries(messageData)) {
+      if (!value.trim()) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const handleSendMessage = async () => {
+    setIsLoading(true)
+    if (checkFields()) {
+      setIsLoading(false)
+      return toast.error("Please fill all fields")
+    }
+
+    try {
+      const response = await axios.post('/api/sendMessage', { message: messageData })
+      if (response.status === 200) {
+        toast.success("Message sent successfully")
+        setMessageData({ firstName: '', lastName: "", email: '', phone: '', message: "" })
+
+      }
+    } catch (error) {
+      toast.error("Something went wrong")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleMessageDataChange = (e) => {
+    setMessageData({ ...messageData, [e.target.name]: e.target.value })
+  }
   return (
     <div>
       {/* <Header /> */}
@@ -30,7 +76,7 @@ export default function ContactPageTwo() {
                   Get in touch
                 </p>
                 <p className="mt-4 text-lg text-gray-600">
-                Our team would love to hear from you!
+                  Our team would love to hear from you!
                 </p>
                 <form action="" className="mt-8 space-y-4">
                   <div className="grid w-full gap-y-4 md:gap-x-4 lg:grid-cols-2">
@@ -45,6 +91,9 @@ export default function ContactPageTwo() {
                         type="text"
                         id="first_name"
                         placeholder="First Name"
+                        value={messageData.firstName}
+                        name="firstName"
+                        onChange={handleMessageDataChange}
                       />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
@@ -58,6 +107,9 @@ export default function ContactPageTwo() {
                         type="text"
                         id="last_name"
                         placeholder="Last Name"
+                        value={messageData.lastName}
+                        name="lastName"
+                        onChange={handleMessageDataChange}
                       />
                     </div>
                   </div>
@@ -72,6 +124,9 @@ export default function ContactPageTwo() {
                       type="text"
                       id="email"
                       placeholder="Email"
+                      name="email"
+                      value={messageData.email}
+                      onChange={handleMessageDataChange}
                     />
                   </div>
                   <div className="grid w-full  items-center gap-1.5">
@@ -85,6 +140,9 @@ export default function ContactPageTwo() {
                       type="tel"
                       id="phone_number"
                       placeholder="Phone number"
+                      name="phone"
+                      value={messageData.phone}
+                      onChange={handleMessageDataChange}
                     />
                   </div>
                   <div className="grid w-full  items-center gap-1.5">
@@ -99,13 +157,22 @@ export default function ContactPageTwo() {
                       id="message"
                       placeholder="Leave us a message"
                       cols={3}
+                      name="message"
+                      value={messageData.message}
+                      onChange={handleMessageDataChange}
                     />
                   </div>
                   <Button
                     type="button"
-                    className="w-full rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    className="w-full rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black items-center flex"
+                    onClick={handleSendMessage}
+                    disabled={isLoading}
                   >
-                    Send Message
+                    {
+                      isLoading ? <>
+                        Sending <ImSpinner3 className="animate-spin w-4 h-4 ml-1" />
+                      </> : <>Send Message</>
+                    }
                   </Button>
                 </form>
               </div>
