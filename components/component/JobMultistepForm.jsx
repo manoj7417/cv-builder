@@ -906,7 +906,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                 </div>
                                                             </div>
                                                             <div className='m-2'>
-                                                                <Label>Description</Label>
+                                                                <Label className='mb-1'>Description</Label>
                                                                 <Textarea value={item.highlights.join("\n")} onChange={(e) => handleProjectHighlightsChange(e.target.value, index)} />
                                                             </div>
                                                         </div>
