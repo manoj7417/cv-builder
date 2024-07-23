@@ -595,7 +595,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                                     {
                                                                                         item?.present ?
                                                                                             <div className=' h-10 rounded-md flex items-center pl-2'>
-                                                                                                <p className='text-xl text-gray-600'>Present</p>
+                                                                                                <p className='text-xl text-gray-500'>Present</p>
                                                                                             </div> :
                                                                                             <DatePicker
                                                                                                 picker="month"
@@ -612,7 +612,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                                 <div className='flex items-center '>
                                                                                     <Checkbox className='mr-2 font-thin'
                                                                                         checked={item?.present}
-                                                                                        onCheckedChange={() => handleExperienceCheckChange(index)} /><p className=' font-mono italic'>present</p>
+                                                                                        onCheckedChange={() => handleExperienceCheckChange(index)} /><p className=' font-mono italic test-gray-500'>present</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -758,7 +758,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                         {
                                                                             item?.present ?
                                                                                 <div className=' h-10 rounded-md flex items-center pl-2'>
-                                                                                    <p className='text-xl text-gray-600'>Present</p>
+                                                                                    <p className='text-xl text-gray-500'>Present</p>
                                                                                 </div> :
                                                                                 <DatePicker
                                                                                     picker="month"
@@ -775,7 +775,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                     <div className='flex items-center '>
                                                                         <Checkbox className='mr-2 font-thin'
                                                                             checked={item?.present}
-                                                                            onCheckedChange={() => handleEducationCheckChange(index)} /><p className=' font-mono italic'>present</p>
+                                                                            onCheckedChange={() => handleEducationCheckChange(index)} /><p className=' font-mono italic text-gray-500'>present</p>
                                                                     </div>
                                                                 </div>
 
@@ -906,7 +906,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                 </div>
                                                             </div>
                                                             <div className='m-2'>
-                                                                <Label>Description</Label>
+                                                                <Label className='mb-1'>Description</Label>
                                                                 <Textarea value={item.highlights.join("\n")} onChange={(e) => handleProjectHighlightsChange(e.target.value, index)} />
                                                             </div>
                                                         </div>

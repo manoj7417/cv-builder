@@ -261,10 +261,11 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {
-    beginner: 25,
-    intermediate: 50,
-    advanced: 75,
-    expert: 100,
+    basic: 20,
+    conversational: 40,
+    proficient: 60,
+    fluent: 80,
+    native: 100
   };
 
   return (
@@ -341,7 +342,55 @@ const Profile = ({ fontStyle, colorStyle }) => {
   );
 };
 
-const Hobbies = ({ fontStyle ,colorText,colorBackground}) => {
+// const Languages = ({ fontStyle, colorStyle }) => {
+//   const data = useResumeStore((state) => state.resume.data.sections.language);
+//   const metadata = useResumeStore((state) => state.resume.data.metadata);
+//   return (
+//     <div>
+//       {data?.visible && data?.items?.length > 0 && (
+//         <div
+//           className="skills_section py-3"
+//           style={{
+//             borderColor: metadata.theme.text,
+//           }}
+//         >
+//           <h2
+//             className={`${fontStyle.headingFont} font-semibold uppercase`}
+//             style={{
+//               color: colorStyle,
+//             }}
+//           >
+//             {data?.name}
+//           </h2>
+//           <div className="text-gray-600 my-1">
+//             <ul
+//               className="list-disc pl-5"
+//               style={{
+//                 color: metadata?.theme.text,
+//               }}
+//             >
+//               {data.items.map((item, i) => {
+//                 return (
+//                   <li
+//                     className={`font-bold ${fontStyle.skillsFont} py-1`}
+//                     key={i}
+//                     style={{
+//                       listStyle: metadata.theme.text,
+//                     }}
+//                   >
+//                     {item?.name}
+//                   </li>
+//                 );
+//               })}
+//             </ul>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
   const data = useResumeStore(
     (state) => state?.resume?.data?.sections?.hobbies
   );
@@ -360,7 +409,7 @@ const Hobbies = ({ fontStyle ,colorText,colorBackground}) => {
                     key={index}
                     className="text-15px py-2 font-semibold"
                     style={{
-                      color:colorText
+                      color: colorText
                     }}
                   >
                     {item}

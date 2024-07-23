@@ -304,10 +304,11 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {
-    beginner: 25,
-    intermediate: 50,
-    advanced: 75,
-    expert: 100,
+    basic: 20,
+    conversational: 40,
+    proficient: 60,
+    fluent: 80,
+    native: 100
   };
 
   return (
