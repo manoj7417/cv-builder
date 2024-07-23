@@ -51,6 +51,7 @@ import {
 } from "@/components/ui/context-menu";
 import dayjs from "dayjs";
 import { Checkbox } from "@/components/ui/checkbox";
+import LanguageSelect from "@/components/component/LanguageSelect";
 
 const ImageTemplates = [
   "Template1",
@@ -2541,7 +2542,7 @@ export default function ResumeForm() {
                               >
                                 Level
                               </Label>
-                              <SkillsSelect
+                              <LanguageSelect
                                 className="w-full mt-2"
                                 onSelectChange={handlelanguageLevelChange}
                                 index={index}
