@@ -94,12 +94,12 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className="year">
                     <p
                       className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                     >
@@ -119,12 +119,12 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
-                <div className="px-3">
+                <div className="px-3 py-2">
                   {item?.highlights?.length > 0 && (
-                    <ul className="list-disc">
+                    <ul className="list-disc pl-2">
                       {item?.highlights?.map((item, key) => {
                         return (
-                          <li key={key} className=" break-words text-15px">
+                          <li key={key} className=" break-words py-2 text-15px">
                             {item}
                           </li>
                         );
@@ -176,7 +176,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -415,7 +415,7 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
             return (
               <div
                 key={index}
-                className="break-words text-13px font-bold text-gray-600 py-5"
+                className="break-words text-13px  text-gray-600 py-5"
               >
                 <>
                   <div className="mt-2 flex justify-between">
@@ -477,7 +477,7 @@ const Reference = ({ fontStyle, colorBackground, colorText }) => {
             return (
               <div
                 key={index}
-                className="break-words text-13px font-bold text-gray-600 my-3"
+                className="break-words text-13px text-gray-600 my-3"
               >
                 <>
                   <div className="mt-2">
@@ -491,7 +491,7 @@ const Reference = ({ fontStyle, colorBackground, colorText }) => {
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-15px font-bold text-gray-600">
+                      <p className="break-words text-15px font-medium text-gray-600">
                         {item.name}
                       </p>
                     )}
@@ -500,13 +500,13 @@ const Reference = ({ fontStyle, colorBackground, colorText }) => {
                 <div className="w-full ">
                   <p className="text-16px">
                     <span>{item.jobTitle}</span>
-                    <span className="mx-1">
+                    <span className="mx-1 font-medium">
                       {item.jobTitle && item.organization && ","}
                     </span>
                     <span>{item?.organization}</span>
                   </p>
-                  <p>{item.email}</p>
-                  <p>{item.phone}</p>
+                  <p className="font-medium">{item.email}</p>
+                  <p className="font-medium">{item.phone}</p>
                 </div>
               </div>
             );
