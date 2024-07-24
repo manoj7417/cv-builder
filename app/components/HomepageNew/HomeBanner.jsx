@@ -34,7 +34,7 @@ const HomeBanner = () => {
   }, []);
 
   return (
-    <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative">
+    <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative z-10">
       <div className="banner_image mx-auto">
         <Image src={"/bg_circular.png"} alt="bg" width={1000} height={1000} className="w-full h-full object-cover"/>
       </div>
@@ -82,6 +82,7 @@ const HomeBanner = () => {
           </div>
         </div>
       </div>
+      {/* banner Content  */}
       <div className="banner_content absolute text-center space-y-4">
         <h1 className="text-6xl font-semibold text-white">
           Super Charge your{" "}

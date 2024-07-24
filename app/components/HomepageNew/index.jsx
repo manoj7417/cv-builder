@@ -138,29 +138,38 @@ export default function HomepageNew() {
 
   return (
     <>
-      <HomeBanner />
-      <section className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-white border-t-4 rounded-lg shadow-xl">
-        <div className="discover_image lg:flex align-middle overflow-hidden hidden">
-          <Image
-            src={"/home-creative-down.png"}
-            width={2000}
-            height={1500}
-            alt="discover"
-            loading="lazy"
-            style={{
-              marginLeft: "-150px",
-            }}
-          />
-        </div>
-        <div className="my-auto p-10">
-          <CourseSlider />
-        </div>
+      <section className="w-full h-screen z-10 sticky top-0 left-0 right-0">
+        <HomeBanner />
       </section>
-      <Slider />
-      <TabResume />
-      <WorkTogether />
-      <FAQSection />
-      <ServiceSection />
+      <section className="w-full g-full z-50 relative">
+        <div className="banner-bottom text-center -mt-20 z-50 p-10 border-t-2 rounded-t-[50px] relative bg-white">
+          <h2 className="text-5xl font-bold text-blue-950">
+            How Career Genies Hub helps you
+          </h2>
+        </div>
+        <div className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-white">
+          <div className="discover_image lg:flex align-middle overflow-hidden hidden">
+            <Image
+              src={"/home-creative-down.png"}
+              width={2000}
+              height={1500}
+              alt="discover"
+              loading="lazy"
+              style={{
+                marginLeft: "-150px",
+              }}
+            />
+          </div>
+          <div className="my-auto p-10">
+            <CourseSlider />
+          </div>
+        </div>
+        <Slider />
+        <TabResume />
+        <WorkTogether />
+        <FAQSection />
+        <ServiceSection />
+      </section>
     </>
   );
 }

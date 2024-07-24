@@ -123,7 +123,7 @@ export default function TabResume() {
 
   return (
     <>
-      <div className=''>
+      <div className='bg-gradient-to-b from-[#e4f5fc] to-[white]'>
         <div className='rounded-t-xl p-6'>
           <div className='tabs_heading'>
             <h2 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-[#0D3572] text-center'>
