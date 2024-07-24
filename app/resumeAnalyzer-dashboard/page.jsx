@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import Lottie from "lottie-react";
 import animation from "@/public/animations/NonAtsLoaderAnimation.json";
-import { GetTokens } from "../actions";
+import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import WorkTogether from "@/components/component/WorkTogether";
@@ -29,6 +29,7 @@ export default function DashboardIdea() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
   const userState = useUserStore((state) => state.userState);
+  const logoutUser = useUserStore(state => state.logoutUser)
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
@@ -72,14 +73,19 @@ export default function DashboardIdea() {
       if (response.status === "SUCCESS") {
         router.push(`/analyser/${response.analysisId}`);
       }
-      const value = JSON.parse(response[0].text.value);
     } catch (error) {
-      if (
+      if (error.response.status === 404 && error.response.data.error === "User not found") {
+        logoutUser()
+        RemoveTokens()
+        router.push('/login?redirect=resumeAnalyzer-dashboard')
+      } else if (
         error.response.status === 400 &&
         (error.response.data.error === "Insufficient tokens" ||
           error.response.data.error === "Subscription is inactive or expired")
       ) {
         router.push("/pricing");
+      } else {
+        toast.error("Unable to analyze resume, Please try again");
       }
     } finally {
       setIsAnalysing(false);
@@ -201,45 +207,3 @@ export default function DashboardIdea() {
   );
 }
 
-function LinkIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-    </svg>
-  );
-}
-
-function LocateIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="2" x2="5" y1="12" y2="12" />
-      <line x1="19" x2="22" y1="12" y2="12" />
-      <line x1="12" x2="12" y1="2" y2="5" />
-      <line x1="12" x2="12" y1="19" y2="22" />
-      <circle cx="12" cy="12" r="7" />
-    </svg>
-  );
-}

@@ -114,11 +114,11 @@ const Pricing = () => {
                       Analyzer free
                     </li>{" "}
                     <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      <FaTimesCircle className="text-red-500 mr-2" />
                       Free Psycometric Tests
                     </li>
                     <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      <FaTimesCircle className="text-red-500 mr-2" />
                       24 X 7 Support Service
                     </li>
                     <li className="flex items-center  text-sm text-gray-600">
@@ -143,7 +143,7 @@ const Pricing = () => {
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$48" : "$4"}
+                    {enabled ? "$39.99" : "$3.99"}
                     {/* {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
                         $42.12
@@ -200,7 +200,7 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$120" : "$10"}
+                    {enabled ? "$69.99" : "$6.99"}
                     {/* {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
                         $64.80
