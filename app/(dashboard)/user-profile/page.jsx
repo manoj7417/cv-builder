@@ -53,8 +53,10 @@ const ProfilePage = () => {
   const [passwordError, setPasswordError] = useState('')
   const [oldPasswordError, setOldPasswordError] = useState('')
   const router = useRouter();
-
+  const [sendingMail, setIsSendingMail] = useState(false)
+  const email = useRef(null)
   const fileUploadRef = useRef(null);
+  const [showEmailDialog, setShowEmailDialog] = useState(false)
 
   useEffect(() => {
     if (userState?.userdata) {
@@ -247,11 +249,24 @@ const ProfilePage = () => {
   }
 
   const handleForgotPassword = () => {
+    setShowDialog(false)
+    setShowEmailDialog(true)
+  }
 
+  const handleSendResetEmail = async() => {
+    const userEmail = email.current.value
+    setIsSendingMail(true);
     try {
-
+      const response = await axios.post('/api/resetpassword', { email: userEmail });
+      if (response.status === 200) {
+        email.current.value = null
+        toast.success('Reset password link sent to your email');
+      }
     } catch (error) {
-
+      toast.error(error.response?.data?.error || 'Error sending reset password email');
+    } finally {
+      setIsSendingMail(false);
+      setShowEmailDialog(false)
     }
   }
 
@@ -267,6 +282,21 @@ const ProfilePage = () => {
 
   return (
     <>
+      <Dialog open={showEmailDialog} >
+        <DialogContent className=" w-96" onClick={handleDialogClose} showCloseButton >
+          <div>
+            <h1>Reset Password</h1>
+            <Input placeholder="Enter your email address" className="mt-4" ref={email} />
+            <div className="w-full my-3 flex justify-end items-center">
+              <Button className=" disabled:bg-opacity-85" disabled={sendingMail} onClick={handleSendResetEmail}>{sendingMail ?
+                <>
+                  Sending<ImSpinner3 className="animate-spin ml-2" size={16} />
+                </>
+                : "Send"}</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       <section className="bg-gradient-to-r from-white to-[#dcecff] pt-28">
         <Dialog open={showDialog} >
           <DialogContent showCloseButton onClick={handleDialogClose} className="w-96">
