@@ -1,16 +1,46 @@
-'use client'
-import Image from "next/image";
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import "./header.css";
+import { IoNotificationsOutline } from "react-icons/io5";
 
-export default function ResumeHeader() {
-  const [isToggleOpen, setIsToggleOpen] = useState(false);
+const menuItems = [
+  {
+    name: "Overview",
+    href: "#",
+  },
+  {
+    name: "Solution",
+    href: "#",
+  },
+  {
+    name: "Plans",
+    href: "#",
+  },
+  {
+    name: "Referrals",
+    href: "#",
+  },
+];
+
+export function ResumeHeader() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const logoutUser = UserStore((state) => state.logoutUser)
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsToggleOpen(false);
+      setIsDropdownOpen(false);
     }
   };
 
@@ -22,85 +52,170 @@ export default function ResumeHeader() {
   }, []);
 
   return (
-    <>
-      {/*<!-- Header --> */}
-      <header className="sticky top-0 border-b-1 z-20 w-full border-b border-slate-200 bg-[#fafbfd]    border border-b-[#fafbfd] shadow-lg shadow-slate-700/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
-        <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-[80rem] 2xl:max-w-[82rem]">
-          <nav
-            aria-label="main navigation"
-            className="flex h-[4rem] p-5 items-center justify-between font-medium text-slate-700"
-            role="navigation"
-          >
-            {/*      <!-- Brand logo --> */}
-            <a href="/" className="flex items-center gap-2">
+    <section className="new_resume_latest">
+      <div className="relative w-full">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+          <div className="inline-flex items-center space-x-2">
+            <span>
               <Image
-                src={"/gch_logo.png"}
-                width={30}
-                height={30}
-                alt="newlogo"
-                className="w-50 h-auto object-contain"
+                src="/gch-white-logo.png"
+                width={100}
+                height={100}
+                alt="white_logo"
+                className="w-20 h-20 object-contain"
               />
-              <span className="text-black font-bold text-2xl">Genies Career Hub</span>
-            </a>
-            <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
-              {/* Avatar with Dropdown */}
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setIsToggleOpen(!isToggleOpen)}
-                  className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white focus:outline-none"
-                >
-                  <Image
-                    src="/avatar.jpg"
-                    alt="user name"
-                    title="user name"
-                    width={40}
-                    height={40}
-                    className="max-w-full rounded-full"
-                  />
-                  <span className="absolute bottom-0 right-0 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 p-1 text-sm text-white">
-                    <span className="sr-only"> 7 new emails </span>
-                  </span>
-                </button>
-                {/* Dropdown */}
-                {isToggleOpen && (
-                  <div
-                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu"
+            </span>
+          </div>
+          <div className="hidden lg:block">
+            <ul className="ml-12 inline-flex space-x-8">
+              {menuItems.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    className="inline-flex items-center text-sm text-white"
                   >
-                    <div className="py-1" role="none">
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex grow justify-end">
+            <div className="notification bg-white rounded-full p-2 relative">
+              <IoNotificationsOutline className="text-xl" />
+              <span className="absolute top-0 right-0 flex h-3 w-3 -mt-1 -mr-1">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-400" />
+              </span>
+            </div>
+          </div>
+          <div className="ml-2 hidden lg:block">
+            <div className="relative" ref={dropdownRef}>
+              <div
+                className="flex items-center bg-white rounded-full p-1 w-[180px] cursor-pointer"
+                onClick={toggleDropdown}
+              >
+                <span className="relative inline-block">
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src="/profile-avatar-img.png"
+                    alt="Dan_Abromov"
+                  />
+                </span>
+                <div className="mx-2">
+                  <div className="text-sm font-medium text-gray-900">
+                    Chloe Milagres
+                  </div>
+                  <div className="text-[10px] text-gray-500">Premium</div>
+                </div>
+              </div>
+
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                  <ul>
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                      Profile
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                      CV History
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                      Logout
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="ml-2 lg:hidden">
+            <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
+          </div>
+          {isMenuOpen && (
+            <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden">
+              <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                <div className="px-5 pb-6 pt-5">
+                  <div className="flex items-center justify-between">
+                    <div className="inline-flex items-center space-x-2">
+                      <span>
+                        <Image
+                          src="/genies-career-hub-logo.png"
+                          width={50}
+                          height={50}
+                          alt="white_logo"
+                          className="w-14 h-14 object-contain"
+                        />
+                      </span>
+                    </div>
+                    <div className="-mr-2">
+                      <button
+                        type="button"
+                        onClick={toggleMenu}
+                        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                       >
-                        Profile
-                      </a>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Settings
-                      </a>
-                      <div
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                        role="menuitem"
-                        onClick={logoutUser}
-                      >
-                        Logout
-                      </div>
+                        <span className="sr-only">Close menu</span>
+                        <X className="h-6 w-6" aria-hidden="true" />
+                      </button>
                     </div>
                   </div>
-                )}
+                  <div className="mt-6">
+                    <nav className="grid gap-y-4">
+                      {menuItems.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
+                        >
+                          <span className="text-base font-medium text-gray-900">
+                            {item.name}
+                          </span>
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
+                  <div className="mt-4 flex items-center space-x-2">
+                  <div className="relative" ref={dropdownRef}>
+              <div
+                className="flex items-center bg-white rounded-full p-1 w-[180px] cursor-pointer"
+                onClick={toggleDropdown}
+              >
+                <span className="relative inline-block">
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src="/profile-avatar-img.png"
+                    alt="Dan_Abromov"
+                  />
+                </span>
+                <div className="mx-2">
+                  <div className="text-sm font-medium text-gray-900">
+                    Chloe Milagres
+                  </div>
+                  <div className="text-[10px] text-gray-500">Premium</div>
+                </div>
               </div>
-              {/* End Avatar with Dropdown */}
+
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                  <ul>
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                      Profile
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                      CV History
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                      Logout
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
-          </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </header>
-      {/*<!-- End Navbar with Avatar--> */}
-    </>
+      </div>
+    </section>
   );
 }

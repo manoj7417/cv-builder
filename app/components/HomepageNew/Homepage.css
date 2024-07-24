@@ -226,3 +226,16 @@
     transition: all 200ms ease;
   }
 }
+
+
+
+/* New HomeBanner CSS Starts here  */
+
+
+.new_home_banner {
+  background: linear-gradient(74.18deg, #99A6D5 3.97%, #5B75FE 101.42%);
+}
+
+
+
+/* New HomeBanner CSS Ends here  */
