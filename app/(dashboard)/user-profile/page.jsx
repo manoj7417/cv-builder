@@ -19,14 +19,15 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { Card } from "../../../components/ui/card";
 import { useRouter } from "next/navigation";
-import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
-import { Flat, Heat, Nested } from "@alptugidin/react-circular-progress-bar";
+import { Flat } from "@alptugidin/react-circular-progress-bar";
 import { Dialog, DialogContent } from "../../../components/ui/dialog";
 import { GoKey } from "react-icons/go";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { ImSpinner3 } from "react-icons/im";
 import { FaChevronRight } from "react-icons/fa6";
+
+
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const { userState, updateUserData } = useUserStore((state) => ({
@@ -127,6 +128,11 @@ const ProfilePage = () => {
       console.error("Error updating profile:", error);
     }
   };
+
+  const handleEmailDialogClose = () => {
+    setShowEmailDialog(false);
+  }
+
 
   const handleInputChange = (e) => {
     let { name, value } = e.target;
@@ -253,7 +259,7 @@ const ProfilePage = () => {
     setShowEmailDialog(true)
   }
 
-  const handleSendResetEmail = async() => {
+  const handleSendResetEmail = async () => {
     const userEmail = email.current.value
     setIsSendingMail(true);
     try {
@@ -283,7 +289,7 @@ const ProfilePage = () => {
   return (
     <>
       <Dialog open={showEmailDialog} >
-        <DialogContent className=" w-96" onClick={handleDialogClose} showCloseButton >
+        <DialogContent className=" w-96" onClick={handleEmailDialogClose} showCloseButton >
           <div>
             <h1>Reset Password</h1>
             <Input placeholder="Enter your email address" className="mt-4" ref={email} />

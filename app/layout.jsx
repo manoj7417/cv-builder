@@ -24,17 +24,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWEWJM4JYM"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3864YFJZRV"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
                window.dataLayer = window.dataLayer || [];
-               function gtag(){dataLayer.push(arguments);}
-               gtag('js', new Date());
-               gtag('config', 'G-NWEWJM4JYM');
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3864YFJZRV');
             `,
           }} />
-        <meta name="google-site-verification" content="3rLr-hJyNEY32xTuNgCpZ615tYr0yriig4N3sfvNi_E" />
+        
 
       </head>
       <body className={inter.className}>
