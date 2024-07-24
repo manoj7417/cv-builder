@@ -12,7 +12,7 @@ export default function NewSlider({ data }) {
   return (
     <>
       <Swiper
-        spaceBetween={30}
+        // spaceBetween={30}
         centeredSlides={false}
         autoplay={{
           delay: 2500,
