@@ -24,8 +24,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <head>
-
-
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3864YFJZRV"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+               window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3864YFJZRV');
+            `,
+          }} />
+        <meta name="google-site-verification" content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po" />
       </head>
       <body className={inter.className}>
         <ToastContainer />
