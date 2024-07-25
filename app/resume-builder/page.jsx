@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import ResumeForm from "./ResumeForm";
 import ResumeView from "./ResumeView";
 import Link from "next/link";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdDownload, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
@@ -123,6 +123,9 @@ const ResumeBuilderPage = () => {
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
           <ResumeView setIsContentVisible={setIsContentVisible} />
         </div>
+         <div className="preview_button bg-black text-white fixed bottom-10 right-5 p-2 rounded-full">
+            <span className="text-sm">Preview and Download <MdDownload className="text-xl inline-flex mx-2"/></span>
+         </div>
         <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible} />
       </div>
     </>

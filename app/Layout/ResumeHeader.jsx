@@ -5,6 +5,9 @@ import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import "./header.css";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { usePathname, useRouter } from "next/navigation";
+import { useUserStore } from "../store/UserStore";
+import Link from "next/link";
 
 const menuItems = [
   {
@@ -29,6 +32,21 @@ export function ResumeHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const logoutUser = useUserStore((state) => state?.logoutUser);
+  const { userState } = useUserStore((state) => state);
+  const userdata = userState?.userdata || {};
+  const userImage = userdata?.profilePicture;
+
+  const handleLogout = async () => {
+    await RemoveTokens();
+    toast.success("User logout successfully", {
+      position: "top-right",
+    });
+    logoutUser();
+    router.push("/");
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -53,7 +71,7 @@ export function ResumeHeader() {
 
   return (
     <section className="new_resume_latest">
-      <div className="relative w-full">
+      <div className="header_wrapper w-full">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <span>
@@ -173,42 +191,47 @@ export function ResumeHeader() {
                     </nav>
                   </div>
                   <div className="mt-4 flex items-center space-x-2">
-                  <div className="relative" ref={dropdownRef}>
-              <div
-                className="flex items-center bg-white rounded-full p-1 w-[180px] cursor-pointer"
-                onClick={toggleDropdown}
-              >
-                <span className="relative inline-block">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src="/profile-avatar-img.png"
-                    alt="Dan_Abromov"
-                  />
-                </span>
-                <div className="mx-2">
-                  <div className="text-sm font-medium text-gray-900">
-                    Chloe Milagres
-                  </div>
-                  <div className="text-[10px] text-gray-500">Premium</div>
-                </div>
-              </div>
+                    <div className="relative" ref={dropdownRef}>
+                      <div
+                        className="flex items-center bg-white rounded-full p-1 w-[180px] cursor-pointer"
+                        onClick={toggleDropdown}
+                      >
+                        <span className="relative inline-block">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src="/profile-avatar-img.png"
+                            alt="Dan_Abromov"
+                          />
+                        </span>
+                        <div className="mx-2">
+                          <div className="text-sm font-medium text-gray-900">
+                            Chloe Milagres
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            Premium
+                          </div>
+                        </div>
+                      </div>
 
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                  <ul>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                      Profile
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                      CV History
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                      Logout
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
+                      {isDropdownOpen && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                          <ul>
+                            <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                              <Link href="/user-profile">Profile</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                              <Link href="/user-history">CV History</Link>
+                            </li>
+                            <li
+                              className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm"
+                              onClick={handleLogout}
+                            >
+                              Logout
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -23,6 +23,7 @@ import NewResumeHeader from "../Layout/NewResumeHeader";
 import WorkTogether from "@/components/component/WorkTogether";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
@@ -92,11 +93,11 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+      {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
       <main>
         {/* <Header /> */}
         {isAnalysing && <Loader />}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-12 bg-gradient-to-t from-[#bde3f2] to-[white]">
+        <section className="flex  min-h-screen flex-col items-center justify-center pt-12 bg-gradient-to-t from-[#bde3f2] to-[white]">
           <Dialog open={isDialogOpen} onClose={handleDialogClose}>
             <DialogContent
               onClick={handleDialogClose}
@@ -125,8 +126,8 @@ export default function DashboardIdea() {
             </DialogContent>
           </Dialog>
           <div className="container  w-full h-full resume-dashboard">
-            <div className="flex lg:px-10 px-10 justify-between">
-              <div className="space-y-2 2xl:mt-40 lg:mt-32">
+            <div className="flex lg:flex-row flex-col lg:px-10 px-10 justify-between">
+              <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20">
                 <h1 className="text-3xl font-bold mb-5 text-gray-900 sm:text-5xl 2xl:text-6xl">
                   An <span className="text-[#2C98CA]">Optimised CV </span> goes
                   a Long Way
@@ -168,32 +169,6 @@ export default function DashboardIdea() {
             </div>
           </div>
         </section>
-        {/* <section className="w-full py-12 md:py-24 lg:py-32 border-t   scroll-mt-20" style={{ backgroundImage: "url('/banner-bg.svg')", backgroundPosition: "center" }}>
-          <div className="container mx-auto grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10" >
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight" >
-                Get Matched to the Job that is Right for You!
-              </h2>
-              <p className="max-w-[600px] text-gray-700 md:text-base/relaxed lg:text-base/relaxed xl:text-base/relaxed ">
-                Find the perfect profession and get matched with the best job profile with the AI-Based Job Assistance Programme.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
-              <Link
-                className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 "
-                href="#"
-              >
-                Contact Expert
-              </Link>
-              {/* <Link
-                className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50    "
-                href="#"
-              >
-                Learn more
-              </Link> 
-            </div>
-          </div>
-        </section> */}
         <WorkTogether />
         <Footer />
       </main>

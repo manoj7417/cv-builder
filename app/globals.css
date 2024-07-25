@@ -713,7 +713,7 @@ footer a:hover svg {
 }
 
 .floating_button {
-  z-index: 11;
+  z-index: 99;
   transition: opacity 0.3s ease-in-out;
 }
 
@@ -1114,6 +1114,10 @@ ol>li {
     width: 100px;
     height: 100px;
   }
+
+  .cv_slider .swiper {
+     width:250px
+  }
 }
 
 
@@ -1134,4 +1138,3 @@ ol>li {
 .cv_slider .swiper {
   height: 75%;
 }
-
