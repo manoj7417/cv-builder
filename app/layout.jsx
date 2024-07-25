@@ -10,11 +10,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export const metadata = {
-  title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
-  description:
-    "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
-};
+// export const metadata = {
+//   title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
+//   description:
+//     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
+// };
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
@@ -55,6 +55,8 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
         <noscript><img height="1" width="1" style={{ display: 'none' }}
           src="https://www.facebook.com/tr?id=452806670914263&ev=PageView&noscript=1"
         /></noscript>
+        <title>{"Professional CV Templates for Perfect CVs on Genies CV Maker"}</title>
+        <meta name="description" content={"Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."} />
         <link rel="canonical" href="https://geniescareerhub.com" />
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSQGHKPJ"
           height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
