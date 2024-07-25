@@ -20,6 +20,10 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+   
+  }, [])
+
   return (
     <main>
       {isLoading ? (
@@ -27,7 +31,7 @@ export default function Home() {
       ) : (
         <>
           {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-          <HomepageNew/>
+          <HomepageNew />
           {/* <Homepage /> */}
           <Footer />
         </>
