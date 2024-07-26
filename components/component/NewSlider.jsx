@@ -11,7 +11,7 @@ export default function NewSlider({ data }) {
   return (
     <>
       <Swiper
-        slidesPerView={2}
+        slidesPerView={1.5}
         spaceBetween={40}
         autoplay={{
           delay: 2500,

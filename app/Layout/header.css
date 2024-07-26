@@ -104,7 +104,7 @@
 
 /* New Resume Header CSS Starts Here  */
 .new_resume_latest .header_wrapper {
-    background: linear-gradient(74.18deg, #99A6D5 3.97%, #768be9 101.42%);
+    background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
     position: fixed;
     top: 0;

@@ -8,6 +8,8 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserStore } from "../store/UserStore";
 import Link from "next/link";
+import { RemoveTokens } from "../actions";
+import { toast } from "react-toastify";
 
 const menuItems = [
   {
@@ -76,7 +78,7 @@ export function ResumeHeader() {
           <div className="inline-flex items-center space-x-2">
             <span>
               <Image
-                src="/gch-white-logo.png"
+                src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}
                 alt="white_logo"
@@ -90,7 +92,7 @@ export function ResumeHeader() {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="inline-flex items-center text-sm text-white"
+                    className="inline-flex items-center text-base text-blue-950 font-medium"
                   >
                     {item.name}
                   </a>
@@ -99,7 +101,7 @@ export function ResumeHeader() {
             </ul>
           </div>
           <div className="flex grow justify-end">
-            <div className="notification bg-white rounded-full p-2 relative">
+            <div className="notification bg-gray-200 rounded-full p-2 relative">
               <IoNotificationsOutline className="text-xl" />
               <span className="absolute top-0 right-0 flex h-3 w-3 -mt-1 -mr-1">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
@@ -110,7 +112,7 @@ export function ResumeHeader() {
           <div className="ml-2 hidden lg:block">
             <div className="relative" ref={dropdownRef}>
               <div
-                className="flex items-center bg-white rounded-full p-1 w-[180px] cursor-pointer"
+                className="flex items-center bg-gray-200 rounded-full p-1 w-[180px] cursor-pointer"
                 onClick={toggleDropdown}
               >
                 <span className="relative inline-block">
@@ -137,7 +139,7 @@ export function ResumeHeader() {
                     <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
                       CV History
                     </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm" onClick={handleLogout}>
                       Logout
                     </li>
                   </ul>
@@ -183,7 +185,7 @@ export function ResumeHeader() {
                           href={item.href}
                           className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
                         >
-                          <span className="text-base font-medium text-gray-900">
+                          <span className="text-base font-medium text-blue-950">
                             {item.name}
                           </span>
                         </a>
@@ -193,7 +195,7 @@ export function ResumeHeader() {
                   <div className="mt-4 flex items-center space-x-2">
                     <div className="relative" ref={dropdownRef}>
                       <div
-                        className="flex items-center bg-white rounded-full p-1 w-[180px] cursor-pointer"
+                        className="flex items-center bg-gray-100 rounded-full p-1 w-[180px] cursor-pointer"
                         onClick={toggleDropdown}
                       >
                         <span className="relative inline-block">

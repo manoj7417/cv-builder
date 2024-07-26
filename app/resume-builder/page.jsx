@@ -32,6 +32,10 @@ const ResumeBuilderPage = () => {
     router.push("/");
   };
 
+  const handlePreviewClick = () => {
+    setIsContentVisible(true);
+  };
+
   return (
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
@@ -123,7 +127,7 @@ const ResumeBuilderPage = () => {
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
           <ResumeView setIsContentVisible={setIsContentVisible} />
         </div>
-         <div className="preview_button bg-black text-white fixed bottom-10 right-5 p-2 rounded-full">
+         <div className="preview_button bg-black text-white fixed bottom-10 right-5 p-2 rounded-full lg:hidden block cursor-pointer" onClick={handlePreviewClick}>
             <span className="text-sm">Preview and Download <MdDownload className="text-xl inline-flex mx-2"/></span>
          </div>
         <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible} />

@@ -67,19 +67,20 @@ export default function HomepageNew() {
     <>
       <section className="w-full h-screen z-10 sticky top-0 left-0 right-0">
         <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative">
-          <div className="banner_image mx-auto">
-            <Image
-              src={"/bg_circular.png"}
-              alt="bg"
-              width={1000}
-              height={1000}
+          <div className="banner_image relative w-full h-full">
+            <video
+              src="banner.mp4"
+              autoPlay
+              muted
+              loop
               className="w-full h-full object-cover"
             />
+            <div className="overlay absolute inset-0 bg-white/30"></div>
           </div>
           <div className="side_content_1">
             {/* block1 */}
             <div className="absolute lg:top-[35%] top-[25%] left-8 2xl:left-[15%] flex justify-between items-center gap-8">
-              <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
                 <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
                   <img
                     className="lg:h-8 h-4 lg:w-8 w-4 p-1"
@@ -89,7 +90,7 @@ export default function HomepageNew() {
                 </span>
                 <div className="mx-2 text-white text-start flex-1">
                   <div className="lg:text-sm text-[8px]">CV Studio</div>
-                  <div className="lg:text-[10px] text-[6px] text-wrap lg:w-[80%] w-full">
+                  <div className="lg:text-[10px] text-[6px] text-wrap lg:w-[80%] w-full text-white">
                     Write the CV that gets you the dream job
                   </div>
                 </div>
@@ -102,8 +103,8 @@ export default function HomepageNew() {
               </div>
             </div>
             {/* block2 */}
-            <div className="absolute lg:top-[60%] top-[25%] 2xl:left-[18%] left-5  flex justify-between items-center gap-8">
-              <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+            <div className="absolute lg:top-[60%] top-[25%] 2xl:left-[18%] lg:left-5 right-5 flex justify-between items-center gap-8">
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
                 <span className="relative inline-block bg-[#c4e8c7] p-1 rounded-full">
                   <img
                     className="lg:h-10 h-4 lg:w-10 w-4 p-1"
@@ -128,13 +129,13 @@ export default function HomepageNew() {
           </div>
           {/* banner Content  */}
           <div className="banner_content absolute text-center space-y-4">
-            <h1 className="lg:text-6xl text-3xl font-semibold text-white">
+            <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
               Super Charge your{" "}
             </h1>
-            <h1 className="lg:text-6xl text-3xl font-semibold text-white">
+            <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
               Career Potential
             </h1>
-            <p className="lg:w-[30%] w-[60%] mx-auto lg:text-base text-sm text-white">
+            <p className="lg:w-[30%] w-[60%] mx-auto lg:text-base text-sm text-[#0d3572] font-medium">
               We have a passion to mentor you on your entire career path, help
               you realise what you want to do, how to get into that career and
               utilize experts to guide you on how to excel within it.
@@ -171,7 +172,7 @@ export default function HomepageNew() {
               <div className="image_icon lg:block hidden">
                 <img src="/card-circle.png" alt="card" />
               </div>
-              <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
                 <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
                   <img
                     className="lg:h-8 h-4 lg:w-8 w-4 p-1"
@@ -193,11 +194,11 @@ export default function HomepageNew() {
               </div>
             </div>
             {/* block2 */}
-            <div className="absolute lg:top-[60%] top-[72%] 2xl:right-[18%] right-6 flex justify-between items-center gap-8">
+            <div className="absolute lg:top-[60%] top-[72%] 2xl:right-[18%] lg:right-6 left-5 flex justify-between items-center gap-8">
               <div className="image_icon lg:block hidden">
                 <img src="/card-circle.png" alt="card" />
               </div>
-              <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
                 <span className="relative inline-block bg-[#f2c2c2] p-1 rounded-full">
                   <img
                     className="lg:h-10 h-4 lg:w-10 w-4 p-1"
@@ -252,8 +253,8 @@ export default function HomepageNew() {
       )}
 
       <section className="w-full g-full z-40 relative">
-        <div className="banner-bottom text-center -mt-10 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] relative bg-white">
-          <h2 className="lg:text-5xl text-3xl font-bold text-blue-950">
+        <div className="banner-bottom text-center -mt-15 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] relative bg-white">
+          <h2 className="lg:text-5xl text-3xl font-bold text-[#0d3572]">
             How Career Genies Hub helps you
           </h2>
         </div>
