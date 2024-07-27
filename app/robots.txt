@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geniescareerhub.com/sitemap.xml
+Sitemap: https://geniescareerhub.com/sitemap-image.xml

@@ -19,8 +19,10 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 
 const Pricing = () => {
   const [enabled, setEnabled] = useState(true);
-  const userState = useUserStore((state) => state.userState);
   const router = useRouter();
+  const userState = useUserStore(state => state.userState);
+  const planType = userState?.userdata?.subscription?.plan || "free"
+
 
   const UpgradePlan = async (plan) => {
     const { accessToken } = await GetTokens();
@@ -114,11 +116,11 @@ const Pricing = () => {
                       Analyzer free
                     </li>{" "}
                     <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      <FaTimesCircle className="text-red-500 mr-2" />
                       Free Psycometric Tests
                     </li>
                     <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
+                      <FaTimesCircle className="text-red-500 mr-2" />
                       24 X 7 Support Service
                     </li>
                     <li className="flex items-center  text-sm text-gray-600">
@@ -134,16 +136,19 @@ const Pricing = () => {
                       No career coaching
                     </li>
                   </ul>
-                  <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
-                    Current Plan
-                  </button>
+                  {
+                    planType === 'free' &&
+                    <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
+                      Current Plan
+                    </button>
+                  }
                 </div>
                 <div className=" p-6 rounded-lg shadow-lg  w-full md:w-[50%]">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$48" : "$4"}
+                    {enabled ? "$39.99" : "$3.99"}
                     {/* {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
                         $42.12
@@ -187,12 +192,20 @@ const Pricing = () => {
                       No career coaching
                     </li>
                   </ul>
-                  <button
-                    className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
-                    onClick={() => UpgradePlan("basic")}
-                  >
-                    Upgrade Now!
-                  </button>
+                  {
+                    planType === 'basic' ?
+                      <button
+                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                      >
+                        Current plan
+                      </button>
+                      : <button
+                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                        onClick={() => UpgradePlan("basic")}
+                      >
+                        Upgrade Now!
+                      </button>
+                  }
                 </div>
 
                 <div className=" p-6 rounded-lg shadow-lg text-center w-full md:w-[50%]">
@@ -200,7 +213,7 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$120" : "$10"}
+                    {enabled ? "$69.99" : "$6.99"}
                     {/* {enabled && (
                       <span className="text-xl line-through text-gray-500 ml-2">
                         $64.80
@@ -245,12 +258,21 @@ const Pricing = () => {
                       Unlimited career coaching
                     </li>
                   </ul>
-                  <button
-                    className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
-                    onClick={() => UpgradePlan("premium")}
-                  >
-                    Upgrade Now!
-                  </button>
+                  {
+                    planType === 'premium' ?
+                      <button
+                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                      >
+                        Current plan
+                      </button>
+                      :
+                      <button
+                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
+                        onClick={() => UpgradePlan("premium")}
+                      >
+                        Upgrade Now!
+                      </button>
+                  }
                 </div>
               </div>
             </div>
