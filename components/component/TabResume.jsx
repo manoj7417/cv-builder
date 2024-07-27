@@ -123,13 +123,13 @@ export default function TabResume() {
 
   return (
     <>
-      <div className=''>
+      <div className='bg-gradient-to-b from-[#e4f5fc] to-[white]'>
         <div className='rounded-t-xl p-6'>
           <div className='tabs_heading'>
             <h2 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-[#0D3572] text-center'>
               Discover CVs that fit your Dream Job
             </h2>
-            <p className='lg:w-1/2 w-full mx-auto text-center my-4 text-[#7C7C7C]'>
+            <p className='lg:w-1/2 w-full mx-auto lg:text-xl text-sm text-center my-4 text-[#7C7C7C]'>
               Start your journey with Genies Career Hub CV Maker and unlock the
               door to a world where your talents are valued and your career
               dreams become a reality with a personalised and perfectly tailored
@@ -145,7 +145,7 @@ export default function TabResume() {
                   {TabsHeader?.map((item, index) => (
                     <>
                       <TabsTrigger value={item?.name} key={index}>
-                        <div className='tabs_header flex gap-2 items-center justify-start'>
+                        <div className='tabs_header flex gap-2 items-center justify-start lg:text-xl text-sm'>
                           {item?.icon}
                           {item?.name}
                         </div>
@@ -201,7 +201,7 @@ export default function TabResume() {
                         <div className='relative flex justify-center overflow-hidden group p-4'>
                           <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
                             {isImageLoading && (
-                              <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9'>
+                              <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9]'>
                                 <ImSpinner8 className='animate-spin text-black text-2xl' />
                                 <span className='mx-2'>Loading...</span>
                               </div>

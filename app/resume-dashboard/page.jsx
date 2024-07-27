@@ -17,6 +17,7 @@ import { useUserStore } from "../store/UserStore";
 import WorkTogether from "@/components/component/WorkTogether";
 import Footer from "../Layout/Footer";
 import NewSlider from "@/components/component/NewSlider";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -403,7 +404,7 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+      {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
       <main>
         <section className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]">
           <div className="container w-full h-full resume-dashboard">

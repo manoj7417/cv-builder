@@ -109,7 +109,7 @@ const FAQSection = () => {
 
   return (
     <>
-      <div className="faq_section bg-gradient-to-b from-white to-[#2C98CA33] px-10 py-20" id="FAQS">
+      <div className="faq_section bg-gradient-to-b from-[#e4f5fc] to-[white]  px-10 py-20" id="FAQS">
         <div className="faq_title">
           <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-[#0D3572] text-center">
             Frequently Asked Questions!

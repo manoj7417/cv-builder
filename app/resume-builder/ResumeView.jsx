@@ -284,7 +284,6 @@ const ResumeView = ({ setIsContentVisible }) => {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens()
-    const templateName = resumeData.metadata.template;
     handleDownloadResume(accessToken.value)
   };
 

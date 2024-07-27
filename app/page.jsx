@@ -7,8 +7,8 @@ import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import { useUserStore } from "./store/UserStore";
-// import NewResumeHeader from "./Layout/NewResumeHeader";
-const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
+import { ResumeHeader } from "./Layout/ResumeHeader";
+// const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,8 +30,9 @@ export default function Home() {
         <LoaderUI />
       ) : (
         <>
-          {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
-          <HomepageNew />
+          {/* {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />} */}
+          {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
+          <HomepageNew/>
           {/* <Homepage /> */}
           <Footer />
         </>
