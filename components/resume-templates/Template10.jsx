@@ -38,7 +38,10 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
-                        <h4 style={{ fontSize: fontStyle.paraFont }}>
+                        <h4
+                          style={{ fontSize: fontStyle.paraFont }}
+                          className="font-medium"
+                        >
                           {item?.institute}
                         </h4>
                       </div>
@@ -107,7 +110,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
@@ -132,12 +135,12 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   className={`${fontStyle.paraFont} break-words`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
-                <div className="px-3">
+                <div className="px-3 py-2">
                   {item?.highlights?.length > 0 && (
-                    <ul className="list-disc">
+                    <ul className="list-disc pl-2">
                       {item?.highlights?.map((item, key) => {
                         return (
-                          <li key={key} className=" break-words text-15px">
+                          <li key={key} className="py-2 break-words text-15px">
                             {item}
                           </li>
                         );
@@ -185,7 +188,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -238,7 +241,7 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
             {data?.name}
           </h2>
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex flex-col gap-5 underline underline-offset-2">
+            <ul className="w-full pt-4 flex flex-col gap-5 underline underline-offset-2">
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -339,12 +342,12 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
 
   // Define the mapping of skill levels to percentages
   const levelMapping = {
-    beginner: 25,
-    intermediate: 50,
-    advanced: 75,
-    expert: 100,
+    basic: 20,
+    conversational: 40,
+    proficient: 60,
+    fluent: 80,
+    native: 100
   };
-
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
@@ -359,7 +362,7 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
             {data?.name}
           </h2>
           <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full flex flex-col gap-5 underline underline-offset-2">
+            <ul className="w-full pt-4 flex flex-col gap-5 underline underline-offset-2">
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
@@ -483,13 +486,13 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-xl items-center font-bold inline-flex"
+                        className="break-words text-16px items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-xl font-bold">
+                      <p className="break-words text-15px font-bold">
                         {item.name}
                       </p>
                     )}
@@ -693,7 +696,7 @@ const Template10 = () => {
                             {basics?.email}
                           </p>
                         </a>
-                      )} 
+                      )}
                       {basics?.phone && (
                         <a
                           href={`tel:${basics?.phone}`}

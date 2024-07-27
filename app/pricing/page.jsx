@@ -36,9 +36,9 @@ const Pricing = () => {
     };
     try {
       const response = await UpgradePricing(data, accessToken.value);
-      const { stripeCheckoutUrl } = response.data;
-      if (stripeCheckoutUrl) {
-        router.replace(stripeCheckoutUrl);
+      if (response.status === 200) {
+        const { url } = response.data;
+        window.location = url;
       }
     } catch (error) {
       console.log(error);
@@ -75,14 +75,12 @@ const Pricing = () => {
                 <Switch
                   checked={enabled}
                   onChange={setEnabled}
-                  className={`${
-                    enabled ? "bg-indigo-600" : "bg-gray-200"
-                  } relative inline-flex items-center h-6 rounded-full w-11`}
+                  className={`${enabled ? "bg-indigo-600" : "bg-gray-200"
+                    } relative inline-flex items-center h-6 rounded-full w-11`}
                 >
                   <span
-                    className={`${
-                      enabled ? "translate-x-6" : "translate-x-1"
-                    } inline-block w-4 h-4 transform bg-white rounded-full`}
+                    className={`${enabled ? "translate-x-6" : "translate-x-1"
+                      } inline-block w-4 h-4 transform bg-white rounded-full`}
                   />
                 </Switch>
                 <span className="ml-2 text-sm font-medium text-gray-700">

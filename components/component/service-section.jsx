@@ -43,7 +43,7 @@ export function ServiceSection() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-gradient-to-b from-[#e4f5fc] to-[white] ">
       <main className="flex-1">
         {/* <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-r from-[white] to-[#dcecff]  scroll-mt-20">
           <div className=" px-4 md:px-6 mb-10">
