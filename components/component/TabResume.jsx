@@ -201,7 +201,7 @@ export default function TabResume() {
                         <div className='relative flex justify-center overflow-hidden group p-4'>
                           <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
                             {isImageLoading && (
-                              <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9'>
+                              <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9]'>
                                 <ImSpinner8 className='animate-spin text-black text-2xl' />
                                 <span className='mx-2'>Loading...</span>
                               </div>
