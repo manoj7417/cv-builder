@@ -39,7 +39,7 @@ export function ResumeHeader() {
   const logoutUser = useUserStore((state) => state?.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
-  console.log("userdata:::",userdata)
+  console.log("userdata:::", userdata);
   const userImage = userdata?.profilePicture;
 
   const handleLogout = async () => {
@@ -124,7 +124,9 @@ export function ResumeHeader() {
                   <span className="relative inline-block">
                     <img
                       className="h-8 w-8 rounded-full"
-                      src={userdata?.profilePicture || "/profile-avatar-img.png"}
+                      src={
+                        userdata?.profilePicture || "/profile-avatar-img.png"
+                      }
                       alt="Dan_Abromov"
                     />
                   </span>
@@ -132,7 +134,9 @@ export function ResumeHeader() {
                     <div className="text-sm font-medium text-gray-900">
                       {userdata?.fullname}
                     </div>
-                    <div className="text-[10px] text-gray-500">{userdata?.subscription?.plan}</div>
+                    <div className="text-[10px] text-gray-500">
+                      {userdata?.subscription?.plan}
+                    </div>
                   </div>
                 </div>
 
@@ -140,10 +144,10 @@ export function ResumeHeader() {
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                     <ul>
                       <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                        Profile
+                        <Link href="/user-profile">Profile</Link>
                       </li>
                       <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                        CV History
+                        <Link href="/user-history">CV History</Link>
                       </li>
                       <li
                         className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm"
@@ -257,7 +261,10 @@ export function ResumeHeader() {
                           <span className="relative inline-block">
                             <img
                               className="h-10 w-10 rounded-full"
-                              src={userdata?.profilePicture || "/profile-avatar-img.png"}
+                              src={
+                                userdata?.profilePicture ||
+                                "/profile-avatar-img.png"
+                              }
                               alt="Dan_Abromov"
                             />
                           </span>
@@ -266,7 +273,7 @@ export function ResumeHeader() {
                               {userdata?.fullname}
                             </div>
                             <div className="text-[10px] text-gray-500">
-                            {userdata?.fullname?.subscription?.plan}
+                              {userdata?.fullname?.subscription?.plan}
                             </div>
                           </div>
                         </div>
