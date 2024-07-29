@@ -99,7 +99,7 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
+      <ResumeHeader/>
       <main>
         {/* <Header /> */}
         {isAnalysing && <Loader />}

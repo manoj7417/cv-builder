@@ -1,115 +1,100 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Homepage.css";
-import Image from "next/image";
-import { PiArrowLineUpRightBold } from "react-icons/pi";
-import { FaRegCircleDot } from "react-icons/fa6";
-import GetStartedModal from "@/components/component/GetStartedModal";
+import a1 from "../../../public/animations/a1.json";
+import a2 from "../../../public/animations/a2.json";
+import a3 from "../../../public/animations/a3.json";
+import Lottie from "lottie-react";
 
-const HomeBanner = () => {
-  const [showFloatingButton, setShowFloatingButton] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+const HomeBanner = ({setShowModal,showModal}) => {
+  const animations = [a1, a2, a3, a1, a2, a3, a1, a2, a3, a1];
+  const descriptions = [
+    {
+      title: "CV Creator",
+      description:
+        "Create your CV with professional templates, powered by Artificial Intelligence.",
+    },
+    {
+      title: "CV Optimiser",
+      description:
+        "Analyse your resume with AI and optimise it for your desired Job Profile.",
+    },
+    {
+      title: "CV Match",
+      description:
+        "Assess your personality traits and cognitive abilities to find the best career path.",
+      current: false,
+    },
+    {
+      title: "Career Counselling",
+      description:
+        "Create your CV with professional templates, powered by Artificial Intelligence.",
+    },
+    {
+      title: "Pschycometric Test",
+      description:
+        "Analyse your resume with AI and optimise it for your desired Job Profile.",
+    },
+    {
+      title: "Hire Coach",
+      description:
+        "Assess your personality traits and cognitive abilities to find the best career path.",
+      current: false,
+    },
+    {
+      title: "Skill Advancement",
+      description:
+        "Create your CV with professional templates, powered by Artificial Intelligence.",
+    },
+    {
+      title: "Job Transition",
+      description:
+        "Analyse your resume with AI and optimise it for your desired Job Profile.",
+    },
+    {
+      title: "Professional Refinement",
+      description:
+        "Assess your personality traits and cognitive abilities to find the best career path.",
+      current: false,
+    },
+    {
+      title: "Career Development",
+      description:
+        "Assess your personality traits and cognitive abilities to find the best career path.",
+      current: false,
+    },
+  ];
+
+  const repeatedAnimations = [...animations, ...animations, ...animations]; // Duplicate animations
+  const repeatedDescriptions = [
+    ...descriptions,
+    ...descriptions,
+    ...descriptions,
+  ]; // Duplicate descriptions
+
 
   const handleButtonClick = () => {
     setShowModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const handleScroll = () => {
-    if (window.scrollY > 300) {
-      // Adjust the scroll value as needed
-      setShowFloatingButton(true);
-    } else {
-      setShowFloatingButton(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative z-10">
-        <div className="banner_image mx-auto">
-          <Image
-            src={"/bg_circular.png"}
-            alt="bg"
-            width={1000}
-            height={1000}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="side_content_1">
-          {/* block1 */}
-          <div className="absolute lg:top-[35%] top-[25%] left-8 2xl:left-[15%] flex justify-between items-center gap-8">
-            <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-              <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
-                <img
-                  className="lg:h-8 h-4 lg:w-8 w-4 p-1"
-                  src="/hero1.png"
-                  alt="Dan_Abromov"
-                />
-              </span>
-              <div className="mx-2 text-white text-start flex-1">
-                <div className="lg:text-sm text-[8px]">CV Studio</div>
-                <div className="lg:text-[10px] text-[6px] text-wrap lg:w-[80%] w-full">
-                  Write the CV that gets you the dream job
-                </div>
-              </div>
-              <div className="text-white mr-3">
-                <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-              </div>
-            </div>
-            <div className="image_icon lg:block hidden">
-              <img src="/card-circle.png" alt="card" />
-            </div>
-          </div>
-          {/* block2 */}
-          <div className="absolute lg:top-[60%] top-[25%] 2xl:left-[18%] lg:left-10 right-10 flex justify-between items-center gap-8">
-            <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-              <span className="relative inline-block bg-[#c4e8c7] p-1 rounded-full">
-                <img
-                  className="lg:h-10 h-4 lg:w-10 w-4 p-1"
-                  src="/hero3.png"
-                  alt="Dan_Abromov"
-                />
-              </span>
-              <div className="mx-2 text-white text-start flex-1">
-                <div className="lg:text-sm text-[8px]">Career Coaching</div>
-                <div className="lg:text-[10px] text-[6px] text-wrap">Expert Advice 24*7</div>
-              </div>
-              <div className="text-white mr-3">
-                <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-              </div>
-            </div>
-            <div className="image_icon lg:block hidden">
-              <img src="/card-circle.png" alt="card" />
-            </div>
-          </div>
-        </div>
-        {/* banner Content  */}
-        <div className="banner_content absolute text-center space-y-4">
-          <h1 className="lg:text-6xl text-3xl font-semibold text-white">
+      <div className="container 2lg:px-10 lg:px-5 mx-auto grid lg:grid-cols-2 grid-cols-1 w-full h-full place-items-center place-content-center">
+        <div className="banner_content text-center space-y-4 lg:mt-20">
+          <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-semibold text-[#0d3572]">
             Super Charge your{" "}
           </h1>
-          <h1 className="lg:text-6xl text-3xl font-semibold text-white">
+          <h1 className="lg:text-6xl text-3xl font-semibold bg-gradient-to-r from-blue-900  to-cyan-600 inline-block text-transparent bg-clip-text">
             Career Potential
           </h1>
-          <p className="lg:w-[30%] w-[60%] mx-auto lg:text-base text-sm text-white">
+          <p className="lg:w-[80%] w-[60%] mx-auto lg:text-base text-sm text-[#0d3572] font-medium">
             We have a passion to mentor you on your entire career path, help you
             realise what you want to do, how to get into that career and utilize
             experts to guide you on how to excel within it.
           </p>
           <p className="text-white">Let’s walk this path together</p>
           <div className="flex justify-center mt-5">
-            <div className="button_wrapper">
-              <button className="get_start_btn" onClick={handleButtonClick}>
+            <div className="button_wrapper" onClick={handleButtonClick}>
+              <button className="get_start_btn">
                 <span className="btn_text">Explore Now</span>
                 <div className="btn_overlay">
                   <svg
@@ -132,58 +117,75 @@ const HomeBanner = () => {
             </div>
           </div>
         </div>
-        <div className="side_content_2">
-          {/* block1 */}
-          <div className="absolute lg:top-[35%] top-[72%] 2xl:right-[15%] right-6 flex justify-between items-center gap-8">
-            <div className="image_icon lg:block hidden">
-              <img src="/card-circle.png" alt="card" />
-            </div>
-            <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-              <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
-                <img
-                  className="lg:h-8 h-4 lg:w-8 w-4 p-1"
-                  src="/hero2.png"
-                  alt="Dan_Abromov"
-                />
-              </span>
-              <div className="mx-2 text-white text-start flex-1">
-                <div className="lg:text-sm text-[8px]">AI Career Coaching</div>
-                <div className="lg:text-[10px] text-[6px] text-wrap">
-                  What career is best for you
+        <div className="card_scroll lg:flex gap-5 hidden">
+          <div className="infinite-slide">
+            <div className="card-container">
+              {repeatedAnimations.map((animation, index) => (
+                <div
+                  key={index}
+                  className="card glass-card max-w-xs border-2 border-gray-200 rounded-xl shadow flex flex-col my-5 items-center hover:shadow-blue-500/50 transition-shadow duration-300"
+                >
+                  <Lottie
+                    animationData={animation}
+                    loop={true}
+                    autoplay={true}
+                    style={{ height: 200, width: "100%" }}
+                  />
+                  <div className="py-5 px-3 border-t-2 border-gray-200 bg-white text-white rounded-b-lg flex flex-col justify-between">
+                    <div>
+                      <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
+                        {
+                          repeatedDescriptions[index % descriptions.length]
+                            .title
+                        }
+                      </h5>
+                      <p className="mb-3 font-normal text-sm text-gray-700">
+                        {
+                          repeatedDescriptions[index % descriptions.length]
+                            .description
+                        }
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="text-white mr-3">
-                <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-              </div>
+              ))}
             </div>
           </div>
-          {/* block2 */}
-          <div className="absolute lg:top-[60%] top-[72%] 2xl:right-[18%] lg:right-10 left-6 flex justify-between items-center gap-8">
-            <div className="image_icon lg:block hidden">
-              <img src="/card-circle.png" alt="card" />
-            </div>
-            <div className="flex items-center bg-gradient-to-b from-[#99A6D5] to-[#5B75FE] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-              <span className="relative inline-block bg-[#f2c2c2] p-1 rounded-full">
-                <img
-                  className="lg:h-10 h-4 lg:w-10 w-4 p-1"
-                  src="/hero4.png"
-                  alt="Dan_Abromov"
-                />
-              </span>
-              <div className="mx-2 text-white text-start flex-1">
-                <div className="lg:text-sm text-[8px]">Hire Expert</div>
-                <div className="lg:text-[10px] text-[6px] text-wrap">
-                  Real life experts available to talk to
+          <div className="infinite-slide">
+            <div className="card-container-reverse">
+              {repeatedAnimations.map((animation, index) => (
+                <div
+                  key={index}
+                  className="card glass-card max-w-xs border-2 border-gray-200 rounded-xl shadow flex flex-col my-5 items-center hover:shadow-blue-500/50 transition-shadow duration-300"
+                >
+                  <Lottie
+                    animationData={animation}
+                    loop={true}
+                    autoplay={true}
+                    style={{ height: 200, width: "100%" }}
+                  />
+                  <div className="py-5 px-3 border-t-2 border-gray-200 bg-white text-white rounded-b-lg flex flex-col justify-between">
+                    <div>
+                      <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
+                        {
+                          repeatedDescriptions[index % descriptions.length]
+                            .title
+                        }
+                      </h5>
+                      <p className="mb-3 font-normal text-sm text-gray-700">
+                        {
+                          repeatedDescriptions[index % descriptions.length]
+                            .description
+                        }
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="text-white mr-3">
-                <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-      {showModal && <GetStartedModal onClose={handleCloseModal} />}
     </>
   );
 };

@@ -1,4 +1,6 @@
 import React from "react";
+import { ResumeHeader } from "../Layout/ResumeHeader";
+import Footer from "../Layout/Footer";
 
 export const metadata = {
   title: "Professional CV Creators, Resume Coach, and Curriculum Vitae",
@@ -9,7 +11,9 @@ const Layout = ({ children }) => {
   return (
     <main className="resume_dashboard">
       <div className="resume_dashboard_container">
+        <ResumeHeader/>
         <div className="wrapper">{children}</div>
+        <Footer/>
       </div>
     </main>
   );

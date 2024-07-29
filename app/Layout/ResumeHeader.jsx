@@ -50,6 +50,10 @@ export function ResumeHeader() {
     router.push("/");
   };
 
+  const handleLogin = () => {
+    router.push("/login");
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -76,7 +80,7 @@ export function ResumeHeader() {
       <div className="header_wrapper w-full">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
-            <span>
+            <Link href={"/"}>
               <Image
                 src="/genies-career-hub-logo.png"
                 width={100}
@@ -84,7 +88,7 @@ export function ResumeHeader() {
                 alt="white_logo"
                 className="w-20 h-20 object-contain"
               />
-            </span>
+            </Link>
           </div>
           <div className="hidden lg:block">
             <ul className="ml-12 inline-flex space-x-8">
@@ -110,7 +114,57 @@ export function ResumeHeader() {
             </div>
           </div>
           <div className="ml-2 hidden lg:block">
-            <div className="relative" ref={dropdownRef}>
+            {userState?.isAuthenticated ? (
+              <div className="relative" ref={dropdownRef}>
+                <div
+                  className="flex items-center bg-gray-200 rounded-full p-1 w-[180px] cursor-pointer"
+                  onClick={toggleDropdown}
+                >
+                  <span className="relative inline-block">
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src="/profile-avatar-img.png"
+                      alt="Dan_Abromov"
+                    />
+                  </span>
+                  <div className="mx-2">
+                    <div className="text-sm font-medium text-gray-900">
+                      Chloe Milagres
+                    </div>
+                    <div className="text-[10px] text-gray-500">Premium</div>
+                  </div>
+                </div>
+
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                    <ul>
+                      <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                        Profile
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                        CV History
+                      </li>
+                      <li
+                        className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="auths_button ml-2">
+                <button
+                  className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 rounded-md"
+                  onClick={handleLogin}
+                >
+                  <span>Sign In</span>
+                </button>
+              </div>
+            )}
+            {/* <div className="relative" ref={dropdownRef}>
               <div
                 className="flex items-center bg-gray-200 rounded-full p-1 w-[180px] cursor-pointer"
                 onClick={toggleDropdown}
@@ -145,7 +199,7 @@ export function ResumeHeader() {
                   </ul>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="ml-2 lg:hidden">
             <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
@@ -156,7 +210,7 @@ export function ResumeHeader() {
                 <div className="px-5 pb-6 pt-5">
                   <div className="flex items-center justify-between">
                     <div className="inline-flex items-center space-x-2">
-                      <span>
+                      <Link href={"/"}>
                         <Image
                           src="/genies-career-hub-logo.png"
                           width={50}
@@ -164,7 +218,7 @@ export function ResumeHeader() {
                           alt="white_logo"
                           className="w-14 h-14 object-contain"
                         />
-                      </span>
+                      </Link>
                     </div>
                     <div className="-mr-2">
                       <button
@@ -192,49 +246,60 @@ export function ResumeHeader() {
                       ))}
                     </nav>
                   </div>
-                  <div className="mt-4 flex items-center space-x-2">
-                    <div className="relative" ref={dropdownRef}>
-                      <div
-                        className="flex items-center bg-gray-100 rounded-full p-1 w-[180px] cursor-pointer"
-                        onClick={toggleDropdown}
-                      >
-                        <span className="relative inline-block">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src="/profile-avatar-img.png"
-                            alt="Dan_Abromov"
-                          />
-                        </span>
-                        <div className="mx-2">
-                          <div className="text-sm font-medium text-gray-900">
-                            Chloe Milagres
-                          </div>
-                          <div className="text-[10px] text-gray-500">
-                            Premium
+                  {userState?.isAuthenticated ? (
+                    <div className="mt-4 flex items-center space-x-2">
+                      <div className="relative" ref={dropdownRef}>
+                        <div
+                          className="flex items-center bg-gray-100 rounded-full p-1 w-[180px] cursor-pointer"
+                          onClick={toggleDropdown}
+                        >
+                          <span className="relative inline-block">
+                            <img
+                              className="h-10 w-10 rounded-full"
+                              src="/profile-avatar-img.png"
+                              alt="Dan_Abromov"
+                            />
+                          </span>
+                          <div className="mx-2">
+                            <div className="text-sm font-medium text-gray-900">
+                              Chloe Milagres
+                            </div>
+                            <div className="text-[10px] text-gray-500">
+                              Premium
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {isDropdownOpen && (
-                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                          <ul>
-                            <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                              <Link href="/user-profile">Profile</Link>
-                            </li>
-                            <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                              <Link href="/user-history">CV History</Link>
-                            </li>
-                            <li
-                              className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm"
-                              onClick={handleLogout}
-                            >
-                              Logout
-                            </li>
-                          </ul>
-                        </div>
-                      )}
+                        {isDropdownOpen && (
+                          <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                            <ul>
+                              <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                                <Link href="/user-profile">Profile</Link>
+                              </li>
+                              <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                                <Link href="/user-history">CV History</Link>
+                              </li>
+                              <li
+                                className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm"
+                                onClick={handleLogout}
+                              >
+                                Logout
+                              </li>
+                            </ul>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="auths_button mt-4">
+                      <button
+                        className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 rounded-md"
+                        onClick={handleLogin}
+                      >
+                        <span>Sign In</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
