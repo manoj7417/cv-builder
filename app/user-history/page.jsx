@@ -11,7 +11,7 @@ const UserHistoryPage = () => {
   const userState = useUserStore((state) => state.userState)
   return (
     <>
-      {userState?.isAuthenticated ? <ResumeHeader /> : <Header />}
+      {/* {userState?.isAuthenticated ? <ResumeHeader /> : <Header />} */}
       <div className=" mx-auto bg-gradient-to-t from-[#ebeef7] to-[white]">
         <div className="flex justify-center items-center w-full h-full py-20">
           <TabsMain />

@@ -184,7 +184,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [isLoading, setIsLoading] = useState(false);
-  const [scale, setScale] = useState(0.9,0.8);
+  const [scale, setScale] = useState(0.5);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const data = useResumeStore((state) => state.resume.data);
@@ -201,7 +201,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     },
   };
 
-  const MM_TO_PX = 3;
+  const MM_TO_PX = 3.78;
   const pageWidth = pageSizeMap["a4"].width * MM_TO_PX;
   const pageHeight = pageSizeMap["a4"].height * MM_TO_PX;
 
@@ -326,18 +326,18 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
               <LiaTimesSolid className="text-white text-3xl" />
             </div>
           </div>
-          <div className="shadow-lg no-scrollbar h-screen overflow-y-scroll" style={{
-              transform: `scale(${scale})`,
-            }}>
+          <div className="shadow-lg no-scrollbar h-screen overflow-y-scroll w-screen">
             <div
               id="resume"
               className={cn("relative bg-white")}
               style={{
                 width: `100%`,
-                maxWidth: `${pageWidth}px`,
+                minWidth: `${pageWidth}px`,
                 height: `100%`,
-                maxHeight: `${pageHeight}px`,
+                minHeight: `${pageHeight}px`,
                 overflow: "auto",
+                transform: `scale(${scale})`,
+                margin:"-180px"
               }}
               onClick={(e) => e.stopPropagation()}
             >

@@ -1,5 +1,6 @@
 import Footer from "../Layout/Footer"
 import NewResumeHeader from "../Layout/NewResumeHeader"
+import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
   title: "Returns Policy: Genies Career Hub",
   description:
@@ -11,7 +12,7 @@ const Layout = ({ children }) => {
       <main className="terms_condition" >
         <div className="terms_condition_container">
           <div className="wrapper">
-            <NewResumeHeader/>
+            <ResumeHeader/>
             {children}
             <Footer/>
           </div>

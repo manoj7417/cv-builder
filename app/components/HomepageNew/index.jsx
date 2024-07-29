@@ -66,7 +66,8 @@ export default function HomepageNew() {
   return (
     <>
       <section className="w-full h-screen z-10 sticky top-0 left-0 right-0">
-        <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative">
+        <HomeBanner showModal={showModal} setShowModal={setShowModal}/>
+        {/* <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative">
           <div className="banner_image relative w-full h-full">
             <video
               src="banner.mp4"
@@ -78,7 +79,6 @@ export default function HomepageNew() {
             <div className="overlay absolute inset-0 bg-white/30"></div>
           </div>
           <div className="side_content_1">
-            {/* block1 */}
             <div className="absolute lg:top-[35%] top-[25%] left-8 2xl:left-[15%] flex justify-between items-center gap-8">
               <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
                 <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
@@ -102,7 +102,6 @@ export default function HomepageNew() {
                 <img src="/card-circle.png" alt="card" />
               </div>
             </div>
-            {/* block2 */}
             <div className="absolute lg:top-[60%] top-[25%] 2xl:left-[18%] lg:left-5 right-5 flex justify-between items-center gap-8">
               <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
                 <span className="relative inline-block bg-[#c4e8c7] p-1 rounded-full">
@@ -127,7 +126,6 @@ export default function HomepageNew() {
               </div>
             </div>
           </div>
-          {/* banner Content  */}
           <div className="banner_content absolute text-center space-y-4">
             <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
               Super Charge your{" "}
@@ -167,7 +165,6 @@ export default function HomepageNew() {
             </div>
           </div>
           <div className="side_content_2">
-            {/* block1 */}
             <div className="absolute lg:top-[35%] top-[72%] 2xl:right-[15%] right-6 flex justify-between items-center gap-8">
               <div className="image_icon lg:block hidden">
                 <img src="/card-circle.png" alt="card" />
@@ -193,7 +190,6 @@ export default function HomepageNew() {
                 </div>
               </div>
             </div>
-            {/* block2 */}
             <div className="absolute lg:top-[60%] top-[72%] 2xl:right-[18%] lg:right-6 left-5 flex justify-between items-center gap-8">
               <div className="image_icon lg:block hidden">
                 <img src="/card-circle.png" alt="card" />
@@ -218,7 +214,7 @@ export default function HomepageNew() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
       {showModal && <GetStartedModal onClose={handleCloseModal} />}
 

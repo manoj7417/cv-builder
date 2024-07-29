@@ -10,7 +10,7 @@ const page = () => {
   return (
     <>
       {/* <ResumeHeader /> */}
-      <NewResumeHeader/>
+      <ResumeHeader/>
       <ChatDashboard />
       <Footer />
     </>
