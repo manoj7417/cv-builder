@@ -2,7 +2,7 @@
 
 import { ChatDashboard } from "@/components/component/chat-dashboard";
 import React from "react";
-import ResumeHeader from "../Layout/ResumeHeader";
+import {ResumeHeader} from "../Layout/ResumeHeader";
 import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 

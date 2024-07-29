@@ -1,6 +1,6 @@
 import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
-import ResumeHeader from "../Layout/ResumeHeader";
+import {ResumeHeader} from "../Layout/ResumeHeader";
 export const metadata = {
   title: "Contact the Genies Career Hub Support Team",
   description:
