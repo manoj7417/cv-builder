@@ -39,6 +39,7 @@ export function ResumeHeader() {
   const logoutUser = useUserStore((state) => state?.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
+  console.log("userdata:::",userdata)
   const userImage = userdata?.profilePicture;
 
   const handleLogout = async () => {
@@ -123,15 +124,15 @@ export function ResumeHeader() {
                   <span className="relative inline-block">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src="/profile-avatar-img.png"
+                      src={userdata?.profilePicture || "/profile-avatar-img.png"}
                       alt="Dan_Abromov"
                     />
                   </span>
                   <div className="mx-2">
                     <div className="text-sm font-medium text-gray-900">
-                      Chloe Milagres
+                      {userdata?.fullname}
                     </div>
-                    <div className="text-[10px] text-gray-500">Premium</div>
+                    <div className="text-[10px] text-gray-500">{userdata?.subscription?.plan}</div>
                   </div>
                 </div>
 
@@ -256,16 +257,16 @@ export function ResumeHeader() {
                           <span className="relative inline-block">
                             <img
                               className="h-10 w-10 rounded-full"
-                              src="/profile-avatar-img.png"
+                              src={userdata?.profilePicture || "/profile-avatar-img.png"}
                               alt="Dan_Abromov"
                             />
                           </span>
                           <div className="mx-2">
                             <div className="text-sm font-medium text-gray-900">
-                              Chloe Milagres
+                              {userdata?.fullname}
                             </div>
                             <div className="text-[10px] text-gray-500">
-                              Premium
+                            {userdata?.fullname?.subscription?.plan}
                             </div>
                           </div>
                         </div>
