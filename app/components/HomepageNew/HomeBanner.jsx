@@ -5,72 +5,76 @@ import a2 from "../../../public/animations/a2.json";
 import a3 from "../../../public/animations/a3.json";
 import Lottie from "lottie-react";
 
-const HomeBanner = ({setShowModal,showModal}) => {
-  const animations = [a1, a2, a3, a1, a2, a3, a1, a2, a3, a1];
+const HomeBanner = ({ setShowModal, showModal }) => {
   const descriptions = [
     {
       title: "CV Creator",
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
+      image: "/cvgenerator.png",
     },
     {
       title: "CV Optimiser",
       description:
         "Analyse your resume with AI and optimise it for your desired Job Profile.",
+      image: "/choice-worker-concept-illustrated.png",
     },
     {
       title: "CV Match",
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
-      current: false,
+      image: "/find-career-path.png",
     },
     {
       title: "Career Counselling",
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
+      image: "/identify-skill-gap.png",
     },
     {
       title: "Pschycometric Test",
       description:
         "Analyse your resume with AI and optimise it for your desired Job Profile.",
+      image: "/take-personality-test.png",
     },
     {
       title: "Hire Coach",
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
-      current: false,
+      image: "/vetted.png",
     },
     {
       title: "Skill Advancement",
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
+      image: "/leadership.png",
     },
     {
       title: "Job Transition",
       description:
         "Analyse your resume with AI and optimise it for your desired Job Profile.",
+      image: "/jobtransition.png",
     },
     {
       title: "Professional Refinement",
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
-      current: false,
+      image: "/perfomance.png",
     },
     {
       title: "Career Development",
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
-      current: false,
+      image: "/careergrowth.png",
     },
   ];
 
-  const repeatedAnimations = [...animations, ...animations, ...animations]; // Duplicate animations
   const repeatedDescriptions = [
     ...descriptions,
     ...descriptions,
     ...descriptions,
-  ]; // Duplicate descriptions
-
+    ...descriptions,
+  ];
 
   const handleButtonClick = () => {
     setShowModal(true);
@@ -120,30 +124,23 @@ const HomeBanner = ({setShowModal,showModal}) => {
         <div className="card_scroll lg:flex gap-5 hidden">
           <div className="infinite-slide">
             <div className="card-container">
-              {repeatedAnimations.map((animation, index) => (
+              {repeatedDescriptions.map((item, index) => (
                 <div
                   key={index}
                   className="card glass-card max-w-xs border-2 border-gray-200 rounded-xl shadow flex flex-col my-5 items-center hover:shadow-blue-500/50 transition-shadow duration-300"
                 >
-                  <Lottie
-                    animationData={animation}
-                    loop={true}
-                    autoplay={true}
-                    style={{ height: 200, width: "100%" }}
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    style={{ height: 200, width: "100%" , objectFit:"contain"}}
                   />
                   <div className="py-5 px-3 border-t-2 border-gray-200 bg-white text-white rounded-b-lg flex flex-col justify-between">
                     <div>
                       <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
-                        {
-                          repeatedDescriptions[index % descriptions.length]
-                            .title
-                        }
+                        {item.title}
                       </h5>
                       <p className="mb-3 font-normal text-sm text-gray-700">
-                        {
-                          repeatedDescriptions[index % descriptions.length]
-                            .description
-                        }
+                        {item.description}
                       </p>
                     </div>
                   </div>
@@ -153,30 +150,23 @@ const HomeBanner = ({setShowModal,showModal}) => {
           </div>
           <div className="infinite-slide">
             <div className="card-container-reverse">
-              {repeatedAnimations.map((animation, index) => (
+              {repeatedDescriptions.map((item, index) => (
                 <div
                   key={index}
                   className="card glass-card max-w-xs border-2 border-gray-200 rounded-xl shadow flex flex-col my-5 items-center hover:shadow-blue-500/50 transition-shadow duration-300"
                 >
-                  <Lottie
-                    animationData={animation}
-                    loop={true}
-                    autoplay={true}
+                  <img
+                    src={item.image}
+                    alt={item.title}
                     style={{ height: 200, width: "100%" }}
                   />
                   <div className="py-5 px-3 border-t-2 border-gray-200 bg-white text-white rounded-b-lg flex flex-col justify-between">
                     <div>
                       <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
-                        {
-                          repeatedDescriptions[index % descriptions.length]
-                            .title
-                        }
+                        {item.title}
                       </h5>
                       <p className="mb-3 font-normal text-sm text-gray-700">
-                        {
-                          repeatedDescriptions[index % descriptions.length]
-                            .description
-                        }
+                        {item.description}
                       </p>
                     </div>
                   </div>

@@ -6,7 +6,7 @@ import { GoArrowRight } from "react-icons/go";
 const WorkTogether = () => {
   return (
     <>
-      <div className="bg-gradient-to-b from-[#e4f5fc] to-[white] ">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 place-items-center py-10">
           <div className="work-content lg:px-2 px-10">
             <h2 className="text-blue-900 lg:text-5xl text-2xl font-bold">

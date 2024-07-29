@@ -79,7 +79,7 @@ export function ResumeHeader() {
   return (
     <section className="new_resume_latest">
       <div className="header_wrapper w-full">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <Link href={"/"}>
               <Image
@@ -123,7 +123,7 @@ export function ResumeHeader() {
                 >
                   <span className="relative inline-block">
                     <img
-                      className="h-10 w-10 rounded-full"
+                      className="h-8 w-8 rounded-full"
                       src={userdata?.profilePicture || "/profile-avatar-img.png"}
                       alt="Dan_Abromov"
                     />
