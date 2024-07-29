@@ -49,7 +49,6 @@ const Pricing = () => {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
