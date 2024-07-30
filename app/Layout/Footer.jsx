@@ -204,7 +204,7 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <Link href='refund-policy' className='text-black transition'>
+                  <Link href="/refund-policy" className="text-black transition">
                     {" "}
                     Refund Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
@@ -233,8 +233,9 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href='/cookies-&-tracking-policy'
-                    className='text-black transition'>
+                    href="/cookies-tracking-policy"
+                    className="text-black transition"
+                  >
                     Cookies & tracking policy
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </a>

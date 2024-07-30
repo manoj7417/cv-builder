@@ -12,7 +12,11 @@ import { ResumeHeader } from "./Layout/ResumeHeader";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const userState = useUserStore((state) => state.userState);
+  const { userState, loginUser, logoutUser } = useUserStore()
+
+
+ 
+;
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -20,7 +24,9 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+   
+  }, [])
 
   return (
     <main>

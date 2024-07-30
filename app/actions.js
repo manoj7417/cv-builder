@@ -32,5 +32,6 @@ export async function RemoveTokens() {
 
 export async function GetTokens() {
     const accessToken = cookies().get('accessToken')
-    return { accessToken }
+    const refreshToken = cookies().get('refreshToken')
+    return { accessToken, refreshToken }
 }

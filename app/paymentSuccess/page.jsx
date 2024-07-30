@@ -14,19 +14,22 @@ const PaymentSuccess = () => {
   const fetchUserDetials = async () => {
     const { accessToken } = await GetTokens()
     const token = accessToken?.value;
-    // Fetch user details from API or database
-    const response = await axios.get("/api/getUserProfile", {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-    if (response.status === 200) {
-      updateUserData(response.data.data)
-      if (userState.pricingRedirectRoute) {
+    try {
+      const response = await axios.get("/api/getUserProfile", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      if (response.status === 200) {
+        updateUserData(response.data.data)
+        if (userState.pricingRedirectRoute) {
 
-        return router.push(`/${userState.pricingRedirectRoute}`)
+          return router.push(`/${userState.pricingRedirectRoute}`)
+        }
+        router.push('/resume-builder')
       }
-      router.push('/resume-builder')
+    } catch (error) {
+      console.log(error)
     }
   }
 
