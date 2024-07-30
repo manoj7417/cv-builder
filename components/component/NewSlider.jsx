@@ -7,36 +7,39 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import ImageCarousel from "./ImageCarousel";
 
-
 export default function NewSlider({ data }) {
   return (
     <>
       <Swiper
-        spaceBetween={30}
-        centeredSlides={false}
+        slidesPerView={1.5}
+        spaceBetween={40}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
         pagination={{
           clickable: true,
-          dynamicBullets:true
+          dynamicBullets: true,
         }}
         breakpoints={{
           640: {
             slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 5,
             spaceBetween: 30,
           },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 50,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+          1280: {
+            slidesPerView: 5,
+            spaceBetween: 20,
+          },
         }}
-        navigation={true}
+        navigation={false}
         loop={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"

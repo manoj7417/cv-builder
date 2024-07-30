@@ -95,7 +95,7 @@ const TabsMain = () => {
   return (
     <>
       <div className="tabs_section">
-        <h2 className="lg:text-2xl text-xl text-start my-5">
+        <h2 className="lg:text-2xl text-xl lg:text-start text-center my-5">
           Welcome back,{" "}
           <span className="font-semibold">{userdata?.fullname}</span>
         </h2>

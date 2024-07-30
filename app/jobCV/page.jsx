@@ -154,7 +154,6 @@ export default function Home() {
     setIsGeneratingResume(false);
   };
 
-
   const fetchBetterResume = async (message, accessToken) => {
     message = message + `generate resume for this ${jobRole}`;
     try {
@@ -171,10 +170,14 @@ export default function Home() {
         return response.data;
       }
     } catch (error) {
-      if (error.response.status === 400 && (error.response.data.error === 'Insufficient JobCV tokens' || error.response.data.error === "Subscription is inactive or expired")) {
-        router.push('/pricing')
+      if (
+        error.response.status === 400 &&
+        (error.response.data.error === "Insufficient JobCV tokens" ||
+          error.response.data.error === "Subscription is inactive or expired")
+      ) {
+        router.push("/pricing");
       } else {
-        toast.error("Unable to generate JobCV , Please try again")
+        toast.error("Unable to generate JobCV , Please try again");
       }
     }
   };
@@ -206,7 +209,7 @@ export default function Home() {
           return router.push("/resume-builder");
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         toast.error("Unable to generate your CV");
       } finally {
         setIsGeneratingResume(false);
@@ -257,7 +260,6 @@ export default function Home() {
   return (
     <main>
       <>
-        {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
         <section className="mt-16 py-20 bg-white text-black">
           <Dialog open={showMultiStepDialog}>
             <JobMultistepForm
@@ -286,9 +288,7 @@ export default function Home() {
                 attachment whenever you are ready.
               </p>
               <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
-                <div
-                  class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]"
-                >
+                <div class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]">
                   <label
                     for="dropzone-file"
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -359,7 +359,7 @@ export default function Home() {
             </DialogContent>
           </Dialog>
           <Dialog open={generatingResume}>
-            <DialogContent onClick={handleDialogClose}  >
+            <DialogContent onClick={handleDialogClose}>
               <div className="mx-auto flex items-center flex-col">
                 <Lottie
                   animationData={animation}
@@ -392,7 +392,8 @@ export default function Home() {
                     className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
                     onClick={() => handleGenerateNow()}
                   >
-                    Generate Now <RiAiGenerate className="text-base font-bold" />
+                    Generate Now{" "}
+                    <RiAiGenerate className="text-base font-bold" />
                   </button>
                 </div>
               </div>
@@ -445,7 +446,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <Footer />
       </>
     </main>
   );

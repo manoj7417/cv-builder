@@ -1,56 +1,356 @@
-import { GetTemplate } from '@/components/resume-templates/GetTemplate'
-import { cn } from '@/lib/utils'
-import React from 'react'
-import { LiaTimesSolid } from 'react-icons/lia'
-import { useResumeStore } from '../store/ResumeStore'
+import { GetTemplate } from "@/components/resume-templates/GetTemplate";
+import { cn } from "@/lib/utils";
+import React, { useState } from "react";
+import { LiaTimesSolid } from "react-icons/lia";
+import { useResumeStore } from "../store/ResumeStore";
+import { FaUserCircle } from "react-icons/fa";
+import { MdDownload } from "react-icons/md";
+import { GetTokens } from "../actions";
+import { toast } from "react-toastify";
+import { printResume } from "../api/api";
+import { funfacts } from "@/constants/funfacts";
+import Loader1 from "@/public/animations/downloadLoader1.json";
+import Loader2 from "@/public/animations/downloadLoader2.json";
+import Loader3 from "@/public/animations/downloadLoader3.json";
+import Loader4 from "@/public/animations/downloadLoader4.json";
+import Loader5 from "@/public/animations/downloadLoader5.json";
+import ResumeTooltip from "@/components/component/ResumeTooltip";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { LuLayoutGrid } from "react-icons/lu";
+import { templateType } from "@/components/component/Slider";
+import Image from "next/image";
+
+const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
+const images = [
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "Template3.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template4",
+    src: "/Template4.png",
+    alt: "Template4.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template5",
+    src: "/Template5.png",
+    alt: "Template5.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template6",
+    src: "/Template6-1.png",
+    alt: "Template6-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template7",
+    src: "/Template7-1.png",
+    alt: "Template7-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template8",
+    src: "/Template8.png",
+    alt: "Template8.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template9",
+    src: "/Template9.png",
+    alt: "Template9.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template10",
+    src: "/Template10-1.png",
+    alt: "Template10-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template11",
+    src: "/Template11-(new).png",
+    alt: "Template11-(new).png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template13",
+    src: "/Template13.png",
+    alt: "Template13.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template15",
+    src: "/Template15.png",
+    alt: "Template15.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template12",
+    src: "/Template12.png",
+    alt: "Template12.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template14",
+    src: "/Template14.png",
+    alt: "Template14.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template16",
+    src: "/Template16.png",
+    alt: "Template16.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template18",
+    src: "/Template18.jpg",
+    alt: "Template18.jpg",
+    type: templateType.premium,
+  },
+  {
+    name: "Template17",
+    src: "/Template17.png",
+    alt: "Template17.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template19",
+    src: "/Template19-(new).png",
+    alt: "Template19-(new).png",
+  },
+  {
+    name: "Template20",
+    src: "/Template20.png",
+    alt: "Template20.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template21",
+    src: "/Template21.png",
+    alt: "Template21.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template22",
+    src: "/Template22.png",
+    alt: "Template22.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template23",
+    src: "/Template23.png",
+    alt: "Template23.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template24",
+    src: "/Template24.png",
+    alt: "Template24.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template25",
+    src: "/Template25.png",
+    alt: "Template25.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template26",
+    src: "/Template26.png",
+    alt: "Template26.png",
+    type: templateType.premium,
+  },
+];
 
 function ContentDialog({ isContentVisible, setIsContentVisible }) {
-    const data = useResumeStore(state => state.resume.data)
-    const pageSizeMap = {
-        a4: {
-            width: 210,
-            height: 297,
-        },
-        letter: {
-            width: 216,
-            height: 279,
-        },
-    };
+  const randomNumber = Math.floor(Math.random() * 9);
+  const randomAnimation = Math.floor(Math.random() * 4);
+  const [isLoading, setIsLoading] = useState(false);
+  const [scale, setScale] = useState(0.5);
+  const [funfact, setFunFact] = useState(funfacts[randomNumber]);
+  const [animation, setAnimation] = useState(Loaders[randomAnimation]);
+  const data = useResumeStore((state) => state.resume.data);
+  const resumeData = useResumeStore((state) => state.resume.data);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const pageSizeMap = {
+    a4: {
+      width: 210,
+      height: 297,
+    },
+    letter: {
+      width: 216,
+      height: 279,
+    },
+  };
 
-    const MM_TO_PX = 3.78;
-    return (
-        <>
-            {
-                isContentVisible &&
-                <div className=" bg-black bg-opacity-80 inset-0 z-50 w-full h-full absolute overflow-hidden" onClick={() => setIsContentVisible(false)} >
-                    <div
-                        onClick={() => setIsContentVisible(false)}
-                        className="z-50 fixed top-6 right-10 cursor-pointer"
-                    >
-                        <LiaTimesSolid className="text-white text-3xl" />
-                    </div>
-                    <div
-                        className="shadow-lg fixed top-5 left-[25%] no-scrollbar h-screen overflow-y-scroll"
-                    >
-                        <div
-                            id="resume"
-                            className={cn("relative bg-white")}
-                            style={{
-                                width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
-                                height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <GetTemplate name={data?.metadata?.template} />
-                            <div className="bg-white text-gray-500 text-end">
-                                <p className="text-sm">@Genies Career Hub</p>
-                            </div>
+  const MM_TO_PX = 3.78;
+  const pageWidth = pageSizeMap["a4"].width * MM_TO_PX;
+  const pageHeight = pageSizeMap["a4"].height * MM_TO_PX;
+
+  const checkUserTemplate = async () => {
+    const { accessToken } = await GetTokens()
+    const templateName = resumeData.metadata.template;
+    handleDownloadResume(accessToken.value)
+  };
+
+  const handleDownloadResume = async (token) => {
+    const el = document.getElementById("resume");
+    const resume = el.innerHTML;
+    const body = {
+      html: resume,
+    };
+    setIsLoading(true);
+
+    try {
+      const response = await printResume(body, token);
+      
+      if (response.ok) {
+        generateFunfact();
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "generated.pdf";
+        a.target = "_blank";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        return;
+      }
+      if (response.status !== 500) {
+        updateRedirectPricingRoute('/resume-builder')
+        return router.push('/pricing')
+      }
+    } catch (error) {
+      console.log("Error" , error)
+      toast.error("Something went wrong")
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  const generateFunfact = () => {
+    const randomNumber = Math.floor(Math.random() * 9);
+    const randomAnimation = Math.floor(Math.random() * 4);
+    const newFuncfact = funfacts[randomNumber];
+    const newAnimation = Loaders[randomAnimation];
+    setAnimation((state) => newAnimation);
+    setFunFact((state) => newFuncfact);
+  };
+
+
+  return (
+    <>
+      {isContentVisible && (
+        <div
+          className=" bg-black bg-opacity-80 inset-0 z-50 w-full h-full fixed overflow-hidden"
+          // onClick={() => setIsContentVisible(false)}
+        >
+          <div className="bg-gray-900 text-white flex justify-between items-center p-4">
+          <div className="choose_templates">
+              <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
+                <Drawer
+                  direction="bottom"
+                  open={isDrawerOpen}
+                  onOpenChange={setIsDrawerOpen}
+                >
+                  <DrawerTrigger
+                    className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
+                    onClick={() => setIsDrawerOpen(true)}
+                  >
+                    <LuLayoutGrid className="h-5 w-5 text-white inline" />
+                  </DrawerTrigger>
+                  <DrawerContent className="bg-white flex flex-col h-[500px] w-[425px] mt-24 fixed bottom-0">
+                    <DrawerHeader>
+                      <DrawerTitle className="my-2">Choose Templates</DrawerTitle>
+                      <DrawerDescription>
+                        <div className="grid grid-cols-2 gap-2 overflow-y-scroll h-screen no-scrollbar w-[420px]">
+                          {images.map((image, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className="image_section_1 "
+                                onClick={() => handleTemplateChange(image.name)}
+                              >
+                                <Image
+                                  src={image.src}
+                                  alt={image.alt}
+                                  className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[200px] w-[200px]"
+                                  width={200}
+                                  height={200}
+                                />
+                              </div>
+                            );
+                          })}
                         </div>
-                    </div>
-                </div>
-            }
-        </>
-    )
+                      </DrawerDescription>
+                    </DrawerHeader>
+                  </DrawerContent>
+                </Drawer>
+              </ResumeTooltip>
+            </div>
+            <div className="download_button">
+            <button
+             onClick={checkUserTemplate}
+             disabled={isLoading}
+              className="bg-blue-950 text-white px-4 py-2 rounded flex items-center"
+            >
+              <MdDownload className="text-xl mr-2" />
+              Download
+            </button>
+            </div>
+            <div
+              onClick={() => setIsContentVisible(false)}
+              className="z-50 close_icon"
+            >
+              <LiaTimesSolid className="text-white text-3xl" />
+            </div>
+          </div>
+          <div className="shadow-lg no-scrollbar h-screen overflow-y-scroll w-screen">
+            <div
+              id="resume"
+              className={cn("relative bg-white")}
+              style={{
+                width: `100%`,
+                minWidth: `${pageWidth}px`,
+                height: `100%`,
+                minHeight: `${pageHeight}px`,
+                overflow: "auto",
+                transform: `scale(${scale})`,
+                margin:"-180px"
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <GetTemplate name={data?.metadata?.template} />
+              <div className="bg-white text-gray-500 text-end">
+                <p className="text-sm">@Genies Career Hub</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
-export default ContentDialog
+export default ContentDialog;

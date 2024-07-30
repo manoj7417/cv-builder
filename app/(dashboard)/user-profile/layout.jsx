@@ -1,3 +1,4 @@
+import { ResumeHeader } from "@/app/Layout/ResumeHeader"
 import Footer from "../../Layout/Footer"
 import NewResumeHeader from "../../Layout/NewResumeHeader"
 
@@ -7,7 +8,7 @@ const Layout = ({ children }) => {
       <main className="resume_dashboard" >
         <div className="resume_dashboard_container">
           <div className="wrapper">
-            <NewResumeHeader/>
+            <ResumeHeader/>
             {children}
             <Footer/>
           </div>

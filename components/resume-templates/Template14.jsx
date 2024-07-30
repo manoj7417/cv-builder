@@ -51,7 +51,10 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                         {item?.degree}
                       </h3>
-                      <h4 style={{ fontSize: fontStyle.paraFont }}>
+                      <h4
+                        style={{ fontSize: fontStyle.paraFont }}
+                        className="font-medium"
+                      >
                         {item?.institute}
                       </h4>
                       <div
@@ -111,12 +114,15 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     className={`py-2 ${fontStyle.paraFont} break-words`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
-                  <div className="px-3">
+                  <div className="px-3 py-2">
                     {item?.highlights?.length > 0 && (
-                      <ul className="list-disc">
+                      <ul className="list-disc pl-2">
                         {item?.highlights?.map((item, key) => {
                           return (
-                            <li key={key} className=" break-words text-15px">
+                            <li
+                              key={key}
+                              className="py-2 break-words text-15px"
+                            >
                               {item}
                             </li>
                           );
@@ -164,7 +170,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -229,11 +235,11 @@ const Skills = ({
                     className={`font-bold ${fontStyle.skillsFont} my-1 py-4 `}
                     key={i}
                   >
-                    <div className="text-start w-1/2 mb-1 whitespace-nowrap">
+                    <div className="text-start mb-1">
                       <span>{item?.name}</span>
                     </div>
                     <div
-                      className="w-1/2 text-end h-2.5"
+                      className="w-[60%] text-end h-2.5"
                       style={{
                         backgroundColor: colorText,
                       }}
@@ -377,13 +383,13 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-base items-center inline-flex"
+                        className="break-words text-16px font-bold items-center inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-base">{item.name}</p>
+                      <p className="break-words text-15px">{item.name}</p>
                     )}
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-words`}

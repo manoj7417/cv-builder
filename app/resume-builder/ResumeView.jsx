@@ -108,8 +108,8 @@ const images = [
   },
   {
     name: "Template11",
-    src: "/Template11-1.png",
-    alt: "Template11-1.png",
+    src: "/Template11-(new).png",
+    alt: "Template11-(new).png",
     type: templateType.premium,
   },
   {
@@ -156,8 +156,8 @@ const images = [
   },
   {
     name: "Template19",
-    src: "/Template19.png",
-    alt: "Template19.png",
+    src: "/Template19-(new).png",
+    alt: "Template19-(new).png",
   },
   {
     name: "Template20",
@@ -284,7 +284,6 @@ const ResumeView = ({ setIsContentVisible }) => {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens()
-    const templateName = resumeData.metadata.template;
     handleDownloadResume(accessToken.value)
   };
 

@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import ResumeForm from "./ResumeForm";
 import ResumeView from "./ResumeView";
 import Link from "next/link";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdDownload, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
@@ -32,11 +32,15 @@ const ResumeBuilderPage = () => {
     router.push("/");
   };
 
+  const handlePreviewClick = () => {
+    setIsContentVisible(true);
+  };
+
   return (
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="actions_button bg-white p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-          <div className="w-full mx-[40px] flex flex-row justify-between items-center">
+          <div className="w-full mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">
             <div className="header_section w-full md:block hidden">
               <Button
                 onClick={() => router.back()}
@@ -123,6 +127,9 @@ const ResumeBuilderPage = () => {
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
           <ResumeView setIsContentVisible={setIsContentVisible} />
         </div>
+         <div className="preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-2 rounded-full lg:hidden block cursor-pointer" onClick={handlePreviewClick}>
+            <span className="text-sm">Preview and Download <MdDownload className="text-base inline-flex mx-1"/></span>
+         </div>
         <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible} />
       </div>
     </>

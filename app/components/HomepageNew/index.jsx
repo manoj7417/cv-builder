@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import Link from "next/link";
 import NewNavbar from "../../ui/newNav";
@@ -25,6 +27,8 @@ import { Button } from "@/components/ui/button";
 import GetStartedModal from "@/components/component/GetStartedModal";
 import "./Homepage.css";
 import CourseSlider from "@/components/component/CourseSlider";
+import HomeBanner from "./HomeBanner";
+import { PiArrowLineUpRightBold } from "react-icons/pi";
 
 export default function HomepageNew() {
   const [hovered, setHovered] = useState(false);
@@ -59,91 +63,83 @@ export default function HomepageNew() {
     setHovered(!hovered);
   };
 
-  const defaultOptions = {
-    reverse: false, // reverse the tilt direction
-    max: 25, // max tilt rotation (degrees)
-    perspective: 5000, // Transform perspective, the lower the more extreme the tilt gets.
-    scale: 1.01, // 2 = 200%, 1.5 = 150%, etc..
-    speed: 2000, // Speed of the enter/exit transition
-    transition: true, // Set a transition on enter/exit.
-    axis: null, // What axis should be disabled. Can be X or Y.
-    reset: true, // If the tilt effect has to be reset on exit.
-    easing: "cubic-bezier(.50,.98,.52,.99)", // Easing on enter/exit.
-    padding: 0,
-    margin: 0,
-  };
-
-  const words = [
-    "Build your CV",
-    "Find career path",
-    "Identify skill gaps",
-    "Get career counselling",
-    "Take personality test",
-  ]; // Add more words as needed
-  const images = [
-    "/build-your-cv.png",
-    "/find-career-path.png",
-    "/identify-skill-gap.png",
-    "/get-career-councelling.png",
-    "/take-personality-test.png",
-  ];
-  const interval = 3000; // 2000ms or 2 seconds for each word
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const cycle = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, interval);
-    return () => clearInterval(cycle);
-  }, [words, interval]);
-
   return (
     <>
-      <section className="flex flex-col lg:flex-row lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
-        <div className="container lg:pt-0 pt-20">
-          <div className="flex flex-col justify-center items-center relative">
-            <Image
-              src={"/arrowright.png"}
-              width={100}
-              height={100}
-              alt="arrowright"
-              className="absolute top-[20%] left-0 w-auto h-auto"
+      <section className="w-full h-screen z-10 sticky top-0 left-0 right-0">
+        <HomeBanner showModal={showModal} setShowModal={setShowModal}/>
+        {/* <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative">
+          <div className="banner_image relative w-full h-full">
+            <video
+              src="banner.mp4"
+              autoPlay
+              muted
+              loop
+              className="w-full h-full object-cover"
             />
-            <Image
-              src={"/arrowleft.png"}
-              width={100}
-              height={100}
-              alt="arrowright"
-              className="absolute top-[30%] right-0 w-auto h-auto"
-            />
-            <div className="space-y-2 mx-auto text-center">
-              <h1 className="text-[32px] md:text-[50px] lg:text-[60px] mt-4 flex lg:flex-row flex-col items-center justify-center font-extrabold text-[#0D3572]">
-                <span className="mx-2 md:mx-4 lg:mx-10 slide-text-container">
-                  <span className="slide-text" key={index}>
-                    {words[index]}
-                    <Image
-                      src={images[index]}
-                      width={350}
-                      height={350}
-                      alt={words[index]}
-                      className="ml-4 min-h-[150px] min-w-[150px] md:min-h-[200px] md:min-w-[200px]"
-                    />
-                  </span>
+            <div className="overlay absolute inset-0 bg-white/30"></div>
+          </div>
+          <div className="side_content_1">
+            <div className="absolute lg:top-[35%] top-[25%] left-8 2xl:left-[15%] flex justify-between items-center gap-8">
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+                <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
+                  <img
+                    className="lg:h-8 h-4 lg:w-8 w-4 p-1"
+                    src="/hero1.png"
+                    alt="Dan_Abromov"
+                  />
                 </span>
-              </h1>
-              <h1 className="text-[30px] md:text-[60px] lg:text-[80px] font-extrabold text-[#0D3572] fixed_content">
-                <span className="2xl:ml-3 lg:ml-1 lg:px-0 px-2">
-                  with Genies Career Hub
-                </span>
-              </h1>
-              <p className="max-w-[800px] mx-auto text-center text-[#7C7C7C] text-[14px] md:text-[16px] lg:text-[18px] lg:px-0 px-5">
-                Stand out in the Job Market with Genies Career Hub’s integrated
-                services in Career Assistance. We help you find the right Career
-                Path, maximise your professional skills, build your job-winning
-                resume, and grow your career dynamically.
-              </p>
+                <div className="mx-2 text-white text-start flex-1">
+                  <div className="lg:text-sm text-[8px]">CV Studio</div>
+                  <div className="lg:text-[10px] text-[6px] text-wrap lg:w-[80%] w-full text-white">
+                    Write the CV that gets you the dream job
+                  </div>
+                </div>
+                <div className="text-white mr-3">
+                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
+                </div>
+              </div>
+              <div className="image_icon lg:block hidden">
+                <img src="/card-circle.png" alt="card" />
+              </div>
             </div>
-            <div className="flex flex-col lg:flex-row justify-center min-[400px]:flex-row mt-8">
+            <div className="absolute lg:top-[60%] top-[25%] 2xl:left-[18%] lg:left-5 right-5 flex justify-between items-center gap-8">
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+                <span className="relative inline-block bg-[#c4e8c7] p-1 rounded-full">
+                  <img
+                    className="lg:h-10 h-4 lg:w-10 w-4 p-1"
+                    src="/hero3.png"
+                    alt="Dan_Abromov"
+                  />
+                </span>
+                <div className="mx-2 text-white text-start flex-1">
+                  <div className="lg:text-sm text-[8px]">Career Coaching</div>
+                  <div className="lg:text-[10px] text-[6px] text-wrap">
+                    Expert Advice 24*7
+                  </div>
+                </div>
+                <div className="text-white mr-3">
+                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
+                </div>
+              </div>
+              <div className="image_icon lg:block hidden">
+                <img src="/card-circle.png" alt="card" />
+              </div>
+            </div>
+          </div>
+          <div className="banner_content absolute text-center space-y-4">
+            <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
+              Super Charge your{" "}
+            </h1>
+            <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
+              Career Potential
+            </h1>
+            <p className="lg:w-[30%] w-[60%] mx-auto lg:text-base text-sm text-[#0d3572] font-medium">
+              We have a passion to mentor you on your entire career path, help
+              you realise what you want to do, how to get into that career and
+              utilize experts to guide you on how to excel within it.
+            </p>
+            <p className="text-white">Let’s walk this path together</p>
+            <div className="flex justify-center mt-5">
               <div className="button_wrapper">
                 <button className="get_start_btn" onClick={handleButtonClick}>
                   <span className="btn_text">Explore Now</span>
@@ -167,190 +163,120 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-
-            {/* <div className="flex justify-center mt-10">
-              <Tilt options={defaultOptions}>
-                <Image
-                  src="/career genie website images (2) (1).png"
-                  width={1300}
-                  height={1000}
-                  className="w-full h-auto max-w-full"
-                  alt="banner-image"
-                />
-              </Tilt>
-            </div> */}
-            {showFloatingButton && (
-              <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
-                <div className="button_wrapper mb-5">
-                  <button
-                    className="get_start_btn floating"
-                    onClick={handleButtonClick}
-                  >
-                    <span className="btn_text">Explore Now</span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
-        </div>
-        <div></div>
-        {showModal && <GetStartedModal onClose={handleCloseModal} />}
-      </section>
-      <section className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-gradient-to-t from-blue-100 to-[#5dcafd33]">
-        <div className="discover_image lg:flex align-middle overflow-hidden hidden">
-          <Image
-            src={"/home-creative-down.png"}
-            width={2000}
-            height={1500}
-            alt="discover"
-            loading="lazy"
-            style={{
-              marginLeft: "-150px",
-            }}
-          />
-        </div>
-        <div className="my-auto p-10">
-          <CourseSlider />
-        </div>
-      </section>
-
-      {/* <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-24 lg:pt-32 bg-gradient-to-b from-white to-[#5dcafd33] relative">
-        <div className="container lg:pt-0 pt-20">
-          <div className="flex flex-col justify-center items-center">
-            <Image
-              src={"/arrowright.png"}
-              width={100}
-              height={100}
-              alt="arrowright"
-              className="absolute top-[20%] left-0 w-auto h-auto"
-            />
-            <Image
-              src={"/arrowleft.png"}
-              width={100}
-              height={100}
-              alt="arrowright"
-              className="absolute top-[30%] right-0 w-auto h-auto"
-            />
-            <div className="space-y-2 mx-auto text-center">
-              <h1 className="text-[75px] mt-4 text-center flex  lg:flex-row flex-col items-center justify-center  font-extrabold text-[#0D3572]">
-                <span
-                  className="mx-10 slide-text-container"
-                >
-                  <span className="slide-text" key={index}>
-                    {words[index]}
-                    <Image
-                      src={images[index]}
-                      width={350}
-                      height={350}
-                      alt={words[index]}
-                      className="ml-4 min-h-[200px] min-w-[200px]"
-                    />
-                  </span>
+          <div className="side_content_2">
+            <div className="absolute lg:top-[35%] top-[72%] 2xl:right-[15%] right-6 flex justify-between items-center gap-8">
+              <div className="image_icon lg:block hidden">
+                <img src="/card-circle.png" alt="card" />
+              </div>
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+                <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
+                  <img
+                    className="lg:h-8 h-4 lg:w-8 w-4 p-1"
+                    src="/hero2.png"
+                    alt="Dan_Abromov"
+                  />
                 </span>
-              </h1>
-              <h1 className="text-[100px] text-center font-extrabold text-[#0D3572]" style={{
-                marginTop:"-75px"
-              }}>
-                <span className="2xl:ml-3 lg:ml-1">with Genies Career Hub</span>
-              </h1>
-              <p className="max-w-[800px]  mx-auto text-center text-[#7C7C7C] text-[18px]">
-                Stand out in the Job Market with Genies Career Hub’s integrated
-                services in Career Assistance. We help you find the right Career
-                Path, maximise your professional skills, build your job-winning
-                resume, and grow your career dynamically.
-              </p>
-            </div>
-            <div className="flex lg:flex-row justify-center  flex-col  min-[400px]:flex-row ">
-              <div className="button_wrapper mt-8">
-                <button className="get_start_btn" onClick={handleButtonClick}>
-                  <span className="btn_text">Explore Now</span>
-                  <div className="btn_overlay">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
+                <div className="mx-2 text-white text-start flex-1">
+                  <div className="lg:text-sm text-[8px]">
+                    AI Career Coaching
                   </div>
-                </button>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <Tilt options={defaultOptions}>
-                <Image
-                  src="/career genie website images (2) (1).png"
-                  width={1300}
-                  height={1000}
-                  className=""
-                  alt="banner-image"
-                />
-              </Tilt>
-            </div>
-            {showFloatingButton && (
-              <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center">
-                <div className="button_wrapper mb-5">
-                  <button
-                    className="get_start_btn floating"
-                    onClick={handleButtonClick}
-                  >
-                    <span className="btn_text">Explore Now</span>
-                    <div className="btn_overlay">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-arrow-right"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </div>
-                  </button>
+                  <div className="lg:text-[10px] text-[6px] text-wrap">
+                    What career is best for you
+                  </div>
+                </div>
+                <div className="text-white mr-3">
+                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
                 </div>
               </div>
-            )}
+            </div>
+            <div className="absolute lg:top-[60%] top-[72%] 2xl:right-[18%] lg:right-6 left-5 flex justify-between items-center gap-8">
+              <div className="image_icon lg:block hidden">
+                <img src="/card-circle.png" alt="card" />
+              </div>
+              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
+                <span className="relative inline-block bg-[#f2c2c2] p-1 rounded-full">
+                  <img
+                    className="lg:h-10 h-4 lg:w-10 w-4 p-1"
+                    src="/hero4.png"
+                    alt="Dan_Abromov"
+                  />
+                </span>
+                <div className="mx-2 text-white text-start flex-1">
+                  <div className="lg:text-sm text-[8px]">Hire Expert</div>
+                  <div className="lg:text-[10px] text-[6px] text-wrap">
+                    Real life experts available to talk to
+                  </div>
+                </div>
+                <div className="text-white mr-3">
+                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
+      </section>
+      {showModal && <GetStartedModal onClose={handleCloseModal} />}
+
+      {showFloatingButton && (
+        <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center z-">
+          <div className="button_wrapper mb-5">
+            <button
+              className="get_start_btn floating"
+              onClick={handleButtonClick}
+            >
+              <span className="btn_text">Explore Now</span>
+              <div className="btn_overlay">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-arrow-right"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </div>
+            </button>
           </div>
         </div>
-        <div></div>
-        {showModal && <GetStartedModal onClose={handleCloseModal} />}
-      </section> */}
-      <Slider />
-      <TabResume />
-      <WorkTogether />
-      <FAQSection />
-      <ServiceSection />
+      )}
+
+      <section className="w-full g-full z-40 relative">
+        <div className="banner-bottom text-center -mt-15 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] relative bg-white">
+          <h2 className="lg:text-5xl text-3xl font-bold text-[#0d3572]">
+            How Career Genies Hub helps you
+          </h2>
+        </div>
+        <div className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-white">
+          <div className="discover_image lg:flex align-middle overflow-hidden hidden">
+            <Image
+              src={"/home-creative-down.png"}
+              width={2000}
+              height={1500}
+              alt="discover"
+              loading="lazy"
+              style={{
+                marginLeft: "-150px",
+              }}
+            />
+          </div>
+          <div className="my-auto p-10">
+            <CourseSlider />
+          </div>
+        </div>
+        <Slider />
+        <TabResume />
+        <WorkTogether />
+        <FAQSection />
+        <ServiceSection />
+      </section>
     </>
   );
 }

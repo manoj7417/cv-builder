@@ -35,8 +35,6 @@ import { toast } from "react-toastify";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
-
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -103,8 +101,8 @@ const templatesData = [
   },
   {
     name: "Template11",
-    src: "/Template11-1.png",
-    alt: "Template11-1.png",
+    src: "/Template11-(new).png",
+    alt: "Template11-(new).png",
     type: templateType.dummy,
   },
   {
@@ -151,8 +149,8 @@ const templatesData = [
   },
   {
     name: "Template19",
-    src: "/Template19-1.png",
-    alt: "Template19-1.png",
+    src: "/Template19-(new).png",
+    alt: "Template19-(new).png",
     type: templateType.free,
   },
   {
@@ -253,12 +251,13 @@ export default function Slider() {
           CV by creating a resume that aligns with your Professional Profile,
           employing our customised Curriculum Vitae template.
         </p>
-        <div className="mt-10 max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
-          <div className="mt-10 max-w-7xl mx-auto h-[500px] cv_slider">
+        <div className="mt-10 lg:max-w-7xl flex flex-wrap gap-5 mx-auto justify-center items-center h-full">
+          <div className="mt-10 lg:max-w-7xl w-full  mx-auto lg:h-[500px] h-auto cv_slider">
             <Swiper
-              // spaceBetween={30}
-              centeredSlides={false}
-              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              slidesPerView={1}
+              spaceBetween={20}
+              centeredSlides={true}
+              autoplay={{ delay: 7000, disableOnInteraction: false }}
               pagination={{ clickable: true, dynamicBullets: true }}
               navigation={false}
               loop={true}
@@ -268,12 +267,16 @@ export default function Slider() {
                   spaceBetween: 20,
                 },
                 768: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                1024: {
                   slidesPerView: 4,
                   spaceBetween: 40,
                 },
-                1024: {
+                1280: {
                   slidesPerView: 5,
-                  spaceBetween: 30,
+                  spaceBetween: 50,
                 },
               }}
               modules={[Autoplay, Pagination, Navigation]}
@@ -281,7 +284,7 @@ export default function Slider() {
             >
               {templatesData.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div className="group relative overflow-hidden rounded-lg shadow-lg px-3 py-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
+                  <div className="group lg:w-auto lg:h-auto w-[220px] h-[320px] relative overflow-hidden rounded-lg shadow-lg px-3 py-2 bg-gradient-to-t from-[#8181b9] to-[#dcecff]">
                     {item.type === templateType.premium && (
                       <div className="card_box">
                         <span></span>

@@ -48,6 +48,7 @@ const Education = ({ fontStyle, headingColor }) => {
                             fontSize: fontStyle.paraFont,
                             color: headingColor,
                           }}
+                          className="font-medium"
                         >
                           {item?.institute}
                         </h4>
@@ -125,7 +126,7 @@ const Experience = ({ fontStyle, headingColor }) => {
                         fontSize: fontStyle.paraFont,
                         color: headingColor,
                       }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.employer}
                     </h4>
@@ -150,12 +151,12 @@ const Experience = ({ fontStyle, headingColor }) => {
                   className={`${fontStyle.paraFont} break-words text-justify`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
-                <div className="px-3">
+                <div className="px-3 py-2">
                   {item?.highlights?.length > 0 && (
-                    <ul className="list-disc">
+                    <ul className="list-disc pl-2">
                       {item?.highlights?.map((item, key) => {
                         return (
-                          <li key={key} className=" break-words text-15px">
+                          <li key={key} className="py-2 break-words text-15px">
                             {item}
                           </li>
                         );
@@ -212,7 +213,7 @@ const Projects = ({ fontStyle, headingColor }) => {
                         fontSize: fontStyle.paraFont,
                         color: headingColor,
                       }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {item?.subtitle}
                     </h4>
@@ -648,7 +649,7 @@ const Template6 = () => {
                 {resumeData?.basics?.email && (
                   <a
                     href={`mailto:${resumeData?.basics?.email}`}
-                    className="hover:underline flex items-center mt-1  text-wrap w-full "
+                    className="hover:underline flex items-center mt-1  text-wrap"
                   >
                     <MdOutlineMailOutline
                       className="mr-2"

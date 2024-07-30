@@ -7,10 +7,8 @@ import LoaderUI from "./ui/LoaderUI";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import { useUserStore } from "./store/UserStore";
-import axios from "axios";
-
-// import NewResumeHeader from "./Layout/NewResumeHeader";
-const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
+import { ResumeHeader } from "./Layout/ResumeHeader";
+// const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +16,7 @@ export default function Home() {
 
 
  
-
+;
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -26,7 +24,9 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-
+  useEffect(() => {
+   
+  }, [])
 
   return (
     <main>
@@ -34,9 +34,8 @@ export default function Home() {
         <LoaderUI />
       ) : (
         <>
-          {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+          <ResumeHeader />
           <HomepageNew />
-          {/* <Homepage /> */}
           <Footer />
         </>
       )}
