@@ -37,6 +37,7 @@
     "antd": "^5.17.2",
     "aos": "^2.3.4",
     "apexcharts": "^3.49.0",
+    "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "chart.js": "^4.4.3",
     "class-variance-authority": "^0.7.0",
@@ -49,6 +50,7 @@
     "font-awesome": "^4.7.0",
     "framer-motion": "^11.1.7",
     "html-react-parser": "^5.1.10",
+    "jodit-react": "^4.1.2",
     "lodash.debounce": "^4.0.8",
     "lodash.set": "^4.3.2",
     "lottie-react": "^2.4.0",
@@ -91,8 +93,7 @@
     "webfontloader": "^1.6.28",
     "yup": "^1.4.0",
     "zundo": "^2.1.0",
-    "zustand": "^4.5.2",
-    "autoprefixer": "^10.4.19"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/cookie": "^0.6.0",

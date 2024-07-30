@@ -5,10 +5,10 @@ import "./globals.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
+// import VerifyUser from "@/components/component/VerifyUser";
 
 // export const metadata = {
 //   title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
@@ -21,6 +21,7 @@ const inter = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["300", "400", "70
 
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en" >
       <head>
@@ -63,6 +64,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
       </head>
       <body className={inter.className}>
         <ToastContainer />
+        {/* <VerifyUser /> */}
         {children}
       </body>
     </html>

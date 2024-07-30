@@ -278,7 +278,7 @@ export default function Home() {
               onClick={() => setShowDialog(false)}
             >
               <h1 className="text-center pt-4 text-xl font-bold text-gray-500">
-                Upload and attach files, or start with afresh!
+                Upload and attach files, or start afresh!
               </h1>
               <p className="text-center px-6 md:px-12 sm:px-12 text-gray-500">
                 Drag and drop your resume file or upload from Google Drive or
