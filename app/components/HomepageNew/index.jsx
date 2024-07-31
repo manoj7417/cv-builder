@@ -65,45 +65,45 @@ export default function HomepageNew() {
 
   return (
     <>
-      <section className="w-full min-h-screen sm:sticky sm:top-0 p-4 pt-28 sm:p-18 bg-gray-100 text-black flex items-center">
-        <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
-          <div className="flex flex-col md:flex-row items-center max-w-6xl">
-            <div className="text-start">
-              <h1 className="text-4xl sm:text-8xl font-extrabold mb-4 sm:mb-6 sm:text-start text-center">
-                Super Charge Your <span className="text-blue-600">Career</span> Potential
-              </h1>
-              <p className="text-sm text-black text-center sm:text-start sm:text-xl font-medium mb-4 sm:mb-10 max-w-4xl">
-                We have a passion to mentor you on your entire career path, help you realize what you want to do, how to get into that career, and utilize experts to guide you on how to excel within it.
-              </p>
-              <div className="flex justify-center sm:justify-start">
-                
-                <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
-                  Get Started
-                </button>
-              </div>
-            </div>
-            <Image src="/v1.png" alt="home-creative-down" className="" height={300} width={450} />
-          </div>
-          <div className="flex-1 w-full overflow-hidden relative">
-            <div className="hidden sm:flex animate-marquee whitespace-nowrap p-9">
-              {Array(2).fill().map((_, index) => (
-                <div key={index} className="flex gap-8 me-8">
-                  {renderServiceCards()}
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-2 gap-4 gap-y-10 sm:hidden pt-10 pb-10">
-              {renderServiceCards()}
-            </div>
-          </div>
+      <section className="w-full min-h-screen xs:sticky sm:top-0 p-4 pt-28 sm:p-18 bg-gray-100 text-black flex items-center">
+  <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
+    <div className="flex flex-col xs:flex-row items-center max-w-6xl">
+      <div className="text-start">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
+          Super Charge Your <span className="text-blue-600">Career</span> Potential
+        </h1>
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-center xs:text-start">
+          We have a passion to mentor you on your entire career path, help you realize what you want to do, how to get into that career, and utilize experts to guide you on how to excel within it.
+        </p>
+        <div className="flex justify-center xs:justify-start">
+          <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
+            Get Started
+          </button>
         </div>
-      </section>
+      </div>
+      <Image src="/v1.png" alt="home-creative-down" className="" height={300} width={450} />
+    </div>
+    <div className="flex-1 w-full overflow-hidden relative">
+      <div className="hidden lg:flex animate-marquee whitespace-nowrap p-9">
+        {Array(2).fill().map((_, index) => (
+          <div key={index} className="flex gap-8 me-8">
+            {renderServiceCards()}
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-4 gap-y-10 lg:hidden pt-10 pb-10">
+        {renderServiceCards()}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {showModal && <GetStartedModal onClose={handleCloseModal} />}
 
       {showFloatingButton && (
         <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
-          <button className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden sm:block" onClick={handleButtonClick}>
+          <button className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block" onClick={handleButtonClick}>
             <span>Explore Now</span>
             <div>
               <svg
@@ -127,7 +127,7 @@ export default function HomepageNew() {
       )}
 
       <section className="w-full z-40 relative">
-        <div className="text-center sm:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
+        <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
           <h2 className="lg:text-5xl text-3xl font-bold ">
             How Career Genies Hub helps you
           </h2>
