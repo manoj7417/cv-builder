@@ -1,34 +1,16 @@
 /** @format */
 
 "use client";
-import Link from "next/link";
-import NewNavbar from "../../ui/newNav";
-import Slider from "../../../components/component/Slider";
-import { ServiceSection } from "@/components/component/service-section";
-import Footer from "../../ui/newFooter";
-import Navbar from "../../ui/newNav";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Tilt } from "react-tilt";
+import Slider from "../../../components/component/Slider";
+import { ServiceSection } from "@/components/component/service-section";
 import TabResume from "@/components/component/TabResume";
 import FAQSection from "@/components/component/FAQSection";
 import WorkTogether from "@/components/component/WorkTogether";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
 import GetStartedModal from "@/components/component/GetStartedModal";
-import "./Homepage.css";
 import CourseSlider from "@/components/component/CourseSlider";
-import HomeBanner from "./HomeBanner";
-import { PiArrowLineUpRightBold } from "react-icons/pi";
+import "./Homepage.css";
 
 export default function HomepageNew() {
   const [hovered, setHovered] = useState(false);
@@ -45,7 +27,6 @@ export default function HomepageNew() {
 
   const handleScroll = () => {
     if (window.scrollY > 300) {
-      // Adjust the scroll value as needed
       setShowFloatingButton(true);
     } else {
       setShowFloatingButton(false);
@@ -63,211 +44,106 @@ export default function HomepageNew() {
     setHovered(!hovered);
   };
 
+  function renderServiceCards() {
+    const services = [
+      { src: "/s1.svg", alt: "Expert Advice 24/7", title: "Expert Advice 24/7", description: "Gain access to expert career advice anytime to excel in your chosen field." },
+      { src: "/s2 (2).svg", alt: "What Career is Best for You", title: "What Career is Best for You", description: "Discover the best career paths suited to your personality and skills." },
+      { src: "/s3.svg", alt: "Real Life Experts Talk", title: "Real Life Experts Talk", description: "Interact with industry leaders to get insights into professional success." },
+      { src: "/s4.svg", alt: "Write the CV that Gets You the Dream Job", title: "Write the CV that Gets You the Dream Job", description: "Create a resume that stands out and opens doors to new opportunities." }
+    ];
+
+    return services.map((service, index) => (
+      <div key={index} className="p-4 bg-white rounded-xl border-2 shadow-lg border-[#0d3572] sm:px-8 sm:py-4 sm:mt-16">
+        <div className="flex justify-center -mt-12 sm:-mt-16">
+          <img className="w-16 h-16 border-2 bg-white border-[#0d3572] rounded-full sm:w-20 sm:h-20" src={service.src} alt={service.alt}/>
+        </div>
+        <h2 className="mt-2 text-lg font-bold text-black sm:text-2xl">{service.title}</h2>
+        <p className="mt-2 text-xs text-black sm:text-sm sm:text-md whitespace-normal">{service.description}</p>
+      </div>
+    ));
+  }
+
   return (
     <>
-      <section className="w-full h-screen z-10 sticky top-0 left-0 right-0">
-        <HomeBanner showModal={showModal} setShowModal={setShowModal}/>
-        {/* <div className="new_home_banner flex items-center justify-center w-full h-full border-t border-gray-50 relative">
-          <div className="banner_image relative w-full h-full">
-            <video
-              src="banner.mp4"
-              autoPlay
-              muted
-              loop
-              className="w-full h-full object-cover"
-            />
-            <div className="overlay absolute inset-0 bg-white/30"></div>
-          </div>
-          <div className="side_content_1">
-            <div className="absolute lg:top-[35%] top-[25%] left-8 2xl:left-[15%] flex justify-between items-center gap-8">
-              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-                <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
-                  <img
-                    className="lg:h-8 h-4 lg:w-8 w-4 p-1"
-                    src="/hero1.png"
-                    alt="Dan_Abromov"
-                  />
-                </span>
-                <div className="mx-2 text-white text-start flex-1">
-                  <div className="lg:text-sm text-[8px]">CV Studio</div>
-                  <div className="lg:text-[10px] text-[6px] text-wrap lg:w-[80%] w-full text-white">
-                    Write the CV that gets you the dream job
-                  </div>
-                </div>
-                <div className="text-white mr-3">
-                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-                </div>
-              </div>
-              <div className="image_icon lg:block hidden">
-                <img src="/card-circle.png" alt="card" />
-              </div>
-            </div>
-            <div className="absolute lg:top-[60%] top-[25%] 2xl:left-[18%] lg:left-5 right-5 flex justify-between items-center gap-8">
-              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-                <span className="relative inline-block bg-[#c4e8c7] p-1 rounded-full">
-                  <img
-                    className="lg:h-10 h-4 lg:w-10 w-4 p-1"
-                    src="/hero3.png"
-                    alt="Dan_Abromov"
-                  />
-                </span>
-                <div className="mx-2 text-white text-start flex-1">
-                  <div className="lg:text-sm text-[8px]">Career Coaching</div>
-                  <div className="lg:text-[10px] text-[6px] text-wrap">
-                    Expert Advice 24*7
-                  </div>
-                </div>
-                <div className="text-white mr-3">
-                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-                </div>
-              </div>
-              <div className="image_icon lg:block hidden">
-                <img src="/card-circle.png" alt="card" />
-              </div>
-            </div>
-          </div>
-          <div className="banner_content absolute text-center space-y-4">
-            <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
-              Super Charge your{" "}
-            </h1>
-            <h1 className="lg:text-6xl text-3xl font-semibold text-[#0d3572]">
-              Career Potential
-            </h1>
-            <p className="lg:w-[30%] w-[60%] mx-auto lg:text-base text-sm text-[#0d3572] font-medium">
-              We have a passion to mentor you on your entire career path, help
-              you realise what you want to do, how to get into that career and
-              utilize experts to guide you on how to excel within it.
-            </p>
-            <p className="text-white">Let’s walk this path together</p>
-            <div className="flex justify-center mt-5">
-              <div className="button_wrapper">
-                <button className="get_start_btn" onClick={handleButtonClick}>
-                  <span className="btn_text">Explore Now</span>
-                  <div className="btn_overlay">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </div>
+      <section className="w-full min-h-screen sm:sticky sm:top-0 p-4 pt-28 sm:p-12 bg-gray-100 text-black flex items-center">
+        <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
+          <div className="flex flex-col md:flex-row items-center max-w-6xl">
+            <div className="text-start">
+              <h1 className="text-4xl sm:text-8xl font-extrabold mb-4 sm:mb-6 sm:text-start text-center">
+                Super Charge Your <span className="text-blue-600">Career</span> Potential
+              </h1>
+              <p className="text-sm text-black text-center sm:text-start sm:text-xl font-medium mb-4 sm:mb-10 max-w-4xl">
+                We have a passion to mentor you on your entire career path, help you realize what you want to do, how to get into that career, and utilize experts to guide you on how to excel within it.
+              </p>
+              <div className="flex justify-center sm:justify-start">
+                
+                <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
+                  Get Started
                 </button>
               </div>
             </div>
+            <Image src="/v1.png" alt="home-creative-down" className="" height={300} width={450} />
           </div>
-          <div className="side_content_2">
-            <div className="absolute lg:top-[35%] top-[72%] 2xl:right-[15%] right-6 flex justify-between items-center gap-8">
-              <div className="image_icon lg:block hidden">
-                <img src="/card-circle.png" alt="card" />
-              </div>
-              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-                <span className="relative inline-block bg-[#FBF1DD] p-1 rounded-full">
-                  <img
-                    className="lg:h-8 h-4 lg:w-8 w-4 p-1"
-                    src="/hero2.png"
-                    alt="Dan_Abromov"
-                  />
-                </span>
-                <div className="mx-2 text-white text-start flex-1">
-                  <div className="lg:text-sm text-[8px]">
-                    AI Career Coaching
-                  </div>
-                  <div className="lg:text-[10px] text-[6px] text-wrap">
-                    What career is best for you
-                  </div>
+          <div className="flex-1 w-full overflow-hidden relative">
+            <div className="hidden sm:flex animate-marquee whitespace-nowrap p-9">
+              {Array(2).fill().map((_, index) => (
+                <div key={index} className="flex gap-8 me-8">
+                  {renderServiceCards()}
                 </div>
-                <div className="text-white mr-3">
-                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="absolute lg:top-[60%] top-[72%] 2xl:right-[18%] lg:right-6 left-5 flex justify-between items-center gap-8">
-              <div className="image_icon lg:block hidden">
-                <img src="/card-circle.png" alt="card" />
-              </div>
-              <div className="flex items-center bg-[#0d3572] rounded-full lg:p-2 p-1 lg:w-[300px] w-[150px] cursor-pointer">
-                <span className="relative inline-block bg-[#f2c2c2] p-1 rounded-full">
-                  <img
-                    className="lg:h-10 h-4 lg:w-10 w-4 p-1"
-                    src="/hero4.png"
-                    alt="Dan_Abromov"
-                  />
-                </span>
-                <div className="mx-2 text-white text-start flex-1">
-                  <div className="lg:text-sm text-[8px]">Hire Expert</div>
-                  <div className="lg:text-[10px] text-[6px] text-wrap">
-                    Real life experts available to talk to
-                  </div>
-                </div>
-                <div className="text-white mr-3">
-                  <PiArrowLineUpRightBold className="lg:text-xl text-[10px]" />
-                </div>
-              </div>
+            <div className="grid grid-cols-2 gap-4 gap-y-10 sm:hidden pt-10 pb-10">
+              {renderServiceCards()}
             </div>
           </div>
-        </div> */}
+        </div>
       </section>
+
       {showModal && <GetStartedModal onClose={handleCloseModal} />}
 
       {showFloatingButton && (
-        <div className="floating_button fixed bottom-0 left-0 right-0 w-full flex justify-center z-">
-          <div className="button_wrapper mb-5">
-            <button
-              className="get_start_btn floating"
-              onClick={handleButtonClick}
-            >
-              <span className="btn_text">Explore Now</span>
-              <div className="btn_overlay">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-arrow-right"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </div>
-            </button>
-          </div>
+        <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
+          <button className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300" onClick={handleButtonClick}>
+            <span>Explore Now</span>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-arrow-right"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </div>
+          </button>
         </div>
       )}
 
-      <section className="w-full g-full z-40 relative">
-        <div className="banner-bottom text-center -mt-15 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] relative bg-white">
-          <h2 className="lg:text-5xl text-3xl font-bold text-[#0d3572]">
+      <section className="w-full z-40 relative">
+        <div className="text-center sm:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
+          <h2 className="lg:text-5xl text-3xl font-bold ">
             How Career Genies Hub helps you
           </h2>
         </div>
-        <div className="grid lg:grid-cols-2 grid-cols-1 py-20 bg-white">
-          <div className="discover_image lg:flex align-middle overflow-hidden hidden">
+        <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
+          <div className="lg:flex align-middle overflow-hidden hidden">
             <Image
               src={"/home-creative-down.png"}
               width={2000}
               height={1500}
               alt="discover"
               loading="lazy"
-              style={{
-                marginLeft: "-150px",
-              }}
+              className="-ml-36"
             />
           </div>
-          <div className="my-auto p-10">
+          <div className="my-auto p-4 sm:p-10">
             <CourseSlider />
           </div>
         </div>

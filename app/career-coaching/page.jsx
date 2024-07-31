@@ -91,7 +91,7 @@ const ComingSoonPage = () => {
             />
             <div className='space-y-2 lg:mx-auto mx-0 lg:py-20 py-5'>
               <h1
-                className='lg:text-[80px] text-[40px] mt-4 lg:py-10 py-5 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]'
+                className='lg:text-[80px] text-[40px] mt-4 lg:py-10 py-5 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-black'
                 style={{
                   WebkitTextStrokeWidth: "thin",
                   wordSpacing: "0.8rem",
@@ -186,7 +186,7 @@ const ComingSoonPage = () => {
             {/* Right Column - Text */}
             <div className='w-full md:w-1/2 mt-8 md:mt-0 md:pl-8'>
               <h2 className='trust font-bold text-gray-800'>
-                Trusted By <span className='text-[#0D3572]'>Talent</span> From
+                Trusted By <span className='text-black'>Talent</span> From
                 Around The Globe
               </h2>
               <p className='mt-4 text-gray-600'>
@@ -204,7 +204,7 @@ const ComingSoonPage = () => {
             <div className='w-full text-center md:text-left sm:text-left md:w-1/2 mt-8 md:mt-0 md:pl-8'>
               <h2 className='trust font-bold text-gray-800'>
                 Grow as
-                <span className='text-[#0D3572]'> Organisations</span>
+                <span className='text-black'> Organisations</span>
               </h2>
               <p className='mt-4 text-gray-600'>
                 Are you looking to upskill employees with considerable
@@ -291,7 +291,7 @@ const ComingSoonPage = () => {
               <h1 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center items-center font-extrabold'>
                 We Offer Coaching For
                 <br />
-                <span className='text-[#0D3572]'>Every</span> Domain
+                <span className='text-black'>Every</span> Domain
               </h1>
               <div className='flex justify-center mt-4'></div>
               <p className='max-w-[800px] mx-auto text-center text-gray text-[18px] pt-4'>
@@ -472,7 +472,7 @@ const ComingSoonPage = () => {
             <div className='w-full md:w-[40%] mt-8 md:mt-0 md:pl-8'>
               <h2 className='trust font-bold text-gray-800'>
                 A Traditional &{" "}
-                <span className='text-[#0D3572]'>Transparent</span> Career
+                <span className='text-black'>Transparent</span> Career
                 Coaching
               </h2>
               <p className='mt-4 text-gray-600'>

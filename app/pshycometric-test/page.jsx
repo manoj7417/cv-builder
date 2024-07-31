@@ -92,7 +92,7 @@ const Page = () => {
               className="absolute top-[30%] right-0 w-auto h-auto"
             />
             <div className="space-y-2 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:py-0 py-10">
-              <h1 className="text-[30px] md:text-[62px] sm:text-[62px] mt-4 pt-5 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-[#0D3572]">
+              <h1 className="text-[30px] md:text-[62px] sm:text-[62px] mt-4 pt-5 flex flex-col md:flex-row sm:flex-row text-center justify-center items-center font-extrabold text-black">
                 Comprehend Your Career with the <br></br>Power of Science!
               </h1>
 

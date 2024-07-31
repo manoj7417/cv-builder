@@ -173,9 +173,9 @@ export default function AboutUs() {
             <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
                 Organisational{" "}
-                <span className="text-[#0D3572]">Connect for </span>
+                <span className="text-black">Connect for </span>
                 {""}
-                <span className="text-[#0D3572]"> </span>Career Coach
+                <span className="text-black"> </span>Career Coach
               </h2>
               <p className="mt-4 text-gray-600">
                 At Genies Career Hub, we are dedicated to helping you build
@@ -225,8 +225,8 @@ export default function AboutUs() {
             <div className="w-full text-center md:text-left sm:text-left md:w-1/2 mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
                 Coaching that is inspired by{" "}
-                <span className="text-[#0D3572]">Experience</span> and{" "}
-                <span className="text-[#0D3572]">Expertise </span>
+                <span className="text-black">Experience</span> and{" "}
+                <span className="text-black">Expertise </span>
               </h2>
               <p className="mt-4 text-gray-600">
                 Our community of Career Coaches is not only expertly trained in
@@ -297,8 +297,8 @@ export default function AboutUs() {
             <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
                 We Bring{" "}
-                <span className="text-[#0D3572]">Professional Advisors</span> to
-                your Table, <span className="text-[#0D3572]">Instantly!</span>
+                <span className="text-black">Professional Advisors</span> to
+                your Table, <span className="text-black">Instantly!</span>
               </h2>
               <p className="mt-4 text-gray-600">
                 Genies Career Hub is established with a envision to

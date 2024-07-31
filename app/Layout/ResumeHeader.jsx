@@ -12,22 +12,27 @@ import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 
 const menuItems = [
+ 
   {
-    name: "Overview",
-    href: "#",
+    name: "Career Coaching",
+    href: "/coming-soon",
   },
   {
-    name: "Solution",
-    href: "#",
+    name: "CV Studio",
+    href: "/resume-dashboard",
   },
   {
-    name: "Plans",
-    href: "#",
+    name: "Pricing",
+    href: "/pricing",
   },
   {
-    name: "Referrals",
-    href: "#",
+    name: "About Us",
+    href: "/about-us",
   },
+  {
+    name: "Contact Us",
+    href: "/contact-us",
+  }
 ];
 
 export function ResumeHeader() {
@@ -105,7 +110,7 @@ export function ResumeHeader() {
               ))}
             </ul>
           </div>
-          <div className="flex grow justify-end">
+          {/* <div className="flex grow justify-end">
             <div className="notification bg-gray-200 rounded-full p-2 relative">
               <IoNotificationsOutline className="text-xl" />
               <span className="absolute top-0 right-0 flex h-3 w-3 -mt-1 -mr-1">
@@ -113,7 +118,7 @@ export function ResumeHeader() {
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-400" />
               </span>
             </div>
-          </div>
+          </div> */}
           <div className="ml-2 hidden lg:block">
             {userState?.isAuthenticated ? (
               <div className="relative" ref={dropdownRef}>

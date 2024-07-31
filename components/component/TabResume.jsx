@@ -1,9 +1,8 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaRegFolderOpen,
-  FaStore,
   FaDatabase,
   FaLaptop,
   FaPalette,
@@ -12,27 +11,35 @@ import {
 } from "react-icons/fa6";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { FaCogs, FaPencilRuler, FaUsersCog } from "react-icons/fa";
+import { FaPencilRuler, FaUsersCog } from "react-icons/fa";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "../ui/tabs";
-import CourseSlider from "./CourseSlider";
 import { ImSpinner8 } from "react-icons/im";
 import { useRouter } from "next/navigation";
-import { useUserStore } from "@/app/store/UserStore";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
 import { GetTokens } from "@/app/actions";
 import { createNewJobProfileResume } from "@/app/api/api";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { MdOutlineKeyboardArrowRight, MdOutlineReadMore } from "react-icons/md";
+import { MdOutlineReadMore } from "react-icons/md";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
-  // const [imageLoading, setImageLoading] = useState(true);
-  // State to manage image loading
   const [isImageLoading, setIsImageLoading] = useState(true);
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("Business Analyst");
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const TabsHeader = [
     {
@@ -71,12 +78,6 @@ export default function TabResume() {
       icon: <FaPencilRuler className='text-[#3F51B5]' />,
       src: "/Template12-1.png",
     },
-    // {
-    //   id: 7,
-    //   name: "Engineer",
-    //   icon: <FaCogs className="text-[#9C27B0]" />,
-    //   src: "/Template22-1.png",
-    // },
     {
       id: 8,
       name: "Accounting",
@@ -89,12 +90,6 @@ export default function TabResume() {
       icon: <FaPalette className='text-[#E91E63]' />,
       src: "/Template-design.png",
     },
-    // {
-    //   id: 10,
-    //   name: "Marketing",
-    //   icon: <FaStore className="text-[#FF5722]" />,
-    //   src: "/Template16-1.png",
-    // },
   ];
 
   const handleCreateCV = async (name) => {
@@ -121,12 +116,18 @@ export default function TabResume() {
     }
   };
 
+  const handleSelectChange = (event) => {
+    setSelectedTab(event.target.value);
+  };
+
+  const selectedIcon = TabsHeader.find((tab) => tab.name === selectedTab)?.icon;
+
   return (
     <>
       <div className='bg-gradient-to-b from-[#e4f5fc] to-[white]'>
         <div className='rounded-t-xl p-6'>
           <div className='tabs_heading'>
-            <h2 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-[#0D3572] text-center'>
+            <h2 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-black text-center'>
               Discover CVs that fit your Dream Job
             </h2>
             <p className='lg:w-1/2 w-full mx-auto lg:text-xl text-sm text-center my-4 text-[#7C7C7C]'>
@@ -136,44 +137,58 @@ export default function TabResume() {
               resume.
             </p>
           </div>
-          <Tabs
-            className='max-w-5xl mx-auto py-5'
-            defaultValue='Business Analyst'>
-            <div className='grid lg:grid-cols-2 grid-cols-1 place-items-around items-center '>
-              <div className='tabs_main'>
-                <TabsList className='flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4'>
-                  {TabsHeader?.map((item, index) => (
-                    <>
-                      <TabsTrigger value={item?.name} key={index}>
-                        <div className='tabs_header flex gap-2 items-center justify-start lg:text-xl text-sm'>
-                          {item?.icon}
-                          {item?.name}
-                        </div>
-                      </TabsTrigger>
-                    </>
-                  ))}
-                  <div className='view_more pl-6 pt-2'>
-                    <Link href='/resume-dashboard' className='text-[18px]'>
-                      <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2' />{" "}
-                      View More
-                    </Link>
+          {isMobile ? (
+            <div className='max-w-5xl mx-auto py-5'>
+              <div className='relative flex items-center px-8 mb-5'>
+                <div className='text-3xl mr-3'>{selectedIcon}</div>
+                <div className='relative w-full'>
+                  <select
+                    className='w-full p-3 bg-white border border-gray-300 rounded-md text-xl font-semibold text-blue-950 focus:outline-none focus:ring focus:border-blue-500 appearance-none'
+                    value={selectedTab}
+                    onChange={handleSelectChange}
+                    style={{ WebkitAppearance: "none", MozAppearance: "none" }}>
+                    {TabsHeader.map((item) => (
+                      <option key={item.id} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700'>
+                    <svg
+                      className='fill-current h-5 w-5'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 20 20'>
+                      <path d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' />
+                    </svg>
                   </div>
-                </TabsList>
+                </div>
               </div>
-              <div className='tabs_content'>
-                {/* {TabsHeader.length > 0 &&
-                  TabsHeader?.map((item, index) => (
-                    <TabsContent value={item?.name} key={index}>
-                      <div className='relative flex justify-center  overflow-hidden group p-4'>
-                        <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
+              {TabsHeader.map(
+                (item) =>
+                  item.name === selectedTab && (
+                    <div key={item.id} className='py-5'>
+                      <div className='relative flex justify-center overflow-hidden group'>
+                        <div className='relative w-full max-w-xs p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
+                          {isImageLoading && (
+                            <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9]'>
+                              <ImSpinner8 className='animate-spin text-black text-2xl' />
+                              <span className='mx-2'>Loading...</span>
+                            </div>
+                          )}
                           <Image
                             src={item.src}
-                            key={index}
                             width={800}
                             height={400}
                             alt={item.name}
-                            className='object-fit h-full rounded-md'
-                            loading='lazy'
+                            className={`object-fit rounded-md w-full ${
+                              isImageLoading ? "hidden" : ""
+                            }`}
+                            onLoadingComplete={() => setIsImageLoading(false)}
+                            priority={true}
+                            placeholder='blur'
+                            blurDataURL={`data:image/svg+xml;base64,${btoa(
+                              '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><rect width="100%" height="100%" fill="#f0f0f0"/></svg>'
+                            )}`}
                           />
                         </div>
                         <div className='absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
@@ -192,14 +207,49 @@ export default function TabResume() {
                           </Button>
                         </div>
                       </div>
-                    </TabsContent>
-                  ))} */}
-                {TabsHeader.length > 0 &&
-                  TabsHeader.map((item, index) => {
-                    return (
+                      <div className='mt-4 text-center'>
+                        <Link href='/resume-dashboard'>
+                          <span className='text-[18px]  font-bold hover:underline'>
+                            <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2' />
+                            View More
+                          </span>
+                        </Link>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
+          ) : (
+            <Tabs
+              className='max-w-5xl mx-auto py-5'
+              defaultValue='Business Analyst'>
+              <div className='grid lg:grid-cols-2 grid-cols-1 place-items-around items-center '>
+                <div className='tabs_main'>
+                  <TabsList className='flex flex-col w-full justify-start flex-wrap py-10 h-auto gap-4'>
+                    {TabsHeader?.map((item, index) => (
+                      <TabsTrigger value={item?.name} key={index}>
+                        <div className='tabs_header flex gap-2 items-center justify-start lg:text-xl text-sm'>
+                          {item?.icon}
+                          {item?.name}
+                        </div>
+                      </TabsTrigger>
+                    ))}
+                    <div className='view_more pl-6 pt-2'>
+                      <Link href='/resume-dashboard'>
+                        <span className='text-[18px]'>
+                          <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2' />{" "}
+                          View More
+                        </span>
+                      </Link>
+                    </div>
+                  </TabsList>
+                </div>
+                <div className='tabs_content'>
+                  {TabsHeader.length > 0 &&
+                    TabsHeader.map((item, index) => (
                       <TabsContent value={item?.name} key={index}>
                         <div className='relative flex justify-center overflow-hidden group p-4'>
-                          <div className='relative h-[600px] w-[400px] p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
+                          <div className='relative w-full max-w-xs p-3 flex items-center justify-center bg-gradient-to-t from-[#8181b9] to-[#dcecff] rounded-md'>
                             {isImageLoading && (
                               <div className='absolute inset-0 flex items-center justify-center bg-[#0EA5E9]'>
                                 <ImSpinner8 className='animate-spin text-black text-2xl' />
@@ -211,15 +261,17 @@ export default function TabResume() {
                               width={800}
                               height={400}
                               alt={item.name}
-                              className={`object-fit rounded-md h-full ${
+                              className={`object-fit rounded-md w-full ${
                                 isImageLoading ? "hidden" : ""
                               }`}
-                              onLoadingComplete={() => setIsImageLoading(false)}
+                              onLoadingComplete={() =>
+                                setIsImageLoading(false)
+                              }
                               priority={true}
-                              placeholder='blur' // Use a blurred placeholder while loading
+                              placeholder='blur'
                               blurDataURL={`data:image/svg+xml;base64,${btoa(
                                 '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><rect width="100%" height="100%" fill="#f0f0f0"/></svg>'
-                              )}`} // A placeholder to improve perceived performance
+                              )}`}
                             />
                           </div>
                           <div className='absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
@@ -239,30 +291,13 @@ export default function TabResume() {
                           </div>
                         </div>
                       </TabsContent>
-                    );
-                  })}
+                    ))}
+                </div>
               </div>
-            </div>
-          </Tabs>
+            </Tabs>
+          )}
         </div>
       </div>
-      {/* <section className="grid lg:grid-cols-2 grid-cols-1 py-20">
-        <div className="discover_image lg:flex align-middle overflow-hidden hidden">
-          <Image
-            src={"/home-creative-down.png"}
-            width={2000}
-            height={1500}
-            alt="discover"
-            loading="lazy"
-            style={{
-              marginLeft: "-150px",
-            }}
-          />
-        </div>
-        <div className="my-auto">
-          <CourseSlider />
-        </div>
-      </section> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,10 +10,28 @@ import "@/app/components/HomepageNew/Homepage.css";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function CourseSlider() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+
+    // Set initial screen size
+    handleResize();
+
+    // Add event listener to handle screen resizing
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const stepsResumeData = [
     {
       id: 1,
@@ -38,19 +56,21 @@ export default function CourseSlider() {
     },
   ];
 
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
-    },
-  };
+  const pagination = !isMobile
+    ? {
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '">' + (index + 1) + "</span>";
+        },
+      }
+    : false; // Disable pagination on mobile
 
   return (
-    <div className="bg-gray-100 rounded-3xl p-10 steps_slider shadow-xl">
-      <div className="steps_slider_title mb-5">
-        <h2 className="lg:text-3xl text-xl text-blue-900 font-bold">
+    <div className="bg-gray-100 rounded-3xl p-6 sm:p-10 steps_slider shadow-xl">
+      <div className="steps_slider_title mb-5 sm:block hidden">
+        <h2 className="lg:text-3xl text-xl text-black font-bold">
           A Step Closer to Your Dream Job with
-          <span className="font-bold text-[#2C98CA]"> Genies Pro Studio</span>
+          <span className="font-bold text-blue-600"> Genies Pro Studio</span>
         </h2>
         <p className="lg:text-base text-sm mt-3">
           Our AI-driven Genies CV Pro Studio is a comprehensive suite of three
@@ -73,8 +93,8 @@ export default function CourseSlider() {
       >
         {stepsResumeData.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="steps_content pt-10">
-              <div className="title text-xl text-blue-900 font-bold my-3">
+            <div className="steps_content pt-10 text-center sm:text-start">
+              <div className="title text-xl text-blue-900 font-bold my-3 ">
                 {item.stepHeading}
               </div>
               <div className="steps_details lg:text-base text-sm font-medium mb-4">
@@ -82,9 +102,9 @@ export default function CourseSlider() {
                 <div className="button_wrapper mt-5">
                   <Link
                     href={item?.link}
-                    className="get_start_btn course_button"
+                    className="get_start_btn  mx-auto sm:mx-0 course_button"
                   >
-                    <span className="btn_text">Explore Now</span>
+                    <span className="btn_text ">Explore Now</span>
                     <div className="btn_overlay">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

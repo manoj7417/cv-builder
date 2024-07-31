@@ -9,7 +9,7 @@ const WorkTogether = () => {
       <div className="bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 place-items-center py-10">
           <div className="work-content lg:px-2 px-10">
-            <h2 className="text-blue-900 lg:text-5xl text-2xl font-bold">
+            <h2 className="text-black lg:text-5xl text-2xl font-bold">
               Connect with Us,
               <br /> Join the Community
             </h2>
@@ -20,12 +20,12 @@ const WorkTogether = () => {
             </p>
             <div className="learn-more flex gap-1 items-center mt-5">
               <Link
-                className="text-blue-400 underline underline-offset-8"
+                className="text-blue-950 underline underline-offset-8 font-bold"
                 href={"/contact-us"}
               >
                 Learn More
               </Link>
-              <GoArrowRight className="text-blue-400" />
+              <GoArrowRight className="text-blue-950 font-bold" />
             </div>
           </div>
           <div className="work_image lg:px-2 px-8">

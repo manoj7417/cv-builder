@@ -84,13 +84,13 @@ const HomeBanner = ({ setShowModal, showModal }) => {
     <>
       <div className="container 2lg:px-10 lg:px-5 mx-auto grid lg:grid-cols-2 grid-cols-1 w-full h-full place-items-center place-content-center">
         <div className="banner_content text-center space-y-4 lg:mt-20">
-          <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-semibold text-[#0d3572]">
+          <h1 className="2xl:text-6xl lg:text-5xl text-3xl font-semibold text-black">
             Super Charge your{" "}
           </h1>
           <h1 className="lg:text-6xl text-3xl font-semibold bg-gradient-to-r from-blue-900  to-cyan-600 inline-block text-transparent bg-clip-text">
             Career Potential
           </h1>
-          <p className="lg:w-[80%] w-[60%] mx-auto lg:text-base text-sm text-[#0d3572] font-medium">
+          <p className="lg:w-[80%] w-[60%] mx-auto lg:text-base text-sm text-black font-medium">
             We have a passion to mentor you on your entire career path, help you
             realise what you want to do, how to get into that career and utilize
             experts to guide you on how to excel within it.

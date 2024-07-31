@@ -1,6 +1,6 @@
 import Footer from "../Layout/Footer"
 import NewResumeHeader from "../Layout/NewResumeHeader"
-import ResumeHeader from "../Layout/ResumeHeader"
+import {ResumeHeader} from "../Layout/ResumeHeader"
 export const metadata = {
   title: "About Us: Genies Career Hub",
   description:
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
       <main className="resume_dashboard" >
         <div className="resume_dashboard_container">
           <div className="wrapper">
-            <NewResumeHeader/>
+            <ResumeHeader/>
             {children}
             <Footer/>
           </div>
