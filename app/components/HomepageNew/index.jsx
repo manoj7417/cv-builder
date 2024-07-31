@@ -76,7 +76,7 @@ export default function HomepageNew() {
           We have a passion to mentor you on your entire career path, help you realize what you want to do, how to get into that career, and utilize experts to guide you on how to excel within it.
         </p>
         <div className="flex justify-center xs:justify-start">
-          <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
+          <button onClick={handleButtonClick} className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
             Get Started
           </button>
         </div>
