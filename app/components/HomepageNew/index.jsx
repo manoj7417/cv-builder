@@ -77,7 +77,7 @@ export default function HomepageNew() {
               </p>
               <div className="flex justify-center sm:justify-start">
                 
-                <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
+                <button className="bg-blue-00 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
                   Get Started
                 </button>
               </div>
@@ -103,7 +103,7 @@ export default function HomepageNew() {
 
       {showFloatingButton && (
         <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
-          <button className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300" onClick={handleButtonClick}>
+          <button className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden sm:block" onClick={handleButtonClick}>
             <span>Explore Now</span>
             <div>
               <svg
