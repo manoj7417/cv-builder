@@ -65,7 +65,7 @@ export default function HomepageNew() {
 
   return (
     <>
-      <section className="w-full min-h-screen sm:sticky sm:top-0 p-4 pt-28 sm:p-12 bg-gray-100 text-black flex items-center">
+      <section className="w-full min-h-screen sm:sticky sm:top-0 p-4 pt-28 sm:p-18 bg-gray-100 text-black flex items-center">
         <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
           <div className="flex flex-col md:flex-row items-center max-w-6xl">
             <div className="text-start">
@@ -77,7 +77,7 @@ export default function HomepageNew() {
               </p>
               <div className="flex justify-center sm:justify-start">
                 
-                <button className="bg-blue-00 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
+                <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300">
                   Get Started
                 </button>
               </div>
