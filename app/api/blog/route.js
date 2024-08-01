@@ -5,11 +5,12 @@ export async function POST(req, res) {
     const data = await req.json();
     console.log(data)
     const token = req.headers.get('Authorization');
-    const response = await serverInstance.post('/blogs/create', data,{
+    const response = await serverInstance.post('/blog/create', data,{
         headers:{
             'Authorization' : token
         }
     });
+
     return new Response(JSON.stringify(response.data), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }

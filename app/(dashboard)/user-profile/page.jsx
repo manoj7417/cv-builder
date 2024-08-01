@@ -88,15 +88,17 @@ const ProfilePage = () => {
   });
 
   const userProfileHandler = async (data) => {
+    console.log(data)
     setIsEditable(false);
     try {
       const { accessToken } = await GetTokens();
-
+      console.log(selectedImage)
       if (selectedImage) {
         const formData = new FormData();
         formData.append("file", selectedImage);
-        formData.append("upload_preset", "fr8vexzg");
+        formData.append("upload_preset", "careerg");
         const uploadResponse = await uploadImage(formData);
+        console.log("uploadResponse::",uploadResponse)
         if (uploadResponse.status === 200) {
           const imageUrl = uploadResponse.data.secure_url;
           data.profilePicture = imageUrl;

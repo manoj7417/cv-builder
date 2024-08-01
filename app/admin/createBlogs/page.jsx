@@ -18,363 +18,470 @@ import { FaTimes, FaTrash } from "react-icons/fa";
 import { Switch } from "@/components/ui/switch";
 import axios from "axios";
 import { GetTokens } from "@/app/actions";
+import { uploadImage } from "@/app/api/api";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 function CreateBlogs() {
-  const [blog, setBlog] = useState({
-    slug: "",
-    header: "",
-    body: "",
-    meta: {
-      title: " ",
-      description: "",
-      keywords: [],
-    },
-    maintitle: "",
-    mainImage: {
-      url: "",
-      altText: "",
-      caption: "",
-    },
-    author: "",
-    description: "",
-    sections: [
-      {
-        title: "",
-        description: "",
-        images: [
-          {
-            url: "",
-            altText: "",
-            caption: "",
-          },
-        ],
-      },
-    ],
-  });
-
-  const editor = useRef(null);
-  const sectionEditor = useRef(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [sectionPreviewImage, setSectionPreviewImage] = useState(null);
-  const [isUploadMode, setIsUploadMode] = useState(true);
-  const [keywordInput, setKeywordInput] = useState("");
-
-  //Handle form Change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBlog({
-      ...blog,
-      [name]: value,
-    });
-  };
-
-  // Handle changes to the alt text
-  const handleAltTextChange = (e) => {
-    setBlog((prevBlog) => ({
-      ...prevBlog,
-      mainImage: {
-        ...prevBlog.mainImage,
-        altText: e.target.value,
-      },
-    }));
-  };
-
-  // Handle changes to the caption
-  const handleCaptionChange = (e) => {
-    setBlog((prevBlog) => ({
-      ...prevBlog,
-      mainImage: {
-        ...prevBlog.mainImage,
-        caption: e.target.value,
-      },
-    }));
-  };
-
-  // Hnadle Meta Content Change
-  const handleMetaChange = (e) => {
-    const { name, value } = e.target;
-    setBlog({
-      ...blog,
+    const [blog, setBlog] = useState({
+      slug: "",
+      header: "",
+      body: "",
       meta: {
-        ...blog.meta,
-        [name]: value,
+        title: " ",
+        description: "",
+        keywords: [],
       },
-    });
-  };
-
-  //Handle Section Change
-  const handleSectionChange = (index, e) => {
-    const { name, value } = e.target;
-    const updatedSections = blog.sections.map((section, i) =>
-      i === index ? { ...section, [name]: value } : section
-    );
-    setBlog({
-      ...blog,
-      sections: updatedSections,
-    });
-  };
-
-  //Handle Section Image Change
-  const handleSectionImageChange = (sectionIndex, imageIndex, e) => {
-    const { name, value, files } = e.target;
-    const updatedSections = blog.sections.map((section, i) => {
-      if (i === sectionIndex) {
-        const updatedImages = section.images.map((image, j) => {
-          if (j === imageIndex) {
-            if (files) {
-              const file = files[0];
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                const newImage = {
-                  ...image,
-                  url: reader.result,
-                  preview: reader.result,
-                };
-                const updatedImagesWithPreview = section.images.map(
-                  (img, idx) => (idx === imageIndex ? newImage : img)
-                );
-                const updatedSection = {
-                  ...section,
-                  images: updatedImagesWithPreview,
-                };
-                setBlog((prevBlog) => {
-                  const updatedSections = prevBlog.sections.map((sec, secIdx) =>
-                    secIdx === sectionIndex ? updatedSection : sec
-                  );
-                  return { ...prevBlog, sections: updatedSections };
-                });
-              };
-              reader.readAsDataURL(file);
-              return { ...image, url: "", preview: "" };
-            } else {
-              return { ...image, [name]: value };
-            }
-          }
-          return image;
-        });
-        return { ...section, images: updatedImages };
-      }
-      return section;
-    });
-    setBlog({ ...blog, sections: updatedSections });
-  };
-
-  //Handle Secton Remove Image Change
-  const handleRemoveSectionImagePreview = (sectionIndex, imageIndex) => {
-    const updatedSections = blog.sections.map((section, i) => {
-      if (i === sectionIndex) {
-        const updatedImages = section.images.map((image, j) =>
-          j === imageIndex ? { ...image, url: "", preview: "" } : image
-        );
-        return { ...section, images: updatedImages };
-      }
-      return section;
-    });
-    setBlog({ ...blog, sections: updatedSections });
-  };
-
-  //Handle Add Section
-  const handleAddSection = () => {
-    setBlog({
-      ...blog,
+      maintitle: "",
+      mainImage: {
+        url: "",
+        altText: "",
+        caption: "",
+      },
+      author: "",
+      description: "",
       sections: [
-        ...blog.sections,
-        { title: "", description: "", images: [""] },
+        {
+          title: "",
+          description: "",
+          images: [
+            {
+              url: "",
+              altText: "",
+              caption: "",
+            },
+          ],
+        },
       ],
     });
-  };
 
-  //Handle Editor Change
-  const handleEditorStateChange = (newContent) => {
-    setBlog((prevBlog) => ({
-      ...prevBlog,
-      description: newContent,
-    }));
-  };
+    const editor = useRef(null);
+    const sectionEditor = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [previewImage, setPreviewImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [isUploadMode, setIsUploadMode] = useState(true);
+    const [keywordInput, setKeywordInput] = useState("");
+    const  router = useRouter()
 
-  //Handle Submit Form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-   
-     const {accessToken} = await GetTokens();
-     const token = accessToken?.value;
-    // Prepare data for submission
-    const formattedBlog = {
-      ...blog,
-      sections: blog.sections.map((section) => ({
-        ...section,
-        images: section.images.map((image) => ({
-          url: image.url,
-          altText: image.altText,
-          caption: image.caption,
-        })),
-      })),
+
+    //Handle form Change
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setBlog({
+        ...blog,
+        [name]: value,
+      });
     };
 
-    try {
-      const response = await axios.post("/api/blog", formattedBlog,{
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      console.log("response data:::",response.data);
-      // Handle success (e.g., clear form, show success message)
-    } catch (error) {
-      console.error("Error creating blog:", error);
-      // Handle error (e.g., show error message)
-    }
-  };
-
-  //Handle Delete Section
-  const handleDeleteSection = (i) => {
-    const updatedSections = blog.sections.filter((_, j) => j !== i);
-    setBlog({ ...blog, sections: updatedSections });
-  };
-
-  //Hanlde Section Change
-  const handleSectionDescriptionChange = (e, i) => {
-    const updatedSections = blog.sections.map((section, j) =>
-      j === i ? { ...section, description: e } : section
-    );
-    setBlog({ ...blog, sections: updatedSections });
-  };
-
-  //handle Main Image Change
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setPreviewImage(reader.result);
+    // Handle changes to the alt text
+    const handleAltTextChange = (e) => {
       setBlog((prevBlog) => ({
         ...prevBlog,
         mainImage: {
           ...prevBlog.mainImage,
-          url: reader.result,
-          altText: prevBlog.mainImage.altText || "", // Preserve existing altText or set empty string
-          caption: prevBlog.mainImage.caption || "", // Preserve existing caption or set empty string
+          altText: e.target.value,
         },
       }));
     };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
+    // Handle changes to the caption
+    const handleCaptionChange = (e) => {
+      setBlog((prevBlog) => ({
+        ...prevBlog,
+        mainImage: {
+          ...prevBlog.mainImage,
+          caption: e.target.value,
+        },
+      }));
+    };
 
-  //Handle Image Url Change
-  const handleImageUrlChange = (e) => {
-    const { value } = e.target;
-    setPreviewImage(value);
-    setBlog({
-      ...blog,
-      mainImage: {
-        ...blog.mainImage,
-        url: value,
-      },
-    });
-  };
+    // Hnadle Meta Content Change
+    const handleMetaChange = (e) => {
+      const { name, value } = e.target;
+      setBlog({
+        ...blog,
+        meta: {
+          ...blog.meta,
+          [name]: value,
+        },
+      });
+    };
 
-  //  Handle Remove Preview Image Change
-  const handleRemovePreviewImage = () => {
-    setPreviewImage(null);
-    setBlog({
-      ...blog,
-      mainImage: {
-        ...blog.mainImage,
-        url: "",
-      },
-    });
-  };
+    //Handle Section Change
+    const handleSectionChange = (index, e) => {
+      const { name, value } = e.target;
+      const updatedSections = blog.sections.map((section, i) =>
+        i === index ? { ...section, [name]: value } : section
+      );
+      setBlog({
+        ...blog,
+        sections: updatedSections,
+      });
+    };
 
-  //Toggle Upload Mode
-  const toggleUploadMode = () => {
-    console.log("toggle buttton");
-    setIsUploadMode((prev) => !prev);
-  };
+    //Handle Section Image Change
+    // const handleSectionImageChange = (sectionIndex, imageIndex, e) => {
+    //   const { name, value, files } = e.target;
+    //   const updatedSections = blog.sections.map((section, i) => {
+    //     if (i === sectionIndex) {
+    //       const updatedImages = section.images.map((image, j) => {
+    //         if (j === imageIndex) {
+    //           if (files) {
+    //             const file = files[0];
+    //             const reader = new FileReader();
+    //             reader.onloadend = () => {
+    //               const newImage = {
+    //                 ...image,
+    //                 url: reader.result,
+    //                 preview: reader.result,
+    //               };
+    //               const updatedImagesWithPreview = section.images.map(
+    //                 (img, idx) => (idx === imageIndex ? newImage : img)
+    //               );
+    //               const updatedSection = {
+    //                 ...section,
+    //                 images: updatedImagesWithPreview,
+    //               };
+    //               setBlog((prevBlog) => {
+    //                 const updatedSections = prevBlog.sections.map((sec, secIdx) =>
+    //                   secIdx === sectionIndex ? updatedSection : sec
+    //                 );
+    //                 return { ...prevBlog, sections: updatedSections };
+    //               });
+    //             };
+    //             reader.readAsDataURL(file);
+    //             return { ...image, url: "", preview: "" };
+    //           } else {
+    //             return { ...image, [name]: value };
+    //           }
+    //         }
+    //         return image;
+    //       });
+    //       return { ...section, images: updatedImages };
+    //     }
+    //     return section;
+    //   });
+    //   setBlog({ ...blog, sections: updatedSections });
+    // };
+    const handleSectionImageChange = async (sectionIndex, imageIndex, e) => {
+      const { name, value, files } = e.target;
+      const updatedSections = blog.sections.map((section, i) => {
+        if (i === sectionIndex) {
+          const updatedImages = section.images.map((image, j) => {
+            if (j === imageIndex) {
+              if (files) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onloadend = async () => {
+                  const previewUrl = reader.result;
+                  const newImage = {
+                    ...image,
+                    preview: previewUrl,
+                  };
+                  const updatedImagesWithPreview = section.images.map(
+                    (img, idx) => (idx === imageIndex ? newImage : img)
+                  );
+                  const updatedSection = {
+                    ...section,
+                    images: updatedImagesWithPreview,
+                  };
+                  setBlog((prevBlog) => {
+                    const updatedSections = prevBlog.sections.map((sec, secIdx) =>
+                      secIdx === sectionIndex ? updatedSection : sec
+                    );
+                    return { ...prevBlog, sections: updatedSections };
+                  });
+    
+                  try {
+                    const formData = new FormData();
+                    formData.append("file",file);
+                    formData.append("upload_preset", "careerg");
+                    const cloudinaryUrl = await uploadImage(formData);
+                    const imageUrl = cloudinaryUrl?.data?.secure_url;
+                    console.log("imageUrl:::",imageUrl)
+                    setBlog((prevBlog) => {
+                      const updatedImagesWithCloudinary = section.images.map(
+                        (img, idx) =>
+                          idx === imageIndex ? { ...newImage, url: imageUrl } : img
+                      );
+                      const updatedSectionWithCloudinary = {
+                        ...section,
+                        images: updatedImagesWithCloudinary,
+                      };
+                      const updatedSectionsWithCloudinary = prevBlog.sections.map(
+                        (sec, secIdx) =>
+                          secIdx === sectionIndex ? updatedSectionWithCloudinary : sec
+                      );
+                      return { ...prevBlog, sections: updatedSectionsWithCloudinary };
+                    });
+                  } catch (error) {
+                    console.error('Error uploading image to Cloudinary', error);
+                  }
+                };
+                reader.readAsDataURL(file);
+                return { ...image, url: "", preview: "" };
+              } else {
+                return { ...image, [name]: value };
+              }
+            }
+            return image;
+          });
+          return { ...section, images: updatedImages };
+        }
+        return section;
+      });
+      setBlog({ ...blog, sections: updatedSections });
+    };
+    
+    
 
-  //Toggle Section Upload Mode
-  const toggleSectionImageUploadMode = (sectionIndex, imageIndex) => {
-    const updatedSections = blog.sections.map((section, i) => {
-      if (i === sectionIndex) {
-        const updatedImages = section.images.map((image, j) =>
-          j === imageIndex
-            ? { ...image, isUploadMode: !image.isUploadMode }
-            : image
-        );
-        return { ...section, images: updatedImages };
+    //Handle Secton Remove Image Change
+    const handleRemoveSectionImagePreview = (sectionIndex, imageIndex) => {
+      const updatedSections = blog.sections.map((section, i) => {
+        if (i === sectionIndex) {
+          const updatedImages = section.images.map((image, j) =>
+            j === imageIndex ? { ...image, url: "", preview: "" } : image
+          );
+          return { ...section, images: updatedImages };
+        }
+        return section;
+      });
+      setBlog({ ...blog, sections: updatedSections });
+    };
+
+    //Handle Add Section
+    const handleAddSection = () => {
+      setBlog({
+        ...blog,
+        sections: [
+          ...blog.sections,
+          { title: "", description: "", images: [""] },
+        ],
+      });
+    };
+
+    //Handle Editor Change
+    const handleEditorStateChange = (newContent) => {
+      setBlog((prevBlog) => ({
+        ...prevBlog,
+        description: newContent,
+      }));
+    };
+
+    //Handle Submit Form
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsLoading(true);
+
+      const { accessToken } = await GetTokens();
+      const token = accessToken?.value;
+      // Prepare data for submission
+      const formattedBlog = {
+        ...blog,
+        sections: blog.sections.map((section) => ({
+          ...section,
+          images: section.images.map((image) => ({
+            url: image.url,
+            altText: image.altText,
+            caption: image.caption,
+          })),
+        })),
+      };
+
+      try {
+        const response = await axios.post("/api/blog", formattedBlog, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        console.log("response data:::", response.data);
+        router.push("/admin/viewBlogs")
+        toast.success("Blog created successfully",{
+          position:"top-right"
+        })
+        // Handle success (e.g., clear form, show success message)
+      } catch (error) {
+        console.error("Error creating blog:", error);
+        // Handle error (e.g., show error message)
       }
-      return section;
-    });
-    setBlog({
-      ...blog,
-      sections: updatedSections,
-    });
-  };
+    };
 
-  // Handle MetaKeywords Change
-  const handleKeywordInputChange = (e) => {
-    setKeywordInput(e.target.value);
-  };
+    //Handle Delete Section
+    const handleDeleteSection = (i) => {
+      const updatedSections = blog.sections.filter((_, j) => j !== i);
+      setBlog({ ...blog, sections: updatedSections });
+    };
 
-  // Handle Add MetaKeywords Change
-  const handleAddKeyword = () => {
-    if (keywordInput.trim()) {
+    //Hanlde Section Change
+    const handleSectionDescriptionChange = (e, i) => {
+      const updatedSections = blog.sections.map((section, j) =>
+        j === i ? { ...section, description: e } : section
+      );
+      setBlog({ ...blog, sections: updatedSections });
+    };
+
+    //handle Main Image Change
+    // const handleImageUpload = (e) => {
+    //   const file = e.target.files[0];
+    //   const reader = new FileReader();
+    //   reader.onloadend = () => {
+    //     setPreviewImage(reader.result);
+    //     setBlog((prevBlog) => ({
+    //       ...prevBlog,
+    //       mainImage: {
+    //         ...prevBlog.mainImage,
+    //         url: reader.result,
+    //         altText: prevBlog.mainImage.altText || "", // Preserve existing altText or set empty string
+    //         caption: prevBlog.mainImage.caption || "", // Preserve existing caption or set empty string
+    //       },
+    //     }));
+    //   };
+    //   if (file) {
+    //     reader.readAsDataURL(file);
+    //     setSelectedImage(file);
+    //   }
+    // };
+
+    const handleImageUpload = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+
+      try {
+        const formData = new FormData();
+        formData.append("file",file);
+        formData.append("upload_preset", "careerg");
+        const cloudinaryUrl = await uploadImage(formData);
+        const imageUrl = cloudinaryUrl?.data?.secure_url
+        setBlog((prevBlog) => ({
+          ...prevBlog,
+          mainImage: {
+            ...prevBlog.mainImage,
+            url: imageUrl,
+            altText: prevBlog.mainImage.altText || "", // Preserve existing altText or set empty string
+            caption: prevBlog.mainImage.caption || "", // Preserve existing caption or set empty string
+          },
+        }));
+      } catch (error) {
+        console.error('Error handling image upload', error);
+      }
+    };
+
+    //Handle Image Url Change
+    const handleImageUrlChange = (e) => {
+      const { value } = e.target;
+      setPreviewImage(value);
+      setBlog({
+        ...blog,
+        mainImage: {
+          ...blog.mainImage,
+          url: value,
+        },
+      });
+    };
+
+    //  Handle Remove Preview Image Change
+    const handleRemovePreviewImage = () => {
+      setPreviewImage(null);
+      setBlog({
+        ...blog,
+        mainImage: {
+          ...blog.mainImage,
+          url: "",
+        },
+      });
+    };
+
+    //Toggle Upload Mode
+    const toggleUploadMode = () => {
+      console.log("toggle buttton");
+      setIsUploadMode((prev) => !prev);
+    };
+
+    //Toggle Section Upload Mode
+    const toggleSectionImageUploadMode = (sectionIndex, imageIndex) => {
+      const updatedSections = blog.sections.map((section, i) => {
+        if (i === sectionIndex) {
+          const updatedImages = section.images.map((image, j) =>
+            j === imageIndex
+              ? { ...image, isUploadMode: !image.isUploadMode }
+              : image
+          );
+          return { ...section, images: updatedImages };
+        }
+        return section;
+      });
+      setBlog({
+        ...blog,
+        sections: updatedSections,
+      });
+    };
+
+    // Handle MetaKeywords Change
+    const handleKeywordInputChange = (e) => {
+      setKeywordInput(e.target.value);
+    };
+
+    // Handle Add MetaKeywords Change
+    const handleAddKeyword = () => {
+      if (keywordInput.trim()) {
+        setBlog((prevBlog) => ({
+          ...prevBlog,
+          meta: {
+            ...prevBlog.meta,
+            keywords: [...prevBlog.meta.keywords, keywordInput.trim()],
+          },
+        }));
+        setKeywordInput("");
+      }
+    };
+
+    // Handle Remove MetaKeywords Change
+    const handleRemoveKeyword = (keywordToRemove) => {
       setBlog((prevBlog) => ({
         ...prevBlog,
         meta: {
           ...prevBlog.meta,
-          keywords: [...prevBlog.meta.keywords, keywordInput.trim()],
+          keywords: prevBlog.meta.keywords.filter(
+            (keyword) => keyword !== keywordToRemove
+          ),
         },
       }));
-      setKeywordInput("");
-    }
-  };
+    };
 
-  // Handle Remove MetaKeywords Change
-  const handleRemoveKeyword = (keywordToRemove) => {
-    setBlog((prevBlog) => ({
-      ...prevBlog,
-      meta: {
-        ...prevBlog.meta,
-        keywords: prevBlog.meta.keywords.filter(
-          (keyword) => keyword !== keywordToRemove
-        ),
-      },
-    }));
-  };
+    // Function to handle adding a new image entry
+    const handleAddSectionImage = (sectionIndex) => {
+      setBlog((prevBlog) => {
+        // Create a new array of images with a new image entry
+        const updatedSections = prevBlog.sections.map((section, idx) => {
+          if (idx === sectionIndex) {
+            return {
+              ...section,
+              images: [
+                ...section.images,
+                {
+                  url: "",
+                  altText: "",
+                  caption: "",
+                  isUploadMode: true, // Set default upload mode
+                  preview: "",
+                },
+              ],
+            };
+          }
+          return section;
+        });
 
-  // Function to handle adding a new image entry
-  const handleAddSectionImage = (sectionIndex) => {
-    setBlog((prevBlog) => {
-      // Create a new array of images with a new image entry
-      const updatedSections = prevBlog.sections.map((section, idx) => {
-        if (idx === sectionIndex) {
-          return {
-            ...section,
-            images: [
-              ...section.images,
-              {
-                url: "",
-                altText: "",
-                caption: "",
-                isUploadMode: true, // Set default upload mode
-                preview: "",
-              },
-            ],
-          };
-        }
-        return section;
+        return { ...prevBlog, sections: updatedSections };
       });
-
-      return { ...prevBlog, sections: updatedSections };
-    });
-  };
-
-
+    };
 
   return (
     <div className="mt-24 mb-10  w-[60%] h-auto p-5 mx-auto rounded-xl shadow-xl ">

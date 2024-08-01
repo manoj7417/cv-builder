@@ -39,7 +39,6 @@ export function ResumeHeader() {
   const logoutUser = useUserStore((state) => state?.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
-  console.log("userdata:::", userdata);
   const userImage = userdata?.profilePicture;
 
   const handleLogout = async () => {

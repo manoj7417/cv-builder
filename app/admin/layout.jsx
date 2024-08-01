@@ -1,5 +1,6 @@
-import Footer from "../Layout/Footer"
-import NewResumeHeader from "../Layout/NewResumeHeader"
+import Header from "./(AdminSidebar)/header"
+import HeaderMobile from "./(AdminSidebar)/header-mobile"
+import SideNav from "./(AdminSidebar)/Sidebar"
 
 
 
@@ -9,9 +10,10 @@ const Layout = ({ children }) => {
         <main className="resume_dashboard" >
             <div className="resume_dashboard_container">
                 <div className="wrapper">
-                    <NewResumeHeader />
+                    <SideNav/>
+                    <Header/>
+                    <HeaderMobile/>
                     {children}
-                    <Footer />
                 </div>
             </div>
         </main>
