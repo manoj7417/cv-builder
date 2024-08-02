@@ -410,12 +410,12 @@ export default function DashboardIdea() {
         <section className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]">
           <div className="container w-full h-full resume-dashboard">
             <div className="flex 2lg:px-24 px-5 justify-between">
-              <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20">
+              <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20 px-2 sm:px-10 text-center sm:text-start">
                 <h1 className="text-3xl font-bold mb-5 text-gray-900 sm:text-5xl 2xl:text-6xl">
                   Craft the <span className="text-[#2C98CA]">Perfect CV </span>{" "}
                   for Your Dream Job
                 </h1>
-                <p className="text-gray-700 lg:text-lg text-sm pe-10">
+                <p className="text-gray-700 lg:text-lg text-sm">
                   Created by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
                   forward Resume Template options that are custom-tailored to
@@ -423,7 +423,7 @@ export default function DashboardIdea() {
                   through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center space-x-4">
-                  <Button className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3">
+                  <Button className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3 mx-auto sm:mx-0">
                     <Link href="/user-history">Create CV Now</Link>
                   </Button>
                 </div>
