@@ -379,8 +379,8 @@ export default function Home() {
                 doors to your ideal{" "}
                 <span className="text-blue-900">career!</span>
               </h1>
-              <div className="flex gap-2 py-3 rounded-lg w-full">
-                <div className="w-full">
+              <div className="flex flex-col sm:flex-row gap-2 py-3 rounded-lg w-full">
+                <div className="w-full sm:px-0 px-4 mb-4 sm:mb-0">
                   <SearchBar
                     jobRole={jobRole}
                     setJobRole={setJobRole}
@@ -398,7 +398,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl p-10">
+            <div className="mt-10 sm:mt-0 w-full lg:max-w-4xl sm:p-10 p-0">
               <Image
                 src="/cvgenerator.png"
                 width={1300}
