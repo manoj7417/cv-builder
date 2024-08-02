@@ -43,7 +43,7 @@ export default function Register() {
   return (
     <section>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
-        <div className="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
+        <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
           <div className="absolute inset-0">
             <Image
               width={500}
@@ -151,7 +151,7 @@ export default function Register() {
           </div>
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md border-2 sm:border-0 shadow-blue-100 shadow-xl  sm:shadow-none  py-12 sm:py-0 px-8 sm:px-0 rounded-2xl">
             <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl">
               Sign up
             </h2>
