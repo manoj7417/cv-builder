@@ -48,7 +48,6 @@ function LoginUser() {
         router.push(redirect || "/");
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.error || 'Error logging in');
     } finally {
       setIsLoading(false);

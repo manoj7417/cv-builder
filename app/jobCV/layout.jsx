@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
   return (
     <main className="resume_dashboard">
       <div className="resume_dashboard_container">
-        <ResumeHeader/>
         <div className="wrapper">{children}</div>
         <Footer/>
       </div>
