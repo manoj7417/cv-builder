@@ -72,7 +72,7 @@ export default function HomepageNew() {
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
           Super Charge Your <span className="text-blue-600">Career</span> Potential
         </h1>
-        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-center xs:text-start">
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-center xs:text-start mx-auto">
           We have a passion to mentor you on your entire career path, help you realize what you want to do, how to get into that career, and utilize experts to guide you on how to excel within it.
         </p>
         <div className="flex justify-center xs:justify-start">

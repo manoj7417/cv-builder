@@ -438,7 +438,7 @@ export default function DashboardIdea() {
               />
             </div>
           </div>
-          <div className="py-10 w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
+          <div className="pb-10 w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
             <div className="rounded-t-xl border-t-8 border-blue-900 p-6">
               <h2 className="2xl:text-6xl lg:text-5xl text-2xl font-bold mt-10 text-black text-center">
                 Choose From Our Detailed Templates Options
