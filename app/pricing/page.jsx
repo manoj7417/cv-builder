@@ -90,7 +90,7 @@ const Pricing = () => {
                 </span>
               </div>
 
-              <div className="mt-10 flex  space-x-8">
+              <div className="mt-10 flex flex-col sm:flex-row  sm:space-x-8">
                 <div className=" p-6 w-full md:w-[50%] rounded-lg shadow-lg  border-gray-100">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     FREE
