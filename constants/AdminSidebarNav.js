@@ -11,7 +11,7 @@ export const AdminSidebarNav =  [
       subMenuItems: [
         { title: 'Create Blog', path: '/admin/createBlogs' },
         { title: 'View Blog', path: '/admin/viewBlogs' },
-        { title: 'Update Blog', path: '/singleBlog' },
+        { title: 'Update Blog', path: '/admin/updateBlog' },
       ],
     },
     {
