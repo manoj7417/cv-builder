@@ -24,12 +24,42 @@ import { useParams, useRouter } from "next/navigation";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 function UpdateBlog() {
-
-
+  
   const { id } = useParams();
-  const [blogData, setBlogData] = useState({});
 
-  console.log("blogData::",blogData)
+  const [blog, setBlog] = useState({
+    slug: "",
+    header: "",
+    body: "",
+    meta: {
+      title: " ",
+      description: "",
+      keywords: [],
+    },
+    maintitle: "",
+    mainImage: {
+      url: "",
+      altText: "",
+      caption: "",
+    },
+    author: "",
+    description: "",
+    sections: [
+      {
+        title: "",
+        description: "",
+        images: [
+          {
+            url: "",
+            altText: "",
+            caption: "",
+          },
+        ],
+      },
+    ],
+  });
+
+   console.log("blog:::",blog)  
 
   const fetchBlogIndividualDetails = async (id) => {
     const { accessToken } = await GetTokens();
@@ -46,7 +76,7 @@ function UpdateBlog() {
           },
         }
       );
-      setBlogData(response?.data?.blog);
+      setBlog(response?.data?.blog);
     } catch (error) {
       console.log(error);
     }
@@ -58,43 +88,12 @@ function UpdateBlog() {
   }, [id]);
 
 
-    const [blog, setBlog] = useState({
-      slug: "fgkhdfkgh",
-      header: "",
-      body: "",
-      meta: {
-        title: " ",
-        description: "",
-        keywords: [],
-      },
-      maintitle: "",
-      mainImage: {
-        url: "",
-        altText: "",
-        caption: "",
-      },
-      author: "",
-      description: "",
-      sections: [
-        {
-          title: "",
-          description: "",
-          images: [
-            {
-              url: "",
-              altText: "",
-              caption: "",
-            },
-          ],
-        },
-      ],
-    });
+    
 
     const editor = useRef(null);
     const sectionEditor = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [previewImage, setPreviewImage] = useState(blogData?.mainImage?.url);
-    console.log("previewImage::",previewImage)
+    const [previewImage, setPreviewImage] = useState("");
     const [isUploadMode, setIsUploadMode] = useState(true);
     const [keywordInput, setKeywordInput] = useState("");
     const  router = useRouter()
@@ -261,42 +260,45 @@ function UpdateBlog() {
     };
 
     //Handle Submit Form
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setIsLoading(true);
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault();
+    //   setIsLoading(true);
 
-      const { accessToken } = await GetTokens();
-      const token = accessToken?.value;
-      // Prepare data for submission
-      const formattedBlog = {
-        ...blog,
-        sections: blog.sections.map((section) => ({
-          ...section,
-          images: section.images.map((image) => ({
-            url: image.url,
-            altText: image.altText,
-            caption: image.caption,
-          })),
-        })),
-      };
+    //   const { accessToken } = await GetTokens();
+    //   const token = accessToken?.value;
+    //   // Prepare data for submission
+    //   const formattedBlog = {
+    //     ...blog,
+    //     sections: blog.sections.map((section) => ({
+    //       ...section,
+    //       images: section.images.map((image) => ({
+    //         url: image.url,
+    //         altText: image.altText,
+    //         caption: image.caption,
+    //       })),
+    //     })),
+    //   };
 
-      try {
-        const response = await axios.post("/api/blog", formattedBlog, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        console.log("response data:::", response.data);
-        router.push("/admin/viewBlogs")
-        toast.success("Blog created successfully",{
-          position:"top-right"
-        })
-        // Handle success (e.g., clear form, show success message)
-      } catch (error) {
-        console.error("Error creating blog:", error);
-        // Handle error (e.g., show error message)
-      }
-    };
+    //   try {
+    //     const response = await axios.post("/api/blog", formattedBlog, {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     console.log("response data:::", response.data);
+    //     router.push("/admin/viewBlogs")
+    //     toast.success("Blog created successfully",{
+    //       position:"top-right"
+    //     })
+    //     // Handle success (e.g., clear form, show success message)
+    //   } catch (error) {
+    //     console.error("Error creating blog:", error);
+    //     // Handle error (e.g., show error message)
+    //   }
+    // };
+    const handleSubmit = ()=>{
+      console.log("fkljdg")
+    }
 
     //Handle Delete Section
     const handleDeleteSection = (i) => {
@@ -463,7 +465,7 @@ function UpdateBlog() {
           <Input
             type="text"
             name="header"
-            value={blogData.header}
+            value={blog?.header}
             onChange={handleChange}
             required
             className=" p-2 w-full mt-1"
@@ -476,7 +478,7 @@ function UpdateBlog() {
           <Textarea
             type="text"
             name="body"
-            value={blogData.body}
+            value={blog.body}
             onChange={handleChange}
             required
             className="border p-2 w-full mt-1"
@@ -489,7 +491,7 @@ function UpdateBlog() {
           <Input
             type="text"
             name="slug"
-            value={blogData?.slug}
+            value={blog?.slug}
             onChange={handleChange}
             required
             className=" p-2 w-full mt-1"
@@ -503,7 +505,7 @@ function UpdateBlog() {
             <Input
               type="text"
               name="title"
-              value={blogData?.meta?.title}
+              value={blog?.meta?.title}
               onChange={handleMetaChange}
               required
               className="border p-2 w-full mt-1"
@@ -530,7 +532,7 @@ function UpdateBlog() {
               </Button>
             </div>
             <div className="flex gap-5 mt-3">
-              {blogData?.meta?.keywords.map((keyword, index) => (
+              {blog?.meta?.keywords.map((keyword, index) => (
                 <div key={index} className="flex items-start gap-1">
                   <span className="p-2 border rounded">{keyword}</span>
                   <FaTimes
@@ -550,7 +552,7 @@ function UpdateBlog() {
           <Textarea
             type="text"
             name="description"
-            value={blogData?.meta?.description}
+            value={blog?.meta?.description}
             onChange={handleMetaChange}
             required
             className="border p-2 w-full mt-1"
@@ -564,7 +566,7 @@ function UpdateBlog() {
           <Input
             type="text"
             name="maintitle"
-            value={blogData?.maintitle}
+            value={blog?.maintitle}
             onChange={handleChange}
             required
             className="border p-2 w-full mt-1"
@@ -608,11 +610,11 @@ function UpdateBlog() {
                 />
               </div>
             )}
-            {isUploadMode && blogData?.mainImage?.url && (
+            {isUploadMode && (
               <div className="relative mt-2">
                 <img
-                  src={blogData.mainImage.url}
-                  alt={blogData.mainImage.altText || "Image"}
+                  src={blog.mainImage.url}
+                  alt={blog.mainImage.altText || "Image"}
                   className="w-[200px] h-[200px] object-contain"
                 />
                 <button
@@ -634,7 +636,7 @@ function UpdateBlog() {
             <Input
               type="text"
               name="mainImage"
-              value={blogData.mainImage?.altText}
+              value={blog.mainImage?.altText}
               onChange={handleAltTextChange}
               required
               className="border p-2 w-full mt-1"
@@ -647,7 +649,7 @@ function UpdateBlog() {
             <Input
               type="text"
               name="mainImage"
-              value={blogData.mainImage?.caption}
+              value={blog.mainImage?.caption}
               onChange={handleCaptionChange}
               required
               className="border p-2 w-full mt-1"
@@ -661,7 +663,7 @@ function UpdateBlog() {
           <Input
             type="text"
             name="author"
-            value={blogData.author}
+            value={blog.author}
             onChange={handleChange}
             required
             className="border p-2 w-full mt-1"
@@ -674,7 +676,7 @@ function UpdateBlog() {
           <JoditEditor
             ref={editor}
             name="description"
-            value={blogData?.description}
+            value={blog?.description}
             onChange={handleEditorStateChange}
             required={true}
             className="border p-2 w-full mt-1"
@@ -688,7 +690,7 @@ function UpdateBlog() {
               <FaPlus className="mr-1" /> Add Section
             </Button>
           </div>
-          {blogData?.sections?.map((section, index) => (
+          {blog?.sections?.map((section, index) => (
             <div key={index} className="p-2 mt-4 group relative">
               <Accordion
                 type="single"
