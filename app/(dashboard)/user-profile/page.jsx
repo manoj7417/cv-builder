@@ -95,7 +95,7 @@ const ProfilePage = () => {
       if (selectedImage) {
         const formData = new FormData();
         formData.append("file", selectedImage);
-        formData.append("upload_preset", "fr8vexzg");
+        formData.append("upload_preset", "careerg");
         const uploadResponse = await uploadImage(formData);
         if (uploadResponse.status === 200) {
           const imageUrl = uploadResponse.data.secure_url;
