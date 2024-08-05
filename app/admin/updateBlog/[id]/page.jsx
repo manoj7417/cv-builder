@@ -24,7 +24,6 @@ import { useParams, useRouter } from "next/navigation";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 function UpdateBlog() {
-  
   const { id } = useParams();
 
   const [blog, setBlog] = useState({
@@ -59,8 +58,6 @@ function UpdateBlog() {
     ],
   });
 
-   console.log("blog:::",blog)  
-
   const fetchBlogIndividualDetails = async (id) => {
     const { accessToken } = await GetTokens();
     if (!accessToken) return;
@@ -82,375 +79,425 @@ function UpdateBlog() {
     }
   };
 
-
   useEffect(() => {
     fetchBlogIndividualDetails(id);
   }, [id]);
 
+  const editor = useRef(null);
+  const sectionEditor = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [isUploadMode, setIsUploadMode] = useState(true);
+  const [keywordInput, setKeywordInput] = useState("");
+  const router = useRouter();
 
-    
+  //Handle form Change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBlog({
+      ...blog,
+      [name]: value,
+    });
+  };
 
-    const editor = useRef(null);
-    const sectionEditor = useRef(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [previewImage, setPreviewImage] = useState("");
-    const [isUploadMode, setIsUploadMode] = useState(true);
-    const [keywordInput, setKeywordInput] = useState("");
-    const  router = useRouter()
+  // Handle changes to the alt text
+  const handleAltTextChange = (e) => {
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      mainImage: {
+        ...prevBlog.mainImage,
+        altText: e.target.value,
+      },
+    }));
+  };
 
+  // Handle changes to the caption
+  const handleCaptionChange = (e) => {
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      mainImage: {
+        ...prevBlog.mainImage,
+        caption: e.target.value,
+      },
+    }));
+  };
 
-    //Handle form Change
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setBlog({
-        ...blog,
+  // Hnadle Meta Content Change
+  const handleMetaChange = (e) => {
+    const { name, value } = e.target;
+    setBlog({
+      ...blog,
+      meta: {
+        ...blog.meta,
         [name]: value,
-      });
-    };
+      },
+    });
+  };
 
-    // Handle changes to the alt text
-    const handleAltTextChange = (e) => {
-      setBlog((prevBlog) => ({
-        ...prevBlog,
-        mainImage: {
-          ...prevBlog.mainImage,
-          altText: e.target.value,
-        },
-      }));
-    };
+  //Handle Section Change
+  const handleSectionChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedSections = blog.sections.map((section, i) =>
+      i === index ? { ...section, [name]: value } : section
+    );
+    setBlog({
+      ...blog,
+      sections: updatedSections,
+    });
+  };
 
-    // Handle changes to the caption
-    const handleCaptionChange = (e) => {
-      setBlog((prevBlog) => ({
-        ...prevBlog,
-        mainImage: {
-          ...prevBlog.mainImage,
-          caption: e.target.value,
-        },
-      }));
-    };
-
-    // Hnadle Meta Content Change
-    const handleMetaChange = (e) => {
-      const { name, value } = e.target;
-      setBlog({
-        ...blog,
-        meta: {
-          ...blog.meta,
-          [name]: value,
-        },
-      });
-    };
-
-    //Handle Section Change
-    const handleSectionChange = (index, e) => {
-      const { name, value } = e.target;
-      const updatedSections = blog.sections.map((section, i) =>
-        i === index ? { ...section, [name]: value } : section
-      );
-      setBlog({
-        ...blog,
-        sections: updatedSections,
-      });
-    };
-
-    //Handle Section Image Change
-    const handleSectionImageChange = async (sectionIndex, imageIndex, e) => {
-      const { name, value, files } = e.target;
-      const updatedSections = blog.sections.map((section, i) => {
-        if (i === sectionIndex) {
-          const updatedImages = section.images.map((image, j) => {
-            if (j === imageIndex) {
-              if (files) {
-                const file = files[0];
-                const reader = new FileReader();
-                reader.onloadend = async () => {
-                  const previewUrl = reader.result;
-                  const newImage = {
-                    ...image,
-                    preview: previewUrl,
-                  };
-                  const updatedImagesWithPreview = section.images.map(
-                    (img, idx) => (idx === imageIndex ? newImage : img)
+  //Handle Section Image Change
+  const handleSectionImageChange = async (sectionIndex, imageIndex, e) => {
+    const { name, value, files } = e.target;
+    const updatedSections = blog.sections.map((section, i) => {
+      if (i === sectionIndex) {
+        const updatedImages = section.images.map((image, j) => {
+          if (j === imageIndex) {
+            if (files) {
+              const file = files[0];
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                const previewUrl = reader.result;
+                setBlog((prevBlog) => {
+                  const updatedSections = prevBlog.sections.map(
+                    (sec, secIdx) => {
+                      if (secIdx === sectionIndex) {
+                        const updatedImages = sec.images.map((img, idx) => {
+                          if (idx === imageIndex) {
+                            return { ...img, preview: previewUrl };
+                          }
+                          return img;
+                        });
+                        return { ...sec, images: updatedImages };
+                      }
+                      return sec;
+                    }
                   );
-                  const updatedSection = {
-                    ...section,
-                    images: updatedImagesWithPreview,
-                  };
-                  setBlog((prevBlog) => {
-                    const updatedSections = prevBlog.sections.map((sec, secIdx) =>
-                      secIdx === sectionIndex ? updatedSection : sec
-                    );
-                    return { ...prevBlog, sections: updatedSections };
-                  });
-    
-                  try {
-                    const formData = new FormData();
-                    formData.append("file",file);
-                    formData.append("upload_preset", "careerg");
-                    const cloudinaryUrl = await uploadImage(formData);
+                  return { ...prevBlog, sections: updatedSections };
+                });
+
+                try {
+                  const formData = new FormData();
+                  formData.append("file", file);
+                  formData.append("upload_preset", "careerg");
+                  uploadImage(formData).then((cloudinaryUrl) => {
                     const imageUrl = cloudinaryUrl?.data?.secure_url;
-                    console.log("imageUrl:::",imageUrl)
                     setBlog((prevBlog) => {
-                      const updatedImagesWithCloudinary = section.images.map(
-                        (img, idx) =>
-                          idx === imageIndex ? { ...newImage, url: imageUrl } : img
+                      const updatedSections = prevBlog.sections.map(
+                        (sec, secIdx) => {
+                          if (secIdx === sectionIndex) {
+                            const updatedImages = sec.images.map((img, idx) => {
+                              if (idx === imageIndex) {
+                                return { ...img, url: imageUrl };
+                              }
+                              return img;
+                            });
+                            return { ...sec, images: updatedImages };
+                          }
+                          return sec;
+                        }
                       );
-                      const updatedSectionWithCloudinary = {
-                        ...section,
-                        images: updatedImagesWithCloudinary,
-                      };
-                      const updatedSectionsWithCloudinary = prevBlog.sections.map(
-                        (sec, secIdx) =>
-                          secIdx === sectionIndex ? updatedSectionWithCloudinary : sec
-                      );
-                      return { ...prevBlog, sections: updatedSectionsWithCloudinary };
+                      return { ...prevBlog, sections: updatedSections };
                     });
-                  } catch (error) {
-                    console.error('Error uploading image to Cloudinary', error);
-                  }
-                };
-                reader.readAsDataURL(file);
-                return { ...image, url: "", preview: "" };
-              } else {
-                return { ...image, [name]: value };
-              }
+                  });
+                } catch (error) {
+                  console.error("Error uploading image to Cloudinary", error);
+                }
+              };
+              reader.readAsDataURL(file);
+              return { ...image, url: "", preview: "" };
+            } else {
+              return { ...image, [name]: value };
             }
-            return image;
-          });
-          return { ...section, images: updatedImages };
-        }
-        return section;
-      });
-      setBlog({ ...blog, sections: updatedSections });
-    };
-    
+          }
+          return image;
+        });
+        return { ...section, images: updatedImages };
+      }
+      return section;
+    });
+    setBlog({ ...blog, sections: updatedSections });
+  };
+
+  //Handle Secton Remove Image Change
+  const handleRemoveSectionImagePreview = (sectionIndex, imageIndex) => {
+    const updatedSections = blog.sections.map((section, i) => {
+      if (i === sectionIndex) {
+        const updatedImages = section.images.map((image, j) =>
+          j === imageIndex ? { ...image, url: "", preview: "" } : image
+        );
+        return { ...section, images: updatedImages };
+      }
+      return section;
+    });
+    setBlog({ ...blog, sections: updatedSections });
+  };
+
+  //Handle Add Section
+  const handleAddSection = () => {
+    setBlog({
+      ...blog,
+      sections: [
+        ...blog.sections,
+        {
+          title: "",
+          description: "",
+          images: [{ isUploadMode: false, url: "", altText: "", caption: "" }],
+        },
+      ],
+    });
+  };
+
+  //Handle Editor Change
+  const handleEditorStateChange = (newContent) => {
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      description: newContent,
+    }));
+  };
+
+  //Handle Submit Form
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   const { accessToken } = await GetTokens();
+  //   const token = accessToken?.value;
+  //   // Prepare data for submission
+  //   const formattedBlog = {
+  //     ...blog,
+  //     sections: blog.sections.map((section) => ({
+  //       ...section,
+  //       images: section.images.map((image) => ({
+  //         url: image.url,
+  //         altText: image.altText,
+  //         caption: image.caption,
+  //       })),
+  //     })),
+  //   };
+
+  //   try {
+  //     const response = await axios.post("/api/blog", formattedBlog, {
+  //       headers: {
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     });
+  //     console.log("response data:::", response.data);
+  //     router.push("/admin/viewBlogs")
+  //     toast.success("Blog created successfully",{
+  //       position:"top-right"
+  //     })
+  //     // Handle success (e.g., clear form, show success message)
+  //   } catch (error) {
+  //     console.error("Error creating blog:", error);
+  //     // Handle error (e.g., show error message)
+  //   }
+  // };
   
-    //Handle Secton Remove Image Change
-    const handleRemoveSectionImagePreview = (sectionIndex, imageIndex) => {
-      const updatedSections = blog.sections.map((section, i) => {
-        if (i === sectionIndex) {
-          const updatedImages = section.images.map((image, j) =>
-            j === imageIndex ? { ...image, url: "", preview: "" } : image
-          );
-          return { ...section, images: updatedImages };
-        }
-        return section;
-      });
-      setBlog({ ...blog, sections: updatedSections });
-    };
+//Handle Submit Form
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    //Handle Add Section
-    const handleAddSection = () => {
-      setBlog({
-        ...blog,
-        sections: [
-          ...blog.sections,
-          { title: "", description: "", images: [""] },
-        ],
-      });
-    };
+  const { accessToken } = await GetTokens();
+  const token = accessToken?.value;
+  // Prepare data for submission
+  const formattedBlog = {
+    ...blog,
+    sections: blog.sections.map((section) => ({
+      ...section,
+      images: section.images.map((image) => ({
+        url: image.url,
+        altText: image.altText,
+        caption: image.caption,
+      })),
+    })),
+  };
 
-    //Handle Editor Change
-    const handleEditorStateChange = (newContent) => {
+  try {
+    const response = await axios.post("/api/updateBlog", formattedBlog, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log("response data:::", response.data);
+    router.push("/admin/viewBlogs")
+    toast.success("Blog updated successfully",{
+      position:"top-right"
+    })
+    // Handle success (e.g., clear form, show success message)
+  } catch (error) {
+    console.error("Error creating blog:", error);
+    // Handle error (e.g., show error message)
+  }
+};
+
+  //Handle Delete Section
+  const handleDeleteSection = (i) => {
+    const updatedSections = blog.sections.filter((_, j) => j !== i);
+    setBlog({ ...blog, sections: updatedSections });
+  };
+
+  //Hanlde Section Change
+  const handleSectionDescriptionChange = (e, i) => {
+    const updatedSections = blog.sections.map((section, j) =>
+      j === i ? { ...section, description: e } : section
+    );
+    setBlog({ ...blog, sections: updatedSections });
+  };
+
+  //handle Main Image Change
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "careerg");
+      const cloudinaryUrl = await uploadImage(formData);
+      const imageUrl = cloudinaryUrl?.data?.secure_url;
       setBlog((prevBlog) => ({
         ...prevBlog,
-        description: newContent,
+        mainImage: {
+          ...prevBlog.mainImage,
+          url: imageUrl,
+          altText: prevBlog.mainImage.altText || "", // Preserve existing altText or set empty string
+          caption: prevBlog.mainImage.caption || "", // Preserve existing caption or set empty string
+        },
       }));
-    };
-
-    //Handle Submit Form
-    // const handleSubmit = async (e) => {
-    //   e.preventDefault();
-    //   setIsLoading(true);
-
-    //   const { accessToken } = await GetTokens();
-    //   const token = accessToken?.value;
-    //   // Prepare data for submission
-    //   const formattedBlog = {
-    //     ...blog,
-    //     sections: blog.sections.map((section) => ({
-    //       ...section,
-    //       images: section.images.map((image) => ({
-    //         url: image.url,
-    //         altText: image.altText,
-    //         caption: image.caption,
-    //       })),
-    //     })),
-    //   };
-
-    //   try {
-    //     const response = await axios.post("/api/blog", formattedBlog, {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     console.log("response data:::", response.data);
-    //     router.push("/admin/viewBlogs")
-    //     toast.success("Blog created successfully",{
-    //       position:"top-right"
-    //     })
-    //     // Handle success (e.g., clear form, show success message)
-    //   } catch (error) {
-    //     console.error("Error creating blog:", error);
-    //     // Handle error (e.g., show error message)
-    //   }
-    // };
-    const handleSubmit = ()=>{
-      console.log("fkljdg")
+    } catch (error) {
+      console.error("Error handling image upload", error);
     }
+  };
 
-    //Handle Delete Section
-    const handleDeleteSection = (i) => {
-      const updatedSections = blog.sections.filter((_, j) => j !== i);
-      setBlog({ ...blog, sections: updatedSections });
-    };
+  //Handle Image Url Change
+  const handleImageUrlChange = (e) => {
+    const { value } = e.target;
+    setPreviewImage(value);
+    setBlog({
+      ...blog,
+      mainImage: {
+        ...blog.mainImage,
+        url: value,
+      },
+    });
+  };
 
-    //Hanlde Section Change
-    const handleSectionDescriptionChange = (e, i) => {
-      const updatedSections = blog.sections.map((section, j) =>
-        j === i ? { ...section, description: e } : section
-      );
-      setBlog({ ...blog, sections: updatedSections });
-    };
+  //  Handle Remove Preview Image Change
+  const handleRemovePreviewImage = () => {
+    setPreviewImage(null);
+    setBlog({
+      ...blog,
+      mainImage: {
+        ...blog.mainImage,
+        url: "",
+      },
+    });
+  };
 
-    //handle Main Image Change
-    const handleImageUpload = async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-      try {
-        const formData = new FormData();
-        formData.append("file",file);
-        formData.append("upload_preset", "careerg");
-        const cloudinaryUrl = await uploadImage(formData);
-        const imageUrl = cloudinaryUrl?.data?.secure_url
-        setBlog((prevBlog) => ({
-          ...prevBlog,
-          mainImage: {
-            ...prevBlog.mainImage,
-            url: imageUrl,
-            altText: prevBlog.mainImage.altText || "", // Preserve existing altText or set empty string
-            caption: prevBlog.mainImage.caption || "", // Preserve existing caption or set empty string
-          },
-        }));
-      } catch (error) {
-        console.error('Error handling image upload', error);
+  //Toggle Upload Mode
+  const toggleUploadMode = () => {
+    console.log("toggle buttton");
+    setIsUploadMode((prev) => !prev);
+  };
+
+  //Toggle Section Upload Mode
+  const toggleSectionImageUploadMode = (sectionIndex, imageIndex) => {
+    const updatedSections = blog.sections.map((section, i) => {
+      if (i === sectionIndex) {
+        const updatedImages = section.images.map((image, j) =>
+          j === imageIndex
+            ? { ...image, isUploadMode: !image.isUploadMode }
+            : image
+        );
+        return { ...section, images: updatedImages };
       }
-    };
+      return section;
+    });
+    setBlog({
+      ...blog,
+      sections: updatedSections,
+    });
+  };
 
-    //Handle Image Url Change
-    const handleImageUrlChange = (e) => {
-      const { value } = e.target;
-      setPreviewImage(value);
-      setBlog({
-        ...blog,
-        mainImage: {
-          ...blog.mainImage,
-          url: value,
-        },
-      });
-    };
+  // Handle MetaKeywords Change
+  const handleKeywordInputChange = (e) => {
+    setKeywordInput(e.target.value);
+  };
 
-    //  Handle Remove Preview Image Change
-    const handleRemovePreviewImage = () => {
-      setPreviewImage(null);
-      setBlog({
-        ...blog,
-        mainImage: {
-          ...blog.mainImage,
-          url: "",
-        },
-      });
-    };
-
-    //Toggle Upload Mode
-    const toggleUploadMode = () => {
-      console.log("toggle buttton");
-      setIsUploadMode((prev) => !prev);
-    };
-
-    //Toggle Section Upload Mode
-    const toggleSectionImageUploadMode = (sectionIndex, imageIndex) => {
-      const updatedSections = blog.sections.map((section, i) => {
-        if (i === sectionIndex) {
-          const updatedImages = section.images.map((image, j) =>
-            j === imageIndex
-              ? { ...image, isUploadMode: !image.isUploadMode }
-              : image
-          );
-          return { ...section, images: updatedImages };
-        }
-        return section;
-      });
-      setBlog({
-        ...blog,
-        sections: updatedSections,
-      });
-    };
-
-    // Handle MetaKeywords Change
-    const handleKeywordInputChange = (e) => {
-      setKeywordInput(e.target.value);
-    };
-
-    // Handle Add MetaKeywords Change
-    const handleAddKeyword = () => {
-      if (keywordInput.trim()) {
-        setBlog((prevBlog) => ({
-          ...prevBlog,
-          meta: {
-            ...prevBlog.meta,
-            keywords: [...prevBlog.meta.keywords, keywordInput.trim()],
-          },
-        }));
-        setKeywordInput("");
-      }
-    };
-
-    // Handle Remove MetaKeywords Change
-    const handleRemoveKeyword = (keywordToRemove) => {
+  // Handle Add MetaKeywords Change
+  const handleAddKeyword = () => {
+    if (keywordInput.trim()) {
       setBlog((prevBlog) => ({
         ...prevBlog,
         meta: {
           ...prevBlog.meta,
-          keywords: prevBlog.meta.keywords.filter(
-            (keyword) => keyword !== keywordToRemove
-          ),
+          keywords: [...prevBlog.meta.keywords, keywordInput.trim()],
         },
       }));
-    };
+      setKeywordInput("");
+    }
+  };
 
-    // Function to handle adding a new image entry
-    const handleAddSectionImage = (sectionIndex) => {
-      setBlog((prevBlog) => {
-        // Create a new array of images with a new image entry
-        const updatedSections = prevBlog.sections.map((section, idx) => {
-          if (idx === sectionIndex) {
-            return {
-              ...section,
-              images: [
-                ...section.images,
-                {
-                  url: "",
-                  altText: "",
-                  caption: "",
-                  isUploadMode: true, // Set default upload mode
-                  preview: "",
-                },
-              ],
-            };
-          }
-          return section;
-        });
+  // Handle Remove MetaKeywords Change
+  const handleRemoveKeyword = (keywordToRemove) => {
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      meta: {
+        ...prevBlog.meta,
+        keywords: prevBlog.meta.keywords.filter(
+          (keyword) => keyword !== keywordToRemove
+        ),
+      },
+    }));
+  };
 
-        return { ...prevBlog, sections: updatedSections };
+  // Function to handle adding a new image entry
+  const handleAddSectionImage = (sectionIndex) => {
+    setBlog((prevBlog) => {
+      // Create a new array of images with a new image entry
+      const updatedSections = prevBlog.sections.map((section, idx) => {
+        if (idx === sectionIndex) {
+          return {
+            ...section,
+            images: [
+              ...section.images,
+              {
+                url: "",
+                altText: "",
+                caption: "",
+                isUploadMode: true, // Set default upload mode
+                preview: "",
+              },
+            ],
+          };
+        }
+        return section;
       });
-    };
+
+      return { ...prevBlog, sections: updatedSections };
+    });
+  };
+
+  const handleRemoveSectionImage = (sectionIndex, imageIndex) => {
+    setBlog((prevBlog) => {
+      const updatedSections = prevBlog.sections.map((section, secIdx) => {
+        if (secIdx === sectionIndex) {
+          const updatedImages = section.images.filter(
+            (_, imgIdx) => imgIdx !== imageIndex
+          );
+          return { ...section, images: updatedImages };
+        }
+        return section;
+      });
+      return { ...prevBlog, sections: updatedSections };
+    });
+  };
 
   return (
     <div className="mt-24 mb-10  w-[60%] h-auto p-5 mx-auto rounded-xl shadow-xl ">
@@ -701,7 +748,7 @@ function UpdateBlog() {
               >
                 <AccordionItem value={`item-${index}`}>
                   <AccordionTrigger>
-                    <div className=" px-3 flex flex-col items-start">
+                    <div className="px-3 flex flex-col items-start">
                       <h3 className="text-xl font-bold">
                         {section?.title || "( not described )"}
                       </h3>
@@ -732,85 +779,76 @@ function UpdateBlog() {
                         className="border p-2 w-full mt-1"
                       />
                     </div>
-                    <div className="section_images">
+                    <div className="section_images relative">
                       {section.images.map((image, imageIndex) => (
                         <>
-                          <div key={imageIndex} className="p-2">
-                            <div className="w-1/3">
-                              <div className="my-2 flex items-center gap-4">
-                                <div className="flex items-center space-x-2">
-                                  <Switch
-                                    id={`toggle-switch-section-${index}-image-${imageIndex}`}
-                                    checked={image.isUploadMode}
-                                    className="bg-gray-500 text-white"
-                                    onCheckedChange={() =>
-                                      toggleSectionImageUploadMode(
-                                        index,
-                                        imageIndex
-                                      )
-                                    }
-                                  />
-                                  <Label
-                                    htmlFor={`toggle-switch-section-${index}-image-${imageIndex}`}
-                                  >
-                                    {image.isUploadMode
-                                      ? "Section Image Upload"
-                                      : "Section Image URL"}
-                                  </Label>
-                                </div>
+                        <div key={imageIndex} className="p-2">
+                          <div className="w-1/3">
+                            <div className="my-2 flex items-center gap-4">
+                              <div className="flex items-center space-x-2">
+                                <Switch
+                                  id={`toggle-switch-section-${index}-image-${imageIndex}`}
+                                  checked={image.isUploadMode}
+                                  className="bg-gray-500 text-white"
+                                  onCheckedChange={() =>
+                                    toggleSectionImageUploadMode(
+                                      index,
+                                      imageIndex
+                                    )
+                                  }
+                                />
+                                <Label
+                                  htmlFor={`toggle-switch-section-${index}-image-${imageIndex}`}
+                                >
+                                  {image.isUploadMode
+                                    ? "Section Image Upload"
+                                    : "Section Image URL"}
+                                </Label>
                               </div>
-                              {image.isUploadMode ? (
-                                <Input
-                                  type="file"
-                                  name="url"
-                                  className="border p-2 w-full mt-1"
-                                  onChange={(e) =>
-                                    handleSectionImageChange(
-                                      index,
-                                      imageIndex,
-                                      e
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <Input
-                                  type="text"
-                                  name="url"
-                                  value={image.url}
-                                  placeholder="Enter image URL"
-                                  className="border p-2 w-full mt-1"
-                                  onChange={(e) =>
-                                    handleSectionImageChange(
-                                      index,
-                                      imageIndex,
-                                      e
-                                    )
-                                  }
-                                />
-                              )}
-                              {image.preview && (
-                                <div className="relative mt-2">
-                                  <img
-                                    src={image.preview}
-                                    alt="Preview"
-                                    className="w-[200px] h-[200px] object-contain rounded-md"
-                                  />
-                                  <Button
-                                    type="button"
-                                    variant="outline"
-                                    className="absolute top-1 right-1"
-                                    onClick={() =>
-                                      handleRemoveSectionImagePreview(
-                                        index,
-                                        imageIndex
-                                      )
-                                    }
-                                  >
-                                    <FaTimes />
-                                  </Button>
-                                </div>
-                              )}
                             </div>
+                            {image.isUploadMode ? (
+                              <Input
+                                type="file"
+                                name="url"
+                                className="border p-2 w-full mt-1"
+                                onChange={(e) =>
+                                  handleSectionImageChange(index, imageIndex, e)
+                                }
+                              />
+                            ) : (
+                              <Input
+                                type="text"
+                                name="url"
+                                value={image.url}
+                                placeholder="Enter image URL"
+                                className="border p-2 w-full mt-1"
+                                onChange={(e) =>
+                                  handleSectionImageChange(index, imageIndex, e)
+                                }
+                              />
+                            )}
+                            {image.url && (
+                              <div className="relative mt-2">
+                                <img
+                                  src={image.url}
+                                  alt="Preview"
+                                  className="w-[200px] h-[200px] object-contain rounded-md"
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  className="absolute top-1 right-1"
+                                  onClick={() =>
+                                    handleRemoveSectionImagePreview(
+                                      index,
+                                      imageIndex
+                                    )
+                                  }
+                                >
+                                  <FaTimes />
+                                </Button>
+                              </div>
+                            )}
                           </div>
                           <div className="flex gap-10 p-2">
                             <div className="section_alt_text w-1/2">
@@ -840,23 +878,33 @@ function UpdateBlog() {
                               />
                             </div>
                           </div>
-                          {/* Add the button to add the section */}
-                          <Button
+                          
+                        </div>
+                        <Button
                             type="button"
-                            onClick={() => handleAddSectionImage(index)}
-                            className="mt-4 text-sm"
+                            onClick={() =>
+                              handleRemoveSectionImage(index, imageIndex)
+                            }
+                            className="absolute top-1 right-1 bg-transparent hover:bg-transparent text-red-600"
                           >
-                            <FaPlus /> Add Image
-                          </Button>
+                            Remove Image Section <FaTimes />
+                          </Button> 
                         </>
+                        
                       ))}
+                      <Button
+                        type="button"
+                        onClick={() => handleAddSectionImage(index)}
+                        className="mt-4 text-sm"
+                      >
+                        <FaPlus /> Add Image
+                      </Button>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
               <MdDeleteOutline
-                className="-right-5 top-8 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out absolute"
+                className="-right-5 top-8 text-2xl font-extrabold cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out absolute"
                 onClick={() => handleDeleteSection(index)}
               />
             </div>
