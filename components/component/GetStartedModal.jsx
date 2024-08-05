@@ -29,7 +29,7 @@ const GetStartedModal = ({ onClose }) => {
       title: "CV Creator",
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
-      link: "/resume-dashboard",
+      link: "/resume",
     },
     {
       title: "CV Optimiser",

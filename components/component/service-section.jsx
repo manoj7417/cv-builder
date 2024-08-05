@@ -121,7 +121,7 @@ export function ServiceSection() {
                 </ul>
                 <div>
                   <button className=" px-7 py-2 rounded-md text-base text-white bg-blue-900 hover:bg-blue-700">
-                    <a href="/resume-dashboard" className="flex items-center">
+                    <a href="/resume" className="flex items-center">
                       Curate Now
                       <FiBox className="h-5 w-5 ms-5 text-white" />
                     </a>

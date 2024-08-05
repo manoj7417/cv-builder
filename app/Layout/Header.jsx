@@ -84,8 +84,8 @@ const Header = () => {
             {/* Resume Navs  */}
             <li>
               <Link
-                href="/resume-dashboard"
-                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume-dashboard")}`}
+                href="/resume"
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume")}`}
                 prefetch={false}
               >
                 CV Creator

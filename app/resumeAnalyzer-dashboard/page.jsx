@@ -125,7 +125,7 @@ export default function DashboardIdea() {
                 resume. This is the main reason you are not getting shortlisted.
               </DialogDescription>
               <div className="flex w-full justify-end">
-                <Link href="/resume-dashboard" className="inline">
+                <Link href="/resume" className="inline">
                   <Button>View Templates</Button>
                 </Link>
               </div>

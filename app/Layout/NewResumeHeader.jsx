@@ -21,7 +21,7 @@ import { RemoveTokens } from "../actions";
 import "./header.css";
 
 const navigation = [
-  { name: "CV Creator", href: "/resume-dashboard", current: true },
+  { name: "CV Creator", href: "/resume", current: true },
   { name: "CV Optimiser", href: "/resumeAnalyzer-dashboard", current: false },
   { name: "CV Match", href: "/jobCV", current: false, isBeta: true },
   // {

@@ -3994,7 +3994,7 @@ html {
     font-size: 19px;
   }
 
-  .resume-dashboard {
+  .resume {
     margin-bottom: 0 !important;
     padding: 50px 0;
   }
@@ -4081,12 +4081,12 @@ footer a:hover svg {
   transform: translate(0.5rem, 0rem);
 }
 
-.resume-dashboard {
+.resume {
   margin-bottom: -100px;
 }
 
 @media (min-width: 1536px) {
-  .resume-dashboard {
+  .resume {
     margin-bottom: -200px;
   }
 }
