@@ -14,10 +14,6 @@ import { toast } from "react-toastify";
 const menuItems = [
  
   {
-    name: "Career Coaching",
-    href: "/coming-soon",
-  },
-  {
     name: "CV Studio",
     href: "/resume-dashboard",
   },
@@ -32,6 +28,10 @@ const menuItems = [
   {
     name: "Contact Us",
     href: "/contact-us",
+  },
+  {
+    name: "Career Coaching",
+    href: "/coming-soon",
   }
 ];
 
