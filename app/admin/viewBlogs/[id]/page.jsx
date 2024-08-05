@@ -130,14 +130,16 @@ const IndividualBlogPage = () => {
                   {parse(individualBlog?.description || "")}
                 </p>
                 {individualBlog?.sections?.map((val, index) => (
-                  <div>
+                  <div key={index}>
                     <div className="section_image">
-                      {val?.images?.map((el)=>(
-                        <img
+                      {val?.images?.map((el,idx)=>(
+                       <div key={idx}>
+                         <img
                         className="w-full my-4"
                         src={el?.url}
                         alt={el?.altText}
                       />
+                       </div>
                       ))}
                     </div>
                     <div className="section_content">
