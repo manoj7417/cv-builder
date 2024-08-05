@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import "./header.css";
-import { IoNotificationsOutline } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserStore } from "../store/UserStore";
 import Link from "next/link";
