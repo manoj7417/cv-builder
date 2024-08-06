@@ -1,6 +1,5 @@
 import React from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
-
+import { DialogContent, DialogFooter } from '../ui/dialog'
 import { Label } from '../ui/label'
 import { Button } from '../ui/button'
 import { toast } from 'react-toastify'
@@ -13,7 +12,6 @@ import { IoIosAddCircle } from "react-icons/io";
 import { Input } from '../ui/input'
 import Lottie from 'lottie-react'
 import animation from '@/public/animations/JobCVLoader.json'
-import { generateResumeOnFeeback } from '@/app/api/api'
 import { GetTokens } from '@/app/actions'
 import { useUserStore } from '@/app/store/UserStore'
 import { useResumeStore } from '@/app/store/ResumeStore'
@@ -438,12 +436,12 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 1) {
-        return <DialogContent className='max-w-[70dvw] h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className=' sm:max-w-[70dvw] h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
-                <div className='w-1/3 h-full '>
+            <div className='w-1/3 h-full hidden sm:block'>
+            <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
+            </div>
 
-                    <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
-                </div>
                 <div className=' w-2/3 py-5 h-full'>
                     <div className='shadow-xl p-10 w-full h-full rounded-2xl bg-white'>
                         <div className='my-2'>
