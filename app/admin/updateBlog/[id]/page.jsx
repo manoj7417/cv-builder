@@ -25,6 +25,7 @@ const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 function UpdateBlog() {
   const { id } = useParams();
+  console.log(id);
 
   const [blog, setBlog] = useState({
     slug: "",
@@ -293,44 +294,44 @@ function UpdateBlog() {
   //     // Handle error (e.g., show error message)
   //   }
   // };
-  
-//Handle Submit Form
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsLoading(true);
 
-  const { accessToken } = await GetTokens();
-  const token = accessToken?.value;
-  // Prepare data for submission
-  const formattedBlog = {
-    ...blog,
-    sections: blog.sections.map((section) => ({
-      ...section,
-      images: section.images.map((image) => ({
-        url: image.url,
-        altText: image.altText,
-        caption: image.caption,
+  //Handle Submit Form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { accessToken } = await GetTokens();
+    if (!accessToken) return;
+    const token = accessToken?.value;
+    // Prepare data for submission
+    const formattedBlog = {
+      id: id,
+      ...blog,
+      sections: blog.sections.map((section) => ({
+        ...section,
+        images: section.images.map((image) => ({
+          url: image.url,
+          altText: image.altText,
+          caption: image.caption,
+        })),
       })),
-    })),
-  };
+    };
 
-  try {
-    const response = await axios.post("/api/updateBlog", formattedBlog, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    console.log("response data:::", response.data);
-    router.push("/admin/viewBlogs")
-    toast.success("Blog updated successfully",{
-      position:"top-right"
-    })
-    // Handle success (e.g., clear form, show success message)
-  } catch (error) {
-    console.error("Error creating blog:", error);
-    // Handle error (e.g., show error message)
-  }
-};
+    try {
+      const response = await axios.post("/api/updateBlog", formattedBlog, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      console.log("response data:::", response.data);
+      router.push("/admin/viewBlogs");
+      toast.success("Blog updated successfully", {
+        position: "top-right",
+      });
+      // Handle success (e.g., clear form, show success message)
+    } catch (error) {
+      console.error("Error creating blog:", error);
+      // Handle error (e.g., show error message)
+    }
+  };
 
   //Handle Delete Section
   const handleDeleteSection = (i) => {
@@ -484,17 +485,19 @@ const handleSubmit = async (e) => {
     });
   };
 
+  // Function to handle remove a new image entry
   const handleRemoveSectionImage = (sectionIndex, imageIndex) => {
     setBlog((prevBlog) => {
-      const updatedSections = prevBlog.sections.map((section, secIdx) => {
-        if (secIdx === sectionIndex) {
-          const updatedImages = section.images.filter(
-            (_, imgIdx) => imgIdx !== imageIndex
-          );
-          return { ...section, images: updatedImages };
+      const updatedSections = prevBlog.sections.map((section, idx) => {
+        if (idx === sectionIndex) {
+          return {
+            ...section,
+            images: section.images.filter((_, imgIdx) => imgIdx !== imageIndex),
+          };
         }
         return section;
       });
+
       return { ...prevBlog, sections: updatedSections };
     });
   };
@@ -782,115 +785,137 @@ const handleSubmit = async (e) => {
                     <div className="section_images relative">
                       {section.images.map((image, imageIndex) => (
                         <>
-                        <div key={imageIndex} className="p-2">
-                          <div className="w-1/3">
-                            <div className="my-2 flex items-center gap-4">
-                              <div className="flex items-center space-x-2">
-                                <Switch
-                                  id={`toggle-switch-section-${index}-image-${imageIndex}`}
-                                  checked={image.isUploadMode}
-                                  className="bg-gray-500 text-white"
-                                  onCheckedChange={() =>
-                                    toggleSectionImageUploadMode(
+                          <div key={imageIndex} className="p-2">
+                            <div className="w-1/3">
+                              <div className="my-2 flex items-center gap-4">
+                                <div className="flex items-center space-x-2">
+                                  <Switch
+                                    id={`toggle-switch-section-${index}-image-${imageIndex}`}
+                                    checked={image.isUploadMode}
+                                    className="bg-gray-500 text-white"
+                                    onCheckedChange={() =>
+                                      toggleSectionImageUploadMode(
+                                        index,
+                                        imageIndex
+                                      )
+                                    }
+                                  />
+                                  <Label
+                                    htmlFor={`toggle-switch-section-${index}-image-${imageIndex}`}
+                                  >
+                                    {image.isUploadMode
+                                      ? "Section Image Upload"
+                                      : "Section Image URL"}
+                                  </Label>
+                                </div>
+                                {/* Remove Button */}
+                                {section?.images?.length > 1 &&
+                                  imageIndex > 0 && (
+                                    <Button
+                                      type="button"
+                                      variant="outline"
+                                      className="ml-auto"
+                                      onClick={() =>
+                                        handleRemoveSectionImage(
+                                          index,
+                                          imageIndex
+                                        )
+                                      }
+                                    >
+                                      <FaTimes />
+                                    </Button>
+                                  )}
+                              </div>
+                              {image.isUploadMode ? (
+                                <Input
+                                  type="file"
+                                  name="url"
+                                  className="border p-2 w-full mt-1"
+                                  onChange={(e) =>
+                                    handleSectionImageChange(
                                       index,
-                                      imageIndex
+                                      imageIndex,
+                                      e
                                     )
                                   }
                                 />
-                                <Label
-                                  htmlFor={`toggle-switch-section-${index}-image-${imageIndex}`}
-                                >
-                                  {image.isUploadMode
-                                    ? "Section Image Upload"
-                                    : "Section Image URL"}
-                                </Label>
-                              </div>
-                            </div>
-                            {image.isUploadMode ? (
-                              <Input
-                                type="file"
-                                name="url"
-                                className="border p-2 w-full mt-1"
-                                onChange={(e) =>
-                                  handleSectionImageChange(index, imageIndex, e)
-                                }
-                              />
-                            ) : (
-                              <Input
-                                type="text"
-                                name="url"
-                                value={image.url}
-                                placeholder="Enter image URL"
-                                className="border p-2 w-full mt-1"
-                                onChange={(e) =>
-                                  handleSectionImageChange(index, imageIndex, e)
-                                }
-                              />
-                            )}
-                            {image.url && (
-                              <div className="relative mt-2">
-                                <img
-                                  src={image.url}
-                                  alt="Preview"
-                                  className="w-[200px] h-[200px] object-contain rounded-md"
-                                />
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  className="absolute top-1 right-1"
-                                  onClick={() =>
-                                    handleRemoveSectionImagePreview(
+                              ) : (
+                                <Input
+                                  type="text"
+                                  name="url"
+                                  value={image.url}
+                                  placeholder="Enter image URL"
+                                  className="border p-2 w-full mt-1"
+                                  onChange={(e) =>
+                                    handleSectionImageChange(
                                       index,
-                                      imageIndex
+                                      imageIndex,
+                                      e
                                     )
                                   }
-                                >
-                                  <FaTimes />
-                                </Button>
+                                />
+                              )}
+                              {image.url && (
+                                <div className="relative mt-2">
+                                  <img
+                                    src={image.url}
+                                    alt="Preview"
+                                    className="w-[200px] h-[200px] object-contain rounded-md"
+                                  />
+                                  <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="absolute top-1 right-1"
+                                    onClick={() =>
+                                      handleRemoveSectionImagePreview(
+                                        index,
+                                        imageIndex
+                                      )
+                                    }
+                                  >
+                                    <FaTimes />
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex gap-10 p-2">
+                              <div className="section_alt_text w-1/2">
+                                <Label>Section Alt Text</Label>
+                                <Input
+                                  type="text"
+                                  name="altText"
+                                  value={image.altText}
+                                  required
+                                  className="border p-2 w-full mt-1"
+                                  onChange={(e) =>
+                                    handleSectionImageChange(
+                                      index,
+                                      imageIndex,
+                                      e
+                                    )
+                                  }
+                                />
                               </div>
-                            )}
-                          </div>
-                          <div className="flex gap-10 p-2">
-                            <div className="section_alt_text w-1/2">
-                              <Label>Section Alt Text</Label>
-                              <Input
-                                type="text"
-                                name="altText"
-                                value={image.altText}
-                                required
-                                className="border p-2 w-full mt-1"
-                                onChange={(e) =>
-                                  handleSectionImageChange(index, imageIndex, e)
-                                }
-                              />
-                            </div>
-                            <div className="section_image_caption w-1/2">
-                              <Label>Section Image Caption</Label>
-                              <Input
-                                type="text"
-                                name="caption"
-                                value={image.caption}
-                                required
-                                className="border p-2 w-full mt-1"
-                                onChange={(e) =>
-                                  handleSectionImageChange(index, imageIndex, e)
-                                }
-                              />
+                              <div className="section_image_caption w-1/2">
+                                <Label>Section Image Caption</Label>
+                                <Input
+                                  type="text"
+                                  name="caption"
+                                  value={image.caption}
+                                  required
+                                  className="border p-2 w-full mt-1"
+                                  onChange={(e) =>
+                                    handleSectionImageChange(
+                                      index,
+                                      imageIndex,
+                                      e
+                                    )
+                                  }
+                                />
+                              </div>
                             </div>
                           </div>
-                          
-                        </div>
-                        <Button
-                            type="button"
-                            onClick={() =>
-                              handleRemoveSectionImage(index, imageIndex)
-                            }
-                            className="absolute top-1 right-1 bg-transparent hover:bg-transparent text-red-600"
-                          >
-                            Remove Image Section <FaTimes />
-                          </Button> 
                         </>
-                        
                       ))}
                       <Button
                         type="button"

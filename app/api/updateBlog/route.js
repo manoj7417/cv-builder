@@ -2,15 +2,14 @@ import { serverInstance } from "@/lib/serverApi";
 
 export async function POST(req, res) {
   try {
-    const { id } = await req.json();
-    console.log("id:::",id)
+    const formattedBlog = await req.json();
+    const {id} = formattedBlog;
     const token = req.headers.get("Authorization");
-    const response = await serverInstance.patch(`/blog/update/${id}`, {
+    const response = await serverInstance.patch(`/blog/update/${id}`, formattedBlog,{
       headers: {
         Authorization: token,
       },
     });
-    console.log("response:::",response)
     return new Response(JSON.stringify(response.data), {
       status: 200,
       headers: { "Content-Type": "application/json" },

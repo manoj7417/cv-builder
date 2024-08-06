@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import parse from "html-react-parser";
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
+import ResumeTooltip from "@/components/component/ResumeTooltip";
 
 const ViewBlogsPage = () => {
   const [blogData, setBlogData] = useState([]);
@@ -108,20 +109,26 @@ const ViewBlogsPage = () => {
               blogData.map((item, index) => (
                 <div key={index}>
                   <div className="views_cards_blog">
-                    <div className="w-[300px] h-[550px] rounded-md border">
+                    <div
+                      className="2xl:w-[300px] w-full 2xl:h-[550px] h-full rounded-md"
+                      style={{
+                        boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                      }}
+                    >
                       <img
                         src={item?.mainImage?.url}
                         alt={item?.mainImage?.altText}
                         className="h-[300px] w-full rounded-t-md object-cover"
                       />
-                      <div className="p-4">
+                      <div className="p-4 text-center">
                         <h1 className="inline-flex items-center text-lg font-semibold">
                           {item?.author}
                         </h1>
                         <p className="mt-3 text-sm text-gray-600">
                           {parse(item?.description.slice(0, 100) || "")}
                         </p>
-                        <div className="mt-4">
+                        {/* <span>Read more...</span> */}
+                        <div className="mt-4 flex justify-center">
                           {item?.meta?.keywords.map((keyitem, index) => (
                             <div key={index}>
                               <span className="mb-2 mr-2 inline-block rounded-full bg-gray-100 px-3 py-1 text-[10px] font-semibold text-gray-900">
@@ -134,27 +141,34 @@ const ViewBlogsPage = () => {
                           <div className="view_more">
                             <button
                               type="button"
-                              class="mt-4 w-full rounded-sm bg-blue-950 px-2 py-1.5 text-[10px] font-semibold text-white shadow-sm"
+                              class="mt-4 w-full rounded-sm  px-2 py-1.5 text-sm font-semibold text-black shadow-sm"
                               onClick={() => handleIndividualBlog(item?._id)}
                             >
                               Read More...
                             </button>
                           </div>
                           <div className="action_button">
-                            <button
-                              type="button"
-                              className="rounded-full p-2"
-                              onClick={() => handleBlogEdit(item?._id)}
+                            <ResumeTooltip icon={FaEdit} title="Edit Blog">
+                              <button
+                                type="button"
+                                className="rounded-full p-2"
+                                onClick={() => handleBlogEdit(item?._id)}
+                              >
+                                <FaEdit className="text-sm"/>
+                              </button>
+                            </ResumeTooltip>
+                            <ResumeTooltip
+                              icon={FaTrashAlt}
+                              title="Delete Blog"
                             >
-                              <FaEdit />
-                            </button>
-                            <button
-                              type="button"
-                              className="rounded-full p-2"
-                              onClick={() => handleDeleteBlog(item?._id)}
-                            >
-                              <FaTrashAlt />
-                            </button>
+                              <button
+                                type="button"
+                                className="rounded-full p-2"
+                                onClick={() => handleDeleteBlog(item?._id)}
+                              >
+                                <FaTrashAlt className="text-sm"/>
+                              </button>
+                            </ResumeTooltip>
                           </div>
                         </div>
                       </div>
