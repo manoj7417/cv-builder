@@ -436,7 +436,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 1) {
-        return <DialogContent className=' sm:max-w-[70dvw] sm:h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='h-full sm:max-w-[70dvw] sm:h-[80dvh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
             <div className='flex justify-around'>
             <div className='w-1/3 h-full hidden sm:block'>
             <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' className='absolute bottom-5' width={400} height={500} />
@@ -480,7 +480,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 2) {
-        return <DialogContent className='max-w-[100vw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
         <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
             <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                 <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' layout='fill' objectFit='cover' className='sm:absolute sm:bottom-5' />
@@ -798,13 +798,13 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 4) {
-        return <DialogContent className='max-w-[100vw] no-scrollbar h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[100vw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                         <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' layout='fill' objectFit='cover' className='sm:absolute sm:bottom-5' />
                     </div>
                     <div className='w-full sm:w-2/3 py-5 h-full overflow-hidden'>
-                    <div className='shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
+                    <div className='shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
                         <div className='max-h-[85%]  overflow-scroll no-scrollbar'>
                             <div className='flex justify-between items-center my-4 px-1'>
                                 <p className='text-blue-900'>Add Projects</p>
@@ -928,13 +928,13 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
     }
 
     if (steps === 5) {
-        return <DialogContent className='max-w-[100vw] no-scrollbar p-0 h-[80vh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+        return <DialogContent className='max-w-[100vw] no-scrollbar p-0 h-full sm:h-[80vh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
         <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
             <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                 <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' layout='fill' objectFit='cover' className='sm:absolute sm:bottom-5' />
             </div>
             <div className='w-full sm:w-2/3 py-5 h-full overflow-hidden'>
-                    <div className='shadow-xl px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
+                    <div className='shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
                         <Label >Skills</Label>
                         <Textarea placeholder='Enter your skills' value={formData.skills.join("\n")} onChange={handleSkillsChange} className='mt-2 h-1/2' />
                         <div className='w-full justify-between items-center py-10 flex'>
