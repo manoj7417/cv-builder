@@ -5,14 +5,30 @@ import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useRouter } from "next/navigation";
 import parse from "html-react-parser";
-import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaEye, FaTimesCircle, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import ResumeTooltip from "@/components/component/ResumeTooltip";
+import { IoShieldCheckmark } from "react-icons/io5";
+import Pagination from "../(AdminSidebar)/Pagination";
 
 const ViewBlogsPage = () => {
   const [blogData, setBlogData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const totalPages = Math.ceil(blogData?.length / itemsPerPage);
+  console.log("totalPages:::", totalPages);
+
+  const currentPageData = blogData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+
+
   const router = useRouter();
+  const isVerified = "false";
 
   const fetchBlogDetails = async () => {
     const { accessToken } = await GetTokens();
@@ -68,13 +84,25 @@ const ViewBlogsPage = () => {
     router.push(`/admin/updateBlog/${id}`);
   };
 
+  const handleAddBlog = () => {
+    router.push("/admin/createBlogs");
+  };
+
   useEffect(() => {
     fetchBlogDetails();
   }, []);
 
   return (
-    <div className="mx-auto w-[60%] my-20">
-      <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
+    <div className="2xl:p-20 lg:p-10">
+      <div className="add_blog flex justify-end 2xl:mb-10 lg:mb-5 mb-5">
+        <button
+          className="bg-blue-950 text-white text-sm px-5 py-2"
+          onClick={handleAddBlog}
+        >
+          Add Blog
+        </button>
+      </div>
+      <div className="grid 2xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-5">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <div key={index}>
@@ -104,13 +132,13 @@ const ViewBlogsPage = () => {
           ))
         ) : (
           <>
-            {Array.isArray(blogData) &&
-              blogData.length > 0 &&
-              blogData.map((item, index) => (
+            {Array.isArray(currentPageData) &&
+              currentPageData.length > 0 &&
+              currentPageData.map((item, index) => (
                 <div key={index}>
                   <div className="views_cards_blog">
                     <div
-                      className="2xl:w-[300px] w-full 2xl:h-[550px] h-full rounded-md"
+                      className="2xl:w-[300px] w-full 2xl:h-[400px] h-full rounded-md relative"
                       style={{
                         boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
                       }}
@@ -118,7 +146,7 @@ const ViewBlogsPage = () => {
                       <img
                         src={item?.mainImage?.url}
                         alt={item?.mainImage?.altText}
-                        className="h-[300px] w-full rounded-t-md object-cover"
+                        className="h-[200px] w-full rounded-t-md object-cover"
                       />
                       <div className="p-4 text-center">
                         <h1 className="inline-flex items-center text-lg font-semibold">
@@ -127,15 +155,23 @@ const ViewBlogsPage = () => {
                         <p className="mt-3 text-sm text-gray-600">
                           {parse(item?.description.slice(0, 100) || "")}
                         </p>
-                        {/* <span>Read more...</span> */}
-                        <div className="mt-4 flex justify-center">
-                          {item?.meta?.keywords.map((keyitem, index) => (
-                            <div key={index}>
-                              <span className="mb-2 mr-2 inline-block rounded-full bg-gray-100 px-3 py-1 text-[10px] font-semibold text-gray-900">
-                                #{keyitem}
+                        {/* Conditionally render the "Not Verified" label */}
+                        <div className="verified_div absolute top-0 right-2">
+                          {isVerified === "false" ? (
+                            <div className="mt-2">
+                              <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-800">
+                                <FaTimesCircle className="text-base inline-flex mr-2" />
+                                Not Verified
                               </span>
                             </div>
-                          ))}
+                          ) : (
+                            <div className="mt-2">
+                              <span className="inline-block rounded-full bg-green-200 p-2  text-xs font-semibold text-green-800">
+                                <IoShieldCheckmark className="text-base inline-flex mr-2" />{" "}
+                                Verified
+                              </span>
+                            </div>
+                          )}
                         </div>
                         <div className="flex justify-between  items-baseline mt-4">
                           <div className="view_more">
@@ -154,7 +190,7 @@ const ViewBlogsPage = () => {
                                 className="rounded-full p-2"
                                 onClick={() => handleBlogEdit(item?._id)}
                               >
-                                <FaEdit className="text-sm"/>
+                                <FaEdit className="text-sm" />
                               </button>
                             </ResumeTooltip>
                             <ResumeTooltip
@@ -166,7 +202,7 @@ const ViewBlogsPage = () => {
                                 className="rounded-full p-2"
                                 onClick={() => handleDeleteBlog(item?._id)}
                               >
-                                <FaTrashAlt className="text-sm"/>
+                                <FaTrashAlt className="text-sm text-red-600" />
                               </button>
                             </ResumeTooltip>
                           </div>
@@ -178,6 +214,13 @@ const ViewBlogsPage = () => {
               ))}
           </>
         )}
+      </div>
+      <div className="pagination mt-10">
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+        />
       </div>
     </div>
   );

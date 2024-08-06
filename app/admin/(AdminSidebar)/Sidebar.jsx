@@ -7,8 +7,26 @@ import { AdminSidebarNav } from "@/constants/AdminSidebarNav";
 import { FaChevronDown } from "react-icons/fa";
 
 const SideNav = () => {
+
+  const currentUserRole = "USER"; // Replace this with the actual logic to get the current user's role
+
+// Define the filtering logic based on roles
+const filteredMenuItems = AdminSidebarNav.filter((item) => {
+  if (currentUserRole === "SUPER_ADMIN" || currentUserRole === "ADMIN") {
+    // Show all items to SUPER_ADMIN and ADMIN
+    return item;
+  } else if (currentUserRole === "USER") {
+    // Show only "Blog" tab to USER
+    return item.title === "Blog";
+  } else {
+    // For other roles, remove 'User' and 'Settings' tabs
+    return !["User", "Settings"].includes(item.title);
+  }
+});
+
+
   return (
-    <div className="md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex mt-14">
+    <div className="md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex top-14">
       <div className="flex flex-col space-y-6 w-full">
         <Link
           href="/"
@@ -19,7 +37,7 @@ const SideNav = () => {
         </Link>
 
         <div className="flex flex-col space-y-2  md:px-6 ">
-          {AdminSidebarNav.map((item, idx) => {
+          {filteredMenuItems.map((item, idx) => {
             return <MenuItem key={idx} item={item} />;
           })}
         </div>

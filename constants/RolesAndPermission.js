@@ -1,56 +1,89 @@
-export const RolesAndPermission = [
-  {
-    id: 1,
-    role: "SuperAdmin",
-    managePermissions:["managedBlogs","managedUser","settings","publishBlog"]
-  },
-  {
-    id: 2,
-    role: "Admin",
-    managePermissions:["managedBlogs","managedUser","verifyBlog"]
-  },
-  {
-    id: 3,
-    role: "User",
-    managePermissions:"managedBlogs"
-  },
-];
+export const availableRoles = ["SUPER_ADMIN", "ADMIN", "USER"];
+
+export const PERMISSIONS = {
+  CREATE_USER: "CREATE_USER",
+  VIEW_USERS: "VIEW_USERS",
+  UPDATE_USER: "UPDATE_USER",
+  DELETE_USER: "DELETE_USER",
+  CREATE_ROLE: "CREATE_ROLE",
+  VIEW_ROLES: "VIEW_ROLES",
+  UPDATE_ROLE: "UPDATE_ROLE",
+  DELETE_ROLE: "DELETE_ROLE",
+  CREATE_PERMISSION: "CREATE_PERMISSION",
+  VIEW_PERMISSIONS: "VIEW_PERMISSIONS",
+  UPDATE_PERMISSION: "UPDATE_PERMISSION",
+  DELETE_PERMISSION: "DELETE_PERMISSION",
+  CREATE_BLOG: "CREATE_BLOG",
+  VIEW_BLOG: "VIEW_BLOG",
+  UPDATE_BLOG: "UPDATE_BLOG",
+  DELETE_BLOG: "DELETE_BLOG",
+};
 
 export const userDetails = [
-    {
-        userId:1,
-        userName:"Mukesh",
-        role:"SuperAdmin",
-        managePermissions:["managedBlogs","managedUser","settings","publishBlog"]
-    },
-    {
-        userId:2,
-        userName:"Suresh",
-        role:"Admin",
-        managePermissions:["managedBlogs","managedUser","verifyBlog"]
-    },
-    {
-        userId:3,
-        userName:"Mahesh",
-        role:"Admin",
-        managePermissions:["managedBlogs","managedUser","verifyBlog"]
-    },
-    {
-        userId:4,
-        userName:"Rohit",
-        role:"User",
-        managePermissions:"managedBlogs"
-    },
-    {
-        userId:5,
-        userName:"Virat",
-        role:"User",
-        managePermissions:"managedBlogs"
-    },
-    {
-        userId:6,
-        userName:"Rahul",
-        role:"User",
-        managePermissions:"managedBlogs"
-    }
-]
+  {
+    id: "1",
+    username: "superadmin",
+    email: "superadmin@example.com",
+    role: "SUPER_ADMIN",
+    permissions: [
+      PERMISSIONS.CREATE_USER,
+      PERMISSIONS.VIEW_USERS,
+      PERMISSIONS.UPDATE_USER,
+      PERMISSIONS.DELETE_USER,
+      PERMISSIONS.CREATE_ROLE,
+      PERMISSIONS.VIEW_ROLES,
+      PERMISSIONS.UPDATE_ROLE,
+      PERMISSIONS.DELETE_ROLE,
+      PERMISSIONS.CREATE_PERMISSION,
+      PERMISSIONS.VIEW_PERMISSIONS,
+      PERMISSIONS.UPDATE_PERMISSION,
+      PERMISSIONS.DELETE_PERMISSION,
+      PERMISSIONS.CREATE_BLOG,
+      PERMISSIONS.VIEW_BLOG,
+      PERMISSIONS.UPDATE_BLOG,
+      PERMISSIONS.DELETE_BLOG,
+    ],
+  },
+  {
+    id: "2",
+    username: "admin",
+    email: "admin@example.com",
+    role: "ADMIN",
+    permissions: [
+      PERMISSIONS.CREATE_USER,
+      PERMISSIONS.VIEW_USERS,
+      PERMISSIONS.UPDATE_USER,
+      PERMISSIONS.DELETE_USER,
+      PERMISSIONS.CREATE_ROLE,
+      PERMISSIONS.VIEW_ROLES,
+      PERMISSIONS.UPDATE_ROLE,
+      PERMISSIONS.DELETE_ROLE,
+      PERMISSIONS.CREATE_BLOG,
+      PERMISSIONS.VIEW_BLOG,
+      PERMISSIONS.UPDATE_BLOG,
+      PERMISSIONS.DELETE_BLOG,
+    ],
+  },
+  {
+    id: "3",
+    username: "user1",
+    email: "user1@example.com",
+    role: "USER",
+    permissions: [
+      PERMISSIONS.CREATE_BLOG,
+      PERMISSIONS.VIEW_BLOG,
+      PERMISSIONS.UPDATE_BLOG,
+    ],
+  },
+  {
+    id: "4",
+    username: "user2",
+    email: "user2@example.com",
+    role: "USER",
+    permissions: [
+      PERMISSIONS.CREATE_BLOG,
+      PERMISSIONS.VIEW_BLOG,
+      PERMISSIONS.UPDATE_BLOG,
+    ],
+  },
+];
