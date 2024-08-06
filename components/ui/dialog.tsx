@@ -47,7 +47,7 @@ const DialogContent = React.forwardRef<
       {children}
       {showCloseButton && (
         <div
-          className="absolute ring-offset-white transition-transform focus:outline-none  w-[30px] h-[30px] rounded-full shadow-lg disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500 flex items-center justify-center cursor-pointer z-[200] bg-blue-600 hover:rotate-90 -top-3 -right-2"
+          className="absolute ring-offset-white transition-transform focus:outline-none  w-[30px] h-[30px] rounded-full shadow-lg disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500 flex items-center justify-center cursor-pointer z-[200] bg-blue-600 hover:rotate-90 top-2 sm:-top-3 right-1 sm:-right-2"
           style={{ transition: "transform 0.5s " }}
           {...props} // Adding transition property
         >
