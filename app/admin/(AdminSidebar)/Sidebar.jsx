@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 import React, { useState } from "react";
@@ -7,36 +9,35 @@ import { AdminSidebarNav } from "@/constants/AdminSidebarNav";
 import { FaChevronDown } from "react-icons/fa";
 
 const SideNav = () => {
-
   const currentUserRole = "USER"; // Replace this with the actual logic to get the current user's role
 
-// Define the filtering logic based on roles
-const filteredMenuItems = AdminSidebarNav.filter((item) => {
-  if (currentUserRole === "SUPER_ADMIN" || currentUserRole === "ADMIN") {
-    // Show all items to SUPER_ADMIN and ADMIN
-    return item;
-  } else if (currentUserRole === "USER") {
-    // Show only "Blog" tab to USER
-    return item.title === "Blog";
-  } else {
-    // For other roles, remove 'User' and 'Settings' tabs
-    return !["User", "Settings"].includes(item.title);
-  }
-});
-
+  // Define the filtering logic based on roles
+  const filteredMenuItems = AdminSidebarNav.filter((item) => {
+    if (currentUserRole === "SUPER_ADMIN" || currentUserRole === "ADMIN") {
+      // Show all items to SUPER_ADMIN and ADMIN
+      return item;
+    } else if (currentUserRole === "USER") {
+      // Show only "Blog" tab to USER
+      return item.title === "Blog";
+    } else {
+      // For other roles, remove 'User' and 'Settings' tabs
+      return !["User", "Settings"].includes(item.title);
+    }
+  });
 
   return (
-    <div className="md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex top-14">
-      <div className="flex flex-col space-y-6 w-full">
+    <div className='md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex top-0'>
+      <div className='flex flex-col space-y-6 w-full'>
         <Link
-          href="/"
-          className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-blue-900 h-12 w-full"
-        >
-          <span className="h-7 w-7 bg-blue-900 rounded-lg" />
-          <span className="font-bold text-sm hidden md:flex">Career Genies Hub</span>
+          href='/'
+          className='flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-blue-900 h-12 w-full'>
+          <span className='h-7 w-7 bg-blue-900 rounded-lg' />
+          <span className='font-bold text-sm hidden md:flex'>
+            Career Genies Hub
+          </span>
         </Link>
 
-        <div className="flex flex-col space-y-2  md:px-6 ">
+        <div className='flex flex-col space-y-2  md:px-6 '>
           {filteredMenuItems.map((item, idx) => {
             return <MenuItem key={idx} item={item} />;
           })}
@@ -56,27 +57,32 @@ const MenuItem = ({ item }) => {
   };
 
   return (
-    <div className="">
+    <div className=''>
       {item.submenu ? (
         <>
           <button
             onClick={toggleSubMenu}
             className={`flex flex-row items-center p-2 rounded-lg hover-bg-zinc-100 w-full justify-between hover:bg-zinc-100 ${
               pathname.includes(item.path) ? "bg-zinc-100" : ""
-            }`}
-          >
-            <div className="flex flex-row space-x-4 items-center">
+            }`}>
+            <div className='flex flex-row space-x-4 items-center'>
               {item.icon}
-              <span className="font-semibold text-base flex text-blue-950">{item.title}</span>
+              <span className='font-semibold text-base flex text-blue-950'>
+                {item.title}
+              </span>
             </div>
 
             <div className={`${subMenuOpen ? "rotate-180" : ""} flex`}>
-              <FaChevronDown width="20" height="20" className="text-blue-950 h-3 w-3"/>
+              <FaChevronDown
+                width='20'
+                height='20'
+                className='text-blue-950 h-3 w-3'
+              />
             </div>
           </button>
 
           {subMenuOpen && (
-            <div className="my-2 ml-12 flex flex-col space-y-4">
+            <div className='my-2 ml-12 flex flex-col space-y-4'>
               {item.subMenuItems?.map((subItem, idx) => {
                 return (
                   <Link
@@ -84,9 +90,8 @@ const MenuItem = ({ item }) => {
                     href={subItem.path}
                     className={`${
                       subItem.path === pathname ? "font-bold" : ""
-                    } text-base`}
-                  >
-                    <span className="text-sm">{subItem.title}</span>
+                    } text-base`}>
+                    <span className='text-sm'>{subItem.title}</span>
                   </Link>
                 );
               })}
@@ -98,10 +103,9 @@ const MenuItem = ({ item }) => {
           href={item.path}
           className={`flex flex-row space-x-4 items-center p-2 rounded-lg hover:bg-zinc-100 ${
             item.path === pathname ? "bg-zinc-100" : ""
-          }`}
-        >
+          }`}>
           {item.icon}
-          <span className="font-semibold text-xl flex">{item.title}</span>
+          <span className='font-semibold text-xl flex'>{item.title}</span>
         </Link>
       )}
     </div>
