@@ -44,7 +44,7 @@ export default function Homepage() {
                       ? "bg-white text-blue-900 border-2 border-transparent"
                       : "bg-blue-900 text-white"
                   }`}
-                  href="/resume-dashboard"
+                  href="/resume"
                   onMouseEnter={toggleHover}
                 >
                   CV Curator

@@ -38,7 +38,7 @@ export default function CourseSlider() {
       stepHeading: "CV CREATOR",
       stepDetails:
         "Looking to create a CV that impresses potential recruiters right away? Build a CV with our AI-enhanced Genies Pro CV Creator by exploring our curated collection of CV templates. Craft a resume with expert CV designs with the assistance of Artificial Intelligence meticulously developed to rectify errors, elevate structure, enrich content and finally, discover your Curriculum Vitae making it through the cut.",
-      link: "/resume-dashboard",
+      link: "/resume",
     },
     {
       id: 2,

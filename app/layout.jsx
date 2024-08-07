@@ -10,11 +10,11 @@ import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 // import VerifyUser from "@/components/component/VerifyUser";
 
-// export const metadata = {
-//   title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
-//   description:
-//     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
-// };
+export const metadata = {
+  title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
+  description:
+    "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
+};
 
 const inter = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -37,6 +37,20 @@ export default function RootLayout({ children }) {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-3864YFJZRV');
+            `,
+          }}
+        />
+         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(h,o,t,j,a,r){
+                  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                  h._hjSettings={hjid:5085024,hjsv:6};
+                  a=o.getElementsByTagName('head')[0];
+                  r=o.createElement('script');r.async=1;
+                  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                  a.appendChild(r);
+              })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
             `,
           }}
         />
@@ -67,6 +81,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
           fbq('track', 'PageView');`,
           }}
         />
+      
         <noscript>
           <img
             height="1"
@@ -75,15 +90,15 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
             src="https://www.facebook.com/tr?id=452806670914263&ev=PageView&noscript=1"
           />
         </noscript>
-        <title>
+        {/* <title>
           {"Professional CV Templates for Perfect CVs on Genies CV Maker"}
-        </title>
-        <meta
+        </title> */}
+        {/* <meta
           name="description"
           content={
             "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."
           }
-        />
+        /> */}
         <link rel="canonical" href="https://geniescareerhub.com" />
         <noscript>
           <iframe

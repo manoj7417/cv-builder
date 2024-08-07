@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import "./header.css";
-import { IoNotificationsOutline } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
 import { useUserStore } from "../store/UserStore";
 import Link from "next/link";
@@ -14,12 +13,8 @@ import { toast } from "react-toastify";
 const menuItems = [
  
   {
-    name: "Career Coaching",
-    href: "/coming-soon",
-  },
-  {
     name: "CV Studio",
-    href: "/resume-dashboard",
+    href: "/resume",
   },
   {
     name: "Pricing",
@@ -32,6 +27,10 @@ const menuItems = [
   {
     name: "Contact Us",
     href: "/contact-us",
+  },
+  {
+    name: "Career Coaching",
+    href: "/coming-soon",
   }
 ];
 
@@ -44,7 +43,6 @@ export function ResumeHeader() {
   const logoutUser = useUserStore((state) => state?.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
-  console.log("userdata:::", userdata);
   const userImage = userdata?.profilePicture;
 
   const handleLogout = async () => {
@@ -82,7 +80,7 @@ export function ResumeHeader() {
   }, []);
 
   return (
-    <section className="new_resume_latest">
+    <section className="new_resume_latest z-[1000] fixed" >
       <div className="header_wrapper w-full">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">

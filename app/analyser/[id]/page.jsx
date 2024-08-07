@@ -129,11 +129,11 @@ const FeedbackFuction = () => {
   return (
     <>
       <Dialog open={showDialog} >
-        <DialogContent className="max-w-[60dvw]  p-0" showCloseButton={true} onClick={() => setShowDialog(false)}>
+        <DialogContent className="sm:max-w-[60dvw] w-96 sm:w-full rounded-xl" showCloseButton={true} onClick={() => setShowDialog(false)}>
           <h1 className="text-center pt-4 text-xl font-bold text-gray-500">
             Upload and attach files, or start afresh!
           </h1>
-          <p className="text-center px-6 md:px-12 sm:px-12 text-gray-500">
+          <p className="text-center text-sm sm:text-lg md:px-12 sm:px-12 text-gray-500">
             Drag and drop your resume file or upload from Google Drive or
             Dropbox. We can also send you an email to reply with your
             attachment whenever you are ready.
@@ -145,11 +145,11 @@ const FeedbackFuction = () => {
             >
               <label
                 for="dropzone-file"
-                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                class="flex flex-col items-center justify-center w-full sm:h-64 h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"
               >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
-                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    class="w-8 h-8 mb-4 text-gray-500"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -163,19 +163,19 @@ const FeedbackFuction = () => {
                       d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                     />
                   </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <p class="mb-2 text-sm text-gray-500">
                     <span class="font-semibold">Optimize</span> current resume
                   </p>
                 </div>
               </label>
             </div>
             <div
-              className="flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              className="flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 "
               onClick={handleShowMultiStepForm}
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  className="w-8 h-8 mb-4 text-gray-500 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -189,12 +189,12 @@ const FeedbackFuction = () => {
                     d="M12 4v16m0 0-3-3m3 3 3-3M4 12h16m0 0-3 3m3-3-3-3"
                   />
                 </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <p className="mb-2 text-sm text-gray-500">
                   <span className="font-semibold">
                     Start with a Fresh...
                   </span>
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                <p className="text-xs text-gray-500 text-center">
                   Personalized career advice, CV building, and more.
                 </p>
               </div>
@@ -229,7 +229,7 @@ const FeedbackFuction = () => {
             <h1 className=" text-center lg:text-6xl text-4xl font-bold leading-snug mb-4 text-blue-400  mt-28">
               CV <span className="text-blue-950">Insights</span>
             </h1>
-            <p className="text-lg text-gray-500">
+            <p className="text-lg text-gray-500 text-center">
               Get a better understanding of your resume and improve your chances
               of getting hired.
             </p>
@@ -237,7 +237,7 @@ const FeedbackFuction = () => {
         </div>
 
         <div
-          className="w-5/6 mx-auto mb-10  rounded-2xl"
+          className="w-full sm:w-4/5 mx-auto mb-10  rounded-2xl"
           style={{
             borderWidth: "16px",
             borderColor: "#F1F6FA",

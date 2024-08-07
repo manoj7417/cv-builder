@@ -37,7 +37,7 @@ const PercentageCircle = ({ percentage, label }) => {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="flex  items-center">
+    <div className="flex flex-col sm:flex-row  items-center">
       <div className="relative flex items-center justify-center w-24 h-24">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 80 80">
           <circle
@@ -221,74 +221,71 @@ export default function AboutUs() {
       </section>
       <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-16 lg:pt-20 px-5 relative">
         <div className="max-w-6xl mx-auto  py-10">
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <div className="w-full text-center md:text-left sm:text-left md:w-1/2 mt-8 md:mt-0 md:pl-8">
-              <h2 className="trust font-bold text-gray-800">
-                Coaching that is inspired by{" "}
-                <span className="text-black">Experience</span> and{" "}
-                <span className="text-black">Expertise </span>
-              </h2>
-              <p className="mt-4 text-gray-600">
-                Our community of Career Coaches is not only expertly trained in
-                assisting candidates with distinctive professional dreams and
-                aspirations, but also has experience in comprehending different
-                mindsets.
-              </p>
-              <ul className="space-y-2 py-8">
-                <li className="flex items-center">
-                  <svg
-                    className="w-6 h-6 text-blue-950 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  Coaches with Expertise in a myriad of professional domains.
-                </li>
-                <li className="flex items-center">
-                  <svg
-                    className="w-6 h-6 text-blue-950 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  Trusted by Students, Professionals, and Employers worldwide.
-                </li>
-              </ul>
-              <div className="flex gap-2">
-                <PercentageCircle
-                  percentage={92}
-                  label="Clients Satisfaction"
-                />
-                <PercentageCircle percentage={99} label="Instant Support " />
-              </div>
-            </div>
-            {/* Left Column - Image */}
-            <div className="w-full text-center md:w-1/2 flex justify-center md:justify-start parallax-container">
-              <img
-                src="/cgabout2.png"
-                alt="Description of the image"
-                className="parallax-image"
-              />
-            </div>
+        <div className="flex flex-col md:flex-row items-center gap-4 overflow-hidden">
+  {/* Left Column - Text */}
+  <div className="text-center md:text-left mt-8 md:mt-0">
+    <h2 className="text-xl font-bold text-gray-800">
+      Coaching that is inspired by{" "}
+      <span className="text-black">Experience</span> and{" "}
+      <span className="text-black">Expertise</span>
+    </h2>
+    <p className="mt-4 text-gray-600">
+      Our community of Career Coaches is not only expertly trained in
+      assisting candidates with distinctive professional dreams and
+      aspirations, but also has experience in comprehending different
+      mindsets.
+    </p>
+    <ul className="space-y-2 py-8">
+      <li className="flex items-center justify-center md:justify-start">
+        <svg
+          className="w-6 h-6 text-blue-950 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+        Coaches with Expertise in a myriad of professional domains.
+      </li>
+      <li className="flex items-center justify-center md:justify-start">
+        <svg
+          className="w-6 h-6 text-blue-950 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+        Trusted by Students, Professionals, and Employers worldwide.
+      </li>
+    </ul>
+    <div className="flex justify-center md:justify-start gap-2 overflow-hidden">
+      <PercentageCircle percentage={92} label="Clients Satisfaction" />
+      <PercentageCircle percentage={99} label="Instant Support" />
+    </div>
+  </div>
+  {/* Right Column - Image */}
+  <div className="text-center flex justify-center md:justify-start overflow-hidden mt-4 md:mt-0">
+    <img
+      src="/cgabout2.png"
+      alt="Description of the image"
+      className="parallax-image max-w-full h-auto"
+    />
+  </div>
+</div>
 
-            {/* Right Column - Text */}
-          </div>
         </div>
       </section>
       <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-16 lg:pt-20 px-5 relative">

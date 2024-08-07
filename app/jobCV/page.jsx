@@ -8,7 +8,7 @@ import Image from "next/image";
 import SearchBar from "../ui/Searchbar";
 import { RiAiGenerate } from "react-icons/ri";
 import TabMenu from "../ui/TabMenu";
-import { Dialog } from "@radix-ui/react-dialog";
+import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { FaWpforms } from "react-icons/fa";
@@ -23,10 +23,9 @@ import Lottie from "lottie-react";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
 import axios from "axios";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
-const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
-  ssr: false,
-});
+
 
 const options = [
   "Accountant",
@@ -260,6 +259,7 @@ export default function Home() {
   return (
     <main>
       <>
+        <ResumeHeader />
         <section className="mt-16 py-20 bg-white text-black">
           <Dialog open={showMultiStepDialog}>
             <JobMultistepForm
@@ -275,7 +275,7 @@ export default function Home() {
           </Dialog>
           <Dialog open={showDialog}>
             <DialogContent
-              className="max-w-[92dvw] md:max-w-[60dvw] sm:max-w-[60dvw] p-0"
+              className="max-w-[92dvw] md:max-w-[60dvw] sm:max-w-[60dvw] p-0 rounded-xl"
               showCloseButton={true}
               onClick={() => setShowDialog(false)}
             >
@@ -291,7 +291,7 @@ export default function Home() {
                 <div class="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]">
                   <label
                     for="dropzone-file"
-                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                    class="flex flex-col items-center justify-center w-full sm:h-64 h-full  border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"
                   >
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                       <svg
@@ -379,8 +379,8 @@ export default function Home() {
                 doors to your ideal{" "}
                 <span className="text-blue-900">career!</span>
               </h1>
-              <div className="flex gap-2 py-3 rounded-lg w-full">
-                <div className="w-full">
+              <div className="flex flex-col sm:flex-row gap-2 py-3 rounded-lg w-full">
+                <div className="w-full sm:px-0 px-4 mb-4 sm:mb-0">
                   <SearchBar
                     jobRole={jobRole}
                     setJobRole={setJobRole}
@@ -398,7 +398,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 lg:mt-0 w-full lg:max-w-4xl p-10">
+            <div className="mt-10 sm:mt-0 w-full lg:max-w-4xl sm:p-10 p-0">
               <Image
                 src="/cvgenerator.png"
                 width={1300}
