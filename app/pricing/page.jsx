@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { FaTimesCircle } from "react-icons/fa";
 import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 
@@ -53,230 +52,192 @@ const Pricing = () => {
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
       >
-        <div className="container lg:pt-0 pt-20">
-          <div className="py-16 ">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center">
-                <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
-                  Our Pricing
-                </h2>
-                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-                  Simple Pricing, Easy Access, Better Career!
-                </p>
-                <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                  Our simple pricing with secured payment measures ensures
-                  accessing the dream career has never been easier.
-                </p>
-              </div>
+      <div className="container lg:pt-0 pt-20">
+  <div className="py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center">
+        <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
+          Our Pricing
+        </h2>
+        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+          Simple Pricing, Easy Access, Better Career!
+        </p>
+        <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Our simple pricing with secured payment measures ensures accessing the dream career has never been easier.
+        </p>
+      </div>
 
-              <div className="mt-10 flex justify-center items-center">
-                <span className="mr-2 text-sm font-medium text-gray-700">
-                  Monthly
-                </span>
-                <Switch
-                  checked={enabled}
-                  onChange={setEnabled}
-                  className={`${enabled ? "bg-indigo-600" : "bg-gray-200"
-                    } relative inline-flex items-center h-6 rounded-full w-11`}
-                >
-                  <span
-                    className={`${enabled ? "translate-x-6" : "translate-x-1"
-                      } inline-block w-4 h-4 transform bg-white rounded-full`}
-                  />
-                </Switch>
-                <span className="ml-2 text-sm font-medium text-gray-700">
-                  Yearly
-                  {/* <span className="ml-1 text-green-500">(Get 30% OFF)</span> */}
-                </span>
-              </div>
+      <div className="mt-10 flex justify-center items-center">
+        <span className="mr-2 text-sm font-medium text-gray-700">Monthly</span>
+        <Switch
+          checked={enabled}
+          onChange={setEnabled}
+          className={`${enabled ? "bg-indigo-600" : "bg-gray-200"} relative inline-flex items-center h-6 rounded-full w-11`}
+        >
+          <span className={`${enabled ? "translate-x-6" : "translate-x-1"} inline-block w-4 h-4 transform bg-white rounded-full`} />
+        </Switch>
+        <span className="ml-2 text-sm font-medium text-gray-700">Yearly</span>
+      </div>
 
-              <div className="mt-10 flex  space-x-8">
-                <div className=" p-6 w-full md:w-[50%] rounded-lg shadow-lg  border-gray-100">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    FREE
-                  </h3>
-                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    $0
-                  </p>
-                  <p className="mt-2 text-sm text-gray-500">
-                    Per member, per yearly
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Unlimited resumes and cover letters
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      All premium templates and colors
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />1 Cv
-                      Analyzer free
-                    </li>{" "}
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" />
-                      Free Psycometric Tests
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" />
-                      24 X 7 Support Service
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" /> No AI
-                      Analyzer
-                    </li>{" "}
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" />
-                      No AI Psycometric Tests
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" />
-                      No career coaching
-                    </li>
-                  </ul>
-                  {
-                    planType === 'free' &&
-                    <button className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md">
-                      Current Plan
-                    </button>
-                  }
-                </div>
-                <div className=" p-6 rounded-lg shadow-lg  w-full md:w-[50%]">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    BASIC
-                  </h3>
-                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$39.99" : "$3.99"}
-                    {/* {enabled && (
-                      <span className="text-xl line-through text-gray-500 ml-2">
-                        $42.12
-                      </span>
-                    )} */}
-                  </p>
-                  <p className="mt-2 text-sm text-gray-500">
-                    Per member, per {enabled ? "yearly" : "monthly"}
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Download Unlimited resumes and cover letters
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Download All premium templates and colors
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      10 Cv Analyzer free
-                    </li>{" "}
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Free Psycometric Tests
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      24 X 7 Support Service
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" /> 10 AI
-                      Analyzer
-                    </li>{" "}
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" />
-                      No AI Psycometric Tests
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaTimesCircle className="text-red-500 mr-2" />
-                      No career coaching
-                    </li>
-                  </ul>
-                  {
-                    planType === 'basic' ?
-                      <button
-                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
-                      >
-                        Current plan
-                      </button>
-                      : <button
-                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
-                        onClick={() => UpgradePlan("basic")}
-                      >
-                        Upgrade Now!
-                      </button>
-                  }
-                </div>
-
-                <div className=" p-6 rounded-lg shadow-lg text-center w-full md:w-[50%]">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    PREMIUM
-                  </h3>
-                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "$69.99" : "$6.99"}
-                    {/* {enabled && (
-                      <span className="text-xl line-through text-gray-500 ml-2">
-                        $64.80
-                      </span>
-                    )} */}
-                  </p>
-
-                  <p className="mt-2 text-sm text-gray-500">
-                    Per member, per {enabled ? "yearly" : "monthly"}
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Download Unlimited resumes and cover letters
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Download All premium templates and colors
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Unlimited Cv Analyzer free
-                    </li>{" "}
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Free Psycometric Tests
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      24 X 7 Support Service
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" /> Unlimited
-                      AI Analyzer
-                    </li>{" "}
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Unlimited AI Psycometric Tests
-                    </li>
-                    <li className="flex items-center  text-sm text-gray-600">
-                      <FaCheckCircle className="text-blue-950 mr-2" />
-                      Unlimited career coaching
-                    </li>
-                  </ul>
-                  {
-                    planType === 'premium' ?
-                      <button
-                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
-                      >
-                        Current plan
-                      </button>
-                      :
-                      <button
-                        className="mt-6 w-full bg-blue-950 text-white py-2 rounded-md"
-                        onClick={() => UpgradePlan("premium")}
-                      >
-                        Upgrade Now!
-                      </button>
-                  }
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="mt-10 flex space-x-8">
+        <div className="p-6 w-full md:w-[50%] rounded-lg shadow-lg border-gray-100 flex flex-col">
+         
+          <h3 className="text-lg leading-6 font-medium text-gray-900">FREE</h3>
+          <p className="mt-2 text-3xl font-extrabold text-gray-900">$0</p>
+          <p className="mt-2 text-sm text-gray-500">Per member, per yearly</p>
+          <ul className="mt-4 space-y-2 flex-grow">
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Access to Professional and ATS Compatible CV Templates
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Download 1 CV in Text format
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              1 CV Template Choices with all Colours and Customisations
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Unlimited Modification in Created CV
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              1 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              1 CV Upgrade through AI-based CV Match
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              One-on-one consultation with Career Coach
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Email Support Service
+            </li>
+          </ul>
+         
+          {planType === 'free' && (
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+              Current Plan
+            </button>
+          )}
         </div>
+
+        <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">BASIC</h3>
+          <p className="mt-2 text-3xl font-extrabold text-gray-900">{enabled ? "₹4,999" : "₹449"}</p>
+          <p className="mt-2 text-sm text-gray-500">Per member, per {enabled ? "yearly" : "monthly"}</p>
+          <ul className="mt-4 space-y-2 flex-grow">
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Access to Professional and ATS Compatible CV Templates
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Download 10 CVs in PDF format
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Template Choices with all Colours and Customisations
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Unlimited Modification in Created CV
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              10 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              10 CV Upgrade through AI-Based CV Match
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Access to 1 Psychometric Tests
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              One-on-one consultation with Career Coach
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Email Support Service
+            </li>
+          </ul>
+          {planType === 'basic' ? (
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+              Current plan
+            </button>
+          ) : (
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlan("basic")}>
+              Upgrade Now!
+            </button>
+          )}
+        </div>
+
+        <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">PREMIUM</h3>
+          <p className="mt-2 text-3xl font-extrabold text-gray-900">{enabled ? "₹9,999" : "₹999"}</p>
+          <p className="mt-2 text-sm text-gray-500">Per member, per {enabled ? "yearly" : "monthly"}</p>
+          <ul className="mt-4 space-y-2 flex-grow">
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Access to Professional and ATS Compatible CV Templates
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Download 20 CVs in PDF format
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Template Choices with all Colours and Customisations
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Unlimited Modification in Created CV
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              20 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Unlimited CV Upgrade through AI-based CV Match
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Access to 10 psychometric Tests
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              One-on-one consultation with Career Coach
+            </li>
+            <li className="flex items-center text-sm text-gray-600">
+              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
+              Email and On-Call Support Service
+            </li>
+          </ul>
+          {planType === 'premium' ? (
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+              Current plan
+            </button>
+          ) : (
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlan("premium")}>
+              Upgrade Now!
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
       </section>
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full   px-5 relative"
@@ -387,10 +348,10 @@ const Pricing = () => {
                           Download Unlimited resumes and cover letters
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -401,10 +362,10 @@ const Pricing = () => {
                           Download All premium templates and colors
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -416,10 +377,10 @@ const Pricing = () => {
                           Unlimited Cv Analyzer free
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -444,10 +405,10 @@ const Pricing = () => {
                           Unlimited AI Analyzer
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -458,10 +419,10 @@ const Pricing = () => {
                           AI Psycometric Tests
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -472,10 +433,10 @@ const Pricing = () => {
                           Career coaching
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="text-red-500">&#10060;</span>
+                          <span className="text-blue-950">&#10060;</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
