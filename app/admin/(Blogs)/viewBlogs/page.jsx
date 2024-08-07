@@ -11,7 +11,7 @@ import { FaEdit, FaEye, FaTimesCircle, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import ResumeTooltip from "@/components/component/ResumeTooltip";
 import { IoShieldCheckmark } from "react-icons/io5";
-import Pagination from "../(AdminSidebar)/Pagination";
+import Pagination from "@/app/admin/(AdminSidebar)/Pagination";
 
 const ViewBlogsPage = () => {
   const [blogData, setBlogData] = useState([]);
@@ -180,7 +180,7 @@ const ViewBlogsPage = () => {
                 <div key={index}>
                   <div className='views_cards_blog'>
                     <div
-                      className='2xl:w-[300px] w-full 2xl:h-[400px] h-full rounded-md relative'
+                      className='w-full min-h-[400px] rounded-md relative'
                       style={{
                         boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
                       }}>

@@ -1,3 +1,5 @@
+/** @format */
+
 import { FaUser } from "react-icons/fa";
 import { IoDocuments, IoSettings } from "react-icons/io5";
 
@@ -6,10 +8,10 @@ export const AdminSidebarNav = [
     title: "Blog",
     path: "/blogs",
     icon: (
-      <IoDocuments 
-        width="40"
-        height="40"
-        className="text-xl text-blue-950 font-semibold"
+      <IoDocuments
+        width='40'
+        height='40'
+        className='text-xl text-blue-950 font-semibold'
       />
     ),
     submenu: true,
@@ -22,16 +24,15 @@ export const AdminSidebarNav = [
     title: "User",
     path: "/manageUser",
     icon: (
-      <FaUser 
-        width="40"
-        height="40"
-        className="text-xl text-blue-950 font-semibold"
+      <FaUser
+        width='40'
+        height='40'
+        className='text-xl text-blue-950 font-semibold'
       />
     ),
     submenu: true,
     subMenuItems: [
       { title: "Create User", path: "/admin/createUser" },
-      { title: "Update User", path: "/admin/updateUser" },
       { title: "View User", path: "/admin/viewUsers" },
     ],
   },
@@ -39,10 +40,10 @@ export const AdminSidebarNav = [
     title: "Settings",
     path: "/settings",
     icon: (
-      <IoSettings 
-        width="40"
-        height="40"
-        className="text-xl text-blue-950 font-semibold"
+      <IoSettings
+        width='40'
+        height='40'
+        className='text-xl text-blue-950 font-semibold'
       />
     ),
     submenu: true,

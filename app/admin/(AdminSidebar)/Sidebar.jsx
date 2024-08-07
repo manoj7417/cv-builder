@@ -9,7 +9,7 @@ import { AdminSidebarNav } from "@/constants/AdminSidebarNav";
 import { FaChevronDown } from "react-icons/fa";
 
 const SideNav = () => {
-  const currentUserRole = "USER"; // Replace this with the actual logic to get the current user's role
+  const currentUserRole = "SUPER_ADMIN"; // Replace this with the actual logic to get the current user's role
 
   // Define the filtering logic based on roles
   const filteredMenuItems = AdminSidebarNav.filter((item) => {
