@@ -53,8 +53,8 @@ const Pricing = () => {
         id="free"
       >
       <div className="container lg:pt-0 pt-20">
-  <div className="py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="sm:py-16">
+    <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
       <div className="text-center">
         <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
           Our Pricing
@@ -79,7 +79,7 @@ const Pricing = () => {
         <span className="ml-2 text-sm font-medium text-gray-700">Yearly</span>
       </div>
 
-      <div className="mt-10 flex space-x-8">
+      <div className="mt-10 flex flex-col sm:flex-row sm:space-x-8">
         <div className="p-6 w-full md:w-[50%] rounded-lg shadow-lg border-gray-100 flex flex-col">
          
           <h3 className="text-lg leading-6 font-medium text-gray-900">FREE</h3>
