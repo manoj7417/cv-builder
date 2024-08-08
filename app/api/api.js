@@ -306,10 +306,11 @@ export const sendSubscribeEmail = async (data) => {
 
 export const UpgradePricing = async (data, token) => {
   try {
+    console.log(token)
     const response = await instance.post('/stripe/createSubscription', data, {
       withCredentials: true,
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: `Bearer  ${token}`
       }
     })
     return response;
@@ -317,6 +318,8 @@ export const UpgradePricing = async (data, token) => {
     throw error;
   }
 }
+
+
 
 
 export const generateFreshResume = async (message, type, token) => {

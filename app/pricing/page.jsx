@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { useUserStore } from "../store/UserStore";
 import Header from "../Layout/Header";
+import { loadRazorpayScript } from '../utils/razorpayUtils';
 
 import { Switch } from "@headlessui/react";
 import { GetTokens } from "../actions";
@@ -17,11 +18,11 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 });
 
 const Pricing = () => {
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
   const router = useRouter();
   const userState = useUserStore(state => state.userState);
   const planType = userState?.userdata?.subscription?.plan || "free"
-
+  console.log(enabled);
 
   const UpgradePlan = async (plan) => {
     const { accessToken } = await GetTokens();
@@ -45,6 +46,89 @@ const Pricing = () => {
       console.log(error);
     }
   };
+
+  const UpgradePlanWithRazorpay = async (plan) => {
+   
+    const { accessToken } = await GetTokens();
+    if (!accessToken) {
+        return router.push("/login?redirect=pricing");
+    }
+
+    const data = {
+        email: userState?.userdata?.email,
+        plan,
+        duration: enabled ? "yearly" : "monthly",
+    };
+
+
+
+    const res = await loadRazorpayScript();
+    if (!res) {
+        alert('Razorpay SDK failed to load. Are you online?');
+        return;
+    }
+
+    try {
+        const response = await axios.post('/api/pricing',  {data} , {
+            headers: {
+                Authorization: "Bearer " + accessToken.value,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (response.status === 200) {
+            const { orderId, amount, currency, key } = response.data;
+
+            const options = {
+                key,
+                amount,
+                currency,
+                name: "Your Company Name",
+                description: "Upgrade Plan",
+                order_id: orderId,
+                handler: async (response) => {
+                    const paymentData = {
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                    };
+                    console.log(paymentData);
+                    // try {
+                    //     const verifyResponse = await axios.post('/api/pricing/verify', paymentData, {
+                    //         headers: {
+                    //             Authorization: "Bearer " + accessToken.value,
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //     });
+
+                    //     if (verifyResponse.status === 200) {
+                    //         alert("Payment successful and verified!");
+                    //         // Handle successful payment and verification here
+                    //     } else {
+                    //         alert("Payment verification failed!");
+                    //     }
+                    // } catch (verifyError) {
+                    //     console.error('Verification error:', verifyError);
+                    //     alert("Payment verification error!");
+                    // }
+                },
+                prefill: {
+                    email: userState?.userdata?.email,
+                },
+                theme: {
+                    color: "#F37254",
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        }
+    } catch (error) {
+        console.error('Payment error:', error);
+    }
+};
+
+
 
   return (
     <>
@@ -174,7 +258,7 @@ const Pricing = () => {
               Current plan
             </button>
           ) : (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlan("basic")}>
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlanWithRazorpay("basic")}>
               Upgrade Now!
             </button>
           )}
@@ -227,7 +311,7 @@ const Pricing = () => {
               Current plan
             </button>
           ) : (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlan("premium")}>
+            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlanWithRazorpay("premium")}>
               Upgrade Now!
             </button>
           )}
