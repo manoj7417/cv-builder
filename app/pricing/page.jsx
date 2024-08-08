@@ -83,7 +83,7 @@ const Pricing = () => {
         <div className="p-6 w-full md:w-[50%] rounded-lg shadow-lg border-gray-100 flex flex-col">
          
           <h3 className="text-lg leading-6 font-medium text-gray-900">FREE</h3>
-          <p className="mt-2 text-3xl font-extrabold text-gray-900">$0</p>
+          <p className="mt-2 text-3xl font-extrabold text-gray-900">₹0</p>
           <p className="mt-2 text-sm text-gray-500">Per member, per yearly</p>
           <ul className="mt-4 space-y-2 flex-grow">
             <li className="flex items-center text-sm text-gray-600">
