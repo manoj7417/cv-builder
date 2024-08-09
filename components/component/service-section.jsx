@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,36 +11,36 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "@/app/store/UserStore";
 
 export function ServiceSection() {
-  const [isSubscribing, setIsSubscribing] = useState(false)
-  const [isSubscribed, setIsSubscribed] = useState(false)
-  const email = useRef('')
-  const router = useRouter()
-  const { userdata } = useUserStore(state => state.userState)
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const email = useRef("");
+  const router = useRouter();
+  const { userdata } = useUserStore((state) => state.userState);
 
   const handleSubscribe = async () => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     if (!accessToken) {
-      router.push('/login')
-      return
+      router.push("/login");
+      return;
     }
-    setIsSubscribing(true)
+    setIsSubscribing(true);
     const obj = {
       name: userdata?.fullname,
-      email: email.current.value
-    }
+      email: email.current.value,
+    };
     try {
-      const response = await sendSubscribeEmail(obj)
-      console.log(response)
+      const response = await sendSubscribeEmail(obj);
+      console.log(response);
       if (response.status === 200) {
-        setIsSubscribed(true)
+        setIsSubscribed(true);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      email.current.value = ''
-      setIsSubscribing(false)
+      email.current.value = "";
+      setIsSubscribing(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col bg-gradient-to-b from-[#e4f5fc] to-[white] ">
@@ -266,25 +266,30 @@ export function ServiceSection() {
               <div className="flex lg:flex-row flex-col space-x-2 mb-5 gap-5">
                 <input
                   className="max-w-lg lg:py-0 py-2 flex-1 px-3 bg-blue-900 bg-opacity-10 rounded-lg text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 opacity-55"
-                  
                   placeholder="Enter your email"
                   type="email"
                   ref={email}
                   disabled={isSubscribed}
                 />
-                {
-                  isSubscribed ?
-                    <Button className="inline-flex h-10 items-center justify-center rounded-md bg-green-700 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-green-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 " >
-                      Susbcribed
-                    </Button>
-                    :
-                    <Button className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50" disabled={isSubscribing} onClick={handleSubscribe}>
-                      {isSubscribing ? 'Subscribing..' : 'Subscribe'}
-                    </Button>
-                }
+                {isSubscribed ? (
+                  <Button className="inline-flex h-10 items-center justify-center rounded-md bg-green-700 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-green-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ">
+                    Susbcribed
+                  </Button>
+                ) : (
+                  <Button
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
+                    disabled={isSubscribing}
+                    onClick={handleSubscribe}
+                  >
+                    {isSubscribing ? "Subscribing.." : "Subscribe"}
+                  </Button>
+                )}
               </div>
               <p className="text-xs text-gray-500">
-                <Link className="underline underline-offset-2" href="/terms-condition">
+                <Link
+                  className="underline underline-offset-2"
+                  href="/terms-condition"
+                >
                   Terms & Conditions
                 </Link>
               </p>

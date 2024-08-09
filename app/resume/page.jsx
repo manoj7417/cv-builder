@@ -18,6 +18,11 @@ import WorkTogether from "@/components/component/WorkTogether";
 import Footer from "../Layout/Footer";
 import NewSlider from "@/components/component/NewSlider";
 import { ResumeHeader } from "../Layout/ResumeHeader";
+import { useEffect, useState } from "react";
+import { useResumeStore } from "@/app/store/ResumeStore";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { GetTokens } from "@/app/actions";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -400,12 +405,48 @@ const ProfessionalTemplates = [
 ];
 
 export default function DashboardIdea() {
-  const userState = useUserStore((state) => state.userState);
+  // const userState = useUserStore((state) => state.userState);
+  const [userState, setUserState] = useState({});
+  const [loading, setIsLoading] = useState(false);
+  const createResume = useUserStore((state) => state.createResume);
+  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
+  const router = useRouter();
+
+  const handleCreateCV = async (template) => {
+    const { accessToken } = await GetTokens();
+
+    if (!accessToken) {
+      toast("Please login to use this template");
+      router.push("/login");
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await createNewResume(accessToken.value, template);
+      if (response.data.data) {
+        createResume(response.data.data);
+        replaceResumeData(response.data.data);
+        router.push("/resume-builder");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userState"));
+    if (user) {
+      setUserState(user.userdata);
+    }
+  }, []);
 
   return (
     <>
       {/* {userState?.isAuthenticated ? <ResumeHeader /> : <Header />} */}
-      <ResumeHeader/>
+      <ResumeHeader />
       <main>
         <section className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]">
           <div className="container w-full h-full resume">
@@ -423,8 +464,11 @@ export default function DashboardIdea() {
                   through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center space-x-4">
-                  <Button className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3 mx-auto sm:mx-0">
-                    <Link href="/user-history">Create CV Now</Link>
+                  <Button
+                    onClick={() => handleCreateCV()}
+                    className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3 mx-auto sm:mx-0"
+                  >
+                    Create CV Now
                   </Button>
                 </div>
               </div>
@@ -455,7 +499,7 @@ export default function DashboardIdea() {
                   </TabsTrigger>
                   <TabsTrigger value="ats">
                     <MdQueryStats className="text-orange-600 h-8 w-8 me-3" />
-                     Professional
+                    Professional
                   </TabsTrigger>
                   <TabsTrigger value="designer">
                     <IoShirt className="text-green-700 h-8 w-8 me-3" />

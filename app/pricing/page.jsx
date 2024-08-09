@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { useUserStore } from "../store/UserStore";
 import Header from "../Layout/Header";
-import { loadRazorpayScript } from '../utils/razorpayUtils';
+import { loadRazorpayScript } from "../utils/razorpayUtils";
 
 import { Switch } from "@headlessui/react";
 import { GetTokens } from "../actions";
@@ -20,8 +20,8 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 const Pricing = () => {
   const [enabled, setEnabled] = useState(false);
   const router = useRouter();
-  const userState = useUserStore(state => state.userState);
-  const planType = userState?.userdata?.subscription?.plan || "free"
+  const userState = useUserStore((state) => state.userState);
+  const planType = userState?.userdata?.subscription?.plan || "free";
   console.log(enabled);
 
   const UpgradePlan = async (plan) => {
@@ -48,87 +48,86 @@ const Pricing = () => {
   };
 
   const UpgradePlanWithRazorpay = async (plan) => {
-   
     const { accessToken } = await GetTokens();
     if (!accessToken) {
-        return router.push("/login?redirect=pricing");
+      return router.push("/login?redirect=pricing");
     }
 
     const data = {
-        email: userState?.userdata?.email,
-        plan,
-        duration: enabled ? "yearly" : "monthly",
+      email: userState?.userdata?.email,
+      plan,
+      duration: enabled ? "yearly" : "monthly",
     };
-
-
 
     const res = await loadRazorpayScript();
     if (!res) {
-        alert('Razorpay SDK failed to load. Are you online?');
-        return;
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
     }
 
     try {
-        const response = await axios.post('/api/pricing',  {data} , {
-            headers: {
-                Authorization: "Bearer " + accessToken.value,
-                'Content-Type': 'application/json'
-            },
-        });
-
-        if (response.status === 200) {
-            const { orderId, amount, currency, key } = response.data;
-
-            const options = {
-                key,
-                amount,
-                currency,
-                name: "Your Company Name",
-                description: "Upgrade Plan",
-                order_id: orderId,
-                handler: async (response) => {
-                    const paymentData = {
-                        razorpay_order_id: response.razorpay_order_id,
-                        razorpay_payment_id: response.razorpay_payment_id,
-                        razorpay_signature: response.razorpay_signature,
-                    };
-                    console.log(paymentData);
-                    // try {
-                    //     const verifyResponse = await axios.post('/api/pricing/verify', paymentData, {
-                    //         headers: {
-                    //             Authorization: "Bearer " + accessToken.value,
-                    //             'Content-Type': 'application/json'
-                    //         },
-                    //     });
-
-                    //     if (verifyResponse.status === 200) {
-                    //         alert("Payment successful and verified!");
-                    //         // Handle successful payment and verification here
-                    //     } else {
-                    //         alert("Payment verification failed!");
-                    //     }
-                    // } catch (verifyError) {
-                    //     console.error('Verification error:', verifyError);
-                    //     alert("Payment verification error!");
-                    // }
-                },
-                prefill: {
-                    email: userState?.userdata?.email,
-                },
-                theme: {
-                    color: "#F37254",
-                },
-            };
-
-            const rzp = new window.Razorpay(options);
-            rzp.open();
+      const response = await axios.post(
+        "/api/pricing",
+        { data },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+            "Content-Type": "application/json",
+          },
         }
+      );
+
+      if (response.status === 200) {
+        const { orderId, amount, currency, key } = response.data;
+
+        const options = {
+          key,
+          amount,
+          currency,
+          name: "Your Company Name",
+          description: "Upgrade Plan",
+          order_id: orderId,
+          handler: async (response) => {
+            const paymentData = {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            };
+            console.log(paymentData);
+            // try {
+            //     const verifyResponse = await axios.post('/api/pricing/verify', paymentData, {
+            //         headers: {
+            //             Authorization: "Bearer " + accessToken.value,
+            //             'Content-Type': 'application/json'
+            //         },
+            //     });
+
+            //     if (verifyResponse.status === 200) {
+            //         alert("Payment successful and verified!");
+            //         // Handle successful payment and verification here
+            //     } else {
+            //         alert("Payment verification failed!");
+            //     }
+            // } catch (verifyError) {
+            //     console.error('Verification error:', verifyError);
+            //     alert("Payment verification error!");
+            // }
+          },
+          prefill: {
+            email: userState?.userdata?.email,
+          },
+          theme: {
+            color: "#F37254",
+          },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      }
     } catch (error) {
-        console.error('Payment error:', error);
+      console.error("Payment error:", error);
     }
-};
-
-
+  };
 
   return (
     <>
@@ -136,192 +135,305 @@ const Pricing = () => {
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative"
         id="free"
       >
-      <div className="container lg:pt-0 pt-20">
-  <div className="sm:py-16">
-    <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
-          Our Pricing
-        </h2>
-        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-          Simple Pricing, Easy Access, Better Career!
-        </p>
-        <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-          Our simple pricing with secured payment measures ensures accessing the dream career has never been easier.
-        </p>
-      </div>
+        <div className="container lg:pt-0 pt-20">
+          <div className="sm:py-16">
+            <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
+              <div className="text-center">
+                <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
+                  Our Pricing
+                </h2>
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+                  Simple Pricing, Easy Access, Better Career!
+                </p>
+                <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                  Our simple pricing with secured payment measures ensures
+                  accessing the dream career has never been easier.
+                </p>
+              </div>
 
-      <div className="mt-10 flex justify-center items-center">
-        <span className="mr-2 text-sm font-medium text-gray-700">Monthly</span>
-        <Switch
-          checked={enabled}
-          onChange={setEnabled}
-          className={`${enabled ? "bg-indigo-600" : "bg-gray-200"} relative inline-flex items-center h-6 rounded-full w-11`}
-        >
-          <span className={`${enabled ? "translate-x-6" : "translate-x-1"} inline-block w-4 h-4 transform bg-white rounded-full`} />
-        </Switch>
-        <span className="ml-2 text-sm font-medium text-gray-700">Yearly</span>
-      </div>
+              <div className="mt-10 flex justify-center items-center">
+                <span className="mr-2 text-sm font-medium text-gray-700">
+                  Monthly
+                </span>
+                <Switch
+                  checked={enabled}
+                  onChange={setEnabled}
+                  className={`${
+                    enabled ? "bg-indigo-600" : "bg-gray-200"
+                  } relative inline-flex items-center h-6 rounded-full w-11`}
+                >
+                  <span
+                    className={`${
+                      enabled ? "translate-x-6" : "translate-x-1"
+                    } inline-block w-4 h-4 transform bg-white rounded-full`}
+                  />
+                </Switch>
+                <span className="ml-2 text-sm font-medium text-gray-700">
+                  Yearly
+                </span>
+              </div>
 
-      <div className="mt-10 flex flex-col sm:flex-row sm:space-x-8">
-        <div className="p-6 w-full md:w-[50%] rounded-lg shadow-lg border-gray-100 flex flex-col">
-         
-          <h3 className="text-lg leading-6 font-medium text-gray-900">FREE</h3>
-          <p className="mt-2 text-3xl font-extrabold text-gray-900">₹0</p>
-          <p className="mt-2 text-sm text-gray-500">Per member, per yearly</p>
-          <ul className="mt-4 space-y-2 flex-grow">
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Access to Professional and ATS Compatible CV Templates
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Download 1 CV in Text format
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              1 CV Template Choices with all Colours and Customisations
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Unlimited Modification in Created CV
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              1 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              1 CV Upgrade through AI-based CV Match
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              One-on-one consultation with Career Coach
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Email Support Service
-            </li>
-          </ul>
-         
-          {planType === 'free' && (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
-              Current Plan
-            </button>
-          )}
+              <div className="mt-10 flex flex-col sm:flex-row sm:space-x-8">
+                <div className="p-6 w-full md:w-[50%] rounded-lg shadow-lg border-gray-100 flex flex-col">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    FREE
+                  </h3>
+                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
+                    ₹0
+                  </p>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Per member, per yearly
+                  </p>
+                  <ul className="mt-4 space-y-2 flex-grow">
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Access to Professional and ATS Compatible CV Templates
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Download 1 CV in Text format
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      1 CV Template Choices with all Colours and Customisations
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Unlimited Modification in Created CV
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      1 CV Scan through CV Optimiser for passing the Recruiter’s
+                      ATS Software
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      1 CV Upgrade through AI-based CV Match
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      One-on-one consultation with Career Coach
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Email Support Service
+                    </li>
+                  </ul>
+
+                  {planType === "free" && (
+                    <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+                      Current Plan
+                    </button>
+                  )}
+                </div>
+
+                <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    BASIC
+                  </h3>
+                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
+                    {enabled ? "₹4,999" : "₹449"}
+                  </p>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Per member, per {enabled ? "yearly" : "monthly"}
+                  </p>
+                  <ul className="mt-4 space-y-2 flex-grow">
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Access to Professional and ATS Compatible CV Templates
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Download 10 CVs in PDF format
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Template Choices with all Colours and Customisations
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Unlimited Modification in Created CV
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      10 CV Scan through CV Optimiser for passing the
+                      Recruiter’s ATS Software
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      10 CV Upgrade through AI-Based CV Match
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Access to 1 Psychometric Tests
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      One-on-one consultation with Career Coach
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Email Support Service
+                    </li>
+                  </ul>
+                  {planType === "basic" ? (
+                    <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+                      Current plan
+                    </button>
+                  ) : (
+                    <button
+                      className="w-full bg-blue-950 text-white py-2 rounded-md mt-10"
+                      onClick={() => UpgradePlanWithRazorpay("basic")}
+                    >
+                      Upgrade Now!
+                    </button>
+                  )}
+                </div>
+
+                <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    PREMIUM
+                  </h3>
+                  <p className="mt-2 text-3xl font-extrabold text-gray-900">
+                    {enabled ? "₹9,999" : "₹999"}
+                  </p>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Per member, per {enabled ? "yearly" : "monthly"}
+                  </p>
+                  <ul className="mt-4 space-y-2 flex-grow">
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Access to Professional and ATS Compatible CV Templates
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Download 20 CVs in PDF format
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Template Choices with all Colours and Customisations
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Unlimited Modification in Created CV
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      20 CV Scan through CV Optimiser for passing the
+                      Recruiter’s ATS Software
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Unlimited CV Upgrade through AI-based CV Match
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Access to 10 psychometric Tests
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      One-on-one consultation with Career Coach
+                    </li>
+                    <li className="flex items-center text-sm text-gray-600">
+                      <FaCheckCircle
+                        className="text-blue-950 mr-2"
+                        style={{ minWidth: "15px", minHeight: "15px" }}
+                      />
+                      Email and On-Call Support Service
+                    </li>
+                  </ul>
+                  {planType === "premium" ? (
+                    <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+                      Current plan
+                    </button>
+                  ) : (
+                    <button
+                      className="w-full bg-blue-950 text-white py-2 rounded-md mt-10"
+                      onClick={() => UpgradePlanWithRazorpay("premium")}
+                    >
+                      Upgrade Now!
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">BASIC</h3>
-          <p className="mt-2 text-3xl font-extrabold text-gray-900">{enabled ? "₹4,999" : "₹449"}</p>
-          <p className="mt-2 text-sm text-gray-500">Per member, per {enabled ? "yearly" : "monthly"}</p>
-          <ul className="mt-4 space-y-2 flex-grow">
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Access to Professional and ATS Compatible CV Templates
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Download 10 CVs in PDF format
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Template Choices with all Colours and Customisations
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Unlimited Modification in Created CV
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              10 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              10 CV Upgrade through AI-Based CV Match
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Access to 1 Psychometric Tests
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              One-on-one consultation with Career Coach
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Email Support Service
-            </li>
-          </ul>
-          {planType === 'basic' ? (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
-              Current plan
-            </button>
-          ) : (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlanWithRazorpay("basic")}>
-              Upgrade Now!
-            </button>
-          )}
-        </div>
-
-        <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">PREMIUM</h3>
-          <p className="mt-2 text-3xl font-extrabold text-gray-900">{enabled ? "₹9,999" : "₹999"}</p>
-          <p className="mt-2 text-sm text-gray-500">Per member, per {enabled ? "yearly" : "monthly"}</p>
-          <ul className="mt-4 space-y-2 flex-grow">
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Access to Professional and ATS Compatible CV Templates
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Download 20 CVs in PDF format
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Template Choices with all Colours and Customisations
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Unlimited Modification in Created CV
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              20 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Unlimited CV Upgrade through AI-based CV Match
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Access to 10 psychometric Tests
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              One-on-one consultation with Career Coach
-            </li>
-            <li className="flex items-center text-sm text-gray-600">
-              <FaCheckCircle className="text-blue-950 mr-2" style={{ minWidth: '15px', minHeight: '15px' }} />
-              Email and On-Call Support Service
-            </li>
-          </ul>
-          {planType === 'premium' ? (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
-              Current plan
-            </button>
-          ) : (
-            <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" onClick={() => UpgradePlanWithRazorpay("premium")}>
-              Upgrade Now!
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
       </section>
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full   px-5 relative"
@@ -347,7 +459,7 @@ const Pricing = () => {
                       WATCH VIDEO
                     </button> */}
                     <a href="/contact-us">
-                      <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
+                      <button className="bg-blue-950 text-white py-2 px-4 rounded shadow  transition duration-200">
                         Contact Us
                       </button>
                     </a>
