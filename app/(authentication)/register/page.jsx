@@ -18,25 +18,27 @@ export default function Register() {
     watch,
     formState: { errors },
   } = useForm();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async (data) => {
     if (!data.terms) {
       toast.error("You must agree to the terms and conditions");
       return;
     }
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await registerUser(data);
       if (response.status === 201) {
         toast.success("Registration successful");
-        toast.success("Your password has been to your registered email address");
+        toast.success(
+          "Your password has been to your registered email address"
+        );
         router.push("/login");
       }
     } catch (error) {
       toast.error(error.response.data.error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -155,17 +157,7 @@ export default function Register() {
             <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl">
               Sign up
             </h2>
-            <p className="mt-2 text-base text-gray-600">
-              Already have an account?{" "}
-              <Link
-                href="/login"
-                title=""
-                className="font-medium text-black transition-all duration-200 hover:underline"
-              >
-                Sign In
-              </Link>
-            </p>
-            <form className="mt-8" onSubmit={handleSubmit(handleRegister)}>
+            <form className="mt-5" onSubmit={handleSubmit(handleRegister)}>
               <div className="space-y-5">
                 <div>
                   <label
@@ -230,9 +222,7 @@ export default function Register() {
                     type="checkbox"
                     name="terms"
                     className="form-checkbox h-4 w-4 text-blue-600"
-                    {
-                    ...register("terms", { required: true })
-                    }
+                    {...register("terms", { required: true })}
                   />
                   <label
                     htmlFor="checkbox"
@@ -240,7 +230,13 @@ export default function Register() {
                   >
                     <p>
                       By signing up you are agreeing to our
-                      <a href="#" className="text-blue-900  underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</a>
+                      <a
+                        href="#"
+                        className="text-blue-900  underline underline-offset-4 ml-1 font-semibold"
+                      >
+                        {" "}
+                        Terms and Conditions
+                      </a>
                     </p>
                   </label>
                 </div>
@@ -256,20 +252,32 @@ export default function Register() {
                     className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue/80 disabled:bg-opacity-80"
                     disabled={isLoading}
                   >
-                    {
-                      isLoading ?
-                        <>
-                          Creating Account
-                          <ImSpinner3 className="animate-spin ml-2" size={16} />
-                        </>
-                        :
-                        <>
-                          Create Account
-                          <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
-                        </>
-                    }
+                    {isLoading ? (
+                      <>
+                        Creating Account
+                        <ImSpinner3 className="animate-spin ml-2" size={16} />
+                      </>
+                    ) : (
+                      <>
+                        Create Account
+                        <MdOutlineKeyboardArrowRight
+                          className="ml-2"
+                          size={16}
+                        />
+                      </>
+                    )}
                   </button>
                 </div>
+                <p className="mt-2 text-base text-gray-600">
+                  Already have an account?
+                  <Link
+                    href="/login"
+                    title=""
+                    className="font-medium text-black transition-all duration-200 hover:underline"
+                  >
+                    Sign In
+                  </Link>
+                </p>
               </div>
             </form>
           </div>

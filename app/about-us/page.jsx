@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 
 import { FaRocket, FaBriefcase, FaLightbulb } from "react-icons/fa";
@@ -99,7 +100,15 @@ export default function AboutUs() {
                 We dream with you and assist you as strive to achieve every step
                 of success.
               </p>
-              <form action="" className="mt-8 flex items-start space-x-2">
+              <div className="w-full mt-8">
+                  <Link
+                    href={"/contact-us"}
+                    className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Connect with us!
+                  </Link>
+                </div>
+              {/* <form action="" className="mt-8 flex items-start space-x-2">
                 <div className="w-full">
                   <input
                     className="flex w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -116,7 +125,7 @@ export default function AboutUs() {
                     Connect with us!
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
             <div className="relative lg:col-span-5 lg:-mr-8 xl:col-span-6">
               <img

@@ -135,7 +135,7 @@ export const MultiStepForm = ({
                   (optional)
                 </span>
               </Label>
-              <DatePicker placeholder="Start Date" name="startDate" />
+              <DatePicker placeholder="Start Date" name="startDate"/>
             </div>
             <div>
               <Label htmlFor="employer" className="text-right">
@@ -211,9 +211,9 @@ export const MultiStepForm = ({
     return (
       <DialogContent className="sm:max-w-[500px]" onClick={handleCloseAIDialog} showCloseButton={true}>
         {isLoading ? (
-          <div>
+          <div className="text-center">
             <AiGenerateLoader />
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-800 text-base">
               Generating presonalized profile summary with
               <span className=" text-violet-700 font-bold ml-2 text-base">AI</span>
             </p>

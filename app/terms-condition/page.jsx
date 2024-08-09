@@ -1,8 +1,10 @@
 import React from "react";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 const TermsConditionPage = () => {
   return (
     <>
+    <ResumeHeader/>
       <div className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-6">Terms and Conditions</h1>

@@ -319,7 +319,7 @@ const Languages = ({
     conversational: 40,
     proficient: 60,
     fluent: 80,
-    native: 100
+    native: 100,
   };
 
   return (
@@ -372,12 +372,14 @@ const Certificates = ({ fontStyle, colorText, colorBackground }) => {
   );
   return (
     <div className="certificate_section w-full mt-5 px-10">
-      <h2
-        className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
-        style={{ color: colorBackground }}
-      >
-        {data?.name}
-      </h2>
+      {data?.visible && data?.items.length > 0 && (
+        <h2
+          className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
+          style={{ color: colorBackground }}
+        >
+          {data?.name}
+        </h2>
+      )}
       <div className="hobbies_section mt-5">
         {data?.visible && data?.items.length > 0 && (
           <div>

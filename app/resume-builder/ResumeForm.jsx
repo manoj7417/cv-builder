@@ -1652,7 +1652,7 @@ export default function ResumeForm() {
                                 <Label htmlFor="institute">Title</Label>
                                 <Input
                                   id="institute"
-                                  placeholder="Enter Job title"
+                                  placeholder="Enter Project title"
                                   value={item.title}
                                   name="title"
                                   onChange={(e) =>

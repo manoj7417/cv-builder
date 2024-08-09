@@ -130,7 +130,7 @@ const ResumeBuilderPage = () => {
          <div className="preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-2 rounded-full lg:hidden block cursor-pointer" onClick={handlePreviewClick}>
             <span className="text-sm">Preview and Download <MdDownload className="text-base inline-flex mx-1"/></span>
          </div>
-        <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible} />
+        <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible}/>
       </div>
     </>
   );

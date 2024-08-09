@@ -13,6 +13,7 @@ import { GetTokens } from "../actions";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { UpgradePricing } from "../api/api";
+import Link from "next/link";
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
 });
@@ -346,11 +347,11 @@ const Pricing = () => {
                     {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
                       WATCH VIDEO
                     </button> */}
-                    <a href="/contact-us">
-                      <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
+                    <Link href="/contact-us">
+                      <div className="bg-blue-950 text-white py-2 px-4 rounded shadow">
                         Contact Us
-                      </button>
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                 </div>
                 <div className="md:w-[40%] w-full flex justify-center md:justify-end">
@@ -561,10 +562,10 @@ const Pricing = () => {
                   Today!
                 </h2>
                 <p className="text-lg">From 300+ Customer Reviews</p>
-                <div className="mt-4">
-                  <button className="px-8 py-3 bg-white text-indigo-900 font-bold rounded">
+                <div className="mt-5">
+                  <Link href={"/"} className="px-8 py-3 bg-white text-indigo-900 font-bold rounded text-sm">
                     Get Started
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

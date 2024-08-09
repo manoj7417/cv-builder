@@ -515,19 +515,19 @@ const ProfilePage = () => {
           </form>
         </div>
       </section >
-      <section className="w-full py-10 px-20">
-        <h1 className="text-blue-950 text-4xl font-medium">CV Analyser History</h1>
-        <div className="flex flex-wrap">
+      <section className="max-w-6xl py-10 px-20">
+        <h1 className="text-blue-950 lg:text-4xl text-xl font-medium">CV Analyser History</h1>
+        <div className="flex lg:flex-wrap flex-col">
           {loading ? (
             Array(5)
               .fill()
               .map((_, index) => (
-                <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                <div className="lg:w-[350px] w-full mr-10 my-4 flex-1" key={index}>
                   <Skeleton width="100%" height={200} />
                 </div>
               ))
           ) : analysisData.length === 0 ? (
-            <div className="w-[350px] mr-10 my-4">
+            <div className="lg:w-[350px] w-full mr-10 my-4">
               <Card className="w-full h-[200px] flex items-center justify-center">
                 <span>No analyzer data yet</span>
               </Card>
@@ -536,7 +536,7 @@ const ProfilePage = () => {
             analysisData.map((item, index) => {
               return (
                 <Card
-                  className="w-[350px] mr-10 my-4 cursor-pointer hover:shadow-2xl"
+                  className="lg:w-[350px] w-full mr-10 my-4 cursor-pointer hover:shadow-2xl"
                   key={item._id}
                   onClick={() => handleUserAnalysis(item._id)}
                 >
@@ -586,21 +586,21 @@ const ProfilePage = () => {
         </div>
       </section>
       <section className="w-full h-full py-10 px-20">
-        <h1 className="text-blue-950 text-4xl py-5 font-medium">
+        <h1 className="text-blue-950 lg:text-4xl text-xl py-5 font-medium">
           Psychometric Test Summary
         </h1>
         <div className="summary_cards_wrapper">
-          <div className="grid grid-cols-4 gap-10">
+          <div className="grid lg:grid-cols-4 grid-cols-1 gap-10">
             {loading ? (
               Array(5)
                 .fill()
                 .map((_, index) => (
-                  <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                  <div className="lg:w-[350px] w-full mr-10 my-4 flex-1" key={index}>
                     <Skeleton width="100%" height={200} />
                   </div>
                 ))
             ) : popupData?.length === 0 ? (
-              <div className="w-[350px] mr-10 my-4">
+              <div className="lg:w-[350px] w-full mr-10 my-4">
                 <Card className="w-full h-[200px] flex items-center justify-center">
                   <span>No Test Summary data yet</span>
                 </Card>
@@ -608,7 +608,7 @@ const ProfilePage = () => {
             ) : (
               popupData?.map((val, index) => (
                 <div className="summary_cards relative" key={index}>
-                  <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+                  <div className="max-w-2xl lg:w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                     <a href="#">
                       <h5 className="mb-2 text-xl font-bold text-gray-900">
                         User Summary

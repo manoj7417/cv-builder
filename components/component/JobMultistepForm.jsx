@@ -480,7 +480,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
     if (steps === 2) {
         return (
-            <DialogContent className='sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+            <DialogContent className='sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900 z' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                         <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5'  width={400} height={500} />
@@ -634,7 +634,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
     if (steps === 3) {
         return (
-            <DialogContent className='max-w-[100vw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+            <DialogContent className='sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                         <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500}/>
@@ -683,7 +683,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                             <Label htmlFor="institute">Degree</Label>
                                                                             <Input className='my-1'
                                                                                 id="institute"
-                                                                                placeholder="Enter Job title"
+                                                                                placeholder="Enter Degree"
                                                                                 value={item.degree}
                                                                                 name="degree"
                                                                                 onChange={(e) =>
@@ -777,7 +777,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
     if (steps === 4) {
         return (
-            <DialogContent className='max-w-[100vw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+            <DialogContent className='sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                         <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
@@ -822,7 +822,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                                                                         <Input
                                                                             className='my-1'
                                                                             id="institute"
-                                                                            placeholder="Enter Job title"
+                                                                            placeholder="Enter Project Name"
                                                                             value={item.name}
                                                                             name="name"
                                                                             onChange={(e) => handleProjectnameChange(e.target.value, index)}
@@ -908,7 +908,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
     if (steps === 5) {
         return (
-            <DialogContent className='max-w-[100vw] no-scrollbar p-0 h-full sm:h-[80vh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
+            <DialogContent className='sm:max-w-[70dvw] no-scrollbar p-0 h-full sm:h-[80vh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                         <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500}/>
@@ -930,7 +930,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
 
     if (steps === 6) {
         return (
-            <DialogContent className='max-w-[100vw] no-scrollbar h-[80vh]' onClick={handleCloseMultistepForm} showCloseButton>
+            <DialogContent className='sm:max-w-[70dvw] no-scrollbar h-[80vh]' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
                         <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500}/>

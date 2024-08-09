@@ -26,6 +26,7 @@ import {
 import { LuLayoutGrid } from "react-icons/lu";
 import { templateType } from "@/components/component/Slider";
 import Image from "next/image";
+import { FaSpinner } from "react-icons/fa6";
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 const images = [
@@ -189,6 +190,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const data = useResumeStore((state) => state.resume.data);
   const resumeData = useResumeStore((state) => state.resume.data);
+  const setResumeData = useResumeStore((state) => state.setResumeData);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const pageSizeMap = {
     a4: {
@@ -206,9 +208,9 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const pageHeight = pageSizeMap["a4"].height * MM_TO_PX;
 
   const checkUserTemplate = async () => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     const templateName = resumeData.metadata.template;
-    handleDownloadResume(accessToken.value)
+    handleDownloadResume(accessToken.value);
   };
 
   const handleDownloadResume = async (token) => {
@@ -221,7 +223,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
     try {
       const response = await printResume(body, token);
-      
+
       if (response.ok) {
         generateFunfact();
         const blob = await response.blob();
@@ -237,17 +239,21 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
         return;
       }
       if (response.status !== 500) {
-        updateRedirectPricingRoute('/resume-builder')
-        return router.push('/pricing')
+        updateRedirectPricingRoute("/resume-builder");
+        return router.push("/pricing");
       }
     } catch (error) {
-      console.log("Error" , error)
-      toast.error("Something went wrong")
+      console.log("Error", error);
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleTemplateChange = (val) => {
+    setResumeData("metadata.template", val);
+    setIsDrawerOpen(false);
+  };
 
   const generateFunfact = () => {
     const randomNumber = Math.floor(Math.random() * 9);
@@ -258,16 +264,15 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     setFunFact((state) => newFuncfact);
   };
 
-
   return (
     <>
       {isContentVisible && (
         <div
-          className=" bg-black bg-opacity-80 inset-0 z-50 w-full h-full fixed overflow-hidden"
+          className=" bg-black bg-opacity-80 inset-0 z-50 w-full h-full fixed overflow-hidden lg:hidden block"
           // onClick={() => setIsContentVisible(false)}
         >
           <div className="bg-gray-900 text-white flex justify-between items-center p-4">
-          <div className="choose_templates">
+            <div className="choose_templates">
               <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
                 <Drawer
                   direction="bottom"
@@ -282,7 +287,9 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                   </DrawerTrigger>
                   <DrawerContent className="bg-white flex flex-col h-[500px] w-[425px] mt-24 fixed bottom-0">
                     <DrawerHeader>
-                      <DrawerTitle className="my-2">Choose Templates</DrawerTitle>
+                      <DrawerTitle className="my-2">
+                        Choose Templates
+                      </DrawerTitle>
                       <DrawerDescription>
                         <div className="grid grid-cols-2 gap-2 overflow-y-scroll h-screen no-scrollbar w-[420px]">
                           {images.map((image, index) => {
@@ -310,14 +317,18 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
               </ResumeTooltip>
             </div>
             <div className="download_button">
-            <button
-             onClick={checkUserTemplate}
-             disabled={isLoading}
-              className="bg-blue-950 text-white px-4 py-2 rounded flex items-center"
-            >
-              <MdDownload className="text-xl mr-2" />
-              Download
-            </button>
+              <button
+                onClick={checkUserTemplate}
+                disabled={isLoading}
+                className="bg-blue-950 text-white px-4 py-2 rounded flex items-center"
+              >
+                {isLoading ? (
+                  <FaSpinner className="animate-spin text-xl mr-2" />
+                ) : (
+                  <MdDownload className="text-xl mr-2" />
+                )}
+                {isLoading ? "Processing..." : "Download"}
+              </button>
             </div>
             <div
               onClick={() => setIsContentVisible(false)}
@@ -337,7 +348,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 minHeight: `${pageHeight}px`,
                 overflow: "auto",
                 transform: `scale(${scale})`,
-                margin:"-180px"
+                margin: "-180px",
               }}
               onClick={(e) => e.stopPropagation()}
             >
