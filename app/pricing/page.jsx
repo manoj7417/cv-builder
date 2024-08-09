@@ -37,7 +37,12 @@ const Pricing = () => {
       duration: enabled ? "yearly" : "monthly",
     };
     try {
-      const response = await UpgradePricing(data, accessToken.value);
+      const response = await axios.post('/api/upgradePricing',{data},{
+        headers: {
+          Authorization: "Bearer " + accessToken.value,
+          'Content-Type': 'application/json'
+      },
+      } );
       if (response.status === 200) {
         const { url } = response.data;
         window.location = url;
@@ -80,27 +85,27 @@ const Pricing = () => {
       if (response.status === 200) {
         const { orderId, amount, currency, key } = response.data;
 
-        const options = {
-          key,
-          amount,
-          currency,
-          name: "Your Company Name",
-          description: "Upgrade Plan",
-          order_id: orderId,
-          handler: async (response) => {
-            const paymentData = {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            };
-            console.log(paymentData);
-            // try {
-            //     const verifyResponse = await axios.post('/api/pricing/verify', paymentData, {
-            //         headers: {
-            //             Authorization: "Bearer " + accessToken.value,
-            //             'Content-Type': 'application/json'
-            //         },
-            //     });
+            const options = {
+                key,
+                amount,
+                currency,
+                name: "Genies Career Hub",
+                description: "Upgrade Plan",
+                order_id: orderId,
+                handler: async (response) => {
+                    const paymentData = {
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                    };
+                    console.log(paymentData);
+                    // try {
+                    //     const verifyResponse = await axios.post('/api/pricing/verify', paymentData, {
+                    //         headers: {
+                    //             Authorization: "Bearer " + accessToken.value,
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //     });
 
             //     if (verifyResponse.status === 200) {
             //         alert("Payment successful and verified!");
