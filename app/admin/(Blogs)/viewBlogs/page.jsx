@@ -22,7 +22,7 @@ const ViewBlogsPage = () => {
 
   // Get filtered blog data based on search term
   const filteredBlogData = blogData.filter((blog) =>
-    blog.author.toLowerCase().includes(searchTerm.toLowerCase())
+    blog.maintitle.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   //Get total pages
@@ -113,7 +113,7 @@ const ViewBlogsPage = () => {
             id='id-s03'
             type='search'
             name='id-s03'
-            placeholder='Search by author'
+            placeholder='Search by Main Title'
             aria-label='Search content'
             value={searchTerm}
             onChange={handleSearchChange}
@@ -180,7 +180,7 @@ const ViewBlogsPage = () => {
                 <div key={index}>
                   <div className='views_cards_blog'>
                     <div
-                      className='w-full min-h-[400px] rounded-md relative'
+                      className='2xl:w-[300px] lg:w-full min-h-[400px] rounded-md relative'
                       style={{
                         boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
                       }}>
@@ -191,7 +191,7 @@ const ViewBlogsPage = () => {
                       />
                       <div className='p-4 text-center'>
                         <h1 className='inline-flex items-center text-lg font-semibold'>
-                          {item?.author}
+                          {item?.maintitle?.slice(0,20)}
                         </h1>
                         <p className='mt-3 text-sm text-gray-600'>
                           {parse(item?.description.slice(0, 100) || "")}

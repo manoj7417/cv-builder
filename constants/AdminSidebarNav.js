@@ -32,7 +32,6 @@ export const AdminSidebarNav = [
     ),
     submenu: true,
     subMenuItems: [
-      { title: "Create User", path: "/admin/createUser" },
       { title: "View User", path: "/admin/viewUsers" },
     ],
   },
