@@ -37,7 +37,12 @@ const Pricing = () => {
       duration: enabled ? "yearly" : "monthly",
     };
     try {
-      const response = await UpgradePricing(data, accessToken.value);
+      const response = await axios.post('/api/upgradePricing',{data},{
+        headers: {
+          Authorization: "Bearer " + accessToken.value,
+          'Content-Type': 'application/json'
+      },
+      } );
       if (response.status === 200) {
         const { url } = response.data;
         window.location = url;
