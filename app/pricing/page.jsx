@@ -83,7 +83,7 @@ const Pricing = () => {
                 key,
                 amount,
                 currency,
-                name: "Your Company Name",
+                name: "Genies Career Hub",
                 description: "Upgrade Plan",
                 order_id: orderId,
                 handler: async (response) => {
