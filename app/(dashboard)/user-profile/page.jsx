@@ -27,7 +27,6 @@ import { Label } from "../../../components/ui/label";
 import { ImSpinner3 } from "react-icons/im";
 import { FaChevronRight } from "react-icons/fa6";
 
-
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const { userState, updateUserData } = useUserStore((state) => ({
@@ -44,20 +43,20 @@ const ProfilePage = () => {
   const [popupData, setPopupData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cardData, setCardData] = useState([]);
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(false);
   const [passwords, setPasswords] = useState({
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  })
-  const [isChangingPassword, setIsChangingPassword] = useState(false)
-  const [passwordError, setPasswordError] = useState('')
-  const [oldPasswordError, setOldPasswordError] = useState('')
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [oldPasswordError, setOldPasswordError] = useState("");
   const router = useRouter();
-  const [sendingMail, setIsSendingMail] = useState(false)
-  const email = useRef(null)
+  const [sendingMail, setIsSendingMail] = useState(false);
+  const email = useRef(null);
   const fileUploadRef = useRef(null);
-  const [showEmailDialog, setShowEmailDialog] = useState(false)
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
 
   useEffect(() => {
     if (userState?.userdata) {
@@ -131,14 +130,13 @@ const ProfilePage = () => {
 
   const handleEmailDialogClose = () => {
     setShowEmailDialog(false);
-  }
-
+  };
 
   const handleInputChange = (e) => {
     let { name, value } = e.target;
-    value = value.trim()
-    setPasswords({ ...passwords, [name]: value })
-  }
+    value = value.trim();
+    setPasswords({ ...passwords, [name]: value });
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -185,10 +183,9 @@ const ProfilePage = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
-
 
   const handleUserAnalysis = (id) => {
     router.push(`/analyser/${id}`);
@@ -198,7 +195,6 @@ const ProfilePage = () => {
     const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(dateString).toLocaleDateString("en-US", options);
   }
-
 
   const handleReadMore = (data) => {
     setCardData(data);
@@ -210,73 +206,79 @@ const ProfilePage = () => {
   };
 
   const handleResetPassword = () => {
-    setPasswordError('')
-    setOldPasswordError('')
-  }
+    setPasswordError("");
+    setOldPasswordError("");
+  };
 
   const handleChangePassword = async () => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     let token = accessToken.value;
-    handleResetPassword()
-    let { oldPassword, newPassword, confirmPassword } = passwords
-    if (oldPassword === '' || newPassword === '' || confirmPassword === '') {
-      setPasswordError('Please fill in all fields.')
-      return
+    handleResetPassword();
+    let { oldPassword, newPassword, confirmPassword } = passwords;
+    if (oldPassword === "" || newPassword === "" || confirmPassword === "") {
+      setPasswordError("Please fill in all fields.");
+      return;
     }
     if (newPassword !== confirmPassword) {
-      setPasswordError('Please re-enter correct password.')
-      return
+      setPasswordError("Please re-enter correct password.");
+      return;
     }
-    setIsChangingPassword(true)
+    setIsChangingPassword(true);
     try {
-      const response = await axios.post('/api/changePassword', { oldPassword, newPassword }, {
-        headers: {
-          Authorization: 'Bearer ' + token
+      const response = await axios.post(
+        "/api/changePassword",
+        { oldPassword, newPassword },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
         }
-      })
+      );
       if (response.status === 200) {
-        toast.success("Password changed successfully")
-        handleDialogClose()
-        setIsChangingPassword(false)
-        setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' })
+        toast.success("Password changed successfully");
+        handleDialogClose();
+        setIsChangingPassword(false);
+        setPasswords({ oldPassword: "", newPassword: "", confirmPassword: "" });
       }
     } catch (error) {
       if (error.response.status === 401) {
-        setOldPasswordError("Incorrect old password")
+        setOldPasswordError("Incorrect old password");
       }
     }
-  }
+  };
 
   const handleDialogClose = () => {
     setShowDialog(false);
-    setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' })
-    setPasswordError('')
-    setOldPasswordError('')
-  }
+    setPasswords({ oldPassword: "", newPassword: "", confirmPassword: "" });
+    setPasswordError("");
+    setOldPasswordError("");
+  };
 
   const handleForgotPassword = () => {
-    setShowDialog(false)
-    setShowEmailDialog(true)
-  }
+    setShowDialog(false);
+    setShowEmailDialog(true);
+  };
 
   const handleSendResetEmail = async () => {
-    const userEmail = email.current.value
+    const userEmail = email.current.value;
     setIsSendingMail(true);
     try {
-      const response = await axios.post('/api/resetpassword', { email: userEmail });
+      const response = await axios.post("/api/resetpassword", {
+        email: userEmail,
+      });
       if (response.status === 200) {
-        email.current.value = null
-        toast.success('Reset password link sent to your email');
+        email.current.value = null;
+        toast.success("Reset password link sent to your email");
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error sending reset password email');
+      toast.error(
+        error.response?.data?.error || "Error sending reset password email"
+      );
     } finally {
       setIsSendingMail(false);
-      setShowEmailDialog(false)
+      setShowEmailDialog(false);
     }
-  }
-
-
+  };
 
   useEffect(() => {
     fetchUserAnalysisHistory();
@@ -288,24 +290,45 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Dialog open={showEmailDialog} >
-        <DialogContent className=" w-96" onClick={handleEmailDialogClose} showCloseButton >
+      <Dialog open={showEmailDialog}>
+        <DialogContent
+          className=" w-96"
+          onClick={handleEmailDialogClose}
+          showCloseButton
+        >
           <div>
             <h1>Reset Password</h1>
-            <Input placeholder="Enter your email address" className="mt-4" ref={email} />
+            <Input
+              placeholder="Enter your email address"
+              className="mt-4"
+              ref={email}
+            />
             <div className="w-full my-3 flex justify-end items-center">
-              <Button className=" disabled:bg-opacity-85" disabled={sendingMail} onClick={handleSendResetEmail}>{sendingMail ?
-                <>
-                  Sending<ImSpinner3 className="animate-spin ml-2" size={16} />
-                </>
-                : "Send"}</Button>
+              <Button
+                className=" disabled:bg-opacity-85"
+                disabled={sendingMail}
+                onClick={handleSendResetEmail}
+              >
+                {sendingMail ? (
+                  <>
+                    Sending
+                    <ImSpinner3 className="animate-spin ml-2" size={16} />
+                  </>
+                ) : (
+                  "Send"
+                )}
+              </Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
       <section className="bg-gradient-to-r from-white to-[#dcecff] pt-28">
-        <Dialog open={showDialog} >
-          <DialogContent showCloseButton onClick={handleDialogClose} className="w-96">
+        <Dialog open={showDialog}>
+          <DialogContent
+            showCloseButton
+            onClick={handleDialogClose}
+            className="w-96"
+          >
             <div className="w-full flex flex-col items-center">
               <div className="w-24  h-24 flex items-center justify-center rounded-full bg-blue-100">
                 <GoKey className="text-5xl text-blue-800" />
@@ -314,48 +337,84 @@ const ProfilePage = () => {
                 <h1>Set your new password</h1>
                 <div className="w-full my-1">
                   <Label className=" text-sm">Old password</Label>
-                  <Input type="password" className="mt-1" onChange={handleInputChange} name="oldPassword" value={passwords.oldPassword} />
+                  <Input
+                    type="password"
+                    className="mt-1"
+                    onChange={handleInputChange}
+                    name="oldPassword"
+                    value={passwords.oldPassword}
+                  />
                   <div className="w-full">
-                    {oldPasswordError && <p className="text-xs text-red-600 text-start">{oldPasswordError}</p>}
+                    {oldPasswordError && (
+                      <p className="text-xs text-red-600 text-start">
+                        {oldPasswordError}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 <div className="w-full my-1">
                   <Label className=" text-sm">New password</Label>
-                  <Input type="password" className="mt-1" onChange={handleInputChange} name="newPassword" value={passwords.newPassword} />
+                  <Input
+                    type="password"
+                    className="mt-1"
+                    onChange={handleInputChange}
+                    name="newPassword"
+                    value={passwords.newPassword}
+                  />
                 </div>
                 <div className="w-full my-1">
                   <Label className="mb-1">Confirm new password</Label>
-                  <Input type="password" className="mt-1" onChange={handleInputChange} name="confirmPassword" value={passwords.confirmPassword} />
+                  <Input
+                    type="password"
+                    className="mt-1"
+                    onChange={handleInputChange}
+                    name="confirmPassword"
+                    value={passwords.confirmPassword}
+                  />
                 </div>
                 <div className="w-full">
-                  {passwordError && <p className="text-xs text-red-600 text-start">{passwordError}</p>}
+                  {passwordError && (
+                    <p className="text-xs text-red-600 text-start">
+                      {passwordError}
+                    </p>
+                  )}
                 </div>
-                <div className="w-full my-2" >
-                  <p className="text-sm cursor-pointer" onClick={handleForgotPassword}>Forgot password?</p>
+                <div className="w-full my-2">
+                  <p
+                    className="text-sm cursor-pointer"
+                    onClick={handleForgotPassword}
+                  >
+                    Forgot password?
+                  </p>
                 </div>
                 <div className="pt-5 w-full">
-                  <Button className="w-full" onClick={handleChangePassword} disabled={isChangingPassword}>
-                    {
-                      isChangingPassword ? (
-                        <>
-                          Changing Password<ImSpinner3 className="animate-spin w-3 h-3 text-white ml-1" />
-                        </>
-                      ) : (
-                        <>
-                          Change password<FaChevronRight className="w-3 h-3 text-white ml-1" />
-                        </>
-                      )
-                    }
+                  <Button
+                    className="w-full"
+                    onClick={handleChangePassword}
+                    disabled={isChangingPassword}
+                  >
+                    {isChangingPassword ? (
+                      <>
+                        Changing Password
+                        <ImSpinner3 className="animate-spin w-3 h-3 text-white ml-1" />
+                      </>
+                    ) : (
+                      <>
+                        Change password
+                        <FaChevronRight className="w-3 h-3 text-white ml-1" />
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>
-
             </div>
           </DialogContent>
         </Dialog>
         <div className="flex justify-end px-10">
-          <Button className="" onClick={() => setShowDialog(true)}>Change Password</Button>
+          <Button className="" onClick={() => setShowDialog(true)}>
+            Change Password
+          </Button>
         </div>
         <div className="container mx-auto px-5">
           <form onSubmit={handleSubmit(userProfileHandler)}>
@@ -508,15 +567,16 @@ const ProfilePage = () => {
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
           </form>
         </div>
-      </section >
+      </section>
       <section className="w-full py-10 px-20">
-        <h1 className="text-blue-950 text-4xl font-medium">CV Analyser History</h1>
+        <h1 className="text-blue-950 text-4xl font-medium">
+          CV Analyser History
+        </h1>
         <div className="flex flex-wrap">
           {loading ? (
             Array(5)
@@ -590,17 +650,20 @@ const ProfilePage = () => {
           Psychometric Test Summary
         </h1>
         <div className="summary_cards_wrapper">
-          <div className="grid grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-10">
             {loading ? (
               Array(5)
                 .fill()
                 .map((_, index) => (
-                  <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                  <div
+                    className="w-full md:w-[350px] mr-0 md:mr-10 my-4 flex-1"
+                    key={index}
+                  >
                     <Skeleton width="100%" height={200} />
                   </div>
                 ))
             ) : popupData?.length === 0 ? (
-              <div className="w-[350px] mr-10 my-4">
+              <div className="w-full md:w-[350px] mr-0 md:mr-10 my-4">
                 <Card className="w-full h-[200px] flex items-center justify-center">
                   <span>No Test Summary data yet</span>
                 </Card>
@@ -608,16 +671,16 @@ const ProfilePage = () => {
             ) : (
               popupData?.map((val, index) => (
                 <div className="summary_cards relative" key={index}>
-                  <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+                  <div className="w-full md:w-[250px] p-4 sm:p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                     <a href="#">
-                      <h5 className="mb-2 text-xl font-bold text-gray-900">
+                      <h5 className="mb-2 text-lg sm:text-xl font-bold text-gray-900">
                         User Summary
                       </h5>
                     </a>
                     <p className="mb-3 font-normal text-sm text-gray-700">
                       Interests: {val.summary.interests.slice(0, 100)}
                     </p>
-                    <div className="summary_card_footer absolute bottom-6 left-6 right-6">
+                    <div className="summary_card_footer absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
                       <div
                         className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
                         onClick={() => handleReadMore(val)}
@@ -646,8 +709,8 @@ const ProfilePage = () => {
             )}
 
             {showPopup && popupData && (
-              <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white max-w-5xl min-h-[500px] w-full p-6 rounded-lg shadow-lg relative">
+              <div className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50 p-4">
+                <div className="bg-white max-w-full md:max-w-5xl w-full p-4 md:p-6 rounded-lg shadow-lg relative">
                   <button
                     onClick={closePopup}
                     className="absolute top-[1rem] right-[1rem] text-gray-400 hover:text-gray-600 focus:outline-none"
@@ -667,32 +730,29 @@ const ProfilePage = () => {
                       />
                     </svg>
                   </button>
-                  <Tabs
-                    className="w-full py-5"
-                    defaultValue="actionableInsights"
-                  >
+                  <Tabs className="w-full py-5">
                     <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto">
                       <TabsTrigger
                         value="actionableInsights"
-                        className=" text-blue-950 rounded-md text-base"
+                        className="text-blue-950 rounded-md text-base"
                       >
                         Actionable Insights
                       </TabsTrigger>
                       <TabsTrigger
                         value="careerSuggestions"
-                        className=" text-blue-950 rounded-md text-base"
+                        className="text-blue-950 rounded-md text-base"
                       >
                         Career Suggestions
                       </TabsTrigger>
                       <TabsTrigger
                         value="summary"
-                        className=" text-blue-950 rounded-md text-base"
+                        className="text-blue-950 rounded-md text-base"
                       >
                         Summary
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent value="actionableInsights" className="mb-4">
-                      <div className="actions_section max-w-4xl mx-auto">
+                      <div className="actions_section max-w-full md:max-w-4xl mx-auto">
                         <div>
                           <h2 className="text-xl font-bold mb-6 text-blue-950">
                             Actionable Insights
@@ -714,7 +774,7 @@ const ProfilePage = () => {
                       </div>
                     </TabsContent>
                     <TabsContent className="mb-6" value="careerSuggestions">
-                      <div className="career_section max-w-4xl mx-auto">
+                      <div className="career_section max-w-full md:max-w-4xl mx-auto">
                         <div className="space-y-3">
                           <h2 className="text-xl font-bold text-blue-950 flex items-center gap-3">
                             Career Suggestions
@@ -736,7 +796,7 @@ const ProfilePage = () => {
                       </div>
                     </TabsContent>
                     <TabsContent className="mb-6" value="summary">
-                      <div className="max-w-4xl mx-auto summary_section">
+                      <div className="max-w-full md:max-w-4xl mx-auto summary_section">
                         <div>
                           <h2 className="text-xl font-bold mb-6 text-blue-950">
                             Summary

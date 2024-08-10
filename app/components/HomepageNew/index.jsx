@@ -201,7 +201,7 @@ export default function HomepageNew() {
         <Slider />
         <TabResume />
         <WorkTogether />
-        <FAQSection />
+        {/* <FAQSection /> */}
         <ServiceSection />
       </section>
     </>

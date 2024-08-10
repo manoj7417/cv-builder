@@ -161,13 +161,10 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <a
-                    href="#FAQS"
-                    className="text-black transition pointer-events-none"
-                  >
+                  <Link href="/faq" className="text-black transition ">
                     FAQs
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="/pricing" className="text-black transition">
