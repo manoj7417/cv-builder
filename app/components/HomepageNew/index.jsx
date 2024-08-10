@@ -215,14 +215,14 @@ export default function HomepageNew() {
           </h2>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
-          <div className="lg:flex align-middle overflow-hidden hidden">
+          <div className="lg:flex align-middle overflow-hidden hidden ">
             <Image
               src={"/home-creative-down.png"}
               width={2000}
               height={1500}
               alt="discover"
               loading="lazy"
-              className="-ml-36"
+              className=" p-4 sm:p-10"
             />
           </div>
           <div className="my-auto p-4 sm:p-10">
@@ -232,7 +232,7 @@ export default function HomepageNew() {
         <Slider />
         <TabResume />
         <WorkTogether />
-        <FAQSection />
+        {/* <FAQSection /> */}
         <ServiceSection />
       </section>
     </>
