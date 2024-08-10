@@ -51,7 +51,7 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                           className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
                         >
                           {item?.startDate &&
-                            `${item?.startDate}${item?.endDate && " - "}`}
+                            `${item?.startDate}${item?.endDate && " / "}`}
                           {item?.endDate}
                         </p>
                         {item?.city && (
@@ -610,7 +610,7 @@ const Template17 = () => {
                       width={250}
                       height={250}
                       alt="pic"
-                      className="mx-auto"
+                      className="w-auto h-[300px]"
                     />
                   )}
                 </div>
@@ -633,7 +633,7 @@ const Template17 = () => {
                       href={`tel:${basics?.phone}`}
                       className="hover:underline flex items-center mt-1  text-wrap w-full "
                     >
-                      <MdOutlinePhone className="mr-2" />
+                      <MdOutlinePhone className="mr-2 text-white" />
                       <p className="w-[80%] text-wrap break-words text-white">
                         {basics?.phone}
                       </p>
@@ -657,7 +657,7 @@ const Template17 = () => {
                       href={`mailto:${basics?.email}`}
                       className="hover:underline flex items-center mt-1  text-wrap w-full "
                     >
-                      <MdOutlineMailOutline className="mr-2" />
+                      <MdOutlineMailOutline className="mr-2 text-white" />
                       <p className="w-[80%] text-wrap break-words text-white">
                         {basics?.email}
                       </p>
@@ -665,24 +665,6 @@ const Template17 = () => {
                   )}
                 </div>
               </div>
-
-              {/* website */}
-              {/* <div className="w-full grid grid-cols-12">
-                <div
-                  className="col-span-3 w-full h-6"
-                  style={{ backgroundColor: metadata?.theme?.primary }}
-                ></div>
-                <div className="col-span-9">
-                  <div className="w-full h-6 bg-[rgba(45,45,45,0.6)] px-3 flex items-center">
-                    <p className="text-sm font-semibold text-gray-200">
-                      Website
-                    </p>
-                  </div>
-                  <p className="bg-transparent outline-none border-none text-xs px-3 mt-2 text-gray-200 w-full">
-                    www.test.com
-                  </p>
-                </div>
-              </div> */}
 
               {/* address */}
               <div className="w-full grid grid-cols-12">
@@ -698,7 +680,7 @@ const Template17 = () => {
                   </div>
                   {(basics?.city || basics?.country) && (
                     <p className="flex items-center text-white ml-2">
-                      <IoLocationOutline className="text-white" />
+                      <IoLocationOutline className="text-white mr-2" />
                       <span>{basics?.city}</span>
                       <span>{basics?.city && basics?.country && " , "}</span>
                       <span className="">{basics?.country}</span>

@@ -208,7 +208,7 @@ export default function Footer() {
 
                 <li>
                   <a href="/terms-condition" className="text-black transition">
-                    Terms and Condition
+                    Terms & Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>
@@ -232,7 +232,7 @@ export default function Footer() {
                     href="/cookies-tracking-policy"
                     className="text-black transition"
                   >
-                    Cookies & tracking policy
+                    Cookies & Tracking Policy
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </a>
                 </li>

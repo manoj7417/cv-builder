@@ -642,7 +642,7 @@ const Template1 = () => {
               <img
                 src={basics?.picture?.url}
                 alt="Resume_image"
-                className="w-40 h-40 block mx-auto my-5 rounded-full"
+                className="w-auto h-[300px] block"
               />
             )}
           </div>

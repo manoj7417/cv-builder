@@ -576,7 +576,7 @@ const Pricing = () => {
 
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Unlimited Cv Analyzer free
+                         Unlimited CV Optimiser free
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-blue-950">&#10060;</span>
@@ -590,7 +590,7 @@ const Pricing = () => {
                       </tr>
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          Free Psycometric Tests
+                        Free Psychometric Tests
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-green-500">&#10003;</span>
@@ -618,7 +618,7 @@ const Pricing = () => {
                       </tr>
                       <tr>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          AI Psycometric Tests
+                         AI Psychometric Tests
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <span className="text-blue-950">&#10060;</span>

@@ -23,6 +23,7 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
+import { createNewResume } from "../api/api";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
