@@ -1,23 +1,22 @@
 import { uploadImage } from '@/app/api/api';
-import React, { useRef, useState } from 'react'
-import { TbEdit } from "react-icons/tb";
+import React, { useRef, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
-import { FaCamera } from 'react-icons/fa';
+import { FaCamera, FaUndo } from 'react-icons/fa';
 import { useResumeStore } from '@/app/store/ResumeStore';
 
 function ImageUpload() {
-    const resumeData = useResumeStore((state) => state.resume.data)
-    const setResumeData = useResumeStore((state) => state.setResumeData)
-    const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'
+    const resumeData = useResumeStore((state) => state.resume.data);
+    const setResumeData = useResumeStore((state) => state.setResumeData);
+    const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png';
     const [avatarURL, setAvatarURL] = useState(resumeData?.basics?.picture?.url || defaultImage);
-    const [isUploading, setIsUploading] = useState(false)
+    const [isUploading, setIsUploading] = useState(false);
 
     const fileUploadRef = useRef();
 
     const handleImageUpload = (event) => {
         event.preventDefault();
         fileUploadRef.current.click();
-    }
+    };
 
     const uploadImageDisplay = async () => {
         setIsUploading(true);
@@ -35,12 +34,12 @@ function ImageUpload() {
                 // File read successfully
                 const formData = new FormData();
                 formData.append("file", uploadedFile);
-                formData.append("upload_preset", 'careerg')
+                formData.append("upload_preset", 'careerg');
                 const response = await uploadImage(formData);
                 if (response.status === 200) {
-                    const url = response.data.secure_url
+                    const url = response.data.secure_url;
                     setAvatarURL(url);
-                    setResumeData('basics.picture.url', url)
+                    setResumeData('basics.picture.url', url);
                 }
             };
 
@@ -52,9 +51,22 @@ function ImageUpload() {
             console.error(error);
             setAvatarURL(defaultImage);
         } finally {
-            setIsUploading(false)
+            setIsUploading(false);
+            // Clear the file input after uploading
+            if (fileUploadRef.current) {
+                fileUploadRef.current.value = '';
+            }
         }
-    }
+    };
+
+    const resetImage = () => {
+        setAvatarURL(defaultImage);
+        setResumeData('basics.picture.url', defaultImage);
+        // Clear the file input when resetting the image
+        if (fileUploadRef.current) {
+            fileUploadRef.current.value = '';
+        }
+    };
 
     return (
         <div className="relative h-[100px] w-[100px]">
@@ -64,7 +76,7 @@ function ImageUpload() {
                     src={avatarURL}
                     alt="Avatar"
                     className="h-full w-full rounded-full" />}
-
+            
             <form id="form" encType='multipart/form-data'>
                 <button
                     type='submit'
@@ -80,8 +92,17 @@ function ImageUpload() {
                     accept="image/png, image/gif, image/jpeg"
                     hidden />
             </form>
+
+            {avatarURL !== defaultImage && (
+                <button
+                    type='button'
+                    onClick={resetImage}
+                    className='absolute bottom-0 r-0 p-2 bg-red-600 text-white rounded-full'>
+                    <FaUndo />
+                </button>
+            )}
         </div>
-    )
+    );
 }
 
-export default ImageUpload
+export default ImageUpload;

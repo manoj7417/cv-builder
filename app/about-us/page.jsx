@@ -93,7 +93,7 @@ export default function AboutUs() {
           <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
             <div className="flex flex-col justify-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
               <h1 className="mt-8 text-3xl font-bold -tight text-[#005599] md:text-4xl lg:text-6xl">
-                We Envisage your Growth with You!
+                We Envisage Your Growth With You!
               </h1>
               <p className="mt-8 text-lg text-gray-700">
                 We aim to be the bridge between you and your progressive career.

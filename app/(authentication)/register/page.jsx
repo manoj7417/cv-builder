@@ -22,21 +22,19 @@ export default function Register() {
 
   const handleRegister = async (data) => {
     if (!data.terms) {
-      toast.error("You must agree to the terms and conditions");
+      toast.error("You must agree to the terms and conditions", { autoClose: 5000 }); // 5000ms = 5 seconds
       return;
     }
     setIsLoading(true);
     try {
       const response = await registerUser(data);
       if (response.status === 201) {
-        toast.success("Registration successful");
-        toast.success(
-          "Your password has been to your registered email address"
-        );
+        toast.success("Registration successful", { autoClose: 20000 }); // 20000ms = 20 seconds
+        toast.success("Your password has been sent to your registered email address", { autoClose: 20000 }); // 20000ms = 20 seconds
         router.push("/login");
       }
     } catch (error) {
-      toast.error(error.response.data.error);
+      toast.error(error.response.data.error, { autoClose: 20000 }); // 20000ms = 20 seconds
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +82,6 @@ export default function Register() {
                     </svg>
                   </div>
                   <span className="text-lg font-medium text-white">
-                    {" "}
                     Custom CVs
                   </span>
                 </li>
@@ -104,7 +101,6 @@ export default function Register() {
                     </svg>
                   </div>
                   <span className="text-lg font-medium text-white">
-                    {" "}
                     Skill Gaps Analyser
                   </span>
                 </li>
@@ -124,7 +120,6 @@ export default function Register() {
                     </svg>
                   </div>
                   <span className="text-lg font-medium text-white">
-                    {" "}
                     ATS Optimisation
                   </span>
                 </li>
@@ -144,7 +139,6 @@ export default function Register() {
                     </svg>
                   </div>
                   <span className="text-lg font-medium text-white">
-                    {" "}
                     AI-Based CV Creator
                   </span>
                 </li>
@@ -164,8 +158,7 @@ export default function Register() {
                     htmlFor="name"
                     className="text-base font-medium text-gray-900"
                   >
-                    {" "}
-                    Full Name{" "}
+                    Full Name
                   </label>
                   <div className="mt-2">
                     <input
@@ -190,8 +183,7 @@ export default function Register() {
                     htmlFor="email"
                     className="text-base font-medium text-gray-900"
                   >
-                    {" "}
-                    Email Address{" "}
+                    Email Address
                   </label>
                   <div className="mt-2">
                     <input
@@ -230,13 +222,7 @@ export default function Register() {
                   >
                     <p>
                       By signing up you are agreeing to our
-                      <a
-                        href="#"
-                        className="text-blue-900  underline underline-offset-4 ml-1 font-semibold"
-                      >
-                        {" "}
-                        Terms and Conditions
-                      </a>
+                      <a href="#" className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</a>
                     </p>
                   </label>
                 </div>
