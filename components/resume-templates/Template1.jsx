@@ -39,8 +39,6 @@ const Education = ({ fontStyle, colorStyle }) => {
                       {<p>item?.startDate</p> &&
                         `${item?.startDate}${item?.endDate && " - "}`}
                       {item?.endDate}
-                      {/* <div className="year_marker absolute top-1.5 right-0 w-2.5 h-2.5 bg-white border border-[#26252d] rounded-full" />
-                      <div className="year_line absolute top-4 right-1 w-0.5 h-full bg-[#0175b2]" /> */}
                     </div>
                     <div className="content flex flex-col break-all ">
                       <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
@@ -637,12 +635,12 @@ const Template1 = () => {
             color: metadata?.theme?.text,
           }}
         >
-          <div className="resume_image w-full">
+          <div className="resume_image w- [400px] h-[300px]">
             {basics?.picture?.url && (
               <img
                 src={basics?.picture?.url}
                 alt="Resume_image"
-                className="w-auto h-[300px] block"
+                className="w-full h-full block object-cover"
               />
             )}
           </div>

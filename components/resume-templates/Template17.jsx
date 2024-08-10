@@ -603,14 +603,14 @@ const Template17 = () => {
           <div className="col-span-1 md:col-span-4 bg-black flex flex-col items-center justify-start">
             <div className="w-full h-80 bg-black">
               <div>
-                <div className="profile-pic">
+                <div className="profile-pic w-[300px] h-[300px]">
                   {basics?.picture?.url && (
                     <img
                       src={basics.picture.url}
-                      width={250}
-                      height={250}
+                      width={300}
+                      height={300}
                       alt="pic"
-                      className="w-auto h-[300px]"
+                      className="w-full h-full object-cover"
                     />
                   )}
                 </div>

@@ -214,6 +214,7 @@ const ResumeView = ({ setIsContentVisible }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [showFilenameModal, setShowFilenameModal] = useState(false);
 
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
