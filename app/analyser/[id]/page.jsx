@@ -527,29 +527,24 @@ const FeedbackFuction = () => {
         >
           Fix My CV <FaCrown className="ml-1 text-yellow-300" />
         </button> */}
-        <div className="button_wrapper mb-5 fixed bottom-5 left-[44%]">
+        {/* <div className="button_wrapper mb-5 fixed bottom-5 left-[20%] sm:left-[44%] md:left-[44%] lg:left-[44%] xl:left-[44%] 2xl:left-[44%] ">
           <button className="get_start_btn floating" onClick={() => setShowDialog(true)}>
             <span className="btn_text">Fix My CV</span>
             <div className="btn_overlay">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-arrow-right"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg> */}
-              <FaCrown className="ml-1 text-yellow-500" />
+                           <FaCrown className="ml-1 text-yellow-500" />
             </div>
           </button>
-        </div>
+        </div> */}
+        <div className="button_wrapper mb-5 fixed bottom-5 left-1/2 transform -translate-x-1/2">
+  <button className="get_start_btn floating" onClick={() => setShowDialog(true)}>
+    <span className="btn_text">Fix My CV</span>
+    <div className="btn_overlay">
+      
+      <FaCrown className="ml-1 text-yellow-500" />
+    </div>
+  </button>
+</div>
+
       </section>
     </>
   );
