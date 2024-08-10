@@ -447,7 +447,7 @@ const ResumeView = ({ setIsContentVisible }) => {
         )}
         <div>
           <div
-            className="shadow-2xl overflow-y-scroll no-scrollbar h-screen"
+            className="shadow-2xl overflow-y-scroll h-screen"
             style={{
               transform: `scale(${scale})`,
             }}
@@ -528,7 +528,7 @@ const ResumeView = ({ setIsContentVisible }) => {
                     <DrawerHeader>
                       <DrawerTitle>Choose Templates</DrawerTitle>
                       <DrawerDescription>
-                        <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen no-scrollbar">
+                        <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen">
                           {images.map((image, index) => {
                             return (
                               <div
