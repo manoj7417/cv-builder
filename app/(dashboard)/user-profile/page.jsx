@@ -35,14 +35,14 @@ const ProfilePage = () => {
     updateUserData: state.updateUserData,
   }));
   const userdata = userState?.userdata || {};
-  const [previewImage, setPreviewImage] = useState(
-    userdata?.profilePicture || "https://via.placeholder.com/150"
-  );
-  const [selectedImage, setSelectedImage] = useState(null);
+  // const [previewImage, setPreviewImage] = useState(
+  //   userdata?.profilePicture || "https://via.placeholder.com/150"
+  // );
+  // const [selectedImage, setSelectedImage] = useState(null);
   const [analysisData, setAnalysisData] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [popupData, setPopupData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [cardData, setCardData] = useState([]);
   const [showDialog, setShowDialog] = useState(false)
   const [passwords, setPasswords] = useState({
@@ -59,6 +59,14 @@ const ProfilePage = () => {
   const fileUploadRef = useRef(null);
   const [showEmailDialog, setShowEmailDialog] = useState(false)
 
+
+  /**************************** */
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  /******************************* */
+
   useEffect(() => {
     if (userState?.userdata) {
       setPreviewImage(
@@ -69,6 +77,7 @@ const ProfilePage = () => {
 
   const handleImageUpload = (event) => {
     event.preventDefault();
+    // alert("LLLLLLLL");
     if (fileUploadRef.current) {
       fileUploadRef.current.click();
     }
@@ -140,13 +149,26 @@ const ProfilePage = () => {
     setPasswords({ ...passwords, [name]: value })
   }
 
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setSelectedImage(file);
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setPreviewImage(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setLoading(true); // Show loading image
       setSelectedImage(file);
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewImage(reader.result);
+        setLoading(false); // Hide loading image
       };
       reader.readAsDataURL(file);
     }
@@ -388,6 +410,8 @@ const ProfilePage = () => {
                           onChange={handleImageChange}
                           className="mx-auto mb-4 hidden"
                         />
+                        {loading && <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>} 
+                        
                       </div>
                     )}
                   </div>
