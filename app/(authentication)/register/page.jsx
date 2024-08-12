@@ -9,6 +9,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { ImSpinner3 } from "react-icons/im";
 import { registerUser } from "../../api/api";
+import { Input } from "@/components/ui/input";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 export default function Register() {
   const router = useRouter();
@@ -19,6 +21,7 @@ export default function Register() {
     formState: { errors },
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async (data) => {
     if (!data.terms) {
@@ -29,12 +32,12 @@ export default function Register() {
     try {
       const response = await registerUser(data);
       if (response.status === 201) {
-        toast.success("Registration successful", { autoClose: 20000 }); // 20000ms = 20 seconds
-        toast.success("Your password has been sent to your registered email address", { autoClose: 20000 }); // 20000ms = 20 seconds
+        toast.success("Registration successful");
+        toast.info("Verification link has been sent to your email address , please verfiy your email to continue");
         router.push("/login");
       }
     } catch (error) {
-      toast.error(error.response.data.error, { autoClose: 20000 }); // 20000ms = 20 seconds
+      toast.error(error.response.data.error); // 20000ms = 20 seconds
     } finally {
       setIsLoading(false);
     }
@@ -170,8 +173,8 @@ export default function Register() {
                     Full Name
                   </label>
                   <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    <Input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 h-12"
                       type="text"
                       placeholder="Full Name"
                       id="name"
@@ -195,8 +198,8 @@ export default function Register() {
                     Email Address
                   </label>
                   <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    <Input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 h-12"
                       type="email"
                       placeholder="Email Address"
                       id="email"
@@ -214,6 +217,46 @@ export default function Register() {
                     />
                     <div className="text-red-500 text-sm my-2">
                       {errors?.email?.message}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900"
+                  >
+                    Password
+                  </label>
+                  <div className="mt-2 relative">
+                    <Input
+                      className="flex  w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 h-12"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Password"
+                      id="password"
+                      {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Password is required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Password must be at least 8 characters long",
+                        },
+                        pattern: {
+                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                          message:
+                            "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+                        },
+                      })}
+                    />
+
+                    <div className="text-red-500 text-sm my-2">
+                      {errors?.password?.message}
+                    </div>
+                    <div className="top-0 right-0 absolute h-12 flex items-center justify-center pr-3">
+                      {
+                        showPassword ? <IoEye className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(false)} /> : <IoEyeOff className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(true)} />
+                      }
                     </div>
                   </div>
                 </div>
