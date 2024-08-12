@@ -570,21 +570,21 @@ export default function Page() {
                     <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto bg-[#1e3a8a78] rounded-full">
                       <TabsTrigger
                         value="actionableInsights"
-                        className=" text-blue-950 rounded-md text-base"
+                        className="text-white  rounded-md text-base font-bold sumtab"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Actionable Insights
                       </TabsTrigger>
                       <TabsTrigger
                         value="careerSuggestions"
-                        className=" text-blue-950 rounded-md text-base"
+                        className=" text-white  rounded-md text-base font-bold sumtab"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Career Suggestions
                       </TabsTrigger>
                       <TabsTrigger
                         value="summary"
-                        className=" text-blue-950 rounded-md text-base"
+                        className="text-white   rounded-md text-base font-bold sumtab"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Summary
