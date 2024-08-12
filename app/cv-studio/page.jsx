@@ -46,6 +46,7 @@ const CVStudioPage = () => {
         <div className="flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20">
             {cvStudio.map((animation, index) => (
+             <div key={index}>
               <div className="w-[300px] min-h-[300px] rounded-md border">
                 <img
                   src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
@@ -64,6 +65,7 @@ const CVStudioPage = () => {
                     Learn Morwe
                   </Link>
                 </div>
+              </div>
               </div>
             ))}
           </div>
