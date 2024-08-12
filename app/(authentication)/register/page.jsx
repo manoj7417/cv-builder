@@ -148,6 +148,15 @@ export default function Register() {
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md border-2 sm:border-0 shadow-blue-100 shadow-xl  sm:shadow-none  py-12 sm:py-0 px-8 sm:px-0 rounded-2xl">
+          <Link href={"/"} className="flex justify-center items-center mb-[60px]">
+              <Image
+                src="/genies-career-hub-logo.png"
+                width={100}
+                height={100}
+                alt="white_logo"
+                className="w-32 h-auto object-contain"
+              />
+            </Link>
             <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl">
               Sign up
             </h2>
@@ -222,7 +231,7 @@ export default function Register() {
                   >
                     <p>
                       By signing up you are agreeing to our
-                      <a href="#" className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</a>
+                      <Link href="/terms-condition" className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</Link>
                     </p>
                   </label>
                 </div>

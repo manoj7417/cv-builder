@@ -4,6 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { FaRocket, FaCrown } from "react-icons/fa";
 
 import "react-circular-progressbar/dist/styles.css";
+import Link from "next/link";
 
 const tests = {
   NumericalReasoning: {
@@ -945,12 +946,12 @@ const Page = () => {
                 <FaCrown className="mr-2 animate-pulse" />
                 Retake Test
               </button>
-              <a href="/career-counselling">
+              <Link href="/career-counselling">
                 <button className="flex mt-6 items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
                   <FaCrown className="mr-2 animate-pulse" />
                   Career Counselling!
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         )}

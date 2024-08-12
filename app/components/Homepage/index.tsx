@@ -55,7 +55,7 @@ export default function Homepage() {
                       ? "bg-blue-900 text-white border-2 border-transparent"
                       : "bg-white border-2"
                   }`}
-                  href="/resumeAnalyzer-dashboard"
+                  href="/resume-analyzer"
                   onMouseEnter={toggleHover}
                 >
                   CV Analyser

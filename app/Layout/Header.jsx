@@ -64,7 +64,7 @@ const Header = () => {
       >
         <div className="wrapper">
           <div className="logo">
-            <a href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <Image
                 src={"/genies-career-hub-logo.png"}
                 width={100}
@@ -73,7 +73,7 @@ const Header = () => {
                 className="logo-image"
                 priority
               />
-            </a>
+            </Link>
           </div>
           <input type="radio" name="slider" id="menu-btn" />
           <input type="radio" name="slider" id="close-btn" />
@@ -93,8 +93,8 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/resumeAnalyzer-dashboard"
-                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resumeAnalyzer-dashboard")}`}
+                href="/resume-analyzer"
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume-analyzer")}`}
                 prefetch={false}
               >
                 CV Optimiser
@@ -103,8 +103,8 @@ const Header = () => {
             {/* FeedBack  */}
             <li>
               <Link
-                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/jobCV")}`}
-                href="/jobCV"
+                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/job-cv")}`}
+                href="/job-cv"
                 prefetch={false}
               >
                 CV Match

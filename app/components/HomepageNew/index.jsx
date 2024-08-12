@@ -131,7 +131,7 @@ export default function HomepageNew() {
             />
           </div> */}
           <div className="flex lg:flex-row flex-col gap-5 items-center 2xl:max-w-7xl lg:max-w-6xl mx-auto 2xl:mt-10 lg:mt-5">
-            <div className="text-start">
+            <div className="lg:text-start text-center">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[70px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 text-start">
                 Super Charge Your <span className="text-blue-700">Career</span>{" "}
                 Potential
@@ -150,13 +150,13 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-            <div className="mx-auto">
+            <div className="2xl:w-[500px] 2xl:h-[500px] lg:w-[400px] lg:h-[400px] w-full h-full mx-auto">
               <Image
                 src="/v1.png"
                 alt="home-creative-down"
                 height={400}
                 width={450}
-                className="w-auto h-auto object-contain"
+                className="w-full h-auto object-contain"
               />
             </div>
           </div>

@@ -20,10 +20,12 @@ import pdfToText from "react-pdftotext";
 import { GetTokens } from "../actions";
 import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
-import animation from "@/public/animations/JobCVLoader.json";
+// import animation from "@/public/animations/job-cvLoader.json";
+import animation from "@/public/animations/JobCVLoader.json"
 import CountUp from "react-countup";
 import axios from "axios";
 import { ResumeHeader } from "../Layout/ResumeHeader";
+import Link from "next/link";
 
 
 
@@ -198,7 +200,7 @@ export default function Home() {
         setIsGeneratingResume(true);
         const { accessToken } = await GetTokens();
         if (!accessToken) {
-          router.push("/login?redirect=/jobCV");
+          router.push("/login?redirect=/job-cv");
           return;
         }
         const response = await fetchBetterResume(text, accessToken);
@@ -238,7 +240,7 @@ export default function Home() {
     }
     const { accessToken } = await GetTokens();
     if (!accessToken) {
-      router.push("/login?redirect=/jobCV");
+      router.push("/login?redirect=/job-cv");
       return;
     }
     setShowDialog(true);
@@ -423,7 +425,7 @@ export default function Home() {
                   Expert Advice, Anytime, Anywhere!
                 </h2>
                 <button className="bg-blue-900 text-white px-4 py-2 rounded text-sm">
-                  <a href="/contact-us">Work With Coach</a>
+                  <Link href="/contact-us">Work With Coach</Link>
                 </button>
               </div>
               <div className="flex flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl gap-5">

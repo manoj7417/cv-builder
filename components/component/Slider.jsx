@@ -257,7 +257,7 @@ export default function Slider() {
               slidesPerView={1}
               spaceBetween={20}
               centeredSlides={true}
-              autoplay={{ delay: 7000, disableOnInteraction: false }}
+              autoplay={{ delay: 9000, disableOnInteraction: false }}
               pagination={{ clickable: true, dynamicBullets: true }}
               navigation={false}
               loop={true}

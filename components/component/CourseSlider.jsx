@@ -45,14 +45,14 @@ export default function CourseSlider() {
       stepHeading: "CV Optimiser",
       stepDetails:
         "Is your CV optimised for the job you are dreaming of? Analyse, optimise and enhance your resume with our Genies Pro CV Optimiser and stand out in the competitive job market. Ensure that your CV passes through every Application Tracking Software ATS Resume Checker and impresses the employer. Run it through the analyser and optimise it with the AI’s recommendations to match the exact requirements of the desired job profile.",
-      link: "/resumeAnalyzer-dashboard",
+      link: "/resume-analyzer",
     },
     {
       id: 3,
       stepHeading: "CV Match",
       stepDetails:
         "Searching for the exact CV that matches the job profile and description? Get the perfect curriculum vitae template crafted for the Job you are applying for with the power of Artificial Intelligence. Discover the strength of a CV that is precisely tailored to the Job Role you are aiming for. Simply share your requirements and let the Genies Pro CV Match find the best resumes that reflect your skills and purpose.",
-      link: "/jobCV",
+      link: "/job-cv",
     },
   ];
 

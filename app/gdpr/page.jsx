@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 const Page = () => {
@@ -153,12 +154,12 @@ const Page = () => {
               reasonable step to ensure that your wishes are met in a timely and
               respectful method. If you wish to exercise any of these liberties,
               please contact our Data Protection Team at{" "}
-              <a
+              <Link
                 href="mailto:support@geniescareerhub.com"
                 className="text-blue-500 hover:underline"
               >
                 support@geniescareerhub.com
-              </a>
+              </Link>
               .
             </p>
           </section>
@@ -253,12 +254,12 @@ const Page = () => {
               rights, taking every reasonable measure to meet them quickly and
               in an ethical manner. If you wish to exercise any of your rights,
               please reach out to our Data Protection Officer via{" "}
-              <a
+              <Link
                 href="mailto:support@geniescareerhub.com"
                 className="text-blue-500 hover:underline"
               >
                 support@geniescareerhub.com
-              </a>{" "}
+              </Link>{" "}
               and they will assist you.
             </p>
           </section>

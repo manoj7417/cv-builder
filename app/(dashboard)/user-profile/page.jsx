@@ -123,7 +123,6 @@ const ProfilePage = () => {
         updateUserData(userdata);
         setPreviewImage(userdata.profilePicture);
         reset(userdata);
-
         await SetTokens({
           accessToken: newAccessToken,
           refreshToken: newRefreshToken,
@@ -691,11 +690,11 @@ const ProfilePage = () => {
               popupData?.map((val, index) => (
                 <div className="summary_cards relative" key={index}>
                   <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
-                    <a href="#">
+                    <div>
                       <h5 className="mb-2 text-lg sm:text-xl font-bold text-gray-900">
                         User Summary
                       </h5>
-                    </a>
+                    </div>
                     <p className="mb-3 font-normal text-sm text-gray-700">
                       Interests: {val.summary.interests.slice(0, 100)}
                     </p>
