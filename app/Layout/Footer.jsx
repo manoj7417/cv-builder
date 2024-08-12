@@ -241,7 +241,7 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-black">
-            &copy; 2024. Genies Career Hub. All rights reserved.
+            &copy; 2024. <Link href={"https://www.glassfrogtech.com/"} target="_blank" className="hover:underline">Glassfrog Technologies</Link>. All rights reserved.
           </p>
         </div>
       </footer>
