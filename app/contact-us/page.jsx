@@ -17,6 +17,12 @@ const locations = [
     timings: "Mon-Sat 9am to 5pm.",
     address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
     contactNo: "0203 476 7492"
+  },
+  {
+    title: "India office",
+    timings: "Mon-Sat 9am to 5pm.",
+    address: "​​Jumpstart Tower, 2nd floor, Haridwar Bypass Rd, opp. Nilaya Hills, Saraswati Vihar, Ajabpur Kalan, Dehradun, Uttarakhand 248001.",
+    contactNo: "9084712325"
   }
 ];
 

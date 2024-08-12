@@ -11,7 +11,6 @@ import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 
 const menuItems = [
- 
   {
     name: "CV Studio",
     href: "/resume",
@@ -31,7 +30,7 @@ const menuItems = [
   {
     name: "Career Coaching",
     href: "/coming-soon",
-  }
+  },
 ];
 
 export function ResumeHeader() {

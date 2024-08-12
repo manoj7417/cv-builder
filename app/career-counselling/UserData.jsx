@@ -2,22 +2,17 @@
 import { useEffect, useState } from "react";
 import { getCareerCounselling } from "../api/api";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CustomLoader from "../ui/CustomLoader";
 import Image from "next/image";
 import { GetTokens } from "../actions";
-import { DialogTitle } from "@radix-ui/react-dialog";
 import { useUserDataStore } from "@/app/store/useUserDataStore";
 import { Button } from "@/components/ui/button";
 
 export default function UserData() {
   const [isValid, setIsValid] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const [openQuestion, setOpenQuestion] = useState(null); // Track open question
 
   const {
     bioData,
@@ -29,94 +24,16 @@ export default function UserData() {
     setAnswers,
     resetSteps,
     setContentType,
-    resetData
+    resetData,
   } = useUserDataStore();
 
-
-
-
-
   const categories = Object.keys(bioData);
-
-
-  const transformApiResponse = (apiResponse) => {
-    // Initialize an empty object to store transformed data
-    const transformedResponse = {};
-
-    // Define the categories and their corresponding keys in the API response
-    const categories = [
-      {
-        key: "Career Aptitude Assessment",
-        possibleKeys: ["Career Aptitude Assessment"],
-      },
-      {
-        key: "Interest Inventory",
-        possibleKeys: [
-          "Interest Inventory (RIASEC - Holland Codes)",
-          "Interest Inventory",
-        ],
-      },
-      {
-        key: "Personality Assessment",
-        possibleKeys: [
-          "Personality Assessment (Big Five - OCEAN)",
-          "Personality Assessment",
-        ],
-      },
-      {
-        key: "Values and Motivations",
-        possibleKeys: ["Values and Motivations"],
-      },
-    ];
-
-    // Check if apiResponse and apiResponse.data exist
-    if (apiResponse && apiResponse.data) {
-      // Process each category
-      categories.forEach(({ key, possibleKeys }) => {
-        // Find the first matching key in apiResponse.data
-        const foundKey = possibleKeys.find(
-          (apiKey) => apiKey in apiResponse.data
-        );
-
-        if (foundKey && Array.isArray(apiResponse.data[foundKey])) {
-          transformedResponse[key] = apiResponse.data[foundKey].map((q) => ({
-            question: q.question,
-            options: q.options || [],
-            answer: "",
-            type: q.type,
-          }));
-        } else {
-          // Handle case where category is missing or not an array
-          transformedResponse[key] = [];
-        }
-      });
-    } else {
-      // Handle case where apiResponse or apiResponse.data is undefined or null
-      console.error("API response or its data is undefined or null.");
-      // Optionally throw an error or return a default transformedResponse
-    }
-
-    return transformedResponse;
-  };
-
-  // const handleInputChange = (category, questionIndex, newAnswer) => {
-  //   setBioData((prevAnswers) => {
-  //     const updatedCategory = prevAnswers[category].map((q, i) =>
-  //       i === questionIndex ? { ...q, answer: newAnswer } : q
-  //     );
-  //     return {
-  //       ...prevAnswers,
-  //       [category]: updatedCategory,
-  //     };
-  //   });
-  // };
 
   const handleInputChange = (category, questionIndex, newAnswer) => {
     setBioData(category, questionIndex, newAnswer);
   };
 
   const handleNext = () => {
-    window.scrollTo(0, 0);
     if (
       bioData[categories[currentStep]].every(
         (questionObj) => questionObj.answer.trim() !== ""
@@ -124,7 +41,8 @@ export default function UserData() {
     ) {
       setIsValid(false);
       nextStep();
-      // setCurrentStep((prevStep) => prevStep + 1);
+      setOpenQuestion(null); // Close any open question when moving to next step
+      window.scrollTo(0, 0);
     } else {
       setIsValid(true);
     }
@@ -133,7 +51,7 @@ export default function UserData() {
   const handlePrevious = () => {
     setIsValid(false);
     previousStep();
-    // setCurrentStep((prevStep) => prevStep - 1);
+    setOpenQuestion(null); // Close any open question when moving to previous step
   };
 
   const handleSubmit = async () => {
@@ -147,10 +65,10 @@ export default function UserData() {
         const { accessToken } = await GetTokens();
         const token = accessToken.value;
         const data = await getCareerCounselling(bioData, token);
-        const answerData = data?.data
+        const answerData = data?.data;
         setAnswers(answerData);
-        setContentType('generateQuestions')
-        resetSteps()
+        setContentType("generateQuestions");
+        resetSteps();
       } catch (error) {
         console.error("Error submitting form:", error);
       } finally {
@@ -161,8 +79,8 @@ export default function UserData() {
     }
   };
 
-  const handleClose = () => {
-    setShowDialog(false);
+  const toggleQuestion = (index) => {
+    setOpenQuestion(openQuestion === index ? null : index);
   };
 
   useEffect(() => {
@@ -177,7 +95,7 @@ export default function UserData() {
             <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
               <div className="ai-image">
                 <Image
-                  src="/aipowered2.gif"
+                  src="/testpopup.png"
                   width={500}
                   height={500}
                   alt="ai"
@@ -185,10 +103,17 @@ export default function UserData() {
                 />
               </div>
               <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                <Image src="/testtimer.png" width={80} height={100} alt="ai" />
                 <p className="text-center mx-auto text-xl">
-                  Please wait for a moment... <br /> while we are
-                  generating the personalised test based on your
-                  input.
+                  <span className="text-[#FC0000] font-semibold">
+                    {" "}
+                    Please wait for a moment...{" "}
+                  </span>
+                  <br />{" "}
+                  <span className="text-[#1E3A8A] font-semibold">
+                    While we are generating the personalised test based on your
+                    input...
+                  </span>
                 </p>
                 <CustomLoader />
               </div>
@@ -196,38 +121,61 @@ export default function UserData() {
           </div>
         </DialogContent>
       </Dialog>
-      <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 ">
+      <section className="flex flex-col flex-1 gap-6 overflow-y-auto  sm:px-6 ">
         <div className="space-y-4">
-          <h2 className="text-4xl font-semibold">{categories[currentStep]}</h2>
+          <h2 className="text-4xl text-[#1E3A8A] font-bold">
+            {categories[currentStep]}
+          </h2>
+          <p className="font-semibold">
+            Please follow these instructions to provide answers to the
+            questionnaire:
+          </p>
           {bioData[categories[currentStep]].map((questionObj, quesIndex) => (
-            <div key={quesIndex} className="space-y-2">
-              <label className="block text-sm font-medium">
-                {questionObj.question}
-              </label>
-              {questionObj.type === "input" && (
-                <Textarea
-                  required
-                  value={questionObj.answer}
-                  onChange={(e) =>
-                    handleInputChange(
-                      categories[currentStep],
-                      quesIndex,
-                      e.target.value
-                    )
-                  }
-                  placeholder="Type your answer here..."
-                  className="w-full resize-none"
-                />
-              )}
+            <div
+              key={quesIndex}
+              className="space-y-2 border border-[#00000030] p-5 rounded-[17px]"
+            >
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={() => toggleQuestion(quesIndex)}
+              >
+                <div className="w-[90%]">
+                  <h3 className="text-lg  text-[#1E3A8A] font-bold">
+                    {questionObj.question}
+                  </h3>
+                </div>
+                <div className="md:w-[10%]  flex justify-center">
+                  <img src="/testarrow.png" className="h-8 md:h-12" />
+                </div>
+              </div>
               {isValid && questionObj.answer.trim() === "" && (
                 <p className="text-red-500 text-sm">
                   Please provide an answer.
                 </p>
               )}
+              {openQuestion === quesIndex && (
+                <>
+                  {questionObj.type === "input" && (
+                    <Textarea
+                      required
+                      value={questionObj.answer}
+                      onChange={(e) =>
+                        handleInputChange(
+                          categories[currentStep],
+                          quesIndex,
+                          e.target.value
+                        )
+                      }
+                      placeholder="Type your answer here..."
+                      className="w-full resize-none"
+                    />
+                  )}
+                </>
+              )}
             </div>
           ))}
         </div>
-        <div className="flex justify-between p-4">
+        <div className="flex justify-between p-4 items-center">
           <div>
             <Button onClick={() => resetData()}>Cancel</Button>
           </div>
@@ -235,16 +183,16 @@ export default function UserData() {
             <button
               onClick={handlePrevious}
               disabled={currentStep === 0}
-              className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50 mr-3"
+              className=" px-4 py-2 rounded disabled:opacity-50 mr-3"
             >
-              Previous
+              <img src="/prevarrow.png" className="h-12 " />
             </button>
             {currentStep < categories.length - 1 ? (
               <button
                 onClick={handleNext}
-                className="bg-blue-900 text-white px-4 py-2 rounded"
+                className=" text-white px-4 py-2 rounded"
               >
-                Next
+                <img src="/nextarrow.png" className="h-12 " />
               </button>
             ) : (
               <>
@@ -257,7 +205,6 @@ export default function UserData() {
               </>
             )}
           </div>
-
         </div>
       </section>
     </>
