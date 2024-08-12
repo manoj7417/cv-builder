@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaCamera, FaRegEdit } from "react-icons/fa";
 import { useUserStore } from "@/app/store/UserStore";
+
 import { useForm } from "react-hook-form";
 import { uploadImage, updateUserProfile } from "@/app/api/api";
 import { GetTokens, SetTokens } from "@/app/actions";
@@ -33,7 +34,8 @@ const ProfilePage = () => {
     userState: state.userState,
     updateUserData: state.updateUserData,
   }));
-  const userdata = userState?.userdata || {};
+
+  // const userdata = userState?.userdata || {};
   // const [previewImage, setPreviewImage] = useState(
   //   userdata?.profilePicture || "https://via.placeholder.com/150"
   // );
@@ -58,11 +60,11 @@ const ProfilePage = () => {
   const fileUploadRef = useRef(null);
   const [showEmailDialog, setShowEmailDialog] = useState(false);
 
-
   /**************************** */
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const userdata = userState?.userdata || {};
 
   /******************************* */
 
@@ -469,8 +471,12 @@ const ProfilePage = () => {
                           onChange={handleImageChange}
                           className="mx-auto mb-4 hidden"
                         />
-                        {loading && <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>} 
-                        
+                        {loading && (
+                          <svg
+                            class="animate-spin h-5 w-5 mr-3 ..."
+                            viewBox="0 0 24 24"
+                          ></svg>
+                        )}
                       </div>
                     )}
                   </div>
@@ -517,6 +523,7 @@ const ProfilePage = () => {
                     <div className="w-full sm:w-1/3">
                       <p className="font-semibold text-base">Full Name</p>
                     </div>
+
                     <div className="w-full sm:w-2/3">
                       <div className="mt-2">
                         {isEditable ? (
@@ -531,6 +538,19 @@ const ProfilePage = () => {
                         ) : (
                           <p className="text-gray-500">{userdata?.fullname}</p>
                         )}
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="flex flex-wrap my-3 items-center">
+                    <div className="w-full sm:w-1/3">
+                      <p className="font-semibold text-base">Plan</p>
+                    </div>
+                    <div className="w-full sm:w-2/3">
+                      <div className="mt-2">
+                        <p className="text-gray-500">
+                          {userdata?.subscription?.plan}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -596,20 +616,22 @@ const ProfilePage = () => {
             </div>
           </form>
         </div>
-      </section >
-      <section className="w-full py-10 px-20">
-        <h1 className="text-blue-950 text-4xl font-medium">CV Analyser History</h1>
+      </section>
+      <section className="w-full py-10 px-12">
+        <h1 className="text-blue-950 text-4xl font-medium">
+          CV Analyser History
+        </h1>
         <div className="flex flex-wrap">
           {loading ? (
             Array(5)
               .fill()
               .map((_, index) => (
-                <div className="lg:w-[350px] w-full mr-10 my-4 flex-1" key={index}>
+                <div className="lg:w-[350px] w-full  my-4 flex-1" key={index}>
                   <Skeleton width="100%" height={200} />
                 </div>
               ))
           ) : analysisData.length === 0 ? (
-            <div className="lg:w-[350px] w-full mr-10 my-4">
+            <div className="lg:w-[350px] w-full  my-4">
               <Card className="w-full h-[200px] flex items-center justify-center">
                 <span>No analyzer data yet</span>
               </Card>
@@ -667,22 +689,25 @@ const ProfilePage = () => {
           )}
         </div>
       </section>
-      <section className="w-full h-full py-10 px-20">
+      <section className="w-full h-full py-10 px-12">
         <h1 className="text-blue-950 lg:text-4xl text-xl py-5 font-medium">
           Psychometric Test Summary
         </h1>
         <div className="summary_cards_wrapper">
-          <div className="grid grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-10">
             {loading ? (
               Array(5)
                 .fill()
                 .map((_, index) => (
-                  <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                  <div
+                    className="w-full md:w-[350px] mr-0 md:mr-10 my-4 flex-1"
+                    key={index}
+                  >
                     <Skeleton width="100%" height={200} />
                   </div>
                 ))
             ) : popupData?.length === 0 ? (
-              <div className="w-[350px] mr-10 my-4">
+              <div className="w-full md:w-[350px] mr-0 md:mr-10 my-4">
                 <Card className="w-full h-[200px] flex items-center justify-center">
                   <span>No Test Summary data yet</span>
                 </Card>
@@ -690,7 +715,7 @@ const ProfilePage = () => {
             ) : (
               popupData?.map((val, index) => (
                 <div className="summary_cards relative" key={index}>
-                  <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+                  <div className="w-full md:w-[250px] p-4 sm:p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                     <a href="#">
                       <h5 className="mb-2 text-lg sm:text-xl font-bold text-gray-900">
                         User Summary

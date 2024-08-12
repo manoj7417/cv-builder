@@ -29,7 +29,12 @@ export default function Page() {
   const [cardData, setCardData] = useState(null);
   const [testSummary, setTestSummary] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [startingTest, setStartingTest] = useState(false)
+  const [startingTest, setStartingTest] = useState(false);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   const {
     answers,
     setAnswers,
@@ -170,9 +175,9 @@ export default function Page() {
     try {
       const response = await axios.get("/api/checkEligibility", {
         headers: {
-          Authorization: 'Bearer ' + token
-        }
-      })
+          Authorization: "Bearer " + token,
+        },
+      });
 
       if (response.status === 200) {
         setContentType("userData");
@@ -181,7 +186,7 @@ export default function Page() {
       console.log(error.response.status === 403);
       error.response.status === 403 && router.push("/pricing");
     } finally {
-      setStartingTest(false)
+      setStartingTest(false);
     }
   };
 
@@ -213,67 +218,94 @@ export default function Page() {
                         className="mt-6 bg-blue-900 text-white px-10 py-2 rounded"
                         disabled={startingTest}
                       >
-                        {startingTest ? <>
-                          Starting test <ImSpinner3 className="w-3 h-3 ml-1 animate-spin"/>
-                        </> : "Start Test"}
+                        {startingTest ? (
+                          <>
+                            Starting test{" "}
+                            <ImSpinner3 className="w-3 h-3 ml-1 animate-spin" />
+                          </>
+                        ) : (
+                          "Start Test"
+                        )}
                       </Button>
                     </div>
                   </div>
                 )}
                 {contentType === "userData" && <UserData />}
                 {contentType === "generateQuestions" && (
-                  <section className="flex flex-col flex-1 gap-6 overflow-y-auto px-4 sm:px-6 ">
+                  <section className="flex flex-col flex-1 gap-6 overflow-y-auto  sm:px-6 ">
                     <div className="space-y-4">
-                      <h2 className="text-4xl font-semibold">
+                      <h2 className="text-4xl font-semibold text-[#1E3A8A]">
                         {categories[currentStep]}
                       </h2>
+                      <p className="font-semibold">
+                        Please follow these instructions to provide answers to
+                        the questionnaire:
+                      </p>
                       {answers[categories[currentStep]].map(
                         (questionObj, quesIndex) => (
-                          <div key={quesIndex} className="space-y-2">
-                            <label className="block text-sm font-medium">
-                              {questionObj.question}
-                            </label>
-                            {questionObj.type === "input" ? (
-                              <Textarea
-                                required
-                                value={questionObj.answer}
-                                onChange={(e) =>
-                                  handleInputChange(
-                                    categories[currentStep],
-                                    quesIndex,
-                                    e.target.value
-                                  )
-                                }
-                                placeholder="Type your answer here..."
-                                className="w-full resize-none"
-                              />
-                            ) : (
-                              <div className="space-y-2">
-                                {questionObj.options.map(
-                                  (option, optionIndex) => (
-                                    <div key={optionIndex}>
-                                      <label className="flex items-center space-x-3">
-                                        <input
-                                          type="radio"
-                                          name={`question-${quesIndex}`}
-                                          value={option}
-                                          required
-                                          checked={
-                                            questionObj.answer === option
-                                          }
-                                          onChange={(e) =>
-                                            handleInputChange(
-                                              categories[currentStep],
-                                              quesIndex,
-                                              e.target.value
-                                            )
-                                          }
-                                          className="text-2xl circle-outer accent-blue-700 cursor-pointer"
-                                        />
-                                        <span>{option}</span>
-                                      </label>
-                                    </div>
-                                  )
+                          <div
+                            key={quesIndex}
+                            className="border border-gray-300 rounded-md mb-2"
+                          >
+                            <div
+                              className="cursor-pointer p-4 flex  items-center  font-semibold text-gray-700"
+                              onClick={() => toggleAccordion(quesIndex)}
+                            >
+                              <div className="w-[90%]">
+                                {questionObj.question}
+                              </div>
+                              <div className="md:w-[10%]  flex justify-center">
+                                <img
+                                  src="/testarrow.png"
+                                  className="h-8 md:h-12"
+                                />
+                              </div>
+                            </div>
+                            {openIndex === quesIndex && (
+                              <div className="p-4">
+                                {questionObj.type === "input" ? (
+                                  <Textarea
+                                    required
+                                    value={questionObj.answer}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        categories[currentStep],
+                                        quesIndex,
+                                        e.target.value
+                                      )
+                                    }
+                                    placeholder="Type your answer here..."
+                                    className="w-full resize-none"
+                                  />
+                                ) : (
+                                  <div className="space-y-2">
+                                    {questionObj.options.map(
+                                      (option, optionIndex) => (
+                                        <div key={optionIndex}>
+                                          <label className="flex items-center space-x-3">
+                                            <input
+                                              type="radio"
+                                              name={`question-${quesIndex}`}
+                                              value={option}
+                                              required
+                                              checked={
+                                                questionObj.answer === option
+                                              }
+                                              onChange={(e) =>
+                                                handleInputChange(
+                                                  categories[currentStep],
+                                                  quesIndex,
+                                                  e.target.value
+                                                )
+                                              }
+                                              className="text-2xl circle-outer accent-blue-700 cursor-pointer"
+                                            />
+                                            <span>{option}</span>
+                                          </label>
+                                        </div>
+                                      )
+                                    )}
+                                  </div>
                                 )}
                               </div>
                             )}
@@ -302,16 +334,16 @@ export default function Page() {
                         <button
                           onClick={handlePrevious}
                           disabled={currentStep === 0}
-                          className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
+                          className=" px-4 py-2 rounded disabled:opacity-50"
                         >
-                          Previous
+                          <img src="/prevarrow.png" className="h-12 " />
                         </button>
                         {currentStep < categories.length - 1 ? (
                           <button
                             onClick={handleNext}
-                            className="bg-blue-950 text-white px-4 py-2 rounded"
+                            className=" text-white px-4 py-2 rounded"
                           >
-                            Next
+                            <img src="/nextarrow.png" className="h-12 " />
                           </button>
                         ) : (
                           <>
@@ -330,7 +362,7 @@ export default function Page() {
                                     <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
                                       <div className="ai-image">
                                         <Image
-                                          src="/aipowered2.gif"
+                                          src="/testpopup.png"
                                           width={500}
                                           height={500}
                                           alt="ai"
@@ -338,10 +370,24 @@ export default function Page() {
                                         />
                                       </div>
                                       <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                                        <Image
+                                          src="/testtimer.png"
+                                          width={80}
+                                          height={100}
+                                          alt="ai"
+                                        />
+
                                         <p className="text-center mx-auto text-xl">
-                                          Please wait for a moment... <br />{" "}
-                                          while we are generating summary for
-                                          this test.
+                                          <span className="text-[#FC0000] font-semibold">
+                                            {" "}
+                                            Please wait for a moment...{" "}
+                                          </span>
+                                          <br />{" "}
+                                          <span className="text-[#1E3A8A] font-semibold">
+                                            While we are generating the
+                                            personalised test based on your
+                                            input...
+                                          </span>
                                         </p>
                                         <CustomLoader />
                                       </div>
@@ -358,58 +404,71 @@ export default function Page() {
                 )}
                 {(contentType === "userData" ||
                   contentType === "generateQuestions") && (
-                    <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
-                      <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
-                        <CardHeader className="">
-                          <h1 className="xl:text-4xl text-2xl font-bold text-blue-950">
-                            Career Counselor Steps
-                          </h1>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="flex justify-center items-center flex-1 w-full h-full">
-                            <div>
-                              <p className="my-4 font-medium text-center">
-                                Please follow these instructions to provide
-                                answers to the questionnaire:
-                              </p>
-                              <ul className="list-disc pl-6">
-                                <li className="mb-2 py-2 flex items-center font-medium">
-                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                  <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
+                    <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
+                      <img src="/teststep.png" className="h-48" />
+                      <CardHeader className="">
+                        <h1 className="xl:text-3xl text-2xl text-center font-bold text-blue-950">
+                          Career Counselor Steps
+                        </h1>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex justify-center items-center flex-1 w-full h-full">
+                          <div>
+                            <p className="font-medium text-center">
+                              Please follow these instructions to provide
+                              answers to the questionnaire:
+                            </p>
+                            <ul className="list-disc pl-6">
+                              <li className="mb-2 py-2 flex  font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                <span>
                                   Click on{" "}
                                   <span className="font-bold mx-1">Start</span>
                                   to start the quiz.
-                                </li>
-                                <li className="mb-2 py-2 flex items-center font-medium">
-                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                </span>
+                              </li>
+                              <li className="mb-2 py-2 flex  font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                <span>
                                   Click on{" "}
                                   <span className="font-bold mx-1">Next</span>
                                   to move to the next question.
-                                </li>
-                                <li className="mb-2 py-2 flex items-center font-medium">
-                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                </span>
+                              </li>
+                              <li className="mb-2 py-2 flex  font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                <span>
                                   Click on
                                   <span className="font-bold mx-1">
                                     Previous
                                   </span>{" "}
                                   to go back to the previous question.
-                                </li>
-                                <li className="mb-2 py-2 flex items-center font-medium">
-                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                </span>
+                              </li>
+                              <li className="mb-2 py-2 flex  font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                <span>
                                   Fill in your answers in the text area provided
                                   for each question.
-                                </li>
-                                <li className="mb-2 py-2 flex items-center font-medium">
-                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                </span>
+                              </li>
+                              <li className="mb-2 py-2 flex  font-medium">
+                                <TiTick className="text-green-500 text-2xl mr-2" />
+                                <span>
                                   Once you have answered all questions, click on
-                                  <span className="font-bold mx-1">Submit.</span>
-                                </li>
-                              </ul>
-                            </div>
+                                  <span className="font-bold mx-1">
+                                    Submit.
+                                  </span>
+                                </span>
+                              </li>
+                            </ul>
                           </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
               </div>
             </main>
           </div>
@@ -438,7 +497,7 @@ export default function Page() {
             ) : (
               popupData?.map((val, index) => (
                 <div className="summary_cards relative" key={index}>
-                  <div className="max-w-2xl w-[250px] p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+                  <div className="max-w-2xl  p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
                     <a href="#">
                       <h5 className="mb-2 text-xl font-bold text-gray-900">
                         User Summary
@@ -508,7 +567,7 @@ export default function Page() {
                     className="w-full py-5"
                     defaultValue="actionableInsights"
                   >
-                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto">
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto bg-[#1e3a8a78] rounded-full">
                       <TabsTrigger
                         value="actionableInsights"
                         className=" text-blue-950 rounded-md text-base"
@@ -534,13 +593,13 @@ export default function Page() {
                     <TabsContent value="actionableInsights" className="mb-4">
                       <div className="actions_section max-w-4xl mx-auto">
                         <div>
-                          <h2 className="text-xl font-bold mb-6 text-blue-950">
+                          <h2 className="text-xl font-bold mb-6 text-[#FC0000]">
                             Actionable Insights
                           </h2>
                           <ul className="space-y-3 text-sm">
                             {Object.entries(cardData?.actionableInsights).map(
                               ([key, value], idx) => (
-                                <li key={idx}>
+                                <li key={idx} className="text-[#1E3A8A]">
                                   <strong>
                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                     :
@@ -556,13 +615,16 @@ export default function Page() {
                     <TabsContent className="mb-6" value="careerSuggestions">
                       <div className="career_section max-w-4xl mx-auto">
                         <div className="space-y-3">
-                          <h2 className="text-xl font-bold text-blue-950 flex items-center gap-3">
+                          <h2 className="text-xl font-bold text-[#FC0000] flex items-center gap-3">
                             Career Suggestions
                           </h2>
                           <ul className="space-y-3 text-sm">
                             {cardData?.careerSuggestions?.map(
                               (career, index) => (
-                                <li key={index} className="py-2 space-y-2">
+                                <li
+                                  key={index}
+                                  className="py-2 space-y-2 text-[#1E3A8A]"
+                                >
                                   <strong>Career:</strong> {career.career}
                                   <br />
                                   <strong>Reason:</strong> {career.reason}
@@ -578,13 +640,13 @@ export default function Page() {
                     <TabsContent className="mb-6" value="summary">
                       <div className="max-w-4xl mx-auto summary_section">
                         <div>
-                          <h2 className="text-xl font-bold mb-6 text-blue-950">
+                          <h2 className="text-xl font-bold mb-6 text-[#FC0000]">
                             Summary
                           </h2>
                           <ul className="space-y-3 text-sm">
                             {Object.entries(cardData?.summary).map(
                               ([key, value], idx) => (
-                                <li key={idx}>
+                                <li key={idx} className="text-[#1E3A8A]">
                                   <strong>
                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                     :
