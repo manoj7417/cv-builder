@@ -9,11 +9,11 @@ const WorkTogether = () => {
       <div className="bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 place-items-center py-10">
           <div className="work-content lg:px-2 px-10">
-            <h2 className="text-black lg:text-5xl text-2xl font-bold">
+            <h2 className="text-black lg:text-5xl text-2xl font-bold text-center sm:text-center md:text-left lg:text-left xl:text-left 2xl:text-left">
               Connect with Us,
               <br /> Join the Community
             </h2>
-            <p className="text-sm mt-3 w-3/4 text-[#7C7C7C]">
+            <p className="text-sm mt-3 text-[#7C7C7C] text-center sm:text-center md:text-left lg:text-left xl:text-left 2xl:text-left">
               Is your job helping others to find a job? Connect with Us and
               explore better opportunities as a Career Coach with the Genies
               Career Hub!

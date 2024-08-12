@@ -14,22 +14,22 @@ const getFutureDate = () => {
 // Renderer function for the countdown
 const renderer = ({ days, hours, minutes, seconds }) => {
   return (
-    <ul className="countdown flex space-x-4 text-center justify-center">
+    <ul className="countdown flex space-x-2 sm:space-x-4 text-center justify-center">
       <li className="flex flex-col items-center">
-        <span className="days text-6xl font-bold">{days}</span>
-        <p className="days_ref">days</p>
+        <span className="days text-4xl sm:text-6xl font-bold">{days}</span>
+        <p className="days_ref text-sm sm:text-base">days</p>
       </li>
       <li className="flex flex-col items-center">
-        <span className="hours text-6xl font-bold">{hours}</span>
-        <p className="hours_ref">hours</p>
+        <span className="hours text-4xl sm:text-6xl font-bold">{hours}</span>
+        <p className="hours_ref text-sm sm:text-base">hours</p>
       </li>
       <li className="flex flex-col items-center">
-        <span className="minutes text-6xl font-bold">{minutes}</span>
-        <p className="minutes_ref">minutes</p>
+        <span className="minutes text-4xl sm:text-6xl font-bold">{minutes}</span>
+        <p className="minutes_ref text-sm sm:text-base">minutes</p>
       </li>
       <li className="flex flex-col items-center">
-        <span className="seconds text-6xl font-bold">{seconds}</span>
-        <p className="seconds_ref">seconds</p>
+        <span className="seconds text-4xl sm:text-6xl font-bold">{seconds}</span>
+        <p className="seconds_ref text-sm sm:text-base">seconds</p>
       </li>
     </ul>
   );
@@ -40,19 +40,19 @@ const ComingSoon = () => {
 
   return (
     <div
-      className="wrapper flex h-screen bg-gray-100 mt-16"
+      className="wrapper flex flex-col h-screen bg-gray-100 mt-16 sm:mt-0"
       style={{
         backgroundImage: "url(/coming-soon-bg.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "top",
       }}
     >
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center px-4">
         <div className="text-center">
           <Lottie
             animationData={Countanimation}
             loop={true}
-            style={{ height: "300px", margin: "0 auto" }}
+            style={{ height: "200px", sm: "300px", margin: "0 auto" }}
           />
           <div className="mt-6 text-center">
             <Countdown date={futureDate} renderer={renderer} />

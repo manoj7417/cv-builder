@@ -131,17 +131,17 @@ export default function HomepageNew() {
             />
           </div> */}
           <div className="flex lg:flex-row flex-col gap-5 items-center 2xl:max-w-7xl lg:max-w-6xl mx-auto 2xl:mt-10 lg:mt-5">
-            <div className="text-start">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[70px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 text-start">
+            <div className="text-center sm:text-start md:text-start lg:text-start xl:text-start 2xl:text-start">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[70px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 text-center sm:text-start md:text-start lg:text-start xl:text-start 2xl:text-start">
                 Super Charge Your <span className="text-blue-700">Career</span>{" "}
                 Potential
               </h1>
-              <p className="2xl:w-[50%] lg:w-[60%] w-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-start">
+              <p className="2xl:w-[50%] lg:w-[60%] w-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-center sm:text-start md:text-start lg:text-start xl:text-start 2xl:text-start">
                 We have a passion to mentor you on your entire career path, help
                 you realize what you want to do, how to get into that career,
                 and utilize experts to guide you on how to excel within it.
               </p>
-              <div className="flex justify-start">
+              <div className="flex justify-center items-center sm:justify-start sm:items-start md:justify-start md:items-start lg:justify-start lg:items-start xl:justify-start xl:items-start 2xl:justify-start 2xl:items-start">
                 <button
                   onClick={handleButtonClick}
                   className="bg-blue-950 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300"
@@ -150,13 +150,13 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-            <div className="mx-auto">
+            <div className="2xl:w-[500px] 2xl:h-[500px] lg:w-[400px] lg:h-[400px] w-full h-full mx-auto">
               <Image
                 src="/v1.png"
                 alt="home-creative-down"
                 height={400}
                 width={450}
-                className="w-auto h-auto object-contain"
+                className="w-full h-auto object-contain"
               />
             </div>
           </div>
