@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Slide } from 'react-toastify';
 // import VerifyUser from "@/components/component/VerifyUser";
 
 export const metadata = {
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-         <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(h,o,t,j,a,r){
@@ -81,7 +82,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
           fbq('track', 'PageView');`,
           }}
         />
-      
+
         <noscript>
           <img
             height="1"
@@ -110,7 +111,19 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
         </noscript>
       </head>
       <body className={inter.className}>
-        <ToastContainer />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          transition={Slide}
+        />
         {/* <VerifyUser /> */}
         {children}
       </body>

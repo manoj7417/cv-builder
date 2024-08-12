@@ -415,7 +415,6 @@ export default function DashboardIdea() {
 
   const handleCreateCV = async (template) => {
     const { accessToken } = await GetTokens();
-
     if (!accessToken) {
       toast("Please login to use this template");
       router.push("/login");
@@ -428,7 +427,7 @@ export default function DashboardIdea() {
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
-        router.push("/resume-builder");
+        router.push("/user-history");
       }
     } catch (error) {
       console.log(error);
