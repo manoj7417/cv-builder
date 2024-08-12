@@ -413,8 +413,8 @@ export default function Home() {
           </div>
         </section>
         <section>
-          <div className="container mx-auto py-12 px-4 md:px-32  ">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-6 lg:p-12 rounded-3xl">
+          <div className="container mx-auto py-12 px-4  ">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-6 lg:p-12 rounded-3xl">
               <div className="text-center md:text-left ">
                 <h2
                   className="text-2xl md:text-[2rem] font-bold mb-6"
@@ -428,7 +428,7 @@ export default function Home() {
                   <Link href="/contact-us">Work With Coach</Link>
                 </button>
               </div>
-              <div className="flex flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl gap-5">
+              <div className="flex flex-col sm:flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl gap-5">
                 <div className="text-2xl font-bold text-black mb-6 md:mb-0 text-center">
                   <CountUp start={1} end={200} duration={2} />+
                   <p className="text-lg font-semibold">Templates</p>

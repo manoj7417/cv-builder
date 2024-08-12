@@ -90,43 +90,27 @@ export default function AboutUs() {
       <div className="w-full my-20">
         {/* Hero Section */}
         <div className="relative w-full bg-white">
-          <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-            <div className="flex flex-col justify-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
-              <h1 className="mt-8 text-3xl font-bold -tight text-[#005599] md:text-4xl lg:text-6xl">
+          {/* <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+            <div className="flex flex-col justify-center items-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
+              <h1 className="mt-8 text-3xl font-bold text-center text-[#005599] md:text-4xl lg:text-6xl">
                 We Envisage Your Growth With You!
               </h1>
-              <p className="mt-8 text-lg text-gray-700">
+              <p className="mt-8 text-lg text-center text-gray-700">
                 We aim to be the bridge between you and your progressive career.
                 We dream with you and assist you as strive to achieve every step
                 of success.
               </p>
-              <div className="w-full mt-8">
-                  <Link
-                    href={"/contact-us"}
-                    className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Connect with us!
-                  </Link>
-                </div>
-              {/* <form action="" className="mt-8 flex items-start space-x-2">
-                <div className="w-full">
-                  <input
-                    className="flex w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                    type="email"
-                    placeholder="Enter your email"
-                    id="email"
-                  ></input>
-                </div>
-                <div className=" w-full">
-                  <button
-                    type="button"
-                    className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white hover:text-[#005599] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Connect with us!
-                  </button>
-                </div>
-              </form> */}
+              <div className="w-full mt-8 flex justify-center">
+                <Link
+                  href={"/contact-us"}
+                  className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                >
+                  Connect with us!
+                </Link>
+              </div>
+              
             </div>
+
             <div className="relative lg:col-span-5 lg:-mr-8 xl:col-span-6">
               <img
                 className="aspect-[3/2] bg-gray-50 object-cover lg:aspect-[4/3]  xl:aspect-[16/9]"
@@ -134,11 +118,43 @@ export default function AboutUs() {
                 alt=""
               />
             </div>
-          </div>
+          </div> */}
+       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div className="flex flex-col md:grid md:grid-cols-12 md:gap-x-8">
+    <div className="flex flex-col justify-center items-center px-4 py-12  md:col-span-7 md:gap-x-6 md:px-6 md:py-24 xl:col-span-6">
+      <h1 className="mt-8 text-3xl font-bold text-center sm:text-left md:text-left lg:text-left xl:text-left 2xl:text-left text-[#005599] md:text-4xl lg:text-6xl">
+        We Envisage Your Growth With You!
+      </h1>
+      <p className="mt-8 text-lg text-center sm:text-left md:text-left lg:text-left xl:text-left 2xl:text-left text-gray-700">
+        We aim to be the bridge between you and your progressive career. We
+        dream with you and assist you as strive to achieve every step of
+        success.
+      </p>
+      <div className="w-full mt-8 flex justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start 2xl:justify-start">
+        <Link
+          href={"/contact-us"}
+          className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Connect with us!
+        </Link>
+      </div>
+    </div>
+
+    <div className="relative md:col-span-5 md:-mr-8 xl:col-span-6">
+      <img
+        className="aspect-[3/2] bg-gray-50 object-cover w-full h-auto md:aspect-[4/3] xl:aspect-[16/9]"
+        src="/cgabout.png"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
+
+
         </div>
       </div>
       <section className="py-12 bg-gray-100">
-        <div className="container mx-auto max-w-7xl  lg:gap-x-8 lg:px-8">
+        <div className="container mx-auto max-w-7xl  gap-x-8 px-8 sm:gap-x-8 sm:px-8 md:gap-x-8 md:px-8 lg:gap-x-8 lg:px-8 xl:gap-x-8 xl:px-8 2xl:gap-x-8 2xl:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="acard rounded-lg shadow-md p-6 text-center">
               <div className="w-12 h-12 mx-auto mb-4">
@@ -181,8 +197,7 @@ export default function AboutUs() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                Organisational{" "}
-                <span className="text-black">Connect for </span>
+                Organisational <span className="text-black">Connect for </span>
                 {""}
                 <span className="text-black"> </span>Career Coach
               </h2>
@@ -230,71 +245,73 @@ export default function AboutUs() {
       </section>
       <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-16 lg:pt-20 px-5 relative">
         <div className="max-w-6xl mx-auto  py-10">
-        <div className="flex flex-col md:flex-row items-center gap-4 overflow-hidden">
-  {/* Left Column - Text */}
-  <div className="text-center md:text-left mt-8 md:mt-0">
-    <h2 className="text-xl font-bold text-gray-800">
-      Coaching that is inspired by{" "}
-      <span className="text-black">Experience</span> and{" "}
-      <span className="text-black">Expertise</span>
-    </h2>
-    <p className="mt-4 text-gray-600">
-      Our community of Career Coaches is not only expertly trained in
-      assisting candidates with distinctive professional dreams and
-      aspirations, but also has experience in comprehending different
-      mindsets.
-    </p>
-    <ul className="space-y-2 py-8">
-      <li className="flex items-center justify-center md:justify-start">
-        <svg
-          className="w-6 h-6 text-blue-950 mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-        Coaches with Expertise in a myriad of professional domains.
-      </li>
-      <li className="flex items-center justify-center md:justify-start">
-        <svg
-          className="w-6 h-6 text-blue-950 mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-        Trusted by Students, Professionals, and Employers worldwide.
-      </li>
-    </ul>
-    <div className="flex justify-center md:justify-start gap-2 overflow-hidden">
-      <PercentageCircle percentage={92} label="Clients Satisfaction" />
-      <PercentageCircle percentage={99} label="Instant Support" />
-    </div>
-  </div>
-  {/* Right Column - Image */}
-  <div className="text-center flex justify-center md:justify-start overflow-hidden mt-4 md:mt-0">
-    <img
-      src="/cgabout2.png"
-      alt="Description of the image"
-      className="parallax-image max-w-full h-auto"
-    />
-  </div>
-</div>
-
+          <div className="flex flex-col md:flex-row items-center gap-4 overflow-hidden">
+            {/* Left Column - Text */}
+            <div className="text-center md:text-left mt-8 md:mt-0">
+              <h2 className="text-xl font-bold text-gray-800">
+                Coaching that is inspired by{" "}
+                <span className="text-black">Experience</span> and{" "}
+                <span className="text-black">Expertise</span>
+              </h2>
+              <p className="mt-4 text-gray-600">
+                Our community of Career Coaches is not only expertly trained in
+                assisting candidates with distinctive professional dreams and
+                aspirations, but also has experience in comprehending different
+                mindsets.
+              </p>
+              <ul className="space-y-2 py-8">
+                <li className="flex items-center justify-center md:justify-start">
+                  <svg
+                    className="w-6 h-6 text-blue-950 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Coaches with Expertise in a myriad of professional domains.
+                </li>
+                <li className="flex items-center justify-center md:justify-start">
+                  <svg
+                    className="w-6 h-6 text-blue-950 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Trusted by Students, Professionals, and Employers worldwide.
+                </li>
+              </ul>
+              <div className="flex justify-center md:justify-start gap-2 overflow-hidden">
+                <PercentageCircle
+                  percentage={92}
+                  label="Clients Satisfaction"
+                />
+                <PercentageCircle percentage={99} label="Instant Support" />
+              </div>
+            </div>
+            {/* Right Column - Image */}
+            <div className="text-center flex justify-center md:justify-start overflow-hidden mt-4 md:mt-0">
+              <img
+                src="/cgabout2.png"
+                alt="Description of the image"
+                className="parallax-image max-w-full h-auto"
+              />
+            </div>
+          </div>
         </div>
       </section>
       <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-16 lg:pt-20 px-5 relative">
