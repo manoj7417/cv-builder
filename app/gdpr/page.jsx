@@ -10,12 +10,12 @@ const Page = () => {
         id="free"
       >
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-bold mb-6">
             Genies Career Hub GDPR Privacy Policy
           </h1>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
-            <p className="text-lg mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">Introduction</h2>
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               Welcome to Genies Career Hub, your trusted partner in career
               development. In the latest digital era, your personal data is more
               than just information; it’s a part of your self-identity. That’s
@@ -31,17 +31,17 @@ const Page = () => {
             </p>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Scope of the GDPR Policy
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               This GDPR policy is applicable to all the users of Genies Career
               Hub, including job applicants, employers, and any other
               individuals or associations that employ our services for their
               benefit. It encompasses all personal data processed by us, which
               includes but is not limited to:
             </p>
-            <ul className="list-disc list-inside ml-4 mb-4">
+            <ul className="list-disc list-inside ml-4 mb-4 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               <li>
                 Personal Identification Information: Such as name, date of
                 birth, and government-issued identification numbers.
@@ -71,10 +71,10 @@ const Page = () => {
             </ul>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Management of Consent of the Users
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               At the Genies Career Hub, consent is obtained by specific,
               affirmative measures that display acceptance of the processing of
               personal information. On our website or app, users usually give
@@ -86,15 +86,15 @@ const Page = () => {
             </p>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Information Security
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               Data security is our foremost priority at the Genies Career Hub,
               and we take several organisational and technical safeguards to
               defend personal information, such as:
             </p>
-            <ul className="list-disc list-inside ml-4 mb-4">
+            <ul className="list-disc list-inside ml-4 mb-4 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               <li>
                 Data Encryption Both at Rest and in Transit: Industry-standard
                 protocols are employed to encrypt all data, including data kept
@@ -119,16 +119,16 @@ const Page = () => {
             </ul>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Retention of Inactive Accounts
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               We understand that career paths may take unexpected turns, and
               there may be periods of inactivity on user accounts. Even during
               these times, we handle personal data with care and in compliance
               with GDPR.
             </p>
-            <ul className="list-disc list-inside ml-4 mb-4">
+            <ul className="list-disc list-inside ml-4 mb-4 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               <li>
                 Retention Period: For the accounts that are not active anymore,
                 we preserve confidential data for a period of seven years. This
@@ -149,7 +149,7 @@ const Page = () => {
                 provided personal data.
               </li>
             </ul>
-            <p className="text-lg">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               We are dedicated to upholding these rights and will take every
               reasonable step to ensure that your wishes are met in a timely and
               respectful method. If you wish to exercise any of these liberties,
@@ -164,18 +164,17 @@ const Page = () => {
             </p>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Data Subject Rights at Genies Career Hub
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               As a user of Genies Career Hub, you have specific rights
               pertaining to your personal information, as bestowed by the
               General Data Protection Regulation (GDPR). These rights include:
             </p>
-            <ul className="list-disc list-inside ml-4 mb-4">
-              <li>
-                <strong>The Right to Access:</strong>
-                <ul className="list-disc list-inside ml-4 mb-2">
+            <ul className="list-disc list-inside ml-4 mb-4 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
+            <strong>The Right to Access:</strong>
+                <ul className="list-disc list-inside ml-4 mb-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                   <li>
                     You can request access to your personal data that we keep a
                     track of.
@@ -185,10 +184,10 @@ const Page = () => {
                     information upon request.
                   </li>
                 </ul>
-              </li>
-              <li>
                 <strong>The Right to Rectification:</strong>
-                <ul className="list-disc list-inside ml-4 mb-2">
+             
+                
+                <ul className="list-disc list-inside ml-4 mb-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                   <li>
                     If you believe any personal data we hold about you is not
                     correct or entirely complete, you can request its
@@ -198,10 +197,10 @@ const Page = () => {
                     Contact us if you need any modifications to your data.
                   </li>
                 </ul>
-              </li>
-              <li>
                 <strong>The Right to Erasure (‘Right to be Forgotten’):</strong>
-                <ul className="list-disc list-inside ml-4 mb-2">
+              
+               
+                <ul className="list-disc list-inside ml-4 mb-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                   <li>
                     You can request the deletion of your personal data when it
                     is no longer necessary for us to retain it.
@@ -211,20 +210,20 @@ const Page = () => {
                     legal requirements.
                   </li>
                 </ul>
-              </li>
-              <li>
                 <strong>The Right to Restrict Processing:</strong>
-                <ul className="list-disc list-inside ml-4 mb-2">
+              
+                
+                <ul className="list-disc list-inside ml-4 mb-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                   <li>
                     Under certain conditions, you have the right to ‘block’ or
                     suppress further use of your personal data.
                   </li>
                   <li>Reach out to us if you wish to exercise this right.</li>
                 </ul>
-              </li>
-              <li>
                 <strong>The Right to Data Portability:</strong>
-                <ul className="list-disc list-inside ml-4 mb-2">
+              
+                
+                <ul className="list-disc list-inside ml-4 mb-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                   <li>
                     You have the right to receive your personal data in a
                     structured, commonly used, and machine-readable format.
@@ -234,10 +233,10 @@ const Page = () => {
                     us know and we will facilitate the transfer.
                   </li>
                 </ul>
-              </li>
-              <li>
                 <strong>The Right to Object:</strong>
-                <ul className="list-disc list-inside ml-4 mb-2">
+              
+                
+                <ul className="list-disc list-inside ml-4 mb-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                   <li>
                     If your personal data is processed based on legitimate
                     interests, you have the right to object to such processing.
@@ -247,9 +246,9 @@ const Page = () => {
                     is not processed for such purposes.
                   </li>
                 </ul>
-              </li>
+              
             </ul>
-            <p className="text-lg">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               We respect your preferences and are dedicated to upholding these
               rights, taking every reasonable measure to meet them quickly and
               in an ethical manner. If you wish to exercise any of your rights,
@@ -264,15 +263,15 @@ const Page = () => {
             </p>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Data Sharing and International Transfers
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               At Genies Career Hub, we prioritize data protection and
               transparency. Here is how we handle data sharing, international
               transfers, and safeguarding measures:
             </p>
-            <ul className="list-disc list-inside ml-4 mb-4">
+            <ul className="list-disc list-inside ml-4 mb-4 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               <li>
                 We only share your data when necessary for providing services or
                 as legally mandated (for instance, service providers helping run
@@ -297,11 +296,11 @@ const Page = () => {
             </ul>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Data Security Measures
             </h2>
-            <p className="text-lg mb-4">Protective measures taken include:</p>
-            <ul className="list-disc list-inside ml-4 mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">Protective measures taken include:</p>
+            <ul className="list-disc list-inside ml-4 mb-4 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               <li>Encrypting data both while transmitting and at rest.</li>
               <li>
                 Conducting regular security audits and penetration tests on
@@ -327,18 +326,18 @@ const Page = () => {
             </ul>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               Third-Party Processors
             </h2>
-            <p className="text-lg mb-4">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               GDPR-compliant third-party processors undergo rigorous
               assessments. Our agreements guarantee their adherence to data
               protection standards with regular audits taking place.
             </p>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Policy Reviews</h2>
-            <p className="text-lg mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">Policy Reviews</h2>
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4">
               Our GDPR policy is reviewed every year or when necessary. Users
               are kept up-to-date through website updates and email
               notifications.
