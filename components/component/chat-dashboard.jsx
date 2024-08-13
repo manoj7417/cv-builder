@@ -39,7 +39,7 @@ export function ChatDashboard() {
                       </div>
                     </div>
                   </Link>
-                  <Link href={"/resumeAnalyzer-dashboard"}>
+                  <Link href={"/resume-analyzer"}>
                   <div className="flex items-start gap-4 py-5">
                     <PillIcon className="h-6 w-6  shrink-0 " />
                     <div>

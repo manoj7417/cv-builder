@@ -11,10 +11,9 @@ import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 
 const menuItems = [
-
   {
     name: "CV Studio",
-    href: "/resume",
+    href: "/cv-studio",
   },
   {
     name: "Pricing",
@@ -31,7 +30,7 @@ const menuItems = [
   {
     name: "Career Coaching",
     href: "/coming-soon",
-  }
+  },
 ];
 
 export function ResumeHeader() {
@@ -78,9 +77,10 @@ export function ResumeHeader() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
 
   return (
-    <section className="new_resume_latest z-[1000] fixed" >
+    <section className="new_resume_latest z-[100] fixed" >
       <div className="header_wrapper w-full">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
@@ -108,15 +108,6 @@ export function ResumeHeader() {
               ))}
             </ul>
           </div>
-          {/* <div className="flex grow justify-end">
-            <div className="notification bg-gray-200 rounded-full p-2 relative">
-              <IoNotificationsOutline className="text-xl" />
-              <span className="absolute top-0 right-0 flex h-3 w-3 -mt-1 -mr-1">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-400" />
-              </span>
-            </div>
-          </div> */}
           <div className="ml-2 hidden lg:block">
             {userState?.isAuthenticated ? (
               <div className="relative" ref={dropdownRef}>
@@ -173,42 +164,6 @@ export function ResumeHeader() {
                 </button>
               </div>
             )}
-            {/* <div className="relative" ref={dropdownRef}>
-              <div
-                className="flex items-center bg-gray-200 rounded-full p-1 w-[180px] cursor-pointer"
-                onClick={toggleDropdown}
-              >
-                <span className="relative inline-block">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src="/profile-avatar-img.png"
-                    alt="Dan_Abromov"
-                  />
-                </span>
-                <div className="mx-2">
-                  <div className="text-sm font-medium text-gray-900">
-                    Chloe Milagres
-                  </div>
-                  <div className="text-[10px] text-gray-500">Premium</div>
-                </div>
-              </div>
-
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                  <ul>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                      Profile
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                      CV History
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm" onClick={handleLogout}>
-                      Logout
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div> */}
           </div>
           <div className="ml-2 lg:hidden">
             <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />

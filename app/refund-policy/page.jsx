@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const RefundPolicyPage = () => {
@@ -47,12 +48,12 @@ const RefundPolicyPage = () => {
             <ol className="list-decimal ml-5">
               <li className="text-base my-2">
                 Contact our customer support team at{" "}
-                <a
+                <Link
                   href="mailto:support@geniescareerhub.com"
                   className="text-blue-600 hover:underline"
                 >
                   support@geniescareerhub.com
-                </a>{" "}
+                </Link>{" "}
                 with your refund request and order details.
               </li>
               <li className="text-base my-2">

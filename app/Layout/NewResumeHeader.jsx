@@ -22,8 +22,8 @@ import "./header.css";
 
 const navigation = [
   { name: "CV Creator", href: "/resume", current: true },
-  { name: "CV Optimiser", href: "/resumeAnalyzer-dashboard", current: false },
-  { name: "CV Match", href: "/jobCV", current: false, isBeta: true },
+  { name: "CV Optimiser", href: "/resume-analyzer", current: false },
+  { name: "CV Match", href: "/job-cv", current: false, isBeta: true },
   // {
   //   name: "Career Coaching",
   //   href: "/career-coaching",

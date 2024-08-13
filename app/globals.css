@@ -890,10 +890,10 @@ footer a:hover svg {
   opacity: var(--swiper-pagination-bullet-opacity, 1);
   background: #fff !important;
 }
-
+/* 
 .swiper-pagination-bullet {
-  background: #a1a1aa !important;
-}
+  background: #0d3572  !important;
+} */
 
 @keyframes fadeIn {
   from {
@@ -1152,4 +1152,8 @@ ol>li {
 
 .cv_slider .swiper {
   height: 75%;
+}
+
+.resume_slider  .swiper {
+  height: 450px;
 }

@@ -35,14 +35,14 @@ const GetStartedModal = ({ onClose }) => {
       title: "CV Optimiser",
       description:
         "Analyse your resume with AI and optimise it for your desired Job Profile.",
-      link: "/resumeAnalyzer-dashboard",
+      link: "/resume-analyzer",
     },
     {
       title: "CV Match",
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
       current: false,
-      link: "/jobCV",
+      link: "/job-cv",
     },
   ];
 

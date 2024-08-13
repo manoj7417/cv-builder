@@ -39,7 +39,7 @@ export default function DashboardIdea() {
     const { accessToken } = await GetTokens();
     if (!accessToken) {
       toast("Please login to use this template");
-      return router.push("/login?redirect=/resumeAnalyzer-dashboard");
+      return router.push("/login?redirect=/resume-analyzer");
     }
     if (userState.userdata.subscription.status !== "Active") {
       return router.push("/pricing");

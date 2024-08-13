@@ -11,3 +11,7 @@
 input[type=radio] .circle-outer {
     accent-color: #FF0000 !important;
 }
+.sumtab{
+        background: none !important;
+            box-shadow: none !important;
+}
