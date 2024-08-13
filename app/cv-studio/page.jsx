@@ -70,7 +70,7 @@ const CVStudioPage = () => {
                       href={animation?.link}
                       className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"
                     >
-                      Learn More
+                      Try Now
                     </Link>
                   </div>
                 </div>
