@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const menuItems = [
   {
     name: "CV Studio",
-    href: "/resume",
+    href: "/cv-studio",
   },
   {
     name: "Pricing",

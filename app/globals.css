@@ -890,10 +890,10 @@ footer a:hover svg {
   opacity: var(--swiper-pagination-bullet-opacity, 1);
   background: #fff !important;
 }
-
+/* 
 .swiper-pagination-bullet {
   background: #0d3572  !important;
-}
+} */
 
 @keyframes fadeIn {
   from {

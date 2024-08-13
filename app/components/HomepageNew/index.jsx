@@ -102,13 +102,13 @@ export default function HomepageNew() {
     <>
       <section className="w-full min-h-screen sm:top-0 p-4 pt-28 sm:p-18 bg-gray-100 text-black flex items-center">
         <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
-          {/* <div className="flex flex-col xs:flex-row items-center max-w-6xl">
+          <div className="flex flex-col xs:flex-row items-center max-w-6xl 2xl:mt-10 lg:mt-5">
             <div className="text-start">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[95px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
                 Super Charge Your <span className="text-blue-700">Career</span>{" "}
                 Potential
               </h1>
-              <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-center xs:text-start mx-auto">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 max-w-4xl text-center xs:text-start mx-auto">
                 We have a passion to mentor you on your entire career path, help
                 you realize what you want to do, how to get into that career,
                 and utilize experts to guide you on how to excel within it.
@@ -125,12 +125,12 @@ export default function HomepageNew() {
             <Image
               src="/v1.png"
               alt="home-creative-down"
-              className=""
               height={300}
               width={450}
+              className="2xl:w-[500px] 2xl:h-[400px] lg:w-[500px] lg:h-[300px] object-contain"
             />
-          </div> */}
-          <div className="flex lg:flex-row flex-col gap-5 items-center 2xl:max-w-7xl lg:max-w-6xl mx-auto 2xl:mt-10 lg:mt-5">
+          </div>
+          {/* <div className="flex lg:flex-row flex-col gap-5 items-center 2xl:max-w-7xl lg:max-w-6xl mx-auto 2xl:mt-10 lg:mt-5">
             <div className="text-center sm:text-start md:text-start lg:text-start xl:text-start 2xl:text-start">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[70px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 text-center sm:text-start md:text-start lg:text-start xl:text-start 2xl:text-start">
                 Super Charge Your <span className="text-blue-700">Career</span>{" "}
@@ -159,7 +159,7 @@ export default function HomepageNew() {
                 className="w-full h-auto object-contain"
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="flex-1 w-full overflow-hidden relative">
             <div className="hidden lg:flex animate-marquee whitespace-nowrap p-9">
@@ -215,7 +215,7 @@ export default function HomepageNew() {
           </h2>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
-          <div className="lg:flex align-middle overflow-hidden hidden ">
+          <div className="lg:flex align-middle overflow-hidden hidden -ml-16">
             <Image
               src={"/home-creative-down.png"}
               width={2000}
