@@ -13,18 +13,21 @@ const CVStudioPage = () => {
   const cvStudio = [
     {
       title: "CV Creator",
+      image: a1,
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
       link: "/resume",
     },
     {
       title: "CV Optimiser",
+      image: a2,
       description:
         "Analyse your resume with AI and optimise it for your desired Job Profile.",
       link: "/resume-analyzer",
     },
     {
       title: "CV Match",
+      image: a3,
       description:
         "Assess your personality traits and cognitive abilities to find the best career path.",
       current: false,
@@ -44,28 +47,33 @@ const CVStudioPage = () => {
           confidence.
         </p>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
             {cvStudio.map((animation, index) => (
-             <div key={index}>
-              <div className="w-[300px] min-h-[300px] rounded-md border">
-                <img
-                  src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
-                  alt="Laptop"
-                  className="h-[200px] w-full rounded-md object-cover"
-                />
-                <div className="p-4">
-                  <h1 className="text-lg font-semibold">{animation?.title}</h1>
-                  <p className="mt-3 mb-3 text-sm text-gray-600">
-                    {animation?.description}
-                  </p>
-                  <Link
-                    href={"/"}
-                    className="mt-5 rounded-sm bg-blue-950 px-3 py-2 text-[10px] font-semibold text-white shadow-sm"
-                  >
-                    Learn Morwe
-                  </Link>
+              <div key={index}>
+                <div className="w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between">
+                  <Lottie
+                    animationData={animation?.image}
+                    loop={true}
+                    autoplay={true}
+                    style={{ height: 200, width: "100%" }}
+                  />
+                  <div className="flex-grow p-4 text-center">
+                    <h1 className="text-2xl font-semibold">
+                      {animation?.title}
+                    </h1>
+                    <p className="my-4 text-sm text-gray-600">
+                      {animation?.description}
+                    </p>
+                  </div>
+                  <div className="p-4">
+                    <Link
+                      href={animation?.link}
+                      className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"
+                    >
+                      Try Now
+                    </Link>
+                  </div>
                 </div>
-              </div>
               </div>
             ))}
           </div>
