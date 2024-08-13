@@ -11,7 +11,7 @@ import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 
 const menuItems = [
- 
+
   {
     name: "CV Studio",
     href: "/resume",
@@ -138,8 +138,9 @@ export function ResumeHeader() {
                       {userdata?.fullname}
                     </div>
                     <div className="text-[10px] text-gray-500">
-                      {userdata?.subscription?.plan}
+                      {userdata?.subscription?.plan?.charAt(0).toUpperCase() + userdata?.subscription?.plan?.slice(1)}
                     </div>
+
                   </div>
                 </div>
 
