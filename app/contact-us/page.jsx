@@ -75,13 +75,13 @@ export default function ContactPageTwo() {
       {/* <Header /> */}
       <div className="mx-auto max-w-7xl pt-14">
         <div className="mx-auto max-w-7xl py-12 md:py-24">
-          <div className="grid items-center justify-items-center gap-x-4 gap-y-10 lg:grid-cols-2">
-            <div className="flex items-center justify-center">
-              <div className="px-2 md:px-12">
-                <p className="text-2xl font-bold text-blue-800 md:text-5xl">
+          <div className="grid items-center justify-items-center gap-x-4 gap-y-10  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+            <div className="flex items-center justify-center w-full">
+              <div className="px-2 md:px-5 w-full m-10 sm:m-10 md:m-0 lg:m-1 xl:m-0 2xl:m-0">
+                <p className="text-2xl sm:text-3xl font-bold text-blue-800 md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl">
                   Get in touch
                 </p>
-                <p className="mt-4 text-lg text-gray-600">
+                <p className="mt-4 text-sm sm:text-lg md:text-lg xl:text-lg 2xl:text-lg text-gray-600">
                   Our team would love to hear from you!
                 </p>
                 <form action="" className="mt-8 space-y-4">
@@ -100,6 +100,7 @@ export default function ContactPageTwo() {
                         value={messageData.firstName}
                         name="firstName"
                         onChange={handleMessageDataChange}
+                        
                       />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
@@ -185,7 +186,7 @@ export default function ContactPageTwo() {
             </div>
             <Image
               alt="Contact us"
-              className=""
+              className="hidden sm:hidden md:block lg:block xl:block 2xl:block"
               src="/contact-us.jpg"
               width={1000}
               height={1000}
