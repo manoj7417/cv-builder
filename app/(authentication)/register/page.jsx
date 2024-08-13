@@ -149,7 +149,7 @@ export default function Register() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-12 sm:py-0 px-8 sm:px-0 rounded-2xl">
           <Link href={"/"} className="flex justify-center items-center mb-[60px]">
               <Image
@@ -311,7 +311,7 @@ export default function Register() {
                   <Link
                     href="/login"
                     title=""
-                    className="font-medium text-black transition-all duration-200 hover:underline"
+                    className="font-semibold text-black transition-all duration-200 hover:underline"
                   >
                     Sign In
                   </Link>
