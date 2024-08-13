@@ -22,10 +22,73 @@ export default function Register() {
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [strength, setStrength] = useState("");
+  const [validation, setValidation] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    numbercase: false,
+    specialChar: false,
+  });
+
+  const password = watch("password", "");
+
+  const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  const hasUpperCase = (str) => /[A-Z]/.test(str);
+  const hasLowerCase = (str) => /[a-z]/.test(str);
+  const hasNumber = (str) => /\d/.test(str);
+
+  useEffect(() => {
+    const newValidation = {
+      length: password.length >= 8,
+      uppercase: hasUpperCase(password),
+      lowercase: hasLowerCase(password),
+      number: hasNumber(password),
+      specialChar: format.test(password),
+    };
+
+    setValidation(newValidation);
+
+    const validCount = Object.values(newValidation).filter(Boolean).length;
+
+    // switch (validCount) {
+    //   case 0:
+    //     setStrength("");
+    //     break;
+    //   case 1:
+    //     setStrength("Weak");
+    //     break;
+    //   case 2:
+    //     setStrength("Medium");
+    //     break;
+    //   case 3:
+    //     setStrength("Strong");
+    //     break;
+    //   case 4:
+    //     setStrength("Excellent");
+    //     break;
+    //   default:
+    //     setStrength("");
+    //     break;
+    // }
+    if (validCount === 5) {
+      setStrength("Excellent");
+    } else if (validCount === 4) {
+      setStrength("Strong");
+    } else if (validCount === 3) {
+      setStrength("Medium");
+    } else if (validCount === 2) {
+      setStrength("Weak");
+    } else {
+      setStrength("");
+    }
+  }, [password]);
 
   const handleRegister = async (data) => {
     if (!data.terms) {
-      toast.error("You must agree to the terms and conditions", { autoClose: 5000 }); // 5000ms = 5 seconds
+      toast.error("You must agree to the terms and conditions", {
+        autoClose: 5000,
+      }); // 5000ms = 5 seconds
       return;
     }
     setIsLoading(true);
@@ -33,7 +96,9 @@ export default function Register() {
       const response = await registerUser(data);
       if (response.status === 201) {
         toast.success("Registration successful");
-        toast.info("Verification link has been sent to your email address , please verfiy your email to continue");
+        toast.info(
+          "Verification link has been sent to your email address , please verfiy your email to continue"
+        );
         router.push("/login");
       }
     } catch (error) {
@@ -151,7 +216,10 @@ export default function Register() {
         </div>
         <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-12 sm:py-0 px-8 sm:px-0 rounded-2xl">
-          <Link href={"/"} className="flex justify-center items-center mb-[60px]">
+            <Link
+              href={"/"}
+              className="flex justify-center items-center mb-[60px]"
+            >
               <Image
                 src="/genies-career-hub-logo.png"
                 width={100}
@@ -240,10 +308,12 @@ export default function Register() {
                         },
                         minLength: {
                           value: 8,
-                          message: "Password must be at least 8 characters long",
+                          message:
+                            "Password must be at least 8 characters long",
                         },
                         pattern: {
-                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                          value:
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                           message:
                             "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
                         },
@@ -254,9 +324,149 @@ export default function Register() {
                       {errors?.password?.message}
                     </div>
                     <div className="top-0 right-0 absolute h-12 flex items-center justify-center pr-3">
-                      {
-                        showPassword ? <IoEye className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(false)} /> : <IoEyeOff className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(true)} />
-                      }
+                      {showPassword ? (
+                        <IoEye
+                          className="cursor-pointer h-4 w-4"
+                          onClick={() => setShowPassword(false)}
+                        />
+                      ) : (
+                        <IoEyeOff
+                          className="cursor-pointer h-4 w-4"
+                          onClick={() => setShowPassword(true)}
+                        />
+                      )}
+                    </div>
+                    {/* Password Strength Indicator */}
+                    {/* <div className="space-y-2 mt-4">
+                      <small className="text-gray-600">Password strength</small>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div
+                          className={`h-2.5 rounded-full ${
+                            strength === "Weak"
+                              ? "bg-red-500"
+                              : strength === "Medium"
+                              ? "bg-yellow-400"
+                              : strength === "Strong"
+                              ? "bg-blue-400"
+                              : strength === "Excellent"
+                              ? "bg-green-500"
+                              : "bg-transparent"
+                          }`}
+                          style={{
+                            width:
+                              strength === "Weak"
+                                ? "50px"
+                                : strength === "Medium"
+                                ? "100px"
+                                : strength === "Strong"
+                                ? "150px"
+                                : strength === "Excellent"
+                                ? "100%"
+                                : "0px",
+                          }}
+                        />
+                      </div>
+                      <small className="text-gray-600">{strength}</small>
+                    </div> */}
+                    {/* Validation List */}
+                    <div className="mt-2">
+                      <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
+                        <li
+                          className={`flex items-center space-x-2 text-sm ${
+                            validation.length
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        >
+                          <span
+                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                              validation.length
+                                ? "bg-green-500"
+                                : "border-gray-400"
+                            }`}
+                          ></span>
+                          <span className="w-3 h-3 flex items-center justify-center">
+                            {validation.length && "✔"}
+                          </span>
+                          <span>Min 8 letters</span>
+                        </li>
+                        <li
+                          className={`flex items-center space-x-2 text-sm ${
+                            validation.uppercase
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        >
+                          <span
+                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                              validation.uppercase
+                                ? "bg-green-500"
+                                : "border-gray-400"
+                            }`}
+                          ></span>
+                          <span className="w-3 h-3 flex items-center justify-center">
+                            {validation.uppercase && "✔"}
+                          </span>
+                          <span>1 uppercase character</span>
+                        </li>
+                        <li
+                          className={`flex items-center text-sm space-x-2 ${
+                            validation.lowercase
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        >
+                          <span
+                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                              validation.lowercase
+                                ? "bg-green-500"
+                                : "border-gray-400"
+                            }`}
+                          ></span>
+                          <span className="w-3 h-3 flex items-center justify-center">
+                            {validation.lowercase && "✔"}
+                          </span>
+                          <span>1 lowercase character</span>
+                        </li>
+                        <li
+                          className={`flex items-center space-x-2 text-sm ${
+                            validation.number
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        >
+                          <span
+                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                              validation.number
+                                ? "bg-green-500"
+                                : "border-gray-400"
+                            }`}
+                          ></span>
+                          <span className="w-3 h-3 flex items-center justify-center">
+                            {validation.number && "✔"}
+                          </span>
+                          <span>1 number</span>
+                        </li>
+                        <li
+                          className={`flex items-center space-x-2 text-sm ${
+                            validation.specialChar
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }`}
+                        >
+                          <span
+                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                              validation.specialChar
+                                ? "bg-green-500"
+                                : "border-gray-400"
+                            }`}
+                          ></span>
+                          <span className="w-3 h-3 flex items-center justify-center">
+                            {validation.specialChar && "✔"}
+                          </span>
+                          <span>1 special character</span>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -274,7 +484,13 @@ export default function Register() {
                   >
                     <p>
                       By signing up you are agreeing to our
-                      <Link href="/terms-condition" className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"> Terms and Conditions</Link>
+                      <Link
+                        href="/terms-condition"
+                        className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"
+                      >
+                        {" "}
+                        Terms and Conditions
+                      </Link>
                     </p>
                   </label>
                 </div>
