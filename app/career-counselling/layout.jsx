@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
       <main className="resume_dashboard" >
         <div className="resume_dashboard_container">
           <div className="wrapper">
-            <NewResumeHeader/>
+            {/* <NewResumeHeader/> */}
             {children}
             <Footer/>
           </div>
