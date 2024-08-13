@@ -13,6 +13,9 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Dialog, DialogContent } from "../../../components/ui/dialog";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
+import { HiOutlineMailOpen } from "react-icons/hi";
+import { Label } from "@/components/ui/label";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 function LoginUser() {
   const router = useRouter();
@@ -21,14 +24,19 @@ function LoginUser() {
   const loginUser = useUserStore((state) => state.loginUser);
   const [showDialog, setShowDialog] = useState(false);
   const email = useRef(null);
+  const [showVerificationDilaog, setShowVerificationDilaog] = useState(false)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
   const [loading, setIsLoading] = useState(false);
   const [sendingMail, setIsSendingMail] = useState(false);
+  const [showResendButton, setShowResendButton] = useState(false)
+  const [isSendingVerificationEmail, setIsSendingVerificationEmail] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleDialogClose = () => {
     setShowDialog(false);
@@ -47,6 +55,9 @@ function LoginUser() {
       }
     } catch (error) {
       toast.error(error.response?.data?.error || "Error logging in");
+      if (error.response?.status === 403 && error.response?.data?.error === 'Email verification is required') {
+        setShowVerificationDilaog(true)
+      }
     } finally {
       setIsLoading(false);
     }
@@ -72,6 +83,29 @@ function LoginUser() {
       setShowDialog(false);
     }
   };
+
+  const handleCloseVerificationDilaog = async () => {
+    setShowVerificationDilaog(false);
+    setIsSendingVerificationEmail(false)
+    setShowResendButton(false)
+  }
+
+  const handleResendVerificationEmail = async (data) => {
+    setIsSendingVerificationEmail(true)
+    try {
+      const response = await axios.post("/api/resendVerificationEmail", { email: data.verifyemail });
+      if (response.status === 200) {
+        toast.success("Verification email sent to your email");
+        reset()
+        setShowVerificationDilaog(false)
+        setIsSendingVerificationEmail(false)
+        setShowResendButton(false)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("Error sending verification email")
+    }
+  }
 
   return (
     <>
@@ -107,6 +141,58 @@ function LoginUser() {
           </div>
         </DialogContent>
       </Dialog>
+      <Dialog open={showVerificationDilaog}>
+        <DialogContent onClick={handleCloseVerificationDilaog} className="md:w-[400px] w-[300px]">
+          <div>
+            <div className="flex justify-center items-center w-20 h-20 mx-auto bg-gray-100 rounded-full">
+              <HiOutlineMailOpen className="text-blue-950 h-16 w-16" />
+            </div>
+            <h1 className="text-center text-2xl">
+              You&apos;re almost there!
+            </h1>
+
+            {
+              showResendButton ?
+                <div className=" py-5">
+                  <form onSubmit={handleSubmit(handleResendVerificationEmail)}>
+                    <div className="py-5">
+                      <Label>Email</Label>
+                      <Input {...register("verifyemail", {
+                        required: {
+                          value: true,
+                          message: "Email is required",
+                        },
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: "Invalid email format",
+                        },
+                      })} placeholder="Enter your register email address" className="mt-1" />
+                      <div className="py-1">
+                        <p className="text-xs text-red-500">{errors?.verifyemail?.message}</p>
+                      </div>
+                    </div>
+                    <Button className="w-full" type="submit" disabled={isSendingVerificationEmail}>
+                      {
+                        isSendingVerificationEmail ? <>
+                          Sending <ImSpinner3 className="h-4 w-4 ml-2 animate-spin" />
+                        </> :
+                          "Resend"
+                      }
+                    </Button>
+                  </form>
+                </div>
+                :
+                <>
+                  <p className='mt-5 text-md text-center text-gray-500'>Verify your email address in order to proceed to use all services</p>
+                  <div className=" py-10">
+                    <p className="my-2 text-sm text-gray-500">Unable to find the verification link?</p>
+                    <Button className="w-full" onClick={() => setShowResendButton(true)}>Get verification email</Button>
+                  </div>
+                </>
+            }
+          </div>
+        </DialogContent>
+      </Dialog>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
           <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -132,9 +218,9 @@ function LoginUser() {
                     >
                       Email address
                     </label>
-                    <div className="lg:mt-2 mt-1">
-                      <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    <div className="mt-2">
+                      <Input
+                        className="flex h-10 md:h-12 w-full "
                         type="email"
                         placeholder="Email Address"
                         {...register("email", {
@@ -160,10 +246,10 @@ function LoginUser() {
                     >
                       Password
                     </label>
-                    <div className="lg:mt-2 mt-1">
-                      <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                        type="password"
+                    <div className="mt-2 relative">
+                      <Input
+                        className="flex h-10 md:h-12 w-full "
+                        type={showPassword ? "text" : "password"}
                         autoComplete="true"
                         placeholder="Password"
                         {...register("password", {
@@ -179,6 +265,11 @@ function LoginUser() {
                       />
                       <div className="text-red-500 text-sm">
                         {errors?.password?.message}
+                      </div>
+                      <div className="top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3">
+                        {
+                          showPassword ? <IoEye className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(false)} /> : <IoEyeOff className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(true)} />
+                        }
                       </div>
                     </div>
                   </div>
