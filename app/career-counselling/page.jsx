@@ -33,7 +33,7 @@ export default function Page() {
   const [startingTest, setStartingTest] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
 
-  console.log("popupData::",popupData)
+  console.log("popupData::", popupData);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -626,7 +626,7 @@ export default function Page() {
                     className="w-full py-5"
                     defaultValue="actionableInsights"
                   >
-                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto bg-[#1e3a8a78] rounded-full">
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto gap-0 md:gap-6 bg-[#1e3a8a78] rounded-full">
                       <TabsTrigger
                         value="actionableInsights"
                         className="text-white  rounded-md text-base font-bold sumtab"
@@ -677,7 +677,7 @@ export default function Page() {
                           <h2 className="text-xl font-bold text-[#FC0000] flex items-center gap-3">
                             Career Suggestions
                           </h2>
-                          <ul className="space-y-3 text-sm">
+                          <ul className="space-y-3 text-sm h-48 overflow-scroll md:overflow-none md:h-full">
                             {cardData?.careerSuggestions?.map(
                               (career, index) => (
                                 <li
