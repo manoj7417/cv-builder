@@ -68,12 +68,16 @@ const Pricing = () => {
       amount
     };
     try {
-      const response = await axios.post('/api/upgradePricing', { data }, {
-        headers: {
-          Authorization: "Bearer " + accessToken.value,
-          'Content-Type': 'application/json'
-        },
-      });
+      const response = await axios.post(
+        "/api/upgradePricing",
+        { data },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.status === 200) {
         const { url } = response.data;
         window.location = url;
@@ -528,7 +532,7 @@ const Pricing = () => {
             <div className=" flex items-center justify-center py-12">
               <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
                 <div className="md:w-[60%]  w-full text-center md:text-left mb-8 md:mb-0">
-                  <h1 className="text-4xl font-bold mb-4">
+                  <h1 className="text-2xl md:text-4xl font-bold mb-4">
                     Want to try out our Business Model Services? Connect with us
                     Today!
                   </h1>
@@ -572,159 +576,158 @@ const Pricing = () => {
                 <h2 className="text-base font-semibold text-blue-950 tracking-wide uppercase">
                   Features
                 </h2>
-                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-2xl leading-8 font-extrabold tracking-tight text-gray-900 md:text-4xl">
                   All the features you need
                 </p>
               </div>
 
               <div className="mt-10">
-              <div className="mt-10 max-w-full overflow-x-auto">
-  <table className="min-w-full divide-y divide-gray-200">
-    <thead className="bg-blue-950">
-      <tr>
-        <th
-          scope="col"
-          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
-        >
-          Features
-        </th>
-        <th
-          scope="col"
-          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
-        >
-          Free
-        </th>
-        <th
-          scope="col"
-          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
-        >
-          Basic
-        </th>
-        <th
-          scope="col"
-          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
-        >
-          Premium
-        </th>
-      </tr>
-    </thead>
-    <tbody className="bg-white divide-y divide-gray-200">
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Unlimited resumes and cover letters
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Download Unlimited resumes and cover letters
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Download All premium templates and colors
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Unlimited CV Optimiser free
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Free Psychometric Tests
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Unlimited AI Analyzer
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          AI Psychometric Tests
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-      <tr>
-        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-          Career coaching
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-blue-950">&#10060;</span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <span className="text-green-500">&#10003;</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+                <div className="mt-10 max-w-full overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-blue-950">
+                      <tr>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
+                        >
+                          Features
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
+                        >
+                          Free
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
+                        >
+                          Basic
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs md:text-sm font-medium text-white uppercase tracking-wider"
+                        >
+                          Premium
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Unlimited resumes and cover letters
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Download Unlimited resumes and cover letters
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Download All premium templates and colors
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Unlimited CV Optimiser free
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Free Psychometric Tests
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Unlimited AI Analyzer
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          AI Psychometric Tests
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          Career coaching
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-blue-950">&#10060;</span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <span className="text-green-500">&#10003;</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -752,13 +755,16 @@ const Pricing = () => {
             </div>
             <div className="relative  z-10 flex flex-col md:flex-row justify-center items-center">
               <div className="text-center">
-                <h2 className="text-4xl font-extrabold mb-4">
+                <h2 className="text-2xl md:text-4xl font-extrabold mb-4">
                   Start your <span className="text-green-500">Journey</span>{" "}
                   Today!
                 </h2>
                 <p className="text-lg">From 300+ Customer Reviews</p>
                 <div className="mt-5">
-                  <Link href={"/"} className="px-8 py-3 bg-white text-indigo-900 font-bold rounded text-sm">
+                  <Link
+                    href={"/"}
+                    className="px-8 py-3 bg-white text-indigo-900 font-bold rounded text-sm"
+                  >
                     Get Started
                   </Link>
                 </div>

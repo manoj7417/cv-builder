@@ -90,26 +90,31 @@ export default function UserData() {
   return (
     <>
       <Dialog open={showDialog}>
-        <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-          <div className="flex items-center space-x-2">
-            <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+        <DialogContent className="max-w-[90vw] lg:max-w-[50dvw] h-[60dvh] p-0">
+          <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center w-full">
               <div className="ai-image">
                 <Image
                   src="/testpopup.png"
                   width={500}
                   height={500}
                   alt="ai"
-                  className="w-full h-auto"
+                  className="w-full h-auto max-w-[80vw] lg:max-w-[500px]"
                 />
               </div>
-              <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
-                <Image src="/testtimer.png" width={80} height={100} alt="ai" />
-                <p className="text-center mx-auto text-xl">
+              <div className="ai-content flex flex-col items-center justify-center gap-5 p-2 w-full">
+                <Image
+                  src="/testtimer.png"
+                  width={80}
+                  height={100}
+                  alt="ai"
+                  className="max-w-[20vw] lg:max-w-[80px]"
+                />
+                <p className="text-center mx-auto text-base lg:text-xl">
                   <span className="text-[#FC0000] font-semibold">
-                    {" "}
-                    Please wait for a moment...{" "}
+                    Please wait for a moment...
                   </span>
-                  <br />{" "}
+                  <br />
                   <span className="text-[#1E3A8A] font-semibold">
                     While we are generating the personalised test based on your
                     input...
@@ -123,10 +128,10 @@ export default function UserData() {
       </Dialog>
       <section className="flex flex-col flex-1 gap-6 overflow-y-auto  sm:px-6 ">
         <div className="space-y-4">
-          <h2 className="text-4xl text-[#1E3A8A] font-bold">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl text-[#1E3A8A] font-bold">
             {categories[currentStep]}
           </h2>
-          <p className="font-semibold">
+          <p className="font-semibold text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
             Please follow these instructions to provide answers to the
             questionnaire:
           </p>
@@ -140,7 +145,7 @@ export default function UserData() {
                 onClick={() => toggleQuestion(quesIndex)}
               >
                 <div className="w-[90%]">
-                  <h3 className="text-lg  text-[#1E3A8A] font-bold">
+                  <h3 className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg  text-[#1E3A8A] font-bold">
                     {questionObj.question}
                   </h3>
                 </div>
