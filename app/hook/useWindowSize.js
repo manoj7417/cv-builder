@@ -11,8 +11,7 @@ const useWindowSize = () => {
     const handleResize = () => {
         const windowHeight = window.innerHeight;
         const windowWidth = window.innerWidth;
-        console.log("windowHeight:",windowHeight)
-        console.log("windowWidth:",windowWidth)
+        
         const aspectRatio = 210 / 297; // Width / Height for A4
   
         const newWidth = windowHeight * aspectRatio;

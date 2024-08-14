@@ -25,7 +25,6 @@ function VerifyEmailComponent() {
                 }, 3000)
             }
         } catch (error) {
-            console.log("Error verifying email", error)
             toast.error('Failed to verify email')
             return router.push('/login')
         }
