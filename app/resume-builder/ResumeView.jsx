@@ -34,7 +34,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-;
 import { ImSpinner3 } from "react-icons/im";
 import Lottie from "lottie-react";
 import Loader1 from "@/public/animations/downloadLoader1.json";
@@ -220,7 +219,7 @@ const ResumeView = ({ setIsContentVisible }) => {
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
-  const { userdata } = useUserStore(state => state.userState)
+  const { userdata } = useUserStore((state) => state.userState);
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
@@ -230,8 +229,9 @@ const ResumeView = ({ setIsContentVisible }) => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
-  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
-
+  const updateRedirectPricingRoute = useUserStore(
+    (state) => state.updateRedirectPricingRoute
+  );
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -248,10 +248,10 @@ const ResumeView = ({ setIsContentVisible }) => {
         email: userState.userdata.email,
         name: temp,
         // url: "https://career-genies-frontend.vercel.app/paymentSuccess",
-        url: 'http://localhost:3000/paymentSuccess',
+        url: "http://localhost:3000/paymentSuccess",
         cancel_url: window.location.href,
         templateName: resumeData.metadata.template,
-        temp_type: type
+        temp_type: type,
       },
       accessToken.value
     )
@@ -267,25 +267,28 @@ const ResumeView = ({ setIsContentVisible }) => {
       });
   };
 
-
   const TemplateCheck = async (templateName, token) => {
     try {
-      const response = await axios.post('/api/checkUserTemplate', { templateName }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.post(
+        "/api/checkUserTemplate",
+        { templateName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      })
+      );
       if (response.status === 200) {
-        return true
+        return true;
       }
     } catch (error) {
-      throw new Error(error.response.data.message)
+      throw new Error(error.response.data.message);
     }
-  }
+  };
 
   const checkUserTemplate = async () => {
-    const { accessToken } = await GetTokens()
-    handleDownloadResume(accessToken.value)
+    const { accessToken } = await GetTokens();
+    handleDownloadResume(accessToken.value);
   };
 
   const handleDownloadResume = async (token) => {
@@ -298,7 +301,7 @@ const ResumeView = ({ setIsContentVisible }) => {
 
     try {
       const response = await printResume(body, token);
-      
+
       if (response.ok) {
         generateFunfact();
         const blob = await response.blob();
@@ -314,11 +317,11 @@ const ResumeView = ({ setIsContentVisible }) => {
         return;
       }
       if (response.status !== 500) {
-        updateRedirectPricingRoute('/resume-builder')
-        return router.push('/pricing')
+        updateRedirectPricingRoute("/resume-builder");
+        return router.push("/pricing");
       }
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -467,7 +470,6 @@ const ResumeView = ({ setIsContentVisible }) => {
               </div>
             </div>
           </div>
-
         </div>
         <div className="toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
           <div className="auth_section flex justify-around w-full  items-center px-2">
@@ -557,7 +559,6 @@ const ResumeView = ({ setIsContentVisible }) => {
           </div>
         </div>
       </div>
-
     </>
   );
 };
