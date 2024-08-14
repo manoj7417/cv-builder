@@ -22,7 +22,7 @@ function VerifyEmailComponent() {
                 loginUser(response.data.userdata);
                 setTimeout(() => {
                     return router.push('/')
-                }, 3000)
+                }, 2000)
             }
         } catch (error) {
             toast.error('Failed to verify email')

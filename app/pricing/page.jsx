@@ -14,6 +14,9 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { UpgradePricing } from "../api/api";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ImSpinner3 } from "react-icons/im";
+import { prices } from '../../constants/prices'
 const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
   ssr: false,
 });
@@ -23,18 +26,46 @@ const Pricing = () => {
   const router = useRouter();
   const userState = useUserStore((state) => state.userState);
   const planType = userState?.userdata?.subscription?.plan || "free";
+  const [geoinfo, setGeoInfo] = useState({
+    ip: "",
+    countryName: "",
+    countryCode: "",
+    city: "",
+    timezone: ""
+  });
+  const [loaders, setLoaders] = useState({
+    basic: false,
+    premium: false
+  })
+  const [currency, setCurrency] = useState('USD')
+  const [plandata, setPlandata] = useState({
+    currency: 'USD',
+    sign: "$",
+    basic: {
+      monthly: 5.4,
+      yearly: 65
+    },
+    premium: {
+      monthly: 12,
+      yearly: 144
+    }
+  })
 
   const UpgradePlan = async (plan) => {
+    setLoaders({ ...loaders, [plan]: true })
     const { accessToken } = await GetTokens();
     if (!accessToken) {
       return router.push("/login?redirect=pricing");
     }
+    const amount = enabled ? plandata[plan].yearly : plandata[plan].monthly
     const data = {
       email: userState?.userdata?.email,
       plan,
       success_url: "http://localhost:3000/paymentSuccess",
       cancel_url: window.location.href,
       duration: enabled ? "yearly" : "monthly",
+      currency: geoinfo?.currency || "USD",
+      amount
     };
     try {
       const response = await axios.post(
@@ -53,27 +84,27 @@ const Pricing = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoaders({ ...loaders, [plan]: false })
     }
   };
 
   const UpgradePlanWithRazorpay = async (plan) => {
+    setLoaders({ ...loaders, [plan]: true })
     const { accessToken } = await GetTokens();
     if (!accessToken) {
       return router.push("/login?redirect=pricing");
     }
-
     const data = {
       email: userState?.userdata?.email,
       plan,
       duration: enabled ? "yearly" : "monthly",
     };
-
     const res = await loadRazorpayScript();
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-
     try {
       const response = await axios.post(
         "/api/pricing",
@@ -88,7 +119,6 @@ const Pricing = () => {
 
       if (response.status === 200) {
         const { orderId, amount, currency, key } = response.data;
-
         const options = {
           key,
           amount,
@@ -134,8 +164,43 @@ const Pricing = () => {
       }
     } catch (error) {
       console.error("Payment error:", error);
+    } finally {
+      setLoaders({ ...loaders, [plan]: false })
     }
   };
+
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        const plan = prices.filter(el => el.currency === data.currency)
+        let currencyData;
+        if (plan) {
+          setCurrency((prev) => data.currency)
+          currencyData = prices.filter(el => el.currency === data.currency)[0]
+        } else {
+          currencyData = prices.filter(el => el.currency === currency)[0]
+        }
+        setPlandata(currencyData)
+        setGeoInfo({
+          ...geoinfo,
+          ip: data.ip,
+          countryName: data.country_name,
+          countryCode: data.country_calling_code,
+          city: data.city,
+          timezone: data.timezone,
+          currency: data.currency
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getGeoInfo();
+  }, []);
 
   return (
     <>
@@ -166,14 +231,12 @@ const Pricing = () => {
                 <Switch
                   checked={enabled}
                   onChange={setEnabled}
-                  className={`${
-                    enabled ? "bg-indigo-600" : "bg-gray-200"
-                  } relative inline-flex items-center h-6 rounded-full w-11`}
+                  className={`${enabled ? "bg-indigo-600" : "bg-gray-200"
+                    } relative inline-flex items-center h-6 rounded-full w-11`}
                 >
                   <span
-                    className={`${
-                      enabled ? "translate-x-6" : "translate-x-1"
-                    } inline-block w-4 h-4 transform bg-white rounded-full`}
+                    className={`${enabled ? "translate-x-6" : "translate-x-1"
+                      } inline-block w-4 h-4 transform bg-white rounded-full`}
                   />
                 </Switch>
                 <span className="ml-2 text-sm font-medium text-gray-700">
@@ -187,7 +250,7 @@ const Pricing = () => {
                     FREE
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    ₹0
+                    {`${plandata?.sign}0`}
                   </p>
                   {/* <p className="mt-2 text-sm text-gray-500">
                     Per member, per yearly
@@ -264,7 +327,7 @@ const Pricing = () => {
                     BASIC
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹4,999" : "₹449"}
+                    {enabled ? `${plandata.sign}${plandata.basic.yearly}` : `${plandata.sign}${plandata.basic.monthly}`}
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per {enabled ? "yearly" : "monthly"}
@@ -335,18 +398,29 @@ const Pricing = () => {
                       Email Support Service
                     </li>
                   </ul>
-                  {planType === "basic" ? (
-                    <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
-                      Current plan
-                    </button>
-                  ) : (
-                    <button
-                      className="w-full bg-blue-950 text-white py-2 rounded-md mt-10"
-                      onClick={() => UpgradePlanWithRazorpay("basic")}
-                    >
-                      Upgrade Now!
-                    </button>
-                  )}
+                  {
+                   planType !== 'premium' &&
+                    <div>
+                      {planType === "basic" ? (
+                        <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
+                          Current plan
+                        </button>
+                      ) : (
+                        <Button
+                          className="w-full bg-blue-950 text-white py-2 rounded-md mt-10"
+                          onClick={() => geoinfo.countryName === 'India' ? UpgradePlanWithRazorpay("basic") : UpgradePlan('basic')}
+                          disabled={loaders.basic}
+                        >
+                          <>
+                            {
+                              loaders.basic ? <>Upgrading <ImSpinner3 className="w-4 h-4 animate-spin ml-2" /></> : "Upgrade Now!"
+                            }
+                          </>
+
+                        </Button>
+                      )}
+                    </div>
+                  }
                 </div>
 
                 <div className="p-6 rounded-lg shadow-lg w-full md:w-[50%] flex flex-col">
@@ -354,7 +428,7 @@ const Pricing = () => {
                     PREMIUM
                   </h3>
                   <p className="mt-2 text-3xl font-extrabold text-gray-900">
-                    {enabled ? "₹9,999" : "₹999"}
+                    {enabled ? `${plandata.sign}${plandata.premium.yearly}` : `${plandata.sign}${plandata.premium.monthly}`}
                   </p>
                   <p className="mt-2 text-sm text-gray-500">
                     Per member, per {enabled ? "yearly" : "monthly"}
@@ -426,23 +500,29 @@ const Pricing = () => {
                     </li>
                   </ul>
                   {planType === "premium" ? (
-                    <button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10">
-                      Current plan
-                    </button>
+                    <Button className="w-full bg-blue-950 text-white py-2 rounded-md mt-10" disabled={loaders.premium}>
+                      Current Plan
+                    </Button>
                   ) : (
-                    <button
+                    <Button
                       className="w-full bg-blue-950 text-white py-2 rounded-md mt-10"
-                      onClick={() => UpgradePlanWithRazorpay("premium")}
+                      onClick={() => geoinfo?.countryName === 'India' ? UpgradePlanWithRazorpay("premium") : UpgradePlan('premium')
+                      }
+                      disabled={loaders.premium}
                     >
-                      Upgrade Now!
-                    </button>
+                      <>
+                        {
+                          loaders.premium ? <>Upgrading <ImSpinner3 className="w-4 h-4 animate-spin ml-2" /></> : "Upgrade Now!"
+                        }
+                      </>
+                    </Button>
                   )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section >
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full   px-5 relative"
         id="premium"
