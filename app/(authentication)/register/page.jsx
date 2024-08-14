@@ -96,9 +96,7 @@ export default function Register() {
       const response = await registerUser(data);
       if (response.status === 201) {
         toast.success("Registration successful");
-        toast.info(
-          "Verification link has been sent to your email address , please verfiy your email to continue"
-        );
+        toast.info("Verification link sent to your email address", { autoClose: 5000 });
         router.push("/login");
       }
     } catch (error) {

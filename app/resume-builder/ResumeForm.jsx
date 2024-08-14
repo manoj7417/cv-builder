@@ -72,7 +72,7 @@ const ImageTemplates = [
   "Template26",
 ];
 
-const dateFormat = 'YYYY-MM'
+const dateFormat = "YYYY-MM";
 
 export default function ResumeForm() {
   const data = useResumeStore((state) => state.resume.data);
@@ -165,8 +165,13 @@ export default function ResumeForm() {
 
   const disabledEducationEndDate = (current, item) => {
     const startDate = dayjs(item.startDate, dateFormat);
-    return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
-  }
+    return (
+      current &&
+      (current < startDate ||
+        (current.year() === startDate.year() &&
+          current.month() === startDate.month()))
+    );
+  };
 
   const handleEducationDescriptionChange = (val, i) => {
     const updatedEducationItems = data.sections.education.items.map(
@@ -196,7 +201,7 @@ export default function ResumeForm() {
       }
     );
     setResumeData("sections.education.items", updatedEducationItems);
-  }
+  };
 
   const handleExperienceChange = (e, i) => {
     const { name, value } = e.target;
@@ -273,8 +278,13 @@ export default function ResumeForm() {
 
   const handledisableExperienceDate = (current, item) => {
     const startDate = dayjs(item.startDate, dateFormat);
-    return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
-  }
+    return (
+      current &&
+      (current < startDate ||
+        (current.year() === startDate.year() &&
+          current.month() === startDate.month()))
+    );
+  };
 
   const handleExperienceCheckChange = (e, i) => {
     const updatedExperienceItems = data.sections.experience.items.map(
@@ -289,7 +299,7 @@ export default function ResumeForm() {
       }
     );
     setResumeData("sections.experience.items", updatedExperienceItems);
-  }
+  };
 
   const handleAddNewEducation = () => {
     const newEducationItems = [
@@ -455,8 +465,13 @@ export default function ResumeForm() {
 
   const handleDisableProjectEndDate = (current, item) => {
     const startDate = dayjs(item.startDate, dateFormat);
-    return current && (current < startDate || (current.year() === startDate.year() && current.month() === startDate.month()));
-  }
+    return (
+      current &&
+      (current < startDate ||
+        (current.year() === startDate.year() &&
+          current.month() === startDate.month()))
+    );
+  };
 
   const handleProjectCheckChange = (e, i) => {
     const updatedProjectItems = data.sections.projects.items.map(
@@ -468,9 +483,10 @@ export default function ResumeForm() {
           };
         }
         return item;
-      })
+      }
+    );
     setResumeData("sections.projects.items", updatedProjectItems);
-  }
+  };
 
   const handleTemplateThemeChange = (color) => {
     if (color) {
@@ -899,10 +915,10 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
       : null;
   }
 
@@ -950,8 +966,7 @@ export default function ResumeForm() {
   const handlesetSecondayColor = () => {
     const primaryColor = data.metadata.theme.primary;
     const secondaryColor = lightenColor(primaryColor, 0.5);
-    // console.log("primaryColor", primaryColor);
-    // console.log("secondaryColor", secondaryColor);
+
     setResumeData("metadata.theme.background", secondaryColor);
   };
 
@@ -1269,29 +1284,39 @@ export default function ResumeForm() {
                                     End Date
                                   </Label>
                                   <div className="w-full">
-                                    {
-                                      item.endDate === 'present' ?
-                                        <div className=' h-10 rounded-md flex items-center pl-2'>
-                                          <p className='text-xl text-gray-500'>Present</p>
-                                        </div>
-                                        :
-                                        <DatePicker
-                                          picker="month"
-                                          onChange={(e) =>
-                                            handleEducationEndDateChange(e, index)
-                                          }
-                                          disabled={!item?.startDate}
-                                          disabledDate={(e) => disabledEducationEndDate(e, item)}
-                                          name="endDate"
-                                          maxDate={dayjs()}
-                                          className="w-full h-10"
-                                        />
-                                    }
+                                    {item.endDate === "present" ? (
+                                      <div className=" h-10 rounded-md flex items-center pl-2">
+                                        <p className="text-xl text-gray-500">
+                                          Present
+                                        </p>
+                                      </div>
+                                    ) : (
+                                      <DatePicker
+                                        picker="month"
+                                        onChange={(e) =>
+                                          handleEducationEndDateChange(e, index)
+                                        }
+                                        disabled={!item?.startDate}
+                                        disabledDate={(e) =>
+                                          disabledEducationEndDate(e, item)
+                                        }
+                                        name="endDate"
+                                        maxDate={dayjs()}
+                                        className="w-full h-10"
+                                      />
+                                    )}
                                   </div>
-                                  <div className='flex items-center '>
-                                    <Checkbox className='mr-2 font-thin'
-                                      checked={item.endDate === 'present'}
-                                      onCheckedChange={(e) => handleEducationCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>Present</p>
+                                  <div className="flex items-center ">
+                                    <Checkbox
+                                      className="mr-2 font-thin"
+                                      checked={item.endDate === "present"}
+                                      onCheckedChange={(e) =>
+                                        handleEducationCheckChange(e, index)
+                                      }
+                                    />
+                                    <p className=" font-mono italic text-gray-500">
+                                      Present
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -1348,7 +1373,7 @@ export default function ResumeForm() {
 
         {/* experience section */}
         <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 px-10">
+          <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
@@ -1414,7 +1439,8 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
@@ -1481,28 +1507,41 @@ export default function ResumeForm() {
                                     End Date
                                   </Label>
                                   <div className="w-full">
-                                    {
-                                      item.endDate === 'present' ?
-                                        <div className=' h-10 rounded-md flex items-center pl-2'>
-                                          <p className='text-xl text-gray-500'>Present</p>
-                                        </div>
-                                        :
-                                        <DatePicker
-                                          picker="month"
-                                          onChange={(e) =>
-                                            handleExperienceEndDateChange(e, index)
-                                          }
-                                          className="w-full h-10"
-                                          maxDate={dayjs()}
-                                          disabled={!item.startDate}
-                                          disabledDate={(e) => handledisableExperienceDate(e, item)}
-                                        />
-                                    }
+                                    {item.endDate === "present" ? (
+                                      <div className=" h-10 rounded-md flex items-center pl-2">
+                                        <p className="text-xl text-gray-500">
+                                          Present
+                                        </p>
+                                      </div>
+                                    ) : (
+                                      <DatePicker
+                                        picker="month"
+                                        onChange={(e) =>
+                                          handleExperienceEndDateChange(
+                                            e,
+                                            index
+                                          )
+                                        }
+                                        className="w-full h-10"
+                                        maxDate={dayjs()}
+                                        disabled={!item.startDate}
+                                        disabledDate={(e) =>
+                                          handledisableExperienceDate(e, item)
+                                        }
+                                      />
+                                    )}
                                   </div>
-                                  <div className='flex items-center '>
-                                    <Checkbox className='mr-2 font-thin'
-                                      checked={item.endDate === 'present'}
-                                      onCheckedChange={(e) => handleExperienceCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>Present</p>
+                                  <div className="flex items-center ">
+                                    <Checkbox
+                                      className="mr-2 font-thin"
+                                      checked={item.endDate === "present"}
+                                      onCheckedChange={(e) =>
+                                        handleExperienceCheckChange(e, index)
+                                      }
+                                    />
+                                    <p className=" font-mono italic text-gray-500">
+                                      Present
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -1570,7 +1609,7 @@ export default function ResumeForm() {
 
         {/* Projects */}
         <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 px-10">
+          <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
@@ -1696,28 +1735,38 @@ export default function ResumeForm() {
                                     End Date
                                   </Label>
                                   <div className="w-full">
-                                    {
-                                      item.endDate === 'present' ?
-                                        <div className=' h-10 rounded-md flex items-center pl-2'>
-                                          <p className='text-xl text-gray-500'>Present</p>
-                                        </div>
-                                        :
-                                        <DatePicker
-                                          picker="month"
-                                          onChange={(e) =>
-                                            handleProjectEndDateChange(e, index)
-                                          }
-                                          disabled={!item.startDate}
-                                          disabledDate={(e) => handleDisableProjectEndDate(e, item)}
-                                          className="w-full h-10"
-                                          maxDate={dayjs()}
-                                        />
-                                    }
+                                    {item.endDate === "present" ? (
+                                      <div className=" h-10 rounded-md flex items-center pl-2">
+                                        <p className="text-xl text-gray-500">
+                                          Present
+                                        </p>
+                                      </div>
+                                    ) : (
+                                      <DatePicker
+                                        picker="month"
+                                        onChange={(e) =>
+                                          handleProjectEndDateChange(e, index)
+                                        }
+                                        disabled={!item.startDate}
+                                        disabledDate={(e) =>
+                                          handleDisableProjectEndDate(e, item)
+                                        }
+                                        className="w-full h-10"
+                                        maxDate={dayjs()}
+                                      />
+                                    )}
                                   </div>
-                                  <div className='flex items-center '>
-                                    <Checkbox className='mr-2 font-thin'
-                                      checked={item.endDate === 'present'}
-                                      onCheckedChange={(e) => handleProjectCheckChange(e, index)} /><p className=' font-mono italic text-gray-500'>Present</p>
+                                  <div className="flex items-center ">
+                                    <Checkbox
+                                      className="mr-2 font-thin"
+                                      checked={item.endDate === "present"}
+                                      onCheckedChange={(e) =>
+                                        handleProjectCheckChange(e, index)
+                                      }
+                                    />
+                                    <p className=" font-mono italic text-gray-500">
+                                      Present
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -1761,7 +1810,7 @@ export default function ResumeForm() {
 
         {/* Skills */}
         <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 px-10">
+          <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
                 <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
@@ -1877,8 +1926,8 @@ export default function ResumeForm() {
         </div>
 
         {/* Hobbies  */}
-        <div className="lg:px-8 px-5">
-          <div className="my-5 flex justify-between w-full items-center p-3">
+        <div className=" lg:px-10 px-5">
+          <div className="my-5 flex justify-between w-full items-center ">
             <div className="group">
               <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
                 {sections?.hobbies?.name}
@@ -2347,7 +2396,8 @@ export default function ResumeForm() {
             </div>
             <div>
               <p className="text-sm text-gray-500">
-                Add Industry-relevant certifications and accreditations that you have.
+                Add Industry-relevant certifications and accreditations that you
+                have.
               </p>
             </div>
           </div>
@@ -2460,7 +2510,7 @@ export default function ResumeForm() {
 
         {/* languages */}
         <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 px-10">
+          <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
                 <Label className="text-2xl flex group-hover:hidden text-blue-900 font-bold items-center gap-2">

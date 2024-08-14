@@ -13,8 +13,7 @@
 //   const { pathname } = req.nextUrl
 //   let cookie = req.cookies.get('accessToken')
 
-//   console.log("Pathname:", pathname);
-//   console.log("Cookie:", cookie);
+//   
   
 //   if (protectedRoutes.includes(pathname)) {
 //     if (!cookie?.value) {

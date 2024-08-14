@@ -306,7 +306,6 @@ export const sendSubscribeEmail = async (data) => {
 
 export const UpgradePricing = async (data, token) => {
   try {
-    console.log(token)
     const response = await instance.post('/stripe/createSubscription', data, {
       withCredentials: true,
       headers: {

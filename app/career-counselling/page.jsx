@@ -33,7 +33,6 @@ export default function Page() {
   const [startingTest, setStartingTest] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
 
-  console.log("popupData::", popupData);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -118,7 +117,6 @@ export default function Page() {
         content = JSON.stringify(content);
         const responseData = await generateCareerAdvice(content, token);
         const parsedData = JSON.parse(responseData.data[0].text.value);
-        console.log(parsedData);
         setSummary(parsedData);
         setContentType("summary");
         setShowPopup(true);
@@ -186,7 +184,6 @@ export default function Page() {
         setContentType("userData");
       }
     } catch (error) {
-      console.log(error.response.status === 403);
       error.response.status === 403 && router.push("/pricing");
     } finally {
       setStartingTest(false);
@@ -362,31 +359,31 @@ export default function Page() {
                               </DialogTrigger>
                               {showDialog && (
                                 <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                                  <div className="flex items-center space-x-2">
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
+                                  <div className="flex items-center justify-center lg:space-x-2 space-y-4 lg:space-y-0 flex-col lg:flex-row">
+                                    <div className="grid grid-cols-1 place-items-center w-full">
                                       <div className="ai-image">
                                         <Image
                                           src="/testpopup.png"
                                           width={500}
                                           height={500}
                                           alt="ai"
-                                          className="w-full h-auto"
+                                          className="w-full h-auto max-w-[80vw] lg:max-w-[500px]"
                                         />
                                       </div>
-                                      <div className="ai-content flex flex-col items-center justify-center gap-5 p-2">
+                                      <div className="ai-content flex flex-col items-center justify-center gap-5 p-2 w-full">
                                         <Image
                                           src="/testtimer.png"
                                           width={80}
                                           height={100}
                                           alt="ai"
+                                          className="max-w-[20vw] lg:max-w-[80px]"
                                         />
 
-                                        <p className="text-center mx-auto text-xl">
+                                        <p className="text-center mx-auto text-base lg:text-xl">
                                           <span className="text-[#FC0000] font-semibold">
-                                            {" "}
-                                            Please wait for a moment...{" "}
+                                            Please wait for a moment...
                                           </span>
-                                          <br />{" "}
+                                          <br />
                                           <span className="text-[#1E3A8A] font-semibold">
                                             While we are generating the
                                             personalised test based on your
