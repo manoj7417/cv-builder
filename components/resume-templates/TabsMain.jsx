@@ -20,6 +20,7 @@ import { FaEllipsisVertical } from "react-icons/fa6";
 import PlusIcon from "../ui/PlusIcon";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
+import dayjs from "dayjs";
 
 const TabsMain = () => {
   const userdata = useUserStore((state) => state.userState.userdata);
@@ -51,7 +52,6 @@ const TabsMain = () => {
     setisCreatingResume(true);
     try {
       const response = await createNewResume(accessToken?.value, "Template3");
-      console.log(response.data);
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
@@ -184,10 +184,21 @@ const TabsMain = () => {
                         width="300"
                       />
 
-                      <div className="grid grid-cols-7 justify-between items-start gap-2 px-3 py-2 bg-white h-full">
-                        <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-words col-span-6">
-                          {item.title}
-                        </h3>
+                      <div className="flex justify-between items-start gap-2 px-3 py-2 bg-white h-full">
+                        <div className="w-[90%]">
+
+                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-words col-span-6">
+                            {item.title}
+                          </h3>
+                          <div className="flex justify-between">
+                            <p className="text-gray-400 text-xs">
+                              {dayjs(item.createdAt).format('DD-MMM-YYYY')}
+                            </p>
+                            <p className="text-gray-400 text-xs">
+                              {dayjs(item.createdAt).format('hh:mm A')}
+                            </p>
+                          </div>
+                        </div>
                         <div className="col-span-1">
                           <DropdownMenu>
                             <DropdownMenuTrigger>
@@ -203,7 +214,6 @@ const TabsMain = () => {
                           </DropdownMenu>
                         </div>
                       </div>
-
                     </div>
                   );
                 })}
