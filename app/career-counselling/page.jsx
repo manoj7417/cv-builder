@@ -205,7 +205,7 @@ export default function Page() {
                 {contentType === "Intro" && (
                   <div className="flex justify-center items-center flex-1 mt-10">
                     <div className="text-center">
-                      <h1 className="lg:text-5xl text-2xl font-bold text-blue-950">
+                      <h1 className="text-2xl lg:text-5xl  font-bold text-blue-950">
                         Welcome to the Career Counselling
                       </h1>
                       <p className="mt-4 lg:w-1/2 w-full mx-auto">
@@ -235,10 +235,10 @@ export default function Page() {
                 {contentType === "generateQuestions" && (
                   <section className="flex flex-col flex-1 gap-6 overflow-y-auto  sm:px-6 ">
                     <div className="space-y-4">
-                      <h2 className="text-4xl font-semibold text-[#1E3A8A]">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl font-semibold text-[#1E3A8A]">
                         {categories[currentStep]}
                       </h2>
-                      <p className="font-semibold">
+                      <p className="font-semibold text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                         Please follow these instructions to provide answers to
                         the questionnaire:
                       </p>
@@ -252,7 +252,7 @@ export default function Page() {
                               className="cursor-pointer p-4 flex  items-center  font-semibold text-gray-700"
                               onClick={() => toggleAccordion(quesIndex)}
                             >
-                              <div className="w-[90%]">
+                              <div className="w-[90%] text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                                 {questionObj.question}
                               </div>
                               <div className="md:w-[10%]  flex justify-center">
@@ -416,12 +416,12 @@ export default function Page() {
                       <CardContent>
                         <div className="flex justify-center items-center flex-1 w-full h-full">
                           <div>
-                            <p className="font-medium text-center">
+                            <p className="text-sm sm:font-medium md:font-medium lg:font-medium xl:font-medium 2xl:font-medium text-center">
                               Please follow these instructions to provide
                               answers to the questionnaire:
                             </p>
                             <ul className="list-disc pl-6">
-                              <li className="mb-2 py-2 flex  font-medium">
+                              <li className="mb-2 py-2 flex font-medium">
                                 <TiTick className="text-green-500 text-2xl mr-2" />
                                 <span>
                                   Click on{" "}
@@ -591,9 +591,9 @@ export default function Page() {
               ))
             )}
 
-            {showPopup && popupData && (
+            {/* {showPopup && popupData && (
               <div
-                className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50"
+                className="fixed top-0 inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50 "
                 onClick={closePopup}
               >
                 <div
@@ -675,6 +675,134 @@ export default function Page() {
                             Career Suggestions
                           </h2>
                           <ul className="space-y-3 text-sm h-48 overflow-scroll md:overflow-none md:h-full">
+                            {cardData?.careerSuggestions?.map(
+                              (career, index) => (
+                                <li
+                                  key={index}
+                                  className="py-2 space-y-2 text-[#1E3A8A]"
+                                >
+                                  <strong>Career:</strong> {career.career}
+                                  <br />
+                                  <strong>Reason:</strong> {career.reason}
+                                  <br />
+                                  <strong>Actions:</strong> {career.actions}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent className="mb-6" value="summary">
+                      <div className="max-w-4xl mx-auto summary_section">
+                        <div>
+                          <h2 className="text-xl font-bold mb-6 text-[#FC0000]">
+                            Summary
+                          </h2>
+                          <ul className="space-y-3 text-sm">
+                            {Object.entries(cardData?.summary).map(
+                              ([key, value], idx) => (
+                                <li key={idx} className="text-[#1E3A8A]">
+                                  <strong>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </strong>{" "}
+                                  <p>{value}</p>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </div>
+              </div>
+            )} */}
+            {showPopup && popupData && (
+              <div
+                className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50 mt-14"
+                onClick={closePopup}
+              >
+                <div
+                  className="bg-white w-full max-h-[40vh] min-h-[360px] p-6 rounded-lg shadow-lg relative z-60 overflow-y-scroll mx-4 sm:mx-6 lg:mx-0 max-w-5xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={closePopup}
+                    className="absolute top-4 right-4 sm:top-6 sm:right-8 md:top-4 md:right-8 text-gray-400 hover:text-gray-600 focus:outline-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <Tabs
+                    className="w-full py-5"
+                    defaultValue="actionableInsights"
+                  >
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto bg-[#1e3a8a78] rounded-full">
+                      <TabsTrigger
+                        value="actionableInsights"
+                        className="text-white rounded-md text-base font-bold sumtab"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Actionable Insights
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="careerSuggestions"
+                        className="text-white rounded-md text-base font-bold sumtab"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Career Suggestions
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="summary"
+                        className="text-white rounded-md text-base font-bold sumtab"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Summary
+                      </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="actionableInsights" className="mb-4">
+                      <div className="actions_section max-w-4xl mx-auto">
+                        <div>
+                          <h2 className="text-xl font-bold mb-6 text-[#FC0000]">
+                            Actionable Insights
+                          </h2>
+                          <ul className="space-y-3 text-sm">
+                            {Object.entries(cardData?.actionableInsights).map(
+                              ([key, value], idx) => (
+                                <li key={idx} className="text-[#1E3A8A]">
+                                  <strong>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                    :
+                                  </strong>{" "}
+                                  <p>{value}</p>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent className="mb-6" value="careerSuggestions">
+                      <div className="career_section max-w-4xl mx-auto">
+                        <div className="space-y-3">
+                          <h2 className="text-xl font-bold text-[#FC0000] flex items-center gap-3">
+                            Career Suggestions
+                          </h2>
+                          <ul className="space-y-3 text-sm">
                             {cardData?.careerSuggestions?.map(
                               (career, index) => (
                                 <li

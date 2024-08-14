@@ -15,6 +15,7 @@ import { BsFacebook } from "react-icons/bs";
 // import ScrollButton from "@/shared/ScrollButton";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <>
       <footer className="bg-[#ffffff] z-20 relative">
@@ -251,15 +252,17 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-black">
-            &copy; 2024.{" "}
+            &copy; {currentYear}. Genies career hub . All rights reserved.
+            <br />
+            <br />
+            powered by
             <Link
-              href={"https://www.glassfrogtech.com/"}
+              href="https://www.glassfrogtech.com/"
               target="_blank"
-              className="hover:underline"
+              className="hover:underline pl-1"
             >
-              Glassfrog Technologies
+              glassfrog technologies
             </Link>
-            . All rights reserved.
           </p>
         </div>
       </footer>

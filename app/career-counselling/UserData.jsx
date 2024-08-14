@@ -128,10 +128,10 @@ export default function UserData() {
       </Dialog>
       <section className="flex flex-col flex-1 gap-6 overflow-y-auto  sm:px-6 ">
         <div className="space-y-4">
-          <h2 className="text-4xl text-[#1E3A8A] font-bold">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl text-[#1E3A8A] font-bold">
             {categories[currentStep]}
           </h2>
-          <p className="font-semibold">
+          <p className="font-semibold text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
             Please follow these instructions to provide answers to the
             questionnaire:
           </p>
@@ -145,7 +145,7 @@ export default function UserData() {
                 onClick={() => toggleQuestion(quesIndex)}
               >
                 <div className="w-[90%]">
-                  <h3 className="text-lg  text-[#1E3A8A] font-bold">
+                  <h3 className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg  text-[#1E3A8A] font-bold">
                     {questionObj.question}
                   </h3>
                 </div>

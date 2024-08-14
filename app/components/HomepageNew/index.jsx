@@ -116,7 +116,7 @@ export default function HomepageNew() {
               <div className="flex justify-center xs:justify-start">
                 <button
                   onClick={handleButtonClick}
-                  className="bg-blue-950 text-white py-3 px-8 rounded hover:bg-blue-950 transition duration-300"
+                  className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
                 >
                   Get Started
                 </button>
