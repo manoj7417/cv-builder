@@ -7,14 +7,14 @@ const TermsConditionPage = () => {
     <ResumeHeader/>
       <div className="bg-gradient-to-r from-white to-[#dcecff] text-gray-800 py-20">
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-6">Terms and Conditions</h1>
+          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-bold mb-6">Terms and Conditions</h1>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               1. CV Creator, Optimizer, and CV Match
             </h2>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">a. Eligibility:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">a. Eligibility:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   These tools will help you create, optimize, and match your CV.
                 </li>
@@ -23,18 +23,18 @@ const TermsConditionPage = () => {
               </ul>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">b. Data Privacy:</h3>
-              <p className="text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">b. Data Privacy:</h3>
+              <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 We respect your privacy. Your CV is processed securely and
                 solely to the benefit of your application.
               </p>
-              <p className="text-lg">
+              <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 Please refer to our Privacy Statement for more information.
               </p>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">c. Accuracy:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">c. Accuracy:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   We strive to be accurate, but always check the CV generated
                   for discrepancies.
@@ -47,12 +47,12 @@ const TermsConditionPage = () => {
             </div>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               2. Psychometric Testing
             </h2>
             <div className="mb-6">
               <h3 className="text-xl font-semibold mb-2">a. Purpose:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   Psychometric tests can provide insight into your personality,
                   abilities, and preferences.
@@ -61,21 +61,21 @@ const TermsConditionPage = () => {
               </ul>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">b. Interpretation:</h3>
-              <p className="text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">b. Interpretation:</h3>
+              <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 It is important to consider the test results in conjunction with
                 all other factors.
               </p>
-              <p className="text-lg">
+              <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 If you need professional advice, seek it.
               </p>
             </div>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">3. AI Career Coach</h2>
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">3. AI Career Coach</h2>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">a. Guidance:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">a. Guidance:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   AI Career Coach offers you personalized advice based on your
                   goals and profile.
@@ -87,8 +87,8 @@ const TermsConditionPage = () => {
               </ul>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">b. Limitations:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">b. Limitations:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   AI Career Coach is not a replacement for professional career
                   counseling.
@@ -101,14 +101,14 @@ const TermsConditionPage = () => {
             </div>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               4. Career Coaching Services
             </h2>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">
                 a. Service Details:
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   Experienced professionals deliver our career coaching
                   services.
@@ -119,8 +119,8 @@ const TermsConditionPage = () => {
               </ul>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">b. Payment:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">b. Payment:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   The cost of career coaching is clearly stated at the time of
                   booking.
@@ -130,10 +130,10 @@ const TermsConditionPage = () => {
             </div>
           </section>
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">5. General Terms</h2>
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">5. General Terms</h2>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">a. User Conduct:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">a. User Conduct:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>Use our services ethically and responsibly.</li>
                 <li>
                   Respect the community guidelines as well as your fellow users.
@@ -141,8 +141,8 @@ const TermsConditionPage = () => {
               </ul>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-2">b. Modifications:</h3>
-              <ul className="list-disc pl-5 space-y-2 text-lg">
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">b. Modifications:</h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   These terms may be updated periodically. Please check for the
                   most recent version.
@@ -155,7 +155,7 @@ const TermsConditionPage = () => {
           </section>
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
-            <p className="text-lg">
+            <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               Please contact our Customer Service team at{" "}
               <a
                 href="mailto:support@geniescareerhub.com"

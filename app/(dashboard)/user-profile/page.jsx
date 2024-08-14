@@ -719,35 +719,36 @@ const ProfilePage = () => {
                       <h5 className="mb-2 text-lg sm:text-xl font-bold text-gray-900">
                         User Summary
                       </h5>
-                      </a>
-                    </div>
+                    </a>
                     <p className="mb-3 font-normal text-sm text-gray-700">
                       Interests: {val.summary.interests.slice(0, 100)}
                     </p>
-                    <div className="summary_card_footer absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
-                      <div
-                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
-                        onClick={() => handleReadMore(val)}
+                  </div>
+
+                  <div className="summary_card_footer absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+                    <div
+                      className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
+                      onClick={() => handleReadMore(val)}
+                    >
+                      Read more
+                      <svg
+                        className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
                       >
-                        Read more
-                        <svg
-                          className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                          />
-                        </svg>
-                      </div>
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                      </svg>
                     </div>
                   </div>
+                </div>
               ))
             )}
 

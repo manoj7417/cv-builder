@@ -18,6 +18,7 @@ import Skeleton from "react-loading-skeleton";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ImSpinner3 } from "react-icons/im";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 export default function Page() {
   const [showIntro, setShowIntro] = useState(false);
@@ -25,12 +26,14 @@ export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
   const [userData, setUserData] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
-  const [popupData, setPopupData] = useState(null);
+  const [popupData, setPopupData] = useState([]);
   const [cardData, setCardData] = useState(null);
   const [testSummary, setTestSummary] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [startingTest, setStartingTest] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
+
+  console.log("popupData::", popupData);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -196,6 +199,7 @@ export default function Page() {
 
   return (
     <>
+      <ResumeHeader />
       <section className="career_counselling">
         <div className="flex min-h-[500px] w-full bg-background p-5">
           <div className="flex flex-col flex-1 sm:gap-4 sm:py-4 sm:pl-14">
@@ -480,7 +484,7 @@ export default function Page() {
         </h1>
         <div className="summary_cards_wrapper">
           <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10">
-            {loading ? (
+            {/* {loading ? (
               Array(5)
                 .fill()
                 .map((_, index) => (
@@ -488,7 +492,62 @@ export default function Page() {
                     <Skeleton width="100%" height={200} />
                   </div>
                 ))
-            ) : popupData.length === 0 ? (
+            ) : popupData?.length === 0 ? (
+              <div className="w-[350px] mr-10 my-4">
+                <Card className="w-full h-[200px] flex items-center justify-center">
+                  <span>No Test Summary data yet</span>
+                </Card>
+              </div>
+            ) : (
+              popupData?.map((val, index) => (
+                <div className="summary_cards relative" key={index}>
+                  <div className="max-w-2xl  p-6 min-h-[220px] bg-white border border-gray-200 rounded-lg shadow">
+                    <a href="#">
+                      <h5 className="mb-2 text-xl font-bold text-gray-900">
+                        User Summary
+                      </h5>
+                    </a>
+                    <p className="mb-5 font-normal text-sm text-gray-700">
+                      <strong>Interests</strong>:{" "}
+                      {val.summary.interests?.slice(0, 50)}
+                    </p>
+                    <div className="summary_card_footer absolute bottom-6 left-6 right-6 mt-5">
+                      <div
+                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
+                        onClick={(e) => handleReadMore(e, val)}
+                      >
+                        Read more
+                        <svg
+                          className="rtl:rotate-180 w-2.5 h-2.5 ms-2 mt-1"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 10"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M1 5h12m0 0L9 1m4 4L9 9"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )} */}
+
+            {loading ? (
+              Array(4)
+                .fill()
+                .map((_, index) => (
+                  <div className="w-[350px] mr-10 my-4 flex-1" key={index}>
+                    <Skeleton width="100%" height={150} />
+                  </div>
+                ))
+            ) : popupData?.length === 0 ? (
               <div className="w-[350px] mr-10 my-4">
                 <Card className="w-full h-[200px] flex items-center justify-center">
                   <span>No Test Summary data yet</span>
@@ -567,7 +626,7 @@ export default function Page() {
                     className="w-full py-5"
                     defaultValue="actionableInsights"
                   >
-                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto bg-[#1e3a8a78] rounded-full">
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto gap-0 md:gap-6 bg-[#1e3a8a78] rounded-full">
                       <TabsTrigger
                         value="actionableInsights"
                         className="text-white  rounded-md text-base font-bold sumtab"
@@ -618,7 +677,7 @@ export default function Page() {
                           <h2 className="text-xl font-bold text-[#FC0000] flex items-center gap-3">
                             Career Suggestions
                           </h2>
-                          <ul className="space-y-3 text-sm">
+                          <ul className="space-y-3 text-sm h-48 overflow-scroll md:overflow-none md:h-full">
                             {cardData?.careerSuggestions?.map(
                               (career, index) => (
                                 <li
