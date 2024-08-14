@@ -98,7 +98,11 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <Link href="/resume" className="text-black transition" prefetch={true}>
+                  <Link
+                    href="/resume"
+                    className="text-black transition"
+                    prefetch={true}
+                  >
                     CV Creator
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>
@@ -126,7 +130,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/coming-soon" className="text-black transition">
-                    Psycometric Test
+                    Psychometric Test
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>
                 </li>
@@ -193,7 +197,10 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacy-policy" className="text-black transition">
+                  <Link
+                    href="/privacy-policy"
+                    className="text-black transition"
+                  >
                     {" "}
                     Privacy Policy{" "}
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
@@ -207,7 +214,10 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms-condition" className="text-black transition">
+                  <Link
+                    href="/terms-condition"
+                    className="text-black transition"
+                  >
                     Terms & Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>
@@ -241,7 +251,15 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-black">
-            &copy; 2024. <Link href={"https://www.glassfrogtech.com/"} target="_blank" className="hover:underline">Glassfrog Technologies</Link>. All rights reserved.
+            &copy; 2024.{" "}
+            <Link
+              href={"https://www.glassfrogtech.com/"}
+              target="_blank"
+              className="hover:underline"
+            >
+              Glassfrog Technologies
+            </Link>
+            . All rights reserved.
           </p>
         </div>
       </footer>
