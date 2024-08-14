@@ -30,6 +30,7 @@ import { templateType } from "@/components/component/Slider";
 import { tempType, TempTypes } from "@/lib/templateTypes/TempTypes";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -53,6 +54,9 @@ const ResumeTooltip = dynamic(
 );
 
 import { convert } from "html-to-text";
+import { IoDocumentText } from "react-icons/io5";
+import Link from "next/link";
+import { FaFilePdf } from "react-icons/fa6";
 
 const images = [
   {
@@ -217,8 +221,7 @@ const ResumeView = ({ setIsContentVisible }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [showFilenameModal, setShowFilenameModal] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
@@ -306,24 +309,7 @@ const ResumeView = ({ setIsContentVisible }) => {
 
     try {
       if (userdata?.subscription?.plan === "free") {
-        // Download resume in text format for basic users
-        const resumeText = convert(resume, {
-          wordwrap: 130,
-          selectors: [
-            { selector: "a", options: { ignoreHref: true } }, // Ignore links
-            // You can add more selectors to customize the conversion
-          ],
-        });
-        const blob = new Blob([resumeText], { type: "text/plain" });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "resume.txt";
-        a.target = "_blank";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+        setShowModal(true);
         return;
       }
 
@@ -353,6 +339,26 @@ const ResumeView = ({ setIsContentVisible }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const downloadAsText = () => {
+    const el = document.getElementById("resume");
+    const resume = el.innerHTML;
+    const resumeText = convert(resume, {
+      wordwrap: 130,
+      selectors: [{ selector: "a", options: { ignoreHref: true } }],
+    });
+    const blob = new Blob([resumeText], { type: "text/plain" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "resume.txt";
+    a.target = "_blank";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    setShowModal(false);
   };
 
   const handleTemplateChange = (val) => {
@@ -535,6 +541,60 @@ const ResumeView = ({ setIsContentVisible }) => {
                 <FaDownload className='h-4 w-4 text-black' />
               </button>
             </ResumeTooltip>
+            <Dialog open={showModal} onOpenChange={setShowModal}>
+              <DialogContent className='h-full sm:max-w-[60dvw] sm:h-[80dvh] p-0 bg-white'>
+                <DialogHeader>
+                  <DialogTitle className='text-4xl text-center mt-20 text-blue-900'>
+                    Choose Format
+                  </DialogTitle>
+                  <button
+                    className='absolute top-4 right-4 text-gray-500 hover:text-gray-700'
+                    onClick={() => setShowModal(false)}>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      strokeWidth='2'
+                      stroke='currentColor'
+                      className='w-6 h-6'>
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M6 18L18 6M6 6l12 12'
+                      />
+                    </svg>
+                  </button>
+                </DialogHeader>
+                <div className='modal_content_section flex'>
+                  <div className='w-1/2 h-full hidden sm:block'>
+                    <Image
+                      src='/illustration-manager-choosing-new-worker.png'
+                      alt='choice-worker-concept-illustrated'
+                      className='absolute bottom-5'
+                      width={400}
+                      height={500}
+                    />
+                  </div>
+                  <div className='w-1/2 h-full'>
+                    <div className='flex flex-col gap-10 p-10'>
+                      <button
+                        className='border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-4  rounded-md text-sm font-bold'
+                        onClick={downloadAsText}>
+                        Download as Text{" "}
+                        <IoDocumentText className='text-blue-700 inline-flex ml-2 text-xl animate-bounce' />
+                      </button>
+                      <Link
+                        href='/pricing'
+                        className='py-4 border-2 border-red-500 hover:border-red-700  text-red-500 text-center rounded-md text-sm font-bold'
+                        disabled>
+                        Download as PDF (Upgrade Required){" "}
+                        <FaFilePdf className='text-red-500 inline-flex ml-2 text-xl animate-bounce' />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
             <div className='choose_templates'>
               <ResumeTooltip icon={LuLayoutGrid} title='Choose Templates'>
                 <Drawer
