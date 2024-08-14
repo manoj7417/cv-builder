@@ -1,5 +1,4 @@
 /** @format */
-
 // import { ChevronRight } from 'lucide-react'
 import React from "react";
 import { FaInstagram } from "react-icons/fa6";
@@ -35,10 +34,9 @@ export default function Footer() {
                 </span>
               </a>
             </div> */}
-
             <ul className="mt-8 flex justify-center gap-6 sm:mt-0">
               <li>
-                <a
+                <Link
                   href="https://www.facebook.com/profile.php?id=61560696226983"
                   target="_blank"
                 >
@@ -47,10 +45,10 @@ export default function Footer() {
 
                     <BsFacebook className="h-6 w-6" />
                   </div>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="https://www.instagram.com/genies_career_hub/"
                   target="_blank"
                 >
@@ -58,7 +56,7 @@ export default function Footer() {
                     <span className="sr-only">Instagram</span>
                     <BsInstagram className="h-6 w-6" />
                   </div>
-                </a>
+                </Link>
               </li>
 
               {/* <li>
@@ -71,24 +69,24 @@ export default function Footer() {
               </li> */}
               <li>
                 <div className="text-black transition hover:text-sky-500">
-                  <a
+                  <Link
                     href="https://www.linkedin.com/company/100784711/admin/feed/posts/"
                     target="_blank"
                   >
                     <span className="sr-only">LinkedIn</span>
                     <FaLinkedin className="h-6 w-6" />
-                  </a>
+                  </Link>
                 </div>
               </li>
               <li>
                 <div className="text-black transition hover:text-red-700">
-                  <a
+                  <Link
                     href="https://www.pinterest.co.uk/GeniesCareerHub/"
                     target="_blank"
                   >
                     <span className="sr-only">Pinterest</span>
                     <FaPinterest className="h-6 w-6" />
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>
@@ -100,37 +98,37 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a href="/resume-builder" className="text-black transition">
+                  <Link href="/resume" className="text-black transition" prefetch={true}>
                     CV Creator
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/resumeAnalyzer-dashboard"
+                  <Link
+                    href="/resume-analyzer"
                     className="text-black transition"
                   >
                     CV Optimiser
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/jobCV" className="text-black transition">
-                    CV Match(beta)
+                  <Link href="/job-cv" className="text-black transition">
+                    CV Match
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/coming-soon" className="text-black transition">
+                  <Link href="/coming-soon" className="text-black transition">
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/coming-soon" className="text-black transition">
+                  <Link href="/coming-soon" className="text-black transition">
                     Psycometric Test
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -172,23 +170,20 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>
                 </li>
-
                 <li>
-                  <a
+                  <Link
                     href="https://www.careergenies.co.uk/blog"
                     className="text-black transition"
                     target="_blank"
                   >
                     Blog
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
-
             <div>
               <p className="font-bold text-gray-900">Legal</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link href="/return-policy" className="text-black transition">
@@ -197,7 +192,13 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>
                 </li>
-
+                <li>
+                  <Link href="/privacy-policy" className="text-black transition">
+                    {" "}
+                    Privacy Policy{" "}
+                    <MdOutlineKeyboardArrowRight className="inline text-xl" />
+                  </Link>
+                </li>
                 <li>
                   <Link href="/refund-policy" className="text-black transition">
                     {" "}
@@ -205,43 +206,42 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>
                 </li>
-
                 <li>
-                  <a href="/terms-condition" className="text-black transition">
+                  <Link href="/terms-condition" className="text-black transition">
                     Terms & Condition
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/gdpr" className="text-black transition">
+                  <Link href="/gdpr" className="text-black transition">
                     GDPR
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/editorial-guidlines"
                     className="text-black transition"
                   >
                     Editorial Guidlines
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/cookies-tracking-policy"
                     className="text-black transition"
                   >
                     Cookies & Tracking Policy
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
 
           <p className="text-sm text-black">
-            &copy; 2024. Genies Career Hub. All rights reserved.
+            &copy; 2024. <Link href={"https://www.glassfrogtech.com/"} target="_blank" className="hover:underline">Glassfrog Technologies</Link>. All rights reserved.
           </p>
         </div>
       </footer>

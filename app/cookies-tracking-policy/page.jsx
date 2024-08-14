@@ -4,6 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { FaRocket, FaCrown } from "react-icons/fa";
 
 import "react-circular-progressbar/dist/styles.css";
+import Link from "next/link";
 
 const Page = () => {
   return (
@@ -89,17 +90,17 @@ const Page = () => {
               <h2 className="text-2xl font-semibold mb-4">Our Commitment</h2>
               <p className="text-lg mb-4">
                 We explain in our{" "}
-                <a href="#" className="text-blue-500 hover:underline">
+                <Link href="/privacy-policy" className="text-blue-500 hover:underline">
                   Privacy Policy
-                </a>{" "}
+                </Link>{" "}
                 how we handle your personal data. If you have any questions or
                 concerns about our cookie usage, feel free to contact us at{" "}
-                <a
+                <Link
                   href="mailto:support@geniescareerhub.com"
                   className="text-blue-500 hover:underline"
                 >
                   support@geniescareerhub.com
-                </a>
+                </Link>
                 .
               </p>
             </section>

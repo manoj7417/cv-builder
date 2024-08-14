@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 
 const Page = () => {
@@ -121,12 +122,12 @@ const Page = () => {
               engaged by our clarifications and insights as needed. If you
               prefer to keep your feedback private, feel free to reach out to us
               at{" "}
-              <a
+              <Link
                 href="mailto:support@geniescareerhub.com"
                 className="text-blue-500 hover:underline"
               >
                 support@geniescareerhub.com
-              </a>
+              </Link>
               .
             </p>
           </section>

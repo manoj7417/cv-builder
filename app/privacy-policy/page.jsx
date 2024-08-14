@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const PrivacyPage = () => {
@@ -411,12 +412,12 @@ const PrivacyPage = () => {
             </p>
             <p className="text-lg">
               <strong>Website:</strong>{" "}
-              <a
+              <Link
                 href="https://www.ico.org.uk/make-a-complaint"
                 className="text-blue-500 hover:underline"
               >
                 https://www.ico.org.uk/make-a-complaint
-              </a>
+              </Link>
             </p>
           </section>
         </div>

@@ -19,6 +19,7 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
 import "../components/HomepageNew/Homepage.css";
+import Link from "next/link";
 
 const ComingSoonPage = () => {
   const userState = useUserStore((state) => state.userState);
@@ -114,7 +115,7 @@ const ComingSoonPage = () => {
               </p>
               <div className='flex lg:flex-row flex-col gap-2 md:gap-8 sm:gap-8 justify-center items-center'>
                 <div className='button_wrapper mt-8'>
-                  <a href='/contact-us'>
+                  <Link href='/contact-us'>
                     <button className='get_start_btn'>
                       <span className='btn_text'>Hire Coach</span>
                       <div className='btn_overlay'>
@@ -134,10 +135,10 @@ const ComingSoonPage = () => {
                         </svg>
                       </div>
                     </button>
-                  </a>
+                  </Link>
                 </div>
                 <div className='button_wrapper mt-8 flex justify-center lg:justify-start'>
-                  <a href='#learnmore'>
+                  <Link href='#learnmore'>
                     <button className='get_start_btn'>
                       <span className='btn_text'>Learn More</span>
                       <div className='btn_overlay'>
@@ -157,7 +158,7 @@ const ComingSoonPage = () => {
                         </svg>
                       </div>
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -314,7 +315,7 @@ const ComingSoonPage = () => {
                   Our Career Coaches have all the answers you need.
                 </p>
                 <div className='button_wrapper mt-8'>
-                  <a href='/contact-us'>
+                  <Link href='/contact-us'>
                     <button
                       className='get_start_btn'
                       style={{ background: "#88e48d", border: "none" }}>
@@ -336,7 +337,7 @@ const ComingSoonPage = () => {
                         </svg>
                       </div>
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -354,7 +355,7 @@ const ComingSoonPage = () => {
                   upskill.
                 </p>
                 <div className='button_wrapper mt-8'>
-                  <a href='/contact-us'>
+                  <Link href='/contact-us'>
                     <button
                       className='get_start_btn'
                       style={{ background: "#ff914c", border: "none" }}>
@@ -376,7 +377,7 @@ const ComingSoonPage = () => {
                         </svg>
                       </div>
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -393,7 +394,7 @@ const ComingSoonPage = () => {
                   through all the dilemmas and create a strategy for you.
                 </p>
                 <div className='button_wrapper mt-8'>
-                  <a href='/contact-us'>
+                  <Link href='/contact-us'>
                     {" "}
                     <button
                       className='get_start_btn'
@@ -416,7 +417,7 @@ const ComingSoonPage = () => {
                         </svg>
                       </div>
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -435,7 +436,7 @@ const ComingSoonPage = () => {
                   you with personalised advice and approach.
                 </p>
                 <div className='button_wrapper mt-8'>
-                  <a href='/contact-us'>
+                  <Link href='/contact-us'>
                     {" "}
                     <button
                       className='get_start_btn'
@@ -458,7 +459,7 @@ const ComingSoonPage = () => {
                         </svg>
                       </div>
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -481,7 +482,7 @@ const ComingSoonPage = () => {
                 assist you in achieving your career goals!
               </p>
               <div className='button_wrapper mt-8 flex justify-center lg:justify-start'>
-                <a href='/about-us'>
+                <Link href='/about-us'>
                   <button className='get_start_btn'>
                     <span className='btn_text'>Learn More</span>
                     <div className='btn_overlay'>
@@ -501,7 +502,7 @@ const ComingSoonPage = () => {
                       </svg>
                     </div>
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
             {/* Right Column - Image and Features */}

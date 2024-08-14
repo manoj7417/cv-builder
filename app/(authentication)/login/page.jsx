@@ -195,9 +195,18 @@ function LoginUser() {
       </Dialog>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
-          <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md sm:border-0 border-2 shadow-xl shadow-blue-100 sm:shadow-none  sm:py-0 py-12 px-8 sm:px-0 rounded-2xl">
-              <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl">
+          <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full sm:border-0 border-0 shadow-none shadow-blue-100 sm:shadow-none   sm:py-0 py-20 px-8 sm:px-0 rounded-2xl">
+            <Link href={"/"} className="flex justify-center items-center mb-[60px]">
+              <Image
+                src="/genies-career-hub-logo.png"
+                width={100}
+                height={100}
+                alt="white_logo"
+                className="w-28 h-auto object-contain"
+              />
+            </Link>
+              <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
                 Sign in
               </h2>
               <form className="mt-5" onSubmit={handleSubmit(handleLogin)}>
@@ -205,7 +214,7 @@ function LoginUser() {
                   <div>
                     <label
                       htmlFor=""
-                      className="text-base font-medium text-gray-900"
+                      className="lg:text-base text-sm font-medium text-gray-900"
                     >
                       Email address
                     </label>
@@ -233,7 +242,7 @@ function LoginUser() {
                   <div>
                     <label
                       htmlFor=""
-                      className="text-base font-medium text-gray-900"
+                      className="lg:text-base text-sm font-medium text-gray-900"
                     >
                       Password
                     </label>
@@ -294,7 +303,7 @@ function LoginUser() {
                       )}
                     </button>
                   </div>
-                  <p className="mt-2 text-sm text-gray-600">
+                  <p className="mt-2 text-sm text-gray-600 lg:text-start text-center">
                     Don&apos;t have an account?{" "}
                     <Link
                       href="/register"
