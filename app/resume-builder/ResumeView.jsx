@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import { cn } from "@/lib/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -34,7 +36,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-;
 import { ImSpinner3 } from "react-icons/im";
 import Lottie from "lottie-react";
 import Loader1 from "@/public/animations/downloadLoader1.json";
@@ -50,6 +51,8 @@ const ResumeTooltip = dynamic(
   () => import("@/components/component/ResumeTooltip"),
   { ssr: false }
 );
+
+import { convert } from "html-to-text";
 
 const images = [
   {
@@ -220,7 +223,8 @@ const ResumeView = ({ setIsContentVisible }) => {
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
-  const { userdata } = useUserStore(state => state.userState)
+  const { userdata } = useUserStore((state) => state.userState);
+  console.log("userdata:::", userdata);
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
@@ -230,8 +234,9 @@ const ResumeView = ({ setIsContentVisible }) => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
-  const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
-
+  const updateRedirectPricingRoute = useUserStore(
+    (state) => state.updateRedirectPricingRoute
+  );
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -248,10 +253,10 @@ const ResumeView = ({ setIsContentVisible }) => {
         email: userState.userdata.email,
         name: temp,
         // url: "https://career-genies-frontend.vercel.app/paymentSuccess",
-        url: 'http://localhost:3000/paymentSuccess',
+        url: "http://localhost:3000/paymentSuccess",
         cancel_url: window.location.href,
         templateName: resumeData.metadata.template,
-        temp_type: type
+        temp_type: type,
       },
       accessToken.value
     )
@@ -267,25 +272,28 @@ const ResumeView = ({ setIsContentVisible }) => {
       });
   };
 
-
   const TemplateCheck = async (templateName, token) => {
     try {
-      const response = await axios.post('/api/checkUserTemplate', { templateName }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.post(
+        "/api/checkUserTemplate",
+        { templateName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      })
+      );
       if (response.status === 200) {
-        return true
+        return true;
       }
     } catch (error) {
-      throw new Error(error.response.data.message)
+      throw new Error(error.response.data.message);
     }
-  }
+  };
 
   const checkUserTemplate = async () => {
-    const { accessToken } = await GetTokens()
-    handleDownloadResume(accessToken.value)
+    const { accessToken } = await GetTokens();
+    handleDownloadResume(accessToken.value);
   };
 
   const handleDownloadResume = async (token) => {
@@ -297,15 +305,20 @@ const ResumeView = ({ setIsContentVisible }) => {
     setIsLoading(true);
 
     try {
-      const response = await printResume(body, token);
-      
-      if (response.ok) {
-        generateFunfact();
-        const blob = await response.blob();
+      if (userdata?.subscription?.plan === "free") {
+        // Download resume in text format for basic users
+        const resumeText = convert(resume, {
+          wordwrap: 130,
+          selectors: [
+            { selector: "a", options: { ignoreHref: true } }, // Ignore links
+            // You can add more selectors to customize the conversion
+          ],
+        });
+        const blob = new Blob([resumeText], { type: "text/plain" });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "generated.pdf";
+        a.download = "resume.txt";
         a.target = "_blank";
         document.body.appendChild(a);
         a.click();
@@ -313,12 +326,30 @@ const ResumeView = ({ setIsContentVisible }) => {
         window.URL.revokeObjectURL(url);
         return;
       }
-      if (response.status !== 500) {
-        updateRedirectPricingRoute('/resume-builder')
-        return router.push('/pricing')
+
+      if (userdata?.subscription?.plan === "premium") {
+        const response = await printResume(body, token);
+        if (response.ok) {
+          generateFunfact();
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "generated.pdf";
+          a.target = "_blank";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+          return;
+        }
+        if (response.status !== 500) {
+          updateRedirectPricingRoute("/resume-builder");
+          return router.push("/pricing");
+        }
       }
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -422,22 +453,22 @@ const ResumeView = ({ setIsContentVisible }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-white to-blue-100">
+      <div className='flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-white to-blue-100'>
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
-            <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
-              <div className="flex">
-                <div className="w-[50%]">
+            <DialogContent className='sm:max-w-[60vw] h-[60vh] bg-white'>
+              <div className='flex'>
+                <div className='w-[50%]'>
                   <Lottie animationData={animation} />
                 </div>
-                <div className="w-[50%] flex flex-col  justify-center">
-                  <div className="text-fancy text-5xl text-center">
-                    <h1 className="my-2">Did you know?</h1>
-                    <p className="text-xl my-3">{funfact}</p>
+                <div className='w-[50%] flex flex-col  justify-center'>
+                  <div className='text-fancy text-5xl text-center'>
+                    <h1 className='my-2'>Did you know?</h1>
+                    <p className='text-xl my-3'>{funfact}</p>
                   </div>
-                  <div className="flex mt-10 items-center justify-center">
-                    <div className="flex items-center justify-center">
-                      <ImSpinner3 className="mr-1 animate-spin" />
+                  <div className='flex mt-10 items-center justify-center'>
+                    <div className='flex items-center justify-center'>
+                      <ImSpinner3 className='mr-1 animate-spin' />
                     </div>
                     <p>Downloading...</p>
                   </div>
@@ -448,99 +479,90 @@ const ResumeView = ({ setIsContentVisible }) => {
         )}
         <div>
           <div
-            className="shadow-2xl overflow-y-scroll h-screen"
+            className='shadow-2xl overflow-y-scroll h-screen'
             style={{
               transform: `scale(${scale})`,
-            }}
-          >
+            }}>
             <div
-              id="resume"
+              id='resume'
               className={cn("relative bg-white")}
               style={{
                 width: `${pageSizeMap["a4"].width * MM_TO_PX}px`,
                 height: `${pageSizeMap["a4"].height * MM_TO_PX}px`,
-              }}
-            >
+              }}>
               <GetTemplate name={data?.metadata?.template} resumeData={data} />
-              <div className="text-center bg-white">
+              <div className='text-center bg-white'>
                 <p>@Genies Career Hub</p>
               </div>
             </div>
           </div>
-
         </div>
-        <div className="toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl">
-          <div className="auth_section flex justify-around w-full  items-center px-2">
-            <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
+        <div className='toolbar_floating_button absolute bottom-5 xl:w-[60%] md:w-[60%] w-full rounded-full shadow-2xl'>
+          <div className='auth_section flex justify-around w-full  items-center px-2'>
+            <ResumeTooltip icon={BsFullscreen} title='Fullscreen'>
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-                onClick={() => setIsContentVisible(true)}
-              >
-                <BsFullscreen className="h-5 w-5 text-black font-bold" />
+                className='2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden'
+                onClick={() => setIsContentVisible(true)}>
+                <BsFullscreen className='h-5 w-5 text-black font-bold' />
               </button>
             </ResumeTooltip>
-            <ResumeTooltip icon={FiPlus} title="Zoom In">
+            <ResumeTooltip icon={FiPlus} title='Zoom In'>
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={handleZoomIn}
-              >
-                <FiPlus className="h-5 w-5 text-black font-bold" />
+                className='2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md'
+                onClick={handleZoomIn}>
+                <FiPlus className='h-5 w-5 text-black font-bold' />
               </button>
             </ResumeTooltip>
-            <ResumeTooltip icon={FiMinus} title="Zoom Out">
+            <ResumeTooltip icon={FiMinus} title='Zoom Out'>
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={handleZoomOut}
-              >
-                <FiMinus className="h-5 w-5 text-black font-bold" />
+                className='2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md'
+                onClick={handleZoomOut}>
+                <FiMinus className='h-5 w-5 text-black font-bold' />
               </button>
             </ResumeTooltip>
-            <ResumeTooltip icon={CiUndo} title="Reset">
+            <ResumeTooltip icon={CiUndo} title='Reset'>
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={handleReset}
-              >
-                <CiUndo className="h-5 w-5 text-black font-bold" />
+                className='2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md'
+                onClick={handleReset}>
+                <CiUndo className='h-5 w-5 text-black font-bold' />
               </button>
             </ResumeTooltip>
-            <ResumeTooltip icon={FaDownload} title="Download Template">
+            <ResumeTooltip icon={FaDownload} title='Download Template'>
               <button
-                className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
+                className='2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md'
                 onClick={checkUserTemplate}
-                disabled={isLoading}
-              >
-                <FaDownload className="h-4 w-4 text-black" />
+                disabled={isLoading}>
+                <FaDownload className='h-4 w-4 text-black' />
               </button>
             </ResumeTooltip>
-            <div className="choose_templates">
-              <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
+            <div className='choose_templates'>
+              <ResumeTooltip icon={LuLayoutGrid} title='Choose Templates'>
                 <Drawer
-                  direction="right"
+                  direction='right'
                   open={isDrawerOpen}
-                  onOpenChange={setIsDrawerOpen}
-                >
+                  onOpenChange={setIsDrawerOpen}>
                   <DrawerTrigger
-                    className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
-                    onClick={() => setIsDrawerOpen(true)}
-                  >
-                    <LuLayoutGrid className="h-5 w-5 text-black inline" />
+                    className='2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center'
+                    onClick={() => setIsDrawerOpen(true)}>
+                    <LuLayoutGrid className='h-5 w-5 text-black inline' />
                   </DrawerTrigger>
-                  <DrawerContent className="bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0">
+                  <DrawerContent className='bg-white flex flex-col h-full w-[500px] mt-24 fixed right-0'>
                     <DrawerHeader>
                       <DrawerTitle>Choose Templates</DrawerTitle>
                       <DrawerDescription>
-                        <div className="grid grid-cols-2 gap-5 overflow-y-scroll h-screen">
+                        <div className='grid grid-cols-2 gap-5 overflow-y-scroll h-screen'>
                           {images.map((image, index) => {
                             return (
                               <div
                                 key={index}
-                                className="image_section_1 "
-                                onClick={() => handleTemplateChange(image.name)}
-                              >
+                                className='image_section_1 '
+                                onClick={() =>
+                                  handleTemplateChange(image.name)
+                                }>
                                 <Image
                                   src={image.src}
                                   alt={image.alt}
-                                  className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"
+                                  className='cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]'
                                   width={500}
                                   height={500}
                                 />
@@ -557,7 +579,6 @@ const ResumeView = ({ setIsContentVisible }) => {
           </div>
         </div>
       </div>
-
     </>
   );
 };
