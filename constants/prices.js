@@ -15,36 +15,36 @@ export const prices = [
         currency: 'USD',
         sign: "$",
         basic: {
-            monthly: 5.4,
-            yearly: 65
+            monthly: 20,
+            yearly: 240
         },
         premium: {
-            monthly: 12,
-            yearly: 144
+            monthly: 40,
+            yearly: 480
         }
     },
     {
         currency: 'EUR',
         sign: "€",
         basic: {
-            monthly: 5,
-            yearly: 60
+            monthly: 25,
+            yearly: 300
         },
         premium: {
-            monthly: 11,
-            yearly: 132
+            monthly: 50,
+            yearly: 600
         }
     },
     {
         currency: 'GBP',
         sign: "£",
         basic: {
-            monthly: 4.2,
-            yearly: 50
+            monthly: 20,
+            yearly: 240
         },
         premium: {
-            monthly: 9.3,
-            yearly: 93
+            monthly: 40,
+            yearly: 480
         }
     }
 ]
