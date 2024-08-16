@@ -728,7 +728,7 @@ export default function Page() {
                 onClick={closePopup}
               >
                 <div
-                  className="bg-white w-full max-h-[40vh] min-h-[360px] p-6 rounded-lg shadow-lg relative z-60 overflow-y-scroll mx-4 sm:mx-6 lg:mx-0 max-w-5xl"
+                  className="bg-white w-full max-h-[40vh] min-h-[360px] p-6 rounded-lg shadow-lg relative z-60 overflow-y-scroll mx-4 sm:mx-6 md:mx-4 lg:mx-4 xl:mx-4 2xl:mx-4 max-w-5xl"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <button
