@@ -15,7 +15,7 @@ export const useUserStore = create(
             createResume: (resume) => set((state) => ({
                 userState: {
                     ...state.userState,
-                    resumes: [...(state?.userState?.resumes || []), resume]
+                    resumes: [resume, ...(state?.userState?.resumes || [])]
                 }
             })),
             readResumes: () => set((state) => ({

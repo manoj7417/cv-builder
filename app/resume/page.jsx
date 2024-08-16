@@ -408,33 +408,8 @@ const ProfessionalTemplates = [
 export default function DashboardIdea() {
   // const userState = useUserStore((state) => state.userState);
   const [userState, setUserState] = useState({});
-  const [loading, setIsLoading] = useState(false);
-  const createResume = useUserStore((state) => state.createResume);
-  const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
-  const router = useRouter();
+  const router = useRouter()
 
-  const handleCreateCV = async (template) => {
-    const { accessToken } = await GetTokens();
-    if (!accessToken) {
-      toast("Please login to use this template");
-      router.push("/login");
-      setIsLoading(false);
-      return;
-    }
-    setIsLoading(true);
-    try {
-      const response = await createNewResume(accessToken.value, template);
-      if (response.data.data) {
-        createResume(response.data.data);
-        replaceResumeData(response.data.data);
-        router.push("/user-history");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
@@ -496,7 +471,7 @@ export default function DashboardIdea() {
                 </p>
                 <div className="flex items-center justify-center space-x-4">
                   <Button
-                    onClick={() => handleCreateCV()}
+                    onClick={()=>router.push('/user-history')}
                     className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3"
                   >
                     Create CV Now

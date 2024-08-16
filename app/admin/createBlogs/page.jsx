@@ -82,7 +82,7 @@ function CreateBlogs() {
     setIsLoading(true);
     try {
       const response = await axios.post("/api/blogs/create", blog);
-      console.log(response.data);
+      
       // Handle success (e.g., clear form, show success message)
     } catch (error) {
       console.error("Error creating blog:", error);
