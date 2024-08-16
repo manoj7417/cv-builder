@@ -54,22 +54,22 @@ const CVStudioPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
               {cvStudio.map((animation, index) => (
                 <div key={index}>
-                  <div className="max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between">
+                  <div className="max-w-[400px] min-h-[250px] h-[400px] rounded-md border flex flex-col justify-between">
                     <Lottie
                       animationData={animation?.image}
                       loop={true}
                       autoplay={true}
                       style={{ height: 200, width: "100%" }}
                     />
-                    <div className="flex-grow p-4 text-center">
+                    <div className="p-4 text-center">
                       <h1 className="text-2xl font-semibold">
                         {animation?.title}
                       </h1>
-                      <p className="my-4 text-sm text-gray-600">
+                      <p className="my-1 text-sm text-gray-600">
                         {animation?.description}
                       </p>
                     </div>
-                    <div className="p-4">
+                    <div className="pl-4 pr-4 pb-4">
                       <Link
                         href={animation?.link}
                         className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"

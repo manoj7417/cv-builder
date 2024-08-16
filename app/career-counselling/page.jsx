@@ -358,16 +358,16 @@ export default function Page() {
                                 </button>
                               </DialogTrigger>
                               {showDialog && (
-                                <DialogContent className="max-w-[50dvw] h-[60dvh] p-0">
-                                  <div className="flex items-center justify-center lg:space-x-2 space-y-4 lg:space-y-0 flex-col lg:flex-row">
+                                <DialogContent className="max-w-[50dvw] h-[70dvh] p-0">
+                                  <div className="flex items-center justify-center lg:space-x-2 space-y-4 lg:space-y-0 flex-col sm:flex-row md:flex-row lg:flex-row">
                                     <div className="grid grid-cols-1 place-items-center w-full">
                                       <div className="ai-image">
                                         <Image
                                           src="/testpopup.png"
-                                          width={500}
-                                          height={500}
+                                          width={200}
+                                          height={200}
                                           alt="ai"
-                                          className="w-full h-auto max-w-[80vw] lg:max-w-[500px]"
+                                          className="w-full h-40 sm:h-40 md:h-60"
                                         />
                                       </div>
                                       <div className="ai-content flex flex-col items-center justify-center gap-5 p-2 w-full">
@@ -725,7 +725,7 @@ export default function Page() {
                 onClick={closePopup}
               >
                 <div
-                  className="bg-white w-full max-h-[40vh] min-h-[360px] p-6 rounded-lg shadow-lg relative z-60 overflow-y-scroll mx-4 sm:mx-6 md:mx-4 lg:mx-4 xl:mx-4 2xl:mx-4 max-w-5xl"
+                  className="bg-white w-full max-h-[40vh] min-h-[560px] p-6 rounded-lg shadow-lg relative z-60 overflow-y-scroll mx-4 sm:mx-6 md:mx-4 lg:mx-4 xl:mx-4 2xl:mx-4 max-w-5xl"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <button
@@ -751,24 +751,27 @@ export default function Page() {
                     className="w-full py-5"
                     defaultValue="actionableInsights"
                   >
-                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto bg-[#1e3a8a78] rounded-full">
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto  rounded-lg md:rounded-full lg:rounded-full xl:rounded-full 2xl:rounded-full">
                       <TabsTrigger
                         value="actionableInsights"
-                        className="text-white rounded-md text-base font-bold sumtab"
+                        className="text-black rounded-md text-base font-bold bg-white
+                        data-[state=active]:bg-blue-950 data-[state=active]:text-white hover:bg-blue-950 hover:text-white"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Actionable Insights
                       </TabsTrigger>
                       <TabsTrigger
                         value="careerSuggestions"
-                        className="text-white rounded-md text-base font-bold sumtab"
+                        className="text-black rounded-md text-base font-bold bg-white
+                        data-[state=active]:bg-blue-950 data-[state=active]:text-white hover:bg-blue-950 hover:text-white"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Career Suggestions
                       </TabsTrigger>
                       <TabsTrigger
                         value="summary"
-                        className="text-white rounded-md text-base font-bold sumtab"
+                        className="text-black rounded-md text-base font-bold bg-white
+                        data-[state=active]:bg-blue-950 data-[state=active]:text-white hover:bg-blue-950 hover:text-white"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Summary
@@ -777,7 +780,7 @@ export default function Page() {
                     <TabsContent value="actionableInsights" className="mb-4">
                       <div className="actions_section max-w-4xl mx-auto">
                         <div>
-                          <h2 className="text-xl font-bold mb-6 text-[#FC0000]">
+                          <h2 className="text-xl font-bold mb-6 text-blue-950">
                             Actionable Insights
                           </h2>
                           <ul className="space-y-3 text-sm">
@@ -799,7 +802,7 @@ export default function Page() {
                     <TabsContent className="mb-6" value="careerSuggestions">
                       <div className="career_section max-w-4xl mx-auto">
                         <div className="space-y-3">
-                          <h2 className="text-xl font-bold text-[#FC0000] flex items-center gap-3">
+                          <h2 className="text-xl font-bold text-blue-950 flex items-center gap-3">
                             Career Suggestions
                           </h2>
                           <ul className="space-y-3 text-sm">
@@ -824,7 +827,7 @@ export default function Page() {
                     <TabsContent className="mb-6" value="summary">
                       <div className="max-w-4xl mx-auto summary_section">
                         <div>
-                          <h2 className="text-xl font-bold mb-6 text-[#FC0000]">
+                          <h2 className="text-xl font-bold mb-6 text-blue-950">
                             Summary
                           </h2>
                           <ul className="space-y-3 text-sm">
