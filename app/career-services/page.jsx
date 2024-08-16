@@ -2,36 +2,36 @@
 import React from "react";
 import WorkTogether from "@/components/component/WorkTogether";
 import GetStartedModal from "@/components/component/GetStartedModal";
-import a1 from "../../public/animations/a1.json";
+import a1 from "../../public/animations/aibrain.json";
 import a2 from "../../public/animations/a2.json";
 import a3 from "../../public/animations/a3.json";
 import Lottie from "lottie-react";
 import Link from "next/link";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
-const CVStudioPage = () => {
+const CareerServices = () => {
   const cvStudio = [
     {
-      title: "CV Creator",
+      title: "AI Career Coaching",
       image: a1,
       description:
-        "Create your CV with professional templates, powered by Artificial Intelligence.",
-      link: "/resume",
+        "Receive personalized career guidance and actionable insights, powered by advanced AI algorithms.",
+      link: "/coming-soon",
     },
     {
-      title: "CV Optimiser",
+      title: "1 to 1 Career Coaching",
       image: a2,
       description:
-        "Analyse your resume with AI and optimise it for your desired Job Profile.",
-      link: "/resume-analyzer",
+        "Work directly with a professional career coach to strategize and achieve your career goals.",
+      link: "/coming-soon",
     },
     {
-      title: "CV Match",
+      title: "Psychometric Testing Tools",
       image: a3,
       description:
-        "Assess your personality traits and cognitive abilities to find the best career path.",
+        "Assess your personality traits and cognitive abilities to discover the career paths best suited to you",
       current: false,
-      link: "/job-cv",
+      link: "/coming-soon",
     },
   ];
 
@@ -43,33 +43,34 @@ const CVStudioPage = () => {
       >
         <div className="container ">
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">Genies Pro CV Studio,</span> Your
-            Automated Resume Builder!
+            <span className="text-[#2C98CA]">AI Career Coaching,</span> Your
+            Personalized Career Guide!
           </h1>
           <p className="text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
-            Build tailored CVs and reach out to potential employers with
-            confidence.
+            Receive expert career guidance powered by AI to help you achieve
+            your goals and stand out in the job market.
           </p>
+
           <div className="flex justify-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
               {cvStudio.map((animation, index) => (
                 <div key={index}>
-                  <div className="max-w-[400px] min-h-[250px] h-[400px] rounded-md border flex flex-col justify-between">
+                  <div className="max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between">
                     <Lottie
                       animationData={animation?.image}
                       loop={true}
                       autoplay={true}
                       style={{ height: 200, width: "100%" }}
                     />
-                    <div className="p-4 text-center">
+                    <div className="flex-grow p-4 text-center">
                       <h1 className="text-2xl font-semibold">
                         {animation?.title}
                       </h1>
-                      <p className="my-1 text-sm text-gray-600">
+                      <p className="my-4 text-sm text-gray-600">
                         {animation?.description}
                       </p>
                     </div>
-                    <div className="pl-4 pr-4 pb-4">
+                    <div className="p-4">
                       <Link
                         href={animation?.link}
                         className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"
@@ -90,4 +91,4 @@ const CVStudioPage = () => {
   );
 };
 
-export default CVStudioPage;
+export default CareerServices;

@@ -28,8 +28,8 @@ const menuItems = [
     href: "/contact-us",
   },
   {
-    name: "Career Coaching",
-    href: "/coming-soon",
+    name: "Career",
+    href: "/career-services",
   },
 ];
 
