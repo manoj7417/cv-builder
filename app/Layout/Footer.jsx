@@ -130,7 +130,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/coming-soon" className="text-black transition">
+                  <Link href="/career-counselling" className="text-black transition">
                     Psychometric Test
                     <MdOutlineKeyboardArrowRight className="inline text-xl" />
                   </Link>

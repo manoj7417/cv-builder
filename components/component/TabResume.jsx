@@ -180,9 +180,8 @@ export default function TabResume() {
                             width={800}
                             height={400}
                             alt={item.name}
-                            className={`object-fit rounded-md w-full ${
-                              isImageLoading ? "hidden" : ""
-                            }`}
+                            className={`object-fit rounded-md w-full ${isImageLoading ? "hidden" : ""
+                              }`}
                             onLoadingComplete={() => setIsImageLoading(false)}
                             priority={true}
                             placeholder='blur'
@@ -191,7 +190,7 @@ export default function TabResume() {
                             )}`}
                           />
                         </div>
-                        <div className='absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                        <div className='absolute inset-0 flex items-center justify-center bg-opacity-50 opacity-100 transition-opacity duration-300 sm:opacity-100 sm:group-hover:opacity-100'>
                           <Button
                             className='inline-flex h-10 items-center justify-center rounded-md bg-[#0EA5E9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]'
                             onClick={() => handleCreateCV(item.name)}
@@ -216,6 +215,7 @@ export default function TabResume() {
                         </Link>
                       </div>
                     </div>
+
                   )
               )}
             </div>
@@ -261,9 +261,8 @@ export default function TabResume() {
                               width={800}
                               height={400}
                               alt={item.name}
-                              className={`object-fit rounded-md w-full ${
-                                isImageLoading ? "hidden" : ""
-                              }`}
+                              className={`object-fit rounded-md w-full ${isImageLoading ? "hidden" : ""
+                                }`}
                               onLoadingComplete={() =>
                                 setIsImageLoading(false)
                               }

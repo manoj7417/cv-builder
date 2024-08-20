@@ -300,7 +300,7 @@ export default function Slider() {
                       />
                     </div>
                     <div
-                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="absolute inset-0 flex items-center justify-center  bg-opacity-50 md:opacity-0 transition-opacity duration-300 md:group-hover:opacity-100"
                       style={{ zIndex: "1" }}
                     >
                       <Button
@@ -318,6 +318,7 @@ export default function Slider() {
                         )}
                       </Button>
                     </div>
+
                   </div>
                 </SwiperSlide>
               ))}

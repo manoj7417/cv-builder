@@ -176,6 +176,7 @@ const Pricing = () => {
         let data = response.data;
         const plan = prices.filter(el => el.currency === data.currency)
         let currencyData;
+        
         if (plan) {
           setCurrency((prev) => data.currency)
           currencyData = prices.filter(el => el.currency === data.currency)[0]
