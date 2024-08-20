@@ -10,6 +10,7 @@ import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export function ServiceSection() {
   const [isSubscribing, setIsSubscribing] = useState(false);
@@ -34,17 +35,12 @@ export function ServiceSection() {
     setEmailError(false);
     setIsSubscribing(true);
 
-    const obj = {
-      name: userdata?.fullname,
-      email: email.current.value,
-    };
     try {
-      const response = await sendSubscribeEmail(obj);
-      console.log(response);
+      const response = await axios.post('/api/newsletter', { email: email.current.value });
       if (response.status === 200) {
         setIsSubscribed(true);
-        toast.success("You are subscribed to our newsletter",{
-          position:"top-right"
+        toast.success("You are subscribed to our newsletter", {
+          position: "top-right"
         })
       }
     } catch (error) {
