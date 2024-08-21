@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResumeForm from "./ResumeForm";
 import ResumeView from "./ResumeView";
 import Link from "next/link";
@@ -17,8 +17,10 @@ const ResumeBuilderPage = () => {
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { userState } = useUserStore((state) => state);
-  const logoutUser = useUserStore(state => state.logoutUser)
+  const logoutUser = useUserStore((state) => state.logoutUser);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [showText, setShowText] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =
     userdata?.profilePicture || "https://via.placeholder.com/150";
@@ -35,6 +37,27 @@ const ResumeBuilderPage = () => {
   const handlePreviewClick = () => {
     setIsContentVisible(true);
   };
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop === 0 || scrollTop + clientHeight >= scrollHeight) {
+      setShowText(true);
+      setIsAnimating(true);
+    } else {
+      setShowText(false);
+      setIsAnimating(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -127,10 +150,25 @@ const ResumeBuilderPage = () => {
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
           <ResumeView setIsContentVisible={setIsContentVisible} />
         </div>
-         <div className="preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-2 rounded-full lg:hidden block cursor-pointer" onClick={handlePreviewClick}>
-            <span className="text-sm">Preview and Download <MdDownload className="text-base inline-flex mx-1"/></span>
-         </div>
-        <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible}/>
+        <div
+          className={`preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-3 rounded-full lg:hidden block cursor-pointer transition-all duration-300`}
+          onClick={handlePreviewClick}
+        >
+           <span
+            className={`text-sm transition-all duration-300 ${
+              showText
+                ? "bgNdnL"
+                : "epiSoF"
+            }`}
+          >
+            Preview and Download
+          </span>
+          <MdDownload className="text-xl inline-flex mx-1 animate-bounce" />
+        </div>
+        <ContentDialog
+          isContentVisible={isContentVisible}
+          setIsContentVisible={setIsContentVisible}
+        />
       </div>
     </>
   );
