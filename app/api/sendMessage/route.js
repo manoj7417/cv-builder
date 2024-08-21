@@ -11,7 +11,6 @@ export async function POST(req, res) {
     } catch (error) {
         const errorMessage = error.response ? error.response.data : { error: "Error forgetting password" };
         const statusCode = error.response ? error.response.status : 500;
-
         return new Response(JSON.stringify(errorMessage), {
             status: statusCode,
             headers: { 'Content-Type': 'application/json' }
