@@ -155,7 +155,7 @@ const ResumeBuilderPage = () => {
           onClick={handlePreviewClick}
         >
            <span
-            className={`text-sm transition-all duration-300 ${
+            className={`text-sm ${
               showText
                 ? "bgNdnL"
                 : "epiSoF"

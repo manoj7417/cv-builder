@@ -224,11 +224,12 @@ const ResumeView = ({ setIsContentVisible }) => {
   const [showModal, setShowModal] = useState(false);
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
+  console.log("data:::",data)
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
-  console.log("userdata:::", userdata);
   const resumeData = useResumeStore((state) => state.resume.data);
+  console.log("resumeData:::", resumeData);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const { undo, redo, canUndo, canRedo } = useTemporalResumeStore((state) => ({
@@ -548,66 +549,6 @@ const ResumeView = ({ setIsContentVisible }) => {
                 <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
-            {/* <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="h-full sm:max-w-[60dvw] sm:h-[80dvh] p-0 bg-white">
-                <DialogHeader>
-                  <DialogTitle className="text-4xl text-center mt-20 text-blue-900">
-                    Choose Format
-                  </DialogTitle>
-                  <button
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </DialogHeader>
-                <div className="modal_content_section flex">
-                  <div className="sm:w-1/2 w-full hidden sm:block">
-                    <div className="image_content text-center mx-auto">
-                      <Image
-                        src="/illustration-manager-choosing-new-worker.png"
-                        alt="choice-worker-concept-illustrated"
-                        className="w-full h-auto sm:w-[400px] sm:h-[500px] object-contain"
-                        width={400}
-                        height={500}
-                      />
-                    </div>
-                  </div>
-                  <div className="w-1/2 h-full">
-                    <div className="flex flex-col gap-10 p-10">
-                      <button
-                        className="border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-4  rounded-md text-sm font-bold"
-                        onClick={downloadAsText}
-                      >
-                        Download as Text{" "}
-                        <IoDocumentText className="text-blue-700 inline-flex ml-2 text-xl animate-bounce" />
-                      </button>
-                      <Link
-                        href="/pricing"
-                        className="py-4 border-2 border-red-500 hover:border-red-700  text-red-500 text-center rounded-md text-sm font-bold"
-                        disabled
-                      >
-                        Download as PDF (Upgrade Required){" "}
-                        <FaFilePdf className="text-red-500 inline-flex ml-2 text-xl animate-bounce" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog> */}
             <Dialog open={showModal} onOpenChange={setShowModal}>
               <DialogContent className="h-full sm:max-w-[55dvw] sm:h-[65dvh] p-0 bg-white">
                 <DialogHeader>
