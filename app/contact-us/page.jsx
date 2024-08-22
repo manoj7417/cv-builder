@@ -18,12 +18,12 @@ const locations = [
     address: "The Career Genies Group UK LTD ,124 City Road,London,EC1V 2NX",
     contactNo: "0203 476 7492"
   },
-  {
-    title: "India office",
-    timings: "Mon-Sat 9am to 5pm.",
-    address: "​​Jumpstart Tower, 2nd floor, Haridwar Bypass Rd, opp. Nilaya Hills, Saraswati Vihar, Ajabpur Kalan, Dehradun, Uttarakhand 248001.",
-    contactNo: "9084712325"
-  }
+  // {
+  //   title: "India office",
+  //   timings: "Mon-Sat 9am to 5pm.",
+  //   address: "​​Jumpstart Tower, 2nd floor, Haridwar Bypass Rd, opp. Nilaya Hills, Saraswati Vihar, Ajabpur Kalan, Dehradun, Uttarakhand 248001.",
+  //   contactNo: "9084712325"
+  // }
 ];
 
 export default function ContactPageTwo() {
@@ -100,7 +100,7 @@ export default function ContactPageTwo() {
                         value={messageData.firstName}
                         name="firstName"
                         onChange={handleMessageDataChange}
-                        
+
                       />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
