@@ -280,8 +280,26 @@ export default function AboutUs() {
                 Working with us can be highly advantageous. Here is why you will
                 love working with us.
               </p>
-              <ul className="space-y-2 py-8">
-                <li className="flex items-center justify-center md:justify-start">
+              <p className="mt-4 text-gray-600">
+                <b>Diverse Domains</b>: Whatever professional you bring to the
+                table to seek assistance, we are here to help. Be it healthcare,
+                technology, management, communications, the creative industry
+                sectors, sports, or any other, we have you covered. Our career
+                coaches are industry accredited and leading coaching
+                professionals and have advanced knowledge of career progression
+                within all domains of professions and careers.
+              </p>
+              <p className="mt-4 text-gray-600">
+                <b>Global Trust</b>: We connect you with guidance resources from
+                across the globe. For years, our career coaches have assisted
+                students, professionals, and employers of different diverse
+                backgrounds of all levels of seniority. They have acquired
+                global trust over time. Join the ranks of satisfied clients
+                who’ve achieved their career goals with the support of our
+                outstanding community of professionals in Career Coaching.
+              </p>
+              {/* <ul className="space-y-2 py-8">
+              <li className="flex items-center justify-center md:justify-start">
                   <svg
                     className="w-6 h-6 text-blue-950 mr-2"
                     fill="none"
@@ -296,14 +314,7 @@ export default function AboutUs() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <b>Diverse Domains</b>: Whatever professional you bring to the
-                  table to seek assistance, we are here to help. Be it
-                  healthcare, technology, management, communications, the
-                  creative industry sectors, sports, or any other, we have you
-                  covered. Our career coaches are industry accredited and
-                  leading coaching professionals and have advanced knowledge of
-                  career progression within all domains of professions and
-                  careers. .
+                  Coaches with Expertise in a myriad of professional domains.
                 </li>
                 <li className="flex items-center justify-center md:justify-start">
                   <svg
@@ -322,8 +333,8 @@ export default function AboutUs() {
                   </svg>
                   Trusted by Students, Professionals, and Employers worldwide.
                 </li>
-              </ul>
-              <div className="flex justify-center md:justify-start gap-2 overflow-hidden">
+              </ul> */}
+              <div className="flex justify-center md:justify-start gap-2 overflow-hidden mt-10">
                 <PercentageCircle
                   percentage={92}
                   label="Clients Satisfaction"
@@ -347,38 +358,106 @@ export default function AboutUs() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
               <h2 className="trust font-bold text-gray-800">
-                We Bring{" "}
-                <span className="text-black">Professional Advisors</span> to
-                your Table, <span className="text-black">Instantly!</span>
+                Guiding, Empowering, and Fuelling your Growth with Expertise
               </h2>
               <p className="mt-4 text-gray-600">
-                Genies Career Hub is established with a envision to
-                revolutionize the linearity of the professional career coaching
-                industry. The traditional career consultation methods are very
-                inefficient given the requirements of the students,
-                professionals, and employers today. Our services in Career
-                Coaching are very well developed to offer a compelling solution
-                to any such gaps that a candidate might experience with the
-                available services. <br></br>
-                <br></br>Limited options in Career Counselling and Coaching have
-                always been an obstacle to career development and progression.
-                The prime issue with the Career Consultation Services that are
-                prominent in the existing marketing is that the services are
-                channelled towards figuring out the right career. However, with
-                the Genies Career Hub, the focus is dynamically on all sorts of
-                Career relevant issues such as Performance Enhancement, Career
-                Transitions, Professional Alignment Identification, and much
-                more.<br></br>
-                <br></br>The community of Career Coaches at the Genies Career
-                Hub has eclectic knowledge. The Coaches are equipped with
-                expertise and experience beyond the normality. The curated list
-                of Consultants is specifically devised to provide you with the
-                most suitable assistance. All you need to do is connect with us
-                and we shall assist in connecting you with the best possible
-                resource that can help you solve your problems. With the Genies
-                Career Hub, your Career Problems are solved in a flicker of a
-                moment because we ensure that the best resources depending on
-                your requisites are brought to your table.
+                Take a stroll through our journey as we evolve from Career
+                Genies to Genies Career Hub. Our story began with Career Genies,
+                a division of The Career Genies Group. Established in 2021,
+                Career Genies was set up with the aim to assist professionals,
+                students, and employers in a plethora of different and diverse
+                industry sectors of careers. The platform gained quick
+                recognition as a renowned agency that successfully offers
+                support to job seekers and businesses.<br></br>
+                <br></br>The purpose of Career Genies was to sustain itself
+                while offering support to job seekers and employers during the
+                rising complexities in the job market. By assisting job seekers
+                in building a suitable application and approaching the desired
+                job, we have successfully met the growing demands of
+                professionals navigating the complexities of the current job
+                market and organisations refining the recruitment processes
+                <br></br>
+                <br></br>.
+              </p>
+            </div>
+            {/* Left Column - Image */}
+
+            {/* Right Column - Text */}
+          </div>
+        </div>
+      </section>
+      <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-5 lg:pt-2 px-5 relative">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
+              <h2 className="trust font-bold text-gray-800">
+                Diverse Expertise, Myriad Experience
+              </h2>
+              <p className="mt-4 text-gray-600">
+                The team of Career Genies holds rich experience in arenas such
+                as Recruitment, Creative Writing, Career Coaching, Information
+                Technology, and Psychology. This experience inspires our
+                expertise in myriad domains. We can tackle a broad range of
+                career challenges. Our objective is not just to help you find
+                what path in your career you must choose. We aim to also help
+                you with performance enhancement, easy and smooth job
+                transitions, career alignment, skill development, job searching,
+                and problem-solving. We have been and shall further assist you
+                in every step of your career path
+              </p>
+            </div>
+            {/* Left Column - Image */}
+
+            {/* Right Column - Text */}
+          </div>
+        </div>
+      </section>
+      <section className="flex lg:items-center items-start justify-center w-full pt-12 md:pt-5 lg:pt-10 px-5 relative">
+        <div className="max-w-6xl mx-auto pb-20">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <div className="w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8">
+              <h2 className="trust font-bold text-gray-800">
+                The Genies Career Hub: A New Chapter for The Career Genies
+              </h2>
+              <p className="mt-4 text-gray-600">
+                Launched in 2024, Genies Career Hub is an innovative and
+                revolutionised career-developed platform that seamlessly
+                integrates artificial intelligence and technology to offer
+                traditional career coaching services methodologies with an
+                advanced approach. By expanding on the expertise, intent, and
+                experience of the Career Genies Team, this platform addresses
+                all the problems that you might face while you are advancing on
+                your path to achieve success in your career goals. Here are all
+                the services that the Genies Career Hub platform offers
+              </p>
+              <p className="mt-4 text-gray-600">
+                <b>Genies CV Studio</b>: Create standout CVs using AI-backed
+                Genies Pro CV Creator and further optimise them with the Genies
+                Pro CV Optimiser to ensure compatibility with prevalent
+                Application Tracking Systems in the job market. You can also
+                find the exact CV that is tailored to your profile with the help
+                of AI with Genies Pro CV Match.
+              </p>
+
+              <p className="mt-4 text-gray-600">
+                <b>Psychometric Tests</b>: Gain insights into your professional
+                strengths and preferences by finding answers through
+                Psychometric tests that are intelligently devised by leading
+                psychometricians across the globe. Analyse your professional
+                profile and experience clarity while making your career choices
+              </p>
+              <p className="mt-4 text-gray-600">
+                <b>AI Career Coach</b>: Escape the matrix of time foundations
+                with career assistance that is powered by AI. With AI Career
+                Coach, witness the strength of personalised career guidance and
+                excel with strategic ease.
+              </p>
+              <p className="mt-4 text-gray-600">
+                <b>Accredited Career Coaches</b>: Still willing to rely on
+                manual career coaching services? We have a community of
+                accredited and experienced career professionals across the globe
+                who can assist you with every step of your career path as you
+                strive forward to your desired successful career.
               </p>
             </div>
             {/* Left Column - Image */}

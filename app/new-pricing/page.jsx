@@ -4,6 +4,10 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import PricingModal from "./PricingModal";
 import Link from "next/link";
+import card1 from "@/public/banner-img-3.jpg"
+import card2 from "@/public/se.webp" 
+import card3 from "@/public/easymeeting.png"
+import card4 from "@/public/perfomance.png"
 
 const Pricing = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -21,7 +25,8 @@ const Pricing = () => {
       cardTitle: "Genies Pro Suite",
       cardDescription:
         "Unlock the full potential of your career with Genies Pro Suite, offering advanced tools for professional growth.",
-      free: {
+        imageUrl:card1,
+        free: {
         title: "Free",
         link: "/cv-studio",
       },
@@ -49,7 +54,8 @@ const Pricing = () => {
       cardTitle: "AI Career Coach",
       cardDescription:
         "Get personalized career guidance with AI Career Coach, designed to help you navigate your career path effectively.",
-      free: {
+        imageUrl:card2,
+        free: {
         title: "Free",
         link: "/coming-soon",
       },
@@ -78,7 +84,8 @@ const Pricing = () => {
       cardTitle: "Traditional Virtual 1-to-1 Coaching",
       cardDescription:
         "Experience personalized coaching with our traditional virtual 1-to-1 sessions, tailored to your career needs.",
-      free: {
+        imageUrl:card3,
+        free: {
         title: "Free",
         link: "/coming-soon",
       },
@@ -107,7 +114,8 @@ const Pricing = () => {
       cardTitle: "Psychometric Testing Tools",
       cardDescription:
         "Utilize Psychometric Testing Tools to assess your abilities, personality traits, and career potential accurately.",
-      free: {
+        imageUrl:card4,
+        free: {
         title: "Free",
         link: "/coming-soon",
       },
@@ -153,18 +161,18 @@ const Pricing = () => {
 
   return (
     <>
-      <section className="w-full h-screen 2xl:mt-20 lg:mt-32 ">
+      <section className="w-full h-screen 2xl:mt-20 lg:mt-32 mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
+            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
               Genies<span className="text-blue-700">Pricing</span>
             </h1>
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 max-w-3xl text-center xs:text-start mx-auto">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
               Get the services like CV Studio Resume Builder generative AI
               features. ( ADD ALL SERVICES NAME ) Get the Subscription now on
               monthly incl. GST.
             </p>
-            <div className="flex justify-center xs:justify-start gap-5">
+            <div className="flex lg:flex-row flex-col lg:w-full w-[60%] mx-auto text-center justify-center xs:justify-start gap-5">
               <button
                 className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent"
                 onClick={scrollToServiceCards}
@@ -185,7 +193,7 @@ const Pricing = () => {
                 alt="Pricing"
                 width={500} // adjust as needed
                 height={300} // adjust as needed
-                className="w-[500px] h-[400px] object-cover"
+                className="lg:w-[500px] w-[400px] lg:h-[500px] h-[300px] lg:object-cover object-contain"
               />
             </div>
           </div>
@@ -205,7 +213,7 @@ const Pricing = () => {
           </p>
         </div>
         <div className="flex justify-center py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5">
             {serviceCards?.length > 0 &&
               serviceCards.map((item, index) => {
                 // Assign background color based on index
@@ -213,12 +221,12 @@ const Pricing = () => {
                   backgroundColors[index % backgroundColors.length];
                 return (
                   <>
-                    <div key={index} className="flex">
+                    <div key={index} className="flex rounded-md">
                       <div
-                        className={`w-[300px] h-[250px] rounded-md border flex flex-col shadow-lg justify-between ${bgColor}`}
+                        className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor}`}
                       >
                         <div className="p-4">
-                          <h1 className="text-xl font-semibold text-white">
+                          <h1 className="text-2xl font-semibold text-white">
                             {item?.cardTitle}
                           </h1>
                           <p className="mt-3 text-sm text-white">
@@ -236,23 +244,21 @@ const Pricing = () => {
                           <button
                             type="button"
                             onClick={() => handleOpenAIDialog(item)}
-                            className="rounded-sm bg-blue-950 px-5 py-2 text-sm font-semibold text-white"
+                            className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
                           >
                             {item?.subscribe?.title}
                           </button>
                         </div>
                       </div>
-                      {(index === 1 || index === 2) && ( // Render image only for every second card
-                        <div className="">
+                      <div className="bg-white lg:block hidden">
                           <Image
-                            src="/pricingCard.png" // replace with the correct image path
+                            src={item?.imageUrl} // replace with the correct image path
                             alt="Card Image"
                             width={500} // adjust as needed
                             height={500} // adjust as needed
-                            className="w-[500px] h-[250px] object-contain -ml-16"
+                            className={`w-[350px] h-[250px] object-contain`}
                           />
                         </div>
-                      )}
                     </div>
                     <PricingModal
                       isDialogOpen={isDialogOpen}
