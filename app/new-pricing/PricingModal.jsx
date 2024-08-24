@@ -10,9 +10,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaSpinner } from "react-icons/fa";
 import axios from "axios";
 import { prices } from '../../constants/prices'
+import { GetTokens } from "../actions";
+import { loadRazorpayScript } from "../utils/razorpayUtils";
+import { useUserStore } from "../store/UserStore";
 
 const PricingModal = ({
   isDialogOpen,
@@ -22,6 +25,8 @@ const PricingModal = ({
 }) => {
 
   const [selectedPlan, setSelectedPlan] = useState("monthly"); // Default selection
+  const userState = useUserStore((state) => state.userState);
+  const [loading, setLoading] = useState(false); 
   const [geoinfo, setGeoInfo] = useState({
     ip: "",
     countryName: "",
@@ -42,6 +47,7 @@ const PricingModal = ({
   });
 
 
+  //Get the location 
   const getGeoInfo = () => {
     if (!pricingData?.cardTitle) {
       console.warn("No service key available from pricingData");
@@ -84,6 +90,72 @@ const PricingModal = ({
       .catch((error) => {
         console.error("Error fetching geo information:", error);
       });
+  };
+
+  //Get the pricing page
+  const GetPlanWithRazorpay = async () => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken) {
+      return router.push("/login?redirect=pricing");
+    }
+    const data = {
+      name: plandata?.serviceName,
+      currency:plandata?.currency,
+      duration: selectedPlan,
+    };
+    console.log("data::::",data)
+    const res = await loadRazorpayScript();
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    setLoading(true); 
+    try {
+      const response = await axios.post(
+        "/api/pricing",
+        { data },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const { orderId, amount, currency, key } = response.data;
+        const options = {
+          key,
+          amount,
+          currency,
+          name: "Genies Career Hub",
+          description: "Upgrade Plan",
+          order_id: orderId,
+          handler: async (response) => {
+            const paymentData = {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            };
+          },
+          prefill: {
+            email: userState?.userdata?.email,
+          },
+          theme: {
+            color: "#F37254",
+          },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+    }
+    finally {
+      setLoading(false); // Stop loader
+    }
   };
 
   useEffect(() => {
@@ -202,8 +274,12 @@ const PricingModal = ({
             </div>
           </div>
           <DialogFooter>
-            <div className="bg-blue-950 text-white p-2 rounded-md text-sm">
-              Buy Now
+            <div className="bg-blue-950 text-white p-2 rounded-md text-sm cursor-pointer" onClick={GetPlanWithRazorpay} disabled={loading}>
+            {loading ? (
+    <FaSpinner className="animate-spin mr-2" /> // Spinner icon with animation
+  ) : (
+    "Proceed to Payment"
+  )}
             </div>
           </DialogFooter>
         </DialogContent>
