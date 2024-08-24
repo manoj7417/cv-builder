@@ -161,7 +161,7 @@ const Pricing = () => {
 
   return (
     <>
-      <section className="w-full h-screen 2xl:mt-20 lg:mt-32 mt-10">
+      <section className="w-full h-screen 2xl:mt-20 lg:mt-44 mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
             <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
