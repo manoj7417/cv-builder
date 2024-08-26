@@ -110,7 +110,7 @@ const Pricing = () => {
     },
     {
       id: 4,
-      cardTitle: "Psychometric Testing Tools",
+      cardTitle: "Psychometric Testing Tool",
       cardDescription:
         "Utilise  Psychometric Testing Tools to assess your abilities, personality traits, and career potential accurately.",
       imageUrl: card4,
@@ -291,20 +291,20 @@ const Pricing = () => {
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="sm:max-w-[800px]"
+          className="sm:max-w-[800px] max-w-[500px] sm:h-auto h-[700px] overflow-y-scroll"
           showCloseButton={true}
           onClick={handleCloseAIDialog}
         >
           <DialogHeader>
             <DialogTitle>
-              <h2 className="text-3xl my-2">{selectedCard?.cardTitle}</h2>
+              <h2 className="lg:text-3xl text-2xl my-2">{selectedCard?.cardTitle}</h2>
             </DialogTitle>
             <DialogDescription>
               <p>{selectedCard?.cardDescription}</p>
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-2 items-center gap-4">
+            <div className="grid lg:grid-cols-2 grid-cols-1 items-center gap-4">
               <div className="modal_left">
                 <div className="modal_list">
                   <ul className="space-y-2 flex-grow">
@@ -330,10 +330,10 @@ const Pricing = () => {
                       Choose your plan
                     </p>
                     <div className="flex items-center justify-center ">
-                      <h1 className="mt-4 text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl">
+                      <h1 className="mt-4 lg:text-2xl text-xl font-semibold text-center text-gray-800 capitalize 2xl:text-3xl">
                         {selectedPlan === 'monthly' ? `${selectedCard?.symbol}${selectedCard?.price}` : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
                       </h1>
-                      <p className=" text-gray-500 text-sm px-2">{selectedPlan === 'monthly' ? 'per Month' : "per Year"}</p>
+                      <p className="text-gray-500 text-sm px-2">{selectedPlan === 'monthly' ? 'per Month' : "per Year"}</p>
                     </div>
                     <div className="mt-6 space-y-8 xl:mt-12 shadow-">
                       <div
@@ -466,7 +466,7 @@ const Pricing = () => {
                         className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor}`}
                       >
                         <div className="p-4">
-                          <h1 className="text-2xl font-semibold text-white">
+                          <h1 className="lg:text-2xl text-xl font-semibold text-white">
                             {item?.cardTitle}
                           </h1>
                           <p className="mt-3 text-sm text-white">
