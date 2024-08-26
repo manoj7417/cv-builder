@@ -111,7 +111,7 @@ const Pricing = () => {
     },
     {
       id: 4,
-      cardTitle: "Psychometric Testing Tools",
+      cardTitle: "Psychometric Test",
       cardDescription:
         "Utilize Psychometric Testing Tools to assess your abilities, personality traits, and career potential accurately.",
         imageUrl:card4,
