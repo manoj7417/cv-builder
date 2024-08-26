@@ -57,6 +57,8 @@ import { convert } from "html-to-text";
 import { IoDocumentText } from "react-icons/io5";
 import Link from "next/link";
 import { FaFilePdf } from "react-icons/fa6";
+import ContentDialog from "./ContentDialog";
+import FullResumeModal from "./FullResumeModal";
 
 const images = [
   {
@@ -212,10 +214,11 @@ const images = [
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 
-const ResumeView = ({ setIsContentVisible }) => {
+const ResumeView = () => {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [scale, setScale] = useState(0.8);
+  const [isModalView,setIsModalView] = useState(false)
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -224,12 +227,10 @@ const ResumeView = ({ setIsContentVisible }) => {
   const [showModal, setShowModal] = useState(false);
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
-  console.log("data:::",data)
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
   const resumeData = useResumeStore((state) => state.resume.data);
-  console.log("resumeData:::", resumeData);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const { undo, redo, canUndo, canRedo } = useTemporalResumeStore((state) => ({
@@ -436,6 +437,11 @@ const ResumeView = ({ setIsContentVisible }) => {
 
     return () => window.removeEventListener("resize", updateScale);
   }, []);
+  
+
+  const handleFullScreen = ()=>{
+    setIsModalView(true)
+  }
 
   const handleZoomIn = () => {
     setScale((prevScale) => Math.min(prevScale * 1.2, 3));
@@ -460,7 +466,7 @@ const ResumeView = ({ setIsContentVisible }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-white to-blue-100">
+      <div className="flex justify-center items-center flex-col w-full relative bg-blue-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
@@ -511,7 +517,7 @@ const ResumeView = ({ setIsContentVisible }) => {
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-                onClick={() => setIsContentVisible(true)}
+                onClick={handleFullScreen}
               >
                 <BsFullscreen className="h-5 w-5 text-black font-bold" />
               </button>
@@ -655,6 +661,7 @@ const ResumeView = ({ setIsContentVisible }) => {
           </div>
         </div>
       </div>
+      <FullResumeModal isModalView={isModalView} setIsModalView={setIsModalView}/>
     </>
   );
 };

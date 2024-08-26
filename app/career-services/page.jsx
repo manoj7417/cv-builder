@@ -3,7 +3,7 @@ import React from "react";
 import WorkTogether from "@/components/component/WorkTogether";
 import GetStartedModal from "@/components/component/GetStartedModal";
 import a1 from "../../public/animations/ai-career-coach.json";
-import a2 from "../../public/animations/1-to-1-coaching.json";
+import a2 from "../../public/animations/1-1-career.json";
 import a3 from "../../public/animations/pschometric-test.json";
 import Lottie from "lottie-react";
 import Link from "next/link";
