@@ -1,7 +1,7 @@
 "use client";
 import { CardDescription } from "@/components/ui/card";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import card1 from "@/public/banner-img-3.jpg"
 import card2 from "@/public/se.webp"
@@ -15,8 +15,9 @@ import axios from "axios";
 import { GetTokens } from "../actions";
 import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
 
-const Pricing = () => {
+const PricingFunc = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const serviceCardsRef = useRef(null);
@@ -29,6 +30,8 @@ const Pricing = () => {
     timezone: "",
     currency: ""
   });
+  const searchParams = useSearchParams();
+  const scroll = searchParams.get('scroll')
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
   // Function to scroll to the service cards section
@@ -286,6 +289,17 @@ const Pricing = () => {
   }, []);
 
 
+  useEffect(() => {
+    const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
+    if (serviceCardsSection) {
+      const offsetTop = serviceCardsSection.offsetTop - 250;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }, [scroll])
+
   return (
     <>
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
@@ -461,9 +475,9 @@ const Pricing = () => {
                   backgroundColors[index % backgroundColors.length];
                 return (
                   <>
-                    <div key={index} className="flex rounded-md">
+                    <div key={index} className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""} `} id={`pricing-` + `${index + 1}`}>
                       <div
-                        className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor}`}
+                        className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
                       >
                         <div className="p-4">
                           <h1 className="text-2xl font-semibold text-white">
@@ -510,4 +524,11 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+
+export default function Pricing() {
+  return (
+    <Suspense>
+      <PricingFunc />
+    </Suspense>
+  )
+}

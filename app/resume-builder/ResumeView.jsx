@@ -308,10 +308,6 @@ const ResumeView = ({ setIsContentVisible }) => {
     setIsLoading(true);
 
     try {
-      if (!plan || !plan.includes('CVSTUDIO')) {
-        setShowModal(true);
-        return;
-      }
       const response = await printResume(body, token);
       if (response.ok) {
         generateFunfact();
@@ -327,9 +323,23 @@ const ResumeView = ({ setIsContentVisible }) => {
         window.URL.revokeObjectURL(url);
         return;
       }
-      if (response.status !== 500) {
+      const res = await response.json()
+      if (response.status === 403 && res.message === 'You are not eligible for this feature') {
+        toast.info("Subscribe to Genies Pro Suite to download your CV.", { autoclose: 3000 })
         updateRedirectPricingRoute("/resume-builder");
-        return router.push("/pricing");
+        return router.push("/pricing?scroll=1");
+      }
+
+      if (response.status === 403 && res.message === 'Your download CV tokens have expired') {
+        toast.info("Your plan validity has expired.", { autoclose: 3000 })
+        return router.push("/pricing?scroll=1");
+      }
+
+      if (response.status === 403 && res.message === 'You have no download CV tokens') {
+
+      }
+      if (response.status === 500) {
+        toast.error("Error downloading your CV , Please try again later")
       }
     } catch (error) {
       toast.error("Something went wrong");

@@ -37,12 +37,10 @@ export default function DashboardIdea() {
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens();
+    console.log(accessToken)
     if (!accessToken) {
       toast("Please login to use this template");
       return router.push("/login?redirect=/resume-analyzer");
-    }
-    if (userState.userdata.subscription.status !== "Active") {
-      return router.push("/pricing");
     }
     let selectedFile = e.target.files[0];
     if (!selectedFile) return;
@@ -71,22 +69,17 @@ export default function DashboardIdea() {
   const getFeedback = async (message, token) => {
     try {
       const response = await AnalyzeAts(message, token);
+      console.log(response)
       if (response.status === "SUCCESS") {
         router.push(`/analyser/${response.analysisId}`);
       }
+
     } catch (error) {
-      if (error.response.status === 404 && error.response.data.error === "User not found") {
-        logoutUser()
-        RemoveTokens()
-        router.push('/login?redirect=resumeAnalyzer-dashboard')
-      } else if (
-        error.response.status === 400 &&
-        (error.response.data.error === "Insufficient tokens" ||
-          error.response.data.error === "Subscription is inactive or expired")
-      ) {
-        router.push("/pricing");
+      console.log(error.response.data)
+      if (error.response.status === 403 && error.response.data.message === 'You have no download CV tokens') {
+      
       } else {
-        toast.error("Unable to analyze resume, Please try again");
+        router.push('/pricing?scroll=1')
       }
     } finally {
       setIsAnalysing(false);
@@ -99,7 +92,7 @@ export default function DashboardIdea() {
 
   return (
     <>
-      <ResumeHeader/>
+      <ResumeHeader />
       <main>
         {/* <Header /> */}
         {isAnalysing && <Loader />}
