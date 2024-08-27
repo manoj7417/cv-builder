@@ -26,7 +26,7 @@ const CareerServices = () => {
       link: "/coming-soon",
     },
     {
-      title: "Psychometric Test",
+      title: "Psychometric Test Tool",
       image: a3,
       description:
         "Assess your personality traits and cognitive abilities to discover the career paths best suited to you",

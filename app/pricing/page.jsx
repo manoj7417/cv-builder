@@ -3,11 +3,19 @@ import { CardDescription } from "@/components/ui/card";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import card1 from "@/public/banner-img-3.jpg"
-import card2 from "@/public/se.webp"
-import card3 from "@/public/easymeeting.png"
-import card4 from "@/public/perfomance.png"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import card1 from "@/public/banner-img-3.jpg";
+import card2 from "@/public/se.webp";
+import card3 from "@/public/easymeeting.png";
+import card4 from "@/public/perfomance.png";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { FaCheckCircle, FaSpinner } from "react-icons/fa";
 import { useUserStore } from "../store/UserStore";
 import { PricingData } from "@/constants/prices";
@@ -20,14 +28,14 @@ const Pricing = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const serviceCardsRef = useRef(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [geoinfo, setGeoInfo] = useState({
     ip: "",
     countryName: "",
     countryCode: "",
     city: "",
     timezone: "",
-    currency: ""
+    currency: "",
   });
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
@@ -58,7 +66,7 @@ const Pricing = () => {
         "One-on-one consultation with Career Coach",
         "Email and On-Call Support Service",
       ],
-      planName: "CVSTUDIO"
+      planName: "CVSTUDIO",
     },
     {
       id: 2,
@@ -82,7 +90,7 @@ const Pricing = () => {
         "One-on-one consultation with Career Coach",
         "Email and On-Call Support Service",
       ],
-      planName: "AICareerCoach"
+      planName: "AICareerCoach",
     },
     {
       id: 3,
@@ -106,7 +114,7 @@ const Pricing = () => {
         "One-on-one consultation with Career Coach",
         "Email and On-Call Support Service",
       ],
-      planName: "VirtualCoaching"
+      planName: "VirtualCoaching",
     },
     {
       id: 4,
@@ -131,7 +139,7 @@ const Pricing = () => {
         "One-on-one consultation with Career Coach",
         "Email and On-Call Support Service",
       ],
-      planName: "PsychometricTestingTools"
+      planName: "PsychometricTestingTools",
     },
   ];
 
@@ -144,7 +152,7 @@ const Pricing = () => {
 
   const handleOpenAIDialog = (cardData) => {
     const planName = cardData.planName;
-    const pricing = PricingData[planName][geoinfo.currency || "USD"]
+    const pricing = PricingData[planName][geoinfo.currency || "USD"];
     const { symbol, price } = pricing;
     setSelectedCard({ ...cardData, symbol, price });
     setIsDialogOpen(true);
@@ -203,7 +211,7 @@ const Pricing = () => {
           },
         }
       );
-      console.log(response)
+      console.log(response);
       if (response.status === 200) {
         const { orderId, amount, currency, key } = response.data;
         const options = {
@@ -233,8 +241,7 @@ const Pricing = () => {
       }
     } catch (error) {
       console.error("Payment error:", error);
-    }
-    finally {
+    } finally {
       setLoading(false); // Stop loader
     }
   };
@@ -255,9 +262,9 @@ const Pricing = () => {
       cancel_url: window.location.href,
       duration: selectedPlan,
       currency: geoinfo?.currency || "USD",
-      planName: plan.planName
+      planName: plan.planName,
     };
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await axios.post(
         "/api/upgradePricing",
@@ -276,22 +283,20 @@ const Pricing = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
-
 
   useEffect(() => {
     getGeoInfo();
   }, []);
 
-
   return (
     <>
-      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      {/* <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="sm:max-w-[800px] max-w-[500px] sm:h-auto h-[700px] overflow-y-scroll"
+          className="sm:max-w-[800px]"
           showCloseButton={true}
           onClick={handleCloseAIDialog}
         >
@@ -400,7 +405,133 @@ const Pricing = () => {
             </Button>
           </DialogFooter>
         </DialogContent>
+      </Dialog> */}
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+        <DialogTrigger asChild></DialogTrigger>
+        <DialogContent
+          className="sm:max-w-[800px] w-full sm:w-auto px-4 py-6 sm:px-8 sm:py-8"
+          showCloseButton={true}
+          onClick={handleCloseAIDialog}
+        >
+          <DialogHeader>
+            <DialogTitle>
+              <h2 className="lg:text-3xl text-xl sm:text-2xl my-2 text-center">
+                {selectedCard?.cardTitle}
+              </h2>
+            </DialogTitle>
+            <DialogDescription>
+              <p className="text-sm sm:text-base text-center">
+                {selectedCard?.cardDescription}
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid sm:grid-cols-2 grid-cols-1 items-center gap-4">
+              <div className="modal_left">
+                <div className="modal_list">
+                  <ul className="space-y-2">
+                    {selectedCard?.features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-xs sm:text-sm text-gray-600"
+                      >
+                        <FaCheckCircle
+                          className="text-blue-950 mr-2"
+                          style={{ minWidth: "15px", minHeight: "15px" }}
+                        />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
+                <div className="text-center">
+                  <p className="text-lg sm:text-xl text-gray-500">
+                    Choose your plan
+                  </p>
+                  <div className="flex items-center justify-center mt-4">
+                    <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                      {selectedPlan === "monthly"
+                        ? `${selectedCard?.symbol}${selectedCard?.price}`
+                        : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
+                    </h1>
+                    <p className="text-gray-500 text-xs sm:text-sm px-2">
+                      {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                    </p>
+                  </div>
+                  <div className="mt-6 space-y-4 sm:space-y-8">
+                    <div
+                      className={`max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                        selectedPlan === "monthly"
+                          ? "border-blue-500 shadow-lg"
+                          : ""
+                      }`}
+                      onClick={() => handlePlanChange("monthly")}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                          Monthly
+                        </div>
+                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
+                          {selectedCard?.symbol}
+                          {selectedCard?.price}
+                        </div>
+                        <input
+                          type="checkbox"
+                          hidden
+                          checked={selectedPlan === "monthly"}
+                          onChange={() => handlePlanChange("monthly")}
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className={`max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                        selectedPlan === "yearly"
+                          ? "border-blue-500 shadow-lg"
+                          : ""
+                      }`}
+                      onClick={() => handlePlanChange("yearly")}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                          Yearly
+                        </div>
+                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
+                          {selectedCard?.symbol}
+                          {selectedCard?.price * 10}
+                        </div>
+                        <input
+                          type="checkbox"
+                          hidden
+                          checked={selectedPlan === "yearly"}
+                          onChange={() => handlePlanChange("yearly")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <DialogFooter className="mt-4 sm:mt-8">
+            <Button
+              className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+              onClick={() => UpgradePlan(selectedCard)}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  Upgrading <FaSpinner className="animate-spin ml-2" />
+                </>
+              ) : (
+                "Upgrade Now"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
       </Dialog>
+
       <section className="w-full h-screen 2xl:mt-20 lg:mt-32 mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
@@ -449,7 +580,7 @@ const Pricing = () => {
           <p className="lg:w-[40%] w-full mx-auto my-3 text-base">
             We have a passion to mentor you on your entire career path, help you
             realize what you want to do, how to get into that career, and
-            utilise  experts to guide you on how to excel within it.
+            utilise experts to guide you on how to excel within it.
           </p>
         </div>
         <div className="flex justify-center py-8">
