@@ -131,10 +131,6 @@ export function ResumeHeader() {
                     <div className="text-sm font-medium text-gray-900">
                       {userdata?.fullname}
                     </div>
-                    <div className="text-[10px] text-gray-500">
-                      {userdata?.subscription?.plan?.charAt(0).toUpperCase() + userdata?.subscription?.plan?.slice(1)}
-                    </div>
-
                   </div>
                 </div>
 

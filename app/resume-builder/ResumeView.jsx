@@ -224,12 +224,10 @@ const ResumeView = ({ setIsContentVisible }) => {
   const [showModal, setShowModal] = useState(false);
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
-  console.log("data:::",data)
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
   const resumeData = useResumeStore((state) => state.resume.data);
-  console.log("resumeData:::", resumeData);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const { undo, redo, canUndo, canRedo } = useTemporalResumeStore((state) => ({
@@ -301,6 +299,7 @@ const ResumeView = ({ setIsContentVisible }) => {
   };
 
   const handleDownloadResume = async (token) => {
+    const plan = userState.userdata.subscription?.plan
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
     const body = {
@@ -309,31 +308,28 @@ const ResumeView = ({ setIsContentVisible }) => {
     setIsLoading(true);
 
     try {
-      if (userdata?.subscription?.plan === "free") {
+      if (!plan || !plan.includes('CVSTUDIO')) {
         setShowModal(true);
         return;
       }
-
-      if (userdata?.subscription?.plan === "premium") {
-        const response = await printResume(body, token);
-        if (response.ok) {
-          generateFunfact();
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "generated.pdf";
-          a.target = "_blank";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-          return;
-        }
-        if (response.status !== 500) {
-          updateRedirectPricingRoute("/resume-builder");
-          return router.push("/pricing");
-        }
+      const response = await printResume(body, token);
+      if (response.ok) {
+        generateFunfact();
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "generated.pdf";
+        a.target = "_blank";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        return;
+      }
+      if (response.status !== 500) {
+        updateRedirectPricingRoute("/resume-builder");
+        return router.push("/pricing");
       }
     } catch (error) {
       toast.error("Something went wrong");
