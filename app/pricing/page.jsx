@@ -49,22 +49,21 @@ const Pricing = () => {
       id: 1,
       cardTitle: "Genies Pro Suite",
       cardDescription:
-        "Unlock the full potential of your career with Genies Pro Suite, offering advanced tools for professional growth.",
+        "Get a premium hold of services such as CV Creator, CV Optimiser, and CV Match to create the best Resume by integrating AI for perfection",
       imageUrl: card1,
       free: {
         title: "Free",
         link: "/cv-studio",
       },
+      popUpDescription:"Build a job application that suits the exact description that your employers are looking forward to. With tools such as CV Creator, CV Optimiser, and CV Match, create the perfect Resume that is not only optimised for Application Tracking Software but also leaves an exemplary first impression",
       features: [
-        "Access to Professional and ATS Compatible CV Templates",
-        "Download 20 CVs in PDF format",
-        "Template Choices with all Colours and Customisations",
-        "Unlimited Modification in Created CV",
-        "20 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software",
-        "Unlimited CV Upgrade through AI-based CV Match",
-        "Access to 10 psychometric Tests",
-        "One-on-one consultation with Career Coach",
-        "Email and On-Call Support Service",
+        "Access to Professional ATS Compatible CV Templates",
+        "Create CVs through the AI-based CV Creator tool",
+        "Download 20 CVs in PDF Format",
+        "Get 20 scans through CV Optimiser and make a better CV",
+        "Match the best resume with job-specific CVs with AI-based CV Match",
+        "Enhance your CV with AI and increase the ATS Compatibility Score",
+        ,
       ],
       planName: "CVSTUDIO",
     },
@@ -72,23 +71,17 @@ const Pricing = () => {
       id: 2,
       cardTitle: "AI Career Coach",
       cardDescription:
-        "Get personalized career guidance with AI Career Coach, designed to help you navigate your career path effectively.",
+        "Take career assistance anytime and anywhere in different domains with an Artificial Intelligence-based Career Coach",
       imageUrl: card2,
       free: {
         title: "Free",
         link: "/coming-soon",
       },
+      popUpDescription:"Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
       features: [
-        "Personalized Career Guidance with AI-based Insights",
-        "Access to Professional and ATS Compatible CV Templates",
-        "Download 20 CVs in PDF format",
-        "Template Choices with all Colours and Customisations",
-        "Unlimited Modification in Created CV",
-        "20 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software",
-        "Unlimited CV Upgrade through AI-based CV Match",
-        "Access to 10 psychometric Tests",
-        "One-on-one consultation with Career Coach",
-        "Email and On-Call Support Service",
+        "Personalised Career Guidance from an AI-based online Career Coach",
+        "Ask as many questions, in as many domains as you seek assistance with",
+        "Get instant solutions to your problems",
       ],
       planName: "AICareerCoach",
     },
@@ -96,23 +89,18 @@ const Pricing = () => {
       id: 3,
       cardTitle: "Traditional Virtual 1-to-1 Coaching",
       cardDescription:
-        "Experience personalized coaching with our traditional virtual 1-to-1 sessions, tailored to your career needs.",
+        "Get a more personalised approach to Career Coaching with Traditional Career Coaching from experienced coaches across the globe",
       imageUrl: card3,
       free: {
         title: "Free",
         link: "/coming-soon",
       },
+      popUpDescription:"If you want a more personalised and manual approach to Career Coaching, connect with one of the renowned experts who have years of experience working with candidates of different disciplines and calibre. Our community consists of Career Coaches from across the globe who are here to assist you with your career development",
       features: [
-        "Personalized Virtual 1-to-1 Coaching Sessions",
-        "Access to Professional and ATS Compatible CV Templates",
-        "Download 20 CVs in PDF format",
-        "Template Choices with all Colours and Customisations",
-        "Unlimited Modification in Created CV",
-        "20 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software",
-        "Unlimited CV Upgrade through AI-based CV Match",
-        "Access to 10 psychometric Tests",
-        "One-on-one consultation with Career Coach",
-        "Email and On-Call Support Service",
+        "Virtual Career Coach Connect through the Genies Career Hub platform",
+        "Assured Career assistance for guaranteed solutions",
+        "Get to choose from a selection of Career Coaching professionals",
+        "Easy support and assistance from Genies Career Hub team",
       ],
       planName: "VirtualCoaching",
     },
@@ -120,24 +108,18 @@ const Pricing = () => {
       id: 4,
       cardTitle: "Psychometric Testing Tool",
       cardDescription:
-        "Utilise  Psychometric Testing Tools to assess your abilities, personality traits, and career potential accurately.",
+        "Identify your strengths and weaknesses with tests created by Psychometric professionals and find the best suited solution",
       imageUrl: card4,
       free: {
         title: "Free",
         link: "/coming-soon",
       },
-
+      popUpDescription:"Designed by leading Psychometricians from all around the world, the Psychometric Tests offer you a comprehensive and compelling guide to understanding your cognitive and analytical abilities. This helps you gain a deeper insight into your career choices. Know your strengths, weaknesses, and areas of potential for identifying a better career path",
       features: [
-        "Comprehensive Psychometric Assessments",
-        "Access to Professional and ATS Compatible CV Templates",
-        "Download 20 CVs in PDF format",
-        "Template Choices with all Colours and Customisations",
-        "Unlimited Modification in Created CV",
-        "20 CV Scan through CV Optimiser for passing the Recruiter’s ATS Software",
-        "Unlimited CV Upgrade through AI-based CV Match",
-        "Access to 10 psychometric Tests",
-        "One-on-one consultation with Career Coach",
-        "Email and On-Call Support Service",
+        "Access to Psychometric Tests created by professionals",
+        "A comprehensive report of your career strategy, strengths, and weaknesses.",
+        "A record of your test results in your profile",
+        "Solutions and recommendations based on the results of your test",
       ],
       planName: "PsychometricTestingTools",
     },
@@ -420,8 +402,8 @@ const Pricing = () => {
               </h2>
             </DialogTitle>
             <DialogDescription>
-              <p className="text-sm sm:text-base text-center">
-                {selectedCard?.cardDescription}
+              <p className="text-sm sm:text-base text-justify">
+                {selectedCard?.popUpDescription}
               </p>
             </DialogDescription>
           </DialogHeader>
@@ -433,7 +415,7 @@ const Pricing = () => {
                     {selectedCard?.features.map((feature, index) => (
                       <li
                         key={index}
-                        className="flex items-center text-xs sm:text-sm text-gray-600"
+                        className="flex items-center text-xs sm:text-base text-gray-600"
                       >
                         <FaCheckCircle
                           className="text-blue-950 mr-2"
@@ -532,29 +514,31 @@ const Pricing = () => {
         </DialogContent>
       </Dialog>
 
-      <section className="w-full h-screen 2xl:mt-20 lg:mt-32 mt-10">
+      <section className="w-full h-screen 2xl:mt-20 lg:mt-52 mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-8xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
-              Genies<span className="text-blue-700">Pricing</span>
+            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center leading-5">
+              Grow beyond expectations
+              <br />
+              with <span className="text-blue-700">Flexible Pricing</span>
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
-              Get the services like CV Studio Resume Builder generative AI
-              features. ( ADD ALL SERVICES NAME ) Get the Subscription now on
-              monthly incl. GST.
+              With careful plans designed to cater to all your needs, simple and
+              transparent pricing, and secured pricing, you are one step closer
+              to your dream career.
             </p>
             <div className="flex lg:flex-row flex-col lg:w-full w-[60%] mx-auto text-center justify-center xs:justify-start gap-5">
               <button
                 className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent"
                 onClick={scrollToServiceCards}
               >
-                View Subscription Plan
+                View Plans
               </button>
               <Link
                 href={"/cv-studio"}
                 className="bg-sky-100  text-blue-950 py-3 px-8 rounded border-2 border-blue-950"
               >
-                Go For Free Trial
+                Start Free Trial
               </Link>
             </div>
             {/* Add Image below the content */}
@@ -578,9 +562,9 @@ const Pricing = () => {
             <span className="text-blue-700">Infinite possibilities.</span>{" "}
           </h2>
           <p className="lg:w-[40%] w-full mx-auto my-3 text-base">
-            We have a passion to mentor you on your entire career path, help you
-            realize what you want to do, how to get into that career, and
-            utilise experts to guide you on how to excel within it.
+            Our services are designed to help you navigate through career
+            challenges with ease. Accordingly, we have created plans that help
+            you approach your career with perfection.
           </p>
         </div>
         <div className="flex justify-center py-8">
