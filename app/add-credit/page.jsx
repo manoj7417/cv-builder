@@ -1,40 +1,70 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Menu, X, Check } from 'lucide-react'
-
-const plans = [
-  {
-    name: 'CV Creator',
-    price: '$10/mth',
-    features: [
-      'Access to all basic features ',
-      'Reporting and analytics',
-      '20 Pdf Download',
-    ],
-  },
-  {
-    name: 'CV Optimiser',
-    price: '$20/mth',
-    features: [
-     'Access to all basic features ',
-      'Reporting and analytics',
-      '20 Pdf Download',
-    ],
-  },
-  {
-    name: 'CV Match',
-    price: '$40/mth',
-    features: [
-     'Access to all basic features ',
-      'Reporting and analytics',
-      '20 Pdf Download',
-    ],
-  },
-]
-
+import axios from 'axios';
 
 export default function AddCreditPage() {
+
+  const plans = [
+    {
+      name: 'CV Creator',
+      price: '$10/mth',
+      features: [
+        "Get 20 additional CV downloads in PDF formats",
+      ],
+    },
+    {
+      name: 'CV Optimiser',
+      price: '$20/mth',
+      features: [
+       'Scan your CV 20 additional times through the optimiser',
+      ],
+    },
+    {
+      name: 'CV Match',
+      price: '$40/mth',
+      features: [
+       'Create 20 CVs with the help of AI',
+      ],
+    },
+  ]
+
+  const [geoinfo, setGeoInfo] = useState({
+    ip: "",
+    countryName: "",
+    countryCode: "",
+    city: "",
+    timezone: "",
+    currency: "",
+  });
+
+
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        let currency = data.currency || "USD";
+        setGeoInfo({
+          ...geoinfo,
+          ip: data.ip,
+          countryName: data.country_name,
+          countryCode: data.country_calling_code,
+          city: data.city,
+          timezone: data.timezone,
+          currency: currency,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+  
+  
+  useEffect(() => {
+    getGeoInfo();
+  }, []);
 
   return (
     <div className="mx-auto max-w-7xl px-2 md:px-4 pt-20">
@@ -43,11 +73,10 @@ export default function AddCreditPage() {
         {/* Hero Section */}
         <div className="flex flex-col space-y-8 pb-10 pt-12 text-center md:pt-24">
           <p className="text-3xl font-bold text-blue-900 md:text-5xl md:leading-10">
-            Simple, transparent pricing
+          ADD CREDITS, CONTINUE GROWING 
           </p>
           <p className="mx-auto max-w-3xl text-base text-gray-600 md:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore veritatis voluptates
-            neque itaque repudiandae sint, explicabo assumenda quam ratione placeat?
+          To continue availing of the Genies Pro Suite, you need to add more credits. Select the best plan depending on your requirements.
           </p>
         </div>
         <div className="mt-8 w-full space-y-4 md:mt-12">
