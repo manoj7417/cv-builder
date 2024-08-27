@@ -59,6 +59,7 @@ import Link from "next/link";
 import { FaFilePdf } from "react-icons/fa6";
 import ContentDialog from "./ContentDialog";
 import FullResumeModal from "./FullResumeModal";
+import ServicesPopUp from "@/components/component/ServicesPopUp";
 
 const images = [
   {
@@ -218,7 +219,7 @@ const ResumeView = () => {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [scale, setScale] = useState(0.8);
-  const [isModalView,setIsModalView] = useState(false)
+  const [isModalView, setIsModalView] = useState(false)
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -239,6 +240,7 @@ const ResumeView = () => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
@@ -249,52 +251,7 @@ const ResumeView = () => {
     }
   };
 
-  const handlepayment = async (type) => {
-    const { accessToken } = await GetTokens();
-    const temp = resumeData?.metadata?.template;
-    Payment(
-      {
-        amount: type === tempType.premium ? 20 : 0.4,
-        email: userState.userdata.email,
-        name: temp,
-        // url: "https://career-genies-frontend.vercel.app/paymentSuccess",
-        url: "http://localhost:3000/paymentSuccess",
-        cancel_url: window.location.href,
-        templateName: resumeData.metadata.template,
-        temp_type: type,
-      },
-      accessToken.value
-    )
-      .then((response) => {
-        localStorage.setItem("purchasedItem", JSON.stringify(response.data));
-        const { url } = response.data;
-        window.location = url;
-      })
-      .catch((error) => {
-        console.error(
-          error.response ? error.response.data.error : error.message
-        );
-      });
-  };
 
-  const TemplateCheck = async (templateName, token) => {
-    try {
-      const response = await axios.post(
-        "/api/checkUserTemplate",
-        { templateName },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status === 200) {
-        return true;
-      }
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  };
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
@@ -302,14 +259,12 @@ const ResumeView = () => {
   };
 
   const handleDownloadResume = async (token) => {
-    const plan = userState.userdata.subscription?.plan
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
     const body = {
       html: resume,
     };
     setIsLoading(true);
-
     try {
       const response = await printResume(body, token);
       if (response.ok) {
@@ -337,9 +292,8 @@ const ResumeView = () => {
         toast.info("Your plan validity has expired.", { autoclose: 3000 })
         return router.push("/pricing?scroll=1");
       }
-
       if (response.status === 403 && res.message === 'You have no download CV tokens') {
-
+        setIsServiceDialogOpen(true)
       }
       if (response.status === 500) {
         toast.error("Error downloading your CV , Please try again later")
@@ -445,9 +399,9 @@ const ResumeView = () => {
 
     return () => window.removeEventListener("resize", updateScale);
   }, []);
-  
 
-  const handleFullScreen = ()=>{
+
+  const handleFullScreen = () => {
     setIsModalView(true)
   }
 
@@ -498,6 +452,13 @@ const ResumeView = () => {
             </DialogContent>
           </Dialog>
         )}
+        <Dialog open={isServiceDialogOpen}>
+          <ServicesPopUp
+            isServiceDialogOpen={isServiceDialogOpen}
+            setIsServiceDialogOpen={setIsServiceDialogOpen}
+            serviceName="Create CV"
+          />
+        </Dialog>
         <div>
           <div
             className="shadow-2xl overflow-y-scroll h-screen"
@@ -669,7 +630,7 @@ const ResumeView = () => {
           </div>
         </div>
       </div>
-      <FullResumeModal isModalView={isModalView} setIsModalView={setIsModalView}/>
+      <FullResumeModal isModalView={isModalView} setIsModalView={setIsModalView} />
     </>
   );
 };
