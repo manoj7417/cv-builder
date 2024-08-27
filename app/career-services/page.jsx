@@ -2,9 +2,9 @@
 import React from "react";
 import WorkTogether from "@/components/component/WorkTogether";
 import GetStartedModal from "@/components/component/GetStartedModal";
-import a1 from "../../public/animations/aibrain.json";
-import a2 from "../../public/animations/a2.json";
-import a3 from "../../public/animations/a3.json";
+import a1 from "../../public/animations/ai-career-coach.json";
+import a2 from "../../public/animations/1-1-career.json";
+import a3 from "../../public/animations/pschometric-test.json";
 import Lottie from "lottie-react";
 import Link from "next/link";
 import { FaArrowAltCircleRight } from "react-icons/fa";
@@ -26,7 +26,7 @@ const CareerServices = () => {
       link: "/coming-soon",
     },
     {
-      title: "Psychometric Testing Tools",
+      title: "Psychometric Test Tool",
       image: a3,
       description:
         "Assess your personality traits and cognitive abilities to discover the career paths best suited to you",
@@ -73,7 +73,7 @@ const CareerServices = () => {
                     <div className="p-4">
                       <Link
                         href={animation?.link}
-                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"
+                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 p-3 text-sm font-semibold text-white shadow-sm text-center"
                       >
                         Try Now
                       </Link>

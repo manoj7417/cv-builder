@@ -21,13 +21,13 @@ import { GetTokens } from "../actions";
 import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
 // import animation from "@/public/animations/job-cvLoader.json";
-import animation from "@/public/animations/JobCVLoader.json"
+import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
 import axios from "axios";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 import Link from "next/link";
-
-
+import ServicesPopUp from "@/components/component/ServicesPopUp";
+import { Button } from "@/components/ui/button";
 
 const options = [
   "Accountant",
@@ -150,6 +150,8 @@ export default function Home() {
   const updateUserData = useUserStore((state) => state.updateUserData);
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
+  const isCreditScore = true;
 
   const handleDialogClose = () => {
     setIsGeneratingResume(false);
@@ -390,13 +392,29 @@ export default function Home() {
                   />
                 </div>
                 <div className="w-full flex items-center">
-                  <button
-                    className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
-                    onClick={() => handleGenerateNow()}
-                  >
-                    Generate Now{" "}
-                    <RiAiGenerate className="text-base font-bold" />
-                  </button>
+                  <Dialog open={isServiceDialogOpen}>
+                    <ServicesPopUp
+                      isServiceDialogOpen={isServiceDialogOpen}
+                      setIsServiceDialogOpen={setIsServiceDialogOpen}
+                      serviceName="Create CV"
+                    />
+                  </Dialog>
+                  {isCreditScore ? (
+                    <Button
+                      onClick={() => setIsServiceDialogOpen(true)}
+                      className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
+                    >
+                      Optimise CV Now
+                    </Button>
+                  ) : (
+                    <button
+                      className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
+                      onClick={() => handleGenerateNow()}
+                    >
+                      Generate Now{" "}
+                      <RiAiGenerate className="text-base font-bold" />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
