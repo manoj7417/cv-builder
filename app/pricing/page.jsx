@@ -419,7 +419,7 @@ const PricingFunc = () => {
       <section className="w-full h-screen 2xl:mt-40 lg:mt-52 md:mt-40  mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center leading-5">
+            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center lg:leading-5 leading-[45px]">
               Grow beyond expectations
               <br />
               with <span className="text-blue-700">Flexible Pricing</span>
@@ -480,7 +480,7 @@ const PricingFunc = () => {
                   <>
                     <div key={index} className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""} `} id={`pricing-` + `${index + 1}`}>
                       <div
-                        className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
+                        className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
                       >
                         <div className="p-4">
                           <h1 className="lg:text-2xl text-xl font-semibold text-white">
