@@ -22,7 +22,7 @@ import dayjs from 'dayjs';
 
 const dateFormat = "YYYY-MM";
 
-function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole, type }) {
+function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole, type, setIsServiceDialogOpen }) {
     const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
     const router = useRouter();
     const updateUserData = useUserStore(state => state.updateUserData);
@@ -407,9 +407,15 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
                 return response.data;
             }
         } catch (error) {
-            if (error.response.status === 400 && (error.response.data.error === 'Insufficient JobCV tokens' || error.response.data.error === "Subscription is inactive or expired" || error.response.data.error === "Insufficient optimizer tokens")) {
-                router.push('/pricing');
-            } else {
+            if (error.response.status === 403) {
+                if (error.response.data.error === "Insufficient JobCV tokens" || error.response.data.error === "Insufficient optimizer tokens") {
+                    setIsServiceDialogOpen(true)
+                } else {
+                    toast.error("You don not have a valid plan.")
+                    return router.push('/pricing?scroll=1')
+                }
+            }
+            else {
                 toast.error("Unable to generate JobCV , Please try again");
             }
         }
@@ -483,7 +489,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             <DialogContent className='sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900 z' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
-                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5'  width={400} height={500} />
+                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
                     </div>
                     <div className='w-full sm:w-2/3 py-5 h-full overflow-hidden'>
                         <div className=' shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden  bg-white'>
@@ -637,7 +643,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             <DialogContent className='sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
-                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500}/>
+                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
                     </div>
                     <div className='w-full sm:w-2/3 py-5 h-full overflow-hidden'>
                         <div className='shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
@@ -780,7 +786,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             <DialogContent className='sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
-                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
+                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
                     </div>
                     <div className='w-full sm:w-2/3 py-5 h-full overflow-hidden'>
                         <div className='shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
@@ -911,7 +917,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             <DialogContent className='sm:max-w-[70dvw] no-scrollbar p-0 h-full sm:h-[80vh] bg-blue-900' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around overflow-hidden'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
-                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500}/>
+                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
                     </div>
                     <div className='w-full sm:w-2/3 py-5 h-full overflow-hidden'>
                         <div className='shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white'>
@@ -933,7 +939,7 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
             <DialogContent className='sm:max-w-[70dvw] no-scrollbar h-[80vh]' onClick={handleCloseMultistepForm} showCloseButton>
                 <div className='flex flex-col-reverse sm:flex-row justify-around'>
                     <div className='sm:w-1/3 w-full h-64 sm:h-full hidden sm:block'>
-                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated'  objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500}/>
+                        <Image src='/illustration-manager-choosing-new-worker.png' alt='choice-worker-concept-illustrated' objectFit='cover' className='sm:absolute sm:bottom-5' width={400} height={500} />
                     </div>
                     <div className='w-1/2 h-full flex item-center'>
                         <div className='mx-auto flex items-center justify-center flex-col'>

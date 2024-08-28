@@ -71,15 +71,19 @@ export default function DashboardIdea() {
   const getFeedback = async (message, token) => {
     try {
       const response = await AnalyzeAts(message, token);
-      console.log(response)
       if (response.status === "SUCCESS") {
         router.push(`/analyser/${response.analysisId}`);
       }
     } catch (error) {
-      if (error.response.status === 403 && error.response.data.message === 'You have no download CV tokens') {
-        setIsServiceDialogOpen(true)
+      if (error.response.status === 403) {
+        if (error.response.data.message === 'You have no analyser tokens') {
+          setIsServiceDialogOpen(true)
+        } else {
+          toast.info("You do not have a valid plan.", { autoClose: 5000 })
+          return router.push('/pricing?scroll=1')
+        }
       } else {
-        router.push('/pricing?scroll=1')
+        toast.error("Error while analysing your CV.")
       }
     } finally {
       setIsAnalysing(false);
@@ -145,17 +149,17 @@ export default function DashboardIdea() {
                 />
               </Dialog>
               <div className="flex justify-center mt-12">
-                  <label className="flex items-center space-x-4 bg-transparent text-blue rounded-lg uppercase cursor-pointer hover:bg-blue sm:mx-auto">
-                    <span className="text-md px-10 py-3 bg-blue-900 hover:bg-blue-600 rounded-md text-white font-semibold">
-                      Optimise CV Now
-                    </span>
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept="application/pdf"
-                      onChange={handlepdfFileChange}
-                    />
-                  </label>
+                <label className="flex items-center space-x-4 bg-transparent text-blue rounded-lg uppercase cursor-pointer hover:bg-blue sm:mx-auto">
+                  <span className="text-md px-10 py-3 bg-blue-900 hover:bg-blue-600 rounded-md text-white font-semibold">
+                    Optimise CV Now
+                  </span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="application/pdf"
+                    onChange={handlepdfFileChange}
+                  />
+                </label>
               </div>
             </div>
             <div className="mt-10 lg:mt-0 flex justify-center lg:justify-start">

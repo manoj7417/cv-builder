@@ -29,7 +29,7 @@ import { NextResponse } from 'next/server';
 
 export const config = {
   // This matcher applies the middleware to all routes
-  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq'],
+  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq','/add-credit'],
 };
 
 export function middleware(req) {
