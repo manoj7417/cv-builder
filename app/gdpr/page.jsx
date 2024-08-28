@@ -78,7 +78,7 @@ const Page = () => {
               At the Genies Career Hub, consent is obtained by specific,
               affirmative measures that display acceptance of the processing of
               personal information. On our website or app, users usually give
-              their approval through checkboxes or other options. We utilize our
+              their approval through checkboxes or other options. We utilise  our
               secure Consent Management Platform (CMP) to manage consent and
               record it with user IDs and timelines. Users of this site can
               quickly analyse, investigate, and modify their consent

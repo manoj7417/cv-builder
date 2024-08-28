@@ -24,25 +24,25 @@ import WorkTogether from "@/components/component/WorkTogether";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
+import ServicesPopUp from "@/components/component/ServicesPopUp";
 
 export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
   const userState = useUserStore((state) => state.userState);
-  const logoutUser = useUserStore(state => state.logoutUser)
+  const logoutUser = useUserStore((state) => state.logoutUser);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
+  const isCreditScore = true;
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens();
     if (!accessToken) {
       toast("Please login to use this template");
       return router.push("/login?redirect=/resume-analyzer");
-    }
-    if (userState.userdata.subscription.status !== "Active") {
-      return router.push("/pricing");
     }
     let selectedFile = e.target.files[0];
     if (!selectedFile) return;
@@ -71,22 +71,15 @@ export default function DashboardIdea() {
   const getFeedback = async (message, token) => {
     try {
       const response = await AnalyzeAts(message, token);
+      console.log(response)
       if (response.status === "SUCCESS") {
         router.push(`/analyser/${response.analysisId}`);
       }
     } catch (error) {
-      if (error.response.status === 404 && error.response.data.error === "User not found") {
-        logoutUser()
-        RemoveTokens()
-        router.push('/login?redirect=resumeAnalyzer-dashboard')
-      } else if (
-        error.response.status === 400 &&
-        (error.response.data.error === "Insufficient tokens" ||
-          error.response.data.error === "Subscription is inactive or expired")
-      ) {
-        router.push("/pricing");
+      if (error.response.status === 403 && error.response.data.message === 'You have no download CV tokens') {
+        setIsServiceDialogOpen(true)
       } else {
-        toast.error("Unable to analyze resume, Please try again");
+        router.push('/pricing?scroll=1')
       }
     } finally {
       setIsAnalysing(false);
@@ -99,7 +92,7 @@ export default function DashboardIdea() {
 
   return (
     <>
-      <ResumeHeader/>
+      <ResumeHeader />
       <main>
         {/* <Header /> */}
         {isAnalysing && <Loader />}
@@ -134,23 +127,35 @@ export default function DashboardIdea() {
           <div className="flex flex-col max-w-8xl text-center px-8  lg:px-32 pt-16 sm:pt-28">
             <div className=" flex flex-col">
               <h1 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 lg:px-32">
-                An <span className="text-blue-600">Optimised CV</span> goes a Long Way
+                An <span className="text-blue-600">Optimised CV</span> goes a
+                Long Way
               </h1>
               <p className="text-gray-700 text-sm lg:text-md sm:text-lg lg:px-32">
-                Wondering why your CV does not get through the initial rounds of selection? Analyse your CV with our AI-based CV Optimiser and get industry expertise integrated to create an Application Tracking System (ATS) friendly resume and flawless application profile that gets passed through ATS CV Checker.
+                Wondering why your CV does not get through the initial rounds of
+                selection? Analyse your CV with our AI-based CV Optimiser and
+                get industry expertise integrated to create an Application
+                Tracking System (ATS) friendly resume and flawless application
+                profile that gets passed through ATS CV Checker.
               </p>
-              <div className="flex justify-center lg:justify-start mt-12">
-                <label className="flex items-center space-x-4 bg-transparent text-blue rounded-lg uppercase cursor-pointer hover:bg-blue sm:mx-auto">
-                  <span className="text-md px-10 py-3 bg-blue-900 hover:bg-blue-600 rounded-md text-white font-semibold">
-                    Optimise CV Now
-                  </span>
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="application/pdf"
-                    onChange={handlepdfFileChange}
-                  />
-                </label>
+              <Dialog open={isServiceDialogOpen}>
+                <ServicesPopUp
+                  isServiceDialogOpen={isServiceDialogOpen}
+                  setIsServiceDialogOpen={setIsServiceDialogOpen}
+                  serviceName="Create CV"
+                />
+              </Dialog>
+              <div className="flex justify-center mt-12">
+                  <label className="flex items-center space-x-4 bg-transparent text-blue rounded-lg uppercase cursor-pointer hover:bg-blue sm:mx-auto">
+                    <span className="text-md px-10 py-3 bg-blue-900 hover:bg-blue-600 rounded-md text-white font-semibold">
+                      Optimise CV Now
+                    </span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="application/pdf"
+                      onChange={handlepdfFileChange}
+                    />
+                  </label>
               </div>
             </div>
             <div className="mt-10 lg:mt-0 flex justify-center lg:justify-start">
@@ -173,7 +178,6 @@ export default function DashboardIdea() {
         <WorkTogether />
         <Footer />
       </main>
-
     </>
   );
 }

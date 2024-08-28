@@ -9,6 +9,9 @@ import { useUserStore } from "../store/UserStore";
 import Link from "next/link";
 import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
+import { IoSettingsOutline } from "react-icons/io5";
+import { MdLogout } from "react-icons/md";
+import { PiReadCvLogo } from "react-icons/pi";
 
 const menuItems = [
   {
@@ -77,7 +80,7 @@ export function ResumeHeader() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
+
 
   return (
     <section className="new_resume_latest z-[100] fixed" >
@@ -128,27 +131,27 @@ export function ResumeHeader() {
                     <div className="text-sm font-medium text-gray-900">
                       {userdata?.fullname}
                     </div>
-                    <div className="text-[10px] text-gray-500">
-                      {userdata?.subscription?.plan?.charAt(0).toUpperCase() + userdata?.subscription?.plan?.slice(1)}
-                    </div>
-
                   </div>
                 </div>
 
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                     <ul>
-                      <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                        <Link href="/user-profile">Profile</Link>
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                        <Link href="/user-history">CV History</Link>
-                      </li>
+                      <Link href="/settings/profile">
+                        <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
+                        <IoSettingsOutline className="mr-2" /> Settings
+                        </li>
+                      </Link>
+                      <Link href="/user-history">
+                        <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
+                        <PiReadCvLogo className="mr-2"/>CV History
+                        </li>
+                      </Link>
                       <li
-                        className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm"
+                        className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center"
                         onClick={handleLogout}
                       >
-                        Logout
+                       <MdLogout className="mr-2" /> Logout
                       </li>
                     </ul>
                   </div>
@@ -221,8 +224,7 @@ export function ResumeHeader() {
                             <img
                               className="h-10 w-10 rounded-full"
                               src={
-                                userdata?.profilePicture ||
-                                "/profile-avatar-img.png"
+                                userdata?.profilePicture
                               }
                               alt="Dan_Abromov"
                             />
@@ -241,7 +243,9 @@ export function ResumeHeader() {
                           <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                             <ul>
                               <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
-                                <Link href="/user-profile">Profile</Link>
+                                <Link href="/user-profile/profile">
+                                  Profile
+                                </Link>
                               </li>
                               <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
                                 <Link href="/user-history">CV History</Link>

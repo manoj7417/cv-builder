@@ -261,7 +261,7 @@ export default function Footer() {
               target="_blank"
               className="hover:underline pl-1"
             >
-              glassfrog technologies
+              Glassfrog Technologies
             </Link>
           </p>
         </div>

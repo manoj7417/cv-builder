@@ -57,6 +57,9 @@ import { convert } from "html-to-text";
 import { IoDocumentText } from "react-icons/io5";
 import Link from "next/link";
 import { FaFilePdf } from "react-icons/fa6";
+import ContentDialog from "./ContentDialog";
+import FullResumeModal from "./FullResumeModal";
+import ServicesPopUp from "@/components/component/ServicesPopUp";
 
 const images = [
   {
@@ -212,10 +215,11 @@ const images = [
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 
-const ResumeView = ({ setIsContentVisible }) => {
+const ResumeView = () => {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [scale, setScale] = useState(0.8);
+  const [isModalView, setIsModalView] = useState(false)
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -227,7 +231,6 @@ const ResumeView = ({ setIsContentVisible }) => {
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
-  console.log("userdata:::", userdata);
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
@@ -237,6 +240,7 @@ const ResumeView = ({ setIsContentVisible }) => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(true);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
@@ -247,52 +251,7 @@ const ResumeView = ({ setIsContentVisible }) => {
     }
   };
 
-  const handlepayment = async (type) => {
-    const { accessToken } = await GetTokens();
-    const temp = resumeData?.metadata?.template;
-    Payment(
-      {
-        amount: type === tempType.premium ? 20 : 0.4,
-        email: userState.userdata.email,
-        name: temp,
-        // url: "https://career-genies-frontend.vercel.app/paymentSuccess",
-        url: "http://localhost:3000/paymentSuccess",
-        cancel_url: window.location.href,
-        templateName: resumeData.metadata.template,
-        temp_type: type,
-      },
-      accessToken.value
-    )
-      .then((response) => {
-        localStorage.setItem("purchasedItem", JSON.stringify(response.data));
-        const { url } = response.data;
-        window.location = url;
-      })
-      .catch((error) => {
-        console.error(
-          error.response ? error.response.data.error : error.message
-        );
-      });
-  };
 
-  const TemplateCheck = async (templateName, token) => {
-    try {
-      const response = await axios.post(
-        "/api/checkUserTemplate",
-        { templateName },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status === 200) {
-        return true;
-      }
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  };
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
@@ -306,33 +265,38 @@ const ResumeView = ({ setIsContentVisible }) => {
       html: resume,
     };
     setIsLoading(true);
-
     try {
-      if (userdata?.subscription?.plan === "free") {
-        setShowModal(true);
+      const response = await printResume(body, token);
+      if (response.ok) {
+        generateFunfact();
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "generated.pdf";
+        a.target = "_blank";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
         return;
       }
+      const res = await response.json()
+      if (response.status === 403 && res.message === 'You are not eligible for this feature') {
+        toast.info("Subscribe to Genies Pro Suite to download your CV.", { autoclose: 3000 })
+        updateRedirectPricingRoute("/resume-builder");
+        return router.push("/pricing?scroll=1");
+      }
 
-      if (userdata?.subscription?.plan === "premium") {
-        const response = await printResume(body, token);
-        if (response.ok) {
-          generateFunfact();
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "generated.pdf";
-          a.target = "_blank";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-          return;
-        }
-        if (response.status !== 500) {
-          updateRedirectPricingRoute("/resume-builder");
-          return router.push("/pricing");
-        }
+      if (response.status === 403 && res.message === 'Your download CV tokens have expired') {
+        toast.info("Your plan validity has expired.", { autoclose: 3000 })
+        return router.push("/pricing?scroll=1");
+      }
+      if (response.status === 403 && res.message === 'You have no download CV tokens') {
+        setIsServiceDialogOpen(true)
+      }
+      if (response.status === 500) {
+        toast.error("Error downloading your CV , Please try again later")
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -436,6 +400,11 @@ const ResumeView = ({ setIsContentVisible }) => {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
+
+  const handleFullScreen = () => {
+    setIsModalView(true)
+  }
+
   const handleZoomIn = () => {
     setScale((prevScale) => Math.min(prevScale * 1.2, 3));
   };
@@ -459,7 +428,7 @@ const ResumeView = ({ setIsContentVisible }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col w-full relative bg-gradient-to-r from-white to-blue-100">
+      <div className="flex justify-center items-center flex-col w-full relative bg-blue-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
@@ -483,6 +452,13 @@ const ResumeView = ({ setIsContentVisible }) => {
             </DialogContent>
           </Dialog>
         )}
+        <Dialog open={isServiceDialogOpen}>
+          <ServicesPopUp
+            isServiceDialogOpen={isServiceDialogOpen}
+            setIsServiceDialogOpen={setIsServiceDialogOpen}
+            serviceName="CV-BUILDER"
+          />
+        </Dialog>
         <div>
           <div
             className="shadow-2xl overflow-y-scroll h-screen"
@@ -510,7 +486,7 @@ const ResumeView = ({ setIsContentVisible }) => {
             <ResumeTooltip icon={BsFullscreen} title="Fullscreen">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2 text-black disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] lg:flex items-center justify-around rounded-md hidden"
-                onClick={() => setIsContentVisible(true)}
+                onClick={handleFullScreen}
               >
                 <BsFullscreen className="h-5 w-5 text-black font-bold" />
               </button>
@@ -548,66 +524,6 @@ const ResumeView = ({ setIsContentVisible }) => {
                 <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
-            {/* <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="h-full sm:max-w-[60dvw] sm:h-[80dvh] p-0 bg-white">
-                <DialogHeader>
-                  <DialogTitle className="text-4xl text-center mt-20 text-blue-900">
-                    Choose Format
-                  </DialogTitle>
-                  <button
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </DialogHeader>
-                <div className="modal_content_section flex">
-                  <div className="sm:w-1/2 w-full hidden sm:block">
-                    <div className="image_content text-center mx-auto">
-                      <Image
-                        src="/illustration-manager-choosing-new-worker.png"
-                        alt="choice-worker-concept-illustrated"
-                        className="w-full h-auto sm:w-[400px] sm:h-[500px] object-contain"
-                        width={400}
-                        height={500}
-                      />
-                    </div>
-                  </div>
-                  <div className="w-1/2 h-full">
-                    <div className="flex flex-col gap-10 p-10">
-                      <button
-                        className="border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-4  rounded-md text-sm font-bold"
-                        onClick={downloadAsText}
-                      >
-                        Download as Text{" "}
-                        <IoDocumentText className="text-blue-700 inline-flex ml-2 text-xl animate-bounce" />
-                      </button>
-                      <Link
-                        href="/pricing"
-                        className="py-4 border-2 border-red-500 hover:border-red-700  text-red-500 text-center rounded-md text-sm font-bold"
-                        disabled
-                      >
-                        Download as PDF (Upgrade Required){" "}
-                        <FaFilePdf className="text-red-500 inline-flex ml-2 text-xl animate-bounce" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog> */}
             <Dialog open={showModal} onOpenChange={setShowModal}>
               <DialogContent className="h-full sm:max-w-[55dvw] sm:h-[65dvh] p-0 bg-white">
                 <DialogHeader>
@@ -714,6 +630,7 @@ const ResumeView = ({ setIsContentVisible }) => {
           </div>
         </div>
       </div>
+      <FullResumeModal isModalView={isModalView} setIsModalView={setIsModalView} />
     </>
   );
 };

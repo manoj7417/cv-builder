@@ -118,17 +118,12 @@ const ProfilePage = () => {
       const response = await updateUserProfile(data, accessToken.value);
       if (response.status === 200) {
         const {
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-          userdata,
+          userdata
         } = response.data.data;
         updateUserData(userdata);
         setPreviewImage(userdata.profilePicture);
         reset(userdata);
-        await SetTokens({
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-        });
+
         toast.success("Profile updated successfully", {
           position: "top-right",
         });
@@ -617,7 +612,7 @@ const ProfilePage = () => {
         </div>
       </section>
       <section className="w-full py-10 px-12">
-        <h1 className="text-blue-950 text-4xl font-medium">
+        <h1 className="text-blue-950 text-2xl font-medium">
           CV Analyser History
         </h1>
         <div className="flex flex-wrap">

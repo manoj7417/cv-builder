@@ -488,28 +488,28 @@ const FeedbackFuction = () => {
                     <ul className="custom-counter border-l-4 border-[#F89A14] p-5">
                       <li className="text-sm">
                         <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
+                          Utilise  our CV checker to compare your resume
                         </span>{" "}
                         against those from successful candidates hired at
                         leading global companies in our database.
                       </li>
                       <li className="text-sm">
                         <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
+                          Utilise  our CV checker to compare your resume
                         </span>{" "}
                         against those from successful candidates hired at
                         leading global companies in our database.
                       </li>
                       <li className="text-sm">
                         <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
+                          Utilise  our CV checker to compare your resume
                         </span>{" "}
                         against those from successful candidates hired at
                         leading global companies in our database.
                       </li>
                       <li className="text-sm">
                         <span className="text-black font-semibold">
-                          Utilize our CV checker to compare your resume
+                          Utilise  our CV checker to compare your resume
                         </span>{" "}
                         against those from successful candidates hired at
                         leading global companies in our database.
