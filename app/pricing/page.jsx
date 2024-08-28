@@ -420,9 +420,9 @@ const PricingFunc = () => {
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
             <h1 className="text-[35px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
-              Grow beyond expectations
-              <br className="lg:block hidden"/>
-              with <span className="text-blue-700">Flexible Pricing</span>
+              Grow beyond expectations with
+              <br/>
+              <span className="text-blue-700">Flexible Pricing</span>
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
               With careful plans designed to cater to all your needs, simple and
