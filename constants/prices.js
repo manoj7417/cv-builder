@@ -1,3 +1,5 @@
+import { Currency } from "lucide-react"
+
 export const PricingData = {
   CVSTUDIO: {
     name: "CV STUDIO",
@@ -76,4 +78,68 @@ export const PricingData = {
       symbol: "£"
     }
   }
+}
+
+
+
+
+export const AddCreditData = {
+  CVCreator: {
+    name: "CV Creator",
+    INR: {
+      price: 15,
+      symbol: "₹"
+    },
+    USD: {
+      price: 2,
+      symbol: "$"
+    },
+    EUR: {
+      price: 2,
+      symbol: "€"
+    },
+    GBP: {
+      price: 2,
+      symbol: "£"
+    }
+  },
+  CVOptimiser: {
+    name: "CV Optimiser",
+    INR: {
+      price: 20,
+      symbol: "₹"
+    },
+    USD: {
+      price: 2,
+      symbol: "$"
+    },
+    EUR: {
+      price: 2,
+      symbol: "€"
+    },
+    GBP: {
+      price: 2,
+      symbol: "£"
+    }
+  },
+  CVMatch: {
+    name: "CV Match",
+    INR: {
+      price: 20,
+      symbol: "₹"
+    },
+    USD: {
+      price: 2,
+      symbol: "$"
+    },
+    EUR: {
+      price: 2,
+      symbol: "€"
+    },
+    GBP: {
+      price: 2,
+      symbol: "£"
+      
+    }
+  },
 }

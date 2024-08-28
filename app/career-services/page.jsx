@@ -31,7 +31,7 @@ const CareerServices = () => {
       description:
         "Assess your personality traits and cognitive abilities to discover the career paths best suited to you",
       current: false,
-      link: "/coming-soon",
+      link: "/career-counselling",
     },
   ];
 

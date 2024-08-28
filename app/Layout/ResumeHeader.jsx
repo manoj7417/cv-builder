@@ -224,8 +224,7 @@ export function ResumeHeader() {
                             <img
                               className="h-10 w-10 rounded-full"
                               src={
-                                userdata?.profilePicture ||
-                                "/profile-avatar-img.png"
+                                userdata?.profilePicture
                               }
                               alt="Dan_Abromov"
                             />
