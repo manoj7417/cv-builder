@@ -3,27 +3,28 @@
 import React, { useEffect, useState } from 'react'
 import { Menu, X, Check } from 'lucide-react'
 import axios from 'axios';
+import { AddCreditData } from '@/constants/prices';
 
 export default function AddCreditPage() {
 
   const plans = [
     {
-      name: 'CV Creator',
-      price: '$10/mth',
+      name: 'CVCreator',
+      defaultPrice: AddCreditData.CVCreator.GBP?.price,
       features: [
         "Get 20 additional CV downloads in PDF formats",
       ],
     },
     {
-      name: 'CV Optimiser',
-      price: '$20/mth',
+      name: 'CVOptimiser',
+      defaultPrice: AddCreditData.CVCreator.GBP?.price,
       features: [
        'Scan your CV 20 additional times through the optimiser',
       ],
     },
     {
-      name: 'CV Match',
-      price: '$40/mth',
+      name: 'CVMatch',
+      defaultPrice: AddCreditData.CVCreator.GBP?.price,
       features: [
        'Create 20 CVs with the help of AI',
       ],
@@ -36,7 +37,7 @@ export default function AddCreditPage() {
     countryCode: "",
     city: "",
     timezone: "",
-    currency: "",
+    currency: "GBP",
   });
 
 
@@ -45,7 +46,7 @@ export default function AddCreditPage() {
       .get("https://ipapi.co/json/")
       .then((response) => {
         let data = response.data;
-        let currency = data.currency || "USD";
+        let currency = data.currency || "GBP";
         setGeoInfo({
           ...geoinfo,
           ip: data.ip,
@@ -59,6 +60,21 @@ export default function AddCreditPage() {
       .catch((error) => {
         console.error("Error fetching geo information:", error);
       });
+  };
+
+
+
+  const getPriceForPlan = (planName) => {
+    const currency = geoinfo.currency;
+    const planData = AddCreditData[planName];
+    console.log("plandata::",planData)
+    if (planData) {
+      const currencyData  = planData[currency] || planData['GBP'];
+      const { price, symbol } = currencyData;
+      return `${symbol} ${price}`; // Return currency symbol with price
+    }
+
+    return `${currency} ${plans.find(plan => plan.name === planName).defaultPrice}`;
   };
   
   
@@ -88,6 +104,9 @@ export default function AddCreditPage() {
                   <div className="flex w-full flex-col items-start justify-start space-y-1">
                     <p className="w-full text-2xl font-semibold leading-loose text-blue-900">
                       {plan.name}
+                    </p>
+                    <p className="w-full text-2xl font-semibold leading-loose text-blue-900">
+                    {getPriceForPlan(plan.name)}
                     </p>
                   </div>
                 </div>
