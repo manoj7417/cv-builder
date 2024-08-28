@@ -87,59 +87,58 @@ export const AddCreditData = {
   CVCreator: {
     name: "CV Creator",
     INR: {
-      price: 15,
+      price: 500,
       symbol: "₹"
     },
     USD: {
-      price: 2,
+      price: 5,
       symbol: "$"
     },
     EUR: {
-      price: 2,
+      price: 5,
       symbol: "€"
     },
     GBP: {
-      price: 2,
+      price: 5,
       symbol: "£"
     }
   },
   CVOptimiser: {
     name: "CV Optimiser",
     INR: {
-      price: 20,
+      price: 500,
       symbol: "₹"
     },
     USD: {
-      price: 2,
+      price: 5,
       symbol: "$"
     },
     EUR: {
-      price: 2,
+      price: 5,
       symbol: "€"
     },
     GBP: {
-      price: 2,
+      price: 5,
       symbol: "£"
     }
   },
   CVMatch: {
     name: "CV Match",
     INR: {
-      price: 20,
+      price: 500,
       symbol: "₹"
     },
     USD: {
-      price: 2,
+      price: 5,
       symbol: "$"
     },
     EUR: {
-      price: 2,
+      price: 5,
       symbol: "€"
     },
     GBP: {
-      price: 2,
+      price: 5,
       symbol: "£"
-      
     }
   },
 }

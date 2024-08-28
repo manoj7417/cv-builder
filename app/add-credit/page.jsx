@@ -2,11 +2,15 @@
 
 import React, { useEffect, useState } from 'react'
 import { Menu, X, Check } from 'lucide-react'
-import axios from 'axios';
+import { Button } from '@/components/ui/button'
+import axios from 'axios'
+import { GetTokens } from '../actions'
 import { AddCreditData } from '@/constants/prices';
+import { useUserStore } from '../store/UserStore'
+import { toast } from 'react-toastify'
+
 
 export default function AddCreditPage() {
-
   const plans = [
     {
       name: 'CVCreator',
@@ -19,14 +23,14 @@ export default function AddCreditPage() {
       name: 'CVOptimiser',
       defaultPrice: AddCreditData.CVCreator.GBP?.price,
       features: [
-       'Scan your CV 20 additional times through the optimiser',
+        'Scan your CV 20 additional times through the optimiser',
       ],
     },
     {
       name: 'CVMatch',
       defaultPrice: AddCreditData.CVCreator.GBP?.price,
       features: [
-       'Create 20 CVs with the help of AI',
+        'Create 20 CVs with the help of AI',
       ],
     },
   ]
@@ -37,9 +41,10 @@ export default function AddCreditPage() {
     countryCode: "",
     city: "",
     timezone: "",
-    currency: "GBP",
+    currency: "USD",
   });
 
+  const { userdata } = useUserStore(state => state.userState)
 
   const getGeoInfo = () => {
     axios
@@ -68,30 +73,56 @@ export default function AddCreditPage() {
     const currency = geoinfo.currency;
     const planData = AddCreditData[planName];
     if (planData) {
-      const currencyData  = planData[currency] || planData['GBP'];
+      const currencyData = planData[currency] || planData['GBP'];
       const { price, symbol } = currencyData;
-      return `${symbol} ${price}`; // Return currency symbol with price
+      return `${symbol} ${price}`;
     }
 
     return `${currency} ${plans.find(plan => plan.name === planName).defaultPrice}`;
   };
-  
-  
+
+  const handleAddMoreCredits = async (serviceName) => {
+    const { accessToken } = await GetTokens()
+    const amount = getPriceForPlan(serviceName)
+    const data = {
+      email: userdata.email,
+      success_url: "http://localhost:3000/",
+      cancel_url: window.location.href,
+      currency: geoinfo.currency,
+      serviceName,
+      credits: 20,
+      amount: + amount.split(" ")[1]
+    }
+    try {
+      const response = await axios.post("/api/addcredits", data, {
+        headers: {
+          Authorization: "Bearer " + accessToken.value
+        }
+      })
+      if (response.status === 200) {
+        window.location = response.data.url
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("Error while adding credits")
+    }
+  }
+
+
   useEffect(() => {
     getGeoInfo();
   }, []);
 
   return (
     <div className="mx-auto max-w-7xl px-2 md:px-4 pt-20">
-      
       <div>
         {/* Hero Section */}
         <div className="flex flex-col space-y-8 pb-10 pt-12 text-center md:pt-24">
           <p className="text-3xl font-bold text-blue-900 md:text-5xl md:leading-10">
-          ADD CREDITS, CONTINUE GROWING 
+            ADD CREDITS, CONTINUE GROWING
           </p>
           <p className="mx-auto max-w-3xl text-base text-gray-600 md:text-xl">
-          To continue availing of the Genies Pro Suite, you need to add more credits. Select the best plan depending on your requirements.
+            To continue availing of the Genies Pro Suite, you need to add more credits. Select the best plan depending on your requirements.
           </p>
         </div>
         <div className="mt-8 w-full space-y-4 md:mt-12">
@@ -105,7 +136,7 @@ export default function AddCreditPage() {
                       {plan.name}
                     </p>
                     <p className="w-full text-2xl font-semibold leading-loose text-blue-900">
-                    {getPriceForPlan(plan.name)}
+                      {getPriceForPlan(plan.name)}
                     </p>
                   </div>
                 </div>
@@ -123,12 +154,13 @@ export default function AddCreditPage() {
                 </div>
                 <div className="flex w-full flex-col px-8 pb-8">
                   <div className="flex w-full flex-col items-start justify-start space-y-3">
-                    <button
+                    <Button
                       type="button"
                       className="w-full rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm"
+                      onClick={() => handleAddMoreCredits(plan.name)}
                     >
                       Add Credit
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

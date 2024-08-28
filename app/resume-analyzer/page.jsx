@@ -44,9 +44,6 @@ export default function DashboardIdea() {
       toast("Please login to use this template");
       return router.push("/login?redirect=/resume-analyzer");
     }
-    if (userState.userdata.subscription.status !== "Active") {
-      return router.push("/pricing");
-    }
     let selectedFile = e.target.files[0];
     if (!selectedFile) return;
     if (selectedFile?.type !== "application/pdf")
@@ -74,25 +71,15 @@ export default function DashboardIdea() {
   const getFeedback = async (message, token) => {
     try {
       const response = await AnalyzeAts(message, token);
+      console.log(response)
       if (response.status === "SUCCESS") {
         router.push(`/analyser/${response.analysisId}`);
       }
     } catch (error) {
-      if (
-        error.response.status === 404 &&
-        error.response.data.error === "User not found"
-      ) {
-        logoutUser();
-        RemoveTokens();
-        router.push("/login?redirect=resumeAnalyzer-dashboard");
-      } else if (
-        error.response.status === 400 &&
-        (error.response.data.error === "Insufficient tokens" ||
-          error.response.data.error === "Subscription is inactive or expired")
-      ) {
-        router.push("/pricing");
+      if (error.response.status === 403 && error.response.data.message === 'You have no download CV tokens') {
+        setIsServiceDialogOpen(true)
       } else {
-        toast.error("Unable to analyze resume, Please try again");
+        router.push('/pricing?scroll=1')
       }
     } finally {
       setIsAnalysing(false);
@@ -158,14 +145,6 @@ export default function DashboardIdea() {
                 />
               </Dialog>
               <div className="flex justify-center mt-12">
-                {isCreditScore ? (
-                  <Button
-                    onClick={()=>setIsServiceDialogOpen(true)}
-                    className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
-                  >
-                    Optimise CV Now
-                  </Button>
-                ) : (
                   <label className="flex items-center space-x-4 bg-transparent text-blue rounded-lg uppercase cursor-pointer hover:bg-blue sm:mx-auto">
                     <span className="text-md px-10 py-3 bg-blue-900 hover:bg-blue-600 rounded-md text-white font-semibold">
                       Optimise CV Now
@@ -177,7 +156,6 @@ export default function DashboardIdea() {
                       onChange={handlepdfFileChange}
                     />
                   </label>
-                )}
               </div>
             </div>
             <div className="mt-10 lg:mt-0 flex justify-center lg:justify-start">

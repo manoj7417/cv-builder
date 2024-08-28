@@ -412,14 +412,9 @@ export default function DashboardIdea() {
   // const userState = useUserStore((state) => state.userState);
   const [userState, setUserState] = useState({});
   const router = useRouter();
-  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
 
-  const isCreditScore = false;
 
-  const handleCreateCV = () => {
-    setIsServiceDialogOpen(true);
-    // router.push("/user-history")
-  };
+
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
@@ -448,28 +443,12 @@ export default function DashboardIdea() {
                   through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center justify-center space-x-4">
-                  <Dialog open={isServiceDialogOpen}>
-                    <ServicesPopUp
-                      isServiceDialogOpen={isServiceDialogOpen}
-                      setIsServiceDialogOpen={setIsServiceDialogOpen}
-                      serviceName="Create CV"
-                    />
-                  </Dialog>
-                  {isCreditScore ? (
                     <Button
-                      onClick={() => router.push("/user-history")}
+                      onClick={()=>router.push('/user-history')}
                       className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
                     >
                       Create CV Now
                     </Button>
-                  ) : (
-                    <Button
-                      onClick={handleCreateCV}
-                      className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
-                    >
-                      Create CV Now
-                    </Button>
-                  )}
                 </div>
               </div>
               <Image

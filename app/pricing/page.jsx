@@ -1,7 +1,7 @@
 "use client";
 import { CardDescription } from "@/components/ui/card";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import card1 from "@/public/banner-img-3.jpg";
 import card2 from "@/public/se.webp";
@@ -23,8 +23,9 @@ import axios from "axios";
 import { GetTokens } from "../actions";
 import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
 
-const Pricing = () => {
+const PricingFunc = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const serviceCardsRef = useRef(null);
@@ -37,6 +38,8 @@ const Pricing = () => {
     timezone: "",
     currency: "",
   });
+  const searchParams = useSearchParams();
+  const scroll = searchParams.get('scroll')
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
   // Function to scroll to the service cards section
@@ -273,121 +276,20 @@ const Pricing = () => {
     getGeoInfo();
   }, []);
 
+
+  useEffect(() => {
+    const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
+    if (serviceCardsSection) {
+      const offsetTop = serviceCardsSection.offsetTop - 250;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }, [scroll])
+
   return (
     <>
-      {/* <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent
-          className="sm:max-w-[800px]"
-          showCloseButton={true}
-          onClick={handleCloseAIDialog}
-        >
-          <DialogHeader>
-            <DialogTitle>
-              <h2 className="lg:text-3xl text-2xl my-2">{selectedCard?.cardTitle}</h2>
-            </DialogTitle>
-            <DialogDescription>
-              <p>{selectedCard?.cardDescription}</p>
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid lg:grid-cols-2 grid-cols-1 items-center gap-4">
-              <div className="modal_left">
-                <div className="modal_list">
-                  <ul className="space-y-2 flex-grow">
-                    {selectedCard?.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center text-sm text-gray-600"
-                      >
-                        <FaCheckCircle
-                          className="text-blue-950 mr-2"
-                          style={{ minWidth: "15px", minHeight: "15px" }}
-                        />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="modal_right bg-gray-100">
-                <div className="">
-                  <div className="container px-6 py-8 mx-auto">
-                    <p className="text-xl text-center text-gray-500">
-                      Choose your plan
-                    </p>
-                    <div className="flex items-center justify-center ">
-                      <h1 className="mt-4 lg:text-2xl text-xl font-semibold text-center text-gray-800 capitalize 2xl:text-3xl">
-                        {selectedPlan === 'monthly' ? `${selectedCard?.symbol}${selectedCard?.price}` : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
-                      </h1>
-                      <p className="text-gray-500 text-sm px-2">{selectedPlan === 'monthly' ? 'per Month' : "per Year"}</p>
-                    </div>
-                    <div className="mt-6 space-y-8 xl:mt-12 shadow-">
-                      <div
-                        className={`max-w-2xl px-8 py-5 mx-auto border cursor-pointer rounded-xl  ${selectedPlan === "monthly" ? "border-blue-500 shadow-lg" : ""
-                          }`}
-                        onClick={() => handlePlanChange("monthly")}
-                      >
-                        <div className="monthly_plan">
-                          <div className="flex flex-row justify-between items-center">
-                            <div className="subscription-panel-offer-commitment font-bold">
-                              Monthly
-                            </div>
-                            <div className="subscription-panel-offer-commitment font-semibold">
-                              {selectedCard?.symbol}{selectedCard?.price}
-                            </div>
-                            <input
-                              type="checkbox"
-                              hidden
-                              checked={selectedPlan === "monthly"}
-                              onChange={() => handlePlanChange("monthly")}
-                              className="ml-4"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        className={`max-w-2xl px-8 py-4 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly" ? "border-blue-500 shadow-lg" : ""
-                          }`}
-                        onClick={() => handlePlanChange("yearly")}
-                      >
-                        <div className="yearly_plan">
-                          <div className="flex flex-row justify-between items-center">
-                            <div className="subscription-panel-offer-commitment font-bold">
-                              Yearly
-                            </div>
-                            <div className="subscription-panel-offer-commitment font-semibold">
-                              {selectedCard?.symbol}{selectedCard?.price * 10}
-                            </div>
-                            <input
-                              type="checkbox"
-                              hidden
-                              checked={selectedPlan === "yearly"}
-                              onChange={() => handlePlanChange("yearly")}
-                              className="ml-4"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button className="bg-blue-950 text-white px-4 py-2 rounded-md text-sm cursor-pointer" onClick={() => UpgradePlan(selectedCard)} disabled={loading}>
-              {loading ? (
-                <>
-                  Upgrading<FaSpinner className="animate-spin ml-2" />
-                </>
-              ) : (
-                "Upgrade Now"
-              )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog> */}
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
@@ -514,7 +416,7 @@ const Pricing = () => {
         </DialogContent>
       </Dialog>
 
-      <section className="w-full h-screen 2xl:mt-20 lg:mt-52 mt-10">
+      <section className="w-full h-screen 2xl:mt-40 lg:mt-52 md:mt-40  mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
             <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center leading-5">
@@ -576,9 +478,9 @@ const Pricing = () => {
                   backgroundColors[index % backgroundColors.length];
                 return (
                   <>
-                    <div key={index} className="flex rounded-md">
+                    <div key={index} className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""} `} id={`pricing-` + `${index + 1}`}>
                       <div
-                        className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor}`}
+                        className={`w-[350px] h-[250px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
                       >
                         <div className="p-4">
                           <h1 className="lg:text-2xl text-xl font-semibold text-white">
@@ -625,4 +527,11 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+
+export default function Pricing() {
+  return (
+    <Suspense>
+      <PricingFunc />
+    </Suspense>
+  )
+}
