@@ -67,7 +67,6 @@ export default function AddCreditPage() {
   const getPriceForPlan = (planName) => {
     const currency = geoinfo.currency;
     const planData = AddCreditData[planName];
-    console.log("plandata::",planData)
     if (planData) {
       const currencyData  = planData[currency] || planData['GBP'];
       const { price, symbol } = currencyData;
