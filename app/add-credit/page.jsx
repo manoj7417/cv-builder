@@ -2,6 +2,9 @@
 
 import React from 'react'
 import { Menu, X, Check } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import axios from 'axios'
+import { GetTokens } from '../actions'
 
 const plans = [
   {
@@ -17,7 +20,7 @@ const plans = [
     name: 'CV Optimiser',
     price: '$20/mth',
     features: [
-     'Access to all basic features ',
+      'Access to all basic features ',
       'Reporting and analytics',
       '20 Pdf Download',
     ],
@@ -26,7 +29,7 @@ const plans = [
     name: 'CV Match',
     price: '$40/mth',
     features: [
-     'Access to all basic features ',
+      'Access to all basic features ',
       'Reporting and analytics',
       '20 Pdf Download',
     ],
@@ -36,9 +39,33 @@ const plans = [
 
 export default function AddCreditPage() {
 
+  const handleAddMoreCredits = async (serviceName, amount) => {
+    const { accessToken } = await GetTokens()
+    const data = {
+      serviceName,
+      amount,
+      currency,
+      success_url : 'http://localhost:3000/',
+      cancel_url : 'http://localhost:3000/',
+      currency : 'USD'
+    }
+    try {
+      const response = await axios.post('/api/buy-credits', data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`
+        }
+      })
+      if (response.status === 200) {
+        const { url } = response.data;
+        window.location = url;
+      }
+    } catch (error) {
+
+    }
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-2 md:px-4 pt-20">
-      
       <div>
         {/* Hero Section */}
         <div className="flex flex-col space-y-8 pb-10 pt-12 text-center md:pt-24">
@@ -76,12 +103,13 @@ export default function AddCreditPage() {
                 </div>
                 <div className="flex w-full flex-col px-8 pb-8">
                   <div className="flex w-full flex-col items-start justify-start space-y-3">
-                    <button
+                    <Button
                       type="button"
                       className="w-full rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm"
+                      onClick={() => handleAddMoreCredits(plan.name)}
                     >
                       Add Credit
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

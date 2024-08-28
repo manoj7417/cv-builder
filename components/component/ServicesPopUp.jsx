@@ -18,7 +18,8 @@ const ServicesPopUp = ({
   serviceName,
   serviceLink
 }) => {
-  const router = useRouter()
+  const router = useRouter();
+
 
   return (
     <div>

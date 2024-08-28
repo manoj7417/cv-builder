@@ -240,7 +240,7 @@ const ResumeView = () => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
-  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(true);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
@@ -456,7 +456,7 @@ const ResumeView = () => {
           <ServicesPopUp
             isServiceDialogOpen={isServiceDialogOpen}
             setIsServiceDialogOpen={setIsServiceDialogOpen}
-            serviceName="Create CV"
+            serviceName="CV-BUILDER"
           />
         </Dialog>
         <div>
