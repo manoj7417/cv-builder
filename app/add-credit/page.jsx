@@ -9,7 +9,6 @@ import { AddCreditData } from '@/constants/prices';
 
 
 export default function AddCreditPage() {
-
   const plans = [
     {
       name: 'CVCreator',
