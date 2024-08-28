@@ -419,9 +419,9 @@ const PricingFunc = () => {
       <section className="w-full h-screen 2xl:mt-40 lg:mt-52 md:mt-40  mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center lg:leading-5 leading-[45px]">
+            <h1 className="text-[35px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
               Grow beyond expectations
-              <br />
+              <br className="lg:block hidden"/>
               with <span className="text-blue-700">Flexible Pricing</span>
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
@@ -457,9 +457,9 @@ const PricingFunc = () => {
         </div>
       </section>
 
-      <section className="p-20 bg-blue-50" ref={serviceCardsRef}>
+      <section className="2xl:p-20 lg:p-20 p-10 bg-blue-50" ref={serviceCardsRef}>
         <div className="text-center card_main_title">
-          <h2 className="lg:text-5xl text-xl font-bold">
+          <h2 className="lg:text-5xl text-3xl font-bold">
             Different Services,
             <span className="text-blue-700">Infinite possibilities.</span>{" "}
           </h2>
