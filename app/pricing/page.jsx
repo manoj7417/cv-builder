@@ -39,7 +39,7 @@ const PricingFunc = () => {
     currency: "",
   });
   const searchParams = useSearchParams();
-  const scroll = searchParams.get('scroll')
+  const scroll = searchParams.get("scroll");
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
   // Function to scroll to the service cards section
@@ -58,7 +58,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/cv-studio",
       },
-      popUpDescription:"Build a job application that suits the exact description that your employers are looking forward to. With tools such as CV Creator, CV Optimiser, and CV Match, create the perfect Resume that is not only optimised for Application Tracking Software but also leaves an exemplary first impression",
+      popUpDescription:
+        "Build a job application that suits the exact description that your employers are looking forward to. With tools such as CV Creator, CV Optimiser, and CV Match, create the perfect Resume that is not only optimised for Application Tracking Software but also leaves an exemplary first impression",
       features: [
         "Access to Professional ATS Compatible CV Templates",
         "Create CVs through the AI-based CV Creator tool",
@@ -80,7 +81,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/coming-soon",
       },
-      popUpDescription:"Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
+      popUpDescription:
+        "Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
       features: [
         "Personalised Career Guidance from an AI-based online Career Coach",
         "Ask as many questions, in as many domains as you seek assistance with",
@@ -98,7 +100,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/coming-soon",
       },
-      popUpDescription:"If you want a more personalised and manual approach to Career Coaching, connect with one of the renowned experts who have years of experience working with candidates of different disciplines and calibre. Our community consists of Career Coaches from across the globe who are here to assist you with your career development",
+      popUpDescription:
+        "If you want a more personalised and manual approach to Career Coaching, connect with one of the renowned experts who have years of experience working with candidates of different disciplines and calibre. Our community consists of Career Coaches from across the globe who are here to assist you with your career development",
       features: [
         "Virtual Career Coach Connect through the Genies Career Hub platform",
         "Assured Career assistance for guaranteed solutions",
@@ -117,7 +120,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/coming-soon",
       },
-      popUpDescription:"Designed by leading Psychometricians from all around the world, the Psychometric Tests offer you a comprehensive and compelling guide to understanding your cognitive and analytical abilities. This helps you gain a deeper insight into your career choices. Know your strengths, weaknesses, and areas of potential for identifying a better career path",
+      popUpDescription:
+        "Designed by leading Psychometricians from all around the world, the Psychometric Tests offer you a comprehensive and compelling guide to understanding your cognitive and analytical abilities. This helps you gain a deeper insight into your career choices. Know your strengths, weaknesses, and areas of potential for identifying a better career path",
       features: [
         "Access to Psychometric Tests created by professionals",
         "A comprehensive report of your career strategy, strengths, and weaknesses.",
@@ -276,17 +280,16 @@ const PricingFunc = () => {
     getGeoInfo();
   }, []);
 
-
   useEffect(() => {
     const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
     if (serviceCardsSection) {
       const offsetTop = serviceCardsSection.offsetTop - 250;
       window.scrollTo({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
-  }, [scroll])
+  }, [scroll]);
 
   return (
     <>
@@ -416,14 +419,15 @@ const PricingFunc = () => {
         </DialogContent>
       </Dialog>
 
-      <section className="w-full h-screen 2xl:mt-40 lg:mt-52 md:mt-40  mt-10">
+      <section className="w-full h-screen 2xl:mt-40 lg:mt-56 md:mt-40  mt-20">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-[35px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center">
-              Grow beyond expectations with 
-              <br/>
-              <span className="text-blue-700"> Flexible Pricing</span>
+            <h1 className="text-4xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
+              Grow beyond expectations with
+              <br />
+              <span className="text-blue-700">Flexible Pricing</span>
             </h1>
+
             <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
               With careful plans designed to cater to all your needs, simple and
               transparent pricing, and secured pricing, you are one step closer
@@ -457,7 +461,10 @@ const PricingFunc = () => {
         </div>
       </section>
 
-      <section className="2xl:p-20 lg:p-20 p-10 bg-blue-50" ref={serviceCardsRef}>
+      <section
+        className="2xl:p-20 lg:p-20 p-10 bg-blue-50"
+        ref={serviceCardsRef}
+      >
         <div className="text-center card_main_title">
           <h2 className="lg:text-5xl text-3xl font-bold">
             Different Services,
@@ -478,7 +485,13 @@ const PricingFunc = () => {
                   backgroundColors[index % backgroundColors.length];
                 return (
                   <>
-                    <div key={index} className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""} `} id={`pricing-` + `${index + 1}`}>
+                    <div
+                      key={index}
+                      className={`flex rounded-md ${
+                        index + 1 === scroll ? "animate-bounce" : ""
+                      } `}
+                      id={`pricing-` + `${index + 1}`}
+                    >
                       <div
                         className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
                       >
@@ -527,11 +540,10 @@ const PricingFunc = () => {
   );
 };
 
-
 export default function Pricing() {
   return (
     <Suspense>
       <PricingFunc />
     </Suspense>
-  )
+  );
 }
