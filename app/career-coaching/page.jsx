@@ -20,6 +20,7 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 import "../components/HomepageNew/Homepage.css";
 import Link from "next/link";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 const ComingSoonPage = () => {
   const userState = useUserStore((state) => state.userState);
@@ -72,7 +73,8 @@ const ComingSoonPage = () => {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+      {/* {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />} */}
+      <ResumeHeader/>
       <section className='flex lg:items-center items-start justify-center pb-8 w-full pt-10 md:pt-10 lg:pt-10  px-5 relative'>
         <div className='container lg:pt-0 pt-10'>
           <div className='flex flex-col justify-center '>
