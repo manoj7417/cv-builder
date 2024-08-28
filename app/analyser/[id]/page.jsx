@@ -22,6 +22,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import uploadAnimation from '@/public/animations/uploadCVLoader.json'
 import scratchAnimation from '@/public/animations/startfromStratch.json'
+import ServicesPopUp from "@/components/component/ServicesPopUp";
 
 const FeedbackFuction = () => {
   const [content, setContent] = useState({});
@@ -50,6 +51,7 @@ const FeedbackFuction = () => {
   const [showMultiStepDialog, setshowMultiStepDialog] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const updateRedirectPricingRoute = useUserStore(state => state.updateRedirectPricingRoute)
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
 
 
   const fetchBetterResume = async () => {
@@ -69,10 +71,13 @@ const FeedbackFuction = () => {
         router.push('/resume-builder')
       }
     } catch (error) {
-      console.log(error)
-      if (error.response.status === 400 && error.response.data.error === "Insufficient optimizer tokens") {
-        updateRedirectPricingRoute('analyser/feedback')
-        return router.push('/pricing')
+      if (error.response.status === 403) {
+        if (error.response.data.error === 'Insufficient optimizer tokens') {
+          return setIsServiceDialogOpen(true)
+        } else {
+          toast.info("You do not have a valid plan.", { autoclose: 3000 })
+          return router.push("/pricing?scroll=1")
+        }
       }
     } finally {
       setIsLoading(false);
@@ -128,6 +133,13 @@ const FeedbackFuction = () => {
 
   return (
     <>
+      <Dialog open={isServiceDialogOpen}>
+        <ServicesPopUp
+          isServiceDialogOpen={isServiceDialogOpen}
+          setIsServiceDialogOpen={setIsServiceDialogOpen}
+          serviceName="Create CV"
+        />
+      </Dialog>
       <Dialog open={showDialog} >
         <DialogContent className="sm:max-w-[60dvw] w-96 sm:w-full rounded-xl" showCloseButton={true} onClick={() => setShowDialog(false)}>
           <h1 className="text-center pt-4 text-xl font-bold text-gray-500">
@@ -211,6 +223,7 @@ const FeedbackFuction = () => {
           formData={formData}
           setFormData={setFormData}
           type={'optimizer'}
+          setIsServiceDialogOpen={setIsServiceDialogOpen}
         />
       </Dialog>
       <section className="analyser_resume_section " suppressHydrationWarning>
@@ -536,14 +549,14 @@ const FeedbackFuction = () => {
           </button>
         </div> */}
         <div className="button_wrapper mb-5 fixed bottom-5 left-1/2 transform -translate-x-1/2">
-  <button className="get_start_btn floating" onClick={() => setShowDialog(true)}>
-    <span className="btn_text">Fix My CV</span>
-    <div className="btn_overlay">
-      
-      <FaCrown className="ml-1 text-yellow-500" />
-    </div>
-  </button>
-</div>
+          <button className="get_start_btn floating" onClick={() => setShowDialog(true)}>
+            <span className="btn_text">Fix My CV</span>
+            <div className="btn_overlay">
+
+              <FaCrown className="ml-1 text-yellow-500" />
+            </div>
+          </button>
+        </div>
 
       </section>
     </>

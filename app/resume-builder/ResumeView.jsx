@@ -240,7 +240,7 @@ const ResumeView = () => {
     canUndo: state.canUndo,
     canRedo: state.canRedo,
   }));
-  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(true);
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
