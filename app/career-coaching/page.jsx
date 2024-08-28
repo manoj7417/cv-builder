@@ -20,6 +20,7 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 import "../components/HomepageNew/Homepage.css";
 import Link from "next/link";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 const ComingSoonPage = () => {
   const userState = useUserStore((state) => state.userState);
