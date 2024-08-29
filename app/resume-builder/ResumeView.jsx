@@ -219,7 +219,7 @@ const ResumeView = () => {
   const randomNumber = Math.floor(Math.random() * 9);
   const randomAnimation = Math.floor(Math.random() * 4);
   const [scale, setScale] = useState(0.8);
-  const [isModalView, setIsModalView] = useState(false)
+  const [isModalView, setIsModalView] = useState(false);
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -231,6 +231,7 @@ const ResumeView = () => {
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
+  console.log("userdata::", userdata);
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
@@ -251,11 +252,13 @@ const ResumeView = () => {
     }
   };
 
-
-
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
-    handleDownloadResume(accessToken.value);
+    if (!userdata.subscription.plan.includes('CVSTUDIO')) {
+      setShowModal(true);
+    } else {
+      handleDownloadResume(accessToken.value);
+    }
   };
 
   const handleDownloadResume = async (token) => {
@@ -265,6 +268,7 @@ const ResumeView = () => {
       html: resume,
     };
     setIsLoading(true);
+
     try {
       const response = await printResume(body, token);
       if (response.ok) {
@@ -281,22 +285,33 @@ const ResumeView = () => {
         window.URL.revokeObjectURL(url);
         return;
       }
-      const res = await response.json()
-      if (response.status === 403 && res.message === 'You are not eligible for this feature') {
-        toast.info("Subscribe to Genies Pro Suite to download your CV.", { autoclose: 3000 })
+      const res = await response.json();
+      if (
+        response.status === 403 &&
+        res.message === "You are not eligible for this feature"
+      ) {
+        toast.info("Subscribe to Genies Pro Suite to download your CV.", {
+          autoclose: 3000,
+        });
         updateRedirectPricingRoute("/resume-builder");
         return router.push("/pricing?scroll=1");
       }
 
-      if (response.status === 403 && res.message === 'Your download CV tokens have expired') {
-        toast.info("Your plan validity has expired.", { autoclose: 3000 })
+      if (
+        response.status === 403 &&
+        res.message === "Your download CV tokens have expired"
+      ) {
+        toast.info("Your plan validity has expired.", { autoclose: 3000 });
         return router.push("/pricing?scroll=1");
       }
-      if (response.status === 403 && res.message === 'You have no download CV tokens') {
-        setIsServiceDialogOpen(true)
+      if (
+        response.status === 403 &&
+        res.message === "You have no download CV tokens"
+      ) {
+        setIsServiceDialogOpen(true);
       }
       if (response.status === 500) {
-        toast.error("Error downloading your CV , Please try again later")
+        toast.error("Error downloading your CV , Please try again later");
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -400,10 +415,9 @@ const ResumeView = () => {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-
   const handleFullScreen = () => {
-    setIsModalView(true)
-  }
+    setIsModalView(true);
+  };
 
   const handleZoomIn = () => {
     setScale((prevScale) => Math.min(prevScale * 1.2, 3));
@@ -525,11 +539,14 @@ const ResumeView = () => {
               </button>
             </ResumeTooltip>
             <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="h-full sm:max-w-[55dvw] sm:h-[65dvh] p-0 bg-white">
+              <DialogContent className="h-full sm:max-w-[50dvw] sm:h-[65dvh] p-0 bg-white">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl sm:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
+                  <DialogTitle className="text-2xl sm:text-5xl text-center mt-10 sm:mt-20 text-blue-900">
                     Choose Format
                   </DialogTitle>
+                  <p className="text-center text-sm sm:text-xl text-gray-600 mt-2">
+                    Select your preferred format to download your resume.
+                  </p>
                   <button
                     className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
                     onClick={() => setShowModal(false)}
@@ -568,16 +585,17 @@ const ResumeView = () => {
                         className="w-full max-w-[300px] border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-3 sm:py-4 rounded-md text-xs sm:text-sm font-bold text-center"
                         onClick={downloadAsText}
                       >
-                        Download as Text{" "}
+                        Download as Text
                         <IoDocumentText className="text-blue-700 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
                       </button>
                       <Link
-                        href="/pricing"
-                        className="w-full max-w-[300px] py-3 sm:py-4 border-2 border-red-500 hover:border-red-700 text-red-500 rounded-md text-xs sm:text-sm font-bold text-center"
+                        href="/pricing?scroll=1"
+                        className="w-full max-w-[300px] py-3 sm:py-4 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
                         disabled
                       >
-                        Download as PDF (Upgrade Required){" "}
-                        <FaFilePdf className="text-red-500 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
+                        Download as PDF 
+                        <FaFilePdf className="text-green-500 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
+                        <br/>(Upgrade Required)
                       </Link>
                     </div>
                   </div>
@@ -630,7 +648,10 @@ const ResumeView = () => {
           </div>
         </div>
       </div>
-      <FullResumeModal isModalView={isModalView} setIsModalView={setIsModalView} />
+      <FullResumeModal
+        isModalView={isModalView}
+        setIsModalView={setIsModalView}
+      />
     </>
   );
 };
