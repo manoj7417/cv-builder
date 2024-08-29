@@ -111,13 +111,12 @@ export default function Register() {
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
         <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
           <div className="absolute inset-0">
-            <Image
+            <Image priority
               width={500}
               height={500}
               className="h-full w-full rounded-md object-cover object-center"
               src="/newlogin.png"
               alt="register"
-              priority
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
@@ -218,7 +217,7 @@ export default function Register() {
               href={"/"}
               className="flex justify-center items-center mb-[60px]"
             >
-              <Image
+              <Image priority
                 src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}

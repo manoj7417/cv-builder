@@ -66,7 +66,7 @@ function ImageCarousel({ data }) {
                   <span></span>
                 </div>
               )}
-                <Image
+                <Image priority
                   alt={image.alt}
                   className="h-full w-full object-contain transition-all duration-300 group-hover:scale-105"
                   src={image.src}
@@ -99,7 +99,7 @@ function ImageCarousel({ data }) {
             <span></span>
           </div>
         )}
-        <Image
+        <Image priority
           alt={data.alt}
           className="h-full w-full object-contain transition-all duration-300 group-hover:scale-105"
           src={data.src}

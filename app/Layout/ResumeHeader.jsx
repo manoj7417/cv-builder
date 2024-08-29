@@ -88,7 +88,7 @@ export function ResumeHeader() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <Link href={"/"}>
-              <Image
+              <Image priority
                 src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}
@@ -128,7 +128,7 @@ export function ResumeHeader() {
                           }
                           alt="Dan_Abromov"
                         /> :
-                        <Image
+                        <Image priority
                           src="/avatar.png"
                           alt="Avatar"
                           height={100}
@@ -153,7 +153,7 @@ export function ResumeHeader() {
                         </li>
                       </Link>
                       <Link href="/user-history">
-                        <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
+                        <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center  ">
                           <PiReadCvLogo className="mr-2" />CV History
                         </li>
                       </Link>
@@ -188,7 +188,7 @@ export function ResumeHeader() {
                   <div className="flex items-center justify-between">
                     <div className="inline-flex items-center space-x-2">
                       <Link href={"/"}>
-                        <Image
+                        <Image priority
                           src="/genies-career-hub-logo.png"
                           width={50}
                           height={50}

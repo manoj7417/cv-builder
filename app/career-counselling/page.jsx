@@ -362,7 +362,7 @@ export default function Page() {
                                   <div className="flex items-center justify-center lg:space-x-2 space-y-4 lg:space-y-0 flex-col sm:flex-row md:flex-row lg:flex-row">
                                     <div className="grid grid-cols-1 place-items-center w-full">
                                       <div className="ai-image">
-                                        <Image
+                                        <Image priority
                                           src="/testpopup.png"
                                           width={200}
                                           height={200}
@@ -371,7 +371,7 @@ export default function Page() {
                                         />
                                       </div>
                                       <div className="ai-content flex flex-col items-center justify-center gap-5 p-2 w-full">
-                                        <Image
+                                        <Image priority
                                           src="/testtimer.png"
                                           width={80}
                                           height={100}
