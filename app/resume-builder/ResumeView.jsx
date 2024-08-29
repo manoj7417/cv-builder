@@ -231,7 +231,6 @@ const ResumeView = () => {
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
-  console.log("userdata::", userdata);
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
@@ -539,50 +538,33 @@ const ResumeView = () => {
               </button>
             </ResumeTooltip>
             <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="h-full sm:max-w-[50dvw] sm:h-[65dvh] p-0 bg-white">
+              <DialogContent className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white"  showCloseButton={true}
+               onClick={() => setShowModal(false)}>
                 <DialogHeader>
-                  <DialogTitle className="text-2xl sm:text-5xl text-center mt-10 sm:mt-20 text-blue-900">
-                    Choose Format
+                  <DialogTitle className="text-2xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
+                    Oops! You have not subscribed yet
                   </DialogTitle>
-                  <p className="text-center text-sm sm:text-xl text-gray-600 mt-2">
-                    Select your preferred format to download your resume.
+                  <p className="lg:w-full w-1/2 mx-auto text-center text-[12px] sm:text-base text-gray-600 mt-2">
+                    You need to upgrade to download your CV as a PDF, or else
+                    you can download as a Text for free
                   </p>
-                  <button
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
                 </DialogHeader>
-                <div className="modal_content_section flex flex-col sm:flex-row items-center justify-center sm:justify-between">
-                  <div className="w-full sm:w-1/2 flex lg:flex-row flex-col justify-center mb-6 sm:mb-0">
+                <div className="modal_content_section flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-6">
+                  <div className="w-full sm:w-1/2 flex justify-center mb-6 sm:mb-0">
                     <div className="image_content text-center">
                       <Image
                         src="/illustration-manager-choosing-new-worker.png"
                         alt="choice-worker-concept-illustrated"
-                        className="2xl:w-full 2xl:h-[400px] lg:w-[300px] lg:h-[250px] w-[200px] h-[200px] object-contain mx-auto"
+                        className="w-[200px] h-[200px] sm:w-[300px] sm:h-[250px] lg:w-[300px] lg:h-[200px] 2xl:w-[400px] 2xl:h-[400px] object-contain mx-auto"
                         width={400}
                         height={500}
                       />
                     </div>
                   </div>
                   <div className="w-full sm:w-1/2 flex justify-center">
-                    <div className="flex flex-col gap-4 sm:gap-10 p-6 sm:p-10 items-center w-full">
+                    <div className="flex flex-col gap-4 sm:gap-8 p-4 sm:p-6 items-center w-full">
                       <button
-                        className="w-full max-w-[300px] border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-3 sm:py-4 rounded-md text-xs sm:text-sm font-bold text-center"
+                        className="w-full max-w-[250px] sm:max-w-[300px] border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold text-center"
                         onClick={downloadAsText}
                       >
                         Download as Text
@@ -593,9 +575,10 @@ const ResumeView = () => {
                         className="w-full max-w-[300px] py-3 sm:py-4 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
                         disabled
                       >
-                        Download as PDF 
+                        Download as PDF
                         <FaFilePdf className="text-green-500 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
-                        <br/>(Upgrade Required)
+                        <br />
+                        (Upgrade Required)
                       </Link>
                     </div>
                   </div>
