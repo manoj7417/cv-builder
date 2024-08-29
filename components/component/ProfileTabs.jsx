@@ -1,5 +1,4 @@
 'use client'
-import React from "react";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import React, { useState, useRef, useEffect } from "react";
 import { FaCamera, FaRegEdit } from "react-icons/fa";
@@ -9,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { uploadImage, updateUserProfile } from "@/app/api/api";
 import { GetTokens, SetTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
-import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
