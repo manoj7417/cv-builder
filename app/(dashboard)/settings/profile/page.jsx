@@ -7,6 +7,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -56,7 +57,7 @@ function Profile() {
     useEffect(() => {
         if (userState?.userdata) {
             setPreviewImage(
-                userState.userdata.profilePicture || "https://via.placeholder.com/150"
+                userState.userdata.profilePicture
             );
         }
     }, [userState?.userdata]);
@@ -193,7 +194,7 @@ function Profile() {
             }
         } catch {
             toast.error("Error removing profile picture")
-        }finally{
+        } finally {
             setIsUploadingImage(false)
         }
     }
@@ -419,185 +420,192 @@ function Profile() {
                 </DialogContent>
             </Dialog>
             <section className="bg-gradient-to-r p-6 sm:p-10">
-  <div className="px-3 sm:px-5">
-    <p className="font-bold text-2xl sm:text-3xl flex items-center text-blue-900">
-      <FaRegUserCircle className="mr-2" />
-      Profile
-    </p>
-  </div>
+                <div className="px-3 sm:px-5">
+                    <p className="font-bold text-2xl sm:text-3xl flex items-center text-blue-900">
+                        <FaRegUserCircle className="mr-2" />
+                        Profile
+                    </p>
+                </div>
 
-  <div className="container mx-auto px-3 sm:px-5">
-    <div className="mb-4 p-4">
-      <div className="flex flex-col sm:flex-row my-3">
-        <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative">
-          <div className="rounded-full overflow-hidden w-24 h-24 sm:w-36 sm:h-36 relative">
-            <img
-              src={previewImage || "https://i.sstatic.net/l60Hf.png"}
-              alt="avatar"
-              className="mx-auto h-full w-full object-cover"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/150";
-              }}
-            />
-            {isUploadingImage && (
-              <div className="absolute top-0 w-full h-full bg-black/50 flex items-center justify-center">
-                <BiLoaderAlt className="text-white w-10 h-10 animate-spin" />
-              </div>
-            )}
-          </div>
-          <div className="flex flex-col justify-center items-center h-24 w-24 sm:h-36 sm:w-36 mt-4 sm:mt-0">
-            <div>
-              <Button
-                variant="outline"
-                className="my-2 lg:w-full w-[200px]"
-                onClick={handleImageUpload}
-              >
-                <CiImageOn className="mr-1" />
-                Change
-              </Button>
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileUploadRef}
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </div>
-            <Button
-              variant="outline"
-              className="my-2 lg:w-full w-[200px]"
-              onClick={handleRemoveProfilePicture}
-            >
-              <RiDeleteBinLine className="mr-1" />
-              Remove
-            </Button>
-          </div>
-        </div>
+                <div className="container mx-auto px-3 sm:px-5">
+                    <div className="mb-4 p-4">
+                        <div className="flex flex-col sm:flex-row my-3">
+                            <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative">
+                                <div className="rounded-full overflow-hidden w-24 h-24 sm:w-36 sm:h-36 relative">
+                                    {
+                                        previewImage ?
+                                            <img
+                                                src={previewImage}
+                                                alt="avatar"
+                                                className="mx-auto h-full w-full object-cover"
+                                            />
+                                            :
+                                            <Image
+                                                src='/avatar.png'
+                                                className="mx-auto h-full w-full object-cover"
+                                                alt='avatar.png'
+                                                height={100}
+                                                width={100}
+                                            />
+                                    }
+                                    {isUploadingImage && (
+                                        <div className="absolute top-0 w-full h-full bg-black/50 flex items-center justify-center">
+                                            <BiLoaderAlt className="text-white w-10 h-10 animate-spin" />
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col justify-center items-center h-24 w-24 sm:h-36 sm:w-36 mt-4 sm:mt-0">
+                                    <div>
+                                        <Button
+                                            variant="outline"
+                                            className="my-2 lg:w-full w-[200px]"
+                                            onClick={handleImageUpload}
+                                        >
+                                            <CiImageOn className="mr-1" />
+                                            Change
+                                        </Button>
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            ref={fileUploadRef}
+                                            onChange={handleImageChange}
+                                            className="hidden"
+                                        />
+                                    </div>
+                                    <Button
+                                        variant="outline"
+                                        className="my-2 lg:w-full w-[200px]"
+                                        onClick={handleRemoveProfilePicture}
+                                    >
+                                        <RiDeleteBinLine className="mr-1" />
+                                        Remove
+                                    </Button>
+                                </div>
+                            </div>
 
-        <div className="w-full sm:w-2/3 px-5 p-4 sm:p-5 mt-6 sm:mt-0 shadow-lg rounded-2xl">
-          <form onSubmit={handleSubmit(userProfileHandler)}>
-            <div className="w-full mb-4">
-              <Label>Fullname</Label>
-              <div>
-                {isEditable ? (
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset">
-                    <Input
-                      type="text"
-                      {...register("fullname")}
-                      defaultValue={userdata?.fullname}
-                      className="text-md text-gray-500"
-                    />
-                  </div>
-                ) : (
-                  <p className="text-gray-500 flex items-center h-8">
-                    {userdata?.fullname || "-"}
-                  </p>
-                )}
-              </div>
-            </div>
+                            <div className="w-full sm:w-2/3 px-5 p-4 sm:p-5 mt-6 sm:mt-0 shadow-lg rounded-2xl">
+                                <form onSubmit={handleSubmit(userProfileHandler)}>
+                                    <div className="w-full mb-4">
+                                        <Label>Fullname</Label>
+                                        <div>
+                                            {isEditable ? (
+                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset">
+                                                    <Input
+                                                        type="text"
+                                                        {...register("fullname")}
+                                                        defaultValue={userdata?.fullname}
+                                                        className="text-md text-gray-500"
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <p className="text-gray-500 flex items-center h-8">
+                                                    {userdata?.fullname || "-"}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
 
-            <div className="my-3">
-              <Label>Email</Label>
-              <p className="text-gray-500 h-8">
-                {userdata?.email || ""}
-              </p>
-            </div>
+                                    <div className="my-3">
+                                        <Label>Email</Label>
+                                        <p className="text-gray-500 h-8">
+                                            {userdata?.email || ""}
+                                        </p>
+                                    </div>
 
-            <div className="my-3">
-              <Label>Occupation</Label>
-              <div>
-                {isEditable ? (
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset">
-                    <Input
-                      type="text"
-                      {...register("occupation")}
-                      defaultValue={userdata?.occupation}
-                    />
-                  </div>
-                ) : (
-                  <p className="text-gray-500 h-10">
-                    {userdata?.occupation || "-"}
-                  </p>
-                )}
-              </div>
-            </div>
+                                    <div className="my-3">
+                                        <Label>Occupation</Label>
+                                        <div>
+                                            {isEditable ? (
+                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset">
+                                                    <Input
+                                                        type="text"
+                                                        {...register("occupation")}
+                                                        defaultValue={userdata?.occupation}
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <p className="text-gray-500 h-10">
+                                                    {userdata?.occupation || "-"}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
 
-            <div className="my-3">
-              <Label>Address</Label>
-              <div>
-                {isEditable ? (
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset">
-                    <Input
-                      type="text"
-                      {...register("address")}
-                      defaultValue={userdata?.address}
-                    />
-                  </div>
-                ) : (
-                  <p className="text-gray-500 h-10">
-                    {userdata?.address || "-"}
-                  </p>
-                )}
-              </div>
-            </div>
+                                    <div className="my-3">
+                                        <Label>Address</Label>
+                                        <div>
+                                            {isEditable ? (
+                                                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset">
+                                                    <Input
+                                                        type="text"
+                                                        {...register("address")}
+                                                        defaultValue={userdata?.address}
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <p className="text-gray-500 h-10">
+                                                    {userdata?.address || "-"}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
 
-            <div className="my-3">
-              <Label>Plan</Label>
-              <p className="text-gray-500">
-                {userdata?.subscription?.plan}
-              </p>
-            </div>
+                                    <div className="my-3">
+                                        <Label>Plan</Label>
+                                        <p className="text-gray-500">
+                                            {userdata?.subscription?.plan}
+                                        </p>
+                                    </div>
 
-            <div className="py-4 flex flex-col sm:flex-row justify-between items-center gap-5">
-              <div className="flex items-center justify-end">
-                {isEditable ? (
-                  <div className="flex flex-row">
-                    <Button
-                      variant="outline"
-                      type="button"
-                      className="mr-0 sm:mr-4 mb-2 sm:mb-0"
-                      onClick={() => setIsEditable(false)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="text-white py-2 px-4 rounded"
-                      disabled={isUpdatingData}
-                    >
-                      {isUpdatingData ? (
-                        <>
-                          Updating
-                          <ImSpinner3 className="h-4 w-4 animate-spin ml-2" />
-                        </>
-                      ) : (
-                        "Update"
-                      )}
-                    </Button>
-                  </div>
-                ) : (
-                  <Button
-                    type="button"
-                    className="w-[150px] inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-4 border h-10 cursor-pointer text-white bg-blue-900"
-                    onClick={() => setIsEditable(true)}
-                  >
-                    Edit
-                  </Button>
-                )}
-              </div>
-              <div>
-                <Button type="button" className="" onClick={() => setShowDialog(true)}>
-                  Change Password
-                </Button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                                    <div className="py-4 flex flex-col sm:flex-row justify-between items-center gap-5">
+                                        <div className="flex items-center justify-end">
+                                            {isEditable ? (
+                                                <div className="flex flex-row">
+                                                    <Button
+                                                        variant="outline"
+                                                        type="button"
+                                                        className="mr-0 sm:mr-4 mb-2 sm:mb-0"
+                                                        onClick={() => setIsEditable(false)}
+                                                    >
+                                                        Cancel
+                                                    </Button>
+                                                    <Button
+                                                        type="submit"
+                                                        className="text-white py-2 px-4 rounded"
+                                                        disabled={isUpdatingData}
+                                                    >
+                                                        {isUpdatingData ? (
+                                                            <>
+                                                                Updating
+                                                                <ImSpinner3 className="h-4 w-4 animate-spin ml-2" />
+                                                            </>
+                                                        ) : (
+                                                            "Update"
+                                                        )}
+                                                    </Button>
+                                                </div>
+                                            ) : (
+                                                <Button
+                                                    type="button"
+                                                    className="w-[150px] inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-4 border h-10 cursor-pointer text-white bg-blue-900"
+                                                    onClick={() => setIsEditable(true)}
+                                                >
+                                                    Edit
+                                                </Button>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <Button type="button" className="" onClick={() => setShowDialog(true)}>
+                                                Change Password
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </>
     )

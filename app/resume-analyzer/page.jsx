@@ -30,13 +30,14 @@ export default function DashboardIdea() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
-  const userState = useUserStore((state) => state.userState);
+  const { userdata } = useUserStore((state) => state.userState);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
   const isCreditScore = true;
+
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens();
@@ -77,9 +78,14 @@ export default function DashboardIdea() {
     } catch (error) {
       if (error.response.status === 403) {
         if (error.response.data.message === 'You have no analyser tokens') {
-          setIsServiceDialogOpen(true)
+          if (userdata.subscription.plan.includes('CVSTUDIO')) {
+            setIsServiceDialogOpen(true)
+          } else {
+            toast.info("Please subscribe to Genies Pro Suit to use this service", { autoClose: 10000 })
+            return router.push('/pricing?scroll=1')
+          }
         } else {
-          toast.info("You do not have a valid plan.", { autoClose: 5000 })
+          toast.info("You do not have a valid plan.", { autoClose: 10000 })
           return router.push('/pricing?scroll=1')
         }
       } else {

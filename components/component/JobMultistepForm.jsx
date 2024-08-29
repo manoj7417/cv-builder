@@ -25,7 +25,8 @@ const dateFormat = "YYYY-MM";
 function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData, setFormData, jobRole, type, setIsServiceDialogOpen }) {
     const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
     const router = useRouter();
-    const updateUserData = useUserStore(state => state.updateUserData);
+    const { updateUserData, userState } = useUserStore(state => state);
+    const { userdata } = userState;
 
     const handleChangeStep1 = () => {
         if (!formData.fullname.trim() || !formData.email.trim() || !formData.jobTitle.trim() || !formData.country.trim() || !formData.city.trim()) {
@@ -409,7 +410,12 @@ function JobMultistepForm({ handleCloseMultistepForm, steps, setSteps, formData,
         } catch (error) {
             if (error.response.status === 403) {
                 if (error.response.data.error === "Insufficient JobCV tokens" || error.response.data.error === "Insufficient optimizer tokens") {
-                    setIsServiceDialogOpen(true)
+                    if (userdata.subscription.plan.includes('CVSTUDIO')) {
+                        return setIsServiceDialogOpen(true)
+                    } else {
+                        toast.info("Please subscribe to Genies Pro Suit to use this service", { autoClose: 10000 })
+                        return router.push('/pricing?scroll=1')
+                    }
                 } else {
                     toast.error("You don not have a valid plan.")
                     return router.push('/pricing?scroll=1')

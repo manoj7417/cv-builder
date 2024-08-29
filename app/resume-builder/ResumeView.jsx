@@ -253,7 +253,7 @@ const ResumeView = () => {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
-    if (userdata?.subscription?.plan === "free") {
+    if (!userdata.subscription.plan.includes('CVSTUDIO')) {
       setShowModal(true);
     } else {
       handleDownloadResume(accessToken.value);
@@ -267,6 +267,7 @@ const ResumeView = () => {
       html: resume,
     };
     setIsLoading(true);
+
     try {
       const response = await printResume(body, token);
       if (response.ok) {
@@ -570,8 +571,8 @@ const ResumeView = () => {
                         <IoDocumentText className="text-blue-700 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
                       </button>
                       <Link
-                        href="/pricing"
-                        className="w-full max-w-[250px] sm:max-w-[300px] py-2 sm:py-3 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
+                        href="/pricing?scroll=1"
+                        className="w-full max-w-[300px] py-3 sm:py-4 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
                         disabled
                       >
                         Download as PDF
