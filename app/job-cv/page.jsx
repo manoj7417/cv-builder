@@ -151,7 +151,7 @@ export default function Home() {
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
-  const isCreditScore = true;
+
 
   const handleDialogClose = () => {
     setIsGeneratingResume(false);
@@ -173,15 +173,15 @@ export default function Home() {
         return response.data;
       }
     } catch (error) {
-      if (
-        error.response.status === 400 &&
-        (error.response.data.error === "Insufficient JobCV tokens" ||
-          error.response.data.error === "Subscription is inactive or expired")
-      ) {
-        router.push("/pricing");
-      } else {
-        toast.error("Unable to generate JobCV , Please try again");
+      if (error.response.status === 403) {
+        if (error.response.data.error === "Insufficient JobCV tokens") {
+          return setIsServiceDialogOpen(true)
+        } else {
+          toast.info("You do not have a valid plan.", { autoclose: 3000 })
+          return router.push("/pricing?scroll=1");
+        }
       }
+      toast.error("Unable to generate your CV.")
     }
   };
 
@@ -275,6 +275,7 @@ export default function Home() {
               setFormData={setFormData}
               jobRole={jobRole}
               type={"JobCV"}
+              setIsServiceDialogOpen={setIsServiceDialogOpen}
             />
           </Dialog>
           <Dialog open={showDialog}>
@@ -399,14 +400,6 @@ export default function Home() {
                       serviceName="Create CV"
                     />
                   </Dialog>
-                  {isCreditScore ? (
-                    <Button
-                      onClick={() => setIsServiceDialogOpen(true)}
-                      className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
-                    >
-                      Optimise CV Now
-                    </Button>
-                  ) : (
                     <button
                       className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
                       onClick={() => handleGenerateNow()}
@@ -414,7 +407,6 @@ export default function Home() {
                       Generate Now{" "}
                       <RiAiGenerate className="text-base font-bold" />
                     </button>
-                  )}
                 </div>
               </div>
             </div>
