@@ -119,13 +119,23 @@ export function ResumeHeader() {
                   onClick={toggleDropdown}
                 >
                   <span className="relative inline-block">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src={
-                        userdata?.profilePicture || "/profile-avatar-img.png"
-                      }
-                      alt="Dan_Abromov"
-                    />
+                    {
+                      userdata?.profilePicture ?
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src={
+                            userdata?.profilePicture
+                          }
+                          alt="Dan_Abromov"
+                        /> :
+                        <Image
+                          src="/avatar.png"
+                          alt="Avatar"
+                          height={100}
+                          width={100}
+                          className="w-8 h-8 object-contain"
+                        />
+                    }
                   </span>
                   <div className="mx-2">
                     <div className="text-sm font-medium text-gray-900">
@@ -139,19 +149,19 @@ export function ResumeHeader() {
                     <ul>
                       <Link href="/settings/profile">
                         <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
-                        <IoSettingsOutline className="mr-2" /> Settings
+                          <IoSettingsOutline className="mr-2" /> Settings
                         </li>
                       </Link>
                       <Link href="/user-history">
                         <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
-                        <PiReadCvLogo className="mr-2"/>CV History
+                          <PiReadCvLogo className="mr-2" />CV History
                         </li>
                       </Link>
                       <li
                         className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center"
                         onClick={handleLogout}
                       >
-                       <MdLogout className="mr-2" /> Logout
+                        <MdLogout className="mr-2" /> Logout
                       </li>
                     </ul>
                   </div>

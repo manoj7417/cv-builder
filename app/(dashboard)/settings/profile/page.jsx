@@ -7,6 +7,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -56,7 +57,7 @@ function Profile() {
     useEffect(() => {
         if (userState?.userdata) {
             setPreviewImage(
-                userState.userdata.profilePicture || "https://via.placeholder.com/150"
+                userState.userdata.profilePicture
             );
         }
     }, [userState?.userdata]);
@@ -193,7 +194,7 @@ function Profile() {
             }
         } catch {
             toast.error("Error removing profile picture")
-        }finally{
+        } finally {
             setIsUploadingImage(false)
         }
     }
@@ -429,15 +430,22 @@ function Profile() {
                         <div className="flex  my-3">
                             <div className="w-1/3 flex  justify-start relative ">
                                 <div className='rounded-full overflow-hidden  w-36 h-36 relative'>
-                                    <img
-                                        src={previewImage || "https://i.sstatic.net/l60Hf.png"}
-                                        alt="avatar"
-                                        className=" mx-auto h-full w-full object-cover"
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = "https://via.placeholder.com/150";
-                                        }}
-                                    />
+                                    {
+                                        previewImage ?
+                                            <img
+                                                src={previewImage}
+                                                alt="avatar"
+                                                className=" mx-auto h-full w-full object-cover"
+                                            />
+                                            :
+                                            <Image
+                                                src='/avatar.png'
+                                                alt='avatar'
+                                                className='rounded-full h-full w-full object-cover'
+                                                height={200}
+                                                width={200}
+                                            />
+                                    }
                                     {
                                         isUploadingImage &&
                                         <div className='absolute top-0 w-full h-full bg-black/50 flex items-center justify-center'>
@@ -458,30 +466,6 @@ function Profile() {
                                     </div>
                                     <Button variant={'outline'} className='my-2' onClick={handleRemoveProfilePicture}><RiDeleteBinLine className='mr-1 ' />Remove</Button>
                                 </div>
-                                {/* {isEditable && (
-                                        <div className="image_preview h-40 flex item-center justify-center absolute top-0">
-                                            <button
-                                                type="button"
-                                                onClick={handleImageUpload}
-                                                className="w-32 h-32 flex items-baseline justify-end rounded-full border-2 relative"
-                                            >
-                                                <FaCamera className="bg-blue-900 text-white text-2xl border border-black/40 p-1 rounded-full absolute top-20" />
-                                            </button>
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                ref={fileUploadRef}
-                                                onChange={handleImageChange}
-                                                className="mx-auto mb-4 hidden"
-                                            />
-                                            {loading && (
-                                                <svg
-                                                    class="animate-spin h-5 w-5 mr-3 ..."
-                                                    viewBox="0 0 24 24"
-                                                ></svg>
-                                            )}
-                                        </div>
-                                    )} */}
                             </div>
                             <div className=' w-2/3 px-10 p-5 shadow-lg rounded-2xl'>
                                 <form onSubmit={handleSubmit(userProfileHandler)}>

@@ -1,29 +1,3 @@
-// import { NextResponse } from "next/server";
-
-
-// const protectedRoutes = ['/app/resume-builder', '/app/analyser/feedback', '/app/user-history', '/app/user-profile', '/app/career-counselling', '/app/mcq'];
-
-// export const config = {
-//   matcher: [
-//     '/app/:path*'
-//   ],
-// }
-
-// export async function middleware(req) {
-//   const { pathname } = req.nextUrl
-//   let cookie = req.cookies.get('accessToken')
-
-//   
-  
-//   if (protectedRoutes.includes(pathname)) {
-//     if (!cookie?.value) {
-//       return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, req.nextUrl));
-//     }
-//   }
-//   return NextResponse.next();
-// }
-
-
 
 import { NextResponse } from 'next/server';
 
