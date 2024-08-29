@@ -440,7 +440,7 @@ function Profile() {
                                                 className="mx-auto h-full w-full object-cover"
                                             />
                                             :
-                                            <Image
+                                            <Image priority
                                                 src='/avatar.png'
                                                 className="mx-auto h-full w-full object-cover"
                                                 alt='avatar.png'

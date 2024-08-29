@@ -575,7 +575,7 @@ const PricingFunc = () => {
             </div>
             {/* Add Image below the content */}
             <div className="mt-8 flex justify-center">
-              <Image
+              <Image priority
                 src="/pricing-pic.png" // replace with your image path
                 alt="Pricing"
                 width={500} // adjust as needed
@@ -645,7 +645,7 @@ const PricingFunc = () => {
             </div>
           </div>
           <div className="bg-white lg:block hidden">
-            <Image
+            <Image priority
               src={item?.imageUrl} // replace with the correct image path
               alt="Card Image"
               width={500} // adjust as needed

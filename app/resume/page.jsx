@@ -451,13 +451,13 @@ export default function DashboardIdea() {
                     </Button>
                 </div>
               </div>
-              <Image
+              <Image priority
                 src="/resume.png"
                 className="w-50 h-50 px-7 mt-10 pt-7 rounded-t-3xl"
                 alt="@shadcn"
                 width={600}
                 height={100}
-                priority
+                
               />
             </div>
           </div>

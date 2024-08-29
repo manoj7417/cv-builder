@@ -299,7 +299,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                                 className="image_section_1 "
                                 onClick={() => handleTemplateChange(image.name)}
                               >
-                                <Image
+                                <Image priority
                                   src={image.src}
                                   alt={image.alt}
                                   className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[200px] w-[200px]"

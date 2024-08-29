@@ -184,7 +184,7 @@ export default function ContactPageTwo() {
                 </form>
               </div>
             </div>
-            <Image
+            <Image priority
               alt="Contact us"
               className="hidden sm:hidden md:block lg:block xl:block 2xl:block"
               src="/contact-us.jpg"

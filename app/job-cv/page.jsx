@@ -416,7 +416,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-10 sm:mt-0 w-full lg:max-w-4xl sm:p-10 p-0">
-              <Image
+              <Image priority
                 src="/cvgenerator.png"
                 width={1300}
                 height={700}

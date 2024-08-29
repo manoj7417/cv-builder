@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="sm:flex sm:items-center sm:justify-center">
             {/* <div>
               <a href="/" className="flex items-center gap-2 mobile_footer">
-                <Image
+                <Image priority
                   src={"/genies-career-hub-logo.png"}
                   width={200}
                   height={100}

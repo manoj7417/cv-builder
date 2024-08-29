@@ -95,7 +95,7 @@ export default function NewResumeHeader() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start h-full">
                   <div>
                     <a href="/" className="flex items-center gap-2">
-                      <Image
+                      <Image priority
                         src="/genies-career-hub-logo.png"
                         width={100}
                         height={100}

@@ -169,13 +169,13 @@ export default function DashboardIdea() {
               </div>
             </div>
             <div className="mt-10 lg:mt-0 flex justify-center lg:justify-start">
-              <Image
+              <Image priority
                 src="/1enhance.png"
                 className="rounded-t-3xl w-full sm:w-1/2 mx-auto h-auto responsive-image"
                 alt="@shadcn"
                 width={600}
                 height={100}
-                priority
+                
               />
             </div>
           </div>
