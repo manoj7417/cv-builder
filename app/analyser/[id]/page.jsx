@@ -73,9 +73,14 @@ const FeedbackFuction = () => {
     } catch (error) {
       if (error.response.status === 403) {
         if (error.response.data.error === 'Insufficient optimizer tokens') {
-          return setIsServiceDialogOpen(true)
+          if (userdata.subscription.plan.includes('CVSTUDIO')) {
+            return setIsServiceDialogOpen(true)
+          } else {
+            toast.info("Please subscribe to Genies Pro Suit to use this service", { autoClose: 10000 })
+            return router.push('/pricing?scroll=1')
+          }
         } else {
-          toast.info("You do not have a valid plan.", { autoclose: 3000 })
+          toast.info("You do not have a valid plan.", { autoclose: 10000 })
           return router.push("/pricing?scroll=1")
         }
       }
