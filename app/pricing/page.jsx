@@ -548,7 +548,7 @@ const PricingFunc = () => {
       <section className="w-full h-screen 2xl:mt-40 lg:mt-56 md:mt-40  mt-20">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
               Grow beyond expectations with
               <br />
               <span className="text-blue-700">Flexible Pricing</span>
@@ -603,63 +603,61 @@ const PricingFunc = () => {
           </p>
         </div>
         <div className="flex justify-center py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5">
-            {serviceCards?.length > 0 &&
-              serviceCards.map((item, index) => {
-                // Assign background color based on index
-                const bgColor =
-                  backgroundColors[index % backgroundColors.length];
-                return (
-                  <>
-                    <div
-                      key={index}
-                      className={`flex rounded-md ${
-                        index + 1 === scroll ? "animate-bounce" : ""
-                      } `}
-                      id={`pricing-` + `${index + 1}`}
-                    >
-                      <div
-                        className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
-                      >
-                        <div className="p-4">
-                          <h1 className="lg:text-2xl text-xl font-semibold text-white">
-                            {item?.cardTitle}
-                          </h1>
-                          <p className="mt-3 text-sm text-white">
-                            {item?.cardDescription}
-                          </p>
-                        </div>
-                        <div className="p-4 actions_buttons flex justify-between">
-                          <Link
-                            href={item?.free?.link}
-                            type="button"
-                            className="rounded-sm bg-transparent px-5 py-2 text-sm font-semibold text-white border-2 border-white"
-                          >
-                            {item?.free?.title}
-                          </Link>
-                          <button
-                            type="button"
-                            onClick={() => handleOpenAIDialog(item)}
-                            className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
-                          >
-                            Subscribe
-                          </button>
-                        </div>
-                      </div>
-                      <div className="bg-white lg:block hidden">
-                        <Image
-                          src={item?.imageUrl} // replace with the correct image path
-                          alt="Card Image"
-                          width={500} // adjust as needed
-                          height={500} // adjust as needed
-                          className={`w-[350px] h-[250px] object-contain`}
-                        />
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5">
+  {serviceCards?.length > 0 &&
+    serviceCards.map((item, index) => {
+      // Assign background color based on index
+      const bgColor = backgroundColors[index % backgroundColors.length];
+      return (
+        <div
+          key={item.id} // Ensure key prop is here on the top-level element
+          className={`flex rounded-md ${
+            index + 1 === scroll ? "animate-bounce" : ""
+          } `}
+          id={`pricing-` + `${index + 1}`}
+        >
+          <div
+            className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
+          >
+            <div className="p-4">
+              <h1 className="lg:text-2xl text-xl font-semibold text-white">
+                {item?.cardTitle}
+              </h1>
+              <p className="mt-3 text-sm text-white">
+                {item?.cardDescription}
+              </p>
+            </div>
+            <div className="p-4 actions_buttons flex justify-between">
+              <Link
+                href={item?.free?.link}
+                type="button"
+                className="rounded-sm bg-transparent px-5 py-2 text-sm font-semibold text-white border-2 border-white"
+              >
+                {item?.free?.title}
+              </Link>
+              <button
+                type="button"
+                onClick={() => handleOpenAIDialog(item)}
+                className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+              >
+                Subscribe
+              </button>
+            </div>
           </div>
+          <div className="bg-white lg:block hidden">
+            <Image
+              src={item?.imageUrl} // replace with the correct image path
+              alt="Card Image"
+              width={500} // adjust as needed
+              height={500} // adjust as needed
+              className={`w-[350px] h-[250px] object-contain`}
+            />
+          </div>
+        </div>
+      );
+    })}
+</div>
+
         </div>
       </section>
     </>
