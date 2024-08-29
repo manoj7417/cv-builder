@@ -541,7 +541,7 @@ const ResumeView = () => {
                onClick={() => setShowModal(false)}>
                 <DialogHeader>
                   <DialogTitle className="text-2xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
-                    Oops! You haven't subscribed yet
+                    Oops! You have not subscribed yet
                   </DialogTitle>
                   <p className="lg:w-full w-1/2 mx-auto text-center text-[12px] sm:text-base text-gray-600 mt-2">
                     You need to upgrade to download your CV as a PDF, or else
