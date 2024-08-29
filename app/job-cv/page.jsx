@@ -175,9 +175,14 @@ export default function Home() {
     } catch (error) {
       if (error.response.status === 403) {
         if (error.response.data.error === "Insufficient JobCV tokens") {
-          return setIsServiceDialogOpen(true)
+          if (userdata.subscription.plan.includes('CVSTUDIO')) {
+            return setIsServiceDialogOpen(true)
+          } else {
+            toast.info("Please subscribe to Genies Pro Suit to use this service", { autoClose: 10000 })
+            return router.push('/pricing?scroll=1')
+          }
         } else {
-          toast.info("You do not have a valid plan.", { autoclose: 3000 })
+          toast.info("You do not have a valid plan.", { autoclose: 10000 })
           return router.push("/pricing?scroll=1");
         }
       }
@@ -400,13 +405,13 @@ export default function Home() {
                       serviceName="Create CV"
                     />
                   </Dialog>
-                    <button
-                      className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
-                      onClick={() => handleGenerateNow()}
-                    >
-                      Generate Now{" "}
-                      <RiAiGenerate className="text-base font-bold" />
-                    </button>
+                  <button
+                    className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
+                    onClick={() => handleGenerateNow()}
+                  >
+                    Generate Now{" "}
+                    <RiAiGenerate className="text-base font-bold" />
+                  </button>
                 </div>
               </div>
             </div>
