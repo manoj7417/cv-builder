@@ -39,7 +39,7 @@ const PricingFunc = () => {
     currency: "",
   });
   const searchParams = useSearchParams();
-  const scroll = searchParams.get('scroll')
+  const scroll = searchParams.get("scroll");
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
   // Function to scroll to the service cards section
@@ -58,7 +58,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/cv-studio",
       },
-      popUpDescription:"Build a job application that suits the exact description that your employers are looking forward to. With tools such as CV Creator, CV Optimiser, and CV Match, create the perfect Resume that is not only optimised for Application Tracking Software but also leaves an exemplary first impression",
+      popUpDescription:
+        "Build a job application that suits the exact description that your employers are looking forward to. With tools such as CV Creator, CV Optimiser, and CV Match, create the perfect Resume that is not only optimised for Application Tracking Software but also leaves an exemplary first impression",
       features: [
         "Access to Professional ATS Compatible CV Templates",
         "Create CVs through the AI-based CV Creator tool",
@@ -80,7 +81,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/coming-soon",
       },
-      popUpDescription:"Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
+      popUpDescription:
+        "Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
       features: [
         "Personalised Career Guidance from an AI-based online Career Coach",
         "Ask as many questions, in as many domains as you seek assistance with",
@@ -90,7 +92,7 @@ const PricingFunc = () => {
     },
     {
       id: 3,
-      cardTitle: "Traditional Virtual 1-to-1 Coaching",
+      cardTitle: "Virtual 1-to-1 Coaching",
       cardDescription:
         "Get a more personalised approach to Career Coaching with Traditional Career Coaching from experienced coaches across the globe",
       imageUrl: card3,
@@ -98,7 +100,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/coming-soon",
       },
-      popUpDescription:"If you want a more personalised and manual approach to Career Coaching, connect with one of the renowned experts who have years of experience working with candidates of different disciplines and calibre. Our community consists of Career Coaches from across the globe who are here to assist you with your career development",
+      popUpDescription:
+        "If you want a more personalised and manual approach to Career Coaching, connect with one of the renowned experts who have years of experience working with candidates of different disciplines and calibre. Our community consists of Career Coaches from across the globe who are here to assist you with your career development",
       features: [
         "Virtual Career Coach Connect through the Genies Career Hub platform",
         "Assured Career assistance for guaranteed solutions",
@@ -117,7 +120,8 @@ const PricingFunc = () => {
         title: "Free",
         link: "/coming-soon",
       },
-      popUpDescription:"Designed by leading Psychometricians from all around the world, the Psychometric Tests offer you a comprehensive and compelling guide to understanding your cognitive and analytical abilities. This helps you gain a deeper insight into your career choices. Know your strengths, weaknesses, and areas of potential for identifying a better career path",
+      popUpDescription:
+        "Designed by leading Psychometricians from all around the world, the Psychometric Tests offer you a comprehensive and compelling guide to understanding your cognitive and analytical abilities. This helps you gain a deeper insight into your career choices. Know your strengths, weaknesses, and areas of potential for identifying a better career path",
       features: [
         "Access to Psychometric Tests created by professionals",
         "A comprehensive report of your career strategy, strengths, and weaknesses.",
@@ -276,21 +280,20 @@ const PricingFunc = () => {
     getGeoInfo();
   }, []);
 
-
   useEffect(() => {
     const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
     if (serviceCardsSection) {
       const offsetTop = serviceCardsSection.offsetTop - 250;
       window.scrollTo({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
-  }, [scroll])
+  }, [scroll]);
 
   return (
     <>
-      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      {/* <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
           className="sm:max-w-[800px] w-full sm:w-auto px-4 py-6 sm:px-8 sm:py-8"
@@ -414,16 +417,143 @@ const PricingFunc = () => {
             </Button>
           </DialogFooter>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+  <DialogTrigger asChild></DialogTrigger>
+  <DialogContent
+    className="max-w-full sm:max-w-[800px] w-full max-h-full sm:max-h-[800px] h-[700px] overflow-y-scroll px-4 py-6 sm:px-8 sm:py-8"
+    showCloseButton={true}
+    onClick={handleCloseAIDialog}
+  >
+    <DialogHeader>
+      <DialogTitle>
+        <h2 className="text-xl sm:text-2xl lg:text-3xl my-2 text-center">
+          {selectedCard?.cardTitle}
+        </h2>
+      </DialogTitle>
+      <DialogDescription>
+        <p className="text-sm sm:text-base text-justify">
+          {selectedCard?.popUpDescription}
+        </p>
+      </DialogDescription>
+    </DialogHeader>
+    <div className="grid gap-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+        <div className="modal_left">
+          <div className="modal_list">
+            <ul className="space-y-2">
+              {selectedCard?.features.map((feature, index) => (
+                <li
+                  key={index}
+                  className="flex items-center text-xs sm:text-base text-gray-600"
+                >
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
+          <div className="text-center">
+            <p className="text-lg sm:text-xl text-gray-500">
+              Choose your plan
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+              <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                {selectedPlan === "monthly"
+                  ? `${selectedCard?.symbol}${selectedCard?.price}`
+                  : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
+              </h1>
+              <p className="text-gray-500 text-xs sm:text-sm px-2">
+                {selectedPlan === "monthly" ? "per Month" : "per Year"}
+              </p>
+            </div>
+            <div className="mt-6 space-y-4 sm:space-y-8">
+              <div
+                className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                  selectedPlan === "monthly"
+                    ? "border-blue-500 shadow-lg"
+                    : ""
+                }`}
+                onClick={() => handlePlanChange("monthly")}
+              >
+                <div className="flex justify-between items-center">
+                  <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                    Monthly
+                  </div>
+                  <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
+                    {selectedCard?.symbol}
+                    {selectedCard?.price}
+                  </div>
+                  <input
+                    type="checkbox"
+                    hidden
+                    checked={selectedPlan === "monthly"}
+                    onChange={() => handlePlanChange("monthly")}
+                  />
+                </div>
+              </div>
+              <div
+                className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                  selectedPlan === "yearly"
+                    ? "border-blue-500 shadow-lg"
+                    : ""
+                }`}
+                onClick={() => handlePlanChange("yearly")}
+              >
+                <div className="flex justify-between items-center">
+                  <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                    Yearly
+                  </div>
+                  <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
+                    {selectedCard?.symbol}
+                    {selectedCard?.price * 10}
+                  </div>
+                  <input
+                    type="checkbox"
+                    hidden
+                    checked={selectedPlan === "yearly"}
+                    onChange={() => handlePlanChange("yearly")}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <DialogFooter className="mt-4 sm:mt-8">
+      <Button
+        className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+        onClick={() => UpgradePlan(selectedCard)}
+        disabled={loading}
+      >
+        {loading ? (
+          <>
+            Upgrading <FaSpinner className="animate-spin ml-2" />
+          </>
+        ) : (
+          "Upgrade Now"
+        )}
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
 
-      <section className="w-full h-screen 2xl:mt-40 lg:mt-52 md:mt-40  mt-10">
+
+      <section className="w-full h-screen 2xl:mt-40 lg:mt-56 md:mt-40  mt-20">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
-            <h1 className="text-[45px] sm:text-4xl md:text-5xl lg:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 xs:text-start text-center lg:leading-5 leading-[45px]">
-              Grow beyond expectations
+            <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
+              Grow beyond expectations with
               <br />
-              with <span className="text-blue-700">Flexible Pricing</span>
+              <span className="text-blue-700">Flexible Pricing</span>
             </h1>
+
             <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
               With careful plans designed to cater to all your needs, simple and
               transparent pricing, and secured pricing, you are one step closer
@@ -457,9 +587,12 @@ const PricingFunc = () => {
         </div>
       </section>
 
-      <section className="p-20 bg-blue-50" ref={serviceCardsRef}>
+      <section
+        className="2xl:p-20 lg:p-20 p-10 bg-blue-50"
+        ref={serviceCardsRef}
+      >
         <div className="text-center card_main_title">
-          <h2 className="lg:text-5xl text-xl font-bold">
+          <h2 className="lg:text-5xl text-3xl font-bold">
             Different Services,
             <span className="text-blue-700">Infinite possibilities.</span>{" "}
           </h2>
@@ -478,7 +611,13 @@ const PricingFunc = () => {
                   backgroundColors[index % backgroundColors.length];
                 return (
                   <>
-                    <div key={index} className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""} `} id={`pricing-` + `${index + 1}`}>
+                    <div
+                      key={index}
+                      className={`flex rounded-md ${
+                        index + 1 === scroll ? "animate-bounce" : ""
+                      } `}
+                      id={`pricing-` + `${index + 1}`}
+                    >
                       <div
                         className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
                       >
@@ -527,11 +666,10 @@ const PricingFunc = () => {
   );
 };
 
-
 export default function Pricing() {
   return (
     <Suspense>
       <PricingFunc />
     </Suspense>
-  )
+  );
 }
