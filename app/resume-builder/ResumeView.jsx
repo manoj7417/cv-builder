@@ -231,7 +231,6 @@ const ResumeView = () => {
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
-  console.log("userdata::", userdata);
   const resumeData = useResumeStore((state) => state.resume.data);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
