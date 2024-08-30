@@ -2,22 +2,17 @@
 import { NextResponse } from 'next/server';
 
 export const config = {
-  // This matcher applies the middleware to all routes
-  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq','/add-credit'],
+  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq', '/add-credit','/settings/profile','/settings/cvanalysis','/settings/pyschometric-test'
+  ],
 };
 
 export function middleware(req) {
-
-  // Check for accessToken cookie
-  const token = req.cookies.get('accessToken');
-  
-  // Redirect to login page if token is not present
-  if (!token?.value) {
+  const token = req.cookies.get('accessToken')
+  if (!token || !token.value) {
     const redirectUrl = new URL('/login', req.url);
     redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
-  // Allow access if token is present
   return NextResponse.next();
 }

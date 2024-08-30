@@ -221,7 +221,6 @@ export default function HomepageNew() {
               width={2000}
               height={1500}
               alt="discover"
-              loading="lazy"
               className=" p-4 sm:p-10"
             />
           </div>
