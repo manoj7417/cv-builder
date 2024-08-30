@@ -15,6 +15,7 @@ import { Textarea } from "../ui/textarea";
 import AiGenerateLoader from "@/app/ui/AiGenerateLoader";
 
 import React from "react";
+import dayjs from "dayjs";
 
 export const MultiStepForm = ({
   steps,
@@ -25,6 +26,7 @@ export const MultiStepForm = ({
   handleGenerateProfileSummary,
   handleCloseAIDialog
 }) => {
+
   const handleJobTitleChange = (e) => {
     const newFormDate = { ...formData, jobTitle: e.target.value };
     setFormData(newFormDate);
@@ -43,6 +45,36 @@ export const MultiStepForm = ({
     };
     setFormData(newFormData);
   };
+
+  const handleAddStartDate = (e) => {
+    if (!e) {
+      return;
+    }
+    const newDate = dayjs(e).format("YYYY-MM-DD");
+    setFormData({
+      ...formData, experience: {
+        ...formData.experience, startDate: newDate
+      }
+    })
+  }
+
+  const handleAddEndDate = (e) => {
+    if (!e) {
+      return;
+    }
+    const newDate = dayjs(e).format("YYYY-MM-DD");
+    setFormData({
+      ...formData, experience: {
+        ...formData.experience, endDate: newDate
+      }
+    })
+  }
+
+  const disabledEndDate = (current) => {
+    const startDate = dayjs(formData.experience.startDate, 'YYYY-MM-DD');
+    const nextDay = startDate.add(1, 'day');
+  return current && current < nextDay;
+  }
 
   if (steps === 1) {
     return (
@@ -135,7 +167,7 @@ export const MultiStepForm = ({
                   (optional)
                 </span>
               </Label>
-              <DatePicker placeholder="Start Date" name="startDate"/>
+              <DatePicker placeholder="Start Date" name="startDate" className="w-full" maxDate={dayjs()} onChange={handleAddStartDate} />
             </div>
             <div>
               <Label htmlFor="employer" className="text-right">
@@ -144,7 +176,12 @@ export const MultiStepForm = ({
                   (optional)
                 </span>
               </Label>
-              <DatePicker placeholder="End Date" name="endDate" />
+              <DatePicker placeholder="End Date" name="endDate" maxDate={dayjs()} className="w-full"
+                disabled={!formData.experience.startDate}
+                onChange={handleAddEndDate}
+                disabledDate={(e) =>
+                  disabledEndDate(e)
+                } />
             </div>
           </div>
         </div>
