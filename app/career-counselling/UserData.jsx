@@ -94,7 +94,7 @@ export default function UserData() {
           <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-2">
             <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center w-full">
               <div className="ai-image">
-                <Image
+                <Image priority
                   src="/testpopup.png"
                   width={500}
                   height={500}
@@ -103,7 +103,7 @@ export default function UserData() {
                 />
               </div>
               <div className="ai-content flex flex-col items-center justify-center gap-5 p-2 w-full">
-                <Image
+                <Image priority
                   src="/testtimer.png"
                   width={80}
                   height={100}

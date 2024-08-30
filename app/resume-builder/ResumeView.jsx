@@ -552,7 +552,7 @@ const ResumeView = () => {
                 <div className="modal_content_section flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-6">
                   <div className="w-full sm:w-1/2 flex justify-center mb-6 sm:mb-0">
                     <div className="image_content text-center">
-                      <Image
+                      <Image priority
                         src="/illustration-manager-choosing-new-worker.png"
                         alt="choice-worker-concept-illustrated"
                         className="w-[200px] h-[200px] sm:w-[300px] sm:h-[250px] lg:w-[300px] lg:h-[200px] 2xl:w-[400px] 2xl:h-[400px] object-contain mx-auto"
@@ -611,7 +611,7 @@ const ResumeView = () => {
                                 className="image_section_1 "
                                 onClick={() => handleTemplateChange(image.name)}
                               >
-                                <Image
+                                <Image priority
                                   src={image.src}
                                   alt={image.alt}
                                   className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"

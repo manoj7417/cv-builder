@@ -122,7 +122,7 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-            <Image
+            <Image priority
               src="/v1.png"
               alt="home-creative-down"
               height={300}
@@ -151,7 +151,7 @@ export default function HomepageNew() {
               </div>
             </div>
             <div className="2xl:w-[500px] 2xl:h-[500px] lg:w-[400px] lg:h-[400px] w-full h-full mx-auto">
-              <Image
+              <Image priority
                 src="/v1.png"
                 alt="home-creative-down"
                 height={400}
@@ -216,7 +216,7 @@ export default function HomepageNew() {
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
           <div className="lg:flex align-middle overflow-hidden hidden -ml-16">
-            <Image
+            <Image priority
               src={"/home-creative-down.png"}
               width={2000}
               height={1500}

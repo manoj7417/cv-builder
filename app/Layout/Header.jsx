@@ -65,13 +65,12 @@ const Header = () => {
         <div className="wrapper">
           <div className="logo">
             <Link href="/" className="flex items-center gap-2">
-              <Image
+              <Image priority
                 src={"/genies-career-hub-logo.png"}
                 width={100}
                 height={100}
                 alt="newlogo"
                 className="logo-image"
-                priority
               />
             </Link>
           </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ResumeForm from "./ResumeForm";
 import ResumeView from "./ResumeView";
 import Link from "next/link";
-import { MdDownload, MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdDownload, MdLogout, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
@@ -123,16 +124,18 @@ const ResumeBuilderPage = () => {
                       <div className="py-1" role="none">
                         <Link
                           href="/settings/profile"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                           role="menuitem"
                         >
-                          Profile
+                          <IoSettingsOutline className="mr-2" />
+                          Settings
                         </Link>
                         <div
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                           role="menuitem"
                           onClick={handleLogout}
                         >
+                          <MdLogout className="mr-2" />
                           Logout
                         </div>
                       </div>

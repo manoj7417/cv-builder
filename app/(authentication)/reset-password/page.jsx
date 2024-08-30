@@ -159,7 +159,7 @@ const ResetPasswordFunc = () => {
                     </div>
                 </div>
                 <div className="h-full w-full">
-                    <Image
+                    <Image priority
                         width={500}
                         height={500}
                         className="mx-auto h-full w-full rounded-md object-cover"
