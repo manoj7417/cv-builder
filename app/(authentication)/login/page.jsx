@@ -198,7 +198,7 @@ function LoginUser() {
           <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full sm:border-0 border-0 shadow-none shadow-blue-100 sm:shadow-none   sm:py-0 py-20 px-8 sm:px-0 rounded-2xl">
             <Link href={"/"} className="flex justify-center items-center mb-[60px]">
-              <Image
+              <Image priority
                 src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}
@@ -318,13 +318,13 @@ function LoginUser() {
           </div>
           <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
             <div className="absolute inset-0">
-              <Image
+              <Image priority
                 width={500}
                 height={500}
                 className="h-full w-full rounded-md object-cover object-center"
                 src="/newlogo12.png"
                 alt="register"
-                priority
+                
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>

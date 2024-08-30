@@ -1382,7 +1382,7 @@ export const JobResumeSchema = [
                                 "Implemented a new design system using Figma, enhancing brand consistency across all web platforms.",
                                 "Collaborated with product managers to refine user personas, resulting in a more targeted and effective product development strategy.",
                                 "Initiated and led a cross-functional team to integrate accessibility features, making the website fully compliant with WCAG 2.1.",
-                                "Spearheaded a project to utilize atomic design principles, shortening the development cycle for new features by 20%."
+                                "Spearheaded a project to utilise  atomic design principles, shortening the development cycle for new features by 20%."
                             ]
                         },
                         {

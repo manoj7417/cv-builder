@@ -53,8 +53,7 @@ const FAQSection = () => {
       id: 3,
       ques: "How can resume professionals and resume services help me write my CV?",
       ans: `
-        Taking services from a Career Coach who also offers services in Resume creation and professional writing can be very insightful. Often, for very high-profile jobs, the candidates miss out on the exact details and keywords that an employer is looking for in the job application. Therefore, a resume professional and resume services Career Coach can help you format the perfect resume for the job you are applying for. Additionally, they can help you figure out various aspects as you seek to switch your job or find employment. You can easily contact the best career coach who can help you. All you need to do is:
-        1. Head to the Career Coach and contact to get connected with a potential Career Coach who can guide you through professional problems.
+        Taking services from a Career Coach who also offers services in Resume creation and professional writing can be very insightful. Often, for very high-profile jobs, the candidates miss out on the exact details and keywords that an employer is looking for in the job application. Therefore, a resume professional and resume services Career Coach can help you format the perfect resume for the job you are applying for. Additionally, they can help you figure out various aspects as you seek to switch your job or find employment. You can easily contact the best career coach who can help you. All you need to do is head to the Career Coach and contact to get connected with a potential Career Coach who can guide you through professional problems.
       `,
     },
     {

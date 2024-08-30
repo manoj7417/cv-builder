@@ -21,13 +21,13 @@ import { GetTokens } from "../actions";
 import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
 // import animation from "@/public/animations/job-cvLoader.json";
-import animation from "@/public/animations/JobCVLoader.json"
+import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
 import axios from "axios";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 import Link from "next/link";
-
-
+import ServicesPopUp from "@/components/component/ServicesPopUp";
+import { Button } from "@/components/ui/button";
 
 const options = [
   "Accountant",
@@ -150,6 +150,8 @@ export default function Home() {
   const updateUserData = useUserStore((state) => state.updateUserData);
   const [generatingResume, setIsGeneratingResume] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
+
 
   const handleDialogClose = () => {
     setIsGeneratingResume(false);
@@ -171,15 +173,20 @@ export default function Home() {
         return response.data;
       }
     } catch (error) {
-      if (
-        error.response.status === 400 &&
-        (error.response.data.error === "Insufficient JobCV tokens" ||
-          error.response.data.error === "Subscription is inactive or expired")
-      ) {
-        router.push("/pricing");
-      } else {
-        toast.error("Unable to generate JobCV , Please try again");
+      if (error.response.status === 403) {
+        if (error.response.data.error === "Insufficient JobCV tokens") {
+          if (userdata.subscription.plan.includes('CVSTUDIO')) {
+            return setIsServiceDialogOpen(true)
+          } else {
+            toast.info("Please subscribe to Genies Pro Suit to use this service", { autoClose: 10000 })
+            return router.push('/pricing?scroll=1')
+          }
+        } else {
+          toast.info("You do not have a valid plan.", { autoclose: 10000 })
+          return router.push("/pricing?scroll=1");
+        }
       }
+      toast.error("Unable to generate your CV.")
     }
   };
 
@@ -273,6 +280,7 @@ export default function Home() {
               setFormData={setFormData}
               jobRole={jobRole}
               type={"JobCV"}
+              setIsServiceDialogOpen={setIsServiceDialogOpen}
             />
           </Dialog>
           <Dialog open={showDialog}>
@@ -390,6 +398,13 @@ export default function Home() {
                   />
                 </div>
                 <div className="w-full flex items-center">
+                  <Dialog open={isServiceDialogOpen}>
+                    <ServicesPopUp
+                      isServiceDialogOpen={isServiceDialogOpen}
+                      setIsServiceDialogOpen={setIsServiceDialogOpen}
+                      serviceName="Create CV"
+                    />
+                  </Dialog>
                   <button
                     className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
                     onClick={() => handleGenerateNow()}
@@ -401,7 +416,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-10 sm:mt-0 w-full lg:max-w-4xl sm:p-10 p-0">
-              <Image
+              <Image priority
                 src="/cvgenerator.png"
                 width={1300}
                 height={700}

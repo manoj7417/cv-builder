@@ -112,7 +112,10 @@ const Experience = ({ fontStyle, colorStyle }) => {
                       <ul className="list-disc pl-2">
                         {item?.highlights?.map((item, key) => {
                           return (
-                            <li key={key} className=" break-words py-2 text-15px">
+                            <li
+                              key={key}
+                              className=" break-words py-2 text-15px"
+                            >
                               {item}
                             </li>
                           );
@@ -263,7 +266,7 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
     conversational: 40,
     proficient: 60,
     fluent: 80,
-    native: 100
+    native: 100,
   };
 
   return (
@@ -407,7 +410,7 @@ const Hobbies = ({ fontStyle, colorText, colorBackground }) => {
                     key={index}
                     className="text-15px py-2 font-semibold"
                     style={{
-                      color: colorText
+                      color: colorText,
                     }}
                   >
                     {item}
@@ -575,7 +578,9 @@ const References = ({ fontStyle, colorStyle }) => {
                             {item.name}
                           </p>
                         )}
-                        <h3 className={`${fontStyle.subHeadingFont} font-medium`}>
+                        <h3
+                          className={`${fontStyle.subHeadingFont} font-medium`}
+                        >
                           <span>{item.jobTitle}</span>
                           <span className="mx-1">
                             {item.jobTitle && item.organization && ","}
@@ -627,7 +632,10 @@ const Template1 = () => {
 
   return (
     <>
-      <div className="resume_wrapper flex bg-white p-3 mx-auto h-min-[297mm] w-min-[210mm]">
+      <div
+        className="resume_wrapper flex bg-white p-3 mx-auto h-min-[297mm] w-min-[210mm]"
+        id="resumeParentContent"
+      >
         <div
           className="resume_left w-[35%] min-h-[1123px]"
           style={{
@@ -646,33 +654,41 @@ const Template1 = () => {
           </div>
           <div className="resume_bottom py-5 px-8">
             <div className="resume_item resume_profile">
-              <Education fontStyle={fontStyle} />
+              <div className="template_section">
+                <Education fontStyle={fontStyle} />
+              </div>
             </div>
 
             <div className="resume_item resume_skills">
               <div className="resume_info">
+              <div className="template_section">
                 <Skills
                   fontStyle={fontStyle}
                   colorText={metadata?.theme?.text}
                   colorBackground={metadata?.theme?.background}
                   secondaryBackground={metadata?.theme?.background}
                 />
+                </div>
               </div>
               <div className="resume_info">
+              <div className="template_section">
                 <Hobbies
                   fontStyle={fontStyle}
                   colorText={metadata?.theme?.text}
                   colorBackground={metadata?.theme?.background}
                   secondaryBackground={metadata?.theme?.background}
                 />
+                </div>
               </div>
               <div className="resume_info">
+              <div className="template_section">
                 <Languages
                   fontStyle={fontStyle}
                   colorText={metadata?.theme?.text}
                   colorBackground={metadata?.theme?.background}
                   secondaryBackground={metadata?.theme?.background}
                 />
+                </div>
               </div>
             </div>
           </div>
@@ -730,44 +746,56 @@ const Template1 = () => {
           </div>
           <div className="resume_item resume_profile my-5">
             <div className="resume_info">
+            <div className="template_section">
               <Profile
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
               />
+              </div>
             </div>
           </div>
           <div className="resume_item resume_experience my-5">
             <div className="resume_info">
+            <div className="template_section">
               <Experience
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
               />
+              </div>
             </div>
           </div>
           <div className="resume_item projects my-5">
             <div className="resume_info">
+            <div className="template_section">
               <Projects
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
               />
+              </div>
             </div>
             <div className="resume_info">
+            <div className="template_section">
               <Awards
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
               />
+              </div>
             </div>
             <div className="resume_info">
+            <div className="template_section">
               <Certificates
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
               />
+              </div>
             </div>
             <div className="resume_info">
+            <div className="template_section">
               <References
                 fontStyle={fontStyle}
                 colorStyle={metadata?.theme?.primary}
               />
+              </div>
             </div>
           </div>
         </div>

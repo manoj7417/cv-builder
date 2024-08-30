@@ -142,7 +142,7 @@ const ReturnPolicyPage = () => {
               information that a particular organization or a government agency
               stores on your behalf. The information that the organizations
               collect will be noted in order to maintain a record of your data
-              and utilize the information for the purpose of processing your
+              and utilise  the information for the purpose of processing your
               services.
             </p>
             <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">

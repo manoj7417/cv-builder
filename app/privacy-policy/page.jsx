@@ -47,7 +47,7 @@ const PrivacyPage = () => {
           <section className="mb-8">
             <p className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               For the operation of our customer accounts and guarantee, we also
-              collect or utilize the following information:
+              collect or utilise  the following information:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
               <li>Racial or ethnic origin</li>

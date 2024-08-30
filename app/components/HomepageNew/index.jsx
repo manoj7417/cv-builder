@@ -111,7 +111,7 @@ export default function HomepageNew() {
               <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 max-w-4xl text-center xs:text-start mx-auto">
                 We have a passion to mentor you on your entire career path, help
                 you realize what you want to do, how to get into that career,
-                and utilize experts to guide you on how to excel within it.
+                and utilise  experts to guide you on how to excel within it.
               </p>
               <div className="flex justify-center xs:justify-start">
                 <button
@@ -122,7 +122,7 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-            <Image
+            <Image priority
               src="/v1.png"
               alt="home-creative-down"
               height={300}
@@ -139,7 +139,7 @@ export default function HomepageNew() {
               <p className="2xl:w-[50%] lg:w-[60%] w-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium mb-4 sm:mb-10 max-w-4xl text-center sm:text-start md:text-start lg:text-start xl:text-start 2xl:text-start">
                 We have a passion to mentor you on your entire career path, help
                 you realize what you want to do, how to get into that career,
-                and utilize experts to guide you on how to excel within it.
+                and utilise  experts to guide you on how to excel within it.
               </p>
               <div className="flex justify-center items-center sm:justify-start sm:items-start md:justify-start md:items-start lg:justify-start lg:items-start xl:justify-start xl:items-start 2xl:justify-start 2xl:items-start">
                 <button
@@ -151,7 +151,7 @@ export default function HomepageNew() {
               </div>
             </div>
             <div className="2xl:w-[500px] 2xl:h-[500px] lg:w-[400px] lg:h-[400px] w-full h-full mx-auto">
-              <Image
+              <Image priority
                 src="/v1.png"
                 alt="home-creative-down"
                 height={400}
@@ -216,7 +216,7 @@ export default function HomepageNew() {
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
           <div className="lg:flex align-middle overflow-hidden hidden -ml-16">
-            <Image
+            <Image priority
               src={"/home-creative-down.png"}
               width={2000}
               height={1500}

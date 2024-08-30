@@ -1,9 +1,9 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResumeForm from "./ResumeForm";
 import ResumeView from "./ResumeView";
 import Link from "next/link";
-import { MdDownload, MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdDownload, MdLogout, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
@@ -11,14 +11,17 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { userState } = useUserStore((state) => state);
-  const logoutUser = useUserStore(state => state.logoutUser)
+  const logoutUser = useUserStore((state) => state.logoutUser);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [showText, setShowText] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =
     userdata?.profilePicture || "https://via.placeholder.com/150";
@@ -36,10 +39,31 @@ const ResumeBuilderPage = () => {
     setIsContentVisible(true);
   };
 
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop === 0 || scrollTop + clientHeight >= scrollHeight) {
+      setShowText(true);
+      setIsAnimating(true);
+    } else {
+      setShowText(false);
+      setIsAnimating(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div className="flex md:flex-row flex-col w-full h-full relative">
-        <div className="actions_button bg-white p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
+        <div className="actions_button bg-gray-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
           <div className="w-full mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">
             <div className="header_section w-full md:block hidden">
               <Button
@@ -99,17 +123,19 @@ const ResumeBuilderPage = () => {
                     >
                       <div className="py-1" role="none">
                         <Link
-                          href="/user-profile"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          href="/settings/profile"
+                          className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                           role="menuitem"
                         >
-                          Profile
+                          <IoSettingsOutline className="mr-2" />
+                          Settings
                         </Link>
                         <div
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                           role="menuitem"
                           onClick={handleLogout}
                         >
+                          <MdLogout className="mr-2" />
                           Logout
                         </div>
                       </div>
@@ -127,10 +153,25 @@ const ResumeBuilderPage = () => {
         <div className="lg:w-[50%] w-full h-screen overflow-hidden resume_templates_section lg:fixed top-0 lg:right-0 lg:block hidden">
           <ResumeView setIsContentVisible={setIsContentVisible} />
         </div>
-         <div className="preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-2 rounded-full lg:hidden block cursor-pointer" onClick={handlePreviewClick}>
-            <span className="text-sm">Preview and Download <MdDownload className="text-base inline-flex mx-1"/></span>
-         </div>
-        <ContentDialog isContentVisible={isContentVisible} setIsContentVisible={setIsContentVisible}/>
+        <div
+          className={`preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-3 rounded-full lg:hidden block cursor-pointer transition-all duration-300`}
+          onClick={handlePreviewClick}
+        >
+           <span
+            className={`text-sm ${
+              showText
+                ? "bgNdnL"
+                : "epiSoF"
+            }`}
+          >
+            Preview and Download
+          </span>
+          <MdDownload className="text-xl inline-flex mx-1 animate-bounce" />
+        </div>
+        <ContentDialog
+          isContentVisible={isContentVisible}
+          setIsContentVisible={setIsContentVisible}
+        />
       </div>
     </>
   );

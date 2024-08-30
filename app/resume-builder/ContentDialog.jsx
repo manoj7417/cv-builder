@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
-import { FaUserCircle } from "react-icons/fa";
+import { FaFilePdf, FaUserCircle } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { GetTokens } from "../actions";
 import { toast } from "react-toastify";
@@ -27,6 +27,19 @@ import { LuLayoutGrid } from "react-icons/lu";
 import { templateType } from "@/components/component/Slider";
 import Image from "next/image";
 import { FaSpinner } from "react-icons/fa6";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { IoDocumentText } from "react-icons/io5";
+import Link from "next/link";
+import { useUserStore } from "../store/UserStore";
+import { convert } from "html-to-text";
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 const images = [
@@ -192,6 +205,9 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const resumeData = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [showModal,setShowModal] = useState(false)
+  const { userdata } = useUserStore((state) => state.userState);
+
   const pageSizeMap = {
     a4: {
       width: 210,
@@ -209,8 +225,11 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
-    const templateName = resumeData.metadata.template;
-    handleDownloadResume(accessToken.value);
+    if (userdata?.subscription?.plan === "free") {
+      setShowModal(true);
+    } else {
+      handleDownloadResume(accessToken.value);
+    }
   };
 
   const handleDownloadResume = async (token) => {
@@ -248,6 +267,27 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+
+  const downloadAsText = () => {
+    const el = document.getElementById("resume");
+    const resume = el.innerHTML;
+    const resumeText = convert(resume, {
+      wordwrap: 130,
+      selectors: [{ selector: "a", options: { ignoreHref: true } }],
+    });
+    const blob = new Blob([resumeText], { type: "text/plain" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "resume.txt";
+    a.target = "_blank";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    setShowModal(false);
   };
 
   const handleTemplateChange = (val) => {
@@ -299,7 +339,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                                 className="image_section_1 "
                                 onClick={() => handleTemplateChange(image.name)}
                               >
-                                <Image
+                                <Image priority
                                   src={image.src}
                                   alt={image.alt}
                                   className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[200px] w-[200px]"
@@ -330,6 +370,54 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 {isLoading ? "Processing..." : "Download"}
               </button>
             </div>
+            <Dialog open={showModal} onOpenChange={setShowModal}>
+              <DialogContent className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white"  showCloseButton={true}
+               onClick={() => setShowModal(false)}>
+                <DialogHeader>
+                  <DialogTitle className="text-xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
+                    Oops! You have not subscribed yet
+                  </DialogTitle>
+                  <p className="lg:w-full w-1/2 mx-auto text-center text-[12px] sm:text-base text-gray-600 mt-2">
+                    You need to upgrade to download your CV as a PDF, or else
+                    you can download as a Text for free
+                  </p>
+                </DialogHeader>
+                <div className="modal_content_section flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-6">
+                  <div className="w-full sm:w-1/2 flex justify-center mb-6 sm:mb-0">
+                    <div className="image_content text-center">
+                      <Image
+                        src="/illustration-manager-choosing-new-worker.png"
+                        alt="choice-worker-concept-illustrated"
+                        className="w-[200px] h-[200px] sm:w-[300px] sm:h-[250px] lg:w-[300px] lg:h-[200px] 2xl:w-[400px] 2xl:h-[400px] object-contain mx-auto"
+                        width={400}
+                        height={500}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full sm:w-1/2 flex justify-center">
+                    <div className="flex flex-col gap-4 sm:gap-8 p-4 sm:p-6 items-center w-full">
+                      <button
+                        className="w-full max-w-[250px] sm:max-w-[300px] border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold text-center"
+                        onClick={downloadAsText}
+                      >
+                        Download as Text
+                        <IoDocumentText className="text-blue-700 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
+                      </button>
+                      <Link
+                        href="/pricing"
+                        className="w-full max-w-[250px] sm:max-w-[300px] py-2 sm:py-3 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
+                        disabled
+                      >
+                        Download as PDF
+                        <FaFilePdf className="text-green-500 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
+                        <br />
+                        (Upgrade Required)
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
             <div
               onClick={() => setIsContentVisible(false)}
               className="z-50 close_icon"
@@ -348,7 +436,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 minHeight: `${pageHeight}px`,
                 overflow: "auto",
                 transform: `scale(${scale})`,
-                margin: "-180px",
+                margin: "-200px",
               }}
               onClick={(e) => e.stopPropagation()}
             >

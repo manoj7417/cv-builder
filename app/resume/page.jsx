@@ -24,6 +24,9 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
 import { createNewResume } from "../api/api";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import ServicesPopIp from "@/components/component/ServicesPopUp";
+import ServicesPopUp from "@/components/component/ServicesPopUp";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -408,7 +411,9 @@ const ProfessionalTemplates = [
 export default function DashboardIdea() {
   // const userState = useUserStore((state) => state.userState);
   const [userState, setUserState] = useState({});
-  const router = useRouter()
+  const router = useRouter();
+
+
 
 
   useEffect(() => {
@@ -420,42 +425,10 @@ export default function DashboardIdea() {
 
   return (
     <>
-      {/* {userState?.isAuthenticated ? <ResumeHeader /> : <Header />} */}
       <ResumeHeader />
       <main>
         <section className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]">
           <div className="container w-full h-full resume">
-            {/* <div className="flex 2xl:px-24 px-5 justify-between">
-              <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20 px-2 sm:px-10 text-center sm:text-start">
-                <h1 className="text-3xl font-bold mb-5 text-gray-900 sm:text-5xl 2xl:text-6xl">
-                  Craft the <span className="text-[#2C98CA]">Perfect CV </span>{" "}
-                  for Your Dream Job
-                </h1>
-                <p className="text-gray-700 lg:text-lg text-sm">
-                  Created by Professionals and Industry Experts from all across
-                  the globe and integrating Artificial Intelligence, we bring
-                  forward Resume Template options that are custom-tailored to
-                  the job you are applying for, to ensure that your CV gets
-                  through every Application Tracking Software ATS CV Checker.
-                </p>
-                <div className="flex items-center space-x-4">
-                  <Button
-                    onClick={() => handleCreateCV()}
-                    className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3 mx-auto sm:mx-0"
-                  >
-                    Create CV Now
-                  </Button>
-                </div>
-              </div>
-              <Image
-                src="/resume.png"
-                className="w-50 h-50 px-7 mt-20 pt-7 rounded-t-3xl lg:block hidden"
-                alt="@shadcn"
-                width={600}
-                height={100}
-                priority
-              />
-            </div> */}
             <div className="flex flex-col items-center justify-center 2xl:px-24 px-5">
               <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20 px-2 sm:px-10 text-center sm:text-start">
                 <h1 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-center lg:px-20 xl:px-20 2xl:px-20">
@@ -470,21 +443,21 @@ export default function DashboardIdea() {
                   through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center justify-center space-x-4">
-                  <Button
-                    onClick={()=>router.push('/user-history')}
-                    className="lg:text-base text-sm text-white bg-blue-900 hover:bg-blue-700 rounded-md px-5 mt-5 py-3"
-                  >
-                    Create CV Now
-                  </Button>
+                    <Button
+                      onClick={()=>router.push('/user-history')}
+                      className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
+                    >
+                      Create CV Now
+                    </Button>
                 </div>
               </div>
-              <Image
+              <Image priority
                 src="/resume.png"
                 className="w-50 h-50 px-7 mt-10 pt-7 rounded-t-3xl"
                 alt="@shadcn"
                 width={600}
                 height={100}
-                priority
+                
               />
             </div>
           </div>

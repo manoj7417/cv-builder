@@ -1360,7 +1360,7 @@ export default function ResumeForm() {
                 );
               })}
           </div>
-          <div className="px-10 ">
+          <div className="lg:px-10 px-4">
             <Button
               className="w-full bg-transparent text-blue-900 p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewEducation}
@@ -1425,7 +1425,7 @@ export default function ResumeForm() {
                   >
                     <GoGrabber
                       className="mt-3 text-3xl
-               font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                     />
                     <Accordion
                       type="single"
@@ -1596,7 +1596,7 @@ export default function ResumeForm() {
                 );
               })}
           </div>
-          <div className="px-10 ">
+          <div className="lg:px-10 px-4">
             <Button
               className="w-full bg-transparent p-2 text-blue-900 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewExperience}
@@ -1797,7 +1797,7 @@ export default function ResumeForm() {
                 );
               })}
           </div>
-          <div className="px-10 ">
+          <div className="lg:px-10 px-5">
             <Button
               className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewProject}
@@ -1858,8 +1858,8 @@ export default function ResumeForm() {
                     className="flex items-start justify-center group my-5 relative"
                   >
                     <GoGrabber
-                      className=" text-3xl
-                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      className="mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                     />
                     <Accordion
                       type="single"
@@ -1904,15 +1904,15 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="absolute top-2 right-1 text-2xl
-                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className="mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                       onClick={() => handleDeleteSkills(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="mt-5 px-10">
+          <div className="mt-5 lg:px-10 px-4">
             <div>
               <Button
                 className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
@@ -2049,8 +2049,8 @@ export default function ResumeForm() {
                       className="flex items-start justify-center group my-5 relative w-full"
                     >
                       <GoGrabber
-                        className=" text-3xl
-                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                        className="mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                       />
                       <Accordion
                         type="single"
@@ -2151,15 +2151,15 @@ export default function ResumeForm() {
                         </AccordionItem>
                       </Accordion>
                       <MdDeleteOutline
-                        className="absolute top-2 right-1 text-2xl
-                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        className="mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                         onClick={() => handleDeleteAward(index)}
                       />
                     </div>
                   );
                 })}
             </div>
-            <div className="mt-5 px-10">
+            <div className="mt-5 lg:px-10 px-4">
               <div>
                 <Button
                   className="w-full bg-transparent text-blue-950 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
@@ -2223,8 +2223,8 @@ export default function ResumeForm() {
                       className="flex items-start justify-center group my-5 relative w-full"
                     >
                       <GoGrabber
-                        className=" text-3xl
-                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                        className="mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                       />
                       <Accordion
                         type="single"
@@ -2339,15 +2339,15 @@ export default function ResumeForm() {
                         </AccordionItem>
                       </Accordion>
                       <MdDeleteOutline
-                        className="absolute top-2 right-1 text-2xl
-                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        className="mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                         onClick={() => handleDeleteReference(index)}
                       />
                     </div>
                   );
                 })}
             </div>
-            <div className="mt-5 px-10">
+            <div className="mt-5 lg:px-10 px-4">
               <div>
                 <Button
                   className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
@@ -2411,8 +2411,8 @@ export default function ResumeForm() {
                       className="flex items-start justify-center group my-5 relative w-full"
                     >
                       <GoGrabber
-                        className=" text-3xl
-                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                        className="mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                       />
                       <Accordion
                         type="single"
@@ -2486,15 +2486,15 @@ export default function ResumeForm() {
                         </AccordionItem>
                       </Accordion>
                       <MdDeleteOutline
-                        className="absolute top-2 right-1 text-2xl
-                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        className="mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                         onClick={() => handleDeletecertificate(index)}
                       />
                     </div>
                   );
                 })}
             </div>
-            <div className="mt-5 px-10">
+            <div className="mt-5 lg:px-10 px-4">
               <div>
                 <Button
                   className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
@@ -2554,8 +2554,8 @@ export default function ResumeForm() {
                     className="flex items-start justify-center group my-5 relative"
                   >
                     <GoGrabber
-                      className=" text-3xl
-                       font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out absolute top-2 left-1"
+                      className="mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
                     />
                     <Accordion
                       type="single"
@@ -2604,15 +2604,15 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="absolute top-2 right-1 text-2xl
-                        font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className="mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
                       onClick={() => handleDeletelanguage(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="mt-5 px-10">
+          <div className="mt-5 lg:px-10 px-4">
             <div>
               <Button
                 className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
