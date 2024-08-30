@@ -103,7 +103,7 @@ const ResetPasswordFunc = () => {
                                             className="absolute top-3 right-2 cursor-pointer"
                                             onClick={togglePasswordVisibility}
                                         >
-                                            {showPassword ? <FaRegEyeSlash className="text-blue-900" onClick={() => setShowPassword(false)} /> : < FaEye className="text-blue-900" onClick={() => setShowPassword(true)} />}
+                                            {!showPassword ? <FaRegEyeSlash className="text-blue-900" onClick={() => setShowPassword(false)} /> : < FaEye className="text-blue-900" onClick={() => setShowPassword(true)} />}
                                         </div>
                                         <div className="text-red-500 text-sm m-2">
                                             {errors?.password?.message}
@@ -130,7 +130,7 @@ const ResetPasswordFunc = () => {
                                             className="absolute top-3 right-2 cursor-pointer"
                                             onClick={toggleConfirmPasswordVisibility}
                                         >
-                                            {showConfirmPassword ? <FaRegEyeSlash className="text-blue-900" onClick={() => setConfirmShowPassword(false)} /> : < FaEye className="text-blue-900" onClick={() => setConfirmShowPassword(true)} />}
+                                            {!showConfirmPassword ? <FaRegEyeSlash className="text-blue-900" onClick={() => setConfirmShowPassword(false)} /> : < FaEye className="text-blue-900" onClick={() => setConfirmShowPassword(true)} />}
                                         </div>
                                         <div className="text-red-500 text-sm m-2">
                                             {errors?.cpassword?.message}
