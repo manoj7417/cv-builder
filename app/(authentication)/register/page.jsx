@@ -88,7 +88,7 @@ export default function Register() {
     if (!data.terms) {
       toast.error("You must agree to the terms and conditions", {
         autoClose: 5000,
-      }); // 5000ms = 5 seconds
+      }); 
       return;
     }
     setIsLoading(true);
@@ -100,7 +100,7 @@ export default function Register() {
         router.push("/login");
       }
     } catch (error) {
-      toast.error(error.response.data.error); // 20000ms = 20 seconds
+      toast.error(error.response.data.error); 
     } finally {
       setIsLoading(false);
     }
@@ -211,11 +211,11 @@ export default function Register() {
             </div>
           </div>
         </div>
-        <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-12 sm:py-0 px-8 sm:px-0 rounded-2xl">
+        <div className="flex lg:items-center items-start justify-center px-4 py-1 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-5   sm:py-0 px-2 sm:px-10  rounded-2xl">
             <Link
               href={"/"}
-              className="flex justify-center items-center mb-[60px]"
+              className="flex justify-center items-center mb-4 sm:mb-[60px]"
             >
               <Image priority
                 src="/genies-career-hub-logo.png"
@@ -225,15 +225,15 @@ export default function Register() {
                 className="w-28 h-auto object-contain"
               />
             </Link>
-            <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl">
+            <h2 className="text-2xl font-bold leading-tight text-blue-900 sm:text-4xl">
               Sign up
             </h2>
             <form className="mt-5" onSubmit={handleSubmit(handleRegister)}>
-              <div className="space-y-5">
+              <div className="space-y-2 sm:space-y-5">
                 <div>
                   <label
                     htmlFor="name"
-                    className="lg:text-base text-sm font-medium text-gray-900"
+                    className="lg:text-base text-sm font-medium text-gray-900 "
                   >
                     Full Name
                   </label>
@@ -383,7 +383,7 @@ export default function Register() {
                           <span className="w-3 h-3 flex items-center justify-center">
                             {validation.length && "✔"}
                           </span>
-                          <span>Min 8 letters</span>
+                          <span className="text-xs sm:text-sm">Min 8 letters</span>
                         </li>
                         <li
                           className={`flex items-center space-x-2 text-sm ${
@@ -402,7 +402,7 @@ export default function Register() {
                           <span className="w-3 h-3 flex items-center justify-center">
                             {validation.uppercase && "✔"}
                           </span>
-                          <span>1 uppercase character</span>
+                          <span className="text-xs sm:text-sm">1 uppercase character</span>
                         </li>
                         <li
                           className={`flex items-center text-sm space-x-2 ${
@@ -421,7 +421,7 @@ export default function Register() {
                           <span className="w-3 h-3 flex items-center justify-center">
                             {validation.lowercase && "✔"}
                           </span>
-                          <span>1 lowercase character</span>
+                          <span className="text-xs sm:text-sm">1 lowercase character</span>
                         </li>
                         <li
                           className={`flex items-center space-x-2 text-sm ${
@@ -440,7 +440,7 @@ export default function Register() {
                           <span className="w-3 h-3 flex items-center justify-center">
                             {validation.number && "✔"}
                           </span>
-                          <span>1 number</span>
+                          <span className="text-xs sm:text-sm">1 number</span>
                         </li>
                         <li
                           className={`flex items-center space-x-2 text-sm ${
@@ -459,7 +459,7 @@ export default function Register() {
                           <span className="w-3 h-3 flex items-center justify-center">
                             {validation.specialChar && "✔"}
                           </span>
-                          <span>1 special character</span>
+                          <span className="text-xs sm:text-sm">1 special character</span>
                         </li>
                       </ul>
                     </div>
@@ -475,7 +475,7 @@ export default function Register() {
                   />
                   <label
                     htmlFor="checkbox"
-                    className="ml-2 lg:text-sm text-[12px] text-gray-700"
+                    className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
                   >
                     <p>
                       By signing up you are agreeing to our
