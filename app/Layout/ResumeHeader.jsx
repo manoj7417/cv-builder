@@ -89,11 +89,12 @@ export function ResumeHeader() {
           <div className="inline-flex items-center space-x-2">
             <Link href={"/"}>
               <Image priority
-                src="/genies-career-hub-logo.png"
+                // src="/genies-career-hub-logo.png"
+                src={"/beta-logo.png"}
                 width={100}
                 height={100}
                 alt="white_logo"
-                className="w-20 h-20 object-contain"
+                className="w-20 h-16 object-contain"
               />
             </Link>
           </div>

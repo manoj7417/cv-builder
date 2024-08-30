@@ -1,4 +1,5 @@
-import Footer from "../Layout/Footer";
+import { ResumeHeader } from "@/app/Layout/ResumeHeader";
+import Footer from "../../Layout/Footer";
 export const metadata = {
   title: "Expert Career Advisor for Career Change and Life Coach ",
   description:
@@ -9,6 +10,7 @@ const Layout = ({ children }) => {
     <main className="resume_dashboard">
       <div className="resume_dashboard_container">
         <div className="wrapper">
+          <ResumeHeader />
           {children}
           <Footer />
         </div>
