@@ -216,7 +216,7 @@ export default function HomepageNew() {
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
           <div className="lg:flex align-middle overflow-hidden hidden -ml-16">
-            <Image priority
+            <Image
               src={"/home-creative-down.png"}
               width={2000}
               height={1500}
