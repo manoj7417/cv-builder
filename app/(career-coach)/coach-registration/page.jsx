@@ -37,7 +37,7 @@ export default function CoachRegistration() {
     {
       id: 5,
       name: "Tanya Fox",
-      profession: "Business Coach",
+      profession: "Business Coach", 
     },
     {
       id: 6,
