@@ -21,20 +21,6 @@ export default function Footer() {
       <footer className="bg-[#ffffff] z-20 relative">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
           <div className="sm:flex sm:items-center sm:justify-center">
-            {/* <div>
-              <a href="/" className="flex items-center gap-2 mobile_footer">
-                <Image priority
-                  src={"/genies-career-hub-logo.png"}
-                  width={200}
-                  height={100}
-                  alt="newlogo"
-                  className="w-50 h-auto object-contain"
-                />
-                <span className="text-black font-bold text-2xl">
-                  Genies Career Hub
-                </span>
-              </a>
-            </div> */}
             <ul className="mt-8 flex justify-center gap-6 sm:mt-0">
               <li>
                 <Link
@@ -59,15 +45,6 @@ export default function Footer() {
                   </div>
                 </Link>
               </li>
-
-              {/* <li>
-                <a href="" target="_blank">
-                  <div className="text-black transition hover:text-sky-500">
-                    <span className="sr-only">Twitter</span>
-                    <FaXTwitter className="h-6 w-6" />
-                  </div>
-                </a>
-              </li> */}
               <li>
                 <div className="text-black transition hover:text-sky-500">
                   <Link
@@ -177,7 +154,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="https://www.careergenies.co.uk/blog"
+                    href="https://geniescareerhub.com/"
                     className="text-black transition"
                     target="_blank"
                   >
