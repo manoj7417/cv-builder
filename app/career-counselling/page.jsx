@@ -33,7 +33,6 @@ export default function Page() {
   const [startingTest, setStartingTest] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
 
-
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -367,7 +366,7 @@ export default function Page() {
                                           width={200}
                                           height={200}
                                           alt="ai"
-                                          className="w-full h-40 sm:h-40 md:h-60"
+                                          className="w-full h-40"
                                         />
                                       </div>
                                       <div className="ai-content flex flex-col items-center justify-center gap-5 p-2 w-full">

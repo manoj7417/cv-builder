@@ -4,9 +4,9 @@
 import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
-import { useUserStore } from "../store/UserStore";
-import NewResumeHeader from "../Layout/NewResumeHeader";
-import Header from "../Layout/Header";
+import { useUserStore } from "../../store/UserStore";
+import NewResumeHeader from "../../Layout/NewResumeHeader";
+import Header from "../../Layout/Header";
 import Image from "next/image";
 import { Tilt } from "react-tilt";
 import { useState } from "react";
@@ -18,9 +18,9 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
-import "../components/HomepageNew/Homepage.css";
+import "@/app/components/HomepageNew/Homepage.css";
 import Link from "next/link";
-import { ResumeHeader } from "../Layout/ResumeHeader";
+import { ResumeHeader } from "../../Layout/ResumeHeader";
 
 const ComingSoonPage = () => {
   const userState = useUserStore((state) => state.userState);

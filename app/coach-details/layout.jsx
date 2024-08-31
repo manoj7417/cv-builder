@@ -1,8 +1,8 @@
 import Footer from "../Layout/Footer";
 export const metadata = {
-  title: "Expert Career Advisor for Career Change and Life Coach ",
+  title: "Coach Details ",
   description:
-    "Choose Career Counselling and Coach and get help from a professional job and career advisor on how to proceed with Career Change, Resume Services, and more.",
+    "Coach Details.",
 };
 const Layout = ({ children }) => {
   return (

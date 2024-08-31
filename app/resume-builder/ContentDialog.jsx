@@ -225,7 +225,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
-    if (userdata?.subscription?.plan === "free") {
+    if (!userdata.subscription.plan.includes('CVSTUDIO')) {
       setShowModal(true);
     } else {
       handleDownloadResume(accessToken.value);
