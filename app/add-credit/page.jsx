@@ -80,7 +80,7 @@ export default function AddCreditPage() {
     const amount = getPriceForPlan(serviceName);
     const data = {
       email: userdata.email,
-      success_url: "http://localhost:3000/",
+      success_url: "https://geniescareerhub.com/paymentSuccess",
       cancel_url: window.location.href,
       currency: geoinfo.currency,
       serviceName,

@@ -247,7 +247,7 @@ const PricingFunc = () => {
     const data = {
       email: userState?.userdata?.email,
       plan,
-      success_url: "http://localhost:3000/paymentSuccess",
+      success_url: "https://geniescareerhub.com/paymentSuccess",
       cancel_url: window.location.href,
       duration: selectedPlan,
       currency: geoinfo?.currency || "USD",

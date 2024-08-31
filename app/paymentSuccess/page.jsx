@@ -23,13 +23,14 @@ const PaymentSuccess = () => {
       if (response.status === 200) {
         updateUserData(response.data.data)
         if (userState.pricingRedirectRoute) {
-
           return router.push(`/${userState.pricingRedirectRoute}`)
         }
-        router.push('/resume-builder')
+
       }
     } catch (error) {
-      console.log(error)
+  console.log(error)
+    } finally {
+      router.push('/')
     }
   }
 
