@@ -1,8 +1,8 @@
-import Footer from "../Layout/Footer";
+import Footer from "../../Layout/Footer";
 export const metadata = {
-  title: "Coach Details ",
+  title: "Coach Appointment",
   description:
-    "Coach Details.",
+    "Coach Appointment.",
 };
 const Layout = ({ children }) => {
   return (
