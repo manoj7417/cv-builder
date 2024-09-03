@@ -9,7 +9,6 @@ import { useParams } from "next/navigation";
 
 const CoachDetailsPage = () => {
   const { id } = useParams();
-  console.log("id:::", id);
   const [activeTab, setActiveTab] = useState("blogs");
 
   const handleTabClick = (tab) => {
