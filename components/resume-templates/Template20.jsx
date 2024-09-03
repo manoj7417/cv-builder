@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaLinkedin, FaLocationDot, FaPhone } from "react-icons/fa6";
 import Image from "next/image";
 import { useResumeStore } from "@/app/store/ResumeStore";
-import { MdOutlineMailOutline, MdOutlineSettings } from "react-icons/md";
+import { MdOutlineEmail, MdOutlineMailOutline, MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePhone } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaComputer, FaGraduationCap, FaXTwitter } from "react-icons/fa6";
@@ -641,7 +641,7 @@ const Template20 = () => {
                 )}
               </li>
               <li className="flex items-center gap-3">
-                <FaLinkedin />
+              <MdOutlineEmail />
                 {basics?.email && <p> {basics?.email}</p>}
               </li>
             </ul>
