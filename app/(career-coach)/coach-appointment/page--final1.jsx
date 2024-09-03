@@ -26,19 +26,11 @@ const CoachAppointmentPage = () => {
       title: "Career Coaching with Joy",
       start: new Date(2024, 7, 5, 10, 0),
       end: new Date(2024, 7, 5, 11, 0),
-      
     },
     {
       title: "Resume Review",
       start: new Date(2024, 7, 7, 14, 0),
       end: new Date(2024, 7, 7, 15, 0),
-      
-    },
-    {
-      title: "Available Slot",
-      start: new Date(2024, 7, 8, 10, 0),
-      end: new Date(2024, 7, 8, 11, 0),
-      isAvailable: true,  // Available slot
     },
   ]);
 
@@ -63,22 +55,13 @@ const CoachAppointmentPage = () => {
   };
 
   const handleSelectSlot = ({ start, end }) => {
-    // Check if the selected slot overlaps with any existing appointments
-    const isSlotAvailable = appointments.every(
-      appointment => start >= appointment.end || end <= appointment.start
-    );
-
-    if (isSlotAvailable) {
-      setSelectedSlot({ start, end });
-      setNewAppointment({
-        title: "",
-        start: format(start, "yyyy-MM-dd'T'HH:mm"),
-        end: format(end, "yyyy-MM-dd'T'HH:mm"),
-      });
-      setShowBookingForm(true);
-    } else {
-      alert("This slot is not available. Please choose a different time.");
-    }
+    setSelectedSlot({ start, end });
+    setNewAppointment({
+      title: "",
+      start: format(start, "yyyy-MM-dd'T'HH:mm"),
+      end: format(end, "yyyy-MM-dd'T'HH:mm"),
+    });
+    setShowBookingForm(true);
   };
 
   const handleBookingChange = (e) => {
@@ -106,19 +89,6 @@ const CoachAppointmentPage = () => {
     } else {
       alert("Please fill in all the details correctly.");
     }
-  };
-
-  const eventStyleGetter = (event) => {
-    let style = {
-      backgroundColor: "#3174ad",  // Default color for booked slots
-      color: "white",
-    };
-
-    if (event.isAvailable) {
-      style.backgroundColor = "orange";  // Orange color for available slots
-    }
-
-    return { style };
   };
 
   return (
@@ -215,7 +185,6 @@ const CoachAppointmentPage = () => {
                     views={['month']} // Only show the month view
                     defaultView={Views.MONTH} // Set default view to month
                     toolbar={true} // Display the toolbar with navigation controls
-                    eventPropGetter={eventStyleGetter}  // Apply custom styles to events
                   />
                 </div>
                 <h1 className="text-[16px] font-bold text-[#1D2026]">
@@ -233,58 +202,49 @@ const CoachAppointmentPage = () => {
         {showBookingForm && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded shadow-lg w-1/3">
-              <h2 className="text-xl font-bold mb-4">Book Appointment
-              </h2>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Title
-                </label>
+              <h2 className="text-xl font-bold mb-4">Book Appointment</h2>
+              <label className="block mb-2">
+                Title:
                 <input
                   type="text"
                   name="title"
                   value={newAppointment.title}
                   onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="w-full border p-2 rounded"
                 />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Start Time
-                </label>
+              </label>
+              <label className="block mb-2">
+                Start Time:
                 <input
                   type="datetime-local"
                   name="start"
                   value={newAppointment.start}
                   onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="w-full border p-2 rounded"
                 />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  End Time
-                </label>
+              </label>
+              <label className="block mb-2">
+                End Time:
                 <input
                   type="datetime-local"
                   name="end"
                   value={newAppointment.end}
                   onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="w-full border p-2 rounded"
                 />
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={handleSubmitBooking}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Book Appointment
-                </button>
-                <button
-                  onClick={() => setShowBookingForm(false)}
-                  className="text-red-500 hover:text-red-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Cancel
-                </button>
-              </div>
+              </label>
+              <button
+                onClick={handleSubmitBooking}
+                className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
+              >
+                Book
+              </button>
+              <button
+                onClick={() => setShowBookingForm(false)}
+                className="bg-red-500 text-white py-2 px-4 rounded"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         )}
