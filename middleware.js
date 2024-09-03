@@ -8,6 +8,7 @@ export const config = {
 
 export function middleware(req) {
   const token = req.cookies.get('accessToken')
+  console.log("Token",token)
   if (!token || !token.value) {
     const redirectUrl = new URL('/login', req.url);
     redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
