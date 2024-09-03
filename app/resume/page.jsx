@@ -413,9 +413,6 @@ export default function DashboardIdea() {
   const [userState, setUserState] = useState({});
   const router = useRouter();
 
-
-
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
     if (user) {
@@ -443,21 +440,21 @@ export default function DashboardIdea() {
                   through every Application Tracking Software ATS CV Checker.
                 </p>
                 <div className="flex items-center justify-center space-x-4">
-                    <Button
-                      onClick={()=>router.push('/user-history')}
-                      className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
-                    >
-                      Create CV Now
-                    </Button>
+                  <Button
+                    onClick={() => router.push("/user-history")}
+                    className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
+                  >
+                    Create CV Now
+                  </Button>
                 </div>
               </div>
-              <Image priority
+              <Image
+                priority
                 src="/resume.png"
                 className="w-50 h-50 px-7 mt-10 pt-7 rounded-t-3xl"
                 alt="@shadcn"
                 width={600}
                 height={100}
-                
               />
             </div>
           </div>
@@ -505,6 +502,501 @@ export default function DashboardIdea() {
                   <NewSlider data={ProfessionalTemplates} />
                 </TabsContent>
               </Tabs>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="steps_main_section max-w-7xl mx-auto relative">
+            <h2 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-justify lg:px-20 xl:px-10 2xl:px-10">
+              Create a CV template for Your{" "}
+              <span className="text-[#2C98CA]">Dream Job</span>
+            </h2>
+            <div className="left_icon absolute bottom-32 left-20 lg:block hidden">
+              <img src="/resume-icon.png" alt="icon1" />
+            </div>
+            <div className="right_icon absolute bottom-20 right-10 lg:block hidden">
+              <img
+                src="/resume-icon3.png"
+                alt="icon2"
+                className="w-full h-32"
+              />
+            </div>
+            <p className="text-base text-black text-start lg:px-20 xl:px-20 2xl:px-10 pt-20">
+              Create your CV with our custom-made templates like experts and
+              industry professionals and incorporate Artificial Intelligence
+              with it. Match the modern recruitment standards with our
+              customizable templates in the professional curriculum vitae
+              format.
+            </p>
+          </div>
+          <div className="max-w-7xl mx-auto steps_intro py-20">
+            <div className="flex gap-10 my-10">
+              <div className="lg:w-[30%] w-full h-[350px] image_content bg-[#ffc7bf]">
+                <img
+                  src="/resume-icon4.png"
+                  alt="icon4"
+                  className="w-full h-full p-10 object-contain"
+                />
+              </div>
+              <div className="lg:w-[70%] w-full steps_content">
+                <h3 className="text-4xl text-black font-bold py-3">
+                  Use our CV Builder with customisable templates and make your
+                  resume online
+                </h3>
+                <p className="text-base py-3">
+                  Create a professional CV with our CV Builder in UK format
+                  resume Template. Take the help of our Custom-made templates
+                  made with the insights of professionals with combining
+                  Artificial Intelligence.
+                </p>
+                <p className="text-base py-3">
+                  These templates will make your CV layout UK stand out and
+                  ensure every detail is flawless with proper highlighting of
+                  your skills and achievements. This UK-style resume template
+                  builder is tried and tested by experts with specialties like
+                  skills, profiles, education, certificates, etc.
+                </p>
+                <p className="text-base py-3">
+                  After quickly filling in your details in the template, you can
+                  save it and use it for yourself. You can choose and customize
+                  from your curriculum vitae templates.
+                </p>
+              </div>
+            </div>
+            <div className="step_1">
+              <div className="flex gap-10 my-20 step1 relative">
+                <div className="lg:w-[70%] w-full steps_content">
+                  <h4 className="font-bold text-black text-2xl">Step 1</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Choose a CV Template 
+                  </h3>
+                  <p className="text-base py-3">
+                    When you reach the CV creator, we bring you the most
+                    straightforward resume builder. Follow these simple steps to
+                    create your professional CV layout UK.
+                  </p>
+                  <p className="text-base py-3">
+                    We bring you the best templates approved by experts. You can
+                    choose personalized designs from any of the 25 UK-style CV
+                    templates. These allow you to fill in general details like
+                    your profile, education, experience, projects, skills,
+                    hobbies, awards, references, certificates, language, and the
+                    color theme of your template.
+                  </p>
+                  <p className="text-base py-3">
+                    Choose a template that matches your job professionalism and
+                    proceed with filling in the details. This will proceed with
+                    specifications and additional qualities you can fill in
+                    yourself or take the help of Artificial Intelligence by
+                    clicking on the Generate with AI option.
+                  </p>
+                  <p className="text-base py-3">
+                    With the help of Artificial Intelligence, after you fill in
+                    some details, it generates a proper professional profile
+                    description. 
+                  </p>
+                  <div className="step_image">
+                    <img src="/step12.png" alt="" />
+                  </div>
+                </div>
+                <div className="lg:w-[30%] w-full h-[450px] image_content bg-[#d3e9f4] flex justify-center items-center">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="/step-1.png"
+                      alt="icon4"
+                      className="w-[200px] h-[200px] object-contain"
+                    />
+                    <img
+                      src="/step-11.png"
+                      alt="icon4"
+                      className="w-[200px] h-[200px] object-contain"
+                    />
+                  </div>
+                </div>
+                <div className="arrow absolute left-[35%] -bottom-40">
+                  <img
+                    src="/arrow1.png"
+                    alt="arrow"
+                    className="w-52 h-52 object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="step_2 relative">
+              <div className="flex gap-10 mt-20 ">
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="/step2.png"
+                      alt="icon4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="lg:w-[50%] w-full steps_content mt-10">
+                  <h4 className="font-bold text-black text-2xl">Step 2</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Enter basic details in CV Builder 
+                  </h3>
+                  <p className="text-base py-3">
+                    Build your resume template with your basic details in our
+                    curriculum vitae builder. In the Profile section, you can
+                    either fill in the description of your profile or, by
+                    entering some details, you can go for the Generate with AI
+                    option. This feature is only provided by us which makes your
+                    CV even more professional and ready for interview. 
+                  </p>
+                  <p className="text-base py-3">
+                    The details that you fill in once get stopped in between due
+                    to any unwanted conditions; you can go to the Back button
+                    and leave the details; they will be saved automatically on
+                    your next visit.
+                  </p>
+                </div>
+              </div>
+              <div className="pro_tips">
+                <div className="pro_image relative">
+                  <img src="/pro-tips.png" alt="pro-tips" />
+                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                    Pro Tips !
+                  </p>
+                </div>
+                <p className="text-xl px-5">
+                  Do you wish to change the font style of the text? Yes, you
+                  can! We provide you the choice of changing the font style if
+                  you do not like the original one. 
+                </p>
+              </div>
+              <div className="arrow absolute left-[35%] -bottom-40">
+                <img
+                  src="/arrow2.png"
+                  alt="arrow"
+                  className="w-52 h-52 object-contain"
+                />
+              </div>
+            </div>
+            <div className="step_3 relative">
+              <div className="flex gap-10 mt-20">
+                <div className="lg:w-[50%] w-full steps_content mt-10">
+                  <h4 className="font-bold text-black text-2xl">Step 3</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Add your education details 
+                  </h3>
+                  <p className="text-base py-3">
+                    We provide you with a different section to input your
+                    educational details, institutions you joined, and learnings
+                    you had in your academic journey.  
+                  </p>
+                  <p className="text-base py-3">
+                    Filling in some information-specific details is very
+                    important for the recruiters as they will take care of these
+                    details during analysis
+                  </p>
+                </div>
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="/step3.png"
+                      alt="icon4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="pro_tips">
+                <div className="pro_image relative">
+                  <img src="/pro-tips.png" alt="pro-tips" />
+                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                    Pro Tips !
+                  </p>
+                </div>
+                <p className="text-xl px-5">
+                  You can change the design of the templates anywhere in the
+                  process of making your CV. 
+                </p>
+              </div>
+              <div className="arrow absolute left-[35%] -bottom-40">
+                <img
+                  src="/arrow1.png"
+                  alt="arrow"
+                  className="w-52 h-52 object-contain"
+                />
+              </div>
+            </div>
+            <div className="step_4 relative">
+              <div className="flex gap-10 mt-20">
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="/step-4.png"
+                      alt="icon4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="lg:w-[50%] w-full steps_content mt-16">
+                  <h4 className="font-bold text-black text-2xl">Step 4</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Fil in your experience and achievement details 
+                  </h3>
+                  <p className="text-base py-3">
+                    Fill in your education details in the specified boxes with
+                    your details. After this, you can describe your job
+                    experience in the description box below the basic experience
+                    details. Here, you can tell your experience of work and any
+                    projects that you have worked on. You can aslo state the
+                    achievements if you had any. In a very structured format
+                    these will be presented on the CV Template 
+                  </p>
+                </div>
+              </div>
+              <div className="pro_tips">
+                <div className="pro_image relative">
+                  <img src="/pro-tips.png" alt="pro-tips" />
+                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                    Pro Tips !
+                  </p>
+                </div>
+                <p className="text-xl px-5">
+                  Do you wish to change the shades other than the colors
+                  provided? Go ahead and click on the selected color, change the
+                  shade by doodling around, and set it 
+                </p>
+              </div>
+              <div className="arrow absolute left-[35%] -bottom-40">
+                <img
+                  src="/arrow2.png"
+                  alt="arrow"
+                  className="w-52 h-52 object-contain"
+                />
+              </div>
+            </div>
+            <div className="step_5 relative">
+              <div className="flex gap-10 mt-20">
+                <div className="lg:w-[50%] w-full steps_content mt-16">
+                  <h4 className="font-bold text-black text-2xl">Step 5</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Build your skills and hobbies section 
+                  </h3>
+                  <p className="text-base py-3">
+                    We provide you with this professional section to showcase
+                    your hobbies and skills. By adding your skills and hobbies,
+                    the employers take note of what you can do exceptionally.
+                  </p>
+                  <p className="text-base py-3">
+                    These hobbies and skills will show what passions you have
+                    beyond your workplace.
+                  </p>
+                </div>
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="/step-5.png"
+                      alt="icon5"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* <div className="pro_tips">
+                <div className="pro_image relative">
+                  <img src="/pro-tips.png" alt="pro-tips" />
+                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                    Pro Tips !
+                  </p>
+                </div>
+                <p className="text-xl px-5">
+                  Do you wish to change the shades other than the colors
+                  provided? Go ahead and click on the selected color, change the
+                  shade by doodling around, and set it 
+                </p>
+              </div> */}
+              <div className="arrow absolute left-[35%] -bottom-20">
+                <img
+                  src="/arrow1.png"
+                  alt="arrow"
+                  className="w-52 h-52 object-contain"
+                />
+              </div>
+            </div>
+            <div className="step_6 relative">
+              <div className="flex gap-10 mt-20">
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center">
+                  <div className="flex flex-col gap-10 justify-start items-center mt-10">
+                    <img
+                      src="/step6-1.png"
+                      alt="icon5"
+                      className="w-full h-full object-cover"
+                    />
+                    <img
+                      src="/step6-2.png"
+                      alt="icon5"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="lg:w-[50%] w-full steps_content">
+                  <h4 className="font-bold text-black text-2xl">Step 6</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Upload your certificates and language 
+                  </h3>
+                  <div className="certificate mt-3">
+                    <h4 className="text-xl text-[#F0B000] font-medium">
+                      Certificate
+                    </h4>
+                    <p className="text-base py-3">
+                      This detail section makes your UK resume template look
+                      professional and shows the essential qualities
+                      <span>
+                        Uploading the certificate will highlight your
+                        achievements and embrace your expertise in it.
+                      </span>
+                    </p>
+                  </div>
+                  <div className="Language mt-3">
+                    <h4 className="text-xl text-[#F0B000] font-medium">
+                      Language
+                    </h4>
+                    <p className="text-base py-3">
+                      Languages are a vital part of your CV in this era. Knowing
+                      different languages with proficiency is essential for
+                      communication across varied cultures
+                      <span>
+                        These credentials will let the employer know about you
+                        in depth.
+                      </span>
+                    </p>
+                  </div>
+                  <p className="text-base py-3">
+                    These hobbies and skills will show what passions you have
+                    beyond your workplace.
+                  </p>
+                </div>
+              </div>
+              <div className="arrow absolute left-[35%] -bottom-40">
+                <img
+                  src="/arrow2.png"
+                  alt="arrow"
+                  className="w-52 h-52 object-contain"
+                />
+              </div>
+            </div>
+            <div className="step_7 relative">
+              <div className="flex gap-10 mt-20">
+                <div className="lg:w-[50%] w-full steps_content mt-10">
+                  <h4 className="font-bold text-black text-2xl">Step 7</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Review your final CV 
+                  </h3>
+                  <p className="text-base py-3">
+                    The final look through of your UK style CV template after
+                    filling in the details at last is an important step. With a
+                    free mind, you can have an overview of the whole CV and make
+                    changes if required at the same time. The layout and visual
+                    representation of knowledge will be presented forth you so
+                    that you get an overview of the content in the templates.
+                  </p>
+                  <p className="text-base py-3">
+                    Add the background color and text, change font size, bold or
+                    italic-specific headings, etc
+                  </p>
+                </div>
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src="/step3.png"
+                      alt="icon4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="pro_tips">
+                <div className="pro_image relative">
+                  <img src="/pro-tips.png" alt="pro-tips" />
+                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                    Pro Tips !
+                  </p>
+                </div>
+                <p className="text-xl px-5">
+                  Get your CV downloaded in the form of a PDF or TXT file and
+                  save it for future use. 
+                </p>
+              </div>
+              <div className="arrow absolute left-[35%] -bottom-40">
+                <img
+                  src="/arrow1.png"
+                  alt="arrow"
+                  className="w-52 h-52 object-contain"
+                />
+              </div>
+            </div>
+            <div className="step_8 relative">
+              <div className="flex gap-10 mt-20">
+                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-start items-center">
+                  <div className="flex justify-start items-center">
+                    <img
+                      src="/step-8.png"
+                      alt="icon4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="lg:w-[50%] w-full steps_content mt-10">
+                  <h4 className="font-bold text-black text-2xl">Step 8</h4>
+                  <h3 className="text-4xl text-black font-bold py-3">
+                    Download and Save your CV
+                  </h3>
+                  <p className="text-base py-3">
+                    The downloading service that we provide will help you to
+                    save it with you and reduce the chances of getting
+                    misplaced. Give your CV a name and set a date for the file.
+                  </p>
+                  <p className="text-base py-3">
+                    While downloading the CV, you can download it in PDF and TXT
+                    files.
+                  </p>
+                  <p className="text-base py-3">
+                    If, in the end, you change your mind and want to change the
+                    template or edit something, well, go ahead and do it with
+                    ease!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="w-full h-full relative">
+          <div className="image_background">
+            <img
+              src="/background-image.png"
+              alt="background-image"
+              className="w-full h-[600px]"
+            />
+          </div>
+          <div className="inner_content flex absolute top-40 left-[20%] max-w-7xl mx-auto">
+            <div className="lg:w-[50%] w-full">
+              <h2 className="w-1/2 text-4xl lg:text-5xl font-bold text-gray-900">
+                Build a perfect CV using our CV Creator
+              </h2>
+              <div className="image_section">
+                
+              </div>
+            </div>
+            <div className="lg:w-[50%] w-full">
+              <p className="my-3 text-black text-base">
+                Craft a professional and polished CV to make a strong impression
+                on the employer. We provide you with a vast choice of curriculum
+                vitae templates that contain portions for your specifications
+                like profile, education, experience, skills, language, and other
+                specifications.{" "}
+              </p>
+              <p className="text-black my-3 text-base">
+                Our unique feature of Artificial Intelligence added to the
+                profile section helps you build your profile details
+                professionally with AI. To add value, our CV enhancer has a
+                skills, hobbies, and language section for you.
+              </p>
             </div>
           </div>
         </section>
