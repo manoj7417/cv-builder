@@ -2,17 +2,16 @@
 import { NextResponse } from 'next/server';
 
 export const config = {
-  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq', '/add-credit','/settings/profile','/settings/cvanalysis','/settings/pyschometric-test'
+  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq', '/add-credit', '/settings/profile', '/settings/cvanalysis', '/settings/pyschometric-test'
   ],
 };
 
 export function middleware(req) {
   const token = req.cookies.get('accessToken')
-  if (!token || !token.value) {
-    const redirectUrl = new URL('/login', req.url);
-    redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
-    return NextResponse.redirect(redirectUrl);
+  if (token && token.value) {
+    return NextResponse.next();
   }
-
-  return NextResponse.next();
+  const redirectUrl = new URL('/login', req.url);
+  redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
+  return NextResponse.redirect(redirectUrl);
 }
