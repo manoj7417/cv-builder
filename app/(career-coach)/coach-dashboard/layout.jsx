@@ -1,4 +1,4 @@
-// import Footer from "../../Layout/Footer";
+// import Footer from "./footer";
 export const metadata = {
   title: "Coach Dashboard",
   description:
