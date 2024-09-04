@@ -488,9 +488,6 @@ const ResumeView = () => {
               }}
             >
               <GetTemplate name={data?.metadata?.template} resumeData={data} />
-              <div className="text-center bg-white">
-                <p>@Genies Career Hub</p>
-              </div>
             </div>
           </div>
         </div>

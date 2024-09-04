@@ -40,6 +40,7 @@ import { IoDocumentText } from "react-icons/io5";
 import Link from "next/link";
 import { useUserStore } from "../store/UserStore";
 import { convert } from "html-to-text";
+import ServicesPopUp from "@/components/component/ServicesPopUp";
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 const images = [
@@ -205,8 +206,9 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const resumeData = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [showModal,setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const { userdata } = useUserStore((state) => state.userState);
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
 
   const pageSizeMap = {
     a4: {
@@ -225,7 +227,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
-    if (!userdata.subscription.plan.includes('CVSTUDIO')) {
+    if (!userdata.subscription.plan.includes("CVSTUDIO")) {
       setShowModal(true);
     } else {
       handleDownloadResume(accessToken.value);
@@ -242,7 +244,6 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
     try {
       const response = await printResume(body, token);
-
       if (response.ok) {
         generateFunfact();
         const blob = await response.blob();
@@ -257,18 +258,40 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
         window.URL.revokeObjectURL(url);
         return;
       }
-      if (response.status !== 500) {
+      const res = await response.json();
+      if (
+        response.status === 403 &&
+        res.message === "You are not eligible for this feature"
+      ) {
+        toast.info("Subscribe to Genies Pro Suite to download your CV.", {
+          autoclose: 3000,
+        });
         updateRedirectPricingRoute("/resume-builder");
-        return router.push("/pricing");
+        return router.push("/pricing?scroll=1");
+      }
+
+      if (
+        response.status === 403 &&
+        res.message === "Your download CV tokens have expired"
+      ) {
+        toast.info("Your plan validity has expired.", { autoclose: 3000 });
+        return router.push("/pricing?scroll=1");
+      }
+      if (
+        response.status === 403 &&
+        res.message === "You have no download CV tokens"
+      ) {
+        setIsServiceDialogOpen(true);
+      }
+      if (response.status === 500) {
+        toast.error("Error downloading your CV , Please try again later");
       }
     } catch (error) {
-      console.log("Error", error);
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
   };
-
 
   const downloadAsText = () => {
     const el = document.getElementById("resume");
@@ -339,7 +362,8 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                                 className="image_section_1 "
                                 onClick={() => handleTemplateChange(image.name)}
                               >
-                                <Image priority
+                                <Image
+                                  priority
                                   src={image.src}
                                   alt={image.alt}
                                   className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[200px] w-[200px]"
@@ -356,7 +380,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 </Drawer>
               </ResumeTooltip>
             </div>
-            <div className="download_button">
+            <div className="download_button mx-auto">
               <button
                 onClick={checkUserTemplate}
                 disabled={isLoading}
@@ -371,8 +395,11 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
               </button>
             </div>
             <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white"  showCloseButton={true}
-               onClick={() => setShowModal(false)}>
+              <DialogContent
+                className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white"
+                showCloseButton={true}
+                onClick={() => setShowModal(false)}
+              >
                 <DialogHeader>
                   <DialogTitle className="text-xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
                     Oops! You have not subscribed yet
@@ -418,6 +445,13 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 </div>
               </DialogContent>
             </Dialog>
+            <Dialog open={isServiceDialogOpen}>
+              <ServicesPopUp
+                isServiceDialogOpen={isServiceDialogOpen}
+                setIsServiceDialogOpen={setIsServiceDialogOpen}
+                serviceName="CV-BUILDER"
+              />
+            </Dialog>
             <div
               onClick={() => setIsContentVisible(false)}
               className="z-50 close_icon"
@@ -441,9 +475,6 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
               onClick={(e) => e.stopPropagation()}
             >
               <GetTemplate name={data?.metadata?.template} />
-              <div className="bg-white text-gray-500 text-end">
-                <p className="text-sm">@Genies Career Hub</p>
-              </div>
             </div>
           </div>
         </div>
