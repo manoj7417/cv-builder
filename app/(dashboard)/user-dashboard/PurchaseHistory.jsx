@@ -33,57 +33,59 @@ const PurchaseHistory = ({ open, toggle }) => {
 
   return (
     <div>
-      <div className="pt-[10px]">
+      <div className="pt-2">
         <div
-          className="bg-white border border-gray-300 p-5 flex justify-between items-start cursor-pointer gap-5"
+          className="bg-white border border-gray-300 p-4 flex justify-between items-start cursor-pointer gap-3 sm:gap-5"
           onClick={toggle}
         >
           <div>
-            <p className="lg:text-base text-sm font-semibold">
-              1st Septembar, 2021 at 11:30 PM
+            <p className="text-xs sm:text-sm lg:text-base font-semibold">
+              1st September, 2021 at 11:30 PM
             </p>
-            <ul className="flex gap-10 mt-2">
-              <li className="text-sm text-gray-800 flex items-center gap-1">
-                <FaRegCirclePlay className="text-sm text-blue-500" />3 Courses
+            <ul className="flex flex-wrap gap-5 sm:gap-10 mt-2">
+              <li className="text-xs sm:text-sm text-gray-800 flex items-center gap-1">
+                <FaRegCirclePlay className="text-xs sm:text-sm text-blue-500" />
+                3 Courses
               </li>
-              <li className="text-sm text-gray-800  flex items-center gap-1">
-                <FaDollarSign className="text-sm text-orange-500" />
+              <li className="text-xs sm:text-sm text-gray-800 flex items-center gap-1">
+                <FaDollarSign className="text-xs sm:text-sm text-orange-500" />
                 $75.00 USD
               </li>
-              <li className="text-sm text-gray-800 flex items-center gap-1">
-                <FaRegCreditCard className="text-sm text-green-500" />
+              <li className="text-xs sm:text-sm text-gray-800 flex items-center gap-1">
+                <FaRegCreditCard className="text-xs sm:text-sm text-green-500" />
                 Credit Card
               </li>
             </ul>
           </div>
-          <div className="text-sm bg-[#FF6636] text-white p-2">
+          <div className="text-xs sm:text-sm bg-[#FF6636] text-white p-2 flex-shrink-0">
             {open ? <IoArrowUp /> : <IoArrowDown />}
           </div>
         </div>
+
         <Collapse isOpened={open}>
-          <div className="bg-white lg:text-[15px] text-[12px] font-medium">
+          <div className="bg-white text-xs sm:text-sm lg:text-base font-medium">
             <div className="ansers_section border border-gray-300">
-              <div className="grid grid-cols-2 place-items-center">
-                <div className="user_history p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center">
+                <div className="user_history p-4">
                   <ul className="flex flex-col divide-y divide-gray-200">
                     {products.map((product) => (
                       <li
                         key={product.id}
-                        className="flex flex-col py-6 sm:flex-row sm:justify-between"
+                        className="flex flex-col py-4 sm:flex-row sm:justify-between"
                       >
                         <div className="flex w-full space-x-2 sm:space-x-4">
                           <img
-                            className="h-32 w-36 flex-shrink-0 rounded object-contain outline-none dark:border-transparent sm:h-32 sm:w-40"
+                            className="h-24 sm:h-32 w-24 sm:w-36 flex-shrink-0 rounded object-contain"
                             src={product.imageSrc}
                             alt={product.name}
                           />
-                          <div className="flex w-full flex-col justify-between pb-4">
-                            <div className="flex w-full justify-between space-x-2 pb-2">
+                          <div className="flex w-full flex-col justify-between">
+                            <div className="flex w-full justify-between space-x-2">
                               <div className="space-y-1">
-                                <h3 className="text-lg font-semibold leading-snug sm:pr-8">
+                                <h3 className="text-base sm:text-lg font-semibold leading-snug">
                                   {product.name}
                                 </h3>
-                                <p className="text-sm">
+                                <p className="text-xs sm:text-sm">
                                   <span className="text-gray-400">
                                     Course by
                                   </span>
@@ -91,7 +93,7 @@ const PurchaseHistory = ({ open, toggle }) => {
                                 </p>
                               </div>
                               <div className="text-right">
-                                <p className="text-lg font-semibold text-[#FF6636]">
+                                <p className="text-base sm:text-lg font-semibold text-[#FF6636]">
                                   {product.price}
                                 </p>
                               </div>
@@ -102,31 +104,31 @@ const PurchaseHistory = ({ open, toggle }) => {
                     ))}
                   </ul>
                 </div>
-                <div className="user_time">
+                <div className="user_time p-4">
                   <div>
-                    <p className="lg:text-base text-sm font-semibold">
-                      1st Septembar, 2021 at 11:30 PM
+                    <p className="text-xs sm:text-sm lg:text-base font-semibold">
+                      1st September, 2021 at 11:30 PM
                     </p>
-                    <ul className="flex gap-10 mt-2 pl-0">
-                      <li className="text-sm text-gray-800 flex items-center gap-1">
-                        <FaRegCirclePlay className="text-sm text-blue-500" />3
-                        Courses
+                    <ul className="flex flex-wrap gap-5 sm:gap-10 mt-2 pl-0">
+                      <li className="text-xs sm:text-sm text-gray-800 flex items-center gap-1">
+                        <FaRegCirclePlay className="text-xs sm:text-sm text-blue-500" />
+                        3 Courses
                       </li>
-                      <li className="text-sm text-gray-800  flex items-center gap-1">
-                        <FaDollarSign className="text-sm text-orange-500" />
+                      <li className="text-xs sm:text-sm text-gray-800 flex items-center gap-1">
+                        <FaDollarSign className="text-xs sm:text-sm text-orange-500" />
                         $75.00 USD
                       </li>
-                      <li className="text-sm text-gray-800 flex items-center gap-1">
-                        <FaRegCreditCard className="text-sm text-green-500" />
+                      <li className="text-xs sm:text-sm text-gray-800 flex items-center gap-1">
+                        <FaRegCreditCard className="text-xs sm:text-sm text-green-500" />
                         Credit Card
                       </li>
                     </ul>
                   </div>
-                   <div className="user_purchase_name">
-                    <div className="name">
-                        <p>Kevin Gilbert</p>
-                    </div>
-                   </div>
+                  <div className="user_purchase_name mt-2">
+                    <p className="text-xs sm:text-sm lg:text-base font-semibold">
+                      Kevin Gilbert
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

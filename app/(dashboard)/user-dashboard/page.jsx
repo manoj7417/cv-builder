@@ -4,7 +4,7 @@ import { CoachHeader } from "@/components/component/CoachHeader";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./user.css";
-import { FaStar } from "react-icons/fa";
+import { FaRegPlayCircle, FaStar } from "react-icons/fa";
 import Profile from "../settings/profile/page";
 import Whishlist from "./Wishlist";
 // import AccordionItem from "./AccordionItem";
@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PurchaseHistory from "./PurchaseHistory";
+import { BsFileEarmarkCheck } from "react-icons/bs";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -26,16 +27,16 @@ const UserDashboardPage = () => {
       return setOpen(null);
     }
     setOpen(index);
-  }
+  };
 
   const puchaseHistory = [
     {
-      id:1,
-      courses:"3",
-      price:"$75.00 USD",
-      paymentType:"Credit Card"
-    }
-  ]
+      id: 1,
+      courses: "3",
+      price: "$75.00 USD",
+      paymentType: "Credit Card",
+    },
+  ];
 
   const coaches = [
     {
@@ -407,10 +408,64 @@ const UserDashboardPage = () => {
             <TabsContent value="dashboard" className="mb-4">
               <div className="actions_section max-w-full md:max-w-5xl mx-auto">
                 <div>
-                  <h2 className="text-xl font-bold mb-6 text-blue-950">
+                  <h2 className="text-xl font-bold mb-6 text-blue-950 lg:text-start text-center">
                     Dashboard
                   </h2>
-                  <h2>This is a dashboard</h2>
+                  <div className="dashboard">
+                    <div className="grid lg:grid-cols-4 grid-cols-1 gap-10 lg:p-0 p-5">
+                      <div class="card border border-gray-200 shadow-lg bg-pink-200">
+                        <div class="card-content p-4">
+                          <div class="card-body">
+                            <div class="flex items-center gap-5">
+                              <div class="flex-shrink-0 bg-white p-2">
+                                <FaRegPlayCircle className="text-2xl text-pink-400" />
+                              </div>
+                              <div class="flex-grow text-start">
+                                <h3 class="text-xl">10</h3>
+                                <span class="text-gray-500 text-sm">
+                                  Live Coaching
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card border border-gray-200 shadow-lg bg-[#EBEBFF]">
+                        <div class="card-content p-4">
+                          <div class="card-body">
+                            <div class="flex items-center gap-5">
+                              <div class="flex-shrink-0 bg-white p-2">
+                                <BsFileEarmarkCheck className="text-2xl text-blue-400" />
+                              </div>
+                              <div class="flex-grow text-start">
+                                <h3 class="text-base">6</h3>
+                                <span class="text-gray-500 text-sm">
+                                  Build Resume
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card border border-gray-200 shadow-lg bg-[#f3c6b2]">
+                        <div class="card-content p-4">
+                          <div class="card-body">
+                            <div class="flex items-center gap-5">
+                              <div class="flex-shrink-0 bg-white p-2">
+                                <BsFileEarmarkCheck className="text-2xl text-blue-400" />
+                              </div>
+                              <div class="flex-grow text-start">
+                                <h3 class="text-base">92 % Score</h3>
+                                <span class="text-gray-500 text-sm whitespace-nowrap">
+                                  CV Analyser History
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </TabsContent>
@@ -475,12 +530,12 @@ const UserDashboardPage = () => {
             <TabsContent className="mb-6" value="purchaseHistory">
               <div className="max-w-full md:max-w-5xl mx-auto summary_section">
                 <div>
-                  <h2 className="text-xl font-bold mb-6 text-blue-950">
+                  <h2 className="text-xl font-bold mb-6 text-blue-950 lg:text-start text-center">
                     Purchase History
                   </h2>
 
                   <div className="purchase_section">
-                    <PurchaseHistory open={open} toggle={toggle}/>
+                    <PurchaseHistory open={open} toggle={toggle} />
                   </div>
                 </div>
               </div>

@@ -26,6 +26,7 @@ import {
 } from "react-icons/fa";
 import { GoKey } from "react-icons/go";
 import { ImSpinner3 } from "react-icons/im";
+import { MdOutlineFileUpload } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
@@ -70,8 +71,7 @@ function Profile() {
     }
   }, [userState?.userdata]);
 
-  const handleImageUpload = (event) => {
-    event.preventDefault();
+  const handleImageUpload = () => {
     if (fileUploadRef.current) {
       fileUploadRef.current.click();
     }
@@ -411,7 +411,7 @@ function Profile() {
           <div className="mb-4">
             <div className="flex flex-col sm:flex-row my-3">
               <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative  border-2 border-gray-200">
-                <div className="overflow-hidden w-[200px] h-[200px] relative mx-auto mt-20">
+                <div className="overflow-hidden w-[250px] h-[250px] relative mx-auto mt-10">
                   {previewImage ? (
                     <img
                       src={previewImage}
@@ -419,26 +419,42 @@ function Profile() {
                       className="mx-auto h-full w-full object-cover"
                     />
                   ) : (
-                    <Image
-                      priority
-                      src="/avatar.png"
-                      className="mx-auto h-full w-full object-cover"
-                      alt="avatar.png"
-                      height={100}
-                      width={100}
-                    />
+                    <>
+                      <Image
+                        priority
+                        src="/avatar.png"
+                        className="mx-auto h-full w-full object-cover"
+                        alt="avatar.png"
+                        height={100}
+                        width={100}
+                      />
+                    </>
                   )}
                   {isUploadingImage && (
                     <div className="absolute top-0 w-full h-full bg-black/50 flex items-center justify-center">
                       <BiLoaderAlt className="text-white w-10 h-10 animate-spin" />
                     </div>
                   )}
+                  <Button
+                  className="upload flex items-center gap-2 p-2 bg-black/50 w-full absolute left-0 bottom-0 justify-center cursor-pointer hover:bg-black/70"
+                  onClick={handleImageUpload}
+                >
+                  <MdOutlineFileUpload className="text-white" />
+                  <p className="text-white">Upload Photo</p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileUploadRef}
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                </Button>
                 </div>
                 <p className="mt-2 text-sm text-gray-400 text-center w-3/4 mx-auto">
                   Image size should be under 1MB and image ration needs to be
                   1:1
                 </p>
-                <div className="flex lg:flex-row flex-col justify-center items-center lg:gap-10 gap-0 mx-auto lg:mt-5 mt-1">
+                {/* <div className="flex lg:flex-row flex-col justify-center items-center lg:gap-10 gap-0 mx-auto lg:mt-5 mt-1">
                   <div>
                     <Button
                       className="my-2 lg:w-full w-[200px] text-sm bg-[#FF6636] text-white hover:bg-[#FF6636]"
@@ -462,7 +478,7 @@ function Profile() {
                     <RiDeleteBinLine className="mr-1" />
                     Remove
                   </Button>
-                </div>
+                </div> */}
               </div>
 
               <div className="w-full sm:w-2/3 lg:px-10 px-2 lg:pt-0 pt-10">
