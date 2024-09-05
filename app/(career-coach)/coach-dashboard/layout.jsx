@@ -1,4 +1,4 @@
-// import Footer from "./footer";
+import Footer from "./Footer";
 export const metadata = {
   title: "Coach Dashboard",
   description:
@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
       <div className="resume_dashboard_container">
         <div className="wrapper">
           {children}
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </div>
     </main>
