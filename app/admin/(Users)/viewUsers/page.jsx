@@ -1,7 +1,5 @@
-/** @format */
 
 "use client";
-
 import { useState } from "react";
 import {
   ColumnDef,
@@ -91,136 +89,128 @@ const data = [
   },
 ];
 
-export const columns = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  },
-  {
-    accessorKey: "username",
-    header: "User Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("username")}</div>
-    ),
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    cell: ({ row }) => {
-      const [role, setRole] = useState(row.getValue("role"));
 
-      const handleChange = async (event) => {
-        const newRole = event.target.value;
-        setRole(newRole);
 
-        // Update the role in your backend or state management
-        try {
-          // Assuming you have an API to update the role
-          await axios.put(`/api/updateUserRole/${row.original.id}`, {
-            role: newRole,
-          });
-          console.log("Role updated successfully");
-        } catch (error) {
-          console.error("Error updating role", error);
-        }
-      };
 
-      return (
-        <Select value={role} onChange={handleChange}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select a role" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Roles</SelectLabel>
-              <SelectItem value="SUPER_ADMIN">SUPER_ADMIN</SelectItem>
-              <SelectItem value="ADMIN">ADMIN</SelectItem>
-              <SelectItem value="USER">USER</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const handleEdit = () => {
-        // Add your edit logic here
-        console.log("Edit clicked for row:", row);
-      };
-
-      const handleDelete = () => {
-        // Add your delete logic here
-        console.log("Delete clicked for row:", row);
-      };
-
-      return (
-        <div className="flex gap-5 space-x-2">
-          <button
-            type="button"
-            onClick={handleEdit}
-            className="text-blue-600 hover:text-blue-900"
-            aria-label="Edit"
-          >
-            <FaEdit />
-          </button>
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="text-red-600 hover:text-red-900"
-            aria-label="Delete"
-          >
-            <FaTrashAlt />
-          </button>
-        </div>
-      );
-    },
-  },
-];
 
 export default function ViewUsersPage() {
+
+
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [filterChange, setFilterChange] = useState("");
   const [addUserModal, setAddUserModal] = useState(false);
+
+  const RoleSelect = ({ row }) => {
+    const [role, setRole] = useState(row.getValue("role"));
+  
+    const handleChange = async (event) => {
+      const newRole = event.target.value;
+      setRole(newRole);
+  
+      // Update the role in your backend or state management
+      try {
+        await axios.put(`/api/updateUserRole/${row.original.id}`, {
+          role: newRole,
+        });
+        console.log("Role updated successfully");
+      } catch (error) {
+        console.error("Error updating role", error);
+      }
+    };
+  }
+
+
+  const columns = [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "email",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Email
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    },
+    {
+      accessorKey: "username",
+      header: "User Name",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("username")}</div>
+      ),
+    },
+    {
+      accessorKey: "role",
+      header: "Role",
+      cell: ({ row }) => <RoleSelect row={row} />, // Use the RoleSelect component
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const handleEdit = () => {
+          // Add your edit logic here
+          console.log("Edit clicked for row:", row);
+        };
+  
+        const handleDelete = () => {
+          // Add your delete logic here
+          console.log("Delete clicked for row:", row);
+        };
+  
+        return (
+          <div className="flex gap-5 space-x-2">
+            <button
+              type="button"
+              onClick={handleEdit}
+              className="text-blue-600 hover:text-blue-900"
+              aria-label="Edit"
+            >
+              <FaEdit />
+            </button>
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="text-red-600 hover:text-red-900"
+              aria-label="Delete"
+            >
+              <FaTrashAlt />
+            </button>
+          </div>
+        );
+      },
+    },
+  ];
 
   const table = useReactTable({
     data,
@@ -247,6 +237,8 @@ export default function ViewUsersPage() {
     setAddUserModal(false);
   };
 
+
+
   return (
     <>
       <Dialog open={addUserModal}>
@@ -268,7 +260,7 @@ export default function ViewUsersPage() {
               placeholder="Enter user password"
               className="mt-4"
             />
-            <Select>
+            <Select value={role} onChange={handleChange}>
               <SelectTrigger className="w-full mt-4">
                 <SelectValue placeholder="Select a role" />
               </SelectTrigger>
@@ -410,3 +402,10 @@ export default function ViewUsersPage() {
     </>
   );
 }
+
+
+
+
+
+
+
