@@ -1,5 +1,7 @@
+/** @format */
 
 "use client";
+
 import { useState } from "react";
 import {
   ColumnDef,
@@ -91,11 +93,7 @@ const data = [
 
 
 
-
-
 export default function ViewUsersPage() {
-
-
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -106,8 +104,7 @@ export default function ViewUsersPage() {
   const RoleSelect = ({ row }) => {
     const [role, setRole] = useState(row.getValue("role"));
   
-    const handleChange = async (event) => {
-      const newRole = event.target.value;
+    const handleChange = async (newRole) => {
       setRole(newRole);
   
       // Update the role in your backend or state management
@@ -120,8 +117,23 @@ export default function ViewUsersPage() {
         console.error("Error updating role", error);
       }
     };
-  }
-
+  
+    return (
+      <Select value={role} onValueChange={handleChange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a role" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Roles</SelectLabel>
+            <SelectItem value="SUPER_ADMIN">SUPER_ADMIN</SelectItem>
+            <SelectItem value="ADMIN">ADMIN</SelectItem>
+            <SelectItem value="USER">USER</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    );
+  };
 
   const columns = [
     {
@@ -171,7 +183,7 @@ export default function ViewUsersPage() {
     {
       accessorKey: "role",
       header: "Role",
-      cell: ({ row }) => <RoleSelect row={row} />, // Use the RoleSelect component
+      cell: ({ row }) => <RoleSelect row={row} />, 
     },
     {
       id: "actions",
@@ -237,13 +249,11 @@ export default function ViewUsersPage() {
     setAddUserModal(false);
   };
 
-
-
   return (
     <>
       <Dialog open={addUserModal}>
         <DialogContent
-          className="w-96 z-[50]"
+          className="w-96 z-[100]"
           onClick={handleUserDialogClose}
           showCloseButton
         >
@@ -260,7 +270,7 @@ export default function ViewUsersPage() {
               placeholder="Enter user password"
               className="mt-4"
             />
-            <Select value={role} onChange={handleChange}>
+            <Select>
               <SelectTrigger className="w-full mt-4">
                 <SelectValue placeholder="Select a role" />
               </SelectTrigger>
@@ -402,10 +412,3 @@ export default function ViewUsersPage() {
     </>
   );
 }
-
-
-
-
-
-
-
