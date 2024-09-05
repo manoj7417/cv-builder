@@ -654,7 +654,7 @@ export default function DashboardIdea() {
                   Artificial Intelligence.
                 </p>
                 <p className="text-base py-3">
-                  These templates will make your CV layout UK stand out and
+                  These templates will make your <Link href={'/resume'} className="font-bold">CV layout UK</Link> stand out and
                   ensure every detail is flawless with proper highlighting of
                   your skills and achievements. This UK-style resume template
                   builder is tried and tested by experts with specialties like
@@ -663,7 +663,7 @@ export default function DashboardIdea() {
                 <p className="text-base py-3">
                   After quickly filling in your details in the template, you can
                   save it and use it for yourself. You can choose and customize
-                  from your curriculum vitae templates.
+                  from your <Link href={'/resume'} className="font-bold">curriculum vitae templates</Link>.
                 </p>
               </div>
             </div>
@@ -677,7 +677,7 @@ export default function DashboardIdea() {
                   <p className="text-base py-3">
                     When you reach the CV creator, we bring you the most
                     straightforward resume builder. Follow these simple steps to
-                    create your professional CV layout UK.
+                    create your professional <Link href={'/resume'} className="font-bold">CV layout UK</Link>.
                   </p>
                   <p className="text-base py-3">
                     We bring you the best templates approved by experts. You can
@@ -860,7 +860,7 @@ export default function DashboardIdea() {
                     details. Here, you can tell your experience of work and any
                     projects that you have worked on. You can aslo state the
                     achievements if you had any. In a very structured format
-                    these will be presented on the CV Template 
+                    these will be presented on the <Link href={'/resume'} className="font-bold">CV Template </Link>
                   </p>
                 </div>
               </div>
@@ -1008,12 +1008,16 @@ export default function DashboardIdea() {
                     Review your final CV 
                   </h3>
                   <p className="text-base py-3">
-                    The final look through of your UK style CV template after
-                    filling in the details at last is an important step. With a
-                    free mind, you can have an overview of the whole CV and make
-                    changes if required at the same time. The layout and visual
-                    representation of knowledge will be presented forth you so
-                    that you get an overview of the content in the templates.
+                    The final look through of your UK style{" "}
+                    <Link href={'/resume'} className="font-bold">
+                      CV template
+                    </Link>{" "}
+                    after filling in the details at last is an important step.
+                    With a free mind, you can have an overview of the whole CV
+                    and make changes if required at the same time. The layout
+                    and visual representation of knowledge will be presented
+                    forth you so that you get an overview of the content in the
+                    templates.
                   </p>
                   <p className="text-base py-3">
                     Add the background color and text, change font size, bold or
