@@ -1,11 +1,13 @@
 'use client';
 import React, { useState } from "react";
 import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
-import { format, parse, startOfWeek, getDay, isValid } from "date-fns";
+import { format, parse, startOfWeek, getDay } from "date-fns";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { ResumeHeader } from "../../Layout/ResumeHeader";
 import { CoachHeader } from "../../../components/component/CoachHeader";
 import moment from 'moment-timezone';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -22,34 +24,62 @@ const localizer = dateFnsLocalizer({
 const CoachAppointmentPage = () => {
   const [activeTab, setActiveTab] = useState("Courses");
   const [appointments, setAppointments] = useState([
+    // Booked appointments
     {
+      id: 1,
       title: "Career Coaching with Joy",
-      start: new Date(2024, 7, 5, 10, 0),
-      end: new Date(2024, 7, 5, 11, 0),
-      
+      start: new Date(2024, 8, 5, 10, 0),
+      end: new Date(2024, 8, 5, 11, 0),
+      isAvailable: false,
+      coachId: 101,  // Example coach ID
     },
     {
+      id: 2,
       title: "Resume Review",
-      start: new Date(2024, 7, 7, 14, 0),
-      end: new Date(2024, 7, 7, 15, 0),
-      
+      start: new Date(2024, 8, 7, 14, 0),
+      end: new Date(2024, 8, 7, 15, 0),
+      isAvailable: false,
+      coachId: 101,  // Example coach ID
     },
-    {
-      title: "Available Slot",
-      start: new Date(2024, 7, 8, 10, 0),
-      end: new Date(2024, 7, 8, 11, 0),
-      isAvailable: true,  // Available slot
-    },
+    // Available slots with unique IDs
+    ...Array.from({ length: 1 }, (_, index) => ({
+      id: index + 3,
+      title: `Available Slot ${index + 1}`,
+      start: new Date(2024, 8, 2, 9, 0), // September 2
+      end: new Date(2024, 8, 2, 10, 0),
+      isAvailable: true,
+      coachId: 101,  // Example coach ID
+    })),
+    ...Array.from({ length: 2 }, (_, index) => ({
+      id: index + 4,
+      title: `Available Slot ${index + 1}`,
+      start: new Date(2024, 8, 3, 9 + index, 0), // September 3
+      end: new Date(2024, 8, 3, 10 + index, 0),
+      isAvailable: true,
+      coachId: 101,  // Example coach ID
+    })),
+    ...Array.from({ length: 3 }, (_, index) => ({
+      id: index + 6,
+      title: `Available Slot ${index + 1}`,
+      start: new Date(2024, 8, 4, 9 + index, 0), // September 4
+      end: new Date(2024, 8, 4, 10 + index, 0),
+      isAvailable: true,
+      coachId: 101,  // Example coach ID
+    })),
+    ...Array.from({ length: 4 }, (_, index) => ({
+      id: index + 9,
+      title: `Available Slot ${index + 1}`,
+      start: new Date(2024, 8, 5, 9 + index, 0), // September 5
+      end: new Date(2024, 8, 5, 10 + index, 0),
+      isAvailable: true,
+      coachId: 101,  // Example coach ID
+    })),
   ]);
 
   const [date, setDate] = useState(new Date());
-  const [selectedSlot, setSelectedSlot] = useState(null);
-  const [showBookingForm, setShowBookingForm] = useState(false);
-  const [newAppointment, setNewAppointment] = useState({
-    title: "",
-    start: "",
-    end: "",
-  });
+  const [showSlotPopup, setShowSlotPopup] = useState(false);
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [clickedDate, setClickedDate] = useState(null);
 
   // Get the user's current timezone
   const userTimezone = moment.tz.guess();
@@ -62,50 +92,41 @@ const CoachAppointmentPage = () => {
     setDate(newDate);
   };
 
-  const handleSelectSlot = ({ start, end }) => {
-    // Check if the selected slot overlaps with any existing appointments
-    const isSlotAvailable = appointments.every(
-      appointment => start >= appointment.end || end <= appointment.start
+  const handleSelectSlot = (slot) => {
+    const slots = appointments.filter(
+      (appointment) =>
+        appointment.isAvailable &&
+        appointment.start.getFullYear() === slot.start.getFullYear() &&
+        appointment.start.getMonth() === slot.start.getMonth() &&
+        appointment.start.getDate() === slot.start.getDate()
     );
 
-    if (isSlotAvailable) {
-      setSelectedSlot({ start, end });
-      setNewAppointment({
-        title: "",
-        start: format(start, "yyyy-MM-dd'T'HH:mm"),
-        end: format(end, "yyyy-MM-dd'T'HH:mm"),
-      });
-      setShowBookingForm(true);
-    } else {
-      alert("This slot is not available. Please choose a different time.");
+    if (slots.length > 0) {
+      setClickedDate(slot.start);
+      setAvailableSlots(slots);
+      setShowSlotPopup(true);
     }
   };
 
-  const handleBookingChange = (e) => {
-    setNewAppointment({ ...newAppointment, [e.target.name]: e.target.value });
-  };
+  const handleSlotClick = (slot) => {
+    // Log slot details including ID and coachId
+    console.log({
+      id: slot.id,
+      date: format(slot.start, "yyyy-MM-dd"),
+      startTime: format(slot.start, "HH:mm:ss"),
+      endTime: format(slot.end, "HH:mm:ss"),
+      coachId: slot.coachId,  // Log coachId
+    });
 
-  const handleSubmitBooking = () => {
-    const { title, start, end } = newAppointment;
-    const startDate = new Date(start);
-    const endDate = new Date(end);
+    // Mark slot as booked
+    setAppointments(appointments.map(app =>
+      app.id === slot.id ? { ...app, isAvailable: false } : app
+    ));
 
-    // Define the desired date format
-    const dateFormat = "MM-dd-yyyy HH:mm:ss";
+    // Show toast message
+    toast.success(`Slot booked from ${format(slot.start, "hh:mm a")} to ${format(slot.end, "hh:mm a")}`);
 
-    console.log("Booking Details:");
-    console.log("Title:", title);
-    console.log("Start Time:", format(startDate, dateFormat));
-    console.log("End Time:", format(endDate, dateFormat));
-
-    if (title && isValid(startDate) && isValid(endDate)) {
-      setAppointments([...appointments, { title, start: startDate, end: endDate }]);
-      setNewAppointment({ title: "", start: "", end: "" });
-      setShowBookingForm(false);
-      setSelectedSlot(null);
-    } else {
-      alert("Please fill in all the details correctly.");
-    }
+    setShowSlotPopup(false); // Close the popup after booking
   };
 
   const eventStyleGetter = (event) => {
@@ -115,10 +136,30 @@ const CoachAppointmentPage = () => {
     };
 
     if (event.isAvailable) {
-      style.backgroundColor = "orange";  // Orange color for available slots
+      style.backgroundColor = "green";  // Green color for available slots
+    } else {
+      style.backgroundColor = "red";  // Red color for booked slots
     }
 
     return { style };
+  };
+
+  const handleEventClick = (event) => {
+    if (event.isAvailable) {
+      const slots = appointments.filter(
+        (appointment) =>
+          appointment.isAvailable &&
+          appointment.start.getFullYear() === event.start.getFullYear() &&
+          appointment.start.getMonth() === event.start.getMonth() &&
+          appointment.start.getDate() === event.start.getDate()
+      );
+
+      if (slots.length > 0) {
+        setClickedDate(event.start);
+        setAvailableSlots(slots);
+        setShowSlotPopup(true);
+      }
+    }
   };
 
   return (
@@ -183,24 +224,10 @@ const CoachAppointmentPage = () => {
 
           <div
             id="blog_right_side"
-            className="w-full lg:w-[75%] bg-white h-auto p-5 border-l border-[#FFDDD1]"
+            className="w-full lg:w-[75%] bg-white h-full"
           >
-            {activeTab === "Courses" && (
-              <>
-                <h1 className="text-2xl lg:text-xl font-bold pt-5 pb-5">
-                  Joy Career Development Courses
-                </h1>
-                <div
-                  id="blog_tab"
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4"
-                ></div>
-              </>
-            )}
             {activeTab === "appointment" && (
-              <div id="book_an_appointment_tab">
-                <h1 className="text-[16px] font-bold text-[#1D2026]">
-                  Select A Date & Time
-                </h1>
+              <div>
                 <div id="showCalender">
                   <Calendar
                     localizer={localizer}
@@ -212,6 +239,7 @@ const CoachAppointmentPage = () => {
                     date={date}
                     onNavigate={handleNavigate}
                     onSelectSlot={handleSelectSlot}
+                    onSelectEvent={handleEventClick} // Handle event click to show slots
                     views={['month']} // Only show the month view
                     defaultView={Views.MONTH} // Set default view to month
                     toolbar={true} // Display the toolbar with navigation controls
@@ -230,64 +258,40 @@ const CoachAppointmentPage = () => {
           </div>
         </div>
 
-        {showBookingForm && (
+        {showSlotPopup && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded shadow-lg w-1/3">
-              <h2 className="text-xl font-bold mb-4">Book Appointment
-              </h2>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={newAppointment.title}
-                  onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Start Time
-                </label>
-                <input
-                  type="datetime-local"
-                  name="start"
-                  value={newAppointment.start}
-                  onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  End Time
-                </label>
-                <input
-                  type="datetime-local"
-                  name="end"
-                  value={newAppointment.end}
-                  onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={handleSubmitBooking}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Book Appointment
-                </button>
-                <button
-                  onClick={() => setShowBookingForm(false)}
-                  className="text-red-500 hover:text-red-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Cancel
-                </button>
-              </div>
+              <h2 className="text-xl font-bold mb-4">Available Slots for {format(clickedDate, "MMM d, yyyy")}</h2>
+              {availableSlots.length > 0 ? (
+                <div>
+                  {availableSlots.map((slot) => (
+                    <button
+                      key={slot.id}
+                      onClick={() => handleSlotClick(slot)}
+                      className={`block w-full text-left px-4 py-2 mb-2 ${
+                        slot.isAvailable ? "bg-green-500" : "bg-red-500"
+                      } text-white rounded hover:bg-green-600`}
+                      disabled={!slot.isAvailable} // Disable if the slot is booked
+                    >
+                      {format(slot.start, "hh:mm a")} - {format(slot.end, "hh:mm a")}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <p>No available slots for this date.</p>
+              )}
+              <button
+                onClick={() => setShowSlotPopup(false)}
+                className="mt-4 bg-gray-700 text-white py-2 px-4 rounded"
+              >
+                Close
+              </button>
             </div>
           </div>
         )}
+
+        {/* Toast Container */}
+        <ToastContainer />
       </div>
     </>
   );
