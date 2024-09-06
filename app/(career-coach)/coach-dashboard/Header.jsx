@@ -5,9 +5,11 @@ import Link from "next/link";
 const Header = () => {
   return (
     <>
-      <div className="h-20 w-full bg-white flex items-center justify-between p-5 shadow-md">
+      <div className="h-20 w-full bg-white flex items-center justify-between lg:p-5 p-2 shadow-md">
         {/* <!-- Logo Section --> */}
-        <div className="text-black text-xl font-bold">Coach Dashboard</div>
+        <div className="text-black text-xl font-bold whitespace-nowrap
+        
+        ">Coach Dashboard</div>
 
         {/* <!-- Search Bar Section --> */}
         <div className="flex items-center w-1/2">
@@ -88,7 +90,7 @@ const Header = () => {
               <img
                 src="/coach_photos.png"
                 alt="User"
-                className="rounded-full h-10 w-10"
+                className="rounded-full lg:h-10 lg:w-10 h-14 w-14 object-contain"
               />
             </button>
           </div>

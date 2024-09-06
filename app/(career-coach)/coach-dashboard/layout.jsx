@@ -18,14 +18,14 @@ const Layout = ({ children }) => {
           {/* Sidebar */}
           <div
             id="sidebarCoach"
-            className="w-full md:w-[20%] lg:w-[20%] bg-[#E0F2FF]">
+            className="w-full md:w-[20%] lg:w-[20%] bg-[#E0F2FF] sticky top-0 lg:h-screen h-auto z-50">
             {/* Sidebar content goes here */}
             <SidebarCoach className="w-full" />
           </div>
           {/* Main Content */}
           <div
             id="mainContent"
-            className="w-full md:w-[80%] lg:w-[80%] bg-gray-100">
+            className="w-full md:w-[80%] lg:w-[80%] bg-gray-100 z-10">
             {/* Coach Dashboard content goes here */}
             {children}
           </div>

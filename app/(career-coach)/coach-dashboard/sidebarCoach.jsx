@@ -2,28 +2,46 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { IoMdClose } from "react-icons/io";
+import { HiMenu } from "react-icons/hi";
 
 const SidebarCoach = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const [activeTab, setActiveTab] = useState(pathname);
 
   // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleSetActiveTab = (tab) => {
+    setActiveTab(tab);
+    setIsOpen(false); // Close sidebar on mobile after link click
+  };
+
+  // Function to apply active class based on activeTab
+  const getLinkClass = (tab) => {
+    return activeTab === tab
+      ? "flex items-center p-3 rounded-full bg-white text-blue-500 cursor-pointer"
+      : "flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer";
+  };
+
   return (
-    <div className="flex h-full sticky top-0">
+    <div className="flex lg:h-full h-auto lg:sticky lg:top-0 relative">
       {/* Mobile Hamburger Menu Button */}
       <button
         className="md:hidden p-4 focus:outline-none"
         onClick={toggleSidebar}
       >
-        <Image
+        {/* <Image
           src="/icons/hamburger-icon.png" // Replace with your hamburger icon path
           alt="Menu"
           width={30}
           height={30}
-        />
+        /> */}
+        <HiMenu className="w-8 h-8"/>
       </button>
 
       {/* Sidebar for Mobile and Desktop */}
@@ -33,17 +51,14 @@ const SidebarCoach = () => {
         } md:relative md:translate-x-0 bg-[#E0F2FF] p-4 transition-transform duration-300 ease-in-out z-50 w-full`}
       >
         {/* Close button for mobile sidebar */}
-        <button
-          className="md:hidden mb-4 focus:outline-none"
-          onClick={toggleSidebar}
-        >
-          <Image
-            src="/icons/close-icon.png" // Replace with your close icon path
-            alt="Close"
-            width={24}
-            height={24}
-          />
-        </button>
+        <div className="flex justify-end mr-5">
+          <button
+            className="md:hidden mb-4 focus:outline-none cursor-pointer"
+            onClick={toggleSidebar}
+          >
+            <IoMdClose className="w-8 h-8" />
+          </button>
+        </div>
 
         {/* Profile Section */}
         <div className="flex items-center mb-6 w-full">
@@ -63,10 +78,14 @@ const SidebarCoach = () => {
         </div>
 
         <nav>
-          <ul className="space-y-4">
+          <ul className="space-y-4 lg:w-full w-[65%]">
             {/* Highlighted Dashboard Item with Custom Icon */}
-            <li className="flex items-center p-3 rounded-full bg-white text-blue-500 cursor-pointer">
-              <Link href="/coach-dashboard" className="flex items-center">
+            <li className={getLinkClass("/coach-dashboard")}>
+              <Link
+                href="/coach-dashboard"
+                className="flex items-center"
+                onClick={() => handleSetActiveTab("/coach-dashboard")}
+              >
                 <Image
                   src="/coach_dashboard.png" // Replace with your custom icon path
                   alt="Dashboard Icon"
@@ -78,8 +97,14 @@ const SidebarCoach = () => {
               </Link>
             </li>
             {/* Other Items with Custom Icons */}
-            <li className="flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer">
-              <Link href="/coach-dashboard/coach-blog" className="flex items-center">
+            <li className={getLinkClass("/coach-dashboard/coach-blog")}>
+              <Link
+                href="/coach-dashboard/coach-blog"
+                className="flex items-center"
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/coach-blog")
+                }
+              >
                 <Image
                   src="/blog_icon.png" // Replace with your custom icon path
                   alt="Blog Icon"
@@ -90,8 +115,14 @@ const SidebarCoach = () => {
                 <span className="font-semibold text-gray-800">Blog</span>
               </Link>
             </li>
-            <li className="flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer">
-              <Link href={"/coach-appointment"} className="flex items-center">
+            <li className={getLinkClass("/coach-dashboard/coach-availabilty")}>
+              <Link
+                href={"/coach-dashboard/coach-availabilty"}
+                className="flex items-center"
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/coach-availabilty")
+                }
+              >
                 <Image
                   src="/coach_personal_detail_icon.png" // Replace with your custom icon path
                   alt="Appointments Icon"
@@ -100,12 +131,18 @@ const SidebarCoach = () => {
                   className="mr-3"
                 />
                 <span className="font-semibold text-gray-800">
-                  Appointments
+                  Availability
                 </span>
               </Link>
             </li>
-            <li className="flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer">
-              <Link href={"/coach-dashboard/coach-details"} className="flex items-center">
+            <li className={getLinkClass("/coach-dashboard/coach-details")}>
+              <Link
+                href={"/coach-dashboard/coach-details"}
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/coach-details")
+                }
+                className="flex items-center"
+              >
                 <Image
                   src="/coach_personal_detail_icon.png" // Replace with your custom icon path
                   alt="Personal Details Icon"

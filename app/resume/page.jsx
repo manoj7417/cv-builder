@@ -20,7 +20,7 @@ import NewSlider from "@/components/component/NewSlider";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 import { useEffect, useState } from "react";
 import { useResumeStore } from "@/app/store/ResumeStore";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
 import { createNewResume } from "../api/api";
@@ -440,6 +440,8 @@ export default function DashboardIdea() {
   // const userState = useUserStore((state) => state.userState);
   const [userState, setUserState] = useState({});
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  console.log("pathname::",pathname)
   const router = useRouter();
 
   const toggle = (index) => {
@@ -1178,6 +1180,7 @@ export default function DashboardIdea() {
                   key={index}
                   ques={item?.ques}
                   ans={parse(item?.ans)}
+                  pathname={pathname}
                   toggle={() => toggle(index)}
                 />
               ))}
