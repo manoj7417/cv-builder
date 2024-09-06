@@ -323,7 +323,13 @@ const coaches = [
 ];
 
 const CoachBlog = () => {
-    const [showDialog,setShowDialog] = useState(false)
+    const [showDialog,setShowDialog] = useState(false);
+
+   const handleCloseDialog =()=>{
+    setShowDialog(false)  
+   }
+
+
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -345,13 +351,13 @@ const CoachBlog = () => {
             <h3 className="text-xl font-semibold">Blog</h3>
           </div>
           <div className="add_blog_button">
-            <Dialog>
-              <DialogTrigger open={showDialog}>
+            <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
+              <DialogTrigger asChild>
                 <div className="bg-blue-950 text-white px-5 py-2 cursor-pointer text-sm">
                   Add New Blog +
-                </div>
+                </div> 
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]" showCloseButton={true} onClick={()=>setShowDialog(false)}>
+              <DialogContent className="sm:max-w-[425px]" showCloseButton={true} onClick={handleCloseDialog}>
                 <DialogHeader>
                   <DialogTitle>Edit profile</DialogTitle>
                   <DialogDescription>
