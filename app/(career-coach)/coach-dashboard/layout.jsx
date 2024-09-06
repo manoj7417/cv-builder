@@ -1,4 +1,6 @@
-import Footer from "./Footer";
+// import Footer from "./Footer";
+import Header from "./Header";
+import SidebarCoach from "./sidebarCoach";
 export const metadata = {
   title: "Coach Dashboard",
   description:
@@ -9,8 +11,29 @@ const Layout = ({ children }) => {
     <main className="resume_dashboard">
       <div className="resume_dashboard_container">
         <div className="wrapper">
-          {children}
-          <Footer />
+        <div id="mainDiv" className="flex flex-col h-screen">
+        {/* START-HEADER */}
+        <Header className="w-full" />
+        {/* END-HEADER */}
+        <div className="flex flex-1 flex-col md:flex-row">
+          {/* Sidebar */}
+          <div
+            id="sidebarCoach"
+            className="w-full md:w-[20%] lg:w-[20%] bg-[#E0F2FF]">
+            {/* Sidebar content goes here */}
+            <SidebarCoach className="w-full" />
+          </div>
+          {/* Main Content */}
+          <div
+            id="mainContent"
+            className="w-full md:w-[80%] lg:w-[80%] bg-gray-100">
+            {/* Coach Dashboard content goes here */}
+            {children}
+          </div>
+        </div>
+      </div>
+          
+          {/* <Footer /> */}
         </div>
       </div>
     </main>
