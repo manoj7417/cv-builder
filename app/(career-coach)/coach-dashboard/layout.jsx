@@ -1,5 +1,5 @@
 import Header from "./Header";
-import SidebarCoach from "./SidebarCoach";
+import SidebarCoach from "./sidebarCoach";
 export const metadata = {
   title: "Coach Dashboard",
   description:
