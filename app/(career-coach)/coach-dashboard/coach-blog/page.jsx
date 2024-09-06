@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Pagination from "@/app/admin/(AdminSidebar)/Pagination";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
@@ -324,12 +324,11 @@ const coaches = [
 ];
 
 const CoachBlog = () => {
-    const [showDialog,setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
 
-   const handleCloseDialog =()=>{
-    setShowDialog(false)  
-   }
-
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+  };
 
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -343,7 +342,6 @@ const CoachBlog = () => {
     currentPage * itemsPerPage
   );
 
-
   return (
     <>
       <div className="max-w-5xl mx-auto coach_blog">
@@ -352,13 +350,19 @@ const CoachBlog = () => {
             <h3 className="text-xl font-semibold">Blog</h3>
           </div>
           <div className="add_blog_button">
-            <Dialog open={showDialog} onClose={handleCloseDialog}>
-              <DialogTrigger asChild>
-                <div className="bg-blue-950 text-white px-5 py-2 cursor-pointer text-sm">
-                  Add New Blog +
-                </div> 
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]" showCloseButton={true} onClick={handleCloseDialog}>
+            <div
+              className="bg-blue-950 text-white px-5 py-2 cursor-pointer text-sm"
+              onClick={() => setShowDialog(true)}
+            >
+              Add New Blog +
+            </div>
+            <Dialog open={showDialog}>
+              <DialogTrigger asChild></DialogTrigger>
+              <DialogContent
+                className="sm:max-w-[425px]"
+                showCloseButton
+                onClick={handleCloseDialog}
+              >
                 <DialogHeader>
                   <DialogTitle>Edit profile</DialogTitle>
                   <DialogDescription>
