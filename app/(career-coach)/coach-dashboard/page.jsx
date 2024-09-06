@@ -12,14 +12,14 @@ const CoachDashboardPage = () => {
     <>
       <div className="h-full w-full bg-white p-7">
         <h1 className="text-lg">Hello Kevin 👋🏼,</h1>
-        <div className="flex w-full mt-10">
+        <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row w-full mt-10">
           {/* START-PART 1 */}
-          <div className="w-[40%]">
-            <div className="grid grid-cols-2 gap-2">
+          <div className="w-[100%] sm:w-[100%] md:w-[100%] lg:w-[100%] xl:w-[40%] 2xl:w-[40%]">
+            <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 gap-2">
               {/* start-sectin 1 */}
-              <div className="h-72 w-64 bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
+              <div className="h-auto w-full bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
                 <div className="flex justify-between items-center">
-                  <div className="text-lg font-bold text-[#FFF]">
+                  <div className="text-lg  font-bold text-[#FFF]">
                     Next Appointment
                   </div>
                   <div>
@@ -36,32 +36,32 @@ const CoachDashboardPage = () => {
                     />
                   </div>
                   <div className="ml-1">
-                    <p className="text-[13px] font-bold text-white">
+                    <p className="text-[13px]  font-bold text-white">
                       319 Haul Road
                     </p>
-                    <p className="text-[13px] text-white mt-1">
+                    <p className="text-[13px]  text-white mt-1">
                       Glenrock, WY 12345
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-2">
-                  <div className="text-sm text-[#FFF]">Appointment Date</div>
-                  <div className="text-sm text-[#FFF]">Price</div>
+                  <div className="text-sm  text-[#FFF]">Appointment Date</div>
+                  <div className="text-sm  text-[#FFF]">Price</div>
                 </div>
                 <div className="flex justify-between items-center mt-2">
-                  <div className="text-sm font-bold text-[#FFF]">
+                  <div className="text-sm font-bold  text-[#FFF]">
                     Aug 3 2024, 17:00
                   </div>
-                  <div className="text-sm font-bold text-[#FFF]">$ 10</div>
+                  <div className="text-sm font-bold  text-[#FFF]">$ 10</div>
                 </div>
                 <div className="flex justify-between items-center mt-10">
                   <div className="text-sm font-bold text-[#FFF]">
-                    <button className="rounded-full p-3 bg-white w-24 text-black">
+                    <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
                       Start
                     </button>
                   </div>
                   <div className="text-sm font-bold text-[#FFF]">
-                    <button className="rounded-full p-3 bg-white w-24 text-black">
+                    <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
                       Cancel
                     </button>
                   </div>
@@ -69,7 +69,7 @@ const CoachDashboardPage = () => {
               </div>
               {/* end-sectin 1 */}
               {/* start-sectin 2 */}
-              <div className="h-72 w-64 bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
+              <div className="h-auto w-full bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
                 <div className="flex justify-between items-center">
                   <div className="text-lg font-bold text-[#FFF]">
                     Next Appointment
@@ -108,12 +108,12 @@ const CoachDashboardPage = () => {
                 </div>
                 <div className="flex justify-between items-center mt-10">
                   <div className="text-sm font-bold text-[#FFF]">
-                    <button className="rounded-full p-3 bg-white w-24 text-black">
+                    <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
                       Start
                     </button>
                   </div>
                   <div className="text-sm font-bold text-[#FFF]">
-                    <button className="rounded-full p-3 bg-white w-24 text-black">
+                    <button className="rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20  text-black">
                       Cancel
                     </button>
                   </div>
@@ -124,8 +124,8 @@ const CoachDashboardPage = () => {
           </div>
           {/* END-PART 1 */}
           {/* START-PART 2 */}
-          <div className="w-[40%]">
-          <div className="grid grid-cols-1 gap-4">
+          <div className="w-[100%] pt-7 lg:pt-0 sm:w-[100%] md:w-[100%] lg:w-[100%] xl:w-[40%] 2xl:w-[40%]">
+          <div className="grid grid-cols-1 gap-4 lg:ml-7">
               <div className=" bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg">
                 <div className="flex justify-between items-center mt-2">
                   <div className="text-lg font-bold  text-[#092C4C]">Today’ s Appointment</div>
@@ -228,8 +228,8 @@ const CoachDashboardPage = () => {
           </div>
           {/* END-PART 2 */}
           {/* START-PART 3 */}
-          <div className="w-[20%] pl-10">
-            <div className="flex flex-col gap-7">
+          <div className="w-[100%] sm:w-[100%] pt-7 lg:pt-0 md:w-[100%] lg:w-[100%] xl:w-[20%] 2xl:w-[20%] lg:pl-10 xl:pl-10 2xl:pl-10">
+            <div className="flex flex-col sm:flex-row md:flex-row lg:flex-col gap-7 justify-around">
               
               <div className="bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg text-left">
                 <div className="text-[18px] font-bold text-[#7E92A2]">Total No. Of Students</div>

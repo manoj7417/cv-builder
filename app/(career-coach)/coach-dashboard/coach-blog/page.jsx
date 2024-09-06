@@ -1,6 +1,6 @@
 "use client";
 import Pagination from "@/app/admin/(AdminSidebar)/Pagination";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import {
   Dialog,
@@ -11,6 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ArrowRight } from "lucide-react";
+import dynamic from "next/dynamic";
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const coaches = [
   {
@@ -106,7 +109,7 @@ const coaches = [
       textColor: "text-teal-800",
     },
     href: "#",
-    imageSrc: "/coach-blog-2.png",
+    imageSrc: "/coach-1.png",
     rating: "5.0",
     students: "180.2k",
     price: "$49",
@@ -120,7 +123,7 @@ const coaches = [
       textColor: "text-orange-800",
     },
     href: "#",
-    imageSrc: "/coach-blog-1.png",
+    imageSrc: "/coach-2.png",
     rating: "4.7",
     students: "210.4k",
     price: "$49",
@@ -324,6 +327,7 @@ const coaches = [
 ];
 
 const CoachBlog = () => {
+  const sectionEditor = useRef(null);
   const [showDialog, setShowDialog] = useState(false);
 
   const handleCloseDialog = () => {
@@ -359,38 +363,76 @@ const CoachBlog = () => {
             <Dialog open={showDialog}>
               <DialogTrigger asChild></DialogTrigger>
               <DialogContent
-                className="sm:max-w-[425px]"
+                className="sm:max-w-[700px]"
                 showCloseButton
                 onClick={handleCloseDialog}
               >
                 <DialogHeader>
-                  <DialogTitle>Edit profile</DialogTitle>
+                  <DialogTitle>Add New Blog</DialogTitle>
                   <DialogDescription>
-                    Make changes to your profile here. Click save when you are
-                    done.
+                    Enter the details for your new blog post. Click save when
+                    you are done.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <label htmlFor="name" className="text-right">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      defaultValue="Pedro Duarte"
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <label htmlFor="username" className="text-right">
-                      Username
-                    </label>
-                    <input
-                      id="username"
-                      defaultValue="@peduarte"
-                      className="col-span-3"
-                    />
-                  </div>
+                <div className="dialog_content">
+                  <form action="#" method="POST" className="mt-8">
+                    <div className="space-y-5">
+                      <div className="flex w-full gap-5">
+                        <div className="lg:w-1/2 w-full">
+                          <label
+                            htmlFor="name"
+                            className="text-base font-medium text-gray-900"
+                          >
+                            Heading
+                          </label>
+                          <div className="mt-2">
+                            <input
+                              className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                              type="text"
+                              placeholder="Blog Heading"
+                              id="heading"
+                            ></input>
+                          </div>
+                        </div>
+                        <div className="lg:w-1/2 w-full">
+                          <label
+                            htmlFor="email"
+                            className="text-base font-medium text-gray-900"
+                          >
+                            Title
+                          </label>
+                          <div className="mt-2">
+                            <input
+                              className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                              type="text"
+                              placeholder="Blog Title"
+                              id="title"
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="p-2">
+                          <label>Blog Description</label>
+                          <JoditEditor
+                            ref={sectionEditor}
+                            name="description"
+                            required
+                            className="border p-2 w-full mt-1"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="inline-flex w-full items-center justify-center rounded-md bg-blue-950 px-3.5 py-2.5 font-semibold leading-7 text-white"
+                        >
+                            Save Blog
+                          <ArrowRight className="ml-2" size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
                 <DialogFooter>
                   <button type="submit">Save changes</button>
@@ -401,7 +443,7 @@ const CoachBlog = () => {
         </div>
         <h1 className="text-xl font-semibold my-10">Coach Blogs</h1>
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-          {coaches.slice(0, 6).map((item, index) => (
+          {currentPageData.map((item, index) => (
             <div
               key={item.id}
               className="group relative bg-white cursor-pointer"
@@ -414,11 +456,11 @@ const CoachBlog = () => {
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
-              <div className="coaching_name text-center mt-2">
-                <h3 className="text-sm text-gray-700">{item.name}</h3>
-                <p className="text-[12px] text-gray-700">
+              <div className="coaching_name mt-2 text-start ml-5">
+                <span className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} p-1`}>
                   {item?.jobProfile?.title}
-                </p>
+                </span>
+                <h3 className="text-sm text-gray-700 mt-2">{item.name}</h3>
               </div>
               <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
                 <div className="flex items-center gap-2">
