@@ -567,7 +567,7 @@ export default function DashboardIdea() {
               format.
             </p>
           </div>
-          <div className="max-w-7xl mx-auto steps_intro py-20 sm:p-5">
+          <div className="max-w-7xl mx-auto steps_intro lg:py-20 sm:p-5 p-5">
             <div className="flex lg:flex-row flex-col gap-10 my-10">
               <div className="lg:w-[30%] w-full h-[350px] image_content bg-[#ffc7bf]">
                 <img
