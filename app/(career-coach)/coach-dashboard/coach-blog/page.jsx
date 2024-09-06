@@ -352,7 +352,7 @@ const CoachBlog = () => {
             <h3 className="text-xl font-semibold">Blog</h3>
           </div>
           <div className="add_blog_button">
-            <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
+            <Dialog open={showDialog} onClose={handleCloseDialog}>
               <DialogTrigger asChild>
                 <div className="bg-blue-950 text-white px-5 py-2 cursor-pointer text-sm">
                   Add New Blog +
