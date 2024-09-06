@@ -109,7 +109,7 @@ const coaches = [
       textColor: "text-teal-800",
     },
     href: "#",
-    imageSrc: "/coach-blog-2.png",
+    imageSrc: "/coach-1.png",
     rating: "5.0",
     students: "180.2k",
     price: "$49",
@@ -123,7 +123,7 @@ const coaches = [
       textColor: "text-orange-800",
     },
     href: "#",
-    imageSrc: "/coach-blog-1.png",
+    imageSrc: "/coach-2.png",
     rating: "4.7",
     students: "210.4k",
     price: "$49",
@@ -443,7 +443,7 @@ const CoachBlog = () => {
         </div>
         <h1 className="text-xl font-semibold my-10">Coach Blogs</h1>
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-          {coaches.slice(0, 6).map((item, index) => (
+          {currentPageData.map((item, index) => (
             <div
               key={item.id}
               className="group relative bg-white cursor-pointer"
@@ -456,11 +456,11 @@ const CoachBlog = () => {
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
-              <div className="coaching_name text-center mt-2">
-                <h3 className="text-sm text-gray-700">{item.name}</h3>
-                <p className="text-[12px] text-gray-700">
+              <div className="coaching_name mt-2 text-start ml-5">
+                <span className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} p-1`}>
                   {item?.jobProfile?.title}
-                </p>
+                </span>
+                <h3 className="text-sm text-gray-700 mt-2">{item.name}</h3>
               </div>
               <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
                 <div className="flex items-center gap-2">
