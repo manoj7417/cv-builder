@@ -12,7 +12,7 @@ const SidebarCoach = () => {
   };
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full sticky top-0">
       {/* Mobile Hamburger Menu Button */}
       <button
         className="md:hidden p-4 focus:outline-none"
@@ -66,47 +66,57 @@ const SidebarCoach = () => {
           <ul className="space-y-4">
             {/* Highlighted Dashboard Item with Custom Icon */}
             <li className="flex items-center p-3 rounded-full bg-white text-blue-500 cursor-pointer">
-              <Image
-                src="/coach_dashboard.png" // Replace with your custom icon path
-                alt="Dashboard Icon"
-                width={24}
-                height={24}
-                className="mr-3"
-              />
-              <span className="font-semibold text-gray-800">Dashboard</span>
+              <Link href="/coach-dashboard" className="flex items-center">
+                <Image
+                  src="/coach_dashboard.png" // Replace with your custom icon path
+                  alt="Dashboard Icon"
+                  width={24}
+                  height={24}
+                  className="mr-3"
+                />
+                <span className="font-semibold text-gray-800">Dashboard</span>
+              </Link>
             </li>
             {/* Other Items with Custom Icons */}
             <li className="flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer">
-              <Image
-                src="/blog_icon.png" // Replace with your custom icon path
-                alt="Blog Icon"
-                width={24}
-                height={24}
-                className="mr-3"
-              />
-              <span className="font-semibold text-gray-800">Blog</span>
+              <Link href="/coach-dashboard/coach-blog" className="flex items-center">
+                <Image
+                  src="/blog_icon.png" // Replace with your custom icon path
+                  alt="Blog Icon"
+                  width={24}
+                  height={24}
+                  className="mr-3"
+                />
+                <span className="font-semibold text-gray-800">Blog</span>
+              </Link>
             </li>
             <li className="flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer">
-              <Image
-                src="/coach_personal_detail_icon.png" // Replace with your custom icon path
-                alt="Appointments Icon"
-                width={24}
-                height={24}
-                className="mr-3"
-              />
-              <span className="font-semibold text-gray-800">Appointments</span>
+              <Link href={"/coach-appointment"} className="flex items-center">
+                <Image
+                  src="/coach_personal_detail_icon.png" // Replace with your custom icon path
+                  alt="Appointments Icon"
+                  width={24}
+                  height={24}
+                  className="mr-3"
+                />
+                <span className="font-semibold text-gray-800">
+                  Appointments
+                </span>
+              </Link>
             </li>
             <li className="flex items-center p-3 rounded-full hover:bg-white hover:text-blue-500 cursor-pointer">
-              <Image
-                src="/coach_personal_detail_icon.png" // Replace with your custom icon path
-                alt="Personal Details Icon"
-                width={24}
-                height={24}
-                className="mr-3"
-              />
-              <span className="font-semibold text-gray-800">
-                Personal Details
-              </span>
+              <Link href={"/coach-dashboard/coach-details"} className="flex items-center">
+                <Image
+                  src="/coach_personal_detail_icon.png" // Replace with your custom icon path
+                  alt="Personal Details Icon"
+                  width={24}
+                  height={24}
+                  className="mr-3"
+                />
+                <span className="font-semibold text-gray-800">
+                  Personal Details
+                </span>
+              </Link>
             </li>
           </ul>
         </nav>

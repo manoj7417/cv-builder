@@ -414,94 +414,26 @@ const ProfessionalTemplates = [
 const faqData = [
   {
     id: 1,
-    ques: "How do I use the Curriculum Vitae Template to make my Resume?",
+    ques: "Can we make UK style CV template in this CV builder?",
     ans: `
-      There are a variety of options available on the CV Creator to build your resume that matches your sets of skills and professional experience. In order to use the pre-existing Curriculum Vitae Template to create your resume, you can simply follow the following steps:
-      <ul>
-        <li>Head to the CV Creator section tab on the header and tap to open the Creator tool.</li>
-        <li>On the following page, there shall be a variety of templates available under the categories of All Templates, Simple, ATS, Designer, and Professional.</li>
-        <li>Click on the respective category to load the template options.</li>
-        <li>Click on the “Try Now” button to build the CV in the selected template design.</li>
-        <li>The template shall open up along with the CV Maker tool.</li>
-        <li>Enter the required details. You can also use the assistance of the AI to input the necessary information and frame the content.</li>
-        <li>Post the creation of the resume, you can easily Preview it and check the Resume Score simultaneously.</li>
-        <li>Download the CV in the preferred Curriculum Vitae format through the Resume Generator tool.</li>
-      </ul>
+      Yes, you can make your resume online using our Genies Career Hub resume builder. This online resume generator makes your work easier by allowing you to fill in some general and required information. Career Genies Hub builds <a href="/resume" class="font-bold">UK style CV templates</a> for you to get through interviews quickly
     `,
   },
   {
     id: 2,
-    ques: "How do I make an ATS Friendly Resume using available CV Templates?",
+    ques: "What is unique about this resume builder?",
     ans: `
-      To make an ATS Friendly Resume, the simple hack is to employ an Application Tracking System ATS Resume Template. These templates are specifically designed to build an ATS System CV. This CV shall easily pass through the software that analyses resumes and compacts them for information. To create a resume that is compatible with the ATS CV Checker, follow these steps:
-      <ul>
-        <li>Tap on the CV Creator tab on the header of the website.</li>
-        <li>In the templates section, tap on the category of ATS. The templates that are compatible with the Application Tracking Software shall appear on the screen. These templates are formatted according to the ATS System CV formatting.</li>
-        <li>Click on the “Try Now” option to create the resume in the selected template CV format.</li>
-        <li>Enter all the necessary details and information about your profile and experience.</li>
-        <li>Tap on the Preview option to check the formatted and created resume.</li>
-        <li>You can easily download your ATS friendly Resume, specially crafted to go through the Application Tracking Software.</li>
-        <li>Further, you can easily run the prepared CV through the ATS CV Checker available in the CV Optimiser tool. This will help you analyse your Curriculum Vitae and easily check its compatibility.</li>
-        <li>In case, your Resume does not appear compatible with the analyser, you can edit it with the AI.</li>
-      </ul>
+      The Career Genies Hub resume builder is a professionally approved online CV builder. Our CV enhancer, with the help of Artificial Intelligence, helps your CV profile to become error-free and extraordinary. AI and your input will together produce an outstanding resume that impresses the employer exceptionally. 
     `,
   },
   ,
   {
     id: 3,
-    ques: "How can resume professionals and resume services help me write my CV?",
+    ques: "What is different about your curriculum vitae templates?",
     ans: `
-      Taking services from a Career Coach who also offers services in Resume creation and professional writing can be very insightful. Often, for very high-profile jobs, the candidates miss out on the exact details and keywords that an employer is looking for in the job application. Therefore, a resume professional and resume services Career Coach can help you format the perfect resume for the job you are applying for. Additionally, they can help you figure out various aspects as you seek to switch your job or find employment. You can easily contact the best career coach who can help you. All you need to do is head to the Career Coach and contact to get connected with a potential Career Coach who can guide you through professional problems.
+     Our Curriculum vitae templates are customised templates that are made with the insights of professionals and AI. The AI improves your UK CV format content, making it the best for you. You can also change these <a href="/resume" class="font-bold">British CV templates</a> in between or at the end whenever you want.
     `,
   },
-  {
-    id: 4,
-    ques: "What are the different types of personality tests and how can they help me?",
-    ans: `
-      There are distinctive types of personality tests that you can take in order to identify your professional strengths and weaknesses. Additionally, you can take Psychometric Tests in order to figure out your professional inclinations. The tests are curated specifically to suit distinct personalities and psychologies and are designed by professional psychometricians. The types of personality tests analyse different aspects. The following psychometric examinations are available for judging personality types:
-      <ul class="styled-list">
-        <li>Numerical Reasoning</li>
-        <li>Verbal Reasoning</li>
-        <li>Diagrammatic Reasoning</li>
-        <li>Situational Judgement</li>
-        <li>Abstract Reasoning</li>
-        <li>Spatial Reasoning</li>
-        <li>Logical Reasoning</li>
-        <li>Mechanical Reasoning</li>
-      </ul>
-    `,
-  },
-  // Uncomment and format the rest of the entries similarly if needed
-  // {
-  //   id: 5,
-  //   ques: "How can AI ensure my CV meets industry standards?",
-  //   ans: "Our AI-driven CV creator ensures your resume meets industry standards and catches the eye of recruiters.",
-  // },
-  // {
-  //   id: 6,
-  //   ques: "What are the best ways to customize my CV for different job positions?",
-  //   ans: "Use our AI services to customize your CV for any position, increasing your chances of landing an interview.",
-  // },
-  // {
-  //   id: 7,
-  //   ques: "Where can I find sample CVs to help create a standout resume?",
-  //   ans: "Our sample CVs and AI enhancements provide the perfect starting point to create a standout resume.",
-  // },
-  // {
-  //   id: 8,
-  //   ques: "How can AI tools help format and polish my CV?",
-  //   ans: "AI tools help you format and polish your CV to perfection, making it compelling and professional.",
-  // },
-  // {
-  //   id: 9,
-  //   ques: "How do I ensure my CV is error-free and impactful?",
-  //   ans: "Ensure your CV is error-free and impactful with the help of our intelligent CV-making services.",
-  // },
-  // {
-  //   id: 10,
-  //   ques: "How can AI services adapt to my specific CV needs?",
-  //   ans: "Our AI-based CV services adapt to your needs, helping you craft a resume that aligns perfectly with job requirements.",
-  // },
 ];
 
 export default function DashboardIdea() {
@@ -648,22 +580,33 @@ export default function DashboardIdea() {
                   resume online
                 </h3>
                 <p className="text-base py-3">
-                  Create a professional CV with our CV Builder in UK format
-                  resume Template. Take the help of our Custom-made templates
-                  made with the insights of professionals with combining
-                  Artificial Intelligence.
+                  Create a professional CV with our{" "}
+                  <Link href="/resume" className="font-bold">
+                    CV Builder
+                  </Link>{" "}
+                  in <Link href="/resume" className="font-bold">UK format CV Template</Link>. Take the help of our Custom-made
+                  templates made with the insights of professionals with
+                  combining Artificial Intelligence.
                 </p>
                 <p className="text-base py-3">
-                  These templates will make your <Link href={'/resume'} className="font-bold">CV layout UK</Link> stand out and
-                  ensure every detail is flawless with proper highlighting of
-                  your skills and achievements. This UK-style resume template
-                  builder is tried and tested by experts with specialties like
-                  skills, profiles, education, certificates, etc.
+                  These templates will make your{" "}
+                  <Link href={"/resume"} className="font-bold">
+                    CV layout UK
+                  </Link>{" "}
+                  stand out and ensure every detail is flawless with proper
+                  highlighting of your skills and achievements. This UK-style
+                  resume template builder is tried and tested by experts with
+                  specialties like skills, profiles, education, certificates,
+                  etc.
                 </p>
                 <p className="text-base py-3">
                   After quickly filling in your details in the template, you can
                   save it and use it for yourself. You can choose and customize
-                  from your <Link href={'/resume'} className="font-bold">curriculum vitae templates</Link>.
+                  from your{" "}
+                  <Link href={"/resume"} className="font-bold">
+                    curriculum vitae templates
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
@@ -677,7 +620,11 @@ export default function DashboardIdea() {
                   <p className="text-base py-3">
                     When you reach the CV creator, we bring you the most
                     straightforward resume builder. Follow these simple steps to
-                    create your professional <Link href={'/resume'} className="font-bold">CV layout UK</Link>.
+                    create your professional{" "}
+                    <Link href={"/resume"} className="font-bold">
+                      CV layout UK
+                    </Link>
+                    .
                   </p>
                   <p className="text-base py-3">
                     We bring you the best templates approved by experts. You can
@@ -749,11 +696,14 @@ export default function DashboardIdea() {
                   </h3>
                   <p className="text-base py-3">
                     Build your resume template with your basic details in our
-                    curriculum vitae builder. In the Profile section, you can
-                    either fill in the description of your profile or, by
-                    entering some details, you can go for the Generate with AI
-                    option. This feature is only provided by us which makes your
-                    CV even more professional and ready for interview. 
+                    <Link href={"/resume"} className="font-bold">
+                      curriculum vitae builder
+                    </Link>
+                    . In the Profile section, you can either fill in the
+                    description of your profile or, by entering some details,
+                    you can go for the Generate with AI option. This feature is
+                    only provided by us which makes your CV even more
+                    professional and ready for interview. 
                   </p>
                   <p className="text-base py-3">
                     The details that you fill in once get stopped in between due
@@ -860,7 +810,10 @@ export default function DashboardIdea() {
                     details. Here, you can tell your experience of work and any
                     projects that you have worked on. You can aslo state the
                     achievements if you had any. In a very structured format
-                    these will be presented on the <Link href={'/resume'} className="font-bold">CV Template </Link>
+                    these will be presented on the{" "}
+                    <Link href={"/resume"} className="font-bold">
+                      CV Template 
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -964,8 +917,11 @@ export default function DashboardIdea() {
                       Certificate
                     </h4>
                     <p className="text-base py-3">
-                      This detail section makes your UK resume template look
-                      professional and shows the essential qualities
+                      This detail section makes your{" "}
+                      <Link href="/resume" className="font-bold">
+                        UK resume template
+                      </Link>{" "}
+                      look professional and shows the essential qualities
                       <span>
                         Uploading the certificate will highlight your
                         achievements and embrace your expertise in it.
@@ -1009,7 +965,7 @@ export default function DashboardIdea() {
                   </h3>
                   <p className="text-base py-3">
                     The final look through of your UK style{" "}
-                    <Link href={'/resume'} className="font-bold">
+                    <Link href={"/resume"} className="font-bold">
                       CV template
                     </Link>{" "}
                     after filling in the details at last is an important step.
@@ -1213,7 +1169,7 @@ export default function DashboardIdea() {
               </div>
             </div>
             <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">
-              <h2 className="text-3xl text-center text-bold font-semibold">
+              <h2 className="text-3xl text-center text-bold font-semibold my-5">
                 Frequently Asked Questions
               </h2>
               {faqData?.map((item, index) => (

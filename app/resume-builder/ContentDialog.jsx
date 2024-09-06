@@ -343,10 +343,12 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                   onOpenChange={setIsDrawerOpen}
                 >
                   <DrawerTrigger
-                    className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center"
+                    className="2xl:p-3 md:p-2 p-1 2xl:text-base md:text-sm text-[12px] font-semibold rounded-md flex items-center justify-center flex-col"
                     onClick={() => setIsDrawerOpen(true)}
                   >
                     <LuLayoutGrid className="h-5 w-5 text-white inline" />
+                    {/* <img src="/template_icon1.png" alt="icon" className="h-10 w-10"/> */}
+                    <p className="text-white text-[10px]">Templates</p>
                   </DrawerTrigger>
                   <DrawerContent className="bg-white flex flex-col h-[500px] w-[425px] mt-24 fixed bottom-0">
                     <DrawerHeader>

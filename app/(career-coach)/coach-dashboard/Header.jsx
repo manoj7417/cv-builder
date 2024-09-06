@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <>
-      <div className="h-20 w-full bg-white flex items-center justify-between px-6 shadow-md">
+      <div className="h-20 w-full bg-white flex items-center justify-between p-5 shadow-md">
         {/* <!-- Logo Section --> */}
         <div className="text-black text-xl font-bold">Coach Dashboard</div>
 
