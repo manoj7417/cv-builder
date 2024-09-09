@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           {/* Main Content */}
           <div
             id="mainContent"
-            className="w-full md:w-[80%] lg:w-[80%] bg-gray-100 z-10">
+            className="w-full md:w-[80%] lg:w-[80%] bg-white z-10">
             {/* Coach Dashboard content goes here */}
             {children}
           </div>
