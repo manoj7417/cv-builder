@@ -10,6 +10,10 @@ import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { ImSpinner3 } from "react-icons/im";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 export default function CoachRegistration() {
   const {
@@ -20,6 +24,7 @@ export default function CoachRegistration() {
     formState: { errors },
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [validation, setValidation] = useState({
     length: false,
@@ -43,17 +48,21 @@ export default function CoachRegistration() {
     setValidation(newValidation);
   }, [password]);
 
-  const handleCoachDetails = async(data) => {
+  const handleCoachDetails = async (data) => {
+    console.log(data);
     setIsLoading(true);
     try {
       const response = await axios.post("/api/registerCoach", { data });
       if (response.status === 200) {
         toast.success("Registration successful");
-        toast.info("Verification link sent to your email address", { autoClose: 5000 });
+        // toast.info("Verification link sent to your email address", {
+        //   autoClose: 5000,
+        // });
         router.push("/coach-signin");
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || "Error logging in");
+      console.log("error::", error);
+      toast.error(error.response?.data?.error || "Error in register");
     } finally {
       setIsLoading(false);
     }
@@ -62,11 +71,14 @@ export default function CoachRegistration() {
   return (
     <section className="max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 my-20">
-        <div className="h-full w-full lg:block md:block hidden">
+        <div className="h-full w-full lg:block md:block hidden bg-[#007AFF]">
+           <div className="pt-20">
+           <h2 className="text-white text-center text-3xl">Join as a Coach and inspire the next generation of achievers!</h2>
+           </div>
           <img
-            className="mx-auto h-full w-full rounded-md object-cover"
-            src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80"
-            alt=""
+            className="mx-auto h-auto w-[400px] rounded-md object-contain"
+            src="/coach-register.png"
+            alt="coach-register"
           />
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -86,7 +98,7 @@ export default function CoachRegistration() {
             </p>
             <form onSubmit={handleSubmit(handleCoachDetails)} className="mt-8">
               <div className="space-y-5">
-                <div>
+                 <div>
                   <Label
                     htmlFor="name"
                     className="text-base font-medium text-gray-900"
@@ -96,7 +108,7 @@ export default function CoachRegistration() {
                   </Label>
                   <div className="mt-2">
                     <Input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
                       type="text"
                       placeholder="Full Name"
                       id="name"
@@ -203,7 +215,7 @@ export default function CoachRegistration() {
                             ></span>
                           )}
                           <span className="text-xs sm:text-sm">
-                          Minimum 7 characters long
+                            Minimum 7 characters long
                           </span>
                         </li>
                         <li
@@ -223,7 +235,7 @@ export default function CoachRegistration() {
                             ></span>
                           )}
                           <span className="text-xs sm:text-sm">
-                             Uppercase & lowercase letters
+                            Uppercase & lowercase letters
                           </span>
                         </li>
                         <li
@@ -242,7 +254,9 @@ export default function CoachRegistration() {
                               className={`w-3 h-3 flex items-center justify-center rounded-full border  border-gray-400`}
                             ></span>
                           )}
-                          <span className="text-xs sm:text-sm">At least 1 number</span>
+                          <span className="text-xs sm:text-sm">
+                            At least 1 number
+                          </span>
                         </li>
                         <li
                           className={`flex items-center space-x-2 text-sm ${
@@ -279,7 +293,7 @@ export default function CoachRegistration() {
                   </div>
                   <div className="mt-2">
                     <Controller
-                      name="phone"
+                      name="phoneNumber"
                       control={control}
                       defaultValue=""
                       rules={{
@@ -296,15 +310,15 @@ export default function CoachRegistration() {
                           value={field.value} // Ensure value is set correctly
                           onChange={(value, countryData) => {
                             // Update value with full phone number including country code
-                            field.onChange(value,countryData);
+                            field.onChange(value, countryData);
                           }}
                         />
                       )}
                     />
                     {/* Display validation errors */}
-                    {errors.phone && (
+                    {errors.phoneNumber && (
                       <p className="text-red-500 mt-1">
-                        {errors.phone.message}
+                        {errors.phoneNumber.message}
                       </p>
                     )}
                   </div>
@@ -312,16 +326,28 @@ export default function CoachRegistration() {
                 <div>
                   <Button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-blue-950 hover:bg-blue-950 px-3.5 py-2.5 font-semibold leading-7 text-white"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
                   >
-                    Create Account <ArrowRight className="ml-2" size={16} />
+                    {isLoading ? (
+                      <>
+                        Creating Account
+                        <ImSpinner3 className="animate-spin ml-2" size={16} />
+                      </>
+                    ) : (
+                      <>
+                        Create Account
+                        <MdOutlineKeyboardArrowRight
+                          className="ml-2"
+                          size={16}
+                        />
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>
             </form>
           </div>
         </div>
-        
       </div>
     </section>
   );

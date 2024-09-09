@@ -10,6 +10,9 @@ import { Dialog, DialogContent } from "../../../components/ui/dialog";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function CoachRegistration() {
   const {
@@ -21,21 +24,23 @@ export default function CoachRegistration() {
   } = useForm();
 
   const email = useRef(null);
+  const router = useRouter();
   const [loading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [sendingMail, setIsSendingMail] = useState(false);
 
-  const handleCoachLogin = async(data) => {
+  const handleCoachLogin = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/loginCoach", { data });
+      const response = await axios.post("/api/loginCoach", data);
       if (response.status === 200) {
         toast.success("Login successful");
-        toast.info("Verification link sent to your email address", { autoClose: 5000 });
-        router.push("/coach-signin");
+        // toast.info("Verification link sent to your email address", { autoClose: 5000 });
+        router.push("/coach-dashboard");
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response?.data?.error || "Error logging in");
     } finally {
       setIsLoading(false);
@@ -84,13 +89,18 @@ export default function CoachRegistration() {
           </div>
         </DialogContent>
       </Dialog>
-      <section class="mt-20">
+      <section class=" max-w-7xl mx-auto mt-40">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="h-full w-full lg:block md:block hidden">
+          <div className="h-full w-full lg:block md:block hidden bg-[#007AFF]">
+            <div className="pt-20">
+              <h2 className="text-white text-center text-3xl">
+                Join as a Coach and inspire the next generation of achievers!
+              </h2>
+            </div>
             <img
-              className="mx-auto h-full w-full rounded-md object-cover"
-              src="https://images.unsplash.com/photo-1630673245362-f69d2b93880e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-              alt=""
+              className="mx-auto h-auto w-[400px] rounded-md object-contain"
+              src="/coach-register.png"
+              alt="coach-register"
             />
           </div>
           <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -191,9 +201,9 @@ export default function CoachRegistration() {
                   <div>
                     <Button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-blue-950 hover:bg-blue-950 px-3.5 py-2.5 font-semibold leading-7 text-white"
+                      className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:bg-[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
                     >
-                     {loading ? (
+                      {loading ? (
                         <>
                           Getting Started
                           <ImSpinner3 className="animate-spin ml-2" size={16} />
@@ -213,7 +223,6 @@ export default function CoachRegistration() {
               </form>
             </div>
           </div>
-          
         </div>
       </section>
     </>
