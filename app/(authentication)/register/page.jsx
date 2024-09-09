@@ -32,7 +32,6 @@ export default function Register() {
   });
 
   const password = watch("password", "");
-
   const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   const hasUpperCase = (str) => /[A-Z]/.test(str);
   const hasLowerCase = (str) => /[a-z]/.test(str);
@@ -50,27 +49,6 @@ export default function Register() {
     setValidation(newValidation);
 
     const validCount = Object.values(newValidation).filter(Boolean).length;
-
-    // switch (validCount) {
-    //   case 0:
-    //     setStrength("");
-    //     break;
-    //   case 1:
-    //     setStrength("Weak");
-    //     break;
-    //   case 2:
-    //     setStrength("Medium");
-    //     break;
-    //   case 3:
-    //     setStrength("Strong");
-    //     break;
-    //   case 4:
-    //     setStrength("Excellent");
-    //     break;
-    //   default:
-    //     setStrength("");
-    //     break;
-    // }
     if (validCount === 5) {
       setStrength("Excellent");
     } else if (validCount === 4) {

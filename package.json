@@ -93,6 +93,7 @@
     "react-loading-skeleton": "^3.4.0",
     "react-lottie": "^1.2.4",
     "react-pdftotext": "^1.2.0",
+    "react-phone-input-2": "^2.15.1",
     "react-quill": "^2.0.0",
     "react-select": "^5.8.0",
     "react-tilt": "^1.0.2",
