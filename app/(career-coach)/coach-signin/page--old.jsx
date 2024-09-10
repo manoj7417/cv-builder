@@ -14,13 +14,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-//
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Import core Swiper styles
-import "swiper/css/pagination"; // Import Swiper pagination module styles
-import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
-
-//
 export default function CoachRegistration() {
   const {
     register,
@@ -96,61 +89,26 @@ export default function CoachRegistration() {
           </div>
         </DialogContent>
       </Dialog>
-      <section className=" max-w-7xl mx-auto mt-40">
-        <div className="grid grid-cols-1 lg:grid-cols-2  gap-7">
-          <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF]">
-            <div className="w-[70%] mt-14">
-              <h2 className="text-white text-center text-2xl font-semibold">
+      <section class=" max-w-7xl mx-auto mt-40">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="h-full w-full lg:block md:block hidden bg-[#007AFF]">
+            <div className="pt-20">
+              <h2 className="text-white text-center text-3xl">
                 Join as a Coach and inspire the next generation of achievers!
               </h2>
             </div>
-
-            {/* Swiper Slider with Pagination */}
-            <Swiper
-              modules={[Pagination, Autoplay]} // Use Pagination module
-              pagination={{ clickable: true }} // Enable pagination with clickable dots
-              autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
-              spaceBetween={20} // Space between slides
-              slidesPerView={1} // Show one slide at a time
-              className="mb-10 w-[80%] rounded-md"
-            >
-              <SwiperSlide>
-                <div className="p-4 rounded-md shadow">
-                  <img
-                    className="mx-auto h-auto  rounded-md object-contain"
-                    src="/coach-register.png"
-                    alt="coach-register"
-                  />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="p-4 rounded-md shadow">
-                  <img
-                    className="mx-auto h-auto  rounded-md object-contain"
-                    src="/coach-register.png"
-                    alt="coach-register"
-                  />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="p-4 rounded-md shadow">
-                  <img
-                    className="mx-auto h-auto rounded-md object-contain"
-                    src="/coach-register.png"
-                    alt="coach-register"
-                  />
-                </div>
-              </SwiperSlide>
-              {/* Add more slides as needed */}
-            </Swiper>
-            {/* Custom Pagination Styles */}
+            <img
+              className="mx-auto h-auto w-[400px] rounded-md object-contain"
+              src="/coach-register.png"
+              alt="coach-register"
+            />
           </div>
-          <div className="flex justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+          <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
-                Sign in
+              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
+                Coach Sign in
               </h2>
-              <p className="mt-2 text-[13px] text-gray-600">
+              <p className="mt-2 text-sm text-gray-600">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/coach-registration"
@@ -168,7 +126,7 @@ export default function CoachRegistration() {
                       className="text-base font-medium text-gray-900"
                     >
                       {" "}
-                      Email{" "}
+                      Email address{" "}
                     </Label>
                     <div className="mt-2">
                       <Input
@@ -230,91 +188,15 @@ export default function CoachRegistration() {
                         )}
                       </div>
                     </div>
-                    {/* <div className="text-right mt-2">
+                    <div className="text-right mt-2">
                       <div
                         onClick={() => setShowDialog(true)}
-                        className="text-sm font-semibold text-[#007AFF] hover:underline cursor-pointer"
+                        className="text-sm font-semibold text-black hover:underline cursor-pointer"
                       >
                         {" "}
                         Forgot password?{" "}
                       </div>
-                    </div> */}
-                  </div>
-                  <div className="terms_condition">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="field field-checkbox flex items-center">
-                          <input
-                            id="checkbox"
-                            type="checkbox"
-                            name="terms"
-                            className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
-                            {...register("rememberMe", { required: false })}
-                          />
-                          <label
-                            htmlFor="checkbox"
-                            className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
-                          >
-                            <p>Remember me</p>
-                          </label>
-                        </div>
-                        {errors.rememberMe && (
-                          <div className="text-red-500 text-sm my-2">
-                            You must remember me
-                          </div>
-                        )}
-                      </div>
-                      <div>
-                      <div
-                        onClick={() => setShowDialog(true)}
-                        className="text-sm font-semibold text-[#007AFF] hover:underline cursor-pointer"
-                      >
-                        {" "}
-                        Forgot password?{" "}
-                      </div>
-                      </div>
                     </div>
-                  </div>
-                  <div className="terms_condition">
-                    <div className="field field-checkbox flex items-center">
-                      <input
-                        id="checkbox"
-                        type="checkbox"
-                        name="terms"
-                        className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
-                        {...register("terms", { required: true })}
-                      />
-                      <label
-                        htmlFor="checkbox"
-                        className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
-                      >
-                        <p>
-                          I agree to all the
-                          <Link
-                            href="/terms-condition"
-                            target="_blank"
-                            className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
-                          >
-                            {" "}
-                            Terms
-                          </Link>
-                          <span className="pl-1">and</span>
-                          <Link
-                            href="/privacy-policy"
-                            target="_blank"
-                            className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
-                          >
-                            {" "}
-                            Privacy policy
-                          </Link>
-                        </p>
-                      </label>
-                    </div>
-                    {errors.terms && (
-                      <div className="text-red-500 text-sm my-2">
-                        You must agree to the terms and conditions
-                      </div>
-                    )}
                   </div>
                   <div>
                     <Button
@@ -323,12 +205,12 @@ export default function CoachRegistration() {
                     >
                       {loading ? (
                         <>
-                          Login
+                          Getting Started
                           <ImSpinner3 className="animate-spin ml-2" size={16} />
                         </>
                       ) : (
                         <>
-                          Login
+                          Get Started
                           <MdOutlineKeyboardArrowRight
                             className="ml-2"
                             size={16}
