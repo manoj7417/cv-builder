@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { motion } from "framer-motion";
 import { DatePicker } from "antd";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Select,
   SelectContent,
@@ -12,11 +13,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { schema } from "./CoachValidation";
 import {
   MdKeyboardArrowRight,
+  MdOutlineFileUpload,
   MdOutlineKeyboardArrowLeft,
 } from "react-icons/md";
-import { FaTimes } from "react-icons/fa";
+import { FaCheckCircle, FaTimes } from "react-icons/fa";
+import { IoMdCloudUpload } from "react-icons/io";
 
 const CoachForm = () => {
   const steps = [
@@ -24,27 +28,28 @@ const CoachForm = () => {
       id: "Step 1",
       name: "Personal Details",
       fields: [
+        "profilePic",
         "firstName",
         "lastName",
         "dateofBirth",
         "placeofBirth",
         "email",
+        "phone",
         "address",
         "country",
         "city",
-        "zipCode",
+        "zip",
       ],
     },
     {
       id: "Step 2",
       name: "Other Details",
       fields: [
-        "profilePic",
         "uploadCV",
-        "bioCoach",
         "experience",
         "typeOfCoaching",
         "skills",
+        "bioCoach",
         "coachingDescription",
       ],
     },
@@ -84,14 +89,38 @@ const CoachForm = () => {
     URL.revokeObjectURL(preview); // Free up memory if an uploaded image was previewed
   };
 
+  const [cvFile, setCvFile] = useState(null);
+  const [error, setError] = useState("");
+
+  const handleCVUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.type !== "application/pdf") {
+        setError("Only PDF files are allowed.");
+        setCvFile(null);
+      } else {
+        setCvFile(file);
+        setError("");
+      }
+    }
+  };
+
+  const handleRemoveCV = () => {
+    setCvFile(null);
+    setError("");
+  };
+
   const {
     register,
     handleSubmit,
     watch,
+    control,
     reset,
     trigger,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const processForm = (data) => {
     console.log(data);
@@ -124,7 +153,7 @@ const CoachForm = () => {
     <>
       <section className="px-10 py-5">
         {/* steps */}
-        <nav aria-label="Progress">
+        {/* <nav aria-label="Progress">
           <ol
             role="list"
             className="space-y-4 md:flex md:space-x-8 md:space-y-0"
@@ -161,6 +190,44 @@ const CoachForm = () => {
               </li>
             ))}
           </ol>
+        </nav> */}
+        <nav aria-label="Progress">
+          <ol
+            role="list"
+            className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 md:flex md:space-x-8 md:space-y-0"
+          >
+            {steps.map((step, index) => (
+              <li key={step.name} className="md:flex-1">
+                {currentStep > index ? (
+                  <>
+                    <div className="group flex w-full flex-col border-l-8 border-sky-600 py-4 pl-4 transition-colors sm:border-l-0 sm:border-t-4 sm:pb-0 sm:pl-0 sm:pt-4">
+                      <span className="text-sm font-medium text-sky-600 transition-colors ">
+                        {step.id}
+                      </span>
+                      <span className="text-sm font-medium">{step.name}</span>
+                    </div>
+                  </>
+                ) : currentStep === index ? (
+                  <div
+                    className="flex w-full flex-col border-l-8 border-sky-600 py-4 pl-4 sm:border-l-0 sm:border-t-4 sm:pb-0 sm:pl-0 sm:pt-4"
+                    aria-current="step"
+                  >
+                    <span className="text-sm font-medium text-sky-600">
+                      {step.id}
+                    </span>
+                    <span className="text-sm font-medium">{step.name}</span>
+                  </div>
+                ) : (
+                  <div className="group flex w-full flex-col border-l-8 border-gray-200 py-4 pl-4 transition-colors sm:border-l-0 sm:border-t-4 sm:pb-0 sm:pl-0 sm:pt-4">
+                    <span className="text-sm font-medium text-gray-500 transition-colors">
+                      {step.id}
+                    </span>
+                    <span className="text-sm font-medium">{step.name}</span>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
         </nav>
 
         {/* Form */}
@@ -178,6 +245,51 @@ const CoachForm = () => {
                 Provide your personal details.
               </p>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-full">
+                  <div className="flex flex-col items-start">
+                    <div className="relative">
+                      <img
+                        src={preview}
+                        alt="Uploaded Preview"
+                        className="w-32 h-32 object-cover border rounded-lg"
+                      />
+                      {image && (
+                        <button
+                          className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full"
+                          onClick={removeImage}
+                        >
+                          <FaTimes /> {/* Remove icon */}
+                        </button>
+                      )}
+                      {errors.image && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.profileImage.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="mt-4">
+                      <label className="text-sm cursor-pointer bg-blue-500 text-white px-4 py-2 rounded">
+                        <MdOutlineFileUpload className="inline-flex text-xl m-1" />{" "}
+                        Upload
+                        <Controller
+                          name="image"
+                          control={control}
+                          render={({ field }) => (
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => {
+                                field.onChange(e.target.files);
+                                handleImageUpload(e);
+                              }}
+                            />
+                          )}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <div className="sm:col-span-3">
                   <label
                     htmlFor="firstName"
@@ -188,7 +300,6 @@ const CoachForm = () => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      id="firstName"
                       {...register("firstName")}
                       autoComplete="given-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
@@ -224,13 +335,25 @@ const CoachForm = () => {
                 </div>
                 <div className="sm:col-span-3">
                   <label
-                    htmlFor="firstName"
+                    htmlFor="dateofBirth"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
                     Date of Birth
                   </label>
                   <div className="mt-2">
-                    <DatePicker className="w-full h-10" />
+                    <Controller
+                      name="dateofBirth"
+                      control={control}
+                      // rules={{ required: "Date of Birth is required" }}
+                      render={({ field }) => (
+                        <DatePicker
+                          {...field}
+                          className="w-full h-10"
+                          selected={field.value}
+                          onChange={(date) => field.onChange(date)}
+                        />
+                      )}
+                    />
                     {errors.dateofBirth?.message && (
                       <p className="mt-2 text-sm text-red-400">
                         {errors.dateofBirth.message}
@@ -240,29 +363,36 @@ const CoachForm = () => {
                 </div>
                 <div className="sm:col-span-3">
                   <label
-                    htmlFor="lastName"
+                    htmlFor="placeofBirth"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
                     Place of Birth
                   </label>
                   <div className="mt-2">
-                    <Select>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a country" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="apple">Canada</SelectItem>
-                          <SelectItem value="banana">London</SelectItem>
-                          <SelectItem value="blueberry">Paris</SelectItem>
-                          <SelectItem value="grapes">Finland</SelectItem>
-                          <SelectItem value="pineapple">New York</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    {errors.lastName?.message && (
+                    <Controller
+                      name="placeofBirth"
+                      control={control}
+                      // rules={{ required: "Place of Birth is required" }}
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a country" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectItem value="canada">Canada</SelectItem>
+                              <SelectItem value="london">London</SelectItem>
+                              <SelectItem value="paris">Paris</SelectItem>
+                              <SelectItem value="finland">Finland</SelectItem>
+                              <SelectItem value="new-york">New York</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {errors.placeofBirth?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.lastName.message}
+                        {errors.placeofBirth.message}
                       </p>
                     )}
                   </div>
@@ -291,28 +421,29 @@ const CoachForm = () => {
                 </div>
                 <div className="sm:col-span-3">
                   <label
-                    htmlFor="email"
+                    htmlFor="phone"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
                     Phone Number
                   </label>
                   <div className="mt-2">
                     <input
-                      type="number"
-                      {...register("phoneNumber")}
+                      type="text"
+                      id="phone"
+                      {...register("phone")}
                       autoComplete="Phone Number"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                     />
-                    {errors.email?.message && (
+                    {errors.phone && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.email.message}
+                        {errors.phone.message}
                       </p>
                     )}
                   </div>
                 </div>
                 <div className="sm:col-span-6">
                   <label
-                    htmlFor="email"
+                    htmlFor="address"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
                     Address
@@ -320,18 +451,40 @@ const CoachForm = () => {
                   <div className="mt-2">
                     <textarea
                       type="text"
-                      {...register("phoneNumber")}
-                      autoComplete="Phone Number"
+                      {...register("address")}
+                      autoComplete="Address"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                     />
-                    {errors.email?.message && (
+                    {errors.address?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.email.message}
+                        {errors.address.message}
                       </p>
                     )}
                   </div>
                 </div>
                 <div className="sm:col-span-2 sm:col-start-1">
+                  <label
+                    htmlFor="country"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Country
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="country"
+                      {...register("country")}
+                      autoComplete="address-level2"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    />
+                    {errors.country?.message && (
+                      <p className="mt-2 text-sm text-red-400">
+                        {errors.country.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
                   <label
                     htmlFor="city"
                     className="block text-sm font-medium leading-6 text-gray-900"
@@ -343,7 +496,7 @@ const CoachForm = () => {
                       type="text"
                       id="city"
                       {...register("city")}
-                      autoComplete="address-level2"
+                      autoComplete="address-level1"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                     />
                     {errors.city?.message && (
@@ -353,30 +506,6 @@ const CoachForm = () => {
                     )}
                   </div>
                 </div>
-
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="state"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    State / Province
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      id="state"
-                      {...register("state")}
-                      autoComplete="address-level1"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                    />
-                    {errors.state?.message && (
-                      <p className="mt-2 text-sm text-red-400">
-                        {errors.state.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
                 <div className="sm:col-span-2">
                   <label
                     htmlFor="zip"
@@ -418,148 +547,209 @@ const CoachForm = () => {
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-3">
-                  <div className="flex flex-col items-center">
-                    <div className="relative">
-                      <img
-                        src={preview}
-                        alt="Uploaded Preview"
-                        className="w-64 h-64 object-cover border rounded-lg"
+                  <label
+                    htmlFor="cvUpload"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Upload CV (PDF only)
+                  </label>
+                  <div className="flex gap-5 items-center">
+                    <div className="mt-2">
+                      <label
+                        htmlFor="cvUpload"
+                        className="flex items-center cursor-pointer space-x-2 text-sky-600"
+                      >
+                        <IoMdCloudUpload className="text-xl" />
+                        <span className="text-sm">Upload</span>
+                      </label>
+                      <input
+                        type="file"
+                        id="cvUpload"
+                        accept="application/pdf" // Only allows PDF files
+                        onChange={handleCVUpload}
+                        className="hidden w-full text-gray-900 border rounded-md py-1.5"
                       />
-                      {image && (
-                        <button
-                          className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full"
-                          onClick={removeImage}
-                        >
-                          <FaTimes /> {/* Remove icon */}
-                        </button>
+                      {error && (
+                        <p className="mt-2 text-sm text-red-400">{error}</p>
                       )}
                     </div>
-                    <div className="mt-4">
-                      <label className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded">
-                        Change Image
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={handleImageUpload}
-                        />
-                      </label>
-                    </div>
+                    {cvFile && (
+                      <>
+                        <div className="mt-2 flex items-center space-x-2 text-green-600">
+                          <span>{cvFile.name}</span>
+                          <FaCheckCircle className="text-xl" />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleRemoveCV}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes className="text-sm" />
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="sm:col-span-3">
                   <label
-                    htmlFor="country"
+                    htmlFor="experience"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Country
+                    Skills
                   </label>
                   <div className="mt-2">
-                    <select
-                      id="country"
-                      {...register("country")}
-                      autoComplete="country-name"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                    >
-                      <option>United States</option>
-                      <option>Canada</option>
-                      <option>Mexico</option>
-                    </select>
-                    {errors.country?.message && (
+                    <Controller
+                      name="skills"
+                      control={control}
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a skills" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectItem value="leadership">
+                                Leadership Coaching
+                              </SelectItem>
+                              <SelectItem value="career">
+                                Career Coaching
+                              </SelectItem>
+                              <SelectItem value="life">
+                                Life Coaching
+                              </SelectItem>
+                              <SelectItem value="executive">
+                                Executive Coaching
+                              </SelectItem>
+                              <SelectItem value="personal-development">
+                                Personal Development
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {errors.skills?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.country.message}
+                        {errors.skills.message}
                       </p>
                     )}
                   </div>
                 </div>
-
-                <div className="col-span-full">
+                <div className="sm:col-span-3">
                   <label
-                    htmlFor="street"
+                    htmlFor="experience"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Street address
+                    Experience
                   </label>
                   <div className="mt-2">
-                    <input
-                      type="text"
-                      id="street"
-                      {...register("street")}
-                      autoComplete="street-address"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    <Controller
+                      name="experience"
+                      control={control}
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a experience" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectItem value="1">1</SelectItem>
+                              <SelectItem value="2">2</SelectItem>
+                              <SelectItem value="3">3</SelectItem>
+                              <SelectItem value="4">4</SelectItem>
+                              <SelectItem value="5">5</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      )}
                     />
-                    {errors.street?.message && (
+                    {errors.experience?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.street.message}
+                        {errors.experience.message}
                       </p>
                     )}
                   </div>
                 </div>
-
-                <div className="sm:col-span-2 sm:col-start-1">
+                <div className="sm:col-span-3">
                   <label
-                    htmlFor="city"
+                    htmlFor="typeOfCoaching"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    City
+                    Type of Coaching
                   </label>
                   <div className="mt-2">
-                    <input
-                      type="text"
-                      id="city"
-                      {...register("city")}
-                      autoComplete="address-level2"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    <Controller
+                      name="typeOfCoaching"
+                      control={control}
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a Coahing" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectItem value="careerDevelopment">
+                                Career Developement
+                              </SelectItem>
+                              <SelectItem value="webDevelopment">
+                                Web Development
+                              </SelectItem>
+                              <SelectItem value="networkSecurity">
+                                Network Security
+                              </SelectItem>
+                              <SelectItem value="cyberSecurity">
+                                Cyber Security
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      )}
                     />
-                    {errors.city?.message && (
+                    {errors.typeOfCoaching?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.city.message}
+                        {errors.typeOfCoaching.message}
                       </p>
                     )}
                   </div>
                 </div>
-
-                <div className="sm:col-span-2">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor="state"
+                    htmlFor="coachingDescription"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    State / Province
+                    Coaching Desciption
                   </label>
                   <div className="mt-2">
-                    <input
+                    <textarea
                       type="text"
-                      id="state"
-                      {...register("state")}
-                      autoComplete="address-level1"
+                      {...register("coachingDescription")}
+                      autoComplete="coachingDescription"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                     />
-                    {errors.state?.message && (
+                    {errors.coachingDescription?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.state.message}
+                        {errors.coachingDescription.message}
                       </p>
                     )}
                   </div>
                 </div>
-
-                <div className="sm:col-span-2">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor="zip"
+                    htmlFor="bioCoach"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    ZIP / Postal code
+                    Bio of Coach
                   </label>
                   <div className="mt-2">
-                    <input
+                    <textarea
                       type="text"
-                      id="zip"
-                      {...register("zip")}
-                      autoComplete="postal-code"
+                      {...register("bioCoach")}
+                      autoComplete="bioCoach"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                     />
-                    {errors.zip?.message && (
+                    {errors.bioCoach?.message && (
                       <p className="mt-2 text-sm text-red-400">
-                        {errors.zip.message}
+                        {errors.bioCoach.message}
                       </p>
                     )}
                   </div>
@@ -570,13 +760,242 @@ const CoachForm = () => {
 
           {currentStep === 2 && (
             <>
+              <motion.div
+                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Bank Details
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Please provide any additional information that may help us
+                </p>
+
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="sm:col-span-full">
+                    <label
+                      htmlFor="placeofBirth"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Bank Name
+                    </label>
+                    <div className="mt-2">
+                      <Controller
+                        name="bankName"
+                        control={control}
+                        // rules={{ required: "Place of Birth is required" }}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange}>
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select a Bank" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem value="chase">
+                                  Chase Bank
+                                </SelectItem>
+                                <SelectItem value="wells-fargo">
+                                  Wells Fargo
+                                </SelectItem>
+                                <SelectItem value="bank-of-america">
+                                  Bank of America
+                                </SelectItem>
+                                <SelectItem value="citibank">
+                                  Citibank
+                                </SelectItem>
+                                <SelectItem value="hsbc">HSBC</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.bankName?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.bankName.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="ifscCode"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      IFSC Code
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        {...register("ifscCode")}
+                        autoComplete="street-address"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                      />
+                      {errors.ifscCode?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.ifscCode.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="bankAccountNumber"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Bank Account Number
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        {...register("bankAccountNumber")}
+                        autoComplete="street-address"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                      />
+                      {errors.bankAccountNumber?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.bankAccountNumber.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="price"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Price
+                    </label>
+                    <div className="mt-2">
+                      <Controller
+                        name="price"
+                        control={control}
+                        // rules={{ required: "Place of Birth is required" }}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange}>
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select a price" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem value="1000">1000</SelectItem>
+                                <SelectItem value="2000">2000</SelectItem>
+                                <SelectItem value="3000">3000</SelectItem>
+                                <SelectItem value="4000">4000</SelectItem>
+                                <SelectItem value="5000">5000</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.price?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.price.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="charges"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Charges
+                    </label>
+                    <div className="mt-2">
+                      <Controller
+                        name="charges"
+                        control={control}
+                        // rules={{ required: "Place of Birth is required" }}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange}>
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select a charges" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem value="100">100</SelectItem>
+                                <SelectItem value="200">200</SelectItem>
+                                <SelectItem value="300">300</SelectItem>
+                                <SelectItem value="400">400</SelectItem>
+                                <SelectItem value="500">500</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.charges?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.charges.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+
+          {currentStep === 3 && (
+            <motion.div
+              initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
               <h2 className="text-base font-semibold leading-7 text-gray-900">
-                Complete
+                Documentation
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
-                Thank you for your submission.
+                Please provide a proper documentation
               </p>
-            </>
+
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-6">
+                  <label
+                    htmlFor="cvUpload"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Signed and Accepted Agreement
+                  </label>
+                  <div className="flex gap-5 items-center">
+                    <div className="mt-2">
+                      <label
+                        htmlFor="cvUpload"
+                        className="flex items-center cursor-pointer space-x-2 text-sky-600"
+                      >
+                        <IoMdCloudUpload className="text-xl" />
+                        <span className="text-sm">Upload</span>
+                      </label>
+                      <input
+                        type="file"
+                        id="cvUpload"
+                        accept="application/pdf" // Only allows PDF files
+                        onChange={handleCVUpload}
+                        className="hidden w-full text-gray-900 border rounded-md py-1.5"
+                      />
+                      {error && (
+                        <p className="mt-2 text-sm text-red-400">{error}</p>
+                      )}
+                    </div>
+                    {cvFile && (
+                      <>
+                        <div className="mt-2 flex items-center space-x-2 text-green-600">
+                          <span>{cvFile.name}</span>
+                          <FaCheckCircle className="text-xl" />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleRemoveCV}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes className="text-sm" />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           )}
         </form>
 
