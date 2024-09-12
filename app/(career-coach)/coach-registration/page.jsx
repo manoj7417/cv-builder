@@ -49,10 +49,16 @@ export default function CoachRegistration() {
   }, [password]);
 
   const handleCoachDetails = async (data) => {
-    console.log(data);
+    const { firstName, lastName, email, phoneNumber, password } = data;
+    const obj = {
+      name: `${firstName} ${lastName}`,
+      email,
+      phoneNumber,
+      password,
+    };
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/registerCoach", { data });
+      const response = await axios.post("/api/registerCoach", obj);
       if (response.status === 200) {
         toast.success("Registration successful");
         // toast.info("Verification link sent to your email address", {
@@ -69,12 +75,14 @@ export default function CoachRegistration() {
   };
 
   return (
-    <section className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-20">
+    <section className="max-w-[80rem] mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 my-40 gap-20">
         <div className="h-full w-full lg:block md:block hidden bg-[#007AFF]">
-           <div className="pt-20">
-           <h2 className="text-white text-center text-3xl">Join as a Coach and inspire the next generation of achievers!</h2>
-           </div>
+          <div className="pt-20">
+            <h2 className="text-white text-center text-3xl">
+              Join as a Coach and inspire the next generation of achievers!
+            </h2>
+          </div>
           <img
             className="mx-auto h-auto w-[400px] rounded-md object-contain"
             src="/coach-register.png"
@@ -82,76 +90,149 @@ export default function CoachRegistration() {
           />
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-xl">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
-              Coach Sign Up
+              Create account
             </h2>
             <p className="mt-2 text-base text-gray-600">
-              Already have an account?
-              <Link
-                href="/coach-signin"
-                title=""
-                className="font-medium text-black transition-all duration-200 hover:underline"
-              >
-                Sign In
-              </Link>
+              For business, band or celebrity.
             </p>
             <form onSubmit={handleSubmit(handleCoachDetails)} className="mt-8">
               <div className="space-y-5">
-                 <div>
-                  <Label
-                    htmlFor="name"
-                    className="text-base font-medium text-gray-900"
-                  >
-                    {" "}
-                    Full Name{" "}
-                  </Label>
-                  <div className="mt-2">
-                    <Input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
-                      type="text"
-                      placeholder="Full Name"
-                      id="name"
-                      {...register("name", {
-                        required: {
-                          value: true,
-                          message: "Name is required",
-                        },
-                      })}
-                    />
-                    {errors?.name && (
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors?.name?.message}
-                      </p>
-                    )}
+                <div className="flex gap-5">
+                  <div className="lg:w-1/2 w-full">
+                    <div>
+                      <Label
+                        htmlFor="name"
+                        className="text-base font-medium text-gray-900"
+                      >
+                        First Name
+                      </Label>
+                      <div className="mt-2">
+                        <Input
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
+                          type="text"
+                          placeholder="First Name"
+                          id="firstName"
+                          {...register("firstName", {
+                            required: {
+                              value: true,
+                              message: "First Name is required",
+                            },
+                          })}
+                        />
+                        {errors?.name && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors?.firstName?.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="lg:w-1/2 w-full">
+                    <div>
+                      <Label
+                        htmlFor="name"
+                        className="text-base font-medium text-gray-900"
+                      >
+                        {" "}
+                        Last Name{" "}
+                      </Label>
+                      <div className="mt-2">
+                        <Input
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
+                          type="text"
+                          placeholder="Last Name"
+                          id="name"
+                          {...register("lastName", {
+                            required: {
+                              value: true,
+                              message: "Last Name is required",
+                            },
+                          })}
+                        />
+                        {errors?.name && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors?.lastName?.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <Label
-                    htmlFor="email"
-                    className="text-base font-medium text-gray-900"
-                  >
-                    {" "}
-                    Email address{" "}
-                  </Label>
-                  <div className="mt-2">
-                    <Input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="email"
-                      placeholder="Email"
-                      id="email"
-                      {...register("email", {
-                        required: {
-                          value: true,
-                          message: "Email is required",
-                        },
-                      })}
-                    />
-                    {errors?.email && (
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors?.email?.message}
-                      </p>
-                    )}
+                <div className="flex gap-5">
+                  <div className="lg:w-1/2 w-full">
+                    <div>
+                      <Label
+                        htmlFor="email"
+                        className="text-base font-medium text-gray-900"
+                      >
+                        {" "}
+                        Email address{" "}
+                      </Label>
+                      <div className="mt-2">
+                        <Input
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                          type="email"
+                          placeholder="Email"
+                          id="email"
+                          {...register("email", {
+                            required: {
+                              value: true,
+                              message: "Email is required",
+                            },
+                          })}
+                        />
+                        {errors?.email && (
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors?.email?.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="lg:w-1/2 w-full">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <Label
+                          htmlFor="password"
+                          className="text-base font-medium text-gray-900"
+                        >
+                          Phone Number
+                        </Label>
+                      </div>
+                      <div>
+                        <Controller
+                          name="phoneNumber"
+                          control={control}
+                          defaultValue=""
+                          rules={{
+                            required: "Phone number is required",
+                            validate: (value) =>
+                              value.length >= 10 ||
+                              "Phone number must be at least 10 digits",
+                          }}
+                          render={({ field }) => (
+                            <PhoneInput
+                              {...field}
+                              inputStyle={{ height: "40px", width: "100%" }}
+                              country={"us"}
+                              value={field.value} // Ensure value is set correctly
+                              onChange={(value, countryData) => {
+                                // Update value with full phone number including country code
+                                field.onChange(value, countryData);
+                              }}
+                            />
+                          )}
+                        />
+                        {/* Display validation errors */}
+                        {errors.phoneNumber && (
+                          <p className="text-red-500 mt-1">
+                            {errors.phoneNumber.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -282,47 +363,38 @@ export default function CoachRegistration() {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div className="flex items-center justify-between">
-                    <Label
-                      htmlFor="password"
-                      className="text-base font-medium text-gray-900"
-                    >
-                      Phone Number
-                    </Label>
-                  </div>
-                  <div className="mt-2">
-                    <Controller
-                      name="phoneNumber"
-                      control={control}
-                      defaultValue=""
-                      rules={{
-                        required: "Phone number is required",
-                        validate: (value) =>
-                          value.length >= 10 ||
-                          "Phone number must be at least 10 digits",
-                      }}
-                      render={({ field }) => (
-                        <PhoneInput
-                          {...field}
-                          inputStyle={{ height: "40px", width: "100%" }}
-                          country={"us"}
-                          value={field.value} // Ensure value is set correctly
-                          onChange={(value, countryData) => {
-                            // Update value with full phone number including country code
-                            field.onChange(value, countryData);
-                          }}
-                        />
-                      )}
+                <div className="terms_condition">
+                  <div className="field field-checkbox flex items-center">
+                    <input
+                      id="checkbox"
+                      type="checkbox"
+                      name="terms"
+                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                      {...register("terms", { required: true })}
                     />
-                    {/* Display validation errors */}
-                    {errors.phoneNumber && (
-                      <p className="text-red-500 mt-1">
-                        {errors.phoneNumber.message}
+                    <label
+                      htmlFor="checkbox"
+                      className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
+                    >
+                      <p>
+                         I agree to all the 
+                        <Link
+                          href="/terms-condition"
+                          className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"
+                        >
+                          {" "}
+                          Terms and Privacy policy
+                        </Link>
                       </p>
-                    )}
+                    </label>
                   </div>
+                  {errors.terms && (
+                    <div className="text-red-500 text-sm my-2">
+                      You must agree to the terms and conditions
+                    </div>
+                  )}
                 </div>
+
                 <div>
                   <Button
                     type="submit"
@@ -343,6 +415,16 @@ export default function CoachRegistration() {
                       </>
                     )}
                   </Button>
+                  <p className="mt-10 text-base text-gray-600 text-center">
+                    Already have an account?
+                    <Link
+                      href="/coach-signin"
+                      title=""
+                      className="font-medium text-blue-500 transition-all duration-200 hover:underline"
+                    >
+                      Sign In
+                    </Link>
+                  </p>
                 </div>
               </div>
             </form>
