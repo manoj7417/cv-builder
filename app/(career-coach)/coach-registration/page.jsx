@@ -106,7 +106,7 @@ export default function CoachRegistration() {
   return (
     <section className="max-w-[80rem] mx-auto place-items-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 my-40 gap-24">
-        <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF]">
+        <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0">
           <div className="w-[70%] mt-14">
             <h2 className="text-white text-center text-2xl font-semibold">
               Join as a Coach and inspire the next generation of achievers!
