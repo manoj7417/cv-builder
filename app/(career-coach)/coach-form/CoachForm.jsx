@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { schema } from "./CoachValidation";
+import { schema } from "./CoachValidation";
 import {
   MdKeyboardArrowRight,
   MdOutlineFileUpload,
@@ -23,6 +23,7 @@ import {
 } from "react-icons/md";
 import { FaCheckCircle, FaTimes } from "react-icons/fa";
 import { IoMdCloudUpload } from "react-icons/io";
+import axios from "axios";
 
 const CoachForm = () => {
   const steps = [
@@ -30,7 +31,7 @@ const CoachForm = () => {
       id: "Step 1",
       name: "Personal Details",
       fields: [
-        "profilePic",
+        "image",
         "firstName",
         "lastName",
         "dateofBirth",
@@ -47,7 +48,7 @@ const CoachForm = () => {
       id: "Step 2",
       name: "Other Details",
       fields: [
-        "uploadCV",
+        "cvUpload",
         "experience",
         "typeOfCoaching",
         "skills",
@@ -72,66 +73,6 @@ const CoachForm = () => {
 
   const delta = currentStep - previousStep;
   const defaultImage = "https://via.placeholder.com/150"; // Set the default image URL
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(defaultImage);
-
-  // Handle image upload
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file)); // Generate a preview URL
-    }
-  };
-
-  // Remove the uploaded image and reset to default
-  const removeImage = () => {
-    setImage(null);
-    setPreview(defaultImage); // Reset to the default image
-    URL.revokeObjectURL(preview); // Free up memory if an uploaded image was previewed
-  };
-
-  const [cvFile, setCvFile] = useState(null);
-  const [docsFile, setDocsFile] = useState(null);
-  const [error, setError] = useState("");
-  const [docsError, setDocsError] = useState("");
-
-  const handleCVUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      if (file.type !== "application/pdf") {
-        setError("Only PDF files are allowed.");
-        setCvFile(null);
-      } else {
-        setCvFile(file);
-        setError("");
-      }
-    }
-  };
-
-  const handleDocsUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      if (file.type !== "application/pdf") {
-        setDocsError("Only PDF files are allowed.");
-        setDocsFile(null);
-      } else {
-        setDocsFile(file);
-        setDocsError("");
-      }
-    }
-  };
-
-  const handleRemoveCV = () => {
-    setCvFile(null);
-    setDocsFile(null);
-    setError("");
-  };
-
-  const handleRemoveDocs = () => {
-    setDocsFile(null);
-    setDocsError("");
-  };
 
   const {
     register,
@@ -140,8 +81,84 @@ const CoachForm = () => {
     control,
     reset,
     trigger,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const [preview, setPreview] = useState(null); // For image preview
+  console.log("preview::", preview);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Watch for image field changes
+  const image = watch("image");
+
+  // Handle image upload and preview
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      try {
+        setIsLoading(true);
+        const response = await axios.post("/api/uploadImage", formData);
+        if (response.status === 200) {
+          const imageUrl = response.data.url;
+          setPreview(imageUrl);
+          setValue("image", imageUrl);
+          setIsLoading(false);
+        } else {
+          console.error("Image upload failed.");
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
+  };
+
+  // Remove the uploaded image
+  const removeImage = () => {
+    setPreview(null); // Clear image preview
+    setValue("image", null); // Clear image from the form state
+  };
+
+  //upload cv
+  const cvFile = watch("cvUpload");
+  const error = errors.cvUpload?.message;
+
+  //upload docs
+  const docsFile = watch("docsUpload");
+  const docsError = errors.docsUpload?.message;
+
+  // Common function to handle file upload
+  const handleFileUpload = async (e, fileType, setValue) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append(fileType, file); // Use the fileType to differentiate between CV and documents
+
+      try {
+        setIsLoading(true); // Start loading
+        const response = await axios.post("/api/upload", formData); // Adjust API endpoint if needed
+        if (response.status === 200) {
+          const fileUrl = response.data.url;
+          setValue(fileType, fileUrl); // Set the uploaded file URL in form state
+        } else {
+          console.error(`${fileType} upload failed.`);
+        }
+      } catch (error) {
+        console.error(`Error uploading ${fileType}:`, error);
+      } finally {
+        setIsLoading(false); // End loading
+      }
+    }
+  };
+
+  // Common function to remove uploaded file
+  const handleRemoveFile = (fileType, setValue) => {
+    setValue(fileType, null); // Clear the uploaded file from form state
+  };
 
   const processForm = (data) => {
     alert("hi");
@@ -152,14 +169,14 @@ const CoachForm = () => {
   const next = async () => {
     const fields = steps[currentStep].fields;
     const output = await trigger(fields, { shouldFocus: true });
-
     if (!output) return;
-    console.log("currentStep::", currentStep);
-    if (currentStep === steps.length - 1) {
-      await handleSubmit(processForm)();
-    } else {
-      setPreviousStep(currentStep);
-      setCurrentStep((step) => step + 1);
+    if (currentStep < steps.length) {
+      if (currentStep === steps.length - 1) {
+        await handleSubmit(processForm)();
+      } else {
+        setPreviousStep(currentStep);
+        setCurrentStep((step) => step + 1);
+      }
     }
   };
 
@@ -228,11 +245,40 @@ const CoachForm = () => {
                 <div className='sm:col-span-full'>
                   <div className='flex flex-col items-start'>
                     <div className='relative'>
-                      <img
-                        src={preview}
-                        alt='Uploaded Preview'
-                        className='w-32 h-32 object-cover border rounded-lg'
-                      />
+                      {isLoading ? (
+                        <div className='w-32 h-32 flex items-center justify-center border rounded-lg mt-4'>
+                          <div className='loader flex items-center gap-2'>
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='currentColor'
+                              class='w-6 h-6 animate-spin'
+                              viewBox='0 0 16 16'>
+                              <path d='M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z' />
+                              <path
+                                fill-rule='evenodd'
+                                d='M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z'
+                              />
+                            </svg>
+                            <span className='text-sm'>Loading...</span>
+                          </div>{" "}
+                          {/* Custom loader */}
+                        </div>
+                      ) : preview ? (
+                        <img
+                          src={preview}
+                          alt='Uploaded Preview'
+                          className='w-32 h-32 object-cover border rounded-lg'
+                        />
+                      ) : (
+                        <div className='w-32 h-32 flex items-center justify-center border rounded-lg'>
+                          <img
+                            src={defaultImage}
+                            alt='Uploaded Preview'
+                            className='w-32 h-32 object-cover border rounded-lg'
+                          />
+                        </div>
+                      )}
+
                       {image && (
                         <button
                           className='absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full'
@@ -240,12 +286,15 @@ const CoachForm = () => {
                           <FaTimes /> {/* Remove icon */}
                         </button>
                       )}
+
+                      {/* Error message */}
                       {errors.image && (
                         <p className='mt-2 text-sm text-red-400'>
-                          {errors.profileImage.message}
+                          {errors.image.message}
                         </p>
                       )}
                     </div>
+
                     <div className='mt-4'>
                       <label className='text-sm cursor-pointer bg-blue-500 text-white px-4 py-2 rounded'>
                         <MdOutlineFileUpload className='inline-flex text-xl m-1' />{" "}
@@ -253,14 +302,16 @@ const CoachForm = () => {
                         <Controller
                           name='image'
                           control={control}
+                          defaultValue={null}
                           render={({ field }) => (
                             <input
                               type='file'
                               accept='image/*'
                               className='hidden'
                               onChange={(e) => {
-                                field.onChange(e.target.files);
-                                handleImageUpload(e);
+                                const file = e.target.files[0];
+                                field.onChange(file); // Update form state with file
+                                handleImageUpload(e); // Handle image preview
                               }}
                             />
                           )}
@@ -522,23 +573,39 @@ const CoachForm = () => {
                   </label>
                   <div className='flex gap-5 items-center'>
                     <div className='mt-2'>
-                      <label
-                        htmlFor='cvUpload'
-                        className='flex items-center cursor-pointer space-x-2 text-sky-600'>
-                        <IoMdCloudUpload className='text-xl' />
-                        <span className='text-sm'>Upload</span>
-                      </label>
-                      <input
-                        type='file'
-                        id='cvUpload'
-                        accept='application/pdf' // Only allows PDF files
-                        onChange={handleCVUpload}
-                        className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                      {/* Controller for handling file input */}
+                      <Controller
+                        name='cvUpload'
+                        control={control}
+                        defaultValue={null}
+                        render={({ field: { onChange } }) => (
+                          <>
+                            <label
+                              htmlFor='cvUpload'
+                              className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                              <IoMdCloudUpload className='text-xl' />
+                              <span className='text-sm'>Upload</span>
+                            </label>
+                            <input
+                              type='file'
+                              accept='application/pdf'
+                              className='hidden'
+                              onChange={(e) =>
+                                handleFileUpload(e, "cvUpload", setValue)
+                              }
+                            />
+                            {/* Error message if validation fails */}
+                            {error && (
+                              <p className='mt-2 text-sm text-red-400'>
+                                {error}
+                              </p>
+                            )}
+                          </>
+                        )}
                       />
-                      {error && (
-                        <p className='mt-2 text-sm text-red-400'>{error}</p>
-                      )}
                     </div>
+
+                    {/* Display uploaded file name and allow removing it */}
                     {cvFile && (
                       <>
                         <div className='mt-2 flex items-center space-x-2 text-green-600'>
@@ -547,7 +614,7 @@ const CoachForm = () => {
                         </div>
                         <button
                           type='button'
-                          onClick={handleRemoveCV}
+                          onClick={() => handleRemoveFile("cvUpload", setValue)}
                           className='text-red-500 hover:text-red-700'>
                           <FaTimes className='text-sm' />
                         </button>
@@ -911,22 +978,37 @@ const CoachForm = () => {
                   </label>
                   <div className='flex gap-5 items-center'>
                     <div className='mt-2'>
-                      <label
-                        htmlFor='docsUpload'
-                        className='flex items-center cursor-pointer space-x-2 text-sky-600'>
-                        <IoMdCloudUpload className='text-xl' />
-                        <span className='text-sm'>Upload Documents</span>
-                      </label>
-                      <input
-                        type='file'
-                        id='docsUpload'
-                        accept='application/pdf' // Only allows PDF files
-                        onChange={handleDocsUpload}
-                        className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                      <Controller
+                        name='docsUpload'
+                        control={control}
+                        defaultValue={null}
+                        render={({ field: { onChange } }) => (
+                          <>
+                            <label
+                              htmlFor='docsUpload'
+                              className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                              <IoMdCloudUpload className='text-xl' />
+                              <span className='text-sm'>Upload Documents</span>
+                            </label>
+                            <input
+                              type='file'
+                              id='docsUpload'
+                              accept='application/pdf'
+                              onChange={(e) => {
+                                const file = e.target.files[0];
+                                onChange(file); // Update form state with the uploaded file
+                              }}
+                              className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                            />
+                            {/* Show error message if any */}
+                            {docsError && (
+                              <p className='mt-2 text-sm text-red-400'>
+                                {docsError}
+                              </p>
+                            )}
+                          </>
+                        )}
                       />
-                      {docsError && (
-                        <p className='mt-2 text-sm text-red-400'>{docsError}</p>
-                      )}
                     </div>
                     {docsFile && (
                       <>
@@ -952,7 +1034,7 @@ const CoachForm = () => {
                   </label>
                   <div className='mt-2'>
                     <input
-                      type='number'
+                      type='text'
                       {...register("pancard")}
                       autoComplete='given-name'
                       className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
@@ -979,21 +1061,15 @@ const CoachForm = () => {
                 <MdOutlineKeyboardArrowLeft className='h-5 w-5' />
                 <span className='text-sm'>Previous</span>
               </button>
-              {currentStep === steps.length - 1 ? (
-                <button
-                  type='submit'
-                  className='rounded bg-blue-500 px-2 py-1 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-blue-300 hover:bg-blue-600 flex items-center'>
-                  <span className='text-sm'>Confirm & Submit</span>
-                </button>
-              ) : (
-                <button
-                  type='button'
-                  onClick={next}
-                  className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 flex items-center'>
-                  <span className='text-sm'>Go Next</span>
-                  <MdKeyboardArrowRight className='w-5 h-5' />
-                </button>
-              )}
+              <button
+                type='button'
+                onClick={next}
+                className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 flex items-center'>
+                <span className='text-sm'>
+                  {currentStep === steps.length - 1 ? "Submit" : "Go Next"}
+                </span>
+                <MdKeyboardArrowRight className='w-5 h-5' />
+              </button>
             </div>
           </div>
         </form>
