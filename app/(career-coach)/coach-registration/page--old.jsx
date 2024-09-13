@@ -14,68 +14,39 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-//
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Import core Swiper styles
-import "swiper/css/pagination"; // Import Swiper pagination module styles
-import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
-
-//
 
 export default function CoachRegistration() {
-  const formSchema = yup.object().shape({
-    firstName: yup.string().required("First Name is required"),
-    lastName: yup.string().required("Last Name is required"),
-    email: yup.string().required("Email is required"),
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters"),
-    cpassword: yup
-      .string()
-      .required("Confirm Password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
-      .oneOf([yup.ref("password")], "Passwords do not match"),
-  });
-
   const {
     register,
     handleSubmit,
     control,
     watch,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(formSchema),
-  });
+  } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  // const [validation, setValidation] = useState({
-  //   length: false,
-  //   upperAndLowercase: false,
-  //   numbercase: false,
-  //   specialChar: false,
-  // });
+  const [validation, setValidation] = useState({
+    length: false,
+    upperAndLowercase: false,
+    numbercase: false,
+    specialChar: false,
+  });
 
-  // const password = watch("password", "");
-  // const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  // const hasUpperAndLowerCase = (str) => /[A-Z]/.test(str) && /[a-z]/.test(str);
-  // const hasNumber = (str) => /\d/.test(str);
+  const password = watch("password", "");
+  const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  const hasUpperAndLowerCase = (str) => /[A-Z]/.test(str) && /[a-z]/.test(str);
+  const hasNumber = (str) => /\d/.test(str);
 
-  // useEffect(() => {
-  //   const newValidation = {
-  //     length: password.length >= 8,
-  //     upperAndLowercase: hasUpperAndLowerCase(password),
-  //     number: hasNumber(password),
-  //     specialChar: format.test(password),
-  //   };
-  //   setValidation(newValidation);
-  // }, [password]);
+  useEffect(() => {
+    const newValidation = {
+      length: password.length >= 8,
+      upperAndLowercase: hasUpperAndLowerCase(password),
+      number: hasNumber(password),
+      specialChar: format.test(password),
+    };
+    setValidation(newValidation);
+  }, [password]);
 
   const handleCoachDetails = async (data) => {
     const { firstName, lastName, email, phoneNumber, password } = data;
@@ -104,62 +75,26 @@ export default function CoachRegistration() {
   };
 
   return (
-    <section className="max-w-[80rem] mx-auto place-items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-40 gap-24">
-        <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0">
-          <div className="w-[70%] mt-14">
-            <h2 className="text-white text-center text-2xl font-semibold">
+    <section className="max-w-[80rem] mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 my-40 gap-20">
+        <div className="h-full w-full lg:block md:block hidden bg-[#007AFF]">
+          <div className="pt-20">
+            <h2 className="text-white text-center text-3xl">
               Join as a Coach and inspire the next generation of achievers!
             </h2>
           </div>
-
-          {/* Swiper Slider with Pagination */}
-          <Swiper
-            modules={[Pagination, Autoplay]} // Use Pagination module
-            pagination={{ clickable: true }} // Enable pagination with clickable dots
-            autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
-            spaceBetween={20} // Space between slides
-            slidesPerView={1} // Show one slide at a time
-            className="mt-4 w-[80%] rounded-md"
-          >
-            <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
-                <img
-                  className="mx-auto h-auto  rounded-md object-contain"
-                  src="/coach-register.png"
-                  alt="coach-register"
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
-                <img
-                  className="mx-auto h-auto  rounded-md object-contain"
-                  src="/coach-register.png"
-                  alt="coach-register"
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
-                <img
-                  className="mx-auto h-auto rounded-md object-contain"
-                  src="/coach-register.png"
-                  alt="coach-register"
-                />
-              </div>
-            </SwiperSlide>
-            {/* Add more slides as needed */}
-          </Swiper>
-          {/* Custom Pagination Styles */}
+          <img
+            className="mx-auto h-auto w-[400px] rounded-md object-contain"
+            src="/coach-register.png"
+            alt="coach-register"
+          />
         </div>
-
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-xl">
-            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
+            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
               Create account
             </h2>
-            <p className="mt-2 text-[13px] text-gray-600">
+            <p className="mt-2 text-base text-gray-600">
               For business, band or celebrity.
             </p>
             <form onSubmit={handleSubmit(handleCoachDetails)} className="mt-8">
@@ -167,7 +102,10 @@ export default function CoachRegistration() {
                 <div className="flex gap-5">
                   <div className="lg:w-1/2 w-full">
                     <div>
-                      <Label htmlFor="name" className="text-sm text-gray-900">
+                      <Label
+                        htmlFor="name"
+                        className="text-base font-medium text-gray-900"
+                      >
                         First Name
                       </Label>
                       <div className="mt-2">
@@ -175,9 +113,15 @@ export default function CoachRegistration() {
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
                           type="text"
                           placeholder="First Name"
-                          {...register("firstName")}
+                          id="firstName"
+                          {...register("firstName", {
+                            required: {
+                              value: true,
+                              message: "First Name is required",
+                            },
+                          })}
                         />
-                        {errors?.firstName && (
+                        {errors?.name && (
                           <p className="text-red-500 text-sm mt-2">
                             {errors?.firstName?.message}
                           </p>
@@ -187,7 +131,10 @@ export default function CoachRegistration() {
                   </div>
                   <div className="lg:w-1/2 w-full">
                     <div>
-                      <Label htmlFor="name" className="text-sm text-gray-900">
+                      <Label
+                        htmlFor="name"
+                        className="text-base font-medium text-gray-900"
+                      >
                         {" "}
                         Last Name{" "}
                       </Label>
@@ -196,9 +143,15 @@ export default function CoachRegistration() {
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
                           type="text"
                           placeholder="Last Name"
-                          {...register("lastName")}
+                          id="name"
+                          {...register("lastName", {
+                            required: {
+                              value: true,
+                              message: "Last Name is required",
+                            },
+                          })}
                         />
-                        {errors?.lastName && (
+                        {errors?.name && (
                           <p className="text-red-500 text-sm mt-2">
                             {errors?.lastName?.message}
                           </p>
@@ -210,7 +163,10 @@ export default function CoachRegistration() {
                 <div className="flex gap-5">
                   <div className="lg:w-1/2 w-full">
                     <div>
-                      <Label htmlFor="email" className="text-sm text-gray-900">
+                      <Label
+                        htmlFor="email"
+                        className="text-base font-medium text-gray-900"
+                      >
                         {" "}
                         Email address{" "}
                       </Label>
@@ -220,7 +176,12 @@ export default function CoachRegistration() {
                           type="email"
                           placeholder="Email"
                           id="email"
-                          {...register("email")}
+                          {...register("email", {
+                            required: {
+                              value: true,
+                              message: "Email is required",
+                            },
+                          })}
                         />
                         {errors?.email && (
                           <p className="text-red-500 text-sm mt-2">
@@ -235,7 +196,7 @@ export default function CoachRegistration() {
                       <div className="flex items-center justify-between">
                         <Label
                           htmlFor="password"
-                          className="text-sm text-gray-900"
+                          className="text-base font-medium text-gray-900"
                         >
                           Phone Number
                         </Label>
@@ -274,62 +235,7 @@ export default function CoachRegistration() {
                     </div>
                   </div>
                 </div>
-                {/*START-PASSWORD AND CONFIRM PASSWORD  */}
-                <div className="flex gap-5">
-                  <div className="lg:w-1/2 w-full">
-                    <div>
-                      <Label
-                        htmlFor="password"
-                        className="text-sm text-gray-900"
-                      >
-                        {" "}
-                        Password{" "}
-                      </Label>
-                      <div className="mt-2">
-                        <Input
-                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="Password"
-                          id="password"
-                          {...register("password")}
-                        />
-                        {errors?.password && (
-                          <p className="text-red-500 text-sm mt-2">
-                            {errors?.password?.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-1/2 w-full">
-                    <div>
-                      <Label
-                        htmlFor="password"
-                        className="text-sm text-gray-900"
-                      >
-                        {" "}
-                        Confirm Password{" "}
-                      </Label>
-                      <div className="mt-2">
-                        <Input
-                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="Password"
-                          id="password"
-                          {...register("cpassword")}
-                        />
-                        {errors?.cpassword && (
-                          <p className="text-red-500 text-sm mt-2">
-                            {errors?.cpassword?.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*END PASSWORD AND CONFIRM PASSWORD */}
-
-                {/* <div>
+                <div>
                   <div className="flex items-center justify-between">
                     <Label
                       htmlFor="password"
@@ -370,7 +276,7 @@ export default function CoachRegistration() {
                         />
                       )}
                     </div>
-                    
+                    {/* Validation List */}
                     <div className="mt-2">
                       <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
                         <li
@@ -456,28 +362,6 @@ export default function CoachRegistration() {
                       </ul>
                     </div>
                   </div>
-                </div> */}
-                <div className="terms_condition">
-                  <div className="field field-checkbox flex items-center">
-                    <input
-                      id="checkbox"
-                      type="checkbox"
-                      name="terms"
-                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
-                      {...register("rememberMe", { required: false })}
-                    />
-                    <label
-                      htmlFor="checkbox"
-                      className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
-                    >
-                      <p>Remember me</p>
-                    </label>
-                  </div>
-                  {errors.rememberMe && (
-                    <div className="text-red-500 text-sm my-2">
-                      You must remember me
-                    </div>
-                  )}
                 </div>
                 <div className="terms_condition">
                   <div className="field field-checkbox flex items-center">
@@ -493,23 +377,13 @@ export default function CoachRegistration() {
                       className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
                     >
                       <p>
-                        I agree to all the
+                         I agree to all the 
                         <Link
                           href="/terms-condition"
-                          target="_blank"
-                          className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
+                          className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"
                         >
                           {" "}
-                          Terms
-                        </Link>
-                        <span className="pl-1">and</span>
-                        <Link
-                          href="/privacy-policy"
-                          target="_blank"
-                          className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
-                        >
-                          {" "}
-                          Privacy policy
+                          Terms and Privacy policy
                         </Link>
                       </p>
                     </label>
@@ -541,14 +415,14 @@ export default function CoachRegistration() {
                       </>
                     )}
                   </Button>
-                  <p className="mt-10 text-sm text-gray-600 text-center">
+                  <p className="mt-10 text-base text-gray-600 text-center">
                     Already have an account?
                     <Link
                       href="/coach-signin"
                       title=""
                       className="font-medium text-blue-500 transition-all duration-200 hover:underline"
                     >
-                      Log In
+                      Sign In
                     </Link>
                   </p>
                 </div>
