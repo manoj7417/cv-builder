@@ -21,9 +21,16 @@ import {
   MdOutlineFileUpload,
   MdOutlineKeyboardArrowLeft,
 } from "react-icons/md";
-import { FaCheckCircle, FaTimes } from "react-icons/fa";
+import { FaCheckCircle, FaEye, FaSpinner, FaTimes } from "react-icons/fa";
 import { IoMdCloudUpload } from "react-icons/io";
 import axios from "axios";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const CoachForm = () => {
   const steps = [
@@ -90,6 +97,9 @@ const CoachForm = () => {
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
   const [preview, setPreview] = useState(null); // For image preview
   const [cvFileUrl, setCvFileUrl] = useState(null);
+  const [docsUrl, setDocsUrl] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fileType, setFileType] = useState(null);
 
   // Watch for image field changes
   const image = watch("image");
@@ -138,6 +148,7 @@ const CoachForm = () => {
       try {
         setIsCvLoading(true);
         const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        console.log("response", response);
         if (response.status === 200) {
           const cvUrl = response.data.url;
           setValue("cvUpload", cvUrl); // Set CV URL in form data
@@ -177,6 +188,7 @@ const CoachForm = () => {
           const docUrl = response.data.url;
           setValue("docsUpload", docUrl); // Set document URL in form data
           setIsDocumentLoading(false);
+          setDocsUrl(docUrl);
         } else {
           console.error("Document upload failed.");
         }
@@ -189,6 +201,24 @@ const CoachForm = () => {
   // Common function to remove uploaded file
   const handleRemoveDocs = () => {
     setValue("docsUpload", null); // Clear the uploaded file from form state
+  };
+
+  // Use Google Docs Viewer if needed
+  const googleViewerUrl =
+    fileType === "cv"
+      ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
+      : fileType === "docs"
+      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+      : null;
+
+  const handleViewFile = (type) => {
+    setFileType(type);
+    setIsModalOpen(true); // Open the modal when the view icon is clicked
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close the modal
+    setFileType(null); // Reset file type
   };
 
   // Upload Docs Functionlaity ends here
@@ -598,7 +628,7 @@ const CoachForm = () => {
               </p>
 
               <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                <div className='sm:col-span-3'>
+                <div className='sm:col-span-6'>
                   <label
                     htmlFor='cvUpload'
                     className='block text-sm font-medium leading-6 text-gray-900'>
@@ -645,17 +675,54 @@ const CoachForm = () => {
                     {cvFile && (
                       <>
                         <div className='mt-2 flex items-center space-x-2 text-green-600'>
-                          <span>{cvFile.name}</span>
+                          <span>{cvFileUrl?.split("/")?.pop()}</span>
                           <FaCheckCircle className='text-xl' />
+
+                          {/* View PDF Icon */}
+                          {cvFileUrl && (
+                            <button
+                              type='button'
+                              onClick={() => handleViewFile("cv")}
+                              className='text-blue-600 hover:text-blue-800'>
+                              <FaEye className='text-xl' /> {/* View Icon */}
+                            </button>
+                          )}
                         </div>
                         <button
                           type='button'
-                          onClick={handleRemovecvUpload}
+                          onClick={() => setCvFileUrl(null)}
                           className='text-red-500 hover:text-red-700'>
                           <FaTimes className='text-sm' />
                         </button>
                       </>
                     )}
+
+                    {/* ShadCN Dialog to display PDF */}
+                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                      <DialogContent
+                        showCloseButton='true'
+                        onClick={handleCloseModal}>
+                        <DialogHeader>
+                          <DialogTitle>CV Upload Preview</DialogTitle>
+                        </DialogHeader>
+                        {/* PDF Display using iframe */}
+                        <div className='relative w-full h-[80vh]'>
+                          {isCvLoading ? ( // Show loading spinner if PDF is still loading
+                            <div className='flex justify-center items-center h-full'>
+                              <FaSpinner className='animate-spin text-4xl text-blue-500' />
+                            </div>
+                          ) : googleViewerUrl ? ( // Show iframe once the URL is available
+                            <iframe
+                              src={googleViewerUrl}
+                              className='w-full h-full'
+                              title='PDF Preview'
+                            />
+                          ) : (
+                            <p>No PDF file available</p> // Display message if no URL
+                          )}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
                 <div className='sm:col-span-3'>
@@ -1047,7 +1114,7 @@ const CoachForm = () => {
                         )}
                       />
                     </div>
-                    {docsFile && (
+                    {/* {docsFile && (
                       <>
                         <div className='mt-2 flex items-center space-x-2 text-green-600'>
                           <span>{docsFile.name}</span>
@@ -1060,7 +1127,59 @@ const CoachForm = () => {
                           <FaTimes className='text-sm' />
                         </button>
                       </>
+                    )} */}
+                    {/* Display uploaded file name and allow removing it */}
+                    {docsFile && (
+                      <>
+                        <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                          <span>{docsUrl?.split("/")?.pop()}</span>
+                          <FaCheckCircle className='text-xl' />
+
+                          {/* View PDF Icon */}
+                          {docsUrl && (
+                            <button
+                              type='button'
+                              onClick={() => handleViewFile("docs")}
+                              className='text-blue-600 hover:text-blue-800'>
+                              <FaEye className='text-xl' /> {/* View Icon */}
+                            </button>
+                          )}
+                        </div>
+                        <button
+                          type='button'
+                          onClick={() => setDocsUrl(bull)}
+                          className='text-red-500 hover:text-red-700'>
+                          <FaTimes className='text-sm' />
+                        </button>
+                      </>
                     )}
+
+                    {/* ShadCN Dialog to display PDF */}
+                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                      <DialogContent
+                        showCloseButton='true'
+                        onClick={handleCloseModal}>
+                        <DialogHeader>
+                          <DialogTitle>Document Upload Preview</DialogTitle>
+                        </DialogHeader>
+                        {/* PDF Display using iframe */}
+                        <div className='relative w-full h-[80vh]'>
+                          {isDocumentLoading ? ( // Show loading spinner if PDF is still loading
+                            <div className='flex justify-center items-center h-full'>
+                              <FaSpinner className='animate-spin text-4xl text-blue-500' />
+                            </div>
+                          ) : googleViewerUrl ? ( // Show iframe once the URL is available
+                            <iframe
+                              src={googleViewerUrl}
+                              className='w-full h-full'
+                              title='PDF Preview'
+                            />
+                          ) : (
+                            <p>No PDF file available</p> // Display message if no URL
+                          )}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
                 <div className='sm:col-span-3'>

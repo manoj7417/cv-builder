@@ -5,15 +5,6 @@ import { serverInstance } from "@/lib/serverApi";
 export async function POST(req) {
   try {
     const formData = await req.formData(); // Parse FormData
-    const file = formData.get("image");
-
-    if (!file) {
-      return new Response(JSON.stringify({ error: "No file uploaded" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
     // Send the formData to the external API
     const response = await serverInstance.post(
       "/uploadimage/upload",
