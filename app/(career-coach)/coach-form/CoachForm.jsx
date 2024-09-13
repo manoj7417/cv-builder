@@ -672,30 +672,36 @@ const CoachForm = () => {
                     </div>
 
                     {/* Display uploaded file name and allow removing it */}
-                    {cvFile && (
-                      <>
-                        <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                    <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                      {isCvLoading ? ( // Show loading spinner while fetching
+                        <FaSpinner className='animate-spin text-xl text-blue-500' />
+                      ) : cvFileUrl ? ( // Show file name and tick icon when file is uploaded
+                        <>
                           <span>{cvFileUrl?.split("/")?.pop()}</span>
                           <FaCheckCircle className='text-xl' />
 
                           {/* View PDF Icon */}
-                          {cvFileUrl && (
-                            <button
-                              type='button'
-                              onClick={() => handleViewFile("cv")}
-                              className='text-blue-600 hover:text-blue-800'>
-                              <FaEye className='text-xl' /> {/* View Icon */}
-                            </button>
-                          )}
-                        </div>
+                          <button
+                            type='button'
+                            onClick={() => handleViewFile("cv")}
+                            className='text-blue-600 hover:text-blue-800'>
+                            <FaEye className='text-xl' /> {/* View Icon */}
+                          </button>
+                        </>
+                      ) : (
+                        <p>No file uploaded</p> // Message when no file is uploaded
+                      )}
+
+                      {/* Remove File Button */}
+                      {cvFileUrl && (
                         <button
                           type='button'
                           onClick={() => setCvFileUrl(null)}
                           className='text-red-500 hover:text-red-700'>
                           <FaTimes className='text-sm' />
                         </button>
-                      </>
-                    )}
+                      )}
+                    </div>
 
                     {/* ShadCN Dialog to display PDF */}
                     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -1114,45 +1120,37 @@ const CoachForm = () => {
                         )}
                       />
                     </div>
-                    {/* {docsFile && (
-                      <>
-                        <div className='mt-2 flex items-center space-x-2 text-green-600'>
-                          <span>{docsFile.name}</span>
-                          <FaCheckCircle className='text-xl' />
-                        </div>
-                        <button
-                          type='button'
-                          onClick={handleRemoveDocs}
-                          className='text-red-500 hover:text-red-700'>
-                          <FaTimes className='text-sm' />
-                        </button>
-                      </>
-                    )} */}
                     {/* Display uploaded file name and allow removing it */}
-                    {docsFile && (
-                      <>
-                        <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                    <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                      {isDocumentLoading ? ( // Show loading spinner while fetching
+                        <FaSpinner className='animate-spin text-xl text-blue-500' />
+                      ) : docsUrl ? ( // Show file name and tick icon when file is uploaded
+                        <>
                           <span>{docsUrl?.split("/")?.pop()}</span>
                           <FaCheckCircle className='text-xl' />
 
                           {/* View PDF Icon */}
-                          {docsUrl && (
-                            <button
-                              type='button'
-                              onClick={() => handleViewFile("docs")}
-                              className='text-blue-600 hover:text-blue-800'>
-                              <FaEye className='text-xl' /> {/* View Icon */}
-                            </button>
-                          )}
-                        </div>
+                          <button
+                            type='button'
+                            onClick={() => handleViewFile("docs")}
+                            className='text-blue-600 hover:text-blue-800'>
+                            <FaEye className='text-xl' /> {/* View Icon */}
+                          </button>
+                        </>
+                      ) : (
+                        <p>No file uploaded</p> // Message when no file is uploaded
+                      )}
+
+                      {/* Remove File Button */}
+                      {docsUrl && (
                         <button
                           type='button'
-                          onClick={() => setDocsUrl(bull)}
+                          onClick={() => setDocsUrl(null)}
                           className='text-red-500 hover:text-red-700'>
                           <FaTimes className='text-sm' />
                         </button>
-                      </>
-                    )}
+                      )}
+                    </div>
 
                     {/* ShadCN Dialog to display PDF */}
                     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
