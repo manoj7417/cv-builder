@@ -33,5 +33,5 @@ export const schema = yup.object().shape({
   bankAccountNumber: yup.string().required("Bank Account Number is required"),
   price: yup.number().required("Price is required"),
   charges: yup.number().required("Charges is required"),
-  pancard: yup.number().min(1, "Pan card is required"),
+  pancard: yup.string().min(1, "Pan card is required"),
 });
