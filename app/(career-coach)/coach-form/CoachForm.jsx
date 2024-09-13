@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { schema } from "./CoachValidation";
+// import { schema } from "./CoachValidation";
 import {
   MdKeyboardArrowRight,
   MdOutlineFileUpload,
@@ -83,13 +83,13 @@ const CoachForm = () => {
     trigger,
     setValue,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm();
 
-  const [preview, setPreview] = useState(null); // For image preview
-  console.log("preview::", preview);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCvLoading, setIsCvLoading] = useState(false);
+  const [isDocumentLoading, setIsDocumentLoading] = useState(false);
+  const [preview, setPreview] = useState(null); // For image preview
+  const [cvFileUrl, setCvFileUrl] = useState(null);
 
   // Watch for image field changes
   const image = watch("image");
@@ -123,42 +123,75 @@ const CoachForm = () => {
     setValue("image", null); // Clear image from the form state
   };
 
+  // Upload CV Functionlaity starts here
+
   //upload cv
   const cvFile = watch("cvUpload");
   const error = errors.cvUpload?.message;
+
+  // For CV Upload
+  const handleCVUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("cvUpload", file); // Assuming "cv" is the expected field in the backend
+      try {
+        setIsCvLoading(true);
+        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        if (response.status === 200) {
+          const cvUrl = response.data.url;
+          setValue("cvUpload", cvUrl); // Set CV URL in form data
+          setCvFileUrl(cvUrl);
+          setIsCvLoading(false);
+        } else {
+          console.error("CV upload failed.");
+        }
+      } catch (error) {
+        console.error("Error uploading CV:", error);
+      }
+    }
+  };
+
+  const handleRemovecvUpload = () => {
+    setValue("cvUpload", null);
+  };
+
+  // Upload CV Functionlaity ends here
+
+  // Upload Docs Functionlaity starts here
 
   //upload docs
   const docsFile = watch("docsUpload");
   const docsError = errors.docsUpload?.message;
 
-  // Common function to handle file upload
-  const handleFileUpload = async (e, fileType, setValue) => {
+  // For Document Upload
+  const handleDocUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append(fileType, file); // Use the fileType to differentiate between CV and documents
-
+      formData.append("docsUpload", file); // Assuming "document" is the expected field in the backend
       try {
-        setIsLoading(true); // Start loading
-        const response = await axios.post("/api/upload", formData); // Adjust API endpoint if needed
+        setIsDocumentLoading(true);
+        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
         if (response.status === 200) {
-          const fileUrl = response.data.url;
-          setValue(fileType, fileUrl); // Set the uploaded file URL in form state
+          const docUrl = response.data.url;
+          setValue("docsUpload", docUrl); // Set document URL in form data
+          setIsDocumentLoading(false);
         } else {
-          console.error(`${fileType} upload failed.`);
+          console.error("Document upload failed.");
         }
       } catch (error) {
-        console.error(`Error uploading ${fileType}:`, error);
-      } finally {
-        setIsLoading(false); // End loading
+        console.error("Error uploading document:", error);
       }
     }
   };
 
   // Common function to remove uploaded file
-  const handleRemoveFile = (fileType, setValue) => {
-    setValue(fileType, null); // Clear the uploaded file from form state
+  const handleRemoveDocs = () => {
+    setValue("docsUpload", null); // Clear the uploaded file from form state
   };
+
+  // Upload Docs Functionlaity ends here
 
   const processForm = (data) => {
     alert("hi");
@@ -588,11 +621,14 @@ const CoachForm = () => {
                             </label>
                             <input
                               type='file'
+                              id='cvUpload'
                               accept='application/pdf'
                               className='hidden'
-                              onChange={(e) =>
-                                handleFileUpload(e, "cvUpload", setValue)
-                              }
+                              onChange={(e) => {
+                                const file = e.target.files[0];
+                                onChange(file); // Update form state with the uploaded file
+                                handleCVUpload(e);
+                              }}
                             />
                             {/* Error message if validation fails */}
                             {error && (
@@ -614,7 +650,7 @@ const CoachForm = () => {
                         </div>
                         <button
                           type='button'
-                          onClick={() => handleRemoveFile("cvUpload", setValue)}
+                          onClick={handleRemovecvUpload}
                           className='text-red-500 hover:text-red-700'>
                           <FaTimes className='text-sm' />
                         </button>
@@ -997,6 +1033,7 @@ const CoachForm = () => {
                               onChange={(e) => {
                                 const file = e.target.files[0];
                                 onChange(file); // Update form state with the uploaded file
+                                handleDocUpload(e);
                               }}
                               className='hidden w-full text-gray-900 border rounded-md py-1.5'
                             />
