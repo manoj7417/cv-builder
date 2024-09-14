@@ -1,22 +1,37 @@
-import Header from "./(AdminSidebar)/header";
-import HeaderMobile from "./(AdminSidebar)/header-mobile";
-import SideNav from "./(AdminSidebar)/Sidebar";
+/** @format */
 
+import AdminHeader from "./(AdminSidebar)/AdminHeader";
+import Sidebar from "./(AdminSidebar)/Sidebar";
+export const metadata = {
+  title: "Admin Dashboard",
+  description: "Admin Dashboard.",
+};
 const Layout = ({ children }) => {
   return (
-    <main className="resume_dashboard">
-      <div className="resume_dashboard_container">
-        <div className="flex">
-          <SideNav />
-          <main className="flex-1">
-            <div className="flex flex-col md:ml-60 sm:border-r sm:border-zinc-700 min-h-screen">
-              <Header />
-              <HeaderMobile />
-              <div className="flex flex-col pt-2 px-4 space-y-2 bg-zinc-100 flex-grow pb-4">
+    <main className='resume_dashboard'>
+      <div className='resume_dashboard_container'>
+        <div className='wrapper'>
+          <div id='mainDiv' className='flex flex-col h-screen'>
+            {/* START-HEADER */}
+            <AdminHeader className='w-full' />
+            {/* END-HEADER */}
+            <div className='flex flex-1 flex-col md:flex-row'>
+              {/* Sidebar */}
+              <div
+                id='sidebarCoach'
+                className='w-full md:w-[20%] lg:w-[20%] bg-[#E0F2FF] sticky top-0 lg:h-screen h-auto z-50'>
+                {/* Sidebar content goes here */}
+                <Sidebar className='w-full' />
+              </div>
+              {/* Main Content */}
+              <div
+                id='mainContent'
+                className='w-full md:w-[80%] lg:w-[80%] bg-white z-10'>
+                {/* Coach Dashboard content goes here */}
                 {children}
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </main>

@@ -1,0 +1,67 @@
+/** @format */
+
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+
+const AdminHeader = () => {
+  return (
+    <>
+      <div className='h-20 w-full bg-white flex items-center justify-between lg:p-5 p-2 shadow-md'>
+        {/* <!-- Logo Section --> */}
+        <div
+          className='text-black text-xl font-bold whitespace-nowrap
+        
+        '>
+          Admin Dashboard
+        </div>
+
+        {/* <!-- Search Bar Section --> */}
+        <div className='flex items-center w-1/2'>
+          <input
+            type='text'
+            placeholder='Search...'
+            className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 hidden sm:block md:block lg:block xl:block 2xl:block'
+          />
+        </div>
+
+        {/* <!-- Profile Section --> */}
+        <div className='flex items-center space-x-6'>
+          {/* <!-- Notification Icon with Orange Dot --> */}
+          <div className='relative'>
+            <button className='text-black hover:text-gray-600'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-6 w-6'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.054-.595 1.437L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9'
+                />
+              </svg>
+              {/* <!-- Orange Dot --> */}
+              <span className='absolute top-0 right-0 block h-2 w-2 bg-orange-500 rounded-full'></span>
+            </button>
+          </div>
+
+          {/* <!-- Profile Icon --> */}
+          <div className='relative'>
+            <button className='text-black hover:text-gray-600 flex items-center'>
+              <img
+                src='/coach_photos.png'
+                alt='User'
+                className='rounded-full lg:h-10 lg:w-10 h-14 w-14 object-contain'
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AdminHeader;
