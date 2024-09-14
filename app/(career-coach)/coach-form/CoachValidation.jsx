@@ -1,7 +1,9 @@
+/** @format */
+
 import * as yup from "yup";
 
 export const schema = yup.object().shape({
-  profileImage:yup.string().required("Profile Image is required"),
+  profileImage: yup.string().required("Profile Image is required"),
   firstName: yup.string().min(1, "First name is required"),
   lastName: yup.string().min(1, "Last name is required"),
   email: yup
@@ -26,9 +28,10 @@ export const schema = yup.object().shape({
   coachingDescription: yup.string().min(1, "Coaching Description is required"),
   skills: yup.string().required("Skills is required"),
   typeOfCoaching: yup.string().required("Type of Coaching is required"),
-  bankName:yup.string().required("Bank Name is required"),
-  ifscCode:yup.string().required("IFSC Code is required"),
-  bankAccountNumber:yup.string().required("Bank Account Number is required"),
-  price:yup.number().required("Price is required"),
-  charges:yup.number().required("Charges is required"),
+  bankName: yup.string().required("Bank Name is required"),
+  ifscCode: yup.string().required("IFSC Code is required"),
+  bankAccountNumber: yup.string().required("Bank Account Number is required"),
+  price: yup.number().required("Price is required"),
+  charges: yup.number().required("Charges is required"),
+  pancard: yup.string().min(1, "Pan card is required"),
 });
