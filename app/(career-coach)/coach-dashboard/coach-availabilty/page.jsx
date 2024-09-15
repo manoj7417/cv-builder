@@ -279,15 +279,20 @@ const CoachAvailability = () => {
     return timeSlot.filter((_, idx) => idx > selectedIndex); // Only show times after the selected time
   };
 
+  // Initialize useFieldArray for each day outside the loop
+  const fieldArrays = daysOfWeek.map((_, dayIndex) => {
+    return useFieldArray({
+      control,
+      name: `availability.${dayIndex}`,
+    });
+  });
+
   return (
     <div className='max-w-5xl mx-auto border-2 border-gray-200 p-5 relative'>
       <form onSubmit={handleSubmit(onSubmit)}>
         {daysOfWeek.map((day, dayIndex) => {
-          // Use useFieldArray for each day's availability
-          const { fields, append, remove } = useFieldArray({
-            control,
-            name: `availability.${dayIndex}`,
-          });
+          const fieldArray = fieldArrays[dayIndex];
+          const { fields, append, remove } = fieldArray;
 
           return (
             <div key={day} className='available flex items-start gap-4 mb-4'>
