@@ -50,8 +50,8 @@ const DayFieldArray = ({
         return (
           <div
             key={item.id}
-            className='time_slot flex gap-10 items-center justify-between ml-5 mb-3'>
-            <div className='flex gap-4 items-center'>
+            className='time_slot flex gap-10 items-center justify-between lg:ml-5 ml-0 mb-3'>
+            <div className='flex lg:gap-4 gap-1 items-center'>
               {/* First Time Select */}
               <div className='flex-1'>
                 <Controller
@@ -124,7 +124,7 @@ const DayFieldArray = ({
                     secondSelectedTime: "",
                   });
                 }}
-                className='text-black px-4 py-2 rounded flex items-center text-sm'>
+                className='text-black flex items-center text-sm'>
                 <FiPlus className='mr-1 text-base' />
               </button>
             </div>

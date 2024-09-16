@@ -288,7 +288,7 @@ const CoachAvailability = () => {
   };
 
   return (
-    <div className='max-w-5xl mx-auto mt-18'>
+    <div className='max-w-5xl mx-auto mt-18 lg:p-0 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll'>
       <div className='main_heading my-5'>
         <h1 className='text-xl text-black font-bold'>Time Availabilty</h1>
         <p className='text-sm font-semibold text-gray-600'>
@@ -299,7 +299,9 @@ const CoachAvailability = () => {
         <div className='flex lg:flex-row flex-col gap-5'>
           <div className='lg:w-[70%] w-full form_calendar rounded-md border-2 border-gray-200 p-5'>
             {daysOfWeek.map((day, dayIndex) => (
-              <div key={day} className='available flex items-start mb-4'>
+              <div
+                key={day}
+                className='available flex lg:flex-row flex-col lg:gap-0 gap-5 items-start mb-4'>
                 {/* Switch and Day Label */}
                 <div className='flex items-center gap-2 w-[200px]'>
                   <Switch
