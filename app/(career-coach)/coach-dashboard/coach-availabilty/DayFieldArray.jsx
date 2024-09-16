@@ -1,0 +1,128 @@
+/** @format */
+
+import React from "react";
+import { useFieldArray, Controller } from "react-hook-form";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+} from "@/components/ui/select";
+import { FiPlus } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
+
+const DayFieldArray = ({
+  control,
+  watch,
+  dayIndex,
+  timeSlot,
+  availabilityStatus,
+  getFilteredTimeSlots,
+}) => {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: `availability.${dayIndex}`,
+  });
+
+  if (!availabilityStatus) return null; // Only show when availabilityStatus is true
+
+  return (
+    <div className='w-full'>
+      {fields.map((item, index) => {
+        const firstSelectedTime = watch(
+          `availability.${dayIndex}.${index}.firstSelectedTime`
+        );
+
+        // Filter times for second slot based on the first selected time
+        const filteredTimeSlots = getFilteredTimeSlots(firstSelectedTime);
+
+        return (
+          <div
+            key={item.id}
+            className='time_slot flex gap-10 items-center justify-between ml-5 mb-3'>
+            <div className='flex gap-4 items-center'>
+              {/* First Time Select */}
+              <div className='flex-1'>
+                <Controller
+                  control={control}
+                  name={`availability.${dayIndex}.${index}.firstSelectedTime`}
+                  render={({ field }) => (
+                    <Select
+                      onValueChange={(value) => field.onChange(value)}
+                      value={field.value}>
+                      <SelectTrigger className='w-[150px]'>
+                        <SelectValue placeholder='Select a time' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {timeSlot.map((time, idx) => (
+                            <SelectItem key={idx} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+
+              {/* Second Time Select */}
+              <div className='flex-1'>
+                <Controller
+                  control={control}
+                  name={`availability.${dayIndex}.${index}.secondSelectedTime`}
+                  render={({ field }) => (
+                    <Select
+                      onValueChange={(value) => field.onChange(value)}
+                      value={field.value}>
+                      <SelectTrigger className='w-[150px]'>
+                        <SelectValue placeholder='Select a time' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {filteredTimeSlots.map((time, idx) => (
+                            <SelectItem key={idx} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+
+              {/* Remove Button */}
+              {fields.length > 1 && index > 0 && (
+                <button
+                  type='button'
+                  onClick={() => remove(index)}
+                  className='text-red-600 flex items-center'>
+                  <MdDeleteOutline className='text-base mr-1' />
+                </button>
+              )}
+
+              {/* Add Time Slot Button */}
+              <button
+                type='button'
+                onClick={() =>
+                  append({
+                    firstSelectedTime: "",
+                    secondSelectedTime: "",
+                  })
+                }
+                className='text-black px-4 py-2 rounded flex items-center text-sm'>
+                <FiPlus className='mr-1 text-base' />
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default DayFieldArray;
