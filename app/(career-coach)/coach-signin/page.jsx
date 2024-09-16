@@ -19,6 +19,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import core Swiper styles
 import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
+import { SetTokens } from "@/app/actions";
+import { useCoachStore } from '../../store/coachStore'
 
 //
 export default function CoachRegistration() {
@@ -29,6 +31,7 @@ export default function CoachRegistration() {
     watch,
     formState: { errors },
   } = useForm();
+  const { userState, formData, loginUser } = useCoachStore()
 
   const email = useRef(null);
   const router = useRouter();
@@ -43,8 +46,14 @@ export default function CoachRegistration() {
       const response = await axios.post("/api/loginCoach", data);
       if (response.status === 200) {
         toast.success("Login successful");
-        // toast.info("Verification link sent to your email address", { autoClose: 5000 });
-        router.push("/coach-dashboard");
+        const { accessToken, refreshToken } = response.data.data
+        await SetTokens({ accessToken, refreshToken })
+        loginUser(response.data.data.userdata)
+        const { isApproved } = response.data.data.userdata
+        if (isApproved) {
+          return router.push("/coach-dashboard")
+        }
+        router.push('/coach-form')
       }
     } catch (error) {
       console.log(error);
@@ -96,9 +105,9 @@ export default function CoachRegistration() {
           </div>
         </DialogContent>
       </Dialog>
-      <section className=" max-w-7xl mx-auto mt-40">
+      <section className="w-full h-screen">
         <div className="grid grid-cols-1 lg:grid-cols-2  gap-7">
-          <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0">
+          <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen">
             <div className="w-[70%] mt-14">
               <h2 className="text-white text-center text-2xl font-semibold">
                 Join as a Coach and inspire the next generation of achievers!
@@ -112,7 +121,7 @@ export default function CoachRegistration() {
               autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
               spaceBetween={20} // Space between slides
               slidesPerView={1} // Show one slide at a time
-              className="mb-10 w-[80%] rounded-md"
+              className="mb-10 w-[60%] rounded-md"
             >
               <SwiperSlide>
                 <div className="p-4 rounded-md shadow">
@@ -265,13 +274,13 @@ export default function CoachRegistration() {
                         )}
                       </div>
                       <div>
-                      <div
-                        onClick={() => setShowDialog(true)}
-                        className="text-sm font-semibold text-[#007AFF] hover:underline cursor-pointer"
-                      >
-                        {" "}
-                        Forgot password?{" "}
-                      </div>
+                        <div
+                          onClick={() => setShowDialog(true)}
+                          className="text-sm font-semibold text-[#007AFF] hover:underline cursor-pointer"
+                        >
+                          {" "}
+                          Forgot password?{" "}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -320,6 +329,7 @@ export default function CoachRegistration() {
                     <Button
                       type="submit"
                       className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:bg-[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
+                      disabled={loading}
                     >
                       {loading ? (
                         <>

@@ -139,10 +139,10 @@ const ComingSoonPage = () => {
                     </button>
                   </Link>
                 </div>
-                <div className='button_wrapper mt-8 flex justify-center lg:justify-start'>
-                  <Link href='#learnmore'>
+                <div className='button_wrapper mt-8 flex justify-center lg:justify-start '>
+                  <Link href='/coach-signin'>
                     <button className='get_start_btn'>
-                      <span className='btn_text'>Learn More</span>
+                      <span className='btn_text '>Register</span>
                       <div className='btn_overlay'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'

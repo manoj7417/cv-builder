@@ -2,10 +2,10 @@
 
 import * as yup from "yup";
 
+
 export const schema = yup.object().shape({
-  profileImage: yup.string().required("Profile Image is required"),
-  firstName: yup.string().min(1, "First name is required"),
-  lastName: yup.string().min(1, "Last name is required"),
+  profileImage: yup.string().url("Invalid URL").required("Profile image is required"),
+  name: yup.string().min(1, "Full name is required"),
   email: yup
     .string()
     .min(1, "Email is required")
@@ -19,19 +19,17 @@ export const schema = yup.object().shape({
   placeofBirth: yup.string().required("Place of Birth is required"),
   address: yup.string().required("Address is required"),
   country: yup.string().min(1, "Country is required"),
-  street: yup.string().min(1, "Street is required"),
-  country: yup.string().min(1, "Country is required"),
   city: yup.string().min(1, "City is required"),
   zip: yup.string().min(1, "zip is required"),
-  experience: yup.number().required("Experience is required"),
-  bioCoach: yup.string().min(1, "Bio is required"),
+  experience: yup.number().typeError("Experience must be a number").required("Experience is required").min(1, "Experience must be at least 1 year"),
+  bio: yup.string().min(1, "Bio is required"),
   coachingDescription: yup.string().min(1, "Coaching Description is required"),
   skills: yup.string().required("Skills is required"),
   typeOfCoaching: yup.string().required("Type of Coaching is required"),
   bankName: yup.string().required("Bank Name is required"),
   ifscCode: yup.string().required("IFSC Code is required"),
   bankAccountNumber: yup.string().required("Bank Account Number is required"),
-  price: yup.number().required("Price is required"),
-  charges: yup.number().required("Charges is required"),
-  pancard: yup.string().min(1, "Pan card is required"),
+  charges: yup.number().typeError("Charges must be a number").required("Price is required").min(1, "charges must not be less than $1/hr"),
+  cvUpload: yup.string().required("CV is required"),
+  docsUpload: yup.string().required("Signed Aggrement Document is required"),
 });
