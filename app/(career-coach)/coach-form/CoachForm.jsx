@@ -119,7 +119,6 @@ const CoachForm = () => {
   const [isUploadingDocs, setIsUploadingDocs] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { updateUserData } = useCoachStore()
-
   const imageUrl = watch("profileImage")
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];

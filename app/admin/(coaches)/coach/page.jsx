@@ -1,8 +1,11 @@
 /** @format */
-
+"use client"
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import axios from "axios";
 import Image from "next/image";
-import React from "react";
-import { FaCheck, FaDollarSign, FaTimes } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { FaCheck, FaDollarSign, FaLongArrowAltRight, FaTimes, FaUser } from "react-icons/fa";
 
 const people = [
   {
@@ -21,7 +24,27 @@ const people = [
   },
 ];
 
+
+
 const Coach = () => {
+
+  const [allCoaches, setAllCoaches] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const getAllCoaches = async () => {
+    setIsLoading(true)
+    try {
+      const response = await axios.get("/api/getAllCoaches");
+      setAllCoaches(response.data.coaches)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getAllCoaches()
+  }, [])
   return (
     <div>
       <div className='coach_section max-w-7xl mx-auto mt-10 p-5'>
@@ -45,78 +68,129 @@ const Coach = () => {
                         <tr>
                           <th
                             scope='col'
-                            className='px-4 py-3.5 text-left text-sm font-normal text-gray-700'>
+                            className='px-4 py-3.5 text-center text-sm font-normal text-gray-700'>
                             <span>Coach</span>
                           </th>
                           <th
                             scope='col'
-                            className='px-12 py-3.5 text-left text-sm font-normal text-gray-700'>
+                            className='px-12 py-3.5  text-sm font-normal text-gray-700 text-center'>
                             Fees
                           </th>
 
                           <th
                             scope='col'
-                            className='px-4 py-3.5 text-left text-sm font-normal text-gray-700'>
-                            Action
+                            className='px-4 py-3.5 text-center text-sm font-normal text-gray-700'>
                           </th>
                         </tr>
+
                       </thead>
                       <tbody className='divide-y divide-gray-200 bg-white'>
-                        {people.map((person) => (
-                          <tr key={person.name}>
-                            <td className='whitespace-nowrap px-4 py-4'>
-                              <div className='flex items-center'>
-                                <div className='h-10 w-10 flex-shrink-0'>
-                                  <img
-                                    className='h-10 w-10 rounded-full object-cover'
-                                    src={person.image}
-                                    alt=''
-                                  />
-                                </div>
-                                <div className='ml-4'>
-                                  <div className='text-sm font-medium text-gray-900'>
-                                    {person.name}
+                        {
+                          isLoading ?
+                            <>
+                              <tr>
+                                <td className="whitespace-nowrap px-4 py-4">
+                                  <div className="flex items-center">
+                                    <Skeleton className="h-10 w-10 rounded-full" />
+                                    <div className="ml-4 space-y-2">
+                                      <Skeleton className="h-4 w-[150px]" />
+                                      <Skeleton className="h-4 w-[120px]" />
+                                    </div>
                                   </div>
-                                  <div className='text-sm text-gray-700'>
-                                    {person.role}
+                                </td>
+                                <td className="whitespace-nowrap px-12 py-4">
+                                  <Skeleton className="h-4 w-[80px]" />
+                                </td>
+                                <td className="whitespace-nowrap px-12 py-4">
+                                  <Skeleton className="h-8 w-[100px]" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="whitespace-nowrap px-4 py-4">
+                                  <div className="flex items-center">
+                                    <Skeleton className="h-10 w-10 rounded-full" />
+                                    <div className="ml-4 space-y-2">
+                                      <Skeleton className="h-4 w-[150px]" />
+                                      <Skeleton className="h-4 w-[120px]" />
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className='whitespace-nowrap px-12 py-4'>
-                              <div className='flex gap-1 items-center text-sm text-gray-900 '>
-                                <FaDollarSign className='text-orange-500' />{" "}
-                                {person.fees}
-                              </div>
-                            </td>
-                            <td className='whitespace-nowrap px-12 py-4'>
-                              <div className='flex items-center justify-start text-sm text-gray-700'>
-                                {/* Department Name */}
-                                <span>{person.department}</span>
+                                </td>
+                                <td className="whitespace-nowrap px-12 py-4">
+                                  <Skeleton className="h-4 w-[80px]" />
+                                </td>
+                                <td className="whitespace-nowrap px-12 py-4">
+                                  <Skeleton className="h-8 w-[100px]" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="whitespace-nowrap px-4 py-4">
+                                  <div className="flex items-center">
+                                    <Skeleton className="h-10 w-10 rounded-full" />
+                                    <div className="ml-4 space-y-2">
+                                      <Skeleton className="h-4 w-[150px]" />
+                                      <Skeleton className="h-4 w-[120px]" />
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="whitespace-nowrap px-12 py-4">
+                                  <Skeleton className="h-4 w-[80px]" />
+                                </td>
+                                <td className="whitespace-nowrap px-12 py-4">
+                                  <Skeleton className="h-8 w-[100px]" />
+                                </td>
+                              </tr>
 
-                                {/* Icons for Approve and Delete */}
-                                <div className='flex gap-5 space-x-2'>
-                                  {/* Approve Icon */}
-                                  <div
-                                    className='bg-green-700 hover:bg-green-700 p-2 cursor-pointer'
-                                    title='Approve Coach'>
-                                    <FaCheck className='text-sm text-white' />
-                                  </div>
-
-                                  {/* Delete Icon */}
-                                  <div
-                                    className='bg-red-700 hover:bg-red-700 p-2 cursor-pointer'
-                                    title='Delete Coach'>
-                                    <FaTimes className='text-sm text-white' />
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
+                            </>
+                            :
+                            <>
+                              {
+                                allCoaches.length > 0 && allCoaches.map((coach) => (
+                                  <tr key={coach.name}>
+                                    <td className='whitespace-nowrap px-4 py-4'>
+                                      <div className='flex items-center'>
+                                        <div className='h-10 w-10 flex-shrink-0'>
+                                          <img
+                                            className='h-10 w-10 rounded-full object-cover'
+                                            src={coach.profileImage}
+                                            alt=''
+                                          />
+                                        </div>
+                                        <div className='ml-4'>
+                                          <div className='text-sm font-medium text-gray-900'>
+                                            {coach.name}
+                                          </div>
+                                          <div className='text-sm text-gray-700'>
+                                            {coach.email}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td className='whitespace-nowrap px-12 py-4'>
+                                      <div className='flex gap-1 items-center text-sm text-gray-900 '>
+                                        <FaDollarSign className='text-orange-500' />{" "}
+                                        {coach.ratesPerHour.charges}
+                                      </div>
+                                    </td>
+                                    <td className='whitespace-nowrap px-12 py-4 '>
+                                      <Button className="bg-white text-blue-900 text-lg hover:bg-white">View<FaLongArrowAltRight className="ml-2" /></Button>
+                                    </td>
+                                  </tr>
+                                ))
+                              }
+                            </>
+                        }
                       </tbody>
                     </table>
                   </div>
+                  {
+                    !isLoading && allCoaches.length === 0 &&
+                    <div className="w-full border h-56 bg-white flex flex-col items-center justify-center py-5">
+                      <div className="w-20 h-20  rounded-full bg-slate-100 flex items-center justify-center">
+                        <FaUser className="text-4xl text-blue-800"/>
+                      </div>
+                      <p className="flex justify-center items-center mt-5">No Coaches Found</p>
+                    </div>
+                  }
                 </div>
               </div>
             </div>

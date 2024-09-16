@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
               {/* Sidebar */}
               <div
                 id='sidebarCoach'
-                className='w-full md:w-[20%] lg:w-[20%] bg-white sticky top-0 lg:h-screen h-auto z-50'>
+                className='w-full md:w-[20%] lg:w-[15%] bg-white sticky top-0 lg:h-screen h-auto z-50'>
                 {/* Sidebar content goes here */}
                 <Sidebar className='w-full' />
               </div>
