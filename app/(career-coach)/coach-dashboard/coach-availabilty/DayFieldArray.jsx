@@ -20,13 +20,22 @@ const DayFieldArray = ({
   timeSlot,
   availabilityStatus,
   getFilteredTimeSlots,
+  shouldRun,
 }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: `availability.${dayIndex}`,
   });
 
-  if (!availabilityStatus) return null; // Only show when availabilityStatus is true
+  // Run the logic only if shouldRun is true and availabilityStatus is true
+  if (!shouldRun || !availabilityStatus) return null;
+
+  const availability = watch(`availability.${dayIndex}`);
+
+  const getLastSecondSelectedTime = () => {
+    const lastField = availability[availability.length - 1];
+    return lastField?.secondSelectedTime || "";
+  }; // Only show when availabilityStatus is true
 
   return (
     <div className='w-full'>
@@ -108,12 +117,13 @@ const DayFieldArray = ({
               {/* Add Time Slot Button */}
               <button
                 type='button'
-                onClick={() =>
+                onClick={() => {
+                  const lastSecondTime = getLastSecondSelectedTime();
                   append({
-                    firstSelectedTime: "",
+                    firstSelectedTime: lastSecondTime || "", // Prefill with last secondSelectedTime
                     secondSelectedTime: "",
-                  })
-                }
+                  });
+                }}
                 className='text-black px-4 py-2 rounded flex items-center text-sm'>
                 <FiPlus className='mr-1 text-base' />
               </button>

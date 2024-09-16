@@ -318,6 +318,7 @@ const CoachAvailability = () => {
                   timeSlot={timeSlot}
                   availabilityStatus={availabilityStatus[day]}
                   getFilteredTimeSlots={getFilteredTimeSlots}
+                  shouldRun={availabilityStatus[day]}
                 />
               </div>
             ))}
