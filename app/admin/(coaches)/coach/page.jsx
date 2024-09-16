@@ -21,7 +21,7 @@ const people = [
   },
 ];
 
-const CoachDetails = () => {
+const Coach = () => {
   return (
     <div>
       <div className='coach_section max-w-7xl mx-auto mt-10 p-5'>
@@ -31,8 +31,8 @@ const CoachDetails = () => {
               <div>
                 <h2 className='text-lg font-semibold'>Coach Request</h2>
                 <p className='mt-1 text-sm text-gray-700'>
-                  This is a list of all coaches. You can edit
-                  or delete existing ones.
+                  This is a list of all coaches. You can edit or delete existing
+                  ones.
                 </p>
               </div>
             </div>
@@ -259,4 +259,4 @@ const CoachDetails = () => {
   );
 };
 
-export default CoachDetails;
+export default Coach;
