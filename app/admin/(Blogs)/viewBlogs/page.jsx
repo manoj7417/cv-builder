@@ -180,7 +180,7 @@ const ViewBlogsPage = () => {
                 <div key={index}>
                   <div className='views_cards_blog'>
                     <div
-                      className='2xl:w-[300px] lg:w-full min-h-[400px] rounded-md relative'
+                      className='2xl:w-[300px] lg:w-full min-h-[400px] rounded-md relative bg-white'
                       style={{
                         boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
                       }}>

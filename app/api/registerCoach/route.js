@@ -2,7 +2,7 @@ import { serverInstance } from '@/lib/serverApi';
 
 export async function POST(req, res) {
     try {
-        const {data} = await req.json();
+        const data = await req.json();
         const response = await serverInstance.post('/coach/register', data);
         return new Response(JSON.stringify(response.data), {
             status: 200,

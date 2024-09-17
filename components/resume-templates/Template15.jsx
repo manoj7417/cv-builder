@@ -599,7 +599,7 @@ const Template15 = () => {
   return (
     <>
       <div
-        className="mx-auto w-[210mm] bg-white border-y-[20px] border-[#e4f2f2]"
+        className="mx-auto w-[210mm] bg-white border-t-[20px] border-[#e4f2f2]"
         style={{
           borderColor: metadata?.theme?.primary,
         }}
