@@ -649,7 +649,7 @@ export default function DashboardIdea() {
                     description. 
                   </p>
                   <div className="step_image">
-                    <img src="/step12.png" alt="" />
+                    <img src="/Step-21.png" alt="step1" />
                   </div>
                 </div>
                 <div className="lg:w-[30%] w-full h-[450px] image_content bg-[#d3e9f4] flex justify-center items-center">
@@ -685,7 +685,7 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex justify-center items-center">
                     <img
-                      src="/step2.png"
+                      src="/Step-22.png"
                       alt="icon4"
                       className="w-full h-full object-cover"
                     />
@@ -757,7 +757,7 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex justify-center items-center">
                     <img
-                      src="/step3.png"
+                      src="/Step-23.png"
                       alt="icon4"
                       className="w-full h-full object-cover"
                     />
@@ -794,7 +794,7 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex justify-center items-center">
                     <img
-                      src="/step-4.png"
+                      src="/Step-24.png"
                       alt="icon4"
                       className="w-full h-full object-cover"
                     />
@@ -860,7 +860,7 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex justify-center items-center">
                     <img
-                      src="/step-5.png"
+                      src="/Step-25.png"
                       alt="icon5"
                       className="w-full h-full object-cover"
                     />
@@ -898,12 +898,12 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex flex-col gap-10 justify-start items-center mt-10">
                     <img
-                      src="/step6-1.png"
+                      src="/Step-26-1.png"
                       alt="icon5"
                       className="w-full h-full object-cover"
                     />
                     <img
-                      src="/step6-2.png"
+                      src="/Step-26-2.png"
                       alt="icon5"
                       className="w-full h-full object-cover"
                     />
@@ -985,7 +985,7 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex justify-center items-center">
                     <img
-                      src="/step3.png"
+                      src="/Step-27.png"
                       alt="icon4"
                       className="w-full h-full object-cover"
                     />
