@@ -27,7 +27,7 @@ const TimeZone = ({ value, onChange }) => {
   return (
     <div>
       <div className='time_zone_heading mb-2'>
-        <h1 className='text-base font-bold text-black'>TimeZone</h1>
+        <h1 className='text-base font-bold text-blue-950'>TimeZone</h1>
       </div>
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger className='w-[300px]'>
