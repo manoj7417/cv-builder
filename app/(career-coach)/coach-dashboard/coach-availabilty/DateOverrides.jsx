@@ -21,11 +21,14 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 
 const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
+  const [dateOverridesData, setDateOverridesData] = useState(null);
   const [isUnavailable, setIsUnavailable] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const [selectedDatesTimes, setSelectedDatesTimes] = useState({});
   const { control } = useForm();
+
+  console.log("dateOverridesData", dateOverridesData);
 
   const isDateDisabled = (date) => {
     const today = new Date();
@@ -87,6 +90,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
       selectedDateTimeSlots: selectedDatesTimes,
       isUnavailableAllDay: isUnavailable,
     };
+    setDateOverridesData(data);
     onUpdateOverrides(data); // Send data to parent component
     setIsModalOpen(false);
   };
@@ -110,7 +114,9 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
           <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
             <DialogContent className="max-w-3xl border-none">
               <DialogHeader>
-                <DialogTitle className="text-blue-950 ">Select the dates to override</DialogTitle>
+                <DialogTitle className="text-blue-950 ">
+                  Select the dates to override
+                </DialogTitle>
               </DialogHeader>
               <div className="flex w-full justify-center">
                 <div className="lg:w-[50%] w-full calendar">
@@ -371,6 +377,25 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+        </div>
+        <div className="show_dataoverrides border-2 border-gray-500 rounded-md p-5 mt-5">
+          {dateOverridesData?.selectedDateTimeSlots && (
+            <div>
+              {Object.keys(dateOverridesData?.selectedDateTimeSlots).map((date) => (
+                <div key={date}>
+                  <p className="font-semibold">{date}</p>
+                  {dateOverridesData?.selectedDateTimeSlots[date].map((slot, index) =>
+                    // Only show the time slot if both times are selected
+                    slot.firstSelectedTime && slot.secondSelectedTime ? (
+                      <p key={index}>
+                        {slot.firstSelectedTime} - {slot.secondSelectedTime}
+                      </p>
+                    ) : null
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

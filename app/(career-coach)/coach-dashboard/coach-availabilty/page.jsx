@@ -176,6 +176,7 @@ const CoachAvailability = () => {
                 getFilteredTimeSlots={getFilteredTimeSlots}
                 onUpdateOverrides={handleDateOverridesUpdate}
               />
+             
             </div>
           </div>
           <div className="lg:w-[30%] w-full time_zone">
