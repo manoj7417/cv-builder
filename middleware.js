@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 
 export const config = {
-  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq', '/add-credit', '/settings/profile', '/settings/cvanalysis', '/settings/pyschometric-test' , '/admin'
+  matcher: ['/user-profile', '/resume-builder', '/analyser/feedback', '/user-history', '/career-counselling', '/mcq', '/add-credit', '/settings/profile', '/settings/cvanalysis', '/settings/pyschometric-test' 
   ],
 };
 
