@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
@@ -125,14 +126,19 @@ function Profile() {
   const updateUserImage = async (data) => {
     try {
       const { accessToken } = await GetTokens();
-      const response = await updateUserProfile(data, accessToken.value);
+      const response = await axios.patch("/api/uploadProfilePicture", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        }
+      });
       if (response.status === 200) {
-        const { userdata } = response.data.data;
+        const { userdata } = response.data;
         updateUserData(userdata);
         setPreviewImage(userdata.profilePicture);
         toast.success("Profile picture updated successfully");
       }
     } catch (error) {
+      console.log(error)
       toast.error("Error updating profile picture");
     }
   };
@@ -147,22 +153,10 @@ function Profile() {
       // Create FormData and append the selected file
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "careerg");
 
-      // Upload the image
-      const uploadResponse = await uploadImage(formData);
-
-      if (uploadResponse.status === 200) {
-        const imageUrl = uploadResponse.data.secure_url;
-
-        // Update the user's profile picture with the new image URL
-        await updateUserImage({ profilePicture: imageUrl });
-      } else {
-        throw new Error("Failed to upload image");
-      }
-    } catch (error) {
-      // Show an error message if the upload fails
-      toast.error("Error uploading profile picture");
+      await updateUserImage(formData);
+    }
+    catch (error) {
       console.error("Error uploading profile picture:", error);
     } finally {
       // Ensure the uploading state is reset after upload completes
@@ -436,19 +430,19 @@ function Profile() {
                     </div>
                   )}
                   <Button
-                  className="upload flex items-center gap-2 p-2 bg-black/50 w-full absolute left-0 bottom-0 justify-center cursor-pointer hover:bg-black/70"
-                  onClick={handleImageUpload}
-                >
-                  <MdOutlineFileUpload className="text-white" />
-                  <p className="text-white">Upload Photo</p>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    ref={fileUploadRef}
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
-                </Button>
+                    className="upload flex items-center gap-2 p-2 bg-black/50 w-full absolute left-0 bottom-0 justify-center cursor-pointer hover:bg-black/70"
+                    onClick={handleImageUpload}
+                  >
+                    <MdOutlineFileUpload className="text-white" />
+                    <p className="text-white">Upload Photo</p>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={fileUploadRef}
+                      onChange={handleImageChange}
+                      className="hidden"
+                    />
+                  </Button>
                 </div>
                 <p className="mt-2 text-sm text-gray-400 text-center w-3/4 mx-auto">
                   Image size should be under 1MB and image ration needs to be
