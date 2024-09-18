@@ -38,7 +38,7 @@ const DayFieldArray = ({
   }; // Only show when availabilityStatus is true
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       {fields.map((item, index) => {
         const firstSelectedTime = watch(
           `availability.${dayIndex}.${index}.firstSelectedTime`
@@ -50,19 +50,21 @@ const DayFieldArray = ({
         return (
           <div
             key={item.id}
-            className='time_slot flex gap-10 items-center justify-between ml-5 mb-3'>
-            <div className='flex gap-4 items-center'>
+            className="time_slot flex gap-10 items-center justify-between lg:ml-5 ml-0 mb-3"
+          >
+            <div className="flex lg:gap-4 gap-1 items-center">
               {/* First Time Select */}
-              <div className='flex-1'>
+              <div className="flex-1">
                 <Controller
                   control={control}
                   name={`availability.${dayIndex}.${index}.firstSelectedTime`}
                   render={({ field }) => (
                     <Select
                       onValueChange={(value) => field.onChange(value)}
-                      value={field.value}>
-                      <SelectTrigger className='w-[150px]'>
-                        <SelectValue placeholder='Select a time' />
+                      value={field.value}
+                    >
+                      <SelectTrigger className="w-[150px]">
+                        <SelectValue placeholder="Select a time" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
@@ -79,16 +81,17 @@ const DayFieldArray = ({
               </div>
 
               {/* Second Time Select */}
-              <div className='flex-1'>
+              <div className="flex-1">
                 <Controller
                   control={control}
                   name={`availability.${dayIndex}.${index}.secondSelectedTime`}
                   render={({ field }) => (
                     <Select
                       onValueChange={(value) => field.onChange(value)}
-                      value={field.value}>
-                      <SelectTrigger className='w-[150px]'>
-                        <SelectValue placeholder='Select a time' />
+                      value={field.value}
+                    >
+                      <SelectTrigger className="w-[150px]">
+                        <SelectValue placeholder="Select a time" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
@@ -105,28 +108,29 @@ const DayFieldArray = ({
               </div>
 
               {/* Remove Button */}
-              {fields.length > 1 && index > 0 && (
+              {fields.length > 1 && index > 0 ? (
                 <button
-                  type='button'
+                  type="button"
                   onClick={() => remove(index)}
-                  className='text-red-600 flex items-center'>
-                  <MdDeleteOutline className='text-base mr-1' />
+                  className="text-red-600 flex items-center"
+                >
+                  <MdDeleteOutline className="text-base mr-1" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const lastSecondTime = getLastSecondSelectedTime();
+                    append({
+                      firstSelectedTime: lastSecondTime || "", // Prefill with last secondSelectedTime
+                      secondSelectedTime: "",
+                    });
+                  }}
+                  className="text-blue-950 flex items-center text-sm"
+                >
+                  <FiPlus className="mr-1 text-base" />
                 </button>
               )}
-
-              {/* Add Time Slot Button */}
-              <button
-                type='button'
-                onClick={() => {
-                  const lastSecondTime = getLastSecondSelectedTime();
-                  append({
-                    firstSelectedTime: lastSecondTime || "", // Prefill with last secondSelectedTime
-                    secondSelectedTime: "",
-                  });
-                }}
-                className='text-black px-4 py-2 rounded flex items-center text-sm'>
-                <FiPlus className='mr-1 text-base' />
-              </button>
             </div>
           </div>
         );
