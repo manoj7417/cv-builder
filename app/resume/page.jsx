@@ -569,11 +569,11 @@ export default function DashboardIdea() {
           </div>
           <div className="max-w-7xl mx-auto steps_intro lg:py-20 sm:p-5 p-5">
             <div className="flex lg:flex-row flex-col gap-10 my-10">
-              <div className="lg:w-[30%] w-full h-[350px] image_content bg-[#ffc7bf]">
+              <div className="lg:w-[30%] w-full h-[350px] image_content">
                 <img
-                  src="/resume-icon4.png"
+                  src="/resume21.png"
                   alt="icon4"
-                  className="w-full h-full p-10 object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="lg:w-[70%] w-full steps_content">
@@ -652,17 +652,12 @@ export default function DashboardIdea() {
                     <img src="/Step-21.png" alt="step1" />
                   </div>
                 </div>
-                <div className="lg:w-[30%] w-full h-[450px] image_content bg-[#d3e9f4] flex justify-center items-center">
+                <div className="lg:w-[30%] w-full h-[450px] image_content flex justify-center items-center">
                   <div className="flex lg:flex-row flex-col justify-center items-center">
                     <img
-                      src="/step-1.png"
+                      src="/resume22.png"
                       alt="icon4"
-                      className="w-[200px] h-[200px] object-contain"
-                    />
-                    <img
-                      src="/step-11.png"
-                      alt="icon4"
-                      className="w-[200px] h-[200px] object-contain"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </div>

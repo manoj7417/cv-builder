@@ -8,7 +8,7 @@ import DateOverrides from "./DateOverrides";
 
 const CoachAvailability = () => {
   const [dateOverridesData, setDateOverridesData] = useState(null);
-  const [formData,setFormData] = useState();
+  const [formData,setFormData] = useState(null);
 
 
   console.log("formData",formData)
@@ -109,9 +109,30 @@ const CoachAvailability = () => {
     <div className="max-w-7xl mx-auto mt-18 lg:p-0 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
       <div className="main_heading my-5 mt-10">
         <h1 className="text-xl text-blue-950 font-bold">Time Availabilty</h1>
-        <p className="text-sm font-semibold text-gray-600">
+        {/* <p className="text-sm font-semibold text-gray-600">
           Sun - Sat, 9:00 AM - 5:00 PM
-        </p>
+        </p> */}
+        {formData && (
+        <div>
+          {daysOfWeek.map((day) => (
+            <div key={day}>
+              {formData[day] && formData[day].length > 0 ? (
+                formData[day].map((slot, index) => (
+                  slot.firstSelectedTime && slot.secondSelectedTime ? (
+                    <p key={index} className="text-sm font-semibold text-gray-600">
+                      <strong>{day}</strong>: {slot.firstSelectedTime} - {slot.secondSelectedTime}
+                    </p>
+                  ) : null
+                ))
+              ) : (
+                <p key={day}>
+                  <strong>{day}</strong>: No Availability
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex lg:flex-row flex-col gap-5">
