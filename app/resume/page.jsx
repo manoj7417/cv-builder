@@ -1022,9 +1022,9 @@ export default function DashboardIdea() {
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-start items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
                   <div className="flex justify-start items-center">
                     <img
-                      src="/step-8.png"
+                      src="/Step-28.png"
                       alt="icon4"
-                      className="w-full h-full object-cover"
+                      className="w-full h-[500px] object-cover"
                     />
                   </div>
                 </div>
