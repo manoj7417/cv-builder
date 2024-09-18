@@ -78,7 +78,7 @@ export default function Register() {
         router.push("/login");
       }
     } catch (error) {
-      toast.error(error.response.data.error); 
+      toast.error(error?.response.data.error); 
     } finally {
       setIsLoading(false);
     }
