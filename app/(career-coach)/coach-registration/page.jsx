@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -78,14 +78,14 @@ export default function CoachRegistration() {
   // }, [password]);
 
   const handleCoachDetails = async (data) => {
-    const { firstName, lastName, email, phoneNumber, password } = data;
+    setIsLoading(true);
+    const { firstName, lastName, email, phone, password } = data;
     const obj = {
       name: `${firstName} ${lastName}`,
       email,
-      phoneNumber,
+      phone,
       password,
     };
-    setIsLoading(true);
     try {
       const response = await axios.post("/api/registerCoach", obj);
       if (response.status === 200) {
@@ -104,8 +104,8 @@ export default function CoachRegistration() {
   };
 
   return (
-    <section className="max-w-[80rem] mx-auto place-items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-40 gap-24">
+    <section className=" place-items-center h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 ">
         <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0">
           <div className="w-[70%] mt-14">
             <h2 className="text-white text-center text-2xl font-semibold">
@@ -120,7 +120,7 @@ export default function CoachRegistration() {
             autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
             spaceBetween={20} // Space between slides
             slidesPerView={1} // Show one slide at a time
-            className="mt-4 w-[80%] rounded-md"
+            className="mt-4 w-[60%] rounded-md"
           >
             <SwiperSlide>
               <div className="p-4 rounded-md shadow">
@@ -242,7 +242,7 @@ export default function CoachRegistration() {
                       </div>
                       <div>
                         <Controller
-                          name="phoneNumber"
+                          name="phone"
                           control={control}
                           defaultValue=""
                           rules={{
@@ -265,9 +265,9 @@ export default function CoachRegistration() {
                           )}
                         />
                         {/* Display validation errors */}
-                        {errors.phoneNumber && (
+                        {errors.phone && (
                           <p className="text-red-500 mt-1">
-                            {errors.phoneNumber.message}
+                            {errors.phone.message}
                           </p>
                         )}
                       </div>
@@ -525,6 +525,7 @@ export default function CoachRegistration() {
                   <Button
                     type="submit"
                     className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
+                    disabled={isLoading}
                   >
                     {isLoading ? (
                       <>

@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { schema } from "./CoachValidation";
+import { schema } from "./CoachValidation";
 import {
   MdKeyboardArrowRight,
   MdOutlineFileUpload,
@@ -31,6 +31,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { ImSpinner3, ImSpinner8 } from "react-icons/im";
+import { Button } from "@/components/ui/button";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { GetTokens } from "@/app/actions";
+import { toast } from "react-toastify";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useCoachStore } from "@/app/store/coachStore";
+import Image from "next/image";
+import dayjs from "dayjs";
 
 const CoachForm = () => {
   const steps = [
@@ -38,9 +48,8 @@ const CoachForm = () => {
       id: "Step 1",
       name: "Personal Details",
       fields: [
-        "image",
-        "firstName",
-        "lastName",
+        "profileImage",
+        "name",
         "dateofBirth",
         "placeofBirth",
         "email",
@@ -59,28 +68,26 @@ const CoachForm = () => {
         "experience",
         "typeOfCoaching",
         "skills",
-        "bioCoach",
+        "bio",
         "coachingDescription",
       ],
     },
     {
       id: "Step 3",
       name: "Bank Details",
-      fields: ["bankName", "bankAccountNumber", "ifscCode", "price", "charges"],
+      fields: ["bankName", "bankAccountNumber", "ifscCode", "charges"],
     },
     {
       id: "Step 4",
       name: "Document Details",
-      fields: ["docsUpload", "pancard"],
+      fields: ["docsUpload"],
     },
   ];
-
   const [currentStep, setCurrentStep] = useState(0);
   const [previousStep, setPreviousStep] = useState(0);
-
   const delta = currentStep - previousStep;
-  const defaultImage = "https://via.placeholder.com/150"; // Set the default image URL
-
+  const defaultImage = "https://via.placeholder.com/150";
+  const { userdata } = useCoachStore((state) => state.userState)
   const {
     register,
     handleSubmit,
@@ -89,76 +96,87 @@ const CoachForm = () => {
     reset,
     trigger,
     setValue,
+    clearErrors,
     formState: { errors },
-  } = useForm();
 
-  const [isLoading, setIsLoading] = useState(false);
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: userdata.email || '',
+      name: userdata.name || ''
+    },
+  });
+  // { resolver: yupResolver(schema) }
+  const [isImageUploading, setIsImageUploading] = useState(false);
   const [isCvLoading, setIsCvLoading] = useState(false);
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
-  const [preview, setPreview] = useState(null); // For image preview
   const [cvFileUrl, setCvFileUrl] = useState(null);
   const [docsUrl, setDocsUrl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileType, setFileType] = useState(null);
-
-  // Watch for image field changes
-  const image = watch("image");
-
-  // Handle image upload and preview
+  const profileImageUrl = watch("profileImage");
+  const [isUploadingCV, setIsUploadingCV] = useState(false)
+  const [isUploadingDocs, setIsUploadingDocs] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { updateUserData } = useCoachStore()
+  const imageUrl = watch("profileImage")
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setIsImageUploading(true)
       const formData = new FormData();
       formData.append("image", file);
       try {
-        setIsLoading(true);
         const response = await axios.post("/api/uploadImage", formData);
         if (response.status === 200) {
           const imageUrl = response.data.url;
-          setPreview(imageUrl);
-          setValue("image", imageUrl);
-          setIsLoading(false);
+          setValue("profileImage", imageUrl);
         } else {
           console.error("Image upload failed.");
         }
       } catch (error) {
         console.error("Error uploading image:", error);
+      } finally {
+        setIsImageUploading(false)
       }
     }
   };
 
   // Remove the uploaded image
   const removeImage = () => {
-    setPreview(null); // Clear image preview
-    setValue("image", null); // Clear image from the form state
+    setValue("profileImage", null);
+    setValue("profileImage", null); // Clear the value in the form
+    clearErrors("profileImage"); // Clear validation errors if any
   };
 
-  // Upload CV Functionlaity starts here
+  // Upload CV Functionlaity starts here  
 
   //upload cv
   const cvFile = watch("cvUpload");
   const error = errors.cvUpload?.message;
 
-  // For CV Upload
+  // For CV UploadF
   const handleCVUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setIsUploadingCV(true)
       const formData = new FormData();
       formData.append("cvUpload", file); // Assuming "cv" is the expected field in the backend
       try {
         setIsCvLoading(true);
         const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
-        console.log("response", response);
         if (response.status === 200) {
           const cvUrl = response.data.url;
           setValue("cvUpload", cvUrl); // Set CV URL in form data
           setCvFileUrl(cvUrl);
-          setIsCvLoading(false);
         } else {
           console.error("CV upload failed.");
         }
       } catch (error) {
         console.error("Error uploading CV:", error);
+      } finally {
+        setIsUploadingCV(false)
+        setIsCvLoading(false);
       }
     }
   };
@@ -179,6 +197,7 @@ const CoachForm = () => {
   const handleDocUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setIsUploadingDocs(true)
       const formData = new FormData();
       formData.append("docsUpload", file); // Assuming "document" is the expected field in the backend
       try {
@@ -186,6 +205,7 @@ const CoachForm = () => {
         const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
         if (response.status === 200) {
           const docUrl = response.data.url;
+          console.log(docUrl)
           setValue("docsUpload", docUrl); // Set document URL in form data
           setIsDocumentLoading(false);
           setDocsUrl(docUrl);
@@ -194,6 +214,8 @@ const CoachForm = () => {
         }
       } catch (error) {
         console.error("Error uploading document:", error);
+      } finally {
+        setIsUploadingDocs(false)
       }
     }
   };
@@ -208,8 +230,8 @@ const CoachForm = () => {
     fileType === "cv"
       ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
       : fileType === "docs"
-      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
-      : null;
+        ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+        : null;
 
   const handleViewFile = (type) => {
     setFileType(type);
@@ -223,10 +245,60 @@ const CoachForm = () => {
 
   // Upload Docs Functionlaity ends here
 
-  const processForm = (data) => {
-    alert("hi");
-    console.log(data);
-    reset();
+  const processForm = async (data) => {
+    const { accessToken } = await GetTokens();
+    setIsSubmitting(true)
+    const payload = {
+      name: data.name,
+      phone: data.phone,
+      profileImage: data.profileImage,
+      address: data.address,
+      country: data.country,
+      city: data.city,
+      zip: data.zip,
+      cv: {
+        link: data.cvUpload
+      },
+      signedAggrement: {
+        link: data.docsUpload
+      },
+      experience: data.experience,
+      typeOfCoaching: data.typeOfCoaching,
+      skills: data.skills,
+      dateofBirth: data.dateofBirth,
+      placeofBirth: data.placeofBirth,
+      bio: data.bio,
+      bankDetails: {
+        accountNumber: data.bankAccountNumber,
+        code: {
+          name: "IFSC",
+          value: data.ifscCode
+        }
+      },
+      coachingDescription: data.coachingDescription,
+      address: data.address,
+      ratesPerHour: {
+        charges: data.charges
+      },
+      formFilled: true
+    }
+    try {
+      const response = await axios.patch('/api/coachForm', payload, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`
+        }
+      })
+      if (response.status === 200) {
+        // console.log(response.data.coach)
+        updateUserData(response.data.coach)
+        toast.success('Form submitted successfully')
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("Error in submitting the form")
+    } finally {
+      setIsSubmitting(false)
+    }
   };
 
   const next = async () => {
@@ -252,6 +324,28 @@ const CoachForm = () => {
 
   return (
     <>
+      <Dialog open={userdata.formFilled}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle></DialogTitle>
+          </DialogHeader>
+          <div className="w-full flex flex-col items-center ">
+            <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
+              <Image
+                src={'/hourglass.png'}
+                alt=""
+                width={100}
+                height={100}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="text-center py-4">
+              <h1 className="text-2xl font-bold text-gray-600">Document Verification Pending</h1>
+              <p className="mt-3 text-gray-500">Your documents are now being verified , please wait</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       <section className='px-10 py-5'>
         {/* steps */}
         <nav aria-label='Progress'>
@@ -306,124 +400,61 @@ const CoachForm = () => {
               </p>
               <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
                 <div className='sm:col-span-full'>
-                  <div className='flex flex-col items-start'>
-                    <div className='relative'>
-                      {isLoading ? (
-                        <div className='w-32 h-32 flex items-center justify-center border rounded-lg mt-4'>
-                          <div className='loader flex items-center gap-2'>
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              fill='currentColor'
-                              class='w-6 h-6 animate-spin'
-                              viewBox='0 0 16 16'>
-                              <path d='M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z' />
-                              <path
-                                fill-rule='evenodd'
-                                d='M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z'
-                              />
-                            </svg>
-                            <span className='text-sm'>Loading...</span>
-                          </div>{" "}
-                          {/* Custom loader */}
-                        </div>
-                      ) : preview ? (
-                        <img
-                          src={preview}
-                          alt='Uploaded Preview'
-                          className='w-32 h-32 object-cover border rounded-lg'
-                        />
-                      ) : (
-                        <div className='w-32 h-32 flex items-center justify-center border rounded-lg'>
-                          <img
-                            src={defaultImage}
-                            alt='Uploaded Preview'
-                            className='w-32 h-32 object-cover border rounded-lg'
-                          />
-                        </div>
-                      )}
+                  <div className='flex'>
+                    <div className='mt-4  w-1/2'>
+                      <div className="flex">
+                        <img src={imageUrl || defaultImage} alt="profileimage" className="w-40 h-40 rounded-full object-cover shadow-md" />
 
-                      {image && (
-                        <button
-                          className='absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full'
-                          onClick={removeImage}>
-                          <FaTimes /> {/* Remove icon */}
-                        </button>
-                      )}
-
-                      {/* Error message */}
-                      {errors.image && (
-                        <p className='mt-2 text-sm text-red-400'>
-                          {errors.image.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className='mt-4'>
-                      <label className='text-sm cursor-pointer bg-blue-500 text-white px-4 py-2 rounded'>
-                        <MdOutlineFileUpload className='inline-flex text-xl m-1' />{" "}
-                        Upload
-                        <Controller
-                          name='image'
-                          control={control}
-                          defaultValue={null}
-                          render={({ field }) => (
+                        <div className="px-4 justify-center flex flex-col ">
+                          <label className=' cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4'>
+                            {
+                              isImageUploading ? <>
+                                <ImSpinner3 className="m-1 animate-spin" />{" "}Uploading
+                              </> :
+                                <>
+                                  <MdOutlineFileUpload className='inline-flex text-xl m-1' />{" "}
+                                  Upload
+                                </>
+                            }
                             <input
-                              type='file'
-                              accept='image/*'
-                              className='hidden'
-                              onChange={(e) => {
-                                const file = e.target.files[0];
-                                field.onChange(file); // Update form state with file
-                                handleImageUpload(e); // Handle image preview
-                              }}
+                              type="file"
+                              accept="image/*"
+                              hidden="true"
+                              onChange={handleImageUpload}
                             />
-                          )}
-                        />
+                          </label>
+                          {
+                            imageUrl && <Button className="text-white bg-red-500 hover:bg-red-700 flex justify-center" onClick={removeImage}><RiDeleteBinLine className="m-1" />{" "}Remove</Button>
+                          }
+                        </div>
+                      </div>
+                      <p className='mt-2 text-sm text-red-400'>
+                        {errors?.profileImage?.message}
+                      </p>
+                    </div>
+                    <div className='sm:col-span-3 w-1/2 flex flex-col justify-center pl-4'>
+                      <label
+                        htmlFor='fullname'
+                        className='block text-sm font-medium leading-6 text-gray-900'>
+                        Full name
                       </label>
+                      <div className='mt-2'>
+                        <Input
+                          type='text'
+                          {...register("name")}
+                          autoComplete='given-name'
+
+                        />
+                        {errors.name?.message && (
+                          <p className='mt-2 text-sm text-red-400'>
+                            {errors.name.message}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='firstName'
-                    className='block text-sm font-medium leading-6 text-gray-900'>
-                    First name
-                  </label>
-                  <div className='mt-2'>
-                    <input
-                      type='text'
-                      {...register("firstName")}
-                      autoComplete='given-name'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
-                    />
-                    {errors.firstName?.message && (
-                      <p className='mt-2 text-sm text-red-400'>
-                        {errors.firstName.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='lastName'
-                    className='block text-sm font-medium leading-6 text-gray-900'>
-                    Last name
-                  </label>
-                  <div className='mt-2'>
-                    <input
-                      type='text'
-                      id='lastName'
-                      {...register("lastName")}
-                      autoComplete='family-name'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
-                    />
-                    {errors.lastName?.message && (
-                      <p className='mt-2 text-sm text-red-400'>
-                        {errors.lastName.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
+
                 <div className='sm:col-span-3'>
                   <label
                     htmlFor='dateofBirth'
@@ -441,6 +472,7 @@ const CoachForm = () => {
                           className='w-full h-10'
                           selected={field.value}
                           onChange={(date) => field.onChange(date)}
+                          maxDate={dayjs()}
                         />
                       )}
                     />
@@ -458,27 +490,7 @@ const CoachForm = () => {
                     Place of Birth
                   </label>
                   <div className='mt-2'>
-                    <Controller
-                      name='placeofBirth'
-                      control={control}
-                      // rules={{ required: "Place of Birth is required" }}
-                      render={({ field }) => (
-                        <Select onValueChange={field.onChange}>
-                          <SelectTrigger className='w-full'>
-                            <SelectValue placeholder='Select a country' />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectItem value='canada'>Canada</SelectItem>
-                              <SelectItem value='london'>London</SelectItem>
-                              <SelectItem value='paris'>Paris</SelectItem>
-                              <SelectItem value='finland'>Finland</SelectItem>
-                              <SelectItem value='new-york'>New York</SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
+                    <Input {...register("placeofBirth")} />
                     {errors.placeofBirth?.message && (
                       <p className='mt-2 text-sm text-red-400'>
                         {errors.placeofBirth.message}
@@ -493,12 +505,12 @@ const CoachForm = () => {
                     Email address
                   </label>
                   <div className='mt-2'>
-                    <input
+                    <Input
                       id='email'
                       type='email'
                       {...register("email")}
                       autoComplete='email'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
+                      disabled
                     />
                     {errors.email?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -514,12 +526,11 @@ const CoachForm = () => {
                     Phone Number
                   </label>
                   <div className='mt-2'>
-                    <input
+                    <Input
                       type='text'
                       id='phone'
                       {...register("phone")}
                       autoComplete='Phone Number'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.phone && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -535,11 +546,10 @@ const CoachForm = () => {
                     Address
                   </label>
                   <div className='mt-2'>
-                    <textarea
+                    <Textarea
                       type='text'
                       {...register("address")}
                       autoComplete='Address'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.address?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -555,12 +565,11 @@ const CoachForm = () => {
                     Country
                   </label>
                   <div className='mt-2'>
-                    <input
+                    <Input
                       type='text'
                       id='country'
                       {...register("country")}
                       autoComplete='address-level2'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.country?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -576,12 +585,11 @@ const CoachForm = () => {
                     City
                   </label>
                   <div className='mt-2'>
-                    <input
+                    <Input
                       type='text'
                       id='city'
                       {...register("city")}
                       autoComplete='address-level1'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.city?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -597,12 +605,11 @@ const CoachForm = () => {
                     ZIP / Postal code
                   </label>
                   <div className='mt-2'>
-                    <input
+                    <Input
                       type='text'
                       id='zip'
                       {...register("zip")}
                       autoComplete='postal-code'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.zip?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -614,7 +621,6 @@ const CoachForm = () => {
               </div>
             </motion.div>
           )}
-
           {currentStep === 1 && (
             <motion.div
               initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
@@ -637,37 +643,28 @@ const CoachForm = () => {
                   <div className='flex gap-5 items-center'>
                     <div className='mt-2'>
                       {/* Controller for handling file input */}
-                      <Controller
-                        name='cvUpload'
-                        control={control}
-                        defaultValue={null}
-                        render={({ field: { onChange } }) => (
-                          <>
-                            <label
-                              htmlFor='cvUpload'
-                              className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                      <label
+                        htmlFor='cvUpload'
+                        className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                        {
+                          isUploadingCV ?
+                            <>
+                              <ImSpinner8 className='text-xl animate-spin' />
+                              <span className='text-sm'>Uploading</span>
+                            </>
+                            :
+                            <>
                               <IoMdCloudUpload className='text-xl' />
                               <span className='text-sm'>Upload</span>
-                            </label>
-                            <input
-                              type='file'
-                              id='cvUpload'
-                              accept='application/pdf'
-                              className='hidden'
-                              onChange={(e) => {
-                                const file = e.target.files[0];
-                                onChange(file); // Update form state with the uploaded file
-                                handleCVUpload(e);
-                              }}
-                            />
-                            {/* Error message if validation fails */}
-                            {error && (
-                              <p className='mt-2 text-sm text-red-400'>
-                                {error}
-                              </p>
-                            )}
-                          </>
-                        )}
+                            </>
+                        }
+                      </label>
+                      <input
+                        type='file'
+                        id='cvUpload'
+                        accept='application/pdf'
+                        className='hidden'
+                        onChange={handleCVUpload}
                       />
                     </div>
 
@@ -696,7 +693,7 @@ const CoachForm = () => {
                       {cvFileUrl && (
                         <button
                           type='button'
-                          onClick={() => setCvFileUrl(null)}
+                          onClick={handleRemovecvUpload}
                           className='text-red-500 hover:text-red-700'>
                           <FaTimes className='text-sm' />
                         </button>
@@ -730,10 +727,13 @@ const CoachForm = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
+                  <p className='mt-2 text-sm text-red-400'>
+                    {errors?.cvUpload?.message}
+                  </p>
                 </div>
                 <div className='sm:col-span-3'>
                   <label
-                    htmlFor='experience'
+                    htmlFor='skills'
                     className='block text-sm font-medium leading-6 text-gray-900'>
                     Skills
                   </label>
@@ -782,25 +782,10 @@ const CoachForm = () => {
                     Experience
                   </label>
                   <div className='mt-2'>
-                    <Controller
-                      name='experience'
-                      control={control}
-                      render={({ field }) => (
-                        <Select onValueChange={field.onChange}>
-                          <SelectTrigger className='w-full'>
-                            <SelectValue placeholder='Select a experience' />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectItem value='1'>1</SelectItem>
-                              <SelectItem value='2'>2</SelectItem>
-                              <SelectItem value='3'>3</SelectItem>
-                              <SelectItem value='4'>4</SelectItem>
-                              <SelectItem value='5'>5</SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      )}
+                    <Input
+                      type='number'
+                      min='1'
+                      {...register("experience")}
                     />
                     {errors.experience?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -857,11 +842,10 @@ const CoachForm = () => {
                     Coaching Desciption
                   </label>
                   <div className='mt-2'>
-                    <textarea
+                    <Textarea
                       type='text'
                       {...register("coachingDescription")}
                       autoComplete='coachingDescription'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.coachingDescription?.message && (
                       <p className='mt-2 text-sm text-red-400'>
@@ -872,20 +856,19 @@ const CoachForm = () => {
                 </div>
                 <div className='sm:col-span-6'>
                   <label
-                    htmlFor='bioCoach'
+                    htmlFor='bio'
                     className='block text-sm font-medium leading-6 text-gray-900'>
                     Bio of Coach
                   </label>
                   <div className='mt-2'>
-                    <textarea
+                    <Textarea
                       type='text'
-                      {...register("bioCoach")}
-                      autoComplete='bioCoach'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
+                      {...register("bio")}
+                      autoComplete='bio'
                     />
-                    {errors.bioCoach?.message && (
+                    {errors.bio?.message && (
                       <p className='mt-2 text-sm text-red-400'>
-                        {errors.bioCoach.message}
+                        {errors.bio.message}
                       </p>
                     )}
                   </div>
@@ -906,43 +889,16 @@ const CoachForm = () => {
                 <p className='mt-1 text-sm leading-6 text-gray-600'>
                   Please provide any additional information that may help us
                 </p>
-
                 <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                  <div className='sm:col-span-full'>
+                  <div className='sm:col-span-3'>
                     <label
                       htmlFor='placeofBirth'
                       className='block text-sm font-medium leading-6 text-gray-900'>
                       Bank Name
                     </label>
                     <div className='mt-2'>
-                      <Controller
-                        name='bankName'
-                        control={control}
-                        // rules={{ required: "Place of Birth is required" }}
-                        render={({ field }) => (
-                          <Select onValueChange={field.onChange}>
-                            <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select a Bank' />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectItem value='chase'>
-                                  Chase Bank
-                                </SelectItem>
-                                <SelectItem value='wells-fargo'>
-                                  Wells Fargo
-                                </SelectItem>
-                                <SelectItem value='bank-of-america'>
-                                  Bank of America
-                                </SelectItem>
-                                <SelectItem value='citibank'>
-                                  Citibank
-                                </SelectItem>
-                                <SelectItem value='hsbc'>HSBC</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                        )}
+                      <Input
+                        {...register("bankName")}
                       />
                       {errors.bankName?.message && (
                         <p className='mt-2 text-sm text-red-400'>
@@ -958,11 +914,9 @@ const CoachForm = () => {
                       IFSC Code
                     </label>
                     <div className='mt-2'>
-                      <input
+                      <Input
                         type='text'
                         {...register("ifscCode")}
-                        autoComplete='street-address'
-                        className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                       />
                       {errors.ifscCode?.message && (
                         <p className='mt-2 text-sm text-red-400'>
@@ -978,11 +932,10 @@ const CoachForm = () => {
                       Bank Account Number
                     </label>
                     <div className='mt-2'>
-                      <input
+                      <Input
                         type='text'
                         {...register("bankAccountNumber")}
-                        autoComplete='street-address'
-                        className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
+
                       />
                       {errors.bankAccountNumber?.message && (
                         <p className='mt-2 text-sm text-red-400'>
@@ -995,65 +948,10 @@ const CoachForm = () => {
                     <label
                       htmlFor='price'
                       className='block text-sm font-medium leading-6 text-gray-900'>
-                      Price
+                      Charges $/hr
                     </label>
                     <div className='mt-2'>
-                      <Controller
-                        name='price'
-                        control={control}
-                        // rules={{ required: "Place of Birth is required" }}
-                        render={({ field }) => (
-                          <Select onValueChange={field.onChange}>
-                            <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select a price' />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectItem value='1000'>1000</SelectItem>
-                                <SelectItem value='2000'>2000</SelectItem>
-                                <SelectItem value='3000'>3000</SelectItem>
-                                <SelectItem value='4000'>4000</SelectItem>
-                                <SelectItem value='5000'>5000</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                      {errors.price?.message && (
-                        <p className='mt-2 text-sm text-red-400'>
-                          {errors.price.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className='sm:col-span-3'>
-                    <label
-                      htmlFor='charges'
-                      className='block text-sm font-medium leading-6 text-gray-900'>
-                      Charges
-                    </label>
-                    <div className='mt-2'>
-                      <Controller
-                        name='charges'
-                        control={control}
-                        // rules={{ required: "Place of Birth is required" }}
-                        render={({ field }) => (
-                          <Select onValueChange={field.onChange}>
-                            <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select a charges' />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectItem value='100'>100</SelectItem>
-                                <SelectItem value='200'>200</SelectItem>
-                                <SelectItem value='300'>300</SelectItem>
-                                <SelectItem value='400'>400</SelectItem>
-                                <SelectItem value='500'>500</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
+                      <Input {...register("charges")} type="number" min='1' />
                       {errors.charges?.message && (
                         <p className='mt-2 text-sm text-red-400'>
                           {errors.charges.message}
@@ -1087,69 +985,57 @@ const CoachForm = () => {
                   </label>
                   <div className='flex gap-5 items-center'>
                     <div className='mt-2'>
-                      <Controller
-                        name='docsUpload'
-                        control={control}
-                        defaultValue={null}
-                        render={({ field: { onChange } }) => (
+                      <div className="flex items-center ">
+                        <label
+                          htmlFor='docsUpload'
+                          className='flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 '>
+                          {
+                            isUploadingDocs ?
+                              <>
+                                <ImSpinner8 className='text-xl animate-spin' />
+                                <span className='text-sm'>Uploading</span></>
+                              :
+                              <>
+                                <IoMdCloudUpload className='text-xl' />
+                                <span className='text-sm'>Upload Documents</span>
+                              </>
+                          }
+                        </label>
+                        <input
+                          type='file'
+                          id='docsUpload'
+                          hidden
+                          accept='application/pdf'
+                          onChange={handleDocUpload}
+                          className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                        />
+                        {docsFile && (
                           <>
-                            <label
-                              htmlFor='docsUpload'
-                              className='flex items-center cursor-pointer space-x-2 text-sky-600'>
-                              <IoMdCloudUpload className='text-xl' />
-                              <span className='text-sm'>Upload Documents</span>
-                            </label>
-                            <input
-                              type='file'
-                              id='docsUpload'
-                              accept='application/pdf'
-                              onChange={(e) => {
-                                const file = e.target.files[0];
-                                onChange(file); // Update form state with the uploaded file
-                                handleDocUpload(e);
-                              }}
-                              className='hidden w-full text-gray-900 border rounded-md py-1.5'
-                            />
-                            {/* Show error message if any */}
-                            {docsError && (
-                              <p className='mt-2 text-sm text-red-400'>
-                                {docsError}
-                              </p>
-                            )}
+                            <div className='mt-2 flex items-center space-x-2 text-green-600 py-2'>
+                              <span>{docsUrl?.split("/")?.pop()}</span>
+                              <FaCheckCircle className='text-xl' />
+                              {/* View PDF Icon */}
+                              {docsUrl && (
+                                <button
+                                  type='button'
+                                  onClick={() => handleViewFile("docs")}
+                                  className='text-blue-600 hover:text-blue-800'>
+                                  <FaEye className='text-xl' /> {/* View Icon */}
+                                </button>
+                              )}
+                            </div>
+                            <button
+                              type='button'
+                              onClick={handleRemoveDocs}
+                              className='text-red-500 hover:text-red-700'>
+                              <FaTimes className='text-sm' />
+                            </button>
                           </>
                         )}
-                      />
-                    </div>
-                    {/* Display uploaded file name and allow removing it */}
-                    <div className='mt-2 flex items-center space-x-2 text-green-600'>
-                      {isDocumentLoading ? ( // Show loading spinner while fetching
-                        <FaSpinner className='animate-spin text-xl text-blue-500' />
-                      ) : docsUrl ? ( // Show file name and tick icon when file is uploaded
-                        <>
-                          <span>{docsUrl?.split("/")?.pop()}</span>
-                          <FaCheckCircle className='text-xl' />
-
-                          {/* View PDF Icon */}
-                          <button
-                            type='button'
-                            onClick={() => handleViewFile("docs")}
-                            className='text-blue-600 hover:text-blue-800'>
-                            <FaEye className='text-xl' /> {/* View Icon */}
-                          </button>
-                        </>
-                      ) : (
-                        <p>No file uploaded</p> // Message when no file is uploaded
-                      )}
-
-                      {/* Remove File Button */}
-                      {docsUrl && (
-                        <button
-                          type='button'
-                          onClick={() => setDocsUrl(null)}
-                          className='text-red-500 hover:text-red-700'>
-                          <FaTimes className='text-sm' />
-                        </button>
-                      )}
+                      </div>
+                      <p className='mt-2 text-sm text-red-400'>
+                        {errors?.docsUpload?.message}
+                      </p>
                     </div>
 
                     {/* ShadCN Dialog to display PDF */}
@@ -1180,26 +1066,6 @@ const CoachForm = () => {
                     </Dialog>
                   </div>
                 </div>
-                <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='firstName'
-                    className='block text-sm font-medium leading-6 text-gray-900'>
-                    Pan Card
-                  </label>
-                  <div className='mt-2'>
-                    <input
-                      type='text'
-                      {...register("pancard")}
-                      autoComplete='given-name'
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
-                    />
-                    {errors.pancard?.message && (
-                      <p className='mt-2 text-sm text-red-400'>
-                        {errors.pancard.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
               </div>
             </motion.div>
           )}
@@ -1218,11 +1084,19 @@ const CoachForm = () => {
               <button
                 type='button'
                 onClick={next}
-                className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 flex items-center'>
-                <span className='text-sm'>
-                  {currentStep === steps.length - 1 ? "Submit" : "Go Next"}
-                </span>
-                <MdKeyboardArrowRight className='w-5 h-5' />
+                disabled={isSubmitting}
+                className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 flex items-center disabled:text-gray-500'>
+                {
+                  isSubmitting ?
+                    <>
+                      Submitting{' '}<ImSpinner8 className='w-3 h-3 animate-spin ml-1' />
+                    </>
+                    :
+                    <>
+                      {currentStep === steps.length - 1 ? "Submit" : "Go Next"}
+                      <MdKeyboardArrowRight className='w-4 h-4' />
+                    </>
+                }
               </button>
             </div>
           </div>
