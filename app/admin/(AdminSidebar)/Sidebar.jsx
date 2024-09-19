@@ -156,7 +156,7 @@ const Sidebar = () => {
               alt="Profile Image"
               width={52} // Width should match the container's width
               height={52} // Height should match the container's height
-              className="object-cover h-10 w-10"
+              className="object-cover h-10 w-10 rounded-full"
             />
             <div>
               <p className="font-semibold text-gray-800 text-base">
