@@ -499,16 +499,16 @@ const UserDashboardPage = () => {
                   </h2>
                   <div className="dashboard">
                     <div className="grid lg:grid-cols-4 grid-cols-1 gap-10 lg:p-0 p-5">
-                      <div class="card border border-gray-200 shadow-lg bg-pink-200">
-                        <div class="card-content p-4">
-                          <div class="card-body">
-                            <div class="flex items-center gap-5">
-                              <div class="flex-shrink-0 bg-white p-2">
+                      <div className="card border border-gray-200 shadow-lg bg-pink-200">
+                        <div className="card-content p-4">
+                          <div className="card-body">
+                            <div className="flex items-center gap-5">
+                              <div className="flex-shrink-0 bg-white p-2">
                                 <FaRegPlayCircle className="text-2xl text-pink-400" />
                               </div>
-                              <div class="flex-grow text-start">
-                                <h3 class="text-xl">10</h3>
-                                <span class="text-gray-500 text-sm">
+                              <div className="flex-grow text-start">
+                                <h3 className="text-xl">10</h3>
+                                <span className="text-gray-500 text-sm">
                                   Live Coaching
                                 </span>
                               </div>
@@ -516,16 +516,16 @@ const UserDashboardPage = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="card border border-gray-200 shadow-lg bg-[#EBEBFF]">
-                        <div class="card-content p-4">
-                          <div class="card-body">
-                            <div class="flex items-center gap-5">
-                              <div class="flex-shrink-0 bg-white p-2">
+                      <div className="card border border-gray-200 shadow-lg bg-[#EBEBFF]">
+                        <div className="card-content p-4">
+                          <div className="card-body">
+                            <div className="flex items-center gap-5">
+                              <div className="flex-shrink-0 bg-white p-2">
                                 <BsFileEarmarkCheck className="text-2xl text-blue-400" />
                               </div>
-                              <div class="flex-grow text-start">
-                                <h3 class="text-base">6</h3>
-                                <span class="text-gray-500 text-sm">
+                              <div className="flex-grow text-start">
+                                <h3 className="text-base">6</h3>
+                                <span className="text-gray-500 text-sm">
                                   Build Resume
                                 </span>
                               </div>
@@ -533,16 +533,16 @@ const UserDashboardPage = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="card border border-gray-200 shadow-lg bg-[#f3c6b2]">
-                        <div class="card-content p-4">
-                          <div class="card-body">
-                            <div class="flex items-center gap-5">
-                              <div class="flex-shrink-0 bg-white p-2">
+                      <div className="card border border-gray-200 shadow-lg bg-[#f3c6b2]">
+                        <div className="card-content p-4">
+                          <div className="card-body">
+                            <div className="flex items-center gap-5">
+                              <div className="flex-shrink-0 bg-white p-2">
                                 <BsFileEarmarkCheck className="text-2xl text-blue-400" />
                               </div>
-                              <div class="flex-grow text-start">
-                                <h3 class="text-base">92 % Score</h3>
-                                <span class="text-gray-500 text-sm whitespace-nowrap">
+                              <div className="flex-grow text-start">
+                                <h3 className="text-base">92 % Score</h3>
+                                <span className="text-gray-500 text-sm whitespace-nowrap">
                                   CV Analyser History
                                 </span>
                               </div>
