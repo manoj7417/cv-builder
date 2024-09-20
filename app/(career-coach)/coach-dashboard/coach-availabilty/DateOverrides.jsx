@@ -20,15 +20,19 @@ import { Controller, useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 
-const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
+const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOverrides }) => {
   const [dateOverridesData, setDateOverridesData] = useState(null);
   const [isUnavailable, setIsUnavailable] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const [selectedDatesTimes, setSelectedDatesTimes] = useState({});
   const { control } = useForm();
+  const [timeSlots, setTimeSlots] = useState([{
+    startTime: "9:00 AM",
+    endTime: "5:00 PM"
+  }])
 
-  console.log("dateOverridesData", dateOverridesData);
+
 
   const isDateDisabled = (date) => {
     const today = new Date();
@@ -58,22 +62,17 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
     setSelectedDatesTimes(updatedDatesTimes);
   };
 
-  const addTimeSlot = (dateKey) => {
-    const updatedDatesTimes = { ...selectedDatesTimes };
-    const previousSlot = updatedDatesTimes[dateKey].slice(-1)[0];
-    const newFirstSelectedTime = previousSlot.secondSelectedTime || ""; // Use the second time of the previous slot
-
-    updatedDatesTimes[dateKey].push({
-      firstSelectedTime: newFirstSelectedTime, // Set the first time of the new slot
-      secondSelectedTime: "",
-    });
-
-    setSelectedDatesTimes(updatedDatesTimes);
+  const addTimeSlot = (i) => {
+    const updateTimeSlots = [...timeSlots, {
+      startTime: timeSlots[i].endTime,
+      endTime: ""
+    }
+    ]
+    setTimeSlots(updateTimeSlots)
   };
-  const removeTimeSlot = (dateKey, index) => {
-    const updatedDatesTimes = { ...selectedDatesTimes };
-    updatedDatesTimes[dateKey].splice(index, 1);
-    setSelectedDatesTimes(updatedDatesTimes);
+  const removeTimeSlot = (index) => {
+    const updateTimeSlots = timeSlots.filter((_, i) => i !== index)
+    setTimeSlots(updateTimeSlots)
   };
 
   const getFilteredSecondTimeSlots = (firstSelectedTime) => {
@@ -90,9 +89,10 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
       selectedDateTimeSlots: selectedDatesTimes,
       isUnavailableAllDay: isUnavailable,
     };
-    setDateOverridesData(data);
-    onUpdateOverrides(data); // Send data to parent component
-    setIsModalOpen(false);
+    console.log(data)
+    // setDateOverridesData(data);
+    // onUpdateOverrides(data); 
+    // setIsModalOpen(false);
   };
 
   return (
@@ -249,9 +249,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                           />
                         </div>
                       ) : (
-                        selectedDatesTimes[
-                          Object.keys(selectedDatesTimes)[0]
-                        ]?.map((slot, index) => (
+                        timeSlots.map((slot, index) => (
                           <div
                             key={index}
                             className="flex gap-4 mb-2 items-center"
@@ -259,18 +257,17 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                             <div className="flex-1">
                               <Controller
                                 control={control}
-                                name={`firstSelectedTime-${index}`}
+                                name={`startTime-${index}`}
                                 render={({ field }) => (
                                   <Select
                                     onValueChange={(value) =>
                                       handleTimeChange(
-                                        "firstSelectedTime",
+                                        "startTime",
                                         value,
-                                        index,
-                                        Object.keys(selectedDatesTimes)[0]
+                                        index
                                       )
                                     }
-                                    value={slot.firstSelectedTime}
+                                    value={slot.startTime}
                                   >
                                     <SelectTrigger className="w-[150px]">
                                       <SelectValue placeholder="Select a time" />
@@ -292,7 +289,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                             <div className="flex-1">
                               <Controller
                                 control={control}
-                                name={`secondSelectedTime-${index}`}
+                                name={`endTime-${index}`}
                                 render={({ field }) => (
                                   <Select
                                     onValueChange={(value) =>
@@ -303,7 +300,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                                         Object.keys(selectedDatesTimes)[0]
                                       )
                                     }
-                                    value={slot.secondSelectedTime}
+                                    value={slot.endTime}
                                   >
                                     <SelectTrigger className="w-[150px]">
                                       <SelectValue placeholder="Select a time" />
@@ -311,7 +308,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                                     <SelectContent>
                                       <SelectGroup>
                                         {getFilteredSecondTimeSlots(
-                                          slot.firstSelectedTime
+                                          slot.startTime
                                         ).map((time, idx) => (
                                           <SelectItem key={idx} value={time}>
                                             {time}
@@ -328,7 +325,6 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                               <button
                                 onClick={() =>
                                   removeTimeSlot(
-                                    Object.keys(selectedDatesTimes)[0],
                                     index
                                   )
                                 }
@@ -340,7 +336,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                               <button
                                 onClick={() =>
                                   addTimeSlot(
-                                    Object.keys(selectedDatesTimes)[0]
+                                    index
                                   )
                                 }
                                 className="text-blue-950 flex items-center gap-1"
@@ -364,8 +360,8 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                       </div>
                     </div>
                   )}
-                </div>
-              </div>
+                </div >
+              </div >
               <DialogFooter>
                 <Button
                   type="button"
@@ -375,9 +371,9 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
                   Save changes
                 </Button>
               </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </div>
+            </DialogContent >
+          </Dialog >
+        </div >
         <div className="show_dataoverrides border-2 border-gray-500 rounded-md p-5 mt-5">
           {dateOverridesData?.selectedDateTimeSlots && (
             <div>
@@ -397,7 +393,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides }) => {
             </div>
           )}
         </div>
-      </div>
+      </div >
     </>
   );
 };

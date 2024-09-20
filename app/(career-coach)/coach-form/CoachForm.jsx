@@ -1,7 +1,7 @@
 /** @format */
 
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { motion } from "framer-motion";
 import { DatePicker } from "antd";
@@ -102,8 +102,8 @@ const CoachForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: userdata.email || '',
-      name: userdata.name || ''
+      email: userdata?.email || '',
+      name: userdata?.name || ''
     },
   });
   // { resolver: yupResolver(schema) }
@@ -120,6 +120,7 @@ const CoachForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { updateUserData } = useCoachStore()
   const imageUrl = watch("profileImage")
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -289,7 +290,7 @@ const CoachForm = () => {
         }
       })
       if (response.status === 200) {
-        // console.log(response.data.coach)
+
         updateUserData(response.data.coach)
         toast.success('Form submitted successfully')
       }
@@ -322,9 +323,15 @@ const CoachForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (userdata?.formFilled) {
+      setIsDialogOpen(true)
+    }
+  }, [])
+
   return (
     <>
-      <Dialog open={userdata.formFilled}>
+      <Dialog open={userdata?.formFilled || false}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle></DialogTitle>
@@ -667,12 +674,8 @@ const CoachForm = () => {
                         onChange={handleCVUpload}
                       />
                     </div>
-
-                    {/* Display uploaded file name and allow removing it */}
                     <div className='mt-2 flex items-center space-x-2 text-green-600'>
-                      {isCvLoading ? ( // Show loading spinner while fetching
-                        <FaSpinner className='animate-spin text-xl text-blue-500' />
-                      ) : cvFileUrl ? ( // Show file name and tick icon when file is uploaded
+                      {cvFileUrl ? ( 
                         <>
                           <span>{cvFileUrl?.split("/")?.pop()}</span>
                           <FaCheckCircle className='text-xl' />

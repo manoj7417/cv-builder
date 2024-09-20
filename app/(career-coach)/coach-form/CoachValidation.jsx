@@ -4,7 +4,7 @@ import * as yup from "yup";
 
 
 export const schema = yup.object().shape({
-  profileImage: yup.string().url("Invalid URL").required("Profile image is required"),
+  profileImage: yup.string().required("Profile image is required"),
   name: yup.string().min(1, "Full name is required"),
   email: yup
     .string()
