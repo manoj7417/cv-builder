@@ -1,27 +1,20 @@
 /** @format */
 "use client";
-import { CoachHeader } from "@/components/component/CoachHeader";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./user.css";
 import { FaRegPlayCircle, FaStar } from "react-icons/fa";
 import Profile from "../settings/profile/page";
 import Whishlist from "./Wishlist";
-// import AccordionItem from "./AccordionItem";
-import parse from "html-react-parser";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import PurchaseHistory from "./PurchaseHistory";
 import { BsFileEarmarkCheck } from "react-icons/bs";
+import { useUserStore } from "@/app/store/UserStore";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
-
+  const { userdata } = useUserStore((state) => state.userState)
   const toggle = (index) => {
     if (open === index) {
       return setOpen(null);
@@ -354,52 +347,145 @@ const UserDashboardPage = () => {
       <div className="mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center "></div>
       <div className="max-w-5xl mx-auto">
         <div className="profile_header">
-          <CoachHeader />
+          <div className='sm:container md:container lg:container xl:container 2xl:container bg-[#FFF] h-auto -mt-20 w-full flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row justify-between items-center border border-[#FFDDD1] p-4'>
+            {/* Left Side */}
+            <div
+              id='blog_header_left_side'
+              className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>
+              <div id='coach_image' className='px-4'>
+                <img
+                  src={userdata?.profilePicture || "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"}
+                  alt='Coach'
+                  className='w-full  object-cover w-44 h-44 rounded-full'
+                />
+              </div>
+              <div id='coach_details' className='pt-4 sm:pt-10'>
+                <div
+                  id='row1'
+                  className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3'>
+                  <h1 className='font-bold text-[#1D2026] text-2xl sm:text-3xl'>
+                    {userdata?.fullname}
+                  </h1>
+                </div>
+                {/* <div
+                  id='row3'
+                  className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-500'>
+                  <div className='flex items-center space-x-1'>
+                    <img
+                      src='/Star.png'
+                      alt='Star'
+                      className='w-3 sm:w-4 h-3 sm:h-4'
+                    />
+                    <span className='text-[#1D2026] font-bold'>4.8</span>
+                    <span className='text-[#6E7485]'>(134,633 reviews)</span>
+                  </div>
+                  <div className='flex items-center space-x-1'>
+                    <img
+                      src='/Users.png'
+                      alt='Users'
+                      className='w-3 sm:w-4 h-3 sm:h-4'
+                    />
+                    <span className='text-[#1D2026] font-bold'>430,117</span>
+                    <span className='text-[#6E7485]'>students</span>
+                  </div>
+                  <div className='flex items-center space-x-1'>
+                    <img
+                      src='/PlayCircle.png'
+                      alt='Play Circle'
+                      className='w-3 sm:w-4 h-3 sm:h-4'
+                    />
+                    <span className='text-[#1D2026] font-bold'>7</span>
+                    <span className='text-[#6E7485]'>courses</span>
+                  </div>
+                </div> */}
+              </div>
+            </div>
+
+            {/* Right Side */}
+            <div
+              id='blog_header_right_side'
+              className='text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0'>
+              <div
+                id='website_link'
+                className='text-xs sm:text-sm text-blue-500 underline flex items-center justify-center sm:justify-center md:justify-end lg:justify-end xl:justify-end 2xl:justify-end  space-x-1'>
+                <img
+                  src='/GlobeSimple.png'
+                  alt='Globe Icon'
+                  className='w-3 sm:w-4 h-3 sm:h-4'
+                />
+                <span className='text-[10px] sm:text-[12px] text-[#564FFD]'>
+                  http://www.com
+                </span>
+              </div>
+              <div id='socialMediaIcons' className='flex space-x-2 justify-end'>
+                <img
+                  src='/facebook_icon.png'
+                  alt='Facebook'
+                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                />
+                <img
+                  src='/twitter_icon.png'
+                  alt='Twitter'
+                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                />
+                <img
+                  src='/instagram_icon.png'
+                  alt='Instagram'
+                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                />
+                <img
+                  src='/youtube_icon.png'
+                  alt='YouTube'
+                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                />
+                <img
+                  src='/whatsApp_icon.png'
+                  alt='WhatsApp'
+                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="tabs_section mt-10">
           <Tabs className="w-full py-5" defaultValue="dashboard">
             <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto">
               <TabsTrigger
                 value="dashboard"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${
-                  activeTab === "dashboard" ? "active" : ""
-                } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "dashboard" ? "active" : ""
+                  } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("dashboard")}
               >
                 Dashboard
               </TabsTrigger>
               <TabsTrigger
                 value="coaching"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${
-                  activeTab === "coaching" ? "active" : ""
-                } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "coaching" ? "active" : ""
+                  } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("coaching")}
               >
                 Coaching
               </TabsTrigger>
               <TabsTrigger
                 value="whishlist"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${
-                  activeTab === "whishlist" ? "active" : ""
-                } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "whishlist" ? "active" : ""
+                  } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("whishlist")}
               >
                 Whishlist
               </TabsTrigger>
               <TabsTrigger
                 value="purchaseHistory"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${
-                  activeTab === "purchaseHistory" ? "active" : ""
-                } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "purchaseHistory" ? "active" : ""
+                  } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("purchaseHistory")}
               >
                 Purchase History
               </TabsTrigger>
               <TabsTrigger
                 value="settings"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${
-                  activeTab === "settings" ? "active" : ""
-                } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "settings" ? "active" : ""
+                  } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("settings")}
               >
                 Settings
@@ -413,16 +499,16 @@ const UserDashboardPage = () => {
                   </h2>
                   <div className="dashboard">
                     <div className="grid lg:grid-cols-4 grid-cols-1 gap-10 lg:p-0 p-5">
-                      <div class="card border border-gray-200 shadow-lg bg-pink-200">
-                        <div class="card-content p-4">
-                          <div class="card-body">
-                            <div class="flex items-center gap-5">
-                              <div class="flex-shrink-0 bg-white p-2">
+                      <div className="card border border-gray-200 shadow-lg bg-pink-200">
+                        <div className="card-content p-4">
+                          <div className="card-body">
+                            <div className="flex items-center gap-5">
+                              <div className="flex-shrink-0 bg-white p-2">
                                 <FaRegPlayCircle className="text-2xl text-pink-400" />
                               </div>
-                              <div class="flex-grow text-start">
-                                <h3 class="text-xl">10</h3>
-                                <span class="text-gray-500 text-sm">
+                              <div className="flex-grow text-start">
+                                <h3 className="text-xl">10</h3>
+                                <span className="text-gray-500 text-sm">
                                   Live Coaching
                                 </span>
                               </div>
@@ -430,16 +516,16 @@ const UserDashboardPage = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="card border border-gray-200 shadow-lg bg-[#EBEBFF]">
-                        <div class="card-content p-4">
-                          <div class="card-body">
-                            <div class="flex items-center gap-5">
-                              <div class="flex-shrink-0 bg-white p-2">
+                      <div className="card border border-gray-200 shadow-lg bg-[#EBEBFF]">
+                        <div className="card-content p-4">
+                          <div className="card-body">
+                            <div className="flex items-center gap-5">
+                              <div className="flex-shrink-0 bg-white p-2">
                                 <BsFileEarmarkCheck className="text-2xl text-blue-400" />
                               </div>
-                              <div class="flex-grow text-start">
-                                <h3 class="text-base">6</h3>
-                                <span class="text-gray-500 text-sm">
+                              <div className="flex-grow text-start">
+                                <h3 className="text-base">6</h3>
+                                <span className="text-gray-500 text-sm">
                                   Build Resume
                                 </span>
                               </div>
@@ -447,16 +533,16 @@ const UserDashboardPage = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="card border border-gray-200 shadow-lg bg-[#f3c6b2]">
-                        <div class="card-content p-4">
-                          <div class="card-body">
-                            <div class="flex items-center gap-5">
-                              <div class="flex-shrink-0 bg-white p-2">
+                      <div className="card border border-gray-200 shadow-lg bg-[#f3c6b2]">
+                        <div className="card-content p-4">
+                          <div className="card-body">
+                            <div className="flex items-center gap-5">
+                              <div className="flex-shrink-0 bg-white p-2">
                                 <BsFileEarmarkCheck className="text-2xl text-blue-400" />
                               </div>
-                              <div class="flex-grow text-start">
-                                <h3 class="text-base">92 % Score</h3>
-                                <span class="text-gray-500 text-sm whitespace-nowrap">
+                              <div className="flex-grow text-start">
+                                <h3 className="text-base">92 % Score</h3>
+                                <span className="text-gray-500 text-sm whitespace-nowrap">
                                   CV Analyser History
                                 </span>
                               </div>

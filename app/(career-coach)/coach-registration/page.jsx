@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,6 +30,11 @@ export default function CoachRegistration() {
     firstName: yup.string().required("First Name is required"),
     lastName: yup.string().required("Last Name is required"),
     email: yup.string().required("Email is required"),
+    phone: yup.string().required("Phone is required"),
+    terms: yup
+      .boolean()
+      .oneOf([true], "Please accept the terms and conditions")
+      .required("Please accept the terms and conditions"),
     password: yup
       .string()
       .required("Password is required")
@@ -55,37 +60,16 @@ export default function CoachRegistration() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  // const [validation, setValidation] = useState({
-  //   length: false,
-  //   upperAndLowercase: false,
-  //   numbercase: false,
-  //   specialChar: false,
-  // });
-
-  // const password = watch("password", "");
-  // const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-  // const hasUpperAndLowerCase = (str) => /[A-Z]/.test(str) && /[a-z]/.test(str);
-  // const hasNumber = (str) => /\d/.test(str);
-
-  // useEffect(() => {
-  //   const newValidation = {
-  //     length: password.length >= 8,
-  //     upperAndLowercase: hasUpperAndLowerCase(password),
-  //     number: hasNumber(password),
-  //     specialChar: format.test(password),
-  //   };
-  //   setValidation(newValidation);
-  // }, [password]);
-
+  
   const handleCoachDetails = async (data) => {
-    const { firstName, lastName, email, phoneNumber, password } = data;
+    setIsLoading(true);
+    const { firstName, lastName, email, phone, password } = data;
     const obj = {
       name: `${firstName} ${lastName}`,
       email,
-      phoneNumber,
+      phone,
       password,
     };
-    setIsLoading(true);
     try {
       const response = await axios.post("/api/registerCoach", obj);
       if (response.status === 200) {
@@ -104,8 +88,8 @@ export default function CoachRegistration() {
   };
 
   return (
-    <section className="max-w-[80rem] mx-auto place-items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-40 gap-24">
+    <section className=" place-items-center h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 ">
         <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0">
           <div className="w-[70%] mt-14">
             <h2 className="text-white text-center text-2xl font-semibold">
@@ -120,7 +104,7 @@ export default function CoachRegistration() {
             autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
             spaceBetween={20} // Space between slides
             slidesPerView={1} // Show one slide at a time
-            className="mt-4 w-[80%] rounded-md"
+            className="mt-4 w-[60%] rounded-md"
           >
             <SwiperSlide>
               <div className="p-4 rounded-md shadow">
@@ -242,7 +226,7 @@ export default function CoachRegistration() {
                       </div>
                       <div>
                         <Controller
-                          name="phoneNumber"
+                          name="phone"
                           control={control}
                           defaultValue=""
                           rules={{
@@ -265,9 +249,9 @@ export default function CoachRegistration() {
                           )}
                         />
                         {/* Display validation errors */}
-                        {errors.phoneNumber && (
+                        {errors.phone && (
                           <p className="text-red-500 mt-1">
-                            {errors.phoneNumber.message}
+                            {errors.phone.message}
                           </p>
                         )}
                       </div>
@@ -328,143 +312,13 @@ export default function CoachRegistration() {
                   </div>
                 </div>
                 {/*END PASSWORD AND CONFIRM PASSWORD */}
-
-                {/* <div>
-                  <div className="flex items-center justify-between">
-                    <Label
-                      htmlFor="password"
-                      className="text-base font-medium text-gray-900"
-                    >
-                      {" "}
-                      Password{" "}
-                    </Label>
-                  </div>
-                  <div className="mt-2 relative">
-                    <Input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Password"
-                      id="password"
-                      {...register("password", {
-                        required: {
-                          value: true,
-                          message: "Password is required",
-                        },
-                      })}
-                    />
-                    {errors?.password && (
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors?.password?.message}
-                      </p>
-                    )}
-                    <div className="top-0 right-0 absolute h-10 flex items-center justify-center pr-3">
-                      {showPassword ? (
-                        <IoEye
-                          className="cursor-pointer h-4 w-4"
-                          onClick={() => setShowPassword(false)}
-                        />
-                      ) : (
-                        <IoEyeOff
-                          className="cursor-pointer h-4 w-4"
-                          onClick={() => setShowPassword(true)}
-                        />
-                      )}
-                    </div>
-                    
-                    <div className="mt-2">
-                      <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.length
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {validation.length ? (
-                            <span className="w-3 h-3 flex items-center justify-center">
-                              {validation.length && "✔"}
-                            </span>
-                          ) : (
-                            <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full border  border-gray-400`}
-                            ></span>
-                          )}
-                          <span className="text-xs sm:text-sm">
-                            Minimum 7 characters long
-                          </span>
-                        </li>
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.upperAndLowercase
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {validation.upperAndLowercase ? (
-                            <span className="w-3 h-3 flex items-center justify-center">
-                              {validation.upperAndLowercase && "✔"}
-                            </span>
-                          ) : (
-                            <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full border  border-gray-400`}
-                            ></span>
-                          )}
-                          <span className="text-xs sm:text-sm">
-                            Uppercase & lowercase letters
-                          </span>
-                        </li>
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.number
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {validation.number ? (
-                            <span className="w-3 h-3 flex items-center justify-center">
-                              {validation.number && "✔"}
-                            </span>
-                          ) : (
-                            <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full border  border-gray-400`}
-                            ></span>
-                          )}
-                          <span className="text-xs sm:text-sm">
-                            At least 1 number
-                          </span>
-                        </li>
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.specialChar
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {validation.specialChar ? (
-                            <span className="w-3 h-3 flex items-center justify-center">
-                              {validation.specialChar && "✔"}
-                            </span>
-                          ) : (
-                            <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full border  border-gray-400`}
-                            ></span>
-                          )}
-                          <span className="text-xs sm:text-sm">
-                            At least 1 special character
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> */}
-                <div className="terms_condition">
+                {/* <div className="remember">
                   <div className="field field-checkbox flex items-center">
                     <input
-                      id="checkbox"
+                      id="rememberMe"
                       type="checkbox"
-                      name="terms"
                       className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
-                      {...register("rememberMe", { required: false })}
+                      {...register("rememberMe", { required: true })}
                     />
                     <label
                       htmlFor="checkbox"
@@ -478,13 +332,12 @@ export default function CoachRegistration() {
                       You must remember me
                     </div>
                   )}
-                </div>
+                </div> */}
                 <div className="terms_condition">
                   <div className="field field-checkbox flex items-center">
                     <input
-                      id="checkbox"
+                      id="termsCondition"
                       type="checkbox"
-                      name="terms"
                       className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
                       {...register("terms", { required: true })}
                     />
@@ -514,10 +367,10 @@ export default function CoachRegistration() {
                       </p>
                     </label>
                   </div>
-                  {errors.terms && (
-                    <div className="text-red-500 text-sm my-2">
-                      You must agree to the terms and conditions
-                    </div>
+                  {errors?.terms && (
+                    <p className="text-red-500 text-sm mt-2">
+                      {errors?.terms?.message}
+                    </p>
                   )}
                 </div>
 
@@ -525,6 +378,7 @@ export default function CoachRegistration() {
                   <Button
                     type="submit"
                     className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
+                    disabled={isLoading}
                   >
                     {isLoading ? (
                       <>

@@ -8,7 +8,7 @@ export const metadata = {
 };
 const Layout = ({ children }) => {
   return (
-    <main className='resume_dashboard'>
+    <main className='resume_dashboard '>
       <div className='resume_dashboard_container'>
         <div className='wrapper'>
           <div id='mainDiv' className='flex flex-col h-screen'>
@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
               {/* Sidebar */}
               <div
                 id='sidebarCoach'
-                className='w-full md:w-[20%] lg:w-[20%] bg-[#E0F2FF] sticky top-0 lg:h-screen h-auto z-50'>
+                className='w-full md:w-[16%] lg:w-[16%] bg-white sticky top-0 lg:h-screen h-auto z-50 min-w-[220px]'>
                 {/* Sidebar content goes here */}
                 <SidebarCoach className='w-full' />
               </div>

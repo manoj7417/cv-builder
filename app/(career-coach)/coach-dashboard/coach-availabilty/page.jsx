@@ -8,11 +8,8 @@ import DateOverrides from "./DateOverrides";
 
 const CoachAvailability = () => {
   const [dateOverridesData, setDateOverridesData] = useState(null);
-  const [formData,setFormData] = useState(null);
-
-
-  console.log("formData",formData)
-
+  const [formData, setFormData] = useState(null);
+  const [dateOverrides, setDateOverrides] = useState([])
   const daysOfWeek = [
     "Sunday",
     "Monday",
@@ -49,6 +46,29 @@ const CoachAvailability = () => {
     "11:00 AM",
     "11:30 AM",
     "12:00 PM",
+    "12:30 PM",
+    "1:00 PM",
+    "1:30 PM",
+    "2:00 PM",
+    "2:30 PM",
+    "3:00 PM",
+    "3:30 PM",
+    "4:00 PM",
+    "4:30 PM",
+    "5:00 PM",
+    "5:30 PM",
+    "6:00 PM",
+    "6:30 PM",
+    "7:00 PM",
+    "7:30 PM",
+    "8:00 PM",
+    "8:30 PM",
+    "9:00 PM",
+    "9:30 PM",
+    "10:00 PM",
+    "10:30 PM",
+    "11:00 PM",
+    "11:30 PM"
   ];
 
   const { control, handleSubmit, watch } = useForm({
@@ -102,37 +122,35 @@ const CoachAvailability = () => {
   const getFilteredTimeSlots = (selectedTime) => {
     if (!selectedTime) return timeSlot;
     const selectedIndex = timeSlot.indexOf(selectedTime);
-    return timeSlot.filter((_, idx) => idx > selectedIndex); // Only show times after the selected time
+    return timeSlot.filter((_, idx) => idx > selectedIndex);
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-18 lg:p-0 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
+    <div className="w-full mx-auto mt-18 lg:p-10 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
       <div className="main_heading my-5 mt-10">
         <h1 className="text-xl text-blue-950 font-bold">Time Availabilty</h1>
-        {/* <p className="text-sm font-semibold text-gray-600">
-          Sun - Sat, 9:00 AM - 5:00 PM
-        </p> */}
+
         {formData && (
-        <div>
-          {daysOfWeek.map((day) => (
-            <div key={day}>
-              {formData[day] && formData[day].length > 0 ? (
-                formData[day].map((slot, index) => (
-                  slot.firstSelectedTime && slot.secondSelectedTime ? (
-                    <p key={index} className="text-sm font-semibold text-gray-600">
-                      <strong>{day}</strong>: {slot.firstSelectedTime} - {slot.secondSelectedTime}
-                    </p>
-                  ) : null
-                ))
-              ) : (
-                <p key={day}>
-                  <strong>{day}</strong>: No Availability
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+          <div>
+            {daysOfWeek.map((day) => (
+              <div key={day}>
+                {formData[day] && formData[day].length > 0 ? (
+                  formData[day].map((slot, index) => (
+                    slot.firstSelectedTime && slot.secondSelectedTime ? (
+                      <p key={index} className="text-sm font-semibold text-gray-600">
+                        <strong>{day}</strong>: {slot.firstSelectedTime} - {slot.secondSelectedTime}
+                      </p>
+                    ) : null
+                  ))
+                ) : (
+                  <p key={day}>
+                    <strong>{day}</strong>: No Availability
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex lg:flex-row flex-col gap-5">
@@ -175,7 +193,10 @@ const CoachAvailability = () => {
                 timeSlot={timeSlot}
                 getFilteredTimeSlots={getFilteredTimeSlots}
                 onUpdateOverrides={handleDateOverridesUpdate}
+                dateOverrides={dateOverrides}
+                setDateOverrides={setDateOverrides}
               />
+
             </div>
           </div>
           <div className="lg:w-[30%] w-full time_zone">
