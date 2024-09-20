@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import useCoachesDetailStore from "@/app/store/coachDetailStore";
 
 const schema = yup.object().shape({
   first_name: yup.string().matches(/^[A-Za-z]+$/, "First name should only contain letters").required("First name is required"),
@@ -49,6 +50,14 @@ const CoachDetailsPage = () => {
   /************************ */
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)})
+
+    const {
+      singleCoach,
+      fetchAllCoaches,
+      filterCoachById,
+      isLoading,
+      updateSingleCoach,
+    } = useCoachesDetailStore();
   /************************ */
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
@@ -208,6 +217,46 @@ const CoachDetailsPage = () => {
     endTime: "",
   });
 
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchAllCoaches();
+    };
+
+    fetchData();
+  }, [fetchAllCoaches]);
+
+  useEffect(() => {
+    if (id) {
+      console.log("Filtering coach with id:", id); // Debugging log
+      filterCoachById(id);
+    }
+  }, [id, filterCoachById]);
+
+
+
+  const {
+    name,
+    email,
+    phone,
+    bio,
+    coachingDescription,
+    profileImage,
+    dateofBirth,
+    experience,
+    address,
+    city,
+    country,
+    zip,
+    bankDetails,
+    ratesPerHour,
+    cv,
+    signedAggrement,
+    typeOfCoaching,
+    skills,
+  } = singleCoach;
+
   return (
     <>
       <ResumeHeader />
@@ -217,7 +266,7 @@ const CoachDetailsPage = () => {
           id="Main"
           className="mt-10 bg-white w-full h-auto flex flex-col items-center"
         >
-          <CoachHeader />
+          <CoachHeader id={id}/>
           <div className="container bg-[#FFF] h-auto mt-10 w-full flex flex-col lg:flex-row mb-20 border border-[#FFDDD1]">
             <div
               id="blog_left_side"
@@ -230,11 +279,9 @@ const CoachDetailsPage = () => {
                       ABOUT ME
                     </h3>
                     <p className="text-[#6E7485] pb-5 text-sm">
-                      One day Vako had enough with the 9-to-5 grind, or more
-                      like 9-to-9 in his case, and quit his job, or more like
-                      got himself fired from his own startup.
+                      {bio}
                     </p>
-                    <p className="text-[#6E7485] pb-5 text-sm">
+                    {/* <p className="text-[#6E7485] pb-5 text-sm">
                       He decided to work on his dream: be his own boss, travel
                       the world, only do the work he enjoyed, and make a lot
                       more money in the process. No more begging for vacation
@@ -249,7 +296,7 @@ const CoachDetailsPage = () => {
                       to transform their lives. Today with his courses and
                       mentoring Vako is helping thousands of people transform
                       their lives, just like he did once.
-                    </p>
+                    </p> */}
                   </div>
                 </>
               )}

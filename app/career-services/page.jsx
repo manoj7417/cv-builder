@@ -23,7 +23,7 @@ const CareerServices = () => {
       image: a2,
       description:
         "Work directly with a professional career coach to strategize and achieve your career goals.",
-      link: "/coming-soon",
+      link: "/career-coaching",
     },
     {
       title: "Psychometric Test Tool",

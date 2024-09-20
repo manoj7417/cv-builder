@@ -1,10 +1,62 @@
 /** @format */
 
 "use client";
+import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export function CoachHeader() {
+export function CoachHeader({id}) {
+
+ 
+
+  const {
+    singleCoach,
+    fetchAllCoaches,
+    filterCoachById,
+    isLoading,
+    updateSingleCoach,
+  } = useCoachesDetailStore();
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchAllCoaches();
+    };
+
+    fetchData();
+  }, [fetchAllCoaches]);
+
+  useEffect(() => {
+    if (id) {
+      console.log("Filtering coach with id:", id); // Debugging log
+      filterCoachById(id);
+    }
+  }, [id, filterCoachById]);
+
+  const {
+    name,
+    email,
+    phone,
+    bio,
+    coachingDescription,
+    profileImage,
+    dateofBirth,
+    experience,
+    address,
+    city,
+    country,
+    zip,
+    bankDetails,
+    ratesPerHour,
+    cv,
+    signedAggrement,
+    typeOfCoaching,
+    skills,
+  } = singleCoach;
+
+
+
   return (
     <>
       {/* <div className='mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center '></div> */}
@@ -13,11 +65,11 @@ export function CoachHeader() {
         <div
           id='blog_header_left_side'
           className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>
-          <div id='coach_image' className='px-4'>
+          <div id='coach_image' className='px-4 w-[200px] h-auto'>
             <img
-              src='/InstructorImages.png'
+              src={profileImage}
               alt='Coach'
-              className='w-full sm:w-auto h-auto object-cover'
+              className='w-full h-full object-cover'
             />
           </div>
           <div id='coach_details' className='pt-4 sm:pt-10'>
@@ -25,7 +77,7 @@ export function CoachHeader() {
               id='row1'
               className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3'>
               <h1 className='font-bold text-[#1D2026] text-2xl sm:text-3xl'>
-                Joy
+                {name}
               </h1>
               <div className='text-xs sm:text-[10px] bg-[#FFEEE8] text-[#FF6636] flex items-center space-x-1 p-1'>
                 <img

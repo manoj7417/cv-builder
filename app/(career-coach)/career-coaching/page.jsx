@@ -117,7 +117,7 @@ const ComingSoonPage = () => {
               </p>
               <div className='flex lg:flex-row flex-col gap-2 md:gap-8 sm:gap-8 justify-center items-center'>
                 <div className='button_wrapper mt-8'>
-                  <Link href='/contact-us'>
+                  <Link href='/coaches'>
                     <button className='get_start_btn'>
                       <span className='btn_text'>Hire Coach</span>
                       <div className='btn_overlay'>

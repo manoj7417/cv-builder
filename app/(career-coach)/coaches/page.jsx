@@ -5,317 +5,318 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CoachFilter from "./CoachFilter";
 import { useRouter } from "next/navigation";
+import useCoachesDetailStore from "@/app/store/coachDetailStore";
 
-const coaches = [
-  {
-    id: 1,
-    name: "Devon Lane",
-    jobProfile: {
-      title: "Web Developer",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "5.0",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 2,
-    name: "Darrell Steward",
-    jobProfile: {
-      title: "React Native Developer",
-      backgroundColor: "bg-green-100",
-      textColor: "text-green-800",
-    },
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "4.9",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 3,
-    name: "Jane Cooper",
-    jobProfile: {
-      title: "Mobile Developer",
-      backgroundColor: "bg-purple-100",
-      textColor: "text-purple-800",
-    },
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "5.0",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 4,
-    name: "Albert Flores",
-    jobProfile: {
-      title: "Javascript Developer",
-      backgroundColor: "bg-yellow-100",
-      textColor: "text-yellow-800",
-    },
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "5.0",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 5,
-    name: "Leslie Alexander",
-    jobProfile: {
-      title: "UX/UI Designer",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-5.png",
-    rating: "4.8",
-    students: "145.3k",
-    price: "$49",
-  },
-  {
-    id: 6,
-    name: "Wade Warren",
-    jobProfile: {
-      title: "Full Stack Developer",
-      backgroundColor: "bg-red-100",
-      textColor: "text-red-800",
-    },
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "4.9",
-    students: "320.1k",
-    price: "$49",
-  },
-  {
-    id: 7,
-    name: "Kristin Watson",
-    jobProfile: {
-      title: "Data Scientist",
-      backgroundColor: "bg-teal-100",
-      textColor: "text-teal-800",
-    },
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "5.0",
-    students: "180.2k",
-    price: "$49",
-  },
-  {
-    id: 8,
-    name: "Cameron Williamson",
-    jobProfile: {
-      title: "DevOps Engineer",
-      backgroundColor: "bg-orange-100",
-      textColor: "text-orange-800",
-    },
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "4.7",
-    students: "210.4k",
-    price: "$49",
-  },
-  {
-    id: 9,
-    name: "Courtney Henry",
-    jobProfile: {
-      title: "Cybersecurity Specialist",
-      backgroundColor: "bg-indigo-100",
-      textColor: "text-indigo-800",
-    },
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "4.8",
-    students: "170.8k",
-    price: "$49",
-  },
-  {
-    id: 10,
-    name: "Brooklyn Simmons",
-    jobProfile: {
-      title: "Cloud Architect",
-      backgroundColor: "bg-gray-100",
-      textColor: "text-gray-800",
-    },
-    href: "#",
-    imageSrc: "/coach-5.png",
-    rating: "4.9",
-    students: "140.5k",
-    price: "$49",
-  },
-  {
-    id: 11,
-    name: "Darlene Robertson",
-    jobProfile: {
-      title: "Machine Learning Engineer",
-      backgroundColor: "bg-cyan-100",
-      textColor: "text-cyan-800",
-    },
-    href: "#",
-    imageSrc: "/coach-6.png",
-    rating: "4.8",
-    students: "195.2k",
-    price: "$59",
-  },
-  {
-    id: 12,
-    name: "Ronald Richards",
-    jobProfile: {
-      title: "AI Researcher",
-      backgroundColor: "bg-pink-100",
-      textColor: "text-pink-800",
-    },
-    href: "#",
-    imageSrc: "/coach-7.png",
-    rating: "5.0",
-    students: "175.3k",
-    price: "$69",
-  },
-  {
-    id: 13,
-    name: "Jerome Bell",
-    jobProfile: {
-      title: "Backend Developer",
-      backgroundColor: "bg-lime-100",
-      textColor: "text-lime-800",
-    },
-    href: "#",
-    imageSrc: "/coach-8.png",
-    rating: "4.9",
-    students: "220.6k",
-    price: "$49",
-  },
-  {
-    id: 14,
-    name: "Kathryn Murphy",
-    jobProfile: {
-      title: "Software Architect",
-      backgroundColor: "bg-amber-100",
-      textColor: "text-amber-800",
-    },
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "5.0",
-    students: "160.8k",
-    price: "$89",
-  },
-  {
-    id: 15,
-    name: "Annette Black",
-    jobProfile: {
-      title: "Database Administrator",
-      backgroundColor: "bg-emerald-100",
-      textColor: "text-emerald-800",
-    },
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "4.8",
-    students: "210.2k",
-    price: "$49",
-  },
-  {
-    id: 16,
-    name: "Jacob Jones",
-    jobProfile: {
-      title: "Network Engineer",
-      backgroundColor: "bg-violet-100",
-      textColor: "text-violet-800",
-    },
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "5.0",
-    students: "140.9k",
-    price: "$59",
-  },
-  {
-    id: 17,
-    name: "Arlene McCoy",
-    jobProfile: {
-      title: "System Administrator",
-      backgroundColor: "bg-rose-100",
-      textColor: "text-rose-800",
-    },
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "4.7",
-    students: "180.3k",
-    price: "$49",
-  },
-  {
-    id: 18,
-    name: "Esther Howard",
-    jobProfile: {
-      title: "Cloud Engineer",
-      backgroundColor: "bg-fuchsia-100",
-      textColor: "text-fuchsia-800",
-    },
-    href: "#",
-    imageSrc: "/coach-5.png",
-    rating: "4.9",
-    students: "150.7k",
-    price: "$69",
-  },
-  {
-    id: 19,
-    name: "Guy Hawkins",
-    jobProfile: {
-      title: "Blockchain Developer",
-      backgroundColor: "bg-red-100",
-      textColor: "text-red-800",
-    },
-    href: "#",
-    imageSrc: "/coach-6.png",
-    rating: "5.0",
-    students: "130.5k",
-    price: "$79",
-  },
-  {
-    id: 20,
-    name: "Eleanor Pena",
-    jobProfile: {
-      title: "Cybersecurity Analyst",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-7.png",
-    rating: "4.8",
-    students: "165.4k",
-    price: "$49",
-  },
-  {
-    id: 21,
-    name: "Guy Hawkins",
-    jobProfile: {
-      title: "Next.js Developer",
-      backgroundColor: "bg-red-100",
-      textColor: "text-red-800",
-    },
-    href: "#",
-    imageSrc: "/coach-6.png",
-    rating: "5.0",
-    students: "130.5k",
-    price: "$79",
-  },
-  {
-    id: 20,
-    name: "Eleanor Pena",
-    jobProfile: {
-      title: "UX/UI",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-7.png",
-    rating: "4.8",
-    students: "165.4k",
-    price: "$49",
-  },
-];
+// const coaches = [
+//   {
+//     id: 1,
+//     name: "Devon Lane",
+//     jobProfile: {
+//       title: "Web Developer",
+//       backgroundColor: "bg-blue-100",
+//       textColor: "text-blue-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-1.png",
+//     rating: "5.0",
+//     students: "265.7k",
+//     price: "$49",
+//   },
+//   {
+//     id: 2,
+//     name: "Darrell Steward",
+//     jobProfile: {
+//       title: "React Native Developer",
+//       backgroundColor: "bg-green-100",
+//       textColor: "text-green-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-2.png",
+//     rating: "4.9",
+//     students: "265.7k",
+//     price: "$49",
+//   },
+//   {
+//     id: 3,
+//     name: "Jane Cooper",
+//     jobProfile: {
+//       title: "Mobile Developer",
+//       backgroundColor: "bg-purple-100",
+//       textColor: "text-purple-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-3.png",
+//     rating: "5.0",
+//     students: "265.7k",
+//     price: "$49",
+//   },
+//   {
+//     id: 4,
+//     name: "Albert Flores",
+//     jobProfile: {
+//       title: "Javascript Developer",
+//       backgroundColor: "bg-yellow-100",
+//       textColor: "text-yellow-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-4.png",
+//     rating: "5.0",
+//     students: "265.7k",
+//     price: "$49",
+//   },
+//   {
+//     id: 5,
+//     name: "Leslie Alexander",
+//     jobProfile: {
+//       title: "UX/UI Designer",
+//       backgroundColor: "bg-blue-100",
+//       textColor: "text-blue-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-5.png",
+//     rating: "4.8",
+//     students: "145.3k",
+//     price: "$49",
+//   },
+//   {
+//     id: 6,
+//     name: "Wade Warren",
+//     jobProfile: {
+//       title: "Full Stack Developer",
+//       backgroundColor: "bg-red-100",
+//       textColor: "text-red-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-1.png",
+//     rating: "4.9",
+//     students: "320.1k",
+//     price: "$49",
+//   },
+//   {
+//     id: 7,
+//     name: "Kristin Watson",
+//     jobProfile: {
+//       title: "Data Scientist",
+//       backgroundColor: "bg-teal-100",
+//       textColor: "text-teal-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-2.png",
+//     rating: "5.0",
+//     students: "180.2k",
+//     price: "$49",
+//   },
+//   {
+//     id: 8,
+//     name: "Cameron Williamson",
+//     jobProfile: {
+//       title: "DevOps Engineer",
+//       backgroundColor: "bg-orange-100",
+//       textColor: "text-orange-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-3.png",
+//     rating: "4.7",
+//     students: "210.4k",
+//     price: "$49",
+//   },
+//   {
+//     id: 9,
+//     name: "Courtney Henry",
+//     jobProfile: {
+//       title: "Cybersecurity Specialist",
+//       backgroundColor: "bg-indigo-100",
+//       textColor: "text-indigo-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-4.png",
+//     rating: "4.8",
+//     students: "170.8k",
+//     price: "$49",
+//   },
+//   {
+//     id: 10,
+//     name: "Brooklyn Simmons",
+//     jobProfile: {
+//       title: "Cloud Architect",
+//       backgroundColor: "bg-gray-100",
+//       textColor: "text-gray-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-5.png",
+//     rating: "4.9",
+//     students: "140.5k",
+//     price: "$49",
+//   },
+//   {
+//     id: 11,
+//     name: "Darlene Robertson",
+//     jobProfile: {
+//       title: "Machine Learning Engineer",
+//       backgroundColor: "bg-cyan-100",
+//       textColor: "text-cyan-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-6.png",
+//     rating: "4.8",
+//     students: "195.2k",
+//     price: "$59",
+//   },
+//   {
+//     id: 12,
+//     name: "Ronald Richards",
+//     jobProfile: {
+//       title: "AI Researcher",
+//       backgroundColor: "bg-pink-100",
+//       textColor: "text-pink-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-7.png",
+//     rating: "5.0",
+//     students: "175.3k",
+//     price: "$69",
+//   },
+//   {
+//     id: 13,
+//     name: "Jerome Bell",
+//     jobProfile: {
+//       title: "Backend Developer",
+//       backgroundColor: "bg-lime-100",
+//       textColor: "text-lime-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-8.png",
+//     rating: "4.9",
+//     students: "220.6k",
+//     price: "$49",
+//   },
+//   {
+//     id: 14,
+//     name: "Kathryn Murphy",
+//     jobProfile: {
+//       title: "Software Architect",
+//       backgroundColor: "bg-amber-100",
+//       textColor: "text-amber-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-1.png",
+//     rating: "5.0",
+//     students: "160.8k",
+//     price: "$89",
+//   },
+//   {
+//     id: 15,
+//     name: "Annette Black",
+//     jobProfile: {
+//       title: "Database Administrator",
+//       backgroundColor: "bg-emerald-100",
+//       textColor: "text-emerald-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-2.png",
+//     rating: "4.8",
+//     students: "210.2k",
+//     price: "$49",
+//   },
+//   {
+//     id: 16,
+//     name: "Jacob Jones",
+//     jobProfile: {
+//       title: "Network Engineer",
+//       backgroundColor: "bg-violet-100",
+//       textColor: "text-violet-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-3.png",
+//     rating: "5.0",
+//     students: "140.9k",
+//     price: "$59",
+//   },
+//   {
+//     id: 17,
+//     name: "Arlene McCoy",
+//     jobProfile: {
+//       title: "System Administrator",
+//       backgroundColor: "bg-rose-100",
+//       textColor: "text-rose-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-4.png",
+//     rating: "4.7",
+//     students: "180.3k",
+//     price: "$49",
+//   },
+//   {
+//     id: 18,
+//     name: "Esther Howard",
+//     jobProfile: {
+//       title: "Cloud Engineer",
+//       backgroundColor: "bg-fuchsia-100",
+//       textColor: "text-fuchsia-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-5.png",
+//     rating: "4.9",
+//     students: "150.7k",
+//     price: "$69",
+//   },
+//   {
+//     id: 19,
+//     name: "Guy Hawkins",
+//     jobProfile: {
+//       title: "Blockchain Developer",
+//       backgroundColor: "bg-red-100",
+//       textColor: "text-red-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-6.png",
+//     rating: "5.0",
+//     students: "130.5k",
+//     price: "$79",
+//   },
+//   {
+//     id: 20,
+//     name: "Eleanor Pena",
+//     jobProfile: {
+//       title: "Cybersecurity Analyst",
+//       backgroundColor: "bg-blue-100",
+//       textColor: "text-blue-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-7.png",
+//     rating: "4.8",
+//     students: "165.4k",
+//     price: "$49",
+//   },
+//   {
+//     id: 21,
+//     name: "Guy Hawkins",
+//     jobProfile: {
+//       title: "Next.js Developer",
+//       backgroundColor: "bg-red-100",
+//       textColor: "text-red-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-6.png",
+//     rating: "5.0",
+//     students: "130.5k",
+//     price: "$79",
+//   },
+//   {
+//     id: 20,
+//     name: "Eleanor Pena",
+//     jobProfile: {
+//       title: "UX/UI",
+//       backgroundColor: "bg-blue-100",
+//       textColor: "text-blue-800",
+//     },
+//     href: "#",
+//     imageSrc: "/coach-7.png",
+//     rating: "4.8",
+//     students: "165.4k",
+//     price: "$49",
+//   },
+// ];
 
 const categories = [
   {
@@ -397,6 +398,10 @@ export default function CoachesPage() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id);
   const router = useRouter();
 
+  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  console.log("coaches::",coaches)
+
+
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
   };
@@ -423,11 +428,11 @@ export default function CoachesPage() {
               <div
                 key={item.id}
                 className='group relative bg-white cursor-pointer'
-                onClick={() => handleCoachDetails(item?.id)}>
+                onClick={() => handleCoachDetails(item?._id)}>
                 <div className='aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80'>
                   <img
                     alt={item.imageAlt}
-                    src={item.imageSrc}
+                    src={item.profileImage}
                     className='h-full w-full object-cover object-center lg:h-full lg:w-full'
                   />
                 </div>
@@ -438,14 +443,14 @@ export default function CoachesPage() {
                   </p>
                 </div>
                 <div className='mt-4 p-5 flex justify-between border-t border-gray-200'>
-                  <div className='flex items-center gap-2'>
+                  {/* <div className='flex items-center gap-2'>
                     <FaStar className='text-orange-500' />
                     <p className='text-sm text-gray-700'>{item.rating}</p>
                   </div>
                   <p className='text-sm font-medium text-gray-900'>
                     {item.students}{" "}
                     <span className='text-gray-500 ml-1 text-sm'>students</span>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             ))}
