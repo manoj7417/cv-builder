@@ -41,23 +41,24 @@ const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
   const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  console.log("coaches::",coaches)
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
   const [allCoaches, setAllCoaches] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const getAllCoaches = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.get("/api/getAllCoaches");
-  //     setAllCoaches(response.data.coaches);
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+    // const [isLoading, setIsLoading] = useState(true);
+    // const getAllCoaches = async () => {
+    //   setIsLoading(true);
+    //   try {
+    //     const response = await axios.get("/api/getAllCoaches");
+    //     setAllCoaches(response.data.coaches);
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // };
 
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
