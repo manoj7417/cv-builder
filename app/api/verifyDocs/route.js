@@ -4,7 +4,6 @@ export async function PATCH(req, res) {
     try {
         const token = req.headers.get('Authorization');
         const payload = await req.json();
-        console.log("payload::", payload);
         const {id,...otherData} = payload;
         const response = await serverInstance.patch(`/admin/verifyCoach/${id}`, otherData, {
             headers: {

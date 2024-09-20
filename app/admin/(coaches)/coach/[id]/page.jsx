@@ -34,22 +34,6 @@ const CoachDetailsPage = () => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
-  // const [isCvVerified, setIsCvVerified] = useState(
-  //   singleCoach?.cv?.isVerified || false
-  // );
-  // const [isAgreementVerified, setIsAgreementVerified] = useState(
-  //   singleCoach?.signedAggrement?.isVerified || false
-  // );
-
-  // const handleCvToggle = () => {
-  //   setIsCvVerified((prev) => !prev);
-  // };
-
-  // const handleAgreementToggle = () => {
-  //   setIsAgreementVerified((prev) => !prev);
-  // };
-
-  console.log("singleCoachData::", singleCoachData);
 
   const isCvVerified = watch("isCvVerified", singleCoach?.cv?.isVerified);
   const isAgreementVerified = watch(
@@ -59,7 +43,6 @@ const CoachDetailsPage = () => {
 
   const handleApproveData = async (data) => {
     const { accessToken } = await GetTokens();
-    console.log("accessToken::", accessToken);
     const combinedData = {
       ...singleCoach,
       cv: {
@@ -92,8 +75,12 @@ const CoachDetailsPage = () => {
   };
 
   const openModal = (url) => {
-    setPdfUrl(url);
-    setIsModalOpen(true);
+    if (url) {
+      setPdfUrl(url); // Set the PDF URL only if it exists
+      setIsModalOpen(true); // Open the modal
+    } else {
+      toast.error("No document available to view");
+    }
   };
 
   const handleCloseModal = () => {
@@ -324,16 +311,16 @@ const CoachDetailsPage = () => {
             <TabsContent value="documents" className="flex-grow p-6">
               <div className="mt-6">
                 <h2 className="text-lg font-bold mb-4">Documents</h2>
-
                 <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
                     <p className="text-base font-bold text-gray-700">CV</p>
-                    <ResumeTooltip icon={FaEye} title="View Cv">
-                      <FaEye
+                    {/* <ResumeTooltip icon={FaEye} title="View Cv">
+                      
+                    </ResumeTooltip> */}
+                    <FaEye
                         className="text-blue-500 text-xl cursor-pointer"
                         onClick={() => openModal(cv?.link)}
                       />
-                    </ResumeTooltip>
                   </div>
                   <div className="flex">
                     <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
