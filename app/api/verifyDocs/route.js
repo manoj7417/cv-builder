@@ -11,7 +11,6 @@ export async function PATCH(req, res) {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(first)
         return new Response(JSON.stringify(response.data), {
             status: 200,
             headers: {
@@ -19,6 +18,7 @@ export async function PATCH(req, res) {
             }
         });
     } catch (error) {
+        console.log(error)
         const errorMessage = error.response ? error.response.data : { error: "Error updating in coach data" };
         const statusCode = error.response ? error.response.status : 500;
         return new Response(JSON.stringify(errorMessage), {

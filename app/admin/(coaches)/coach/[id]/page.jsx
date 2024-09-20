@@ -28,8 +28,13 @@ const CoachDetailsPage = () => {
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("details");
-  const { singleCoach, fetchAllCoaches, filterCoachById, isLoading,updateSingleCoach } =
-    useCoachesDetailStore();
+  const {
+    singleCoach,
+    fetchAllCoaches,
+    filterCoachById,
+    isLoading,
+    updateSingleCoach,
+  } = useCoachesDetailStore();
   const [singleCoachData] = useState(singleCoach);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,7 +52,7 @@ const CoachDetailsPage = () => {
       ...singleCoach,
       cv: {
         ...singleCoach.cv,
-        isVerified:data?.isCvVerified,
+        isVerified: data?.isCvVerified,
       },
       signedAggrement: {
         ...singleCoach.signedAggrement,
@@ -55,23 +60,26 @@ const CoachDetailsPage = () => {
       },
     };
     try {
-      const response = await axios.patch("/api/verifyDocs", {
-        id,
-        ...combinedData,
-      },{
-        headers: {
-          Authorization: `Bearer ${accessToken.value}`
+      const response = await axios.patch(
+        "/api/verifyDocs",
+        {
+          id,
+          ...combinedData,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken.value}`,
+          },
         }
-      });
-      if (response.status === 200){
-        updateSingleCoach(response?.data?.data)
-        toast.success('Update Coach Details submitted successfully')
+      );
+      if (response.status === 200) {
+        updateSingleCoach(response?.data?.data);
+        toast.success("Update Coach Details submitted successfully");
       }
     } catch (error) {
-      console.log(error)
-      toast.error("Error in submitting the detail")
+      console.log(error);
+      toast.error("Error in submitting the detail");
     }
-
   };
 
   const openModal = (url) => {
@@ -136,14 +144,22 @@ const CoachDetailsPage = () => {
         >
           <div className="main_heading_section flex justify-between">
             <h1 className="text-xl text-black font-bold">{name}</h1>
-            <div className="approve_button">
-              <Button
-                className="bg-blue-700 text-white px-10 py-2 rounded-md"
-                type="submit"
-                disabled={!isCvVerified || !isAgreementVerified || isSubmitting}
-              >
-                Approve
-              </Button>
+            <div className="approve_button flex gap-10">
+              {singleCoach?.isApproved ? (
+                <Button className="bg-blue-700 text-white px-10 py-2 rounded-md">
+                  Update Status
+                </Button>
+              ) : (
+                <Button
+                  className="bg-blue-700 text-white px-10 py-2 rounded-md"
+                  type="submit"
+                  disabled={
+                    !isCvVerified || !isAgreementVerified || isSubmitting
+                  }
+                >
+                  Approve
+                </Button>
+              )}
             </div>
           </div>
           <Tabs
@@ -175,13 +191,13 @@ const CoachDetailsPage = () => {
             <div className="border-b-2 border-gray-300 my-3"></div>
             <TabsContent value="details" className="flex-grow p-6">
               <h2 className="text-xl font-bold">Personal Information</h2>
-              <div className="personal_details_section flex w-full h-full mt-10">
+              <div className="personal_details_section flex w-full gap-10 h-full mt-10">
                 <div className="lg:w-[20%] w-full profile_image">
-                  <div className="image_section text-center flex justify-center">
+                  <div className="image_section w-[200px] h-[200px] text-center flex justify-center">
                     <img
                       src={profileImage}
                       alt="profileImage"
-                      className="rounded-full"
+                      className="w-full h-full rounded-full object-cover"
                     />
                   </div>
                 </div>
@@ -314,13 +330,11 @@ const CoachDetailsPage = () => {
                 <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
                     <p className="text-base font-bold text-gray-700">CV</p>
-                    {/* <ResumeTooltip icon={FaEye} title="View Cv">
-                      
-                    </ResumeTooltip> */}
                     <FaEye
-                        className="text-blue-500 text-xl cursor-pointer"
-                        onClick={() => openModal(cv?.link)}
-                      />
+                      className="text-blue-500 text-xl cursor-pointer"
+                      onClick={() => openModal(cv?.link)}
+                      title="View Cv"
+                    />
                   </div>
                   <div className="flex">
                     <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
@@ -331,7 +345,7 @@ const CoachDetailsPage = () => {
                       <div>
                         <p className="text-base my-2 font-medium text-gray-700">
                           <div className="flex items-center space-x-2">
-                            {isCvVerified ? (
+                            {singleCoach?.isApproved || isCvVerified ? (
                               <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
                                 Approved
                               </span>
@@ -348,12 +362,12 @@ const CoachDetailsPage = () => {
                               />
                               <div
                                 className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                  isCvVerified ? "bg-green-600" : ""
+                                  singleCoach?.isApproved || isCvVerified  ? "bg-green-600" : ""
                                 }`}
                               >
                                 <div
                                   className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                    isCvVerified ? "translate-x-full" : ""
+                                    singleCoach?.isApproved || isCvVerified ? "translate-x-full" : ""
                                   }`}
                                 />
                               </div>
@@ -370,14 +384,11 @@ const CoachDetailsPage = () => {
                     <p className="text-base font-bold text-gray-700">
                       Signed Aggrement
                     </p>
-                    <ResumeTooltip icon={FaEye} title="View Signed Aggrement">
-                      <FaEye
-                        className="text-blue-500 text-xl cursor-pointer"
-                        onClick={() => openModal(signedAggrement?.link)}
-                      />
-                    </ResumeTooltip>
+                    <FaEye
+                      className="text-blue-500 text-xl cursor-pointer"
+                      onClick={() => openModal(signedAggrement?.link)}
+                    />
                   </div>
-
                   <div className="flex">
                     <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
                       <div className="text-green-500 hover:underline flex gap-5">
@@ -390,7 +401,7 @@ const CoachDetailsPage = () => {
                         <p className="text-base font-medium text-gray-700">
                           <p className="text-base font-medium text-gray-700">
                             <div className="flex items-center space-x-2">
-                              {isAgreementVerified ? (
+                              {singleCoach?.isApproved || isAgreementVerified ? (
                                 <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
                                   Approved
                                 </span>
@@ -407,12 +418,12 @@ const CoachDetailsPage = () => {
                                 />
                                 <div
                                   className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    isAgreementVerified ? "bg-green-600" : ""
+                                    singleCoach?.isApproved || isAgreementVerified ? "bg-green-600" : ""
                                   }`}
                                 >
                                   <div
                                     className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      isAgreementVerified
+                                      singleCoach?.isApproved || isAgreementVerified
                                         ? "translate-x-full"
                                         : ""
                                     }`}
