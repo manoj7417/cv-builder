@@ -13,6 +13,7 @@ import moment from "moment-timezone";
 
 const TimeZone = ({ value, onChange }) => {
   const [timeZones, setTimeZones] = useState([]);
+  const [defaultTimeZone, setDefaultTimeZone] = useState("");
 
   useEffect(() => {
     // Fetch all available time zones and their offsets
@@ -22,14 +23,19 @@ const TimeZone = ({ value, onChange }) => {
       return { zone, label: zoneLabel };
     });
     setTimeZones(zones);
-  }, []);
+
+    // Get the user's default timezone
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    setDefaultTimeZone(userTimeZone);
+    onChange(userTimeZone); // Set the default value to user's timezone
+  }, [onChange]);
 
   return (
     <div>
       <div className='time_zone_heading mb-2'>
         <h1 className='text-base font-bold text-blue-950'>TimeZone</h1>
       </div>
-      <Select value={value} onValueChange={onChange}>
+      <Select value={value || defaultTimeZone} onValueChange={onChange}>
         <SelectTrigger className='w-[300px]'>
           <SelectValue placeholder='Select your timezone' />
         </SelectTrigger>
