@@ -9,10 +9,8 @@ export async function POST(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        console.log(error)
         const errorMessage = error.response ? error.response.data : { error: "Error Login coach" };
         const statusCode = error.response ? error.response.status : 500;
-
         return new Response(JSON.stringify(errorMessage), {
             status: statusCode,
             headers: { 'Content-Type': 'application/json' }

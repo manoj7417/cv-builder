@@ -141,6 +141,9 @@ export default function CoachFilter({ coaches, handleCoachDetails }) {
   };
 
   const filteredCoaches = coaches.filter((coach) => {
+
+    const isApprovedCoach = coach.isApproved && coach.approvalStatus === "approved";
+
     const courseMatch =
       selectedFilters.coachCourses.length === 0 ||
       selectedFilters.coachCourses.some((course) =>
@@ -154,7 +157,7 @@ export default function CoachFilter({ coaches, handleCoachDetails }) {
     const ratingMatch =
       selectedFilters.rating.length === 0 ||
       selectedFilters.rating.includes(coach.rating);
-    return courseMatch && profileMatch && ratingMatch;
+      return isApprovedCoach && courseMatch && profileMatch && ratingMatch;
   });
 
   //Filter Func

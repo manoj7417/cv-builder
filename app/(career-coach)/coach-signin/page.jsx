@@ -56,8 +56,7 @@ export default function CoachRegistration() {
         router.push('/coach-form')
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.error || "Error logging in");
+      toast.error(error.response?.data?.error || "Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -106,8 +105,8 @@ export default function CoachRegistration() {
         </DialogContent>
       </Dialog>
       <section className="w-full h-screen">
-        <div className="grid grid-cols-1 lg:grid-cols-2  gap-7">
-          <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 place-items-center">
+          <div className="w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen">
             <div className="w-[70%] mt-14">
               <h2 className="text-white text-center text-2xl font-semibold">
                 Join as a Coach and inspire the next generation of achievers!
@@ -154,7 +153,7 @@ export default function CoachRegistration() {
             </Swiper>
             {/* Custom Pagination Styles */}
           </div>
-          <div className="flex justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+          <div className="flex justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24 w-full">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
                 Sign in
