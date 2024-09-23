@@ -414,7 +414,9 @@ export default function CoachesPage() {
   const handleCoachDetails = (id) => {
     router.push(`coaches/${id}`);
   };
-
+  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  console.log(coaches)
+  
   return (
     <>
       <div className='bg-gray-200'>
