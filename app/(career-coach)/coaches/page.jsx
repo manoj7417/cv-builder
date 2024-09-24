@@ -399,8 +399,7 @@ export default function CoachesPage() {
   const router = useRouter();
 
   const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
-  console.log("coaches::",coaches)
-
+  console.log("coaches manoj::", coaches);
 
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -417,33 +416,41 @@ export default function CoachesPage() {
 
   return (
     <>
-      <div className='bg-gray-200'>
-        <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
-          <h2 className='2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold text-blue-950 text-center my-10'>
+      <div className="bg-gray-200">
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+          <h2 className="2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold text-blue-950 text-center my-10">
             Popular instructor in Career Development
           </h2>
 
-          <div className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-            {coaches.slice(0, 4).map((item, index) => (
-              <div
-                key={item.id}
-                className='group relative bg-white cursor-pointer'
-                onClick={() => handleCoachDetails(item?._id)}>
-                <div className='aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80'>
-                  <img
-                    alt={item.imageAlt}
-                    src={item.profileImage}
-                    className='h-full w-full object-cover object-center lg:h-full lg:w-full'
-                  />
-                </div>
-                <div className='coaching_name text-center mt-2'>
-                  <h3 className='text-sm text-gray-700'>{item.name}</h3>
-                  <p className='text-[12px] text-gray-700'>
-                    {item?.jobProfile?.title}
-                  </p>
-                </div>
-                <div className='mt-4 p-5 flex justify-between border-t border-gray-200'>
-                  {/* <div className='flex items-center gap-2'>
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {coaches?.length > 0 &&
+              coaches
+                ?.filter(
+                  (coach) =>
+                    coach.isApproved && coach.approvalStatus === "approved"
+                )
+                .slice(0, 4)
+                .map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="group relative bg-white cursor-pointer"
+                    onClick={() => handleCoachDetails(item?._id)}
+                  >
+                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                      <img
+                        alt={item.imageAlt}
+                        src={item.profileImage}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      />
+                    </div>
+                    <div className="coaching_name text-center mt-2">
+                      <h3 className="text-sm text-gray-700">{item.name}</h3>
+                      <p className="text-[12px] text-gray-700">
+                        {item?.jobProfile?.title}
+                      </p>
+                    </div>
+                    <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
+                      {/* <div className='flex items-center gap-2'>
                     <FaStar className='text-orange-500' />
                     <p className='text-sm text-gray-700'>{item.rating}</p>
                   </div>
@@ -451,38 +458,40 @@ export default function CoachesPage() {
                     {item.students}{" "}
                     <span className='text-gray-500 ml-1 text-sm'>students</span>
                   </p> */}
-                </div>
-              </div>
-            ))}
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
-      <div className='coach_course py-10 sm:py-20'>
-        <div className='flex flex-wrap justify-center gap-4 sm:gap-10'>
+      <div className="coach_course py-10 sm:py-20">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-10">
           {categories?.length > 0 &&
             categories?.map((val) => (
               <div
                 key={val.id}
-                className='courses_box w-[150px] sm:w-[200px] h-[70px] sm:h-[90px] bg-gray-100 shadow-xl p-4 sm:p-5 text-center cursor-pointer'
-                onClick={() => handleCategoryClick(val?.id)}>
-                <h3 className='text-gray-600 text-sm sm:text-base'>
+                className="courses_box w-[150px] sm:w-[200px] h-[70px] sm:h-[90px] bg-gray-100 shadow-xl p-4 sm:p-5 text-center cursor-pointer"
+                onClick={() => handleCategoryClick(val?.id)}
+              >
+                <h3 className="text-gray-600 text-sm sm:text-base">
                   {val?.categoryTitle}
                 </h3>
-                <p className='text-xs sm:text-sm'>{val?.courses} courses</p>
+                <p className="text-xs sm:text-sm">{val?.courses} courses</p>
               </div>
             ))}
         </div>
 
         {selectedCategoryDetails && (
-          <div className='selected_category mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5'>
-            <h4 className='text-center text-sm sm:text-lg font-semibold text-gray-700 mt-5 sm:mt-3'>
+          <div className="selected_category mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
+            <h4 className="text-center text-sm sm:text-lg font-semibold text-gray-700 mt-5 sm:mt-3">
               Popular Keywords:
             </h4>
-            <ul className='flex flex-wrap justify-center gap-3 sm:gap-4 mt-4'>
+            <ul className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-4">
               {selectedCategoryDetails.subCategory.map((subCat, idx) => (
                 <li
                   key={idx}
-                  className='bg-gray-100 px-3 py-1 sm:px-4 sm:py-2 rounded-md shadow-md text-gray-700 text-xs sm:text-sm'>
+                  className="bg-gray-100 px-3 py-1 sm:px-4 sm:py-2 rounded-md shadow-md text-gray-700 text-xs sm:text-sm"
+                >
                   {subCat}
                 </li>
               ))}
@@ -490,7 +499,7 @@ export default function CoachesPage() {
           </div>
         )}
       </div>
-      <div className='coach_filter'>
+      <div className="coach_filter">
         <CoachFilter
           coaches={coaches}
           handleCoachDetails={handleCoachDetails}

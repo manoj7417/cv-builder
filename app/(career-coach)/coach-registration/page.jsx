@@ -89,7 +89,7 @@ export default function CoachRegistration() {
 
   return (
     <section className=" place-items-center h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 w-full h-full">
         <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0">
           <div className="w-[70%] mt-14">
             <h2 className="text-white text-center text-2xl font-semibold">
@@ -216,7 +216,7 @@ export default function CoachRegistration() {
                   </div>
                   <div className="lg:w-1/2 w-full">
                     <div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mt-1">
                         <Label
                           htmlFor="password"
                           className="text-sm text-gray-900"
@@ -238,7 +238,7 @@ export default function CoachRegistration() {
                           render={({ field }) => (
                             <PhoneInput
                               {...field}
-                              inputStyle={{ height: "40px", width: "100%" }}
+                              inputStyle={{ height: "40px", width: "100%"}}
                               country={"us"}
                               value={field.value} // Ensure value is set correctly
                               onChange={(value, countryData) => {

@@ -292,7 +292,7 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
             </h2>
           </div>
           <div
-            className={`my-5 p-5 ${fontStyle.subHeadingFont} break-words`}
+            className={`my-10 p-5 ${fontStyle.subHeadingFont} break-words`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>

@@ -39,7 +39,9 @@ const useCoachesDetailStore = create(
           ...updatedFields, // Merges the existing singleCoach with new updated fields
         },
       })),
-  }))
+  }),{
+    enabled:true
+  })
 );
 
 export default useCoachesDetailStore;

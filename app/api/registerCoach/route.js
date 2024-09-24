@@ -9,6 +9,7 @@ export async function POST(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
+        
         const errorMessage = error.response ? error.response.data : { error: "Error registering coach" };
         const statusCode = error.response ? error.response.status : 500;
 
