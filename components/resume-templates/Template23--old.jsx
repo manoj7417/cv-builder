@@ -695,10 +695,10 @@ const Template23 = () => {
             style={{ backgroundColor: metadata?.theme?.background }}
           >
             <div
-              className="text-center py-6 pl-72"
+              className="text-center py-6 pl-56"
               style={{ color: metadata?.theme?.primary }}
             >
-              <h1 className="text-5xl italic font-bold">{basics?.name}</h1>
+              <h1 className="text-6xl italic font-bold">{basics?.name}</h1>
               <p className="text-xl pt-2 font-semibold">{basics?.jobtitle}</p>
             </div>
           </div>

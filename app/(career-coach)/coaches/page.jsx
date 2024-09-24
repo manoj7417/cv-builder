@@ -5,7 +5,6 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CoachFilter from "./CoachFilter";
 import { useRouter } from "next/navigation";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
 
 // const coaches = [
 //   {

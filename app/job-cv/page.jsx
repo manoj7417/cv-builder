@@ -123,8 +123,82 @@ const options = [
 const jobTabs = [
   // ... (your jobTabs here)
 ];
+import { usePathname } from "next/navigation";
+import AccordionItem from "@/components/component/AccordionItem";
+import parse from "html-react-parser";
+const faqData = [
+  {
+    id: 1,
+    ques: "What is the CV Match feature?",
+    ans: `
+      The unique concept of the Genies Career Hub’s CV Match feature is that it matches your job title or profession and prepares a <a href="/job-cv" className="font-bold"> Professional curriculum vitae</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
+    `,
+  },
+  {
+    id: 2,
+    ques: "How is this CV Match different from CV Creator?",
+    ans: `
+    <ol>
+        <li>1. CV Creators help make a new CV through a whole detailed process.</li>
+        <li>2. CV Match makes a <a href="/job-cv" className="font-bold">professional CV</a> format template that asks for your basic information and prepares an entirely <a href="/job-cv" className="font-bold">professional CV</a>.</li>
+        <li>3. It matches your job description with our 45+ pre-made templates, filling in the best information professionally.</li>
+    </ol>
+    `,
+  },
+  {
+    id: 3,
+    ques: "How to get a pre-made Professional CV?",
+    ans: `
+    Follow these simple steps to get a pre-made <a href="/job-cv" className="font-bold">professional CV</a>-
+     <ol>
+        <li>1. Go to CV Studio and click on CV Match.</li>
+        <li>2. Enter your job role or profession, and click Generate Now.</li>
+        <li>3. Upload your existing resume or start afresh by making one.</li>
+        <li>4. Enter your name, email, job role, city, and country.</li>
+        <li>5. Add experience if you have any, or select the fresher box.</li>
+        <li>6. Add your education, add any previous projects, and add your skills.</li>
+        <li>7. Review your details generated professionally by AI, and make changes if needed.</li>
+        <li>8. Choose from <a href="/job-cv" className="font-bold">professional CV</a> templates and the colour of your choice.</li>
+        <li>9. Download in text or PDF form.</li>
+    </ol>
+    `,
+  },
+  {
+    id: 4,
+    ques: "Can you achieve your dream job with CV Match?",
+    ans: `
+    CV Match is your helping hand that will help you get that job that you waited for forever. It will make your task more manageable if you struggle with the professional way of writing a CV that meets your employer’s requirements. Just filling in some vital information will do so and get that job to you.
+    `,
+  },
+  {
+    id: 5,
+    ques: "What kind of professional CV templates are there in CV Match?",
+    ans: `
+    1. Graphic Designer<br/>
+Get a professional-approved and AI-analysed resume that is appealing and highlights the critical skills and roles for you. <br/><br/>
 
+2. Electrical Engineer<br/>
+Your electrical engineer CV will have all the technical skills that you want like automation, circuit design etc. with the experience of using tools that you have.<br/><br/>
+
+3. Registered Nurse<br/>
+Get detailed nurse <a href="/job-cv" className="font-bold">professional resume examples</a> with experience in clinical, and patient care skills, and specifications in the healthcare sector.<br/><br/>
+
+4. Project Manager<br/>
+We have CVs matching your profile of project manager’s management skills, leadership, experience and projects customisable by you. As a project manager, we showcase your risk managing, stakeholding and budgeting skills to attract recruiters.<br/><br/> 
+
+5. Chartered Accountant<br/>
+For a profile like a chartered accountant, we make sure the key qualifications like certifications, auditing, tax planning etc are being shown along with technical skills and experience.<br/><br/>
+
+6. Teacher<br/>
+A profile that is very common and has an important role in our lives is of a teacher. We make sure we talk effectively about your teaching experiences, planning of lessons, student development strategies, classroom management and use of educational technologies.<br/><br/>
+
+    `,
+  },
+];
 export default function Home() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  console.log("pathname::", pathname);
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState("");
   const userState = useUserStore((state) => state.userState);
@@ -267,6 +341,12 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const toggle = (index) => {
+    if (open === index) {
+      return setOpen(null);
+    }
+    setOpen(index);
+  };
   return (
     <main>
       <>
@@ -307,7 +387,7 @@ export default function Home() {
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <svg
-                        class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                        className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -472,11 +552,11 @@ export default function Home() {
           <section>
             <div className="steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10 ">
               <div className="flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10">
-                <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full pt-20">
+                <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20">
                   Get a <span className="text-[#2C98CA]">Professional CV</span>{" "}
                   for Your
                 </h2>
-                <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 pb-20">
+                <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20">
                   Job Description
                 </h2>
               </div>
@@ -484,7 +564,7 @@ export default function Home() {
 
             <div className="max-w-7xl mx-auto steps_intro lg:py-0 sm:p-5 p-5">
               {/* START-FIRST SECTION */}
-              <div class="grid grid-cols-3 gap-14">
+              <div className="grid grid-col-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-14">
                 <div className="bg-[#FFFCDC] p-7">
                   <h1 className="text-[#2C98CA] text-lg font-semibold">
                     Pre-written content
@@ -521,15 +601,15 @@ export default function Home() {
                     pre-made 45+ resumes of some selected job descriptions. The
                     jobs are from around the world of different job profiles.
                     Select your resume matching your job description and get a
-                    pre-made professional CV for yourself.
+                    pre-made <Link href="/job-cv" className="font-bold"> professional CV</Link> for yourself.
                   </p>
                 </div>
               </div>
               <div className="max-w-7xl mx-auto mt-12">
                 <div className="flex flex-row w-[100%]">
-                  <div className="w-[16%]"></div>
-                  <div className="w-[68%]">
-                    <div className="grid grid-cols-2 gap-14">
+                  <div className="w-[0%] sm:w-[16%] md:w-[16%] lg:w-[16%] xl:w-[16%] 2xl:w-[16%]"></div>
+                  <div className="w-[100%] sm:w-[68%] md:w-[68%] lg:w-[68%] xl:w-[68%] 2xl:w-[68%]">
+                    <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14">
                       <div className="bg-[#FFD9ED] p-5">
                         <h1 className="text-[#2C98CA] text-lg font-semibold">
                           AI and expert-approved profile description
@@ -540,8 +620,8 @@ export default function Home() {
                           basic information like Job role, upload or start
                           afresh by forming a new CV, fill in the previous
                           projects if any and skills. After optimising it with
-                          AI, the CV Match prepares a professional curriculum
-                          vitae of the same job role or title by modifying the
+                          AI, the CV Match prepares a <Link href="/job-cv" className="font-bold">professional curriculum
+                          vitae</Link> of the same job role or title by modifying the
                           information professionally. 
                         </p>
                       </div>
@@ -561,7 +641,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="w-[16%]"></div>
+                  <div className="w-[0%] sm:w-[16%] md:w-[16%] lg:w-[16%] xl:w-[16%] 2xl:w-[16%]"></div>
                 </div>
               </div>
               {/* END-FIRST SECTION */}
@@ -573,7 +653,7 @@ export default function Home() {
                     Stand Out and Personalize Your CV for The Best Impact
                   </h3>
                   <p className="text-lg py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left text-[#1B1B1F]">
-                    6 simple steps to best professional CV-
+                    6 simple steps to best <Link href="/job-cv" className="font-bold"> professional CV</Link>-
                   </p>
                 </div>
                 <div className="lg:w-[33%] w-full h-auto">
@@ -603,10 +683,7 @@ export default function Home() {
                   <div className="lg:w-[55%] w-full steps_content">
                     <h4 className="font-bold text-[#101827] text-2xl italic">
                       Step 1
-                    </h4>
-                    {/* <h3 className="text-3xl text-black  py-3">
-                      BASIC INFORMATION
-                    </h3> */}
+                    </h4>                    
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Go to the CV Match page for pre-made CVs. Enter your job
                       role or profession and click on Generate Now. 
@@ -615,7 +692,7 @@ export default function Home() {
                       pre-made CV for.
                     </p>
                   </div>
-                  <div className="lg:w-[45%] w-full h-[250px] image_content flex flex-col justify-start items-center">
+                  <div className="lg:w-[45%] w-full h-auto image_content flex flex-col justify-start items-center">
                     {/* <img
                       src="Artboard_ats.png"
                       alt="icon4"
@@ -630,7 +707,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="arrow absolute left-[40%] -bottom-40">
+                  <div className="arrow absolute left-[38%] -bottom-40">
                     <img
                       src="/ats_step_arrow_1.png"
                       alt="arrow"
@@ -644,9 +721,10 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="step_2 relative mt-20">
+              {/*START-STEP-2 FOR MOBILE ONLY  */}
+              <div className=" block sm:block md:block lg:hidden xl:hidden 2xl:hidden step_2 relative mt-20">
                 <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
                     <div className="flex flex-col justify-center items-center">
                       <img
                         src="/CV_MATCH_Step 2.png"
@@ -659,9 +737,7 @@ export default function Home() {
                     <h4 className="font-bold text-[#101827] text-2xl italic">
                       Step 2
                     </h4>
-                    {/* <h3 className="text-3xl text-black  py-3">
-                      PROFILE UPDATES
-                    </h3> */}
+                    
 
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Upload your existing resume. Select a resume and upload
@@ -674,7 +750,7 @@ export default function Home() {
                   <p className="text-2xl font-bold text-[#2C98CA]">Or</p>
                 </div>
                 <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
                     <div className="flex flex-col justify-center items-center">
                       <img
                         src="/CV_MATCH_Step 2.1.png"
@@ -684,35 +760,17 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="lg:w-[50%] w-full steps_content mt-10">
-                    {/*<h4 className="font-bold text-[#101827] text-2xl italic">
-                      Step 2
-                    </h4>
-                     <h3 className="text-3xl text-black  py-3">
-                      PROFILE UPDATES
-                    </h3> */}
+                   
 
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Start afresh by making a CV for yourself. Just fill in
                       basic details like your name, email, job role, city and
-                      country.  This information will help build your
-                      professional CV with professional insights and artificial
+                      country.  This information will help build your <Link href="/job-cv" className="font-bold"> professional CV</Link> with professional insights and artificial
                       intelligence.
                     </p>
                   </div>
                 </div>
-                {/* <div className="pro_tips">
-                    <div className="pro_image relative">
-                      <img src="/pro-tips.png" alt="pro-tips" />
-                      <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                        Pro Tips !
-                      </p>
-                    </div>
-                    <p className="text-xl px-5">
-                      Do you wish to change the font style of the text? Yes, you
-                      can! We provide you the choice of changing the font style
-                      if you do not like the original one. 
-                    </p>
-                  </div> */}
+                
                 <div className="arrow absolute left-[35%] -bottom-45">
                   <img
                     src="/ats_step_arrow_2.png"
@@ -721,7 +779,66 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="step_3 relative">
+              {/*END-STEP-2 FOR MOBILE ONLY  */}
+              {/*START-STEP-2 FOR SM MD LG XL 2XL SCREENS  */}
+              <div className="hidden sm:hidden md:hidden lg:block xl:block 2xl:block step_2 relative mt-32 mb-32">
+                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
+                  <div className="lg:w-[40%] w-full steps_content mt-10">
+                    <h4 className="font-bold text-[#101827] text-2xl italic">
+                      Step 2
+                    </h4>
+                    <p className="text-base py-3 text-[#1B1B1F] ">
+                      Upload your existing resume. Select a resume and upload
+                      its PDF.  This step will analyse the PDF and the details
+                      will be filled accordingly.
+                    </p>
+                  </div>
+                  <div className="lg:w-[10%] w-full ">
+                    <p className="text-2xl font-bold text-[#2C98CA] mt-20 text-center">Or</p>
+                  </div>
+                  <div className="lg:w-[40%] w-full steps_content mt-10">
+                    <p className="text-base py-3 text-[#1B1B1F]">
+                      Start afresh by making a CV for yourself. Just fill in
+                      basic details like your name, email, job role, city and
+                      country.  This information will help build your
+                      <Link href="/job-cv" className="font-bold"> professional CV</Link> with professional insights and artificial
+                      intelligence.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                    ``
+                    <div className="flex flex-col justify-center items-center">
+                      <img
+                        src="/CV_MATCH_Step 2.png"
+                        alt="icon4"
+                        className="w-full h-80 object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                    <div className="flex flex-col justify-center items-center">
+                      <img
+                        src="/CV_MATCH_Step 2.1.png"
+                        alt="icon4"
+                        className="w-full h-80 object-cover"
+                      />
+                    </div>
+                  </div>
+                  
+                </div>
+                <div className="arrow absolute left-[35%] -bottom-35">
+                  <img
+                    src="/ats_step_arrow_2.png"
+                    alt="arrow"
+                    className="w-52 h-52 object-contain"
+                  />
+                </div>
+              </div>
+              {/*END-STEP-2 FOR SM MD LG XL 2XL SCREENS  */}
+              <div className="step_3 relative mt-30">
                 <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                   <div className="lg:w-[50%] w-full steps_content mt-10">
                     <h4 className="font-bold text-[#101827] text-2xl italic">
@@ -734,10 +851,10 @@ export default function Home() {
                       <br />
                       Have an experience? Then go ahead and fill in your
                       experience details.  These details will help build
-                      professional curriculum vitae and help get the best jobs.
+                      <Link href="/job-cv" className="font-bold"> Professional curriculum vitae</Link> and help get the best jobs.
                     </p>
                   </div>
-                  <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent">
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent">
                     <div className="flex justify-center items-center">
                       <img
                         src="/CV_MATCH_Step 3.png"
@@ -747,21 +864,10 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                {/* <div className="pro_tips">
-                    <div className="pro_image relative">
-                      <img src="/pro-tips.png" alt="pro-tips" />
-                      <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                        Pro Tips !
-                      </p>
-                    </div>
-                    <p className="text-xl px-5">
-                      You can change the design of the templates anywhere in the
-                      process of making your CV. 
-                    </p>
-                  </div> */}
-                <div className="arrow absolute left-[56%] -bottom-50">
+                
+                <div className="arrow absolute left-[33%] -bottom-40">
                   <img
-                    src="/ats_step_arrow_2.png"
+                    src="/ats_step_arrow_1.png"
                     alt="arrow"
                     className="w-52 h-52 object-contain lg:block hidden"
                   />
@@ -774,7 +880,7 @@ export default function Home() {
               </div>
               <div className="step_4 relative">
                 <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent">
+                  <div className="lg:w-[40%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent">
                     <div className="flex justify-center items-center">
                       <img
                         src="/CV_MATCH_Step 4.png"
@@ -783,31 +889,22 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full steps_content mt-16">
+                  <div className="lg:w-[60%] w-full steps_content mt-16">
                     <h4 className="font-bold text-[#101827] text-2xl italic">
                       Step 4
                     </h4>
                     {/* <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3> */}
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    The basic information of your education must be filled in the next step. Just fill in your school or university name, course and time duration of the course.
-The employers will review your education status which will help you get better deserving jobs. 
+                      The basic information of your education must be filled in
+                      the next step. Just fill in your school or university
+                      name, course and time duration of the course. The
+                      employers will review your education status which will
+                      help you get better deserving jobs. 
                     </p>
                   </div>
                 </div>
-                {/* <div className="pro_tips">
-                    <div className="pro_image relative">
-                      <img src="/pro-tips.png" alt="pro-tips" />
-                      <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                        Pro Tips !
-                      </p>
-                    </div>
-                    <p className="text-xl px-5">
-                      Do you wish to change the shades other than the colors
-                      provided? Go ahead and click on the selected color, change
-                      the shade by doodling around, and set it 
-                    </p>
-                  </div> */}
-                <div className="arrow absolute left-[37%] -bottom-60">
+                
+                <div className="arrow absolute left-[30%] -bottom-40">
                   <img
                     src="/ats_step_arrow_5.png"
                     alt="arrow"
@@ -820,86 +917,81 @@ The employers will review your education status which will help you get better d
                   />
                 </div>
               </div>
-              <div className="step_5 relative">
+              
+              
+              {/*START-STEP-5 FOR SM MD LG XL 2XL SCREENS  */}
+              <div className="block sm:block md:block lg:block xl:block 2xl:block step_2 relative mt-32">
                 <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full steps_content mt-16">
+                  <div className="lg:w-[100%] w-full steps_content mt-10">
                     <h4 className="font-bold text-[#101827] text-2xl italic">
                       Step 5
                     </h4>
-                    {/* <h3 className="text-3xl text-[#1B1B1F]  py-3">
-                      PROJECTS, SKILLS AND HOBBIES
-                    </h3> */}
-                    <p className="text-base py-3 text-[#1B1B1F]">
-                    Adding your previous projects will give a clear picture to the employer of the different projects that you worked on in the past.
-                    These are reviewed by the recruiters and help you get jobs if projects match their interests</p>
+                    <p className="text-base py-3 text-[#1B1B1F] ">
+                      Adding your previous projects will give a clear picture to
+                      the employer of the different projects that you worked on
+                      in the past. These are reviewed by the recruiters and help
+                      you get jobs if projects match their interests
+                    </p>
                   </div>
-                  <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent">
-                    <div className="flex  flex-col justify-center items-center">
+                  
+                  
+                </div>
+
+                <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                    ``
+                    <div className="flex flex-col justify-center items-center">
                       <img
                         src="/CV_MATCH_Step 5.png"
-                        alt="icon5"
-                        className=" h-full object-cover w-[200px]"
-                      />
-                      <img
-                        src="/CV_MATCH_Step 5.png"
-                        alt="icon5"
-                        className=" h-full object-cover w-[200px]"
+                        alt="icon4"
+                        className="w-full h-80 object-cover"
                       />
                     </div>
                   </div>
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                    <div className="flex flex-col justify-center items-center">
+                      <img
+                        src="/CV_MATCH_Step 5.1.png"
+                        alt="icon4"
+                        className="w-full h-80 object-cover"
+                      />
+                    </div>
+                  </div>
+                  
                 </div>
-                {/* <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
-                  </p>
-                </div>
-                <p className="text-xl px-5">
-                  Do you wish to change the shades other than the colors
-                  provided? Go ahead and click on the selected color, change the
-                  shade by doodling around, and set it 
-                </p>
-              </div> */}
-                <div className="arrow absolute left-[57%] -bottom-40">
+                <div className="arrow absolute left-[35%] -bottom-30 md:left-[58%] lg:left-[58%] xl:left-[58%] 2xl:left-[58%]">
                   <img
                     src="/ats_step_arrow_2.png"
                     alt="arrow"
-                    className="w-52 h-52 object-contain lg:block hidden"
-                  />
-                  <img
-                    src="/arrow2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:hidden block"
+                    className="w-52 h-52 object-contain"
                   />
                 </div>
               </div>
+              {/*END-STEP-5 FOR SM MD LG XL 2XL SCREENS  */}
               <div className="step_6 relative">
                 <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent">
-                    <div className="flex flex-col gap-10 justify-start items-center mt-10">
+                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center  lg:order-first order-last lg:bg-transparent">
+                    <div className="flex flex-col gap-10 justify-start  mt-10">
                       <img
-                        src="/profile_awards_certificates_language.png"
+                        src="/CV_MATCH_Step 6.png"
                         alt="icon5"
                         className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full steps_content">
+                  <div className="lg:w-[50%] w-full steps_content pt-20">
                     <h4 className="font-bold text-black text-2xl italic">
                       Step 6
                     </h4>
-                    <h3 className="text-3xl text-black  py-3">
+                    {/* <h3 className="text-3xl text-black  py-3">
                       AWARDS, CERTIFICATES AND LANGUAGE
-                    </h3>
+                    </h3> */}
                     <p className="text-base py-3">
-                      If you have received any awards or certificates
-                      previously, write them here.
-                    </p>
-                    <p className="text-base py-3">
-                      If you know other languages, do mention them. This helps
-                      and increases your chances of getting better
-                      opportunities.
+                      After filling in all the required details, your
+                      <Link href="/job-cv" className="font-bold"> professional CV</Link> will be presented. Review the information
+                      made with AI and add changes according to your needs. 
+                      Change the colour and template designs from professional
+                      resume examples. Download once completed.
                     </p>
                   </div>
                 </div>
@@ -911,346 +1003,37 @@ The employers will review your education status which will help you get better d
                     />
                   </div> */}
               </div>
-
-              <div className="step_7 w-[80%]">
-                <h3 className="text-4xl text-black font-bold py-3">
-                  Your ATS Resume Decoded 
-                </h3>
-                <p className="text-base py-3">
-                  Our{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    enhanced CV
-                  </Link>{" "}
-                  maker is a tool that transforms your existing resume into an{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    Application Tracking System Resume
-                  </Link>{" "}
-                  . Genies Career Hub provides you with a transformation in a
-                  <Link href="/resume-analyzer" className="font-bold">
-                    resume ATS format
-                  </Link>{" "}
-                  by giving you an ATS score. This score will help the resume
-                  get in a higher rank and will be placed above other
-                  people&apos;s CVs
-                </p>
-                <p className="text-base py-3">
-                  Analyse your{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    ATS Resume
-                  </Link>{" "}
-                  with 3-level optimisation.
-                </p>
-                <p className="text-base py-3">
-                  Optimise your{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    Resume format
-                  </Link>{" "}
-                  Clarity, Relevance,  and Content with AI.
-                </p>
-              </div>
-              {/*  */}
-              <div className="max-w-7xl mx-auto mt-5 mb-10">
-                <h3 className="text-3xl text-black font-bold py-3">
-                  Our 3-level optimisation checker-
-                </h3>
-
-                {/* START- OUR THREE LEVEL OPTIMIZATION CHECKER */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
-                  {/* Step 1 */}
-                  <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_1.png')] bg-no-repeat bg-contain">
-                    <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
-                        1. CLARITY
-                      </h6>
-                      <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                        Gives you clarity of your resume in a clear and concise
-                        manner
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Step 2 */}
-                  <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_2.png')] bg-no-repeat bg-contain">
-                    <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
-                        2. RELEVANCE
-                      </h6>
-                      <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                        Informs you about the relevance of your resume to the
-                        job title.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Step 3 */}
-                  <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_3.png')] bg-no-repeat bg-contain">
-                    <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
-                        3. CONTENT
-                      </h6>
-                      <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
-                        Gives you an idea if your content contains of the
-                        relevant information to the job profile.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                {/* END- OUR THREE LEVEL OPTIMIZATION CHECKER */}
-              </div>
-              {/*  */}
-              {/*  */}
-              <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-[#FE2E12] font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
-                  </p>
-                </div>
-                <p className="text-lg px-5">
-                  Wish you had a better{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    ATS System
-                  </Link>{" "}
-                  Friendly Score! Do it right away. Our Optimiser results show
-                  your score and suggestions in{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    resume ATS format
-                  </Link>
-                  . Follow the tips, and you can increase your{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    ATS Resume
-                  </Link>{" "}
-                  score.
-                </p>
-              </div>
-              {/*  */}
-              {/* step-1 */}
-              <div className="step_6 relative">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full steps_content order-first lg:order-first ">
-                    {/* <h4 className="font-bold text-black text-2xl">Step 6</h4> */}
-                    <h3 className="text-3xl text-black font-bold py-3">
-                      How to use our CV checker?
-                    </h3>
-
-                    <p className="text-base py-3 font-bold">
-                      1. Go to CV Studio to Optimise Your CV and Click Optimise
-                      CV Now. Upload Your Resume in PDF Form.
-                    </p>
-                    <p className="text-sm py-3">
-                      Need an{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        enhanced resume
-                      </Link>{" "}
-                      ? You can go to the CV Creator and prepare your{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                      </Link>{" "}
-                      in 4 easy steps. 
-                    </p>
-                  </div>
-                  <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent">
-                    <div className="flex flex-col gap-10 justify-start items-center mt-0">
-                      <img
-                        src="/profile_ats_am_optimised_cv.png"
-                        alt="icon5"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*  */}
-              {/* step-2 */}
-              <div className="step_6 relative">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full steps_content">
-                    <p className="text-base py-3 font-bold">
-                      2. Check the{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        Resume format
-                      </Link>{" "}
-                      ATS Score in the CV Insights
-                    </p>
-                    <p className="text-sm py-3">
-                      You must upload your resume in Optimise CV Now and let the
-                      AI analyse the score. Your ATS score will appear at the
-                      top. Our CV Optimiser will also provide you with feedback
-                      based on the clarity, relevance, and quality of the
-                      content.
-                    </p>
-                    <p className="text-sm py-3">
-                      Our optimiser gives decent feedback and suggestions on how
-                      to improve the score. It will guide you by suggesting
-                      essential points to{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        enhance resume
-                      </Link>
-                      .
-                    </p>
-                  </div>
-                  <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent  order-last lg:order-first">
-                    <div className="flex flex-col gap-10 justify-start items-center mt-0">
-                      <img
-                        src="/profile_cv_insights.png"
-                        alt="icon5"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*  */}
-              {/*step-3  */}
-              <div className="step_6 relative">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full steps_content order-first lg:order-first ">
-                    <p className="text-base py-3 font-bold">
-                      3. Review Your{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                      </Link>{" "}
-                      Feedback or Suggestions and Start Making Corrections
-                    </p>
-                    <p className="text-base py-3">
-                      Our CV Optimiser will provide recommendations to improve
-                      your{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        enhanced CV
-                      </Link>{" "}
-                      , increasing your chances of getting hired. 
-                    </p>
-                    <p className="text-base py-3">
-                      Go thoroughly through the issues in recommendations, and
-                      accordingly make changes in your{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                      </Link>{" "}
-                      .
-                    </p>
-                  </div>
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center  lg:bg-transparent ">
-                    <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row  gap-5 justify-start items-center mt-0">
-                      <img
-                        src="/profile_clarity_ats.png"
-                        alt="icon5"
-                        className="w-full h-full object-cover"
-                      />
-                      <img
-                        src="/profile_relevance_ats.png"
-                        alt="icon5"
-                        className="w-full h-full object-cover"
-                      />
-                      <img
-                        src="/profile_content_ats.png"
-                        alt="icon5"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*  */}
-              {/*step-4  */}
-              <div className="step_6 relative">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full steps_content order-last lg:order-first ">
-                    <p className="text-base py-3 font-bold">
-                      4. Click on Fix My CV to Make Changes Manually.
-                    </p>
-                    <p className="text-sm py-3">
-                      Make changes to your ATS-friendly resume by following the
-                      recommendations that will make the CV an{" "}
-                      <Link href="/resume-analyzer" className="font-bold">
-                        enhanced CV
-                      </Link>
-                      , and achieve a more significant ATS score.  
-                    </p>
-                    <p className="text-sm py-3">
-                      Take an overview of the details, the content, the
-                      templates, and the color at the end. Make changes
-                      according to your preferences, and you will be able to
-                      download the improvised resume quickly.
-                    </p>
-                  </div>
-                  <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent hidden lg:block"></div>
-                </div>
-              </div>
-              {/*  */}
-              {/*  */}
-              <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-[#FE2E12] font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
-                  </p>
-                </div>
-                <p className="text-lg px-5">
-                  If you wish to recheck your resume for a better score after
-                  making the changes once, just upload your improvised CV to our{" "}
-                  <Link href="/resume-analyzer" className="font-bold">
-                    ATS CV checker
-                  </Link>{" "}
-                  . Then, make more improvements with suggestions and download
-                  the resume. 
-                </p>
-              </div>
-              {/*  */}
-
-              {/*  */}
-              <div className="flex lg:flex-row flex-col gap-10 my-10">
-                <div className="lg:w-[60%] w-full steps_content">
-                  <h3 className="text-3xl text-black font-bold py-3">
-                    Is our ATS Resume Checker successful in Improving the ATS
-                    Score?
-                  </h3>
-                  <p className="text-base py-3">
-                    Yes, Genies Career Hub provides job-seekers with a chance to
-                    improve their{" "}
-                    <Link href="/resume-analyzer" className="font-bold">
-                      ATS Resume
-                    </Link>{" "}
-                    scores. This{" "}
-                    <Link href="/resume-analyzer" className="font-bold">
-                      ATS CV checker
-                    </Link>{" "}
-                    analyses your resume with AI and then bifurcates it based on
-                    the clarity, relevance, and content of your resume format.  
-                  </p>
-                  <p className="text-base py-3">
-                    After breaking down these into three, our optimiser gives
-                    insights into the areas of improvement to increase each of
-                    the scores. These insights can be some keywords or specific
-                    details similar to your job profile meeting industry
-                    standards.
-                  </p>
-                  <p className="text-base py-3">
-                    By following the insights and making changes, you can
-                    re-assess your{" "}
-                    <Link href="/resume-analyzer" className="font-bold">
-                      ATS Resume
-                    </Link>{" "}
-                    score and witness the change in score.
-                  </p>
-                  <p className="text-base py-3">
-                    For a clear picture, we have provided an example of
-                    witnessing the score change after following some
-                    instructions.
-                  </p>
-                </div>
-                <div className="lg:w-[40%] w-full h-auto image_content">
-                  <img
-                    src="/ats_resume_checker.png"
-                    alt="icon4"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </div>
-              {/*  */}
             </div>
           </section>
         </div>
         {/* NEW SECTION END */}
+
+        {/* START-FAQS */}
+        <section className="faq py-20">
+          <div className="max-w-7xl mx-auto flex lg:flex-row flex-col">
+            <div className="faq_image lg:w-[50%] w-full lg:block hidden">
+              <div className="image_div w-[400px] h-[400px]">
+                <img src="/faq_image.png" alt="faq" className="w-full h-full" />
+              </div>
+            </div>
+            <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">
+              <h2 className="text-3xl text-center text-bold font-semibold my-5">
+                Frequently Asked Questions
+              </h2>
+              {faqData?.map((item, index) => (
+                <AccordionItem
+                  open={index === open}
+                  key={index}
+                  ques={item?.ques}
+                  ans={parse(item?.ans)}
+                  pathname={pathname}
+                  toggle={() => toggle(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* END-FAQS */}
 
         {/* END-NEW STEPS CONTENT  */}
       </>
