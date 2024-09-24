@@ -79,8 +79,36 @@ const CoachDetailsPage = () => {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("blogs");
   const [date, setDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [availableSlots, setAvailableSlots] = useState([]);
+
+  const selectedDay = format(date, "EEEE")
+
+
+  const {
+    name,
+    email,
+    phone,
+    bio,
+    availability,
+    coachingDescription,
+    profileImage,
+    dateofBirth,
+    experience,
+    address,
+    city,
+    country,
+    zip,
+    bankDetails,
+    ratesPerHour,
+    cv,
+    signedAggrement,
+    typeOfCoaching,
+    skills,
+  } = singleCoach;
+
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
   const CoachAvailability = [
     {
@@ -248,142 +276,13 @@ const CoachDetailsPage = () => {
       ],
     },
   ];
+
   
 
-  const [selectedDateInfo, setSelectedDateInfo] = useState(null);
-
-  console.log("selectedDateInfo::", selectedDateInfo);
-
-  const availableDates = CoachAvailability.flatMap((coach) =>
-    coach.schedule.map((s) => new Date(s.date))
-  );
-
-  // const handleDateSelect = (selectedDate) => {
-  //   setDate(selectedDate);
-  //   if (selectedDate) {
-  //     // Format the selected date to "MM/DD/YYYY" for comparison
-  //     const dateString = selectedDate.toLocaleDateString("en-US", {
-  //       year: "numeric",
-  //       month: "numeric",
-  //       day: "numeric",
-  //     });
-
-  //     // Find the information for the selected date
-  //     const info = CoachAvailability.flatMap((coach) =>
-  //       coach.schedule
-  //         .filter((s) => {
-  //           // Convert each schedule date to the same format for comparison
-  //           const scheduleDateString = new Date(s.date).toLocaleDateString(
-  //             "en-US",
-  //             {
-  //               year: "numeric",
-  //               month: "numeric",
-  //               day: "numeric",
-  //             }
-  //           );
-  //           return scheduleDateString === dateString;
-  //         })
-  //         .map((s) => ({ ...s, coachName: coach.coachName }))
-  //     )[0];
-
-  //     // Set the selected date information
-  //     setSelectedDateInfo(info);
-  //   } else {
-  //     setSelectedDateInfo(null);
-  //   }
-  // };
-
-  const handleDateSelect = (selectedDate) => {
-    setDate(selectedDate);
-
-    if (selectedDate) {
-      // Format the selected date to "MM/DD/YYYY" for comparison
-      const dateString = selectedDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      });
-
-      // Find the information for the selected date
-      const info = CoachAvailability.flatMap((coach) =>
-        coach.schedule
-          .filter((s) => {
-            // Convert each schedule date to the same format for comparison
-            const scheduleDateString = new Date(s.date).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-              }
-            );
-            return scheduleDateString === dateString;
-          })
-          .map((s) => ({ ...s, coachName: coach.coachName }))
-      )[0];
-
-      if (info) {
-        // Generate 1-hour time slots based on the start and end time
-        const slots = generateTimeSlots(
-          info.slots[0].startTime,
-          info.slots[0].endTime
-        );
-
-        // Set the selected date information, including generated slots
-        setSelectedDateInfo({
-          ...info, // Preserve existing info (e.g., coachName, dayOfWeek, etc.)
-          timeSlots: slots, // Add generated time slots to the info
-        });
-      } else {
-        setSelectedDateInfo(null);
-      }
-    } else {
-      setSelectedDateInfo(null);
-    }
-  };
-
-  // Utility function to generate 1-hour time slots
-  const generateTimeSlots = (startTime, endTime) => {
-    const slots = [];
-
-    // Parse the start and end times into Date objects
-    let start = new Date(`1970-01-01T${convertTo24Hour(startTime)}:00`);
-    const end = new Date(`1970-01-01T${convertTo24Hour(endTime)}:00`);
-
-    // Generate 1-hour intervals
-    while (start < end) {
-      const nextHour = new Date(start.getTime() + 60 * 60 * 1000); // Add 1 hour
-      slots.push({
-        startTime: formatTime(start),
-        endTime: formatTime(nextHour),
-      });
-      start = nextHour; // Move to the next hour
-    }
-
-    return slots;
-  };
-
-  // Helper functions for time format conversion
-  const convertTo24Hour = (time) => {
-    const [hourMin, period] = time.split(" ");
-    let [hour, minute] = hourMin.split(":").map(Number);
-    if (period === "PM" && hour !== 12) hour += 12;
-    if (period === "AM" && hour === 12) hour = 0;
-    return `${String(hour).padStart(2, "0")}:${minute
-      .toString()
-      .padStart(2, "0")}`;
-  };
-
-  const formatTime = (date) => {
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const period = hours >= 12 ? "PM" : "AM";
-    const adjustedHours = hours % 12 || 12; // Convert to 12-hour format
-    return `${adjustedHours}:${minutes.toString().padStart(2, "0")} ${period}`;
-  };
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
+  const disablePastDates = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
   };
 
   useEffect(() => {
@@ -400,38 +299,6 @@ const CoachDetailsPage = () => {
       filterCoachById(id);
     }
   }, [id, filterCoachById]);
-
-  const {
-    name,
-    email,
-    phone,
-    bio,
-    coachingDescription,
-    profileImage,
-    dateofBirth,
-    experience,
-    address,
-    city,
-    country,
-    zip,
-    bankDetails,
-    ratesPerHour,
-    cv,
-    signedAggrement,
-    typeOfCoaching,
-    skills,
-  } = singleCoach;
-
-  // Function to disable dates before today
-  const disablePastDates = (date) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set time to midnight for accurate comparison
-    return date < today;
-  };
-
-  //  const handleDateSelect = (selectedDate) => {
-  //    setDate(selectedDate);
-  //  };
 
   return (
     <>
@@ -676,24 +543,14 @@ const CoachDetailsPage = () => {
                           <Calendar
                             mode="single"
                             selected={date}
-                            onSelect={handleDateSelect}
-                            classNames={{
-                              day_today:
-                                "bg-transparent text-primary font-bold",
-                              day_selected: "bg-blue-300 text-white",
-                            }}
-                            modifiers={{
-                              available: availableDates,
-                            }}
-                            modifiersStyles={{
-                              available: {
-                                fontWeight: "bold",
-                                color: "#3174ad",
-                              },
-                            }}
+                            onSelect={setDate}
+                            className="rounded-md border"
+                            disabled={disablePastDates}
+                            weekStartsOn={1} // Start week on Monday
+                            showOutsideDays={false}
                           />
                         </div>
-                        <div>
+                        {/* <div>
                           {selectedDateInfo ? (
                             <div className="selected-date-info">
                               <h4 className="text-black font-bold text-base">
@@ -722,7 +579,7 @@ const CoachDetailsPage = () => {
                           ) : (
                             <p>No available slots.</p>
                           )}
-                        </div>
+                        </div> */}
                       </div>
                     ) : (
                       <div
