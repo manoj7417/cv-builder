@@ -663,7 +663,7 @@ const Template18 = () => {
             style={{ color: metadata?.theme?.text }}
           >
             <div
-              className={`my-4 ${fontStyle.contactFont} flex flex-col font-semibold px-8`}
+              className={`my-10 ${fontStyle.contactFont} flex flex-col font-semibold px-10`}
             >
               {basics?.email && (
                 <a
