@@ -80,8 +80,7 @@ const CoachDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("blogs");
   const [date, setDate] = useState(new Date());
 
-  const selectedDay = format(date, "EEEE")
-
+  const selectedDay = format(date, "EEEE");
 
   const {
     name,
@@ -105,6 +104,7 @@ const CoachDetailsPage = () => {
     skills,
   } = singleCoach;
 
+  console.log("availability", availability);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -277,12 +277,36 @@ const CoachDetailsPage = () => {
     },
   ];
 
-  
-
   const disablePastDates = (date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return date < today;
+  };
+
+  const getDayOfWeek = (date) => {
+    // Get the day of the week from the date object
+    const options = { weekday: "long" }; // Use 'short' for abbreviated names
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  // // Function to format the date
+  // const formatDate = (date) => {
+  //   const options = { month: 'numeric', day: 'numeric' };
+  //   return date.toLocaleDateString('en-US', options);
+  // };
+
+  // Function to get the day of the month
+  const getDayOfMonth = (date) => {
+    return date.getDate(); // Returns only the day of the month (1-31)
+  };
+
+  // Check if a specific day is available based on the provided data
+  const isDayAvailable = (day) => {
+    const dayOfWeek = getDayOfWeek(day);
+    const availability = singleCoach?.availability?.date?.find(
+      (item) => item.dayOfWeek === dayOfWeek
+    );
+    return availability?.isAvailable;
   };
 
   useEffect(() => {
@@ -548,6 +572,26 @@ const CoachDetailsPage = () => {
                             disabled={disablePastDates}
                             weekStartsOn={1} // Start week on Monday
                             showOutsideDays={false}
+                            components={{
+                              Day: ({ date }) => {
+                                const dayOfWeek = getDayOfWeek(date);
+                                const dayOfMonth = getDayOfMonth(date); // Get only the day of the month
+                                const isAvailable = isDayAvailable(date);
+
+                                return (
+                                  <div
+                                    className={`p-2 rounded ${
+                                      isAvailable
+                                        ? "bg-green-300 text-white"
+                                        : ""
+                                    }`}
+                                    title={dayOfWeek} // Optional: display the day of the week as a tooltip
+                                  >
+                                    <div>{dayOfMonth}</div>{" "}
+                                  </div>
+                                );
+                              },
+                            }}
                           />
                         </div>
                         {/* <div>
