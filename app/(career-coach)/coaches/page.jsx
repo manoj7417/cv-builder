@@ -1,7 +1,7 @@
 /** @format */
 
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CoachFilter from "./CoachFilter";
 import { useRouter } from "next/navigation";
@@ -413,6 +413,10 @@ export default function CoachesPage() {
   const handleCoachDetails = (id) => {
     router.push(`coaches/${id}`);
   };
+
+  useEffect(() => {
+    fetchAllCoaches();
+  }, []);
 
   return (
     <>

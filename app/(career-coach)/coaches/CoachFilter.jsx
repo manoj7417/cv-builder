@@ -360,6 +360,7 @@ export default function CoachFilter({ coaches, handleCoachDetails }) {
 
               <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4 sticky top-0'>
                 {/* Filters */}
+                
                 <form className='hidden lg:block'>
                   {/* <h3 className="sr-only">Categories</h3>
                   <ul
@@ -459,6 +460,7 @@ export default function CoachFilter({ coaches, handleCoachDetails }) {
                             src={item.profileImage}
                             className='h-full w-full object-cover object-center lg:h-full lg:w-full'
                           />
+                          
                         </div>
                         <div className='main_top px-1 flex justify-between items-baseline'>
                           <div className='coaching_name my-2 w-[150px] h-[50px]'>
