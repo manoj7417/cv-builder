@@ -9,8 +9,6 @@ const useCoachesDetailStore = create(
     coaches: [],
     singleCoach: {},
     isLoading: false,
-
-    // Fetch all coaches
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
