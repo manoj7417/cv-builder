@@ -277,10 +277,10 @@ const CoachDetailsPage = () => {
     },
   ];
 
-  const disablePastDates = (date) => {
+  const disablePastDates = (day) => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return date < today;
+    today.setHours(0, 0, 0, 0); // Ensure we compare only the date, not time
+    return day < today; // Disable all days before today
   };
 
   const getDayOfWeek = (date) => {
@@ -301,12 +301,11 @@ const CoachDetailsPage = () => {
   };
 
   // Check if a specific day is available based on the provided data
-  const isDayAvailable = (day) => {
-    const dayOfWeek = getDayOfWeek(day);
-    const availability = singleCoach?.availability?.date?.find(
-      (item) => item.dayOfWeek === dayOfWeek
+  const isDayAvailable = (dayOfWeek) => {
+    const availableDay = availability.dates.find(
+      (day) => day.dayOfWeek === dayOfWeek
     );
-    return availability?.isAvailable;
+    return availableDay ? availableDay.isAvailable : false;
   };
 
   useEffect(() => {
@@ -319,7 +318,6 @@ const CoachDetailsPage = () => {
 
   useEffect(() => {
     if (id) {
-      console.log("Filtering coach with id:", id); // Debugging log
       filterCoachById(id);
     }
   }, [id, filterCoachById]);
@@ -569,25 +567,28 @@ const CoachDetailsPage = () => {
                             selected={date}
                             onSelect={setDate}
                             className="rounded-md border"
-                            disabled={disablePastDates}
-                            weekStartsOn={1} // Start week on Monday
+                            weekStartsOn={1}
                             showOutsideDays={false}
                             components={{
                               Day: ({ date }) => {
                                 const dayOfWeek = getDayOfWeek(date);
-                                const dayOfMonth = getDayOfMonth(date); // Get only the day of the month
-                                const isAvailable = isDayAvailable(date);
-
+                                const dayOfMonth = getDayOfMonth(date);
+                                const isAvailable = isDayAvailable(dayOfWeek);
+                                const isDisabled = disablePastDates(date);
+                                const dayClasses = isDisabled
+                                  ? "text-gray-400 cursor-not-allowed"
+                                  : "text-gray-800 cursor-pointer";
                                 return (
                                   <div
-                                    className={`p-2 rounded ${
-                                      isAvailable
-                                        ? "bg-green-300 text-white"
-                                        : ""
-                                    }`}
-                                    title={dayOfWeek} // Optional: display the day of the week as a tooltip
+                                    className={`p-2 rounded-md ${dayClasses}`}
+                                    title={dayOfWeek}
                                   >
-                                    <div>{dayOfMonth}</div>{" "}
+                                    <div className="flex flex-col items-center justify-center">
+                                      <div>{dayOfMonth}</div>
+                                      {isAvailable && !isDisabled && (
+                                        <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
+                                      )}
+                                    </div>
                                   </div>
                                 );
                               },
