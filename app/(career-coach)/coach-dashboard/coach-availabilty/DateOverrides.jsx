@@ -19,9 +19,11 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
-const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOverrides }) => {
-  const [dateOverridesData, setDateOverridesData] = useState(null);
+const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
   const [isUnavailable, setIsUnavailable] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState([]);
@@ -33,6 +35,14 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
   }])
 
 
+  const handleDialogClose = () => {
+    setSelected([])
+    setTimeSlots([{
+      startTime: "9:00 AM",
+      endTime: "5:00 PM"
+    }])
+    setIsModalOpen(false)
+  }
 
   const isDateDisabled = (date) => {
     const today = new Date();
@@ -56,13 +66,18 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
     setSelectedDatesTimes(newDatesTimes);
   };
 
-  const handleTimeChange = (fieldName, value, index, dateKey) => {
-    const updatedDatesTimes = { ...selectedDatesTimes };
-    updatedDatesTimes[dateKey][index][fieldName] = value;
-    setSelectedDatesTimes(updatedDatesTimes);
+  const handleTimeChange = (fieldName, value, index) => {
+    const updatedSlots = timeSlots.map((slot, i) => {
+      if (i === index) {
+        slot[fieldName] = value;
+      }
+      return slot;
+    })
+    setTimeSlots(updatedSlots)
   };
 
-  const addTimeSlot = (i) => {
+  const addTimeSlot = () => {
+    const i = timeSlots.length - 1
     const updateTimeSlots = [...timeSlots, {
       startTime: timeSlots[i].endTime,
       endTime: ""
@@ -84,16 +99,26 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
   };
 
   const handleSaveChanges = () => {
-    const data = {
-      selectedDates: selected,
-      selectedDateTimeSlots: selectedDatesTimes,
-      isUnavailableAllDay: isUnavailable,
-    };
-    console.log(data)
-    // setDateOverridesData(data);
-    // onUpdateOverrides(data); 
-    // setIsModalOpen(false);
+    const modifiedData = selected.map(date => ({
+      date: date,
+      slots: timeSlots
+    }));
+    setDateOverrides(modifiedData)
+    handleDialogClose();
+    toast.info("Date Overrides updated");
   };
+
+  const handleDeleteDateOverride = (i) => {
+    const newDateOverRides = dateOverrides.filter((_, index) => index !== i);
+    setDateOverrides(newDateOverRides);
+  }
+
+  const handleEditDateOverride = (i) => {
+    const dateOverride = dateOverrides[i];
+    setSelected([dateOverride.date])
+    setTimeSlots(dateOverride.slots)
+    setIsModalOpen(true);
+  }
 
   return (
     <>
@@ -106,13 +131,14 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
           <button
             className="bg-blue-950 text-white px-4 py-2 rounded mt-5 text-sm flex items-center gap-2"
             onClick={() => setIsModalOpen(true)}
+            type="button"
           >
             <FaPlus />
             Add an override
           </button>
 
           <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogContent className="max-w-3xl border-none">
+            <DialogContent className="max-w-3xl border-none" onClick={handleDialogClose}>
               <DialogHeader>
                 <DialogTitle className="text-blue-950 ">
                   Select the dates to override
@@ -127,7 +153,7 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
                     classNames={{
                       day_today: "border border-blue-950",
                       day_selected:
-                        "bg-blue-700 text-white hover:bg-blue-700 rounded-sm",
+                        "bg-blue-700 text-white hover:bg-blue-700  rounded-md",
                     }}
                     disabled={isDateDisabled}
                     defaultMonth={new Date()}
@@ -294,10 +320,9 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
                                   <Select
                                     onValueChange={(value) =>
                                       handleTimeChange(
-                                        "secondSelectedTime",
+                                        "endTime",
                                         value,
-                                        index,
-                                        Object.keys(selectedDatesTimes)[0]
+                                        index
                                       )
                                     }
                                     value={slot.endTime}
@@ -374,24 +399,25 @@ const DateOverrides = ({ timeSlot, onUpdateOverrides, dateOverrides, setDateOver
             </DialogContent >
           </Dialog >
         </div >
-        <div className="show_dataoverrides border-2 border-gray-500 rounded-md p-5 mt-5">
-          {dateOverridesData?.selectedDateTimeSlots && (
-            <div>
-              {Object.keys(dateOverridesData?.selectedDateTimeSlots).map((date) => (
-                <div key={date}>
-                  <p className="font-semibold">{date}</p>
-                  {dateOverridesData?.selectedDateTimeSlots[date].map((slot, index) =>
-                    // Only show the time slot if both times are selected
-                    slot.firstSelectedTime && slot.secondSelectedTime ? (
-                      <p key={index}>
-                        {slot.firstSelectedTime} - {slot.secondSelectedTime}
-                      </p>
-                    ) : null
-                  )}
-                </div>
-              ))}
+        <div className="show_dataoverrides rounded-md p-5 mt-5">
+          {dateOverrides.length > 0 && dateOverrides.map((date, index) => (
+            <div key={index} className="shadow-md px-3 py-4 flex rounded-md">
+              <div className="w-1/2">
+                <p className="font-bold text-gray-600">{date.date.toDateString()}</p>
+                {
+                  date.slots.map((slot, index) => (
+                    <div key={index}>
+                      <p className="text-sm text-gray-500"><span>{slot.startTime}</span> - <span>{slot.endTime}</span></p>
+                    </div>
+                  ))
+                }
+              </div>
+              <div className="w-1/2 flex justify-end items-center">
+                <Button className="bg-none hover:bg-gray-100 hover:shadow-sm" onClick={() => handleDeleteDateOverride(index)}><RiDeleteBin5Line className="text-red-500 text-xl" /></Button>
+                <Button className="bg-none hover:bg-gray-100 ml-2 hover:shadow-sm"> <MdOutlineModeEditOutline className="text-blue-500 text-xl" onClick={() => handleEditDateOverride(index)} /></Button>
+              </div>
             </div>
-          )}
+          ))}
         </div>
       </div >
     </>
