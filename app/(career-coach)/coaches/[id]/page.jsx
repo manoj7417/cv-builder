@@ -8,7 +8,7 @@ import { CoachHeader } from "@/components/component/CoachHeader";
 import moment from "moment-timezone";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 /******************************************** */
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
+import { GetTokens } from "@/app/actions";
 
 
 
@@ -53,6 +54,7 @@ const CoachDetailsPage = () => {
   /************************ */
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState("blogs");
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -63,7 +65,10 @@ const CoachDetailsPage = () => {
     dayOfWeek: "",
   });
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [geoData,setGeoData] = useState(null)
+  const [geoData,setGeoData] = useState(null);
+
+
+
 
   const {
     name,
@@ -87,9 +92,14 @@ const CoachDetailsPage = () => {
     skills,
   } = singleCoach;
 
-  console.log("modalSelectedSlot:", modalSelectedSlot);
 
-  const handleTabClick = (tab) => {
+  const handleTabClick = async(tab) => {
+    const {accessToken} = await GetTokens();
+    if(tab === 'appointment') {
+      if(!accessToken || !accessToken.value){
+       return router.push(`/login?redirect=/coaches/${id}`)
+      }
+    }
     setActiveTab(tab);
   };
 
@@ -210,9 +220,15 @@ const CoachDetailsPage = () => {
   const handleConfirmSlot = (data) => {
     // slotTime, coachId, timezone, country, state, city, notes, date
       const obj = {
-         ...data,
          coachId:id,
-         modalSelectedSlot
+         timezone:geoData.timezone,
+         country:geoData.country_name,
+         state:geoData.region,
+         city:geoData.city,
+         notes:data?.message,
+         date:modalSelectedSlot?.selectedDate?.date,
+         slotTime:modalSelectedSlot?.slot
+         
       }
       console.log("obj::",obj)
   };
@@ -222,6 +238,9 @@ const CoachDetailsPage = () => {
   useEffect(() => {
     getGeoInfo()
   }, [])
+  
+
+
   
 
   return (

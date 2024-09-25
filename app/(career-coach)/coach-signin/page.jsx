@@ -11,7 +11,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 
 //
@@ -32,7 +32,7 @@ export default function CoachRegistration() {
     formState: { errors },
   } = useForm();
   const { userState, formData, loginUser } = useCoachStore()
-
+  
   const email = useRef(null);
   const router = useRouter();
   const [loading, setIsLoading] = useState(false);
