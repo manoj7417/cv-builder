@@ -310,7 +310,7 @@ const PricingFunc = () => {
       >
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="w-[700px] h-[500px]"
+          className="md:w-[700px] md:h-[500px] lg:w-[700px] lg:h-[500px] xl:w-[700px] xl:h-[500px] 2xl:w-[700px] 2xl:h-[500px]"
           showCloseButton={true}
           onClick={handleCloseFreeDialog}
         >
@@ -516,6 +516,7 @@ const PricingFunc = () => {
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
   <DialogTrigger asChild></DialogTrigger>
   <DialogContent
+    // className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
     className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
     showCloseButton={true}
     onClick={handleCloseAIDialog}
@@ -527,7 +528,7 @@ const PricingFunc = () => {
         </h2>
       </DialogTitle>
       <DialogDescription>
-        <p className="text-sm sm:text-sm text-justify">
+        <p className="hidden sm:block md:block lg:block xl:block 2xl:block text-sm sm:text-sm text-justify">
           {selectedCard?.popUpDescription}
         </p>
       </DialogDescription>

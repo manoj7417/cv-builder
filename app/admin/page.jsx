@@ -4,10 +4,20 @@ import React, { useEffect } from "react";
 import { GetTokens } from "../actions";
 import axios from "axios";
 import Image from "next/image";
+
+import useCoachesDetailStore from "@/app/store/coachDetailStore";
+import { useUserStore } from "@/app/store/UserStore";
 const AdminPage = () => {
   //console.log("Admin Page")
 
   // return <div>AdminPage</div>;
+  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  console.log("coaches::", coaches);
+  const { userdata } = useUserStore((state) => state.userState);
+  useEffect(() => {
+    fetchAllCoaches(); // Fetch coaches when the component mounts
+  }, [fetchAllCoaches]);
+
   return (
     <>
       <div id="adminMain" className="to-blue-100">
@@ -18,7 +28,9 @@ const AdminPage = () => {
             className="flex flex-col sm:flex-col md:flex-col lg:flex-row p-10 items-center space-x-10"
           >
             <div className="w-52">
-              <h1 className="text-lg text-[#000000]">Hello Admin 👋🏼,</h1>
+              <h1 className="text-lg text-[#000000]">
+                Hello {userdata?.fullname} 👋🏼,
+              </h1>
             </div>
             <div className="relative w-[100%] mt-5 sm:mt-5 md:mt-5 lg:mt-0 xl:mt-0 2xl:mt-0">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -50,7 +62,7 @@ const AdminPage = () => {
               Created
             </div>
             <div className="flex justify-between w-full mt-7">
-              <div className="text-[40px] font-bold text-[#092C4C]">100</div>
+              <div className="text-[40px] font-bold text-[#092C4C]">0</div>
               <div>
                 <Image
                   src="/total_no_of_resume_Icon.png"
@@ -67,7 +79,7 @@ const AdminPage = () => {
               <br /> Students
             </div>
             <div className="flex justify-between w-full mt-7">
-              <div className="text-[40px] font-bold text-[#092C4C]">78</div>
+              <div className="text-[40px] font-bold text-[#092C4C]">0</div>
               <div>
                 <Image
                   src="/total_students.png"
@@ -84,7 +96,7 @@ const AdminPage = () => {
               <br /> Appointment
             </div>
             <div className="flex justify-between w-full mt-7">
-              <div className="text-[40px] font-bold text-[#092C4C]">136</div>
+              <div className="text-[40px] font-bold text-[#092C4C]">0</div>
               <div>
                 <Image
                   src="/total_appointment.png"
@@ -102,7 +114,7 @@ const AdminPage = () => {
               Downloaded
             </div>
             <div className="flex justify-between w-full mt-7">
-              <div className="text-[40px] font-bold text-[#092C4C]">75</div>
+              <div className="text-[40px] font-bold text-[#092C4C]">0</div>
               <div>
                 <Image
                   src="/total_no_of_resume_downloded_Icon.png"
@@ -120,7 +132,9 @@ const AdminPage = () => {
               Coach
             </div>
             <div className="flex justify-between w-full mt-7">
-              <div className="text-[40px] font-bold text-[#092C4C]">75</div>
+              <div className="text-[40px] font-bold text-[#092C4C]">
+                {coaches.length}
+              </div>
               <div>
                 <Image
                   src="/total_no_of_resume_downloded_Icon.png"
@@ -148,8 +162,60 @@ const AdminPage = () => {
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5 gap-4 pt-3 bg-white ">
+              {coaches.length > 0 ? (
+                coaches.slice(0, 10).map((coach) => {
+                  // Define button styles based on approval status
+                  const buttonStyle = {
+                    approved: "bg-green-500 text-white",
+                    pending: "bg-yellow-500 text-black",
+                    cancelled: "bg-red-500 text-white",
+                  };
+
+                  // Capitalize the first letter of the approval status
+                  const capitalizedStatus =
+                    coach.approvalStatus.charAt(0).toUpperCase() +
+                    coach.approvalStatus.slice(1).toLowerCase();
+
+                  return (
+                    <div
+                      key={coach.name}
+                      className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="pt-3 pb-3">
+                          <img
+                            className="h-16 w-16 rounded-full object-cover"
+                            src={coach.profileImage || "/default_coach.png"} // Use a default image if none is provided
+                            alt="Coach Image"
+                          />
+                        </div>
+                        <div className="font-bold text-base text-[#000000]">
+                          {coach.name}
+                        </div>
+                        <div className="text-[11px] text-[#000000]">
+                          {coach.typeOfCoaching}
+                        </div>
+                        <div className="pt-2 pb-3 text-[#4E5566]">
+                          <button
+                            className={`border p-1 text-[12px] rounded-md ${
+                              buttonStyle[coach.approvalStatus.toLowerCase()]
+                            }`}
+                          >
+                            {capitalizedStatus}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center text-[#4E5566] mt-5">
+                  No coaches available.
+                </div>
+              )}
+
               {/* START-COACH 1 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -169,10 +235,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 1 */}
               {/* START-COACH 2 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -192,10 +258,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 2 */}
               {/* START-COACH 3 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -215,10 +281,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 3 */}
               {/* START-COACH 4 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -238,10 +304,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 4 */}
               {/* START-COACH 5 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -261,10 +327,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 5 */}
               {/* START-COACH 6 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -284,10 +350,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 6 */}
               {/* START-COACH 7 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -307,10 +373,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 7 */}
               {/* START-COACH 8 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -330,10 +396,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 8 */}
               {/* START-COACH 9 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -353,10 +419,10 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 9 */}
               {/* START-COACH 10 */}
-              <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
+              {/* <div className="bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl">
                 <div className="flex flex-col items-center">
                   <div className="pt-3 pb-3">
                     <Image
@@ -376,7 +442,7 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* END-COACH 10 */}
             </div>
           </div>
@@ -393,156 +459,50 @@ const AdminPage = () => {
                   View All
                 </div>
               </div>
-              {/* START-COACH  */}
-              <div className="flex items-center mb-6 w-full mt-5 pr-5">
-                <div className="w-12 h-auto overflow-hidden rounded-full">
-                  <Image
-                    src="/new_appointment_img.png"
-                    alt="Profile Image"
-                    width={44}
-                    height={44}
-                  />
+              {coaches.length > 0 ? (
+                coaches
+                  .filter(
+                    (coach) => coach.approvalStatus.toLowerCase() === "approved"
+                  ) // Filter for approved coaches
+                  .map((coach) => (
+                    <div
+                      key={coach.name}
+                      className="flex items-center mb-6 w-full mt-5 pr-5"
+                    >
+                      <div className="w-16 h-auto overflow-hidden rounded-full">
+                        <img
+                          className="h-16 w-16 rounded-full object-cover"
+                          src={coach.profileImage || "/default_coach.png"} // Use default image if none is provided
+                          alt="Coach Image"
+                        />
+                      </div>
+                      <div className="ml-1 flex justify-between w-full">
+                        <div>
+                          <div className="text-[14px] font-bold text-[#092C4C]">
+                            {coach.name} {/* Display the coach's name */}
+                          </div>
+                          <div className="text-[13px] text-[#7E92A2] mt-2">
+                            {coach.typeOfCoaching}{" "}
+                            {/* Display the type of coaching */}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-[13px] font-bold text-[#092C4C]">
+                            {coach.price} {/* Display the coach's price */}
+                          </div>
+                          <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
+                            {coach.approvalStatus}{" "}
+                            {/* Display approval status */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <div className="text-center text-[#4E5566] mt-5">
+                  No coaches available.
                 </div>
-                <div className="ml-1 flex justify-between w-full">
-                  <div className="">
-                    <div className="text-[14px] font-bold text-[#092C4C]">
-                      Coach Name
-                    </div>
-                    <div className="text-[13px] text-[#7E92A2] mt-2">
-                      For Career Development
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-[13px] font-bold text-[#092C4C]">
-                      $100
-                    </div>
-                    <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
-                      Approved
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* END-COACH  */}
-              {/* START-COACH  */}
-              <div className="flex items-center mb-6 w-full mt-5 pr-5">
-                <div className="w-12 h-auto overflow-hidden rounded-full">
-                  <Image
-                    src="/new_appointment_img.png"
-                    alt="Profile Image"
-                    width={44}
-                    height={44}
-                  />
-                </div>
-                <div className="ml-1 flex justify-between w-full">
-                  <div className="">
-                    <div className="text-[14px] font-bold text-[#092C4C]">
-                      Coach Name
-                    </div>
-                    <div className="text-[13px] text-[#7E92A2] mt-2">
-                      For Career Development
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-[13px] font-bold text-[#092C4C]">
-                      $100
-                    </div>
-                    <div className="text-[13px] text-[#D10000] mt-2 font-bold">
-                      Not approved
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* END-COACH  */}
-              {/* START-COACH  */}
-              <div className="flex items-center mb-6 w-full mt-5 pr-5">
-                <div className="w-12 h-auto overflow-hidden rounded-full">
-                  <Image
-                    src="/new_appointment_img.png"
-                    alt="Profile Image"
-                    width={44}
-                    height={44}
-                  />
-                </div>
-                <div className="ml-1 flex justify-between w-full">
-                  <div className="">
-                    <div className="text-[14px] font-bold text-[#092C4C]">
-                      Coach Name
-                    </div>
-                    <div className="text-[13px] text-[#7E92A2] mt-2">
-                      For Career Development
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-[13px] font-bold text-[#092C4C]">
-                      $100
-                    </div>
-                    <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
-                      Approved
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* END-COACH  */}
-              {/* START-COACH  */}
-              <div className="flex items-center mb-6 w-full mt-5 pr-5">
-                <div className="w-12 h-auto overflow-hidden rounded-full">
-                  <Image
-                    src="/new_appointment_img.png"
-                    alt="Profile Image"
-                    width={44}
-                    height={44}
-                  />
-                </div>
-                <div className="ml-1 flex justify-between w-full">
-                  <div className="">
-                    <div className="text-[14px] font-bold text-[#092C4C]">
-                      Coach Name
-                    </div>
-                    <div className="text-[13px] text-[#7E92A2] mt-2">
-                      For Career Development
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-[13px] font-bold text-[#092C4C]">
-                      $100
-                    </div>
-                    <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
-                      Approved
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* END-COACH  */}
-              {/* START-COACH  */}
-              <div className="flex items-center mb-6 w-full mt-5 pr-5">
-                <div className="w-12 h-auto overflow-hidden rounded-full">
-                  <Image
-                    src="/new_appointment_img.png"
-                    alt="Profile Image"
-                    width={44}
-                    height={44}
-                  />
-                </div>
-                <div className="ml-1 flex justify-between w-full">
-                  <div className="">
-                    <div className="text-[14px] font-bold text-[#092C4C]">
-                      Coach Name
-                    </div>
-                    <div className="text-[13px] text-[#7E92A2] mt-2">
-                      For Career Development
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-[13px] font-bold text-[#092C4C]">
-                      $100
-                    </div>
-                    <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
-                      Approved
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* END-COACH  */}
+              )}
             </div>
           </div>
         </div>

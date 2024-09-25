@@ -171,6 +171,7 @@ export default function CoachFilter({ coaches, handleCoachDetails }) {
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+  
 
   //Next page func
   const handleNextPage = () => {
@@ -449,6 +450,7 @@ export default function CoachFilter({ coaches, handleCoachDetails }) {
                 <div className='lg:col-span-3'>
                   <div className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
                     {currentPageData.map((item, index) => (
+                      console.log(item),
                       <div
                         key={item.id}
                         className='group relative bg-white cursor-pointer'
