@@ -16,46 +16,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import timeSlots from "@/constants/TimeSlots";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
 
-const schema = yup.object().shape({
-  first_name: yup
-    .string()
-    .matches(/^[A-Za-z]+$/, "First name should only contain letters")
-    .required("First name is required"),
-  last_name: yup
-    .string()
-    .matches(/^[A-Za-z]+$/, "Last name should only contain letters")
-    .required("Last name is required"),
-  username: yup.string().required("Username is required"),
-  email: yup
-    .string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  careerCoaching: yup.string().required("Career Coaching topic is required"),
-  message: yup.string().required("Message is required"),
-  agree: yup
-    .boolean()
-    .oneOf([true], "You must agree with the terms and conditions")
-    .required(),
-});
 
-const onSubmit = (data) => {
-  console.log(data);
-  // Handle form submission logic here
-};
+
 /************************************************ */
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
-
-// const localizer = dateFnsLocalizer({
-//   format,
-//   parse,
-//   startOfWeek,
-//   getDay,
-//   locales,
-// });
 
 const CoachDetailsPage = () => {
   /************************ */
@@ -63,9 +41,7 @@ const CoachDetailsPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm();
 
   const {
     singleCoach,
@@ -79,8 +55,15 @@ const CoachDetailsPage = () => {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("blogs");
   const [date, setDate] = useState(new Date());
-
-  const selectedDay = format(date, "EEEE");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedDaySlots, setSelectedDaySlots] = useState(null);
+  const [modalSelectedSlot, setModalSelectedSlot] = useState(null);
+  const [selectedDate, setSelectedDate] = useState({
+    date: new Date(),
+    dayOfWeek: "",
+  });
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [geoData,setGeoData] = useState(null)
 
   const {
     name,
@@ -104,178 +87,16 @@ const CoachDetailsPage = () => {
     skills,
   } = singleCoach;
 
-  console.log("availability", availability);
+  console.log("modalSelectedSlot:", modalSelectedSlot);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
-  const CoachAvailability = [
-    {
-      coachName: "John Doe",
-      schedule: [
-        {
-          date: "23 September 2024",
-          dayOfWeek: "Monday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "03:00 PM",
-            },
-          ],
-        },
-        {
-          date: "24 September 2024",
-          dayOfWeek: "Tuesday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "03:00 PM",
-            },
-          ],
-        },
-        {
-          date: "25 September 2024",
-          dayOfWeek: "Wednesday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "03:00 PM",
-            },
-          ],
-        },
-        {
-          date: "26 September 2024",
-          dayOfWeek: "Thursday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "10:00 AM",
-              endTime: "04:00 PM",
-            },
-          ],
-        },
-        {
-          date: "27 September 2024",
-          dayOfWeek: "Friday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "11:00 AM",
-              endTime: "05:00 PM",
-            },
-          ],
-        },
-        {
-          date: "28 September 2024",
-          dayOfWeek: "Saturday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "01:00 PM",
-            },
-          ],
-        },
-        {
-          date: "29 September 2024",
-          dayOfWeek: "Sunday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "03:00 PM",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      coachName: "Jane Smith",
-      schedule: [
-        {
-          date: "30 September 2024",
-          dayOfWeek: "Monday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "10:00 AM",
-              endTime: "04:00 PM",
-            },
-          ],
-        },
-        {
-          date: "1 October 2024",
-          dayOfWeek: "Tuesday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "08:00 AM",
-              endTime: "12:00 PM",
-            },
-          ],
-        },
-        {
-          date: "2 October 2024",
-          dayOfWeek: "Wednesday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "03:00 PM",
-            },
-          ],
-        },
-        {
-          date: "3 October 2024",
-          dayOfWeek: "Thursday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "10:00 AM",
-              endTime: "04:00 PM",
-            },
-          ],
-        },
-        {
-          date: "4 October 2024",
-          dayOfWeek: "Friday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "11:00 AM",
-              endTime: "05:00 PM",
-            },
-          ],
-        },
-        {
-          date: "5 October 2024",
-          dayOfWeek: "Saturday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "01:00 PM",
-            },
-          ],
-        },
-        {
-          date: "6 October 2024",
-          dayOfWeek: "Sunday",
-          timeZone: "UTC +1",
-          slots: [
-            {
-              startTime: "09:00 AM",
-              endTime: "03:00 PM",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  const handleSlotClick = (slot) => {
+    setModalSelectedSlot({ slot, selectedDate });
+    setIsDialogOpen(true); // Open the dialog
+  };
 
   const disablePastDates = (day) => {
     const today = new Date();
@@ -289,15 +110,9 @@ const CoachDetailsPage = () => {
     return date.toLocaleDateString("en-US", options);
   };
 
-  // // Function to format the date
-  // const formatDate = (date) => {
-  //   const options = { month: 'numeric', day: 'numeric' };
-  //   return date.toLocaleDateString('en-US', options);
-  // };
-
   // Function to get the day of the month
   const getDayOfMonth = (date) => {
-    return date.getDate(); // Returns only the day of the month (1-31)
+    return date.getDate();
   };
 
   // Check if a specific day is available based on the provided data
@@ -322,6 +137,93 @@ const CoachDetailsPage = () => {
     }
   }, [id, filterCoachById]);
 
+  // Function to handle date selection and fetch available slots
+  const handleDateSelect = (dayOfWeek, date) => {
+    setSelectedDate({
+      date,
+      dayOfWeek,
+    });
+    const selectedDay = availability.dates.find(
+      (day) => day.dayOfWeek === dayOfWeek
+    );
+    if (selectedDay.isAvailable) {
+      const newSlots = createOneHourTimeSlotsForRange(selectedDay.slots);
+      setSelectedDaySlots(newSlots);
+    } else {
+      setSelectedDaySlots(null);
+    }
+  };
+
+  const formatDate = (date) => {
+    if (!date) return "";
+    const options = { day: "numeric", month: "long", year: "numeric" }; // Day, full month, and year
+    return date?.toLocaleDateString("en-GB", options); // 'en-GB' for day-first format
+  };
+
+  const isSameMonth = (date1, date2) => {
+    return (
+      date1.getMonth() === date2.getMonth() &&
+      date1.getFullYear() === date2.getFullYear()
+    );
+  };
+
+  const handleMonthChange = (newMonth) => {
+    setCurrentMonth(newMonth);
+  };
+
+  function createOneHourTimeSlotsForRange(slots) {
+    const updatedSlots = [];
+
+    slots.forEach((slot) => {
+      const startIndex = timeSlots.indexOf(slot.startTime);
+      const endIndex = timeSlots.indexOf(slot.endTime);
+
+      if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
+        throw new Error("Invalid start or end time in the slot");
+      }
+
+      // Break the current range into 1-hour intervals
+      for (let i = startIndex; i < endIndex; i++) {
+        updatedSlots.push({
+          startTime: timeSlots[i],
+          endTime: timeSlots[i + 1],
+        });
+      }
+    });
+
+    return updatedSlots;
+  }
+
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        console.log(data)
+        setGeoData(data)
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+
+  const handleConfirmSlot = (data) => {
+    // slotTime, coachId, timezone, country, state, city, notes, date
+      const obj = {
+         ...data,
+         coachId:id,
+         modalSelectedSlot
+      }
+      console.log("obj::",obj)
+  };
+
+
+
+  useEffect(() => {
+    getGeoInfo()
+  }, [])
+  
+
   return (
     <>
       <ResumeHeader />
@@ -344,22 +246,6 @@ const CoachDetailsPage = () => {
                       ABOUT ME
                     </h3>
                     <p className="text-[#6E7485] pb-5 text-sm">{bio}</p>
-                    {/* <p className="text-[#6E7485] pb-5 text-sm">
-                      He decided to work on his dream: be his own boss, travel
-                      the world, only do the work he enjoyed, and make a lot
-                      more money in the process. No more begging for vacation
-                      days and living from paycheck to paycheck. After trying
-                      everything from e-commerce stores to professional poker
-                      his lucky break came when he started freelance design.
-                      Vako fell in love with the field that gives him the
-                      lifestyle of his dreams.
-                    </p>
-                    <p className="text-[#6E7485] pb-5 text-sm">
-                      Vako realizes that people who take courses on Udemy want
-                      to transform their lives. Today with his courses and
-                      mentoring Vako is helping thousands of people transform
-                      their lives, just like he did once.
-                    </p> */}
                   </div>
                 </>
               )}
@@ -556,7 +442,6 @@ const CoachDetailsPage = () => {
               {activeTab === "appointment" && (
                 <>
                   <div>
-                    {!showForm ? (
                       <div
                         id="book_an_appointment_tab"
                         className="flex gap-10 items-baseline justify-around"
@@ -565,8 +450,10 @@ const CoachDetailsPage = () => {
                           <Calendar
                             mode="single"
                             selected={date}
-                            onSelect={setDate}
-                            className="rounded-md border"
+                            // onSelect={setDate}
+                            onSelect={handleDateSelect}
+                            onMonthChange={handleMonthChange}
+                            className="shadow-lg"
                             weekStartsOn={1}
                             showOutsideDays={false}
                             components={{
@@ -575,221 +462,129 @@ const CoachDetailsPage = () => {
                                 const dayOfMonth = getDayOfMonth(date);
                                 const isAvailable = isDayAvailable(dayOfWeek);
                                 const isDisabled = disablePastDates(date);
+                                const isInCurrentMonth = isSameMonth(
+                                  date,
+                                  currentMonth
+                                );
+
+                                const handleDayClick = () => {
+                                  if (!isDisabled) {
+                                    handleDateSelect(dayOfWeek, date);
+                                  }
+                                };
+
                                 const dayClasses = isDisabled
-                                  ? "text-gray-400 cursor-not-allowed"
-                                  : "text-gray-800 cursor-pointer";
-                                return (
-                                  <div
-                                    className={`p-2 rounded-md ${dayClasses}`}
+                                  ? "text-gray-400 cursor-not-allowed bg-transparent"
+                                  : "text-gray-800 cursor-pointer bg-gray-100 rounded-full";
+                                return isInCurrentMonth ? (
+                                  <Button
+                                    className={`w-9 h-9 p-2 rounded-md ${dayClasses}`}
                                     title={dayOfWeek}
+                                    onClick={handleDayClick}
                                   >
-                                    <div className="flex flex-col items-center justify-center">
-                                      <div>{dayOfMonth}</div>
+                                    <span className="flex flex-col items-center justify-center">
+                                      {/* Date (Day of the Month) */}
+                                      <span className="text-sm ">
+                                        {dayOfMonth}
+                                      </span>
+
+                                      {/* Dot below the date */}
                                       {isAvailable && !isDisabled && (
                                         <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
                                       )}
-                                    </div>
-                                  </div>
-                                );
+                                    </span>
+                                  </Button>
+                                ) : null;
                               },
                             }}
                           />
                         </div>
-                        {/* <div>
-                          {selectedDateInfo ? (
-                            <div className="selected-date-info">
-                              <h4 className="text-black font-bold text-base">
-                                Available Slots:
-                              </h4>
-                              <p className="text-gray-500 font-medium text-sm my-2">
-                                {selectedDateInfo.date},
-                                {selectedDateInfo.dayOfWeek}
-                              </p>
-                              <p className="text-gray-500 font-medium text-sm my-2">
-                                {selectedDateInfo.timeZone}
-                              </p>
-                              <div>
-                                {selectedDateInfo.timeSlots.map(
-                                  (slot, index) => (
+                        {selectedDate.date && (
+                          <div>
+                            {selectedDaySlots ? (
+                              <div className="selected-date-info">
+                                <p className="text-gray-500 font-medium text-sm my-2">
+                                  {selectedDate?.dayOfWeek},
+                                  {formatDate(selectedDate?.date)}
+                                </p>
+                                <p className="text-gray-600 font-medium text-sm my-2">
+                                  TimeZone: {availability?.timeZone}
+                                </p>
+                                <div>
+                                  {selectedDaySlots.map((slot, index) => (
                                     <p
                                       key={index}
-                                      className="text-sm bg-blue-950 text-white py-2 text-center  rounded-md font-medium my-2 cursor-pointer"
+                                      onClick={() => handleSlotClick(slot)}
+                                      className="text-sm bg-blue-950 text-white py-2 px-5 text-center  rounded-md font-medium my-2 cursor-pointer"
                                     >
-                                      {slot.startTime} - {slot.endTime}
+                                      {slot.startTime}
                                     </p>
-                                  )
-                                )}  
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                          ) : (
-                            <p>No available slots.</p>
-                          )}
-                        </div> */}
+                            ) : (
+                              <div>
+                                <h4 className="text-black font-bold text-base">
+                                  No Slots available
+                                </h4>
+                                <p className="text-gray-500 font-medium text-sm my-2">
+                                  {formatDate(selectedDate?.date)},
+                                  {selectedDate?.dayOfWeek}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        <Dialog open={isDialogOpen}>
+                          <DialogContent
+                            onClick={() => setIsDialogOpen(false)}
+                            showCloseButton
+                          >
+                            <DialogHeader>
+                              <DialogTitle>Confirm Slot</DialogTitle>
+                            </DialogHeader>
+                            <form onSubmit={handleSubmit(handleConfirmSlot)}>
+                              <div className="space-y-2">
+                                {/* Display date and day of the week */}
+                                <p className="text-gray-500 font-medium text-sm">
+                                  {modalSelectedSlot?.selectedDate?.dayOfWeek},{" "}
+                                  {formatDate(
+                                    modalSelectedSlot?.selectedDate?.date
+                                  )}
+                                </p>
+
+                                {/* Available slot details */}
+                                <div className="slots_available flex flex-wrap">
+                                  <p className="text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2">
+                                    {modalSelectedSlot?.slot?.startTime} -{" "}
+                                    {modalSelectedSlot?.slot?.endTime}
+                                  </p>
+                                </div>
+
+                                {/* Textarea for message input */}
+                                <Textarea
+                                  {...register("message", {
+                                    required: "Message is required",
+                                  })} // Registering the input with validation
+                                  placeholder="Type your message here."
+                                  className="w-full"
+                                />
+                                {errors.message && (
+                                  <p className="text-red-500 text-sm">
+                                    {errors.message.message}
+                                  </p>
+                                )}
+
+                                {/* Confirm Button */}
+                                <div className="confrm_button flex justify-end mt-4">
+                                  <Button type="submit">Confirm</Button>
+                                </div>
+                              </div>
+                            </form>
+                          </DialogContent>
+                        </Dialog>
                       </div>
-                    ) : (
-                      <div
-                        id="appointment_confirm_form"
-                        className="max-w-lg mx-auto p-4"
-                      >
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                          <div className="flex space-x-4">
-                            <div className="flex-1">
-                              <label
-                                htmlFor="first_name"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                First Name
-                              </label>
-                              <input
-                                type="text"
-                                {...register("first_name")}
-                                id="first_name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="First name..."
-                              />
-                              {errors.first_name && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.first_name.message}
-                                </p>
-                              )}
-                            </div>
-                            <div className="flex-1">
-                              <label
-                                htmlFor="last_name"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Last Name
-                              </label>
-                              <input
-                                type="text"
-                                {...register("last_name")}
-                                id="last_name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Last name..."
-                              />
-                              {errors.last_name && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.last_name.message}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="mt-4">
-                            <label
-                              htmlFor="username"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Username
-                            </label>
-                            <input
-                              type="text"
-                              {...register("username")}
-                              id="username"
-                              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder="Username..."
-                            />
-                            {errors.username && (
-                              <p className="text-red-500 text-sm">
-                                {errors.username.message}
-                              </p>
-                            )}
-                          </div>
-
-                          <div className="mt-4">
-                            <label
-                              htmlFor="email"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Email
-                            </label>
-                            <input
-                              type="text"
-                              {...register("email")}
-                              id="email"
-                              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder="Email address..."
-                            />
-                            {errors.email && (
-                              <p className="text-red-500 text-sm">
-                                {errors.email.message}
-                              </p>
-                            )}
-                          </div>
-
-                          <div className="mt-4">
-                            <label
-                              htmlFor="careerCoaching"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Career Coaching
-                            </label>
-                            <input
-                              type="text"
-                              {...register("careerCoaching")}
-                              id="careerCoaching"
-                              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder="Topics"
-                            />
-                            {errors.careerCoaching && (
-                              <p className="text-red-500 text-sm">
-                                {errors.careerCoaching.message}
-                              </p>
-                            )}
-                          </div>
-
-                          <div className="mt-4">
-                            <label
-                              htmlFor="message"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Message
-                            </label>
-                            <input
-                              type="text"
-                              {...register("message")}
-                              id="message"
-                              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder="Message"
-                            />
-                            {errors.message && (
-                              <p className="text-red-500 text-sm">
-                                {errors.message.message}
-                              </p>
-                            )}
-                          </div>
-
-                          <div className="mt-4 flex items-center justify-between">
-                            <div className="flex items-center">
-                              <input
-                                id="agree"
-                                type="checkbox"
-                                {...register("agree")}
-                                className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                              />
-                              <label
-                                htmlFor="agree"
-                                className="ml-2 block text-sm text-gray-900"
-                              >
-                                I Agree with all of your{" "}
-                                <a href="#">Terms & Conditions</a>
-                              </label>
-                              {errors.agree && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.agree.message}
-                                </p>
-                              )}
-                            </div>
-                            <button
-                              type="submit"
-                              className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            >
-                              Book Appointment
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    )}
                   </div>
                 </>
               )}
