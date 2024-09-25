@@ -6,8 +6,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { ResumeHeader } from "@/app/Layout/ResumeHeader";
 import { CoachHeader } from "@/components/component/CoachHeader";
 import moment from "moment-timezone";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useParams, useRouter } from "next/navigation";
 /******************************************** */
 import { useForm } from "react-hook-form";
@@ -27,6 +26,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { GetTokens } from "@/app/actions";
+import { ChevronRight } from "lucide-react";
+import { ImSpinner3 } from "react-icons/im";
 
 
 
@@ -42,6 +43,7 @@ const CoachDetailsPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
   const {
@@ -65,8 +67,8 @@ const CoachDetailsPage = () => {
     dayOfWeek: "",
   });
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [geoData,setGeoData] = useState(null);
-
+  const [geoData, setGeoData] = useState(null);
+  const [isBookingSlot, setIsBookingSlot] = useState(false)
 
 
 
@@ -93,11 +95,11 @@ const CoachDetailsPage = () => {
   } = singleCoach;
 
 
-  const handleTabClick = async(tab) => {
-    const {accessToken} = await GetTokens();
-    if(tab === 'appointment') {
-      if(!accessToken || !accessToken.value){
-       return router.push(`/login?redirect=/coaches/${id}`)
+  const handleTabClick = async (tab) => {
+    const { accessToken } = await GetTokens();
+    if (tab === 'appointment') {
+      if (!accessToken || !accessToken.value) {
+        return router.push(`/login?redirect=/coaches/${id}`)
       }
     }
     setActiveTab(tab);
@@ -209,7 +211,6 @@ const CoachDetailsPage = () => {
       .get("https://ipapi.co/json/")
       .then((response) => {
         let data = response.data;
-        console.log(data)
         setGeoData(data)
       })
       .catch((error) => {
@@ -217,20 +218,42 @@ const CoachDetailsPage = () => {
       });
   };
 
-  const handleConfirmSlot = (data) => {
-    // slotTime, coachId, timezone, country, state, city, notes, date
-      const obj = {
-         coachId:id,
-         timezone:geoData.timezone,
-         country:geoData.country_name,
-         state:geoData.region,
-         city:geoData.city,
-         notes:data?.message,
-         date:modalSelectedSlot?.selectedDate?.date,
-         slotTime:modalSelectedSlot?.slot
-         
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    reset()
+  }
+
+  const handleConfirmSlot = async (data) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push(`/login?redirect=/coaches/${id}`)
+    }
+    setIsBookingSlot(true)
+    const obj = {
+      coachId: id,
+      timezone: geoData.timezone,
+      country: geoData.country_name,
+      state: geoData.region,
+      city: geoData.city,
+      notes: data?.message,
+      date: modalSelectedSlot?.selectedDate?.date,
+      slotTime: modalSelectedSlot?.slot
+    }
+    try {
+      const response = await axios.post('/api/confirmSlots', obj, {
+        headers: {
+          'Authorization': `Bearer ${accessToken.value}`
+        }
+      })
+      if (response.status === 201) {
+        toast.success("Slot booked successfully")
+        handleCloseDialog()
       }
-      console.log("obj::",obj)
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Error booking slot")
+    } finally {
+      setIsBookingSlot(false)
+    }
   };
 
 
@@ -238,10 +261,10 @@ const CoachDetailsPage = () => {
   useEffect(() => {
     getGeoInfo()
   }, [])
-  
 
 
-  
+
+
 
   return (
     <>
@@ -304,21 +327,19 @@ const CoachDetailsPage = () => {
                 className="flex border-b border-gray-300 mb-5"
               >
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "blogs"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "blogs"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("blogs")}
                 >
                   Blogs
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "appointment"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "appointment"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("appointment")}
                 >
                   Book An Appointment
@@ -461,149 +482,158 @@ const CoachDetailsPage = () => {
               {activeTab === "appointment" && (
                 <>
                   <div>
-                      <div
-                        id="book_an_appointment_tab"
-                        className="flex gap-10 items-baseline justify-around"
-                      >
-                        <div id="showCalender">
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            // onSelect={setDate}
-                            onSelect={handleDateSelect}
-                            onMonthChange={handleMonthChange}
-                            className="shadow-lg"
-                            weekStartsOn={1}
-                            showOutsideDays={false}
-                            components={{
-                              Day: ({ date }) => {
-                                const dayOfWeek = getDayOfWeek(date);
-                                const dayOfMonth = getDayOfMonth(date);
-                                const isAvailable = isDayAvailable(dayOfWeek);
-                                const isDisabled = disablePastDates(date);
-                                const isInCurrentMonth = isSameMonth(
-                                  date,
-                                  currentMonth
-                                );
+                    <div
+                      id="book_an_appointment_tab"
+                      className="flex gap-10 items-baseline justify-around"
+                    >
+                      <div id="showCalender">
+                        <Calendar
+                          mode="single"
+                          selected={date}
+                          // onSelect={setDate}
+                          onSelect={handleDateSelect}
+                          onMonthChange={handleMonthChange}
+                          className="shadow-lg"
+                          weekStartsOn={1}
+                          showOutsideDays={false}
+                          components={{
+                            Day: ({ date }) => {
+                              const dayOfWeek = getDayOfWeek(date);
+                              const dayOfMonth = getDayOfMonth(date);
+                              const isAvailable = isDayAvailable(dayOfWeek);
+                              const isDisabled = disablePastDates(date);
+                              const isInCurrentMonth = isSameMonth(
+                                date,
+                                currentMonth
+                              );
 
-                                const handleDayClick = () => {
-                                  if (!isDisabled) {
-                                    handleDateSelect(dayOfWeek, date);
-                                  }
-                                };
+                              const handleDayClick = () => {
+                                if (!isDisabled) {
+                                  handleDateSelect(dayOfWeek, date);
+                                }
+                              };
 
-                                const dayClasses = isDisabled
-                                  ? "text-gray-400 cursor-not-allowed bg-transparent"
-                                  : "text-gray-800 cursor-pointer bg-gray-100 rounded-full";
-                                return isInCurrentMonth ? (
-                                  <Button
-                                    className={`w-9 h-9 p-2 rounded-md ${dayClasses}`}
-                                    title={dayOfWeek}
-                                    onClick={handleDayClick}
-                                  >
-                                    <span className="flex flex-col items-center justify-center">
-                                      {/* Date (Day of the Month) */}
-                                      <span className="text-sm ">
-                                        {dayOfMonth}
-                                      </span>
-
-                                      {/* Dot below the date */}
-                                      {isAvailable && !isDisabled && (
-                                        <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
-                                      )}
+                              const dayClasses = isDisabled
+                                ? "text-gray-400 cursor-not-allowed bg-transparent"
+                                : "text-gray-800 cursor-pointer bg-gray-100 rounded-full";
+                              return isInCurrentMonth ? (
+                                <Button
+                                  className={`w-9 h-9 p-2 rounded-md ${dayClasses}`}
+                                  title={dayOfWeek}
+                                  onClick={handleDayClick}
+                                >
+                                  <span className="flex flex-col items-center justify-center">
+                                    {/* Date (Day of the Month) */}
+                                    <span className="text-sm ">
+                                      {dayOfMonth}
                                     </span>
-                                  </Button>
-                                ) : null;
-                              },
-                            }}
-                          />
-                        </div>
-                        {selectedDate.date && (
-                          <div>
-                            {selectedDaySlots ? (
-                              <div className="selected-date-info">
-                                <p className="text-gray-500 font-medium text-sm my-2">
-                                  {selectedDate?.dayOfWeek},
-                                  {formatDate(selectedDate?.date)}
-                                </p>
-                                <p className="text-gray-600 font-medium text-sm my-2">
-                                  TimeZone: {availability?.timeZone}
-                                </p>
-                                <div>
-                                  {selectedDaySlots.map((slot, index) => (
-                                    <p
-                                      key={index}
-                                      onClick={() => handleSlotClick(slot)}
-                                      className="text-sm bg-blue-950 text-white py-2 px-5 text-center  rounded-md font-medium my-2 cursor-pointer"
-                                    >
-                                      {slot.startTime}
-                                    </p>
-                                  ))}
-                                </div>
-                              </div>
-                            ) : (
-                              <div>
-                                <h4 className="text-black font-bold text-base">
-                                  No Slots available
-                                </h4>
-                                <p className="text-gray-500 font-medium text-sm my-2">
-                                  {formatDate(selectedDate?.date)},
-                                  {selectedDate?.dayOfWeek}
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                        )}
 
-                        <Dialog open={isDialogOpen}>
-                          <DialogContent
-                            onClick={() => setIsDialogOpen(false)}
-                            showCloseButton
-                          >
-                            <DialogHeader>
-                              <DialogTitle>Confirm Slot</DialogTitle>
-                            </DialogHeader>
-                            <form onSubmit={handleSubmit(handleConfirmSlot)}>
-                              <div className="space-y-2">
-                                {/* Display date and day of the week */}
-                                <p className="text-gray-500 font-medium text-sm">
-                                  {modalSelectedSlot?.selectedDate?.dayOfWeek},{" "}
-                                  {formatDate(
-                                    modalSelectedSlot?.selectedDate?.date
-                                  )}
-                                </p>
-
-                                {/* Available slot details */}
-                                <div className="slots_available flex flex-wrap">
-                                  <p className="text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2">
-                                    {modalSelectedSlot?.slot?.startTime} -{" "}
-                                    {modalSelectedSlot?.slot?.endTime}
-                                  </p>
-                                </div>
-
-                                {/* Textarea for message input */}
-                                <Textarea
-                                  {...register("message", {
-                                    required: "Message is required",
-                                  })} // Registering the input with validation
-                                  placeholder="Type your message here."
-                                  className="w-full"
-                                />
-                                {errors.message && (
-                                  <p className="text-red-500 text-sm">
-                                    {errors.message.message}
-                                  </p>
-                                )}
-
-                                {/* Confirm Button */}
-                                <div className="confrm_button flex justify-end mt-4">
-                                  <Button type="submit">Confirm</Button>
-                                </div>
-                              </div>
-                            </form>
-                          </DialogContent>
-                        </Dialog>
+                                    {/* Dot below the date */}
+                                    {isAvailable && !isDisabled && (
+                                      <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
+                                    )}
+                                  </span>
+                                </Button>
+                              ) : null;
+                            },
+                          }}
+                        />
                       </div>
+                      {selectedDate.date && (
+                        <div>
+                          {selectedDaySlots ? (
+                            <div className="selected-date-info">
+                              <p className="text-gray-500 font-medium text-sm my-2">
+                                {selectedDate?.dayOfWeek},
+                                {formatDate(selectedDate?.date)}
+                              </p>
+                              <p className="text-gray-600 font-medium text-sm my-2">
+                                TimeZone: {availability?.timeZone}
+                              </p>
+                              <div>
+                                {selectedDaySlots.map((slot, index) => (
+                                  <p
+                                    key={index}
+                                    onClick={() => handleSlotClick(slot)}
+                                    className="text-sm bg-blue-950 text-white py-2 px-5 text-center  rounded-md font-medium my-2 cursor-pointer"
+                                  >
+                                    {slot.startTime}
+                                  </p>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            <div>
+                              <h4 className="text-black font-bold text-base">
+                                No Slots available
+                              </h4>
+                              <p className="text-gray-500 font-medium text-sm my-2">
+                                {formatDate(selectedDate?.date)},
+                                {selectedDate?.dayOfWeek}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      <Dialog open={isDialogOpen}>
+                        <DialogContent
+                          onClick={handleCloseDialog}
+                          showCloseButton
+                        >
+                          <DialogHeader>
+                            <DialogTitle>Confirm Slot</DialogTitle>
+                          </DialogHeader>
+                          <form onSubmit={handleSubmit(handleConfirmSlot)}>
+                            <div className="space-y-2">
+                              {/* Display date and day of the week */}
+                              <p className="text-gray-500 font-medium text-sm">
+                                {modalSelectedSlot?.selectedDate?.dayOfWeek},{" "}
+                                {formatDate(
+                                  modalSelectedSlot?.selectedDate?.date
+                                )}
+                              </p>
+
+                              {/* Available slot details */}
+                              <div className="slots_available flex flex-wrap">
+                                <p className="text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2">
+                                  {modalSelectedSlot?.slot?.startTime} -{" "}
+                                  {modalSelectedSlot?.slot?.endTime}
+                                </p>
+                              </div>
+
+                              {/* Textarea for message input */}
+                              <Textarea
+                                {...register("message", {
+                                  required: "Message is required",
+                                })} // Registering the input with validation
+                                placeholder="Type your message here."
+                                className="w-full"
+                              />
+                              {errors.message && (
+                                <p className="text-red-500 text-sm">
+                                  {errors.message.message}
+                                </p>
+                              )}
+
+                              {/* Confirm Button */}
+                              <div className="confrm_button flex justify-end mt-4">
+                                <Button type="submit" disabled={isBookingSlot} className="flex justify-center items-center">
+                                  {
+                                    isBookingSlot ? <>
+                                      Booking Slot <ImSpinner3 className="animate-spin ml-2 h-4 w-4" />
+                                    </> :
+                                      <>
+                                        Book Slot
+                                        <ChevronRight className="ml-2 h-4 w-4" />
+                                      </>
+                                  }</Button>
+                              </div>
+                            </div>
+                          </form>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
                   </div>
                 </>
               )}
@@ -611,43 +641,6 @@ const CoachDetailsPage = () => {
           </div>
         </div>
       </div>
-
-      {/* {showSlotPopup && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-1/3">
-            <h2 className="text-xl font-bold mb-4">
-              Available Slots for {format(clickedDate, "MMM d, yyyy")}
-            </h2>
-            {availableSlots.length > 0 ? (
-              <div>
-                {availableSlots.map((slot) => (
-                  <button
-                    key={slot.id}
-                    onClick={() => handleSlotClick(slot)}
-                    className={`block w-full text-left px-4 py-2 mb-2 ${
-                      slot.isAvailable ? "bg-green-500" : "bg-red-500"
-                    } text-white rounded hover:bg-green-600`}
-                    disabled={!slot.isAvailable}
-                  >
-                    {format(slot.start, "hh:mm a")} -{" "}
-                    {format(slot.end, "hh:mm a")}
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <p>No available slots for this date.</p>
-            )}
-            <button
-              onClick={() => setShowSlotPopup(false)}
-              className="mt-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
-
-      <ToastContainer />
     </>
   );
 };

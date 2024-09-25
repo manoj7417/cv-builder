@@ -67,7 +67,7 @@ const CoachAvailability = () => {
 
   const { control, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
-      availabilityDays: userdata.availability.dates.length > 0 ? userdata.availability.dates : defaultAvailabilityDays,
+      availabilityDays: userdata?.availability?.dates?.length > 0 ? userdata.availability.dates : defaultAvailabilityDays,
       timeZone: currentTimeZone,
     },
   });
