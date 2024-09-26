@@ -8,9 +8,7 @@ const useCoachesDetailStore = create(
   myMiddlewares((set) => ({
     coaches: [],
     singleCoach: {},
-    isLoading: false,
-
-    // Fetch all coaches
+    isLoading: true,
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
