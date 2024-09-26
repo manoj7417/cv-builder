@@ -23,17 +23,17 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineFileUpload } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
-  console.log("userdata::", userdata);
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
     watch,
     reset,
   } = useForm({
@@ -41,6 +41,7 @@ const CoachProfile = () => {
       name: userdata?.name,
       email: userdata?.email,
       phone: userdata?.phone,
+      profileImage:userdata?.profileImage,
       experience: userdata?.experience,
       typeOfCoaching: userdata?.typeOfCoaching,
       skills: userdata?.skills,
@@ -53,6 +54,12 @@ const CoachProfile = () => {
       city: userdata?.city,
       country: userdata?.country,
       zip: userdata?.zip,
+      bankName: userdata?.bankDetails?.bankName,
+      accountNumber: userdata?.bankDetails?.accountNumber,
+      ifscCode: userdata?.bankDetails?.code?.value,
+      ratesPerHour: userdata?.ratesPerHour?.charges,
+      cv:userdata?.cv?.link,
+      signedAggrement:userdata?.signedAggrement?.link
     },
   });
 
@@ -61,11 +68,16 @@ const CoachProfile = () => {
   const [pdfUrl, setPdfUrl] = useState("");
   const imageUrl = watch("profileImage");
   const [isImageUploading, setIsImageUploading] = useState(false);
+  const [cvFile, setCvFile] = useState(userdata?.cv?.link);
+  const [signedAggrement, setSignedAggrement] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
+  console.log("cvFile::", cvFile);
+
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setIsImageUploading(true)
+      setIsImageUploading(true);
       const formData = new FormData();
       formData.append("image", file);
       try {
@@ -79,7 +91,7 @@ const CoachProfile = () => {
       } catch (error) {
         console.error("Error uploading image:", error);
       } finally {
-        setIsImageUploading(false)
+        setIsImageUploading(false);
       }
     }
   };
@@ -112,12 +124,37 @@ const CoachProfile = () => {
     console.log(data);
   };
 
+   // Handle file uploads
+  const handleFileChange = (e, type) => {
+    const file = e.target.files[0];
+    if (type === 'cv') {
+      setCvFile(file);
+      setValue('cv', file); // Set in form state
+    } else if (type === 'signedAggrement') {
+      setSignedAggrement(file);
+      setValue('signedAggrement', file); // Set in form state
+    }
+  };
+
+  // Remove file function
+  const removeFile = (type) => {
+    if (type === 'cv') {
+      setCvFile(null);
+      setValue('cv', ""); // Clear in form state
+    } else if (type === 'signedAggrement') {
+      setSignedAggrement(null);
+      setValue('signedAggrement', ""); // Clear in form state
+    }
+  };
+
+
   useEffect(() => {
     if (userdata) {
       reset({
         name: userdata?.name,
         email: userdata?.email,
         phone: userdata?.phone,
+        profileImage:userdata?.profileImage,
         experience: userdata?.experience,
         typeOfCoaching: userdata?.typeOfCoaching,
         skills: userdata?.skills,
@@ -130,6 +167,12 @@ const CoachProfile = () => {
         city: userdata?.city,
         country: userdata?.country,
         zip: userdata?.zip,
+        bankName: userdata?.bankDetails?.bankName,
+        accountNumber: userdata?.bankDetails?.accountNumber,
+        ifscCode: userdata?.bankDetails?.code?.value,
+        ratesPerHour: userdata?.ratesPerHour?.charges,
+        cv:userdata?.cv?.link,
+        signedAggrement:userdata?.signedAggrement?.link
       });
     }
   }, [userdata, reset]);
@@ -147,6 +190,7 @@ const CoachProfile = () => {
               <Button
                 className="bg-blue-700 text-white px-10 py-2 rounded-md"
                 type="submit"
+                onClick={() => setIsEditable(true)}
               >
                 Edit Profile
               </Button>
@@ -183,22 +227,28 @@ const CoachProfile = () => {
               <h2 className="text-xl font-bold">Personal Information</h2>
               <div className="personal_details_section flex w-full gap-10 h-full mt-10">
                 <div className="lg:w-[20%] w-full profile_image">
-                <div className='flex'>
-                    <div className='mt-4  w-1/2'>
+                  <div className="flex">
+                    <div className="mt-4  w-1/2">
                       <div className="flex">
-                        <img src={imageUrl || defaultImage} alt="profileimage" className="w-40 h-40 rounded-full object-cover shadow-md" />
+                        <img
+                          src={userdata?.profileImage || defaultImage}
+                          alt="profileimage"
+                          className="w-40 h-32 rounded-full object-cover shadow-md"
+                        />
 
                         <div className="px-4 justify-center flex flex-col ">
-                          <label className=' cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4'>
-                            {
-                              isImageUploading ? <>
-                                <ImSpinner3 className="m-1 animate-spin" />{" "}Uploading
-                              </> :
-                                <>
-                                  <MdOutlineFileUpload className='inline-flex text-xl m-1' />{" "}
-                                  Upload
-                                </>
-                            }
+                          <label className=" cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4">
+                            {isImageUploading ? (
+                              <>
+                                <ImSpinner3 className="m-1 animate-spin" />{" "}
+                                Uploading
+                              </>
+                            ) : (
+                              <>
+                                <MdOutlineFileUpload className="inline-flex text-xl m-1" />{" "}
+                                Upload
+                              </>
+                            )}
                             <input
                               type="file"
                               accept="image/*"
@@ -206,9 +256,14 @@ const CoachProfile = () => {
                               onChange={handleImageUpload}
                             />
                           </label>
-                          {
-                            imageUrl && <Button className="text-white bg-red-500 hover:bg-red-700 flex justify-center" onClick={removeImage}><RiDeleteBinLine className="m-1" />{" "}Remove</Button>
-                          }
+                          {imageUrl && isEditable && (
+                            <Button
+                              className="text-white bg-red-500 hover:bg-red-700 flex justify-center"
+                              onClick={removeImage}
+                            >
+                              <RiDeleteBinLine className="m-1" /> Remove
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -225,6 +280,7 @@ const CoachProfile = () => {
                           required: "Email is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -237,6 +293,7 @@ const CoachProfile = () => {
                           required: "Phone is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -249,6 +306,7 @@ const CoachProfile = () => {
                           required: "Experience is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -261,6 +319,7 @@ const CoachProfile = () => {
                           required: "Type of Coaching is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -273,6 +332,7 @@ const CoachProfile = () => {
                           required: "Skills are required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -286,6 +346,7 @@ const CoachProfile = () => {
                           required: "Date of Birth is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -296,6 +357,7 @@ const CoachProfile = () => {
                       <Textarea
                         {...register("bio", { required: "Bio is required" })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -308,6 +370,7 @@ const CoachProfile = () => {
                           required: "Coaching Description is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
 
@@ -320,6 +383,7 @@ const CoachProfile = () => {
                           required: "Address is required",
                         })}
                         className="w-full"
+                        disabled={!isEditable}
                       />
                     </div>
                   </div>
@@ -339,6 +403,7 @@ const CoachProfile = () => {
                         required: "Bank Name is required",
                       })}
                       className="w-full"
+                      disabled={!isEditable}
                     />
                   </div>
 
@@ -351,6 +416,7 @@ const CoachProfile = () => {
                         required: "Account Number is required",
                       })}
                       className="w-full"
+                      disabled={!isEditable}
                     />
                   </div>
 
@@ -363,6 +429,7 @@ const CoachProfile = () => {
                         required: "IFSC Code is required",
                       })}
                       className="w-full"
+                      disabled={!isEditable}
                     />
                   </div>
 
@@ -376,6 +443,7 @@ const CoachProfile = () => {
                         required: "Rate per hour is required",
                       })}
                       className="w-full"
+                      disabled={!isEditable}
                     />
                   </div>
                 </div>
@@ -384,19 +452,110 @@ const CoachProfile = () => {
             <TabsContent value="documents" className="flex-grow p-6">
               <div className="mt-6">
                 <h2 className="text-lg font-bold mb-4">Documents</h2>
+
+                {/* CV Section */}
                 <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
-                    <p className="text-xl font-bold text-gray-700">
-                      Signed Aggrement
-                    </p>
+                    <p className="text-base font-bold text-gray-700">CV</p>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={(e) => handleFileChange(e, "cv")}
+                      className="hidden"
+                      id="cv-upload"
+                      disabled={!isEditable}
+                      {...register("cv")}
+                    />
+                    {isEditable && (
+                      <label
+                        htmlFor="cv-upload"
+                        className="cursor-pointer text-blue-500 hover:underline"
+                      >
+                        Edit
+                      </label>
+                    )}
+                    {isEditable && cvFile && (
+                      <button
+                        onClick={() => removeFile("cv")}
+                        className="text-red-500 ml-4"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex">
+                    <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className="text-green-500 hover:underline flex gap-5">
+                        <FaCheckCircle className="text-xl" />
+                        {cvFile ? cvFile || "View CV" : "No CV Uploaded"}
+                        {cvFile && (
+                          <FaEye
+                            className="text-blue-500 text-xl cursor-pointer"
+                            onClick={() => openModal(cvFile)}
+                            title="View CV"
+                          />
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                {/* Signed Agreement Section */}
+                {/* <div className="mb-4">
+                  <div className="maint-title flex items-center gap-5">
+                    <p className="text-base font-bold text-gray-700">
+                      Signed Agreement
+                    </p>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={(e) => handleFileChange(e, "signedAggrement")}
+                      className="hidden"
+                      id="signedAggrement-upload"
+                      disabled={!isEditable}
+                      {...register("signedAggrement")}
+                     
+                    />
+                    {isEditable && (
+                      <label
+                        htmlFor="agreement-upload"
+                        className="cursor-pointer text-blue-500 hover:underline"
+                      >
+                        Edit
+                      </label>
+                    )}
+                    {isEditable && agreementFile && (
+                      <button
+                        onClick={() => removeFile("agreement")}
+                        className="text-red-500 ml-4"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex">
+                    <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className="text-green-500 hover:underline flex gap-5">
+                        <FaCheckCircle className="text-xl" />
+                        {agreementFile
+                          ? agreementFile.name || "View Agreement"
+                          : "No Agreement Uploaded"}
+                        {agreementFile && (
+                          <FaEye
+                            className="text-blue-500 text-xl cursor-pointer"
+                            onClick={() => openModal(agreementFile)}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+
                 {/* Shadcn UI Modal for viewing PDF */}
-                {/* <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogContent
                     showCloseButton="true"
                     onClick={handleCloseModal}
-                    className=""
                   >
                     <DialogHeader>
                       <DialogTitle>PDF Viewer</DialogTitle>
@@ -411,7 +570,7 @@ const CoachProfile = () => {
                       )}
                     </div>
                   </DialogContent>
-                </Dialog> */}
+                </Dialog>
               </div>
             </TabsContent>
           </Tabs>
