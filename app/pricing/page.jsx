@@ -515,7 +515,6 @@ const PricingFunc = () => {
         </DialogContent>
       </Dialog> */}
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-<<<<<<< HEAD
   <DialogTrigger asChild></DialogTrigger>
   <DialogContent
     // className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
@@ -568,23 +567,6 @@ const PricingFunc = () => {
               </h1>
               <p className="text-gray-500 text-xs sm:text-sm px-2">
                 {selectedPlan === "monthly" ? "per Month" : "per Year"}
-=======
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent
-          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
-          showCloseButton={true}
-          onClick={handleCloseAIDialog}
-        >
-          <DialogHeader>
-            <DialogTitle>
-              <h2 className="text-xl sm:text-2xl lg:text-2xl my-2 text-center">
-                {selectedCard?.cardTitle}
-              </h2>
-            </DialogTitle>
-            <DialogDescription>
-              <p className="text-sm sm:text-sm text-justify">
-                {selectedCard?.popUpDescription}
->>>>>>> f76aab82ba800f0124dcca8396dd4140117a1d56
               </p>
             </DialogDescription>
           </DialogHeader>
