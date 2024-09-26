@@ -89,10 +89,6 @@ export default function CoachesPage() {
   const router = useRouter();
 
   const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
-<<<<<<< HEAD
-  //console.log("coaches manoj::", coaches);
-=======
->>>>>>> f76aab82ba800f0124dcca8396dd4140117a1d56
 
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);

@@ -467,32 +467,6 @@ export default function CoachFilter({
                 </form>
 
                 {/* Product grid */}
-<<<<<<< HEAD
-                <div className='lg:col-span-3'>
-                  <div className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
-                    {currentPageData.map((item, index) => (
-                      console.log(item),
-                      <div
-                        key={item.id}
-                        className='group relative bg-white cursor-pointer'
-                        onClick={() => handleCoachDetails(item?._id)}>
-                        <div className='aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80'>
-                          <img
-                            alt={item.imageAlt}
-                            src={item.profileImage}
-                            className='h-full w-full object-cover object-center lg:h-full lg:w-full'
-                          />
-                        </div>
-                        <div className='main_top px-1 flex justify-between items-baseline'>
-                          <div className='coaching_name my-2 w-[150px] h-[50px]'>
-                            <p
-                              className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} text-center p-1 whitespace-nowrap`}>
-                              {item?.jobProfile?.title}
-                            </p>
-                            <h3 className='text-sm text-gray-700 m-1'>
-                              {item.name}
-                            </h3>
-=======
                 <div className="lg:col-span-3">
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                     {isLoading ? (
@@ -516,7 +490,6 @@ export default function CoachFilter({
                               src={item.profileImage}
                               className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                             />
->>>>>>> f76aab82ba800f0124dcca8396dd4140117a1d56
                           </div>
                           <div className="main_top px-1 flex justify-between items-baseline">
                             <div className="coaching_name my-2 w-[150px] h-[50px]">
