@@ -274,7 +274,8 @@ const CoachForm = () => {
         code: {
           name: "IFSC",
           value: data.ifscCode
-        }
+        },
+        bankName: data.bankName
       },
       coachingDescription: data.coachingDescription,
       address: data.address,
@@ -675,7 +676,7 @@ const CoachForm = () => {
                       />
                     </div>
                     <div className='mt-2 flex items-center space-x-2 text-green-600'>
-                      {cvFileUrl ? ( 
+                      {cvFileUrl ? (
                         <>
                           <span>{cvFileUrl?.split("/")?.pop()}</span>
                           <FaCheckCircle className='text-xl' />
