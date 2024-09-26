@@ -362,12 +362,16 @@ const CoachDetailsPage = () => {
                               />
                               <div
                                 className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                  singleCoach?.isApproved || isCvVerified  ? "bg-green-600" : ""
+                                  singleCoach?.isApproved || isCvVerified
+                                    ? "bg-green-600"
+                                    : ""
                                 }`}
                               >
                                 <div
                                   className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                    singleCoach?.isApproved || isCvVerified ? "translate-x-full" : ""
+                                    singleCoach?.isApproved || isCvVerified
+                                      ? "translate-x-full"
+                                      : ""
                                   }`}
                                 />
                               </div>
@@ -381,13 +385,9 @@ const CoachDetailsPage = () => {
 
                 <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
-                    <p className="text-base font-bold text-gray-700">
+                    <p className="text-xl font-bold text-gray-700">
                       Signed Aggrement
                     </p>
-                    <FaEye
-                      className="text-blue-500 text-xl cursor-pointer"
-                      onClick={() => openModal(signedAggrement?.link)}
-                    />
                   </div>
                   <div className="flex">
                     <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
@@ -396,12 +396,17 @@ const CoachDetailsPage = () => {
                         {signedAggrement?.link
                           ? signedAggrement?.link.split("/").pop()
                           : "View CV"}
+                        <FaEye
+                          className="text-blue-500 text-xl cursor-pointer"
+                          onClick={() => openModal(signedAggrement?.link)}
+                        />
                       </div>
                       <div>
                         <p className="text-base font-medium text-gray-700">
                           <p className="text-base font-medium text-gray-700">
                             <div className="flex items-center space-x-2">
-                              {singleCoach?.isApproved || isAgreementVerified ? (
+                              {singleCoach?.isApproved ||
+                              isAgreementVerified ? (
                                 <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
                                   Approved
                                 </span>
@@ -418,12 +423,16 @@ const CoachDetailsPage = () => {
                                 />
                                 <div
                                   className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    singleCoach?.isApproved || isAgreementVerified ? "bg-green-600" : ""
+                                    singleCoach?.isApproved ||
+                                    isAgreementVerified
+                                      ? "bg-green-600"
+                                      : ""
                                   }`}
                                 >
                                   <div
                                     className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      singleCoach?.isApproved || isAgreementVerified
+                                      singleCoach?.isApproved ||
+                                      isAgreementVerified
                                         ? "translate-x-full"
                                         : ""
                                     }`}
