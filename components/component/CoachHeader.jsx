@@ -4,10 +4,11 @@
 import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
-export function CoachHeader({id}) {
+export function CoachHeader({ id }) {
 
- 
+
 
   const {
     singleCoach,
@@ -16,9 +17,9 @@ export function CoachHeader({id}) {
     isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
+  console.log(singleCoach)
 
 
-  
   useEffect(() => {
     const fetchData = async () => {
       await fetchAllCoaches();
@@ -28,32 +29,11 @@ export function CoachHeader({id}) {
   }, [fetchAllCoaches]);
 
   useEffect(() => {
-    if (id) {
-      console.log("Filtering coach with id:", id); // Debugging log
+    if (id) {// Debugging log
       filterCoachById(id);
     }
   }, [id, filterCoachById]);
 
-  const {
-    name,
-    email,
-    phone,
-    bio,
-    coachingDescription,
-    profileImage,
-    dateofBirth,
-    experience,
-    address,
-    city,
-    country,
-    zip,
-    bankDetails,
-    ratesPerHour,
-    cv,
-    signedAggrement,
-    typeOfCoaching,
-    skills,
-  } = singleCoach;
 
 
 
@@ -66,19 +46,40 @@ export function CoachHeader({id}) {
           id='blog_header_left_side'
           className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>
           <div id='coach_image' className='px-4 w-[200px] h-auto'>
-            <img
-              src={profileImage}
-              alt='Coach'
-              className='w-full h-full object-cover'
-            />
+
+            {
+              singleCoach?.profileImage ?
+                (
+                  <img
+                    src={singleCoach.profileImage}
+                    alt='Coach'
+                    className='w-full h-full object-cover'
+                  />
+                )
+                : (
+                  <Skeleton className="w-full h-28" />
+                )
+
+            }
+
           </div>
           <div id='coach_details' className='pt-4 lg:pt-0'>
             <div
               id='row1'
               className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3'>
-              <h1 className='font-bold text-[#1D2026] text-2xl sm:text-3xl'>
-                {name}
-              </h1>
+              {
+                singleCoach?.name ?
+                  (
+                    <h1 className='font-bold text-[#1D2026] text-2xl sm:text-3xl'>
+                      {singleCoach?.name}
+                    </h1>
+                  )
+                  :
+                  (
+                    <Skeleton className="w-[200px] h-6" />
+                  )
+              }
+
               <div className='text-xs sm:text-[10px] bg-[#FFEEE8] text-[#FF6636] flex items-center space-x-1 p-1'>
                 <img
                   src='/Crown.png'
@@ -91,7 +92,12 @@ export function CoachHeader({id}) {
             <div
               id='row2'
               className='text-xs sm:text-sm text-[#6E7485] pb-3 sm:pb-5'>
-              Career Development Coach
+                {
+                  singleCoach?.typeOfCoaching ? 
+                  <p>{singleCoach?.typeOfCoaching}</p>
+                  : 
+                  <Skeleton className="w-[100px] h-4" />
+                }
             </div>
             <div
               id='row3'
@@ -171,7 +177,7 @@ export function CoachHeader({id}) {
             />
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }

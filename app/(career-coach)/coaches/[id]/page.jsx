@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
-import { format, parse, startOfWeek, getDay } from "date-fns";
+
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { ResumeHeader } from "@/app/Layout/ResumeHeader";
 import { CoachHeader } from "@/components/component/CoachHeader";
@@ -28,6 +27,7 @@ import axios from "axios";
 import { GetTokens } from "@/app/actions";
 import { ChevronRight } from "lucide-react";
 import { ImSpinner3 } from "react-icons/im";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 
@@ -48,13 +48,11 @@ const CoachDetailsPage = () => {
 
   const {
     singleCoach,
-    fetchAllCoaches,
     filterCoachById,
-    isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
-  /************************ */
-  const [showForm, setShowForm] = useState(false);
+
+
   const { id } = useParams();
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("blogs");
@@ -69,32 +67,6 @@ const CoachDetailsPage = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false)
-
-
-
-  const {
-    name,
-    email,
-    phone,
-    bio,
-    availability,
-    coachingDescription,
-    profileImage,
-    dateofBirth,
-    experience,
-    address,
-    city,
-    country,
-    zip,
-    bankDetails,
-    ratesPerHour,
-    cv,
-    signedAggrement,
-    typeOfCoaching,
-    skills,
-  } = singleCoach;
-
-
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
     if (tab === 'appointment') {
@@ -129,25 +101,14 @@ const CoachDetailsPage = () => {
 
   // Check if a specific day is available based on the provided data
   const isDayAvailable = (dayOfWeek) => {
-    const availableDay = availability.dates.find(
+    const availableDay = singleCoach?.availability?.dates?.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
     return availableDay ? availableDay.isAvailable : false;
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchAllCoaches();
-    };
 
-    fetchData();
-  }, [fetchAllCoaches]);
 
-  useEffect(() => {
-    if (id) {
-      filterCoachById(id);
-    }
-  }, [id, filterCoachById]);
 
   // Function to handle date selection and fetch available slots
   const handleDateSelect = (dayOfWeek, date) => {
@@ -155,7 +116,7 @@ const CoachDetailsPage = () => {
       date,
       dayOfWeek,
     });
-    const selectedDay = availability.dates.find(
+    const selectedDay = singleCoach?.availability.dates.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
     if (selectedDay.isAvailable) {
@@ -185,7 +146,6 @@ const CoachDetailsPage = () => {
 
   function createOneHourTimeSlotsForRange(slots) {
     const updatedSlots = [];
-
     slots.forEach((slot) => {
       const startIndex = timeSlots.indexOf(slot.startTime);
       const endIndex = timeSlots.indexOf(slot.endTime);
@@ -256,14 +216,24 @@ const CoachDetailsPage = () => {
     }
   };
 
-
+  const handleFetchCoachDetailsById = async (id) => {
+    try {
+      const response = await axios.get(`/api/getCoachDetails/${id}`)
+      if (response.status === 200) {
+        updateSingleCoach(response.data.coach)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
     getGeoInfo()
   }, [])
 
-
-
+  useEffect(() => {
+    handleFetchCoachDetailsById(id)
+  }, [id])
 
 
   return (
@@ -275,7 +245,7 @@ const CoachDetailsPage = () => {
           id="Main"
           className="mt-10 bg-white w-full h-auto flex flex-col items-center"
         >
-          <CoachHeader id={id} />
+          <CoachHeader id={singleCoach?._id} />
           <div className="container bg-[#FFF] h-auto mt-10 w-full flex flex-col lg:flex-row mb-20 border border-[#FFDDD1]">
             <div
               id="blog_left_side"
@@ -287,7 +257,21 @@ const CoachDetailsPage = () => {
                     <h3 className="text-[#1D2026] pb-2 font-semibold text-lg">
                       ABOUT ME
                     </h3>
-                    <p className="text-[#6E7485] pb-5 text-sm">{bio}</p>
+                    {
+                      singleCoach?.bio ?
+                        (<p className="text-[#6E7485] pb-5 text-sm">{singleCoach?.bio}</p>)
+                        :
+                        (<div className="space-y-2">
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-1/2" />
+                        </div>)
+                    }
+
                   </div>
                 </>
               )}
@@ -297,19 +281,19 @@ const CoachDetailsPage = () => {
                   <div className="border-b border-[#FFDDD1] p-5">
                     <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
                       Book Appointment <br />
-                      <span className="font-normal">with Joy</span>
+                      <span className="font-normal">with {singleCoach?.name}</span>
                     </h3>
                   </div>
                   <div className=" p-5 h-full relative z-50 mb-10">
-                    <h2 className="text-xl font-bold w-[70%] text-[#1D2026]">
+                    <h2 className="text-md font-bold  text-[#1D2026]">
                       Career Development Coaching
                     </h2>
-                    <p className="flex items-center pt-5 pb-5 pl-5">
+                    <p className="flex items-center pt-5 text-md">
                       <img src="/careerRightBullet.png" className="mr-2" />
-                      45 Min
+                      1 Hour
                     </p>
 
-                    <p className="flex items-center pt-5 pb-5 pl-5">
+                    <p className="flex items-center pt-5 text-md">
                       <img src="/careerRightBullet.png" className="mr-2" />
                       Web Conferencing details provided upon confirmation
                     </p>
@@ -355,7 +339,7 @@ const CoachDetailsPage = () => {
                     id="blog_tab"
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4"
                   >
-                    {/* START-BLOG 1 */}
+
                     <div className="border border-[#E9EAF0]">
                       <div>
                         <img
@@ -394,8 +378,7 @@ const CoachDetailsPage = () => {
                         </div>
                       </div>
                     </div>
-                    {/* END-BLOG 1 */}
-                    {/* START-BLOG 2 */}
+
                     <div className="border border-[#E9EAF0]">
                       <div>
                         <img
@@ -434,8 +417,6 @@ const CoachDetailsPage = () => {
                         </div>
                       </div>
                     </div>
-                    {/* END-BLOG 2 */}
-                    {/* START-BLOG 3 */}
                     <div className="border border-[#E9EAF0]">
                       <div>
                         <img
@@ -474,7 +455,7 @@ const CoachDetailsPage = () => {
                         </div>
                       </div>
                     </div>
-                    {/* END-BLOG 3 */}
+
                   </div>
                 </>
               )}
@@ -490,7 +471,6 @@ const CoachDetailsPage = () => {
                         <Calendar
                           mode="single"
                           selected={date}
-                          // onSelect={setDate}
                           onSelect={handleDateSelect}
                           onMonthChange={handleMonthChange}
                           className="shadow-lg"
@@ -523,12 +503,12 @@ const CoachDetailsPage = () => {
                                   onClick={handleDayClick}
                                 >
                                   <span className="flex flex-col items-center justify-center">
-                                    {/* Date (Day of the Month) */}
+
                                     <span className="text-sm ">
                                       {dayOfMonth}
                                     </span>
 
-                                    {/* Dot below the date */}
+
                                     {isAvailable && !isDisabled && (
                                       <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
                                     )}
@@ -548,7 +528,7 @@ const CoachDetailsPage = () => {
                                 {formatDate(selectedDate?.date)}
                               </p>
                               <p className="text-gray-600 font-medium text-sm my-2">
-                                TimeZone: {availability?.timeZone}
+                                TimeZone: {singleCoach?.availability?.timeZone}
                               </p>
                               <div>
                                 {selectedDaySlots.map((slot, index) => (
@@ -586,7 +566,6 @@ const CoachDetailsPage = () => {
                           </DialogHeader>
                           <form onSubmit={handleSubmit(handleConfirmSlot)}>
                             <div className="space-y-2">
-                              {/* Display date and day of the week */}
                               <p className="text-gray-500 font-medium text-sm">
                                 {modalSelectedSlot?.selectedDate?.dayOfWeek},{" "}
                                 {formatDate(
@@ -594,7 +573,6 @@ const CoachDetailsPage = () => {
                                 )}
                               </p>
 
-                              {/* Available slot details */}
                               <div className="slots_available flex flex-wrap">
                                 <p className="text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2">
                                   {modalSelectedSlot?.slot?.startTime} -{" "}
@@ -602,7 +580,6 @@ const CoachDetailsPage = () => {
                                 </p>
                               </div>
 
-                              {/* Textarea for message input */}
                               <Textarea
                                 {...register("message", {
                                   required: "Message is required",
@@ -616,7 +593,7 @@ const CoachDetailsPage = () => {
                                 </p>
                               )}
 
-                              {/* Confirm Button */}
+
                               <div className="confrm_button flex justify-end mt-4">
                                 <Button type="submit" disabled={isBookingSlot} className="flex justify-center items-center">
                                   {
@@ -640,7 +617,7 @@ const CoachDetailsPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 };
