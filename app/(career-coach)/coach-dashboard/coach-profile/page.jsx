@@ -4,7 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { useParams } from "next/navigation";
-import { FaCheckCircle, FaEye, FaTimesCircle } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaEye,
+  FaSpinner,
+  FaTimes,
+  FaTimesCircle,
+} from "react-icons/fa";
 import {
   Dialog,
   DialogContent,
@@ -21,14 +27,14 @@ import { toast } from "react-toastify";
 import { useCoachStore } from "@/app/store/coachStore";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ImSpinner3 } from "react-icons/im";
+import { ImSpinner3, ImSpinner8 } from "react-icons/im";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { IoMdCloudUpload } from "react-icons/io";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
-  console.log("userdata", userdata);
 
   const {
     register,
@@ -69,13 +75,17 @@ const CoachProfile = () => {
   const [pdfUrl, setPdfUrl] = useState("");
   const imageUrl = watch("profileImage");
   const [isImageUploading, setIsImageUploading] = useState(false);
-  // const [cvFile, setCvFile] = useState(userdata?.cv?.link);
-  const [signedAggrement, setSignedAggrement] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
-  const cvFile = watch("cv");
-  const agreementFile = watch("signedAggrement");
   const [fileType, setFileType] = useState(null);
-  console.log("cvFile::", cvFile);
+  const [isUploadingCV, setIsUploadingCV] = useState(false);
+  const [isUploadingDocs, setIsUploadingDocs] = useState(false);
+  const [isCvLoading, setIsCvLoading] = useState(false);
+  const [isDocumentLoading, setIsDocumentLoading] = useState(false);
+  const [cvFileUrl, setCvFileUrl] = useState(userdata?.cv?.link || "");
+  const [docsUrl, setDocsUrl] = useState(userdata?.signedAggrement?.link || "");
+
+  const cvFile = watch("cvUpload");
+  const docsFile = watch("docsUpload");
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -127,34 +137,98 @@ const CoachProfile = () => {
     console.log(data);
   };
 
-  const handleFileChange = (e, type) => {
+  // Upload CV Functionlaity starts here
+
+  // For CV UploadF
+  const handleCVUpload = async (e) => {
     const file = e.target.files[0];
-    if (type === "cv") {
-      setValue("cv", file); // Update form state with new file
-    } else if (type === "signedAggrement") {
-      setValue("signedAggrement", file); // Update form state with new signed agreement
+    if (file) {
+      setIsUploadingCV(true);
+      const formData = new FormData();
+      formData.append("cvUpload", file); // Assuming "cv" is the expected field in the backend
+      try {
+        setIsCvLoading(true);
+        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        if (response.status === 200) {
+          const cvUrl = response.data.url;
+          setValue("cvUpload", cvUrl); // Set CV URL in form data
+          setCvFileUrl(cvUrl);
+        } else {
+          console.error("CV upload failed.");
+        }
+      } catch (error) {
+        console.error("Error uploading CV:", error);
+      } finally {
+        setIsUploadingCV(false);
+        setIsCvLoading(false);
+      }
     }
   };
 
-  const removeFile = (type) => {
-    if (type === "cv") {
-      setValue("cv", ""); // Clear CV value in form state
-    } else if (type === "signedAggrement") {
-      setValue("signedAggrement", ""); // Clear signed agreement in form state
+  const handleRemovecvUpload = () => {
+    setValue("cvUpload", null);
+    setCvFileUrl(null);
+  };
+
+  // For Document Upload
+  const handleDocUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setIsUploadingDocs(true);
+      const formData = new FormData();
+      formData.append("docsUpload", file); // Assuming "document" is the expected field in the backend
+      try {
+        setIsDocumentLoading(true);
+        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        if (response.status === 200) {
+          const docUrl = response.data.url;
+          console.log(docUrl);
+          setValue("docsUpload", docUrl); // Set document URL in form data
+          setIsDocumentLoading(false);
+          setDocsUrl(docUrl);
+        } else {
+          console.error("Document upload failed.");
+        }
+      } catch (error) {
+        console.error("Error uploading document:", error);
+      } finally {
+        setIsUploadingDocs(false);
+      }
     }
   };
 
-  const getFileNameFromUrl = (url) => {
-    return url ? url.split("/").pop() : "No file available";
+  // Common function to remove uploaded file
+  const handleRemoveDocs = () => {
+    setValue("docsUpload", ""); // Clear the form field (make sure "docsUpload" matches your field name)
+    setDocsUrl(null); // Clear the state holding the file URL
   };
 
-  const handleViewFile = () => {
-    if (cvFile) {
-      // Create a URL for the uploaded file and open it in a new tab
-      const fileURL = URL.createObjectURL(cvFile);
-      window.open(fileURL, '_blank'); // Open the CV in a new tab
-    }
+  // Use Google Docs Viewer if needed
+  const googleViewerUrl =
+    fileType === "cv"
+      ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
+      : fileType === "docs"
+      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+      : null;
+
+  const handleViewFile = (type) => {
+    setFileType(type);
+    setIsModalOpen(true); // Open the modal when the view icon is clicked
   };
+
+  useEffect(() => {
+    if (userdata?.cv?.link) {
+      setValue("cv", userdata.cv.link); // Set CV URL in the form
+      setCvFileUrl(userdata.cv.link); // Update state to show the file in UI
+    }
+  }, [userdata, setValue]);
+
+  useEffect(() => {
+    if (userdata?.signedAggrement?.link) {
+      setValue("docs", userdata.signedAggrement.link); // Set CV URL in the form
+      setDocsUrl(userdata.signedAggrement.link); // Update state to show the file in UI
+    }
+  }, [userdata, setValue]);
 
   useEffect(() => {
     if (userdata) {
@@ -179,8 +253,8 @@ const CoachProfile = () => {
         accountNumber: userdata?.bankDetails?.accountNumber,
         ifscCode: userdata?.bankDetails?.code?.value,
         ratesPerHour: userdata?.ratesPerHour?.charges,
-        cv: userdata?.cv?.link,
-        signedAggrement: userdata?.signedAggrement?.link,
+        // cv: userdata?.cv?.link,
+        // signedAggrement: userdata?.signedAggrement?.link,
       });
     }
   }, [userdata, reset]);
@@ -245,7 +319,9 @@ const CoachProfile = () => {
                         />
 
                         <div className="px-4 justify-center flex flex-col ">
-                          <label className=" cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4">
+                          {
+                            isEditable && (
+                              <label className=" cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4">
                             {isImageUploading ? (
                               <>
                                 <ImSpinner3 className="m-1 animate-spin" />{" "}
@@ -264,6 +340,8 @@ const CoachProfile = () => {
                               onChange={handleImageUpload}
                             />
                           </label>
+                            )
+                          }
                           {imageUrl && isEditable && (
                             <Button
                               className="text-white bg-red-500 hover:bg-red-700 flex justify-center"
@@ -461,132 +539,211 @@ const CoachProfile = () => {
               <div className="mt-6">
                 <h2 className="text-lg font-bold mb-4">Documents</h2>
 
-                {/* CV Section */}
-                <div className="mb-4">
-                  <div className="maint-title flex items-center gap-5">
-                    <p className="text-base font-bold text-gray-700">CV</p>
-                    <input
-                      type="file"
-                      accept=".pdf"
-                      onChange={(e) => handleFileChange(e, "cv")}
-                      className="hidden"
-                      id="cv-upload"
-                      disabled={!isEditable}
-                      {...register("cv")}
-                    />
-
-                    {isEditable && (
-                      <label
-                        htmlFor="cv-upload"
-                        className="cursor-pointer text-blue-500 hover:underline"
-                      >
-                        Edit CV
-                      </label>
-                    )}
-
-                    {isEditable && cvFile && (
-                      <button
-                        onClick={() => removeFile("cv")}
-                        className="text-red-500 ml-4"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                  <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                    <div className="text-green-500 hover:underline flex gap-5">
-                      <FaCheckCircle className="text-xl" />
-                      {cvFile ? (
-                        typeof cvFile === "string" ? (
-                          <a
-                            href={cvFile}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {getFileNameFromUrl(cvFile)}
-                          </a>
-                        ) : (
-                          cvFile.name // Display the name of the uploaded file
-                        )
-                      ) : (
-                        "No CV Uploaded"
+                <div className="sm:col-span-6">
+                  <label
+                    htmlFor="cvUpload"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Upload CV (PDF only)
+                  </label>
+                  <div className="flex gap-5 items-center">
+                    <div className="mt-2">
+                      {/* Controller for handling file input */}
+                      {isEditable && (
+                        <label
+                          htmlFor="cvUpload"
+                          className="flex items-center cursor-pointer space-x-2 text-sky-600"
+                        >
+                          {isUploadingCV ? (
+                            <>
+                              <ImSpinner8 className="text-xl animate-spin" />
+                              <span className="text-sm">Uploading</span>
+                            </>
+                          ) : (
+                            <>
+                              <IoMdCloudUpload className="text-xl" />
+                              <span className="text-sm">Upload</span>
+                            </>
+                          )}
+                        </label>
                       )}
-                      {cvFile && typeof cvFile === "string" && (
-                        <FaEye
-                          className="text-blue-500 text-xl cursor-pointer"
-                          onClick={() => openModal(cvFile)}
-                          title="View CV"
-                        />
+                      <input
+                        type="file"
+                        id="cvUpload"
+                        accept="application/pdf"
+                        className="hidden"
+                        onChange={handleCVUpload}
+                      />
+                    </div>
+                    <div className="mt-2 flex items-center space-x-2 text-green-600">
+                      {cvFileUrl ? (
+                        <>
+                          <span>{cvFileUrl?.split("/")?.pop()}</span>
+                          <FaCheckCircle className="text-xl" />
+                          <button
+                            type="button"
+                            onClick={() => handleViewFile("cv")}
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            <FaEye className="text-xl" /> {/* View Icon */}
+                          </button>
+                        </>
+                      ) : (
+                        <p>No file uploaded</p> // Message when no file is uploaded
+                      )}
+
+                      {/* Remove File Button */}
+                      {cvFileUrl && (
+                        <button
+                          type="button"
+                          onClick={handleRemovecvUpload}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes className="text-sm" />
+                        </button>
                       )}
                     </div>
+
+                    {/* ShadCN Dialog to display PDF */}
+                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                      <DialogContent
+                        showCloseButton="true"
+                        onClick={handleCloseModal}
+                      >
+                        <DialogHeader>
+                          <DialogTitle>CV Upload Preview</DialogTitle>
+                        </DialogHeader>
+                        {/* PDF Display using iframe */}
+                        <div className="relative w-full h-[80vh]">
+                          {isCvLoading ? ( // Show loading spinner if PDF is still loading
+                            <div className="flex justify-center items-center h-full">
+                              <FaSpinner className="animate-spin text-4xl text-blue-500" />
+                            </div>
+                          ) : googleViewerUrl ? ( // Show iframe once the URL is available
+                            <iframe
+                              src={googleViewerUrl}
+                              className="w-full h-full"
+                              title="PDF Preview"
+                            />
+                          ) : (
+                            <p>No PDF file available</p> // Display message if no URL
+                          )}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors?.cvUpload?.message}
+                  </p>
                 </div>
 
-                {/* Signed Agreement Section */}
-                <div className="mb-4">
-                  <div className="maint-title flex items-center gap-5">
-                    <p className="text-base font-bold text-gray-700">
-                      Signed Agreement
-                    </p>
-                    <input
-                      type="file"
-                      accept=".pdf"
-                      onChange={(e) => handleFileChange(e, "signedAggrement")}
-                      className="hidden"
-                      id="signedAggrement-upload"
-                      disabled={!isEditable}
-                      {...register("signedAggrement")}
-                    />
-
-                    {isEditable && (
-                      <label
-                        htmlFor="signedAggrement-upload"
-                        className="cursor-pointer text-blue-500 hover:underline"
-                      >
-                        Edit Agreement
-                      </label>
-                    )}
-
-                    {isEditable && agreementFile && (
-                      <button
-                        onClick={() => removeFile("signedAggrement")}
-                        className="text-red-500 ml-4"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                  <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                    <div className="text-green-500 hover:underline flex gap-5">
-                      <FaCheckCircle className="text-xl" />
-                      {agreementFile ? (
-                        typeof agreementFile === "string" ? (
-                          <a
-                            href={agreementFile}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                <div className="sm:col-span-full">
+                  <label
+                    htmlFor="cvUpload"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Signed and Accepted Agreement
+                  </label>
+                  <div className="flex gap-5 items-center">
+                    <div className="mt-2">
+                      <div className="flex items-center ">
+                        {isEditable && (
+                          <label
+                            htmlFor="docsUpload"
+                            className="flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 "
                           >
-                            {getFileNameFromUrl(agreementFile)}
-                          </a>
-                        ) : (
-                          agreementFile.name // Display the name of the uploaded file
-                        )
-                      ) : (
-                        "No Agreement Uploaded"
-                      )}
-                      {agreementFile && typeof agreementFile === "string" && (
-                        <FaEye
-                          className="text-blue-500 text-xl cursor-pointer"
-                          onClick={() => openModal(agreementFile)}
-                          title="View Agreement"
+                            {isUploadingDocs ? (
+                              <>
+                                <ImSpinner8 className="text-xl animate-spin" />
+                                <span className="text-sm">Uploading</span>
+                              </>
+                            ) : (
+                              <>
+                                <IoMdCloudUpload className="text-xl" />
+                                <span className="text-sm">
+                                  Upload Documents
+                                </span>
+                              </>
+                            )}
+                          </label>
+                        )}
+
+                        <input
+                          type="file"
+                          id="docsUpload"
+                          hidden
+                          accept="application/pdf"
+                          onChange={handleDocUpload}
+                          className="hidden w-full text-gray-900 border rounded-md py-1.5"
                         />
+                      </div>
+                      <p className="mt-2 text-sm text-red-400">
+                        {errors?.docsUpload?.message}
+                      </p>
+                    </div>
+                    <div className="mt-2 flex items-center space-x-2 text-green-600">
+                      {docsUrl ? (
+                        <>
+                          <span>{docsUrl?.split("/")?.pop()}</span>
+                          <FaCheckCircle className="text-xl" />
+
+                          {/* View PDF Icon */}
+                          <button
+                            type="button"
+                            onClick={() => handleViewFile("docs")}
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            <FaEye className="text-xl" /> {/* View Icon */}
+                          </button>
+                        </>
+                      ) : (
+                        <p>No file uploaded</p> // Message when no file is uploaded
+                      )}
+
+                      {/* Remove File Button */}
+                      {docsUrl && (
+                        <button
+                          type="button"
+                          onClick={handleRemoveDocs}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes className="text-sm" />
+                        </button>
                       )}
                     </div>
+
+                    {/* ShadCN Dialog to display PDF */}
+                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                      <DialogContent
+                        showCloseButton="true"
+                        onClick={handleCloseModal}
+                      >
+                        <DialogHeader>
+                          <DialogTitle>Document Upload Preview</DialogTitle>
+                        </DialogHeader>
+                        {/* PDF Display using iframe */}
+                        <div className="relative w-full h-[80vh]">
+                          {isDocumentLoading ? ( // Show loading spinner if PDF is still loading
+                            <div className="flex justify-center items-center h-full">
+                              <FaSpinner className="animate-spin text-4xl text-blue-500" />
+                            </div>
+                          ) : googleViewerUrl ? ( // Show iframe once the URL is available
+                            <iframe
+                              src={googleViewerUrl}
+                              className="w-full h-full"
+                              title="PDF Preview"
+                            />
+                          ) : (
+                            <p>No PDF file available</p> // Display message if no URL
+                          )}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
 
                 {/* Shadcn UI Modal for viewing PDF */}
-                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                {/* <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogContent
                     showCloseButton="true"
                     onClick={handleCloseModal}
@@ -604,7 +761,7 @@ const CoachProfile = () => {
                       )}
                     </div>
                   </DialogContent>
-                </Dialog>
+                </Dialog> */}
               </div>
             </TabsContent>
           </Tabs>
