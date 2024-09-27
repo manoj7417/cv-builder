@@ -28,8 +28,7 @@ export function CoachHeader({id}) {
   }, [fetchAllCoaches]);
 
   useEffect(() => {
-    if (id) {
-      console.log("Filtering coach with id:", id); // Debugging log
+    if (id) {// Debugging log
       filterCoachById(id);
     }
   }, [id, filterCoachById]);

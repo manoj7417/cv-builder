@@ -53,6 +53,7 @@ const CoachDetailsPage = () => {
     isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
+
   /************************ */
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
@@ -93,7 +94,6 @@ const CoachDetailsPage = () => {
     typeOfCoaching,
     skills,
   } = singleCoach;
-
 
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
@@ -297,19 +297,19 @@ const CoachDetailsPage = () => {
                   <div className="border-b border-[#FFDDD1] p-5">
                     <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
                       Book Appointment <br />
-                      <span className="font-normal">with Joy</span>
+                      <span className="font-normal">with {name}</span>
                     </h3>
                   </div>
                   <div className=" p-5 h-full relative z-50 mb-10">
-                    <h2 className="text-xl font-bold w-[70%] text-[#1D2026]">
+                    <h2 className="text-md font-bold  text-[#1D2026]">
                       Career Development Coaching
                     </h2>
-                    <p className="flex items-center pt-5 pb-5 pl-5">
+                    <p className="flex items-center pt-5 text-md">
                       <img src="/careerRightBullet.png" className="mr-2" />
-                      45 Min
+                      1 Hour
                     </p>
 
-                    <p className="flex items-center pt-5 pb-5 pl-5">
+                    <p className="flex items-center pt-5 text-md">
                       <img src="/careerRightBullet.png" className="mr-2" />
                       Web Conferencing details provided upon confirmation
                     </p>
@@ -490,7 +490,6 @@ const CoachDetailsPage = () => {
                         <Calendar
                           mode="single"
                           selected={date}
-                          // onSelect={setDate}
                           onSelect={handleDateSelect}
                           onMonthChange={handleMonthChange}
                           className="shadow-lg"
