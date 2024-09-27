@@ -94,6 +94,7 @@ const CoachDetailsPage = () => {
     typeOfCoaching,
     skills,
   } = singleCoach;
+  console.log(availability)
 
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
