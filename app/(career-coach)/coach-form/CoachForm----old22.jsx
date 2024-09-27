@@ -2,7 +2,6 @@
 
 "use client";
 import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import { useForm, Controller } from "react-hook-form";
 import { motion } from "framer-motion";
 import { DatePicker } from "antd";
@@ -43,7 +42,6 @@ import { useCoachStore } from "@/app/store/coachStore";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { FcCancel } from "react-icons/fc";
-import { CiCircleRemove } from "react-icons/ci";
 const CoachForm = () => {
   const steps = [
     {
@@ -66,7 +64,7 @@ const CoachForm = () => {
       id: "Step 2",
       name: "Other Details",
       fields: [
-        "cvUpload",        
+        "cvUpload",
         "experience",
         "typeOfCoaching",
         "skills",
@@ -261,9 +259,6 @@ const CoachForm = () => {
       cv: {
         link: data.cvUpload,
       },
-      profileVideo: {
-        url: data.profileVideo,        
-      },
       signedAggrement: {
         link: data.docsUpload,
       },
@@ -277,9 +272,9 @@ const CoachForm = () => {
         accountNumber: data.bankAccountNumber,
         code: {
           name: "IFSC",
-          value: data.ifscCode,
+          value: data.ifscCode
         },
-        bankName: data.bankName,
+        bankName: data.bankName
       },
       coachingDescription: data.coachingDescription,
       address: data.address,
@@ -288,7 +283,6 @@ const CoachForm = () => {
       },
       formFilled: true,
     };
-    console.log(payload);
     try {
       const response = await axios.patch("/api/coachForm", payload, {
         headers: {
@@ -333,19 +327,6 @@ const CoachForm = () => {
       setIsDialogOpen(true);
     }
   }, []);
-
-  //
-  const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
-
-  const handleInputChange = (e) => {
-    setprofileVideo(e.target.value); // Update the state with the input value
-  };
-  // Handle removing the YouTube link
-  const handleRemoveLink = () => {
-    setprofileVideo(""); // Clear the input value
-  };
-
-  //
 
   return (
     <>
@@ -419,11 +400,9 @@ const CoachForm = () => {
                     Congratulations! Your form has been approved. You can now
                     access the coach dashboard.
                   </p>
-                  <a href="/coach-dashboard">
-                    <button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-900 transition duration-200 mt-5">
-                      Go to Dashboard
-                    </button>
-                  </a>
+                 <a href="/coach-dashboard"><button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-900 transition duration-200 mt-5">
+                    Go to Dashboard
+                  </button></a> 
                 </div>
               </div>
             )}
@@ -847,55 +826,6 @@ const CoachForm = () => {
                         {errors?.cvUpload?.message}
                       </p>
                     </div>
-                    {/* START- COACH INTRODUCTION VIDEO */}
-                    <div className="sm:col-span-6">
-                      <label
-                        htmlFor="profileVideo"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Profile Video
-                      </label>
-                      <div className="flex space-x-2">
-                        <input
-                          type="text"
-                          {...register("profileVideo")}
-                          id="profileVideo"
-                          value={profileVideo}
-                          onChange={handleInputChange}
-                          placeholder="Enter video URL"
-                          className="border border-gray-300 p-2 rounded w-full mt-2"
-                        />
-                        {/* Remove Button */}
-
-                        {/* Remove Button with Icon */}
-
-                        <button
-                          type="button"
-                          onClick={handleRemoveLink}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          <FaTimes className="text-sm" />
-                        </button>
-                      </div>
-
-                      {/* Displaying the YouTube video using ReactPlayer */}
-                      <div className="mt-4">
-                        {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
-                          <ReactPlayer
-                            url={profileVideo}
-                            controls
-                            width="100%"
-                            height="300px"
-                          />
-                        ) : (
-                          <p>
-                            Please enter a valid YouTube URL to preview the
-                            video.
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    {/* END- COACH INTRODUCTION VIDEO */}
                     <div className="sm:col-span-3">
                       <label
                         htmlFor="skills"
@@ -1204,13 +1134,14 @@ const CoachForm = () => {
                                     </button>
                                   )}
                                   <button
-                                    type="button"
-                                    onClick={handleRemoveDocs}
-                                    className="text-red-500 hover:text-red-700"
-                                  >
-                                    <FaTimes className="text-sm" />
-                                  </button>
+                                  type="button"
+                                  onClick={handleRemoveDocs}
+                                  className="text-red-500 hover:text-red-700"
+                                >
+                                  <FaTimes className="text-sm" />
+                                </button>
                                 </div>
+                                
                               </>
                             )}
                           </div>
