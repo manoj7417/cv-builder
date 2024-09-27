@@ -27,7 +27,6 @@ import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
-
 const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -42,7 +41,7 @@ const PricingFunc = () => {
     timezone: "",
     currency: "",
   });
-
+  
   const searchParams = useSearchParams();
   const scroll = searchParams.get("scroll");
   const router = useRouter();
