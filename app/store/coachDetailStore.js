@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-const myMiddlewares = (f) => devtools(persist(f, { name: "coachDetail" }));
+const myMiddlewares = (f) => devtools(f, { name: "coachDetail" });
 
 const useCoachesDetailStore = create(
   myMiddlewares((set) => ({
