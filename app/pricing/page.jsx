@@ -42,6 +42,7 @@ const PricingFunc = () => {
     timezone: "",
     currency: "",
   });
+  
   const searchParams = useSearchParams();
   const scroll = searchParams.get("scroll");
   const router = useRouter();
@@ -52,7 +53,7 @@ const PricingFunc = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  
+
   const serviceCards = [
     {
       id: 1,
