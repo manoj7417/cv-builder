@@ -107,28 +107,28 @@ export default function CoachRegistration() {
             className="mt-4 w-[60%] rounded-md"
           >
             <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
+              <div className="p-4 rounded-md ">
                 <img
                   className="mx-auto h-auto  rounded-md object-contain"
-                  src="/coach-register.png"
+                  src="/coachSignin1.png"
                   alt="coach-register"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
+              <div className="p-4 rounded-md ">
                 <img
                   className="mx-auto h-auto  rounded-md object-contain"
-                  src="/coach-register.png"
+                  src="/coachSignin2.png"
                   alt="coach-register"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
+              <div className="p-4 rounded-md ">
                 <img
                   className="mx-auto h-auto rounded-md object-contain"
-                  src="/coach-register.png"
+                  src="/coachSignin3.png"
                   alt="coach-register"
                 />
               </div>
