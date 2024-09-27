@@ -327,25 +327,28 @@ const CoachForm = () => {
       setCurrentStep((step) => step - 1);
     }
   };
+//START-COACH PROFILE VIDEO UPLOAD
+const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
 
+const handleInputChange = (e) => {
+setprofileVideo(e.target.value); // Update the state with the input value
+};
+// Handle removing the YouTube link
+const handleRemoveLink = () => {
+setprofileVideo(""); // Clear the input value
+};
+//END-COACH PROFILE VIDEO UPLOAD
   useEffect(() => {
     if (userdata?.formFilled) {
       setIsDialogOpen(true);
     }
+    // if (userdata?.profileVideo?.url) {
+    //   setProfileVideo(userdata.profileVideo.url); // Set the default value from the database
+    // }
+    
   }, []);
-
-  //
-  const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
-
-  const handleInputChange = (e) => {
-    setprofileVideo(e.target.value); // Update the state with the input value
-  };
-  // Handle removing the YouTube link
-  const handleRemoveLink = () => {
-    setprofileVideo(""); // Clear the input value
-  };
-
-  //
+  
+  
 
   return (
     <>
