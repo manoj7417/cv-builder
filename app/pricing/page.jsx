@@ -43,6 +43,7 @@ const PricingFunc = () => {
     currency: "",
   });
   
+  
   const searchParams = useSearchParams();
   const scroll = searchParams.get("scroll");
   const router = useRouter();
