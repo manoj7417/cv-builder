@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./user.css";
 import { FaRegPlayCircle, FaStar } from "react-icons/fa";
@@ -10,11 +10,21 @@ import Whishlist from "./Wishlist";
 import PurchaseHistory from "./PurchaseHistory";
 import { BsFileEarmarkCheck } from "react-icons/bs";
 import { useUserStore } from "@/app/store/UserStore";
+import axios from "axios";
+import { GetTokens } from "@/app/actions";
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Clock, DollarSign, Mail } from "lucide-react";
+import { format } from "date-fns";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
+  const router = useRouter()
   const { userdata } = useUserStore((state) => state.userState)
+  const [bookings, setBookings] = useState([])
+
   const toggle = (index) => {
     if (open === index) {
       return setOpen(null);
@@ -342,6 +352,29 @@ const UserDashboardPage = () => {
     },
   ];
 
+  const handleGetBookings = async () => {
+    const { accessToken } = await GetTokens()
+    if (!accessToken || !accessToken.value) {
+      return router.push('/login?redirect=/user-dashboard')
+    }
+    try {
+      const response = await axios.get('/api/getUserBookings', {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`
+        }
+      })
+      if (response.status === 200) {
+        setBookings(response.data.bookings)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    handleGetBookings()
+  }, [])
+
   return (
     <>
       <div className="mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center "></div>
@@ -459,6 +492,14 @@ const UserDashboardPage = () => {
                 Dashboard
               </TabsTrigger>
               <TabsTrigger
+                value="Bookings"
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "Bookings" ? "active" : ""
+                  } data-[state=active]:shadow-none`}
+                onClick={() => setActiveTab("Bookings")}
+              >
+                Bookings
+              </TabsTrigger>
+              <TabsTrigger
                 value="coaching"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "coaching" ? "active" : ""
                   } data-[state=active]:shadow-none`}
@@ -550,6 +591,52 @@ const UserDashboardPage = () => {
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+            <TabsContent className="mb-6" value="Bookings">
+              <div className="career_section max-w-full md:max-w-5xl mx-auto">
+                <div className="space-y-3">
+                  <h2 className="lg:text-start text-center text-xl font-bold text-blue-950">
+                    Bookings
+                  </h2>
+                  <div className="coach_section">
+                    <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+                        {bookings.length > 0 && bookings.map((booking) => (
+                          <Card key={booking._id} className="w-full">
+                            <CardHeader>
+                              <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                                <Avatar className="w-12 h-12 mb-2 sm:mb-0">
+                                  <AvatarImage src={booking.coachId.profileImage} alt={booking.coachId.name} className="object-cover" />
+                                  <AvatarFallback>{booking.coachId.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                  <h3 className="text-base sm:text-lg font-semibold">{booking.coachId.name}</h3>
+                                  <p className="text-xs sm:text-sm text-gray-500">{booking.slotTime.startTime} - {booking.slotTime.endTime}</p>
+                                  <p className="text-xs sm:text-sm text-gray-500">{format(new Date(booking.date), 'MMM dd, yyyy')}</p>
+                                  <p className="text-xs sm:text-sm text-gray-500">{booking.timezone}</p>
+                                </div>
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-2">
+                                <div className="flex items-center">
+                                  <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
+                                  <span className="text-xs sm:text-sm truncate">{booking.coachId.email}</span>
+                                </div>
+                                <div className="flex items-center">
+                                  <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
+                                  <span className="text-xs sm:text-sm">{booking.coachId.ratesPerHour.charges}/hour</span>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+
                     </div>
                   </div>
                 </div>
