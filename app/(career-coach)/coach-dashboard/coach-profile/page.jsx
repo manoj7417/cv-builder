@@ -28,6 +28,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
+  console.log("userdata", userdata);
 
   const {
     register,
@@ -41,7 +42,7 @@ const CoachProfile = () => {
       name: userdata?.name,
       email: userdata?.email,
       phone: userdata?.phone,
-      profileImage:userdata?.profileImage,
+      profileImage: userdata?.profileImage,
       experience: userdata?.experience,
       typeOfCoaching: userdata?.typeOfCoaching,
       skills: userdata?.skills,
@@ -58,8 +59,8 @@ const CoachProfile = () => {
       accountNumber: userdata?.bankDetails?.accountNumber,
       ifscCode: userdata?.bankDetails?.code?.value,
       ratesPerHour: userdata?.ratesPerHour?.charges,
-      cv:userdata?.cv?.link,
-      signedAggrement:userdata?.signedAggrement?.link
+      cv: userdata?.cv?.link,
+      signedAggrement: userdata?.signedAggrement?.link,
     },
   });
 
@@ -72,8 +73,9 @@ const CoachProfile = () => {
   const [signedAggrement, setSignedAggrement] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
   const cvFile = watch("cv");
+  const agreementFile = watch("signedAggrement");
+  const [fileType, setFileType] = useState(null);
   console.log("cvFile::", cvFile);
-
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -125,29 +127,34 @@ const CoachProfile = () => {
     console.log(data);
   };
 
-   // Handle file uploads
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
-    if (type === 'cv') {
-      setCvFile(file);
-      setValue('cv', file); // Set in form state
-    } else if (type === 'signedAggrement') {
-      setSignedAggrement(file);
-      setValue('signedAggrement', file); // Set in form state
+    if (type === "cv") {
+      setValue("cv", file); // Update form state with new file
+    } else if (type === "signedAggrement") {
+      setValue("signedAggrement", file); // Update form state with new signed agreement
     }
   };
 
-  // Remove file function
   const removeFile = (type) => {
-    if (type === 'cv') {
-      setCvFile(null);
-      setValue('cv', ""); // Clear in form state
-    } else if (type === 'signedAggrement') {
-      setSignedAggrement(null);
-      setValue('signedAggrement', ""); // Clear in form state
+    if (type === "cv") {
+      setValue("cv", ""); // Clear CV value in form state
+    } else if (type === "signedAggrement") {
+      setValue("signedAggrement", ""); // Clear signed agreement in form state
     }
   };
 
+  const getFileNameFromUrl = (url) => {
+    return url ? url.split("/").pop() : "No file available";
+  };
+
+  const handleViewFile = () => {
+    if (cvFile) {
+      // Create a URL for the uploaded file and open it in a new tab
+      const fileURL = URL.createObjectURL(cvFile);
+      window.open(fileURL, '_blank'); // Open the CV in a new tab
+    }
+  };
 
   useEffect(() => {
     if (userdata) {
@@ -155,7 +162,7 @@ const CoachProfile = () => {
         name: userdata?.name,
         email: userdata?.email,
         phone: userdata?.phone,
-        profileImage:userdata?.profileImage,
+        profileImage: userdata?.profileImage,
         experience: userdata?.experience,
         typeOfCoaching: userdata?.typeOfCoaching,
         skills: userdata?.skills,
@@ -172,8 +179,8 @@ const CoachProfile = () => {
         accountNumber: userdata?.bankDetails?.accountNumber,
         ifscCode: userdata?.bankDetails?.code?.value,
         ratesPerHour: userdata?.ratesPerHour?.charges,
-        cv:userdata?.cv?.link,
-        signedAggrement:userdata?.signedAggrement?.link
+        cv: userdata?.cv?.link,
+        signedAggrement: userdata?.signedAggrement?.link,
       });
     }
   }, [userdata, reset]);
@@ -193,7 +200,7 @@ const CoachProfile = () => {
                 type="submit"
                 onClick={() => setIsEditable(true)}
               >
-                Edit Profile
+                {isEditable ? "Save" : "Edit"}
               </Button>
             </div>
           </div>
@@ -455,7 +462,7 @@ const CoachProfile = () => {
                 <h2 className="text-lg font-bold mb-4">Documents</h2>
 
                 {/* CV Section */}
-                {/* <div className="mb-4">
+                <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
                     <p className="text-base font-bold text-gray-700">CV</p>
                     <input
@@ -463,19 +470,20 @@ const CoachProfile = () => {
                       accept=".pdf"
                       onChange={(e) => handleFileChange(e, "cv")}
                       className="hidden"
-                      hidden="true"
                       id="cv-upload"
                       disabled={!isEditable}
                       {...register("cv")}
                     />
+
                     {isEditable && (
                       <label
                         htmlFor="cv-upload"
                         className="cursor-pointer text-blue-500 hover:underline"
                       >
-                        Edit
+                        Edit CV
                       </label>
                     )}
+
                     {isEditable && cvFile && (
                       <button
                         onClick={() => removeFile("cv")}
@@ -485,25 +493,37 @@ const CoachProfile = () => {
                       </button>
                     )}
                   </div>
-                  <div className="flex">
-                    <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                      <div className="text-green-500 hover:underline flex gap-5">
-                        <FaCheckCircle className="text-xl" />
-                        {cvFile ? cvFile || "View CV" : "No CV Uploaded"}
-                        {cvFile && (
-                          <FaEye
-                            className="text-blue-500 text-xl cursor-pointer"
-                            onClick={() => openModal(cvFile)}
-                            title="View CV"
-                          />
-                        )}
-                      </div>
+                  <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                    <div className="text-green-500 hover:underline flex gap-5">
+                      <FaCheckCircle className="text-xl" />
+                      {cvFile ? (
+                        typeof cvFile === "string" ? (
+                          <a
+                            href={cvFile}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {getFileNameFromUrl(cvFile)}
+                          </a>
+                        ) : (
+                          cvFile.name // Display the name of the uploaded file
+                        )
+                      ) : (
+                        "No CV Uploaded"
+                      )}
+                      {cvFile && typeof cvFile === "string" && (
+                        <FaEye
+                          className="text-blue-500 text-xl cursor-pointer"
+                          onClick={() => openModal(cvFile)}
+                          title="View CV"
+                        />
+                      )}
                     </div>
                   </div>
-                </div> */}
+                </div>
 
                 {/* Signed Agreement Section */}
-                {/* <div className="mb-4">
+                <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
                     <p className="text-base font-bold text-gray-700">
                       Signed Agreement
@@ -516,42 +536,54 @@ const CoachProfile = () => {
                       id="signedAggrement-upload"
                       disabled={!isEditable}
                       {...register("signedAggrement")}
-                     
                     />
+
                     {isEditable && (
                       <label
-                        htmlFor="agreement-upload"
+                        htmlFor="signedAggrement-upload"
                         className="cursor-pointer text-blue-500 hover:underline"
                       >
-                        Edit
+                        Edit Agreement
                       </label>
                     )}
+
                     {isEditable && agreementFile && (
                       <button
-                        onClick={() => removeFile("agreement")}
+                        onClick={() => removeFile("signedAggrement")}
                         className="text-red-500 ml-4"
                       >
                         Remove
                       </button>
                     )}
                   </div>
-                  <div className="flex">
-                    <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                      <div className="text-green-500 hover:underline flex gap-5">
-                        <FaCheckCircle className="text-xl" />
-                        {agreementFile
-                          ? agreementFile.name || "View Agreement"
-                          : "No Agreement Uploaded"}
-                        {agreementFile && (
-                          <FaEye
-                            className="text-blue-500 text-xl cursor-pointer"
-                            onClick={() => openModal(agreementFile)}
-                          />
-                        )}
-                      </div>
+                  <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                    <div className="text-green-500 hover:underline flex gap-5">
+                      <FaCheckCircle className="text-xl" />
+                      {agreementFile ? (
+                        typeof agreementFile === "string" ? (
+                          <a
+                            href={agreementFile}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {getFileNameFromUrl(agreementFile)}
+                          </a>
+                        ) : (
+                          agreementFile.name // Display the name of the uploaded file
+                        )
+                      ) : (
+                        "No Agreement Uploaded"
+                      )}
+                      {agreementFile && typeof agreementFile === "string" && (
+                        <FaEye
+                          className="text-blue-500 text-xl cursor-pointer"
+                          onClick={() => openModal(agreementFile)}
+                          title="View Agreement"
+                        />
+                      )}
                     </div>
                   </div>
-                </div> */}
+                </div>
 
                 {/* Shadcn UI Modal for viewing PDF */}
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
