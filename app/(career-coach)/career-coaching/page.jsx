@@ -115,8 +115,8 @@ const ComingSoonPage = () => {
                 progression, upskilling, and much more. Connect with yours
                 today!
               </p>
-              <div className='flex lg:flex-row flex-col gap-2 md:gap-8 sm:gap-8 justify-center items-center'>
-                <div className='button_wrapper mt-8'>
+              <div className='flex lg:flex-row flex-col gap-2 md:gap-8 sm:gap-8 justify-center items-center  py-8'>
+                <div className='button_wrapper '>
                   <Link href='/coaches'>
                     <button className='get_start_btn'>
                       <span className='btn_text'>Hire Coach</span>
@@ -139,10 +139,10 @@ const ComingSoonPage = () => {
                     </button>
                   </Link>
                 </div>
-                <div className='button_wrapper mt-8 flex justify-center lg:justify-start '>
+                <div className='button_wrapper  flex justify-center lg:justify-start '>
                   <Link href='/coach-signin'>
-                    <button className='get_start_btn'>
-                      <span className='btn_text '>Register</span>
+                    <button className='get_start_btn hire_coach_button'>
+                      <span className='btn_text '>Register as Coach</span>
                       <div className='btn_overlay'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'

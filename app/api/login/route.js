@@ -9,8 +9,6 @@ export async function POST(req, res) {
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    console.error("Error logging in:", error.response || error);
-
     const errorMessage = error.response ? error.response.data : { error: "Error logging in" };
     const statusCode = error.response ? error.response.status : 500;
 

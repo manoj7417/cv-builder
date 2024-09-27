@@ -72,7 +72,7 @@ export function CoachHeader({id}) {
               className='w-full h-full object-cover'
             />
           </div>
-          <div id='coach_details' className='pt-4 sm:pt-10'>
+          <div id='coach_details' className='pt-4 lg:pt-0'>
             <div
               id='row1'
               className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3'>

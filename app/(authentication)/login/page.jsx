@@ -57,6 +57,7 @@ function LoginUser() {
         router.push(redirect || "/");
       }
     } catch (error) {
+      console.log(error)
       toast.error(error.response?.data?.error || "Error logging in");
       if (error.response?.status === 403 && error.response?.data?.error === 'Email verification is required') {
         setShowVerificationDilaog(true)

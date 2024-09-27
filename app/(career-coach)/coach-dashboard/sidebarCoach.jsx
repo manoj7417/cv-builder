@@ -41,7 +41,7 @@ const SidebarCoach = () => {
   const getLinkClass = (tab) => {
     return activeTab === tab
       ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md font-bold"
-      : "flex items-center p-3 text-gray-500 rounded-md hover:shadow-xl cursor-pointer text-sm text-blue-700 font-bold";
+      : "flex items-center p-3 text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold";
   };
 
   const handleLogout = async () => {
@@ -149,6 +149,17 @@ const SidebarCoach = () => {
                 }>
                 <MdEventAvailable className="text-xl mr-3" />
                 Availability
+              </Link>
+            </li>
+            <li className={getLinkClass("/coach-dashboard/coach-profile")}>
+              <Link
+                href={"/coach-dashboard/coach-profile"}
+                className='flex items-center w-full'
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/coach-profile")
+                }>
+                <MdEventAvailable className="text-xl mr-3" />
+                 My Profile
               </Link>
             </li>
           </ul >

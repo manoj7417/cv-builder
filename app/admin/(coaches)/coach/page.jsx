@@ -138,23 +138,23 @@ const Coach = () => {
                   ) : (
                     <>
                       {coaches.length > 0 &&
-                        coaches.map((coach) => (
-                          <tr key={coach.name} className="w-full border">
+                        coaches?.map((coach) => (
+                          <tr key={coach?.name} className="w-full border">
                             <td className="px-4 py-4 w-[25%]">
                               <div className="flex items-center">
                                 <div className="h-10 w-10 flex-shrink-0">
                                   <img
                                     className="h-10 w-10 rounded-full object-cover"
-                                    src={coach.profileImage}
+                                    src={coach?.profileImage}
                                     alt=""
                                   />
                                 </div>
                                 <div className="ml-4">
                                   <div className="text-sm font-medium text-gray-900">
-                                    {coach.name}
+                                    {coach?.name}
                                   </div>
                                   <div className="text-sm text-gray-700">
-                                    {coach.email}
+                                    {coach?.email}
                                   </div>
                                 </div>
                               </div>
@@ -162,7 +162,7 @@ const Coach = () => {
                             <td className="px-4 py-4 text-center w-[25%]">
                               <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
                                 <FaDollarSign className="text-orange-500" />{" "}
-                                {coach.ratesPerHour.charges}
+                                {coach?.ratesPerHour?.charges}
                               </div>
                             </td>
                             <td className="px-4 py-4 w-[25%]">
@@ -243,19 +243,19 @@ const Coach = () => {
                     <>
                       {coaches.length > 0 &&
                         coaches
-                          .filter(
+                            .filter(
                             (coach) =>
                               coach.isApproved &&
                               coach.approvalStatus === "approved"
                           )
                           .map((coach) => (
-                            <tr key={coach.name} className="w-full border">
+                            <tr key={coach?.name} className="w-full border">
                               <td className="px-4 py-4 w-[25%]">
                                 <div className="flex items-center">
                                   <div className="h-10 w-10 flex-shrink-0">
                                     <img
                                       className="h-10 w-10 rounded-full object-cover"
-                                      src={coach.profileImage}
+                                      src={coach?.profileImage}
                                       alt=""
                                     />
                                   </div>
@@ -360,22 +360,22 @@ const Coach = () => {
                               coach.approvalStatus === "pending"
                           )
                           .map((coach) => (
-                            <tr key={coach.name} className="w-full border">
+                            <tr key={coach?.name} className="w-full border">
                               <td className="px-4 py-4 w-[25%]">
                                 <div className="flex items-center">
                                   <div className="h-10 w-10 flex-shrink-0">
                                     <img
                                       className="h-10 w-10 rounded-full object-cover"
-                                      src={coach.profileImage}
+                                      src={coach?.profileImage}
                                       alt=""
                                     />
                                   </div>
                                   <div className="ml-4">
                                     <div className="text-sm font-medium text-gray-900">
-                                      {coach.name}
+                                      {coach?.name}
                                     </div>
                                     <div className="text-sm text-gray-700">
-                                      {coach.email}
+                                      {coach?.email}
                                     </div>
                                   </div>
                                 </div>
@@ -383,7 +383,7 @@ const Coach = () => {
                               <td className="px-4 py-4 text-center w-[25%]">
                                 <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
                                   <FaDollarSign className="text-orange-500" />{" "}
-                                  {coach.ratesPerHour.charges}
+                                  {coach?.ratesPerHour?.charges}
                                 </div>
                               </td>
                               <td className="px-4 py-4 w-[25%]">
