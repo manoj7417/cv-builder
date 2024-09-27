@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import useCoachesDetailStore from "@/app/store/coachDetailStore";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { FaCheckCircle, FaEye, FaTimesCircle } from "react-icons/fa";
 import {
   Dialog,
@@ -38,6 +38,7 @@ const CoachDetailsPage = () => {
   const [singleCoachData] = useState(singleCoach);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter()
   const [pdfUrl, setPdfUrl] = useState("");
 
   const isCvVerified = watch("isCvVerified", singleCoach?.cv?.isVerified);
@@ -74,6 +75,7 @@ const CoachDetailsPage = () => {
       );
       if (response.status === 200) {
         updateSingleCoach(response?.data?.data);
+        router.push("/admin/coach");
         toast.success("Update Coach Details submitted successfully");
       }
     } catch (error) {
