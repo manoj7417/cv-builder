@@ -68,9 +68,10 @@ const CoachProfile = () => {
   const [pdfUrl, setPdfUrl] = useState("");
   const imageUrl = watch("profileImage");
   const [isImageUploading, setIsImageUploading] = useState(false);
-  const [cvFile, setCvFile] = useState(userdata?.cv?.link);
+  // const [cvFile, setCvFile] = useState(userdata?.cv?.link);
   const [signedAggrement, setSignedAggrement] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const cvFile = watch("cv");
   console.log("cvFile::", cvFile);
 
 
@@ -454,7 +455,7 @@ const CoachProfile = () => {
                 <h2 className="text-lg font-bold mb-4">Documents</h2>
 
                 {/* CV Section */}
-                <div className="mb-4">
+                {/* <div className="mb-4">
                   <div className="maint-title flex items-center gap-5">
                     <p className="text-base font-bold text-gray-700">CV</p>
                     <input
@@ -462,6 +463,7 @@ const CoachProfile = () => {
                       accept=".pdf"
                       onChange={(e) => handleFileChange(e, "cv")}
                       className="hidden"
+                      hidden="true"
                       id="cv-upload"
                       disabled={!isEditable}
                       {...register("cv")}
@@ -498,7 +500,7 @@ const CoachProfile = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Signed Agreement Section */}
                 {/* <div className="mb-4">

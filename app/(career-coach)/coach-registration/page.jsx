@@ -24,7 +24,6 @@ import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
 
 //
-
 export default function CoachRegistration() {
   const formSchema = yup.object().shape({
     firstName: yup.string().required("First Name is required"),
@@ -58,7 +57,8 @@ export default function CoachRegistration() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  
+  const [showconfirmPassword, setShowConfirmPassword] = useState(false);
+
   const handleCoachDetails = async (data) => {
     setIsLoading(true);
     const { firstName, lastName, email, phone, password } = data;
@@ -105,28 +105,28 @@ export default function CoachRegistration() {
             className="mt-4 w-[60%] rounded-md"
           >
             <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
+              <div className="p-4 rounded-md ">
                 <img
                   className="mx-auto h-auto  rounded-md object-contain"
-                  src="/coach-register.png"
+                  src="/coachSignin1.png"
                   alt="coach-register"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
+              <div className="p-4 rounded-md ">
                 <img
                   className="mx-auto h-auto  rounded-md object-contain"
-                  src="/coach-register.png"
+                  src="/coachSignin2.png"
                   alt="coach-register"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="p-4 rounded-md shadow">
+              <div className="p-4 rounded-md ">
                 <img
                   className="mx-auto h-auto rounded-md object-contain"
-                  src="/coach-register.png"
+                  src="/coachSignin3.png"
                   alt="coach-register"
                 />
               </div>
@@ -236,7 +236,7 @@ export default function CoachRegistration() {
                           render={({ field }) => (
                             <PhoneInput
                               {...field}
-                              inputStyle={{ height: "40px", width: "100%"}}
+                              inputStyle={{ height: "40px", width: "100%" }}
                               country={"us"}
                               value={field.value} // Ensure value is set correctly
                               onChange={(value, countryData) => {
@@ -267,7 +267,7 @@ export default function CoachRegistration() {
                         {" "}
                         Password{" "}
                       </Label>
-                      <div className="mt-2">
+                      <div className="mt-2 relative">
                         <Input
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type={showPassword ? "text" : "password"}
@@ -280,6 +280,19 @@ export default function CoachRegistration() {
                             {errors?.password?.message}
                           </p>
                         )}
+                        <div className="top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3">
+                          {showPassword ? (
+                            <IoEye
+                              className="cursor-pointer h-4 w-4"
+                              onClick={() => setShowPassword(false)}
+                            />
+                          ) : (
+                            <IoEyeOff
+                              className="cursor-pointer h-4 w-4"
+                              onClick={() => setShowPassword(true)}
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -292,10 +305,10 @@ export default function CoachRegistration() {
                         {" "}
                         Confirm Password{" "}
                       </Label>
-                      <div className="mt-2">
+                      <div className="mt-2 relative">
                         <Input
                           className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                          type={showPassword ? "text" : "password"}
+                          type={showconfirmPassword ? "text" : "password"}
                           placeholder="Password"
                           id="password"
                           {...register("cpassword")}
@@ -305,6 +318,20 @@ export default function CoachRegistration() {
                             {errors?.cpassword?.message}
                           </p>
                         )}
+
+                        <div className="top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3">
+                          {showconfirmPassword ? (
+                            <IoEye
+                              className="cursor-pointer h-4 w-4"
+                              onClick={() => setShowConfirmPassword(false)}
+                            />
+                          ) : (
+                            <IoEyeOff
+                              className="cursor-pointer h-4 w-4"
+                              onClick={() => setShowConfirmPassword(true)}
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>

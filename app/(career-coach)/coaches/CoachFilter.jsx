@@ -176,6 +176,7 @@ export default function CoachFilter({
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+  
 
   //Next page func
   const handleNextPage = () => {
