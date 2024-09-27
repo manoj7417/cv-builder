@@ -52,6 +52,7 @@ const PricingFunc = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  
   const serviceCards = [
     {
       id: 1,
