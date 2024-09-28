@@ -28,19 +28,24 @@ import { useCoachStore } from "@/app/store/coachStore";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ImSpinner3, ImSpinner8 } from "react-icons/im";
-import { MdOutlineFileUpload } from "react-icons/md";
+import {
+  MdOutlineFileUpload,
+  MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdCloudUpload } from "react-icons/io";
+import ReactPlayer from "react-player";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
+  const { updateUserData } = useCoachStore();
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
     watch,
     reset,
   } = useForm({
@@ -55,6 +60,7 @@ const CoachProfile = () => {
       dateofBirth: userdata?.dateofBirth
         ? new Date(userdata.dateofBirth).toISOString().split("T")[0]
         : "",
+      placeofBirth: userdata?.placeofBirth,
       bio: userdata?.bio,
       coachingDescription: userdata?.coachingDescription,
       address: userdata?.address,
@@ -67,6 +73,7 @@ const CoachProfile = () => {
       ratesPerHour: userdata?.ratesPerHour?.charges,
       cv: userdata?.cv?.link,
       signedAggrement: userdata?.signedAggrement?.link,
+      profileVideo: userdata?.profileVideo,
     },
   });
 
@@ -83,6 +90,7 @@ const CoachProfile = () => {
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
   const [cvFileUrl, setCvFileUrl] = useState(userdata?.cv?.link || "");
   const [docsUrl, setDocsUrl] = useState(userdata?.signedAggrement?.link || "");
+  const [isApiLoading, setIsApiLoading] = useState(false);
 
   const cvFile = watch("cvUpload");
   const docsFile = watch("docsUpload");
@@ -134,7 +142,63 @@ const CoachProfile = () => {
   };
 
   const handleEditProfile = (data) => {
-    console.log(data);
+    alert("Profile updated successfully");
+    console.log("data", data);
+    // const { accessToken } = await GetTokens();
+    // const payload = {
+    //   name: data.name,
+    //   email: data.email,
+    //   phone: data.phone,
+    //   profileImage: data.profileImage,
+    //   experience: data.experience,
+    //   typeOfCoaching: data.typeOfCoaching,
+    //   skills: data.skills,
+    //   dateofBirth: data.dateofBirth,
+    //   bio: data.bio,
+    //   coachingDescription: data.coachingDescription,
+    //   address: data.address,
+    //   city: data.city,
+    //   country: data.country,
+    //   zip: data.zip,
+    //   bankName: data.bankName,
+    //   accountNumber: data.accountNumber,
+    //   ifscCode: data.ifscCode,
+    //   ratesPerHour: data.ratesPerHour,
+    //   cv: {
+    //     link: cvFileUrl,
+    //   },
+    //   profileVideo: data.profileVideo,
+    //   signedAggrement: {
+    //     link: docsUrl,
+    //   },
+    //   experience: data.experience,
+    //   typeOfCoaching: data.typeOfCoaching,
+    //   skills: data.skills,
+    //   dateofBirth: data.dateofBirth,
+    //   placeofBirth: data.placeofBirth,
+    //   bio: data.bio,
+    //   coachingDescription: data.coachingDescription,
+    //   address: data.address,
+    // };
+    // console.log(payload);
+    // setIsApiLoading(true);
+    // try {
+    //   const response = await axios.patch("/api/coachForm", payload, {
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken.value}`,
+    //     },
+    //   });
+    //   if (response.status === 200) {
+    //     updateUserData(response.data.coach);
+    //     toast.success("Form submitted successfully");
+    //     setIsApiLoading(false);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //   toast.error("Error in submitting the form");
+    // } finally {
+    //   setIsApiLoading(false); // Stop loading
+    // }
   };
 
   // Upload CV Functionlaity starts here
@@ -216,6 +280,15 @@ const CoachProfile = () => {
     setIsModalOpen(true); // Open the modal when the view icon is clicked
   };
 
+  //START-COACH PROFILE VIDEO UPLOAD
+  // Watch for changes in the profileVideo field
+  const profileVideo = watch("profileVideo"); // State to store YouTube link
+
+  // Handle removing the YouTube link
+  const handleRemoveLink = () => {
+    setValue("profileVideo", "");
+  };
+
   useEffect(() => {
     if (userdata?.cv?.link) {
       setValue("cv", userdata.cv.link); // Set CV URL in the form
@@ -243,6 +316,7 @@ const CoachProfile = () => {
         dateofBirth: userdata?.dateofBirth
           ? new Date(userdata.dateofBirth).toISOString().split("T")[0] // Convert ISO date to YYYY-MM-DD
           : "",
+        placeofBirth: userdata?.placeofBirth,
         bio: userdata?.bio,
         coachingDescription: userdata?.coachingDescription,
         address: userdata?.address,
@@ -253,8 +327,7 @@ const CoachProfile = () => {
         accountNumber: userdata?.bankDetails?.accountNumber,
         ifscCode: userdata?.bankDetails?.code?.value,
         ratesPerHour: userdata?.ratesPerHour?.charges,
-        // cv: userdata?.cv?.link,
-        // signedAggrement: userdata?.signedAggrement?.link,
+        profileVideo: userdata?.profileVideo,
       });
     }
   }, [userdata, reset]);
@@ -270,13 +343,47 @@ const CoachProfile = () => {
             <h1 className="text-xl text-black font-bold">Anuj</h1>
             <div className="approve_button flex gap-10">
               <Button
-                className="bg-blue-700 text-white px-10 py-2 rounded-md"
+                className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
                 type="submit"
-                onClick={() => setIsEditable(true)}
+                onClick={() => {
+                 setIsEditable(true);
+                }}
+                disabled={isApiLoading}
               >
                 {isEditable ? "Save" : "Edit"}
               </Button>
             </div>
+            {/* <div className="approve_button flex gap-10 mt-4">
+              {!isEditable && (
+                <Button
+                  className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
+                  type="button"
+                  onClick={() => setIsEditable(true)}
+                >
+                  Edit
+                  <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                </Button>
+              )}
+              {isEditable && (
+                <Button
+                  className="bg-green-600 text-white px-10 py-2 rounded-md flex items-center"
+                  type="submit"
+                  disabled={isApiLoading}
+                >
+                  {isApiLoading ? (
+                    <>
+                      Saving...
+                      <ImSpinner3 className="animate-spin ml-2" size={16} />
+                    </>
+                  ) : (
+                    <>
+                      Save
+                      <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                    </>
+                  )}
+                </Button>
+              )}
+            </div> */}
           </div>
           <Tabs
             value={activeTab}
@@ -319,29 +426,27 @@ const CoachProfile = () => {
                         />
 
                         <div className="px-4 justify-center flex flex-col ">
-                          {
-                            isEditable && (
-                              <label className=" cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4">
-                            {isImageUploading ? (
-                              <>
-                                <ImSpinner3 className="m-1 animate-spin" />{" "}
-                                Uploading
-                              </>
-                            ) : (
-                              <>
-                                <MdOutlineFileUpload className="inline-flex text-xl m-1" />{" "}
-                                Upload
-                              </>
-                            )}
-                            <input
-                              type="file"
-                              accept="image/*"
-                              hidden="true"
-                              onChange={handleImageUpload}
-                            />
-                          </label>
-                            )
-                          }
+                          {isEditable && (
+                            <label className=" cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4">
+                              {isImageUploading ? (
+                                <>
+                                  <ImSpinner3 className="m-1 animate-spin" />{" "}
+                                  Uploading
+                                </>
+                              ) : (
+                                <>
+                                  <MdOutlineFileUpload className="inline-flex text-xl m-1" />{" "}
+                                  Upload
+                                </>
+                              )}
+                              <input
+                                type="file"
+                                accept="image/*"
+                                hidden="true"
+                                onChange={handleImageUpload}
+                              />
+                            </label>
+                          )}
                           {imageUrl && isEditable && (
                             <Button
                               className="text-white bg-red-500 hover:bg-red-700 flex justify-center"
@@ -430,6 +535,20 @@ const CoachProfile = () => {
                         type="date"
                         {...register("dateofBirth", {
                           required: "Date of Birth is required",
+                        })}
+                        className="w-full"
+                        disabled={!isEditable}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Place of Birth
+                      </label>
+                      <Input
+                        type="text"
+                        {...register("placeofBirth", {
+                          required: "Place of Birth is required",
                         })}
                         className="w-full"
                         disabled={!isEditable}
@@ -742,26 +861,56 @@ const CoachProfile = () => {
                   </div>
                 </div>
 
-                {/* Shadcn UI Modal for viewing PDF */}
-                {/* <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                  <DialogContent
-                    showCloseButton="true"
-                    onClick={handleCloseModal}
+                {/* START- COACH INTRODUCTION VIDEO */}
+                <div className="sm:col-span-6 mt-5">
+                  <label
+                    htmlFor="profileVideo"
+                    className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    <DialogHeader>
-                      <DialogTitle>PDF Viewer</DialogTitle>
-                    </DialogHeader>
-                    <div className="relative w-full h-full no-scrollbar overflow-auto max-h-[70vh] sm:max-h-[75vh] md:max-h-[80vh] lg:max-h-[85vh] xl:max-h-[80vh]">
-                      {pdfUrl && (
-                        <iframe
-                          src={`https://docs.google.com/gview?url=${pdfUrl}&embedded=true`}
-                          className="w-full h-[90vh]"
-                          title="Document Viewer"
-                        />
-                      )}
-                    </div>
-                  </DialogContent>
-                </Dialog> */}
+                    Profile Video
+                  </label>
+                  <div className="flex space-x-2">
+                    <Input
+                      type="text"
+                      {...register("profileVideo")}
+                      id="profileVideo"
+                      value={profileVideo}
+                      placeholder="Enter video URL"
+                      disabled={!isEditable}
+                      className="border border-gray-300 p-2 rounded w-full mt-2"
+                    />
+                    {/* Remove Button */}
+
+                    {/* Remove Button with Icon */}
+
+                    {isEditable && (
+                      <button
+                        type="button"
+                        onClick={handleRemoveLink}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <FaTimes className="text-sm" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Displaying the YouTube video using ReactPlayer */}
+                  <div className="mt-4">
+                    {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
+                      <ReactPlayer
+                        url={profileVideo}
+                        controls
+                        width="100%"
+                        height="300px"
+                      />
+                    ) : (
+                      <p>
+                        Please enter a valid YouTube URL to preview the video.
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {/* END- COACH INTRODUCTION VIDEO */}
               </div>
             </TabsContent>
           </Tabs>
