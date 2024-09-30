@@ -441,7 +441,7 @@ export default function DashboardIdea() {
   const [userState, setUserState] = useState({});
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log("pathname::",pathname)
+  console.log("pathname::", pathname);
   const router = useRouter();
 
   const toggle = (index) => {
@@ -546,8 +546,8 @@ export default function DashboardIdea() {
         <section>
           <div className="steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10">
             <h2 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-justify lg:px-20 xl:px-10 2xl:px-10">
-              Create a CV template for Your{" "}
-              <span className="text-[#2C98CA]">Dream Job</span>
+              CV Templates that fit your desired{" "}
+              <span className="text-[#2C98CA]">Job Role</span>
             </h2>
             <div className="left_icon absolute lg:bottom-32 top-38 lg:left-20 left-10">
               <img src="/resume-icon.png" alt="icon1" />
@@ -560,11 +560,18 @@ export default function DashboardIdea() {
               />
             </div>
             <p className="text-base text-black text-start lg:px-20 xl:px-20 2xl:px-10 pt-20">
-              Create your CV with our custom-made templates like experts and
-              industry professionals and incorporate Artificial Intelligence
-              with it. Match the modern recruitment standards with our
-              customizable templates in the professional curriculum vitae
-              format.
+              Our custom templates, designed by resume writing professionals and
+              job coaches across the globe, cater to every job role. We
+              incorporate artificial intelligence in our{" "}
+              <Link href={"/resume"} className="font-bold">
+                curriculum vitae format
+              </Link>{" "}
+              building to help you create a CV layout that matches modern
+              recruitment standards. Start now with our{" "}
+              <Link className="font-bold" href={"/resume"}>
+                CV template
+              </Link>{" "}
+              options that empower your job application with excellence.
             </p>
           </div>
           <div className="max-w-7xl mx-auto steps_intro lg:py-20 sm:p-5 p-5">
@@ -578,78 +585,108 @@ export default function DashboardIdea() {
               </div>
               <div className="lg:w-[70%] w-full steps_content">
                 <h3 className="text-3xl text-black font-bold py-3">
-                  Use our CV Builder with customisable templates and make your
-                  resume online
+                  Use our CV builder to create an exceptional job application in
+                  minutes
                 </h3>
                 <p className="text-base py-3">
-                  Create a professional CV with our{" "}
-                  <Link href="/resume" className="font-bold">
+                  Utilise the professional{" "}
+                  <Link href={"/resume"} className="font-bold">
+                    UK CV Template
+                  </Link>{" "}
+                  to build a job-winning resume with our{" "}
+                  <Link href={"/resume"} className="font-bold">
+                    CV builder
+                  </Link>
+                  . Our templates, tailored to your requirements, are built by
+                  integrating artificial intelligence and are inspired by
+                  insights and suggestions from professionals with years of
+                  experience and expertise.
+                </p>
+                <p className="text-base py-3">
+                  Highlight your important skills, experiences, and educational
+                  background by utilising our options in{" "}
+                  <Link href={"/resume"} className="font-bold">
+                    CV Layout UK
+                  </Link>
+                  . Engineered to suit global job application systems, this{" "}
+                  <Link href={"/resume"} className="font-bold">
                     CV Builder
                   </Link>{" "}
-                  in <Link href="/resume" className="font-bold">UK format CV Template</Link>. Take the help of our Custom-made
-                  templates made with the insights of professionals with
-                  combining Artificial Intelligence.
+                  is tried and tested by experts who have critically judged
+                  candidates for a myriad of job applications.
                 </p>
                 <p className="text-base py-3">
-                  These templates will make your{" "}
-                  <Link href={"/resume"} className="font-bold">
-                    CV layout UK
-                  </Link>{" "}
-                  stand out and ensure every detail is flawless with proper
-                  highlighting of your skills and achievements. This UK-style
-                  resume template builder is tried and tested by experts with
-                  specialties like skills, profiles, education, certificates,
-                  etc.
-                </p>
-                <p className="text-base py-3">
-                  After quickly filling in your details in the template, you can
-                  save it and use it for yourself. You can choose and customize
-                  from your{" "}
-                  <Link href={"/resume"} className="font-bold">
-                    curriculum vitae templates
-                  </Link>
-                  .
+                  All you need to do is just feed your information into the
+                  Genies Career Hub CV Creator and the artificial
+                  intelligence-based systems will automatically design your
+                  superlative and ATS-compatible CV in no time!
                 </p>
               </div>
             </div>
             <div className="step_1">
               <div className="flex lg:flex-row flex-col gap-10 my-20 relative lg:p-1 p-5">
                 <div className="lg:w-[70%] w-full steps_content">
-                  <h4 className="font-bold text-black text-2xl">Step 1</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The First Step
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Choose a CV Template 
+                    Select your CV Template 
                   </h3>
                   <p className="text-base py-3">
-                    When you reach the CV creator, we bring you the most
-                    straightforward resume builder. Follow these simple steps to
-                    create your professional{" "}
+                    On the Genies Career Hub CV Creator, there are a variety of
+                    CV templates that follow the{" "}
                     <Link href={"/resume"} className="font-bold">
-                      CV layout UK
-                    </Link>
-                    .
+                      CV Layout UK
+                    </Link>{" "}
+                    format. It is all that you need to build a resume that
+                    outshines a number of job applications.
                   </p>
                   <p className="text-base py-3">
-                    We bring you the best templates approved by experts. You can
-                    choose personalized designs from any of the 25 UK-style CV
-                    templates. These allow you to fill in general details like
-                    your profile, education, experience, projects, skills,
-                    hobbies, awards, references, certificates, language, and the
-                    color theme of your template.
+                    All you need to do is follow simple steps in order to build
+                    a curriculum vitae that impresses the recruiters and passes
+                    through job application tracking systems. The first and
+                    foremost step in this process is to select a{" "}
+                    <Link href={"/resume"} className="font-bold">
+                      CV template
+                    </Link>{" "}
+                    that matches with your current job profile and also conforms
+                    with the job role you are yearning for. We have handpicked
+                    25 remarkable templates for you to choose from.
                   </p>
                   <p className="text-base py-3">
-                    Choose a template that matches your job professionalism and
-                    proceed with filling in the details. This will proceed with
-                    specifications and additional qualities you can fill in
-                    yourself or take the help of Artificial Intelligence by
-                    clicking on the Generate with AI option.
+                    While selecting a resume template, you must look out for
+                    important sections such as Profile Summary, Experience,
+                    Education, Contact Details, Skills, Awards, Certifications,
+                    Hobbies and Interests, Photograph, References, and more.
+                    Additionally, your{" "}
+                    <Link href={"/resume"} className="font-bold">
+                      CV template
+                    </Link>{" "}
+                    must have the flexibility to let you omit certain disfavored
+                    sections. The design of the template is what changes the
+                    impression game for you.
                   </p>
                   <p className="text-base py-3">
-                    With the help of Artificial Intelligence, after you fill in
-                    some details, it generates a proper professional profile
-                    description. 
+                    Your CV formatting must not only look captivating but also
+                    be compatible with the ATS software. Therefore, selecting an
+                    exemplary is very vital. Choose the best template for your
+                    job application with us!
                   </p>
                   <div className="step_image">
                     <img src="/Step-21.png" alt="step1" />
+                  </div>
+                  <div className="pro_tips">
+                    <div className="pro_image relative">
+                      <img src="/pro-tips.png" alt="pro-tips" />
+                      <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                        Pro Tip !
+                      </p>
+                    </div>
+                    <p className="text-xl px-5">
+                      Even after selecting your resume template, you can change
+                      it during the creation process, by simply selecting
+                      another from the menu.
+                    </p>
                   </div>
                 </div>
                 <div className="lg:w-[30%] w-full h-[450px] image_content flex justify-center items-center">
@@ -687,26 +724,30 @@ export default function DashboardIdea() {
                   </div>
                 </div>
                 <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">Step 2</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Second Step
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Enter basic details in CV Builder 
+                    Adding your Basic Details 
                   </h3>
                   <p className="text-base py-3">
-                    Build your resume template with your basic details in our
-                    <Link href={"/resume"} className="font-bold">
-                      curriculum vitae builder
-                    </Link>
-                    . In the Profile section, you can either fill in the
-                    description of your profile or, by entering some details,
-                    you can go for the Generate with AI option. This feature is
-                    only provided by us which makes your CV even more
-                    professional and ready for interview. 
+                    With Genies Career Hub’s CV Creator to either create a
+                    curriculum vitae from scratch or simply use the AI for a
+                    faster approach. You can choose any of the suitable options
+                    in any phase of your CV-building process 
                   </p>
                   <p className="text-base py-3">
-                    The details that you fill in once get stopped in between due
-                    to any unwanted conditions; you can go to the Back button
-                    and leave the details; they will be saved automatically on
-                    your next visit.
+                    Simply fill in your details in the CV Creator, such as name,
+                    job title, email, and more. You can write your summary as
+                    per your cognizance or easily{" "}
+                    <Link href={"/resume"} className="font-bold">
+                      Generate with AI
+                    </Link>{" "}
+                    in seconds, The AI observes your details to create CV
+                    content that is exactly how your potential recruiters wish
+                    to read. You can add your picture too, in your selected
+                    template to give your CV that little pictorial and personal
+                    touch.
                   </p>
                 </div>
               </div>
@@ -714,13 +755,13 @@ export default function DashboardIdea() {
                 <div className="pro_image relative">
                   <img src="/pro-tips.png" alt="pro-tips" />
                   <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
+                    Pro Tip !
                   </p>
                 </div>
                 <p className="text-xl px-5">
-                  Do you wish to change the font style of the text? Yes, you
-                  can! We provide you the choice of changing the font style if
-                  you do not like the original one. 
+                  Not satisfied with the font style of your CV? Change it! We
+                  help you customise your resume as you wish. Simply modify the
+                  font styling while adding information in the details box. 
                 </p>
               </div>
               <div className="arrow absolute left-[35%] -bottom-40">
@@ -734,19 +775,30 @@ export default function DashboardIdea() {
             <div className="step_3 relative">
               <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                 <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">Step 3</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Third Step
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Add your education details 
+                    Enter your Educational Background
                   </h3>
                   <p className="text-base py-3">
-                    We provide you with a different section to input your
-                    educational details, institutions you joined, and learnings
-                    you had in your academic journey.  
+                    Your educational background is an inevitable part of your
+                    job application. With Genies Career Hub’s CV Creator, you
+                    can easily add your educational details in order of your
+                    preference. Be it in chronological order or a reverse
+                    chronological one, our{" "}
+                    <Link href={"/resume"} className="font-bold">
+                      CV Builder
+                    </Link>{" "}
+                    flexibly helps you choose your preferred format. With the
+                    help of our easy-to-track calendars, you can uncomplicate
+                    your educational background timelines.
                   </p>
                   <p className="text-base py-3">
-                    Filling in some information-specific details is very
-                    important for the recruiters as they will take care of these
-                    details during analysis
+                    If you have any special educational specifications that you
+                    want your recruiter to see, we have you covered. You can
+                    easily add details about your academic experiences and
+                    present your CV the way you want!
                   </p>
                 </div>
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
@@ -763,12 +815,12 @@ export default function DashboardIdea() {
                 <div className="pro_image relative">
                   <img src="/pro-tips.png" alt="pro-tips" />
                   <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
+                    Pro Tip !
                   </p>
                 </div>
                 <p className="text-xl px-5">
-                  You can change the design of the templates anywhere in the
-                  process of making your CV. 
+                  You can add as many academic experiences as you want. All you
+                  need to do is tap on the add sign!
                 </p>
               </div>
               <div className="arrow absolute left-[35%] -bottom-40">
@@ -796,21 +848,23 @@ export default function DashboardIdea() {
                   </div>
                 </div>
                 <div className="lg:w-[50%] w-full steps_content mt-16">
-                  <h4 className="font-bold text-black text-2xl">Step 4</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Fourth Step
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Fil in your experience and achievement details 
+                    Your Experience and Achievements Go In
                   </h3>
                   <p className="text-base py-3">
-                    Fill in your education details in the specified boxes with
-                    your details. After this, you can describe your job
-                    experience in the description box below the basic experience
-                    details. Here, you can tell your experience of work and any
-                    projects that you have worked on. You can aslo state the
-                    achievements if you had any. In a very structured format
-                    these will be presented on the{" "}
+                    Your recruiters need to know what skills you have learned
+                    and what value you have added to the previous organisations
+                    upon collaboration. This is the section where you add that.
+                    Our CV Creator is customised in a way that you can add,
+                    omit, or simply maximise details into the selected{" "}
                     <Link href={"/resume"} className="font-bold">
-                      CV Template 
-                    </Link>
+                      CV template
+                    </Link>{" "}
+                    based on your intention. We let you take charge of your
+                    resume while supporting you in the way you want.
                   </p>
                 </div>
               </div>
@@ -818,13 +872,13 @@ export default function DashboardIdea() {
                 <div className="pro_image relative">
                   <img src="/pro-tips.png" alt="pro-tips" />
                   <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
+                    Pro Tip !
                   </p>
                 </div>
                 <p className="text-xl px-5">
-                  Do you wish to change the shades other than the colors
-                  provided? Go ahead and click on the selected color, change the
-                  shade by doodling around, and set it 
+                  Want your CV to be of different hues? Go ahead and change the
+                  colour of the template by selecting a different colour by
+                  doodling around.
                 </p>
               </div>
               <div className="arrow absolute left-[35%] -bottom-40">
@@ -838,18 +892,21 @@ export default function DashboardIdea() {
             <div className="step_5 relative">
               <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                 <div className="lg:w-[50%] w-full steps_content mt-16">
-                  <h4 className="font-bold text-black text-2xl">Step 5</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Fifth Step
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Build your skills and hobbies section 
+                    Flaunt your Skills and Interests
                   </h3>
                   <p className="text-base py-3">
-                    We provide you with this professional section to showcase
-                    your hobbies and skills. By adding your skills and hobbies,
-                    the employers take note of what you can do exceptionally.
-                  </p>
-                  <p className="text-base py-3">
-                    These hobbies and skills will show what passions you have
-                    beyond your workplace.
+                    Your skills are what get you way higher on the pile of
+                    applications on the recruiter’s table. Add your skills, and
+                    we ensure that they get highlighted. The CV template designs
+                    on our CV Creator are formatted in a way that they get
+                    emphasised when a recruiter reads the resume or even an
+                    Application Tracking System scans it. Bonus Point: You can
+                    also add your interests to help your recruiters get
+                    additional insight about your passions beyond work life!
                   </p>
                 </div>
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
@@ -862,19 +919,6 @@ export default function DashboardIdea() {
                   </div>
                 </div>
               </div>
-              {/* <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
-                    Pro Tips !
-                  </p>
-                </div>
-                <p className="text-xl px-5">
-                  Do you wish to change the shades other than the colors
-                  provided? Go ahead and click on the selected color, change the
-                  shade by doodling around, and set it 
-                </p>
-              </div> */}
               <div className="arrow absolute left-[35%] -bottom-20">
                 <img
                   src="/arrow1.png"
@@ -905,24 +949,28 @@ export default function DashboardIdea() {
                   </div>
                 </div>
                 <div className="lg:w-[50%] w-full steps_content">
-                  <h4 className="font-bold text-black text-2xl">Step 6</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Sixth Step
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Upload your certificates and language 
+                    Add Certifications and Language Skills
                   </h3>
                   <div className="certificate mt-3">
                     <h4 className="text-xl text-[#F0B000] font-medium">
                       Certificate
                     </h4>
                     <p className="text-base py-3">
-                      This detail section makes your{" "}
-                      <Link href="/resume" className="font-bold">
-                        UK resume template
+                      Your{" "}
+                      <Link href={"/resume"} className="font-bold">
+                        UK Resume template
                       </Link>{" "}
-                      look professional and shows the essential qualities
-                      <span>
-                        Uploading the certificate will highlight your
-                        achievements and embrace your expertise in it.
-                      </span>
+                      can look effulgent and outstanding if you add
+                      certifications to showcase your skills completely. This
+                      shall provide an insight into your compatibility with
+                      necessary industry-applicable aptitudes. While adding your
+                      certifications, you can easily include essential details
+                      such as dates, gained experiences, associated
+                      organisations, and much more
                     </p>
                   </div>
                   <div className="Language mt-3">
@@ -930,19 +978,14 @@ export default function DashboardIdea() {
                       Language
                     </h4>
                     <p className="text-base py-3">
-                      Languages are a vital part of your CV in this era. Knowing
-                      different languages with proficiency is essential for
-                      communication across varied cultures
-                      <span>
-                        These credentials will let the employer know about you
-                        in depth.
-                      </span>
+                      It is a brownie point if you are mulltilingual. With rapid
+                      globalisation, employers look out for talents who have
+                      some acknowledgement of supplementary languages. This
+                      helps the organisations reach out to international
+                      clients. You can not only add the languages in the Genies
+                      Career Hub templates but also add your proficiency level.
                     </p>
                   </div>
-                  <p className="text-base py-3">
-                    These hobbies and skills will show what passions you have
-                    beyond your workplace.
-                  </p>
                 </div>
               </div>
               <div className="arrow absolute left-[35%] -bottom-40">
@@ -952,29 +995,39 @@ export default function DashboardIdea() {
                   className="w-52 h-52 object-contain"
                 />
               </div>
+              <div className="pro_tips">
+                <div className="pro_image relative">
+                  <img src="/pro-tips.png" alt="pro-tips" />
+                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                    Pro Tip !
+                  </p>
+                </div>
+                <p className="text-xl px-5">
+                  To make your CV more professionally accessible, you can add
+                  links to important keywords and help them find the exact
+                  sources of your certifications, and more.
+                </p>
+              </div>
             </div>
             <div className="step_7 relative">
               <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                 <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">Step 7</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Seventh Step{" "}
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Review your final CV 
+                    Review your Curriculum Vitae 
                   </h3>
                   <p className="text-base py-3">
-                    The final look through of your UK style{" "}
-                    <Link href={"/resume"} className="font-bold">
-                      CV template
-                    </Link>{" "}
-                    after filling in the details at last is an important step.
-                    With a free mind, you can have an overview of the whole CV
-                    and make changes if required at the same time. The layout
-                    and visual representation of knowledge will be presented
-                    forth you so that you get an overview of the content in the
-                    templates.
-                  </p>
-                  <p className="text-base py-3">
-                    Add the background color and text, change font size, bold or
-                    italic-specific headings, etc
+                    Now that everything is assembled, all you are left to do is
+                    just give the created resume a quick final view. Review the
+                    information, revise the skills, proofread the content and
+                    check the design elements. If everything fits, you are all
+                    set to go. Otherwise, we help you with the re-edit as well.
+                    You can edit information, rewrite the content, add sections,
+                    remove details, change the template design, format the text
+                    appearance, add your photograph, add links, and do all that
+                    you want, our CV Builder shall assist you throughout
                   </p>
                 </div>
                 <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
@@ -987,7 +1040,7 @@ export default function DashboardIdea() {
                   </div>
                 </div>
               </div>
-              <div className="pro_tips">
+              {/* <div className="pro_tips">
                 <div className="pro_image relative">
                   <img src="/pro-tips.png" alt="pro-tips" />
                   <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
@@ -998,7 +1051,7 @@ export default function DashboardIdea() {
                   Get your CV downloaded in the form of a PDF or TXT file and
                   save it for future use. 
                 </p>
-              </div>
+              </div> */}
               <div className="arrow absolute left-[35%] -bottom-40">
                 <img
                   src="/arrow1.png"
@@ -1019,28 +1072,34 @@ export default function DashboardIdea() {
                     <img
                       src="/Step-28.png"
                       alt="icon4"
-                      className="w-full h-[500px] object-cover"
+                      className="w-full h-[400px] object-cover"
                     />
                   </div>
                 </div>
                 <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">Step 8</h4>
+                  <h4 className="font-bold text-black text-2xl">
+                    The Last Lap{" "}
+                  </h4>
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Download and Save your CV
+                    Download your CV and you’re ready to fill out the
+                    Applications
                   </h3>
                   <p className="text-base py-3">
-                    The downloading service that we provide will help you to
-                    save it with you and reduce the chances of getting
-                    misplaced. Give your CV a name and set a date for the file.
+                    The final step is to save the CV that you have created with
+                    the help of your Resume builder. You can easily download the
+                    created CV after carefully reviewing it. All you need to do
+                    is select the format in which you seek to save your file.
+                    Genies Career Hub offers you the option to either save your
+                    CV in `PDF format or as a TXT file. The choice is yours!
                   </p>
                   <p className="text-base py-3">
-                    While downloading the CV, you can download it in PDF and TXT
-                    files.
-                  </p>
-                  <p className="text-base py-3">
-                    If, in the end, you change your mind and want to change the
-                    template or edit something, well, go ahead and do it with
-                    ease!
+                    Once you have followed all the aforementioned steps, you are
+                    all set to go and apply for your desired job role. With a
+                    complete CV, that is perfectly loomed to suit the job
+                    description, you increase your chances of bagging an
+                    interview by 67%. We make sure that this happens for you.
+                    Get started on getting a lineup of interviews from your
+                    hoped organisations
                   </p>
                 </div>
               </div>
@@ -1104,10 +1163,10 @@ export default function DashboardIdea() {
               className="w-full h-[700px] md:h-[600px] object-cover"
             />
           </div>
-          <div className="inner_content flex flex-col lg:flex-row absolute top-20 md:top-40 left-1/2 transform -translate-x-1/2 max-w-7xl w-full px-4 md:px-8">
+          <div className="inner_content flex flex-col lg:flex-row absolute top-20 md:top-40 left-1/2 transform -translate-x-1/2 max-w-7xl w-full px-4 md:px-8 gap-10">
             <div className="lg:w-[50%] w-full relative text-center lg:text-left">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-                Build a perfect CV using our CV Creator
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                Why do you need our CV Creator to create your Resume?
               </h2>
               <div className="image_section my-4 md:my-6">
                 <img
@@ -1141,18 +1200,11 @@ export default function DashboardIdea() {
               </div>
             </div>
             <div className="lg:w-[50%] w-full mt-4 lg:mt-0 text-center lg:text-left">
-              <p className="my-2 text-black text-base md:text-xl">
-                Craft a professional and polished CV to make a strong impression
-                on the employer. We provide you with a vast choice of curriculum
-                vitae templates that contain sections for your specifications
-                like profile, education, experience, skills, language, and other
-                specifications.
+              <p className="my-2 text-black text-base">
+              In the end, it all boils down to why Genies Career Hub. Designed with an envisage to cater to your specific career needs, each service by the Genies Career Hub is yearned to make the challenging process of finding a job, switching profiles, choosing a career, developing professional skills, and so much more, a little easier for you. Our CV Creator follows the same vision. 
               </p>
-              <p className="text-black my-3 text-base md:text-xl">
-                Our unique feature of Artificial Intelligence added to the
-                profile section helps you build your profile details
-                professionally with AI. To add value, our CV enhancer has a
-                skills, hobbies, and language section for you.
+              <p className="text-black my-3 text-base">
+              Engineered to assist you create a CV that presents your job application with apt intent, our CV builder integrates Artificial Intelligence very carefully. The Genies Career Hub CV Creator not only offers you a selection of handpicked professional CV templates but also helps you with the customisable functionalities and constantly updated systems that comply with the modern global recruitment standards. We work on every little detail to ensure that your CV has no gaps! 
               </p>
             </div>
           </div>

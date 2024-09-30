@@ -66,7 +66,7 @@ export default function Register() {
     if (!data.terms) {
       toast.error("You must agree to the terms and conditions", {
         autoClose: 5000,
-      }); 
+      });
       return;
     }
     setIsLoading(true);
@@ -74,11 +74,13 @@ export default function Register() {
       const response = await registerUser(data);
       if (response.status === 201) {
         toast.success("Registration successful");
-        toast.info("Verification link sent to your email address", { autoClose: 5000 });
+        toast.info("Verification link sent to your email address", {
+          autoClose: 5000,
+        });
         router.push("/login");
       }
     } catch (error) {
-      toast.error(error?.response.data.error); 
+      toast.error(error?.response.data.error);
     } finally {
       setIsLoading(false);
     }
@@ -89,7 +91,8 @@ export default function Register() {
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
         <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
           <div className="absolute inset-0">
-            <Image priority
+            <Image
+              priority
               width={500}
               height={500}
               className="h-full w-full rounded-md object-cover object-center"
@@ -195,7 +198,8 @@ export default function Register() {
               href={"/"}
               className="flex justify-center items-center mb-4 sm:mb-[60px]"
             >
-              <Image priority
+              <Image
+                priority
                 src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}
@@ -288,7 +292,7 @@ export default function Register() {
                         },
                         pattern: {
                           value:
-                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                         },
                       })}
                     />
@@ -309,38 +313,6 @@ export default function Register() {
                         />
                       )}
                     </div>
-                    {/* Password Strength Indicator */}
-                    {/* <div className="space-y-2 mt-4">
-                      <small className="text-gray-600">Password strength</small>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div
-                          className={`h-2.5 rounded-full ${
-                            strength === "Weak"
-                              ? "bg-red-500"
-                              : strength === "Medium"
-                              ? "bg-yellow-400"
-                              : strength === "Strong"
-                              ? "bg-blue-400"
-                              : strength === "Excellent"
-                              ? "bg-green-500"
-                              : "bg-transparent"
-                          }`}
-                          style={{
-                            width:
-                              strength === "Weak"
-                                ? "50px"
-                                : strength === "Medium"
-                                ? "100px"
-                                : strength === "Strong"
-                                ? "150px"
-                                : strength === "Excellent"
-                                ? "100%"
-                                : "0px",
-                          }}
-                        />
-                      </div>
-                      <small className="text-gray-600">{strength}</small>
-                    </div> */}
                     {/* Validation List */}
                     <div className="mt-2">
                       <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
@@ -352,17 +324,19 @@ export default function Register() {
                           }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
                               validation.length
-                                ? "bg-green-500"
-                                : "border-gray-400"
+                                ? "text-green-500"
+                                : "border border-gray-400"
                             }`}
-                          ></span>
-                          <span className="w-3 h-3 flex items-center justify-center">
-                            {validation.length && "✔"}
+                          >
+                            {validation.length ? "✔" : ""}
                           </span>
-                          <span className="text-xs sm:text-sm">Min 8 letters</span>
+                          <span className="text-xs sm:text-sm">
+                            Min 8 letters
+                          </span>
                         </li>
+                        {/* Uppercase validation */}
                         <li
                           className={`flex items-center space-x-2 text-sm ${
                             validation.uppercase
@@ -371,17 +345,20 @@ export default function Register() {
                           }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
                               validation.uppercase
-                                ? "bg-green-500"
-                                : "border-gray-400"
+                                ? "text-green-500"
+                                : "border border-gray-400"
                             }`}
-                          ></span>
-                          <span className="w-3 h-3 flex items-center justify-center">
-                            {validation.uppercase && "✔"}
+                          >
+                            {validation.uppercase ? "✔" : ""}
                           </span>
-                          <span className="text-xs sm:text-sm">1 uppercase character</span>
+                          <span className="text-xs sm:text-sm">
+                            1 uppercase character
+                          </span>
                         </li>
+
+                        {/* Lowercase validation */}
                         <li
                           className={`flex items-center text-sm space-x-2 ${
                             validation.lowercase
@@ -390,17 +367,20 @@ export default function Register() {
                           }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
                               validation.lowercase
-                                ? "bg-green-500"
-                                : "border-gray-400"
+                                ? "text-green-500"
+                                : "border border-gray-400"
                             }`}
-                          ></span>
-                          <span className="w-3 h-3 flex items-center justify-center">
-                            {validation.lowercase && "✔"}
+                          >
+                            {validation.lowercase ? "✔" : ""}
                           </span>
-                          <span className="text-xs sm:text-sm">1 lowercase character</span>
+                          <span className="text-xs sm:text-sm">
+                            1 lowercase character
+                          </span>
                         </li>
+
+                        {/* Number validation */}
                         <li
                           className={`flex items-center space-x-2 text-sm ${
                             validation.number
@@ -409,17 +389,18 @@ export default function Register() {
                           }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
                               validation.number
-                                ? "bg-green-500"
-                                : "border-gray-400"
+                                ? "text-green-500"
+                                : "border border-gray-400"
                             }`}
-                          ></span>
-                          <span className="w-3 h-3 flex items-center justify-center">
-                            {validation.number && "✔"}
+                          >
+                            {validation.number ? "✔" : ""}
                           </span>
                           <span className="text-xs sm:text-sm">1 number</span>
                         </li>
+
+                        {/* Special character validation */}
                         <li
                           className={`flex items-center space-x-2 text-sm ${
                             validation.specialChar
@@ -428,16 +409,17 @@ export default function Register() {
                           }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full border ${
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
                               validation.specialChar
-                                ? "bg-green-500"
-                                : "border-gray-400"
+                                ? "text-green-500"
+                                : "border border-gray-400"
                             }`}
-                          ></span>
-                          <span className="w-3 h-3 flex items-center justify-center">
-                            {validation.specialChar && "✔"}
+                          >
+                            {validation.specialChar ? "✔" : ""}
                           </span>
-                          <span className="text-xs sm:text-sm">1 special character</span>
+                          <span className="text-xs sm:text-sm">
+                            1 special character
+                          </span>
                         </li>
                       </ul>
                     </div>
