@@ -365,7 +365,7 @@ const CoachDetailsPage = () => {
                           DEVELOPMENTS
                         </span>
                       </div>
-                      <div className="break-words p-5 text-lg lg:text-xl">
+                      <div className="break-normal p-5 text-lg lg:text-xl">
                         Machine Learning A-Z™: Hands-On Python & R In Data
                         Science
                       </div>
@@ -404,7 +404,7 @@ const CoachDetailsPage = () => {
                           BUSINESS
                         </span>
                       </div>
-                      <div className="break-words p-5 text-lg lg:text-xl">
+                      <div className="break-normal p-5 text-lg lg:text-xl">
                         Selenium WebDriver with Java -Basics to
                         Advanced+Frameworks
                       </div>
@@ -442,7 +442,7 @@ const CoachDetailsPage = () => {
                           DEVELOPMENT
                         </span>
                       </div>
-                      <div className="break-words p-5 text-lg lg:text-xl">
+                      <div className="break-normal p-5 text-lg lg:text-xl">
                         Selenium WebDriver with Java -Basics to
                         Advanced+Frameworks
                       </div>

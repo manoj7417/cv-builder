@@ -45,7 +45,7 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                     {item?.endDate}
                   </p>
                   <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
+                    className={`py-2 ${fontStyle.paraFont} break-normal`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
                 </div>
@@ -116,7 +116,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                   </div>
                 </div>
                 <div
-                  className={`${fontStyle.paraFont} break-words`}
+                  className={`${fontStyle.paraFont} break-normal`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
                 <div className="px-3 py-2">
@@ -124,7 +124,7 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                     <ul className="list-disc pl-2">
                       {item?.highlights?.map((item, key) => {
                         return (
-                          <li key={key} className=" break-words py-2 text-15px">
+                          <li key={key} className=" break-normal py-2 text-15px">
                             {item}
                           </li>
                         );
@@ -192,7 +192,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                   </div>
                 </div>
                 <div
-                  className={`key_points ${fontStyle.paraFont} break-words`}
+                  className={`key_points ${fontStyle.paraFont} break-normal`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
               </div>
@@ -292,7 +292,7 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
             </h2>
           </div>
           <div
-            className={`my-5 ${fontStyle.subHeadingFont} break-words`}
+            className={`my-5 ${fontStyle.subHeadingFont} break-normal`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -319,7 +319,7 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
               return (
                 <li
                   key={index}
-                  className="break-words py-1 text-15px font-bold text-gray-600"
+                  className="break-normal py-1 text-15px font-bold text-gray-600"
                 >
                   {item}
                 </li>
@@ -359,20 +359,20 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
               return (
                 <div
                   key={index}
-                  className="break-words text-13px font-bold text-gray-600 py-4 mt-2"
+                  className="break-normal text-13px font-bold text-gray-600 py-4 mt-2"
                 >
                   <>
                     {isValidUrl(item?.url) ? (
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-15px font-bold text-gray-600 flex items-center"
+                        className="break-normal text-15px font-bold text-gray-600 flex items-center"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-15px font-bold text-gray-600">
+                      <p className="break-normal text-15px font-bold text-gray-600">
                         {item.name}
                       </p>
                     )}
@@ -415,7 +415,7 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
             return (
               <div
                 key={index}
-                className="break-words text-13px  text-gray-600 py-5"
+                className="break-normal text-13px  text-gray-600 py-5"
               >
                 <>
                   <div className="mt-2 flex justify-between">
@@ -423,17 +423,17 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                        className="break-normal text-16px items-center font-bold text-gray-600 inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-15px font-bold text-gray-600">
+                      <p className="break-normal text-15px font-bold text-gray-600">
                         {item.name}
                       </p>
                     )}
-                    <p className="break-words text-14px font-thin text-gray-600">
+                    <p className="break-normal text-14px font-thin text-gray-600">
                       {item?.date}
                     </p>
                   </div>
@@ -477,7 +477,7 @@ const Reference = ({ fontStyle, colorBackground, colorText }) => {
             return (
               <div
                 key={index}
-                className="break-words text-13px text-gray-600 my-3"
+                className="break-normal text-13px text-gray-600 my-3"
               >
                 <>
                   <div className="mt-2">
@@ -485,13 +485,13 @@ const Reference = ({ fontStyle, colorBackground, colorText }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                        className="break-normal text-16px items-center font-bold text-gray-600 inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-15px font-medium text-gray-600">
+                      <p className="break-normal text-15px font-medium text-gray-600">
                         {item.name}
                       </p>
                     )}
@@ -550,11 +550,11 @@ export const Template3 = () => {
               style={{ color: metadata?.theme?.text }}
             >
               <h1
-                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words `}
+                className={`${fontStyle.mainHeadingFont} uppercase font-bold break-normal `}
               >
                 {basics?.name}
               </h1>
-              <p className={`${fontStyle.jobtitleFont} break-words uppercase`}>
+              <p className={`${fontStyle.jobtitleFont} break-normal uppercase`}>
                 {basics?.jobtitle}
               </p>
             </div>
@@ -586,7 +586,7 @@ export const Template3 = () => {
                       className="hover:underline flex items-center mt-1  text-wrap w-full "
                     >
                       <MdOutlineMailOutline className="mr-2" />
-                      <p className="w-[90%] text-wrap break-words">
+                      <p className="w-[90%] text-wrap break-normal">
                         {basics?.email}
                       </p>
                     </a>
@@ -597,13 +597,13 @@ export const Template3 = () => {
                       className="hover:underline flex items-center mt-1  text-wrap w-full "
                     >
                       <MdOutlinePhone className="mr-2" />
-                      <p className="w-[90%] text-wrap break-words">
+                      <p className="w-[90%] text-wrap break-normal">
                         {basics?.phone}
                       </p>
                     </a>
                   )}
                   {(basics?.city || basics?.country) && (
-                    <p className="flex items-center break-words">
+                    <p className="flex items-center break-normal">
                       <IoLocationOutline className="mr-2" />
                       {basics?.city}
                       {basics?.city && basics?.country && " , "}
