@@ -14,9 +14,9 @@ import Link from "next/link";
 
 export default function CourseSlider() {
   const [isMobile, setIsMobile] = useState(false);
-  const [paginationConfig, setPaginationConfig] = useState({});
 
   useEffect(() => {
+    console.log("window.innerWidth::",window.innerWidth)
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 640);
     };
@@ -57,27 +57,13 @@ export default function CourseSlider() {
     },
   ];
 
-  // const pagination = {
-  //   clickable: true,
-  //   renderBullet: function (index, className) {
-  //     return '<span class="' + className + '">' + (index + 1) + '</span>';
-  //   },
-  // };
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    },
+  };
 
-
-  useEffect(() => {
-    // Update pagination config based on mobile status
-    setPaginationConfig(
-      !isMobile
-        ? {
-            clickable: true,
-            renderBullet: function (index, className) {
-              return `<span class="${className}">${index + 1}</span>`;
-            },
-          }
-        : false
-    );
-  }, [isMobile]);
 
   return (
     <div className="bg-gray-100 rounded-3xl p-6 sm:p-10 steps_slider shadow-xl">
@@ -100,7 +86,7 @@ export default function CourseSlider() {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        pagination={paginationConfig}
+        pagination={pagination}
         navigation={false}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"

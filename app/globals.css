@@ -736,7 +736,6 @@ footer a:hover svg {
   position: absolute;
   top: 0;
   left: 0;
-  /* transform: translateX(-50%); */
   z-index: -1;
   display: flex;
   gap: 10px;
@@ -748,9 +747,9 @@ footer a:hover svg {
   text-align: center;
   line-height: 30px;
   font-size: 14px;
-  color: #000 !important;
+  color: #000;
   opacity: 1;
-  background: rgba(0, 0, 0, 0.2) !important;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .steps_slider .swiper-pagination .swiper-pagination-bullet-active {
@@ -766,9 +765,7 @@ footer a:hover svg {
   width: 1px;
   height: 100%;
   background-color: #ccc;
-  /* Adjust color as needed */
   margin-left: 20px;
-  /* Adjust margin as needed */
 }
 
 /* Course Slider CSS Ends Here  */
@@ -1110,6 +1107,12 @@ ol>li {
 
 
 @media only screen and (max-width: 600px) {
+
+
+  .steps_slider .swiper-pagination .swiper-pagination-bullet {
+    display: none !important;
+  }
+
 
   .mobile_footer img {
     width: 100px;
