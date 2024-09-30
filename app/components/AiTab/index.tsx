@@ -65,7 +65,7 @@ const Aitab: React.FC = () => {
         </div>
         <div className="chat-container overflow-auto p-4 bg-blue-100 text-sm rounded-lg h-96 mb-4" ref={chatContainerRef}>
           {messages.map((message, index) => (
-            <div key={index} className={`p-2 text-white my-2 break-words ${message.sender === 'user' ? 'bg-blue-500 ml-auto rounded-l-xl rounded-tr-xl rounded-br-none rounded-bl-xl' : 'bg-green-500 mr-auto rounded-r-xl rounded-tl-xl rounded-bl-none rounded-tr-none'}`}>
+            <div key={index} className={`p-2 text-white my-2 break-normal ${message.sender === 'user' ? 'bg-blue-500 ml-auto rounded-l-xl rounded-tr-xl rounded-br-none rounded-bl-xl' : 'bg-green-500 mr-auto rounded-r-xl rounded-tl-xl rounded-bl-none rounded-tr-none'}`}>
               {message.text}
             </div>
           ))}

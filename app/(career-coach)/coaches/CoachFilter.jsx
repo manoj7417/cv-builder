@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 import { useState } from "react";
@@ -26,6 +28,8 @@ import { BiSolidUser } from "react-icons/bi";
 import { LuUser2 } from "react-icons/lu";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -105,325 +109,19 @@ const filters = [
   },
 ];
 
-const coaches = [
-  {
-    id: 1,
-    name: "Devon Lane",
-    jobProfile: {
-      title: "Web Developer",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "5.0",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 2,
-    name: "Darrell Steward",
-    jobProfile: {
-      title: "React Native Developer",
-      backgroundColor: "bg-green-100",
-      textColor: "text-green-800",
-    },
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "4.9",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 3,
-    name: "Jane Cooper",
-    jobProfile: {
-      title: "Mobile Developer",
-      backgroundColor: "bg-purple-100",
-      textColor: "text-purple-800",
-    },
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "5.0",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 4,
-    name: "Albert Flores",
-    jobProfile: {
-      title: "Javascript Developer",
-      backgroundColor: "bg-yellow-100",
-      textColor: "text-yellow-800",
-    },
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "5.0",
-    students: "265.7k",
-    price: "$49",
-  },
-  {
-    id: 5,
-    name: "Leslie Alexander",
-    jobProfile: {
-      title: "UX/UI Designer",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-5.png",
-    rating: "4.8",
-    students: "145.3k",
-    price: "$49",
-  },
-  {
-    id: 6,
-    name: "Wade Warren",
-    jobProfile: {
-      title: "Full Stack Developer",
-      backgroundColor: "bg-red-100",
-      textColor: "text-red-800",
-    },
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "4.9",
-    students: "320.1k",
-    price: "$49",
-  },
-  {
-    id: 7,
-    name: "Kristin Watson",
-    jobProfile: {
-      title: "Data Scientist",
-      backgroundColor: "bg-teal-100",
-      textColor: "text-teal-800",
-    },
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "5.0",
-    students: "180.2k",
-    price: "$49",
-  },
-  {
-    id: 8,
-    name: "Cameron Williamson",
-    jobProfile: {
-      title: "DevOps Engineer",
-      backgroundColor: "bg-orange-100",
-      textColor: "text-orange-800",
-    },
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "4.7",
-    students: "210.4k",
-    price: "$49",
-  },
-  {
-    id: 9,
-    name: "Courtney Henry",
-    jobProfile: {
-      title: "Cybersecurity Specialist",
-      backgroundColor: "bg-indigo-100",
-      textColor: "text-indigo-800",
-    },
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "4.8",
-    students: "170.8k",
-    price: "$49",
-  },
-  {
-    id: 10,
-    name: "Brooklyn Simmons",
-    jobProfile: {
-      title: "Cloud Architect",
-      backgroundColor: "bg-gray-100",
-      textColor: "text-gray-800",
-    },
-    href: "#",
-    imageSrc: "/coach-5.png",
-    rating: "4.9",
-    students: "140.5k",
-    price: "$49",
-  },
-  {
-    id: 11,
-    name: "Darlene Robertson",
-    jobProfile: {
-      title: "Machine Learning Engineer",
-      backgroundColor: "bg-cyan-100",
-      textColor: "text-cyan-800",
-    },
-    href: "#",
-    imageSrc: "/coach-6.png",
-    rating: "4.8",
-    students: "195.2k",
-    price: "$59",
-  },
-  {
-    id: 12,
-    name: "Ronald Richards",
-    jobProfile: {
-      title: "AI Researcher",
-      backgroundColor: "bg-pink-100",
-      textColor: "text-pink-800",
-    },
-    href: "#",
-    imageSrc: "/coach-7.png",
-    rating: "5.0",
-    students: "175.3k",
-    price: "$69",
-  },
-  {
-    id: 13,
-    name: "Jerome Bell",
-    jobProfile: {
-      title: "Backend Developer",
-      backgroundColor: "bg-lime-100",
-      textColor: "text-lime-800",
-    },
-    href: "#",
-    imageSrc: "/coach-8.png",
-    rating: "4.9",
-    students: "220.6k",
-    price: "$49",
-  },
-  {
-    id: 14,
-    name: "Kathryn Murphy",
-    jobProfile: {
-      title: "Software Architect",
-      backgroundColor: "bg-amber-100",
-      textColor: "text-amber-800",
-    },
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "5.0",
-    students: "160.8k",
-    price: "$89",
-  },
-  {
-    id: 15,
-    name: "Annette Black",
-    jobProfile: {
-      title: "Database Administrator",
-      backgroundColor: "bg-emerald-100",
-      textColor: "text-emerald-800",
-    },
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "4.8",
-    students: "210.2k",
-    price: "$49",
-  },
-  {
-    id: 16,
-    name: "Jacob Jones",
-    jobProfile: {
-      title: "Network Engineer",
-      backgroundColor: "bg-violet-100",
-      textColor: "text-violet-800",
-    },
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "5.0",
-    students: "140.9k",
-    price: "$59",
-  },
-  {
-    id: 17,
-    name: "Arlene McCoy",
-    jobProfile: {
-      title: "System Administrator",
-      backgroundColor: "bg-rose-100",
-      textColor: "text-rose-800",
-    },
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "4.7",
-    students: "180.3k",
-    price: "$49",
-  },
-  {
-    id: 18,
-    name: "Esther Howard",
-    jobProfile: {
-      title: "Cloud Engineer",
-      backgroundColor: "bg-fuchsia-100",
-      textColor: "text-fuchsia-800",
-    },
-    href: "#",
-    imageSrc: "/coach-5.png",
-    rating: "4.9",
-    students: "150.7k",
-    price: "$69",
-  },
-  {
-    id: 19,
-    name: "Guy Hawkins",
-    jobProfile: {
-      title: "Blockchain Developer",
-      backgroundColor: "bg-red-100",
-      textColor: "text-red-800",
-    },
-    href: "#",
-    imageSrc: "/coach-6.png",
-    rating: "5.0",
-    students: "130.5k",
-    price: "$79",
-  },
-  {
-    id: 20,
-    name: "Eleanor Pena",
-    jobProfile: {
-      title: "Cybersecurity Analyst",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-7.png",
-    rating: "4.8",
-    students: "165.4k",
-    price: "$49",
-  },
-  {
-    id: 21,
-    name: "Guy Hawkins",
-    jobProfile: {
-      title: "Next.js Developer",
-      backgroundColor: "bg-red-100",
-      textColor: "text-red-800",
-    },
-    href: "#",
-    imageSrc: "/coach-6.png",
-    rating: "5.0",
-    students: "130.5k",
-    price: "$79",
-  },
-  {
-    id: 20,
-    name: "Eleanor Pena",
-    jobProfile: {
-      title: "UX/UI",
-      backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
-    },
-    href: "#",
-    imageSrc: "/coach-7.png",
-    rating: "4.8",
-    students: "165.4k",
-    price: "$49",
-  },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CoachFilter() {
+export default function CoachFilter({
+  coaches,
+  handleCoachDetails,
+  isLoading,
+}) {
   const ITEMS_PER_PAGE = 6;
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const router = useRouter();
 
   //Filter Func
   const [selectedFilters, setSelectedFilters] = useState({
@@ -448,6 +146,9 @@ export default function CoachFilter() {
   };
 
   const filteredCoaches = coaches.filter((coach) => {
+    const isApprovedCoach =
+      coach.isApproved && coach.approvalStatus === "approved";
+
     const courseMatch =
       selectedFilters.coachCourses.length === 0 ||
       selectedFilters.coachCourses.some((course) =>
@@ -461,10 +162,8 @@ export default function CoachFilter() {
     const ratingMatch =
       selectedFilters.rating.length === 0 ||
       selectedFilters.rating.includes(coach.rating);
-    return courseMatch && profileMatch && ratingMatch;
+    return isApprovedCoach && courseMatch && profileMatch && ratingMatch;
   });
-
-  console.log("filteredCoaches:::", filteredCoaches);
 
   //Filter Func
 
@@ -477,6 +176,7 @@ export default function CoachFilter() {
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+  
 
   //Next page func
   const handleNextPage = () => {
@@ -675,7 +375,7 @@ export default function CoachFilter() {
                 Products
               </h2>
 
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4 sticky top-0">
                 {/* Filters */}
                 <form className="hidden lg:block">
                   {/* <h3 className="sr-only">Categories</h3>
@@ -713,33 +413,6 @@ export default function CoachFilter() {
                           </span>
                         </DisclosureButton>
                       </h3>
-                      {/* <DisclosurePanel className="pt-6">
-                        <div className="space-y-4">
-                          {section.options.map((option, optionIdx) => (
-                            <div
-                              key={option.value}
-                              className="flex items-center"
-                            >
-                              <input
-                                defaultValue={option.value}
-                                defaultChecked={option.checked}
-                                id={`filter-${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                type="checkbox"
-                                checked={selectedFilters[section.id].includes(option.value)}
-                                onChange={(e) => handleFilterChange(section.id, option.value, e.target.checked)}
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                              />
-                              <label
-                                htmlFor={`filter-${section.id}-${optionIdx}`}
-                                className="ml-3 text-sm text-gray-600"
-                              >
-                                {option.label}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </DisclosurePanel> */}
                       <DisclosurePanel className="pt-6">
                         <div className="space-y-4">
                           {section.options
@@ -796,47 +469,61 @@ export default function CoachFilter() {
                 {/* Product grid */}
                 <div className="lg:col-span-3">
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                    {currentPageData.map((item, index) => (
-                      <div key={item.id} className="group relative bg-white">
-                        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                          <img
-                            alt={item.imageAlt}
-                            src={item.imageSrc}
-                            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                          />
-                        </div>
-                        <div className="main_top px-1 flex justify-between items-baseline">
-                          <div className="coaching_name my-2 w-[150px] h-[50px]">
-                            <p
-                              className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} text-center p-1 whitespace-nowrap`}
-                            >
-                              {item?.jobProfile?.title}
-                            </p>
-                            <h3 className="text-sm text-gray-700 m-1">
-                              {item.name}
-                            </h3>
+                    {isLoading ? (
+                      <>
+                        {Array(6)
+                          .fill(0)
+                          .map((_, index) => (
+                            <CoachSkeltonCard key={index} />
+                          ))}
+                      </>
+                    ) : (
+                      currentPageData.map((item, index) => (
+                        <div
+                          key={item.id}
+                          className="group relative bg-white cursor-pointer"
+                          onClick={() => handleCoachDetails(item?._id)}
+                        >
+                          <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                            <img
+                              alt={item.imageAlt}
+                              src={item.profileImage}
+                              className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                            />
                           </div>
-                          <div className="price">
-                            <p>{item?.price}</p>
+                          <div className="main_top px-1 flex justify-between items-baseline">
+                            <div className="coaching_name my-2 w-[150px] h-[50px]">
+                              <p
+                                className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} text-center p-1 whitespace-nowrap`}
+                              >
+                                {item?.jobProfile?.title}
+                              </p>
+                              <h3 className="text-sm text-gray-700 m-1">
+                                {item.name}
+                              </h3>
+                            </div>
+                            <div className="price">
+                              <p>{item?.price}</p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="mt-4 px-2 py-3 flex justify-between border-t border-gray-200">
-                          <div className="flex items-center gap-2">
-                            <FaStar className="text-orange-500" />
-                            <p className="text-sm text-gray-700">
+                          {/* <div className='mt-4 px-2 py-3 flex justify-between border-t border-gray-200'>
+                          <div className='flex items-center gap-2'>
+                            <FaStar className='text-orange-500' />
+                            <p className='text-sm text-gray-700'>
                               {item.rating}
                             </p>
                           </div>
-                          <p className="text-sm font-medium text-gray-900 flex items-center">
-                            <LuUser2 className="text-blue-700 mr-2 text-base" />
+                          <p className='text-sm font-medium text-gray-900 flex items-center'>
+                            <LuUser2 className='text-blue-700 mr-2 text-base' />
                             {item.students}{" "}
-                            <span className="text-gray-500 ml-1 text-sm">
+                            <span className='text-gray-500 ml-1 text-sm'>
                               students
                             </span>
                           </p>
+                        </div> */}
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 </div>
               </div>

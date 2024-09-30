@@ -1,5 +1,11 @@
 /** @format */
 
+
+
+button.get_start_btn.hire_coach_button {
+  width: 260px;
+}
+
 .button_wrapper button {
   appearance: none;
   background: #0d3572;
@@ -215,6 +221,9 @@
     overflow: hidden;
     text-align: center;
   }
+
+
+
 
   .get_start_btn > span.btn_text {
     color: white;

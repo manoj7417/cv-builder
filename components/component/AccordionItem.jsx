@@ -3,12 +3,16 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { Collapse } from "react-collapse";
 import parse from "html-react-parser";
 
-const AccordionItem = ({ open, toggle, ques, ans }) => {
+const AccordionItem = ({ open, toggle, ques, ans, pathname }) => {
+  const isResume = pathname === "/resume" || pathname === "/resume-analyzer";
+
   return (
     <>
       <div className="pt-[10px]">
         <div
-          className="bg-white border-l-4 border-blue-900 p-5 flex justify-between items-start cursor-pointer gap-5"
+          className={`bg-white ${
+            isResume ? "border-t-4 border-[#D7DEF0]" : "border-l-4 border-blue-900"
+          }  p-5 flex justify-between items-start cursor-pointer gap-5`}
           onClick={toggle}
         >
           <div>

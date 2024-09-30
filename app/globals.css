@@ -735,7 +735,6 @@ footer a:hover svg {
 .steps_slider .mySwiper .swiper-pagination {
   position: absolute;
   top: 0;
-  /* Adjust this value as needed */
   left: 0;
   /* transform: translateX(-50%); */
   z-index: -1;
@@ -743,19 +742,19 @@ footer a:hover svg {
   gap: 10px;
 }
 
-.steps_slider .swiper-pagination-bullet {
+.steps_slider .swiper-pagination .swiper-pagination-bullet {
   width: 30px;
   height: 30px;
   text-align: center;
   line-height: 30px;
   font-size: 14px;
-  color: #000;
+  color: #000 !important;
   opacity: 1;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2) !important;
 }
 
-.steps_slider .swiper-pagination-bullet-active {
-  color: #fff;
+.steps_slider .swiper-pagination .swiper-pagination-bullet-active {
+  color: #fff !important;
   background: #08305c !important;
 }
 
@@ -1174,3 +1173,7 @@ ol>li {
   transition-duration: 0.3s;
   display: none;
 }
+
+
+
+

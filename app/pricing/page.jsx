@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import { CardDescription } from "@/components/ui/card";
 import Image from "next/image";
@@ -23,11 +25,11 @@ import axios from "axios";
 import { GetTokens } from "../actions";
 import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
-import { useSearchParams } from "next/navigation";
-
+import { useRouter, useSearchParams } from "next/navigation";
 const PricingFunc = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isFreeDialogOpen, setIsFreeDialogOpen] = useState(false);
   const serviceCardsRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [geoinfo, setGeoInfo] = useState({
@@ -40,12 +42,14 @@ const PricingFunc = () => {
   });
   const searchParams = useSearchParams();
   const scroll = searchParams.get("scroll");
+  const router = useRouter();
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
   // Function to scroll to the service cards section
   const scrollToServiceCards = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
 
   const serviceCards = [
     {
@@ -147,9 +151,16 @@ const PricingFunc = () => {
     setIsDialogOpen(true);
   };
 
+  const handleOpenFreeDialog = (item) => {
+    setIsFreeDialogOpen(true);
+  };
+
+  const handleCloseFreeDialog = () => {
+    setIsFreeDialogOpen(false);
+  };
+
   const handleCloseAIDialog = () => {
     setIsDialogOpen(false);
-    setSelectedCard(null); // Clear selected card on close
   };
 
   const getGeoInfo = () => {
@@ -157,13 +168,14 @@ const PricingFunc = () => {
       .get("https://ipapi.co/json/")
       .then((response) => {
         let data = response.data;
+        console.log(data)
         let currency = data.currency || "USD";
         setGeoInfo({
           ...geoinfo,
           ip: data.ip,
           countryName: data.country_name,
           countryCode: data.country_calling_code,
-          city: data.city,
+          city: data.city,  
           timezone: data.timezone,
           currency: currency,
         });
@@ -293,135 +305,94 @@ const PricingFunc = () => {
 
   return (
     <>
-      {/* <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      <Dialog
+        open={isFreeDialogOpen}
+        onClose={() => setIsFreeDialogOpen(false)}
+      >
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="sm:max-w-[800px] w-full sm:w-auto px-4 py-6 sm:px-8 sm:py-8"
+          className="w-[700px] h-[500px]"
           showCloseButton={true}
-          onClick={handleCloseAIDialog}
+          onClick={handleCloseFreeDialog}
         >
           <DialogHeader>
             <DialogTitle>
-              <h2 className="lg:text-3xl text-xl sm:text-2xl my-2 text-center">
-                {selectedCard?.cardTitle}
+              <h2 className="text-xl sm:text-2xl lg:text-3xl my-2 text-center">
+                Genies Pro Suite
               </h2>
             </DialogTitle>
             <DialogDescription>
               <p className="text-sm sm:text-base text-justify">
-                {selectedCard?.popUpDescription}
+                Get a premium hold of services such as CV Creator, CV Optimiser,
+                and CV Match to create the best Resume by integrating AI for
+                perfection
               </p>
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid sm:grid-cols-2 grid-cols-1 items-center gap-4">
-              <div className="modal_left">
-                <div className="modal_list">
-                  <ul className="space-y-2">
-                    {selectedCard?.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center text-xs sm:text-base text-gray-600"
-                      >
-                        <FaCheckCircle
-                          className="text-blue-950 mr-2"
-                          style={{ minWidth: "15px", minHeight: "15px" }}
-                        />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
-                <div className="text-center">
-                  <p className="text-lg sm:text-xl text-gray-500">
-                    Choose your plan
-                  </p>
-                  <div className="flex items-center justify-center mt-4">
-                    <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
-                      {selectedPlan === "monthly"
-                        ? `${selectedCard?.symbol}${selectedCard?.price}`
-                        : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
-                    </h1>
-                    <p className="text-gray-500 text-xs sm:text-sm px-2">
-                      {selectedPlan === "monthly" ? "per Month" : "per Year"}
-                    </p>
-                  </div>
-                  <div className="mt-6 space-y-4 sm:space-y-8">
-                    <div
-                      className={`max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                        selectedPlan === "monthly"
-                          ? "border-blue-500 shadow-lg"
-                          : ""
-                      }`}
-                      onClick={() => handlePlanChange("monthly")}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                          Monthly
-                        </div>
-                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
-                          {selectedCard?.symbol}
-                          {selectedCard?.price}
-                        </div>
-                        <input
-                          type="checkbox"
-                          hidden
-                          checked={selectedPlan === "monthly"}
-                          onChange={() => handlePlanChange("monthly")}
-                        />
-                      </div>
-                    </div>
-                    <div
-                      className={`max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                        selectedPlan === "yearly"
-                          ? "border-blue-500 shadow-lg"
-                          : ""
-                      }`}
-                      onClick={() => handlePlanChange("yearly")}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                          Yearly
-                        </div>
-                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
-                          {selectedCard?.symbol}
-                          {selectedCard?.price * 10}
-                        </div>
-                        <input
-                          type="checkbox"
-                          hidden
-                          checked={selectedPlan === "yearly"}
-                          onChange={() => handlePlanChange("yearly")}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div className="modal_content">
+            <div className="modal_list">
+              <ul className="space-y-4">
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  Access to Professional ATS Compatible CV Templates
+                </li>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  Create CVs through the AI-based CV Creator tool
+                </li>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  Download 20 CVs in PDF Format
+                </li>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  Get 20 scans through CV Optimiser and make a better CV
+                </li>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  Match the best resume with job-specific CVs with AI-based CV
+                  Match
+                </li>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                  <FaCheckCircle
+                    className="text-blue-950 mr-2"
+                    style={{ minWidth: "15px", minHeight: "15px" }}
+                  />
+                  Enhance your CV with AI and increase the ATS Compatibility
+                  Score
+                </li>
+              </ul>
+            </div>
+            <div className="start_button text-center mt-10">
+              <Link
+                href={"/cv-studio"}
+                className="bg-blue-950 text-white px-5 py-2 text-base"
+              >
+                Start Free Trial
+              </Link>
             </div>
           </div>
-          <DialogFooter className="mt-4 sm:mt-8">
-            <Button
-              className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
-              onClick={() => UpgradePlan(selectedCard)}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  Upgrading <FaSpinner className="animate-spin ml-2" />
-                </>
-              ) : (
-                "Upgrade Now"
-              )}
-            </Button>
-          </DialogFooter>
         </DialogContent>
-      </Dialog> */}
-      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      </Dialog>
+      {/* <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="max-w-full sm:max-w-[800px] w-full max-h-full sm:max-h-[800px] h-[700px] overflow-y-scroll px-4 py-6 sm:px-8 sm:py-8"
+          className="2xl:max-w-3xl lg:max-w-2xl"
           showCloseButton={true}
           onClick={handleCloseAIDialog}
         >
@@ -542,6 +513,129 @@ const PricingFunc = () => {
             </Button>
           </DialogFooter>
         </DialogContent>
+      </Dialog> */}
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+        <DialogTrigger asChild></DialogTrigger>
+        <DialogContent
+          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
+          showCloseButton={true}
+          onClick={handleCloseAIDialog}
+        >
+          <DialogHeader>
+            <DialogTitle>
+              <h2 className="text-xl sm:text-2xl lg:text-2xl my-2 text-center">
+                {selectedCard?.cardTitle}
+              </h2>
+            </DialogTitle>
+            <DialogDescription>
+              <p className="text-sm sm:text-sm text-justify">
+                {selectedCard?.popUpDescription}
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+              <div className="modal_left">
+                <div className="modal_list">
+                  <ul className="space-y-2">
+                    {selectedCard?.features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-xs sm:text-sm text-gray-600"
+                      >
+                        <FaCheckCircle
+                          className="text-blue-950 mr-2"
+                          style={{ minWidth: "15px", minHeight: "15px" }}
+                        />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
+                <div className="text-center">
+                  <p className="text-lg sm:text-xl text-gray-500">
+                    Choose your plan
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                    <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                      {selectedPlan === "monthly"
+                        ? `${selectedCard?.symbol}${selectedCard?.price}`
+                        : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
+                    </h1>
+                    <p className="text-gray-500 text-xs sm:text-sm px-2">
+                      {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                    </p>
+                  </div>
+                  <div className="mt-6 space-y-4 sm:space-y-8">
+                    <div
+                      className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
+                          ? "border-blue-500 shadow-lg"
+                          : ""
+                        }`}
+                      onClick={() => handlePlanChange("monthly")}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                          Monthly
+                        </div>
+                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
+                          {selectedCard?.symbol}
+                          {selectedCard?.price}
+                        </div>
+                        <input
+                          type="checkbox"
+                          hidden
+                          checked={selectedPlan === "monthly"}
+                          onChange={() => handlePlanChange("monthly")}
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
+                          ? "border-blue-500 shadow-lg"
+                          : ""
+                        }`}
+                      onClick={() => handlePlanChange("yearly")}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                          Yearly
+                        </div>
+                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
+                          {selectedCard?.symbol}
+                          {selectedCard?.price * 10}
+                        </div>
+                        <input
+                          type="checkbox"
+                          hidden
+                          checked={selectedPlan === "yearly"}
+                          onChange={() => handlePlanChange("yearly")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <DialogFooter className="mt-4 sm:mt-8">
+            <Button
+              className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+              onClick={() => UpgradePlan(selectedCard)}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  Upgrading <FaSpinner className="animate-spin ml-2" />
+                </>
+              ) : (
+                "Upgrade Now"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
       </Dialog>
 
       <section className="w-full h-screen 2xl:mt-40 lg:mt-56 md:mt-40  mt-20">
@@ -574,7 +668,8 @@ const PricingFunc = () => {
             </div>
             {/* Add Image below the content */}
             <div className="mt-8 flex justify-center">
-              <Image priority
+              <Image
+                priority
                 src="/pricing-pic.png" // replace with your image path
                 alt="Pricing"
                 width={500} // adjust as needed
@@ -602,61 +697,72 @@ const PricingFunc = () => {
           </p>
         </div>
         <div className="flex justify-center py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5">
-  {serviceCards?.length > 0 &&
-    serviceCards.map((item, index) => {
-      // Assign background color based on index
-      const bgColor = backgroundColors[index % backgroundColors.length];
-      return (
-        <div
-          key={item.id} // Ensure key prop is here on the top-level element
-          className={`flex rounded-md ${
-            index + 1 === scroll ? "animate-bounce" : ""
-          } `}
-          id={`pricing-` + `${index + 1}`}
-        >
-          <div
-            className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
-          >
-            <div className="p-4">
-              <h1 className="lg:text-2xl text-xl font-semibold text-white">
-                {item?.cardTitle}
-              </h1>
-              <p className="mt-3 text-sm text-white">
-                {item?.cardDescription}
-              </p>
-            </div>
-            <div className="p-4 actions_buttons flex justify-between">
-              <Link
-                href={item?.free?.link}
-                type="button"
-                className="rounded-sm bg-transparent px-5 py-2 text-sm font-semibold text-white border-2 border-white"
-              >
-                {item?.free?.title}
-              </Link>
-              <button
-                type="button"
-                onClick={() => handleOpenAIDialog(item)}
-                className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
-              >
-                Subscribe
-              </button>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5">
+            {serviceCards?.length > 0 &&
+              serviceCards.map((item, index) => {
+                // Assign background color based on index
+                const bgColor =
+                  backgroundColors[index % backgroundColors.length];
+                // Define the click handler for each card
+                const handleCardClick = () => {
+                  if (index === 0) {
+                    handleOpenAIDialog(item); // Open popup for the first card
+                  } else {
+                    // Redirect to the "coming soon" page for other cards
+                    router.push("/coming-soon");
+                  }
+                };
+                return (
+                  <div
+                    key={item.id} // Ensure key prop is here on the top-level element
+                    className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
+                      } `}
+                    id={`pricing-` + `${index + 1}`}
+                  >
+                    <div
+                      className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
+                    >
+                      <div className="p-4">
+                        <h1 className="lg:text-2xl text-xl font-semibold text-white">
+                          {item?.cardTitle}
+                        </h1>
+                        <p className="mt-3 text-sm text-white">
+                          {item?.cardDescription}
+                        </p>
+                      </div>
+                      <div className="p-4 actions_buttons flex justify-between">
+                        {index === 0 && (
+                          <div
+                            onClick={handleOpenFreeDialog}
+                            href={item?.free?.link}
+                            className="cursor-pointer rounded-sm bg-transparent px-5 py-2 text-sm font-semibold text-white border-2 border-white"
+                          >
+                            {item?.free?.title}
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          onClick={handleCardClick}
+                          className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+                        >
+                          Subscribe
+                        </button>
+                      </div>
+                    </div>
+                    <div className="bg-white lg:block hidden">
+                      <Image
+                        priority
+                        src={item?.imageUrl} // replace with the correct image path
+                        alt="Card Image"
+                        width={500} // adjust as needed
+                        height={500} // adjust as needed
+                        className={`w-[350px] h-[250px] object-contain`}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
           </div>
-          <div className="bg-white lg:block hidden">
-            <Image priority
-              src={item?.imageUrl} // replace with the correct image path
-              alt="Card Image"
-              width={500} // adjust as needed
-              height={500} // adjust as needed
-              className={`w-[350px] h-[250px] object-contain`}
-            />
-          </div>
-        </div>
-      );
-    })}
-</div>
-
         </div>
       </section>
     </>

@@ -33,13 +33,13 @@ const Education = ({ fontStyle, data }) => {
                         {item?.institute}
                       </h4>
                       <div
-                        className={`py-2 ${fontStyle.paraFont} break-words`}
+                        className={`py-2 ${fontStyle.paraFont} break-normal`}
                         dangerouslySetInnerHTML={{ __html: item?.description }}
                       ></div>
                     </div>
                   </div>
                   {/* <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
+                    className={`py-2 ${fontStyle.paraFont} break-normal`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div> */}
                 </>
@@ -87,7 +87,7 @@ const Experience = ({ fontStyle, data }) => {
                     {item?.employer}
                   </h4>
                   <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
+                    className={`py-2 ${fontStyle.paraFont} break-normal`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
                 </div>
@@ -142,7 +142,7 @@ const Projects = ({ fontStyle, data }) => {
                   </div>
                 </div>
                 <div
-                  className={`key_points ${fontStyle.paraFont} break-words`}
+                  className={`key_points ${fontStyle.paraFont} break-normal`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
               </div>
@@ -198,7 +198,7 @@ const Profile = ({ data, fontStyle }) => {
             </h2>
           </div>
           <div
-            className={`text-white my-5 break-words ${fontStyle.subHeadingFont}`}
+            className={`text-white my-5 break-normal ${fontStyle.subHeadingFont}`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -239,11 +239,11 @@ export const Template2 = ({resumeData}) => {
               />
             )}
             <h1
-              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
+              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-normal`}
             >
               {resumeData?.basics?.name}
             </h1>
-            <p className={`${fontStyle.jobtitleFont} break-words uppercase`}>
+            <p className={`${fontStyle.jobtitleFont} break-normal uppercase`}>
               {resumeData?.basics?.jobtitle}
             </p>
             </header>
@@ -287,7 +287,7 @@ export const Template2 = ({resumeData}) => {
                     className="hover:underline flex items-center mt-1  text-wrap w-full "
                   >
                     <MdOutlineMailOutline className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="w-[90%] text-wrap break-normal">
                       {resumeData?.basics?.email}
                     </p>
                   </a>
@@ -298,7 +298,7 @@ export const Template2 = ({resumeData}) => {
                     className="hover:underline flex items-center mt-1  text-wrap w-full "
                   >
                     <MdOutlinePhone className="mr-2" />
-                    <p className="w-[90%] text-wrap break-words">
+                    <p className="w-[90%] text-wrap break-normal">
                       {resumeData?.basics?.phone}
                     </p>
                   </a>

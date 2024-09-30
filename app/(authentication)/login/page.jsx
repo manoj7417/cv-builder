@@ -24,18 +24,19 @@ function LoginUser() {
   const loginUser = useUserStore((state) => state.loginUser);
   const [showDialog, setShowDialog] = useState(false);
   const email = useRef(null);
-  const [showVerificationDilaog, setShowVerificationDilaog] = useState(false)
+  const [showVerificationDilaog, setShowVerificationDilaog] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
   const [loading, setIsLoading] = useState(false);
   const [sendingMail, setIsSendingMail] = useState(false);
-  const [showResendButton, setShowResendButton] = useState(false)
-  const [isSendingVerificationEmail, setIsSendingVerificationEmail] = useState(false);
+  const [showResendButton, setShowResendButton] = useState(false);
+  const [isSendingVerificationEmail, setIsSendingVerificationEmail] =
+    useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleDialogClose = () => {
@@ -51,12 +52,19 @@ function LoginUser() {
         const { accessToken, refreshToken, userdata } = response.data.data;
         await SetTokens({ accessToken, refreshToken });
         loginUser(userdata);
+        if (userdata.role === "admin") {
+          return router.push("/admin");
+        }
         router.push(redirect || "/");
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response?.data?.error || "Error logging in");
-      if (error.response?.status === 403 && error.response?.data?.error === 'Email verification is required') {
-        setShowVerificationDilaog(true)
+      if (
+        error.response?.status === 403 &&
+        error.response?.data?.error === "Email verification is required"
+      ) {
+        setShowVerificationDilaog(true);
       }
     } finally {
       setIsLoading(false);
@@ -86,26 +94,28 @@ function LoginUser() {
 
   const handleCloseVerificationDilaog = async () => {
     setShowVerificationDilaog(false);
-    setIsSendingVerificationEmail(false)
-    setShowResendButton(false)
-  }
+    setIsSendingVerificationEmail(false);
+    setShowResendButton(false);
+  };
 
   const handleResendVerificationEmail = async (data) => {
-    setIsSendingVerificationEmail(true)
+    setIsSendingVerificationEmail(true);
     try {
-      const response = await axios.post("/api/resendVerificationEmail", { email: data.verifyemail });
+      const response = await axios.post("/api/resendVerificationEmail", {
+        email: data.verifyemail,
+      });
       if (response.status === 200) {
         toast.success("Verification email sent to your email");
-        reset()
-        setShowVerificationDilaog(false)
-        setIsSendingVerificationEmail(false)
-        setShowResendButton(false)
+        reset();
+        setShowVerificationDilaog(false);
+        setIsSendingVerificationEmail(false);
+        setShowResendButton(false);
       }
     } catch (error) {
-      console.log(error)
-      toast.error("Error sending verification email")
+      console.log(error);
+      toast.error("Error sending verification email");
     }
-  }
+  };
 
   return (
     <>
@@ -142,22 +152,23 @@ function LoginUser() {
         </DialogContent>
       </Dialog>
       <Dialog open={showVerificationDilaog}>
-        <DialogContent onClick={handleCloseVerificationDilaog} className="md:w-[400px] w-[300px]">
+        <DialogContent
+          onClick={handleCloseVerificationDilaog}
+          className="md:w-[400px] w-[300px]"
+        >
           <div>
             <div className="flex justify-center items-center w-20 h-20 mx-auto bg-gray-100 rounded-full">
               <HiOutlineMailOpen className="text-blue-950 h-16 w-16" />
             </div>
-            <h1 className="text-center text-2xl">
-              You&apos;re almost there!
-            </h1>
+            <h1 className="text-center text-2xl">You&apos;re almost there!</h1>
 
-            {
-              showResendButton ?
-                <div className=" py-5">
-                  <form onSubmit={handleSubmit(handleResendVerificationEmail)}>
-                    <div className="py-5">
-                      <Label>Email</Label>
-                      <Input {...register("verifyemail", {
+            {showResendButton ? (
+              <div className=" py-5">
+                <form onSubmit={handleSubmit(handleResendVerificationEmail)}>
+                  <div className="py-5">
+                    <Label>Email</Label>
+                    <Input
+                      {...register("verifyemail", {
                         required: {
                           value: true,
                           message: "Email is required",
@@ -166,30 +177,51 @@ function LoginUser() {
                           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                           message: "Invalid email format",
                         },
-                      })} placeholder="Enter your register email address" className="mt-1" />
-                      <div className="py-1">
-                        <p className="text-xs text-red-500">{errors?.verifyemail?.message}</p>
-                      </div>
+                      })}
+                      placeholder="Enter your register email address"
+                      className="mt-1"
+                    />
+                    <div className="py-1">
+                      <p className="text-xs text-red-500">
+                        {errors?.verifyemail?.message}
+                      </p>
                     </div>
-                    <Button className="w-full" type="submit" disabled={isSendingVerificationEmail}>
-                      {
-                        isSendingVerificationEmail ? <>
-                          Sending <ImSpinner3 className="h-4 w-4 ml-2 animate-spin" />
-                        </> :
-                          "Resend"
-                      }
-                    </Button>
-                  </form>
-                </div>
-                :
-                <>
-                  <p className='mt-5 text-md text-center text-gray-500'>Verify your email address in order to proceed to use all services</p>
-                  <div className=" py-10">
-                    <p className="my-2 text-sm text-gray-500">Unable to find the verification link?</p>
-                    <Button className="w-full" onClick={() => setShowResendButton(true)}>Get verification email</Button>
                   </div>
-                </>
-            }
+                  <Button
+                    className="w-full"
+                    type="submit"
+                    disabled={isSendingVerificationEmail}
+                  >
+                    {isSendingVerificationEmail ? (
+                      <>
+                        Sending{" "}
+                        <ImSpinner3 className="h-4 w-4 ml-2 animate-spin" />
+                      </>
+                    ) : (
+                      "Resend"
+                    )}
+                  </Button>
+                </form>
+              </div>
+            ) : (
+              <>
+                <p className="mt-5 text-md text-center text-gray-500">
+                  Verify your email address in order to proceed to use all
+                  services
+                </p>
+                <div className=" py-10">
+                  <p className="my-2 text-sm text-gray-500">
+                    Unable to find the verification link?
+                  </p>
+                  <Button
+                    className="w-full"
+                    onClick={() => setShowResendButton(true)}
+                  >
+                    Get verification email
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </DialogContent>
       </Dialog>
@@ -197,18 +229,31 @@ function LoginUser() {
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
           <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full sm:border-0 border-0 shadow-none shadow-blue-100 sm:shadow-none   sm:py-0 py-20 px-8 sm:px-0 rounded-2xl">
-            <Link href={"/"} className="flex justify-center items-center mb-[60px]">
-              <Image priority
-                src="/genies-career-hub-logo.png"
-                width={100}
-                height={100}
-                alt="white_logo"
-                className="w-28 h-auto object-contain"
-              />
-            </Link>
+              <Link
+                href={"/"}
+                className="flex justify-center items-center mb-[60px]"
+              >
+                <Image
+                  priority
+                  src="/genies-career-hub-logo.png"
+                  width={100}
+                  height={100}
+                  alt="white_logo"
+                  className="w-28 h-auto object-contain"
+                />
+              </Link>
               <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
                 Sign in
               </h2>
+              <p className="mt-2 text-sm text-gray-600 lg:text-start text-center">
+                Don&apos;t have an account?{" "}
+                <Link
+                  href="/register"
+                  className="font-semibold text-black transition-all duration-200 hover:underline"
+                >
+                  Sign Up for Free!
+                </Link>
+              </p>
               <form className="mt-5" onSubmit={handleSubmit(handleLogin)}>
                 <div className="space-y-5">
                   <div>
@@ -267,9 +312,17 @@ function LoginUser() {
                         {errors?.password?.message}
                       </div>
                       <div className="top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3">
-                        {
-                          showPassword ? <IoEye className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(false)} /> : <IoEyeOff className="cursor-pointer h-4 w-4" onClick={() => setShowPassword(true)} />
-                        }
+                        {showPassword ? (
+                          <IoEye
+                            className="cursor-pointer h-4 w-4"
+                            onClick={() => setShowPassword(false)}
+                          />
+                        ) : (
+                          <IoEyeOff
+                            className="cursor-pointer h-4 w-4"
+                            onClick={() => setShowPassword(true)}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -303,28 +356,32 @@ function LoginUser() {
                       )}
                     </button>
                   </div>
-                  <p className="mt-2 text-sm text-gray-600 lg:text-start text-center">
-                    Don&apos;t have an account?{" "}
+                  <div className="flex items-center justify-center">
+                    <div className="flex-grow border-t border-gray-300"></div>
+                    <p className="px-4 text-base text-gray-600">Or</p>
+                    <div className="flex-grow border-t border-gray-300"></div>
+                  </div>
+                  <div className="flex justify-center">
                     <Link
-                      href="/register"
-                      className="font-semibold text-black transition-all duration-200 hover:underline"
+                      href="/coach-signin"
+                      className="font-semibold text-blue-700 transition-all duration-200  hover:underline"
                     >
-                      Sign Up for Free!
+                      Login as a coach
                     </Link>
-                  </p>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
           <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
             <div className="absolute inset-0">
-              <Image priority
+              <Image
+                priority
                 width={500}
                 height={500}
                 className="h-full w-full rounded-md object-cover object-center"
                 src="/newlogo12.png"
                 alt="register"
-                
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>

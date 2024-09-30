@@ -124,7 +124,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
           theme="colored"
           transition={Slide}
         />
-        {/* <VerifyUser /> */}
         {children}
       </body>
     </html>

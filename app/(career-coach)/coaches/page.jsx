@@ -1,46 +1,12 @@
+/** @format */
+
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CoachFilter from "./CoachFilter";
-
-const coaches = [
-  {
-    id: 1,
-    name: "Devon Lane",
-    jobPofile: "Web Developer",
-    href: "#",
-    imageSrc: "/coach-1.png",
-    rating: "5.0",
-    students: "265.7k",
-  },
-  {
-    id: 2,
-    name: "Darrell Steward",
-    jobPofile: "React Native Developer",
-    href: "#",
-    imageSrc: "/coach-2.png",
-    rating: "5.0",
-    students: "265.7k",
-  },
-  {
-    id: 3,
-    name: "Jane Cooper",
-    jobPofile: "Mobile Developer",
-    href: "#",
-    imageSrc: "/coach-3.png",
-    rating: "5.0",
-    students: "265.7k",
-  },
-  {
-    id: 4,
-    name: "Albert Flores",
-    jobPofile: "Javascript Developer",
-    href: "#",
-    imageSrc: "/coach-4.png",
-    rating: "5.0",
-    students: "265.7k",
-  },
-];
+import { useRouter } from "next/navigation";
+import useCoachesDetailStore from "@/app/store/coachDetailStore";
+import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
 
 const categories = [
   {
@@ -120,6 +86,9 @@ const categories = [
 export default function CoachesPage() {
   // Set the default selected category (e.g., the first category)
   const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id);
+  const router = useRouter();
+
+  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
 
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -130,6 +99,14 @@ export default function CoachesPage() {
     (category) => category.id === selectedCategory
   );
 
+  const handleCoachDetails = (id) => {
+    router.push(`coaches/${id}`);
+  };
+
+  useEffect(() => {
+    fetchAllCoaches();
+  }, []);
+
   return (
     <>
       <div className="bg-gray-200">
@@ -139,31 +116,54 @@ export default function CoachesPage() {
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {coaches.map((item, index) => (
-              <div key={item.id} className="group relative bg-white">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
-                    alt={item.imageAlt}
-                    src={item.imageSrc}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="coaching_name text-center mt-2">
-                  <h3 className="text-sm text-gray-700">{item.name}</h3>
-                  <p className="text-[12px] text-gray-700">{item?.jobPofile}</p>
-                </div>
-                <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
-                  <div className="flex items-center gap-2">
-                    <FaStar className="text-orange-500" />
-                    <p className="text-sm text-gray-700">{item.rating}</p>
+            {isLoading  ? (
+              <>
+                {Array(4)
+                  .fill(0)
+                  .map((_, index) => (
+                    <CoachSkeltonCard key={index} />
+                  ))}
+              </>
+            ) : (
+              coaches?.length > 0 &&
+              coaches
+                ?.filter(
+                  (coach) =>
+                    coach.isApproved && coach.approvalStatus === "approved"
+                )
+                .slice(0, 4)
+                .map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="group relative bg-white cursor-pointer rounded-md"
+                    onClick={() => handleCoachDetails(item?._id)}
+                  >
+                    <div className="aspect-h-3 aspect-w-4 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60 rounded-t-md">
+                      <img
+                        alt={item.imageAlt}
+                        src={item.profileImage}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      />
+                    </div>
+                    <div className="coaching_name text-center mt-2">
+                      <h3 className="text-sm text-gray-700">{item.name}</h3>
+                      <p className="text-[12px] text-gray-700">
+                        {item?.jobProfile?.title}
+                      </p>
+                    </div>
+                    <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
+                      {/* <div className='flex items-center gap-2'>
+                        <FaStar className='text-orange-500' />
+                        <p className='text-sm text-gray-700'>{item.rating}</p>
+                      </div>
+                      <p className='text-sm font-medium text-gray-900'>
+                        {item.students}{" "}
+                        <span className='text-gray-500 ml-1 text-sm'>students</span>
+                      </p> */}
+                    </div>
                   </div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {item.students}{" "}
-                    <span className="text-gray-500 ml-1 text-sm">students</span>
-                  </p>
-                </div>
-              </div>
-            ))}
+                ))
+            )}
           </div>
         </div>
       </div>
@@ -203,7 +203,11 @@ export default function CoachesPage() {
         )}
       </div>
       <div className="coach_filter">
-        <CoachFilter />
+        <CoachFilter
+          coaches={coaches}
+          isLoading={isLoading}
+          handleCoachDetails={handleCoachDetails}
+        />
       </div>
     </>
   );

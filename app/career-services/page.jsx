@@ -16,14 +16,14 @@ const CareerServices = () => {
       image: a1,
       description:
         "Receive personalized career guidance and actionable insights, powered by advanced AI algorithms.",
-      link: "/coming-soon",
+      link: "/career-counselling",
     },
     {
       title: "1 to 1 Career Coaching",
       image: a2,
       description:
         "Work directly with a professional career coach to strategize and achieve your career goals.",
-      link: "/coming-soon",
+      link: "/career-coaching",
     },
     {
       title: "Psychometric Test Tool",
@@ -31,7 +31,7 @@ const CareerServices = () => {
       description:
         "Assess your personality traits and cognitive abilities to discover the career paths best suited to you",
       current: false,
-      link: "/career-counselling",
+      link: "/coming-soon",
     },
   ];
 
@@ -55,7 +55,7 @@ const CareerServices = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
               {cvStudio.map((animation, index) => (
                 <div key={index}>
-                  <div className="max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between">
+                  <div className="max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between shadow-lg">
                     <Lottie
                       animationData={animation?.image}
                       loop={true}

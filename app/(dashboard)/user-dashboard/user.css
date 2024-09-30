@@ -1,0 +1,23 @@
+/** @format */
+
+.tabs-trigger {
+  position: relative;
+  padding-bottom: 10px; /* Adjust as needed */
+  cursor: pointer;
+}
+
+.tabs-trigger::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: orange;
+  transition: width 0.3s ease;
+}
+
+.tabs-trigger:hover::after,
+.tabs-trigger.active::after {
+  width: 100%;
+}

@@ -48,7 +48,7 @@ const Education = ({ fontStyle, colorStyle }) => {
                         {item?.institute}
                       </h4>
                       <div
-                        className={`py-2 ${fontStyle.paraFont} break-words`}
+                        className={`py-2 ${fontStyle.paraFont} break-normal`}
                         dangerouslySetInnerHTML={{ __html: item?.description }}
                       ></div>
                     </div>
@@ -104,7 +104,7 @@ const Experience = ({ fontStyle, colorStyle }) => {
                     {item?.employer}
                   </h4>
                   <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
+                    className={`py-2 ${fontStyle.paraFont} break-normal`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
                   <div className="px-3 py-2">
@@ -114,7 +114,7 @@ const Experience = ({ fontStyle, colorStyle }) => {
                           return (
                             <li
                               key={key}
-                              className=" break-words py-2 text-15px"
+                              className=" break-normal py-2 text-15px"
                             >
                               {item}
                             </li>
@@ -178,7 +178,7 @@ const Projects = ({ fontStyle, colorStyle }) => {
                   </div>
                 </div>
                 <div
-                  className={`key_points ${fontStyle.paraFont} break-words`}
+                  className={`key_points ${fontStyle.paraFont} break-normal`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
               </div>
@@ -334,7 +334,7 @@ const Profile = ({ fontStyle, colorStyle }) => {
             </h2>
           </div>
           <div
-            className={`my-5 break-words ${fontStyle.subHeadingFont}`}
+            className={`my-5 break-normal ${fontStyle.subHeadingFont}`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -450,18 +450,18 @@ const Certificates = ({ fontStyle, colorStyle }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-base items-center font-bold inline-flex"
+                        className="break-normal text-base items-center font-bold inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-base font-bold">
+                      <p className="break-normal text-base font-bold">
                         {item.name}
                       </p>
                     )}
                     <div
-                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      className={`py-2 ${fontStyle.paraFont} break-normal`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
                     ></div>
                   </div>
@@ -502,13 +502,13 @@ const Awards = ({ fontStyle, colorStyle }) => {
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold inline-flex"
+                            className="break-normal text-16px items-center font-bold inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold">
+                          <p className="break-normal text-15px font-bold">
                             {item.name}
                           </p>
                         )}
@@ -525,7 +525,7 @@ const Awards = ({ fontStyle, colorStyle }) => {
                       </div>
                     </div>
                     <div
-                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      className={`py-2 ${fontStyle.paraFont} break-normal`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
                     ></div>
                   </div>
@@ -568,13 +568,13 @@ const References = ({ fontStyle, colorStyle }) => {
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                            className="break-normal text-16px items-center font-bold text-gray-600 inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold text-gray-600">
+                          <p className="break-normal text-15px font-bold text-gray-600">
                             {item.name}
                           </p>
                         )}
@@ -696,7 +696,7 @@ const Template1 = () => {
         <div className="resume_right w-[65%] px-5 py-5 text-[#26252d]">
           <div className="resume_item resume_namerole">
             <h1
-              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words`}
+              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-normal`}
               style={{
                 color: metadata?.theme?.primary,
               }}
@@ -704,7 +704,7 @@ const Template1 = () => {
               {basics?.name}
             </h1>
             <p
-              className={`${fontStyle.jobtitleFont} break-words uppercase`}
+              className={`${fontStyle.jobtitleFont} break-normal uppercase`}
               style={{
                 color: metadata?.theme?.primary,
               }}
@@ -721,7 +721,7 @@ const Template1 = () => {
                     className="hover:underline flex items-center text-wrap"
                   >
                     <MdOutlineMailOutline className="mr-2" />
-                    <p className="text-wrap break-words">{basics?.email}</p>
+                    <p className="text-wrap break-normal">{basics?.email}</p>
                   </a>
                 )}
                 {basics?.phone && (
@@ -730,7 +730,7 @@ const Template1 = () => {
                     className="hover:underline flex items-center text-wrap"
                   >
                     <MdOutlinePhone className="mr-2" />
-                    <p className="text-wrap break-words">{basics?.phone}</p>
+                    <p className="text-wrap break-normal">{basics?.phone}</p>
                   </a>
                 )}
                 {(basics?.city || basics?.country) && (

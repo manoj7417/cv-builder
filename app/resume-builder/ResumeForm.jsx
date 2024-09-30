@@ -75,9 +75,9 @@ const ImageTemplates = [
 const dateFormat = "YYYY-MM";
 
 export default function ResumeForm() {
-  const data = useResumeStore((state) => state.resume.data);
+  const { data, title, _id } = useResumeStore((state) => state.resume);
   const resumeData = useResumeStore((state) => state.resume);
-  const setResumeData = useResumeStore((state) => state.setResumeData);
+  const { setResumeData, setResumeTitle } = useResumeStore((state) => state);
   const updateBasicAndSectionsData = useResumeStore(
     (state) => state.updateBasicAndSectionsData
   );
@@ -101,8 +101,14 @@ export default function ResumeForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+
+  const handleResumeTitleChange = (e) => {
+    setResumeTitle(e.target.value , _id);
+  }
+
   const handleChangeProfileSummaryChange = (e) => {
     setResumeData("sections.summary.content", e.htmlValue);
+
   };
 
   const handleEducationChange = (e, i) => {
@@ -915,10 +921,10 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
       : null;
   }
 
@@ -997,12 +1003,11 @@ export default function ResumeForm() {
         )}
         {/* Basics Information  */}
         <div className="lg:px-10 px-5">
-          <div className="flex justify-between py-3 rounded-md">
-            <div className="group">
-              <Label className="text-2xl text-blue-900 font-bold">
-                Basic Information
-              </Label>
-            </div>
+          <div >
+            <Label className="text-sm text-blue-900 font-bold">
+              Resume Title
+            </Label>
+            <Input value={title} onChange={handleResumeTitleChange} />
           </div>
           {ImageTemplates.includes(data.metadata.template) && (
             <div className="w-full mt-5">
@@ -1439,8 +1444,7 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
