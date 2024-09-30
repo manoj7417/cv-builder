@@ -47,18 +47,6 @@ const Coach = () => {
     setActiveTab(value);
   };
   const [allCoaches, setAllCoaches] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const getAllCoaches = async () => {
-    //   setIsLoading(true);
-    //   try {
-    //     const response = await axios.get("/api/getAllCoaches");
-    //     setAllCoaches(response.data.coaches);
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // };
 
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
@@ -272,7 +260,7 @@ const Coach = () => {
                               <td className="px-4 py-4 text-center w-[25%]">
                                 <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
                                   <FaDollarSign className="text-orange-500" />{" "}
-                                  {coach.ratesPerHour.charges}
+                                  {coach?.ratesPerHour?.charges}
                                 </div>
                               </td>
                               <td className="px-4 py-4 w-[25%]">
