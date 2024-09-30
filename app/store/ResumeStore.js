@@ -5,6 +5,7 @@ import { resumeSchema } from '@/lib/schema/resume/resume'
 import { debouncedUpdateResume } from '../services/resume/update';
 import { devtools, persist } from 'zustand/middleware'
 import { temporal, TemporalState } from "zundo";
+import { debouncedUpdateResumeTitle } from '../services/resume/updatedResumeTitle';
 const myMiddlewares = (f) =>
     devtools(
         persist(
@@ -17,6 +18,12 @@ export const useResumeStore = create(myMiddlewares((set) => ({
     resume: resumeSchema,
     isUploading: false,
     setIsUploading: (isUploading) => set({ isUploading }),
+    setResumeTitle: (newTitle, id) => set((state) => {
+        state.resume.title = newTitle;
+        debouncedUpdateResumeTitle(JSON.parse(JSON.stringify({ title: newTitle, id })));
+        return { resume: { ...state.resume, title: newTitle } };
+    }),
+
     setResumeData: (path, value) => set((state) => {
         const newResumeData = { ...state?.resume?.data };
         state.resume.data = _set(newResumeData, path, value);

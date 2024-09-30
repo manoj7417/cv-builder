@@ -187,7 +187,7 @@ const TabsMain = () => {
                       <div className="flex justify-between items-start gap-2 px-3 py-2 bg-white h-full">
                         <div className="w-[90%]">
 
-                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-words col-span-6">
+                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-normal col-span-6">
                             {item.title}
                           </h3>
                           <div className="flex justify-between">

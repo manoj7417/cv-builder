@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 import { IoSettingsOutline } from "react-icons/io5";
+import { Input } from "@/components/ui/input";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
@@ -157,12 +158,11 @@ const ResumeBuilderPage = () => {
           className={`preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-3 rounded-full lg:hidden block cursor-pointer transition-all duration-300`}
           onClick={handlePreviewClick}
         >
-           <span
-            className={`text-sm ${
-              showText
-                ? "bgNdnL"
-                : "epiSoF"
-            }`}
+          <span
+            className={`text-sm ${showText
+              ? "bgNdnL"
+              : "epiSoF"
+              }`}
           >
             Preview and Download
           </span>

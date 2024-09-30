@@ -50,7 +50,7 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                         {item?.institute}
                       </h4>
                       <div
-                        className={`py-2 ${fontStyle.paraFont} break-words`}
+                        className={`py-2 ${fontStyle.paraFont} break-normal`}
                         dangerouslySetInnerHTML={{ __html: item?.description }}
                       ></div>
                     </div>
@@ -114,7 +114,7 @@ const Experience = ({ fontStyle, colorStyle }) => {
                     </div>
                   </div>
                   <div
-                    className={`py-2 ${fontStyle.paraFont} break-words`}
+                    className={`py-2 ${fontStyle.paraFont} break-normal`}
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></div>
                   <div className="px-3">
@@ -122,7 +122,7 @@ const Experience = ({ fontStyle, colorStyle }) => {
                       <ul className="list-disc">
                         {item?.highlights?.map((item, key) => {
                           return (
-                            <li key={key} className=" break-words text-15px">
+                            <li key={key} className=" break-normal text-15px">
                               {item}
                             </li>
                           );
@@ -185,7 +185,7 @@ const Projects = ({ fontStyle, colorStyle }) => {
                   </div>
                 </div>
                 <div
-                  className={`key_points ${fontStyle.paraFont} break-words`}
+                  className={`key_points ${fontStyle.paraFont} break-normal`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></div>
               </div>
@@ -317,13 +317,13 @@ const Awards = ({ fontStyle, colorStyle }) => {
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold inline-flex"
+                            className="break-normal text-16px items-center font-bold inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold">
+                          <p className="break-normal text-15px font-bold">
                             {item.name}
                           </p>
                         )}
@@ -340,7 +340,7 @@ const Awards = ({ fontStyle, colorStyle }) => {
                       </div>
                     </div>
                     <div
-                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      className={`py-2 ${fontStyle.paraFont} break-normal`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
                     ></div>
                   </div>
@@ -436,7 +436,7 @@ const Profile = ({ fontStyle, colorStyle }) => {
             </h2>
           </div> */}
           <div
-            className={`my-5 break-words ${fontStyle.subHeadingFont}`}
+            className={`my-5 break-normal ${fontStyle.subHeadingFont}`}
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           ></div>
         </div>
@@ -470,16 +470,16 @@ const Certificates = ({ fontStyle, colorStyle }) => {
                       <a
                         href={item?.url}
                         target="_blank"
-                        className="break-words text-16px font-bold items-center inline-flex"
+                        className="break-normal text-16px font-bold items-center inline-flex"
                       >
                         {item?.name}
                         <AiOutlineLink className="ml-1" />
                       </a>
                     ) : (
-                      <p className="break-words text-15px">{item.name}</p>
+                      <p className="break-normal text-15px">{item.name}</p>
                     )}
                     <div
-                      className={`py-2 ${fontStyle.paraFont} break-words`}
+                      className={`py-2 ${fontStyle.paraFont} break-normal`}
                       dangerouslySetInnerHTML={{ __html: item?.description }}
                     ></div>
                   </div>
@@ -522,13 +522,13 @@ const References = ({ fontStyle, colorStyle }) => {
                           <a
                             href={item?.url}
                             target="_blank"
-                            className="break-words text-16px items-center font-bold text-gray-600 inline-flex"
+                            className="break-normal text-16px items-center font-bold text-gray-600 inline-flex"
                           >
                             {item?.name}
                             <AiOutlineLink className="ml-1" />
                           </a>
                         ) : (
-                          <p className="break-words text-15px font-bold text-gray-600">
+                          <p className="break-normal text-15px font-bold text-gray-600">
                             {item.name}
                           </p>
                         )}
@@ -588,12 +588,12 @@ const Template18 = () => {
         <div className="resume_right w-[100%] px-10 py-5 text-[#26252d]">
           <div className="resume_item resume_namerole">
             <h1
-              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-words text-white`}
+              className={`${fontStyle.mainHeadingFont} uppercase font-bold break-normal text-white`}
             >
               {basics?.name}
             </h1>
             <p
-              className={`${fontStyle.jobtitleFont} break-words uppercase text-white`}
+              className={`${fontStyle.jobtitleFont} break-normal uppercase text-white`}
             >
               {basics?.jobtitle}
             </p>
@@ -671,7 +671,7 @@ const Template18 = () => {
                   className="hover:underline flex items-center mt-1  text-wrap w-full "
                 >
                   <MdOutlineMailOutline className="mr-2" />
-                  <p className="w-[90%] text-wrap break-words">
+                  <p className="w-[90%] text-wrap break-normal">
                     {basics?.email}
                   </p>
                 </a>
@@ -682,7 +682,7 @@ const Template18 = () => {
                   className="hover:underline flex items-center mt-1  text-wrap w-full "
                 >
                   <MdOutlinePhone className="mr-2" />
-                  <p className="w-[90%] text-wrap break-words">
+                  <p className="w-[90%] text-wrap break-normal">
                     {basics?.phone}
                   </p>
                 </a>
