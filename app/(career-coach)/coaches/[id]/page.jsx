@@ -28,6 +28,7 @@ import { GetTokens } from "@/app/actions";
 import { ChevronRight } from "lucide-react";
 import { ImSpinner3 } from "react-icons/im";
 import { Skeleton } from "@/components/ui/skeleton";
+import ReactPlayer from 'react-player'
 
 
 
@@ -270,6 +271,17 @@ const CoachDetailsPage = () => {
                           <Skeleton className="h-4 w-full" />
                           <Skeleton className="h-4 w-1/2" />
                         </div>)
+                    }
+                    {
+                      singleCoach?.profileVideo?.url &&
+                      <div className="w-full">
+                        <ReactPlayer
+                          url={singleCoach?.profileVideo?.url}
+                          controls
+                          width="100%"
+                          height="150px"
+                        />
+                      </div>
                     }
 
                   </div>
