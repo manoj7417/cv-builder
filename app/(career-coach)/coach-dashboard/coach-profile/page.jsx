@@ -141,64 +141,62 @@ const CoachProfile = () => {
     setActiveTab(value);
   };
 
-  const handleEditProfile = (data) => {
-    alert("Profile updated successfully");
-    console.log("data", data);
-    // const { accessToken } = await GetTokens();
-    // const payload = {
-    //   name: data.name,
-    //   email: data.email,
-    //   phone: data.phone,
-    //   profileImage: data.profileImage,
-    //   experience: data.experience,
-    //   typeOfCoaching: data.typeOfCoaching,
-    //   skills: data.skills,
-    //   dateofBirth: data.dateofBirth,
-    //   bio: data.bio,
-    //   coachingDescription: data.coachingDescription,
-    //   address: data.address,
-    //   city: data.city,
-    //   country: data.country,
-    //   zip: data.zip,
-    //   bankName: data.bankName,
-    //   accountNumber: data.accountNumber,
-    //   ifscCode: data.ifscCode,
-    //   ratesPerHour: data.ratesPerHour,
-    //   cv: {
-    //     link: cvFileUrl,
-    //   },
-    //   profileVideo: data.profileVideo,
-    //   signedAggrement: {
-    //     link: docsUrl,
-    //   },
-    //   experience: data.experience,
-    //   typeOfCoaching: data.typeOfCoaching,
-    //   skills: data.skills,
-    //   dateofBirth: data.dateofBirth,
-    //   placeofBirth: data.placeofBirth,
-    //   bio: data.bio,
-    //   coachingDescription: data.coachingDescription,
-    //   address: data.address,
-    // };
-    // console.log(payload);
-    // setIsApiLoading(true);
-    // try {
-    //   const response = await axios.patch("/api/coachForm", payload, {
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken.value}`,
-    //     },
-    //   });
-    //   if (response.status === 200) {
-    //     updateUserData(response.data.coach);
-    //     toast.success("Form submitted successfully");
-    //     setIsApiLoading(false);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.error("Error in submitting the form");
-    // } finally {
-    //   setIsApiLoading(false); // Stop loading
-    // }
+  const handleEditProfile = async(data) => {
+    const { accessToken } = await GetTokens();
+    const payload = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      profileImage: data.profileImage,
+      experience: data.experience,
+      typeOfCoaching: data.typeOfCoaching,
+      skills: data.skills,
+      dateofBirth: data.dateofBirth,
+      bio: data.bio,
+      coachingDescription: data.coachingDescription,
+      address: data.address,
+      city: data.city,
+      country: data.country,
+      zip: data.zip,
+      bankName: data.bankName,
+      accountNumber: data.accountNumber,
+      ifscCode: data.ifscCode,
+      ratesPerHour: data.ratesPerHour,
+      cv: {
+        link: cvFileUrl,
+      },
+      profileVideo: data.profileVideo,
+      signedAggrement: {
+        link: docsUrl,
+      },
+      experience: data.experience,
+      typeOfCoaching: data.typeOfCoaching,
+      skills: data.skills,
+      dateofBirth: data.dateofBirth,
+      placeofBirth: data.placeofBirth,
+      bio: data.bio,
+      coachingDescription: data.coachingDescription,
+      address: data.address,
+    };
+    setIsApiLoading(true);
+    try {
+      const response = await axios.patch("/api/coachForm", payload, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      if (response.status === 200) {
+        updateUserData(response.data.coach);
+        toast.success("Form submitted successfully");
+        setIsApiLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error in submitting the form");
+    } finally {
+      setIsApiLoading(false); // Stop loading
+      setIsEditable(false)
+    }
   };
 
   // Upload CV Functionlaity starts here
@@ -341,19 +339,15 @@ const CoachProfile = () => {
         >
           <div className="main_heading_section flex justify-between">
             <h1 className="text-xl text-black font-bold">Anuj</h1>
-            <div className="approve_button flex gap-10">
+            {/* <div className="approve_button flex gap-10">
               <Button
                 className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
                 type="submit"
-                onClick={() => {
-                 setIsEditable(true);
-                }}
-                disabled={isApiLoading}
               >
-                {isEditable ? "Save" : "Edit"}
+                Submit
               </Button>
-            </div>
-            {/* <div className="approve_button flex gap-10 mt-4">
+            </div> */}
+            <div className="approve_button flex gap-10 mt-4">
               {!isEditable && (
                 <Button
                   className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
@@ -383,7 +377,7 @@ const CoachProfile = () => {
                   )}
                 </Button>
               )}
-            </div> */}
+            </div>
           </div>
           <Tabs
             value={activeTab}
@@ -449,6 +443,7 @@ const CoachProfile = () => {
                           )}
                           {imageUrl && isEditable && (
                             <Button
+                              type="button"
                               className="text-white bg-red-500 hover:bg-red-700 flex justify-center"
                               onClick={removeImage}
                             >
@@ -467,9 +462,7 @@ const CoachProfile = () => {
                         Email
                       </label>
                       <Input
-                        {...register("email", {
-                          required: "Email is required",
-                        })}
+                        {...register("email")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -480,9 +473,7 @@ const CoachProfile = () => {
                         Phone
                       </label>
                       <Input
-                        {...register("phone", {
-                          required: "Phone is required",
-                        })}
+                        {...register("phone")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -493,9 +484,7 @@ const CoachProfile = () => {
                         Experience
                       </label>
                       <Input
-                        {...register("experience", {
-                          required: "Experience is required",
-                        })}
+                        {...register("experience")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -506,9 +495,7 @@ const CoachProfile = () => {
                         Type of Coaching
                       </label>
                       <Input
-                        {...register("typeOfCoaching", {
-                          required: "Type of Coaching is required",
-                        })}
+                        {...register("typeOfCoaching")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -519,9 +506,7 @@ const CoachProfile = () => {
                         Skills
                       </label>
                       <Input
-                        {...register("skills", {
-                          required: "Skills are required",
-                        })}
+                        {...register("skills")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -533,9 +518,7 @@ const CoachProfile = () => {
                       </label>
                       <Input
                         type="date"
-                        {...register("dateofBirth", {
-                          required: "Date of Birth is required",
-                        })}
+                        {...register("dateofBirth")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -547,9 +530,7 @@ const CoachProfile = () => {
                       </label>
                       <Input
                         type="text"
-                        {...register("placeofBirth", {
-                          required: "Place of Birth is required",
-                        })}
+                        {...register("placeofBirth")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -560,7 +541,7 @@ const CoachProfile = () => {
                         Bio
                       </label>
                       <Textarea
-                        {...register("bio", { required: "Bio is required" })}
+                        {...register("bio")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -571,9 +552,7 @@ const CoachProfile = () => {
                         Coaching Description
                       </label>
                       <Textarea
-                        {...register("coachingDescription", {
-                          required: "Coaching Description is required",
-                        })}
+                        {...register("coachingDescription")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -584,9 +563,7 @@ const CoachProfile = () => {
                         Address
                       </label>
                       <Input
-                        {...register("address", {
-                          required: "Address is required",
-                        })}
+                        {...register("address")}
                         className="w-full"
                         disabled={!isEditable}
                       />
@@ -604,9 +581,7 @@ const CoachProfile = () => {
                       Bank Name
                     </p>
                     <Input
-                      {...register("bankName", {
-                        required: "Bank Name is required",
-                      })}
+                      {...register("bankName")}
                       className="w-full"
                       disabled={!isEditable}
                     />
@@ -617,9 +592,7 @@ const CoachProfile = () => {
                       Account Number
                     </p>
                     <Input
-                      {...register("accountNumber", {
-                        required: "Account Number is required",
-                      })}
+                      {...register("accountNumber")}
                       className="w-full"
                       disabled={!isEditable}
                     />
@@ -630,9 +603,7 @@ const CoachProfile = () => {
                       IFSC Code
                     </p>
                     <Input
-                      {...register("ifscCode", {
-                        required: "IFSC Code is required",
-                      })}
+                      {...register("ifscCode")}
                       className="w-full"
                       disabled={!isEditable}
                     />
@@ -644,9 +615,7 @@ const CoachProfile = () => {
                     </p>
                     <Input
                       type="number"
-                      {...register("ratesPerHour", {
-                        required: "Rate per hour is required",
-                      })}
+                      {...register("ratesPerHour")}
                       className="w-full"
                       disabled={!isEditable}
                     />
