@@ -28,9 +28,8 @@ import { GetTokens } from "@/app/actions";
 import { ChevronRight } from "lucide-react";
 import { ImSpinner3 } from "react-icons/im";
 import { Skeleton } from "@/components/ui/skeleton";
-import ReactPlayer from 'react-player'
-
-
+import ReactPlayer from "react-player";
+import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
 
 /************************************************ */
 
@@ -44,18 +43,14 @@ const CoachDetailsPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
-  const {
-    singleCoach,
-    filterCoachById,
-    updateSingleCoach,
-  } = useCoachesDetailStore();
-
+  const { singleCoach, filterCoachById, updateSingleCoach, isLoading } =
+    useCoachesDetailStore();
 
   const { id } = useParams();
-  const router = useRouter()
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("blogs");
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -67,12 +62,12 @@ const CoachDetailsPage = () => {
   });
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [geoData, setGeoData] = useState(null);
-  const [isBookingSlot, setIsBookingSlot] = useState(false)
+  const [isBookingSlot, setIsBookingSlot] = useState(false);
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
-    if (tab === 'appointment') {
+    if (tab === "appointment") {
       if (!accessToken || !accessToken.value) {
-        return router.push(`/login?redirect=/coaches/${id}`)
+        return router.push(`/login?redirect=/coaches/${id}`);
       }
     }
     setActiveTab(tab);
@@ -108,9 +103,6 @@ const CoachDetailsPage = () => {
     return availableDay ? availableDay.isAvailable : false;
   };
 
-
-
-
   // Function to handle date selection and fetch available slots
   const handleDateSelect = (dayOfWeek, date) => {
     setSelectedDate({
@@ -120,8 +112,8 @@ const CoachDetailsPage = () => {
     const selectedDay = singleCoach?.availability.dates.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
-    if (selectedDay.isAvailable) {
-      const newSlots = createOneHourTimeSlotsForRange(selectedDay.slots);
+    if (selectedDay?.isAvailable) {
+      const newSlots = createOneHourTimeSlotsForRange(selectedDay?.slots);
       setSelectedDaySlots(newSlots);
     } else {
       setSelectedDaySlots(null);
@@ -172,7 +164,7 @@ const CoachDetailsPage = () => {
       .get("https://ipapi.co/json/")
       .then((response) => {
         let data = response.data;
-        setGeoData(data)
+        setGeoData(data);
       })
       .catch((error) => {
         console.error("Error fetching geo information:", error);
@@ -181,15 +173,15 @@ const CoachDetailsPage = () => {
 
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
-    reset()
-  }
+    reset();
+  };
 
   const handleConfirmSlot = async (data) => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
-      return router.push(`/login?redirect=/coaches/${id}`)
+      return router.push(`/login?redirect=/coaches/${id}`);
     }
-    setIsBookingSlot(true)
+    setIsBookingSlot(true);
     const obj = {
       coachId: id,
       timezone: geoData.timezone,
@@ -198,44 +190,43 @@ const CoachDetailsPage = () => {
       city: geoData.city,
       notes: data?.message,
       date: modalSelectedSlot?.selectedDate?.date,
-      slotTime: modalSelectedSlot?.slot
-    }
+      slotTime: modalSelectedSlot?.slot,
+    };
     try {
-      const response = await axios.post('/api/confirmSlots', obj, {
+      const response = await axios.post("/api/confirmSlots", obj, {
         headers: {
-          'Authorization': `Bearer ${accessToken.value}`
-        }
-      })
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
       if (response.status === 201) {
-        toast.success("Slot booked successfully")
-        handleCloseDialog()
+        toast.success("Slot booked successfully");
+        handleCloseDialog();
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Error booking slot")
+      toast.error(error?.response?.data?.message || "Error booking slot");
     } finally {
-      setIsBookingSlot(false)
+      setIsBookingSlot(false);
     }
   };
 
   const handleFetchCoachDetailsById = async (id) => {
     try {
-      const response = await axios.get(`/api/getCoachDetails/${id}`)
+      const response = await axios.get(`/api/getCoachDetails/${id}`);
       if (response.status === 200) {
-        updateSingleCoach(response.data.coach)
+        updateSingleCoach(response.data.coach);
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getGeoInfo()
-  }, [])
+    getGeoInfo();
+  }, []);
 
   useEffect(() => {
-    handleFetchCoachDetailsById(id)
-  }, [id])
-
+    handleFetchCoachDetailsById(id);
+  }, [id]);
 
   return (
     <>
@@ -258,32 +249,40 @@ const CoachDetailsPage = () => {
                     <h3 className="text-[#1D2026] pb-2 font-semibold text-lg">
                       ABOUT ME
                     </h3>
-                    {
-                      singleCoach?.bio ?
-                        (<p className="text-[#6E7485] pb-5 text-sm">{singleCoach?.bio}</p>)
-                        :
-                        (<div className="space-y-2">
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-1/2" />
-                        </div>)
-                    }
-                    {
-                      singleCoach?.profileVideo?.url &&
-                      <div className="w-full">
+                    {singleCoach?.bio ? (
+                      <p className="text-[#6E7485] pb-5 text-sm">
+                        {singleCoach?.bio}
+                      </p>
+                    ) : (
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-1/2" />
+                      </div>
+                    )}
+                    <div>
+                      <h2 className="text-[#1D2026] pb-2 font-semibold text-lg">
+                        Intro Video
+                      </h2>
+                      {isLoading ? (
+                        <CoachSkeltonCard />
+                      ) : singleCoach?.profileVideo?.url ? (
                         <ReactPlayer
-                          url={singleCoach?.profileVideo?.url}
+                          url={singleCoach.profileVideo.url}
                           controls
                           width="100%"
                           height="150px"
                         />
-                      </div>
-                    }
-
+                      ) : (
+                        <div className="no-video-found w-full h-[150px] flex items-center justify-center text-gray-500 bg-gray-100">
+                          <p>No video found</p>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </>
               )}
@@ -293,7 +292,9 @@ const CoachDetailsPage = () => {
                   <div className="border-b border-[#FFDDD1] p-5">
                     <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
                       Book Appointment <br />
-                      <span className="font-normal">with {singleCoach?.name}</span>
+                      <span className="font-normal">
+                        with {singleCoach?.name}
+                      </span>
                     </h3>
                   </div>
                   <div className=" p-5 h-full relative z-50 mb-10">
@@ -301,8 +302,8 @@ const CoachDetailsPage = () => {
                       Career Development Coaching
                     </h2>
                     <p className="flex items-center pt-5 text-md">
-                      <img src="/careerRightBullet.png" className="mr-2" />
-                      1 Hour
+                      <img src="/careerRightBullet.png" className="mr-2" />1
+                      Hour
                     </p>
 
                     <p className="flex items-center pt-5 text-md">
@@ -323,19 +324,21 @@ const CoachDetailsPage = () => {
                 className="flex border-b border-gray-300 mb-5"
               >
                 <div
-                  className={`cursor-pointer p-3 ${activeTab === "blogs"
-                    ? "font-bold border-b-2 border-[#FF6636]"
-                    : "text-gray-500"
-                    }`}
+                  className={`cursor-pointer p-3 ${
+                    activeTab === "blogs"
+                      ? "font-bold border-b-2 border-[#FF6636]"
+                      : "text-gray-500"
+                  }`}
                   onClick={() => handleTabClick("blogs")}
                 >
                   Blogs
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${activeTab === "appointment"
-                    ? "font-bold border-b-2 border-[#FF6636]"
-                    : "text-gray-500"
-                    }`}
+                  className={`cursor-pointer p-3 ${
+                    activeTab === "appointment"
+                      ? "font-bold border-b-2 border-[#FF6636]"
+                      : "text-gray-500"
+                  }`}
                   onClick={() => handleTabClick("appointment")}
                 >
                   Book An Appointment
@@ -351,7 +354,6 @@ const CoachDetailsPage = () => {
                     id="blog_tab"
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4"
                   >
-
                     <div className="border border-[#E9EAF0]">
                       <div>
                         <img
@@ -467,7 +469,6 @@ const CoachDetailsPage = () => {
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </>
               )}
@@ -515,11 +516,9 @@ const CoachDetailsPage = () => {
                                   onClick={handleDayClick}
                                 >
                                   <span className="flex flex-col items-center justify-center">
-
                                     <span className="text-sm ">
                                       {dayOfMonth}
                                     </span>
-
 
                                     {isAvailable && !isDisabled && (
                                       <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
@@ -605,18 +604,24 @@ const CoachDetailsPage = () => {
                                 </p>
                               )}
 
-
                               <div className="confrm_button flex justify-end mt-4">
-                                <Button type="submit" disabled={isBookingSlot} className="flex justify-center items-center">
-                                  {
-                                    isBookingSlot ? <>
-                                      Booking Slot <ImSpinner3 className="animate-spin ml-2 h-4 w-4" />
-                                    </> :
-                                      <>
-                                        Book Slot
-                                        <ChevronRight className="ml-2 h-4 w-4" />
-                                      </>
-                                  }</Button>
+                                <Button
+                                  type="submit"
+                                  disabled={isBookingSlot}
+                                  className="flex justify-center items-center"
+                                >
+                                  {isBookingSlot ? (
+                                    <>
+                                      Booking Slot{" "}
+                                      <ImSpinner3 className="animate-spin ml-2 h-4 w-4" />
+                                    </>
+                                  ) : (
+                                    <>
+                                      Book Slot
+                                      <ChevronRight className="ml-2 h-4 w-4" />
+                                    </>
+                                  )}
+                                </Button>
                               </div>
                             </div>
                           </form>
@@ -629,7 +634,7 @@ const CoachDetailsPage = () => {
             </div>
           </div>
         </div>
-      </div >
+      </div>
     </>
   );
 };
