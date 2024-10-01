@@ -5,7 +5,6 @@ export const metadata = {
   description:
     "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
 };
-
 const Layout = ({ children }) => {
   return (
     <main className="terms_condition">
