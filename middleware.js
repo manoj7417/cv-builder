@@ -10,8 +10,8 @@ export function middleware(req) {
   const token = req.cookies.get('accessToken')
   if (token && token.value) {
     return NextResponse.next();
+  }
   const redirectUrl = new URL('/login', req.url);
   redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
   return NextResponse.redirect(redirectUrl);
-}
 }
