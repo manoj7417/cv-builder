@@ -7,31 +7,35 @@ import loadingAnimation from '@/public/animations/aibrain.json';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { FaCrown } from 'react-icons/fa';
-import { SiOpsgenie } from "react-icons/si";
 import { GiMagicLamp } from 'react-icons/gi';
-interface AtsProps {
-  setActiveTab: (tab: string) => void;
-}
+import { GetTokens } from '@/app/actions';
+import axios from 'axios';
+
 
 const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: loadingAnimation,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
+  loop: true,
+  autoplay: true,
+  animationData: loadingAnimation,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 };
 
-const Ats: React.FC<AtsProps> = ({ setActiveTab }) => {
-  const [resumeText, setResumeText] = useState<string>(''); 
+const Ats = ({ setActiveTab }) => {
+  const [resumeText, setResumeText] = useState('');
   const [loading, setLoading] = useState(false);
-  const [atsScore, setAtsScore] = useState<number>(0);
-  const [feedback, setFeedback] = useState<string[]>([]);
+  const [atsScore, setAtsScore] = useState(0);
+  const [feedback, setFeedback] = useState([]);
 
   const submitDataToAnalyze = async () => {
+    const { accessToken } = await GetTokens();
     setLoading(true);
     try {
-      const response = await AnalyzeAts(resumeText);
+      const response = await axios.post('/api/AnalyzeAts' , {message: resumeText}, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken.value
+        }
+      })
       const result = JSON.parse(response[0].text.value);
       setAtsScore(result.score);
       setFeedback(result.feedback);
@@ -42,11 +46,10 @@ const Ats: React.FC<AtsProps> = ({ setActiveTab }) => {
     }
   };
 
-  // Function to determine color based on score
-  const getColor = (score:any) => {
-    if (score >= 90) return '#10B981'; // green
-    if (score >= 50) return '#F59E0B'; // yellow
-    return '#EF4444'; // red
+  const getColor = (score) => {
+    if (score >= 90) return '#10B981';
+    if (score >= 50) return '#F59E0B';
+    return '#EF4444';
   };
 
   return (
@@ -75,17 +78,17 @@ const Ats: React.FC<AtsProps> = ({ setActiveTab }) => {
         ) : null}
 
         {
-            feedback.length > 0 ? (
-                <div className='text-start mb-5'>
-                <h2 className='items-center flex cursor-pointer pt-5 font-bold mb-3 font-sm underline text-indigo-600'><GiMagicLamp  className='text-indigo-400 h-10 w-10 me-3' />Ask Genie to improve your resume </h2>
-                <h3 className='mb-3 flex items-center justify-between'>Suggestion to improve your resume:<FaCrown className='text-yellow-400 ms-3 h-6 w-6' /></h3>
-                <ol className='text-gray-600 text-sm list-decimal px-8 space-y-2 bg-blue-100 p-3'>
-                    {feedback.map((feedbackItem, index) => (
-                        <li key={index}>{feedbackItem}</li>
-                    ))}
-                </ol>
+          feedback.length > 0 ? (
+            <div className='text-start mb-5'>
+              <h2 className='items-center flex cursor-pointer pt-5 font-bold mb-3 font-sm underline text-indigo-600'><GiMagicLamp className='text-indigo-400 h-10 w-10 me-3' />Ask Genie to improve your resume </h2>
+              <h3 className='mb-3 flex items-center justify-between'>Suggestion to improve your resume:<FaCrown className='text-yellow-400 ms-3 h-6 w-6' /></h3>
+              <ol className='text-gray-600 text-sm list-decimal px-8 space-y-2 bg-blue-100 p-3'>
+                {feedback.map((feedbackItem, index) => (
+                  <li key={index}>{feedbackItem}</li>
+                ))}
+              </ol>
             </div>
-            ):<></>
+          ) : <></>
         }
 
         <div className='text-center'>
@@ -101,9 +104,9 @@ const Ats: React.FC<AtsProps> = ({ setActiveTab }) => {
                   Clear
                 </button>
               </div>
-              <textarea 
-                id="resume_to_analyze" 
-                className='w-full h-52 p-2 rounded-lg border border-gray-500 bg-gray-100 text-gray-700 text-xs' 
+              <textarea
+                id="resume_to_analyze"
+                className='w-full h-52 p-2 rounded-lg border border-gray-500 bg-gray-100 text-gray-700 text-xs'
                 placeholder='Paste your resume here'
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
@@ -112,54 +115,54 @@ const Ats: React.FC<AtsProps> = ({ setActiveTab }) => {
           )}
           <div className='text-center'>
             {loading ? (
-                <>
-                <button 
-                    disabled={true}
-                    className='bg-indigo-300 cursor-not-allowed text-white py-2 px-6 rounded mt-3'
-                    onClick={submitDataToAnalyze}
+              <>
+                <button
+                  disabled={true}
+                  className='bg-indigo-300 cursor-not-allowed text-white py-2 px-6 rounded mt-3'
+                  onClick={submitDataToAnalyze}
                 >
-                    Analyze
+                  Analyze
                 </button>
-                <button 
-                    disabled={true}
-                    className='bg-indigo-300 cursor-not-allowed text-white py-2 px-6 rounded mt-3 ms-3'
+                <button
+                  disabled={true}
+                  className='bg-indigo-300 cursor-not-allowed text-white py-2 px-6 rounded mt-3 ms-3'
                 >
-                    Upload resume to analyze
+                  Upload resume to analyze
                 </button>
-                </>
+              </>
             ) : (
-                <>
-                <button 
-                    onClick={submitDataToAnalyze}
-                    className='bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded mt-3'
+              <>
+                <button
+                  onClick={submitDataToAnalyze}
+                  className='bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded mt-3'
                 >
-                    Analyze
+                  Analyze
                 </button>
-                <button 
-                    className='bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded mt-3 ms-3'
+                <button
+                  className='bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded mt-3 ms-3'
                 >
-                    Upload resume to analyze
+                  Upload resume to analyze
                 </button>
-                </>
+              </>
             )}
-            </div>
+          </div>
 
-         
+
         </div>
         <div >
-            {
-                feedback.length > 0 ? (
-                   <></>
-                ):<>
-                 <h2 className='text-gray-700 pt-5 text-center mb-3 font-sm'>How it works</h2>
-            <ol className='text-gray-600 text-sm list-decimal px-8 space-y-2 bg-blue-100 p-3'>
+          {
+            feedback.length > 0 ? (
+              <></>
+            ) : <>
+              <h2 className='text-gray-700 pt-5 text-center mb-3 font-sm'>How it works</h2>
+              <ol className='text-gray-600 text-sm list-decimal px-8 space-y-2 bg-blue-100 p-3'>
                 <li>Paste or upload your resume.</li>
                 <li>Genie will analyze your resume and provide feedback.</li>
                 <li>It will provide a score and suggestions on how to improve your resume.</li>
-            </ol>
-                </>
-            }
-           
+              </ol>
+            </>
+          }
+
         </div>
       </div>
     </>

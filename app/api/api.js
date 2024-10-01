@@ -26,6 +26,7 @@ export const updateUserProfile = async (data, token) => {
   }
 }
 
+
 export const getCareerCounselling = async (data, token) => {
   try {
     const response = await instance.post('/openai/generateCounsellingTest', data, {
@@ -59,15 +60,7 @@ export const generateCareerAdvice = async (data, token) => {
 
 
 
-export const usertemplatepurchase = async (data) => {
-  try {
-    const response = await instance.post('/user/templatepurchase', data, { withCredentials: true });
-    return response;
-  } catch (error) {
-    console.error("Error creating user:", error.response || error);
-    throw error
-  }
-}
+
 
 export const Payment = async (data, token) => {
   try {
@@ -83,18 +76,6 @@ export const Payment = async (data, token) => {
   }
 };
 
-export const AnalyzeAts = async (message, token) => {
-  try {
-    const response = await instance.post("/openai/atsCheck", { message }, {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
 
 export const AskBot = async (message) => {
   try {

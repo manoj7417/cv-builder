@@ -2,16 +2,23 @@ import { serverInstance } from '@/lib/serverApi';
 
 export async function POST(req, res) {
     try {
-        const { data } = await req.json();
-        const response = await serverInstance.post('/openai/atsCheck', data);
+        const data = await req.json();
+        const token = req.headers.get('Authorization');
+        const response = await serverInstance.post('/openai/atsCheck', data, {
+            headers: {
+                Authorization: token
+            }
+        });
         return new Response(JSON.stringify(response.data), {
-            status: 200,
+            status: response.status || 200,
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        console.error("Error logging in:", error.response || error);
-        return new Response(JSON.stringify({ error: "Error logging in" }), {
-            status: 500,
+        const status = error.response?.status ||  500;
+        const errorMessage = error.response?.data?.message ||
+            (error.request ? "No response received from the server" : error.message);
+        return new Response(JSON.stringify({ error: errorMessage }), {
+            status,
             headers: { 'Content-Type': 'application/json' }
         });
     }
