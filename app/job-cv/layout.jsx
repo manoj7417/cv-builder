@@ -3,9 +3,9 @@ import { ResumeHeader } from "../Layout/ResumeHeader";
 import Footer from "../Layout/Footer";
 
 export const metadata = {
-  title: "Professional CV Creators, Resume Coach, and Curriculum Vitae",
+  title: "Professional Curriculum Vitate Match and Resume Coach",
   description:
-    "Build best professional curriculum vitae with Professional CV Creators, Resume Coach, and Job Description relevant CVs with Genies Career Hub’s Pro CV Match.",
+    " Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert resume coach guidelines",
 };
 const Layout = ({ children }) => {
   return (

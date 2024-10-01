@@ -1,6 +1,10 @@
 import Footer from "../Layout/Footer"
-import NewResumeHeader from "../Layout/NewResumeHeader"
 import { ResumeHeader } from "../Layout/ResumeHeader"
+export const metadata = {
+  title: " Privacy Policy Details | Genies Career Hub",
+  description:
+    "Check out the Privacy Policy details of the Genies Career Hub to know everything about how we collect, use, and share your personal information and data.",
+};
 
 const Layout = ({ children }) => {
     return (
