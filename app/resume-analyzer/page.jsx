@@ -5,7 +5,6 @@ import Image from "next/image";
 import Slider from "@/components/component/Slider";
 import { useRef, useState } from "react";
 import Loader from "../ui/AnalyserLoader";
-import { AnalyzeAts } from "../api/api";
 import pdfToText from "react-pdftotext";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -27,6 +26,7 @@ import { ResumeHeader } from "../Layout/ResumeHeader";
 import ServicesPopUp from "@/components/component/ServicesPopUp";
 import AccordionItem from "@/components/component/AccordionItem";
 import parse from "html-react-parser";
+import axios from "axios";
 const faqData = [
   {
     id: 1,
@@ -114,9 +114,13 @@ export default function DashboardIdea() {
 
   const getFeedback = async (message, token) => {
     try {
-      const response = await AnalyzeAts(message, token);
-      if (response.status === "SUCCESS") {
-        router.push(`/analyser/${response.analysisId}`);
+      const response = await axios.post('/api/AnalyzeAts', { message: message }, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      if (response.status === 201) {
+        router.push(`/analyser/${response.data.analysisId}`);
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -174,8 +178,8 @@ export default function DashboardIdea() {
                   />
                 </div>
                 Non <Link href="/resume-analyzer" className="font-bold">
-                      ATS friendly resume
-                  </Link>{" "} found
+                  ATS friendly resume
+                </Link>{" "} found
               </DialogTitle>
               <DialogDescription>
                 Your resume is not ATS friendly. You should use an ATS-friendly
@@ -200,8 +204,8 @@ export default function DashboardIdea() {
                 get industry expertise integrated to create an Application
                 Tracking System (ATS) friendly resume and flawless application
                 profile that gets passed through <Link href="/resume-analyzer" className="font-bold">
-                    ATS CV checker
-                  </Link>{" "}.
+                  ATS CV checker
+                </Link>{" "}.
               </p>
               <Dialog open={isServiceDialogOpen}>
                 <ServicesPopUp
@@ -330,18 +334,18 @@ export default function DashboardIdea() {
                     </h3>
                     <p className="text-base py-3">
                       Ever wonder how these recruiters segregate and prioritise
-                      CVs for the hiring process? 
+                      CVs for the hiring process?
                     </p>
                     <p className="text-base py-3">
                       The <Link href="/resume-analyzer" className="font-bold">Applicant Tracking System (ATS)</Link> is used by most
                       companies to select CVs. The recruiter enters keywords in
                       the ATS database. This software manages the whole
                       recruitment process by ranking applicants&apos; CVs based
-                      on their skills, keywords, and experience. 
+                      on their skills, keywords, and experience.
                     </p>
                     <p className="text-base py-3">
                       It organises the information of an applicant in a way that
-                      makes the recruitment process easy. 
+                      makes the recruitment process easy.
                     </p>
                     <p className="text-base py-3">
                       If your resume meets these criteria, you&apos;re lucky.
@@ -370,13 +374,13 @@ export default function DashboardIdea() {
                   </div>
                   <div className="lg:w-[67%] w-full steps_content">
                     <h3 className="text-4xl text-black font-bold py-3 text-center md:text-right lg:text-right xl:text-right 2xl:text-right">
-                    
-                    Resume format for Applicant Tracking System
+
+                      Resume format for Applicant Tracking System
                     </h3>
                     <p className="text-sm py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left">
                       For a successful <Link href="/resume-analyzer" className="font-bold">
-                      ATS friendly resume
-                  </Link>{" "}, you must fill out
+                        ATS friendly resume
+                      </Link>{" "}, you must fill out
                       the following details individually.
                     </p>
                   </div>
@@ -454,9 +458,9 @@ export default function DashboardIdea() {
                         <br />
                         This is a step where our unique feature of AI will help
                         you generate a valid and professional profile for your
-                         <Link href="/resume-analyzer" className="font-bold pl-1">
-                        ATS Resume
-                  </Link>{" "}. 
+                        <Link href="/resume-analyzer" className="font-bold pl-1">
+                          ATS Resume
+                        </Link>{" "}.
                       </p>
                       <p className="text-base py-3">
                         You will just need to fill in some basic information,
@@ -578,7 +582,7 @@ export default function DashboardIdea() {
                       alt="arrow"
                       className="w-52 h-52 object-contain lg:block hidden"
                     />
-                     <img
+                    <img
                       src="/ats_step_arrow_2.png"
                       alt="arrow"
                       className="w-52 h-52 object-contain lg:hidden block"
@@ -596,7 +600,7 @@ export default function DashboardIdea() {
                       </h3>
                       <p className="text-base py-3">
                         projects, skills, and hobbies you have done and even
-                        describe them in the description. 
+                        describe them in the description.
                       </p>
                       <p className="text-base py-3">
                         These skills inform the employer about extracurriculars
@@ -679,15 +683,15 @@ export default function DashboardIdea() {
 
                 <div className="step_7 w-[80%]">
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Your ATS Resume Decoded 
+                    Your ATS Resume Decoded
                   </h3>
                   <p className="text-base py-3">
                     Our <Link href="/resume-analyzer" className="font-bold">
-                    enhanced CV
-                  </Link>{" "} maker is a tool that transforms your
+                      enhanced CV
+                    </Link>{" "} maker is a tool that transforms your
                     existing resume into an <Link href="/resume-analyzer" className="font-bold">
-                    Application Tracking System Resume
-                  </Link>{" "}.
+                      Application Tracking System Resume
+                    </Link>{" "}.
                     Genies Career Hub provides you with a transformation in a
                     <Link href="/resume-analyzer" className="font-bold">resume ATS format</Link> by giving you an ATS score. This score
                     will help the resume get in a higher rank and will be placed
@@ -695,13 +699,13 @@ export default function DashboardIdea() {
                   </p>
                   <p className="text-base py-3">
                     Analyse your <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                  </Link>{" "} with 3-level optimisation.
+                      ATS Resume
+                    </Link>{" "} with 3-level optimisation.
                   </p>
                   <p className="text-base py-3">
                     Optimise your <Link href="/resume-analyzer" className="font-bold">
-                    Resume format
-                  </Link>{" "} Clarity, Relevance,  and Content
+                      Resume format
+                    </Link>{" "} Clarity, Relevance,  and Content
                     with AI.
                   </p>
                 </div>
@@ -710,50 +714,50 @@ export default function DashboardIdea() {
                   <h3 className="text-3xl text-black font-bold py-3">
                     Our 3-level optimisation checker-
                   </h3>
-                  
+
                   {/* START- OUR THREE LEVEL OPTIMIZATION CHECKER */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
-                  {/* Step 1 */}
-                  <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_1.png')] bg-no-repeat bg-contain">
-                    <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
-                      1. CLARITY
-                      </h6>
-                      <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                      Gives you clarity of your resume in a clear and concise
-                      manner
-                      </p>
+                    {/* Step 1 */}
+                    <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_1.png')] bg-no-repeat bg-contain">
+                      <div className="absolute inset-0 px-3 py-2 text-black">
+                        <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                          1. CLARITY
+                        </h6>
+                        <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
+                          Gives you clarity of your resume in a clear and concise
+                          manner
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Step 2 */}
-                  <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_2.png')] bg-no-repeat bg-contain">
-                    <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
-                      2. RELEVANCE
-                      </h6>
-                      <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                      Informs you about the relevance of your resume to the
-                      job title.
-                      </p>
+                    {/* Step 2 */}
+                    <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_2.png')] bg-no-repeat bg-contain">
+                      <div className="absolute inset-0 px-3 py-2 text-black">
+                        <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                          2. RELEVANCE
+                        </h6>
+                        <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
+                          Informs you about the relevance of your resume to the
+                          job title.
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Step 3 */}
-                  <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_3.png')] bg-no-repeat bg-contain">
-                    <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
-                      3. CONTENT
-                      </h6>
-                      <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
-                      Gives you an idea if your content contains of the
-                      relevant information to the job profile.
-                      </p>
+                    {/* Step 3 */}
+                    <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_3.png')] bg-no-repeat bg-contain">
+                      <div className="absolute inset-0 px-3 py-2 text-black">
+                        <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                          3. CONTENT
+                        </h6>
+                        <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
+                          Gives you an idea if your content contains of the
+                          relevant information to the job profile.
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  
-                </div>
+
+                  </div>
                   {/* END- OUR THREE LEVEL OPTIMIZATION CHECKER */}
                 </div>
                 {/*  */}
@@ -767,13 +771,13 @@ export default function DashboardIdea() {
                   </div>
                   <p className="text-lg px-5">
                     Wish you had a better <Link href="/resume-analyzer" className="font-bold">
-                    ATS System
-                  </Link>{" "} Friendly Score! Do it right
+                      ATS System
+                    </Link>{" "} Friendly Score! Do it right
                     away. Our Optimiser results show your score and suggestions
                     in <Link href="/resume-analyzer" className="font-bold">resume ATS format</Link>. Follow the tips, and you can increase
                     your <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                  </Link>{" "} score.
+                      ATS Resume
+                    </Link>{" "} score.
                   </p>
                 </div>
                 {/*  */}
@@ -792,11 +796,11 @@ export default function DashboardIdea() {
                       </p>
                       <p className="text-sm py-3">
                         Need an <Link href="/resume-analyzer" className="font-bold">
-                        enhanced resume
-                  </Link>{" "}? You can go to the CV Creator
+                          enhanced resume
+                        </Link>{" "}? You can go to the CV Creator
                         and prepare your <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                  </Link>{" "} in 4 easy steps. 
+                          ATS Resume
+                        </Link>{" "} in 4 easy steps.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent">
@@ -817,8 +821,8 @@ export default function DashboardIdea() {
                     <div className="lg:w-[50%] w-full steps_content">
                       <p className="text-base py-3 font-bold">
                         2. Check the <Link href="/resume-analyzer" className="font-bold">
-                    Resume format
-                  </Link>{" "} ATS Score in the CV Insights
+                          Resume format
+                        </Link>{" "} ATS Score in the CV Insights
                       </p>
                       <p className="text-sm py-3">
                         You must upload your resume in Optimise CV Now and let
@@ -851,22 +855,22 @@ export default function DashboardIdea() {
                     <div className="lg:w-[50%] w-full steps_content order-first lg:order-first ">
                       <p className="text-base py-3 font-bold">
                         3. Review Your <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                  </Link>{" "} Feedback or Suggestions and
+                          ATS Resume
+                        </Link>{" "} Feedback or Suggestions and
                         Start Making Corrections
                       </p>
                       <p className="text-base py-3">
                         Our CV Optimiser will provide recommendations to improve
                         your <Link href="/resume-analyzer" className="font-bold">
-                    enhanced CV
-                  </Link>{" "}, increasing your chances of getting
-                        hired. 
+                          enhanced CV
+                        </Link>{" "}, increasing your chances of getting
+                        hired.
                       </p>
                       <p className="text-base py-3">
                         Go thoroughly through the issues in recommendations, and
                         accordingly make changes in your <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                  </Link>{" "}.
+                          ATS Resume
+                        </Link>{" "}.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center  lg:bg-transparent ">
@@ -901,7 +905,7 @@ export default function DashboardIdea() {
                       <p className="text-sm py-3">
                         Make changes to your ATS-friendly resume by following
                         the recommendations that will make the CV an <Link href="/resume-analyzer" className="font-bold">enhanced
-                        CV</Link>, and achieve a more significant ATS score.  
+                          CV</Link>, and achieve a more significant ATS score.
                       </p>
                       <p className="text-sm py-3">
                         Take an overview of the details, the content, the
@@ -926,9 +930,9 @@ export default function DashboardIdea() {
                     If you wish to recheck your resume for a better score after
                     making the changes once, just upload your improvised CV to
                     our <Link href="/resume-analyzer" className="font-bold">
-                    ATS CV checker
-                  </Link>{" "}. Then, make more improvements with
-                    suggestions and download the resume. 
+                      ATS CV checker
+                    </Link>{" "}. Then, make more improvements with
+                    suggestions and download the resume.
                   </p>
                 </div>
                 {/*  */}
@@ -944,12 +948,12 @@ export default function DashboardIdea() {
                       Yes, Genies Career Hub provides job-seekers with a chance
                       to improve their <Link href="/resume-analyzer" className="font-bold">
                         ATS Resume
-                  </Link>{" "} scores. This <Link href="/resume-analyzer" className="font-bold">
-                    ATS CV checker
-                  </Link>{" "}
+                      </Link>{" "} scores. This <Link href="/resume-analyzer" className="font-bold">
+                        ATS CV checker
+                      </Link>{" "}
                       analyses your resume with AI and then bifurcates it based
                       on the clarity, relevance, and content of your resume
-                      format.  
+                      format.
                     </p>
                     <p className="text-base py-3">
                       After breaking down these into three, our optimiser gives
@@ -962,7 +966,7 @@ export default function DashboardIdea() {
                       By following the insights and making changes, you can
                       re-assess your <Link href="/resume-analyzer" className="font-bold">
                         ATS Resume
-                  </Link>{" "} score and witness the change in
+                      </Link>{" "} score and witness the change in
                       score.
                     </p>
                     <p className="text-base py-3">
