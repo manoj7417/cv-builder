@@ -14,3 +14,4 @@ export function middleware(req) {
   redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
   return NextResponse.redirect(redirectUrl);
 }
+}
