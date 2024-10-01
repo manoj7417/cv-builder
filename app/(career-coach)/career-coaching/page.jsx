@@ -117,7 +117,7 @@ const ComingSoonPage = () => {
               </p>
               <div className='flex lg:flex-row flex-col gap-2 md:gap-8 sm:gap-8 justify-center items-center  py-8'>
                 <div className='button_wrapper '>
-                  <Link href='/coaches'>
+                  <Link href='/coming-soon'>
                     <button className='get_start_btn'>
                       <span className='btn_text'>Hire Coach</span>
                       <div className='btn_overlay'>
@@ -140,7 +140,7 @@ const ComingSoonPage = () => {
                   </Link>
                 </div>
                 <div className='button_wrapper  flex justify-center lg:justify-start '>
-                  <Link href='/coach-signin'>
+                  <Link href='/coming-soon'>
                     <button className='get_start_btn hire_coach_button'>
                       <span className='btn_text '>Register as Coach</span>
                       <div className='btn_overlay'>

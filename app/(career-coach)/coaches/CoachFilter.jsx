@@ -30,6 +30,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
+import useDebounce from "@/app/hook/useDebounce";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -122,6 +123,9 @@ export default function CoachFilter({
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   //Filter Func
   const [selectedFilters, setSelectedFilters] = useState({
@@ -129,6 +133,8 @@ export default function CoachFilter({
     coachProfile: [],
     rating: [],
   });
+
+
 
   const handleFilterChange = (sectionId, value, isChecked) => {
     setSelectedFilters((prevState) => {
@@ -150,19 +156,23 @@ export default function CoachFilter({
       coach.isApproved && coach.approvalStatus === "approved";
 
     const courseMatch =
-      selectedFilters.coachCourses.length === 0 ||
+      selectedFilters?.coachCourses.length === 0 ||
       selectedFilters.coachCourses.some((course) =>
-        coach.jobProfile.title.toLowerCase().includes(course)
+        coach?.jobProfile?.title?.toLowerCase().includes(course)
       );
     const profileMatch =
-      selectedFilters.coachProfile.length === 0 ||
-      selectedFilters.coachProfile.some((profile) =>
-        coach.jobProfile.title.toLowerCase().includes(profile)
+      selectedFilters?.coachProfile.length === 0 ||
+      selectedFilters?.coachProfile.some((profile) =>
+        coach?.jobProfile?.title?.toLowerCase().includes(profile)
       );
     const ratingMatch =
-      selectedFilters.rating.length === 0 ||
-      selectedFilters.rating.includes(coach.rating);
-    return isApprovedCoach && courseMatch && profileMatch && ratingMatch;
+      selectedFilters?.rating.length === 0 ||
+      selectedFilters?.rating?.includes(coach.rating);
+    // return isApprovedCoach && courseMatch && profileMatch && ratingMatch;
+    const searchMatch =
+      debouncedSearchQuery === "" ||
+      coach.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return isApprovedCoach && courseMatch && profileMatch && ratingMatch && searchMatch;
   });
 
   //Filter Func
@@ -176,7 +186,6 @@ export default function CoachFilter({
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
-  
 
   //Next page func
   const handleNextPage = () => {
@@ -211,7 +220,7 @@ export default function CoachFilter({
     <>
       <div className="bg-white">
         <div>
-          {/* Mobile filter dialog */}
+          {/* Mobile filter dialog starts here */}
           <Dialog
             open={mobileFiltersOpen}
             onClose={setMobileFiltersOpen}
@@ -241,20 +250,6 @@ export default function CoachFilter({
 
                 {/* Filters */}
                 <form className="mt-4 border-t border-gray-200">
-                  <h3 className="sr-only">Categories</h3>
-                  <ul
-                    role="list"
-                    className="px-2 py-3 font-medium text-gray-900"
-                  >
-                    {subCategories.map((category) => (
-                      <li key={category.name}>
-                        <a href={category.href} className="block px-2 py-3">
-                          {category.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-
                   {filters.map((section) => (
                     <Disclosure
                       key={section.id}
@@ -309,13 +304,44 @@ export default function CoachFilter({
               </DialogPanel>
             </div>
           </Dialog>
+          {/* Mobile filter dialog ends here */}
 
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-6 pt-24">
               <h1 className="2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold tracking-tight text-gray-900">
                 Best Coaches
               </h1>
-
+              <div className="input_search lg:w-[40%] w-full">
+                <div className="relative">
+                  <input
+                    id="id-s03"
+                    type="search"
+                    name="id-s03"
+                    placeholder="Search here"
+                    aria-label="Search content"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="peer relative h-10 w-full rounded border border-slate-200 px-4 pr-12 text-sm text-slate-500 outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute right-4 top-2.5 h-5 w-5 cursor-pointer stroke-slate-400 peer-disabled:cursor-not-allowed"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    aria-hidden="true"
+                    aria-label="Search icon"
+                    role="graphics-symbol"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                </div>
+              </div>
               <div className="flex items-center">
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
@@ -378,18 +404,6 @@ export default function CoachFilter({
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4 sticky top-0">
                 {/* Filters */}
                 <form className="hidden lg:block">
-                  {/* <h3 className="sr-only">Categories</h3>
-                  <ul
-                    role="list"
-                    className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
-                  >
-                    {subCategories.map((category) => (
-                      <li key={category.name}>
-                        <a href={category.href}>{category.name}</a>
-                      </li>
-                    ))}
-                  </ul> */}
-
                   {filters.map((section) => (
                     <Disclosure
                       key={section.id}
@@ -477,7 +491,7 @@ export default function CoachFilter({
                             <CoachSkeltonCard key={index} />
                           ))}
                       </>
-                    ) : (
+                    ) : currentPageData.length > 0 ? (
                       currentPageData.map((item, index) => (
                         <div
                           key={item.id}
@@ -507,22 +521,30 @@ export default function CoachFilter({
                             </div>
                           </div>
                           {/* <div className='mt-4 px-2 py-3 flex justify-between border-t border-gray-200'>
-                          <div className='flex items-center gap-2'>
-                            <FaStar className='text-orange-500' />
-                            <p className='text-sm text-gray-700'>
-                              {item.rating}
-                            </p>
-                          </div>
-                          <p className='text-sm font-medium text-gray-900 flex items-center'>
-                            <LuUser2 className='text-blue-700 mr-2 text-base' />
-                            {item.students}{" "}
-                            <span className='text-gray-500 ml-1 text-sm'>
-                              students
-                            </span>
+                        <div className='flex items-center gap-2'>
+                          <FaStar className='text-orange-500' />
+                          <p className='text-sm text-gray-700'>
+                            {item.rating}
                           </p>
-                        </div> */}
+                        </div>
+                        <p className='text-sm font-medium text-gray-900 flex items-center'>
+                          <LuUser2 className='text-blue-700 mr-2 text-base' />
+                          {item.students}{" "}
+                          <span className='text-gray-500 ml-1 text-sm'>
+                            students
+                          </span>
+                        </p>
+                      </div> */}
                         </div>
                       ))
+                    ) : (
+                      <>
+                        <div className="no-data-card bg-white w-[200px] h-[200px] rounded shadow-md flex flex-col justify-center items-center text-gray-600 mx-auto border-2 border-gray-300">
+                          <p className="text-base font-semibold">
+                            No data available
+                          </p>
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
@@ -531,6 +553,7 @@ export default function CoachFilter({
           </main>
         </div>
       </div>
+      {/* Paginstion Starts Here  */}
       <div className="pagination_section">
         <div className="flex items-center justify-center gap-5">
           <div
@@ -562,6 +585,7 @@ export default function CoachFilter({
           </div>
         </div>
       </div>
+      {/* Paginstion Ends Here  */}
     </>
   );
 }

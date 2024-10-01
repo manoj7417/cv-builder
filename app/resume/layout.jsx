@@ -1,8 +1,8 @@
 import React from "react";
 export const metadata = {
-  title: "Professional Resume Template and Builder | CV Enhancer",
+  title: "Professional CV Builder | Expert Curriculum Vitae Format",
   description:
-    "Find the best resumé template on the Genies Career Hub résumé builder. Make your resume online with expert CV Builder, CV Enhancer, and CV Building Tools.",
+    "Check out the best curriculum vitae templates that follow industry-standard CV Format and create your resume in minutes with our Curriculum Vitae CV Builder.",
 };
 const Layout = ({ children }) => {
   return (
