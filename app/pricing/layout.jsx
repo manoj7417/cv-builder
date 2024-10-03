@@ -21,5 +21,4 @@ const Layout = ({ children }) => {
     </main>
   );
 };
-
 export default Layout;
