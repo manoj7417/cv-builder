@@ -6,6 +6,9 @@ export const metadata = {
   title: "Professional Curriculum Vitate Match and Resume Coach",
   description:
     " Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert resume coach guidelines",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/job-cv",
+    },
 };
 const Layout = ({ children }) => {
   return (

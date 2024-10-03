@@ -5,6 +5,9 @@ export const metadata = {
   title: "Contact the Genies Career Hub Support Team",
   description:
     "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/contact-us",
+    },
 };
 
 const Layout = ({ children }) => {

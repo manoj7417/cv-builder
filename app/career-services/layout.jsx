@@ -4,6 +4,9 @@ export const metadata = {
   title: "Career Services: Genies Career Hub",
   description:
     "Looking for a Career Services, Life Coach, or anything else? Check out our services in AI Career Coaching, 1 to 1 Career Coaching, and Psychometric Test Tool",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/career-services", // Adding the canonical URL
+    },
 };
 
 
