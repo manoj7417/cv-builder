@@ -12,6 +12,7 @@ import { ResumeHeader } from "../Layout/ResumeHeader";
 const Layout = ({ children }) => {
   return (
     <>
+    <head>
       <title>Privacy Policy Details | Genies Career Hub</title>
       <meta
         name="description"
@@ -54,7 +55,7 @@ const Layout = ({ children }) => {
         name="twitter:image"
         content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
       />
-
+</head>
       <main className="terms_condition">
         <div className="terms_condition_container">
           <div className="wrapper">
