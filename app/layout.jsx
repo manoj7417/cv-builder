@@ -100,7 +100,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
             "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."
           }
         /> */}
-        <link rel="canonical" href="https://geniescareerhub.com" />
+        <link rel="canonical" href="https://www.geniescareerhub.com" />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WSQGHKPJ"

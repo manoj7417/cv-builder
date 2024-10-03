@@ -10,6 +10,7 @@ import { useUserStore } from "./store/UserStore";
 import { ResumeHeader } from "./Layout/ResumeHeader";
 // const NewResumeHeader = dynamic(() => import('./Layout/NewResumeHeader'), { ssr: false })
 
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { userState, loginUser, logoutUser } = useUserStore()
