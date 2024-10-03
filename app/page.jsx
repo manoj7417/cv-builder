@@ -15,7 +15,6 @@ export default function Home() {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
