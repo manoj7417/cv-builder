@@ -843,7 +843,7 @@ export default function DashboardIdea() {
                       ATS System
                     </Link>{" "}
                     Score? Hike it right away. Rectify your CV by working out
-                    the Optimiser's suggestions in your current{" "}
+                    the Optimiser&#39;s suggestions in your current{" "}
                     <Link className="font-bold" href={"/resume-analyzer"}>
                       resume ATS format
                     </Link>{" "}
@@ -861,7 +861,7 @@ export default function DashboardIdea() {
                     <div className="lg:w-[50%] w-full steps_content order-first lg:order-first ">
                       {/* <h4 className="font-bold text-black text-2xl">Step 6</h4> */}
                       <h3 className="text-3xl text-black font-bold py-3">
-                        HERE'S HOW CV OPTIMISER HELPS YOU
+                        HERE&#39;S HOW CV OPTIMISER HELPS YOU
                       </h3>
                       <p className="text-base py-3 font-medium">
                         Want to build a flawless CV? This is how our CV
@@ -876,7 +876,7 @@ export default function DashboardIdea() {
                         the pdf format.
                       </p>
                       <p className="text-sm py-3">
-                        Can't find a CV pdf upload? Use our CV Creator and
+                        Can&#39;t find a CV pdf upload? Use our CV Creator and
                         create your resume instantly!
                       </p>
                     </div>
@@ -914,7 +914,7 @@ export default function DashboardIdea() {
                         into three aspects: Clarity, Relevance, and Content. A
                         complete percentage-wise score shall be reflected on
                         your screen that will provide you a remote insight into
-                        your CV's compatibility and impressionable status.
+                        your CV&#39;s compatibility and impressionable status.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent  order-last lg:order-first">
@@ -978,7 +978,7 @@ export default function DashboardIdea() {
                     <div className="lg:w-[50%] w-full steps_content order-first lg:order-first">
                       <p className="text-base py-3 font-bold">
                         3. Check out the detailed pointers to get a profound
-                        understanding of your CV's status.
+                        understanding of your CV&#39;s status.
                       </p>
                       <p className="text-base py-3">
                         In all three aspects, Clarity, Relevance, and Content,
@@ -1065,7 +1065,7 @@ export default function DashboardIdea() {
                     <Link className="font-bold" href={"/resume-analyzer"}>
                       ATS CV Checker
                     </Link>
-                    . Get the confirmation of your CV's compatibility before you
+                    . Get the confirmation of your CV&#39;s compatibility before you
                     finally send it to the recruiters.
                   </p>
                 </div>
@@ -1079,7 +1079,7 @@ export default function DashboardIdea() {
                       improve the ATS Score?
                     </h3>
                     <p className="text-base py-3">
-                      Genies Career Hub's CV Optimiser is built around the
+                      Genies Career Hub&#39;s CV Optimiser is built around the
                       recruiting standards prevalent globally. We are determined
                       to provide job-seekers with an opportunity to improve
                       their{" "}
@@ -1100,7 +1100,7 @@ export default function DashboardIdea() {
                       After an intricate analysis, we help you with insights
                       into the key areas of improvement. This can either be
                       keywords or particulars referring to your job profile or
-                      resume format's compatibility. By integrating these
+                      resume format&#39;s compatibility. By integrating these
                       suggestions, you can quickly improve your{" "}
                       <Link className="font-bold" href={"/resume-analyzer"}>
                         ATS scores
