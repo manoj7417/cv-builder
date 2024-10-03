@@ -5,6 +5,9 @@ export const metadata = {
   title: "About Us: Genies Career Hub",
   description:
     "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/about-us",
+    },
 };
 
 const Layout = ({ children }) => {

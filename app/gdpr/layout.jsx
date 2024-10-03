@@ -5,6 +5,9 @@ export const metadata = {
   title: "GDPR Policy: Genies Career Hub",
   description:
     "We completely comply with the General Data Protection Regulation GDPR. Read about the protection of your personal data and information at Genies Career Hub.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/gdpr",
+    },
 };
 
 const Layout = ({ children }) => {

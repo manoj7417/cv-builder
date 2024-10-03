@@ -4,6 +4,9 @@ export const metadata = {
   title: "Terms and Conditions: Genies Career Hub",
   description:
     "Read the important terms and conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/terms-condition", // Adding the canonical URL
+    },
 };
 
 const Layout = ({ children }) => {

@@ -5,6 +5,9 @@ export const metadata = {
   title: "Refund Policy : Genies Career Hub",
   description:
     "Seeking a Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/refund-policy",
+    },
 };
 
 const Layout = ({ children }) => {
