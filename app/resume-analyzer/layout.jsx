@@ -16,6 +16,7 @@ const NewResumeHeader = dynamic(() => import("../Layout/NewResumeHeader"), {
 const Layout = ({ children }) => {
   return (
     <>
+    <head>
       <title>ATS Resume Checker | Build an ATS Enhanced Resume</title>
       <meta
         name="description"
@@ -58,7 +59,7 @@ const Layout = ({ children }) => {
         name="twitter:image"
         content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
       />
-
+</head>
       <main className="resume_analyser">
         <div className="resume_analyser_container">
           <div className="wrapper">{children}</div>
