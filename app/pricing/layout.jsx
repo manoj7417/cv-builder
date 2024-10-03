@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
         name="description"
         content="Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience."
       />
+      
       <link rel="canonical" href="https://www.geniescareerhub.com/pricing" />
       <meta
         property="og:url"
