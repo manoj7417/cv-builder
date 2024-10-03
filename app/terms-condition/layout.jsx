@@ -18,7 +18,10 @@ const Layout = ({ children }) => {
           name="description"
           content="Read the important terms and conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction."
         />
-        <link rel="canonical" href="https://www.geniescareerhub.com/terms-condition" />
+        <link
+          rel="canonical"
+          href="https://www.geniescareerhub.com/terms-condition"
+        />
         <meta
           property="og:url"
           content="https://www.geniescareerhub.com/terms-condition"
@@ -34,7 +37,7 @@ const Layout = ({ children }) => {
         />
         <meta
           property="og:image"
-           content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
+          content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -53,7 +56,7 @@ const Layout = ({ children }) => {
         />
         <meta
           name="twitter:image"
-           content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
+          content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
         />
       </head>
 

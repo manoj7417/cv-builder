@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 // export const metadata = {
@@ -11,6 +12,7 @@ import { ResumeHeader } from "../Layout/ResumeHeader";
 const Layout = ({ children }) => {
   return (
     <>
+      <head>
       <title>Pricing: Genies Career Hub</title>
       <meta
         name="description"
@@ -47,6 +49,7 @@ const Layout = ({ children }) => {
         name="twitter:image"
         content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
       />
+      </head>
 
       <main className="terms_condition">
         <div className="terms_condition_container">
