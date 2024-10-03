@@ -4,6 +4,9 @@ export const metadata = {
   title: "Pricing: Genies Career Hub",
   description:
     "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/pricing",
+    },
 };
 const Layout = ({ children }) => {
   return (

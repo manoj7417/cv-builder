@@ -5,6 +5,9 @@ export const metadata = {
   title: "Frequently Asked Question!",
   description:
     "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
+    alternates: {
+      canonical: "https://www.geniescareerhub.com/faq",
+    },
 };
 
 const Layout = ({ children }) => {
