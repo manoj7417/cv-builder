@@ -12,11 +12,9 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { userState, loginUser, logoutUser } = useUserStore();
   const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
     setIsClient(true);
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
