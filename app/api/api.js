@@ -7,7 +7,7 @@ export const instance = axios.create({
   baseURL: `${baseURL}/api`,
   withCredentials: true,
   headers: {
-    "x-api-key": apiKey,
+    "x-api-key": "careerGenie_Key",
     "Content-Type": "application/json"
   },
 });

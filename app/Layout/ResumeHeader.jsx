@@ -34,7 +34,7 @@ const menuItems = [
     href: "/contact-us",
   },
   {
-    name: "Career",
+    name: "Coaching",
     href: "/career-services",
   },
 ];
