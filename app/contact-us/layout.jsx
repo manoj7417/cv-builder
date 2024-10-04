@@ -1,65 +1,38 @@
 import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import { ResumeHeader } from "../Layout/ResumeHeader";
-// export const metadata = {
-//   title: "Contact the Genies Career Hub Support Team",
-//   description:
-//     "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
-//     alternates: {
-//       canonical: "https://www.geniescareerhub.com/contact-us",
-//     },
-// };
+export const metadata = {
+  title: "Contact the Genies Career Hub Support Team",
+  description:
+    "Looking for more or seeking a solution for your education problems? Contact us personally and get more information and support on Genies Career Hub now.",
+  openGraph: {
+    title: "Contact the Genies Career Hub Support Team",
+    description:
+      "Looking for more or seeking a solution for your education problems? Contact us personally and get more information and support on Genies Career Hub now.",
+    url: "https://www.geniescareerhub.com/contact-us",
+    images: [
+      {
+        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        alt: "Genies Career Hub",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@geniescareerhub",
+    title: "Contact the Genies Career Hub Support Team",
+    description:
+      "Looking for more or seeking a solution for your education problems? Contact us personally and get more information and support on Genies Career Hub now.",
+    image:
+      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+  },
+};
+
 
 const Layout = ({ children }) => {
   return (
     <>
-      <head>
-        <title>Contact the Genies Career Hub Support Team</title>
-        <meta
-          name="description"
-          content="Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now."
-        />
-        <link
-          rel="canonical"
-          href="https://www.geniescareerhub.com/contact-us"
-        />
-        <meta
-          property="og:url"
-          content="https://www.geniescareerhub.com/contact-us"
-        />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Contact the Genies Career Hub Support Team"
-        />
-        <meta
-          property="og:description"
-          content="Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now."
-        />
-        <meta
-          property="og:image"
-          content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
-        />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="geniescareerhub.com" />
-        <meta
-          property="twitter:url"
-          content="https://www.geniescareerhub.com/contact-us"
-        />
-        <meta
-          name="twitter:title"
-          content="Contact the Genies Career Hub Support Team"
-        />
-        <meta
-          name="twitter:description"
-          content="Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now."
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
-        />
-      </head>
       <main className="resume_dashboard">
         <div className="resume_dashboard_container">
           <div className="wrapper">

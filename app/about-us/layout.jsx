@@ -1,19 +1,39 @@
 import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import { ResumeHeader } from "../Layout/ResumeHeader";
-// export const metadata = {
-//   title: "About Us: Genies Career Hub",
-//   description:
-//     "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
-//     alternates: {
-//       canonical: "https://www.geniescareerhub.com/about-us",
-//     },
-// };
+export const metadata = {
+  title: "About Us: Genies Career Hub",
+  description:
+    "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
+  openGraph: {
+    title: "About Us: Genies Career Hub",
+    description:
+      "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
+    url: "https://www.geniescareerhub.com/about-us",
+    images: [
+      {
+        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        alt: "Genies Career Hub",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@geniescareerhub",
+    title: "About Us: Genies Career Hub",
+    description:
+      "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
+    image:
+      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+  },
+};
+
 
 const Layout = ({ children }) => {
   return (
     <>
-      <head>
+      {/* <head>
         <title>About Us: Genies Career Hub</title>
         <meta
           name="description"
@@ -50,7 +70,7 @@ const Layout = ({ children }) => {
           name="twitter:image"
           content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
         />
-      </head>
+      </head> */}
       <main className="resume_dashboard">
         <div className="resume_dashboard_container">
           <div className="wrapper">

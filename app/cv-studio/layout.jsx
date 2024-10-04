@@ -1,14 +1,34 @@
 import Head from "next/head";
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
-// export const metadata = {
-//   title: "Professional CV Studio: Genies Career Hub",
-//   description:
-//     "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
-//     alternates: {
-//       canonical: "https://www.geniescareerhub.com/cv-studio", // Adding the canonical URL
-//     },
-// };
+export const metadata = {
+  title: "Professional CV Studio: Genies Career Hub",
+  description:
+    "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
+  openGraph: {
+    title: "Professional CV Studio: Genies Career Hub",
+    description:
+      "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
+    url: "https://www.geniescareerhub.com/cv-studio",
+    images: [
+      {
+        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        alt: "Genies Career Hub",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@geniescareerhub",
+    title: "Professional CV Studio: Genies Career Hub",
+    description:
+      "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
+    image:
+      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+  },
+};
+
 
 const Layout = ({ children }) => {
   return (
