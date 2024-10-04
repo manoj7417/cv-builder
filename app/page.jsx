@@ -21,7 +21,6 @@ export default function Home() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-
   // Conditionally render content only on the client
   if (!isClient) {
     return null; // Avoid rendering anything until client-side
