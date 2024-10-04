@@ -10,7 +10,7 @@ export const metadata = {
     title: "Returns Policy: Genies Career Hub",
     description:
       "Want to register a return or exchange an unwanted purchase? Check out terms, conditions, and policies for returns for complete details regarding your purchase.",
-    url: "https://www.geniescareerhub.com/return-policy",
+    url: "/return-policy",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
