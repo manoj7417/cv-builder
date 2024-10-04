@@ -1,4 +1,5 @@
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "ATS Resume Checker | Build an ATS Enhanced Resume",
   description:
     "Use our Application Tracking System Resume Optimizer and Analyzer to create an enhanced resume with proper resume formatting and ATS CV Checker compatibility.",
@@ -9,7 +10,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/resume-analyzer",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "ATS Resume Checker",
       },
     ],
@@ -22,7 +23,7 @@ export const metadata = {
     description:
       "Use our Application Tracking System Resume Optimizer and Analyzer to create an enhanced resume with proper resume formatting and ATS CV Checker compatibility.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Professional CV Builder | Expert Curriculum Vitae Format",
   description:
     "Check out the best curriculum vitae templates that follow industry-standard CV Format and create your resume in minutes with our Curriculum Vitae CV Builder.",
@@ -10,7 +11,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/resume",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Professional CV Builder",
       },
     ],
@@ -23,7 +24,7 @@ export const metadata = {
     description:
       "Check out the best curriculum vitae templates that follow industry-standard CV Format and create your resume in minutes with our Curriculum Vitae CV Builder.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Professional CV Studio: Genies Career Hub",
   description:
     "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
@@ -12,7 +13,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/cv-studio",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Genies Career Hub",
       },
     ],
@@ -25,7 +26,7 @@ export const metadata = {
     description:
       "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 

@@ -2,6 +2,7 @@ import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Frequently Asked Questions | Genies Career Hub",
   description:
     "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
@@ -12,7 +13,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/faq",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Genies Career Hub",
       },
     ],
@@ -25,7 +26,7 @@ export const metadata = {
     description:
       "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 

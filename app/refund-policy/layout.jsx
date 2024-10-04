@@ -2,6 +2,7 @@ import Footer from "../Layout/Footer";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Refund Policy: Genies Career Hub",
   description:
     "Seeking a Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
@@ -12,7 +13,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/refund-policy",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Genies Career Hub",
       },
     ],
@@ -25,7 +26,7 @@ export const metadata = {
     description:
       "Seeking a Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 

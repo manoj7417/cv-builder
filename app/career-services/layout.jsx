@@ -11,7 +11,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/career-services",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Genies Career Hub",
       },
     ],
@@ -24,7 +24,7 @@ export const metadata = {
     description:
       "Looking for Career Services, a Life Coach, or anything else? Check out our services in AI Career Coaching, 1-to-1 Career Coaching, and the Psychometric Test Tool.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 
