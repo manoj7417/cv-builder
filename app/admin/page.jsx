@@ -446,7 +446,7 @@ const AdminPage = () => {
               {/* END-COACH 10 */}
             </div>
           </div>
-          {/* <div
+          <div
             id="right_section"
             className=" lg:col-span-4 xl:col-span-4 2xl:col-span-4 bg-white rounded-2xl p-5 drop-shadow-md"
           >
@@ -463,7 +463,7 @@ const AdminPage = () => {
                 coaches
                   .filter(
                     (coach) => coach.approvalStatus.toLowerCase() === "approved"
-                  ) 
+                  )
                   .map((coach) => (
                     <div
                       key={coach.name}
@@ -479,11 +479,10 @@ const AdminPage = () => {
                       <div className="ml-1 flex justify-between w-full">
                         <div>
                           <div className="text-[14px] font-bold text-[#092C4C]">
-                            {coach.name} 
+                            {coach.name}
                           </div>
                           <div className="text-[13px] text-[#7E92A2] mt-2">
                             {coach.typeOfCoaching}{" "}
-                           
                           </div>
                         </div>
                         <div className="text-right">
@@ -492,72 +491,6 @@ const AdminPage = () => {
                           </div>
                           <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
                             {coach.approvalStatus}{" "}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-              ) : (
-                <div className="text-center text-[#4E5566] mt-5">
-                  No coaches available.
-                </div>
-              )}
-            </div>
-          </div> */}
-          <div
-            id="right_section"
-            className="lg:col-span-4 xl:col-span-4 2xl:col-span-4 bg-white rounded-2xl p-5 drop-shadow-md"
-          >
-            <div className="bg-[#FFFFFF]">
-              <div className="flex justify-between items-center mt-2">
-                <div className="text-lg font-bold text-[#092C4C]">
-                  Approved Coaches
-                </div>
-                <div className="text-sm text-[#1D4ED8] font-semibold">
-                  View All
-                </div>
-              </div>
-
-              {/* Check if there are approved coaches */}
-              {coaches.length > 0 ? (
-                coaches
-                  .filter(
-                    (coach) => coach.approvalStatus.toLowerCase() === "approved"
-                  ) // Filter for approved coaches
-                  .map((coach) => (
-                    <div
-                      key={coach.name}
-                      className="flex flex-col sm:flex-row items-center mb-6 w-full mt-5 pr-5"
-                    >
-                      {/* Coach Image */}
-                      <div className="w-16 h-auto overflow-hidden rounded-full">
-                        <img
-                          className="h-16 w-16 rounded-full object-cover"
-                          src={coach.profileImage || "/default_coach.png"} // Use default image if none is provided
-                          alt="Coach Image"
-                        />
-                      </div>
-
-                      {/* Coach Info */}
-                      <div className="ml-4 flex-1 sm:flex justify-between items-center w-full sm:ml-5">
-                        <div className="text-center sm:text-left">
-                          <div className="text-[14px] font-bold text-[#092C4C]">
-                            {coach.name} {/* Display the coach's name */}
-                          </div>
-                          <div className="text-[13px] text-[#7E92A2] mt-2">
-                            {coach.typeOfCoaching}{" "}
-                            {/* Display the type of coaching */}
-                          </div>
-                        </div>
-
-                        {/* Price and Status */}
-                        <div className="text-center sm:text-right mt-3 sm:mt-0">
-                          <div className="text-[13px] font-bold text-[#092C4C]">
-                            {coach.price} {/* Display the coach's price */}
-                          </div>
-                          <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
-                            {coach.approvalStatus}{" "}
-                            {/* Display approval status */}
                           </div>
                         </div>
                       </div>

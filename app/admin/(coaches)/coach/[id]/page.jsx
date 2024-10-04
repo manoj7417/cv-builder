@@ -18,6 +18,8 @@ import ResumeTooltip from "@/components/component/ResumeTooltip";
 import axios from "axios";
 import { GetTokens } from "@/app/actions";
 import { toast } from "react-toastify";
+import { Input } from "@/components/ui/input";
+import ReactPlayer from "react-player";
 
 const CoachDetailsPage = () => {
   const {
@@ -35,7 +37,7 @@ const CoachDetailsPage = () => {
     isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
-  const [singleCoachData] = useState(singleCoach);
+
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter()
@@ -111,7 +113,6 @@ const CoachDetailsPage = () => {
 
   useEffect(() => {
     if (id) {
-      console.log("Filtering coach with id:", id); // Debugging log
       filterCoachById(id);
     }
   }, [id, filterCoachById]);
@@ -122,6 +123,7 @@ const CoachDetailsPage = () => {
     phone,
     bio,
     coachingDescription,
+    profileVideo,
     profileImage,
     dateofBirth,
     experience,
@@ -136,6 +138,9 @@ const CoachDetailsPage = () => {
     typeOfCoaching,
     skills,
   } = singleCoach;
+
+
+  console.log("profileVideo::",profileVideo)
 
   return (
     <>
@@ -448,6 +453,32 @@ const CoachDetailsPage = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* START- COACH INTRODUCTION VIDEO */}
+                <div className="sm:col-span-6 mt-5">
+                  <label
+                    htmlFor="profileVideo"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Profile Video
+                  </label>
+                  {/* Displaying the YouTube video using ReactPlayer */}
+                  <div className="mt-4">
+                    {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
+                      <ReactPlayer
+                        url={profileVideo?.url}
+                        controls
+                        width="100%"
+                        height="300px"
+                      />
+                    ) : (
+                      <p>
+                        Please enter a valid YouTube URL to preview the video.
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {/* END- COACH INTRODUCTION VIDEO */}
                 {/* Shadcn UI Modal for viewing PDF */}
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogContent
