@@ -1,4 +1,3 @@
-// import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 // Import Swiper styles
@@ -8,25 +7,88 @@ import "swiper/css/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Slide } from 'react-toastify';
-// import VerifyUser from "@/components/component/VerifyUser";
-
-export const metadata = {
-  title: "Professional CV Templates for Perfect CVs on Genies CV Maker",
-  description:
-    "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
-};
+import { Slide } from "react-toastify";
+import Head from "next/head";
 
 const inter = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
 });
 
-export default function RootLayout({ children }) {
+export const metadata = {
+  title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
+  description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
+  openGraph: {
+    url: 'https://www.geniescareerhub.com/',
+    type: 'website',
+    title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
+    description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
+    images: [
+      {
+        url: 'https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
+        alt: 'Genies Career Hub Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    domain: 'geniescareerhub.com',
+    url: 'https://www.geniescareerhub.com/',
+    title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
+    description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
+    image: 'https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
+  },
+};
 
+
+
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
+      <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-16573743263/_wngCMO46roZEJ-B_d49',
+      'transaction_id': '',
+      'event_callback': callback
+  });
+  return false;
+}
+            `,
+          }}
+        />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16573743263"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16573743263');
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16573743263');
+            `,
+          }}
+        />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-3864YFJZRV"
@@ -91,16 +153,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
             src="https://www.facebook.com/tr?id=452806670914263&ev=PageView&noscript=1"
           />
         </noscript>
-        {/* <title>
-          {"Professional CV Templates for Perfect CVs on Genies CV Maker"}
-        </title> */}
-        {/* <meta
-          name="description"
-          content={
-            "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."
-          }
-        /> */}
-        <link rel="canonical" href="https://geniescareerhub.com" />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WSQGHKPJ"
@@ -109,7 +161,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-      </head>
+      </Head>
       <body className={inter.className}>
         <ToastContainer
           position="top-right"

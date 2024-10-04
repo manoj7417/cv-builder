@@ -18,6 +18,8 @@ import ResumeTooltip from "@/components/component/ResumeTooltip";
 import axios from "axios";
 import { GetTokens } from "@/app/actions";
 import { toast } from "react-toastify";
+import { Input } from "@/components/ui/input";
+import ReactPlayer from "react-player";
 
 const CoachDetailsPage = () => {
   const {
@@ -35,10 +37,10 @@ const CoachDetailsPage = () => {
     isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
-  const [singleCoachData] = useState(singleCoach);
+
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const [pdfUrl, setPdfUrl] = useState("");
 
   const isCvVerified = watch("isCvVerified", singleCoach?.cv?.isVerified);
@@ -46,6 +48,7 @@ const CoachDetailsPage = () => {
     "isAgreementVerified",
     singleCoach?.signedAggrement?.isVerified
   );
+  const isVideoVerified = watch("isVideoVerified", singleCoach?.video?.isVerified);
 
   const handleApproveData = async (data) => {
     const { accessToken } = await GetTokens();
@@ -111,7 +114,6 @@ const CoachDetailsPage = () => {
 
   useEffect(() => {
     if (id) {
-      console.log("Filtering coach with id:", id); // Debugging log
       filterCoachById(id);
     }
   }, [id, filterCoachById]);
@@ -122,6 +124,7 @@ const CoachDetailsPage = () => {
     phone,
     bio,
     coachingDescription,
+    profileVideo,
     profileImage,
     dateofBirth,
     experience,
@@ -136,6 +139,8 @@ const CoachDetailsPage = () => {
     typeOfCoaching,
     skills,
   } = singleCoach;
+
+  console.log("profileVideo::", profileVideo);
 
   return (
     <>
@@ -448,6 +453,75 @@ const CoachDetailsPage = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* START- COACH INTRODUCTION VIDEO */}
+                <div className="sm:col-span-6 mt-10">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="profileVideo"
+                      className="text-xl font-bold text-gray-700"
+                    >
+                      Profile Video
+                    </label>
+                    <div className="mr-2">
+                      <p className="text-base font-medium text-gray-700">
+                        <p className="text-base font-medium text-gray-700">
+                          <div className="flex items-center space-x-2">
+                            {profileVideo?.isApproved || isVideoVerified ? (
+                              <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
+                                Approved
+                              </span>
+                            ) : (
+                              <span className="text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100">
+                                Not Approved
+                              </span>
+                            )}
+                            <label className="flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                {...register("isVideoVerified")}
+                                className="hidden"
+                              />
+                              <div
+                                className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
+                                  profileVideo?.isApproved  || isVideoVerified
+                                    ? "bg-green-600"
+                                    : ""
+                                }`}
+                              >
+                                <div
+                                  className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
+                                    profileVideo?.isApproved  ||
+                                    isVideoVerified
+                                      ? "translate-x-full"
+                                      : ""
+                                  }`}
+                                />
+                              </div>
+                            </label>
+                          </div>
+                        </p>
+                      </p>
+                    </div>
+                  </div>
+                  {/* Displaying the YouTube video using ReactPlayer */}
+                  <div className="mt-4">
+                    {profileVideo?.url &&
+                    ReactPlayer.canPlay(profileVideo?.url) ? (
+                      <ReactPlayer
+                        url={profileVideo?.url}
+                        controls
+                        width="100%"
+                        height="300px"
+                      />
+                    ) : (
+                      <p>
+                        Please enter a valid YouTube URL to preview the video.
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {/* END- COACH INTRODUCTION VIDEO */}
                 {/* Shadcn UI Modal for viewing PDF */}
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogContent

@@ -114,11 +114,15 @@ export default function DashboardIdea() {
 
   const getFeedback = async (message, token) => {
     try {
-      const response = await axios.post('/api/AnalyzeAts', { message: message }, {
-        headers: {
-          Authorization: 'Bearer ' + token
+      const response = await axios.post(
+        "/api/AnalyzeAts",
+        { message: message },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
         }
-      })
+      );
       if (response.status === 201) {
         router.push(`/analyser/${response.data.analysisId}`);
       }
@@ -177,9 +181,11 @@ export default function DashboardIdea() {
                     style={{ height: "300px" }}
                   />
                 </div>
-                Non <Link href="/resume-analyzer" className="font-bold">
+                Non{" "}
+                <Link href="/resume-analyzer" className="font-bold">
                   ATS friendly resume
-                </Link>{" "} found
+                </Link>{" "}
+                found
               </DialogTitle>
               <DialogDescription>
                 Your resume is not ATS friendly. You should use an ATS-friendly
@@ -203,9 +209,11 @@ export default function DashboardIdea() {
                 selection? Analyse your CV with our AI-based CV Optimiser and
                 get industry expertise integrated to create an Application
                 Tracking System (ATS) friendly resume and flawless application
-                profile that gets passed through <Link href="/resume-analyzer" className="font-bold">
+                profile that gets passed through{" "}
+                <Link href="/resume-analyzer" className="font-bold">
                   ATS CV checker
-                </Link>{" "}.
+                </Link>{" "}
+                .
               </p>
               <Dialog open={isServiceDialogOpen}>
                 <ServicesPopUp
@@ -248,7 +256,7 @@ export default function DashboardIdea() {
                     One Step Ahead of
                   </h2>
                   <h2 className="text-4xl lg:text-5xl font-bold  w-full pt-1  text-[#2C98CA]">
-                    CV Checker
+                    Conventional CV Checkers
                   </h2>
 
                   <p className="text-base text-black pt-10 w-[95%] sm:w-[85%] md:w-[85%] lg:w-[85%] xl:w-[85%] 2xl:w-[85%]">
@@ -261,7 +269,7 @@ export default function DashboardIdea() {
                   <p className="text-base text-black pt-10 w-[95%] sm:w-[85%] md:w-[85%] lg:w-[85%] xl:w-[85%] 2xl:w-[85%]">
                     At Genies Career Hub, we have decoded the nuances of the
                     Application Tracking Software to build a CV Optimiser that
-                    pre notifies you about potential gaps in your CV. With an
+                    pre-notifies you about potential gaps in your CV. With an
                     ATS optimised CV, you can make it to the top of the selected
                     application piles.
                   </p>
@@ -269,7 +277,7 @@ export default function DashboardIdea() {
               </div>
               <div className="max-w-7xl mx-auto lg:py-10 sm:p-5 p-5">
                 <h3 className="text-3xl text-black font-bold py-3">
-                  Optimise Your CV in 4 simple steps:
+                  Optimise Your CV in just four simple steps:
                 </h3>
                 {/* START STEPS */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 my-5">
@@ -280,7 +288,11 @@ export default function DashboardIdea() {
                         Step 1
                       </h6>
                       <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                        Go to <b>CV Optimiser</b>
+                        Tap on the{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          CV Optimiser
+                        </Link>{" "}
+                        page on the Genies Career Hub page to get a quick scan.
                       </p>
                     </div>
                   </div>
@@ -292,8 +304,11 @@ export default function DashboardIdea() {
                         Step 2
                       </h6>
                       <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                        Click on <b>Optimise CV Now</b>.<br /> Then{" "}
-                        <b>Upload your PDF</b>.
+                        Tap on the option to{" "}
+                        <Link href={"/resume-analyzer"} className="font-bold">
+                          Upload CV Now
+                        </Link>{" "}
+                        and then Upload your PDF to analyse it.
                       </p>
                     </div>
                   </div>
@@ -305,8 +320,8 @@ export default function DashboardIdea() {
                         Step 3
                       </h6>
                       <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
-                        Click on <b>FIX MY CV</b>, then
-                        <br /> <b>Optimise current resume</b>.
+                        Get the Report with a detailed analysis of the aspects
+                        of your CV with an analytical score.
                       </p>
                     </div>
                   </div>
@@ -318,8 +333,8 @@ export default function DashboardIdea() {
                         Step 4
                       </h6>
                       <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                        Make changes, if any, and then download your resume with
-                        your favorite template and color.
+                        If you wish to get a better version of your CV, tap on
+                        Fix My CV to create one!
                       </p>
                     </div>
                   </div>
@@ -330,28 +345,42 @@ export default function DashboardIdea() {
                 <div className="flex lg:flex-row flex-col gap-10 my-10">
                   <div className="lg:w-[70%] w-full steps_content">
                     <h3 className="text-3xl text-black font-bold py-3">
-                      What is an ATS Resume?
+                      What is ATS, and why do we need an ATS-friendly Resume?
                     </h3>
                     <p className="text-base py-3">
-                      Ever wonder how these recruiters segregate and prioritise
-                      CVs for the hiring process?
+                      Wondering about the segregation process during CV
+                      selection by the top recruiters across the globe? Well,
+                      they use an ATS software.
                     </p>
                     <p className="text-base py-3">
-                      The <Link href="/resume-analyzer" className="font-bold">Applicant Tracking System (ATS)</Link> is used by most
-                      companies to select CVs. The recruiter enters keywords in
-                      the ATS database. This software manages the whole
-                      recruitment process by ranking applicants&apos; CVs based
-                      on their skills, keywords, and experience.
+                      <Link href={"/resume-analyzer"} className="font-bold">
+                        Application Tracking System
+                      </Link>
+                      , alluded to as{" "}
+                      <Link href={"/resume-analyzer"} className="font-bold">
+                        ATS
+                      </Link>
+                      , is a pristine solution that scans and processes the
+                      received job applications. ATS tracks the applications by
+                      analysing the presence of relevant information and
+                      presenting the data to the employer accordingly. Based on
+                      the skills, experience, education, and more details, the
+                      system provides an extensive overview of compatible
+                      applications
                     </p>
                     <p className="text-base py-3">
-                      It organises the information of an applicant in a way that
-                      makes the recruitment process easy.
-                    </p>
-                    <p className="text-base py-3">
-                      If your resume meets these criteria, you&apos;re lucky.
-                      Genies Creer Hub has mastered this system strategy. We
-                      create an ATS-friendly resume that will attract the best
-                      recruiters.
+                      An ATS Software simplifies the recruitment process. It
+                      makes it easier for employers to find the best set of
+                      candidates who are competent for the listed job position.
+                      Resumes today need to be compatible with this system to
+                      get picked out by the ATS. Therefore, creating an{" "}
+                      <Link className="font-bold" href={"/resume-analyzer"}>
+                        ATS friendly resume
+                      </Link>{" "}
+                      is the need of the hour. Genies Career Hub has
+                      reverse-engineered this system to help you build the exact
+                      resume that will attract the recruiters for your desired
+                      job role.
                     </p>
                   </div>
                   <div className="lg:w-[30%] w-full h-auto image_content ">
@@ -374,14 +403,23 @@ export default function DashboardIdea() {
                   </div>
                   <div className="lg:w-[67%] w-full steps_content">
                     <h3 className="text-4xl text-black font-bold py-3 text-center md:text-right lg:text-right xl:text-right 2xl:text-right">
-
-                      Resume format for Applicant Tracking System
+                      How to create a Resume compatible with ATS?
                     </h3>
-                    <p className="text-sm py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left">
-                      For a successful <Link href="/resume-analyzer" className="font-bold">
-                        ATS friendly resume
-                      </Link>{" "}, you must fill out
-                      the following details individually.
+                    <p className="text-base py-3">
+                      At Genies Career Huh, we become the bridge between your
+                      career approach and the volatile job market systems. We
+                      help you understand if an ATS-friendly resume supports
+                      your job application. By analysing your CV with the help
+                      of Artificial Intelligence, trained by industry
+                      professionals especially to find gaps in your resume, we
+                      offer you insightful highlights and hints about your job
+                      application.
+                    </p>
+                    <p className="text-base py-3">
+                      But, the step prior to the optimisation is to create a
+                      resume that is at least remotely relevant to the job
+                      profile. Here is how you can make a CV that complies with
+                      the Application Tracking System’s functionality!
                     </p>
                   </div>
                 </div>
@@ -395,12 +433,12 @@ export default function DashboardIdea() {
                         Step 1
                       </h4>
                       <h3 className="text-3xl text-black  py-3">
-                        BASIC INFORMATION
+                        BASIC INFORMATION GOES IN
                       </h3>
                       <p className="text-base py-3">
-                        Please provide the basic details, such as your full
-                        name, job title, email address, valid phone number,
-                        country, and city.
+                        Get your basic details such as Name, Job Title, Email
+                        Address, Phone Number, Country, and City checked into a
+                        suitable CV template.
                       </p>
                     </div>
                     <div className="lg:w-[45%] w-full h-[250px] image_content flex flex-col justify-start items-center">
@@ -448,25 +486,31 @@ export default function DashboardIdea() {
                         Step 2
                       </h4>
                       <h3 className="text-3xl text-black  py-3">
-                        PROFILE UPDATES
+                        UPDATE THE PROFILE SECTION
                       </h3>
 
                       <p className="text-base py-3">
-                        Fill in a summary of your experiences, your education,
-                        and any skills and achievements you achieved in previous
-                        years.
-                        <br />
-                        This is a step where our unique feature of AI will help
-                        you generate a valid and professional profile for your
-                        <Link href="/resume-analyzer" className="font-bold pl-1">
-                          ATS Resume
-                        </Link>{" "}.
+                        Your CV needs an abridgment of your professional
+                        details, such as experiences, education, skills,
+                        achievements, certifications, and much more, to actually
+                        be an{" "}
+                        <Link href={"/resume-analyzer"} className="font-bold">
+                          ATS resume
+                        </Link>
+                        . The short description is fundamental as it offers a
+                        profound understanding to your employers about your
+                        professional journey. With our generate with AI option,
+                        we assist you in writing each word of this summary. All
+                        you need to do is enter basic information, such as job,
+                        profile, timeline, brief highlights, and more, and the
+                        AI will create the most fitting summary for you.
                       </p>
                       <p className="text-base py-3">
-                        You will just need to fill in some basic information,
-                        such as the job role, a summary, and a few things that
-                        will help you generate a proper profile description for
-                        your CV.
+                        With Genius Career Hub, each step in the way of a career
+                        pathway is made simpler. We uncomplicate every part of
+                        the process for you to help you build a flawless
+                        curriculum that passes through every ATS scan and
+                        impresses each recruiter whose eyes it meets.
                       </p>
                     </div>
                   </div>
@@ -497,12 +541,19 @@ export default function DashboardIdea() {
                       <h4 className="font-bold text-black text-2xl italic">
                         Step 3
                       </h4>
-                      <h3 className="text-3xl text-black  py-3">EDUCATION </h3>
+                      <h3 className="text-3xl text-black  py-3">
+                        ADD YOUR EDUCATIONAL BACKGROUND
+                      </h3>
                       <p className="text-base py-3">
-                        The next step is to fill in your educational details,
-                        where you will state the name of the institutions you
-                        have studied at, the degree name, and a brief
-                        description of your experience.
+                        The next step in the process is to add your educational
+                        background. In this section, you can mention the course
+                        you have pursued, the affiliated institutions, and a
+                        concise description of your academic experiences.
+                      </p>
+                      <p className="text-base py-3">
+                        Using relevant keywords pertaining to job profile and
+                        educational relevance is exactly how your resume becomes
+                        compatible with the ATS intricacies.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent">
@@ -555,11 +606,17 @@ export default function DashboardIdea() {
                       <h4 className="font-bold text-black text-2xl italic">
                         Step 4
                       </h4>
-                      <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3>
+                      <h3 className="text-3xl text-black  py-3">
+                        HIGHLIGHT PROFESSIONAL EXPERIENCES
+                      </h3>
                       <p className="text-base py-3">
-                        The next step asks about your experience over the years.
-                        Fill in specific information like the job title, the
-                        employer, and a brief description of the experience.
+                        In a chronological or reverse chronological order, you
+                        must fill in your professional experiences. Over the
+                        years, the kind of cognizance you have gained at your
+                        workspace must go in here. Add the essential details
+                        such as job, title, employer, and specific description
+                        of the experience to make this section professionally
+                        richer.
                       </p>
                     </div>
                   </div>
@@ -596,15 +653,15 @@ export default function DashboardIdea() {
                         Step 5
                       </h4>
                       <h3 className="text-3xl text-black  py-3">
-                        PROJECTS, SKILLS AND HOBBIES
+                        PROJECTS, SKILLS, AND INTERESTS
                       </h3>
                       <p className="text-base py-3">
-                        projects, skills, and hobbies you have done and even
-                        describe them in the description.
-                      </p>
-                      <p className="text-base py-3">
-                        These skills inform the employer about extracurriculars
-                        other than your job role, so fill it cautiously.
+                        To make your CV more exciting and insightful, add the
+                        details of the projects you have undertaken so far, the
+                        skills that you have acquired, and the interests that
+                        you have. Employers can assess your competency to fit
+                        into the organisation and your possible compatibility
+                        with the present team.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent">
@@ -659,16 +716,16 @@ export default function DashboardIdea() {
                         Step 6
                       </h4>
                       <h3 className="text-3xl text-black  py-3">
-                        AWARDS, CERTIFICATES AND LANGUAGE
+                        AWARDS, REFERENCES, CERTIFICATIONS, AND LANGUAGES
                       </h3>
                       <p className="text-base py-3">
-                        If you have received any awards or certificates
-                        previously, write them here.
-                      </p>
-                      <p className="text-base py-3">
-                        If you know other languages, do mention them. This helps
-                        and increases your chances of getting better
-                        opportunities.
+                        Creating a CV that is fun and functional at the same
+                        time is precisely what you need to do. Hence, you can
+                        add awards, professional references, essential
+                        certifications, and language proficiencies to balance
+                        out your CV. Resumes with complete details impose good
+                        Imp ion on employers and widen the range of keywords
+                        that the ATS software is precisely looking for.
                       </p>
                     </div>
                   </div>
@@ -683,36 +740,49 @@ export default function DashboardIdea() {
 
                 <div className="step_7 w-[80%]">
                   <h3 className="text-4xl text-black font-bold py-3">
-                    Your ATS Resume Decoded
+                    YOUR ATS RESUME SCORE DECODED
                   </h3>
                   <p className="text-base py-3">
-                    Our <Link href="/resume-analyzer" className="font-bold">
+                    Are{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
                       enhanced CV
-                    </Link>{" "} maker is a tool that transforms your
-                    existing resume into an <Link href="/resume-analyzer" className="font-bold">
-                      Application Tracking System Resume
-                    </Link>{" "}.
-                    Genies Career Hub provides you with a transformation in a
-                    <Link href="/resume-analyzer" className="font-bold">resume ATS format</Link> by giving you an ATS score. This score
-                    will help the resume get in a higher rank and will be placed
-                    above other people&apos;s CVs
+                    </Link>{" "}
+                    Creator helps you create a resume that is not only effulgent
+                    but also efficacious. But our CV Optimiser translates your
+                    present resume into an{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      application tracking system resume
+                    </Link>
+                    . We provide you with an ATS score that helps you analyse
+                    your resume quickly. We identify your gaps, constructively
+                    criticize the content, and judge the relevance of your{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      resume
+                    </Link>{" "}
+                    as per the{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      ATS format
+                    </Link>
+                    . Higher the score, the higher the chances of your CV making
+                    it through the initial rounds of selection.
                   </p>
                   <p className="text-base py-3">
-                    Analyse your <Link href="/resume-analyzer" className="font-bold">
-                      ATS Resume
-                    </Link>{" "} with 3-level optimisation.
-                  </p>
-                  <p className="text-base py-3">
-                    Optimise your <Link href="/resume-analyzer" className="font-bold">
-                      Resume format
-                    </Link>{" "} Clarity, Relevance,  and Content
-                    with AI.
+                    We analyse your resume in three simple aspects. Further, we
+                    help you optimise your{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      resume format
+                    </Link>{" "}
+                    in these domains. To build an{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      ATS resume
+                    </Link>
+                    , your CV must excel in all three of these sections.
                   </p>
                 </div>
                 {/*  */}
                 <div className="max-w-7xl mx-auto mt-5 mb-10">
                   <h3 className="text-3xl text-black font-bold py-3">
-                    Our 3-level optimisation checker-
+                    A LEVELLING APPROACH TO CV OPTIMISATION
                   </h3>
 
                   {/* START- OUR THREE LEVEL OPTIMIZATION CHECKER */}
@@ -724,8 +794,8 @@ export default function DashboardIdea() {
                           1. CLARITY
                         </h6>
                         <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                          Gives you clarity of your resume in a clear and concise
-                          manner
+                          Gives you clarity of your resume in a clear and
+                          concise manner
                         </p>
                       </div>
                     </div>
@@ -755,8 +825,6 @@ export default function DashboardIdea() {
                         </p>
                       </div>
                     </div>
-
-
                   </div>
                   {/* END- OUR THREE LEVEL OPTIMIZATION CHECKER */}
                 </div>
@@ -766,18 +834,24 @@ export default function DashboardIdea() {
                   <div className="pro_image relative">
                     <img src="/pro-tips.png" alt="pro-tips" />
                     <p className="text-[#FE2E12] font-bold absolute top-3 left-8 text-xl">
-                      Pro Tips !
+                      Pro Tip !
                     </p>
                   </div>
                   <p className="text-lg px-5">
-                    Wish you had a better <Link href="/resume-analyzer" className="font-bold">
+                    Bothered by a low{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
                       ATS System
-                    </Link>{" "} Friendly Score! Do it right
-                    away. Our Optimiser results show your score and suggestions
-                    in <Link href="/resume-analyzer" className="font-bold">resume ATS format</Link>. Follow the tips, and you can increase
-                    your <Link href="/resume-analyzer" className="font-bold">
-                      ATS Resume
-                    </Link>{" "} score.
+                    </Link>{" "}
+                    Score? Hike it right away. Rectify your CV by working out
+                    the Optimiser&#39;s suggestions in your current{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      resume ATS format
+                    </Link>{" "}
+                    and increase your{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      ATS resume score
+                    </Link>{" "}
+                    in no time!
                   </p>
                 </div>
                 {/*  */}
@@ -787,20 +861,23 @@ export default function DashboardIdea() {
                     <div className="lg:w-[50%] w-full steps_content order-first lg:order-first ">
                       {/* <h4 className="font-bold text-black text-2xl">Step 6</h4> */}
                       <h3 className="text-3xl text-black font-bold py-3">
-                        How to use our CV checker?
+                        HERE&#39;S HOW CV OPTIMISER HELPS YOU
                       </h3>
+                      <p className="text-base py-3 font-medium">
+                        Want to build a flawless CV? This is how our CV
+                        Optimiser can assist you detect gaps in your resume and
+                        optimise it thoroughly for the Application Tracking
+                        Systems.
+                      </p>
 
                       <p className="text-base py-3 font-bold">
-                        1. Go to CV Studio to Optimise Your CV and Click
-                        Optimise CV Now. Upload Your Resume in PDF Form.
+                        1.Head to the CV Studio to open up the CV Optimiser. Tap
+                        on the option to Optimise CV Now and upload your CV in
+                        the pdf format.
                       </p>
                       <p className="text-sm py-3">
-                        Need an <Link href="/resume-analyzer" className="font-bold">
-                          enhanced resume
-                        </Link>{" "}? You can go to the CV Creator
-                        and prepare your <Link href="/resume-analyzer" className="font-bold">
-                          ATS Resume
-                        </Link>{" "} in 4 easy steps.
+                        Can&#39;t find a CV pdf upload? Use our CV Creator and
+                        create your resume instantly!
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent">
@@ -820,21 +897,24 @@ export default function DashboardIdea() {
                   <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                     <div className="lg:w-[50%] w-full steps_content">
                       <p className="text-base py-3 font-bold">
-                        2. Check the <Link href="/resume-analyzer" className="font-bold">
-                          Resume format
-                        </Link>{" "} ATS Score in the CV Insights
+                        2.Wait for the magic to unfurl and check your{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          ATS score
+                        </Link>{" "}
+                        in the CV insights section
                       </p>
                       <p className="text-sm py-3">
-                        You must upload your resume in Optimise CV Now and let
-                        the AI analyse the score. Your ATS score will appear at
-                        the top. Our CV Optimiser will also provide you with
-                        feedback based on the clarity, relevance, and quality of
-                        the content.
-                      </p>
-                      <p className="text-sm py-3">
-                        Our optimiser gives decent feedback and suggestions on
-                        how to improve the score. It will guide you by
-                        suggesting essential points to <Link href="/resume-analyzer" className="font-bold">enhance resume</Link>.
+                        The uploaded CV will be carefully analysed by the
+                        Artificial Intelligence that is integrated into the CV
+                        Optimiser. With a quick scan, we will decode every
+                        aspect of your resume to check its compatibility with
+                        the leading Application Tracking Systems employed by
+                        recruiters across the globe in order to manage job
+                        applications. The analysed document shall be ramified
+                        into three aspects: Clarity, Relevance, and Content. A
+                        complete percentage-wise score shall be reflected on
+                        your screen that will provide you a remote insight into
+                        your CV&#39;s compatibility and impressionable status.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent  order-last lg:order-first">
@@ -850,27 +930,25 @@ export default function DashboardIdea() {
                 </div>
                 {/*  */}
                 {/*step-3  */}
-                <div className="step_6 relative">
+                {/* <div className="step_6 relative">
                   <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                     <div className="lg:w-[50%] w-full steps_content order-first lg:order-first ">
                       <p className="text-base py-3 font-bold">
-                        3. Review Your <Link href="/resume-analyzer" className="font-bold">
-                          ATS Resume
-                        </Link>{" "} Feedback or Suggestions and
-                        Start Making Corrections
+                        3.Check out the detailed pointers to get a profound
+                        understanding of your CV's status.
                       </p>
                       <p className="text-base py-3">
-                        Our CV Optimiser will provide recommendations to improve
-                        your <Link href="/resume-analyzer" className="font-bold">
-                          enhanced CV
-                        </Link>{" "}, increasing your chances of getting
-                        hired.
-                      </p>
-                      <p className="text-base py-3">
-                        Go thoroughly through the issues in recommendations, and
-                        accordingly make changes in your <Link href="/resume-analyzer" className="font-bold">
-                          ATS Resume
-                        </Link>{" "}.
+                        In all three aspects, Clarity, Relevance, and Content,
+                        we break down the format, correctness, and written
+                        content, respectively, to help you with suggestions on
+                        how to improve the quality of your job application. The
+                        suggestions will help you rectify and create a resume
+                        that entirely stands out. You can review all the
+                        pointers to create an{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          enhanced resume
+                        </Link>{" "}
+                        and increase your chances of getting hired.
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center  lg:bg-transparent ">
@@ -893,25 +971,80 @@ export default function DashboardIdea() {
                       </div>
                     </div>
                   </div>
+                </div> */}
+                <div className="step_6 relative">
+                  <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
+                    {/* Content Section */}
+                    <div className="lg:w-[50%] w-full steps_content order-first lg:order-first">
+                      <p className="text-base py-3 font-bold">
+                        3. Check out the detailed pointers to get a profound
+                        understanding of your CV&#39;s status.
+                      </p>
+                      <p className="text-base py-3">
+                        In all three aspects, Clarity, Relevance, and Content,
+                        we break down the format, correctness, and written
+                        content, respectively, to help you with suggestions on
+                        how to improve the quality of your job application. The
+                        suggestions will help you rectify and create a resume
+                        that entirely stands out. You can review all the
+                        pointers to create an{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          enhanced resume
+                        </Link>{" "}
+                        and increase your chances of getting hired.
+                      </p>
+                    </div>
+
+                    {/* Image Section */}
+                    <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent">
+                      <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-5 justify-center items-center">
+                        <img
+                          src="/profile_clarity_ats.png"
+                          alt="icon1"
+                          className="w-[150px] h-[150px] object-cover"
+                        />
+                        <img
+                          src="/profile_relevance_ats.png"
+                          alt="icon2"
+                          className="w-[150px] h-[150px] object-cover"
+                        />
+                        <img
+                          src="/profile_content_ats.png"
+                          alt="icon3"
+                          className="w-[150px] h-[150px] object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
                 {/*  */}
                 {/*step-4  */}
                 <div className="step_6 relative">
                   <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
                     <div className="lg:w-[50%] w-full steps_content order-last lg:order-first ">
                       <p className="text-base py-3 font-bold">
-                        4. Click on Fix My CV to Make Changes Manually.
+                        4.Want to incorporate all the suggestions? Let us do
+                        that for you. Just tap on Fix My CV!
                       </p>
                       <p className="text-sm py-3">
-                        Make changes to your ATS-friendly resume by following
-                        the recommendations that will make the CV an <Link href="/resume-analyzer" className="font-bold">enhanced
-                          CV</Link>, and achieve a more significant ATS score.
-                      </p>
-                      <p className="text-sm py-3">
-                        Take an overview of the details, the content, the
-                        templates, and the color at the end. Make changes
+                        Make changes to your{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          ATS-friendly resume
+                        </Link>{" "}
+                        by following the recommendations that will make the CV
+                        an{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          enhanced CV
+                        </Link>
+                        , and achieve a more significant{" "}
+                        <Link className="font-bold" href={"/resume-analyzer"}>
+                          ATS score
+                        </Link>
+                        . Take an overview of the details, the content, the
+                        templates, and the colour at the end. Make changes
                         according to your preferences, and you will be able to
-                        download the improvised resume quickly.
+                        download the improvised resume quickly
                       </p>
                     </div>
                     <div className="lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent hidden lg:block"></div>
@@ -923,16 +1056,17 @@ export default function DashboardIdea() {
                   <div className="pro_image relative">
                     <img src="/pro-tips.png" alt="pro-tips" />
                     <p className="text-[#FE2E12] font-bold absolute top-3 left-8 text-xl">
-                      Pro Tips !
+                      Pro Tip !
                     </p>
                   </div>
                   <p className="text-lg px-5">
-                    If you wish to recheck your resume for a better score after
-                    making the changes once, just upload your improvised CV to
-                    our <Link href="/resume-analyzer" className="font-bold">
-                      ATS CV checker
-                    </Link>{" "}. Then, make more improvements with
-                    suggestions and download the resume.
+                    To check the optimisation score of your rectified CV, rescan
+                    it through the{" "}
+                    <Link className="font-bold" href={"/resume-analyzer"}>
+                      ATS CV Checker
+                    </Link>
+                    . Get the confirmation of your CV&#39;s compatibility before you
+                    finally send it to the recruiters.
                   </p>
                 </div>
                 {/*  */}
@@ -941,38 +1075,43 @@ export default function DashboardIdea() {
                 <div className="flex lg:flex-row flex-col gap-10 my-10">
                   <div className="lg:w-[60%] w-full steps_content">
                     <h3 className="text-3xl text-black font-bold py-3">
-                      Is our ATS Resume Checker successful in Improving the ATS
-                      Score?
+                      How successfully can we help you in optimising your CV and
+                      improve the ATS Score?
                     </h3>
                     <p className="text-base py-3">
-                      Yes, Genies Career Hub provides job-seekers with a chance
-                      to improve their <Link href="/resume-analyzer" className="font-bold">
+                      Genies Career Hub&#39;s CV Optimiser is built around the
+                      recruiting standards prevalent globally. We are determined
+                      to provide job-seekers with an opportunity to improve
+                      their{" "}
+                      <Link className="font-bold" href={"/resume-analyzer"}>
                         ATS Resume
-                      </Link>{" "} scores. This <Link href="/resume-analyzer" className="font-bold">
+                      </Link>{" "}
+                      scores. The{" "}
+                      <Link className="font-bold" href={"/resume-analyzer"}>
                         ATS CV checker
                       </Link>{" "}
-                      analyses your resume with AI and then bifurcates it based
-                      on the clarity, relevance, and content of your resume
-                      format.
+                      follows an analytical approach while dissecting the
+                      resumes. It carefully examines your resume with the help
+                      of Artificial Intelligence. The three traits, Clarity,
+                      Relevance, and Content of your resume tell you about the
+                      comprehensibility of your curriculum vitae.
                     </p>
                     <p className="text-base py-3">
-                      After breaking down these into three, our optimiser gives
-                      insights into the areas of improvement to increase each of
-                      the scores. These insights can be some keywords or
-                      specific details similar to your job profile meeting
-                      industry standards.
+                      After an intricate analysis, we help you with insights
+                      into the key areas of improvement. This can either be
+                      keywords or particulars referring to your job profile or
+                      resume format&#39;s compatibility. By integrating these
+                      suggestions, you can quickly improve your{" "}
+                      <Link className="font-bold" href={"/resume-analyzer"}>
+                        ATS scores
+                      </Link>
                     </p>
                     <p className="text-base py-3">
-                      By following the insights and making changes, you can
-                      re-assess your <Link href="/resume-analyzer" className="font-bold">
-                        ATS Resume
-                      </Link>{" "} score and witness the change in
-                      score.
-                    </p>
-                    <p className="text-base py-3">
-                      For a clear picture, we have provided an example of
-                      witnessing the score change after following some
-                      instructions.
+                      This structured strategy accurately optimises resumes,
+                      confirming our CV Optimiser as one of the prime tools in
+                      the CV-building process. We secure that your CV is
+                      entirely consistent and impressive to help you bag the job
+                      you are eyeing!
                     </p>
                   </div>
                   <div className="lg:w-[40%] w-full h-auto image_content">

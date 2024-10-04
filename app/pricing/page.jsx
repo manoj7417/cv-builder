@@ -1,5 +1,4 @@
 /** @format */
-
 "use client";
 import { CardDescription } from "@/components/ui/card";
 import Image from "next/image";
@@ -142,7 +141,6 @@ const PricingFunc = () => {
     "bg-[#75009E]",
     "bg-[#D10000]",
   ];
-
   const handleOpenAIDialog = (cardData) => {
     const planName = cardData.planName;
     const pricing = PricingData[planName][geoinfo.currency || "USD"];
