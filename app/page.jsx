@@ -29,49 +29,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <head>
-        <title>
-          Professional CV Templates for Perfect CVs on Genies CV Maker
-        </title>
-        <meta
-          name="description"
-          content="Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."
-        />
-        <link rel="canonical" href="https://www.geniescareerhub.com" />
-        <meta property="og:url" content="https://www.geniescareerhub.com/" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Professional CV Templates for Perfect CVs on Genies CV Maker"
-        />
-        <meta
-          property="og:description"
-          content="Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."
-        />
-        <meta
-          property="og:image"
-          content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
-        />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="geniescareerhub.com" />
-        <meta
-          property="twitter:url"
-          content="https://www.geniescareerhub.com/"
-        />
-        <meta
-          name="twitter:title"
-          content="Professional CV Templates for Perfect CVs on Genies CV Maker"
-        />
-        <meta
-          name="twitter:description"
-          content="Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role."
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
-        />
-      </head> */}
       <main>
         {isLoading ? (
           <LoaderUI />

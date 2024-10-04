@@ -12,7 +12,6 @@ const AdminPage = () => {
 
   // return <div>AdminPage</div>;
   const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
-  console.log("coaches::", coaches);
   const { userdata } = useUserStore((state) => state.userState);
   useEffect(() => {
     fetchAllCoaches(); // Fetch coaches when the component mounts
@@ -153,12 +152,9 @@ const AdminPage = () => {
                     pending: "bg-yellow-500 text-black",
                     cancelled: "bg-red-500 text-white",
                   };
-
-                  // Capitalize the first letter of the approval status
                   const capitalizedStatus =
                     coach.approvalStatus.charAt(0).toUpperCase() +
                     coach.approvalStatus.slice(1).toLowerCase();
-
                   return (
                     <div
                       key={coach.name}
@@ -168,7 +164,7 @@ const AdminPage = () => {
                         <div className="pt-3 pb-3">
                           <img
                             className="h-16 w-16 rounded-full object-cover"
-                            src={coach.profileImage || "/default_coach.png"} // Use a default image if none is provided
+                            src={coach.profileImage || "/default_coach.png"}
                             alt="Coach Image"
                           />
                         </div>

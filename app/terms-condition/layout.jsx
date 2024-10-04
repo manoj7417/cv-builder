@@ -9,7 +9,7 @@ export const metadata = {
     title: "Terms and Conditions: Genies Career Hub",
     description:
       "Read the important terms and conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction.",
-    url: "https://www.geniescareerhub.com/terms-condition",
+    url: "/terms-condition",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75", // Path is relative
