@@ -9,7 +9,7 @@ export const metadata = {
     title: "Privacy Policy Details | Genies Career Hub",
     description:
       "Check out the Privacy Policy details of the Genies Career Hub to know everything about how we collect, use, and share your personal information and data.",
-    url: "https://www.geniescareerhub.com/privacy-policy",
+    url: "/privacy-policy",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",

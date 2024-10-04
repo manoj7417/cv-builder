@@ -10,7 +10,7 @@ export const metadata = {
     title: "Professional CV Studio: Genies Career Hub",
     description:
       "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
-    url: "https://www.geniescareerhub.com/cv-studio",
+    url: "/cv-studio",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",

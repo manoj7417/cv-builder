@@ -10,7 +10,7 @@ export const metadata = {
     title: "Contact the Genies Career Hub Support Team",
     description:
       "Looking for more or seeking a solution for your education problems? Contact us personally and get more information and support on Genies Career Hub now.",
-    url: "https://www.geniescareerhub.com/contact-us",
+    url: "/contact-us",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",

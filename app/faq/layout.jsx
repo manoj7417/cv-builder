@@ -10,7 +10,7 @@ export const metadata = {
     title: "Frequently Asked Questions | Genies Career Hub",
     description:
       "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
-    url: "https://www.geniescareerhub.com/faq",
+    url: "/faq",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",

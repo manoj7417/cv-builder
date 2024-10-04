@@ -9,7 +9,7 @@ export const metadata = {
     title: "Cookies & Tracking Policy: Genies Career Hub",
     description:
       "Check out all the details about the Cookies and Trackers that the Genies Career Hub platform employs in order to process your personal data and information.",
-    url: "https://www.geniescareerhub.com/cookies-tracking-policy",
+    url: "/cookies-tracking-policy",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",

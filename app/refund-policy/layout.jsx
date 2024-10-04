@@ -10,7 +10,7 @@ export const metadata = {
     title: "Refund Policy: Genies Career Hub",
     description:
       "Seeking a Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
-    url: "https://www.geniescareerhub.com/refund-policy",
+    url: "/refund-policy",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",

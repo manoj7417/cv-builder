@@ -7,12 +7,12 @@ import Image from "next/image";
 
 import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { useUserStore } from "@/app/store/UserStore";
+import Link from "next/link";
 const AdminPage = () => {
   //console.log("Admin Page")
 
   // return <div>AdminPage</div>;
   const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
-  console.log("coaches::", coaches);
   const { userdata } = useUserStore((state) => state.userState);
   useEffect(() => {
     fetchAllCoaches(); // Fetch coaches when the component mounts
@@ -116,7 +116,7 @@ const AdminPage = () => {
             </div>
             <div className="flex justify-between w-full mt-7">
               <div className="text-[40px] font-bold text-[#092C4C]">
-                {coaches.length}
+                {coaches?.length}
               </div>
               <div>
                 <Image
@@ -145,7 +145,7 @@ const AdminPage = () => {
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 gap-4 pt-3 bg-white ">
-              {coaches.length > 0 ? (
+              {coaches?.length > 0 ? (
                 coaches.slice(0, 10).map((coach) => {
                   // Define button styles based on approval status
                   const buttonStyle = {
@@ -153,12 +153,9 @@ const AdminPage = () => {
                     pending: "bg-yellow-500 text-black",
                     cancelled: "bg-red-500 text-white",
                   };
-
-                  // Capitalize the first letter of the approval status
                   const capitalizedStatus =
                     coach.approvalStatus.charAt(0).toUpperCase() +
                     coach.approvalStatus.slice(1).toLowerCase();
-
                   return (
                     <div
                       key={coach.name}
@@ -168,7 +165,7 @@ const AdminPage = () => {
                         <div className="pt-3 pb-3">
                           <img
                             className="h-16 w-16 rounded-full object-cover"
-                            src={coach.profileImage || "/default_coach.png"} // Use a default image if none is provided
+                            src={coach.profileImage || "/default_coach.png"}
                             alt="Coach Image"
                           />
                         </div>
@@ -179,13 +176,14 @@ const AdminPage = () => {
                           {coach.typeOfCoaching}
                         </div>
                         <div className="pt-2 pb-3 text-[#4E5566]">
-                          <button
+                          <Link
+                            href={`/admin/coach`}
                             className={`border p-1 text-[12px] rounded-md ${
                               buttonStyle[coach.approvalStatus.toLowerCase()]
                             }`}
                           >
                             {capitalizedStatus}
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -211,7 +209,7 @@ const AdminPage = () => {
                   View All
                 </div>
               </div>
-              {coaches.length > 0 ? (
+              {coaches?.length > 0 ? (
                 coaches
                   .filter(
                     (coach) => coach.approvalStatus.toLowerCase() === "approved"
@@ -223,26 +221,26 @@ const AdminPage = () => {
                     >
                       <div className="w-16 h-auto overflow-hidden rounded-full">
                         <img
-                          className="h-16 w-16 rounded-full object-cover"
+                          className="xl:h-14 xl:w-16 w-12 h-12 rounded-full object-cover"
                           src={coach.profileImage || "/default_coach.png"}
                           alt="Coach Image"
                         />
                       </div>
                       <div className="ml-1 flex justify-between w-full">
                         <div>
-                          <div className="text-[14px] font-bold text-[#092C4C]">
+                          <div className="xl:text-[14px] text-[12px] font-bold text-[#092C4C]">
                             {coach.name}
                           </div>
-                          <div className="text-[13px] text-[#7E92A2] mt-2">
+                          <div className="xl:text-[14px] text-[12px] text-[#7E92A2] xl:mt-2 mt-0">
                             {coach.typeOfCoaching}{" "}
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-[13px] font-bold text-[#092C4C]">
+                          <div className="xl:text-[14px] text-[12px] font-bold text-[#092C4C]">
                             {coach.price}
                           </div>
-                          <div className="text-[13px] text-[#18A53F] mt-2 font-bold">
-                            {coach.approvalStatus}{" "}
+                          <div className="xl:text-[14px] text-[12px] text-[#18A53F] xl:mt-2 mt-0 font-bold uppercase">
+                            {coach.approvalStatus}
                           </div>
                         </div>
                       </div>

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Pricing: Genies Career Hub",
   description:
     "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
@@ -9,10 +10,10 @@ export const metadata = {
     title: "Pricing: Genies Career Hub",
     description:
       "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
-    url: "https://www.geniescareerhub.com/pricing",
+    url: "/pricing",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Genies Career Hub",
       },
     ],
@@ -25,7 +26,7 @@ export const metadata = {
     description:
       "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 

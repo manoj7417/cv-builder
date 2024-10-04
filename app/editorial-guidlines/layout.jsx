@@ -10,7 +10,7 @@ export const metadata = {
     title: "Editorial Guidelines: Genies Career Hub",
     description:
       "Know everything about the Brand’s style, structure, and strategy consistency of the Genies Career Hub as you join our prestigious community of Professionals.",
-    url: "https://www.geniescareerhub.com/editorial-guidlines",
+    url: "/editorial-guidlines",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
