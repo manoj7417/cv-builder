@@ -15,7 +15,6 @@ export default function Home() {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -30,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <head>
+      {/* <head>
         <title>
           Professional CV Templates for Perfect CVs on Genies CV Maker
         </title>
@@ -72,7 +71,7 @@ export default function Home() {
           name="twitter:image"
           content="https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75"
         />
-      </head>
+      </head> */}
       <main>
         {isLoading ? (
           <LoaderUI />
