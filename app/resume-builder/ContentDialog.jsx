@@ -3,11 +3,10 @@ import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
-import { FaFilePdf, FaUserCircle } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { GetTokens } from "../actions";
 import { toast } from "react-toastify";
-import { printResume } from "../api/api";
 import { funfacts } from "@/constants/funfacts";
 import Loader1 from "@/public/animations/downloadLoader1.json";
 import Loader2 from "@/public/animations/downloadLoader2.json";
@@ -41,6 +40,7 @@ import Link from "next/link";
 import { useUserStore } from "../store/UserStore";
 import { convert } from "html-to-text";
 import ServicesPopUp from "@/components/component/ServicesPopUp";
+import axios from "axios";
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 const images = [
@@ -243,24 +243,24 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     setIsLoading(true);
 
     try {
-      const response = await printResume(body, token);
-      if (response.ok) {
+      const response = await axios.post('/api/printResume', body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (response.status === 200) {
         generateFunfact();
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "generated.pdf";
-        a.target = "_blank";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'generated.pdf';
+        link.click();
         return;
       }
-      const res = await response.json();
+      
+    } catch (error) {
       if (
-        response.status === 403 &&
+        error?.response?.status === 403 &&
         res.message === "You are not eligible for this feature"
       ) {
         toast.info("Subscribe to Genies Pro Suite to download your CV.", {
@@ -271,23 +271,21 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
       }
 
       if (
-        response.status === 403 &&
+        error?.response?.status === 403 &&
         res.message === "Your download CV tokens have expired"
       ) {
         toast.info("Your plan validity has expired.", { autoclose: 3000 });
         return router.push("/pricing?scroll=1");
       }
       if (
-        response.status === 403 &&
+        error?.response?.status === 403 &&
         res.message === "You have no download CV tokens"
       ) {
         setIsServiceDialogOpen(true);
       }
-      if (response.status === 500) {
+      if (error?.response?.status === 500) {
         toast.error("Error downloading your CV , Please try again later");
       }
-    } catch (error) {
-      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }

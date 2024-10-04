@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getCareerCounselling } from "../api/api";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CustomLoader from "../ui/CustomLoader";
@@ -8,6 +7,7 @@ import Image from "next/image";
 import { GetTokens } from "../actions";
 import { useUserDataStore } from "@/app/store/useUserDataStore";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 export default function UserData() {
   const [isValid, setIsValid] = useState(false);
@@ -64,7 +64,11 @@ export default function UserData() {
       try {
         const { accessToken } = await GetTokens();
         const token = accessToken.value;
-        const data = await getCareerCounselling(bioData, token);
+        const data = await axios.post('/api/getCareerCounselling', bioData, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const answerData = data?.data;
         setAnswers(answerData);
         setContentType("generateQuestions");

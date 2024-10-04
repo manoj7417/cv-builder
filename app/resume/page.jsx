@@ -23,7 +23,6 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
-import { createNewResume } from "../api/api";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import ServicesPopIp from "@/components/component/ServicesPopUp";
 import ServicesPopUp from "@/components/component/ServicesPopUp";

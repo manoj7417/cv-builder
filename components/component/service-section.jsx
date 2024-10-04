@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { GiMagicLamp } from "react-icons/gi";
 import { FiBox } from "react-icons/fi";
 import { useRef, useState } from "react";
-import { sendSubscribeEmail } from "@/app/api/api";
 import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/app/store/UserStore";
@@ -22,10 +21,7 @@ export function ServiceSection() {
 
   const handleSubscribe = async () => {
     const { accessToken } = await GetTokens();
-    // if (!accessToken) {
-    //   router.push("/login");
-    //   return;
-    // }
+
 
     if (!email.current.value) {
       setEmailError(true);

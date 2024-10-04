@@ -13,12 +13,12 @@ import { IoIosStar } from "react-icons/io";
 import { templateType } from "./Slider";
 import { Button } from "../ui/button";
 import { ImSpinner8 } from "react-icons/im";
-import { createNewResume } from "@/app/api/api";
 import { GetTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
+import axios from "axios";
 
 function ImageCarousel({ data }) {
 
@@ -39,7 +39,7 @@ function ImageCarousel({ data }) {
     }
     setIsLoading(true);
     try {
-      const response = await createNewResume(accessToken.value, template);
+      const response = await axios.post("/api/createNewResume", { template }, { headers: { Authorization: `Bearer ${accessToken?.value}` } });
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);

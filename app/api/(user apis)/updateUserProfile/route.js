@@ -3,7 +3,12 @@ import { serverInstance } from '@/lib/serverApi';
 export async function PATCH(req, res) {
     try {
         const { data } = await req.json();
-        const response = await serverInstance.post('/user/update/userprofiledetails', data);
+        const token = req.headers.get('Authorization');
+        const response = await serverInstance.patch('/user/update/userprofiledetails', data, {
+            headers: {
+                'Authorization': token
+            }
+        });
         return new Response(JSON.stringify(response.data), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
