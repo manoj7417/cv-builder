@@ -1,5 +1,5 @@
 import { GetTokens } from "@/app/actions"
-import { instance } from "@/app/api/api"
+import axios from "axios";
 import debounce from "lodash.debounce"
 
 
@@ -7,7 +7,7 @@ export const updateResume = async (data) => {
     const { accessToken } = await GetTokens()
     if (!data._id) return;
     try {
-        const response = await instance.patch(`/resume/update/${data._id}`, { data: data.data }, {
+        const response = await axios.patch(`/api/updateResume/${data._id}`, { data: data.data }, {
             headers: {
                 Authorization: `Bearer ${accessToken.value}`
             }
@@ -16,7 +16,5 @@ export const updateResume = async (data) => {
         console.log(error)
     }
 }
-
-
 
 export const debouncedUpdateResume = debounce(updateResume, 500)
