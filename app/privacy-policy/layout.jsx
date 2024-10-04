@@ -1,6 +1,7 @@
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Privacy Policy Details | Genies Career Hub",
   description:
     "Check out the Privacy Policy details of the Genies Career Hub to know everything about how we collect, use, and share your personal information and data.",
@@ -11,7 +12,7 @@ export const metadata = {
     url: "https://www.geniescareerhub.com/privacy-policy",
     images: [
       {
-        url: "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+        url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
         alt: "Genies Career Hub",
       },
     ],
@@ -24,7 +25,7 @@ export const metadata = {
     description:
       "Check out the Privacy Policy details of the Genies Career Hub to know everything about how we collect, use, and share your personal information and data.",
     image:
-      "https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
 };
 
