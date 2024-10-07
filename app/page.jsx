@@ -9,6 +9,7 @@ import { useUserStore } from "./store/UserStore";
 import { ResumeHeader } from "./Layout/ResumeHeader";
 import Head from "next/head";
 
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { userState, loginUser, logoutUser } = useUserStore();
