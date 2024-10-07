@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "cross-env APP_ENV=production node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
+    "start": "cross-env NODE_ENV=production next start"
   },
   "dependencies": {
     "@alptugidin/react-circular-progress-bar": "^1.1.2",
@@ -119,6 +118,7 @@
     "@types/react-dom": "^18",
     "@types/react-lottie": "^1.2.10",
     "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
