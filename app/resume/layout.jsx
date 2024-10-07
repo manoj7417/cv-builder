@@ -26,6 +26,9 @@ export const metadata = {
     image:
       "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/resume',
+  },
 };
 
 const Layout = ({ children }) => {
