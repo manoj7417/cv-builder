@@ -16,7 +16,6 @@ export async function POST(req, res) {
     } catch (error) {
         const errorMessage = error.response ? error.response.data : { error: "Error generating feedback" };
         const statusCode = error.response ? error.response.status : 500;
-        console.error('Error generating feedback:', error);
         return new Response(JSON.stringify(errorMessage), {
             status: statusCode,
             headers: { 'Content-Type': 'application/json' }

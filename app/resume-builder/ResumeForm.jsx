@@ -31,27 +31,20 @@ import { cn } from "@/lib/utils";
 import { SkillsSelect } from "@/components/component/skills-select";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
-import { AskBot, getBetterResume } from "@/app/api/api";
 import ImageUpload from "@/components/component/ImageUpload";
-import pdfToText from "react-pdftotext";
 import NewResumeLoader from "@/app/ui/newResumeLoader";
 import { MultiStepForm } from "@/components/component/MultiStepForm";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
-import { toast } from "react-toastify";
 import { Textarea } from "@/components/ui/textarea";
 import { BsStars } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { FiLink } from "react-icons/fi";
 import { Editor } from "primereact/editor";
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu";
 import dayjs from "dayjs";
 import { Checkbox } from "@/components/ui/checkbox";
 import LanguageSelect from "@/components/component/LanguageSelect";
+import axios from "axios";
 
 const ImageTemplates = [
   "Template1",
@@ -103,7 +96,7 @@ export default function ResumeForm() {
 
 
   const handleResumeTitleChange = (e) => {
-    setResumeTitle(e.target.value , _id);
+    setResumeTitle(e.target.value, _id);
   }
 
   const handleChangeProfileSummaryChange = (e) => {
@@ -554,7 +547,7 @@ export default function ResumeForm() {
       data + " Generated profile summary using the data appended data";
     setIsLoading(true);
     try {
-      const response = await AskBot(message);
+      const response = await axios.post('/api/askBot', {message});
       const data = JSON.parse(response[0]?.text?.value.split("\n")[2]);
 
       if (data) {

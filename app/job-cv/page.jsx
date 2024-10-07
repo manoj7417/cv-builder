@@ -7,20 +7,15 @@ import { useUserStore } from "../store/UserStore";
 import Image from "next/image";
 import SearchBar from "../ui/Searchbar";
 import { RiAiGenerate } from "react-icons/ri";
-import TabMenu from "../ui/TabMenu";
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { FaWpforms } from "react-icons/fa";
 import JobMultistepForm from "@/components/component/JobMultistepForm";
 import { toast } from "react-toastify";
 import { useResumeStore } from "../store/ResumeStore";
 import { useRouter } from "next/navigation";
 import pdfToText from "react-pdftotext";
 import { GetTokens } from "../actions";
-import { generateResumeOnFeeback } from "../api/api";
 import Lottie from "lottie-react";
-// import animation from "@/public/animations/job-cvLoader.json";
 import animation from "@/public/animations/JobCVLoader.json";
 import CountUp from "react-countup";
 import axios from "axios";
@@ -202,7 +197,7 @@ And we have many more options in the types of CV that you might get matched too.
 export default function Home() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log("pathname::", pathname);
+
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState("");
   const userState = useUserStore((state) => state.userState);

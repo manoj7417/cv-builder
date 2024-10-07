@@ -1,34 +1,22 @@
 "use client";
 import { GetTokens, SetTokens } from "@/app/actions";
-import { updateUserProfile, uploadImage } from "@/app/api/api";
 import { useUserStore } from "@/app/store/UserStore";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiLoaderAlt } from "react-icons/bi";
-import { CiImageOn } from "react-icons/ci";
 import {
-  FaCamera,
   FaChevronRight,
-  FaRegEdit,
-  FaRegUserCircle,
 } from "react-icons/fa";
 import { GoKey } from "react-icons/go";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineFileUpload } from "react-icons/md";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
 function Profile() {
@@ -37,11 +25,6 @@ function Profile() {
     userState: state.userState,
     updateUserData: state.updateUserData,
   }));
-  const [analysisData, setAnalysisData] = useState([]);
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupData, setPopupData] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  const [cardData, setCardData] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [passwords, setPasswords] = useState({
     oldPassword: "",
@@ -51,20 +34,14 @@ function Profile() {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [oldPasswordError, setOldPasswordError] = useState("");
-  const router = useRouter();
   const [sendingMail, setIsSendingMail] = useState(false);
   const email = useRef(null);
   const fileUploadRef = useRef(null);
   const [showEmailDialog, setShowEmailDialog] = useState(false);
-
-  /**************************** */
-  const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const userdata = userState?.userdata || {};
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isUpdatingData, setIsUpdatingData] = useState(false);
-  /******************************* */
 
   useEffect(() => {
     if (userState?.userdata) {
@@ -95,7 +72,11 @@ function Profile() {
     setIsUpdatingData(true);
     try {
       const { accessToken } = await GetTokens();
-      const response = await updateUserProfile(data, accessToken.value);
+      const response = await axios.patch("/api/updateUserProfile", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`
+        }
+      });
       if (response.status === 200) {
         const { userdata } = response.data.data;
         updateUserData(userdata);
@@ -149,8 +130,6 @@ function Profile() {
 
     try {
       setIsUploadingImage(true);
-
-      // Create FormData and append the selected file
       const formData = new FormData();
       formData.append("file", file);
 
@@ -159,49 +138,10 @@ function Profile() {
     catch (error) {
       console.error("Error uploading profile picture:", error);
     } finally {
-      // Ensure the uploading state is reset after upload completes
       setIsUploadingImage(false);
     }
   };
 
-  const handleRemoveProfilePicture = async () => {
-    setIsUploadingImage(true);
-    try {
-      const { accessToken } = await GetTokens();
-      const response = await updateUserProfile(
-        { profilePicture: "" },
-        accessToken.value
-      );
-      if (response.status === 200) {
-        const { userdata } = response.data.data;
-        updateUserData(userdata);
-        setPreviewImage(null);
-        toast.success("Profile picture removed successfully");
-      }
-    } catch {
-      toast.error("Error removing profile picture");
-    } finally {
-      setIsUploadingImage(false);
-    }
-  };
-
-  const handleUserAnalysis = (id) => {
-    router.push(`/analyser/${id}`);
-  };
-
-  function formatDate(dateString) {
-    const options = { year: "numeric", month: "short", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-US", options);
-  }
-
-  const handleReadMore = (data) => {
-    setCardData(data);
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-  };
 
   const handleResetPassword = () => {
     setPasswordError("");
@@ -261,7 +201,7 @@ function Profile() {
     const userEmail = email.current.value;
     setIsSendingMail(true);
     try {
-      const response = await axios.post("/api/resetpassword", {
+      const response = await axios.post("/api/forgotPassword", {
         email: userEmail,
       });
       if (response.status === 200) {
@@ -375,7 +315,7 @@ function Profile() {
           showCloseButton
         >
           <div>
-            <h1>Reset Password</h1>
+            <h1>Reset password link will be sent to the below email</h1>
             <Input
               placeholder="Enter your email address"
               className="mt-4"
@@ -404,7 +344,7 @@ function Profile() {
         <div className="container mx-auto px-3 sm:px-5">
           <div className="mb-4">
             <div className="flex flex-col sm:flex-row my-3">
-              <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative  border-2 border-gray-200">
+              <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative  shadow-md rounded-md">
                 <div className="overflow-hidden w-[250px] h-[250px] relative mx-auto mt-10">
                   {previewImage ? (
                     <img
@@ -466,7 +406,7 @@ function Profile() {
                     />
                   </div>
                   <Button
-                    className="my-2 lg:w-full w-[200px] bg-[#FF6636] text-white hover:bg-[#FF6636]"
+                    className="my-2 lg:w-full w-[200px] bg-[#FF636] text-white hover:bg-[#FF6636]"
                     onClick={handleRemoveProfilePicture}
                   >
                     <RiDeleteBinLine className="mr-1" />

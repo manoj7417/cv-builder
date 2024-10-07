@@ -27,12 +27,10 @@ export default function CoachRegistration() {
   const {
     register,
     handleSubmit,
-    control,
-    watch,
     formState: { errors },
   } = useForm();
-  const { userState, formData, loginUser } = useCoachStore()
-  
+  const { loginUser } = useCoachStore()
+
   const email = useRef(null);
   const router = useRouter();
   const [loading, setIsLoading] = useState(false);
@@ -67,7 +65,22 @@ export default function CoachRegistration() {
   };
 
   const handleSendResetEmail = async () => {
-    console.log(hi);
+    console.log("?");
+    setIsSendingMail(true);
+    try {
+      const response = await axios.post("/api/forgotCoachPassword", {
+        email: email.current.value,
+      });
+      
+      if (response.status === 200) {
+        toast.success("Reset password link sent to your email");
+        setShowDialog(false);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.error || "Something went wrong");
+    } finally {
+      setIsSendingMail(false);
+    }
   };
 
   return (
@@ -79,7 +92,7 @@ export default function CoachRegistration() {
           showCloseButton
         >
           <div>
-            <h1>Reset Password</h1>
+            <h1>The reset password link will be send to the entered email</h1>
             <Input
               placeholder="Enter your email address"
               className="mt-4"

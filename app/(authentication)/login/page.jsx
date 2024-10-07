@@ -58,7 +58,6 @@ function LoginUser() {
         router.push(redirect || "/");
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.error || "Error logging in");
       if (
         error.response?.status === 403 &&
@@ -75,7 +74,7 @@ function LoginUser() {
     const userEmail = email.current.value;
     setIsSendingMail(true);
     try {
-      const response = await axios.post("/api/resetpassword", {
+      const response = await axios.post("/api/forgotPassword", {
         email: userEmail,
       });
       if (response.status === 200) {
@@ -83,6 +82,7 @@ function LoginUser() {
         toast.success("Reset password link sent to your email");
       }
     } catch (error) {
+      console.log(error)
       toast.error(
         error.response?.data?.error || "Error sending reset password email"
       );
@@ -112,7 +112,6 @@ function LoginUser() {
         setShowResendButton(false);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error sending verification email");
     }
   };
@@ -121,7 +120,7 @@ function LoginUser() {
     <>
       <Dialog open={showDialog}>
         <DialogContent
-          className=" w-96"
+          className="w-96"
           onClick={handleDialogClose}
           showCloseButton
         >
