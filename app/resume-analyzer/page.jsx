@@ -59,7 +59,7 @@ const faqData = [
        <li>Choose a template of your choice, and choose your desired color.</li>
        <li>Download the CV.</li>
        <li>Go to Optimise CV, upload your CV, and get it analysed.</li>
-       <li>Follow the feedback suggestions in case of a low ATS score and re-assess your <a href="/resume-analyzer" className="font-bold">
+       <li>Follow the feedback suggestions in case of a low ATS score and re-assess your <a href="https://geniescareerhub.com/resume-analyzer" className="font-bold">
                         enhanced resume
                   </a>.</li>
      </ul>
@@ -1065,8 +1065,8 @@ export default function DashboardIdea() {
                     <Link className="font-bold" href={"/resume-analyzer"}>
                       ATS CV Checker
                     </Link>
-                    . Get the confirmation of your CV&#39;s compatibility before you
-                    finally send it to the recruiters.
+                    . Get the confirmation of your CV&#39;s compatibility before
+                    you finally send it to the recruiters.
                   </p>
                 </div>
                 {/*  */}

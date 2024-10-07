@@ -8,7 +8,7 @@ export const metadata = {
     title: "Professional CV Builder | Expert Curriculum Vitae Format",
     description:
       "Check out the best curriculum vitae templates that follow industry-standard CV Format and create your resume in minutes with our Curriculum Vitae CV Builder.",
-    url: "https://www.geniescareerhub.com/resume",
+    url: "/resume",
     images: [
       {
         url: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
@@ -25,6 +25,9 @@ export const metadata = {
       "Check out the best curriculum vitae templates that follow industry-standard CV Format and create your resume in minutes with our Curriculum Vitae CV Builder.",
     image:
       "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+  },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/resume',
   },
 };
 

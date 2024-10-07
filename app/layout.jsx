@@ -16,16 +16,17 @@ const inter = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.geniescareerhub.com"),
   title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
   description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
   openGraph: {
-    url: 'https://www.geniescareerhub.com/',
+    url: '/',
     type: 'website',
     title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
     description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
     images: [
       {
-        url: 'https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
+        url: '/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
         alt: 'Genies Career Hub Logo',
       },
     ],
@@ -33,10 +34,13 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     domain: 'geniescareerhub.com',
-    url: 'https://www.geniescareerhub.com/',
+    url: '/',
     title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
     description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
-    image: 'https://www.geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
+    image: '/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
+  },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com',
   },
 };
 
@@ -45,123 +49,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-16573743263/_wngCMO46roZEJ-B_d49',
-      'transaction_id': '',
-      'event_callback': callback
-  });
-  return false;
-}
-            `,
-          }}
-        />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-16573743263"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-16573743263');
-            `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-16573743263');
-            `,
-          }}
-        />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-3864YFJZRV"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-               window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3864YFJZRV');
-            `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:5154594,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-            `,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l] = w[l] || [];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WSQGHKPJ');`,
-          }}
-        />
-        <meta
-          name="google-site-verification"
-          content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: ` !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
-            n.callMethod.apply(n, arguments) : n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '452806670914263');
-          fbq('track', 'PageView');`,
-          }}
-        />
-
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=452806670914263&ev=PageView&noscript=1"
-          />
-        </noscript>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WSQGHKPJ"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
-      </Head>
       <body className={inter.className}>
         <ToastContainer
           position="top-right"

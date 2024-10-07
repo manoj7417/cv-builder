@@ -48,7 +48,10 @@ const CoachDetailsPage = () => {
     "isAgreementVerified",
     singleCoach?.signedAggrement?.isVerified
   );
-  const isVideoVerified = watch("isVideoVerified", singleCoach?.video?.isVerified);
+  const isVideoVerified = watch(
+    "isVideoVerified",
+    singleCoach?.video?.isVerified
+  );
 
   const handleApproveData = async (data) => {
     const { accessToken } = await GetTokens();
@@ -463,46 +466,48 @@ const CoachDetailsPage = () => {
                     >
                       Profile Video
                     </label>
-                    <div className="mr-2">
-                      <p className="text-base font-medium text-gray-700">
+                    {profileVideo?.url && (
+                      <div className="mr-2">
                         <p className="text-base font-medium text-gray-700">
-                          <div className="flex items-center space-x-2">
-                            {profileVideo?.isApproved || isVideoVerified ? (
-                              <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
-                                Approved
-                              </span>
-                            ) : (
-                              <span className="text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100">
-                                Not Approved
-                              </span>
-                            )}
-                            <label className="flex items-center cursor-pointer">
-                              <input
-                                type="checkbox"
-                                {...register("isVideoVerified")}
-                                className="hidden"
-                              />
-                              <div
-                                className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                  profileVideo?.isApproved  || isVideoVerified
-                                    ? "bg-green-600"
-                                    : ""
-                                }`}
-                              >
+                          <p className="text-base font-medium text-gray-700">
+                            <div className="flex items-center space-x-2">
+                              {profileVideo?.isApproved || isVideoVerified ? (
+                                <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
+                                  Approved
+                                </span>
+                              ) : (
+                                <span className="text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100">
+                                  Not Approved
+                                </span>
+                              )}
+                              <label className="flex items-center cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  {...register("isVideoVerified")}
+                                  className="hidden"
+                                />
                                 <div
-                                  className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                    profileVideo?.isApproved  ||
-                                    isVideoVerified
-                                      ? "translate-x-full"
+                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
+                                    profileVideo?.isApproved || isVideoVerified
+                                      ? "bg-green-600"
                                       : ""
                                   }`}
-                                />
-                              </div>
-                            </label>
-                          </div>
+                                >
+                                  <div
+                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
+                                      profileVideo?.isApproved ||
+                                      isVideoVerified
+                                        ? "translate-x-full"
+                                        : ""
+                                    }`}
+                                  />
+                                </div>
+                              </label>
+                            </div>
+                          </p>
                         </p>
-                      </p>
-                    </div>
+                      </div>
+                    )}
                   </div>
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className="mt-4">
@@ -515,9 +520,7 @@ const CoachDetailsPage = () => {
                         height="300px"
                       />
                     ) : (
-                      <p>
-                        Please enter a valid YouTube URL to preview the video.
-                      </p>
+                      <p>No video has been added yet.</p>
                     )}
                   </div>
                 </div>

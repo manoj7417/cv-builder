@@ -118,7 +118,7 @@ const SidebarCoach = () => {
                 Dashboard
               </Link>
             </li>
-            <li className={getLinkClass("/coach-dashboard/coach-details")}>
+            {/* <li className={getLinkClass("/coach-dashboard/coach-details")}>
               <Link
                 href={"/coach-dashboard/coach-details"}
                 onClick={() =>
@@ -139,7 +139,7 @@ const SidebarCoach = () => {
                 <CgLoadbarDoc className="text-xl mr-3" />
                 Blog
               </Link>
-            </li>
+            </li> */}
             <li className={getLinkClass("/coach-dashboard/coach-availabilty")}>
               <Link
                 href={"/coach-dashboard/coach-availabilty"}
