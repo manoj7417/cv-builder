@@ -8,6 +8,7 @@
     "start": "cross-env NODE_ENV=production next start"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "@alptugidin/react-circular-progress-bar": "^1.1.2",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.19.0",
@@ -118,7 +119,6 @@
     "@types/react-dom": "^18",
     "@types/react-lottie": "^1.2.10",
     "autoprefixer": "^10.4.19",
-    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
