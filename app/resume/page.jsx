@@ -415,14 +415,14 @@ const faqData = [
     id: 1,
     ques: "Can we make a professional CV template in this CV builder?",
     ans: `
-      Yes, you can make your resume online using our Genies Career Hub <a href="/resume" class="font-bold">resume builder</a>. This online <a href="https://geniescareerhub.com/resume" class="font-bold">resume generator</a> eases your work by allowing you to fill in some general and required information. Career Genies Hub builds <a href="/resume" class="font-bold">professional CV templates</a> for you to get through interviews quickly
+      Yes, you can make your resume online using our Genies Career Hub <div class="font-bold">resume builder</div>. This online <div class="font-bold">resume generator</div> eases your work by allowing you to fill in some general and required information. Career Genies Hub builds <div class="font-bold">professional CV templates</div> for you to get through interviews quickly
     `,
   },
   {
     id: 2,
     ques: "What is unique about this resume builder?",
     ans: `
-     The Genies Career Hub resume builder is a professionally approved online CV builder. Our <a href="https://geniescareerhub.com/resume" class="font-bold">CV enhancer</a>, with the help of Artificial Intelligence, helps your CV profile to become error-free and extraordinary. AI and your input will together produce an outstanding resume that impresses the employer exceptionally. 
+     The Genies Career Hub resume builder is a professionally approved online CV builder. Our <a href="https://www.geniescareerhub.com/resume" class="font-bold">CV Builder</a>, with the help of Artificial Intelligence, helps your CV profile to become error-free and extraordinary. AI and your input will together produce an outstanding resume that impresses the employer exceptionally. 
     `,
   },
   ,
@@ -430,7 +430,7 @@ const faqData = [
     id: 3,
     ques: "What is different about your curriculum vitae templates?",
     ans: `
-     Our Curriculum vitae templates are customised templates that are made with the insights of professionals and AI. The AI improves your <a href="https://geniescareerhub.com/resume" class="font-bold">CV format</a> content, making it the best for you. You can also change these <a href="https://geniescareerhub.com/resume" class="font-bold">CV templates</a> in between or at the end whenever you want.
+     Our Curriculum vitae templates are customised templates that are made with the insights of professionals and AI. The AI improves your <div class="font-bold">CV format</div> content, making it the best for you. You can also change these <a href="https://www.geniescareerhub.com/resume" class="font-bold">CV template</a> in between or at the end whenever you want.
     `,
   },
 ];
