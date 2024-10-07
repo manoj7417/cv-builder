@@ -1,18 +1,14 @@
 "use client";
-import Template3 from "@/components/resume-templates/Template3";
 import { cn } from "@/lib/utils";
-import { MagnifyingGlassIcon, ReloadIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { printResume } from "@/app/api/api";
-import Link from "next/link";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import {  ReloadIcon } from "@radix-ui/react-icons";
+import React, {  useEffect, useRef, useState } from "react";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
 import { AuthContext } from "@/app/context/AuthContext";
 import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { LiaTimesSolid } from "react-icons/lia";
+import axios from "axios";
 
 
 const ResumeViewPage = ({ resumeData, setResumeData ,isOverlayOpen,setIsOverlayOpen}) => {
@@ -25,17 +21,6 @@ const ResumeViewPage = ({ resumeData, setResumeData ,isOverlayOpen,setIsOverlayO
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
 
-  const handleLogout = () => {
-    if (userState?.isAuthenticated) {
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      toast.success("User logout successfully", {
-        position: "top-right",
-      });
-      
-      router.push("/");
-    }
-  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -50,22 +35,51 @@ const ResumeViewPage = ({ resumeData, setResumeData ,isOverlayOpen,setIsOverlayO
       html: resume,
     };
     setIsLoading(true);
+
     try {
-      const response = await printResume(body);
-      if (response.ok) {
-        const blob = await response.blob(); // Get response body as blob
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "generated.pdf";
-        a.target = "_blank";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+      const response = await axios.post('/api/printResume', body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (response.status === 200) {
+        generateFunfact();
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'generated.pdf';
+        link.click();
+        return;
       }
+      
     } catch (error) {
-      console.log(error);
+      if (
+        error?.response?.status === 403 &&
+        res.message === "You are not eligible for this feature"
+      ) {
+        toast.info("Subscribe to Genies Pro Suite to download your CV.", {
+          autoclose: 3000,
+        });
+        updateRedirectPricingRoute("/resume-builder");
+        return router.push("/pricing?scroll=1");
+      }
+
+      if (
+        error?.response?.status === 403 &&
+        res.message === "Your download CV tokens have expired"
+      ) {
+        toast.info("Your plan validity has expired.", { autoclose: 3000 });
+        return router.push("/pricing?scroll=1");
+      }
+      if (
+        error?.response?.status === 403 &&
+        res.message === "You have no download CV tokens"
+      ) {
+        setIsServiceDialogOpen(true);
+      }
+      if (error?.response?.status === 500) {
+        toast.error("Error downloading your CV , Please try again later");
+      }
     } finally {
       setIsLoading(false);
     }

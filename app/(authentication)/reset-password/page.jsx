@@ -7,9 +7,9 @@ import * as yup from "yup";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { resetPassword } from "../../api/api";
 import { toast } from "react-toastify";
 import { TbLoader } from "react-icons/tb"
+import axios from "axios";
 
 const ResetPasswordFunc = () => {
     const router = useRouter();
@@ -56,7 +56,7 @@ const ResetPasswordFunc = () => {
         }
         setIsLoading(true)
         try {
-            const response = await resetPassword(obj)
+            const response = await axios.post('/api/resetPassword', obj)
             if (response.status === 200) {
                 toast.success('Password changed successfully')
                 router.push('/login')
@@ -70,7 +70,7 @@ const ResetPasswordFunc = () => {
 
     useEffect(() => {
         if (!token) return router.push('/login')
-    }, [token , router])
+    }, [token, router])
 
 
     return (

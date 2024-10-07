@@ -7,7 +7,7 @@ import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import { useUserStore } from "./store/UserStore";
 import { ResumeHeader } from "./Layout/ResumeHeader";
-import Head from "next/head";
+
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +22,6 @@ export default function Home() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-
   // Conditionally render content only on the client
   if (!isClient) {
     return null; // Avoid rendering anything until client-side

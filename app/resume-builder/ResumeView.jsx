@@ -18,7 +18,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Payment, printResume } from "../api/api";
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -269,24 +268,24 @@ const ResumeView = () => {
     setIsLoading(true);
 
     try {
-      const response = await printResume(body, token);
-      if (response.ok) {
+      const response = await axios.post('/api/printResume', body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (response.status === 200) {
         generateFunfact();
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "generated.pdf";
-        a.target = "_blank";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'generated.pdf';
+        link.click();
         return;
       }
-      const res = await response.json();
+      
+    } catch (error) {
       if (
-        response.status === 403 &&
+        error?.response?.status === 403 &&
         res.message === "You are not eligible for this feature"
       ) {
         toast.info("Subscribe to Genies Pro Suite to download your CV.", {
@@ -297,23 +296,21 @@ const ResumeView = () => {
       }
 
       if (
-        response.status === 403 &&
+        error?.response?.status === 403 &&
         res.message === "Your download CV tokens have expired"
       ) {
         toast.info("Your plan validity has expired.", { autoclose: 3000 });
         return router.push("/pricing?scroll=1");
       }
       if (
-        response.status === 403 &&
+        error?.response?.status === 403 &&
         res.message === "You have no download CV tokens"
       ) {
         setIsServiceDialogOpen(true);
       }
-      if (response.status === 500) {
+      if (error?.response?.status === 500) {
         toast.error("Error downloading your CV , Please try again later");
       }
-    } catch (error) {
-      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -535,8 +532,8 @@ const ResumeView = () => {
               </button>
             </ResumeTooltip>
             <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white"  showCloseButton={true}
-               onClick={() => setShowModal(false)}>
+              <DialogContent className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white" showCloseButton={true}
+                onClick={() => setShowModal(false)}>
                 <DialogHeader>
                   <DialogTitle className="text-2xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
                     Oops! You have not subscribed yet

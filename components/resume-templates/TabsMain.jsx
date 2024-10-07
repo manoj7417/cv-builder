@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Tabs, Tab } from "./TabsContent";
 import Link from "next/link";
 import { useUserStore } from "@/app/store/UserStore";
-import {
-  createNewResume,
-  deleteUserResume,
-  getUserResumes,
-} from "@/app/api/api";
 import { Button } from "../ui/button";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useRouter } from "next/navigation";
@@ -21,6 +16,7 @@ import PlusIcon from "../ui/PlusIcon";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
 import dayjs from "dayjs";
+import axios from "axios";
 
 const TabsMain = () => {
   const userdata = useUserStore((state) => state.userState.userdata);
@@ -36,8 +32,12 @@ const TabsMain = () => {
   const fetchUserResumes = async () => {
     const { accessToken } = await GetTokens();
     try {
-      const response = await getUserResumes(accessToken.value);
-      if (response?.data) {
+      const response = await axios.get("/api/getUserResumes", {
+        headers: {
+          Authorization: `Bearer ${accessToken?.value}`,
+        }
+      })
+      if (response.status === 200) {
         setResumes(response.data.data);
       }
     } catch (error) {
@@ -51,7 +51,7 @@ const TabsMain = () => {
     const { accessToken } = await GetTokens();
     setisCreatingResume(true);
     try {
-      const response = await createNewResume(accessToken?.value, "Template3");
+      const response = await axios.post("/api/createNewResume", { template: "Template3" }, { headers: { Authorization: `Bearer ${accessToken?.value}` } })
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
@@ -70,11 +70,12 @@ const TabsMain = () => {
     e.stopPropagation()
     const { accessToken } = await GetTokens();
     toast.promise(
-      deleteUserResume(id, accessToken.value).then((response) => {
+      axios.delete(`/api/deleteUserResume/${id}`, { headers: { Authorization: `Bearer ${accessToken?.value}` } }).then((response) => {
         if (response.status === 204) {
           deleteResume(id);
         }
-      }),
+      }).catch(err => console.log(err)
+      ),
       {
         pending: "Deleting resume...",
         success: "Resume deleted ",

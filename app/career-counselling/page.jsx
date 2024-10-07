@@ -9,9 +9,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import CustomLoader from "../ui/CustomLoader";
 import "./CareerCounselling.css";
-import { generateCareerAdvice } from "../api/api";
 import { useUserDataStore } from "../store/useUserDataStore";
-import CareerSummary from "./CareerSummary";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
@@ -114,7 +112,11 @@ export default function Page() {
         );
 
         content = JSON.stringify(content);
-        const responseData = await generateCareerAdvice(content, token);
+        const responseData = await axios.post('/api/generateCareerAdvice', content, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const parsedData = JSON.parse(responseData.data[0].text.value);
         setSummary(parsedData);
         setContentType("summary");
@@ -404,71 +406,71 @@ export default function Page() {
                 )}
                 {(contentType === "userData" ||
                   contentType === "generateQuestions") && (
-                  <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
-                    <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
-                      <img src="/teststep.png" className="h-48" />
-                      <CardHeader className="">
-                        <h1 className="xl:text-3xl text-2xl text-center font-bold text-blue-950">
-                          Career Counselor Steps
-                        </h1>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex justify-center items-center flex-1 w-full h-full">
-                          <div>
-                            <p className="text-sm sm:font-medium md:font-medium lg:font-medium xl:font-medium 2xl:font-medium text-center">
-                              Please follow these instructions to provide
-                              answers to the questionnaire:
-                            </p>
-                            <ul className="list-disc pl-6">
-                              <li className="mb-2 py-2 flex font-medium">
-                                <TiTick className="text-green-500 text-2xl mr-2" />
-                                <span>
-                                  Click on{" "}
-                                  <span className="font-bold mx-1">Start</span>
-                                  to start the quiz.
-                                </span>
-                              </li>
-                              <li className="mb-2 py-2 flex  font-medium">
-                                <TiTick className="text-green-500 text-2xl mr-2" />
-                                <span>
-                                  Click on{" "}
-                                  <span className="font-bold mx-1">Next</span>
-                                  to move to the next question.
-                                </span>
-                              </li>
-                              <li className="mb-2 py-2 flex  font-medium">
-                                <TiTick className="text-green-500 text-2xl mr-2" />
-                                <span>
-                                  Click on
-                                  <span className="font-bold mx-1">
-                                    Previous
-                                  </span>{" "}
-                                  to go back to the previous question.
-                                </span>
-                              </li>
-                              <li className="mb-2 py-2 flex  font-medium">
-                                <TiTick className="text-green-500 text-2xl mr-2" />
-                                <span>
-                                  Fill in your answers in the text area provided
-                                  for each question.
-                                </span>
-                              </li>
-                              <li className="mb-2 py-2 flex  font-medium">
-                                <TiTick className="text-green-500 text-2xl mr-2" />
-                                <span>
-                                  Once you have answered all questions, click on
-                                  <span className="font-bold mx-1">
-                                    Submit.
+                    <div className="w-full 2xl:w-1/3 lg:w-[45%] mt-24">
+                      <Card className="h-full w-full overflow-hidden flex justify-center items-center flex-col bg-gray-50">
+                        <img src="/teststep.png" className="h-48" />
+                        <CardHeader className="">
+                          <h1 className="xl:text-3xl text-2xl text-center font-bold text-blue-950">
+                            Career Counselor Steps
+                          </h1>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex justify-center items-center flex-1 w-full h-full">
+                            <div>
+                              <p className="text-sm sm:font-medium md:font-medium lg:font-medium xl:font-medium 2xl:font-medium text-center">
+                                Please follow these instructions to provide
+                                answers to the questionnaire:
+                              </p>
+                              <ul className="list-disc pl-6">
+                                <li className="mb-2 py-2 flex font-medium">
+                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                  <span>
+                                    Click on{" "}
+                                    <span className="font-bold mx-1">Start</span>
+                                    to start the quiz.
                                   </span>
-                                </span>
-                              </li>
-                            </ul>
+                                </li>
+                                <li className="mb-2 py-2 flex  font-medium">
+                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                  <span>
+                                    Click on{" "}
+                                    <span className="font-bold mx-1">Next</span>
+                                    to move to the next question.
+                                  </span>
+                                </li>
+                                <li className="mb-2 py-2 flex  font-medium">
+                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                  <span>
+                                    Click on
+                                    <span className="font-bold mx-1">
+                                      Previous
+                                    </span>{" "}
+                                    to go back to the previous question.
+                                  </span>
+                                </li>
+                                <li className="mb-2 py-2 flex  font-medium">
+                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                  <span>
+                                    Fill in your answers in the text area provided
+                                    for each question.
+                                  </span>
+                                </li>
+                                <li className="mb-2 py-2 flex  font-medium">
+                                  <TiTick className="text-green-500 text-2xl mr-2" />
+                                  <span>
+                                    Once you have answered all questions, click on
+                                    <span className="font-bold mx-1">
+                                      Submit.
+                                    </span>
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                )}
+                        </CardContent>
+                      </Card>
+                    </div>
+                  )}
               </div>
             </main>
           </div>

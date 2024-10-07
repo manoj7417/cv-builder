@@ -11,6 +11,7 @@ import { ImSpinner3 } from "react-icons/im";
 import { registerUser } from "../../api/api";
 import { Input } from "@/components/ui/input";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import axios from "axios";
 
 export default function Register() {
   const router = useRouter();
@@ -71,7 +72,7 @@ export default function Register() {
     }
     setIsLoading(true);
     try {
-      const response = await registerUser(data);
+      const response = await axios.post('/api/userRegisteration', data)
       if (response.status === 201) {
         toast.success("Registration successful");
         toast.info("Verification link sent to your email address", {
@@ -317,18 +318,16 @@ export default function Register() {
                     <div className="mt-2">
                       <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
                         <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.length
+                          className={`flex items-center space-x-2 text-sm ${validation.length
                               ? "text-green-500"
                               : "text-red-500"
-                          }`}
+                            }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
-                              validation.length
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.length
                                 ? "text-green-500"
                                 : "border border-gray-400"
-                            }`}
+                              }`}
                           >
                             {validation.length ? "✔" : ""}
                           </span>
@@ -338,18 +337,16 @@ export default function Register() {
                         </li>
                         {/* Uppercase validation */}
                         <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.uppercase
+                          className={`flex items-center space-x-2 text-sm ${validation.uppercase
                               ? "text-green-500"
                               : "text-red-500"
-                          }`}
+                            }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
-                              validation.uppercase
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.uppercase
                                 ? "text-green-500"
                                 : "border border-gray-400"
-                            }`}
+                              }`}
                           >
                             {validation.uppercase ? "✔" : ""}
                           </span>
@@ -360,18 +357,16 @@ export default function Register() {
 
                         {/* Lowercase validation */}
                         <li
-                          className={`flex items-center text-sm space-x-2 ${
-                            validation.lowercase
+                          className={`flex items-center text-sm space-x-2 ${validation.lowercase
                               ? "text-green-500"
                               : "text-red-500"
-                          }`}
+                            }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
-                              validation.lowercase
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.lowercase
                                 ? "text-green-500"
                                 : "border border-gray-400"
-                            }`}
+                              }`}
                           >
                             {validation.lowercase ? "✔" : ""}
                           </span>
@@ -382,18 +377,16 @@ export default function Register() {
 
                         {/* Number validation */}
                         <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.number
+                          className={`flex items-center space-x-2 text-sm ${validation.number
                               ? "text-green-500"
                               : "text-red-500"
-                          }`}
+                            }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
-                              validation.number
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.number
                                 ? "text-green-500"
                                 : "border border-gray-400"
-                            }`}
+                              }`}
                           >
                             {validation.number ? "✔" : ""}
                           </span>
@@ -402,18 +395,16 @@ export default function Register() {
 
                         {/* Special character validation */}
                         <li
-                          className={`flex items-center space-x-2 text-sm ${
-                            validation.specialChar
+                          className={`flex items-center space-x-2 text-sm ${validation.specialChar
                               ? "text-green-500"
                               : "text-red-500"
-                          }`}
+                            }`}
                         >
                           <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${
-                              validation.specialChar
+                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.specialChar
                                 ? "text-green-500"
                                 : "border border-gray-400"
-                            }`}
+                              }`}
                           >
                             {validation.specialChar ? "✔" : ""}
                           </span>

@@ -1,23 +1,21 @@
 import { serverInstance } from '@/lib/serverApi';
 
-export async function POST(req, res) {
+export async function PATCH(req, { params }) {
     try {
-        const { id } = await req.json();
+        const { id } = params;
+        const data = await req.json();
         const token = req.headers.get('Authorization');
-        const response = await serverInstance.get(`/analysis/score/${id}`, {
+        const response = await serverInstance.patch(`/resume/updateTitle/${id}`, data, {
             headers: {
-                'Authorization': token,
-                'Content-Type': 'application/json'
+                Authorization: token
             }
         });
         return new Response(JSON.stringify(response.data), {
-            status: 200 ,
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            status: response.status || 200,
+            headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        const errorMessage = error.response ? error.response.data : { error: "Error forgetting password" };
+        const errorMessage = error.response ? error.response.data : { error: "Error updating  resume title" };
         const statusCode = error.response ? error.response.status : 500;
 
         return new Response(JSON.stringify(errorMessage), {

@@ -1,41 +1,15 @@
 "use client";
-import Link from "next/link";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  CarouselItem,
-  CarouselContent,
-  CarouselPrevious,
-  CarouselNext,
-  Carousel,
-} from "@/components/ui/carousel";
-import { FaUserCog, FaUserGraduate } from "react-icons/fa";
-import {
-  MdOutlineDesignServices,
-  MdOutlineSettingsSuggest,
-} from "react-icons/md";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { IoIosStar } from "react-icons/io";
 import { useEffect, useState } from "react";
-import ImageCarousel from "./ImageCarousel";
 import { ImSpinner8 } from "react-icons/im";
 import { GetTokens } from "@/app/actions";
-import { createNewResume } from "@/app/api/api";
 import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 export const templateType = {
@@ -215,7 +189,7 @@ export default function Slider() {
     }
     setIsLoading(true);
     try {
-      const response = await createNewResume(accessToken.value, template);
+      const response = await axios.post("/api/createNewResume", { template }, { headers: { Authorization: `Bearer ${accessToken?.value}` } });
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);

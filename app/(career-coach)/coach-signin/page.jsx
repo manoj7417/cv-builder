@@ -27,11 +27,9 @@ export default function CoachRegistration() {
   const {
     register,
     handleSubmit,
-    control,
-    watch,
     formState: { errors },
   } = useForm();
-  const { userState, formData, loginUser } = useCoachStore()
+  const {  loginUser } = useCoachStore()
   
   const email = useRef(null);
   const router = useRouter();

@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect } from "react";
 import {
   FaRegFolderOpen,
@@ -18,10 +16,10 @@ import { useRouter } from "next/navigation";
 import { useResumeStore } from "@/app/store/ResumeStore";
 import { JobResumeSchema } from "@/lib/schema/JobResume/JobResumeSchema";
 import { GetTokens } from "@/app/actions";
-import { createNewJobProfileResume } from "@/app/api/api";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { MdOutlineReadMore } from "react-icons/md";
+import axios from "axios";
 
 export default function TabResume() {
   const [loading, setIsLoading] = useState(false);
@@ -104,7 +102,11 @@ export default function TabResume() {
       return;
     }
     try {
-      const response = await createNewJobProfileResume(accessToken.value, data);
+      const response = await axios.post('/api/createNewJobProfileResume', data, {
+        headers: {
+          Authorization: `Bearer ${accessToken?.value}`
+        }
+      });
       if (response.status === 201) {
         replaceResumeData(response.data.data);
         router.push("/resume-builder");

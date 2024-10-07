@@ -23,7 +23,7 @@ import { useResumeStore } from "@/app/store/ResumeStore";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
-import { createNewResume } from "../api/api";
+import axios from "axios";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -424,7 +424,7 @@ export default function DashboardIdea() {
     }
     setIsLoading(true);
     try {
-      const response = await createNewResume(accessToken.value, template);
+      const response = await axios.post("/api/createNewResume", { template }, { headers: { Authorization: `Bearer ${accessToken?.value}` } });
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
@@ -479,7 +479,7 @@ export default function DashboardIdea() {
                 alt="@shadcn"
                 width={600}
                 height={100}
-                
+
               />
             </div>
           </div>

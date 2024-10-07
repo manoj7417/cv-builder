@@ -1,17 +1,10 @@
 "use client";
 import { GetTokens, SetTokens } from "@/app/actions";
-import { updateUserProfile, uploadImage } from "@/app/api/api";
 import { useUserStore } from "@/app/store/UserStore";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -37,11 +30,6 @@ function Profile() {
     userState: state.userState,
     updateUserData: state.updateUserData,
   }));
-  const [analysisData, setAnalysisData] = useState([]);
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupData, setPopupData] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  const [cardData, setCardData] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [passwords, setPasswords] = useState({
     oldPassword: "",
@@ -56,15 +44,10 @@ function Profile() {
   const email = useRef(null);
   const fileUploadRef = useRef(null);
   const [showEmailDialog, setShowEmailDialog] = useState(false);
-
-  /**************************** */
-  const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const userdata = userState?.userdata || {};
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isUpdatingData, setIsUpdatingData] = useState(false);
-  /******************************* */
 
   useEffect(() => {
     if (userState?.userdata) {
@@ -95,7 +78,11 @@ function Profile() {
     setIsUpdatingData(true);
     try {
       const { accessToken } = await GetTokens();
-      const response = await updateUserProfile(data, accessToken.value);
+      const response = await axios.patch("/api/updateUserProfile", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`
+        }
+      });
       if (response.status === 200) {
         const { userdata } = response.data.data;
         updateUserData(userdata);
@@ -164,44 +151,6 @@ function Profile() {
     }
   };
 
-  const handleRemoveProfilePicture = async () => {
-    setIsUploadingImage(true);
-    try {
-      const { accessToken } = await GetTokens();
-      const response = await updateUserProfile(
-        { profilePicture: "" },
-        accessToken.value
-      );
-      if (response.status === 200) {
-        const { userdata } = response.data.data;
-        updateUserData(userdata);
-        setPreviewImage(null);
-        toast.success("Profile picture removed successfully");
-      }
-    } catch {
-      toast.error("Error removing profile picture");
-    } finally {
-      setIsUploadingImage(false);
-    }
-  };
-
-  const handleUserAnalysis = (id) => {
-    router.push(`/analyser/${id}`);
-  };
-
-  function formatDate(dateString) {
-    const options = { year: "numeric", month: "short", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-US", options);
-  }
-
-  const handleReadMore = (data) => {
-    setCardData(data);
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-  };
 
   const handleResetPassword = () => {
     setPasswordError("");
@@ -261,7 +210,7 @@ function Profile() {
     const userEmail = email.current.value;
     setIsSendingMail(true);
     try {
-      const response = await axios.post("/api/resetpassword", {
+      const response = await axios.post("/api/forgotPassword", {
         email: userEmail,
       });
       if (response.status === 200) {
