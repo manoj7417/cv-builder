@@ -39,6 +39,9 @@ export const metadata = {
     description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
     image: '/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
   },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com',
+  },
 };
 
 

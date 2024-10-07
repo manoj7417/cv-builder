@@ -27,6 +27,9 @@ export const metadata = {
       "Seeking a Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/refund-policy',
+  },
 };
 
 const Layout = ({ children }) => {

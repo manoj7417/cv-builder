@@ -27,6 +27,9 @@ export const metadata = {
       "Looking for more or seeking a solution for your education problems? Contact us personally and get more information and support on Genies Career Hub now.",
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/contact-us',
+  },
 };
 
 const Layout = ({ children }) => {

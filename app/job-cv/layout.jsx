@@ -25,6 +25,9 @@ export const metadata = {
       "Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert resume coach guidelines",
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/job-cv',
+  },
 };
 
 const Layout = ({ children }) => {

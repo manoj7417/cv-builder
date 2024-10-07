@@ -27,6 +27,9 @@ export const metadata = {
     image:
       "/_next/image?url=%2Fbeta-logo.png&w=128&q=75", // Path is relative
   },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/terms-condition',
+  },
 };
 
 
