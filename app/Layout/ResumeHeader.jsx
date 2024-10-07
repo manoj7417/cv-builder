@@ -149,9 +149,9 @@ export function ResumeHeader() {
                   <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10'>
                     <ul>
                       <Link href='/user-dashboard'>
-                        {/* <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center'>
+                        <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center'>
                           <FaUserCircle className='mr-2' /> Profile
-                        </li> */}
+                        </li>
                       </Link>
                       <Link href='/user-history'>
                         <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center  '>

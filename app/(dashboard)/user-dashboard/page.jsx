@@ -17,13 +17,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, DollarSign, Mail } from "lucide-react";
 import { format } from "date-fns";
+import { ResumeChart } from "./ResumeChart";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
-  const router = useRouter()
-  const { userdata } = useUserStore((state) => state.userState)
-  const [bookings, setBookings] = useState([])
+  const router = useRouter();
+  const { userdata } = useUserStore((state) => state.userState);
+  // const [bookings, setBookings] = useState([]);
 
   const toggle = (index) => {
     if (open === index) {
@@ -352,51 +353,229 @@ const UserDashboardPage = () => {
     },
   ];
 
+  const bookings = [
+    {
+      _id: "1",
+      coachId: {
+        name: "John Doe",
+        profileImage: "/images/john_doe.jpg",
+        email: "john.doe@example.com",
+        ratesPerHour: {
+          charges: "$50",
+        },
+      },
+      slotTime: {
+        startTime: "10:00 AM",
+        endTime: "11:00 AM",
+      },
+      date: "2024-10-10T00:00:00Z",
+      timezone: "PST",
+    },
+    {
+      _id: "2",
+      coachId: {
+        name: "Jane Smith",
+        profileImage: "/images/jane_smith.jpg",
+        email: "jane.smith@example.com",
+        ratesPerHour: {
+          charges: "$60",
+        },
+      },
+      slotTime: {
+        startTime: "12:00 PM",
+        endTime: "1:00 PM",
+      },
+      date: "2024-10-11T00:00:00Z",
+      timezone: "EST",
+    },
+    {
+      _id: "3",
+      coachId: {
+        name: "Emily Johnson",
+        profileImage: "/images/emily_johnson.jpg",
+        email: "emily.johnson@example.com",
+        ratesPerHour: {
+          charges: "$55",
+        },
+      },
+      slotTime: {
+        startTime: "2:00 PM",
+        endTime: "3:00 PM",
+      },
+      date: "2024-10-12T00:00:00Z",
+      timezone: "CST",
+    },
+    {
+      _id: "4",
+      coachId: {
+        name: "Michael Brown",
+        profileImage: "/images/michael_brown.jpg",
+        email: "michael.brown@example.com",
+        ratesPerHour: {
+          charges: "$65",
+        },
+      },
+      slotTime: {
+        startTime: "4:00 PM",
+        endTime: "5:00 PM",
+      },
+      date: "2024-10-13T00:00:00Z",
+      timezone: "PST",
+    },
+    {
+      _id: "5",
+      coachId: {
+        name: "Sarah Wilson",
+        profileImage: "/images/sarah_wilson.jpg",
+        email: "sarah.wilson@example.com",
+        ratesPerHour: {
+          charges: "$45",
+        },
+      },
+      slotTime: {
+        startTime: "9:00 AM",
+        endTime: "10:00 AM",
+      },
+      date: "2024-10-14T00:00:00Z",
+      timezone: "GMT",
+    },
+    {
+      _id: "6",
+      coachId: {
+        name: "Chris Evans",
+        profileImage: "/images/chris_evans.jpg",
+        email: "chris.evans@example.com",
+        ratesPerHour: {
+          charges: "$70",
+        },
+      },
+      slotTime: {
+        startTime: "6:00 PM",
+        endTime: "7:00 PM",
+      },
+      date: "2024-10-15T00:00:00Z",
+      timezone: "EST",
+    },
+    {
+      _id: "7",
+      coachId: {
+        name: "Sophia Miller",
+        profileImage: "/images/sophia_miller.jpg",
+        email: "sophia.miller@example.com",
+        ratesPerHour: {
+          charges: "$55",
+        },
+      },
+      slotTime: {
+        startTime: "8:00 AM",
+        endTime: "9:00 AM",
+      },
+      date: "2024-10-16T00:00:00Z",
+      timezone: "PST",
+    },
+    {
+      _id: "8",
+      coachId: {
+        name: "David Lee",
+        profileImage: "/images/david_lee.jpg",
+        email: "david.lee@example.com",
+        ratesPerHour: {
+          charges: "$75",
+        },
+      },
+      slotTime: {
+        startTime: "11:00 AM",
+        endTime: "12:00 PM",
+      },
+      date: "2024-10-17T00:00:00Z",
+      timezone: "CST",
+    },
+    {
+      _id: "9",
+      coachId: {
+        name: "Olivia Martinez",
+        profileImage: "/images/olivia_martinez.jpg",
+        email: "olivia.martinez@example.com",
+        ratesPerHour: {
+          charges: "$80",
+        },
+      },
+      slotTime: {
+        startTime: "3:00 PM",
+        endTime: "4:00 PM",
+      },
+      date: "2024-10-18T00:00:00Z",
+      timezone: "GMT",
+    },
+    {
+      _id: "10",
+      coachId: {
+        name: "Liam Anderson",
+        profileImage: "/images/liam_anderson.jpg",
+        email: "liam.anderson@example.com",
+        ratesPerHour: {
+          charges: "$85",
+        },
+      },
+      slotTime: {
+        startTime: "5:00 PM",
+        endTime: "6:00 PM",
+      },
+      date: "2024-10-19T00:00:00Z",
+      timezone: "PST",
+    },
+  ];
+
   const handleGetBookings = async () => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
-      return router.push('/login?redirect=/user-dashboard')
+      return router.push("/login?redirect=/user-dashboard");
     }
     try {
-      const response = await axios.get('/api/getUserBookings', {
+      const response = await axios.get("/api/getUserBookings", {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
-        }
-      })
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
       if (response.status === 200) {
-        setBookings(response.data.bookings)
+        setBookings(response.data.bookings);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    handleGetBookings()
-  }, [])
+    handleGetBookings();
+  }, []);
 
   return (
     <>
       <div className="mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center "></div>
       <div className="max-w-5xl mx-auto">
         <div className="profile_header">
-          <div className='sm:container md:container lg:container xl:container 2xl:container bg-[#FFF] h-auto -mt-20 w-full flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row justify-between items-center border border-[#FFDDD1] p-4'>
+          <div className="sm:container md:container lg:container xl:container 2xl:container bg-[#FFF] h-auto -mt-20 w-full flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row justify-between items-center border border-[#FFDDD1] p-4">
             {/* Left Side */}
             <div
-              id='blog_header_left_side'
-              className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>
-              <div id='coach_image' className='px-4'>
+              id="blog_header_left_side"
+              className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4"
+            >
+              <div id="coach_image" className="px-4">
                 <img
-                  src={userdata?.profilePicture || "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"}
-                  alt='Coach'
-                  className='w-full  object-cover w-44 h-44 rounded-full'
+                  src={
+                    userdata?.profilePicture ||
+                    "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
+                  }
+                  alt="Coach"
+                  className="object-cover w-44 h-44 rounded-full"
                 />
               </div>
-              <div id='coach_details' className='pt-4 sm:pt-10'>
+              <div id="coach_details" className="pt-4 sm:pt-10">
                 <div
-                  id='row1'
-                  className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3'>
-                  <h1 className='font-bold text-[#1D2026] text-2xl sm:text-3xl'>
+                  id="row1"
+                  className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3"
+                >
+                  <h1 className="font-bold text-[#1D2026] text-2xl sm:text-3xl">
                     {userdata?.fullname}
                   </h1>
                 </div>
@@ -436,45 +615,47 @@ const UserDashboardPage = () => {
 
             {/* Right Side */}
             <div
-              id='blog_header_right_side'
-              className='text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0'>
+              id="blog_header_right_side"
+              className="text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0"
+            >
               <div
-                id='website_link'
-                className='text-xs sm:text-sm text-blue-500 underline flex items-center justify-center sm:justify-center md:justify-end lg:justify-end xl:justify-end 2xl:justify-end  space-x-1'>
+                id="website_link"
+                className="text-xs sm:text-sm text-blue-500 underline flex items-center justify-center sm:justify-center md:justify-end lg:justify-end xl:justify-end 2xl:justify-end  space-x-1"
+              >
                 <img
-                  src='/GlobeSimple.png'
-                  alt='Globe Icon'
-                  className='w-3 sm:w-4 h-3 sm:h-4'
+                  src="/GlobeSimple.png"
+                  alt="Globe Icon"
+                  className="w-3 sm:w-4 h-3 sm:h-4"
                 />
-                <span className='text-[10px] sm:text-[12px] text-[#564FFD]'>
+                <span className="text-[10px] sm:text-[12px] text-[#564FFD]">
                   http://www.com
                 </span>
               </div>
-              <div id='socialMediaIcons' className='flex space-x-2 justify-end'>
+              <div id="socialMediaIcons" className="flex space-x-2 justify-end">
                 <img
-                  src='/facebook_icon.png'
-                  alt='Facebook'
-                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                  src="/facebook_icon.png"
+                  alt="Facebook"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
                 <img
-                  src='/twitter_icon.png'
-                  alt='Twitter'
-                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                  src="/twitter_icon.png"
+                  alt="Twitter"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
                 <img
-                  src='/instagram_icon.png'
-                  alt='Instagram'
-                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                  src="/instagram_icon.png"
+                  alt="Instagram"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
                 <img
-                  src='/youtube_icon.png'
-                  alt='YouTube'
-                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                  src="/youtube_icon.png"
+                  alt="YouTube"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
                 <img
-                  src='/whatsApp_icon.png'
-                  alt='WhatsApp'
-                  className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                  src="/whatsApp_icon.png"
+                  alt="WhatsApp"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
               </div>
             </div>
@@ -485,21 +666,23 @@ const UserDashboardPage = () => {
             <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto">
               <TabsTrigger
                 value="dashboard"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "dashboard" ? "active" : ""
-                  } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${
+                  activeTab === "dashboard" ? "active" : ""
+                } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("dashboard")}
               >
                 Dashboard
               </TabsTrigger>
               <TabsTrigger
                 value="Bookings"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "Bookings" ? "active" : ""
-                  } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${
+                  activeTab === "Bookings" ? "active" : ""
+                } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("Bookings")}
               >
                 Bookings
               </TabsTrigger>
-              <TabsTrigger
+              {/* <TabsTrigger
                 value="coaching"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "coaching" ? "active" : ""
                   } data-[state=active]:shadow-none`}
@@ -514,19 +697,21 @@ const UserDashboardPage = () => {
                 onClick={() => setActiveTab("whishlist")}
               >
                 Whishlist
-              </TabsTrigger>
+              </TabsTrigger> */}
               <TabsTrigger
                 value="purchaseHistory"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "purchaseHistory" ? "active" : ""
-                  } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${
+                  activeTab === "purchaseHistory" ? "active" : ""
+                } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("purchaseHistory")}
               >
                 Purchase History
               </TabsTrigger>
               <TabsTrigger
                 value="settings"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "settings" ? "active" : ""
-                  } data-[state=active]:shadow-none`}
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${
+                  activeTab === "settings" ? "active" : ""
+                } data-[state=active]:shadow-none`}
                 onClick={() => setActiveTab("settings")}
               >
                 Settings
@@ -593,6 +778,10 @@ const UserDashboardPage = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="resume_charts mt-5">
+                    <h2>Charts Sections</h2>
+                    <ResumeChart />
+                  </div>
                 </div>
               </div>
             </TabsContent>
@@ -605,44 +794,70 @@ const UserDashboardPage = () => {
                   <div className="coach_section">
                     <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-                        {bookings.length > 0 && bookings.map((booking) => (
-                          <Card key={booking._id} className="w-full">
-                            <CardHeader>
-                              <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
-                                <Avatar className="w-12 h-12 mb-2 sm:mb-0">
-                                  <AvatarImage src={booking.coachId.profileImage} alt={booking.coachId.name} className="object-cover" />
-                                  <AvatarFallback>{booking.coachId.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <h3 className="text-base sm:text-lg font-semibold">{booking.coachId.name}</h3>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking.slotTime.startTime} - {booking.slotTime.endTime}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{format(new Date(booking.date), 'MMM dd, yyyy')}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking.timezone}</p>
+                        {bookings.length > 0 &&
+                          bookings.map((booking) => (
+                            <Card key={booking._id} className="w-full">
+                              <CardHeader>
+                                <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                                  <Avatar className="w-12 h-12 mb-2 sm:mb-0">
+                                    <AvatarImage
+                                      src={booking.coachId.profileImage}
+                                      alt={booking.coachId.name}
+                                      className="object-cover"
+                                    />
+                                    <AvatarFallback>
+                                      {booking.coachId.name
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div>
+                                    <h3 className="text-base sm:text-lg font-semibold">
+                                      {booking.coachId.name}
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-gray-500">
+                                      {booking.slotTime.startTime} -{" "}
+                                      {booking.slotTime.endTime}
+                                    </p>
+                                    <p className="text-xs sm:text-sm text-gray-500">
+                                      {format(
+                                        new Date(booking.date),
+                                        "MMM dd, yyyy"
+                                      )}
+                                    </p>
+                                    <p className="text-xs sm:text-sm text-gray-500">
+                                      {booking.timezone}
+                                    </p>
+                                  </div>
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <div className="space-y-2">
+                                  <div className="flex items-center">
+                                    <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
+                                    <span className="text-xs sm:text-sm truncate">
+                                      {booking.coachId.email}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center">
+                                    <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
+                                    <span className="text-xs sm:text-sm">
+                                      {booking.coachId.ratesPerHour.charges}
+                                      /hour
+                                    </span>
+                                  </div>
                                 </div>
-                              </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                              <div className="space-y-2">
-                                <div className="flex items-center">
-                                  <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm truncate">{booking.coachId.email}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm">{booking.coachId.ratesPerHour.charges}/hour</span>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        ))}
+                              </CardContent>
+                            </Card>
+                          ))}
                       </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </TabsContent>
-            <TabsContent className="mb-6" value="coaching">
+            {/* <TabsContent className="mb-6" value="coaching">
               <div className="career_section max-w-full md:max-w-5xl mx-auto">
                 <div className="space-y-3">
                   <h2 className="lg:text-start text-center text-xl font-bold text-blue-950">
@@ -699,14 +914,13 @@ const UserDashboardPage = () => {
                   <Whishlist />
                 </div>
               </div>
-            </TabsContent>
+            </TabsContent> */}
             <TabsContent className="mb-6" value="purchaseHistory">
               <div className="max-w-full md:max-w-5xl mx-auto summary_section">
                 <div>
                   <h2 className="text-xl font-bold mb-6 text-blue-950 lg:text-start text-center">
                     Purchase History
                   </h2>
-
                   <div className="purchase_section">
                     <PurchaseHistory open={open} toggle={toggle} />
                   </div>

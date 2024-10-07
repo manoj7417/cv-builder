@@ -681,7 +681,7 @@ const CoachProfile = () => {
                       )}
 
                       {/* Remove File Button */}
-                      {cvFileUrl && (
+                      {isEditable && cvFileUrl && (
                         <button
                           type="button"
                           onClick={handleRemovecvUpload}
@@ -789,7 +789,7 @@ const CoachProfile = () => {
                       )}
 
                       {/* Remove File Button */}
-                      {docsUrl && (
+                      {isEditable && docsUrl && (
                         <button
                           type="button"
                           onClick={handleRemoveDocs}
