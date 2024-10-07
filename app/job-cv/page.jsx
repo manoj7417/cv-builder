@@ -126,7 +126,7 @@ const faqData = [
     id: 1,
     ques: "What is the CV Match feature?",
     ans: `
-      The unique concept of the Genies Career Hub’s CV Match feature is that it matches your job title or profession and prepares a <a href="/job-cv" className="font-bold"> Professional curriculum vitae</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
+      The unique concept of the Genies Career Hub’s CV Match feature is that it matches your job title or profession and prepares a <a href="https://geniescareerhub.com/job-cv" className="font-bold"> Professional curriculum vitae</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
     `,
   },
   {
@@ -135,7 +135,7 @@ const faqData = [
     ans: `
     <ol>
         <li>1. CV Creators help make a new CV through a whole detailed process.</li>
-        <li>2. CV Match makes a <a href="/job-cv" className="font-bold">professional CV</a> format template that asks for your basic information and prepares an entirely <a href="/job-cv" className="font-bold">professional CV</a>.</li>
+        <li>2. CV Match makes a <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional CV</a> format template that asks for your basic information and prepares an entirely <a href="/job-cv" className="font-bold">professional CV</a>.</li>
         <li>3. It matches your job description with our 45+ pre-made templates, filling in the best information professionally.</li>
     </ol>
     `,
@@ -153,7 +153,7 @@ const faqData = [
         <li>5. Add experience if you have any, or select the fresher box.</li>
         <li>6. Add your education, add any previous projects, and add your skills.</li>
         <li>7. Review your details generated professionally by AI, and make changes if needed.</li>
-        <li>8. Choose from <a href="/job-cv" className="font-bold">professional CV</a> templates and the colour of your choice.</li>
+        <li>8. Choose from <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional CV</a> templates and the colour of your choice.</li>
         <li>9. Download in text or PDF form.</li>
     </ol>
     `,
@@ -176,7 +176,7 @@ Get a professional-approved and AI-analysed resume that is appealing and highlig
 Your electrical engineer CV will have all the technical skills that you want like automation, circuit design etc. with the experience of using tools that you have.<br/><br/>
 
 3. Registered Nurse<br/>
-Get detailed nurse <a href="/job-cv" className="font-bold">professional resume examples</a> with experience in clinical, and patient care skills, and specifications in the healthcare sector.<br/><br/>
+Get detailed nurse <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional resume examples</a> with experience in clinical, and patient care skills, and specifications in the healthcare sector.<br/><br/>
 
 4. Project Manager<br/>
 We have CVs matching your profile of project manager’s management skills, leadership, experience and projects customisable by you. As a project manager, we showcase your risk managing, stakeholding and budgeting skills to attract recruiters.<br/><br/> 

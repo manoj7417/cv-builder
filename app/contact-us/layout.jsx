@@ -25,15 +25,32 @@ export const metadata = {
     title: "Contact the Genies Career Hub Support Team",
     description:
       "Looking for more or seeking a solution for your education problems? Contact us personally and get more information and support on Genies Career Hub now.",
-    image:
-      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+  },
+  alternates: {
+    canonical: 'https://www.geniescareerhub.com/contact-us',
   },
 };
-
 
 const Layout = ({ children }) => {
   return (
     <>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "Organization",
+              url: "https://www.geniescareerhub.com/",
+              logo: "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+              name: "Genies Career Hub",
+              description:
+                "Genies Career Hub creates your resume in an easy-going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser, and CV Match. Additionally, our new features such as the Psychometric Test incorporating AI, and Career Coach provide the best expertise in creating professional resumes.",
+            }),
+          }}
+        />
+      </head>
       <main className="resume_dashboard">
         <div className="resume_dashboard_container">
           <div className="wrapper">
