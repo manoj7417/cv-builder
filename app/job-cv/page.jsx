@@ -131,7 +131,7 @@ const faqData = [
     id: 1,
     ques: "What is the CV Match feature?",
     ans: `
-      The unique concept of the Genies Career Hub’s CV Match feature is that it matches your job title or profession and prepares a <a href="https://geniescareerhub.com/job-cv" className="font-bold"> Professional curriculum vitae</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
+      The unique concept of the Genies Career Hub’s CV Match feature is that it matches your job title or profession and prepares a <a href="https://www.geniescareerhub.com/resume" className="font-bold"> Professional Curriculum Vitae Templates</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
     `,
   },
   {
@@ -140,7 +140,7 @@ const faqData = [
     ans: `
     <ol>
         <li>1. CV Creators help make a new CV through a whole detailed process.</li>
-        <li>2. CV Match makes a <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional CV</a> format template that asks for your basic information and prepares an entirely <a href="/job-cv" className="font-bold">professional CV</a>.</li>
+        <li>2. CV Match makes a <a href="https://www.geniescareerhub.com/resume" className="font-bold">professional CV Builder</a> format template that asks for your basic information and prepares an entirely <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional CV</a>.</li>
         <li>3. It matches your job description with our 45+ pre-made templates, filling in the best information professionally.</li>
     </ol>
     `,
@@ -149,11 +149,11 @@ const faqData = [
     id: 3,
     ques: "How to get a pre-made Professional CV?",
     ans: `
-    Follow these simple steps to get a pre-made <a href="/job-cv" className="font-bold">professional CV</a>-
+    Follow these simple steps to get a pre-made <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional CV</a>-
      <ol>
-        <li>1. Go to CV Studio and click on CV Match.</li>
+        <li>1. Head to CV Studio and click on CV Match.</li>
         <li>2. Enter your job role or profession, and click Generate Now.</li>
-        <li>3. Upload your existing resume or start afresh by making one.</li>
+        <li>3. Upload your existing <a href="https://www.geniescareerhub.com/resume-analyzer" class="font-bold">resume formatting</a> or start afresh by making one.</li>
         <li>4. Enter your name, email, job role, city, and country.</li>
         <li>5. Add experience if you have any, or select the fresher box.</li>
         <li>6. Add your education, add any previous projects, and add your skills.</li>
@@ -174,6 +174,7 @@ const faqData = [
     id: 5,
     ques: "What kind of professional CV templates are there in CV Match?",
     ans: `
+    Our CV Match feature incorporates more than 23+ professional <a href="https://www.geniescareerhub.com/resume" class="font-bold">CV templates</a>. A few of them are mentioned below.
     1. Graphic Designer<br/>
 Get a professional-approved and AI-analysed resume that is appealing and highlights the critical skills and roles for you. <br/><br/>
 
@@ -192,9 +193,12 @@ For a profile like a chartered accountant, we make sure the key qualifications l
 6. Teacher<br/>
 A profile that is very common and has an important role in our lives is of a teacher. We make sure we talk effectively about your teaching experiences, planning of lessons, student development strategies, classroom management and use of educational technologies.<br/><br/>
 
+And we have many more options in the types of CV that you might get matched too. Check out the CV Match tool and get started! 
+
     `,
   },
 ];
+
 export default function Home() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -601,7 +605,12 @@ export default function Home() {
                     pre-made 45+ resumes of some selected job descriptions. The
                     jobs are from around the world of different job profiles.
                     Select your resume matching your job description and get a
-                    pre-made <Link href="/job-cv" className="font-bold"> professional CV</Link> for yourself.
+                    pre-made{" "}
+                    <Link href="/job-cv" className="font-bold">
+                      {" "}
+                      professional CV
+                    </Link>{" "}
+                    for yourself.
                   </p>
                 </div>
               </div>
@@ -620,8 +629,11 @@ export default function Home() {
                           basic information like Job role, upload or start
                           afresh by forming a new CV, fill in the previous
                           projects if any and skills. After optimising it with
-                          AI, the CV Match prepares a <Link href="/job-cv" className="font-bold">professional curriculum
-                          vitae</Link> of the same job role or title by modifying the
+                          AI, the CV Match prepares a{" "}
+                          <Link href="/job-cv" className="font-bold">
+                            professional curriculum vitae
+                          </Link>{" "}
+                          of the same job role or title by modifying the
                           information professionally. 
                         </p>
                       </div>
@@ -653,7 +665,12 @@ export default function Home() {
                     Stand Out and Personalize Your CV for The Best Impact
                   </h3>
                   <p className="text-lg py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left text-[#1B1B1F]">
-                    6 simple steps to best <Link href="/job-cv" className="font-bold"> professional CV</Link>-
+                    6 simple steps to best{" "}
+                    <Link href="/job-cv" className="font-bold">
+                      {" "}
+                      professional CV
+                    </Link>
+                    -
                   </p>
                 </div>
                 <div className="lg:w-[33%] w-full h-auto">
@@ -683,7 +700,7 @@ export default function Home() {
                   <div className="lg:w-[55%] w-full steps_content">
                     <h4 className="font-bold text-[#101827] text-2xl italic">
                       Step 1
-                    </h4>                    
+                    </h4>
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Go to the CV Match page for pre-made CVs. Enter your job
                       role or profession and click on Generate Now. 
@@ -737,7 +754,6 @@ export default function Home() {
                     <h4 className="font-bold text-[#101827] text-2xl italic">
                       Step 2
                     </h4>
-                    
 
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Upload your existing resume. Select a resume and upload
@@ -760,17 +776,19 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="lg:w-[50%] w-full steps_content mt-10">
-                   
-
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Start afresh by making a CV for yourself. Just fill in
                       basic details like your name, email, job role, city and
-                      country.  This information will help build your <Link href="/job-cv" className="font-bold"> professional CV</Link> with professional insights and artificial
-                      intelligence.
+                      country.  This information will help build your{" "}
+                      <Link href="/job-cv" className="font-bold">
+                        {" "}
+                        professional CV
+                      </Link>{" "}
+                      with professional insights and artificial intelligence.
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="arrow absolute left-[35%] -bottom-45">
                   <img
                     src="/ats_step_arrow_2.png"
@@ -794,15 +812,20 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="lg:w-[10%] w-full ">
-                    <p className="text-2xl font-bold text-[#2C98CA] mt-20 text-center">Or</p>
+                    <p className="text-2xl font-bold text-[#2C98CA] mt-20 text-center">
+                      Or
+                    </p>
                   </div>
                   <div className="lg:w-[40%] w-full steps_content mt-10">
                     <p className="text-base py-3 text-[#1B1B1F]">
                       Start afresh by making a CV for yourself. Just fill in
                       basic details like your name, email, job role, city and
                       country.  This information will help build your
-                      <Link href="/job-cv" className="font-bold"> professional CV</Link> with professional insights and artificial
-                      intelligence.
+                      <Link href="/job-cv" className="font-bold">
+                        {" "}
+                        professional CV
+                      </Link>{" "}
+                      with professional insights and artificial intelligence.
                     </p>
                   </div>
                 </div>
@@ -827,7 +850,6 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                  
                 </div>
                 <div className="arrow absolute left-[35%] -bottom-35">
                   <img
@@ -851,7 +873,11 @@ export default function Home() {
                       <br />
                       Have an experience? Then go ahead and fill in your
                       experience details.  These details will help build
-                      <Link href="/job-cv" className="font-bold"> Professional curriculum vitae</Link> and help get the best jobs.
+                      <Link href="/job-cv" className="font-bold">
+                        {" "}
+                        Professional curriculum vitae
+                      </Link>{" "}
+                      and help get the best jobs.
                     </p>
                   </div>
                   <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent">
@@ -864,7 +890,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="arrow absolute left-[33%] -bottom-40">
                   <img
                     src="/ats_step_arrow_1.png"
@@ -903,7 +929,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="arrow absolute left-[30%] -bottom-40">
                   <img
                     src="/ats_step_arrow_5.png"
@@ -917,8 +943,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              
-              
+
               {/*START-STEP-5 FOR SM MD LG XL 2XL SCREENS  */}
               <div className="block sm:block md:block lg:block xl:block 2xl:block step_2 relative mt-32">
                 <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
@@ -933,8 +958,6 @@ export default function Home() {
                       you get jobs if projects match their interests
                     </p>
                   </div>
-                  
-                  
                 </div>
 
                 <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
@@ -957,7 +980,6 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                  
                 </div>
                 <div className="arrow absolute left-[35%] -bottom-30 md:left-[58%] lg:left-[58%] xl:left-[58%] 2xl:left-[58%]">
                   <img
@@ -988,10 +1010,14 @@ export default function Home() {
                     </h3> */}
                     <p className="text-base py-3">
                       After filling in all the required details, your
-                      <Link href="/job-cv" className="font-bold"> professional CV</Link> will be presented. Review the information
-                      made with AI and add changes according to your needs. 
-                      Change the colour and template designs from professional
-                      resume examples. Download once completed.
+                      <Link href="/job-cv" className="font-bold">
+                        {" "}
+                        professional CV
+                      </Link>{" "}
+                      will be presented. Review the information made with AI and
+                      add changes according to your needs.  Change the colour
+                      and template designs from professional resume examples.
+                      Download once completed.
                     </p>
                   </div>
                 </div>
