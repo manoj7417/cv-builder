@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./user.css";
 import { FaRegPlayCircle, FaStar } from "react-icons/fa";
-import Profile from "../settings/profile/page";
+import Profile from "./Profile";
 import Whishlist from "./Wishlist";
 
 import PurchaseHistory from "./PurchaseHistory";
@@ -385,11 +385,11 @@ const UserDashboardPage = () => {
             <div
               id='blog_header_left_side'
               className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>
-              <div id='coach_image' className='px-4'>
+              <div className='w-44 h-44'>
                 <img
                   src={userdata?.profilePicture || "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"}
                   alt='Coach'
-                  className='w-full  object-cover w-44 h-44 rounded-full'
+                  className='w-full  object-cover w-full h-full rounded-full '
                 />
               </div>
               <div id='coach_details' className='pt-4 sm:pt-10'>
@@ -610,14 +610,14 @@ const UserDashboardPage = () => {
                             <CardHeader>
                               <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
                                 <Avatar className="w-12 h-12 mb-2 sm:mb-0">
-                                  <AvatarImage src={booking.coachId.profileImage} alt={booking.coachId.name} className="object-cover" />
-                                  <AvatarFallback>{booking.coachId.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                  <AvatarImage src={booking?.coachId?.profileImage} alt={booking?.coachId?.name} className="object-cover" />
+                                  <AvatarFallback>{booking?.coachId?.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                  <h3 className="text-base sm:text-lg font-semibold">{booking.coachId.name}</h3>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking.slotTime.startTime} - {booking.slotTime.endTime}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{format(new Date(booking.date), 'MMM dd, yyyy')}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking.timezone}</p>
+                                  <h3 className="text-base sm:text-lg font-semibold">{booking?.coachId?.name}</h3>
+                                  <p className="text-xs sm:text-sm text-gray-500">{booking?.slotTime?.startTime} - {booking?.slotTime?.endTime}</p>
+                                  <p className="text-xs sm:text-sm text-gray-500">{format(new Date(booking?.date), 'MMM dd, yyyy')}</p>
+                                  <p className="text-xs sm:text-sm text-gray-500">{booking?.timezone}</p>
                                 </div>
                               </CardTitle>
                             </CardHeader>
@@ -625,11 +625,11 @@ const UserDashboardPage = () => {
                               <div className="space-y-2">
                                 <div className="flex items-center">
                                   <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm truncate">{booking.coachId.email}</span>
+                                  <span className="text-xs sm:text-sm truncate">{booking?.coachId?.email}</span>
                                 </div>
                                 <div className="flex items-center">
                                   <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm">{booking.coachId.ratesPerHour.charges}/hour</span>
+                                  <span className="text-xs sm:text-sm">{booking?.coachId?.ratesPerHour?.charges}/hour</span>
                                 </div>
                               </div>
                             </CardContent>

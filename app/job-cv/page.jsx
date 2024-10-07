@@ -193,7 +193,7 @@ A profile that is very common and has an important role in our lives is of a tea
 export default function Home() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log("pathname::", pathname);
+
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState("");
   const userState = useUserStore((state) => state.userState);

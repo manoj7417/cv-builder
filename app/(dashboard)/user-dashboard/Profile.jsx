@@ -11,17 +11,12 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiLoaderAlt } from "react-icons/bi";
-import { CiImageOn } from "react-icons/ci";
 import {
-  FaCamera,
   FaChevronRight,
-  FaRegEdit,
-  FaRegUserCircle,
 } from "react-icons/fa";
 import { GoKey } from "react-icons/go";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineFileUpload } from "react-icons/md";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
 function Profile() {
@@ -39,7 +34,6 @@ function Profile() {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [oldPasswordError, setOldPasswordError] = useState("");
-  const router = useRouter();
   const [sendingMail, setIsSendingMail] = useState(false);
   const email = useRef(null);
   const fileUploadRef = useRef(null);
@@ -136,8 +130,6 @@ function Profile() {
 
     try {
       setIsUploadingImage(true);
-
-      // Create FormData and append the selected file
       const formData = new FormData();
       formData.append("file", file);
 
@@ -146,7 +138,6 @@ function Profile() {
     catch (error) {
       console.error("Error uploading profile picture:", error);
     } finally {
-      // Ensure the uploading state is reset after upload completes
       setIsUploadingImage(false);
     }
   };
@@ -324,7 +315,7 @@ function Profile() {
           showCloseButton
         >
           <div>
-            <h1>Reset Password</h1>
+            <h1>Reset password link will be sent to the below email</h1>
             <Input
               placeholder="Enter your email address"
               className="mt-4"
@@ -353,7 +344,7 @@ function Profile() {
         <div className="container mx-auto px-3 sm:px-5">
           <div className="mb-4">
             <div className="flex flex-col sm:flex-row my-3">
-              <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative  border-2 border-gray-200">
+              <div className="w-full sm:w-1/3 flex flex-col items-center sm:items-start relative  shadow-md rounded-md">
                 <div className="overflow-hidden w-[250px] h-[250px] relative mx-auto mt-10">
                   {previewImage ? (
                     <img
@@ -415,7 +406,7 @@ function Profile() {
                     />
                   </div>
                   <Button
-                    className="my-2 lg:w-full w-[200px] bg-[#FF6636] text-white hover:bg-[#FF6636]"
+                    className="my-2 lg:w-full w-[200px] bg-[#FF636] text-white hover:bg-[#FF6636]"
                     onClick={handleRemoveProfilePicture}
                   >
                     <RiDeleteBinLine className="mr-1" />
