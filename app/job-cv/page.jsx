@@ -197,7 +197,7 @@ And we have many more options in the types of CV that you might get matched too.
 export default function Home() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log("pathname::", pathname);
+
   const [isLoading, setIsLoading] = useState(true);
   const [jobRole, setJobRole] = useState("");
   const userState = useUserStore((state) => state.userState);

@@ -8,8 +8,8 @@ export async function POST(req, res) {
             status: response.status || 200,
             headers: { 'Content-Type': 'application/json' }
         });
+
     } catch (error) {
-        
         const errorMessage = error.response ? error.response.data : { error: "Error updating resume" };
         const statusCode = error.response ? error.response.status : 500;
 

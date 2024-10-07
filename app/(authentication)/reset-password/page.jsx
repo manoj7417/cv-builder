@@ -15,6 +15,7 @@ const ResetPasswordFunc = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get('token') || null;
+    const type = searchParams.get('type') || null;
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setConfirmShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -49,20 +50,28 @@ const ResetPasswordFunc = () => {
 
     const hadleResetPassword = async (data) => {
         if (!token) return router.push('/login')
-        // if (!token) return router.push('/login')
         const obj = {
             newPassword: data?.password,
             token
         }
         setIsLoading(true)
         try {
-            const response = await axios.post('/api/resetPassword', obj)
-            if (response.status === 200) {
-                toast.success('Password changed successfully')
-                router.push('/login')
+            if (type === 'coach') {
+                const response = await axios.post('/api/resetCoachPassword', obj)
+                if (response.status === 200) {
+                    toast.success('Password changed successfully')
+                    router.push('/coach-signin')
+                }
+            } else {
+                const response = await axios.post('/api/resetPassword', obj)
+                if (response.status === 200) {
+                    toast.success('Password changed successfully')
+                    router.push('/login')
+                }
             }
         } catch (error) {
-            toast.error("Something went wrong")
+            console.log(error)
+            toast.error(error?.response?.data?.error || "Unable to reset password")
         } finally {
             setIsLoading(false)
         }
@@ -175,7 +184,7 @@ const ResetPasswordFunc = () => {
 
 export default function ResetPassword() {
     return (
-        <Suspense>
+        <Suspense fallback={<div className="flex justify-center items-center h-screen"><TbLoader className="animate-spin text-blue-900" size={48} /></div>}>
             <ResetPasswordFunc />
         </Suspense>
     )
