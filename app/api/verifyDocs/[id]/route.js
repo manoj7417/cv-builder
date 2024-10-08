@@ -1,11 +1,11 @@
 import { serverInstance } from '@/lib/serverApi';
 
-export async function PATCH(req, res) {
+export async function PATCH(req, { params }) {
     try {
         const token = req.headers.get('Authorization');
         const payload = await req.json();
-        const {id,...otherData} = payload;
-        const response = await serverInstance.patch(`/admin/verifyCoach/${id}`, otherData, {
+        const { id } = params;
+        const response = await serverInstance.patch(`/admin/verifyCoach/${id}`, payload, {
             headers: {
                 'Authorization': token,
                 'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ export async function PATCH(req, res) {
             }
         });
     } catch (error) {
-        console.log(error)
+        console.log(error.response.data)
         const errorMessage = error.response ? error.response.data : { error: "Error updating in coach data" };
         const statusCode = error.response ? error.response.status : 500;
         return new Response(JSON.stringify(errorMessage), {
