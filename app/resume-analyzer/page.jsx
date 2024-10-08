@@ -794,8 +794,8 @@ export default function DashboardIdea() {
                           1. CLARITY
                         </h6>
                         <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                          Gives you clarity of your resume in a clear and
-                          concise manner
+                          Find the respective gaps and understand exactly what
+                          kind of CV can make it through the competitive cut.
                         </p>
                       </div>
                     </div>
@@ -807,8 +807,8 @@ export default function DashboardIdea() {
                           2. RELEVANCE
                         </h6>
                         <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
-                          Informs you about the relevance of your resume to the
-                          job title.
+                          Get an analytical report on the relevancy and escape
+                          writing any unrequired information in your CV.
                         </p>
                       </div>
                     </div>
@@ -820,8 +820,8 @@ export default function DashboardIdea() {
                           3. CONTENT
                         </h6>
                         <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
-                          Gives you an idea if your content contains of the
-                          relevant information to the job profile.
+                          “Content is the king,” and we ensure that by helping
+                          you incorporate exact keywords in your CV.
                         </p>
                       </div>
                     </div>
