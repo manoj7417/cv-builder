@@ -8,7 +8,6 @@ import Footer from "./Layout/Footer";
 import { useUserStore } from "./store/UserStore";
 import { ResumeHeader } from "./Layout/ResumeHeader";
 
-
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { userState, loginUser, logoutUser } = useUserStore();
