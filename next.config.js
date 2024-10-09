@@ -34,14 +34,14 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*', // Catch all routes under '/'
+        source: '/:path*',
         has: [
           {
             type: 'host',
             value: 'geniescareerhub.com',
           },
         ],
-        destination: 'https://www.geniescareerhub.com/:path*', // Redirect preserving path
+        destination: 'https://www.geniescareerhub.com/:path*',
         permanent: true,
       },
     ];
@@ -49,4 +49,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-e
