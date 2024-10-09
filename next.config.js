@@ -29,21 +29,5 @@ const nextConfig = {
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
   
-  // Adding redirect logic
-  async redirects() {
-    return [
-      {
-        source: '/',
-        has: [
-          {
-            type: 'host',
-            value: 'geniescareerhub.com',
-          },
-        ],
-        destination: 'https://www.geniescareerhub.com',
-        permanent: true,
-      },
-    ];
-  },
 };
 module.exports = nextConfig;
