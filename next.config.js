@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
   images: {
@@ -29,19 +28,19 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
-
+  
   // Adding redirect logic
   async redirects() {
     return [
       {
-        source: '/:path*',
+        source: '/',
         has: [
           {
             type: 'host',
             value: 'geniescareerhub.com',
           },
         ],
-        destination: 'https://www.geniescareerhub.com/:path*',
+        destination: 'https://www.geniescareerhub.com',
         permanent: true,
       },
     ];
