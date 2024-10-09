@@ -40,8 +40,8 @@ const SidebarCoach = () => {
   // Function to apply active class based on activeTab
   const getLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md font-bold"
-      : "flex items-center p-3 text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold";
+      ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md font-bold w-full"
+      : "flex items-center p-3 text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold w-full";
   };
 
   const handleLogout = async () => {
