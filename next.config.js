@@ -29,19 +29,19 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
-  
+
   // Adding redirect logic
   async redirects() {
     return [
       {
-        source: '/',
+        source: '/:path*', // Catch all routes under '/'
         has: [
           {
             type: 'host',
             value: 'geniescareerhub.com',
           },
         ],
-        destination: 'https://www.geniescareerhub.com',
+        destination: 'https://www.geniescareerhub.com/:path*', // Redirect preserving path
         permanent: true,
       },
     ];
@@ -49,3 +49,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+e
