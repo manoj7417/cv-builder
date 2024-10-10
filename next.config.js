@@ -46,6 +46,19 @@ const nextConfig = {
             key: 'X-Content-Type-Options',
             value: 'nosniff', // Prevents MIME type sniffing
           },
+          {
+            key: 'Content-Security-Policy',
+            value: `
+              default-src 'self'; 
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://res.cloudinary.com; 
+              style-src 'self' 'unsafe-inline'; 
+              img-src 'self' https://res.cloudinary.com https://static.vecteezy.com https://via.placeholder.com; 
+              font-src 'self'; 
+              object-src 'none'; 
+              base-uri 'self'; 
+              frame-ancestors 'none';
+            `.replace(/\s{2,}/g, ' ').trim(), // Adjust the CSP based on your resources and policies
+          },
         ],
       },
     ];
