@@ -23,7 +23,7 @@ const WorkTogether = () => {
                 className="text-blue-950 underline underline-offset-8 font-bold"
                 href={"/contact-us"}
               >
-                Learn More
+                Contact Us
               </Link>
               <GoArrowRight className="text-blue-950 font-bold" />
             </div>

@@ -228,19 +228,15 @@ export default function Home() {
             `,
           }}
         />
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l] = w[l] || [];w[l].push({'gtm.start':
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WSQGHKPJ');`,
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WJL6BJT6');`,
           }}
-        /> */}
-        {/* <meta
-          name="google-site-verification"
-          content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po"
-        /> */}
+        />
         <meta
           name="google-site-verification"
           content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po"
@@ -270,10 +266,10 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
         </noscript>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WSQGHKPJ"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WJL6BJT6"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            style="display:none;visibility:hidden"
           ></iframe>
         </noscript>
       </head>
