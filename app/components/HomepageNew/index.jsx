@@ -11,7 +11,6 @@ import WorkTogether from "@/components/component/WorkTogether";
 import GetStartedModal from "@/components/component/GetStartedModal";
 import CourseSlider from "@/components/component/CourseSlider";
 import "./Homepage.css";
-
 export default function HomepageNew() {
   const [hovered, setHovered] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
