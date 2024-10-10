@@ -19,68 +19,68 @@ import {
 import { GetTokens } from "@/app/actions";
 import axios, { all } from "axios";
 
-const coachAvailabilty = [
-  {
-    userId: "U001",
-    date: "2024-10-10",
-    startTime: "10:00",
-    endTime: "11:00",
-  },
-  {
-    userId: "U002",
-    date: "2024-10-10",
-    startTime: "11:00",
-    endTime: "12:00",
-  },
-  {
-    userId: "U003",
-    date: "2024-10-11",
-    startTime: "14:00",
-    endTime: "15:30",
-  },
-  {
-    userId: "U004",
-    date: "2024-10-11",
-    startTime: "16:00",
-    endTime: "17:00",
-  },
-  {
-    userId: "U005",
-    date: "2024-10-12",
-    startTime: "09:30",
-    endTime: "11:00",
-  },
-  {
-    userId: "U006",
-    date: "2024-10-12",
-    startTime: "12:00",
-    endTime: "13:00",
-  },
-  {
-    userId: "U007",
-    date: "2024-10-13",
-    startTime: "14:30",
-    endTime: "15:30",
-  },
-  {
-    userId: "U008",
-    date: "2024-10-13",
-    startTime: "16:00",
-    endTime: "17:00",
-  },
-  {
-    userId: "U009",
-    date: "2024-10-14",
-    startTime: "10:00",
-    endTime: "11:30",
-  },
-  {
-    userId: "U010",
-    date: "2024-10-14",
-    startTime: "13:00",
-    endTime: "14:30",
-  },
-];
+// const coachAvailabilty = [
+//   {
+//     userId: "U001",
+//     date: "2024-10-10",
+//     startTime: "10:00",
+//     endTime: "11:00",
+//   },
+//   {
+//     userId: "U002",
+//     date: "2024-10-10",
+//     startTime: "11:00",
+//     endTime: "12:00",
+//   },
+//   {
+//     userId: "U003",
+//     date: "2024-10-11",
+//     startTime: "14:00",
+//     endTime: "15:30",
+//   },
+//   {
+//     userId: "U004",
+//     date: "2024-10-11",
+//     startTime: "16:00",
+//     endTime: "17:00",
+//   },
+//   {
+//     userId: "U005",
+//     date: "2024-10-12",
+//     startTime: "09:30",
+//     endTime: "11:00",
+//   },
+//   {
+//     userId: "U006",
+//     date: "2024-10-12",
+//     startTime: "12:00",
+//     endTime: "13:00",
+//   },
+//   {
+//     userId: "U007",
+//     date: "2024-10-13",
+//     startTime: "14:30",
+//     endTime: "15:30",
+//   },
+//   {
+//     userId: "U008",
+//     date: "2024-10-13",
+//     startTime: "16:00",
+//     endTime: "17:00",
+//   },
+//   {
+//     userId: "U009",
+//     date: "2024-10-14",
+//     startTime: "10:00",
+//     endTime: "11:30",
+//   },
+//   {
+//     userId: "U010",
+//     date: "2024-10-14",
+//     startTime: "13:00",
+//     endTime: "14:30",
+//   },
+// ];
 
 const CoachCalendar = () => {
   const [bookingSlot, setBookingSlot] = useState([]);
