@@ -193,6 +193,17 @@ export default function Home() {
         <script
           dangerouslySetInnerHTML={{
             __html: `
+           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5DKF3T7J');
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
               window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -200,10 +211,6 @@ export default function Home() {
             `,
           }}
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-3864YFJZRV"
-        ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -251,7 +258,14 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
             src="https://www.facebook.com/tr?id=452806670914263&ev=PageView&noscript=1"
           />
         </noscript>
-        
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5DKF3T7J"
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+          ></iframe>
+        </noscript>
       </head>
       <main>
         {isLoading ? (

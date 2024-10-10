@@ -110,8 +110,6 @@ const CoachDashboardPage = () => {
     handleGetBookings();
   }, []);
 
-  console.log("bookingSlot", bookingSlot);
-
   return (
     <>
       <div className="w-full bg-white p-7">
@@ -125,54 +123,56 @@ const CoachDashboardPage = () => {
               {/* start-sectin 1 */}
               {bookingSlot.length > 0 &&
                 bookingSlot.map((item, index) => (
-                  <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
-                    <div className="flex justify-between items-center">
-                      <div className="text-lg  font-bold text-[#FFF]">
-                        Next Appointment
+                  <div key={index}>
+                    <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
+                      <div className="flex justify-between items-center">
+                        <div className="text-lg  font-bold text-[#FFF]">
+                          Next Appointment
+                        </div>
+                        <div>
+                          <img src="/coach_dot_icon.png" alt="" className="" />
+                        </div>
                       </div>
-                      <div>
-                        <img src="/coach_dot_icon.png" alt="" className="" />
+                      <div className="flex items-center mb-6 w-full mt-5">
+                        <div className="w-12 h-auto overflow-hidden rounded-full">
+                          <Image
+                            src="/new_appointment_img.png"
+                            alt="Profile Image"
+                            width={44}
+                            height={44}
+                          />
+                        </div>
+                        <div className="ml-1">
+                          <p className="text-[13px]  font-bold text-white">
+                            {item?.userId?.fullname}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center mb-6 w-full mt-5">
-                      <div className="w-12 h-auto overflow-hidden rounded-full">
-                        <Image
-                          src="/new_appointment_img.png"
-                          alt="Profile Image"
-                          width={44}
-                          height={44}
-                        />
+                      <div className="flex justify-between items-center mt-2">
+                        <div className="text-sm  text-[#FFF]">
+                          Appointment Date
+                        </div>
+                        <div className="text-sm  text-[#FFF]">Country</div>
                       </div>
-                      <div className="ml-1">
-                        <p className="text-[13px]  font-bold text-white">
-                          {item?.userId?.fullname}
-                        </p>
+                      <div className="flex justify-between items-center mt-2">
+                        <div className="text-sm font-bold  text-[#FFF]">
+                          {formatDate(item?.date)}
+                        </div>
+                        <div className="text-sm font-bold  text-[#FFF]">
+                          {item?.country}
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex justify-between items-center mt-2">
-                      <div className="text-sm  text-[#FFF]">
-                        Appointment Date
-                      </div>
-                      <div className="text-sm  text-[#FFF]">Country</div>
-                    </div>
-                    <div className="flex justify-between items-center mt-2">
-                      <div className="text-sm font-bold  text-[#FFF]">
-                        {formatDate(item?.date)}
-                      </div>
-                      <div className="text-sm font-bold  text-[#FFF]">
-                        {item?.country}
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center mt-10">
-                      <div className="text-sm font-bold text-[#FFF]">
-                        <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
-                          Start
-                        </button>
-                      </div>
-                      <div className="text-sm font-bold text-[#FFF]">
-                        <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
-                          Cancel
-                        </button>
+                      <div className="flex justify-between items-center mt-10">
+                        <div className="text-sm font-bold text-[#FFF]">
+                          <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
+                            Start
+                          </button>
+                        </div>
+                        <div className="text-sm font-bold text-[#FFF]">
+                          <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
+                            Cancel
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
