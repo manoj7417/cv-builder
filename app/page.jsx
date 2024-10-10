@@ -36,10 +36,11 @@ export default function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org/",
               "@type": "Organization",
-              "url": "https://www.geniescareerhub.com/",
-              "logo": "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
-              "name": "geniescareerhub.com",
-              "description": "Genies Career Hub creates your resume in an easy-going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser, and CV Match."
+              url: "https://www.geniescareerhub.com/",
+              logo: "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+              name: "geniescareerhub.com",
+              description:
+                "Genies Career Hub creates your resume in an easy-going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser, and CV Match.",
             }),
           }}
         />
@@ -51,24 +52,24 @@ export default function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org/",
               "@type": "BreadcrumbList",
-              "itemListElement": [
+              itemListElement: [
                 {
                   "@type": "ListItem",
-                  "position": 1,
-                  "name": "CV Template",
-                  "item": "https://www.geniescareerhub.com/resume",
+                  position: 1,
+                  name: "CV Template",
+                  item: "https://www.geniescareerhub.com/resume",
                 },
                 {
                   "@type": "ListItem",
-                  "position": 2,
-                  "name": "Resume Formatting",
-                  "item": "https://www.geniescareerhub.com/resume-analyzer",
+                  position: 2,
+                  name: "Resume Formatting",
+                  item: "https://www.geniescareerhub.com/resume-analyzer",
                 },
                 {
                   "@type": "ListItem",
-                  "position": 3,
-                  "name": "CV Creators",
-                  "item": "https://www.geniescareerhub.com/job-cv",
+                  position: 3,
+                  name: "CV Creators",
+                  item: "https://www.geniescareerhub.com/job-cv",
                 },
               ],
             }),
@@ -82,36 +83,37 @@ export default function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org/",
               "@type": "HowTo",
-              "name": "build your resume quickly with CV Builder?",
-              "description":
+              name: "build your resume quickly with CV Builder?",
+              description:
                 "To create your resume using a curriculum vitae builder and a CV enhancer, you can use the AI-integrated Genies Career Hub's CV Creator.",
-              "image": "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
-              "tool": {
+              image:
+                "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+              tool: {
                 "@type": "HowToTool",
-                "name": "CV Builder",
+                name: "CV Builder",
               },
-              "step": [
+              step: [
                 {
                   "@type": "HowToStep",
-                  "text": "Open the Curriculum Vitae Builder and check out the variety of CV template options.",
-                  "image": "https://www.geniescareerhub.com/resume21.png",
+                  text: "Open the Curriculum Vitae Builder and check out the variety of CV template options.",
+                  image: "https://www.geniescareerhub.com/resume21.png",
                 },
                 {
                   "@type": "HowToStep",
-                  "text": "Select the best curriculum vitae format and start creating your CV with the help of AI.",
-                  "image": "https://www.geniescareerhub.com/resume22.png",
+                  text: "Select the best curriculum vitae format and start creating your CV with the help of AI.",
+                  image: "https://www.geniescareerhub.com/resume22.png",
                 },
                 {
                   "@type": "HowToStep",
-                  "text": "Mention all the essential information in CV format and finalize the content of the CV with AI.",
+                  text: "Mention all the essential information in CV format and finalize the content of the CV with AI.",
                 },
                 {
                   "@type": "HowToStep",
-                  "text": "Review your finalized CV created using the CV Builder.",
+                  text: "Review your finalized CV created using the CV Builder.",
                 },
                 {
                   "@type": "HowToStep",
-                  "text": "Download the created CV in PDF format.",
+                  text: "Download the created CV in PDF format.",
                 },
               ],
             }),
@@ -125,38 +127,35 @@ export default function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
-              "mainEntity": [
+              mainEntity: [
                 {
                   "@type": "Question",
-                  "name": "What is a Curriculum Vitae Builder?",
-                  "acceptedAnswer": {
+                  name: "What is a Curriculum Vitae Builder?",
+                  acceptedAnswer: {
                     "@type": "Answer",
-                    "text":
-                      "A tool specifically built to create CVs and Resumes using <a href='https://www.geniescareerhub.com/resume'><strong>CV template</strong></a> format and designs is termed a <a href='https://www.geniescareerhub.com/resume'><strong>Curriculum Vitae Builder</strong></a>.",
+                    text: "A tool specifically built to create CVs and Resumes using <a href='https://www.geniescareerhub.com/resume'><strong>CV template</strong></a> format and designs is termed a <a href='https://www.geniescareerhub.com/resume'><strong>Curriculum Vitae Builder</strong></a>.",
                   },
                 },
                 {
                   "@type": "Question",
-                  "name": "How can an ATS CV Checker help me?",
-                  "acceptedAnswer": {
+                  name: "How can an ATS CV Checker help me?",
+                  acceptedAnswer: {
                     "@type": "Answer",
-                    "text":
-                      "An ATS CV Checker helps determine if your resume follows <strong>ats friendly resume format</strong>. CV Optimiser by Genies Career Hub also analyses clarity, relevance, and content.",
+                    text: "An ATS CV Checker helps determine if your resume follows <strong>ats friendly resume format</strong>. CV Optimiser by Genies Career Hub also analyses clarity, relevance, and content.",
                   },
                 },
                 {
                   "@type": "Question",
-                  "name": "What is CV Match tool?",
-                  "acceptedAnswer": {
+                  name: "What is CV Match tool?",
+                  acceptedAnswer: {
                     "@type": "Answer",
-                    "text":
-                      "An innovative algorithm that helps match your job profile with the best resumes pre-written by <a href='https://www.geniescareerhub.com/job-cv'><strong>resume coach</strong></a> professionals.",
+                    text: "An innovative algorithm that helps match your job profile with the best resumes pre-written by <a href='https://www.geniescareerhub.com/job-cv'><strong>resume coach</strong></a> professionals.",
                   },
                 },
               ],
             }),
           }}
-          />
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -178,15 +177,16 @@ export default function Home() {
         />
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-16573743263"
+          src="https://www.googletagmanager.com/gtag/js?id=G-J1X213CSR4"
         ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
+            window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'AW-16573743263');
+
+  gtag('config', 'G-J1X213CSR4');
             `,
           }}
         />
@@ -254,10 +254,10 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
         </noscript>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WSQGHKPJ"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WJL6BJT6"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            style="display:none;visibility:hidden"
           ></iframe>
         </noscript>
       </head>

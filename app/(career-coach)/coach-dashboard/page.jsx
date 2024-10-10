@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHandRock,
@@ -17,10 +17,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
+import { GetTokens } from "@/app/actions";
+import axios from "axios";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const CoachDashboardPage = () => {
   const { userdata } = useCoachStore((state) => state.userState);
+  const [bookingSlot, setBookingSlot] = useState([]);
 
   const invoices = [
     {
@@ -66,6 +70,31 @@ const CoachDashboardPage = () => {
       paymentMethod: "Credit Card",
     },
   ];
+
+  const handleGetBookings = async () => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push("/login?redirect=/user-dashboard");
+    }
+    try {
+      const response = await axios.get("/api/bookings", {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      if (response.status === 200) {
+        setBookingSlot(response.data.bookings);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetBookings();
+  }, []);
+
+  console.log("bookingSlot", bookingSlot);
 
   return (
     <>
@@ -181,140 +210,6 @@ const CoachDashboardPage = () => {
             </div>
           </div>
           {/* END-PART 1 */}
-          {/* START-PART 2 */}
-          <div className="w-[100%] pt-7 lg:pt-0 sm:w-[100%] md:w-[100%] lg:w-[100%] xl:w-[40%] 2xl:w-[40%]">
-            <div className="grid grid-cols-1 gap-4 lg:ml-7">
-              <div className=" bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg">
-                <div className="flex justify-between items-center mt-2">
-                  <div className="text-lg font-bold  text-[#092C4C]">
-                    Today’ s Appointment
-                  </div>
-                  <div className="text-sm text-[#514EF3]">View All</div>
-                </div>
-                {/* START-APPOINTMENT  */}
-                <div className="flex items-center mb-6 w-full mt-5">
-                  <div className="w-12 h-auto overflow-hidden rounded-full">
-                    <Image
-                      src="/new_appointment_img.png"
-                      alt="Profile Image"
-                      width={44}
-                      height={44}
-                    />
-                  </div>
-                  <div className="ml-1 flex justify-between w-full">
-                    <div className="">
-                      <div className="text-[14px] font-bold text-[#092C4C]">
-                        319 Haul Road
-                      </div>
-                      <div className="text-[13px] text-[#7E92A2] mt-2">
-                        Glenrock, WY 12345
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[13px] font-bold text-[#092C4C]">
-                        $10
-                      </div>
-                      <div className="text-[13px] text-[#18A53F] mt-2">
-                        Done
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* END-APPOINTMENT  */}
-                {/* START-APPOINTMENT  */}
-                <div className="flex items-center mb-6 w-full mt-5">
-                  <div className="w-12 h-auto overflow-hidden rounded-full">
-                    <Image
-                      src="/new_appointment_img.png"
-                      alt="Profile Image"
-                      width={44}
-                      height={44}
-                    />
-                  </div>
-                  <div className="ml-1 flex justify-between w-full">
-                    <div className="">
-                      <div className="text-[14px] font-bold text-[#092C4C]">
-                        319 Haul Road
-                      </div>
-                      <div className="text-[13px] text-[#7E92A2] mt-2">
-                        Glenrock, WY 12345
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[13px] font-bold text-[#092C4C]">
-                        $10
-                      </div>
-                      <div className="text-[13px] text-[#D10000] mt-2">
-                        Cancelled
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* END-APPOINTMENT  */}
-                {/* START-APPOINTMENT  */}
-                <div className="flex items-center mb-6 w-full mt-5">
-                  <div className="w-12 h-auto overflow-hidden rounded-full">
-                    <Image
-                      src="/new_appointment_img.png"
-                      alt="Profile Image"
-                      width={44}
-                      height={44}
-                    />
-                  </div>
-                  <div className="ml-1 flex justify-between w-full">
-                    <div className="">
-                      <div className="text-[14px] font-bold text-[#092C4C]">
-                        319 Haul Road
-                      </div>
-                      <div className="text-[13px] text-[#7E92A2] mt-2">
-                        Glenrock, WY 12345
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[13px] font-bold text-[#092C4C]">
-                        $10
-                      </div>
-                      <div className="text-[13px] text-[#D10000] mt-2">
-                        Cancelled
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* END-APPOINTMENT  */}
-                {/* START-APPOINTMENT  */}
-                <div className="flex items-center mb-6 w-full mt-5">
-                  <div className="w-12 h-auto overflow-hidden rounded-full">
-                    <Image
-                      src="/new_appointment_img.png"
-                      alt="Profile Image"
-                      width={44}
-                      height={44}
-                    />
-                  </div>
-                  <div className="ml-1 flex justify-between w-full">
-                    <div className="">
-                      <div className="text-[14px] font-bold text-[#092C4C]">
-                        319 Haul Road
-                      </div>
-                      <div className="text-[13px] text-[#7E92A2] mt-2">
-                        Glenrock, WY 12345
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[13px] font-bold text-[#092C4C]">
-                        $10
-                      </div>
-                      <div className="text-[13px] text-[#18A53F] mt-2">
-                        Done
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* END-APPOINTMENT  */}
-              </div>
-            </div>
-          </div>
-          {/* END-PART 2 */}
           {/* START-PART 3 */}
           <div className="w-[100%] sm:w-[100%] pt-7 lg:pt-0 md:w-[100%] lg:w-[100%] xl:w-[20%] 2xl:w-[20%] lg:pl-10 xl:pl-10 2xl:pl-10">
             <div className="flex flex-col sm:flex-row md:flex-row lg:flex-col gap-7 justify-around">
@@ -356,6 +251,52 @@ const CoachDashboardPage = () => {
           </div>
           {/* END-PART 3 */}
         </div>
+      </div>
+      <div className="max-w-5xl ms-10 appointment">
+        <div className="main_heading">
+          <h2 className="text-lg font-bold  text-[#092C4C]">
+            Today’ s Appointment
+          </h2>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Username</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Slot Time</TableHead>
+              <TableHead>Country</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {bookingSlot.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium">
+                  <div className="flex items-center space-x-3">
+                    <Avatar className="w-10 h-10">
+                      <AvatarImage
+                        src={item.userId.avatar}
+                        alt={item.userId.fullname}
+                      />
+                      <AvatarFallback>
+                        {item.userId.fullname
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span>{item.userId.fullname}</span>
+                  </div>
+                </TableCell>
+                <TableCell className="text-red-500">{item.status}</TableCell>
+                <TableCell>
+                  {item.slotTime.startTime}-{item.slotTime.endTime}
+                </TableCell>
+                <TableCell>{item.country}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </>
   );
