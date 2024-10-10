@@ -23,7 +23,7 @@ import { SetTokens } from "@/app/actions";
 import { useCoachStore } from '../../store/coachStore'
 
 //
-export default function CoachRegistration() {
+export default function CoachLogin() {
   const {
     register,
     handleSubmit,
@@ -266,14 +266,14 @@ export default function CoachRegistration() {
                       <div>
                         <div className="field field-checkbox flex items-center">
                           <input
-                            id="checkbox"
+                            id="rememberMe"
                             type="checkbox"
                             name="terms"
-                            className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                            className="form-checkbox lg:h-4 lg:w-4 h-3 w-3"
                             {...register("rememberMe", { required: false })}
                           />
                           <label
-                            htmlFor="checkbox"
+                            htmlFor="rememberMe"
                             className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
                           >
                             <p>Remember me</p>
@@ -299,14 +299,14 @@ export default function CoachRegistration() {
                   <div className="terms_condition">
                     <div className="field field-checkbox flex items-center">
                       <input
-                        id="checkbox"
+                        id="terms"
                         type="checkbox"
                         name="terms"
-                        className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                        className="form-checkbox lg:h-4 lg:w-4 h-3 w-3"
                         {...register("terms", { required: true })}
                       />
                       <label
-                        htmlFor="checkbox"
+                        htmlFor="terms"
                         className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
                       >
                         <p>
