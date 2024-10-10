@@ -75,7 +75,7 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    // handleAccountRequest()
+    handleAccountRequest()
   }, []);
 
   return (

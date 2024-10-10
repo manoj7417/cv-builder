@@ -359,6 +359,7 @@ const CoachProfile = () => {
                 </Button>
               )}
               {isEditable && (
+                <>
                 <Button
                   className="bg-green-600 text-white px-10 py-2 rounded-md flex items-center"
                   type="submit"
@@ -376,6 +377,10 @@ const CoachProfile = () => {
                     </>
                   )}
                 </Button>
+                <Button className="px-5 py-2 rounded-md flex items-center" onClick={() => setIsEditable(false)}>
+                  Exit <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                </Button>
+                </>
               )}
             </div>
           </div>

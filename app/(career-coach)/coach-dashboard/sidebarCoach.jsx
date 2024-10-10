@@ -26,7 +26,8 @@ const SidebarCoach = () => {
   const [activeTab, setActiveTab] = useState(pathname);
   const router = useRouter();
   const { updateUserData } = useCoachStore();
-  const { userdata } = useCoachStore(state => state.userState)
+  const { userdata } = useCoachStore(state => state.userState);
+  console.log("userdata::", userdata);
   // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -162,17 +163,28 @@ const SidebarCoach = () => {
                  My Profile
               </Link>
             </li>
+            <li className={getLinkClass("/coach-dashboard/coach-calendar")}>
+              <Link
+                href={"/coach-dashboard/coach-calendar"}
+                className='flex items-center w-full'
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/coach-calendar")
+                }>
+                <MdEventAvailable className="text-xl mr-3" />
+                 My Appointment
+              </Link>
+            </li>
           </ul >
         </nav >
         {/* Profile Section */}
         < div className="flex items-center justify-between  absolute bottom-0 min-w-[200px] " >
           <TooltipProvider>
             <img
-              src={userdata?.profilePicture || "/avatar.jpg"} // Replace with your profile image path
+              src={userdata?.profileImage} // Replace with your profile image path
               alt="Profile Image"
               width={52} // Width should match the container's width
               height={52} // Height should match the container's height
-              className="object-cover h-10 w-10"
+              className="object-cover h-10 w-10 rounded-full"
             />
             <div>
               <p className="font-semibold text-gray-800 text-base">

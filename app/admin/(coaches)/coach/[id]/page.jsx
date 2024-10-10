@@ -68,10 +68,9 @@ const CoachDetailsPage = () => {
     };
     try {
       const response = await axios.patch(
-        "/api/verifyDocs",
+        `/api/verifyDocs/${id}`,
         {
-          id,
-          ...combinedData,
+          combinedData,
         },
         {
           headers: {
