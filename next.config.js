@@ -28,6 +28,20 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
-  
+
+  async headers() {
+    return [
+      {
+        source: '/(.*)', // Apply to all routes
+        headers: [
+          {
+            key: 'Referrer-Policy',
+            value: 'no-referrer', // You can customize this value
+          },
+        ],
+      },
+    ]
+  },
 };
+
 module.exports = nextConfig;
