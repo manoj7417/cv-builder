@@ -36,11 +36,15 @@ const nextConfig = {
         headers: [
           {
             key: 'Referrer-Policy',
-            value: 'no-referrer', // You can customize this value
+            value: 'no-referrer', // Custom referrer policy
           },
           {
             key: 'X-Frame-Options',
             value: 'DENY', // Prevents the page from being displayed in an iframe
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff', // Prevents MIME type sniffing
           },
         ],
       },
