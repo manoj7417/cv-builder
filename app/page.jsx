@@ -251,14 +251,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
             src="https://www.facebook.com/tr?id=452806670914263&ev=PageView&noscript=1"
           />
         </noscript>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WJL6BJT6"
-            height="0"
-            width="0"
-            style="display:none;visibility:hidden"
-          ></iframe>
-        </noscript>
+        
       </head>
       <main>
         {isLoading ? (
