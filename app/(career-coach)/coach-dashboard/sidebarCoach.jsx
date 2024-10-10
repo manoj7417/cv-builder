@@ -27,7 +27,6 @@ const SidebarCoach = () => {
   const router = useRouter();
   const { updateUserData } = useCoachStore();
   const { userdata } = useCoachStore(state => state.userState);
-  console.log("userdata::", userdata);
   // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

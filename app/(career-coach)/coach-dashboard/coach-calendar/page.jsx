@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dialog";
 import { GetTokens } from "@/app/actions";
 import axios, { all } from "axios";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 // const coachAvailabilty = [
 //   {
@@ -100,11 +101,32 @@ const CoachCalendar = () => {
       if (response.status === 200) {
         handleConvertBookingDataFormat(response.data.bookings);
         setBookingSlot(response.data.bookings);
+        console.log(response.data.bookings);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const convertTo24Hour = (time12h) => {
+  //   const [time, modifier] = time12h.split(" ");
+
+  //   let [hours, minutes] = time.split(":");
+
+  //   if (hours === "12") {
+  //     hours = "00"; // 12 AM is 00 in 24-hour format
+  //   }
+
+  //   if (modifier === "PM" && hours !== "12") {
+  //     hours = parseInt(hours, 10) + 12; // Convert PM to 24-hour format
+  //   }
+
+  //   // Ensure hours and minutes are always two digits (e.g., "9" becomes "09")
+  //   hours = hours?.padStart(2, "0");
+  //   minutes = minutes?.padStart(2, "0");
+
+  //   return `${hours}:${minutes}:00`;
+  // };
 
   const convertTo24Hour = (time12h) => {
     const [time, modifier] = time12h.split(" ");
@@ -116,10 +138,10 @@ const CoachCalendar = () => {
     }
 
     if (modifier === "PM" && hours !== "12") {
-      hours = parseInt(hours, 10) + 12; // Convert PM to 24-hour format
+      hours = String(parseInt(hours, 10) + 12); // Convert PM to 24-hour format
     }
 
-    // Ensure hours and minutes are always two digits (e.g., "9" becomes "09")
+    // Ensure hours and minutes are always two digits
     hours = hours.padStart(2, "0");
     minutes = minutes.padStart(2, "0");
 
@@ -155,7 +177,7 @@ const CoachCalendar = () => {
           <div className="w-full mx-auto mt-8">
             <FullCalendar
               height={"85vh"}
-              themeSystem="bootstrap"
+              themeSystem="standard"
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               headerToolbar={{
                 left: "prev,next",
