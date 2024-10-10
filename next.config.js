@@ -38,9 +38,13 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'no-referrer', // You can customize this value
           },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY', // Prevents the page from being displayed in an iframe
+          },
         ],
       },
-    ]
+    ];
   },
 };
 
