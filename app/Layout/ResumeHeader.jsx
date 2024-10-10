@@ -89,7 +89,7 @@ export function ResumeHeader() {
       <div className='header_wrapper w-full'>
         <div className='mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8'>
           <div className='inline-flex items-center space-x-2'>
-            <Link href={"/"}>
+            <Link href="/" passHref={true}>
               <Image
                 priority
                 // src="/genies-career-hub-logo.png"
@@ -107,8 +107,9 @@ export function ResumeHeader() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className='inline-flex items-center text-base text-blue-950 font-medium'>
+                    className='inline-flex items-center text-base text-blue-950 font-medium' passHref={true}>
                     {item.name}
+                    
                   </Link>
                 </li>
               ))}
@@ -148,12 +149,12 @@ export function ResumeHeader() {
                 {isDropdownOpen && (
                   <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10'>
                     <ul>
-                      <Link href='/user-dashboard'>
+                      <Link href='/user-dashboard' passHref={true}>
                         <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center'>
                           <FaUserCircle className='mr-2' /> Profile
                         </li>
                       </Link>
-                      <Link href='/user-history'>
+                      <Link href='/user-history' passHref={true}>
                         <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center  '>
                           <PiReadCvLogo className='mr-2' />
                           CV History
@@ -214,7 +215,8 @@ export function ResumeHeader() {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className='-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50'>
+                          className='-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50'
+                          passHref={true}>
                           <span className='text-base font-medium text-blue-950'>
                             {item.name}
                           </span>
