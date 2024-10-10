@@ -25,7 +25,7 @@ export default function Footer() {
               <li>
                 <Link
                   href='https://www.facebook.com/profile.php?id=61560696226983'
-                  target='_blank'>
+                  target='_blank' passHref={true}>
                   <div className='text-black  hover:text-blue-500'>
                     <span className='sr-only'>Facebook</span>
 
@@ -36,7 +36,8 @@ export default function Footer() {
               <li>
                 <Link
                   href='https://www.instagram.com/genies_career_hub/'
-                  target='_blank'>
+                  target='_blank'
+                  passHref={true}>
                   <div className='text-black transition hover:text-pink-700'>
                     <span className='sr-only'>Instagram</span>
                     <BsInstagram className='h-6 w-6' />
@@ -47,7 +48,8 @@ export default function Footer() {
                 <div className='text-black transition hover:text-sky-500'>
                   <Link
                     href='https://www.linkedin.com/company/100784711/admin/feed/posts/'
-                    target='_blank'>
+                    target='_blank'
+                    passHref={true}>
                     <span className='sr-only'>LinkedIn</span>
                     <FaLinkedin className='h-6 w-6' />
                   </Link>
@@ -57,7 +59,8 @@ export default function Footer() {
                 <div className='text-black transition hover:text-red-700'>
                   <Link
                     href='https://www.pinterest.co.uk/GeniesCareerHub/'
-                    target='_blank'>
+                    target='_blank'
+                    passHref={true}>
                     <span className='sr-only'>Pinterest</span>
                     <FaPinterest className='h-6 w-6' />
                   </Link>
@@ -83,19 +86,20 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/resume-analyzer'
-                    className='text-black transition'>
+                    className='text-black transition'
+                    passHref={true}>
                     CV Optimiser
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
                 <li>
-                  <Link href='/job-cv' className='text-black transition'>
+                  <Link href='/job-cv' className='text-black transition' passHref={true}>
                     CV Match
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
                 <li>
-                  <Link href='/coming-soon' className='text-black transition'>
+                  <Link href='/coming-soon' className='text-black transition' passHref={true}>
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -103,7 +107,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/career-counselling'
-                    className='text-black transition'>
+                    className='text-black transition' passHref={true}>
                     Psychometric Test
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -116,7 +120,7 @@ export default function Footer() {
 
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link href='/about-us' className='text-black transition'>
+                  <Link href='/about-us' className='text-black transition' passHref={true}>
                     {" "}
                     About Us
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
@@ -130,20 +134,20 @@ export default function Footer() {
 
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link href='/contact-us' className='text-black transition'>
+                  <Link href='/contact-us' className='text-black transition' passHref={true}>
                     Contact
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
 
                 <li>
-                  <Link href='/faq' className='text-black transition '>
+                  <Link href='/faq' className='text-black transition ' passHref={true}>
                     FAQs
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
                 <li>
-                  <Link href='/pricing' className='text-black transition'>
+                  <Link href='/pricing' className='text-black transition' passHref={true}>
                     Pricing
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -152,7 +156,8 @@ export default function Footer() {
                   <Link
                     href='https://geniescareerhub.com/'
                     className='text-black transition'
-                    target='_blank'>
+                    target='_blank'
+                    passHref={true}>
                     Blog
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -163,7 +168,7 @@ export default function Footer() {
               <p className='font-bold text-gray-900'>Legal</p>
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link href='/return-policy' className='text-black transition'>
+                  <Link href='/return-policy' className='text-black transition' passHref={true}>
                     {" "}
                     Return Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
@@ -172,14 +177,14 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/privacy-policy'
-                    className='text-black transition'>
+                    className='text-black transition' passHref={true}>
                     {" "}
                     Privacy Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
                 <li>
-                  <Link href='/refund-policy' className='text-black transition'>
+                  <Link href='/refund-policy' className='text-black transition' passHref={true}>
                     {" "}
                     Refund Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
@@ -188,13 +193,13 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/terms-condition'
-                    className='text-black transition'>
+                    className='text-black transition' passHref={true}>
                     Terms & Condition
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
                 <li>
-                  <Link href='/gdpr' className='text-black transition'>
+                  <Link href='/gdpr' className='text-black transition' passHref={true}>
                     GDPR
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -202,7 +207,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/editorial-guidlines'
-                    className='text-black transition'>
+                    className='text-black transition' passHref={true}>
                     Editorial Guidlines
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -210,7 +215,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/cookies-tracking-policy'
-                    className='text-black transition'>
+                    className='text-black transition' passHref={true}>
                     Cookies & Tracking Policy
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
@@ -227,7 +232,7 @@ export default function Footer() {
             <Link
               href='https://www.glassfrogtech.com/'
               target='_blank'
-              className='hover:underline pl-1'>
+              className='hover:underline pl-1' passHref={true}>
               Glassfrog Technologies
             </Link>
           </p>
