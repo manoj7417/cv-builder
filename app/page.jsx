@@ -228,7 +228,7 @@ export default function Home() {
             `,
           }}
         />
-        
+
         <script
           dangerouslySetInnerHTML={{
             __html: ` !function(f,b,e,v,n,t,s)
@@ -243,7 +243,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
           fbq('track', 'PageView');`,
           }}
         />
-
         <noscript>
           <img
             height="1"
