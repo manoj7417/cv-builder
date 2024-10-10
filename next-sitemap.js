@@ -1,13 +1,14 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'https://www.geniescareerhub.com', // Your website domain
-    generateRobotsTxt: true, // Generate a robots.txt file
-    changefreq: 'daily', // Frequency for crawling pages
-    priority: 0.7, // Default priority for all pages
-    sitemapSize: 5000, // Limit for URLs per sitemap file
-    exclude: ['/admin/**', '/private/**', '/api/**'], // Exclude specific pages like admin or API routes
+    siteUrl: 'https://www.geniescareerhub.com', // Your domain
+    generateRobotsTxt: true, // Generates a robots.txt file
+    sitemapSize: 5000, // Maximum number of URLs per sitemap (reduce if necessary)
+    generateIndexSitemap: false, // Ensure that a single sitemap.xml is generated
+    changefreq: 'daily', // Frequency of updates
+    priority: 0.7, // Default priority for pages
+    exclude: ['/admin/**', '/private/**', '/api/**'], // Exclude specific pages
     robotsTxtOptions: {
-      policies: [{ userAgent: '*', allow: '/' }], // Allow all bots to crawl the site
+      policies: [{ userAgent: '*', allow: '/' }], // Allow all bots to crawl
     },
   };
   
