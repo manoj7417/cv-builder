@@ -49,6 +49,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+      <meta name="google-site-verification" content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po" />
+      </head>
       <body className={inter.className}>
         <ToastContainer
           position="top-right"
