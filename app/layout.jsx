@@ -17,12 +17,12 @@ const inter = Plus_Jakarta_Sans({
 
 export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
-  title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
+  title: 'Professional CV Templates for Perfect CV on Genies CV Maker',
   description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
   openGraph: {
     url: '/',
     type: 'website',
-    title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
+    title: 'Professional CV Templates for Perfect CV on Genies CV Maker',
     description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
     images: [
       {
@@ -35,7 +35,7 @@ export const metadata = {
     card: 'summary_large_image',
     domain: 'geniescareerhub.com',
     url: '/',
-    title: 'Professional CV Templates for Perfect CVs on Genies CV Maker',
+    title: 'Professional CV Templates for Perfect CV on Genies CV Maker',
     description: 'Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.',
     image: '/_next/image?url=%2Fbeta-logo.png&w=128&q=75',
   },
