@@ -51,13 +51,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
       <meta name="google-site-verification" content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po" />
-      <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WJL6BJT6"
-            height="0"
-            width="0"
-          ></iframe>
-        </noscript>
+      
       </head>
       <body className={inter.className}>
         <ToastContainer
@@ -73,6 +67,13 @@ export default function RootLayout({ children }) {
           theme="colored"
           transition={Slide}
         />
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WJL6BJT6"
+            height="0"
+            width="0"
+          ></iframe>
+        </noscript>
         {children}
       </body>
     </html>
