@@ -89,7 +89,7 @@ export function ResumeHeader() {
       <div className='header_wrapper w-full'>
         <div className='mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8'>
           <div className='inline-flex items-center space-x-2'>
-            <Link href="/" passHref={true}>
+            <a href="/" >
               <Image
                 priority
                 // src="/genies-career-hub-logo.png"
@@ -99,18 +99,18 @@ export function ResumeHeader() {
                 alt='white_logo'
                 className='w-20 h-16 object-contain'
               />
-            </Link>
+            </a>
           </div>
           <div className='hidden lg:block'>
             <ul className='ml-12 inline-flex space-x-8'>
               {menuItems.map((item) => (
                 <li key={item.name}>
-                  <Link
+                  <a
                     href={item.href}
-                    className='inline-flex items-center text-base text-blue-950 font-medium' passHref={true}>
+                    className='inline-flex items-center text-base text-blue-950 font-medium' >
                     {item.name}
                     
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -149,17 +149,17 @@ export function ResumeHeader() {
                 {isDropdownOpen && (
                   <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10'>
                     <ul>
-                      <Link href='/user-dashboard' passHref={true}>
+                      <a href='/user-dashboard' >
                         <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center'>
                           <FaUserCircle className='mr-2' /> Profile
                         </li>
-                      </Link>
-                      <Link href='/user-history' passHref={true}>
+                      </a>
+                      <a href='/user-history' >
                         <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center  '>
                           <PiReadCvLogo className='mr-2' />
                           CV History
                         </li>
-                      </Link>
+                      </a>
                       <li
                         className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center'
                         onClick={handleLogout}>
@@ -188,7 +188,7 @@ export function ResumeHeader() {
                 <div className='px-5 pb-6 pt-5'>
                   <div className='flex items-center justify-between'>
                     <div className='inline-flex items-center space-x-2'>
-                      <Link href={"/"}>
+                      <a href={"/"}>
                         <Image
                           priority
                           src='/genies-career-hub-logo.png'
@@ -197,7 +197,7 @@ export function ResumeHeader() {
                           alt='white_logo'
                           className='w-14 h-14 object-contain'
                         />
-                      </Link>
+                      </a>
                     </div>
                     <div className='-mr-2'>
                       <button
@@ -212,15 +212,15 @@ export function ResumeHeader() {
                   <div className='mt-6'>
                     <nav className='grid gap-y-4'>
                       {menuItems.map((item) => (
-                        <Link
+                        <a
                           key={item.name}
                           href={item.href}
                           className='-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50'
-                          passHref={true}>
+                          >
                           <span className='text-base font-medium text-blue-950'>
                             {item.name}
                           </span>
-                        </Link>
+                        </a>
                       ))}
                     </nav>
                   </div>
@@ -251,12 +251,12 @@ export function ResumeHeader() {
                           <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10'>
                             <ul>
                               {/* <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm'>
-                                <Link href='/user-profile/profile'>
+                                <a href='/user-profile/profile'>
                                   Profile
-                                </Link>
+                                </a>
                               </li> */}
                               <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm'>
-                                <Link href='/user-history'>CV History</Link>
+                                <a href='/user-history'>CV History</a>
                               </li>
                               <li
                                 className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm'

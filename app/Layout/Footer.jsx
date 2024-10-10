@@ -23,47 +23,47 @@ export default function Footer() {
           <div className='sm:flex sm:items-center sm:justify-center'>
             <ul className='mt-8 flex justify-center gap-6 sm:mt-0'>
               <li>
-                <Link
+                <a
                   href='https://www.facebook.com/profile.php?id=61560696226983'
-                  target='_blank' passHref={true}>
+                  target='_blank'>
                   <div className='text-black  hover:text-blue-500'>
                     <span className='sr-only'>Facebook</span>
 
                     <BsFacebook className='h-6 w-6' />
                   </div>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href='https://www.instagram.com/genies_career_hub/'
                   target='_blank'
-                  passHref={true}>
+                >
                   <div className='text-black transition hover:text-pink-700'>
                     <span className='sr-only'>Instagram</span>
                     <BsInstagram className='h-6 w-6' />
                   </div>
-                </Link>
+                </a>
               </li>
               <li>
                 <div className='text-black transition hover:text-sky-500'>
-                  <Link
-                    href='https://www.linkedin.com/company/100784711/admin/feed/posts/'
+                  <a
+                    href='https://www.aedin.com/company/100784711/admin/feed/posts/'
                     target='_blank'
-                    passHref={true}>
-                    <span className='sr-only'>LinkedIn</span>
+                  >
+                    <span className='sr-only'>aedIn</span>
                     <FaLinkedin className='h-6 w-6' />
-                  </Link>
+                  </a>
                 </div>
               </li>
               <li>
                 <div className='text-black transition hover:text-red-700'>
-                  <Link
+                  <a
                     href='https://www.pinterest.co.uk/GeniesCareerHub/'
                     target='_blank'
-                    passHref={true}>
+                  >
                     <span className='sr-only'>Pinterest</span>
                     <FaPinterest className='h-6 w-6' />
-                  </Link>
+                  </a>
                 </div>
               </li>
             </ul>
@@ -75,42 +75,42 @@ export default function Footer() {
 
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link
+                  <a
                     href='/resume'
                     className='text-black transition'
                     prefetch={true}>
                     CV Creator
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='/resume-analyzer'
                     className='text-black transition'
-                    passHref={true}>
+                  >
                     CV Optimiser
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href='/job-cv' className='text-black transition' passHref={true}>
+                  <a href='/job-cv' className='text-black transition'>
                     CV Match
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href='/coming-soon' className='text-black transition' passHref={true}>
+                  <a href='/coming-soon' className='text-black transition'>
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='/career-counselling'
-                    className='text-black transition' passHref={true}>
+                    className='text-black transition'>
                     Psychometric Test
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -120,47 +120,47 @@ export default function Footer() {
 
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link href='/about-us' className='text-black transition' passHref={true}>
+                  <a href='/about-us' className='text-black transition'>
                     {" "}
                     About Us
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <p className='font-bold text-gray-900'>Helpful Links</p>
+              <p className='font-bold text-gray-900'>Helpful as</p>
 
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link href='/contact-us' className='text-black transition' passHref={true}>
+                  <a href='/contact-us' className='text-black transition'>
                     Contact
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
 
                 <li>
-                  <Link href='/faq' className='text-black transition ' passHref={true}>
+                  <a href='/faq' className='text-black transition '>
                     FAQs
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href='/pricing' className='text-black transition' passHref={true}>
+                  <a href='/pricing' className='text-black transition'>
                     Pricing
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='https://geniescareerhub.com/'
                     className='text-black transition'
                     target='_blank'
-                    passHref={true}>
+                  >
                     Blog
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -168,57 +168,57 @@ export default function Footer() {
               <p className='font-bold text-gray-900'>Legal</p>
               <ul className='mt-6 space-y-4 text-sm'>
                 <li>
-                  <Link href='/return-policy' className='text-black transition' passHref={true}>
+                  <a href='/return-policy' className='text-black transition'>
                     {" "}
                     Return Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='/privacy-policy'
-                    className='text-black transition' passHref={true}>
+                    className='text-black transition'>
                     {" "}
                     Privacy Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href='/refund-policy' className='text-black transition' passHref={true}>
+                  <a href='/refund-policy' className='text-black transition'>
                     {" "}
                     Refund Policy{" "}
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='/terms-condition'
-                    className='text-black transition' passHref={true}>
+                    className='text-black transition'>
                     Terms & Condition
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href='/gdpr' className='text-black transition' passHref={true}>
+                  <a href='/gdpr' className='text-black transition'>
                     GDPR
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='/editorial-guidlines'
-                    className='text-black transition' passHref={true}>
+                    className='text-black transition'>
                     Editorial Guidlines
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href='/cookies-tracking-policy'
-                    className='text-black transition' passHref={true}>
+                    className='text-black transition'>
                     Cookies & Tracking Policy
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -229,12 +229,12 @@ export default function Footer() {
             <br />
             <br />
             powered by
-            <Link
+            <a
               href='https://www.glassfrogtech.com/'
               target='_blank'
-              className='hover:underline pl-1' passHref={true}>
+              className='hover:underline pl-1'>
               Glassfrog Technologies
-            </Link>
+            </a>
           </p>
         </div>
       </footer>

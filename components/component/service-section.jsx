@@ -95,12 +95,12 @@ export function ServiceSection() {
               </div>
 
               <p className="text-xs text-gray-500">
-                <Link
+                <a
                   className="underline underline-offset-2"
                   href="/terms-condition"
                 >
                   Terms & Conditions
-                </Link>
+                </a>
               </p>
             </div>
           </div>
