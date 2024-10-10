@@ -9,7 +9,6 @@ export async function POST(req, { params }) {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
-
     } catch (error) {
         const errorMessage = error.response ? error.response.data : { error: "Error editing coach info" };
         const statusCode = error.response ? error.response.status : 500;
