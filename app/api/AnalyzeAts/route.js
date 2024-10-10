@@ -11,6 +11,7 @@ export async function POST(req, res) {
                 Authorization: token
             }
         });
+        
         // Successful response
         return new Response(JSON.stringify(response.data), {
             status: response.status || 200,
