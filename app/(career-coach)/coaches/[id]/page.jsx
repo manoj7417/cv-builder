@@ -324,21 +324,19 @@ const CoachDetailsPage = () => {
                 className="flex border-b border-gray-300 mb-5"
               >
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "blogs"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "blogs"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("blogs")}
                 >
                   Blogs
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "appointment"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "appointment"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("appointment")}
                 >
                   Book An Appointment

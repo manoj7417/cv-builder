@@ -58,7 +58,7 @@ const CoachAvailability = () => {
   ];
 
   const currentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
+console.log('sadfasdf')
   const defaultAvailabilityDays = daysOfWeek.map((day) => ({
     dayOfWeek: day,
     isAvailable: false,

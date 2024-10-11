@@ -3,8 +3,8 @@ export const JobResumeSchema = [
         name: "Business Analyst",
         data: {
             basics: {
-                name: "Jhon Doe",
-                email: "Jhon.Doe@gmail.com",
+                name: "Jane Dhoe",
+                email: "Jane.Dhoe@gmail.com",
                 phone: "+9112345678",
                 country: "CA",
                 city: "San Francisco",
@@ -15,7 +15,7 @@ export const JobResumeSchema = [
                 },
                 customFields: [],
                 picture: {
-                    url: "",
+                    url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     visible: true
                 },
             },
@@ -136,7 +136,7 @@ export const JobResumeSchema = [
                 theme: {
                     background: "#ffffff",
                     text: "#000000",
-                    primary: "#3797BA",
+                    primary: "#182e42",
                 },
                 typography: {
                     font: {
@@ -168,7 +168,7 @@ export const JobResumeSchema = [
                 },
                 customFields: [],
                 picture: {
-                    url: "",
+                    url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     visible: true
                 },
             },
@@ -281,7 +281,7 @@ export const JobResumeSchema = [
                 theme: {
                     background: "#ffffff",
                     text: "#000000",
-                    primary: "#3797BA",
+                    primary: "#021e69",
                 },
                 typography: {
                     font: {
@@ -313,7 +313,7 @@ export const JobResumeSchema = [
                 },
                 customFields: [],
                 picture: {
-                    url: "",
+                    url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     visible: true
                 },
             },
@@ -435,7 +435,7 @@ export const JobResumeSchema = [
                 theme: {
                     background: "#ffffff",
                     text: "#000000",
-                    primary: "#3797BA",
+                    primary: "#3798b9",
                 },
                 typography: {
                     font: {
@@ -467,7 +467,7 @@ export const JobResumeSchema = [
                 },
                 customFields: [],
                 picture: {
-                    url: "",
+                    url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     visible: true
                 }
             },
@@ -591,7 +591,7 @@ export const JobResumeSchema = [
                 theme: {
                     background: "#ffffff",
                     text: "#000000",
-                    primary: "#3797BA",
+                    primary: "#3798b9",
                 },
                 typography: {
                     font: {
@@ -623,7 +623,7 @@ export const JobResumeSchema = [
                 },
                 customFields: [],
                 picture: {
-                    url: "",
+                    url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     visible: true
                 },
             },
@@ -736,7 +736,7 @@ export const JobResumeSchema = [
                 theme: {
                     background: "#ffffff",
                     text: "#000000",
-                    primary: "#3797BA",
+                    primary: "#f8cd15",
                 },
                 typography: {
                     font: {
@@ -757,7 +757,7 @@ export const JobResumeSchema = [
         data: {
             basics: {
                 name: "AIDEN KELLY",
-                email: "name@gmail.com",
+                email: "adienkelly@gmail.com",
                 phone: "+359888888888",
                 country: "NY",
                 city: "Queens",
@@ -889,7 +889,7 @@ export const JobResumeSchema = [
                 theme: {
                     background: "#ffffff",
                     text: "#000000",
-                    primary: "#3797BA",
+                    primary: "#4594b2",
                 },
                 typography: {
                     font: {
@@ -906,221 +906,11 @@ export const JobResumeSchema = [
         }
     },
     {
-        name: "Engineer",
-        data: {
-            "basics": {
-                "name": "Michael Smith",
-                "email": "help@enhancv.com",
-                "phone": "+1-541-754-3010",
-                "country": "US",
-                "city": "Los Angeles",
-                "jobtitle": "Industrial Engineer",
-                "url": {
-                    "label": "LinkedIn",
-                    "href": "linkedin.com"
-                },
-                "customFields": [],
-                "picture": {
-                    "url": "",
-                    "visible": true
-                }
-            },
-            "sections": {
-                "summary": {
-                    "name": "Profile",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "profile",
-                    "content": "With over 10 years of experience as an Industrial Engineer, I have a proven track record in developing efficient manufacturing processes, implementing LEAN principles, and leading successful projects. My technical skills include CAD, automation software development, and process modeling. One of my biggest achievements was the development of an automated assembly process that reduced assembly time by 25%, leading to significant savings."
-                },
-                "education": {
-                    "name": "Education",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "education",
-                    "items": [
-                        {
-                            "startDate": "2011",
-                            "endDate": "2013",
-                            "city": "Los Angeles, CA",
-                            "description": "",
-                            "institute": "University of Southern California",
-                            "degree": "Master of Science in Industrial Engineering"
-                        },
-                        {
-                            "startDate": "2007",
-                            "endDate": "2011",
-                            "city": "Michigan",
-                            "description": "",
-                            "institute": "University of Michigan",
-                            "degree": "Master of Science in Chemistry"
-                        }
-                    ]
-                },
-                "experience": {
-                    "name": "Experience",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "experience",
-                    "items": [
-                        {
-                            "jobtitle": "Industrial Engineer",
-                            "employer": "Lockheed Martin",
-                            "startDate": "2019",
-                            "endDate": "2023",
-                            "description": "",
-                            "city": "Los Angeles, CA",
-                            "highlights": [
-                                "Led a team of engineers in the development and implementation of new manufacturing processes.",
-                                "Implemented a new automated assembly process, reducing assembly time by 25% and saving $100,000 annually.",
-                                "Led a project to redesign the factory layout, improving workflow and increasing productivity by 15%.",
-                                "Developed a new scheduling system, reducing project completion times by 10%."
-                            ]
-                        },
-                        {
-                            "jobtitle": "Manufacturing Engineer",
-                            "employer": "Northrop Grumman",
-                            "startDate": "2016",
-                            "endDate": "2019",
-                            "description": "",
-                            "city": "Los Angeles, CA",
-                            "highlights": [
-                                "Worked on the design and implementation of manufacturing processes for aerospace components.",
-                                "Designed and implemented a new quality control system, reducing defects by 20%.",
-                                "Managed a project to upgrade manufacturing equipment, increasing production capacity by 30%.",
-                                "Implemented Lean Manufacturing principles, reducing waste by 15% and saving $50,000 annually."
-                            ]
-                        },
-                        {
-                            "jobtitle": "Process Engineer",
-                            "employer": "Raytheon Technologies",
-                            "startDate": "2013",
-                            "endDate": "2016",
-                            "description": "",
-                            "city": "Los Angeles, CA",
-                            "highlights": [
-                                "Worked on the development and optimization of manufacturing processes for defense systems.",
-                                "Developed a new process for the assembly of electronic components, reducing assembly time by 20%.",
-                                "Implemented a new inventory management system, reducing stockouts by 30%.",
-                                "Led a project to upgrade manufacturing equipment, increasing production capacity by 25%."
-                            ]
-                        }
-                    ]
-                },
-                "skills": {
-                    "name": "Skills",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "skills",
-                    "items": [
-                        {
-                            "name": "LEAN Manufacturing",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Root Cause Analysis",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Project Scheduling",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Process Modeling",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Design of Experiments",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "CAD (Creo, SolidWorks, NX, Catia)",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Automation Software Development",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "LabVIEW",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "MATLAB",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "C++",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Precision Alignment Systems",
-                            "level": "Expert"
-                        }
-                    ]
-                },
-                "projects": {
-                    "name": "Projects",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "projects",
-                    "items": [
-                        {
-                            "title": "Automated Assembly Process",
-                            "subtitle": "",
-                            "startDate": "",
-                            "endDate": "",
-                            "description": "<p>Developed a new automated assembly process that reduced assembly time by 25%, leading to significant cost savings.</p>"
-                        },
-                        {
-                            "title": "Factory Layout Redesign",
-                            "subtitle": "",
-                            "startDate": "",
-                            "endDate": "",
-                            "description": "<p>Led a project to redesign the factory layout, improving workflow and increasing productivity by 15%.</p>"
-                        },
-                        {
-                            "title": "Quality Control System",
-                            "subtitle": "",
-                            "startDate": "",
-                            "endDate": "",
-                            "description": "<p>Designed and implemented a new quality control system, reducing defects by 20% and improving product quality.</p>"
-                        }
-                    ]
-                }
-            },
-            "metadata": {
-                "template": "Template22",
-                "page": {
-                    "format": {
-                        "type": "a4"
-                    }
-                },
-                "theme": {
-                    "background": "#ffffff",
-                    "text": "#000000",
-                    "primary": "#3797BA"
-                },
-                "typography": {
-                    "font": {
-                        "family": "IBM Plex Sans",
-                        "subset": "latin",
-                        "variants": ["regular"],
-                        "size": 13.2
-                    },
-                    "lineHeight": 2.45,
-                    "hideIcons": false,
-                    "underlineLinks": true
-                }
-            }
-        }
-    },
-    {
         name: "Accounting",
         data: {
             "basics": {
                 "name": "Charlotte May",
-                "email": "help@enhancv.com",
+                "email": "charlottemay@gmail.com",
                 "phone": "+1-541-754-3010",
                 "country": "US",
                 "city": "Los Angeles",
@@ -1131,7 +921,7 @@ export const JobResumeSchema = [
                 },
                 "customFields": [],
                 "picture": {
-                    "url": "",
+                    "url": "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     "visible": true
                 }
             },
@@ -1294,7 +1084,7 @@ export const JobResumeSchema = [
                 "theme": {
                     "background": "#ffffff",
                     "text": "#000000",
-                    "primary": "#3797BA"
+                    "primary": "#e4f2f2"
                 },
                 "typography": {
                     "font": {
@@ -1316,7 +1106,7 @@ export const JobResumeSchema = [
         "data": {
             "basics": {
                 "name": "Ava Williams",
-                "email": "help@enhancv.com",
+                "email": "avawilliams@gmail.com",
                 "phone": "+1-541-754-3010",
                 "country": "US",
                 "city": "New York",
@@ -1327,7 +1117,7 @@ export const JobResumeSchema = [
                 },
                 "customFields": [],
                 "picture": {
-                    "url": "",
+                    "url": "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
                     "visible": true
                 }
             },
@@ -1523,7 +1313,7 @@ export const JobResumeSchema = [
                 "theme": {
                     "background": "#ffffff",
                     "text": "#000000",
-                    "primary": "#3797BA"
+                    "primary": "#121212"
                 },
                 "typography": {
                     "font": {
@@ -1538,204 +1328,5 @@ export const JobResumeSchema = [
                 }
             }
         }
-    }
-    ,
-    {
-        name: "Marketing",
-        data: {
-            "basics": {
-                "name": "Sarah Miller",
-                "email": "help@enhancv.com",
-                "phone": "+1-541-754-3010",
-                "country": "US",
-                "city": "New York",
-                "jobtitle": "Marketing Professional",
-                "url": {
-                    "label": "LinkedIn",
-                    "href": "linkedin.com"
-                },
-                "customFields": [],
-                "picture": {
-                    "url": "",
-                    "visible": true
-                }
-            },
-            "sections": {
-                "summary": {
-                    "name": "Profile",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "profile",
-                    "content": "With over 3 years of experience in marketing, I've successfully managed and executed numerous projects, ensuring they are completed on time and on budget. I excel in building strong relationships, coordinating marketing campaigns, and ensuring the quality of marketing materials."
-                },
-                "education": {
-                    "name": "Education",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "education",
-                    "items": [
-                        {
-                            "startDate": "2014",
-                            "endDate": "2018",
-                            "city": "Syracuse, NY",
-                            "description": "",
-                            "institute": "Syracuse University",
-                            "degree": "Bachelor's Degree in Marketing"
-                        }
-                    ]
-                },
-                "experience": {
-                    "name": "Experience",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "experience",
-                    "items": [
-                        {
-                            "jobtitle": "Marketing Coordinator",
-                            "employer": "Bank of America",
-                            "startDate": "2021",
-                            "endDate": "2023",
-                            "description": "",
-                            "city": "New York, NY",
-                            "highlights": [
-                                "Worked closely with the Creative Director to delegate and assign incoming creative requests.",
-                                "Coordinated with multiple external agencies to manage partner customizations and significant request volume."
-                            ]
-                        },
-                        {
-                            "jobtitle": "Marketing Assistant",
-                            "employer": "Regions Bank",
-                            "startDate": "2019",
-                            "endDate": "2021",
-                            "description": "",
-                            "city": "New York, NY",
-                            "highlights": [
-                                "Assisted in the development and execution of marketing strategies for various campaigns.",
-                                "Assisted in the management of timelines, gathering and communicating programming information, and the creative review process.",
-                                "Supported the team in managing an evolving suite of creative design assets.",
-                                "Participated in weekly meetings to maintain an understanding of the financial services and marketing industry landscape."
-                            ]
-                        },
-                        {
-                            "jobtitle": "Marketing Intern",
-                            "employer": "Citibank",
-                            "startDate": "2018",
-                            "endDate": "2019",
-                            "description": "",
-                            "city": "New York, NY",
-                            "highlights": [
-                                "Supported the marketing team in various aspects of campaign and account-specific creative development.",
-                                "Assisted in the development of creative assets and imagery requests.",
-                                "Supported the execution of partner marketing campaigns.",
-                                "Gained valuable experience in the financial services space."
-                            ]
-                        }
-                    ]
-                },
-                "skills": {
-                    "name": "Skills",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "skills",
-                    "items": [
-                        {
-                            "name": "Marketing",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Project Management",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Microsoft Office Suite",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Adobe Creative Cloud",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Social Media Management",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Event Planning and Coordination",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Retail Marketing",
-                            "level": "Expert"
-                        },
-                        {
-                            "name": "Video Creation and Editing",
-                            "level": "Expert"
-                        }
-                    ]
-                },
-                "projects": {
-                    "name": "Projects",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "projects",
-                    "items": [
-                        {
-                            "title": "Successful Marketing Campaigns",
-                            "subtitle": "",
-                            "startDate": "",
-                            "endDate": "",
-                            "description": "Coordinated and executed numerous successful marketing campaigns at Bank of America, contributing to significant growth in customer numbers."
-                        },
-                        {
-                            "title": "Efficient Project Management",
-                            "subtitle": "",
-                            "startDate": "",
-                            "endDate": "",
-                            "description": "Managed multiple marketing projects simultaneously at JPMorgan Chase, ensuring timely delivery and maintaining high-quality standards."
-                        }
-                    ]
-                },
-                "languages": {
-                    "name": "Languages",
-                    "columns": 1,
-                    "visible": true,
-                    "id": "languages",
-                    "items": [
-                        {
-                            "name": "English",
-                            "level": "Native"
-                        },
-                        {
-                            "name": "Spanish",
-                            "level": "Advanced"
-                        }
-                    ]
-                }
-            },
-            "metadata": {
-                "template": "Template16",
-                "page": {
-                    "format": {
-                        "type": "a4"
-                    }
-                },
-                "theme": {
-                    "background": "#ffffff",
-                    "text": "#000000",
-                    "primary": "#3797BA"
-                },
-                "typography": {
-                    "font": {
-                        "family": "IBM Plex Sans",
-                        "subset": "latin",
-                        "variants": ["regular"],
-                        "size": 13.2
-                    },
-                    "lineHeight": 2.45,
-                    "hideIcons": false,
-                    "underlineLinks": true
-                }
-            }
-        }
-
     },
 ]
