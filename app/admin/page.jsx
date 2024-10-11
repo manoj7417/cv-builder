@@ -9,9 +9,7 @@ import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { useUserStore } from "@/app/store/UserStore";
 import Link from "next/link";
 const AdminPage = () => {
-  //console.log("Admin Page")
 
-  // return <div>AdminPage</div>;
   const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
   const { userdata } = useUserStore((state) => state.userState);
   useEffect(() => {

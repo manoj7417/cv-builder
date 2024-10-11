@@ -70,7 +70,6 @@ const ResetPasswordFunc = () => {
                 }
             }
         } catch (error) {
-            console.log(error)
             toast.error(error?.response?.data?.error || "Unable to reset password")
         } finally {
             setIsLoading(false)

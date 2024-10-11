@@ -40,7 +40,6 @@ const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
   const { updateUserData } = useCoachStore();
-  console.log(userdata?.isEditRequestSent)
   const {
     register,
     handleSubmit,
@@ -243,7 +242,6 @@ const CoachProfile = () => {
         const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
         if (response.status === 200) {
           const docUrl = response.data.url;
-          console.log(docUrl);
           setValue("docsUpload", docUrl); // Set document URL in form data
           setIsDocumentLoading(false);
           setDocsUrl(docUrl);

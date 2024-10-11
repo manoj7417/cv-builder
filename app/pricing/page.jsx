@@ -166,7 +166,6 @@ const PricingFunc = () => {
       .get("https://ipapi.co/json/")
       .then((response) => {
         let data = response.data;
-        console.log(data)
         let currency = data.currency || "USD";
         setGeoInfo({
           ...geoinfo,
@@ -210,7 +209,6 @@ const PricingFunc = () => {
           },
         }
       );
-      console.log(response);
       if (response.status === 200) {
         const { orderId, amount, currency, key } = response.data;
         const options = {
@@ -280,7 +278,6 @@ const PricingFunc = () => {
         window.location = url;
       }
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

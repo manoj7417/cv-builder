@@ -102,11 +102,12 @@ const CoachDashboardPage = () => {
         },
       });
       if (response.status === 200) {
+
         setBookingSlot(response.data.bookings);
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

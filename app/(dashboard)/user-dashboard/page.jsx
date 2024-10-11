@@ -541,7 +541,7 @@ const UserDashboardPage = () => {
         setBookings(response.data.bookings);
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

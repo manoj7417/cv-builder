@@ -17,7 +17,6 @@ export function CoachHeader({ id }) {
     isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
-  console.log(singleCoach)
 
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export const updateResumeTitle = async ({ id, title }) => {
             }
         })
     } catch (error) {
-        console.log(error)
+        
     }
 }
 

@@ -18,8 +18,6 @@ export async function POST(req, res) {
             }
         });
     } catch (error) {
-        console.log(error)
-        console.error("Error generating ai counselling response", error.response || error);
         return new Response(JSON.stringify({ error: "Error generating ai counselling response" }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }

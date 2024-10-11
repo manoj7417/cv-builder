@@ -15,7 +15,6 @@ export async function GET(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        console.log(error)
         const errorMessage = error.response ? error.response.data : { error: "Error checking user eligiblity" };
         const statusCode = error.response ? error.response.status : 500;
         return new Response(JSON.stringify(errorMessage), {

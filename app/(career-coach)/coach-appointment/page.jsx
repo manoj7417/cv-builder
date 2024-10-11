@@ -109,24 +109,14 @@ const CoachAppointmentPage = () => {
   };
 
   const handleSlotClick = (slot) => {
-    // Log slot details including ID and coachId
-    console.log({
-      id: slot.id,
-      date: format(slot.start, "yyyy-MM-dd"),
-      startTime: format(slot.start, "HH:mm:ss"),
-      endTime: format(slot.end, "HH:mm:ss"),
-      coachId: slot.coachId,  // Log coachId
-    });
 
-    // Mark slot as booked
     setAppointments(appointments.map(app =>
       app.id === slot.id ? { ...app, isAvailable: false } : app
     ));
 
-    // Show toast message
     toast.success(`Slot booked from ${format(slot.start, "hh:mm a")} to ${format(slot.end, "hh:mm a")}`);
 
-    setShowSlotPopup(false); // Close the popup after booking
+    setShowSlotPopup(false); 
   };
 
   const eventStyleGetter = (event) => {

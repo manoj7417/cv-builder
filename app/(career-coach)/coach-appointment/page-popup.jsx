@@ -90,14 +90,6 @@ const CoachAppointmentPage = () => {
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    // Define the desired date format
-    const dateFormat = "MM-dd-yyyy HH:mm:ss";
-
-    console.log("Booking Details:");
-    console.log("Title:", title);
-    console.log("Start Time:", format(startDate, dateFormat));
-    console.log("End Time:", format(endDate, dateFormat));
-
     if (title && isValid(startDate) && isValid(endDate)) {
       setAppointments([...appointments, { title, start: startDate, end: endDate }]);
       setNewAppointment({ title: "", start: "", end: "" });

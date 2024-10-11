@@ -196,7 +196,7 @@ export default function Slider() {
         router.push("/resume-builder");
       }
     } catch (error) {
-      console.log(error);
+      
     } finally {
       setIsLoading(false);
     }

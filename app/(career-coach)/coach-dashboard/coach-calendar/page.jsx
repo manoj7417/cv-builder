@@ -105,7 +105,7 @@ const CoachCalendar = () => {
         console.log(response.data.bookings);
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -163,7 +163,6 @@ const CoachCalendar = () => {
       textColor: "#fff",
       allDay: false,
     }));
-    console.log(events);
     setCalendarEvents(events);
   };
 

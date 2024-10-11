@@ -51,7 +51,7 @@ const SidebarCoach = () => {
       toast.success("Logged out")
       router.push('/coach-signin')
     } catch (error) {
-      console.log(error)
+      toast.error("Error logging out")
     }
   }
 
@@ -67,7 +67,6 @@ const SidebarCoach = () => {
         updateUserData(response.data.data.userdata)
       }
     } catch (error) {
-      console.log(error?.response?.data?.error)
       await RemoveTokens()
       toast.error("Error loggin in")
       router.push('/coach-signin')

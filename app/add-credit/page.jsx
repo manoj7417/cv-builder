@@ -98,7 +98,6 @@ export default function AddCreditPage() {
         window.location = response.data.url;
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error while adding credits");
     } finally {
       setLoadingStates((prev) => ({ ...prev, [serviceName]: false }));

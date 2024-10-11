@@ -5,9 +5,6 @@ import React from "react";
 
 const SingleBlogPage = () => {
   const { id } = useParams();
-
-  console.log(typeof id);
-
   const blogs = [
     {
       id: 1,
@@ -41,7 +38,6 @@ const SingleBlogPage = () => {
   // Filter the blog data to find the matching blog by ID
   const filteredBlog = blogs.filter((blog) => blog.id == id);
   const singleBlog = filteredBlog[0];
-  console.log("singleBlog::", singleBlog);
 
   return (
     <div className="max-w-7xl mx-auto py-20 relative">
