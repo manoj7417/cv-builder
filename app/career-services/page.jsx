@@ -35,8 +35,54 @@ const CareerServices = () => {
     },
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Organization",
+    url: "https://www.geniescareerhub.com/",
+    logo: "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    name: "geniescareerhub.com",
+    description:
+      "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes.",
+  };
+
+
+  const jsonLd1 = {
+    "@context": "https://schema.org/", 
+    "@type": "BreadcrumbList", 
+    "itemListElement": [{
+      "@type": "ListItem", 
+      "position": 1, 
+      "name": "Career Coach",
+      "item": "https://www.geniescareerhub.com/career-services"  
+    },{
+      "@type": "ListItem", 
+      "position": 2, 
+      "name": "Career Counseling",
+      "item": "https://www.geniescareerhub.com/career-services"  
+    },{
+      "@type": "ListItem", 
+      "position": 3, 
+      "name": "Career Advisor",
+      "item": "https://www.geniescareerhub.com/career-services"  
+    },{
+      "@type": "ListItem", 
+      "position": 4, 
+      "name": "Define Career",
+      "item": "https://www.geniescareerhub.com/career-services"  
+    }]
+  
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
+      />
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-40  px-5 relative"
         id="free"
@@ -85,7 +131,6 @@ const CareerServices = () => {
           </div>
         </div>
       </section>
-
       <WorkTogether />
     </>
   );

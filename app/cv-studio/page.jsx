@@ -35,8 +35,21 @@ const CVStudioPage = () => {
     },
   ];
 
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.image,
+    description: product.description,
+  }
+
   return (
     <>
+     <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-40  px-5 relative"
         id="free"

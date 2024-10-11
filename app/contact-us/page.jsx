@@ -70,8 +70,23 @@ export default function ContactPageTwo() {
   const handleMessageDataChange = (e) => {
     setMessageData({ ...messageData, [e.target.name]: e.target.value })
   }
+
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Organization",
+    "url": "https://www.geniescareerhub.com/",
+    "logo": "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    "name": "geniescareerhub.com",
+    "description": "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes."
+  }
+
+
   return (
     <div>
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* <Header /> */}
       <div className="mx-auto max-w-7xl pt-14">
         <div className="mx-auto max-w-7xl py-12 md:py-24">

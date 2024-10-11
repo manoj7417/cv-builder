@@ -345,9 +345,98 @@ export default function Home() {
     }
     setOpen(index);
   };
+
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Organization",
+    url: "https://www.geniescareerhub.com/",
+    logo: "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    name: "geniescareerhub.com",
+    description:
+      "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes.",
+  };
+
+  const jsonLd1 = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "CV Creators",
+        item: "https://www.geniescareerhub.com/job-cv",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Professional CV",
+        item: "https://www.geniescareerhub.com/job-cv",
+      },
+    ],
+  };
+
+  const jsonLd2 = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the CV Match feature?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: 'The unique concept of the Genies Career Hub&rsquo;s CV Match feature is that it matches your job title or profession and prepares a <strong>Professional </strong><a href="https://www.geniescareerhub.com/resume"><strong>Curriculum Vitae Templates</strong></a>. We offer the option to start afresh or upload an existing CV, which will be analysed using AI to optimise and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.',
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How is this CV Match different from CV Creator?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `<p>The below-mentioned points state the differences precisely-</p>
+  <ol>
+  <li>CV Creator helps make a new CV through a whole comprehensive process.</li>
+  <li>CV Match makes a <strong>professional </strong><a href=\"https://www.geniescareerhub.com/resume\"><strong>CV Builder</strong></a> format template that asks for your primary information and prepares an entirely <a href=\"https://geniescareerhub.com/job-cv\"><strong>professional CV</strong></a>.</li>
+  <li>It matches your job description with our 45+ pre-made templates, filling in the adequate information professionally.</li>
+  </ol>`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How to get a pre-made Professional CV?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `<p>Follow these steps progressively to get a pre-made <a href=\"https://geniescareerhub.com/job-cv\"><strong>professional CV</strong></a>-</p>
+  <ul>
+  <li>1. Head to CV Studio and click on CV Match.</li>
+  <li>2. Enter your job role or profession, and click Generate Now.</li>
+  <li>3. Upload your existing <a href=\"https://www.geniescareerhub.com/resume-analyzer\">resume formatting</a> or start afresh by making one.</li>
+  <li>4. Enter your name, email, job role, city, and country.</li>
+  <li>5. Add experience if you have any, or select the fresher box.</li>
+  <li>6. Add your education, add any previous projects, and add your skills.</li>
+  <li>7. Review your details generated professionally by AI, and make changes if needed.</li>
+  <li>8. Choose from <strong>professional CV</strong> templates and the colour of your choice.</li>
+  <li>9. Download in text or PDF form.</li>
+  </ul>`,
+        },
+      },
+    ],
+  };
+
   return (
     <main>
       <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd2) }}
+        />
         <ResumeHeader />
         <section className="mt-16 py-20 bg-white text-black">
           <Dialog open={showMultiStepDialog}>
@@ -436,9 +525,7 @@ export default function Home() {
                       />
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">
-                        Start Afresh...
-                      </span>
+                      <span className="font-semibold">Start Afresh...</span>
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                       Personalized career advice, CV building, and more.
@@ -551,10 +638,11 @@ export default function Home() {
             <div className="steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10 ">
               <div className="flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10">
                 <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20">
-                Find your <span className="text-[#2C98CA]">Professional CV</span>{" "}
+                  Find your{" "}
+                  <span className="text-[#2C98CA]">Professional CV</span>{" "}
                 </h2>
                 <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20">
-                in Six Simple Steps!
+                  in Six Simple Steps!
                 </h2>
               </div>
             </div>
@@ -567,26 +655,43 @@ export default function Home() {
                     Pre-written content
                   </h1>
                   <p className="text-base pt-3 text-[#1B1B1F]">
-                  Our database has numerous pre-written resumes tailored to distinctive job descriptions, recruitment requirements, and candidate capabilities. All you need to do is select the resume that resonates with your <b>professional</b> profile and job description. Just alter and add in little details to get a more personalised <b>CV</b>.
+                    Our database has numerous pre-written resumes tailored to
+                    distinctive job descriptions, recruitment requirements, and
+                    candidate capabilities. All you need to do is select the
+                    resume that resonates with your <b>professional</b> profile
+                    and job description. Just alter and add in little details to
+                    get a more personalised <b>CV</b>.
                   </p>
                 </div>
                 <div className="bg-[#ECFFE7] p-7">
                   <h1 className="text-[#2C98CA] text-lg font-semibold">
-                  Professional CV ensured 
+                    Professional CV ensured
                   </h1>
                   <p className="text-base pt-3 text-[#1B1B1F]">
-                  Wondering how appropriate and impressive the pre-written resumes are?
+                    Wondering how appropriate and impressive the pre-written
+                    resumes are?
                   </p>
                   <p className="text-base pt-3 text-[#1B1B1F]">
-                  CV Match is an algorithm backed by data created by experts and resume professionals from across the globe. The CVs that we have in stock for you are not only compatible with recruitment management systems but also are completely constructed to match the needs of candidates. This is why we match you with the best CV for your profile!  
+                    CV Match is an algorithm backed by data created by experts
+                    and resume professionals from across the globe. The CVs that
+                    we have in stock for you are not only compatible with
+                    recruitment management systems but also are completely
+                    constructed to match the needs of candidates. This is why we
+                    match you with the best CV for your profile!  
                   </p>
                 </div>
                 <div className="bg-[#CEEFFF] p-5">
                   <h1 className="text-[#2C98CA] text-lg font-semibold">
-                  45+ pre-written Resumes 
+                    45+ pre-written Resumes
                   </h1>
                   <p className="text-base pt-3 text-[#1B1B1F]">
-                  The CV match database is designed to help you get matched with your perfect resume. To ensure this, we have myriad options available for you. With more than 45+ pre-written templates of resumes, our CV matching system caters to different job profiles and descriptions. Does not matter if you are an art teacher or a software engineer, CV Match has something or the other in store for you
+                    The CV match database is designed to help you get matched
+                    with your perfect resume. To ensure this, we have myriad
+                    options available for you. With more than 45+ pre-written
+                    templates of resumes, our CV matching system caters to
+                    different job profiles and descriptions. Does not matter if
+                    you are an art teacher or a software engineer, CV Match has
+                    something or the other in store for you
                   </p>
                 </div>
               </div>
@@ -597,18 +702,32 @@ export default function Home() {
                     <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14">
                       <div className="bg-[#FFD9ED] p-5">
                         <h1 className="text-[#2C98CA] text-lg font-semibold">
-                        AI expertise integrated 
+                          AI expertise integrated
                         </h1>
                         <p className="text-base pt-3 text-[#1B1B1F]">
-                        We make the process easier for you with the help of Artificial Intelligence. We understand how tiresome and time-consuming the process of CV building can be. Therefore, we have simplified the process with the help of a CV-matching algorithm. You just need to input relevant details pertaining to your professional alignment and job description and we create a resume for you that exactly fits your needs. 
+                          We make the process easier for you with the help of
+                          Artificial Intelligence. We understand how tiresome
+                          and time-consuming the process of CV building can be.
+                          Therefore, we have simplified the process with the
+                          help of a CV-matching algorithm. You just need to
+                          input relevant details pertaining to your professional
+                          alignment and job description and we create a resume
+                          for you that exactly fits your needs.
                         </p>
                       </div>
                       <div className="bg-[#D8DAFF] p-7">
                         <h1 className="text-[#2C98CA] text-lg font-semibold">
-                        Edit your CV the way you want
+                          Edit your CV the way you want
                         </h1>
                         <p className="text-base pt-3 text-[#1B1B1F]">
-                        We completely comprehend the need for a personalised resume. This is why we ensure that every step in your CV creation process allows flexibility. After we match you to the most appropriate resume from our database, you can choose to edit the information. You can edit details, eliminate sections, redesign the template, and do everything you want before finally downloading it. You can revamp your resume in ways you want
+                          We completely comprehend the need for a personalised
+                          resume. This is why we ensure that every step in your
+                          CV creation process allows flexibility. After we match
+                          you to the most appropriate resume from our database,
+                          you can choose to edit the information. You can edit
+                          details, eliminate sections, redesign the template,
+                          and do everything you want before finally downloading
+                          it. You can revamp your resume in ways you want
                         </p>
                       </div>
                     </div>
@@ -622,11 +741,12 @@ export default function Home() {
               <div className="flex lg:flex-row flex-col gap-5 my-20">
                 <div className="lg:w-[67%] w-full steps_content">
                   <h3 className="text-5xl text-[#1B1B1F] font-bold py-3 text-center md:text-left lg:text-left xl:text-left 2xl:text-left leading-normal">
-                  Maximise Impact by personalising your CV
+                    Maximise Impact by personalising your CV
                   </h3>
                   <p className="text-lg py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left text-[#1B1B1F]">
-                  Your <b>professional Curriculum Vitae</b> creation process does not have to be hefty. You can get a job-winning CV in just six simple steps. Follow, and build yours! 
-                    -
+                    Your <b>professional Curriculum Vitae</b> creation process
+                    does not have to be hefty. You can get a job-winning CV in
+                    just six simple steps. Follow, and build yours! -
                   </p>
                 </div>
                 <div className="lg:w-[33%] w-full h-auto">
@@ -658,7 +778,11 @@ export default function Home() {
                       Step 1
                     </h4>
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    To start with the CV creation process through the CV Match tool, you need to simply enter your job role. The entered job description is analysed by the tool in order to gain cognizance regarding the type of content and format that must be utilised for that CV. 
+                      To start with the CV creation process through the CV Match
+                      tool, you need to simply enter your job role. The entered
+                      job description is analysed by the tool in order to gain
+                      cognizance regarding the type of content and format that
+                      must be utilised for that CV.
                     </p>
                   </div>
                   <div className="lg:w-[45%] w-full h-auto image_content flex flex-col justify-start items-center">
@@ -708,7 +832,13 @@ export default function Home() {
                     </h4>
 
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    The CV Match not only helps you make a new resume instantly without any hassle but also rectifies your present CV. All you need to do is make a choice if you wish to make changes in the existing CV or start afresh by building a new CV through the CV Match tool. The tool will observe your details from your present and accordingly craft a new resume for you, just based on that! 
+                      The CV Match not only helps you make a new resume
+                      instantly without any hassle but also rectifies your
+                      present CV. All you need to do is make a choice if you
+                      wish to make changes in the existing CV or start afresh by
+                      building a new CV through the CV Match tool. The tool will
+                      observe your details from your present and accordingly
+                      craft a new resume for you, just based on that!
                     </p>
                   </div>
                 </div>
@@ -727,7 +857,14 @@ export default function Home() {
                   </div>
                   <div className="lg:w-[50%] w-full steps_content mt-10">
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    If you end up choosing the “Start Afresh” option, there are little pointers that you need to provide to our CV Match tool. While creating a <b>professional CV</b> there are many things that need to be taken into account such as Job Profile, Educational Qualifications, Professional Experiences, Special Skills, and so much more. You just need to briefly provide all the details to the too by answering the short questionnaire. 
+                      If you end up choosing the “Start Afresh” option, there
+                      are little pointers that you need to provide to our CV
+                      Match tool. While creating a <b>professional CV</b> there
+                      are many things that need to be taken into account such as
+                      Job Profile, Educational Qualifications, Professional
+                      Experiences, Special Skills, and so much more. You just
+                      need to briefly provide all the details to the too by
+                      answering the short questionnaire.
                     </p>
                   </div>
                 </div>
@@ -749,7 +886,13 @@ export default function Home() {
                       Step 2
                     </h4>
                     <p className="text-base py-3 text-[#1B1B1F] ">
-                    The CV Match not only helps you make a new resume instantly without any hassle but also rectifies your present CV. All you need to do is make a choice if you wish to make changes in the existing CV or start afresh by building a new CV through the CV Match tool. The tool will observe your details from your present and accordingly craft a new resume for you, just based on that! 
+                      The CV Match not only helps you make a new resume
+                      instantly without any hassle but also rectifies your
+                      present CV. All you need to do is make a choice if you
+                      wish to make changes in the existing CV or start afresh by
+                      building a new CV through the CV Match tool. The tool will
+                      observe your details from your present and accordingly
+                      craft a new resume for you, just based on that!
                     </p>
                   </div>
                   <div className="lg:w-[10%] w-full ">
@@ -759,7 +902,14 @@ export default function Home() {
                   </div>
                   <div className="lg:w-[40%] w-full steps_content mt-10">
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    If you end up choosing the “Start Afresh” option, there are little pointers that you need to provide to our CV Match tool. While creating a <b>professional CV</b> there are many things that need to be taken into account such as Job Profile, Educational Qualifications, Professional Experiences, Special Skills, and so much more. You just need to briefly provide all the details to the too by answering the short questionnaire.
+                      If you end up choosing the “Start Afresh” option, there
+                      are little pointers that you need to provide to our CV
+                      Match tool. While creating a <b>professional CV</b> there
+                      are many things that need to be taken into account such as
+                      Job Profile, Educational Qualifications, Professional
+                      Experiences, Special Skills, and so much more. You just
+                      need to briefly provide all the details to the too by
+                      answering the short questionnaire.
                     </p>
                   </div>
                 </div>
@@ -802,9 +952,17 @@ export default function Home() {
                     </h4>
                     {/* <h3 className="text-3xl text-black  py-3">EDUCATION </h3> */}
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    The Genies Career Hub’s CV Match tool is all about personalisation and customisation. Your <b>professional curriculum vitae</b> must look exactly the way you want. To ensure that, we have enables complete flexibility. Just enter the information that you think is relevant and your CV must have and move on to the next part. You can omit whatever sections you do not want your CV to include.
-                    <br/>
-                    Just enter your experience details or just go ahead and click, “Next” if you are a fresher! 
+                      The Genies Career Hub’s CV Match tool is all about
+                      personalisation and customisation. Your{" "}
+                      <b>professional curriculum vitae</b> must look exactly the
+                      way you want. To ensure that, we have enables complete
+                      flexibility. Just enter the information that you think is
+                      relevant and your CV must have and move on to the next
+                      part. You can omit whatever sections you do not want your
+                      CV to include.
+                      <br />
+                      Just enter your experience details or just go ahead and
+                      click, “Next” if you are a fresher!
                     </p>
                   </div>
                   <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent">
@@ -848,7 +1006,13 @@ export default function Home() {
                     </h4>
                     {/* <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3> */}
                     <p className="text-base py-3 text-[#1B1B1F]">
-                    Adding education qualifications in your resume adds academic value to it. Just mention all the important details pertaining to your educational background such as the course pursued, university affiliated, duration of the course, any other relevant detail. Furthermore, if you feel like you can also add your specific details such as learnings acquired and certification obtained. 
+                      Adding education qualifications in your resume adds
+                      academic value to it. Just mention all the important
+                      details pertaining to your educational background such as
+                      the course pursued, university affiliated, duration of the
+                      course, any other relevant detail. Furthermore, if you
+                      feel like you can also add your specific details such as
+                      learnings acquired and certification obtained.
                     </p>
                   </div>
                 </div>
@@ -875,7 +1039,13 @@ export default function Home() {
                       Step 5
                     </h4>
                     <p className="text-base py-3 text-[#1B1B1F] ">
-                    Apart from educational and experience based backgrounds, you can also add details pertaining to the previous projects that you have pursued so far. This shall provide a profound insight into the assignments that you have undertaken. Things like these add value to your resume. This shall make your resume more impressive and be like the cherry on top!
+                      Apart from educational and experience based backgrounds,
+                      you can also add details pertaining to the previous
+                      projects that you have pursued so far. This shall provide
+                      a profound insight into the assignments that you have
+                      undertaken. Things like these add value to your resume.
+                      This shall make your resume more impressive and be like
+                      the cherry on top!
                     </p>
                   </div>
                 </div>
@@ -929,7 +1099,13 @@ export default function Home() {
                       AWARDS, CERTIFICATES AND LANGUAGE
                     </h3> */}
                     <p className="text-base py-3">
-                    CV Match analyses all the relevant details to provide you with a Professional CV that helps you present your professional case with adeptness. The presented CV shall open up in the CV Creator page. You can choose to straightaway download it or edit it and make it better as per your preference. For us at Genies Career Hub, it’s all about catering to your likes.
+                      CV Match analyses all the relevant details to provide you
+                      with a Professional CV that helps you present your
+                      professional case with adeptness. The presented CV shall
+                      open up in the CV Creator page. You can choose to
+                      straightaway download it or edit it and make it better as
+                      per your preference. For us at Genies Career Hub, it’s all
+                      about catering to your likes.
                     </p>
                   </div>
                 </div>
