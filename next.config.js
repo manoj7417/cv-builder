@@ -36,15 +36,15 @@ const nextConfig = {
         headers: [
           {
             key: 'Referrer-Policy',
-            value: 'no-referrer', // Custom referrer policy
+            value: 'no-referrer',
           },
           {
             key: 'X-Frame-Options',
-            value: 'DENY', // Prevents the page from being displayed in an iframe
+            value: 'SAMEORIGIN', // Keeps the X-Frame-Options but allows same-origin framing
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff', // Prevents MIME type sniffing
+            value: 'nosniff',
           },
           {
             key: 'Content-Security-Policy',
@@ -56,8 +56,8 @@ const nextConfig = {
               font-src 'self' data:; 
               object-src 'none'; 
               base-uri 'self'; 
-              frame-ancestors 'none';
-            `.replace(/\s{2,}/g, ' ').trim(), // Adjust the CSP based on your resources and policies
+              frame-ancestors 'self' https://vercel.live;
+            `.replace(/\s{2,}/g, ' ').trim(),
           },
         ],
       },
