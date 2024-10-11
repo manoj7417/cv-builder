@@ -210,7 +210,7 @@ export default function TabResume() {
                       <div className='mt-4 text-center'>
                         <Link href='/resume'>
                           <span className='text-[18px]  font-bold hover:underline'>
-                            <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2' />
+                            <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2 ' />
                             View More
                           </span>
                         </Link>
@@ -237,7 +237,7 @@ export default function TabResume() {
                     ))}
                     <div className='view_more pl-6 pt-2'>
                       <Link href='/resume'>
-                        <span className='text-[18px]'>
+                        <span className='text-[18px] animate-pulse font-bold'>
                           <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-1' />{" "}
                           View More
                         </span>
