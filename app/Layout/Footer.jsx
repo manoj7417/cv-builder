@@ -78,7 +78,7 @@ export default function Footer() {
                   <a
                     href='/resume'
                     className='text-black transition'
-                    prefetch={true}>
+                    >
                     CV Creator
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </a>
