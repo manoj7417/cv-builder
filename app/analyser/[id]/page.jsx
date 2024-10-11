@@ -204,7 +204,7 @@ const FeedbackFuction = () => {
                 </svg>
                 <p className="mb-2 text-sm text-gray-500">
                   <span className="font-semibold">
-                    Start with a Fresh...
+                    Start Afresh...
                   </span>
                 </p>
                 <p className="text-xs text-gray-500 text-center">

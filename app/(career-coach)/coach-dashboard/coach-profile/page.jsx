@@ -33,14 +33,14 @@ import {
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { IoMdCloudUpload } from "react-icons/io";
+import { IoMdCloudUpload, IoMdInformationCircleOutline } from "react-icons/io";
 import ReactPlayer from "react-player";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
   const { updateUserData } = useCoachStore();
-
+  console.log(userdata?.isEditRequestSent)
   const {
     register,
     handleSubmit,
@@ -141,7 +141,7 @@ const CoachProfile = () => {
     setActiveTab(value);
   };
 
-  const handleEditProfile = async(data) => {
+  const handleEditProfile = async (data) => {
     const { accessToken } = await GetTokens();
     const payload = {
       name: data.name,
@@ -180,7 +180,7 @@ const CoachProfile = () => {
     };
     setIsApiLoading(true);
     try {
-      const response = await axios.patch("/api/coachForm", payload, {
+      const response = await axios.post("/api/editCoachInfo", payload, {
         headers: {
           Authorization: `Bearer ${accessToken.value}`,
         },
@@ -191,8 +191,7 @@ const CoachProfile = () => {
         setIsApiLoading(false);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Error in submitting the form");
+      toast.error("An error occured in updating the profile details");
     } finally {
       setIsApiLoading(false); // Stop loading
       setIsEditable(false)
@@ -270,8 +269,8 @@ const CoachProfile = () => {
     fileType === "cv"
       ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
       : fileType === "docs"
-      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
-      : null;
+        ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+        : null;
 
   const handleViewFile = (type) => {
     setFileType(type);
@@ -337,48 +336,48 @@ const CoachProfile = () => {
           onSubmit={handleSubmit(handleEditProfile)}
           className="flex flex-col"
         >
-          <div className="main_heading_section flex justify-between">
-            <h1 className="text-xl text-black font-bold">Anuj</h1>
-            {/* <div className="approve_button flex gap-10">
-              <Button
-                className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </div> */}
-            <div className="approve_button flex gap-10 mt-4">
-              {!isEditable && (
-                <Button
-                  className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
-                  type="button"
-                  onClick={() => setIsEditable(true)}
-                >
-                  Edit
-                  <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
-                </Button>
-              )}
-              {isEditable && (
-                <Button
-                  className="bg-green-600 text-white px-10 py-2 rounded-md flex items-center"
-                  type="submit"
-                  disabled={isApiLoading}
-                >
-                  {isApiLoading ? (
-                    <>
-                      Saving...
-                      <ImSpinner3 className="animate-spin ml-2" size={16} />
-                    </>
-                  ) : (
-                    <>
-                      Save
-                      <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
-                    </>
-                  )}
-                </Button>
-              )}
+          {
+            userdata?.isEditRequestSent &&
+            <div className="border-2 w-full p-3 h-24 rounded-md border-blue-300 bg-blue-100 flex items-center">
+              <p className=" text-sm text-blue-400 flex items-center"><IoMdInformationCircleOutline className="mx-2 text-lg" />Your request for updating profile information has been sent to the <span className="font-bold mx-1">admin</span> for approval.</p>
             </div>
-          </div>
+          }
+          {
+            userdata?.isEditRequestSent === false &&
+            <div className="main_heading_section flex justify-end w-full">
+              <div className="approve_button flex gap-10 mt-4 border">
+                {!isEditable && (
+                  <Button
+                    className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
+                    type="button"
+                    onClick={() => setIsEditable(true)}
+                  >
+                    Edit
+                    <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                  </Button>
+                )}
+                {isEditable && (
+                  <Button
+                    className="bg-green-600 text-white px-10 py-2 rounded-md flex items-center"
+                    type="submit"
+                    disabled={isApiLoading}
+                  >
+                    {isApiLoading ? (
+                      <>
+                        Saving...
+                        <ImSpinner3 className="animate-spin ml-2" size={16} />
+                      </>
+                    ) : (
+                      <>
+                        Save
+                        <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
+                      </>
+                    )}
+                  </Button>
+                )}
+              </div>
+            </div>
+          }
           <Tabs
             value={activeTab}
             onValueChange={handleTabChange}

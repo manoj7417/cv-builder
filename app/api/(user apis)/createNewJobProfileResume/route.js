@@ -4,7 +4,7 @@ export async function POST(req, res) {
     try {
         const data = await req.json();
         const token = req.headers.get('Authorization');
-        const response = await serverInstance.post('/resume/jobResume', data, {
+        const response = await serverInstance.post('/resume/jobResume', { data }, {
             headers: {
                 'Authorization': token
             }

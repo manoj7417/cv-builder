@@ -438,7 +438,7 @@ export default function Home() {
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                       <span className="font-semibold">
-                        Start with Afresh...
+                        Start Afresh...
                       </span>
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
