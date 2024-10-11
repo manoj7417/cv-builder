@@ -79,8 +79,6 @@ export default function Home() {
             }),
           }}
         />
-
-        {/* Google Tag Manager and other tracking scripts */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-J1X213CSR4"
