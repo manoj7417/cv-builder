@@ -8,12 +8,11 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 function EditRequests() {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [requests, setRequests] = useState([])
 
     const handlegetEditCoach = async () => {
         const { accessToken } = await GetTokens()
-        setIsLoading(true)
         if (!accessToken && !accessToken.value) {
             toast("Please login")
             return
