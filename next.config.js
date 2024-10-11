@@ -50,10 +50,10 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: `
               default-src 'self'; 
-              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://res.cloudinary.com; 
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://res.cloudinary.com https://vercel.live; 
               style-src 'self' 'unsafe-inline'; 
               img-src 'self' https://res.cloudinary.com https://static.vecteezy.com https://via.placeholder.com; 
-              font-src 'self'; 
+              font-src 'self' data:; 
               object-src 'none'; 
               base-uri 'self'; 
               frame-ancestors 'none';
