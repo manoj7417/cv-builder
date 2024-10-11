@@ -87,9 +87,9 @@ export default function HomepageNew() {
             alt={service.alt}
           />
         </div>
-        <h2 className="mt-2 text-lg font-bold text-black sm:text-2xl">
+        <h3 className="mt-2 text-lg font-bold text-black sm:text-2xl">
           {service.title}
-        </h2>
+        </h3>
         <p className="mt-2 text-xs text-black sm:text-sm sm:text-md whitespace-normal">
           {service.description}
         </p>

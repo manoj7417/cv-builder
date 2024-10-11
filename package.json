@@ -72,6 +72,7 @@
     "mini-svg-data-uri": "^1.4.4",
     "moment-timezone": "^0.5.45",
     "next": "14.0.4",
+    "next-sitemap": "^4.2.3",
     "openai": "^4.39.0",
     "pdfjs": "^2.5.0",
     "pdfjs-dist": "^3.7.107",

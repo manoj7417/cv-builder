@@ -66,7 +66,7 @@ const CoachForm = () => {
       id: "Step 2",
       name: "Other Details",
       fields: [
-        "cvUpload",        
+        "cvUpload",
         "experience",
         "typeOfCoaching",
         "skills",
@@ -232,8 +232,8 @@ const CoachForm = () => {
     fileType === "cv"
       ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
       : fileType === "docs"
-      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
-      : null;
+        ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+        : null;
 
   const handleViewFile = (type) => {
     setFileType(type);
@@ -262,7 +262,7 @@ const CoachForm = () => {
         link: data.cvUpload,
       },
       profileVideo: {
-        url: data.profileVideo,        
+        url: data.profileVideo,
       },
       signedAggrement: {
         link: data.docsUpload,
@@ -327,17 +327,30 @@ const CoachForm = () => {
       setCurrentStep((step) => step - 1);
     }
   };
-//START-COACH PROFILE VIDEO UPLOAD
-const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
+  //START-COACH PROFILE VIDEO UPLOAD
+  const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
 
-const handleInputChange = (e) => {
-setprofileVideo(e.target.value); // Update the state with the input value
-};
-// Handle removing the YouTube link
-const handleRemoveLink = () => {
-setprofileVideo(""); // Clear the input value
-};
-//END-COACH PROFILE VIDEO UPLOAD
+  const handleInputChange = (e) => {
+    setprofileVideo(e.target.value); // Update the state with the input value
+  };
+  // Handle removing the YouTube link
+  const handleRemoveLink = () => {
+    setprofileVideo(""); // Clear the input value
+  };
+
+  const handleCoachAuth = async () => {
+    const { accessToken, refreshToken } = await GetTokens();
+    console.log(accessToken, refreshToken);
+    try {
+      const response = await axios.post("/api/coachAccount", { accessToken: accessToken.value, refreshToken: refreshToken.value });
+      if (response.status === 200) {
+        console.log(response.data.data.userdata)
+      }
+    } catch (error) {
+
+    }
+  }
+
   useEffect(() => {
     if (userdata?.formFilled) {
       setIsDialogOpen(true);
@@ -345,10 +358,12 @@ setprofileVideo(""); // Clear the input value
     // if (userdata?.profileVideo?.url) {
     //   setProfileVideo(userdata.profileVideo.url); // Set the default value from the database
     // }
-    
+
   }, []);
-  
-  
+
+  useEffect(() => {
+    handleCoachAuth();
+  }, []);
 
   return (
     <>

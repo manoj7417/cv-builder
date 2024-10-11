@@ -19,6 +19,7 @@ import { CgLoadbarDoc } from "react-icons/cg";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useCoachStore } from "@/app/store/coachStore";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const SidebarCoach = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +41,8 @@ const SidebarCoach = () => {
   // Function to apply active class based on activeTab
   const getLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md font-bold"
-      : "flex items-center p-3 text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold";
+      ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md font-bold w-full"
+      : "flex items-center p-3 text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold w-full";
   };
 
   const handleLogout = async () => {
@@ -91,7 +92,7 @@ const SidebarCoach = () => {
       {/* Sidebar for Mobile and Desktop */}
       <div
         className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}
+          } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}
       >
         {/* Close button for mobile sidebar */}
         <div className="flex justify-end mr-5 md:hidden">
@@ -107,7 +108,7 @@ const SidebarCoach = () => {
         </div>
         {/* Links for the pages  */}
         <nav className=" space-y-5 py-8">
-          <ul className="space-y-4 lg:w-full">
+          <ul className="space-y-4 lg:w-full p-2">
             {/* Highlighted Dashboard Item with Custom Icon */}
             <li className={getLinkClass("/coach-dashboard")}>
               <Link
@@ -159,7 +160,7 @@ const SidebarCoach = () => {
                   handleSetActiveTab("/coach-dashboard/coach-profile")
                 }>
                 <MdEventAvailable className="text-xl mr-3" />
-                 My Profile
+                My Profile
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-calendar")}>
@@ -176,17 +177,14 @@ const SidebarCoach = () => {
           </ul >
         </nav >
         {/* Profile Section */}
-        < div className="flex items-center justify-between  absolute bottom-0 min-w-[200px] " >
+        < div className="flex items-center justify-between  absolute l-0 bottom-0 w-full px-2" >
           <TooltipProvider>
-            <img
-              src={userdata?.profileImage} // Replace with your profile image path
-              alt="Profile Image"
-              width={52} // Width should match the container's width
-              height={52} // Height should match the container's height
-              className="object-cover h-10 w-10 rounded-full"
-            />
-            <div>
-              <p className="font-semibold text-gray-800 text-base">
+            <Avatar className="h-10 w-10">
+              <AvatarImage src={userdata?.profileImage} alt={userdata?.name || "avatar"} />
+              <AvatarFallback>{userdata?.name?.slice(0, 1)}</AvatarFallback>
+            </Avatar>
+            <div className="w-3/5">
+              <p className="font-semibold text-gray-800 text-base ">
                 {userdata?.name}
               </p>
             </div>

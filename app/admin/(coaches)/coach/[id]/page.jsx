@@ -142,8 +142,6 @@ const CoachDetailsPage = () => {
     skills,
   } = singleCoach;
 
-  console.log("profileVideo::", profileVideo);
-
   return (
     <>
       <div className="w-full h-auto mt-10 bg-white m-10 p-10">
@@ -456,7 +454,6 @@ const CoachDetailsPage = () => {
                   </div>
                 </div>
 
-                {/* START- COACH INTRODUCTION VIDEO */}
                 <div className="sm:col-span-6 mt-10">
                   <div className="flex items-center justify-between">
                     <label
@@ -523,8 +520,7 @@ const CoachDetailsPage = () => {
                     )}
                   </div>
                 </div>
-                {/* END- COACH INTRODUCTION VIDEO */}
-                {/* Shadcn UI Modal for viewing PDF */}
+
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogContent
                     showCloseButton="true"

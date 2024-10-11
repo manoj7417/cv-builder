@@ -208,12 +208,12 @@ export default function TabResume() {
                         </div>
                       </div>
                       <div className='mt-4 text-center'>
-                        <Link href='/resume'>
+                        <a href='/resume'>
                           <span className='text-[18px]  font-bold hover:underline'>
                             <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2 ' />
                             View More
                           </span>
-                        </Link>
+                        </a>
                       </div>
                     </div>
 

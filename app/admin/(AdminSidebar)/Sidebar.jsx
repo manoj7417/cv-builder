@@ -80,7 +80,6 @@ const Sidebar = () => {
 
   return (
     <div className="flex lg:h-full h-auto lg:sticky lg:top-0 relative pb-5">
-      {/* Mobile Hamburger Menu Button */}
       <button
         className="md:hidden p-4 focus:outline-none"
         onClick={toggleSidebar}
@@ -88,13 +87,12 @@ const Sidebar = () => {
         <HiMenu className="w-8 h-8" />
       </button>
 
-      {/* Sidebar for Mobile and Desktop */}
+
       <div
         className={`fixed inset-y-0 left-0 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}
       >
-        {/* Close button for mobile sidebar */}
         <div className="flex justify-end mr-5 md:hidden">
           <button
             className=" mb-4 focus:outline-none cursor-pointer"
@@ -106,10 +104,8 @@ const Sidebar = () => {
         <div className="dashboard_logo px-5 mb-5">
           <Image src="/admin-logo.png" alt="logo" width={200} height={200} />
         </div>
-        {/* Links for the pages  */}
         <nav className=" space-y-5 py-8">
           <ul className="space-y-4 lg:w-full">
-            {/* Highlighted Dashboard Item with Custom Icon */}
             <li
               className={getLinkClass("/admin")}
               onClick={() => handleSetActiveTab("/admin")}
