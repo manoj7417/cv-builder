@@ -27,7 +27,8 @@ const SidebarCoach = () => {
   const [activeTab, setActiveTab] = useState(pathname);
   const router = useRouter();
   const { updateUserData } = useCoachStore();
-  const { userdata } = useCoachStore(state => state.userState)
+  const { userdata } = useCoachStore(state => state.userState);
+  console.log("userdata::", userdata);
   // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -161,6 +162,17 @@ const SidebarCoach = () => {
                 }>
                 <MdEventAvailable className="text-xl mr-3" />
                 My Profile
+              </Link>
+            </li>
+            <li className={getLinkClass("/coach-dashboard/coach-calendar")}>
+              <Link
+                href={"/coach-dashboard/coach-calendar"}
+                className='flex items-center w-full'
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/coach-calendar")
+                }>
+                <MdEventAvailable className="text-xl mr-3" />
+                 My Appointment
               </Link>
             </li>
           </ul >

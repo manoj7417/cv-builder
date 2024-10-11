@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
   images: {
@@ -29,20 +28,38 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
-  
-  // Adding redirect logic
-  async redirects() {
+
+  async headers() {
     return [
       {
-        source: '/',
-        has: [
+        source: '/(.*)', // Apply to all routes
+        headers: [
           {
-            type: 'host',
-            value: 'geniescareerhub.com',
+            key: 'Referrer-Policy',
+            value: 'no-referrer', // Custom referrer policy
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY', // Prevents the page from being displayed in an iframe
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff', // Prevents MIME type sniffing
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: `
+              default-src 'self'; 
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://res.cloudinary.com; 
+              style-src 'self' 'unsafe-inline'; 
+              img-src 'self' https://res.cloudinary.com https://static.vecteezy.com https://via.placeholder.com; 
+              font-src 'self'; 
+              object-src 'none'; 
+              base-uri 'self'; 
+              frame-ancestors 'none';
+            `.replace(/\s{2,}/g, ' ').trim(), // Adjust the CSP based on your resources and policies
           },
         ],
-        destination: 'https://www.geniescareerhub.com',
-        permanent: true,
       },
     ];
   },

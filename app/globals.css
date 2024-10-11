@@ -1186,3 +1186,9 @@ ol>li {
 
 
 
+/* Change Calendar CSS Starts Here  */
+
+.fc .fc-button {
+ background-color: #031d44 !important;
+ color: white !important;
+}

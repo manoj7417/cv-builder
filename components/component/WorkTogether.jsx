@@ -19,12 +19,12 @@ const WorkTogether = () => {
               Career Hub!
             </p>
             <div className="learn-more flex gap-1 items-center mt-5">
-              <Link
+              <a
                 className="text-blue-950 underline underline-offset-8 font-bold"
                 href={"/contact-us"}
               >
-                Learn More
-              </Link>
+                Contact Us
+              </a>
               <GoArrowRight className="text-blue-950 font-bold" />
             </div>
           </div>
