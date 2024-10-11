@@ -108,6 +108,7 @@
     "react-toastify": "^10.0.5",
     "react-zoom-pan-pinch": "^3.4.4",
     "recharts": "^2.12.7",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.12",
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar": "^3.0.5",
