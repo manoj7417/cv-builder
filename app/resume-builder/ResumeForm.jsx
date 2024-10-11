@@ -554,7 +554,7 @@ export default function ResumeForm() {
         setResumeData("sections.summary.content", data);
       }
     } catch (error) {
-      console.log(error);
+      
     } finally {
       setIsLoading(false);
       setFormData({

@@ -4,7 +4,6 @@ export async function POST(req, res) {
     try {
         const { data } = await req.json();
         const token = req.headers.get('Authorization');
-        console.log(token)
         const response = await serverInstance.post('/stripe/createSubscription', data, {
             headers: {
                 'Authorization': token,

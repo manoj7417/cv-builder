@@ -78,7 +78,7 @@ function UpdateBlog() {
       setBlog(response?.data?.blog);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -284,7 +284,7 @@ function UpdateBlog() {
   //         Authorization: "Bearer " + token,
   //       },
   //     });
-  //     console.log("response data:::", response.data);
+  //     
   //     router.push("/admin/viewBlogs")
   //     toast.success("Blog created successfully",{
   //       position:"top-right"
@@ -322,7 +322,6 @@ function UpdateBlog() {
           Authorization: "Bearer " + token,
         },
       });
-      console.log("response data:::", response.data);
       router.push("/admin/viewBlogs");
       toast.success("Blog updated successfully", {
         position: "top-right",
@@ -404,7 +403,6 @@ function UpdateBlog() {
 
   //Toggle Upload Mode
   const toggleUploadMode = () => {
-    console.log("toggle buttton");
     setIsUploadMode((prev) => !prev);
   };
 

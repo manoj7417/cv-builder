@@ -13,7 +13,7 @@ export const updateResume = async (data) => {
             }
         })
     } catch (error) {
-        console.log(error)
+        
     }
 }
 

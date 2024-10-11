@@ -292,7 +292,6 @@ export default function Home() {
           return router.push("/resume-builder");
         }
       } catch (error) {
-        console.log(error);
         toast.error("Unable to generate your CV");
       } finally {
         setIsGeneratingResume(false);

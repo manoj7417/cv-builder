@@ -14,7 +14,6 @@ export async function POST(req, res) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        console.log(error)
         return new Response(JSON.stringify({ error: "Error generating feedback" }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }

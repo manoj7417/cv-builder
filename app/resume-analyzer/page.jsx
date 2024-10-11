@@ -70,7 +70,6 @@ const faqData = [
 export default function DashboardIdea() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log("pathname::", pathname);
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();

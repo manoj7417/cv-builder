@@ -523,7 +523,7 @@ function JobMultistepForm({
         return router.push("/resume-builder");
       }
     } catch (error) {
-      console.log(error);
+      
     } finally {
       handleCloseMultistepForm();
       setSteps(1);

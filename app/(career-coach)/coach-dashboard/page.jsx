@@ -99,10 +99,11 @@ const CoachDashboardPage = () => {
         },
       });
       if (response.status === 200) {
+
         setBookingSlot(response.data.bookings);
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

@@ -119,7 +119,6 @@ function Profile() {
         toast.success("Profile picture updated successfully");
       }
     } catch (error) {
-      console.log(error)
       toast.error("Error updating profile picture");
     }
   };
