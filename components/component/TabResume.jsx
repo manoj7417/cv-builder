@@ -112,7 +112,7 @@ export default function TabResume() {
         router.push("/resume-builder");
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Error creating new CV");
     } finally {
       setIsLoading(false);
     }

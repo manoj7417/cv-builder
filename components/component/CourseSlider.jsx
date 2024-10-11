@@ -16,7 +16,6 @@ export default function CourseSlider() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    console.log("window.innerWidth::",window.innerWidth)
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 640);
     };

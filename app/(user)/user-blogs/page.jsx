@@ -37,7 +37,6 @@ const BlogPage = () => {
 
 
   const handleSingleBlog = (id) => {
-    console.log(id);
     router.push(`/user-blogs/${id}`);
   };
 

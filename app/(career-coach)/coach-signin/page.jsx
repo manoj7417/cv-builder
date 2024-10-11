@@ -65,7 +65,6 @@ export default function CoachRegistration() {
   };
 
   const handleSendResetEmail = async () => {
-    console.log("?");
     setIsSendingMail(true);
     try {
       const response = await axios.post("/api/forgotCoachPassword", {

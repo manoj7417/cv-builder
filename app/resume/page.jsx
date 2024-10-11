@@ -440,7 +440,6 @@ export default function DashboardIdea() {
   const [userState, setUserState] = useState({});
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  console.log("pathname::", pathname);
   const router = useRouter();
 
   const toggle = (index) => {

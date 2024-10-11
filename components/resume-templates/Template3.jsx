@@ -533,7 +533,6 @@ export const Template3 = () => {
     skillsFont: "text-15px",
     contactFont: "text-13px",
   });
-  console.log(data);
 
   return (
     <>

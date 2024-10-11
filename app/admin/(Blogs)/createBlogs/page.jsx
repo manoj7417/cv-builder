@@ -201,7 +201,6 @@ function CreateBlogs() {
                   formData.append("upload_preset", "careerg");
                   const cloudinaryUrl = await uploadImage(formData);
                   const imageUrl = cloudinaryUrl?.data?.secure_url;
-                  console.log("imageUrl:::", imageUrl);
                   setBlog((prevBlog) => {
                     const updatedImagesWithCloudinary = section.images.map(
                       (img, idx) =>
@@ -303,7 +302,6 @@ function CreateBlogs() {
           Authorization: "Bearer " + token,
         },
       });
-      console.log("response data:::", response.data);
       router.push("/admin/viewBlogs");
       toast.success("Blog created successfully", {
         position: "top-right",
@@ -408,7 +406,6 @@ function CreateBlogs() {
 
   //Toggle Upload Mode
   const toggleUploadMode = () => {
-    console.log("toggle buttton");
     setIsUploadMode((prev) => !prev);
   };
 

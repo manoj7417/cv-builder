@@ -27,7 +27,6 @@ const ViewBlogsPage = () => {
 
   //Get total pages
   const totalPages = Math.ceil(filteredBlogData?.length / itemsPerPage);
-  console.log("totalPages:::", totalPages);
 
   //Get current page blog data
   const currentPageData = filteredBlogData.slice(
@@ -49,11 +48,9 @@ const ViewBlogsPage = () => {
           Authorization: "Bearer " + token,
         },
       });
-      console.log("response::", response);
       setBlogData(response?.data?.blog);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
     }
   };
@@ -84,7 +81,7 @@ const ViewBlogsPage = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

@@ -40,7 +40,7 @@ export function ServiceSection() {
         })
       }
     } catch (error) {
-      console.log(error);
+      
     } finally {
       email.current.value = "";
       setIsSubscribing(false);

@@ -27,7 +27,7 @@ const IndividualBlogPage = () => {
       );
       setIndividualBlog(response?.data?.blog);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

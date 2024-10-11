@@ -112,7 +112,7 @@ export default function ViewUsersPage() {
         await axios.put(`/api/updateUserRole/${row.original.id}`, {
           role: newRole,
         });
-        console.log("Role updated successfully");
+        
       } catch (error) {
         console.error("Error updating role", error);
       }
@@ -192,12 +192,12 @@ export default function ViewUsersPage() {
       cell: ({ row }) => {
         const handleEdit = () => {
           // Add your edit logic here
-          console.log("Edit clicked for row:", row);
+          
         };
   
         const handleDelete = () => {
           // Add your delete logic here
-          console.log("Delete clicked for row:", row);
+          
         };
   
         return (

@@ -82,7 +82,6 @@ function LoginUser() {
         toast.success("Reset password link sent to your email");
       }
     } catch (error) {
-      console.log(error)
       toast.error(
         error.response?.data?.error || "Error sending reset password email"
       );

@@ -84,7 +84,7 @@ const CoachDetailsPage = () => {
         toast.success("Update Coach Details submitted successfully");
       }
     } catch (error) {
-      console.log(error);
+      
       toast.error("Error in submitting the detail");
     }
   };

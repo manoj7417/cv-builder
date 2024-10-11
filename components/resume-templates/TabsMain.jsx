@@ -58,7 +58,7 @@ const TabsMain = () => {
         router.push("/resume-builder");
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.error);
     } finally {
       setisCreatingResume(false);
     }
@@ -74,7 +74,7 @@ const TabsMain = () => {
         if (response.status === 204) {
           deleteResume(id);
         }
-      }).catch(err => console.log(err)
+      }).catch(err => toast.error("Error deleting resume")
       ),
       {
         pending: "Deleting resume...",

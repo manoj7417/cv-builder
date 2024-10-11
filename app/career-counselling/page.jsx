@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ImSpinner3 } from "react-icons/im";
 import { ResumeHeader } from "../Layout/ResumeHeader";
+import { toast } from "react-toastify";
 
 export default function Page() {
   const [showIntro, setShowIntro] = useState(false);
@@ -127,7 +128,7 @@ export default function Page() {
         resetData();
         setTestSummary(true);
       } catch (error) {
-        console.log(error);
+        toast.error("Error generating summary");
       } finally {
         setShowDialog(false);
       }
@@ -166,7 +167,7 @@ export default function Page() {
       setPopupData(response?.data?.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

@@ -201,14 +201,13 @@ const CoachForm = () => {
     if (file) {
       setIsUploadingDocs(true);
       const formData = new FormData();
-      formData.append("docsUpload", file); // Assuming "document" is the expected field in the backend
+      formData.append("docsUpload", file); 
       try {
         setIsDocumentLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        const response = await axios.post("/api/uploadImage", formData); 
         if (response.status === 200) {
           const docUrl = response.data.url;
-          console.log(docUrl);
-          setValue("docsUpload", docUrl); // Set document URL in form data
+          setValue("docsUpload", docUrl); 
           setIsDocumentLoading(false);
           setDocsUrl(docUrl);
         } else {
@@ -288,7 +287,6 @@ const CoachForm = () => {
       },
       formFilled: true,
     };
-    console.log(payload);
     try {
       const response = await axios.patch("/api/coachForm", payload, {
         headers: {
@@ -300,7 +298,6 @@ const CoachForm = () => {
         toast.success("Form submitted successfully");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error in submitting the form");
     } finally {
       setIsSubmitting(false);
@@ -340,7 +337,6 @@ const CoachForm = () => {
 
   const handleCoachAuth = async () => {
     const { accessToken, refreshToken } = await GetTokens();
-    console.log(accessToken, refreshToken);
     try {
       const response = await axios.post("/api/coachAccount", { accessToken: accessToken.value, refreshToken: refreshToken.value });
       if (response.status === 200) {
