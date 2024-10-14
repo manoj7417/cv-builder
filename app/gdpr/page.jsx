@@ -3,8 +3,23 @@ import Link from "next/link";
 import React from "react";
 
 const Page = () => {
+
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Organization",
+    "url": "https://www.geniescareerhub.com/",
+    "logo": "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    "name": "geniescareerhub.com",
+    "description": "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes."
+  }
+
+
   return (
     <>
+     <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-20  px-5 relative bg-gradient-to-r from-white to-[#dcecff]"
         id="free"

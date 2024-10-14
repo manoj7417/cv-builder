@@ -210,7 +210,7 @@ export default function TabResume() {
                       <div className='mt-4 text-center'>
                         <a href='/resume'>
                           <span className='text-[18px]  font-bold hover:underline'>
-                            <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2' />
+                            <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-2 ' />
                             View More
                           </span>
                         </a>
@@ -236,12 +236,12 @@ export default function TabResume() {
                       </TabsTrigger>
                     ))}
                     <div className='view_more pl-6 pt-2'>
-                      <a href='/resume'>
-                        <span className='text-[18px]'>
+                      <Link href='/resume'>
+                        <span className='text-[18px] animate-pulse font-bold'>
                           <MdOutlineReadMore className='inline-flex text-3xl text-orange-400 mr-1' />{" "}
                           View More
                         </span>
-                      </a>
+                      </Link>
                     </div>
                   </TabsList>
                 </div>

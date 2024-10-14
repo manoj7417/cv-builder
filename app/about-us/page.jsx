@@ -38,37 +38,39 @@ const PercentageCircle = ({ percentage, label }) => {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="flex flex-col sm:flex-row  items-center">
-      <div className="relative flex items-center justify-center w-24 h-24">
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 80 80">
-          <circle
-            className="text-gray-300"
-            strokeWidth="8"
-            stroke="currentColor"
-            fill="transparent"
-            r={circleRadius}
-            cx="40"
-            cy="40"
-          />
-          <circle
-            className="text-blue-600"
-            strokeWidth="8"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
-            stroke="currentColor"
-            fill="transparent"
-            r={circleRadius}
-            cx="40"
-            cy="40"
-          />
-        </svg>
-        <span className="text-xl font-semibold text-blue-600">
-          {percentage}%
-        </span>
+    <>
+      <div className="flex flex-col sm:flex-row  items-center">
+        <div className="relative flex items-center justify-center w-24 h-24">
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 80 80">
+            <circle
+              className="text-gray-300"
+              strokeWidth="8"
+              stroke="currentColor"
+              fill="transparent"
+              r={circleRadius}
+              cx="40"
+              cy="40"
+            />
+            <circle
+              className="text-blue-600"
+              strokeWidth="8"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="round"
+              stroke="currentColor"
+              fill="transparent"
+              r={circleRadius}
+              cx="40"
+              cy="40"
+            />
+          </svg>
+          <span className="text-xl font-semibold text-blue-600">
+            {percentage}%
+          </span>
+        </div>
+        <span className="mt-2 ml-4 text-gray-600 w-[40%]">{label}</span>
       </div>
-      <span className="mt-2 ml-4 text-gray-600 w-[40%]">{label}</span>
-    </div>
+    </>
   );
 };
 
@@ -85,40 +87,27 @@ export default function AboutUs() {
       <p className="text-gray-600">{description}</p>
     </div>
   );
+
+  //Schema
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Organization",
+    url: "https://www.geniescareerhub.com/",
+    logo: "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    name: "Genies Career Hub",
+    description:
+      "Genies Career Hub creates your resume in an easy-going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser, and CV Match. Additionally, our new Psychometric Test feature, incorporating AI, and Career Coach offer the best expertise in creating professional resumes.",
+  };
+
   return (
     <>
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="w-full my-20">
         {/* Hero Section */}
         <div className="relative w-full bg-white">
-          {/* <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-            <div className="flex flex-col justify-center items-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
-              <h1 className="mt-8 text-3xl font-bold text-center text-[#005599] md:text-4xl lg:text-6xl">
-                We Envisage Your Growth With You!
-              </h1>
-              <p className="mt-8 text-lg text-center text-gray-700">
-                We aim to be the bridge between you and your progressive career.
-                We dream with you and assist you as strive to achieve every step
-                of success.
-              </p>
-              <div className="w-full mt-8 flex justify-center">
-                <Link
-                  href={"/contact-us"}
-                  className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                  Connect with us!
-                </Link>
-              </div>
-              
-            </div>
-
-            <div className="relative lg:col-span-5 lg:-mr-8 xl:col-span-6">
-              <img
-                className="aspect-[3/2] bg-gray-50 object-cover lg:aspect-[4/3]  xl:aspect-[16/9]"
-                src="/cgabout.png"
-                alt=""
-              />
-            </div>
-          </div> */}
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:grid md:grid-cols-12 md:gap-x-8">
               <div className="flex flex-col justify-center items-center px-4 py-12  md:col-span-7 md:gap-x-6 md:px-6 md:py-24 xl:col-span-6">

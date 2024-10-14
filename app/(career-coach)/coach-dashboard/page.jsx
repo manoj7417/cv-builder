@@ -21,10 +21,12 @@ import {
 import { GetTokens } from "@/app/actions";
 import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Skeleton from "react-loading-skeleton";
 
 const CoachDashboardPage = () => {
   const { userdata } = useCoachStore((state) => state.userState);
   const [bookingSlot, setBookingSlot] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const invoices = [
     {
@@ -92,6 +94,7 @@ const CoachDashboardPage = () => {
     if (!accessToken || !accessToken.value) {
       return router.push("/login?redirect=/user-dashboard");
     }
+    setLoading(true);
     try {
       const response = await axios.get("/api/bookings", {
         headers: {
@@ -101,6 +104,7 @@ const CoachDashboardPage = () => {
       if (response.status === 200) {
 
         setBookingSlot(response.data.bookings);
+        setLoading(false);
       }
     } catch (error) {
       
@@ -120,115 +124,103 @@ const CoachDashboardPage = () => {
             <h2 className="text-2xl my-3 font-bold  text-[#092C4C]">
               Upcoming Appointment
             </h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 gap-2">
-              {/* start-sectin 1 */}
-              {bookingSlot.length > 0 &&
-                bookingSlot.map((item, index) => (
-                  <div key={index}>
-                    <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
-                      <div className="flex justify-between items-center">
-                        <div className="text-lg  font-bold text-[#FFF]">
-                          Next Appointment
-                        </div>
-                        <div>
-                          <img src="/coach_dot_icon.png" alt="" className="" />
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-6 w-full mt-5">
-                        <div className="w-12 h-auto overflow-hidden rounded-full">
-                          <Image
-                            src="/new_appointment_img.png"
-                            alt="Profile Image"
-                            width={44}
-                            height={44}
-                          />
-                        </div>
-                        <div className="ml-1">
-                          <p className="text-[13px]  font-bold text-white">
-                            {item?.userId?.fullname}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center mt-2">
-                        <div className="text-sm  text-[#FFF]">
-                          Appointment Date
-                        </div>
-                        <div className="text-sm  text-[#FFF]">Country</div>
-                      </div>
-                      <div className="flex justify-between items-center mt-2">
-                        <div className="text-sm font-bold  text-[#FFF]">
-                          {formatDate(item?.date)}
-                        </div>
-                        <div className="text-sm font-bold  text-[#FFF]">
-                          {item?.country}
+            <div className="flex gap-5 flex-wrap">
+              {loading
+                ? Array.from({ length: 4 }).map(
+                    (
+                      _,
+                      index // Render 4 skeleton cards
+                    ) => (
+                      <div key={index}>
+                        <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-gray-200 rounded-lg p-5 relative overflow-hidden">
+                          {/* Skeleton for title and icon */}
+                          <div className="flex justify-between items-center">
+                            <Skeleton className="h-6 w-32" />
+                            <Skeleton className="h-6 w-6 rounded-full" />
+                          </div>
+                          {/* Skeleton for avatar and name */}
+                          <div className="flex items-center mb-6 w-full mt-5">
+                            <Skeleton className="w-12 h-12 rounded-full" />
+                            <Skeleton className="ml-2 h-4 w-20" />
+                          </div>
+                          {/* Skeleton for appointment date and country */}
+                          <div className="flex justify-between items-center mt-2">
+                            <Skeleton className="h-4 w-24" />
+                            <Skeleton className="h-4 w-16" />
+                          </div>
+                          <div className="flex justify-between items-center mt-2">
+                            <Skeleton className="h-4 w-24" />
+                            <Skeleton className="h-4 w-16" />
+                          </div>
+                          {/* Skeleton for buttons */}
+                          <div className="flex justify-between items-center mt-10">
+                            <Skeleton className="h-10 w-24 rounded-full" />
+                            <Skeleton className="h-10 w-24 rounded-full" />
+                          </div>
                         </div>
                       </div>
-                      <div className="flex justify-between items-center mt-10">
-                        <div className="text-sm font-bold text-[#FFF]">
-                          <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
-                            Start
-                          </button>
+                    )
+                  )
+                : bookingSlot.length > 0 &&
+                  bookingSlot.map((item, index) => (
+                    <div key={index}>
+                      <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
+                        <div className="flex justify-between items-center">
+                          <div className="text-lg font-bold text-[#FFF]">
+                            Next Appointment
+                          </div>
+                          <div>
+                            <img
+                              src="/coach_dot_icon.png"
+                              alt=""
+                              className=""
+                            />
+                          </div>
                         </div>
-                        <div className="text-sm font-bold text-[#FFF]">
-                          <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
-                            Cancel
-                          </button>
+                        <div className="flex items-center mb-6 w-full mt-5">
+                          <div className="w-12 h-auto overflow-hidden rounded-full">
+                            <Image
+                              src="/new_appointment_img.png"
+                              alt="Profile Image"
+                              width={44}
+                              height={44}
+                            />
+                          </div>
+                          <div className="ml-1">
+                            <p className="text-[13px] font-bold text-white">
+                              {item?.userId?.fullname}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center mt-2">
+                          <div className="text-sm text-[#FFF]">
+                            Appointment Date
+                          </div>
+                          <div className="text-sm text-[#FFF]">Country</div>
+                        </div>
+                        <div className="flex justify-between items-center mt-2">
+                          <div className="text-sm font-bold text-[#FFF]">
+                            {formatDate(item?.date)}
+                          </div>
+                          <div className="text-sm font-bold text-[#FFF]">
+                            {item?.country}
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center mt-10">
+                          <div className="text-sm font-bold text-[#FFF]">
+                            <button className="rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black">
+                              Start
+                            </button>
+                          </div>
+                          <div className="text-sm font-bold text-[#FFF]">
+                            <button className="rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black">
+                              Cancel
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              {/* <div className="h-auto w-full bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
-                <div className="flex justify-between items-center">
-                  <div className="text-lg  font-bold text-[#FFF]">
-                    Next Appointment
-                  </div>
-                  <div>
-                    <img src="/coach_dot_icon.png" alt="" className="" />
-                  </div>
-                </div>
-                <div className="flex items-center mb-6 w-full mt-5">
-                  <div className="w-12 h-auto overflow-hidden rounded-full">
-                    <Image
-                      src="/new_appointment_img.png"
-                      alt="Profile Image"
-                      width={44}
-                      height={44}
-                    />
-                  </div>
-                  <div className="ml-1">
-                    <p className="text-[13px]  font-bold text-white">
-                      319 Haul Road
-                    </p>
-                    <p className="text-[13px]  text-white mt-1">
-                      Glenrock, WY 12345
-                    </p>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center mt-2">
-                  <div className="text-sm  text-[#FFF]">Appointment Date</div>
-                  <div className="text-sm  text-[#FFF]">Price</div>
-                </div>
-                <div className="flex justify-between items-center mt-2">
-                  <div className="text-sm font-bold  text-[#FFF]">
-                    Aug 3 2024, 17:00
-                  </div>
-                  <div className="text-sm font-bold  text-[#FFF]">$ 10</div>
-                </div>
-                <div className="flex justify-between items-center mt-10">
-                  <div className="text-sm font-bold text-[#FFF]">
-                    <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
-                      Start
-                    </button>
-                  </div>
-                  <div className="text-sm font-bold text-[#FFF]">
-                    <button className="rounded-full p-3 xl:p-2 2xl:p-3  bg-white w-24 xl:w-20  text-black">
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div> */}
-              {/* end-sectin 1 */}
+                  ))}
             </div>
           </div>
           {/* END-PART 1 */}
@@ -290,33 +282,60 @@ const CoachDashboardPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bookingSlot.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell className="font-medium">
-                  <div className="flex items-center space-x-3">
-                    <Avatar className="w-10 h-10">
-                      <AvatarImage
-                        src={item.userId.avatar}
-                        alt={item.userId.fullname}
-                      />
-                      <AvatarFallback>
-                        {item.userId.fullname
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span>{item.userId.fullname}</span>
-                  </div>
-                </TableCell>
-                <TableCell className="text-red-500">{item.status}</TableCell>
-                <TableCell>
-                  {item.slotTime.startTime}-{item.slotTime.endTime}
-                </TableCell>
-                <TableCell>{item.country}</TableCell>
-              </TableRow>
-            ))}
+            {loading
+              ? Array.from({ length: 5 }).map(
+                  (
+                    _,
+                    index // Example: Render 5 skeleton rows
+                  ) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        <div className="flex items-center space-x-3">
+                          <Skeleton className="w-10 h-10 rounded-full" />
+                          <Skeleton className="h-4 w-32" />
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-4 w-20" />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-4 w-24" />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-4 w-20" />
+                      </TableCell>
+                    </TableRow>
+                  )
+                )
+              : bookingSlot.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center space-x-3">
+                        <Avatar className="w-10 h-10">
+                          <AvatarImage
+                            src={item.userId.avatar}
+                            alt={item.userId.fullname}
+                          />
+                          <AvatarFallback>
+                            {item.userId.fullname
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")
+                              .toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span>{item.userId.fullname}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-red-500">
+                      {item.status}
+                    </TableCell>
+                    <TableCell>
+                      {item.slotTime.startTime}-{item.slotTime.endTime}
+                    </TableCell>
+                    <TableCell>{item.country}</TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </div>
