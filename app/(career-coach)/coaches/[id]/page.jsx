@@ -444,12 +444,33 @@ const CoachDetailsPage = () => {
     }
   };
 
+  const handleFetchCoachProgramById = async (data) => {
+    const { accessToken } = await GetTokens();
+    if (!data._id) return;
+    try {
+      const response = await axios.post(
+        `/api/getCoachProgram/${id}`,
+        { data: data.data },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken.value}`,
+          },
+        }
+      );
+      console.log("response::", response);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     getGeoInfo();
   }, []);
 
   useEffect(() => {
     handleFetchCoachDetailsById(id);
+  }, [id]);
+
+  useEffect(() => {
+    handleFetchCoachProgramById(id);
   }, [id]);
 
   return (
