@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -94,14 +96,12 @@ export default function ResumeForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-
   const handleResumeTitleChange = (e) => {
     setResumeTitle(e.target.value, _id);
-  }
+  };
 
   const handleChangeProfileSummaryChange = (e) => {
     setResumeData("sections.summary.content", e.htmlValue);
-
   };
 
   const handleEducationChange = (e, i) => {
@@ -547,14 +547,13 @@ export default function ResumeForm() {
       data + " Generated profile summary using the data appended data";
     setIsLoading(true);
     try {
-      const response = await axios.post('/api/askBot', {message});
+      const response = await axios.post("/api/askBot", { message });
       const data = JSON.parse(response[0]?.text?.value.split("\n")[2]);
 
       if (data) {
         setResumeData("sections.summary.content", data);
       }
     } catch (error) {
-      
     } finally {
       setIsLoading(false);
       setFormData({
@@ -914,10 +913,10 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
       : null;
   }
 
@@ -983,48 +982,47 @@ export default function ResumeForm() {
 
   return (
     <>
-      <div className="px-5 py-20 bg-white">
+      <div className='px-5 py-20 bg-white'>
         {generatingResume && (
           <div
-            className="fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0"
+            className='fixed w-screen h-screen bg-black bg-opacity-70 flex items-center justify-center top-0 left-0'
             style={{
               zIndex: 9999,
-            }}
-          >
+            }}>
             <NewResumeLoader />
           </div>
         )}
         {/* Basics Information  */}
-        <div className="lg:px-10 px-5">
-          <div >
-            <Label className="text-sm text-blue-900 font-bold">
+        <div className='lg:px-10 px-5'>
+          <div>
+            <Label className='text-sm text-blue-900 font-bold'>
               Resume Title
             </Label>
             <Input value={title} onChange={handleResumeTitleChange} />
           </div>
           {ImageTemplates.includes(data.metadata.template) && (
-            <div className="w-full mt-5">
+            <div className='w-full mt-5'>
               <ImageUpload />
             </div>
           )}
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
-            <div className="space-y-2 my-2">
-              <Label htmlFor="name">Name</Label>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2'>
+            <div className='space-y-2 my-2'>
+              <Label htmlFor='name'>Name</Label>
               <Input
-                id="name"
-                placeholder="Enter your name"
-                name="name"
+                id='name'
+                placeholder='Enter your name'
+                name='name'
                 onChange={(e) => setResumeData("basics.name", e.target.value)}
                 value={data?.basics?.name}
               />
             </div>
-            <div className="space-y-2 my-2">
-              <Label htmlFor="jobtitle">Job Title</Label>
+            <div className='space-y-2 my-2'>
+              <Label htmlFor='jobtitle'>Job Title</Label>
               <Input
-                id="jobtitle"
-                placeholder="Enter Job Title"
-                name="jobtitle"
-                type="text"
+                id='jobtitle'
+                placeholder='Enter Job Title'
+                name='jobtitle'
+                type='text'
                 onChange={(e) =>
                   setResumeData("basics.jobtitle", e.target.value)
                 }
@@ -1032,48 +1030,48 @@ export default function ResumeForm() {
               />
             </div>
           </div>
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
-            <div className="space-y-2 my-2">
-              <Label htmlFor="email">Email</Label>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2'>
+            <div className='space-y-2 my-2'>
+              <Label htmlFor='email'>Email</Label>
               <Input
-                id="email"
-                placeholder="Enter your email address"
-                type="email"
-                name="email"
+                id='email'
+                placeholder='Enter your email address'
+                type='email'
+                name='email'
                 onChange={(e) => setResumeData("basics.email", e.target.value)}
                 value={data?.basics?.email}
               />
             </div>
-            <div className="space-y-2 my-2">
-              <Label htmlFor="phone">Phone</Label>
+            <div className='space-y-2 my-2'>
+              <Label htmlFor='phone'>Phone</Label>
               <Input
-                id="phone"
-                placeholder="Enter phone number"
-                name="phone"
+                id='phone'
+                placeholder='Enter phone number'
+                name='phone'
                 value={data?.basics?.phone}
                 onChange={(e) => setResumeData("basics.phone", e.target.value)}
               />
             </div>
           </div>
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
-            <div className="space-y-2">
-              <Label htmlFor="country">Country</Label>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2'>
+            <div className='space-y-2'>
+              <Label htmlFor='country'>Country</Label>
               <Input
-                id="country"
-                placeholder="Enter Country Name"
+                id='country'
+                placeholder='Enter Country Name'
                 value={data?.basics?.country}
-                name="country"
+                name='country'
                 onChange={(e) =>
                   setResumeData("basics.country", e.target.value)
                 }
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="city">City</Label>
+            <div className='space-y-2'>
+              <Label htmlFor='city'>City</Label>
               <Input
-                id="city"
-                placeholder="Enter City Name"
-                name="city"
+                id='city'
+                placeholder='Enter City Name'
+                name='city'
                 onChange={(e) => setResumeData("basics.city", e.target.value)}
                 value={data?.basics?.city}
               />
@@ -1082,19 +1080,18 @@ export default function ResumeForm() {
         </div>
 
         {/* profile section */}
-        <div className="py-5 my-5 lg:px-10 px-5">
-          <div className="space-y-2">
-            <div className=" flex justify-between items-center py-3">
-              <div className="group">
+        <div className='py-5 my-5 lg:px-10 px-5'>
+          <div className='space-y-2'>
+            <div className=' flex justify-between items-center py-3'>
+              <div className='group'>
                 <Label
-                  htmlFor="Profile"
-                  className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2"
-                >
+                  htmlFor='Profile'
+                  className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {data?.sections?.summary?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={data?.sections?.summary?.name}
                   onChange={(e) =>
                     setResumeData("sections.summary.name", e.target.value)
@@ -1103,15 +1100,13 @@ export default function ResumeForm() {
               </div>
               <Dialog
                 open={isDialogOpen}
-                onClose={() => setIsDialogOpen(false)}
-              >
+                onClose={() => setIsDialogOpen(false)}>
                 <DialogTrigger asChild>
                   <button
-                    className="generate-ai flex items-center"
-                    onClick={handleOpenAIDialog}
-                  >
+                    className='generate-ai flex items-center'
+                    onClick={handleOpenAIDialog}>
                     Generate with AI
-                    <BsStars className=" text-yellow-500 ml-2" />
+                    <BsStars className=' text-yellow-500 ml-2' />
                   </button>
                 </DialogTrigger>
                 <MultiStepForm
@@ -1126,7 +1121,7 @@ export default function ResumeForm() {
               </Dialog>
             </div>
             <div>
-              <p className=" text-gray-400 text-sm">
+              <p className=' text-gray-400 text-sm'>
                 A short summary of your professional experiences, skills,
                 education, and achievements to interest the readers in your CV
                 will appear at the beginning of your CV. You can write the
@@ -1134,9 +1129,9 @@ export default function ResumeForm() {
                 the summary written by the Genie to create a better impression!
               </p>
             </div>
-            <div className="no-scrollbar">
+            <div className='no-scrollbar'>
               <Editor
-                className="no-scrollbar"
+                className='no-scrollbar'
                 style={{
                   height: "200px",
                   position: "relative",
@@ -1149,33 +1144,33 @@ export default function ResumeForm() {
         </div>
 
         {/* education section */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between py-3">
-              <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='space-y-2 lg:px-10 px-5'>
+            <div className='flex justify-between py-3'>
+              <div className='group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.education?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={data?.sections?.education?.name}
                   onChange={(e) =>
                     setResumeData("sections.education.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.education?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.education.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.education.visible", false)
                     }
@@ -1184,35 +1179,33 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 Input the details of your educational experiences, learnings,
                 institutions joined, and much more that you feel are relevant to
                 your job profile.
               </p>
             </div>
           </div>
-          <div className="my-5 h-auto ">
+          <div className='my-5 h-auto '>
             {sections?.education?.items.length > 0 &&
               sections?.education?.items.map((item, index) => {
                 return (
                   <div
                     key={index}
-                    className="flex items-start justify-center group my-5 relative"
-                  >
+                    className='flex items-start justify-center group my-5 relative'>
                     <GoGrabber
-                      className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                     />
                     <Accordion
-                      type="single"
+                      type='single'
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                      className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
                       defaultValue={`item-${index}`}
-                      defaultChecked
-                    >
+                      defaultChecked>
                       <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
-                          <div className="px-3 flex flex-col items-start">
+                        <AccordionTrigger className='group-hover:text-blue-900'>
+                          <div className='px-3 flex flex-col items-start'>
                             {item?.degree || item?.institute ? (
                               <p>
                                 <span>{item?.degree}</span>
@@ -1224,73 +1217,73 @@ export default function ResumeForm() {
                             ) : (
                               <p>(Not Specified)</p>
                             )}
-                            <p className="text-gray-500 text-sm mt-1">
+                            <p className='text-gray-500 text-sm mt-1'>
                               {item?.startDate && `${item.startDate} - `}
                               {item?.endDate}
                             </p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className="w-full pt-5 pb-10">
-                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
-                              <div className="space-y-2">
-                                <Label htmlFor="institute">Institute</Label>
+                          <div className='w-full pt-5 pb-10'>
+                            <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5'>
+                              <div className='space-y-2'>
+                                <Label htmlFor='institute'>Institute</Label>
                                 <Input
-                                  id="institute"
-                                  placeholder="Institute Name"
+                                  id='institute'
+                                  placeholder='Institute Name'
                                   value={item.institute}
                                   onChange={(e) =>
                                     handleEducationChange(e, index)
                                   }
-                                  name="institute"
+                                  name='institute'
                                 />
                               </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="degree">Degree</Label>
+                              <div className='space-y-2'>
+                                <Label htmlFor='degree'>Degree</Label>
                                 <Input
-                                  id="degree"
-                                  placeholder="Degree Name"
-                                  type="text"
+                                  id='degree'
+                                  placeholder='Degree Name'
+                                  type='text'
                                   value={item.degree}
-                                  name="degree"
+                                  name='degree'
                                   onChange={(e) =>
                                     handleEducationChange(e, index)
                                   }
                                 />
                               </div>
                             </div>
-                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5 ">
-                              <div className="flex flex-col md:flex-row">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 pr-2">
-                                  <Label htmlFor="start_date" className="block">
+                            <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5 '>
+                              <div className='flex flex-col md:flex-row'>
+                                <div className='flex flex-col w-full md:w-1/2 space-y-2 pr-2'>
+                                  <Label htmlFor='start_date' className='block'>
                                     Start Date
                                   </Label>
-                                  <div className="w-full">
+                                  <div className='w-full'>
                                     <DatePicker
-                                      picker="month"
+                                      picker='month'
                                       onChange={(e) =>
                                         handleEducationStartDateChange(e, index)
                                       }
                                       maxDate={dayjs()}
-                                      name="startDate"
-                                      className="w-full h-10"
+                                      name='startDate'
+                                      className='w-full h-10'
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2   lg:pl-2 pl-0 lg:py-0 py-5">
-                                  <Label for="end_date" className="block">
+                                <div className='flex flex-col w-full md:w-1/2 space-y-2   lg:pl-2 pl-0 lg:py-0 py-5'>
+                                  <Label for='end_date' className='block'>
                                     End Date
                                   </Label>
-                                  <div className="w-full">
+                                  <div className='w-full'>
                                     {item.endDate === "present" ? (
-                                      <div className=" h-10 rounded-md flex items-center pl-2">
-                                        <p className="text-xl text-gray-500">
+                                      <div className=' h-10 rounded-md flex items-center pl-2'>
+                                        <p className='text-xl text-gray-500'>
                                           Present
                                         </p>
                                       </div>
                                     ) : (
                                       <DatePicker
-                                        picker="month"
+                                        picker='month'
                                         onChange={(e) =>
                                           handleEducationEndDateChange(e, index)
                                         }
@@ -1298,44 +1291,44 @@ export default function ResumeForm() {
                                         disabledDate={(e) =>
                                           disabledEducationEndDate(e, item)
                                         }
-                                        name="endDate"
+                                        name='endDate'
                                         maxDate={dayjs()}
-                                        className="w-full h-10"
+                                        className='w-full h-10'
                                       />
                                     )}
                                   </div>
-                                  <div className="flex items-center ">
+                                  <div className='flex items-center '>
                                     <Checkbox
-                                      className="mr-2 font-thin"
+                                      className='mr-2 font-thin'
                                       checked={item.endDate === "present"}
                                       onCheckedChange={(e) =>
                                         handleEducationCheckChange(e, index)
                                       }
                                     />
-                                    <p className=" font-mono italic text-gray-500">
+                                    <p className=' font-mono italic text-gray-500'>
                                       Present
                                     </p>
                                   </div>
                                 </div>
                               </div>
 
-                              <div className="space-y-2 flex flex-col">
-                                <Label htmlFor="city">City</Label>
+                              <div className='space-y-2 flex flex-col'>
+                                <Label htmlFor='city'>City</Label>
                                 <Input
-                                  placeholder="Enter city name"
-                                  type="text"
+                                  placeholder='Enter city name'
+                                  type='text'
                                   value={item.city}
-                                  name="city"
+                                  name='city'
                                   onChange={(e) =>
                                     handleEducationChange(e, index)
                                   }
                                 />
                               </div>
                             </div>
-                            <div className="space-y-2 my-5 px-2">
-                              <Label htmlFor="city">Description</Label>
+                            <div className='space-y-2 my-5 px-2'>
+                              <Label htmlFor='city'>Description</Label>
                               <Editor
-                                placeholder="eg. Graduated from the University "
+                                placeholder='eg. Graduated from the University '
                                 value={item.description}
                                 onTextChange={(e) =>
                                   handleEducationDescriptionChange(
@@ -1350,53 +1343,52 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                       onClick={() => handleDeleteEducationSection(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="lg:px-10 px-4">
+          <div className='lg:px-10 px-4'>
             <Button
-              className="w-full bg-transparent text-blue-900 p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
-              onClick={handleAddNewEducation}
-            >
-              <IoIosAddCircleOutline className="text-xl mr-2" />
+              className='w-full bg-transparent text-blue-900 p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center'
+              onClick={handleAddNewEducation}>
+              <IoIosAddCircleOutline className='text-xl mr-2' />
               Add one more {`${data?.sections?.education?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
 
         {/* experience section */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between py-3">
-              <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='space-y-2 lg:px-10 px-5'>
+            <div className='flex justify-between py-3'>
+              <div className='group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.experience?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={data?.sections?.experience?.name}
                   onChange={(e) =>
                     setResumeData("sections.experience.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.experience?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.experience.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.experience.visible", false)
                     }
@@ -1405,7 +1397,7 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 Enter your experiences and professional endeavours and add
                 specific details to add to the value of your profile by
                 reflecting the necessary knowledge base.
@@ -1413,113 +1405,112 @@ export default function ResumeForm() {
             </div>
           </div>
 
-          <div className=" my-5 h-auto">
+          <div className=' my-5 h-auto'>
             {sections?.experience?.items.length > 0 &&
               sections?.experience?.items.map((item, index) => {
                 return (
                   <div
                     key={index}
-                    className="flex items-start justify-between group my-5 "
-                  >
+                    className='flex items-start justify-between group my-5 '>
                     <GoGrabber
-                      className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                     />
                     <Accordion
-                      type="single"
+                      type='single'
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
-                      defaultValue={`item-${index}`}
-                    >
+                      className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
+                      defaultValue={`item-${index}`}>
                       <AccordionItem value={`item-${index}`}>
                         <AccordionTrigger>
-                          <div className=" px-3 flex flex-col items-start">
+                          <div className=' px-3 flex flex-col items-start'>
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${item?.employer && ` at `
+                                  `${item?.jobtitle}${
+                                    item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
                             ) : (
                               <p>(Not Specified)</p>
                             )}
-                            <p className="text-gray-500 text-sm">
+                            <p className='text-gray-500 text-sm'>
                               {item?.startDate && `${item.startDate} - `}
                               {item?.endDate}
                             </p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className="w-full pt-5 pb-10">
-                            <div className="grid lg:grid-cols-2 grid-cols-1  gap-4 px-2 py-5">
-                              <div className="space-y-2">
-                                <Label htmlFor="institute">Job Title</Label>
+                          <div className='w-full pt-5 pb-10'>
+                            <div className='grid lg:grid-cols-2 grid-cols-1  gap-4 px-2 py-5'>
+                              <div className='space-y-2'>
+                                <Label htmlFor='institute'>Job Title</Label>
                                 <Input
-                                  id="institute"
-                                  placeholder="Enter Job title"
+                                  id='institute'
+                                  placeholder='Enter Job title'
                                   value={item.jobtitle}
-                                  name="jobtitle"
+                                  name='jobtitle'
                                   onChange={(e) =>
                                     handleExperienceChange(e, index)
                                   }
                                 />
                               </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="degree">Employer</Label>
+                              <div className='space-y-2'>
+                                <Label htmlFor='degree'>Employer</Label>
                                 <Input
-                                  id="degree"
-                                  placeholder="Employer name"
-                                  type="text"
+                                  id='degree'
+                                  placeholder='Employer name'
+                                  type='text'
                                   value={item.employer}
-                                  name="employer"
+                                  name='employer'
                                   onChange={(e) =>
                                     handleExperienceChange(e, index)
                                   }
                                 />
                               </div>
                             </div>
-                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
-                              <div className="flex flex-col md:flex-row ">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2  pr-2 lg:py-0 py-5">
-                                  <Label for="start_date" className="block">
+                            <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 px-2'>
+                              <div className='flex flex-col md:flex-row '>
+                                <div className='flex flex-col w-full md:w-1/2 space-y-2  pr-2 lg:py-0 py-5'>
+                                  <Label for='start_date' className='block'>
                                     Start Date
                                   </Label>
-                                  <div className="w-full">
+                                  <div className='w-full'>
                                     <DatePicker
-                                      picker="month"
+                                      picker='month'
                                       onChange={(e) =>
                                         handleExperienceStartDateChange(
                                           e,
                                           index
                                         )
                                       }
-                                      className="w-full h-10"
+                                      className='w-full h-10'
                                       maxDate={dayjs()}
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2   lg:pl-2 pl-0">
-                                  <Label for="end_date" className="block">
+                                <div className='flex flex-col w-full md:w-1/2 space-y-2   lg:pl-2 pl-0'>
+                                  <Label for='end_date' className='block'>
                                     End Date
                                   </Label>
-                                  <div className="w-full">
+                                  <div className='w-full'>
                                     {item.endDate === "present" ? (
-                                      <div className=" h-10 rounded-md flex items-center pl-2">
-                                        <p className="text-xl text-gray-500">
+                                      <div className=' h-10 rounded-md flex items-center pl-2'>
+                                        <p className='text-xl text-gray-500'>
                                           Present
                                         </p>
                                       </div>
                                     ) : (
                                       <DatePicker
-                                        picker="month"
+                                        picker='month'
                                         onChange={(e) =>
                                           handleExperienceEndDateChange(
                                             e,
                                             index
                                           )
                                         }
-                                        className="w-full h-10"
+                                        className='w-full h-10'
                                         maxDate={dayjs()}
                                         disabled={!item.startDate}
                                         disabledDate={(e) =>
@@ -1528,39 +1519,39 @@ export default function ResumeForm() {
                                       />
                                     )}
                                   </div>
-                                  <div className="flex items-center ">
+                                  <div className='flex items-center '>
                                     <Checkbox
-                                      className="mr-2 font-thin"
+                                      className='mr-2 font-thin'
                                       checked={item.endDate === "present"}
                                       onCheckedChange={(e) =>
                                         handleExperienceCheckChange(e, index)
                                       }
                                     />
-                                    <p className=" font-mono italic text-gray-500">
+                                    <p className=' font-mono italic text-gray-500'>
                                       Present
                                     </p>
                                   </div>
                                 </div>
                               </div>
 
-                              <div className="space-y-2 flex flex-col">
-                                <Label htmlFor="city">City</Label>
+                              <div className='space-y-2 flex flex-col'>
+                                <Label htmlFor='city'>City</Label>
                                 <Input
-                                  id="city"
-                                  placeholder="Enter city name"
-                                  type="text"
+                                  id='city'
+                                  placeholder='Enter city name'
+                                  type='text'
                                   value={item.city}
-                                  name="city"
+                                  name='city'
                                   onChange={(e) =>
                                     handleExperienceChange(e, index)
                                   }
                                 />
                               </div>
                             </div>
-                            <div className="space-y-2 mt-5 mb-12 px-2">
+                            <div className='space-y-2 mt-5 mb-12 px-2'>
                               <Label>Description</Label>
                               <Editor
-                                placeholder="e.g.  Created and implemented lesson plans based on child-led interests and curiosities."
+                                placeholder='e.g.  Created and implemented lesson plans based on child-led interests and curiosities.'
                                 value={item.description}
                                 onTextChange={(e) =>
                                   handleExperienceDescriptionChange(
@@ -1570,11 +1561,11 @@ export default function ResumeForm() {
                                 }
                               />
                             </div>
-                            <div className="space-y-2  mt-9 px-2">
+                            <div className='space-y-2  mt-9 px-2'>
                               <Label>Achievements</Label>
                               <Textarea
                                 value={item?.highlights?.join("\n") || []}
-                                className="text-10px h-[150px] no-scrollbar"
+                                className='text-10px h-[150px] no-scrollbar'
                                 onChange={(e) =>
                                   handleExperienceHighlightsChange(index, e)
                                 }
@@ -1585,53 +1576,52 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="mt-3 text-2xl
-               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className='mt-3 text-2xl
+               font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                       onClick={() => handleDeleteExperienceSection(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="lg:px-10 px-4">
+          <div className='lg:px-10 px-4'>
             <Button
-              className="w-full bg-transparent p-2 text-blue-900 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
-              onClick={handleAddNewExperience}
-            >
-              <IoIosAddCircleOutline className="text-xl mr-2" />
+              className='w-full bg-transparent p-2 text-blue-900 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center'
+              onClick={handleAddNewExperience}>
+              <IoIosAddCircleOutline className='text-xl mr-2' />
               Add one more {`${data?.sections?.experience?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
 
         {/* Projects */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between py-3">
-              <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='space-y-2 lg:px-10 px-5'>
+            <div className='flex justify-between py-3'>
+              <div className='group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.projects?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={data?.sections?.projects?.name}
                   onChange={(e) =>
                     setResumeData("sections.projects.name", e.target.value)
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.projects?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.projects.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.projects.visible", false)
                     }
@@ -1640,7 +1630,7 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 If you have pursued any independent or relative projects
                 relevant to your job profile, mention them to create an
                 impression of thorough practical experience.{" "}
@@ -1648,99 +1638,97 @@ export default function ResumeForm() {
             </div>
           </div>
 
-          <div className=" my-5 h-auto">
+          <div className=' my-5 h-auto'>
             {sections?.projects?.items.length > 0 &&
               sections?.projects?.items.map((item, index) => {
                 return (
                   <div
                     key={index}
-                    className="flex items-start justify-between group my-5 "
-                  >
+                    className='flex items-start justify-between group my-5 '>
                     <GoGrabber
-                      className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                     />
                     <Accordion
-                      type="single"
+                      type='single'
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
-                      defaultValue={`item-${index}`}
-                    >
+                      className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
+                      defaultValue={`item-${index}`}>
                       <AccordionItem value={`item-${index}`}>
                         <AccordionTrigger>
-                          <div className=" px-3 flex flex-col items-start">
+                          <div className=' px-3 flex flex-col items-start'>
                             <p>
                               {item?.title
                                 ? `${item?.title}`
                                 : "(Not Specified  )"}
                             </p>
                             <p>{item?.subtitle}</p>
-                            <p className="text-gray-500 text-sm">
+                            <p className='text-gray-500 text-sm'>
                               {item?.startDate && `${item.startDate} - `}
                               {item?.endDate}
                             </p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className="w-full pt-5 pb-10">
-                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5">
-                              <div className="space-y-2">
-                                <Label htmlFor="institute">Title</Label>
+                          <div className='w-full pt-5 pb-10'>
+                            <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 px-2 py-5'>
+                              <div className='space-y-2'>
+                                <Label htmlFor='institute'>Title</Label>
                                 <Input
-                                  id="institute"
-                                  placeholder="Enter Project title"
+                                  id='institute'
+                                  placeholder='Enter Project title'
                                   value={item.title}
-                                  name="title"
+                                  name='title'
                                   onChange={(e) =>
                                     handleProjectChange(e, index)
                                   }
                                 />
                               </div>
-                              <div className="space-y-2">
-                                <Label htmlFor="degree">Subtitle</Label>
+                              <div className='space-y-2'>
+                                <Label htmlFor='degree'>Subtitle</Label>
                                 <Input
-                                  id="degree"
-                                  placeholder="Enter project subtitle"
-                                  type="text"
+                                  id='degree'
+                                  placeholder='Enter project subtitle'
+                                  type='text'
                                   value={item.subtitle}
-                                  name="subtitle"
+                                  name='subtitle'
                                   onChange={(e) =>
                                     handleProjectChange(e, index)
                                   }
                                 />
                               </div>
                             </div>
-                            <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
-                              <div className="flex flex-col md:flex-row ">
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2 pr-2">
-                                  <Label htmlFor="start_date" className="block">
+                            <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 px-2'>
+                              <div className='flex flex-col md:flex-row '>
+                                <div className='flex flex-col w-full md:w-1/2 space-y-2 pr-2'>
+                                  <Label htmlFor='start_date' className='block'>
                                     Start Date
                                   </Label>
-                                  <div className="w-full">
+                                  <div className='w-full'>
                                     <DatePicker
-                                      picker="month"
+                                      picker='month'
                                       onChange={(e) =>
                                         handleProjectStartDateChange(e, index)
                                       }
-                                      className="w-full h-10"
+                                      className='w-full h-10'
                                       maxDate={dayjs()}
                                     />
                                   </div>
                                 </div>
-                                <div className="flex flex-col w-full md:w-1/2 space-y-2  lg:pl-2 pl-0 lg:py-0 py-5">
-                                  <Label for="end_date" className="block">
+                                <div className='flex flex-col w-full md:w-1/2 space-y-2  lg:pl-2 pl-0 lg:py-0 py-5'>
+                                  <Label for='end_date' className='block'>
                                     End Date
                                   </Label>
-                                  <div className="w-full">
+                                  <div className='w-full'>
                                     {item.endDate === "present" ? (
-                                      <div className=" h-10 rounded-md flex items-center pl-2">
-                                        <p className="text-xl text-gray-500">
+                                      <div className=' h-10 rounded-md flex items-center pl-2'>
+                                        <p className='text-xl text-gray-500'>
                                           Present
                                         </p>
                                       </div>
                                     ) : (
                                       <DatePicker
-                                        picker="month"
+                                        picker='month'
                                         onChange={(e) =>
                                           handleProjectEndDateChange(e, index)
                                         }
@@ -1748,30 +1736,30 @@ export default function ResumeForm() {
                                         disabledDate={(e) =>
                                           handleDisableProjectEndDate(e, item)
                                         }
-                                        className="w-full h-10"
+                                        className='w-full h-10'
                                         maxDate={dayjs()}
                                       />
                                     )}
                                   </div>
-                                  <div className="flex items-center ">
+                                  <div className='flex items-center '>
                                     <Checkbox
-                                      className="mr-2 font-thin"
+                                      className='mr-2 font-thin'
                                       checked={item.endDate === "present"}
                                       onCheckedChange={(e) =>
                                         handleProjectCheckChange(e, index)
                                       }
                                     />
-                                    <p className=" font-mono italic text-gray-500">
+                                    <p className=' font-mono italic text-gray-500'>
                                       Present
                                     </p>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="space-y-2 my-5 px-2">
-                              <Label htmlFor="city">Description</Label>
+                            <div className='space-y-2 my-5 px-2'>
+                              <Label htmlFor='city'>Description</Label>
                               <Editor
-                                placeholder="e.g.Created and implemented lesson plans based on child-led interests and curiosities."
+                                placeholder='e.g.Created and implemented lesson plans based on child-led interests and curiosities.'
                                 value={item?.description}
                                 onTextChange={(e) =>
                                   handleProjectDescriptionChange(
@@ -1786,51 +1774,50 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                       onClick={() => handleDeleteProjectSection(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="lg:px-10 px-5">
+          <div className='lg:px-10 px-5'>
             <Button
-              className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
-              onClick={handleAddNewProject}
-            >
-              <IoIosAddCircleOutline className="text-xl mr-2" />
+              className='w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center'
+              onClick={handleAddNewProject}>
+              <IoIosAddCircleOutline className='text-xl mr-2' />
               Add one more {`${data?.sections?.projects?.name}`.toLowerCase()}
             </Button>
           </div>
         </div>
 
         {/* Skills */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between py-3">
-              <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='space-y-2 lg:px-10 px-5'>
+            <div className='flex justify-between py-3'>
+              <div className='group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.skills?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={sections?.skills?.name}
                   onChange={handleSkillsLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.skills?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.skills.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.skills.visible", false)
                     }
@@ -1839,7 +1826,7 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 Choose 5 important skills that show you fit the position. Make
                 sure they match the key skills mentioned in the job listing
                 (especially when applying via an online system).
@@ -1852,28 +1839,26 @@ export default function ResumeForm() {
                 return (
                   <div
                     key={index}
-                    className="flex items-start justify-center group my-5 relative"
-                  >
+                    className='flex items-start justify-center group my-5 relative'>
                     <GoGrabber
-                      className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                     />
                     <Accordion
-                      type="single"
+                      type='single'
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                      className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
                       defaultValue={`item-${index}`}
-                      defaultChecked
-                    >
+                      defaultChecked>
                       <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
-                          <div className=" px-3 flex flex-col items-start ">
+                        <AccordionTrigger className='group-hover:text-blue-900'>
+                          <div className=' px-3 flex flex-col items-start '>
                             <p>{skills.name || "(Not Specified)"}</p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className=" grid-cols-2 gap-2 flex px-2">
-                            <div className=" w-1/2">
+                          <div className=' grid-cols-2 gap-2 flex px-2'>
+                            <div className=' w-1/2'>
                               <Label htmlFor={`skills-${index}`}>Name</Label>
                               <Input
                                 value={skills?.name}
@@ -1882,15 +1867,14 @@ export default function ResumeForm() {
                                 }
                               />
                             </div>
-                            <div className=" w-1/2 flex flex-col items-start justify-center">
+                            <div className=' w-1/2 flex flex-col items-start justify-center'>
                               <Label
                                 htmlFor={`skills-${index}`}
-                                className="mb-1"
-                              >
+                                className='mb-1'>
                                 Level
                               </Label>
                               <SkillsSelect
-                                className="w-full"
+                                className='w-full'
                                 onSelectChange={handleSkillLevelChange}
                                 index={index}
                                 value={skills?.level}
@@ -1901,21 +1885,20 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                       onClick={() => handleDeleteSkills(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="mt-5 lg:px-10 px-4">
+          <div className='mt-5 lg:px-10 px-4'>
             <div>
               <Button
-                className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
-                onClick={handleAddNewSkills}
-              >
-                <IoIosAddCircleOutline className="text-xl mr-2" />
+                className='w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center'
+                onClick={handleAddNewSkills}>
+                <IoIosAddCircleOutline className='text-xl mr-2' />
                 Add Skills
               </Button>
             </div>
@@ -1923,30 +1906,30 @@ export default function ResumeForm() {
         </div>
 
         {/* Hobbies  */}
-        <div className=" lg:px-10 px-5">
-          <div className="my-5 flex justify-between w-full items-center ">
-            <div className="group">
-              <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className=' lg:px-10 px-5'>
+          <div className='my-5 flex justify-between w-full items-center '>
+            <div className='group'>
+              <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                 {sections?.hobbies?.name}
-                <MdEdit className="text-xl" />
+                <MdEdit className='text-xl' />
               </Label>
               <CustomLabelInput
-                className="hidden group-hover:block "
+                className='hidden group-hover:block '
                 value={sections?.hobbies?.name}
                 onChange={handlehobbieslevelChange}
               />
             </div>
-            <div className="flex items-center justify-center text-blue-900 text-lg">
+            <div className='flex items-center justify-center text-blue-900 text-lg'>
               {!sections?.hobbies?.visible ? (
                 <GoEyeClosed
-                  className=" cursor-pointer text-blue-900"
+                  className=' cursor-pointer text-blue-900'
                   onClick={() =>
                     setResumeData("sections.hobbies.visible", true)
                   }
                 />
               ) : (
                 <GoEye
-                  className="cursor-pointer text-blue-900"
+                  className='cursor-pointer text-blue-900'
                   onClick={() =>
                     setResumeData("sections.hobbies.visible", false)
                   }
@@ -1955,41 +1938,38 @@ export default function ResumeForm() {
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray-500 pl-2">
+            <p className='text-sm text-gray-500 pl-2'>
               List your hobbies, interests, and passions.
             </p>
           </div>
-          <div className="my-4">
-            <div className=" flex w-full flex-wrap py-4">
+          <div className='my-4'>
+            <div className=' flex w-full flex-wrap py-4'>
               {sections?.hobbies?.items.length > 0 &&
                 sections.hobbies.items.map((item, index) => {
                   return (
                     <p
                       key={index}
-                      className=" bg-white border  py-2 px-6 items-center justify-center flex rounded-3xl my-2 mr-3"
-                    >
-                      <span className="mr-4">{item}</span>
+                      className=' bg-white border  py-2 px-6 items-center justify-center flex rounded-3xl my-2 mr-3'>
+                      <span className='mr-4'>{item}</span>
                       <span
-                        className=" cursor-pointer"
-                        onClick={() => handleDeleteHobbies(index)}
-                      >
-                        <RxCross2 className="text-red-600" />
+                        className=' cursor-pointer'
+                        onClick={() => handleDeleteHobbies(index)}>
+                        <RxCross2 className='text-red-600' />
                       </span>
                     </p>
                   );
                 })}
             </div>
-            <div className="flex justify-between">
+            <div className='flex justify-between'>
               <Input
                 onChange={handleChangeHobbies}
                 ref={hobbiesRef}
-                className="w-[80%]"
+                className='w-[80%]'
               />
               <Button
-                className="flex justify-center"
-                onClick={handleAddNewHobbies}
-              >
-                <IoIosAddCircleOutline className="mr-2 text-xl" />
+                className='flex justify-center'
+                onClick={handleAddNewHobbies}>
+                <IoIosAddCircleOutline className='mr-2 text-xl' />
                 Add
               </Button>
             </div>
@@ -1997,31 +1977,31 @@ export default function ResumeForm() {
         </div>
 
         {/* Awards */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="lg:px-10 p-5 rounded-md">
-            <div className="my-5 flex justify-between w-full items-center">
-              <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='lg:px-10 p-5 rounded-md'>
+            <div className='my-5 flex justify-between w-full items-center'>
+              <div className='group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.awards?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={sections?.awards?.name}
                   onChange={handleawardslevelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.awards?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.awards.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.awards.visible", false)
                     }
@@ -2030,43 +2010,41 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 Awards like student competitions or industry accolades belong
                 here.
               </p>
             </div>
           </div>
           <div>
-            <div className="w-full">
+            <div className='w-full'>
               {sections?.awards?.items?.length > 0 &&
                 sections?.awards?.items.map((award, index) => {
                   return (
                     <div
                       key={index}
-                      className="flex items-start justify-center group my-5 relative w-full"
-                    >
+                      className='flex items-start justify-center group my-5 relative w-full'>
                       <GoGrabber
-                        className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                        className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                       />
                       <Accordion
-                        type="single"
+                        type='single'
                         collapsible
-                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
                         defaultValue={`item-${index}`}
-                        defaultChecked
-                      >
+                        defaultChecked>
                         <AccordionItem value={`item-${index}`}>
-                          <AccordionTrigger className="group-hover:text-blue-900">
-                            <div className=" px-3 flex flex-col items-start ">
+                          <AccordionTrigger className='group-hover:text-blue-900'>
+                            <div className=' px-3 flex flex-col items-start '>
                               <p>{award.name || "(Not Specified)"}</p>
                               <p>{award.date}</p>
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
-                              <div className="w-full flex items-end justify-between px-4">
-                                <div className="w-[80%]">
+                            <div className='pt-5 pb-10 flex justify-between items-baseline w-full flex-col'>
+                              <div className='w-full flex items-end justify-between px-4'>
+                                <div className='w-[80%]'>
                                   <Label htmlFor={`skills-${index} my-2`}>
                                     Name
                                   </Label>
@@ -2078,27 +2056,26 @@ export default function ResumeForm() {
                                         index
                                       )
                                     }
-                                    className="w-full mt-2"
+                                    className='w-full mt-2'
                                   />
                                 </div>
                                 <Popover>
                                   <PopoverTrigger asChild>
                                     <Button
-                                      variant="outline"
-                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
-                                    >
+                                      variant='outline'
+                                      className='bg-blue-900 hover:bg-blue-700 text-white hover:text-white'>
                                       <FiLink />
                                       Link
                                     </Button>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-80 space-y-4 p-4">
-                                    <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-medium">
+                                  <PopoverContent className='w-80 space-y-4 p-4'>
+                                    <div className='flex items-center justify-between'>
+                                      <h4 className='text-lg font-medium'>
                                         Enter Link
                                       </h4>
                                     </div>
                                     <Input
-                                      placeholder="Enter url"
+                                      placeholder='Enter url'
                                       value={stripProtocol(award?.url)}
                                       onChange={(e) =>
                                         handleAwardurlChange(e, index)
@@ -2107,24 +2084,24 @@ export default function ResumeForm() {
                                   </PopoverContent>
                                 </Popover>
                               </div>
-                              <div className="w-full my-3 px-4 flex items-end justify-between">
-                                <div className="w-[48%]">
+                              <div className='w-full my-3 px-4 flex items-end justify-between'>
+                                <div className='w-[48%]'>
                                   <Label>Issuer</Label>
                                   <Input
-                                    placeholder="Enter Issuer"
+                                    placeholder='Enter Issuer'
                                     value={award?.issuer}
                                     onChange={(e) =>
                                       handleAwardInfoChange(e, index)
                                     }
-                                    name="issuer"
-                                    className="mt-2"
+                                    name='issuer'
+                                    className='mt-2'
                                   />
                                 </div>
-                                <div className="w-[48%]  flex flex-col">
+                                <div className='w-[48%]  flex flex-col'>
                                   <Label>Date</Label>
                                   <DatePicker
-                                    picker="month"
-                                    className="h-10 mt-2"
+                                    picker='month'
+                                    className='h-10 mt-2'
                                     onChange={(e) =>
                                       handleAwardDateChange(e, index)
                                     }
@@ -2132,15 +2109,15 @@ export default function ResumeForm() {
                                   />
                                 </div>
                               </div>
-                              <div className="px-4 py-2 w-full">
+                              <div className='px-4 py-2 w-full'>
                                 <Label>Description</Label>
                                 <Editor
                                   value={award?.description}
                                   onTextChange={(e) =>
                                     handleAwardDescription(e.htmlValue, index)
                                   }
-                                  name="description"
-                                  className="mt-2"
+                                  name='description'
+                                  className='mt-2'
                                 />
                               </div>
                             </div>
@@ -2148,21 +2125,20 @@ export default function ResumeForm() {
                         </AccordionItem>
                       </Accordion>
                       <MdDeleteOutline
-                        className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                         onClick={() => handleDeleteAward(index)}
                       />
                     </div>
                   );
                 })}
             </div>
-            <div className="mt-5 lg:px-10 px-4">
+            <div className='mt-5 lg:px-10 px-4'>
               <div>
                 <Button
-                  className="w-full bg-transparent text-blue-950 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
-                  onClick={handleAddNewAwards}
-                >
-                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  className='w-full bg-transparent text-blue-950 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center'
+                  onClick={handleAddNewAwards}>
+                  <IoIosAddCircleOutline className='text-xl mr-2' />
                   Add new award
                 </Button>
               </div>
@@ -2171,31 +2147,31 @@ export default function ResumeForm() {
         </div>
 
         {/* Reference */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="lg:px-10 p-5 rounded-md">
-            <div className="my-5 flex justify-between w-full items-center">
-              <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='lg:px-10 p-5 rounded-md'>
+            <div className='my-5 flex justify-between w-full items-center'>
+              <div className='group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.reference?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block "
+                  className='hidden group-hover:block '
                   value={sections?.reference?.name}
                   onChange={handlereferencelevelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.reference?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.reference.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.reference.visible", false)
                     }
@@ -2204,43 +2180,41 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 If you have former colleagues or bosses that vouch for you, list
                 them.
               </p>
             </div>
           </div>
           <div>
-            <div className="w-full">
+            <div className='w-full'>
               {sections?.reference?.items?.length > 0 &&
                 sections?.reference?.items.map((reference, index) => {
                   return (
                     <div
                       key={index}
-                      className="flex items-start justify-center group my-5 relative w-full"
-                    >
+                      className='flex items-start justify-center group my-5 relative w-full'>
                       <GoGrabber
-                        className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                        className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                       />
                       <Accordion
-                        type="single"
+                        type='single'
                         collapsible
-                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
                         defaultValue={`item-${index}`}
-                        defaultChecked
-                      >
+                        defaultChecked>
                         <AccordionItem value={`item-${index}`}>
-                          <AccordionTrigger className="group-hover:text-blue-900">
-                            <div className=" px-3 flex flex-col items-start ">
+                          <AccordionTrigger className='group-hover:text-blue-900'>
+                            <div className=' px-3 flex flex-col items-start '>
                               <p>{reference?.name || "(Not Specified)"}</p>
                               <p>{reference?.date}</p>
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
-                              <div className="w-full flex items-end justify-between px-4">
-                                <div className="w-[80%]">
+                            <div className='pt-5 pb-10 flex justify-between items-baseline w-full flex-col'>
+                              <div className='w-full flex items-end justify-between px-4'>
+                                <div className='w-[80%]'>
                                   <Label htmlFor={`skills-${index}`}>
                                     Name
                                   </Label>
@@ -2249,28 +2223,27 @@ export default function ResumeForm() {
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
-                                    name="name"
-                                    className="w-full mt-2"
+                                    name='name'
+                                    className='w-full mt-2'
                                   />
                                 </div>
                                 <Popover>
                                   <PopoverTrigger asChild>
                                     <Button
-                                      variant="outline"
-                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
-                                    >
+                                      variant='outline'
+                                      className='bg-blue-900 hover:bg-blue-700 text-white hover:text-white'>
                                       <FiLink />
                                       Link
                                     </Button>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-80 space-y-4 p-4">
-                                    <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-medium">
+                                  <PopoverContent className='w-80 space-y-4 p-4'>
+                                    <div className='flex items-center justify-between'>
+                                      <h4 className='text-lg font-medium'>
                                         Enter Link
                                       </h4>
                                     </div>
                                     <Input
-                                      placeholder="Enter url"
+                                      placeholder='Enter url'
                                       value={stripProtocol(reference?.url)}
                                       onChange={(e) =>
                                         handleReferenceUrlChange(e, index)
@@ -2279,55 +2252,55 @@ export default function ResumeForm() {
                                   </PopoverContent>
                                 </Popover>
                               </div>
-                              <div className="w-full my-3 px-4 flex items-end justify-between">
-                                <div className="w-[48%]">
+                              <div className='w-full my-3 px-4 flex items-end justify-between'>
+                                <div className='w-[48%]'>
                                   <Label>JobTitle</Label>
                                   <Input
-                                    placeholder="Enter Issuer"
+                                    placeholder='Enter Issuer'
                                     value={reference?.jobTitle}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
-                                    name="jobTitle"
-                                    className="mt-2"
+                                    name='jobTitle'
+                                    className='mt-2'
                                   />
                                 </div>
-                                <div className="w-[48%]  flex flex-col">
+                                <div className='w-[48%]  flex flex-col'>
                                   <Label>Organization</Label>
                                   <Input
-                                    placeholder="Enter Organization"
+                                    placeholder='Enter Organization'
                                     value={reference?.organization}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
-                                    name="organization"
-                                    className="mt-2"
+                                    name='organization'
+                                    className='mt-2'
                                   />
                                 </div>
                               </div>
-                              <div className="w-full my-3 px-4 flex items-end justify-between">
-                                <div className="w-[48%]">
+                              <div className='w-full my-3 px-4 flex items-end justify-between'>
+                                <div className='w-[48%]'>
                                   <Label>Email</Label>
                                   <Input
-                                    placeholder="Enter email"
+                                    placeholder='Enter email'
                                     value={reference?.email}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
-                                    name="email"
-                                    className="mt-2"
+                                    name='email'
+                                    className='mt-2'
                                   />
                                 </div>
-                                <div className="w-[48%]  flex flex-col">
+                                <div className='w-[48%]  flex flex-col'>
                                   <Label>Phone</Label>
                                   <Input
-                                    placeholder="Enter a phone number"
+                                    placeholder='Enter a phone number'
                                     value={reference?.phone}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
-                                    name="phone"
-                                    className="mt-2"
+                                    name='phone'
+                                    className='mt-2'
                                   />
                                 </div>
                               </div>
@@ -2336,21 +2309,20 @@ export default function ResumeForm() {
                         </AccordionItem>
                       </Accordion>
                       <MdDeleteOutline
-                        className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                         onClick={() => handleDeleteReference(index)}
                       />
                     </div>
                   );
                 })}
             </div>
-            <div className="mt-5 lg:px-10 px-4">
+            <div className='mt-5 lg:px-10 px-4'>
               <div>
                 <Button
-                  className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
-                  onClick={handleAddNewreference}
-                >
-                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  className='w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center'
+                  onClick={handleAddNewreference}>
+                  <IoIosAddCircleOutline className='text-xl mr-2' />
                   Add new reference
                 </Button>
               </div>
@@ -2359,31 +2331,31 @@ export default function ResumeForm() {
         </div>
 
         {/* certificates */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="lg:px-10 p-5 rounded-md">
-            <div className="my-5 flex justify-between w-full items-center">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='lg:px-10 p-5 rounded-md'>
+            <div className='my-5 flex justify-between w-full items-center'>
+              <div className=' w-[40%] group'>
+                <Label className='text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2'>
                   {sections?.certificates?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className='hidden group-hover:block'
                   value={sections?.certificates?.name}
                   onChange={handlecertificatesLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-gray-400 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.certificates?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.certificates.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.certificates.visible", false)
                     }
@@ -2392,43 +2364,41 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500'>
                 Add Industry-relevant certifications and accreditations that you
                 have.
               </p>
             </div>
           </div>
           <div>
-            <div className="w-full">
+            <div className='w-full'>
               {sections?.certificates?.items?.length > 0 &&
                 sections?.certificates?.items.map((certificate, index) => {
                   return (
                     <div
                       key={index}
-                      className="flex items-start justify-center group my-5 relative w-full"
-                    >
+                      className='flex items-start justify-center group my-5 relative w-full'>
                       <GoGrabber
-                        className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                        className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                       />
                       <Accordion
-                        type="single"
+                        type='single'
                         collapsible
-                        className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                        className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
                         defaultValue={`item-${index}`}
-                        defaultChecked
-                      >
+                        defaultChecked>
                         <AccordionItem value={`item-${index}`}>
-                          <AccordionTrigger className="group-hover:text-blue-900">
-                            <div className=" px-3 flex flex-col items-start ">
+                          <AccordionTrigger className='group-hover:text-blue-900'>
+                            <div className=' px-3 flex flex-col items-start '>
                               <p>{certificate.name || "(Not Specified)"}</p>
                               <p>{certificate.date}</p>
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
-                              <div className="w-full flex items-end justify-between px-4">
-                                <div className="w-[80%]">
+                            <div className='pt-5 pb-10 flex justify-between items-baseline w-full flex-col'>
+                              <div className='w-full flex items-end justify-between px-4'>
+                                <div className='w-[80%]'>
                                   <Label htmlFor={`skills-${index}`}>
                                     Name
                                   </Label>
@@ -2437,28 +2407,27 @@ export default function ResumeForm() {
                                     onChange={(e) =>
                                       handlecertificateInfoChange(e, index)
                                     }
-                                    name="name"
-                                    className="w-full mt-2"
+                                    name='name'
+                                    className='w-full mt-2'
                                   />
                                 </div>
                                 <Popover>
                                   <PopoverTrigger asChild>
                                     <Button
-                                      variant="outline"
-                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
-                                    >
+                                      variant='outline'
+                                      className='bg-blue-900 hover:bg-blue-700 text-white hover:text-white'>
                                       <FiLink />
                                       Link
                                     </Button>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-80 space-y-4 p-4">
-                                    <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-medium">
+                                  <PopoverContent className='w-80 space-y-4 p-4'>
+                                    <div className='flex items-center justify-between'>
+                                      <h4 className='text-lg font-medium'>
                                         Enter Link
                                       </h4>
                                     </div>
                                     <Input
-                                      placeholder="Enter url"
+                                      placeholder='Enter url'
                                       value={stripProtocol(certificate.url)}
                                       onChange={(e) =>
                                         handlecertificateurlChange(e, index)
@@ -2467,7 +2436,7 @@ export default function ResumeForm() {
                                   </PopoverContent>
                                 </Popover>
                               </div>
-                              <div className="px-4 py-6 w-full">
+                              <div className='px-4 py-6 w-full'>
                                 <Editor
                                   value={certificate?.description}
                                   onTextChange={(e) =>
@@ -2483,21 +2452,20 @@ export default function ResumeForm() {
                         </AccordionItem>
                       </Accordion>
                       <MdDeleteOutline
-                        className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                        className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                         onClick={() => handleDeletecertificate(index)}
                       />
                     </div>
                   );
                 })}
             </div>
-            <div className="mt-5 lg:px-10 px-4">
+            <div className='mt-5 lg:px-10 px-4'>
               <div>
                 <Button
-                  className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
-                  onClick={handleAddNewcertificate}
-                >
-                  <IoIosAddCircleOutline className="text-xl mr-2" />
+                  className='w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center'
+                  onClick={handleAddNewcertificate}>
+                  <IoIosAddCircleOutline className='text-xl mr-2' />
                   Add new certificate
                 </Button>
               </div>
@@ -2506,31 +2474,31 @@ export default function ResumeForm() {
         </div>
 
         {/* languages */}
-        <div className="py-5 mt-0 mb-10">
-          <div className="space-y-2 lg:px-10 px-5">
-            <div className="flex justify-between">
-              <div className=" w-[40%] group">
-                <Label className="text-2xl flex group-hover:hidden text-blue-900 font-bold items-center gap-2">
+        <div className='py-5 mt-0 mb-10'>
+          <div className='space-y-2 lg:px-10 px-5'>
+            <div className='flex justify-between'>
+              <div className=' w-[40%] group'>
+                <Label className='text-2xl flex group-hover:hidden text-blue-900 font-bold items-center gap-2'>
                   {sections?.language?.name}
-                  <MdEdit className="text-xl" />
+                  <MdEdit className='text-xl' />
                 </Label>
                 <CustomLabelInput
-                  className="hidden group-hover:block"
+                  className='hidden group-hover:block'
                   value={sections?.language?.name}
                   onChange={handlelanguageLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className='flex items-center justify-center text-blue-900 text-lg'>
                 {!sections?.language?.visible ? (
                   <GoEyeClosed
-                    className=" cursor-pointer"
+                    className=' cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.language.visible", true)
                     }
                   />
                 ) : (
                   <GoEye
-                    className="cursor-pointer"
+                    className='cursor-pointer'
                     onClick={() =>
                       setResumeData("sections.language.visible", false)
                     }
@@ -2539,7 +2507,7 @@ export default function ResumeForm() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Select languages</p>
+              <p className='text-sm text-gray-500'>Select languages</p>
             </div>
           </div>
           <div>
@@ -2548,28 +2516,26 @@ export default function ResumeForm() {
                 return (
                   <div
                     key={index}
-                    className="flex items-start justify-center group my-5 relative"
-                  >
+                    className='flex items-start justify-center group my-5 relative'>
                     <GoGrabber
-                      className="mt-3 text-3xl
-                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out"
+                      className='mt-3 text-3xl
+                      font-extrabold text-gray-800 cursor-grab invisible group-hover:visible transition delay-150 duration-100 ease-in-out'
                     />
                     <Accordion
-                      type="single"
+                      type='single'
                       collapsible
-                      className="w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white"
+                      className='w-[90%] group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border border-gray-200 p-2 bg-white'
                       defaultValue={`item-${index}`}
-                      defaultChecked
-                    >
+                      defaultChecked>
                       <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
-                          <div className=" px-3 flex flex-col items-start ">
+                        <AccordionTrigger className='group-hover:text-blue-900'>
+                          <div className=' px-3 flex flex-col items-start '>
                             <p>{language.name || "(Not Specified)"}</p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className=" grid-cols-2 gap-2 flex px-2">
-                            <div className=" w-1/2">
+                          <div className=' grid-cols-2 gap-2 flex px-2'>
+                            <div className=' w-1/2'>
                               <Label htmlFor={`language-${index}`}>Name</Label>
                               <Input
                                 value={language?.name}
@@ -2579,18 +2545,17 @@ export default function ResumeForm() {
                                     index
                                   )
                                 }
-                                className="mt-2"
+                                className='mt-2'
                               />
                             </div>
-                            <div className=" w-1/2 flex flex-col items-start justify-center">
+                            <div className=' w-1/2 flex flex-col items-start justify-center'>
                               <Label
                                 htmlFor={`skills-${index}`}
-                                className="mb-1"
-                              >
+                                className='mb-1'>
                                 Level
                               </Label>
                               <LanguageSelect
-                                className="w-full mt-2"
+                                className='w-full mt-2'
                                 onSelectChange={handlelanguageLevelChange}
                                 index={index}
                                 value={language?.level}
@@ -2601,21 +2566,20 @@ export default function ResumeForm() {
                       </AccordionItem>
                     </Accordion>
                     <MdDeleteOutline
-                      className="mt-3 text-2xl
-                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out"
+                      className='mt-3 text-2xl
+                      font-extrabold  cursor-pointer invisible group-hover:visible text-red-600 transition delay-150 duration-300 ease-in-out'
                       onClick={() => handleDeletelanguage(index)}
                     />
                   </div>
                 );
               })}
           </div>
-          <div className="mt-5 lg:px-10 px-4">
+          <div className='mt-5 lg:px-10 px-4'>
             <div>
               <Button
-                className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
-                onClick={handleAddNewLanguage}
-              >
-                <IoIosAddCircleOutline className="text-xl mr-2" />
+                className='w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center'
+                onClick={handleAddNewLanguage}>
+                <IoIosAddCircleOutline className='text-xl mr-2' />
                 Add new language
               </Button>
             </div>
@@ -2623,14 +2587,14 @@ export default function ResumeForm() {
         </div>
 
         {/* theme */}
-        <div className="lg:px-10 px-5 rounded-md ">
-          <div className="my-5 flex justify-between w-full items-center">
-            <Label className="text-2xl text-blue-900 font-bold">Theme</Label>
-            <div className="flex rounded-md items-center space-x-4 my-2">
+        <div className='lg:px-10 px-5 rounded-md '>
+          <div className='my-5 flex justify-between w-full items-center'>
+            <Label className='text-2xl text-blue-900 font-bold'>Theme</Label>
+            <div className='flex rounded-md items-center space-x-4 my-2'>
               <Popover>
                 <PopoverTrigger asChild>
                   <div
-                    className="rounded-full cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1"
+                    className='rounded-full cursor-pointer ring-primary ring-offset-2 ring-offset-background transition-shadow hover:ring-1'
                     style={{
                       width: "30px",
                       height: "30px",
@@ -2638,7 +2602,7 @@ export default function ResumeForm() {
                     }}
                   />
                 </PopoverTrigger>
-                <PopoverContent className="rounded-lg border-none bg-transparent p-0">
+                <PopoverContent className='rounded-lg border-none bg-transparent p-0'>
                   <HexColorPicker
                     color={data.metadata.theme.primary}
                     onChange={handleTemplateThemeChange}
@@ -2646,9 +2610,9 @@ export default function ResumeForm() {
                 </PopoverContent>
               </Popover>
               <Input
-                id="theme.primary"
+                id='theme.primary'
                 value={data.metadata.theme.primary}
-                className="pl-2 w-36 rounded-md"
+                className='pl-2 w-36 rounded-md'
                 onChange={(event) => {
                   setResumeData("metadata.theme.primary", event.target.value);
                 }}
@@ -2657,13 +2621,12 @@ export default function ResumeForm() {
           </div>
 
           <Accordion
-            type="single"
+            type='single'
             collapsible
-            className="w-full group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border-none bg-white"
-          >
-            <AccordionItem value="color">
-              <AccordionTrigger className="group-hover:text-blue-900">
-                <div className="grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9 w-full">
+            className='w-full group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border-none bg-white'>
+            <AccordionItem value='color'>
+              <AccordionTrigger className='group-hover:text-blue-900'>
+                <div className='grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9 w-full'>
                   {AccordianColor.map((color, index) => (
                     <div
                       key={color}
@@ -2680,7 +2643,7 @@ export default function ResumeForm() {
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                <div className="mb-2 grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9  pr-4 py-2">
+                <div className='mb-2 grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9  pr-4 py-2'>
                   {colors.map((color, index) => (
                     <div
                       key={color}

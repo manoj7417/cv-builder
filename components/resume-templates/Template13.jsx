@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import { FaLinkedin, FaLocationDot, FaPhone } from "react-icons/fa6";
 import Image from "next/image";
@@ -16,49 +18,45 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume.data.sections?.education
   );
   return (
-    <div className="education_section w-full">
+    <div className='education_section w-full'>
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div
-            className="education_header flex items-center gap-3"
+            className='education_header flex items-center gap-3'
             style={{
               color: colorBackground,
-            }}
-          >
+            }}>
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}
-            >
+              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}>
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800 px-5">
+          <div className='text-gray-800 px-5'>
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="education1 my-5" key={index}>
-                    <div className="education_names my-1">
-                      <div className="education_degree">
+                  <div className='education1 my-5' key={index}>
+                    <div className='education_names my-1'>
+                      <div className='education_degree'>
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className="font-medium"
-                        >
+                          className='font-medium'>
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year">
+                      <div className='education_year'>
                         <p
-                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                        >
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                           {item?.startDate &&
                             `${item?.startDate}${item?.endDate && " - "}`}
                           {item?.endDate}
                         </p>
                         {item?.city && (
-                          <p className="text-13px flex font-normal items-center mt-1">
-                            <IoLocationOutline className="mr-1" />
+                          <p className='text-13px flex font-normal items-center mt-1'>
+                            <IoLocationOutline className='mr-1' />
                             {item?.city}
                           </p>
                         )}
@@ -66,8 +64,9 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-normal`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
+                      dangerouslySetInnerHTML={{
+                        __html: item?.description,
+                      }}></div>
                   </div>
                 </>
               );
@@ -85,50 +84,45 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
   );
 
   return (
-    <div className="experience_section w-full mt-5">
+    <div className='experience_section w-full mt-5'>
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div
-            className="experience_header flex items-center gap-3"
+            className='experience_header flex items-center gap-3'
             style={{
               color: colorBackground,
-            }}
-          >
+            }}>
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}
-            >
+              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}>
               {data?.name}
             </h2>
           </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1 w-full px-5 py-2" key={index}>
-                <div className="post my-2">
-                  <div className="post_title">
+              <div className='experience_1 w-full px-5 py-2' key={index}>
+                <div className='post my-2'>
+                  <div className='post_title'>
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
-                      className="font-bold"
-                    >
+                      className='font-bold'>
                       {item?.jobtitle}
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-medium"
-                    >
+                      className='font-medium'>
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold">
+                  <div className='year font-bold'>
                     <p
-                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                    >
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                       <span>{item?.startDate}</span>
                       <span>{item?.startDate && item?.endDate && " - "}</span>
                       <span>{item?.endDate}</span>
                     </p>
                     {item?.city && (
-                      <p className="text-13px flex font-normal items-center my-1">
-                        <IoLocationOutline className="mr-1" />
+                      <p className='text-13px flex font-normal items-center my-1'>
+                        <IoLocationOutline className='mr-1' />
                         {item?.city}
                       </p>
                     )}
@@ -136,14 +130,13 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                 </div>
                 <div
                   className={`${fontStyle.paraFont} break-normal`}
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                ></div>
-                <div className="px-3 py-2">
+                  dangerouslySetInnerHTML={{ __html: item?.description }}></div>
+                <div className='px-3 py-2'>
                   {item?.highlights?.length > 0 && (
-                    <ul className="list-disc pl-2">
+                    <ul className='list-disc pl-2'>
                       {item?.highlights?.map((item, key) => {
                         return (
-                          <li key={key} className="py-2 break-normal text-15px">
+                          <li key={key} className='py-2 break-normal text-15px'>
                             {item}
                           </li>
                         );
@@ -163,43 +156,38 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
 const Projects = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
-    <div className="project_section my-4">
+    <div className='project_section my-4'>
       {data?.visible && data?.items.length > 0 && (
         <>
           <div
-            className="project_heading w-full flex gap-3 items-center"
+            className='project_heading w-full flex gap-3 items-center'
             style={{
               color: colorBackground,
-            }}
-          >
+            }}>
             <h2
-              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}
-            >
+              className={`font-semibold uppercase ${fontStyle.headingFont} px-5`}>
               {data?.name}
             </h2>
           </div>
           {data?.items.map((item, index) => {
             return (
-              <div className="projects1 w-full my-3 px-5" key={index}>
-                <div className="post my-2">
-                  <div className="post_title">
+              <div className='projects1 w-full my-3 px-5' key={index}>
+                <div className='post my-2'>
+                  <div className='post_title'>
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
-                      className="font-bold"
-                    >
+                      className='font-bold'>
                       {item?.title}
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-medium"
-                    >
+                      className='font-medium'>
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className='year'>
                     <p
-                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                    >
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                       {item?.startDate &&
                         `${item.startDate}${item.endDate && " - "}`}
                       {item?.endDate}
@@ -208,8 +196,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                 </div>
                 <div
                   className={`key_points ${fontStyle.paraFont} break-normal`}
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                ></div>
+                  dangerouslySetInnerHTML={{ __html: item?.description }}></div>
               </div>
             );
           })}
@@ -233,36 +220,33 @@ const Skills = ({ fontStyle, colorBackground, colorText }) => {
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-3">
+        <div className='skills_section py-3'>
           <h2
             className={`my-2 uppercase text-2xl font-bold px-5 ${fontStyle.headingFont}`}
             style={{
               color: colorBackground,
               paddingBottom: "1rem", // Space for the underline
-            }}
-          >
+            }}>
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full">
+          <div className='text-gray-600 my-1 w-full flex justify-end items-center'>
+            <ul className='w-full'>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`flex items-center gap-2 ${fontStyle.skillsFont} my-1 py-1 px-5`}
-                    key={i}
-                  >
-                    <div className="text-start w-1/2 mb-1">
+                    key={i}>
+                    <div className='text-start w-1/2 mb-1'>
                       <span>{item?.name}</span>
                     </div>
-                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
+                    <div className='w-1/2 text-end bg-gray-200 h-2.5'>
                       <div
-                        className="h-2.5"
+                        className='h-2.5'
                         style={{
                           width: `${level}%`,
                           backgroundColor: colorBackground,
-                        }}
-                      ></div>
+                        }}></div>
                     </div>
                   </li>
                 );
@@ -284,42 +268,39 @@ const Languages = ({ fontStyle, colorBackground, colorText }) => {
     conversational: 40,
     proficient: 60,
     fluent: 80,
-    native: 100
+    native: 100,
   };
 
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-3">
+        <div className='skills_section py-3'>
           <h2
             className={`my-2 uppercase text-2xl font-bold px-5 ${fontStyle.headingFont}`}
             style={{
               color: colorBackground,
               paddingBottom: "1rem", // Space for the underline
-            }}
-          >
+            }}>
             {data?.name}
           </h2>
-          <div className="text-gray-600 my-1 w-full flex justify-end items-center">
-            <ul className="w-full">
+          <div className='text-gray-600 my-1 w-full flex justify-end items-center'>
+            <ul className='w-full'>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`flex items-center sfont-bold ${fontStyle.skillsFont} my-1 py-1 px-5`}
-                    key={i}
-                  >
-                    <div className="text-start w-1/2 mb-1">
+                    key={i}>
+                    <div className='text-start w-1/2 mb-1'>
                       <span>{item?.name}</span>
                     </div>
-                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
+                    <div className='w-1/2 text-end bg-gray-200 h-2.5'>
                       <div
-                        className="h-2.5"
+                        className='h-2.5'
                         style={{
                           width: `${level}%`,
                           backgroundColor: colorBackground,
-                        }}
-                      ></div>
+                        }}></div>
                     </div>
                   </li>
                 );
@@ -337,25 +318,24 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
-    <div className="my-5 px-5">
+    <div className='my-5 px-5'>
       {data?.visible && data?.items.length > 0 && (
         <h2
           className={`uppercase text-2xl font-bold ${fontStyle.headingFont}`}
           style={{
             color: colorBackground,
-          }}
-        >
+          }}>
           {data?.name}
         </h2>
       )}
 
-      <div className="hobbies_section mt-5">
+      <div className='hobbies_section mt-5'>
         {data?.visible && data?.items.length > 0 && (
           <div>
-            <ul className="pl-5 list-disc">
+            <ul className='pl-5 list-disc'>
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2">
+                  <li key={index} className='text-15px py-2'>
                     {item}
                   </li>
                 );
@@ -371,37 +351,35 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
 const Awards = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
-    <div className="awards_section w-full px-5">
+    <div className='awards_section w-full px-5'>
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div
-            className="awards_header w-full"
+            className='awards_header w-full'
             style={{
               color: colorBackground,
-            }}
-          >
+            }}>
             <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800">
+          <div className='text-gray-800'>
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="awards my-5" key={index}>
-                    <div className="awards_names flex w-full justify-between my-1">
-                      <div className="awards_degree w-full">
+                  <div className='awards my-5' key={index}>
+                    <div className='awards_names flex w-full justify-between my-1'>
+                      <div className='awards_degree w-full'>
                         {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
-                            target="_blank"
-                            className="break-normal text-16px items-center font-bold inline-flex"
-                          >
+                            target='_blank'
+                            className='break-normal text-16px items-center font-bold inline-flex'>
                             {item?.name}
-                            <AiOutlineLink className="ml-1" />
+                            <AiOutlineLink className='ml-1' />
                           </a>
                         ) : (
-                          <p className="break-normal text-15px font-bold">
+                          <p className='break-normal text-15px font-bold'>
                             {item.name}
                           </p>
                         )}
@@ -409,18 +387,18 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
                           {item?.issuer}
                         </h4>
                       </div>
-                      <div className="awards_year text-end w-full">
+                      <div className='awards_year text-end w-full'>
                         <p
-                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                        >
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                           {item?.date}
                         </p>
                       </div>
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-normal`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
+                      dangerouslySetInnerHTML={{
+                        __html: item?.description,
+                      }}></div>
                   </div>
                 </>
               );
@@ -439,12 +417,11 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
     <div>
       {data?.visible && (
         <div
-          className="profile_section w-full"
+          className='profile_section w-full'
           style={{
             color: colorText,
-          }}
-        >
-          <div className="profile_heading w-full h-full flex gap-3 items-center justify-start mt-10">
+          }}>
+          <div className='profile_heading w-full h-full flex gap-3 items-center justify-start mt-10'>
             {/* <h2
               className={`font-semibold uppercase ${fontStyle.headingFont} px-5 py-2`}
             >
@@ -453,8 +430,7 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
           </div>
           <div
             className={`px-5 ${fontStyle.subHeadingFont} break-normal`}
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
-          ></div>
+            dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
       )}
     </div>
@@ -466,48 +442,51 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
-    <div className="certificate_section w-full px-5">
-      <div
-        style={{
-          color: colorBackground,
-        }}
-      >
-        <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
-          {data?.name}
-        </h2>
-      </div>
-      <div className="hobbies_section mt-5">
-        {data?.visible && data?.items.length > 0 && (
-          <div>
-            <ul className="">
-              {data?.items?.map((item, index) => {
-                return (
-                  <div className="certificate_section px-2" key={index}>
-                    {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-normal text-base items-center font-bold inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-normal text-base font-bold">
-                        {item.name}
-                      </p>
-                    )}
-                    <div
-                      className={`py-2 ${fontStyle.paraFont} break-normal`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
-                  </div>
-                );
-              })}
-            </ul>
+    <div className='certificate_section w-full px-5'>
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div
+            style={{
+              color: colorBackground,
+            }}>
+            <h2 className={`${fontStyle.headingFont} font-bold uppercase`}>
+              {data?.name}
+            </h2>
           </div>
-        )}
-      </div>
+          <div className='hobbies_section mt-5'>
+            {data?.visible && data?.items.length > 0 && (
+              <div>
+                <ul className=''>
+                  {data?.items?.map((item, index) => {
+                    return (
+                      <div className='certificate_section px-2' key={index}>
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target='_blank'
+                            className='break-normal text-base items-center font-bold inline-flex'>
+                            {item?.name}
+                            <AiOutlineLink className='ml-1' />
+                          </a>
+                        ) : (
+                          <p className='break-normal text-base font-bold'>
+                            {item.name}
+                          </p>
+                        )}
+                        <div
+                          className={`py-2 ${fontStyle.paraFont} break-normal`}
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description,
+                          }}></div>
+                      </div>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -517,54 +496,51 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume.data.sections?.reference
   );
   return (
-    <div className="references_section w-full">
+    <div className='references_section w-full'>
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div
-            className="references_header"
+            className='references_header'
             style={{
               color: colorBackground,
-            }}
-          >
+            }}>
             <h2
               className={`my-2 uppercase text-2xl font-bold px-5 ${fontStyle.headingFont}`}
               style={{
                 paddingBottom: "1rem", // Space for the underline
-              }}
-            >
+              }}>
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800">
+          <div className='text-gray-800'>
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="references my-5 px-5" key={index}>
-                    <div className="references_names w-full my-1">
-                      <div className="references w-full">
+                  <div className='references my-5 px-5' key={index}>
+                    <div className='references_names w-full my-1'>
+                      <div className='references w-full'>
                         {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
-                            target="_blank"
-                            className="break-normal text-16px items-center font-bold text-gray-600 inline-flex"
-                          >
+                            target='_blank'
+                            className='break-normal text-16px items-center font-bold text-gray-600 inline-flex'>
                             {item?.name}
-                            <AiOutlineLink className="ml-1" />
+                            <AiOutlineLink className='ml-1' />
                           </a>
                         ) : (
-                          <p className="break-normal text-15px font-bold text-gray-600">
+                          <p className='break-normal text-15px font-bold text-gray-600'>
                             {item.name}
                           </p>
                         )}
                         <h3 className={`${fontStyle.subHeadingFont}`}>
                           <span>{item.jobTitle}</span>
-                          <span className="mx-1">
+                          <span className='mx-1'>
                             {item.jobTitle && item.organization && ","}
                           </span>
                           <span>{item?.organization}</span>
                         </h3>
                       </div>
-                      <div className="references w-full">
+                      <div className='references w-full'>
                         <h4 style={{ fontSize: fontStyle.paraFont }}>
                           {item?.email}
                         </h4>
@@ -603,55 +579,53 @@ const Template13 = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen">
-        <div className="bg-white">
+      <div className='w-full min-h-screen'>
+        <div className='bg-white'>
           <div
-            className="top_section p-10"
+            className='top_section p-10'
             style={{
               backgroundColor: metadata?.theme?.primary,
-            }}
-          >
-            <div className="profile_details flex w-full h-auto justify-between items-center">
-              <div className="profile_section w-1/2 mt-10">
+            }}>
+            <div className='profile_details flex w-full h-auto justify-between items-center'>
+              <div className='profile_section w-1/2 mt-10'>
                 <Profile
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="user_profile text-center">
+              <div className='user_profile text-center'>
                 <div
-                  className="user_name py-10"
+                  className='user_name py-10'
                   style={{
                     color: metadata?.theme?.text,
-                  }}
-                >
-                  <h1 className="text-3xl uppercase font-medium tracking-widest">
+                  }}>
+                  <h1 className='text-3xl uppercase font-medium tracking-widest'>
                     {basics?.name}
                   </h1>
-                  <h4 className="text-base tracking-widest mt-2">
+                  <h4 className='text-base tracking-widest mt-2'>
                     {basics?.jobtitle}
                   </h4>
                 </div>
-                <div className="user_image -mb-[100px] w-[250px] h-[300px] mx-auto">
+                <div className='user_image -mb-[100px] w-[250px] h-[300px] mx-auto'>
                   {basics?.picture?.url && (
                     <img
                       src={basics.picture.url}
                       width={250}
                       height={250}
-                      alt="pic"
-                      className="w-full h-full object-cover"
+                      alt='pic'
+                      className='w-full h-full object-cover'
                     />
                   )}
                 </div>
               </div>
             </div>
           </div>
-          <div className="bottom_section flex gap-10">
-            <div className="resume_details_1 w-[60%]">
+          <div className='bottom_section flex gap-10'>
+            <div className='resume_details_1 w-[60%]'>
               {/* work experiences */}
               <section>
-                <div className="experience px-5">
+                <div className='experience px-5'>
                   <Experience
                     fontStyle={fontStyle}
                     colorBackground={metadata?.theme?.primary}
@@ -661,7 +635,7 @@ const Template13 = () => {
               </section>
               {/* projects  */}
               <section>
-                <div className="projects px-5">
+                <div className='projects px-5'>
                   <Projects
                     fontStyle={fontStyle}
                     colorBackground={metadata?.theme?.primary}
@@ -671,7 +645,7 @@ const Template13 = () => {
               </section>
               {/* awards  */}
               <section>
-                <div className="projects px-5">
+                <div className='projects px-5'>
                   <Awards
                     fontStyle={fontStyle}
                     colorBackground={metadata?.theme?.primary}
@@ -681,7 +655,7 @@ const Template13 = () => {
               </section>
               {/* certificate  */}
               <section>
-                <div className="projects px-5">
+                <div className='projects px-5'>
                   <Certificates
                     fontStyle={fontStyle}
                     colorBackground={metadata?.theme?.primary}
@@ -690,10 +664,10 @@ const Template13 = () => {
                 </div>
               </section>
             </div>
-            <div className="resume_details_2 w-[40%]">
+            <div className='resume_details_2 w-[40%]'>
               {/* education */}
               <section>
-                <div className="education px-5 mt-20">
+                <div className='education px-5 mt-20'>
                   <Education
                     fontStyle={fontStyle}
                     colorBackground={metadata?.theme?.primary}
@@ -702,7 +676,7 @@ const Template13 = () => {
                 </div>
               </section>
               {/* skill  */}
-              <div className="skills px-5 w-full">
+              <div className='skills px-5 w-full'>
                 <Skills
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -710,7 +684,7 @@ const Template13 = () => {
                 />
               </div>
               {/* hobbies  */}
-              <div className="skills px-5 w-full">
+              <div className='skills px-5 w-full'>
                 <Hobbies
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -718,7 +692,7 @@ const Template13 = () => {
                 />
               </div>
               {/* language  */}
-              <div className="skills px-5 w-full">
+              <div className='skills px-5 w-full'>
                 <Languages
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -726,7 +700,7 @@ const Template13 = () => {
                 />
               </div>
               {/* references  */}
-              <div className="skills px-5 w-full">
+              <div className='skills px-5 w-full'>
                 <References
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -735,26 +709,26 @@ const Template13 = () => {
               </div>
             </div>
           </div>
-          <div className="footer_section mt-4">
+          <div className='footer_section mt-4'>
             {/* contact details  */}
-            <div className="contact_details p-2">
-              <ul className="flex w-full justify-center gap-5 mt-2 px-2 ">
-                <li className="flex items-center gap-3">
+            <div className='contact_details p-2'>
+              <ul className='flex w-full justify-center gap-5 mt-2 px-2 '>
+                <li className='flex items-center gap-3'>
                   <FaPhone />
                   {basics?.phone && <p>{basics?.phone}</p>}
                 </li>
-                <li className="flex items-center gap-3">
+                <li className='flex items-center gap-3'>
                   {(basics?.city || basics?.country) && (
-                    <p className="flex items-center break-normal">
-                      <IoLocationOutline className="mr-2" />
+                    <p className='flex items-center break-normal'>
+                      <IoLocationOutline className='mr-2' />
                       {basics?.city}
                       {basics?.city && basics?.country && " , "}
                       {basics?.country}
                     </p>
                   )}
                 </li>
-                <li className="flex items-center gap-3">
-                <MdOutlineEmail />
+                <li className='flex items-center gap-3'>
+                  <MdOutlineEmail />
                   {basics?.email && <p> {basics?.email}</p>}
                 </li>
               </ul>

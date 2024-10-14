@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import { FaLinkedin, FaLocationDot, FaPhone } from "react-icons/fa6";
 import Image from "next/image";
@@ -17,44 +19,41 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume.data.sections?.education
   );
   return (
-    <div className="education_section w-full">
+    <div className='education_section w-full'>
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="education_header" style={{ color: colorBackground }}>
+          <div className='education_header' style={{ color: colorBackground }}>
             <h2
-              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-            >
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}>
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800">
+          <div className='text-gray-800'>
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="education1 my-5" key={index}>
-                    <div className="education_names flex justify-between my-1">
-                      <div className="education_degree">
+                  <div className='education1 my-5' key={index}>
+                    <div className='education_names flex justify-between my-1'>
+                      <div className='education_degree'>
                         <h3 className={`${fontStyle.subHeadingFont} font-bold`}>
                           {item?.degree}
                         </h3>
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className="font-medium"
-                        >
+                          className='font-medium'>
                           {item?.institute}
                         </h4>
                       </div>
-                      <div className="education_year text-end">
+                      <div className='education_year text-end'>
                         <p
-                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                        >
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                           {item?.startDate &&
                             `${item?.startDate}${item?.endDate && " - "}`}
                           {item?.endDate}
                         </p>
                         {item?.city && (
-                          <p className="text-13px flex font-normal items-center justify-end mt-1">
-                            <IoLocationOutline className="mr-1" />
+                          <p className='text-13px flex font-normal items-center justify-end mt-1'>
+                            <IoLocationOutline className='mr-1' />
                             {item?.city}
                           </p>
                         )}
@@ -62,8 +61,9 @@ const Education = ({ fontStyle, colorBackground, colorText }) => {
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-normal`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
+                      dangerouslySetInnerHTML={{
+                        __html: item?.description,
+                      }}></div>
                   </div>
                 </>
               );
@@ -81,48 +81,43 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
   );
 
   return (
-    <div className="experience_section w-full mt-2">
+    <div className='experience_section w-full mt-2'>
       {data?.visible && data?.items?.length > 0 && (
         <>
           <div
-            className="experience_header w-full"
-            style={{ color: colorBackground }}
-          >
+            className='experience_header w-full'
+            style={{ color: colorBackground }}>
             <h2
-              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-            >
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}>
               {data?.name}
             </h2>
           </div>
           {data?.items?.map((item, index) => {
             return (
-              <div className="experience_1 w-full py-2" key={index}>
-                <div className="post flex  justify-between my-2">
-                  <div className="post_title">
+              <div className='experience_1 w-full py-2' key={index}>
+                <div className='post flex  justify-between my-2'>
+                  <div className='post_title'>
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
-                      className="font-bold"
-                    >
+                      className='font-bold'>
                       {item?.jobtitle}
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-medium"
-                    >
+                      className='font-medium'>
                       {item?.employer}
                     </h4>
                   </div>
-                  <div className="year font-bold text-end">
+                  <div className='year font-bold text-end'>
                     <p
-                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                    >
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                       <span>{item?.startDate}</span>
                       <span>{item?.startDate && item?.endDate && " - "}</span>
                       <span>{item?.endDate}</span>
                     </p>
                     {item?.city && (
-                      <p className="text-13px flex font-normal items-center justify-end text-end my-1">
-                        <IoLocationOutline className="mr-1" />
+                      <p className='text-13px flex font-normal items-center justify-end text-end my-1'>
+                        <IoLocationOutline className='mr-1' />
                         {item?.city}
                       </p>
                     )}
@@ -130,14 +125,13 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
                 </div>
                 <div
                   className={`${fontStyle.paraFont} break-normal`}
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                ></div>
-                <div className="px-3 py-2">
+                  dangerouslySetInnerHTML={{ __html: item?.description }}></div>
+                <div className='px-3 py-2'>
                   {item?.highlights?.length > 0 && (
-                    <ul className="list-disc pl-2">
+                    <ul className='list-disc pl-2'>
                       {item?.highlights?.map((item, key) => {
                         return (
-                          <li key={key} className="py-2 break-normal text-15px">
+                          <li key={key} className='py-2 break-normal text-15px'>
                             {item}
                           </li>
                         );
@@ -157,34 +151,32 @@ const Experience = ({ fontStyle, colorBackground, colorText }) => {
 const Awards = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.awards);
   return (
-    <div className="education_section w-full">
+    <div className='education_section w-full'>
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="education_header" style={{ color: colorBackground }}>
+          <div className='education_header' style={{ color: colorBackground }}>
             <h2
-              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-            >
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}>
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800">
+          <div className='text-gray-800'>
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="education1 my-5" key={index}>
-                    <div className="education_names flex w-full justify-between my-1">
-                      <div className="education_degree w-full">
+                  <div className='education1 my-5' key={index}>
+                    <div className='education_names flex w-full justify-between my-1'>
+                      <div className='education_degree w-full'>
                         {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
-                            target="_blank"
-                            className="break-normal text-16px items-center font-bold inline-flex"
-                          >
+                            target='_blank'
+                            className='break-normal text-16px items-center font-bold inline-flex'>
                             {item?.name}
-                            <AiOutlineLink className="ml-1" />
+                            <AiOutlineLink className='ml-1' />
                           </a>
                         ) : (
-                          <p className="break-normal text-15px font-bold">
+                          <p className='break-normal text-15px font-bold'>
                             {item.name}
                           </p>
                         )}
@@ -192,18 +184,18 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
                           {item?.issuer}
                         </h4>
                       </div>
-                      <div className="education_year text-end w-full">
+                      <div className='education_year text-end w-full'>
                         <p
-                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                        >
+                          className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                           {item?.date}
                         </p>
                       </div>
                     </div>
                     <div
                       className={`py-2 ${fontStyle.paraFont} break-normal`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
+                      dangerouslySetInnerHTML={{
+                        __html: item?.description,
+                      }}></div>
                   </div>
                 </>
               );
@@ -218,39 +210,35 @@ const Awards = ({ fontStyle, colorBackground, colorText }) => {
 const Projects = ({ fontStyle, colorBackground, colorText }) => {
   const data = useResumeStore((state) => state?.resume.data.sections?.projects);
   return (
-    <div className="project_section my-2">
+    <div className='project_section my-2'>
       {data?.visible && data?.items.length > 0 && (
         <>
-          <div className="project_heading w-full">
+          <div className='project_heading w-full'>
             <h2
               className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-              style={{ color: colorBackground }}
-            >
+              style={{ color: colorBackground }}>
               {data?.name}
             </h2>
           </div>
           {data?.items.map((item, index) => {
             return (
-              <div className="projects1 w-full my-3" key={index}>
-                <div className="post flex justify-between items-center my-2">
-                  <div className="post_title">
+              <div className='projects1 w-full my-3' key={index}>
+                <div className='post flex justify-between items-center my-2'>
+                  <div className='post_title'>
                     <h3
                       style={{ fontSize: fontStyle.subHeadingFont }}
-                      className="font-bold"
-                    >
+                      className='font-bold'>
                       {item?.title}
                     </h3>
                     <h4
                       style={{ fontSize: fontStyle.paraFont }}
-                      className="font-medium"
-                    >
+                      className='font-medium'>
                       {item?.subtitle}
                     </h4>
                   </div>
-                  <div className="year">
+                  <div className='year'>
                     <p
-                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}
-                    >
+                      className={`${fontStyle?.dates} ${fontStyle.datesStyle}`}>
                       {item?.startDate &&
                         `${item.startDate}${item.endDate && " - "}`}
                       {item?.endDate}
@@ -259,8 +247,7 @@ const Projects = ({ fontStyle, colorBackground, colorText }) => {
                 </div>
                 <div
                   className={`key_points ${fontStyle.paraFont} break-normal`}
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                ></div>
+                  dangerouslySetInnerHTML={{ __html: item?.description }}></div>
               </div>
             );
           })}
@@ -289,36 +276,33 @@ const Skills = ({
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
+        <div className='skills_section py-4'>
           <h2
             className={`-ml-10 text-3xl font-semibold border-t-2 border-b-2 border-r-2 p-2 mb-4 pl-8 font-serif ${fontStyle.headingFont}`}
             style={{
               color: colorText,
               borderColor: colorText,
-            }}
-          >
+            }}>
             {data?.name}
           </h2>
-          <div className="w-full flex justify-end items-center">
-            <ul className="w-full" style={{ color: colorText }}>
+          <div className='w-full flex justify-end items-center'>
+            <ul className='w-full' style={{ color: colorText }}>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`flex items-center gap-2 font-medium ${fontStyle.skillsFont} my-1 py-4 `}
-                    key={i}
-                  >
-                    <div className="text-start w-1/2 mb-1">
+                    key={i}>
+                    <div className='text-start w-1/2 mb-1'>
                       <span>{item?.name}</span>
                     </div>
-                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
+                    <div className='w-1/2 text-end bg-gray-200 h-2.5'>
                       <div
-                        className="bg-black h-2.5"
+                        className='bg-black h-2.5'
                         style={{
                           width: `${level}%`,
                           backgroundColor: secondaryBackground,
-                        }}
-                      ></div>
+                        }}></div>
                     </div>
                   </li>
                 );
@@ -336,26 +320,25 @@ const Hobbies = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume?.data?.sections?.hobbies
   );
   return (
-    <div className="px-5 py-10">
+    <div className='px-5 py-10'>
       {data?.visible && data?.items.length > 0 && (
         <h2
           className={`-ml-10 text-3xl font-semibold border-t-2 border-b-2 border-r-2 p-2 mb-4 pl-8 font-serif ${fontStyle.headingFont}`}
           style={{
             color: colorText,
             borderColor: colorText,
-          }}
-        >
+          }}>
           {data?.name}
         </h2>
       )}
 
-      <div className="hobbies_section">
+      <div className='hobbies_section'>
         {data?.visible && data?.items.length > 0 && (
           <div>
             <ul style={{ color: colorText }}>
               {data?.items?.map((item, index) => {
                 return (
-                  <li key={index} className="text-15px py-2 font-semibold">
+                  <li key={index} className='text-15px py-2 font-semibold'>
                     {item}
                   </li>
                 );
@@ -373,49 +356,51 @@ const Certificates = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume?.data?.sections?.certificates
   );
   return (
-    <div className="my-2">
-      <div
-        className="certificate_title my-2"
-        style={{ color: colorBackground }}
-      >
-        <h2
-          className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-        >
-          {data?.name}
-        </h2>
-      </div>
-      <div className="hobbies_section">
-        {data?.visible && data?.items.length > 0 && (
-          <div>
-            <ul>
-              {data?.items?.map((item, index) => {
-                return (
-                  <div className="certificate_section py-2" key={index}>
-                    {isValidUrl(item?.url) ? (
-                      <a
-                        href={item?.url}
-                        target="_blank"
-                        className="break-normal text-base items-center font-bold inline-flex"
-                      >
-                        {item?.name}
-                        <AiOutlineLink className="ml-1" />
-                      </a>
-                    ) : (
-                      <p className="break-normal text-base font-bold">
-                        {item.name}
-                      </p>
-                    )}
-                    <div
-                      className={`py-2 ${fontStyle.paraFont} break-normal`}
-                      dangerouslySetInnerHTML={{ __html: item?.description }}
-                    ></div>
-                  </div>
-                );
-              })}
-            </ul>
+    <div className='my-2'>
+      {data?.visible && data?.items?.length > 0 && (
+        <>
+          <div
+            className='certificate_title my-2'
+            style={{ color: colorBackground }}>
+            <h2
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}>
+              {data?.name}
+            </h2>
           </div>
-        )}
-      </div>
+          <div className='hobbies_section'>
+            {data?.visible && data?.items.length > 0 && (
+              <div>
+                <ul>
+                  {data?.items?.map((item, index) => {
+                    return (
+                      <div className='certificate_section py-2' key={index}>
+                        {isValidUrl(item?.url) ? (
+                          <a
+                            href={item?.url}
+                            target='_blank'
+                            className='break-normal text-base items-center font-bold inline-flex'>
+                            {item?.name}
+                            <AiOutlineLink className='ml-1' />
+                          </a>
+                        ) : (
+                          <p className='break-normal text-base font-bold'>
+                            {item.name}
+                          </p>
+                        )}
+                        <div
+                          className={`py-2 ${fontStyle.paraFont} break-normal`}
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description,
+                          }}></div>
+                      </div>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -434,42 +419,39 @@ const Languages = ({
     conversational: 40,
     proficient: 60,
     fluent: 80,
-    native: 100
+    native: 100,
   };
 
   return (
     <div>
       {data?.visible && data?.items?.length > 0 && (
-        <div className="skills_section py-4">
+        <div className='skills_section py-4'>
           <h2
             className={`-ml-10 text-3xl font-semibold border-t-2 border-b-2 border-r-2 p-2 mb-4 pl-8 font-serif ${fontStyle.headingFont}`}
             style={{
               color: colorText,
               borderColor: colorText,
-            }}
-          >
+            }}>
             {data?.name}
           </h2>
-          <div className="w-full flex justify-end items-center">
-            <ul className="w-full" style={{ color: colorText }}>
+          <div className='w-full flex justify-end items-center'>
+            <ul className='w-full' style={{ color: colorText }}>
               {data.items.map((item, i) => {
                 const level = levelMapping[item?.level.toLowerCase()] || 25;
                 return (
                   <li
                     className={`flex items-center gap-2 font-medium ${fontStyle.skillsFont} my-1 py-4 `}
-                    key={i}
-                  >
-                    <div className="text-start w-1/2 mb-1">
+                    key={i}>
+                    <div className='text-start w-1/2 mb-1'>
                       <span>{item?.name}</span>
                     </div>
-                    <div className="w-1/2 text-end bg-gray-200 h-2.5">
+                    <div className='w-1/2 text-end bg-gray-200 h-2.5'>
                       <div
-                        className="h-2.5"
+                        className='h-2.5'
                         style={{
                           width: `${level}%`,
                           backgroundColor: secondaryBackground,
-                        }}
-                      ></div>
+                        }}></div>
                     </div>
                   </li>
                 );
@@ -488,21 +470,18 @@ const Profile = ({ fontStyle, colorBackground, colorText }) => {
   return (
     <div>
       {data?.visible && (
-        <div className="profile_section w-full">
+        <div className='profile_section w-full'>
           <div
-            className="profile_heading w-full"
-            style={{ color: colorBackground }}
-          >
+            className='profile_heading w-full'
+            style={{ color: colorBackground }}>
             <h2
-              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-            >
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}>
               {data?.name}
             </h2>
           </div>
           <div
             className={`text-sm py-2 ${fontStyle.subHeadingFont} break-normal`}
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
-          ></div>
+            dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
       )}
     </div>
@@ -514,34 +493,32 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
     (state) => state?.resume.data.sections?.reference
   );
   return (
-    <div className="references_section w-full">
+    <div className='references_section w-full'>
       {data?.visible && data?.items?.length > 0 && (
         <>
-          <div className="references_header" style={{ color: colorBackground }}>
+          <div className='references_header' style={{ color: colorBackground }}>
             <h2
-              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}
-            >
+              className={`font-semibold font-serif ${fontStyle.subMianHeadingFont}`}>
               {data?.name}
             </h2>
           </div>
-          <div className="text-gray-800">
+          <div className='text-gray-800'>
             {data?.items?.map((item, index) => {
               return (
                 <>
-                  <div className="references my-5" key={index}>
-                    <div className="references_names w-full my-1">
-                      <div className="references w-full">
+                  <div className='references my-5' key={index}>
+                    <div className='references_names w-full my-1'>
+                      <div className='references w-full'>
                         {isValidUrl(item?.url) ? (
                           <a
                             href={item?.url}
-                            target="_blank"
-                            className="break-normal text-16px items-center font-bold text-gray-600 inline-flex"
-                          >
+                            target='_blank'
+                            className='break-normal text-16px items-center font-bold text-gray-600 inline-flex'>
                             {item?.name}
-                            <AiOutlineLink className="ml-1" />
+                            <AiOutlineLink className='ml-1' />
                           </a>
                         ) : (
-                          <p className="break-normal text-15px font-bold text-gray-600">
+                          <p className='break-normal text-15px font-bold text-gray-600'>
                             {item.name}
                           </p>
                         )}
@@ -549,17 +526,15 @@ const References = ({ fontStyle, colorBackground, colorText }) => {
                           {item.jobTitle} ,{item?.organization}
                         </h3>
                       </div>
-                      <div className="references w-full flex justify-between">
+                      <div className='references w-full flex justify-between'>
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className=""
-                        >
+                          className=''>
                           {item?.email}
                         </h4>
                         <h4
                           style={{ fontSize: fontStyle.paraFont }}
-                          className=""
-                        >
+                          className=''>
                           {item?.phone}
                         </h4>
                       </div>
@@ -595,25 +570,24 @@ const Template23 = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-[#ffffff] h-auto w-[793px] mx-auto shadow-lg rounded-lg flex relative">
-          <div className="text-white w-full">
+      <div className='min-h-screen flex items-center justify-center bg-gray-100'>
+        <div className='bg-[#ffffff] h-auto w-[793px] mx-auto shadow-lg rounded-lg flex relative'>
+          <div className='text-white w-full'>
             <div
-              className="w-[250px] h-full mx-6 px-4 py-10 relative z-20"
-              style={{ backgroundColor: metadata?.theme?.primary }}
-            >
-              <div className="flex items-center justify-center mb-8">
+              className='w-[250px] h-full mx-6 px-4 py-10 relative z-20'
+              style={{ backgroundColor: metadata?.theme?.primary }}>
+              <div className='flex items-center justify-center mb-8'>
                 {basics?.picture?.url && (
-                  <div className="profile_pic">
+                  <div className='profile_pic'>
                     <img
                       src={basics?.picture?.url}
-                      alt="pic"
-                      className="w-52 h-48 rounded-full object-cover"
+                      alt='pic'
+                      className='w-52 h-48 rounded-full object-cover'
                     />
                   </div>
                 )}
               </div>
-              <section className="mb-8">
+              <section className='mb-8'>
                 <Skills
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -621,51 +595,47 @@ const Template23 = () => {
                   colorText={metadata?.theme?.text}
                 />
               </section>
-              <section className="mb-8">
+              <section className='mb-8'>
                 <h2
-                  className="-ml-10 text-3xl font-semibold border-t-2 border-b-2 border-r-2 p-2 mb-4 pl-8 font-serif"
+                  className='-ml-10 text-3xl font-semibold border-t-2 border-b-2 border-r-2 p-2 mb-4 pl-8 font-serif'
                   style={{
                     color: metadata?.theme?.text,
                     borderColor: metadata?.theme?.text,
-                  }}
-                >
+                  }}>
                   Contact
                 </h2>
                 <ul
-                  className="flex flex-col gap-5 mt-5 px-2"
-                  style={{ color: metadata?.theme?.text }}
-                >
-                  <li className="flex items-center gap-3">
+                  className='flex flex-col gap-5 mt-5 px-2'
+                  style={{ color: metadata?.theme?.text }}>
+                  <li className='flex items-center gap-3'>
                     {basics?.phone && (
                       <a
                         href={`tel:${basics?.phone}`}
-                        className="hover:underline flex items-center mt-1  text-wrap w-full "
-                      >
-                        <MdOutlinePhone className="mr-2" />
-                        <p className="w-[90%] text-wrap break-normal">
+                        className='hover:underline flex items-center mt-1  text-wrap w-full '>
+                        <MdOutlinePhone className='mr-2' />
+                        <p className='w-[90%] text-wrap break-normal'>
                           {basics?.phone}
                         </p>
                       </a>
                     )}
                   </li>
-                  <li className="flex items-center gap-3">
+                  <li className='flex items-center gap-3'>
                     {(basics?.city || basics?.country) && (
-                      <p className="flex items-center">
-                        <IoLocationOutline className="mr-2" />
+                      <p className='flex items-center'>
+                        <IoLocationOutline className='mr-2' />
                         <span>{basics?.city}</span>
                         <span>{basics?.city && basics?.country && " , "}</span>
-                        <span className="">{basics?.country}</span>
+                        <span className=''>{basics?.country}</span>
                       </p>
                     )}
                   </li>
-                  <li className="flex items-center gap-3">
+                  <li className='flex items-center gap-3'>
                     {basics?.email && (
                       <a
                         href={`mailto:${basics?.email}`}
-                        className="hover:underline flex items-center mt-1  text-wrap w-full "
-                      >
-                        <MdOutlineMailOutline className="mr-2" />
-                        <p className="w-[90%] text-wrap break-normal">
+                        className='hover:underline flex items-center mt-1  text-wrap w-full '>
+                        <MdOutlineMailOutline className='mr-2' />
+                        <p className='w-[90%] text-wrap break-normal'>
                           {basics?.email}
                         </p>
                       </a>
@@ -673,14 +643,14 @@ const Template23 = () => {
                   </li>
                 </ul>
               </section>
-              <section className="mb-8">
+              <section className='mb-8'>
                 <Hobbies
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </section>
-              <section className="mb-8">
+              <section className='mb-8'>
                 <Languages
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -691,20 +661,18 @@ const Template23 = () => {
             </div>
           </div>
           <div
-            className="w-full absolute top-30 transform translate-y-10"
-            style={{ backgroundColor: metadata?.theme?.background }}
-          >
+            className='w-full absolute top-30 transform translate-y-10'
+            style={{ backgroundColor: metadata?.theme?.background }}>
             <div
-              className="text-center py-6 pl-72"
-              style={{ color: metadata?.theme?.primary }}
-            >
-              <h1 className="text-5xl italic font-bold">{basics?.name}</h1>
-              <p className="text-xl pt-2 font-semibold">{basics?.jobtitle}</p>
+              className='text-center py-6 pl-72'
+              style={{ color: metadata?.theme?.primary }}>
+              <h1 className='text-5xl italic font-bold'>{basics?.name}</h1>
+              <p className='text-xl pt-2 font-semibold'>{basics?.jobtitle}</p>
             </div>
           </div>
-          <div className="px-4 py-44 relative z-20">
+          <div className='px-4 py-44 relative z-20'>
             <section>
-              <div className="profile_section pt-10 mb-8">
+              <div className='profile_section pt-10 mb-8'>
                 <Profile
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
@@ -712,43 +680,43 @@ const Template23 = () => {
                 />
               </div>
             </section>
-            <section className="mb-8">
-              <div className="education">
+            <section className='mb-8'>
+              <div className='education'>
                 <Education
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="experience">
+              <div className='experience'>
                 <Experience
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="projects">
+              <div className='projects'>
                 <Projects
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="certificated">
+              <div className='certificated'>
                 <Certificates
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="awards">
+              <div className='awards'>
                 <Awards
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
                   colorText={metadata?.theme?.text}
                 />
               </div>
-              <div className="reference">
+              <div className='reference'>
                 <References
                   fontStyle={fontStyle}
                   colorBackground={metadata?.theme?.primary}
