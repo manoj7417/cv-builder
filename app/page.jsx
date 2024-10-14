@@ -79,20 +79,23 @@ export default function Home() {
             }),
           }}
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-J1X213CSR4"
-        ></script>
+        
+        
+        <script 
+          async 
+          src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
+          ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-J1X213CSR4');
+            gtag('config', 'G-HVD8Y7BEDE');
           `,
           }}
         />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
