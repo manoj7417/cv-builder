@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import React from "react";
-
 import { FaRocket, FaBriefcase, FaLightbulb } from "react-icons/fa";
 
 const menuItems = [
