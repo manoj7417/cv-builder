@@ -108,35 +108,6 @@ export default function AboutUs() {
       <div className="w-full my-20">
         {/* Hero Section */}
         <div className="relative w-full bg-white">
-          {/* <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-            <div className="flex flex-col justify-center items-center px-4 py-12 md:py-16 lg:col-span-7 lg:gap-x-6 lg:px-6 lg:py-24 xl:col-span-6">
-              <h1 className="mt-8 text-3xl font-bold text-center text-[#005599] md:text-4xl lg:text-6xl">
-                We Envisage Your Growth With You!
-              </h1>
-              <p className="mt-8 text-lg text-center text-gray-700">
-                We aim to be the bridge between you and your progressive career.
-                We dream with you and assist you as strive to achieve every step
-                of success.
-              </p>
-              <div className="w-full mt-8 flex justify-center">
-                <Link
-                  href={"/contact-us"}
-                  className="rounded-md bg-[#005599] px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                  Connect with us!
-                </Link>
-              </div>
-              
-            </div>
-
-            <div className="relative lg:col-span-5 lg:-mr-8 xl:col-span-6">
-              <img
-                className="aspect-[3/2] bg-gray-50 object-cover lg:aspect-[4/3]  xl:aspect-[16/9]"
-                src="/cgabout.png"
-                alt=""
-              />
-            </div>
-          </div> */}
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:grid md:grid-cols-12 md:gap-x-8">
               <div className="flex flex-col justify-center items-center px-4 py-12  md:col-span-7 md:gap-x-6 md:px-6 md:py-24 xl:col-span-6">

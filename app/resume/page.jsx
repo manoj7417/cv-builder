@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import Link from "next/link";
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
@@ -456,85 +458,181 @@ export default function DashboardIdea() {
     }
   }, []);
 
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Organization",
+    url: "https://www.geniescareerhub.com/",
+    logo: "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    name: "geniescareerhub.com",
+    description:
+      "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes.",
+  };
+
+  const jsonLd1 = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ATS Resume Checker",
+        item: "https://www.geniescareerhub.com/resume-analyzer",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "ATS CV Checker",
+        item: "https://www.geniescareerhub.com/resume-analyzer",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Resume Formatting",
+        item: "https://www.geniescareerhub.com/resume-analyzer",
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Application Tracking System Resume",
+        item: "https://www.geniescareerhub.com/resume-analyzer",
+      },
+    ],
+  };
+
+  const jsonLd2 = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is unique about Genies Career Hub’s CV Optimiser?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: 'This CV Optimiser thoroughly analyses your resume with AI and provides you suggestions with the <a href="https://www.geniescareerhub.com/resume-analyzer"><strong>ATS Resume Score</strong></a>. This feedback contains the clarity, relevance, and content of your resume with a score and suggestions to improve the ATS of your resume. Following these insights, you can increase your score and get better and more opportunities.',
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How does this CV checker help in increasing the ATS score?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Genies Career Hub features a tool in which your resume will be analysed through an optimisation process. After analysing, it delivers you the feedback with a score in three consecutive steps:
+<ul>
+<li>Clarity</li>
+<li>Relevance</li>
+<li>Content</li>
+</ul>
+Follow the suggestions given below the score to get a higher score and better career prospects."
+    }
+  },{
+    "@type": "Question",
+    "name": "How can I optimise my CV without having an enhanced CV?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<p>Adhere to these six simple steps for smooth functioning:</p>
+<ul>
+<li>Go to the CV Studio page to create an <a href=\"https://geniescareerhub.com/resume-analyzer\"><strong>enhanced CV</strong></a>.</li>
+<li>Fill in the mandatory information. If you desire, AI can generate your profile description and ensure all fields completed.</li>
+<li>Choose a template that suits your style, and customize it with your desired colour.</li>
+<li>Download the CV.</li>
+<li>Go to Optimise CV, upload your CV, and get it analysed.</li>
+</ul>
+<p>Follow the feedback suggestions in case of a low <a href=\"https://www.geniescareerhub.com/resume-analyzer\"><strong>ATS CV Checker</strong></a> and re-assess your <strong>enhanced resume</strong>.</p>`,
+        },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd2) }}
+      />
       <ResumeHeader />
       <main>
-        <section className="w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]">
-          <div className="container w-full h-full resume">
-            <div className="flex flex-col items-center justify-center 2xl:px-24 px-5">
-              <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20 px-2 sm:px-10 text-center sm:text-start">
-                <h1 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-center lg:px-20 xl:px-20 2xl:px-20">
-                  Craft the <span className="text-[#2C98CA]">Perfect CV </span>{" "}
+        <section className='w-full flex flex-col items-center justify-center bg-gradient-to-t from-[#a7d9ee] to-[white]'>
+          <div className='container w-full h-full resume'>
+            <div className='flex flex-col items-center justify-center 2xl:px-24 px-5'>
+              <div className='space-y-2 2xl:mt-40 lg:mt-32 mt-20 px-2 sm:px-10 text-center sm:text-start'>
+                <h1 className='text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-center lg:px-20 xl:px-20 2xl:px-20'>
+                  Craft the <span className='text-[#2C98CA]'>Perfect CV </span>{" "}
                   for Your Dream Job
                 </h1>
-                <p className="text-gray-700 text-sm lg:text-md sm:text-lg text-center lg:px-20 xl:px-20 2xl:px-20">
+                <p className='text-gray-700 text-sm lg:text-md sm:text-lg text-center lg:px-20 xl:px-20 2xl:px-20'>
                   Created by Professionals and Industry Experts from all across
                   the globe and integrating Artificial Intelligence, we bring
                   forward Resume Template options that are custom-tailored to
                   the job you are applying for, to ensure that your CV gets
                   through every Application Tracking Software ATS CV Checker.
                 </p>
-                <div className="flex items-center justify-center space-x-4">
+                <div className='flex items-center justify-center space-x-4'>
                   <Button
                     onClick={() => router.push("/user-history")}
-                    className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
-                  >
+                    className='lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3'>
                     Create CV Now
                   </Button>
                 </div>
               </div>
               <Image
                 priority
-                src="/resume.png"
-                className="w-50 h-50 px-7 mt-10 pt-7 rounded-t-3xl"
-                alt="@shadcn"
+                src='/resume.png'
+                className='w-50 h-50 px-7 mt-10 pt-7 rounded-t-3xl'
+                alt='@shadcn'
                 width={600}
                 height={100}
               />
             </div>
           </div>
-          <div className="pb-10 w-full bg-gradient-to-b from-[#edf4f8] to-[white]">
-            <div className="rounded-t-xl border-t-8 border-blue-900 p-6">
-              <h2 className="2xl:text-6xl lg:text-5xl text-2xl font-bold mt-10 text-black text-center">
+          <div className='pb-10 w-full bg-gradient-to-b from-[#edf4f8] to-[white]'>
+            <div className='rounded-t-xl border-t-8 border-blue-900 p-6'>
+              <h2 className='2xl:text-6xl lg:text-5xl text-2xl font-bold mt-10 text-black text-center'>
                 Choose From Our Detailed Templates Options
               </h2>
-              <Tabs className="w-full py-5" defaultValue="all">
-                <TabsList className="mb-4 flex w-full justify-center flex-wrap py-10 h-auto">
-                  <TabsTrigger value="all">
-                    <FaBorderAll className="text-pink-600 h-8 w-8 me-3" />
+              <Tabs className='w-full py-5' defaultValue='all'>
+                <TabsList className='mb-4 flex w-full justify-center flex-wrap py-10 h-auto'>
+                  <TabsTrigger value='all'>
+                    <FaBorderAll className='text-pink-600 h-8 w-8 me-3' />
                     All templates
                   </TabsTrigger>
-                  <TabsTrigger value="simple">
-                    <PiFolderSimpleUser className="text-blue-700 h-8 w-8 me-3" />
+                  <TabsTrigger value='simple'>
+                    <PiFolderSimpleUser className='text-blue-700 h-8 w-8 me-3' />
                     Student
                   </TabsTrigger>
-                  <TabsTrigger value="ats">
-                    <MdQueryStats className="text-orange-600 h-8 w-8 me-3" />
+                  <TabsTrigger value='ats'>
+                    <MdQueryStats className='text-orange-600 h-8 w-8 me-3' />
                     Professional
                   </TabsTrigger>
-                  <TabsTrigger value="designer">
-                    <IoShirt className="text-green-700 h-8 w-8 me-3" />
+                  <TabsTrigger value='designer'>
+                    <IoShirt className='text-green-700 h-8 w-8 me-3' />
                     Creative
                   </TabsTrigger>
-                  <TabsTrigger value="professional">
-                    <RiShirtFill className="text-red-700 h-8 w-8 me-3" />
+                  <TabsTrigger value='professional'>
+                    <RiShirtFill className='text-red-700 h-8 w-8 me-3' />
                     Graduate
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent className="py-7" value="all">
+                <TabsContent className='py-7' value='all'>
                   <NewSlider data={AllTemplates} />
                 </TabsContent>
-                <TabsContent className="py-7" value="simple">
+                <TabsContent className='py-7' value='simple'>
                   <NewSlider data={SimpleTemplates} />
                 </TabsContent>
-                <TabsContent className="py-7" value="ats">
+                <TabsContent className='py-7' value='ats'>
                   <NewSlider data={ATSTemplates} />
                 </TabsContent>
-                <TabsContent className="py-7" value="designer">
+                <TabsContent className='py-7' value='designer'>
                   <NewSlider data={DesignerTemplates} />
                 </TabsContent>
-                <TabsContent className="py-7" value="professional">
+                <TabsContent className='py-7' value='professional'>
                   <NewSlider data={ProfessionalTemplates} />
                 </TabsContent>
               </Tabs>
@@ -542,57 +640,57 @@ export default function DashboardIdea() {
           </div>
         </section>
         <section>
-          <div className="steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10">
-            <h2 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-justify lg:px-20 xl:px-10 2xl:px-10">
+          <div className='steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10'>
+            <h2 className='text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-justify lg:px-20 xl:px-10 2xl:px-10'>
               CV Templates that fit your desired{" "}
-              <span className="text-[#2C98CA]">Job Role</span>
+              <span className='text-[#2C98CA]'>Job Role</span>
             </h2>
-            <div className="left_icon absolute lg:bottom-32 top-38 lg:left-20 left-10">
-              <img src="/resume-icon.png" alt="icon1" />
+            <div className='left_icon absolute lg:bottom-32 top-38 lg:left-20 left-10'>
+              <img src='/resume-icon.png' alt='icon1' />
             </div>
-            <div className="right_icon absolute bottom-20 right-10 lg:block hidden">
+            <div className='right_icon absolute bottom-20 right-10 lg:block hidden'>
               <img
-                src="/resume-icon3.png"
-                alt="icon2"
-                className="w-full h-32"
+                src='/resume-icon3.png'
+                alt='icon2'
+                className='w-full h-32'
               />
             </div>
-            <p className="text-base text-black text-start lg:px-20 xl:px-20 2xl:px-10 pt-20">
+            <p className='text-base text-black text-start lg:px-20 xl:px-20 2xl:px-10 pt-20'>
               Our custom templates, designed by resume writing professionals and
               job coaches across the globe, cater to every job role. We
               incorporate artificial intelligence in our{" "}
-              <Link href={"/resume"} className="font-bold">
+              <Link href={"/resume"} className='font-bold'>
                 curriculum vitae format
               </Link>{" "}
               building to help you create a CV layout that matches modern
               recruitment standards. Start now with our{" "}
-              <Link className="font-bold" href={"/resume"}>
+              <Link className='font-bold' href={"/resume"}>
                 CV template
               </Link>{" "}
               options that empower your job application with excellence.
             </p>
           </div>
-          <div className="max-w-7xl mx-auto steps_intro lg:py-20 sm:p-5 p-5">
-            <div className="flex lg:flex-row flex-col gap-10 my-10">
-              <div className="lg:w-[30%] w-full h-[350px] image_content">
+          <div className='max-w-7xl mx-auto steps_intro lg:py-20 sm:p-5 p-5'>
+            <div className='flex lg:flex-row flex-col gap-10 my-10'>
+              <div className='lg:w-[30%] w-full h-[350px] image_content'>
                 <img
-                  src="/resume21.png"
-                  alt="icon4"
-                  className="w-full h-full object-cover"
+                  src='/resume21.png'
+                  alt='icon4'
+                  className='w-full h-full object-cover'
                 />
               </div>
-              <div className="lg:w-[70%] w-full steps_content">
-                <h3 className="text-3xl text-black font-bold py-3">
+              <div className='lg:w-[70%] w-full steps_content'>
+                <h3 className='text-3xl text-black font-bold py-3'>
                   Use our CV builder to create an exceptional job application in
                   minutes
                 </h3>
-                <p className="text-base py-3">
+                <p className='text-base py-3'>
                   Utilise the professional{" "}
-                  <Link href={"/resume"} className="font-bold">
+                  <Link href={"/resume"} className='font-bold'>
                     UK CV Template
                   </Link>{" "}
                   to build a job-winning resume with our{" "}
-                  <Link href={"/resume"} className="font-bold">
+                  <Link href={"/resume"} className='font-bold'>
                     CV builder
                   </Link>
                   . Our templates, tailored to your requirements, are built by
@@ -600,20 +698,20 @@ export default function DashboardIdea() {
                   insights and suggestions from professionals with years of
                   experience and expertise.
                 </p>
-                <p className="text-base py-3">
+                <p className='text-base py-3'>
                   Highlight your important skills, experiences, and educational
                   background by utilising our options in{" "}
-                  <Link href={"/resume"} className="font-bold">
+                  <Link href={"/resume"} className='font-bold'>
                     CV Layout UK
                   </Link>
                   . Engineered to suit global job application systems, this{" "}
-                  <Link href={"/resume"} className="font-bold">
+                  <Link href={"/resume"} className='font-bold'>
                     CV Builder
                   </Link>{" "}
                   is tried and tested by experts who have critically judged
                   candidates for a myriad of job applications.
                 </p>
-                <p className="text-base py-3">
+                <p className='text-base py-3'>
                   All you need to do is just feed your information into the
                   Genies Career Hub CV Creator and the artificial
                   intelligence-based systems will automatically design your
@@ -621,124 +719,124 @@ export default function DashboardIdea() {
                 </p>
               </div>
             </div>
-            <div className="step_1">
-              <div className="flex lg:flex-row flex-col gap-10 my-20 relative lg:p-1 p-5">
-                <div className="lg:w-[70%] w-full steps_content">
-                  <h4 className="font-bold text-black text-2xl">
+            <div className='step_1'>
+              <div className='flex lg:flex-row flex-col gap-10 my-20 relative lg:p-1 p-5'>
+                <div className='lg:w-[70%] w-full steps_content'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The First Step
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Select your CV Template 
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     On the Genies Career Hub CV Creator, there are a variety of
                     CV templates that follow the{" "}
-                    <Link href={"/resume"} className="font-bold">
+                    <Link href={"/resume"} className='font-bold'>
                       CV Layout UK
                     </Link>{" "}
                     format. It is all that you need to build a resume that
                     outshines a number of job applications.
                   </p>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     All you need to do is follow simple steps in order to build
                     a curriculum vitae that impresses the recruiters and passes
                     through job application tracking systems. The first and
                     foremost step in this process is to select a{" "}
-                    <Link href={"/resume"} className="font-bold">
+                    <Link href={"/resume"} className='font-bold'>
                       CV template
                     </Link>{" "}
                     that matches with your current job profile and also conforms
                     with the job role you are yearning for. We have handpicked
                     25 remarkable templates for you to choose from.
                   </p>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     While selecting a resume template, you must look out for
                     important sections such as Profile Summary, Experience,
                     Education, Contact Details, Skills, Awards, Certifications,
                     Hobbies and Interests, Photograph, References, and more.
                     Additionally, your{" "}
-                    <Link href={"/resume"} className="font-bold">
+                    <Link href={"/resume"} className='font-bold'>
                       CV template
                     </Link>{" "}
                     must have the flexibility to let you omit certain disfavored
                     sections. The design of the template is what changes the
                     impression game for you.
                   </p>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Your CV formatting must not only look captivating but also
                     be compatible with the ATS software. Therefore, selecting an
                     exemplary is very vital. Choose the best template for your
                     job application with us!
                   </p>
-                  <div className="step_image">
-                    <img src="/Step-21.png" alt="step1" />
+                  <div className='step_image'>
+                    <img src='/Step-21.png' alt='step1' />
                   </div>
-                  <div className="pro_tips">
-                    <div className="pro_image relative">
-                      <img src="/pro-tips.png" alt="pro-tips" />
-                      <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+                  <div className='pro_tips'>
+                    <div className='pro_image relative'>
+                      <img src='/pro-tips.png' alt='pro-tips' />
+                      <p className='text-red-600 font-bold absolute top-3 left-8 text-xl'>
                         Pro Tip !
                       </p>
                     </div>
-                    <p className="text-xl px-5">
+                    <p className='text-xl px-5'>
                       Even after selecting your resume template, you can change
                       it during the creation process, by simply selecting
                       another from the menu.
                     </p>
                   </div>
                 </div>
-                <div className="lg:w-[30%] w-full h-[450px] image_content flex justify-center items-center">
-                  <div className="flex lg:flex-row flex-col justify-center items-center">
+                <div className='lg:w-[30%] w-full h-[450px] image_content flex justify-center items-center'>
+                  <div className='flex lg:flex-row flex-col justify-center items-center'>
                     <img
-                      src="/resume22.png"
-                      alt="icon4"
-                      className="w-full h-full object-cover"
+                      src='/resume22.png'
+                      alt='icon4'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
-                <div className="arrow absolute left-[35%] -bottom-40">
+                <div className='arrow absolute left-[35%] -bottom-40'>
                   <img
-                    src="/arrow1.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:block hidden"
+                    src='/arrow1.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain lg:block hidden'
                   />
                   <img
-                    src="/arrow2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:hidden block"
+                    src='/arrow2.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain lg:hidden block'
                   />
                 </div>
               </div>
             </div>
-            <div className="step_2 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex justify-center items-center">
+            <div className='step_2 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex justify-center items-center'>
                     <img
-                      src="/Step-22.png"
-                      alt="icon4"
-                      className="w-full h-full object-cover"
+                      src='/Step-22.png'
+                      alt='icon4'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
-                <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">
+                <div className='lg:w-[50%] w-full steps_content mt-10'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Second Step
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Adding your Basic Details 
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     With Genies Career Hub’s CV Creator to either create a
                     curriculum vitae from scratch or simply use the AI for a
                     faster approach. You can choose any of the suitable options
                     in any phase of your CV-building process 
                   </p>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Simply fill in your details in the CV Creator, such as name,
                     job title, email, and more. You can write your summary as
                     per your cognizance or easily{" "}
-                    <Link href={"/resume"} className="font-bold">
+                    <Link href={"/resume"} className='font-bold'>
                       Generate with AI
                     </Link>{" "}
                     in seconds, The AI observes your details to create CV
@@ -749,116 +847,116 @@ export default function DashboardIdea() {
                   </p>
                 </div>
               </div>
-              <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+              <div className='pro_tips'>
+                <div className='pro_image relative'>
+                  <img src='/pro-tips.png' alt='pro-tips' />
+                  <p className='text-red-600 font-bold absolute top-3 left-8 text-xl'>
                     Pro Tip !
                   </p>
                 </div>
-                <p className="text-xl px-5">
+                <p className='text-xl px-5'>
                   Not satisfied with the font style of your CV? Change it! We
                   help you customise your resume as you wish. Simply modify the
                   font styling while adding information in the details box. 
                 </p>
               </div>
-              <div className="arrow absolute left-[35%] -bottom-40">
+              <div className='arrow absolute left-[35%] -bottom-40'>
                 <img
-                  src="/arrow2.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain"
+                  src='/arrow2.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain'
                 />
               </div>
             </div>
-            <div className="step_3 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">
+            <div className='step_3 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full steps_content mt-10'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Third Step
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Enter your Educational Background
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Your educational background is an inevitable part of your
                     job application. With Genies Career Hub’s CV Creator, you
                     can easily add your educational details in order of your
                     preference. Be it in chronological order or a reverse
                     chronological one, our{" "}
-                    <Link href={"/resume"} className="font-bold">
+                    <Link href={"/resume"} className='font-bold'>
                       CV Builder
                     </Link>{" "}
                     flexibly helps you choose your preferred format. With the
                     help of our easy-to-track calendars, you can uncomplicate
                     your educational background timelines.
                   </p>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     If you have any special educational specifications that you
                     want your recruiter to see, we have you covered. You can
                     easily add details about your academic experiences and
                     present your CV the way you want!
                   </p>
                 </div>
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex justify-center items-center">
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex justify-center items-center'>
                     <img
-                      src="/Step-23.png"
-                      alt="icon4"
-                      className="w-full h-full object-cover"
+                      src='/Step-23.png'
+                      alt='icon4'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
               </div>
-              <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+              <div className='pro_tips'>
+                <div className='pro_image relative'>
+                  <img src='/pro-tips.png' alt='pro-tips' />
+                  <p className='text-red-600 font-bold absolute top-3 left-8 text-xl'>
                     Pro Tip !
                   </p>
                 </div>
-                <p className="text-xl px-5">
+                <p className='text-xl px-5'>
                   You can add as many academic experiences as you want. All you
                   need to do is tap on the add sign!
                 </p>
               </div>
-              <div className="arrow absolute left-[35%] -bottom-40">
+              <div className='arrow absolute left-[35%] -bottom-40'>
                 <img
-                  src="/arrow1.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain lg:block hidden"
+                  src='/arrow1.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain lg:block hidden'
                 />
                 <img
-                  src="/arrow2.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain lg:hidden block"
+                  src='/arrow2.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain lg:hidden block'
                 />
               </div>
             </div>
-            <div className="step_4 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex justify-center items-center">
+            <div className='step_4 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex justify-center items-center'>
                     <img
-                      src="/Step-24.png"
-                      alt="icon4"
-                      className="w-full h-full object-cover"
+                      src='/Step-24.png'
+                      alt='icon4'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
-                <div className="lg:w-[50%] w-full steps_content mt-16">
-                  <h4 className="font-bold text-black text-2xl">
+                <div className='lg:w-[50%] w-full steps_content mt-16'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Fourth Step
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Your Experience and Achievements Go In
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Your recruiters need to know what skills you have learned
                     and what value you have added to the previous organisations
                     upon collaboration. This is the section where you add that.
                     Our CV Creator is customised in a way that you can add,
                     omit, or simply maximise details into the selected{" "}
-                    <Link href={"/resume"} className="font-bold">
+                    <Link href={"/resume"} className='font-bold'>
                       CV template
                     </Link>{" "}
                     based on your intention. We let you take charge of your
@@ -866,37 +964,37 @@ export default function DashboardIdea() {
                   </p>
                 </div>
               </div>
-              <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+              <div className='pro_tips'>
+                <div className='pro_image relative'>
+                  <img src='/pro-tips.png' alt='pro-tips' />
+                  <p className='text-red-600 font-bold absolute top-3 left-8 text-xl'>
                     Pro Tip !
                   </p>
                 </div>
-                <p className="text-xl px-5">
+                <p className='text-xl px-5'>
                   Want your CV to be of different hues? Go ahead and change the
                   colour of the template by selecting a different colour by
                   doodling around.
                 </p>
               </div>
-              <div className="arrow absolute left-[35%] -bottom-40">
+              <div className='arrow absolute left-[35%] -bottom-40'>
                 <img
-                  src="/arrow2.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain"
+                  src='/arrow2.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain'
                 />
               </div>
             </div>
-            <div className="step_5 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full steps_content mt-16">
-                  <h4 className="font-bold text-black text-2xl">
+            <div className='step_5 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full steps_content mt-16'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Fifth Step
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Flaunt your Skills and Interests
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Your skills are what get you way higher on the pile of
                     applications on the recruiter’s table. Add your skills, and
                     we ensure that they get highlighted. The CV template designs
@@ -907,59 +1005,59 @@ export default function DashboardIdea() {
                     additional insight about your passions beyond work life!
                   </p>
                 </div>
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex justify-center items-center">
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex justify-center items-center'>
                     <img
-                      src="/Step-25.png"
-                      alt="icon5"
-                      className="w-full h-full object-cover"
+                      src='/Step-25.png'
+                      alt='icon5'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
               </div>
-              <div className="arrow absolute left-[35%] -bottom-20">
+              <div className='arrow absolute left-[35%] -bottom-20'>
                 <img
-                  src="/arrow1.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain lg:block hidden"
+                  src='/arrow1.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain lg:block hidden'
                 />
                 <img
-                  src="/arrow2.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain lg:hidden block"
+                  src='/arrow2.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain lg:hidden block'
                 />
               </div>
             </div>
-            <div className="step_6 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex flex-col gap-10 justify-start items-center mt-10">
+            <div className='step_6 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex flex-col gap-10 justify-start items-center mt-10'>
                     <img
-                      src="/Step-26-1.png"
-                      alt="icon5"
-                      className="w-full h-full object-cover"
+                      src='/Step-26-1.png'
+                      alt='icon5'
+                      className='w-full h-full object-cover'
                     />
                     <img
-                      src="/Step-26-2.png"
-                      alt="icon5"
-                      className="w-full h-full object-cover"
+                      src='/Step-26-2.png'
+                      alt='icon5'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
-                <div className="lg:w-[50%] w-full steps_content">
-                  <h4 className="font-bold text-black text-2xl">
+                <div className='lg:w-[50%] w-full steps_content'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Sixth Step
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Add Certifications and Language Skills
                   </h3>
-                  <div className="certificate mt-3">
-                    <h4 className="text-xl text-[#F0B000] font-medium">
+                  <div className='certificate mt-3'>
+                    <h4 className='text-xl text-[#F0B000] font-medium'>
                       Certificate
                     </h4>
-                    <p className="text-base py-3">
+                    <p className='text-base py-3'>
                       Your{" "}
-                      <Link href={"/resume"} className="font-bold">
+                      <Link href={"/resume"} className='font-bold'>
                         UK Resume template
                       </Link>{" "}
                       can look effulgent and outstanding if you add
@@ -971,11 +1069,11 @@ export default function DashboardIdea() {
                       organisations, and much more
                     </p>
                   </div>
-                  <div className="Language mt-3">
-                    <h4 className="text-xl text-[#F0B000] font-medium">
+                  <div className='Language mt-3'>
+                    <h4 className='text-xl text-[#F0B000] font-medium'>
                       Language
                     </h4>
-                    <p className="text-base py-3">
+                    <p className='text-base py-3'>
                       It is a brownie point if you are mulltilingual. With rapid
                       globalisation, employers look out for talents who have
                       some acknowledgement of supplementary languages. This
@@ -986,37 +1084,37 @@ export default function DashboardIdea() {
                   </div>
                 </div>
               </div>
-              <div className="arrow absolute left-[35%] -bottom-40">
+              <div className='arrow absolute left-[35%] -bottom-40'>
                 <img
-                  src="/arrow2.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain"
+                  src='/arrow2.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain'
                 />
               </div>
-              <div className="pro_tips">
-                <div className="pro_image relative">
-                  <img src="/pro-tips.png" alt="pro-tips" />
-                  <p className="text-red-600 font-bold absolute top-3 left-8 text-xl">
+              <div className='pro_tips'>
+                <div className='pro_image relative'>
+                  <img src='/pro-tips.png' alt='pro-tips' />
+                  <p className='text-red-600 font-bold absolute top-3 left-8 text-xl'>
                     Pro Tip !
                   </p>
                 </div>
-                <p className="text-xl px-5">
+                <p className='text-xl px-5'>
                   To make your CV more professionally accessible, you can add
                   links to important keywords and help them find the exact
                   sources of your certifications, and more.
                 </p>
               </div>
             </div>
-            <div className="step_7 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">
+            <div className='step_7 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full steps_content mt-10'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Seventh Step{" "}
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Review your Curriculum Vitae 
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Now that everything is assembled, all you are left to do is
                     just give the created resume a quick final view. Review the
                     information, revise the skills, proofread the content and
@@ -1028,12 +1126,12 @@ export default function DashboardIdea() {
                     you want, our CV Builder shall assist you throughout
                   </p>
                 </div>
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex justify-center items-center">
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex justify-center items-center'>
                     <img
-                      src="/Step-27.png"
-                      alt="icon4"
-                      className="w-full h-full object-cover"
+                      src='/Step-27.png'
+                      alt='icon4'
+                      className='w-full h-full object-cover'
                     />
                   </div>
                 </div>
@@ -1050,39 +1148,39 @@ export default function DashboardIdea() {
                   save it for future use. 
                 </p>
               </div> */}
-              <div className="arrow absolute left-[35%] -bottom-40">
+              <div className='arrow absolute left-[35%] -bottom-40'>
                 <img
-                  src="/arrow1.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain lg:block hidden"
+                  src='/arrow1.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain lg:block hidden'
                 />
                 <img
-                  src="/arrow2.png"
-                  alt="arrow"
-                  className="w-52 h-52 object-contain lg:hidden block"
+                  src='/arrow2.png'
+                  alt='arrow'
+                  className='w-52 h-52 object-contain lg:hidden block'
                 />
               </div>
             </div>
-            <div className="step_8 relative">
-              <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                <div className="lg:w-[50%] w-full h-[450px] image_content flex justify-start items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]">
-                  <div className="flex justify-start items-center">
+            <div className='step_8 relative'>
+              <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-start items-center lg:order-first order-last lg:bg-transparent bg-[#d3e9f4]'>
+                  <div className='flex justify-start items-center'>
                     <img
-                      src="/Step-28.png"
-                      alt="icon4"
-                      className="w-full h-[400px] object-cover"
+                      src='/Step-28.png'
+                      alt='icon4'
+                      className='w-full h-[400px] object-cover'
                     />
                   </div>
                 </div>
-                <div className="lg:w-[50%] w-full steps_content mt-10">
-                  <h4 className="font-bold text-black text-2xl">
+                <div className='lg:w-[50%] w-full steps_content mt-10'>
+                  <h4 className='font-bold text-black text-2xl'>
                     The Last Lap{" "}
                   </h4>
-                  <h3 className="text-4xl text-black font-bold py-3">
+                  <h3 className='text-4xl text-black font-bold py-3'>
                     Download your CV and you’re ready to fill out the
                     Applications
                   </h3>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     The final step is to save the CV that you have created with
                     the help of your Resume builder. You can easily download the
                     created CV after carefully reviewing it. All you need to do
@@ -1090,7 +1188,7 @@ export default function DashboardIdea() {
                     Genies Career Hub offers you the option to either save your
                     CV in `PDF format or as a TXT file. The choice is yours!
                   </p>
-                  <p className="text-base py-3">
+                  <p className='text-base py-3'>
                     Once you have followed all the aforementioned steps, you are
                     all set to go and apply for your desired job role. With a
                     complete CV, that is perfectly loomed to suit the job
@@ -1153,70 +1251,83 @@ export default function DashboardIdea() {
             </div>
           </div>
         </section> */}
-        <section className="w-full h-full relative">
-          <div className="image_background">
+        <section className='w-full h-full relative'>
+          <div className='image_background'>
             <img
-              src="/background-image.png"
-              alt="background-image"
-              className="w-full h-[700px] md:h-[600px] object-cover"
+              src='/background-image.png'
+              alt='background-image'
+              className='w-full h-[700px] md:h-[600px] object-cover'
             />
           </div>
-          <div className="inner_content flex flex-col lg:flex-row absolute top-20 md:top-40 left-1/2 transform -translate-x-1/2 max-w-7xl w-full px-4 md:px-8 gap-10">
-            <div className="lg:w-[50%] w-full relative text-center lg:text-left">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+          <div className='inner_content flex flex-col lg:flex-row absolute top-20 md:top-40 left-1/2 transform -translate-x-1/2 max-w-7xl w-full px-4 md:px-8 gap-10'>
+            <div className='lg:w-[50%] w-full relative text-center lg:text-left'>
+              <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900'>
                 Why do you need our CV Creator to create your Resume?
               </h2>
-              <div className="image_section my-4 md:my-6">
+              <div className='image_section my-4 md:my-6'>
                 <img
-                  src="/resume-icon5.png"
-                  alt="resume-icon"
-                  className="w-32 h-32 md:w-52 md:h-52 mx-auto lg:mx-0"
+                  src='/resume-icon5.png'
+                  alt='resume-icon'
+                  className='w-32 h-32 md:w-52 md:h-52 mx-auto lg:mx-0'
                 />
               </div>
-              <div className="hidden lg:block">
-                <div className="bg_icon1 absolute -top-20 right-16 md:right-48">
+              <div className='hidden lg:block'>
+                <div className='bg_icon1 absolute -top-20 right-16 md:right-48'>
                   <img
-                    src="/bg-icon1.png"
-                    alt="bg-icon1"
-                    className="w-20 h-20"
+                    src='/bg-icon1.png'
+                    alt='bg-icon1'
+                    className='w-20 h-20'
                   />
                 </div>
-                <div className="bg_icon2 absolute top-28 right-24 md:right-48">
+                <div className='bg_icon2 absolute top-28 right-24 md:right-48'>
                   <img
-                    src="/bg-icon2.png"
-                    alt="bg-icon2"
-                    className="w-20 h-20"
+                    src='/bg-icon2.png'
+                    alt='bg-icon2'
+                    className='w-20 h-20'
                   />
                 </div>
-                <div className="bg_icon3 absolute -bottom-32 left-12 md:left-44">
+                <div className='bg_icon3 absolute -bottom-32 left-12 md:left-44'>
                   <img
-                    src="/bg-icon3.png"
-                    alt="bg-icon3"
-                    className="w-24 h-24"
+                    src='/bg-icon3.png'
+                    alt='bg-icon3'
+                    className='w-24 h-24'
                   />
                 </div>
               </div>
             </div>
-            <div className="lg:w-[50%] w-full mt-4 lg:mt-0 text-center lg:text-left">
-              <p className="my-2 text-black text-base">
-              In the end, it all boils down to why Genies Career Hub. Designed with an envisage to cater to your specific career needs, each service by the Genies Career Hub is yearned to make the challenging process of finding a job, switching profiles, choosing a career, developing professional skills, and so much more, a little easier for you. Our CV Creator follows the same vision. 
+            <div className='lg:w-[50%] w-full mt-4 lg:mt-0 text-center lg:text-left'>
+              <p className='my-2 text-black text-base'>
+                In the end, it all boils down to why Genies Career Hub. Designed
+                with an envisage to cater to your specific career needs, each
+                service by the Genies Career Hub is yearned to make the
+                challenging process of finding a job, switching profiles,
+                choosing a career, developing professional skills, and so much
+                more, a little easier for you. Our CV Creator follows the same
+                vision.
               </p>
-              <p className="text-black my-3 text-base">
-              Engineered to assist you create a CV that presents your job application with apt intent, our CV builder integrates Artificial Intelligence very carefully. The Genies Career Hub CV Creator not only offers you a selection of handpicked professional CV templates but also helps you with the customisable functionalities and constantly updated systems that comply with the modern global recruitment standards. We work on every little detail to ensure that your CV has no gaps! 
+              <p className='text-black my-3 text-base'>
+                Engineered to assist you create a CV that presents your job
+                application with apt intent, our CV builder integrates
+                Artificial Intelligence very carefully. The Genies Career Hub CV
+                Creator not only offers you a selection of handpicked
+                professional CV templates but also helps you with the
+                customisable functionalities and constantly updated systems that
+                comply with the modern global recruitment standards. We work on
+                every little detail to ensure that your CV has no gaps!
               </p>
             </div>
           </div>
         </section>
 
-        <section className="faq py-20">
-          <div className="max-w-7xl mx-auto flex lg:flex-row flex-col">
-            <div className="faq_image lg:w-[50%] w-full lg:block hidden">
-              <div className="image_div w-[400px] h-[400px]">
-                <img src="/faq_image.png" alt="faq" className="w-full h-full" />
+        <section className='faq py-20'>
+          <div className='max-w-7xl mx-auto flex lg:flex-row flex-col'>
+            <div className='faq_image lg:w-[50%] w-full lg:block hidden'>
+              <div className='image_div w-[400px] h-[400px]'>
+                <img src='/faq_image.png' alt='faq' className='w-full h-full' />
               </div>
             </div>
-            <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">
-              <h2 className="text-3xl text-center text-bold font-semibold my-5">
+            <div className='faq_content lg:w-[50%] w-full lg:p-1 p-5'>
+              <h2 className='text-3xl text-center text-bold font-semibold my-5'>
                 Frequently Asked Questions
               </h2>
               {faqData?.map((item, index) => (

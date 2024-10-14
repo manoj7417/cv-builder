@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useState, useEffect } from "react";
 import {
@@ -19,7 +21,7 @@ import {
 import { GetTokens } from "@/app/actions";
 import axios, { all } from "axios";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-
+import { useRouter } from "next/navigation";
 
 // const coachAvailabilty = [
 //   {
@@ -87,6 +89,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 const CoachCalendar = () => {
   const [bookingSlot, setBookingSlot] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState([]);
+  const router = useRouter();
 
   const handleGetBookings = async () => {
     const { accessToken } = await GetTokens();
@@ -104,9 +107,7 @@ const CoachCalendar = () => {
         setBookingSlot(response.data.bookings);
         console.log(response.data.bookings);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   // const convertTo24Hour = (time12h) => {
@@ -173,18 +174,18 @@ const CoachCalendar = () => {
   return (
     <>
       <div>
-        <div className="flex w-full px-10 justify-start items-start gap-8">
-          <div className="w-full mx-auto mt-8">
+        <div className='flex w-full px-10 justify-start items-start gap-8'>
+          <div className='w-full mx-auto mt-8'>
             <FullCalendar
               height={"85vh"}
-              themeSystem="standard"
+              themeSystem='standard'
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               headerToolbar={{
                 left: "prev,next",
                 center: "title",
                 right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
               }}
-              initialView="dayGridMonth"
+              initialView='dayGridMonth'
               editable={true}
               selectable={true}
               selectMirror={true}
