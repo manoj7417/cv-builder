@@ -329,7 +329,7 @@ const CoachProfile = () => {
 
   return (
     <>
-      <div className="w-full h-auto mt-10 bg-white m-10 p-10">
+      <div className="w-full h-auto mt-10 bg-white p-10">
         <form
           onSubmit={handleSubmit(handleEditProfile)}
           className="flex flex-col"

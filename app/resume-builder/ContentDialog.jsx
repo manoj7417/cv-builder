@@ -246,7 +246,8 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
       const response = await axios.post('/api/printResume', body, {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        responseType: 'arraybuffer'
       });
       if (response.status === 200) {
         generateFunfact();

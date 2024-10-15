@@ -271,7 +271,8 @@ const ResumeView = () => {
       const response = await axios.post('/api/printResume', body, {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        responseType: 'arraybuffer'
       });
       if (response.status === 200) {
         generateFunfact();
@@ -280,9 +281,9 @@ const ResumeView = () => {
         link.href = window.URL.createObjectURL(blob);
         link.download = 'generated.pdf';
         link.click();
+        window.URL.revokeObjectURL(link.href);
         return;
       }
-      
     } catch (error) {
       if (
         error?.response?.status === 403 &&

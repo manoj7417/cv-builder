@@ -89,9 +89,8 @@ const Sidebar = () => {
 
 
       <div
-        className={`fixed inset-y-0 left-0 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}
+        className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}
       >
         <div className="flex justify-end mr-5 md:hidden">
           <button
@@ -126,17 +125,17 @@ const Sidebar = () => {
               </Link>
             </li>
             {/* Other Items with Custom Icons */}
-            {/* <li className={getLinkClass("/admin/viewBlogs")}>
+            <li className={getLinkClass("/admin/EditRequests")}>
               <Link
-                href="/admin/viewBlogs"
+                href="/admin/EditRequests"
                 className="flex items-center w-full"
-                onClick={() => handleSetActiveTab("/admin/viewBlogs")}
+                onClick={() => handleSetActiveTab("/admin/EditRequests")}
               >
                 <IoDocumentsOutline className="w-6 h-6 mr-4" />
-                <span className="font-semibold ">Blog</span>
+                <span className="font-semibold ">Edit Requests</span>
               </Link>
             </li>
-            <li className={getLinkClass("/admin/viewUsers")}>
+            {/* <li className={getLinkClass("/admin/viewUsers")}>
               <Link
                 href={"/admin/viewUsers"}
                 className="flex items-center w-full"
