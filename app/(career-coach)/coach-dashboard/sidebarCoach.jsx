@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useCoachStore } from "@/app/store/coachStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User , LibraryBig   } from 'lucide-react';
 
 const SidebarCoach = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,8 +42,8 @@ const SidebarCoach = () => {
   // Function to apply active class based on activeTab
   const getLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md font-bold w-full"
-      : "flex items-center p-3 text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold w-full";
+      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full"
+      : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold w-full";
   };
 
   const handleLogout = async () => {
@@ -112,7 +113,7 @@ const SidebarCoach = () => {
             <li className={getLinkClass("/coach-dashboard")}>
               <Link
                 href='/coach-dashboard'
-                className='flex items-center w-full'
+                className='flex items-center w-full h-full p-3'
                 onClick={() => handleSetActiveTab("/coach-dashboard")}>
                 <MdDashboard className="text-xl mr-3" />
                 Dashboard
@@ -143,7 +144,7 @@ const SidebarCoach = () => {
             <li className={getLinkClass("/coach-dashboard/coach-availabilty")}>
               <Link
                 href={"/coach-dashboard/coach-availabilty"}
-                className='flex items-center w-full'
+                className='flex items-center w-full p-3'
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-availabilty")
                 }>
@@ -154,23 +155,34 @@ const SidebarCoach = () => {
             <li className={getLinkClass("/coach-dashboard/coach-profile")}>
               <Link
                 href={"/coach-dashboard/coach-profile"}
-                className='flex items-center w-full'
+                className='flex items-center w-full p-3'
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-profile")
                 }>
-                <MdEventAvailable className="text-xl mr-3" />
+                <User className="text-xl mr-3" />
                 My Profile
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-calendar")}>
               <Link
                 href={"/coach-dashboard/coach-calendar"}
-                className='flex items-center w-full'
+                className='flex items-center w-full p-3'
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-calendar")
                 }>
                 <MdEventAvailable className="text-xl mr-3" />
-                 My Appointment
+                My Appointment
+              </Link>
+            </li>
+            <li className={getLinkClass("/coach-dashboard/programs")}>
+              <Link
+                href={"/coach-dashboard/programs"}
+                className='flex items-center w-full p-3'
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/programs")
+                }>
+                <LibraryBig   className="text-xl mr-3" />
+                Programs
               </Link>
             </li>
           </ul >

@@ -13,19 +13,20 @@ export async function POST(req) {
         }
         const response = await serverInstance.post(
             "/print/resume",
-            { html }, 
+            { html },
             {
                 headers: {
                     Authorization: token,
-                    "Content-Type": "application/json", 
+                    "Content-Type": "application/json",
                 },
-                responseType: "arraybuffer", 
+                responseType: "arraybuffer",
             }
         );
+        console.log(response.data)
         return new Response(response.data, {
             status: response.status || 200,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/pdf"
             },
         });
     } catch (error) {

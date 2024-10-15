@@ -8,33 +8,14 @@ export const metadata = {
 };
 const Layout = ({ children }) => {
   return (
-    <main className='resume_dashboard '>
-      <div className='resume_dashboard_container'>
-        <div className='wrapper'>
-          <div id='mainDiv' className='flex flex-col h-screen'>
-            {/* START-HEADER */}
-            {/* <Header className="w-full" /> */}
-            {/* END-HEADER */}
-            <div className='flex flex-1 flex-col md:flex-row'>
-              {/* Sidebar */}
-              <div
-                id='sidebarCoach'
-                className='w-full md:w-[16%] lg:w-[16%] bg-white sticky top-0 lg:h-screen h-auto z-50 min-w-[220px]'>
-                {/* Sidebar content goes here */}
-                <SidebarCoach className='w-full' />
-              </div>
-              {/* Main Content */}
-              <div
-                id='mainContent'
-                className='w-full md:w-[80%] lg:w-[80%] bg-white z-10'>
-                {/* Coach Dashboard content goes here */}
-                {children}
-              </div>
-            </div>
-          </div>
-
-          {/* <Footer /> */}
-        </div>
+    <main className=' border-2 w-full flex'>
+      <div
+        className='w-full md:w-[16%] lg:w-[16%] bg-white sticky top-0 lg:h-screen h-auto z-50 min-w-[220px]'>
+        <SidebarCoach className='w-full' />
+      </div>
+      <div
+        className='w-full md:w-[84%] lg:w-[84%] bg-white h-auto overflow-auto z-10'>
+        {children}
       </div>
     </main>
   );

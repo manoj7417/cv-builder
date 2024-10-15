@@ -547,14 +547,14 @@ export default function ResumeForm() {
       data + " Generated profile summary using the data appended data";
     setIsLoading(true);
     try {
-      const response = await axios.post('/api/askBot', {message});
+      const response = await axios.post('/api/askBot', { message });
       const data = JSON.parse(response[0]?.text?.value.split("\n")[2]);
 
       if (data) {
         setResumeData("sections.summary.content", data);
       }
     } catch (error) {
-      
+
     } finally {
       setIsLoading(false);
       setFormData({
@@ -959,7 +959,11 @@ export default function ResumeForm() {
   }
 
   const stripProtocol = (url) => {
-    return url.replace(/^https?:\/\//i, "");
+    console.log(url)
+    if (url) {
+      return url.replace(/^https?:\/\//i, "");
+    }
+    return null
   };
 
   const handlesetSecondayColor = () => {
