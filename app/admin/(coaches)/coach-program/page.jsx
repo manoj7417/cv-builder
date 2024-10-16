@@ -57,8 +57,10 @@ const AdminCoachProgram = () => {
       <div className='card_coach max-w-5xl mx-auto mt-20'>
         <div className='grid grid-cols-3 gap-5'>
           {programData.length > 0 ? (
-            programData.map((program) => (
-              <div className='bg-white shadow-md rounded-lg p-6 max-w-sm mx-auto h-[400px] flex flex-col justify-between'>
+            programData.map((program, index) => (
+              <div
+                className='bg-white shadow-md rounded-lg p-6 max-w-sm mx-auto h-[400px] flex flex-col justify-between'
+                key={index}>
                 <img
                   src={program.programImage}
                   alt={program.title}
