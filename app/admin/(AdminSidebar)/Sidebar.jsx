@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { GetTokens, RemoveTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { RiUserSettingsLine } from "react-icons/ri";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,54 +76,58 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    handleAccountRequest()
+    handleAccountRequest();
   }, []);
 
   return (
-    <div className="flex lg:h-full h-auto lg:sticky lg:top-0 relative pb-5">
+    <div className='flex lg:h-full h-auto lg:sticky lg:top-0 relative pb-5'>
       <button
-        className="md:hidden p-4 focus:outline-none"
-        onClick={toggleSidebar}
-      >
-        <HiMenu className="w-8 h-8" />
+        className='md:hidden p-4 focus:outline-none'
+        onClick={toggleSidebar}>
+        <HiMenu className='w-8 h-8' />
       </button>
-
 
       <div
         className={`fixed inset-y-0 left-0 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}
-      >
-        <div className="flex justify-end mr-5 md:hidden">
+        } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}>
+        <div className='flex justify-end mr-5 md:hidden'>
           <button
-            className=" mb-4 focus:outline-none cursor-pointer"
-            onClick={toggleSidebar}
-          >
-            <IoMdClose className="w-8 h-8" />
+            className=' mb-4 focus:outline-none cursor-pointer'
+            onClick={toggleSidebar}>
+            <IoMdClose className='w-8 h-8' />
           </button>
         </div>
-        <div className="dashboard_logo px-5 mb-5">
-          <Image src="/admin-logo.png" alt="logo" width={200} height={200} />
+        <div className='dashboard_logo px-5 mb-5'>
+          <Image src='/admin-logo.png' alt='logo' width={200} height={200} />
         </div>
-        <nav className=" space-y-5 py-8">
-          <ul className="space-y-4 lg:w-full">
+        <nav className=' space-y-5 py-8'>
+          <ul className='space-y-4 lg:w-full'>
             <li
               className={getLinkClass("/admin")}
-              onClick={() => handleSetActiveTab("/admin")}
-            >
-              <Link href="/admin" className="flex items-center w-full">
-                <FaKey className="w-4 h-4 mr-4" />
-                <span className="font-semibold">Dashboard</span>
+              onClick={() => handleSetActiveTab("/admin")}>
+              <Link href='/admin' className='flex items-center w-full'>
+                <FaKey className='w-4 h-4 mr-4' />
+                <span className='font-semibold'>Dashboard</span>
               </Link>
             </li>
 
             <li
               className={getLinkClass("/admin/coach")}
-              onClick={() => handleSetActiveTab("/admin/coach")}
-            >
-              <Link href={"/admin/coach"} className="flex items-center w-full">
-                <LuUserSquare2 className="w-6 h-6 mr-4" />
-                <span className="font-semibold">Coaches</span>
+              onClick={() => handleSetActiveTab("/admin/coach")}>
+              <Link href={"/admin/coach"} className='flex items-center w-full'>
+                <LuUserSquare2 className='w-6 h-6 mr-4' />
+                <span className='font-semibold'>Coaches</span>
+              </Link>
+            </li>
+            <li
+              className={getLinkClass("/admin/coach-program")}
+              onClick={() => handleSetActiveTab("/admin/coach-program")}>
+              <Link
+                href={"/admin/coach-program"}
+                className='flex items-center w-full'>
+                <RiUserSettingsLine className='w-5 h-5 mr-4' />
+                <span className='font-semibold'>Coach Program</span>
               </Link>
             </li>
             {/* Other Items with Custom Icons */}
@@ -149,30 +154,29 @@ const Sidebar = () => {
           </ul>
         </nav>
         {/* Profile Section */}
-        <div className="flex items-center justify-between  absolute bottom-0 min-w-[200px] ">
+        <div className='flex items-center justify-between  absolute bottom-0 min-w-[200px] '>
           <TooltipProvider>
             <img
               src={userdata?.profilePicture || "/avatar.jpg"} // Replace with your profile image path
-              alt="Profile Image"
+              alt='Profile Image'
               width={52} // Width should match the container's width
               height={52} // Height should match the container's height
-              className="object-cover h-10 w-10 rounded-full"
+              className='object-cover h-10 w-10 rounded-full'
             />
             <div>
-              <p className="font-semibold text-gray-800 text-base">
+              <p className='font-semibold text-gray-800 text-base'>
                 {userdata?.fullname}
               </p>
             </div>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-gray-600 hover:text-gray-800"
-                  onClick={handleLogout}
-                >
-                  <FiLogOut className="w-5 h-5" />
-                  <span className="sr-only">Logout</span>
+                  variant='ghost'
+                  size='icon'
+                  className='text-gray-600 hover:text-gray-800'
+                  onClick={handleLogout}>
+                  <FiLogOut className='w-5 h-5' />
+                  <span className='sr-only'>Logout</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>

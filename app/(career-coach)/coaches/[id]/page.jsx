@@ -296,8 +296,6 @@ const CoachDetailsPage = () => {
     handleFetchCoachProgramById(id);
   }, [id]);
 
-  console.log("programData::", programData);
-
   return (
     <>
       <ResumeHeader />
