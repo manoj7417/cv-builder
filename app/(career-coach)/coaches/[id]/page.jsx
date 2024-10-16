@@ -48,6 +48,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FaPlayCircle, FaFileAlt, FaTrophy } from "react-icons/fa";
+import Link from "next/link";
 /************************************************ */
 
 const locales = {
@@ -264,12 +265,13 @@ const CoachDetailsPage = () => {
     reset,
   } = useForm();
 
-  const { singleCoach, filterCoachById, updateSingleCoach, isLoading } =
+  const { singleCoach, filterCoachById, updateSingleCoach } =
     useCoachesDetailStore();
 
   const { id } = useParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("programs");
+  const [isLoading, setIsLoading] = useState(true);
   const [activeProgramTab, setActiveProgramTab] = useState("program1");
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -282,6 +284,8 @@ const CoachDetailsPage = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
+  const [programData, setProgramData] = useState([]);
+
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
     if (tab === "appointment") {
@@ -444,21 +448,24 @@ const CoachDetailsPage = () => {
     }
   };
 
-  const handleFetchCoachProgramById = async (data) => {
+  const handleFetchCoachProgramById = async (id) => {
     const { accessToken } = await GetTokens();
-    if (!data._id) return;
     try {
-      const response = await axios.post(
-        `/api/getCoachProgram/${id}`,
-        { data: data.data },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken.value}`,
-          },
-        }
-      );
-      console.log("response::", response);
-    } catch (error) {}
+      const response = await axios.get(`/api/getCoachProgram/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      setProgramData(response?.data?.programs);
+      setIsLoading(false);
+      if (response?.data?.programs.length > 0) {
+        setActiveProgramTab(response?.data?.programs[0]._id); // Set the first program as default active
+      }
+
+      console.log("response::", response?.data?.programs);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -472,6 +479,8 @@ const CoachDetailsPage = () => {
   useEffect(() => {
     handleFetchCoachProgramById(id);
   }, [id]);
+
+  console.log("programData::", programData);
 
   return (
     <>
@@ -496,7 +505,7 @@ const CoachDetailsPage = () => {
                             All Programs
                           </h3>
                         </div>
-                        <ul className='space-y-2 mt-5'>
+                        {/* <ul className='space-y-2 mt-5'>
                           <li>
                             <button
                               className={`w-full text-left p-2 ${
@@ -541,7 +550,34 @@ const CoachDetailsPage = () => {
                               Program 4
                             </button>
                           </li>
-                        </ul>
+                        </ul> */}
+                        {isLoading ? (
+                          <ul className='space-y-2 mt-5'>
+                            {[1, 2, 3, 4].map((_, index) => (
+                              <li key={index}>
+                                <div className='w-full h-8 bg-gray-200 animate-pulse rounded'></div>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <ul className='space-y-2 mt-5'>
+                            {programData.map((program, index) => (
+                              <li key={program._id}>
+                                <button
+                                  className={`w-full text-left p-2 ${
+                                    activeProgramTab === program._id
+                                      ? "bg-gray-200 font-bold"
+                                      : "text-gray-600"
+                                  }`}
+                                  onClick={() =>
+                                    handleProgramTabClick(program._id)
+                                  }>
+                                  Program {index + 1}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -606,145 +642,196 @@ const CoachDetailsPage = () => {
                 <>
                   {/* Tab Content */}
                   <div className='p-5'>
-                    {activeProgramTab === "program1" && (
-                      <div className='tabs_content flex lg:flex-row flex-col'>
-                        <div className='program_content_1 lg:w-[60%] w-full'>
-                          <h2 className='text-xl font-bold mb-4'>
-                            The Complete 2024 Web Development Bootcamp
-                          </h2>
-                          <p className='text-sm'>
-                            Become a Full-Stack Web Developer with just ONE
-                            course. HTML, CSS, Javascript, Node, React,
-                            PostgreSQL, Web3 and DApps
-                          </p>
-                          <div className='weekly_content pr-3 mt-5'>
-                            <h2 className='text-xl font-bold mb-1'>
-                              Course content
-                            </h2>
-                            <div className='course_content'>
-                              <ul className='flex text-xs gap-2'>
-                                <li>44 sections</li>
-                                <li>• 373 lectures </li>
-                                <li>• 61h 44m total length</li>
-                              </ul>
+                    {isLoading ? (
+                      <>
+                        <div className='tabs_content flex lg:flex-row flex-col animate-pulse'>
+                          {/* Left section skeleton */}
+                          <div className='program_content_1 lg:w-[60%] w-full space-y-4'>
+                            <div className='h-8 bg-gray-200 rounded w-3/4'></div>
+                            <div className='h-6 bg-gray-200 rounded w-3/4'></div>
+                            <div className='h-6 bg-gray-200 rounded w-3/4'></div>
+                            <div className='weekly_content mt-5'>
+                              <div className='h-8 bg-gray-200 rounded w-3/4'></div>
+                              <div className='space-y-3 mt-5'>
+                                <div className='h-5 bg-gray-200 rounded w-3/4'></div>
+                                <div className='h-5 bg-gray-200 rounded w-3/4'></div>
+                              </div>
                             </div>
+                          </div>
 
-                            <Accordion
-                              type='single'
-                              collapsible
-                              defaultValue='item-0'
-                              className='w-full my-2 border border-gray-300 p-4 rounded-md'>
-                              {courseWeeks.map((weekContent, index) => (
-                                <AccordionItem
-                                  key={index}
-                                  value={`item-${index}`}
-                                  className='py-5 border-b border-gray-200'>
-                                  <AccordionTrigger>
-                                    {weekContent.week} - {weekContent.level} -{" "}
-                                    {weekContent.title}
-                                  </AccordionTrigger>
-                                  <AccordionContent>
-                                    <ul className='space-y-2 mt-5'>
-                                      {weekContent.lessons.map(
-                                        (lesson, idx) => (
-                                          <li
-                                            key={idx}
-                                            className='flex items-center space-x-3 py-2'>
-                                            {lesson.icon}
-                                            <span className='flex-1 text-gray-700'>
-                                              {lesson.title}
-                                            </span>
-                                            {lesson.duration && (
-                                              <span className='text-gray-500'>
-                                                {lesson.duration}
-                                              </span>
+                          {/* Right section skeleton */}
+                          <div className='program_content_video lg:w-[40%] w-full lg:order-none order-first'>
+                            <div className='h-[200px] bg-gray-200 rounded mb-3'></div>
+                            <div className='h-8 bg-gray-200 rounded w-1/2 mb-3'></div>
+                            <div className='h-6 bg-gray-200 rounded w-full'></div>
+                            <div className='space-y-3 mt-5'>
+                              <div className='h-5 bg-gray-200 rounded w-1/3'></div>
+                              <div className='h-5 bg-gray-200 rounded w-1/2'></div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {programData?.length > 0 &&
+                          programData
+                            ?.filter(
+                              (program) => program._id === activeProgramTab
+                            )
+                            ?.map((course, courseIndex) => (
+                              <div
+                                className='tabs_content flex lg:flex-row flex-col'
+                                key={courseIndex}>
+                                <div className='program_content_1 lg:w-[60%] w-full'>
+                                  <h2 className='text-xl font-bold mb-4'>
+                                    {course?.title}
+                                  </h2>
+                                  <p className='text-sm'>
+                                    {course?.description}
+                                  </p>
+                                  <div className='weekly_content pr-3 mt-5'>
+                                    <h2 className='text-xl font-bold mb-1'>
+                                      Course content
+                                    </h2>
+                                    <div className='course_content'>
+                                      <ul className='flex text-xs gap-2'>
+                                        <li>{course.sections} sections</li>
+                                        <li>• {course.lectures} lectures</li>
+                                        <li>
+                                          • {course.totalLength} total length
+                                        </li>
+                                      </ul>
+                                    </div>
+                                    <Accordion
+                                      type='single'
+                                      collapsible
+                                      defaultValue='item-0'
+                                      className='w-full my-2 border border-gray-300 p-4 rounded-md'>
+                                      {course?.days?.map((item, index) => (
+                                        <AccordionItem
+                                          key={index}
+                                          value={`item-${index}`}
+                                          className='py-5 border-b border-gray-200'>
+                                          <AccordionTrigger className='font-bold text-xl'>
+                                            {item.title}
+                                          </AccordionTrigger>
+                                          <AccordionContent>
+                                            <ul className='space-y-2 mt-5'>
+                                              {item.subModules.map(
+                                                (lesson, idx) => (
+                                                  <li
+                                                    key={idx}
+                                                    className='flex items-center space-x-3 py-2'>
+                                                    {lesson.icon}
+                                                    <span className='flex-1 text-gray-700'>
+                                                      {lesson.title}
+                                                    </span>
+                                                    {lesson.timeToComplete && (
+                                                      <span className='text-gray-500'>
+                                                        {lesson.timeToComplete}
+                                                      </span>
+                                                    )}
+                                                  </li>
+                                                )
+                                              )}
+                                            </ul>
+                                          </AccordionContent>
+                                        </AccordionItem>
+                                      ))}
+                                    </Accordion>
+                                    <div className='requirements'>
+                                      {course?.prerequisites?.length > 0 && (
+                                        <div className='prerequisites'>
+                                          <h3 className='text-xl font-bold my-4'>
+                                            Prerequisites
+                                          </h3>
+                                          <ul>
+                                            {course.prerequisites.map(
+                                              (prerequisite, idx) => (
+                                                <li
+                                                  key={prerequisite._id}
+                                                  className='text-sm my-2'>
+                                                  <Link
+                                                    href={
+                                                      prerequisite.attachmentUrl
+                                                    }
+                                                    target='_blank'
+                                                    rel='noopener noreferrer'
+                                                    className='text-blue-500 underline'>
+                                                    {prerequisite.description} (
+                                                    {prerequisite.type})
+                                                  </Link>
+                                                </li>
+                                              )
                                             )}
-                                          </li>
-                                        )
+                                          </ul>
+                                        </div>
                                       )}
-                                    </ul>
-                                  </AccordionContent>
-                                </AccordionItem>
-                              ))}
-                            </Accordion>
-                          </div>
-                        </div>
-                        <div className='program_content_video lg:w-[40%] w-full lg:order-none order-first'>
-                          <div className='border border-[#E9EAF0]'>
-                            <div>
-                              <img
-                                src='/blogImage1.png'
-                                alt='Blog'
-                                className='w-full'
-                              />
-                            </div>
-                            <div
-                              id='row3'
-                              className='flex justify-between text-sm text-gray-500 p-3'>
-                              <div className='flex items-center space-x-1'>
-                                <span className='text-[#1D2026] font-bold'>
-                                  $549.00{" "}
-                                  <span className='text-gray-400 line-through'>
-                                    $3,099
-                                  </span>
-                                </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='program_content_video lg:w-[40%] w-full lg:order-none order-first'>
+                                  <div className='border border-[#E9EAF0]'>
+                                    <div>
+                                      <img
+                                        src='/blogImage1.png'
+                                        alt='Blog'
+                                        className='w-full'
+                                      />
+                                    </div>
+                                    <div
+                                      id='row3'
+                                      className='flex justify-between text-sm text-gray-500 p-3'>
+                                      <div className='flex items-center space-x-1'>
+                                        <span className='text-[#1D2026] font-bold'>
+                                          $549.00{" "}
+                                          <span className='text-gray-400 line-through'>
+                                            $3,099
+                                          </span>
+                                        </span>
+                                      </div>
+                                      <div className='flex items-center space-x-1'>
+                                        <span className='text-[#fb8130] font-bold'>
+                                          85% off
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div
+                                      id='row3'
+                                      className='flex justify-between p-3 border-b-2 border-gray-300'>
+                                      <div className='flex items-center space-x-1'>
+                                        <Button className='w-[250px]'>
+                                          Buy Now
+                                        </Button>
+                                      </div>
+                                      <div className='flex items-center space-x-1'>
+                                        <span className='font-bold shadow-lg p-2'>
+                                          <CiHeart />
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className='course-details-list p-5'>
+                                      <h2 className='text-xl font-semibold mb-4'>
+                                        Course Details
+                                      </h2>
+                                      <ul className='space-y-3'>
+                                        {courseDetails.map((detail, index) => (
+                                          <li
+                                            key={index}
+                                            className='flex items-center space-x-2'>
+                                            {detail.icon}
+                                            <span className='text-gray-700'>
+                                              {detail.text}
+                                            </span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <div className='flex items-center space-x-1'>
-                                <span className='text-[#fb8130] font-bold'>
-                                  85% off
-                                </span>
-                              </div>
-                            </div>
-                            <div
-                              id='row3'
-                              className='flex justify-between p-3 border-b-2 border-gray-300'>
-                              <div className='flex items-center space-x-1'>
-                                <Button className='w-[250px]'>Buy Now</Button>
-                              </div>
-                              <div className='flex items-center space-x-1'>
-                                <span className='font-bold shadow-lg p-2'>
-                                  <CiHeart />
-                                </span>
-                              </div>
-                            </div>
-                            <div className='course-details-list p-5'>
-                              <h2 className='text-xl font-semibold mb-4'>
-                                Course Details
-                              </h2>
-                              <ul className='space-y-3'>
-                                {courseDetails.map((detail, index) => (
-                                  <li
-                                    key={index}
-                                    className='flex items-center space-x-2'>
-                                    {detail.icon}
-                                    <span className='text-gray-700'>
-                                      {detail.text}
-                                    </span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    {activeProgramTab === "program2" && (
-                      <div className='tabs_content'>
-                        <h2 className='text-lg font-bold mb-4'>Program 2</h2>
-                        <p>Details and information about Program 2...</p>
-                      </div>
-                    )}
-                    {activeProgramTab === "program3" && (
-                      <div className='tabs_content'>
-                        <h2 className='text-lg font-bold mb-4'>Program 3</h2>
-                        <p>Details and information about Program 3...</p>
-                      </div>
-                    )}
-                    {activeProgramTab === "program4" && (
-                      <div className='tabs_content'>
-                        <h2 className='text-lg font-bold mb-4'>Program 4</h2>
-                        <p>Details and information about Program 4...</p>
-                      </div>
+                            ))}
+                      </>
                     )}
                   </div>
                 </>
