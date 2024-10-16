@@ -51,7 +51,20 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
       <meta name="google-site-verification" content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po" />
-      
+      <script 
+          async 
+          src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
+          ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-HVD8Y7BEDE');
+          `,
+          }}
+        />
       </head>
       <body className={inter.className}>
         <ToastContainer

@@ -81,7 +81,7 @@ export default function Home() {
         />
         
         
-        <script 
+        {/* <script 
           async 
           src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
           ></script>
@@ -94,7 +94,7 @@ export default function Home() {
             gtag('config', 'G-HVD8Y7BEDE');
           `,
           }}
-        />
+        /> */}
 
         <script
           dangerouslySetInnerHTML={{
