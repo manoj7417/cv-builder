@@ -8,7 +8,7 @@ export const metadata = {
 };
 const Layout = ({ children }) => {
   return (
-    <main className=' border-2 w-full flex'>
+    <main className='w-full flex'>
       <div
         className='w-full md:w-[16%] lg:w-[16%] bg-white sticky top-0 lg:h-screen h-auto z-50 min-w-[220px]'>
         <SidebarCoach className='w-full' />

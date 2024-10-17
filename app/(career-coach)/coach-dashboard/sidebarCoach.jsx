@@ -20,7 +20,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useCoachStore } from "@/app/store/coachStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User , LibraryBig   } from 'lucide-react';
+import { User, LibraryBig, BadgePlus, SquareDashedKanban } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const SidebarCoach = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,9 +43,23 @@ const SidebarCoach = () => {
   // Function to apply active class based on activeTab
   const getLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full"
-      : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm text-blue-700 font-bold w-full";
+      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto"
+      : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm  font-bold w-full";
   };
+
+  const getProgramLinkClass = (tab) => {
+    return activeTab.includes(tab)
+      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto py-2"
+      : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm  font-bold w-full py-2";
+  }
+
+  const getSubLinkClass = (tab) => {
+    return activeTab === tab
+      ? "flex items-center rounded-md bg-gray-100 text-blue-900 cursor-pointer text-sm shadow-md font-bold w-full h-auto my-1"
+      : "flex items-center text-gray-500 rounded-md hover:bg-gray-100 cursor-pointer text-sm text-blue-700 font-bold w-full my-1";
+  }
+
+
 
   const handleLogout = async () => {
     try {
@@ -106,84 +121,87 @@ const SidebarCoach = () => {
         <div className="dashboard_logo p-5 mb-5">
           <Image src="/admin-logo.png" alt="logo" width={200} height={200} className="w-[90%]" />
         </div>
-        {/* Links for the pages  */}
         <nav className=" space-y-5 py-8">
           <ul className="space-y-4 lg:w-full p-2">
-            {/* Highlighted Dashboard Item with Custom Icon */}
             <li className={getLinkClass("/coach-dashboard")}>
               <Link
                 href='/coach-dashboard'
-                className='flex items-center w-full h-full p-3'
+                className='flex items-center w-full h-full p-2 px-3'
                 onClick={() => handleSetActiveTab("/coach-dashboard")}>
-                <MdDashboard className="text-xl mr-3" />
+                <MdDashboard className="text-lg mr-3" />
                 Dashboard
               </Link>
             </li>
-            {/* <li className={getLinkClass("/coach-dashboard/coach-details")}>
-              <Link
-                href={"/coach-dashboard/coach-details"}
-                onClick={() =>
-                  handleSetActiveTab("/coach-dashboard/coach-details")
-                }
-                className='flex items-center w-full'>
-                <FaUser className="text-xl mr-3" />
-                Coach
-              </Link>
-            </li>
-            <li className={getLinkClass("/coach-dashboard/coach-blog")}>
-              <Link
-                href='/coach-dashboard/coach-blog'
-                className='flex items-center w-full'
-                onClick={() =>
-                  handleSetActiveTab("/coach-dashboard/coach-blog")
-                }>
-                <CgLoadbarDoc className="text-xl mr-3" />
-                Blog
-              </Link>
-            </li> */}
             <li className={getLinkClass("/coach-dashboard/coach-availabilty")}>
               <Link
                 href={"/coach-dashboard/coach-availabilty"}
-                className='flex items-center w-full p-3'
+                className='flex items-center w-full p-2 px-3'
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-availabilty")
                 }>
-                <MdEventAvailable className="text-xl mr-3" />
+                <MdEventAvailable className="text-lg mr-3" />
                 Availability
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-profile")}>
               <Link
                 href={"/coach-dashboard/coach-profile"}
-                className='flex items-center w-full p-3'
+                className='flex items-center w-full p-2 px-3'
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-profile")
                 }>
-                <User className="text-xl mr-3" />
+                <User className="h-5 mr-3" />
                 My Profile
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-calendar")}>
               <Link
                 href={"/coach-dashboard/coach-calendar"}
-                className='flex items-center w-full p-3'
+                className='flex items-center w-full p-2 px-3'
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-calendar")
                 }>
-                <MdEventAvailable className="text-xl mr-3" />
+                <MdEventAvailable className="text-lg mr-3" />
                 My Appointment
               </Link>
             </li>
-            <li className={getLinkClass("/coach-dashboard/programs")}>
-              <Link
-                href={"/coach-dashboard/programs"}
-                className='flex items-center w-full p-3'
-                onClick={() =>
-                  handleSetActiveTab("/coach-dashboard/programs")
-                }>
-                <LibraryBig   className="text-xl mr-3" />
-                Programs
-              </Link>
+            <li>
+              <Accordion className="w-full " type="single" collapsible>
+                <AccordionItem value="item">
+                  <AccordionTrigger className={getProgramLinkClass("/coach-dashboard/programs")}>
+                    <div className="flex px-3">
+                      <LibraryBig className="h-5 mr-3" />
+                      <p>
+                        Programs
+                      </p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="ml-3 py-1">
+                      <li className={getSubLinkClass("/coach-dashboard/programs/create")}>
+                        <Link
+                          href="/coach-dashboard/programs/create"
+                          onClick={() => handleSetActiveTab("/coach-dashboard/programs/create")}
+                          className="flex p-2 w-full"
+                        >
+                          <BadgePlus className="h-5 mr-2" />
+                          Create Program
+                        </Link>
+                      </li>
+                      <li className={getSubLinkClass("/coach-dashboard/programs")}>
+                        <Link
+                          href="/coach-dashboard/programs"
+                          className="flex p-2 w-full"
+                          onClick={() => handleSetActiveTab("/coach-dashboard/programs")}
+                        >
+                          <SquareDashedKanban className="h-5 mr-2" />
+                          Manage Programs
+                        </Link>
+                      </li>
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </li>
           </ul >
         </nav >
