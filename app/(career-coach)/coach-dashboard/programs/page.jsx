@@ -9,6 +9,7 @@ import axios from 'axios';
 import ProgramSkeleton from './ProgramSkeleton';
 import { GetTokens } from '@/app/actions';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
 
 function Programs() {
     const [programs, setPrograms] = useState([]);
@@ -27,24 +28,37 @@ function Programs() {
     }
 
     const handleDeleteProgram = async (id) => {
+        const result = await Swal.fire({
+            title: "Delete Program?",
+            text: "Are you sure you want to delete this program?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        });
+
         const { accessToken } = await GetTokens()
-        toast.promise(
-            axios.delete(`/api/deleteProgram/${id}`, { headers: { Authorization: `Bearer ${accessToken?.value}` } }).then((response) => {
-                console.log(response.status)
-                if (response.status) {
-                    handlefilterProgram(id);
+
+        if (result.isConfirmed) {
+            toast.promise(
+                axios.delete(`/api/deleteProgram/${id}`, { headers: { Authorization: `Bearer ${accessToken?.value}` } }).then((response) => {
+                    console.log(response.status)
+                    if (response.status) {
+                        handlefilterProgram(id);
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    throw err
                 }
-            }).catch(err => {
-                console.log(err)
-                throw err
-            }
-            ),
-            {
-                pending: "Deleting program",
-                success: "Program deleted",
-                error: "Error deleting program",
-            }
-        );
+                ),
+                {
+                    pending: "Deleting program",
+                    success: "Program deleted",
+                    error: "Error deleting program",
+                }
+            );
+        }
     }
 
     const handlefilterProgram = (id) => {
@@ -74,26 +88,23 @@ function Programs() {
                         <>
                             {
                                 programs.length > 0 ? programs.map((program) => (
-                                    <Card key={program.id} className='flex flex-col overflow-hidden'>
-                                        <div className='relative h-0 pb-[70%]'>
+                                    <Card key={program.id} className='flex flex-col overflow-hidden  w-[330px]'>
+                                        <div className='relative h-[220px]'>
                                             <img
                                                 src={program.programImage}
                                                 alt={program.title}
-                                                layout='fill'
-                                                objectFit='cover'
+                                                className='w-full h-full border object-cover'
                                             />
-
                                             {
                                                 program.isapproved ? (
                                                     <span className='absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-md text-xs'>Approved</span>
-                                                ): (
+                                                ) : (
                                                     <span className='absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs'>Pending</span>
                                                 )
-                                                }
-
+                                            }
                                         </div>
-                                        <CardHeader>
-                                            <CardTitle className='text-lg'>{program.title}</CardTitle>
+                                        <CardHeader className='px-5 py-2'>
+                                            <CardTitle className='text-lg '>{program.title}</CardTitle>
                                         </CardHeader>
                                         <CardContent className='flex-grow h-20 overflow-hidden'>
                                             <p className='text-sm text-muted-foreground h-full line-clamp-3'>{program.description}</p>
