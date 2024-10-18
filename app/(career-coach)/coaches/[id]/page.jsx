@@ -257,19 +257,16 @@ const CoachDetailsPage = () => {
       if (response.status === 200) {
         updateSingleCoach(response.data.coach);
       }
+      console.log(response.data)
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleFetchCoachProgramById = async (id) => {
-    const { accessToken } = await GetTokens();
+    // const { accessToken } = await GetTokens();
     try {
-      const response = await axios.get(`/api/getCoachProgram/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken.value}`,
-        },
-      });
+      const response = await axios.get(`/api/getCoachProgram/${id}`);
       setProgramData(response?.data?.programs);
       setIsLoading(false);
       if (response?.data?.programs.length > 0) {

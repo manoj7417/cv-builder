@@ -4,22 +4,12 @@ import { serverInstance } from "@/lib/serverApi";
 export async function GET(req, { params }) {
   try {
     const { id } = params;
-    const token = req.headers.get("Authorization");
 
     // Ensure that the token is present
-    if (!token) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+
 
     // Make the GET request to your server instance
-    const response = await serverInstance.get(`/coach/programByCoachId/${id}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const response = await serverInstance.get(`/coach/programByCoachId/${id}`);
 
     return new Response(JSON.stringify(response.data), {
       status: response.status || 200,
