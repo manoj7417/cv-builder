@@ -264,13 +264,8 @@ const CoachDetailsPage = () => {
   };
 
   const handleFetchCoachProgramById = async (id) => {
-    const { accessToken } = await GetTokens();
     try {
-      const response = await axios.get(`/api/getCoachProgram/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken.value}`,
-        },
-      });
+      const response = await axios.get(`/api/getCoachProgram/${id}`);
       setProgramData(response?.data?.programs);
       setIsLoading(false);
       if (response?.data?.programs.length > 0) {
@@ -331,11 +326,10 @@ const CoachDetailsPage = () => {
                             {programData.map((program, index) => (
                               <li key={program._id}>
                                 <button
-                                  className={`w-full text-left p-2 ${
-                                    activeProgramTab === program._id
+                                  className={`w-full text-left p-2 ${activeProgramTab === program._id
                                       ? "bg-gray-200 font-bold"
                                       : "text-gray-600"
-                                  }`}
+                                    }`}
                                   onClick={() =>
                                     handleProgramTabClick(program._id)
                                   }>
@@ -390,20 +384,18 @@ const CoachDetailsPage = () => {
                 id='blog_tab_page_head'
                 className='flex border-b border-gray-300 mb-5'>
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "programs"
+                  className={`cursor-pointer p-3 ${activeTab === "programs"
                       ? "font-bold border-b-2 border-[#FF6636]"
                       : "text-gray-500"
-                  }`}
+                    }`}
                   onClick={() => handleTabClick("programs")}>
                   Enroll in Program
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "appointment"
+                  className={`cursor-pointer p-3 ${activeTab === "appointment"
                       ? "font-bold border-b-2 border-[#FF6636]"
                       : "text-gray-500"
-                  }`}
+                    }`}
                   onClick={() => handleTabClick("appointment")}>
                   Book An Appointment
                 </div>
