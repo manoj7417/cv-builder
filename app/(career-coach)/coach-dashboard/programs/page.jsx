@@ -1,57 +1,113 @@
+"use client"
 import { Button } from '@/components/ui/button'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CirclePlus, Pencil, Trash2 } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const samplePrograms = [
-    { id: 1, title: 'Web Development Bootcamp', description: 'Learn full-stack web development in 12 weeks.', image: '/placeholder.svg?height=400&width=600' },
-    { id: 2, title: 'Data Science Fundamentals', description: 'Master the basics of data analysis and machine learning.', image: '/placeholder.svg?height=400&width=600' },
-    { id: 3, title: 'UX/UI Design Course', description: 'Create stunning user interfaces and experiences.', image: '/placeholder.svg?height=400&width=600' },
-    { id: 4, title: 'Mobile App Development', description: 'Build iOS and Android apps using React Native.', image: '/placeholder.svg?height=400&width=600' },
-    { id: 5, title: 'Cybersecurity Essentials', description: 'Learn to protect systems and networks from cyber threats.', image: '/placeholder.svg?height=400&width=600' },
-    { id: 6, title: 'Cloud Computing Fundamentals', description: 'Master cloud services and deployment models.', image: '/placeholder.svg?height=400&width=600' },
-]
+import axios from 'axios';
+import ProgramSkeleton from './ProgramSkeleton';
+import { GetTokens } from '@/app/actions';
+import { toast } from 'react-toastify';
 
 function Programs() {
+    const [programs, setPrograms] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const handleGetPrograms = async () => {
+        try {
+            const response = await axios.get('/api/getPrograms');
+            if (response.status === 200) {
+                setPrograms(response.data.programs);
+            }
+        } catch (error) {
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const handleDeleteProgram = async (id) => {
+        const { accessToken } = await GetTokens()
+        toast.promise(
+            axios.delete(`/api/deleteProgram/${id}`, { headers: { Authorization: `Bearer ${accessToken?.value}` } }).then((response) => {
+                console.log(response.status)
+                if (response.status) {
+                    handlefilterProgram(id);
+                }
+            }).catch(err => { throw err }
+            ),
+            {
+                pending: "Deleting program",
+                success: "Program deleted",
+                error: "Error deleting program",
+            }
+        );
+    }
+
+    const handlefilterProgram = (id) => {
+        setPrograms(programs.filter((program) => program._id !== id))
+    }
+
+    useEffect(() => {
+        handleGetPrograms()
+    }, [])
+
     return (
         <div className='w-full min-h-screen p-10'>
             <div className='w-full h-full'>
                 <div className='w-full flex justify-end'>
-                    <Link href='/coach-dashboard/create-program'>
+                    <Link href='/coach-dashboard/programs/create'>
                         <Button >New Program <CirclePlus className='h-5 ml-1' /></Button>
                     </Link>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10'>
-                    {samplePrograms.map((program) => (
-                        <Card key={program.id} className='flex flex-col overflow-hidden'>
-                            <div className='relative h-0 pb-[70%]'>
-                                <Image
-                                    src={program.image}
-                                    alt={program.title}
-                                    layout='fill'
-                                    objectFit='cover'
-                                />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className='text-lg'>{program.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent className='flex-grow'>
-                                <p className='text-sm text-muted-foreground'>{program.description}</p>
-                            </CardContent>
-                            <CardFooter className='flex justify-end space-x-2'>
-                                <Button variant='outline' size='sm' className='text-blue-950 hover:bg-blue-950 hover:text-white'>
-                                    <Pencil className='h-4 w-4 mr-2' />
-                                    Edit
-                                </Button>
-                                <Button variant='outline' size='sm' className='text-red-600 hover:bg-red-600 hover:text-white'>
-                                    <Trash2 className='h-4 w-4 mr-2' />
-                                    Delete
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                    ))}
+                    {isLoading ? (
+                        <>
+                            <ProgramSkeleton />
+                            <ProgramSkeleton />
+                            <ProgramSkeleton />
+                        </>
+                    ) : (
+                        <>
+                            {
+                                programs.length > 0 ? programs.map((program) => (
+                                    <Card key={program.id} className='flex flex-col overflow-hidden'>
+                                        <div className='relative h-0 pb-[70%]'>
+                                            <img
+                                                src={program.programImage}
+                                                alt={program.title}
+                                                layout='fill'
+                                                objectFit='cover'
+                                            />
+                                        </div>
+                                        <CardHeader>
+                                            <CardTitle className='text-lg'>{program.title}</CardTitle>
+                                        </CardHeader>
+                                        <CardContent className='flex-grow'>
+                                            <p className='text-sm text-muted-foreground'>{program.description}</p>
+                                        </CardContent>
+                                        <CardFooter className='flex justify-end space-x-2'>
+                                            <Link href={`/coach-dashboard/programs/edit/${program._id}`}>
+                                                <Button variant='outline' size='sm' className='text-blue-950 hover:bg-blue-950 hover:text-white'>
+                                                    <Pencil className='h-4 w-4 mr-2' />
+                                                    Edit
+                                                </Button>
+                                            </Link>
+                                            <Button variant='outline' size='sm' className='text-red-600 hover:bg-red-600 hover:text-white' onClick={() => handleDeleteProgram(program._id)}>
+                                                <Trash2 className='h-4 w-4 mr-2' />
+                                                Delete
+                                            </Button>
+                                        </CardFooter>
+                                    </Card>
+                                ))
+                                    :
+                                    <Card className='flex flex-col overflow-hidden '>
+                                        <CardContent className='flex items-center justify-center h-[200px]'>
+                                            <p className='text-lg text-muted-foreground font-bold '>No Programs found</p>
+                                        </CardContent>
+                                    </Card>
+                            }
+                        </>
+                    )}
                 </div>
             </div>
         </div>
