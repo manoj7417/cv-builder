@@ -292,6 +292,32 @@ const CoachDetailsPage = () => {
     setVideoUrl(video);
   };
 
+  const handleBuyProgram = async (course) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push(`/login?redirect=/coaches/${id}`);
+    }
+    try {
+      const response = await axios.post('/api/buyprogram', {
+        programId: course._id,
+        coachId: course.coachId,
+        amount: course.amount,
+        currency: "USD",
+        success_url: window.location,
+        cancel_url: window.location
+      }, {
+        headers: {
+          Authorization: `Bearer ${accessToken?.value}`
+        }
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+      toast.error("Error buying program");
+    }
+  }
+  
+
   useEffect(() => {
     getGeoInfo();
   }, []);
@@ -596,8 +622,8 @@ const CoachDetailsPage = () => {
                                       id="row3"
                                       className="flex justify-between p-3 border-b-2 border-gray-300"
                                     >
-                                      <div className="flex items-center space-x-1">
-                                        <Button className="w-[250px]">Buy Now</Button>
+                                      <div className="flex items-center space-x-1 justify-center w-full">
+                                        <Button className="w-[250px]" onClick={() => handleBuyProgram(course)}>Buy Now</Button>
                                       </div>
                                     </div>
 
