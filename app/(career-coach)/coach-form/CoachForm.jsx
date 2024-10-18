@@ -327,6 +327,9 @@ const CoachForm = () => {
   //START-COACH PROFILE VIDEO UPLOAD
   const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
 
+
+  console.log("profileVideo:::",profileVideo)
+
   const handleInputChange = (e) => {
     setprofileVideo(e.target.value); // Update the state with the input value
   };
