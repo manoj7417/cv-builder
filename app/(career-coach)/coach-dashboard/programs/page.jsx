@@ -88,15 +88,13 @@ function Programs() {
                         <>
                             {
                                 programs.length > 0 ? programs.map((program) => (
-                                    <Card key={program.id} className='flex flex-col overflow-hidden'>
-                                        <div className='relative h-0 pb-[70%]'>
+                                    <Card key={program.id} className='flex flex-col overflow-hidden  w-[330px]'>
+                                        <div className='relative h-[220px]'>
                                             <img
                                                 src={program.programImage}
                                                 alt={program.title}
-                                                layout='fill'
-                                                objectFit='cover'
+                                                className='w-full h-full border object-cover'
                                             />
-
                                             {
                                                 program.isapproved ? (
                                                     <span className='absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-md text-xs'>Approved</span>
@@ -104,10 +102,9 @@ function Programs() {
                                                     <span className='absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs'>Pending</span>
                                                 )
                                             }
-
                                         </div>
-                                        <CardHeader>
-                                            <CardTitle className='text-lg'>{program.title}</CardTitle>
+                                        <CardHeader className='px-5 py-2'>
+                                            <CardTitle className='text-lg '>{program.title}</CardTitle>
                                         </CardHeader>
                                         <CardContent className='flex-grow h-20 overflow-hidden'>
                                             <p className='text-sm text-muted-foreground h-full line-clamp-3'>{program.description}</p>
