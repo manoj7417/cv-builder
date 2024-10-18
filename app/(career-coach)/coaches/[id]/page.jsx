@@ -592,7 +592,7 @@ const CoachDetailsPage = () => {
                       </>
                     ) : (
                       <div className='mt-5 text-gray-600 text-xl text-center'>
-                        No data available
+                        No programs yet explore more coaches <a className="font-bold" href="/coaches">View all coaches</a>
                       </div>
                     )}
                   </div>
