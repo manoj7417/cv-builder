@@ -45,7 +45,6 @@ function CreateProgram() {
     const profileImage = watch("programImage");
     const programVideo = watch("programVideo");
     const handleCreateProgram = async (data) => {
-        console.log(data)
         const { accessToken } = await GetTokens();
         try {
             let isValid = true;

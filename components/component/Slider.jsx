@@ -11,6 +11,7 @@ import { useUserStore } from "@/app/store/UserStore";
 import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import axios from "axios";
 
 export const templateType = {
   free: "Free",
@@ -180,8 +181,7 @@ export default function Slider() {
 
   const handleCreateCV = async (template) => {
     const { accessToken } = await GetTokens();
-
-    if (!accessToken) {
+    if (!accessToken && !accessToken?.value) {
       toast("Please login to use this template");
       router.push("/login");
       setIsLoading(false);
@@ -217,7 +217,7 @@ export default function Slider() {
           <br />
           <span className="flex text-[#2C98CA] lg:text-5xl text-3xl justify-center mt-2">
             Perfection
-            <Image priority src="/Vector.svg" height={37} width={39}  alt="vector"/>{" "}
+            <Image priority src="/Vector.svg" height={37} width={39} alt="vector" />{" "}
           </span>
         </h2>
         <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">
