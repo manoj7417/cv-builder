@@ -14,8 +14,9 @@ function Programs() {
     const [programs, setPrograms] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const handleGetPrograms = async () => {
+        const { accessToken } = await GetTokens()
         try {
-            const response = await axios.get('/api/getPrograms');
+            const response = await axios.get('/api/getAllcoachProgram', { headers: { Authorization: `Bearer ${accessToken?.value}` } });
             if (response.status === 200) {
                 setPrograms(response.data.programs);
             }
@@ -33,7 +34,10 @@ function Programs() {
                 if (response.status) {
                     handlefilterProgram(id);
                 }
-            }).catch(err => { throw err }
+            }).catch(err => {
+                console.log(err)
+                throw err
+            }
             ),
             {
                 pending: "Deleting program",
@@ -78,14 +82,23 @@ function Programs() {
                                                 layout='fill'
                                                 objectFit='cover'
                                             />
+
+                                            {
+                                                program.isapproved ? (
+                                                    <span className='absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-md text-xs'>Approved</span>
+                                                ): (
+                                                    <span className='absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs'>Pending</span>
+                                                )
+                                                }
+
                                         </div>
                                         <CardHeader>
                                             <CardTitle className='text-lg'>{program.title}</CardTitle>
                                         </CardHeader>
-                                        <CardContent className='flex-grow'>
-                                            <p className='text-sm text-muted-foreground'>{program.description}</p>
+                                        <CardContent className='flex-grow h-20 overflow-hidden'>
+                                            <p className='text-sm text-muted-foreground h-full line-clamp-3'>{program.description}</p>
                                         </CardContent>
-                                        <CardFooter className='flex justify-end space-x-2'>
+                                        <CardFooter className='flex justify-end space-x-2 items-center py-4'>
                                             <Link href={`/coach-dashboard/programs/edit/${program._id}`}>
                                                 <Button variant='outline' size='sm' className='text-blue-950 hover:bg-blue-950 hover:text-white'>
                                                     <Pencil className='h-4 w-4 mr-2' />

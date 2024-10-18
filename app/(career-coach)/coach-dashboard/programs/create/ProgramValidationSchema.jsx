@@ -36,6 +36,10 @@ const dayValidationSchema = Yup.object().shape({
 
 export const ProgramValidationSchema = Yup.object().shape({
     title: Yup.string().required('Program title is required'),
+    amount: Yup.number()
+        .transform((value, originalValue) => originalValue === '' ? undefined : value)
+        .required('amount is required')
+        .positive('amount must be greater than $1'),
     description: Yup.string().required('Program description is required'),
     programImage: Yup.string().url('Invalid image URL').required('Program Image URL is required'),
     programVideo: Yup.string().url('Invalid video URL').optional(),

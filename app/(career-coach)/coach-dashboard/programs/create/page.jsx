@@ -45,6 +45,7 @@ function CreateProgram() {
     const profileImage = watch("programImage");
     const programVideo = watch("programVideo");
     const handleCreateProgram = async (data) => {
+        console.log(data)
         const { accessToken } = await GetTokens();
         try {
             let isValid = true;
@@ -140,7 +141,6 @@ function CreateProgram() {
                     </div>
                     <div className='my-2'>
                         <Label>Program Image<span className='text-red-500 ml-1'>*</span></Label>
-
                         {
                             profileImage ?
                                 <div className='flex items-center py-4'>
@@ -181,6 +181,10 @@ function CreateProgram() {
                                 <Input placeholder='Enter video url' className='my-2' {...register("programVideo")} />
                         }
                         <p className='text-red-500 text-sm ml-2'>{errors.programVideo?.message}</p>
+                    </div>
+                    <div className='py-2'>
+                        <Label>Amount ($)</Label>
+                        <Input type='number' className='my-2' {...register("amount")} placeholder='Enter amount in dollars ($)' min={'1'} />
                     </div>
                     <PrerequisitesFieldArray control={control} register={register} errors={errors} name={"prerequisites"} />
                     <DaysFieldArray control={control} register={register} errors={errors} />
