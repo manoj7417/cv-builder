@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import { ImSpinner3 } from "react-icons/im";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 import { toast } from "react-toastify";
-
 export default function Page() {
   const [showIntro, setShowIntro] = useState(false);
   const [isValid, setIsValid] = useState(false);
