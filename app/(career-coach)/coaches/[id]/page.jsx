@@ -24,7 +24,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { GetTokens } from "@/app/actions";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import { ImSpinner3 } from "react-icons/im";
 import { Skeleton } from "@/components/ui/skeleton";
 import ReactPlayer from "react-player";
@@ -46,6 +46,7 @@ import {
 } from "@/components/ui/accordion";
 import { FaPlayCircle, FaFileAlt, FaTrophy } from "react-icons/fa";
 import Link from "next/link";
+
 /************************************************ */
 
 const locales = {
@@ -81,8 +82,8 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
+  const [videoUrl, setVideoUrl] = useState("");
 
-  
 
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
@@ -258,7 +259,6 @@ const CoachDetailsPage = () => {
       if (response.status === 200) {
         updateSingleCoach(response.data.coach);
       }
-      console.log(response.data)
     } catch (error) {
       console.error(error);
     }
@@ -279,17 +279,43 @@ const CoachDetailsPage = () => {
 
   const calculateTotalTimeInHours = (program) => {
     if (!program || !program.days) return 0;
-    
+
     const totalTimeInMinutes = program.days.reduce((total, day) => {
       return total + (day.timeToComplete || 0); // Add time for each day
     }, 0);
-    
+
     return (totalTimeInMinutes / 60).toFixed(1); // Convert minutes to hours and format it
   };
 
   const showVideo = (video) => {
-   console.log(video);
+    setVideoUrl(video);
   };
+
+  const handleBuyProgram = async (course) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push(`/login?redirect=/coaches/${id}`);
+    }
+    try {
+      const response = await axios.post('/api/buyprogram', {
+        programId: course._id,
+        coachId: course.coachId,
+        amount: course.amount,
+        currency: "USD",
+        success_url: window.location,
+        cancel_url: window.location
+      }, {
+        headers: {
+          Authorization: `Bearer ${accessToken?.value}`
+        }
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+      toast.error("Error buying program");
+    }
+  }
+  
 
   useEffect(() => {
     getGeoInfo();
@@ -305,6 +331,28 @@ const CoachDetailsPage = () => {
 
   return (
     <>
+      {/* {
+        isPlayingVideo &&
+        <FullScreen handle={handle}>
+          <ReactPlayer
+            url={singleCoach?.video} />
+        </FullScreen>
+      } */}
+      {
+        videoUrl &&
+        <div className="bg-black/75 z-[200] h-screen w-full sticky top-0 ">
+          <div className="relative">
+            <X className="text-white absolute top-5 right-5 h-10 w-10 text-xl  cursor-pointer" onClick={() => setVideoUrl('')} />
+            <div className=" h-screen w-full p-20">
+
+              <ReactPlayer
+                width={"100%"}
+                height={'100%'}
+                url={videoUrl} />
+            </div>
+          </div>
+        </div>
+      }
       <ResumeHeader />
       <div className='mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center '></div>
       <div className='max-w-7xl mx-auto'>
@@ -318,47 +366,46 @@ const CoachDetailsPage = () => {
               className='w-full lg:w-[25%] bg-white h-full relative'>
               {activeTab === "programs" && (
                 <>
-                <div className="tabs_content">
-                  <div>
-                    <div className="p-5">
-                      <div className="border-b border-[#FFDDD1] p-5">
-                        <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
-                          All Programs
-                        </h3>
-                      </div>
-                      {isLoading ? (
-                        <ul className="space-y-2 mt-5">
-                          {[1, 2, 3, 4].map((_, index) => (
-                            <li key={index}>
-                              <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : programData.length > 0 ? ( // Check if programData has items
-                        <ul className="space-y-2 mt-5">
-                          {programData.map((program) => (
-                            <li key={program._id}>
-                              <button
-                                className={`w-full text-left p-2 ${
-                                  activeProgramTab === program._id
+                  <div className="tabs_content">
+                    <div>
+                      <div className="p-5">
+                        <div className="border-b border-[#FFDDD1] p-5">
+                          <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
+                            All Programs
+                          </h3>
+                        </div>
+                        {isLoading ? (
+                          <ul className="space-y-2 mt-5">
+                            {[1, 2, 3, 4].map((_, index) => (
+                              <li key={index}>
+                                <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : programData.length > 0 ? ( // Check if programData has items
+                          <ul className="space-y-2 mt-5">
+                            {programData.map((program) => (
+                              <li key={program._id}>
+                                <button
+                                  className={`w-full text-left p-2 ${activeProgramTab === program._id
                                     ? "bg-gray-200 font-bold"
                                     : "text-gray-600"
-                                }`}
-                                onClick={() => handleProgramTabClick(program._id)}
-                              >
-                                {program.title} {/* Display the program title here */}
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <div className="mt-5 text-gray-600 text-xl">
-                          No data available
-                        </div> // Render "No data available" message if programData is empty
-                      )}
+                                    }`}
+                                  onClick={() => handleProgramTabClick(program._id)}
+                                >
+                                  {program.title} {/* Display the program title here */}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <div className="mt-5 text-gray-600 text-xl">
+                            No data available
+                          </div> // Render "No data available" message if programData is empty
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
                 </>
               )}
 
@@ -398,16 +445,16 @@ const CoachDetailsPage = () => {
                 className='flex border-b border-gray-300 mb-5'>
                 <div
                   className={`cursor-pointer p-3 ${activeTab === "programs"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
                     }`}
                   onClick={() => handleTabClick("programs")}>
                   Enroll in Program
                 </div>
                 <div
                   className={`cursor-pointer p-3 ${activeTab === "appointment"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
                     }`}
                   onClick={() => handleTabClick("appointment")}>
                   Book An Appointment
@@ -449,153 +496,153 @@ const CoachDetailsPage = () => {
                       </>
                     ) : programData?.length > 0 ? (
                       <>
-                    {programData
-                      ?.filter((program) => program._id === activeProgramTab)
-                      ?.map((course, courseIndex) => {
-                        const totalTimeInHours = calculateTotalTimeInHours(course); // Calculate total time for the selected course
+                        {programData
+                          ?.filter((program) => program._id === activeProgramTab)
+                          ?.map((course, courseIndex) => {
+                            const totalTimeInHours = calculateTotalTimeInHours(course); // Calculate total time for the selected course
 
-                        // Construct the course details array inside the map function where the total time is available
-                        const courseDetails = [
-                          {
-                            icon: <FaVideo className="text-blue-500" />,
-                            text: `${totalTimeInHours} hours on-demand videos`,
-                          },
-                          {
-                            icon: <FaMobileAlt className="text-purple-500" />,
-                            text: "Access on mobile and TV",
-                          },
-                        ];
+                            // Construct the course details array inside the map function where the total time is available
+                            const courseDetails = [
+                              {
+                                icon: <FaVideo className="text-blue-500" />,
+                                text: `${totalTimeInHours} hours on-demand videos`,
+                              },
+                              {
+                                icon: <FaMobileAlt className="text-purple-500" />,
+                                text: "Access on mobile and TV",
+                              },
+                            ];
 
-                        return (
-                          <div className="tabs_content flex lg:flex-row flex-col" key={courseIndex}>
-                            <div className="program_content_1 lg:w-[60%] w-full">
-                              <h2 className="text-xl font-bold mb-4">{course?.title}</h2>
-                              <p className="text-sm">{course?.description}</p>
-                              <div className="weekly_content pr-3 mt-5">
-                                <h2 className="text-xl font-bold mb-1">Course content</h2>
-                                <div className="course_content">
-                                  <ul className="flex text-xs gap-2">
-                                    <li>{course.sections} sections</li>
-                                    <li>• {course.lectures} lectures</li>
-                                    <li>• {totalTimeInHours} total hours</li>
-                                  </ul>
+                            return (
+                              <div className="tabs_content flex lg:flex-row flex-col" key={courseIndex}>
+                                <div className="program_content_1 lg:w-[60%] w-full">
+                                  <h2 className="text-xl font-bold mb-4">{course?.title}</h2>
+                                  <p className="text-sm">{course?.description}</p>
+                                  <div className="weekly_content pr-3 mt-5">
+                                    <h2 className="text-xl font-bold mb-1">Course content</h2>
+                                    <div className="course_content">
+                                      <ul className="flex text-xs gap-2">
+                                        <li>{course.sections} sections</li>
+                                        <li>• {course.lectures} lectures</li>
+                                        <li>• {totalTimeInHours} total hours</li>
+                                      </ul>
+                                    </div>
+
+                                    <Accordion
+                                      type="single"
+                                      collapsible
+                                      defaultValue="item-0"
+                                      className="w-full my-2 border border-gray-300 p-4 rounded-md"
+                                    >
+                                      {course?.days?.map((item, index) => (
+                                        <AccordionItem
+                                          key={index}
+                                          value={`item-${index}`}
+                                          className="py-5 border-b border-gray-200"
+                                        >
+                                          <AccordionTrigger className="font-bold text-xl">
+                                            {item.title}
+                                          </AccordionTrigger>
+                                          <AccordionContent>
+                                            <ul className="space-y-2 mt-5">
+                                              {item.subModules.map((lesson, idx) => (
+                                                <li
+                                                  key={idx}
+                                                  className="flex items-center space-x-3 py-2"
+                                                >
+                                                  <span className="flex-1 text-gray-700">
+                                                    {lesson.title}
+                                                  </span>
+                                                  {lesson.timeToComplete && (
+                                                    <span className="text-gray-500">
+                                                      {lesson.timeToComplete} min
+                                                    </span>
+                                                  )}
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          </AccordionContent>
+                                        </AccordionItem>
+                                      ))}
+                                    </Accordion>
+
+                                    <div className="requirements">
+                                      {course?.prerequisites?.length > 0 && (
+                                        <div className="prerequisites">
+                                          <h3 className="text-xl font-bold my-4">Prerequisites</h3>
+                                          <ul>
+                                            {course.prerequisites.map((prerequisite, idx) => (
+                                              <li key={prerequisite._id} className="text-sm my-2">
+                                                <Link
+                                                  href={prerequisite.attachmentUrl}
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+                                                  className="text-blue-500 underline"
+                                                >
+                                                  {prerequisite.description} ({prerequisite.type})
+                                                </Link>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
                                 </div>
 
-                                <Accordion
-                                  type="single"
-                                  collapsible
-                                  defaultValue="item-0"
-                                  className="w-full my-2 border border-gray-300 p-4 rounded-md"
-                                >
-                                  {course?.days?.map((item, index) => (
-                                    <AccordionItem
-                                      key={index}
-                                      value={`item-${index}`}
-                                      className="py-5 border-b border-gray-200"
+                                <div className="program_content_video lg:w-[40%] w-full lg:order-none order-first">
+                                  <div className="border border-[#E9EAF0]">
+                                    <div>
+                                      <img
+                                        src={course?.programImage || "/defaultImage.png"} // Dynamic image here
+                                        alt={course?.title || "Program Image"}
+                                        className="w-full"
+                                      />
+                                    </div>
+                                    <div
+                                      id="row3"
+                                      className="flex justify-between text-sm text-gray-500 p-3"
                                     >
-                                      <AccordionTrigger className="font-bold text-xl">
-                                        {item.title}
-                                      </AccordionTrigger>
-                                      <AccordionContent>
-                                        <ul className="space-y-2 mt-5">
-                                          {item.subModules.map((lesson, idx) => (
-                                            <li
-                                              key={idx}
-                                              className="flex items-center space-x-3 py-2"
-                                            >
-                                              <span className="flex-1 text-gray-700">
-                                                {lesson.title}
-                                              </span>
-                                              {lesson.timeToComplete && (
-                                                <span className="text-gray-500">
-                                                  {lesson.timeToComplete} min
-                                                </span>
-                                              )}
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      </AccordionContent>
-                                    </AccordionItem>
-                                  ))}
-                                </Accordion>
+                                      <div className="flex flex-col items-start cursor-pointer" onClick={() => showVideo(course?.programVideo)}>
+                                        {
+                                          course?.programVideo ?
+                                            <span className="flex items-center text-blue-700">
+                                              Watch program demo <FaVideo className="ml-1 text-blue-500" />
+                                            </span> :
+                                            <div></div>
+                                        }
 
-                                <div className="requirements">
-                                  {course?.prerequisites?.length > 0 && (
-                                    <div className="prerequisites">
-                                      <h3 className="text-xl font-bold my-4">Prerequisites</h3>
-                                      <ul>
-                                        {course.prerequisites.map((prerequisite, idx) => (
-                                          <li key={prerequisite._id} className="text-sm my-2">
-                                            <Link
-                                              href={prerequisite.attachmentUrl}
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                              className="text-blue-500 underline"
-                                            >
-                                              {prerequisite.description} ({prerequisite.type})
-                                            </Link>
+                                        <span className="text-[#1D2026] font-bold">
+                                          Price: ${course?.amount}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div
+                                      id="row3"
+                                      className="flex justify-between p-3 border-b-2 border-gray-300"
+                                    >
+                                      <div className="flex items-center space-x-1 justify-center w-full">
+                                        <Button className="w-[250px]" onClick={() => handleBuyProgram(course)}>Buy Now</Button>
+                                      </div>
+                                    </div>
+
+                                    {/* Course Details */}
+                                    <div className="course-details-list p-5">
+                                      <h2 className="text-xl font-semibold mb-4">Course Details</h2>
+                                      <ul className="space-y-3">
+                                        {courseDetails.map((detail, index) => (
+                                          <li key={index} className="flex items-center space-x-2">
+                                            {detail.icon}
+                                            <span className="text-gray-700">{detail.text}</span>
                                           </li>
                                         ))}
                                       </ul>
                                     </div>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="program_content_video lg:w-[40%] w-full lg:order-none order-first">
-                              <div className="border border-[#E9EAF0]">
-                                <div>
-                                  <img
-                                    src={course?.programImage || "/defaultImage.png"} // Dynamic image here
-                                    alt={course?.title || "Program Image"}
-                                    className="w-full"
-                                  />
-                                </div>
-                                <div
-                                  id="row3"
-                                  className="flex justify-between text-sm text-gray-500 p-3"
-                                >
-                                  <div className="flex flex-col items-start cursor-pointer" onClick={() => showVideo(course?.programVideo)}>
-                                    {
-                                      course?.programVideo ?
-                                      <span className="flex items-center text-blue-700">
-                                      Watch program demo <FaVideo className="ml-1 text-blue-500"/>
-                                    </span>:
-                                    <div></div>
-                                    }
-                                   
-                                    <span className="text-[#1D2026] font-bold">
-                                      Price: ${course?.amount}
-                                    </span>
                                   </div>
                                 </div>
-                                <div
-                                  id="row3"
-                                  className="flex justify-between p-3 border-b-2 border-gray-300"
-                                >
-                                  <div className="flex items-center space-x-1">
-                                    <Button className="w-[250px]">Buy Now</Button>
-                                  </div>
-                                </div>
-
-                                {/* Course Details */}
-                                <div className="course-details-list p-5">
-                                  <h2 className="text-xl font-semibold mb-4">Course Details</h2>
-                                  <ul className="space-y-3">
-                                    {courseDetails.map((detail, index) => (
-                                      <li key={index} className="flex items-center space-x-2">
-                                        {detail.icon}
-                                        <span className="text-gray-700">{detail.text}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
                               </div>
-                            </div>
-                          </div>
-                        );
-                      })}
+                            );
+                          })}
                       </>
                     ) : (
                       <div className='mt-5 text-gray-600 text-xl text-center'>
