@@ -82,8 +82,36 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
+  const [purchasedPrograms, setPurchasedPrograms] = useState({}); 
   const [videoUrl, setVideoUrl] = useState("");
+  const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
 
+  const checkCoursePurchased = async (programId) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push(`/login?redirect=/coaches/${id}`);
+    }
+    try {
+      const response = await axios.post(
+        "/api/programStatus",
+        { programId },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken.value}`,
+          },
+        }
+      );
+
+      if (response.data.purchased) {
+        setPurchasedPrograms((prevState) => ({
+          ...prevState,
+          [programId]: true, // Set purchased status for the specific program
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleTabClick = async (tab) => {
     const { accessToken } = await GetTokens();
@@ -269,8 +297,15 @@ const CoachDetailsPage = () => {
       const response = await axios.get(`/api/getCoachProgram/${id}`);
       setProgramData(response?.data?.programs);
       setIsLoading(false);
+      
       if (response?.data?.programs.length > 0) {
-        setActiveProgramTab(response?.data?.programs[0]._id); // Set the first program as default active
+        // Set the first program as the default active tab
+        setActiveProgramTab(response?.data?.programs[0]._id);
+        
+        // Check if each program is purchased
+        response?.data?.programs.forEach((program) =>
+          checkCoursePurchased(program._id)
+        );
       }
     } catch (error) {
       console.log(error);
@@ -302,20 +337,21 @@ const CoachDetailsPage = () => {
         coachId: course.coachId,
         amount: course.amount,
         currency: "USD",
-        success_url: window.location,
-        cancel_url: window.location
+        success_url: window.location.href,
+        cancel_url: window.location.href
       }, {
         headers: {
           Authorization: `Bearer ${accessToken?.value}`
         }
-      })
-      console.log(response)
+      });
+    
+      // Open the received URL
+      window.location.href = response.data.url; // Redirect to the URL
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Error buying program");
-    }
+    }    
   }
-  
 
   useEffect(() => {
     getGeoInfo();
@@ -622,7 +658,14 @@ const CoachDetailsPage = () => {
                                       className="flex justify-between p-3 border-b-2 border-gray-300"
                                     >
                                       <div className="flex items-center space-x-1 justify-center w-full">
-                                        <Button className="w-[250px]" onClick={() => handleBuyProgram(course)}>Buy Now</Button>
+                                      {!purchasedPrograms[course._id] ? (
+                                          <Button className="w-[250px]" onClick={() => handleBuyProgram(course)}>
+                                            Buy Now
+                                          </Button>
+                                        ) : (
+                                          <div className="text-green-600 font-bold">Already Purchased</div>
+                                        )}
+
                                       </div>
                                     </div>
 
