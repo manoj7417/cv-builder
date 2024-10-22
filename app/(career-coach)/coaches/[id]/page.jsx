@@ -254,7 +254,9 @@ const CoachDetailsPage = () => {
       date: modalSelectedSlot?.selectedDate?.date,
       slotTime: modalSelectedSlot?.slot,
       success_url: window.location.href,
-      cancel_url: window.location.href
+      cancel_url: window.location.href,
+      currency: "USD",
+      amount: 1
     };
 
     try {
@@ -263,8 +265,8 @@ const CoachDetailsPage = () => {
           Authorization: `Bearer ${accessToken.value}`,
         },
       });
-      if (response.status === 201) {
-        toast.success("Slot booked successfully");
+      if (response.status === 200) {
+        window.location.href = response.data.url
         handleCloseDialog();
       }
     } catch (error) {
