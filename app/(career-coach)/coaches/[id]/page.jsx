@@ -55,6 +55,7 @@ import {
 } from "react-icons/fa";
 
 /************************************************ */
+
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
