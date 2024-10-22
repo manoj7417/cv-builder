@@ -70,7 +70,7 @@ const CoachDetailsPage = () => {
 
   const { singleCoach, filterCoachById, updateSingleCoach } =
     useCoachesDetailStore();
-
+  
   const { id } = useParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("about");
@@ -380,8 +380,6 @@ const CoachDetailsPage = () => {
     handleFetchCoachProgramById(id);
   }, [id]);
 
-  console.log("singleCoach::", singleCoach);
-
   return (
     <>
       {/* {
@@ -417,41 +415,38 @@ const CoachDetailsPage = () => {
               id="blog_left_side"
               className="w-full lg:w-[25%] bg-white h-full relative"
             >
-              {activeTab === "about" && (
-                <>
-                  <div className="tabs_content">
-                    <div>
-                      <div className="p-5">
-                        <div className="border-b border-[#FFDDD1] p-3 mb-4">
-                          <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
-                            About
-                          </h3>
-                        </div>
-                        {isLoading ? (
-                          <ul className="space-y-2 mt-5">
-                            {[1, 2, 3, 4].map((_, index) => (
-                              <li key={index}>
-                                <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : programData.length > 0 ? (
-                          <>
-                            <span className="font-bold mt-5">Coach Bio:</span>{" "}
-                            <p className=" text-gray-600 text-sm mt-2">
-                              {singleCoach?.bio}
-                            </p>
-                          </>
-                        ) : (
-                          <div className="mt-5 text-gray-600 text-xl">
-                            No data available
-                          </div> // Render "No data available" message if programData is empty
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
+            {activeTab === "about" && (
+  <>
+    <div className="tabs_content">
+      <div>
+        <div className="p-5">
+          <div className="border-b border-[#FFDDD1] p-3 mb-4">
+            <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
+              About
+            </h3>
+          </div>
+          {isLoading ? (
+            <ul className="space-y-2 mt-5">
+              {[1, 2, 3, 4].map((_, index) => (
+                <li key={index}>
+                  <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <>
+              <span className="font-bold mt-5">Coach Bio:</span>
+              <p className="text-gray-600 text-sm mt-2">
+                {singleCoach?.bio || "Bio not available."}
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  </>
+)}
+
 
               {activeTab === "programs" && (
                 <>
