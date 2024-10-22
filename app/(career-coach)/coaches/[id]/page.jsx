@@ -433,9 +433,7 @@ const CoachDetailsPage = () => {
                           </ul>
                         ) : programData.length > 0 ? (
                           <>
-                            <span className="font-bold mt-5">
-                              Coach Bio:
-                            </span>{" "}
+                            <span className="font-bold mt-5">Coach Bio:</span>{" "}
                             <p className=" text-gray-600 text-sm mt-2">
                               {singleCoach?.bio}
                             </p>
@@ -597,46 +595,71 @@ const CoachDetailsPage = () => {
                         </h3>
                       </div>
                       <div className="p-5">
-                        <ul className="list-disc list-inside space-y-4">
-                          <li className="text-md flex items-center">
-                            <FaUserGraduate className="mr-2 text-blue-500" />{" "}
-                            {/* Icon with blue color */}
-                            <span className="font-bold">
-                              Coaching Experience:
-                            </span>{" "}
-                            {singleCoach?.experience} yrs
-                          </li>
-                          <li className="text-md flex items-center">
-                            <FaInfoCircle className="mr-2 text-green-500" />{" "}
-                            {/* Icon with green color */}
-                            <span className="font-bold">
-                              Coaching Description:
-                            </span>{" "}
-                            {singleCoach?.coachingDescription}
-                          </li>
-                          <li className="text-md flex items-center">
-                            <FaEnvelope className="mr-2 text-red-500" />{" "}
-                            {/* Icon with red color */}
-                            <span className="font-bold">Coach Email:</span>{" "}
-                            {singleCoach?.email}
-                          </li>
-                          <li className="text-md flex items-center">
-                            <FaStar className="mr-2 text-yellow-500" />{" "}
-                            {/* Icon with yellow color */}
-                            <span className="font-bold">
-                              Coach Skills:
-                            </span>{" "}
-                            {singleCoach?.skills}
-                          </li>
-                          <li className="text-md flex items-center">
-                            <FaChalkboardTeacher className="mr-2 text-purple-500" />{" "}
-                            {/* Icon with purple color */}
-                            <span className="font-bold">
-                              Type of Coaching:
-                            </span>{" "}
-                            {singleCoach?.typeOfCoaching}
-                          </li>
-                        </ul>
+                        <table className="min-w-full bg-white border border-gray-200">
+                          <thead>
+                            <tr className="bg-gray-100">
+                              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-600">
+                                Detail
+                              </th>
+                              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-600">
+                                Information
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="border-b hover:bg-gray-50">
+                              <td className="px-4 py-2 flex items-center">
+                                <FaUserGraduate className="mr-2 text-blue-500" />
+                                <span className="font-bold">
+                                  Coaching Experience:
+                                </span>
+                              </td>
+                              <td className="px-4 py-2">
+                                {singleCoach?.experience} yrs
+                              </td>
+                            </tr>
+                            <tr className="border-b hover:bg-gray-50">
+                              <td className="px-4 py-2 flex items-center">
+                                <FaInfoCircle className="mr-2 text-green-500" />
+                                <span className="font-bold">
+                                  Coaching Description:
+                                </span>
+                              </td>
+                              <td className="px-4 py-2">
+                                {singleCoach?.coachingDescription}
+                              </td>
+                            </tr>
+                            <tr className="border-b hover:bg-gray-50">
+                              <td className="px-4 py-2 flex items-center">
+                                <FaEnvelope className="mr-2 text-red-500" />
+                                <span className="font-bold">Coach Email:</span>
+                              </td>
+                              <td className="px-4 py-2">
+                                {singleCoach?.email}
+                              </td>
+                            </tr>
+                            <tr className="border-b hover:bg-gray-50">
+                              <td className="px-4 py-2 flex items-center">
+                                <FaStar className="mr-2 text-yellow-500" />
+                                <span className="font-bold">Coach Skills:</span>
+                              </td>
+                              <td className="px-4 py-2">
+                                {singleCoach?.skills}
+                              </td>
+                            </tr>
+                            <tr className="border-b hover:bg-gray-50">
+                              <td className="px-4 py-2 flex items-center">
+                                <FaChalkboardTeacher className="mr-2 text-purple-500" />
+                                <span className="font-bold">
+                                  Type of Coaching:
+                                </span>
+                              </td>
+                              <td className="px-4 py-2">
+                                {singleCoach?.typeOfCoaching}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </>
                   )}
