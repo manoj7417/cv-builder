@@ -47,6 +47,7 @@ import dayjs from "dayjs";
 import { Checkbox } from "@/components/ui/checkbox";
 import LanguageSelect from "@/components/component/LanguageSelect";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ImageTemplates = [
   "Template1",
@@ -553,6 +554,7 @@ export default function ResumeForm() {
         setResumeData("sections.summary.content", data);
       }
     } catch (error) {
+      toast.error("Error generating profile summary");
     } finally {
       setIsLoading(false);
       setFormData({
