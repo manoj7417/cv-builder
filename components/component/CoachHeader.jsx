@@ -5,6 +5,7 @@ import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import Link from "next/link";
 
 export function CoachHeader({ id }) {
   const {
@@ -137,7 +138,62 @@ export function CoachHeader({ id }) {
           </div>
           {singleCoach?.socialLinks > 0 && (
             <div id="socialMediaIcons" className="flex space-x-2 justify-end">
-              <img
+              <Link
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/facebook_icon.png"
+                  alt="Facebook"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
+                />
+              </Link>
+              <Link
+                href="https://www.twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/twitter_icon.png"
+                  alt="Twitter"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
+                />
+              </Link>
+              <Link
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/instagram_icon.png"
+                  alt="Instagram"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
+                />
+              </Link>
+              <Link
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/youtube_icon.png"
+                  alt="YouTube"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
+                />
+              </Link>
+              <Link
+                href="https://www.whatsapp.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/whatsApp_icon.png"
+                  alt="WhatsApp"
+                  className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
+                />
+              </Link>
+              {/* <img
                 src="/facebook_icon.png"
                 alt="Facebook"
                 className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
@@ -161,7 +217,7 @@ export function CoachHeader({ id }) {
                 src="/whatsApp_icon.png"
                 alt="WhatsApp"
                 className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
-              />
+              /> */}
             </div>
           )}
         </div>
