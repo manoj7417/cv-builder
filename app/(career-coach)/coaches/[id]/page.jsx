@@ -82,7 +82,7 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
-  const [purchasedPrograms, setPurchasedPrograms] = useState({}); 
+  const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
 
@@ -246,9 +246,12 @@ const CoachDetailsPage = () => {
       notes: data?.message,
       date: modalSelectedSlot?.selectedDate?.date,
       slotTime: modalSelectedSlot?.slot,
+      success_url: window.location.href,
+      cancel_url: window.location.href
     };
+    
     try {
-      const response = await axios.post("/api/confirmSlots", obj, {
+      const response = await axios.post("/api/bookSlot", obj, {
         headers: {
           Authorization: `Bearer ${accessToken.value}`,
         },
@@ -297,11 +300,11 @@ const CoachDetailsPage = () => {
       const response = await axios.get(`/api/getCoachProgram/${id}`);
       setProgramData(response?.data?.programs);
       setIsLoading(false);
-      
+
       if (response?.data?.programs.length > 0) {
         // Set the first program as the default active tab
         setActiveProgramTab(response?.data?.programs[0]._id);
-        
+
         // Check if each program is purchased
         response?.data?.programs.forEach((program) =>
           checkCoursePurchased(program._id)
@@ -344,13 +347,13 @@ const CoachDetailsPage = () => {
           Authorization: `Bearer ${accessToken?.value}`
         }
       });
-    
-      // Open the received URL
-      window.location.href = response.data.url; // Redirect to the URL
+
+
+      window.location.href = response.data.url;
     } catch (error) {
       console.log(error);
       toast.error("Error buying program");
-    }    
+    }
   }
 
   useEffect(() => {
@@ -658,7 +661,7 @@ const CoachDetailsPage = () => {
                                       className="flex justify-between p-3 border-b-2 border-gray-300"
                                     >
                                       <div className="flex items-center space-x-1 justify-center w-full">
-                                      {!purchasedPrograms[course._id] ? (
+                                        {!purchasedPrograms[course._id] ? (
                                           <Button className="w-[250px]" onClick={() => handleBuyProgram(course)}>
                                             Buy Now
                                           </Button>

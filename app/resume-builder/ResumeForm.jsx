@@ -548,8 +548,7 @@ export default function ResumeForm() {
     setIsLoading(true);
     try {
       const response = await axios.post('/api/askBot', { message });
-      const data = JSON.parse(response[0]?.text?.value.split("\n")[2]);
-
+      const data = JSON.parse(response.data[0]?.text?.value.split("\n")[2]);
       if (data) {
         setResumeData("sections.summary.content", data);
       }
@@ -913,10 +912,10 @@ export default function ResumeForm() {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
       : null;
   }
 
@@ -1431,8 +1430,7 @@ export default function ResumeForm() {
                             {item?.jobtitle || item?.employer ? (
                               <p>
                                 {item?.jobtitle &&
-                                  `${item?.jobtitle}${
-                                    item?.employer && ` at `
+                                  `${item?.jobtitle}${item?.employer && ` at `
                                   } `}
                                 {item?.employer}
                               </p>
