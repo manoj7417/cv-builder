@@ -131,7 +131,7 @@ const Sidebar = () => {
               </Link>
             </li>
             {/* Other Items with Custom Icons */}
-            <li className={getLinkClass("/admin/EditRequests")}>
+            {/* <li className={getLinkClass("/admin/EditRequests")}>
               <Link
                 href="/admin/EditRequests"
                 className="flex items-center w-full"
@@ -140,7 +140,7 @@ const Sidebar = () => {
                 <IoDocumentsOutline className="w-6 h-6 mr-4" />
                 <span className="font-semibold ">Edit Requests</span>
               </Link>
-            </li>
+            </li> */}
             {/* <li className={getLinkClass("/admin/viewUsers")}>
               <Link
                 href={"/admin/viewUsers"}

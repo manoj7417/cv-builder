@@ -46,6 +46,13 @@ import {
 } from "@/components/ui/accordion";
 import { FaPlayCircle, FaFileAlt, FaTrophy } from "react-icons/fa";
 import Link from "next/link";
+import {
+  FaUserGraduate,
+  FaInfoCircle,
+  FaEnvelope,
+  FaStar,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 
 /************************************************ */
 
@@ -67,7 +74,7 @@ const CoachDetailsPage = () => {
 
   const { id } = useParams();
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("programs");
+  const [activeTab, setActiveTab] = useState("about");
   const [isLoading, setIsLoading] = useState(true);
   const [activeProgramTab, setActiveProgramTab] = useState("program1");
   const [date, setDate] = useState(new Date());
@@ -82,7 +89,7 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
-  const [purchasedPrograms, setPurchasedPrograms] = useState({}); 
+  const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
 
@@ -272,11 +279,11 @@ const CoachDetailsPage = () => {
 
   const courseDetails = [
     {
-      icon: <FaVideo className='text-blue-500' />,
+      icon: <FaVideo className="text-blue-500" />,
       text: `${totalTimeInHours} hours on-demand videos`,
     },
     {
-      icon: <FaMobileAlt className='text-purple-500' />,
+      icon: <FaMobileAlt className="text-purple-500" />,
       text: "Access on mobile and TV",
     },
   ];
@@ -297,11 +304,11 @@ const CoachDetailsPage = () => {
       const response = await axios.get(`/api/getCoachProgram/${id}`);
       setProgramData(response?.data?.programs);
       setIsLoading(false);
-      
+
       if (response?.data?.programs.length > 0) {
         // Set the first program as the default active tab
         setActiveProgramTab(response?.data?.programs[0]._id);
-        
+
         // Check if each program is purchased
         response?.data?.programs.forEach((program) =>
           checkCoursePurchased(program._id)
@@ -332,26 +339,30 @@ const CoachDetailsPage = () => {
       return router.push(`/login?redirect=/coaches/${id}`);
     }
     try {
-      const response = await axios.post('/api/buyprogram', {
-        programId: course._id,
-        coachId: course.coachId,
-        amount: course.amount,
-        currency: "USD",
-        success_url: window.location.href,
-        cancel_url: window.location.href
-      }, {
-        headers: {
-          Authorization: `Bearer ${accessToken?.value}`
+      const response = await axios.post(
+        "/api/buyprogram",
+        {
+          programId: course._id,
+          coachId: course.coachId,
+          amount: course.amount,
+          currency: "USD",
+          success_url: window.location.href,
+          cancel_url: window.location.href,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken?.value}`,
+          },
         }
-      });
-    
+      );
+
       // Open the received URL
       window.location.href = response.data.url; // Redirect to the URL
     } catch (error) {
       console.log(error);
       toast.error("Error buying program");
-    }    
-  }
+    }
+  };
 
   useEffect(() => {
     getGeoInfo();
@@ -365,6 +376,8 @@ const CoachDetailsPage = () => {
     handleFetchCoachProgramById(id);
   }, [id]);
 
+  console.log("singleCoach::", singleCoach);
+
   return (
     <>
       {/* {
@@ -374,32 +387,70 @@ const CoachDetailsPage = () => {
             url={singleCoach?.video} />
         </FullScreen>
       } */}
-      {
-        videoUrl &&
+      {videoUrl && (
         <div className="bg-black/75 z-[200] h-screen w-full sticky top-0 ">
           <div className="relative">
-            <X className="text-white absolute top-5 right-5 h-10 w-10 text-xl  cursor-pointer" onClick={() => setVideoUrl('')} />
+            <X
+              className="text-white absolute top-5 right-5 h-10 w-10 text-xl  cursor-pointer"
+              onClick={() => setVideoUrl("")}
+            />
             <div className=" h-screen w-full p-20">
-
-              <ReactPlayer
-                width={"100%"}
-                height={'100%'}
-                url={videoUrl} />
+              <ReactPlayer width={"100%"} height={"100%"} url={videoUrl} />
             </div>
           </div>
         </div>
-      }
+      )}
       <ResumeHeader />
-      <div className='mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center '></div>
-      <div className='max-w-7xl mx-auto'>
+      <div className="mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center "></div>
+      <div className="max-w-7xl mx-auto">
         <div
-          id='Main'
-          className='mt-10 bg-white w-full h-auto flex flex-col items-center'>
+          id="Main"
+          className="mt-10 bg-white w-full h-auto flex flex-col items-center"
+        >
           <CoachHeader id={singleCoach?._id} />
-          <div className='container bg-[#FFF] h-auto mt-10 w-full flex flex-col lg:flex-row mb-20 border border-[#FFDDD1]'>
+          <div className="container bg-[#FFF] h-auto mt-10 w-full flex flex-col lg:flex-row mb-20 border border-[#FFDDD1]">
             <div
-              id='blog_left_side'
-              className='w-full lg:w-[25%] bg-white h-full relative'>
+              id="blog_left_side"
+              className="w-full lg:w-[25%] bg-white h-full relative"
+            >
+              {activeTab === "about" && (
+                <>
+                  <div className="tabs_content">
+                    <div>
+                      <div className="p-5">
+                        <div className="border-b border-[#FFDDD1] p-3 mb-4">
+                          <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
+                            About
+                          </h3>
+                        </div>
+                        {isLoading ? (
+                          <ul className="space-y-2 mt-5">
+                            {[1, 2, 3, 4].map((_, index) => (
+                              <li key={index}>
+                                <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : programData.length > 0 ? (
+                          <>
+                            <span className="font-bold mt-5">
+                              Coach Bio:
+                            </span>{" "}
+                            <p className=" text-gray-600 text-sm mt-2">
+                              {singleCoach?.bio}
+                            </p>
+                          </>
+                        ) : (
+                          <div className="mt-5 text-gray-600 text-xl">
+                            No data available
+                          </div> // Render "No data available" message if programData is empty
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
               {activeTab === "programs" && (
                 <>
                   <div className="tabs_content">
@@ -423,13 +474,17 @@ const CoachDetailsPage = () => {
                             {programData.map((program) => (
                               <li key={program._id}>
                                 <button
-                                  className={`w-full text-left p-2 ${activeProgramTab === program._id
-                                    ? "bg-gray-200 font-bold"
-                                    : "text-gray-600"
-                                    }`}
-                                  onClick={() => handleProgramTabClick(program._id)}
+                                  className={`w-full text-left p-2 ${
+                                    activeProgramTab === program._id
+                                      ? "bg-gray-200 font-bold"
+                                      : "text-gray-600"
+                                  }`}
+                                  onClick={() =>
+                                    handleProgramTabClick(program._id)
+                                  }
                                 >
-                                  {program.title} {/* Display the program title here */}
+                                  {program.title}{" "}
+                                  {/* Display the program title here */}
                                 </button>
                               </li>
                             ))}
@@ -447,25 +502,25 @@ const CoachDetailsPage = () => {
 
               {activeTab === "appointment" && (
                 <>
-                  <div className='border-b border-[#FFDDD1] p-5'>
-                    <h3 className='text-[#1D2026] pb-2 font-semibold text-2xl'>
+                  <div className="border-b border-[#FFDDD1] p-5">
+                    <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
                       Book Appointment <br />
-                      <span className='font-normal'>
+                      <span className="font-normal">
                         with {singleCoach?.name}
                       </span>
                     </h3>
                   </div>
-                  <div className=' p-5 h-full relative z-50 mb-10'>
-                    <h2 className='text-md font-bold  text-[#1D2026]'>
+                  <div className=" p-5 h-full relative z-50 mb-10">
+                    <h2 className="text-md font-bold  text-[#1D2026]">
                       Career Development Coaching
                     </h2>
-                    <p className='flex items-center pt-5 text-md'>
-                      <img src='/careerRightBullet.png' className='mr-2' />1
+                    <p className="flex items-center pt-5 text-md">
+                      <img src="/careerRightBullet.png" className="mr-2" />1
                       Hour
                     </p>
 
-                    <p className='flex items-center pt-5 text-md'>
-                      <img src='/careerRightBullet.png' className='mr-2' />
+                    <p className="flex items-center pt-5 text-md">
+                      <img src="/careerRightBullet.png" className="mr-2" />
                       Web Conferencing details provided upon confirmation
                     </p>
                   </div>
@@ -474,58 +529,149 @@ const CoachDetailsPage = () => {
             </div>
 
             <div
-              id='blog_right_side'
-              className='w-full lg:w-[75%] bg-white h-auto p-5 border-l border-[#FFDDD1]'>
+              id="blog_right_side"
+              className="w-full lg:w-[75%] bg-white h-auto p-5 border-l border-[#FFDDD1]"
+            >
               <div
-                id='blog_tab_page_head'
-                className='flex border-b border-gray-300 mb-5'>
+                id="blog_tab_page_head"
+                className="flex border-b border-gray-300 mb-5"
+              >
                 <div
-                  className={`cursor-pointer p-3 ${activeTab === "programs"
-                    ? "font-bold border-b-2 border-[#FF6636]"
-                    : "text-gray-500"
-                    }`}
-                  onClick={() => handleTabClick("programs")}>
+                  className={`cursor-pointer p-3 ${
+                    activeTab === "about"
+                      ? "font-bold border-b-2 border-[#FF6636]"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => handleTabClick("about")}
+                >
+                  About
+                </div>
+                <div
+                  className={`cursor-pointer p-3 ${
+                    activeTab === "programs"
+                      ? "font-bold border-b-2 border-[#FF6636]"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => handleTabClick("programs")}
+                >
                   Enroll in Program
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${activeTab === "appointment"
-                    ? "font-bold border-b-2 border-[#FF6636]"
-                    : "text-gray-500"
-                    }`}
-                  onClick={() => handleTabClick("appointment")}>
+                  className={`cursor-pointer p-3 ${
+                    activeTab === "appointment"
+                      ? "font-bold border-b-2 border-[#FF6636]"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => handleTabClick("appointment")}
+                >
                   Book An Appointment
                 </div>
               </div>
 
+              {activeTab === "about" && (
+                <>
+                  {isLoading ? (
+                    <div className="p-2">
+                      <div className="animate-pulse">
+                        <h3 className="bg-gray-200 h-8 w-1/2 rounded mb-2"></h3>
+                      </div>
+                      <div className="p-5">
+                        <ul className="list-disc list-inside space-y-4">
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <li key={index} className="flex items-center">
+                              <div className="bg-gray-200 rounded-full h-6 w-6 mr-2"></div>
+                              <div className="flex-1">
+                                <div className="bg-gray-200 h-4 rounded mb-2 w-1/2"></div>
+                                <div className="bg-gray-200 h-4 rounded w-1/2"></div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="p-2">
+                        <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
+                          About {singleCoach?.name}
+                        </h3>
+                      </div>
+                      <div className="p-5">
+                        <ul className="list-disc list-inside space-y-4">
+                          <li className="text-md flex items-center">
+                            <FaUserGraduate className="mr-2 text-blue-500" />{" "}
+                            {/* Icon with blue color */}
+                            <span className="font-bold">
+                              Coaching Experience:
+                            </span>{" "}
+                            {singleCoach?.experience} yrs
+                          </li>
+                          <li className="text-md flex items-center">
+                            <FaInfoCircle className="mr-2 text-green-500" />{" "}
+                            {/* Icon with green color */}
+                            <span className="font-bold">
+                              Coaching Description:
+                            </span>{" "}
+                            {singleCoach?.coachingDescription}
+                          </li>
+                          <li className="text-md flex items-center">
+                            <FaEnvelope className="mr-2 text-red-500" />{" "}
+                            {/* Icon with red color */}
+                            <span className="font-bold">Coach Email:</span>{" "}
+                            {singleCoach?.email}
+                          </li>
+                          <li className="text-md flex items-center">
+                            <FaStar className="mr-2 text-yellow-500" />{" "}
+                            {/* Icon with yellow color */}
+                            <span className="font-bold">
+                              Coach Skills:
+                            </span>{" "}
+                            {singleCoach?.skills}
+                          </li>
+                          <li className="text-md flex items-center">
+                            <FaChalkboardTeacher className="mr-2 text-purple-500" />{" "}
+                            {/* Icon with purple color */}
+                            <span className="font-bold">
+                              Type of Coaching:
+                            </span>{" "}
+                            {singleCoach?.typeOfCoaching}
+                          </li>
+                        </ul>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+
               {activeTab === "programs" && (
                 <>
                   {/* Tab Content */}
-                  <div className='p-5'>
+                  <div className="p-5">
                     {isLoading ? (
                       <>
-                        <div className='tabs_content flex lg:flex-row flex-col animate-pulse'>
+                        <div className="tabs_content flex lg:flex-row flex-col animate-pulse">
                           {/* Left section skeleton */}
-                          <div className='program_content_1 lg:w-[60%] w-full space-y-4'>
-                            <div className='h-8 bg-gray-200 rounded w-3/4'></div>
-                            <div className='h-6 bg-gray-200 rounded w-3/4'></div>
-                            <div className='h-6 bg-gray-200 rounded w-3/4'></div>
-                            <div className='weekly_content mt-5'>
-                              <div className='h-8 bg-gray-200 rounded w-3/4'></div>
-                              <div className='space-y-3 mt-5'>
-                                <div className='h-5 bg-gray-200 rounded w-3/4'></div>
-                                <div className='h-5 bg-gray-200 rounded w-3/4'></div>
+                          <div className="program_content_1 lg:w-[60%] w-full space-y-4">
+                            <div className="h-8 bg-gray-200 rounded w-3/4"></div>
+                            <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                            <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                            <div className="weekly_content mt-5">
+                              <div className="h-8 bg-gray-200 rounded w-3/4"></div>
+                              <div className="space-y-3 mt-5">
+                                <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+                                <div className="h-5 bg-gray-200 rounded w-3/4"></div>
                               </div>
                             </div>
                           </div>
 
                           {/* Right section skeleton */}
-                          <div className='program_content_video lg:w-[40%] w-full lg:order-none order-first'>
-                            <div className='h-[200px] bg-gray-200 rounded mb-3'></div>
-                            <div className='h-8 bg-gray-200 rounded w-1/2 mb-3'></div>
-                            <div className='h-6 bg-gray-200 rounded w-full'></div>
-                            <div className='space-y-3 mt-5'>
-                              <div className='h-5 bg-gray-200 rounded w-1/3'></div>
-                              <div className='h-5 bg-gray-200 rounded w-1/2'></div>
+                          <div className="program_content_video lg:w-[40%] w-full lg:order-none order-first">
+                            <div className="h-[200px] bg-gray-200 rounded mb-3"></div>
+                            <div className="h-8 bg-gray-200 rounded w-1/2 mb-3"></div>
+                            <div className="h-6 bg-gray-200 rounded w-full"></div>
+                            <div className="space-y-3 mt-5">
+                              <div className="h-5 bg-gray-200 rounded w-1/3"></div>
+                              <div className="h-5 bg-gray-200 rounded w-1/2"></div>
                             </div>
                           </div>
                         </div>
@@ -533,9 +679,12 @@ const CoachDetailsPage = () => {
                     ) : programData?.length > 0 ? (
                       <>
                         {programData
-                          ?.filter((program) => program._id === activeProgramTab)
+                          ?.filter(
+                            (program) => program._id === activeProgramTab
+                          )
                           ?.map((course, courseIndex) => {
-                            const totalTimeInHours = calculateTotalTimeInHours(course); // Calculate total time for the selected course
+                            const totalTimeInHours =
+                              calculateTotalTimeInHours(course); // Calculate total time for the selected course
 
                             // Construct the course details array inside the map function where the total time is available
                             const courseDetails = [
@@ -544,23 +693,36 @@ const CoachDetailsPage = () => {
                                 text: `${totalTimeInHours} hours on-demand videos`,
                               },
                               {
-                                icon: <FaMobileAlt className="text-purple-500" />,
+                                icon: (
+                                  <FaMobileAlt className="text-purple-500" />
+                                ),
                                 text: "Access on mobile and TV",
                               },
                             ];
 
                             return (
-                              <div className="tabs_content flex lg:flex-row flex-col" key={courseIndex}>
+                              <div
+                                className="tabs_content flex lg:flex-row flex-col"
+                                key={courseIndex}
+                              >
                                 <div className="program_content_1 lg:w-[60%] w-full">
-                                  <h2 className="text-xl font-bold mb-4">{course?.title}</h2>
-                                  <p className="text-sm">{course?.description}</p>
+                                  <h2 className="text-xl font-bold mb-4">
+                                    {course?.title}
+                                  </h2>
+                                  <p className="text-sm">
+                                    {course?.description}
+                                  </p>
                                   <div className="weekly_content pr-3 mt-5">
-                                    <h2 className="text-xl font-bold mb-1">Course content</h2>
+                                    <h2 className="text-xl font-bold mb-1">
+                                      Course content
+                                    </h2>
                                     <div className="course_content">
                                       <ul className="flex text-xs gap-2">
                                         <li>{course.sections} sections</li>
                                         <li>• {course.lectures} lectures</li>
-                                        <li>• {totalTimeInHours} total hours</li>
+                                        <li>
+                                          • {totalTimeInHours} total hours
+                                        </li>
                                       </ul>
                                     </div>
 
@@ -581,21 +743,24 @@ const CoachDetailsPage = () => {
                                           </AccordionTrigger>
                                           <AccordionContent>
                                             <ul className="space-y-2 mt-5">
-                                              {item.subModules.map((lesson, idx) => (
-                                                <li
-                                                  key={idx}
-                                                  className="flex items-center space-x-3 py-2"
-                                                >
-                                                  <span className="flex-1 text-gray-700">
-                                                    {lesson.title}
-                                                  </span>
-                                                  {lesson.timeToComplete && (
-                                                    <span className="text-gray-500">
-                                                      {lesson.timeToComplete} min
+                                              {item.subModules.map(
+                                                (lesson, idx) => (
+                                                  <li
+                                                    key={idx}
+                                                    className="flex items-center space-x-3 py-2"
+                                                  >
+                                                    <span className="flex-1 text-gray-700">
+                                                      {lesson.title}
                                                     </span>
-                                                  )}
-                                                </li>
-                                              ))}
+                                                    {lesson.timeToComplete && (
+                                                      <span className="text-gray-500">
+                                                        {lesson.timeToComplete}{" "}
+                                                        min
+                                                      </span>
+                                                    )}
+                                                  </li>
+                                                )
+                                              )}
                                             </ul>
                                           </AccordionContent>
                                         </AccordionItem>
@@ -605,20 +770,30 @@ const CoachDetailsPage = () => {
                                     <div className="requirements">
                                       {course?.prerequisites?.length > 0 && (
                                         <div className="prerequisites">
-                                          <h3 className="text-xl font-bold my-4">Prerequisites</h3>
+                                          <h3 className="text-xl font-bold my-4">
+                                            Prerequisites
+                                          </h3>
                                           <ul>
-                                            {course.prerequisites.map((prerequisite, idx) => (
-                                              <li key={prerequisite._id} className="text-sm my-2">
-                                                <Link
-                                                  href={prerequisite.attachmentUrl}
-                                                  target="_blank"
-                                                  rel="noopener noreferrer"
-                                                  className="text-blue-500 underline"
+                                            {course.prerequisites.map(
+                                              (prerequisite, idx) => (
+                                                <li
+                                                  key={prerequisite._id}
+                                                  className="text-sm my-2"
                                                 >
-                                                  {prerequisite.description} ({prerequisite.type})
-                                                </Link>
-                                              </li>
-                                            ))}
+                                                  <Link
+                                                    href={
+                                                      prerequisite.attachmentUrl
+                                                    }
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-blue-500 underline"
+                                                  >
+                                                    {prerequisite.description} (
+                                                    {prerequisite.type})
+                                                  </Link>
+                                                </li>
+                                              )
+                                            )}
                                           </ul>
                                         </div>
                                       )}
@@ -630,7 +805,10 @@ const CoachDetailsPage = () => {
                                   <div className="border border-[#E9EAF0]">
                                     <div>
                                       <img
-                                        src={course?.programImage || "/defaultImage.png"} // Dynamic image here
+                                        src={
+                                          course?.programImage ||
+                                          "/defaultImage.png"
+                                        } // Dynamic image here
                                         alt={course?.title || "Program Image"}
                                         className="w-full"
                                       />
@@ -639,14 +817,20 @@ const CoachDetailsPage = () => {
                                       id="row3"
                                       className="flex justify-between text-sm text-gray-500 p-3"
                                     >
-                                      <div className="flex flex-col items-start cursor-pointer" onClick={() => showVideo(course?.programVideo)}>
-                                        {
-                                          course?.programVideo ?
-                                            <span className="flex items-center text-blue-700">
-                                              Watch program demo <FaVideo className="ml-1 text-blue-500" />
-                                            </span> :
-                                            <div></div>
+                                      <div
+                                        className="flex flex-col items-start cursor-pointer"
+                                        onClick={() =>
+                                          showVideo(course?.programVideo)
                                         }
+                                      >
+                                        {course?.programVideo ? (
+                                          <span className="flex items-center text-blue-700">
+                                            Watch program demo{" "}
+                                            <FaVideo className="ml-1 text-blue-500" />
+                                          </span>
+                                        ) : (
+                                          <div></div>
+                                        )}
 
                                         <span className="text-[#1D2026] font-bold">
                                           Price: ${course?.amount}
@@ -658,25 +842,38 @@ const CoachDetailsPage = () => {
                                       className="flex justify-between p-3 border-b-2 border-gray-300"
                                     >
                                       <div className="flex items-center space-x-1 justify-center w-full">
-                                      {!purchasedPrograms[course._id] ? (
-                                          <Button className="w-[250px]" onClick={() => handleBuyProgram(course)}>
+                                        {!purchasedPrograms[course._id] ? (
+                                          <Button
+                                            className="w-[250px]"
+                                            onClick={() =>
+                                              handleBuyProgram(course)
+                                            }
+                                          >
                                             Buy Now
                                           </Button>
                                         ) : (
-                                          <div className="text-green-600 font-bold">Already Purchased</div>
+                                          <div className="text-green-600 font-bold">
+                                            Already Purchased
+                                          </div>
                                         )}
-
                                       </div>
                                     </div>
 
                                     {/* Course Details */}
                                     <div className="course-details-list p-5">
-                                      <h2 className="text-xl font-semibold mb-4">Course Details</h2>
+                                      <h2 className="text-xl font-semibold mb-4">
+                                        Course Details
+                                      </h2>
                                       <ul className="space-y-3">
                                         {courseDetails.map((detail, index) => (
-                                          <li key={index} className="flex items-center space-x-2">
+                                          <li
+                                            key={index}
+                                            className="flex items-center space-x-2"
+                                          >
                                             {detail.icon}
-                                            <span className="text-gray-700">{detail.text}</span>
+                                            <span className="text-gray-700">
+                                              {detail.text}
+                                            </span>
                                           </li>
                                         ))}
                                       </ul>
@@ -688,8 +885,11 @@ const CoachDetailsPage = () => {
                           })}
                       </>
                     ) : (
-                      <div className='mt-5 text-gray-600 text-xl text-center'>
-                        No programs yet explore more coaches <a className="font-bold" href="/coaches">View all coaches</a>
+                      <div className="mt-5 text-gray-600 text-xl text-center">
+                        No programs yet explore more coaches{" "}
+                        <a className="font-bold" href="/coaches">
+                          View all coaches
+                        </a>
                       </div>
                     )}
                   </div>
@@ -700,15 +900,16 @@ const CoachDetailsPage = () => {
                 <>
                   <div>
                     <div
-                      id='book_an_appointment_tab'
-                      className='flex gap-10 items-baseline justify-around'>
-                      <div id='showCalender'>
+                      id="book_an_appointment_tab"
+                      className="flex gap-10 items-baseline justify-around"
+                    >
+                      <div id="showCalender">
                         <Calendar
-                          mode='single'
+                          mode="single"
                           selected={date}
                           onSelect={handleDateSelect}
                           onMonthChange={handleMonthChange}
-                          className='shadow-lg'
+                          className="shadow-lg"
                           weekStartsOn={1}
                           showOutsideDays={false}
                           components={{
@@ -735,14 +936,15 @@ const CoachDetailsPage = () => {
                                 <Button
                                   className={`w-9 h-9 p-2 rounded-md ${dayClasses}`}
                                   title={dayOfWeek}
-                                  onClick={handleDayClick}>
-                                  <span className='flex flex-col items-center justify-center'>
-                                    <span className='text-sm '>
+                                  onClick={handleDayClick}
+                                >
+                                  <span className="flex flex-col items-center justify-center">
+                                    <span className="text-sm ">
                                       {dayOfMonth}
                                     </span>
 
                                     {isAvailable && !isDisabled && (
-                                      <span className='inline-block w-1 h-1 rounded-full bg-blue-500 mt-1' />
+                                      <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
                                     )}
                                   </span>
                                 </Button>
@@ -754,12 +956,12 @@ const CoachDetailsPage = () => {
                       {selectedDate.date && (
                         <div>
                           {selectedDaySlots ? (
-                            <div className='selected-date-info'>
-                              <p className='text-gray-500 font-medium text-sm my-2'>
+                            <div className="selected-date-info">
+                              <p className="text-gray-500 font-medium text-sm my-2">
                                 {selectedDate?.dayOfWeek},
                                 {formatDate(selectedDate?.date)}
                               </p>
-                              <p className='text-gray-600 font-medium text-sm my-2'>
+                              <p className="text-gray-600 font-medium text-sm my-2">
                                 TimeZone: {singleCoach?.availability?.timeZone}
                               </p>
                               <div>
@@ -767,7 +969,8 @@ const CoachDetailsPage = () => {
                                   <p
                                     key={index}
                                     onClick={() => handleSlotClick(slot)}
-                                    className='text-sm bg-blue-950 text-white py-2 px-5 text-center  rounded-md font-medium my-2 cursor-pointer'>
+                                    className="text-sm bg-blue-950 text-white py-2 px-5 text-center  rounded-md font-medium my-2 cursor-pointer"
+                                  >
                                     {slot.startTime}
                                   </p>
                                 ))}
@@ -775,10 +978,10 @@ const CoachDetailsPage = () => {
                             </div>
                           ) : (
                             <div>
-                              <h4 className='text-black font-bold text-base'>
+                              <h4 className="text-black font-bold text-base">
                                 No Slots available
                               </h4>
-                              <p className='text-gray-500 font-medium text-sm my-2'>
+                              <p className="text-gray-500 font-medium text-sm my-2">
                                 {formatDate(selectedDate?.date)},
                                 {selectedDate?.dayOfWeek}
                               </p>
@@ -790,21 +993,22 @@ const CoachDetailsPage = () => {
                       <Dialog open={isDialogOpen}>
                         <DialogContent
                           onClick={handleCloseDialog}
-                          showCloseButton>
+                          showCloseButton
+                        >
                           <DialogHeader>
                             <DialogTitle>Confirm Slot</DialogTitle>
                           </DialogHeader>
                           <form onSubmit={handleSubmit(handleConfirmSlot)}>
-                            <div className='space-y-2'>
-                              <p className='text-gray-500 font-medium text-sm'>
+                            <div className="space-y-2">
+                              <p className="text-gray-500 font-medium text-sm">
                                 {modalSelectedSlot?.selectedDate?.dayOfWeek},{" "}
                                 {formatDate(
                                   modalSelectedSlot?.selectedDate?.date
                                 )}
                               </p>
 
-                              <div className='slots_available flex flex-wrap'>
-                                <p className='text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2'>
+                              <div className="slots_available flex flex-wrap">
+                                <p className="text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2">
                                   {modalSelectedSlot?.slot?.startTime} -{" "}
                                   {modalSelectedSlot?.slot?.endTime}
                                 </p>
@@ -814,29 +1018,30 @@ const CoachDetailsPage = () => {
                                 {...register("message", {
                                   required: "Message is required",
                                 })} // Registering the input with validation
-                                placeholder='Type your message here.'
-                                className='w-full'
+                                placeholder="Type your message here."
+                                className="w-full"
                               />
                               {errors.message && (
-                                <p className='text-red-500 text-sm'>
+                                <p className="text-red-500 text-sm">
                                   {errors.message.message}
                                 </p>
                               )}
 
-                              <div className='confrm_button flex justify-end mt-4'>
+                              <div className="confrm_button flex justify-end mt-4">
                                 <Button
-                                  type='submit'
+                                  type="submit"
                                   disabled={isBookingSlot}
-                                  className='flex justify-center items-center'>
+                                  className="flex justify-center items-center"
+                                >
                                   {isBookingSlot ? (
                                     <>
                                       Booking Slot{" "}
-                                      <ImSpinner3 className='animate-spin ml-2 h-4 w-4' />
+                                      <ImSpinner3 className="animate-spin ml-2 h-4 w-4" />
                                     </>
                                   ) : (
                                     <>
                                       Book Slot
-                                      <ChevronRight className='ml-2 h-4 w-4' />
+                                      <ChevronRight className="ml-2 h-4 w-4" />
                                     </>
                                   )}
                                 </Button>
