@@ -249,7 +249,7 @@ const CoachDetailsPage = () => {
       success_url: window.location.href,
       cancel_url: window.location.href
     };
-    
+
     try {
       const response = await axios.post("/api/bookSlot", obj, {
         headers: {
@@ -490,14 +490,14 @@ const CoachDetailsPage = () => {
                   onClick={() => handleTabClick("programs")}>
                   Enroll in Program
                 </div>
-                <div
+                {/* <div
                   className={`cursor-pointer p-3 ${activeTab === "appointment"
                     ? "font-bold border-b-2 border-[#FF6636]"
                     : "text-gray-500"
                     }`}
                   onClick={() => handleTabClick("appointment")}>
                   Book An Appointment
-                </div>
+                </div> */}
               </div>
 
               {activeTab === "programs" && (
