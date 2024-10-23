@@ -12,7 +12,6 @@ import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
-
 const EditCoachProgram = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
