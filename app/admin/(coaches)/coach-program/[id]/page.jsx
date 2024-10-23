@@ -17,7 +17,6 @@ const EditCoachProgram = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [programData, setProgramData] = useState([]);
   const router = useRouter();
-
   const handleFetchCoachProgram = async () => {
     const { accessToken } = await GetTokens();
     try {
