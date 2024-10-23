@@ -53,6 +53,7 @@ import {
   FaStar,
   FaChalkboardTeacher,
 } from "react-icons/fa";
+import dayjs from "dayjs";
 
 /************************************************ */
 const locales = {
@@ -81,7 +82,7 @@ const CoachDetailsPage = () => {
   const [selectedDaySlots, setSelectedDaySlots] = useState(null);
   const [modalSelectedSlot, setModalSelectedSlot] = useState(null);
   const [selectedDate, setSelectedDate] = useState({
-    date: new Date(),
+    date: dayjs().format("YYYY-MM-DD"),
     dayOfWeek: "",
   });
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -166,6 +167,7 @@ const CoachDetailsPage = () => {
 
   // Function to handle date selection and fetch available slots
   const handleDateSelect = (dayOfWeek, date) => {
+    console.log(dayOfWeek, date)
     setSelectedDate({
       date,
       dayOfWeek,
@@ -237,12 +239,14 @@ const CoachDetailsPage = () => {
     reset();
   };
 
+
+
   const handleConfirmSlot = async (data) => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches/${id}`);
     }
-    setIsBookingSlot(true);
+    // setIsBookingSlot(true);
     const obj = {
       coachId: id,
       timezone: geoData.timezone,
@@ -250,14 +254,13 @@ const CoachDetailsPage = () => {
       state: geoData.region,
       city: geoData.city,
       notes: data?.message,
-      date: modalSelectedSlot?.selectedDate?.date,
+      date: selectedDate?.date,
       slotTime: modalSelectedSlot?.slot,
       success_url: window.location.href,
       cancel_url: window.location.href,
       currency: "USD",
       amount: 1
     };
-
     try {
       const response = await axios.post("/api/bookSlot", obj, {
         headers: {
@@ -380,8 +383,6 @@ const CoachDetailsPage = () => {
     handleFetchCoachProgramById(id);
   }, [id]);
 
-  console.log("singleCoach::", singleCoach);
-
   return (
     <>
       {/* {
@@ -476,11 +477,10 @@ const CoachDetailsPage = () => {
                             {programData.map((program) => (
                               <li key={program._id}>
                                 <button
-                                  className={`w-full text-left p-2 ${
-                                    activeProgramTab === program._id
-                                      ? "bg-gray-200 font-bold"
-                                      : "text-gray-600"
-                                  }`}
+                                  className={`w-full text-left p-2 ${activeProgramTab === program._id
+                                    ? "bg-gray-200 font-bold"
+                                    : "text-gray-600"
+                                    }`}
                                   onClick={() =>
                                     handleProgramTabClick(program._id)
                                   }
@@ -539,31 +539,28 @@ const CoachDetailsPage = () => {
                 className="flex border-b border-gray-300 mb-5"
               >
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "about"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "about"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("about")}
                 >
                   About
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "programs"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "programs"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("programs")}
                 >
                   Enroll in Program
                 </div>
                 <div
-                  className={`cursor-pointer p-3 ${
-                    activeTab === "appointment"
-                      ? "font-bold border-b-2 border-[#FF6636]"
-                      : "text-gray-500"
-                  }`}
+                  className={`cursor-pointer p-3 ${activeTab === "appointment"
+                    ? "font-bold border-b-2 border-[#FF6636]"
+                    : "text-gray-500"
+                    }`}
                   onClick={() => handleTabClick("appointment")}
                 >
                   Book An Appointment
@@ -933,12 +930,8 @@ const CoachDetailsPage = () => {
                       <div id="showCalender">
                         <Calendar
                           mode="single"
-                          selected={date}
-                          onSelect={handleDateSelect}
                           onMonthChange={handleMonthChange}
                           className="shadow-lg"
-                          weekStartsOn={1}
-                          showOutsideDays={false}
                           components={{
                             Day: ({ date }) => {
                               const dayOfWeek = getDayOfWeek(date);
@@ -951,8 +944,9 @@ const CoachDetailsPage = () => {
                               );
 
                               const handleDayClick = () => {
+                                const formattedDate = dayjs(date).format('YYYY-MM-DD');
                                 if (!isDisabled) {
-                                  handleDateSelect(dayOfWeek, date);
+                                  handleDateSelect(dayOfWeek, formattedDate);
                                 }
                               };
 
@@ -965,15 +959,15 @@ const CoachDetailsPage = () => {
                                   title={dayOfWeek}
                                   onClick={handleDayClick}
                                 >
-                                  <span className="flex flex-col items-center justify-center">
+                                  <p className="flex flex-col items-center justify-center relative" >
                                     <span className="text-sm ">
                                       {dayOfMonth}
                                     </span>
 
                                     {isAvailable && !isDisabled && (
-                                      <span className="inline-block w-1 h-1 rounded-full bg-blue-500 mt-1" />
+                                      <span className="absolute w-1 h-1 rounded-full bg-blue-500 top-5" />
                                     )}
-                                  </span>
+                                  </p>
                                 </Button>
                               ) : null;
                             },
@@ -986,7 +980,7 @@ const CoachDetailsPage = () => {
                             <div className="selected-date-info">
                               <p className="text-gray-500 font-medium text-sm my-2">
                                 {selectedDate?.dayOfWeek},
-                                {formatDate(selectedDate?.date)}
+                                {selectedDate?.date}
                               </p>
                               <p className="text-gray-600 font-medium text-sm my-2">
                                 TimeZone: {singleCoach?.availability?.timeZone}
@@ -1009,7 +1003,7 @@ const CoachDetailsPage = () => {
                                 No Slots available
                               </h4>
                               <p className="text-gray-500 font-medium text-sm my-2">
-                                {formatDate(selectedDate?.date)},
+                                {selectedDate?.date},
                                 {selectedDate?.dayOfWeek}
                               </p>
                             </div>
@@ -1029,9 +1023,9 @@ const CoachDetailsPage = () => {
                             <div className="space-y-2">
                               <p className="text-gray-500 font-medium text-sm">
                                 {modalSelectedSlot?.selectedDate?.dayOfWeek},{" "}
-                                {formatDate(
+                                {
                                   modalSelectedSlot?.selectedDate?.date
-                                )}
+                                }
                               </p>
 
                               <div className="slots_available flex flex-wrap">
