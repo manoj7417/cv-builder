@@ -246,7 +246,7 @@ const CoachDetailsPage = () => {
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches/${id}`);
     }
-    // setIsBookingSlot(true);
+    setIsBookingSlot(true);
     const obj = {
       coachId: id,
       timezone: geoData.timezone,
