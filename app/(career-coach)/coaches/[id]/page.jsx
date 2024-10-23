@@ -612,10 +612,10 @@ const CoachDetailsPage = () => {
                           <tbody>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaUserGraduate className="mr-2 text-blue-500" />
+                                <FaUserGraduate className="mr-2 text-blue-500 text-2xl" />
                                 <span className="font-bold">
                                   Coaching Experience:
-                                </span>
+                                  </span>
                               </td>
                               <td className="px-4 py-2">
                                 {singleCoach?.experience} yrs
@@ -623,7 +623,7 @@ const CoachDetailsPage = () => {
                             </tr>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaInfoCircle className="mr-2 text-green-500" />
+                                <FaInfoCircle className="mr-2 text-green-500 text-3xl" />
                                 <span className="font-bold">
                                   Coaching Description:
                                 </span>
@@ -634,7 +634,7 @@ const CoachDetailsPage = () => {
                             </tr>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaEnvelope className="mr-2 text-red-500" />
+                                <FaEnvelope className="mr-2 text-red-500 text-xl" />
                                 <span className="font-bold">Coach Email:</span>
                               </td>
                               <td className="px-4 py-2">
@@ -643,7 +643,7 @@ const CoachDetailsPage = () => {
                             </tr>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaStar className="mr-2 text-yellow-500" />
+                                <FaStar className="mr-2 text-yellow-500 text-xl" />
                                 <span className="font-bold">Coach Skills:</span>
                               </td>
                               <td className="px-4 py-2">
@@ -652,7 +652,7 @@ const CoachDetailsPage = () => {
                             </tr>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaChalkboardTeacher className="mr-2 text-purple-500" />
+                                <FaChalkboardTeacher className="mr-2 text-purple-500 text-xl" />
                                 <span className="font-bold">
                                   Type of Coaching:
                                 </span>
