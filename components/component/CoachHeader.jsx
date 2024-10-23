@@ -119,24 +119,25 @@ export function CoachHeader({ id }) {
         </div>
 
         {/* Right Side */}
-        <div
-          id="blog_header_right_side"
-          className="text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0"
-        >
+
+        {singleCoach?.socialLinks > 0 && (
           <div
-            id="website_link"
-            className="text-xs sm:text-sm text-blue-500 underline flex items-center justify-center sm:justify-center md:justify-end lg:justify-end xl:justify-end 2xl:justify-end  space-x-1"
+            id="blog_header_right_side"
+            className="text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0"
           >
-            <img
-              src="/GlobeSimple.png"
-              alt="Globe Icon"
-              className="w-3 sm:w-4 h-3 sm:h-4"
-            />
-            <span className="text-[10px] sm:text-[12px] text-[#564FFD]">
-              http://www.com
-            </span>
-          </div>
-          {singleCoach?.socialLinks > 0 && (
+            <div
+              id="website_link"
+              className="text-xs sm:text-sm text-blue-500 underline flex items-center justify-center sm:justify-center md:justify-end lg:justify-end xl:justify-end 2xl:justify-end  space-x-1"
+            >
+              <img
+                src="/GlobeSimple.png"
+                alt="Globe Icon"
+                className="w-3 sm:w-4 h-3 sm:h-4"
+              />
+              <span className="text-[10px] sm:text-[12px] text-[#564FFD]">
+                http://www.com
+              </span>
+            </div>
             <div id="socialMediaIcons" className="flex space-x-2 justify-end">
               <Link
                 href="https://www.facebook.com"
@@ -193,34 +194,9 @@ export function CoachHeader({ id }) {
                   className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
               </Link>
-              {/* <img
-                src="/facebook_icon.png"
-                alt="Facebook"
-                className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
-              />
-              <img
-                src="/twitter_icon.png"
-                alt="Twitter"
-                className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
-              />
-              <img
-                src="/instagram_icon.png"
-                alt="Instagram"
-                className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
-              />
-              <img
-                src="/youtube_icon.png"
-                alt="YouTube"
-                className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
-              />
-              <img
-                src="/whatsApp_icon.png"
-                alt="WhatsApp"
-                className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
-              /> */}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

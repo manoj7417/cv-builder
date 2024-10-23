@@ -70,7 +70,7 @@ const CoachDetailsPage = () => {
 
   const { singleCoach, filterCoachById, updateSingleCoach } =
     useCoachesDetailStore();
-  
+
   const { id } = useParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("about");
@@ -255,7 +255,7 @@ const CoachDetailsPage = () => {
       success_url: window.location.href,
       cancel_url: window.location.href,
       currency: "USD",
-      amount: 1
+      amount: 1,
     };
 
     try {
@@ -265,7 +265,7 @@ const CoachDetailsPage = () => {
         },
       });
       if (response.status === 200) {
-        window.location.href = response.data.url
+        window.location.href = response.data.url;
         handleCloseDialog();
       }
     } catch (error) {
@@ -415,38 +415,37 @@ const CoachDetailsPage = () => {
               id="blog_left_side"
               className="w-full lg:w-[25%] bg-white h-full relative"
             >
-            {activeTab === "about" && (
-  <>
-    <div className="tabs_content">
-      <div>
-        <div className="p-5">
-          <div className="border-b border-[#FFDDD1] p-3 mb-4">
-            <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
-              About
-            </h3>
-          </div>
-          {isLoading ? (
-            <ul className="space-y-2 mt-5">
-              {[1, 2, 3, 4].map((_, index) => (
-                <li key={index}>
-                  <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <>
-              <span className="font-bold mt-5">Coach Bio:</span>
-              <p className="text-gray-600 text-sm mt-2">
-                {singleCoach?.bio || "Bio not available."}
-              </p>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  </>
-)}
-
+              {activeTab === "about" && (
+                <>
+                  <div className="tabs_content">
+                    <div>
+                      <div className="p-5">
+                        <div className="border-b border-[#FFDDD1] p-3 mb-4">
+                          <h3 className="text-[#1D2026] pb-2 font-semibold text-2xl">
+                            About
+                          </h3>
+                        </div>
+                        {isLoading ? (
+                          <ul className="space-y-2 mt-5">
+                            {[1, 2, 3, 4].map((_, index) => (
+                              <li key={index}>
+                                <div className="w-full h-8 bg-gray-200 animate-pulse rounded"></div>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <>
+                            <span className="font-bold mt-5">Bio:</span>
+                            <p className="text-gray-600 text-sm mt-2">
+                              {singleCoach?.bio || "Bio not available."}
+                            </p>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
 
               {activeTab === "programs" && (
                 <>
@@ -608,10 +607,10 @@ const CoachDetailsPage = () => {
                           <tbody>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaUserGraduate className="mr-2 text-blue-500 text-2xl" />
+                                <FaUserGraduate className="mr-2 text-blue-500 text-xl" />
                                 <span className="font-bold">
-                                  Coaching Experience:
-                                  </span>
+                                  Experience:
+                                </span>
                               </td>
                               <td className="px-4 py-2">
                                 {singleCoach?.experience} yrs
@@ -619,9 +618,9 @@ const CoachDetailsPage = () => {
                             </tr>
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
-                                <FaInfoCircle className="mr-2 text-green-500 text-3xl" />
+                                <FaInfoCircle className="mr-2 text-green-500 text-xl" />
                                 <span className="font-bold">
-                                  Coaching Description:
+                                  Description:
                                 </span>
                               </td>
                               <td className="px-4 py-2">
@@ -631,7 +630,7 @@ const CoachDetailsPage = () => {
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
                                 <FaEnvelope className="mr-2 text-red-500 text-xl" />
-                                <span className="font-bold">Coach Email:</span>
+                                <span className="font-bold">Email:</span>
                               </td>
                               <td className="px-4 py-2">
                                 {singleCoach?.email}
@@ -640,7 +639,7 @@ const CoachDetailsPage = () => {
                             <tr className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center">
                                 <FaStar className="mr-2 text-yellow-500 text-xl" />
-                                <span className="font-bold">Coach Skills:</span>
+                                <span className="font-bold">Skills:</span>
                               </td>
                               <td className="px-4 py-2">
                                 {singleCoach?.skills}
