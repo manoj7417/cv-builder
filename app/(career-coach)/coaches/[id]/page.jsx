@@ -96,7 +96,7 @@ const CoachDetailsPage = () => {
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
-      return router.push(`/login?redirect=/coaches/${id}`);
+      return;
     }
     try {
       const response = await axios.post(
@@ -112,7 +112,7 @@ const CoachDetailsPage = () => {
       if (response.data.purchased) {
         setPurchasedPrograms((prevState) => ({
           ...prevState,
-          [programId]: true, // Set purchased status for the specific program
+          [programId]: true,
         }));
       }
     } catch (error) {
@@ -130,7 +130,6 @@ const CoachDetailsPage = () => {
     setActiveTab(tab);
   };
 
-  // Function to handle program tab click
   const handleProgramTabClick = (tab) => {
     setActiveProgramTab(tab);
   };
@@ -242,6 +241,7 @@ const CoachDetailsPage = () => {
 
 
   const handleConfirmSlot = async (data) => {
+    console.log(data)
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches/${id}`);
@@ -311,12 +311,9 @@ const CoachDetailsPage = () => {
       const response = await axios.get(`/api/getCoachProgram/${id}`);
       setProgramData(response?.data?.programs);
       setIsLoading(false);
-
       if (response?.data?.programs.length > 0) {
-        // Set the first program as the default active tab
         setActiveProgramTab(response?.data?.programs[0]._id);
 
-        // Check if each program is purchased
         response?.data?.programs.forEach((program) =>
           checkCoursePurchased(program._id)
         );
