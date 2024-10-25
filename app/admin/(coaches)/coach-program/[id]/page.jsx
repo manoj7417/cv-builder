@@ -33,7 +33,6 @@ const EditCoachProgram = () => {
       console.log(error);
     }
   };
-
     const handleApprovalToggle = async (program) => {
       const { accessToken } = await GetTokens();
       const updatedStatus = !program.isapproved;
