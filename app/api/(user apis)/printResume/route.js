@@ -22,7 +22,6 @@ export async function POST(req) {
                 responseType: "arraybuffer",
             }
         );
-        console.log(response.data)
         return new Response(response.data, {
             status: response.status || 200,
             headers: {

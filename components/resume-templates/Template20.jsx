@@ -24,7 +24,7 @@ const Education = ({ fontStyle, colorText, colorBackground }) => {
   );
   return (
     <div className='education_section w-full'>
-      {data?.visible && data?.items?.length > 0 && (
+      {data?.visible && data?.items?.length > 0 && 
         <>
           <div
             className='education_header flex items-center gap-3'
@@ -76,7 +76,7 @@ const Education = ({ fontStyle, colorText, colorBackground }) => {
             })}
           </div>
         </>
-      )}
+      }
     </div>
   );
 };

@@ -230,7 +230,7 @@ const ResumeView = () => {
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
-  const resumeData = useResumeStore((state) => state.resume.data);
+  const resumeData = useResumeStore((state) => state.resume);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const { undo, redo, canUndo, canRedo } = useTemporalResumeStore((state) => ({
@@ -279,7 +279,7 @@ const ResumeView = () => {
         const blob = new Blob([response.data], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = 'generated.pdf';
+        link.download = resumeData.title;
         link.click();
         window.URL.revokeObjectURL(link.href);
         return;
@@ -442,6 +442,7 @@ const ResumeView = () => {
       <div className="flex justify-center items-center flex-col w-full relative bg-blue-100">
         {isLoading && (
           <Dialog open={isLoading} onClose={() => setIsLoading(false)}>
+            <DialogTitle></DialogTitle>
             <DialogContent className="sm:max-w-[60vw] h-[60vh] bg-white">
               <div className="flex">
                 <div className="w-[50%]">
