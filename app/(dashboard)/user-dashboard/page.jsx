@@ -27,7 +27,8 @@ const UserDashboardPage = () => {
   const router = useRouter();
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
-  const [program,setProgram] = useState([])
+  const [program, setProgram] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggle = (index) => {
     if (open === index) {
@@ -42,317 +43,6 @@ const UserDashboardPage = () => {
       courses: "3",
       price: "$75.00 USD",
       paymentType: "Credit Card",
-    },
-  ];
-
-  const coaches = [
-    {
-      id: 1,
-      name: "Devon Lane",
-      jobProfile: {
-        title: "Web Developer",
-        backgroundColor: "bg-blue-100",
-        textColor: "text-blue-800",
-      },
-      href: "#",
-      imageSrc: "/coach-1.png",
-      rating: "5.0",
-      students: "265.7k",
-      price: "$49",
-    },
-    {
-      id: 2,
-      name: "Darrell Steward",
-      jobProfile: {
-        title: "React Native Developer",
-        backgroundColor: "bg-green-100",
-        textColor: "text-green-800",
-      },
-      href: "#",
-      imageSrc: "/coach-2.png",
-      rating: "4.9",
-      students: "265.7k",
-      price: "$49",
-    },
-    {
-      id: 3,
-      name: "Jane Cooper",
-      jobProfile: {
-        title: "Mobile Developer",
-        backgroundColor: "bg-purple-100",
-        textColor: "text-purple-800",
-      },
-      href: "#",
-      imageSrc: "/coach-3.png",
-      rating: "5.0",
-      students: "265.7k",
-      price: "$49",
-    },
-    {
-      id: 4,
-      name: "Albert Flores",
-      jobProfile: {
-        title: "Javascript Developer",
-        backgroundColor: "bg-yellow-100",
-        textColor: "text-yellow-800",
-      },
-      href: "#",
-      imageSrc: "/coach-4.png",
-      rating: "5.0",
-      students: "265.7k",
-      price: "$49",
-    },
-    {
-      id: 5,
-      name: "Leslie Alexander",
-      jobProfile: {
-        title: "UX/UI Designer",
-        backgroundColor: "bg-blue-100",
-        textColor: "text-blue-800",
-      },
-      href: "#",
-      imageSrc: "/coach-5.png",
-      rating: "4.8",
-      students: "145.3k",
-      price: "$49",
-    },
-    {
-      id: 6,
-      name: "Wade Warren",
-      jobProfile: {
-        title: "Full Stack Developer",
-        backgroundColor: "bg-red-100",
-        textColor: "text-red-800",
-      },
-      href: "#",
-      imageSrc: "/coach-1.png",
-      rating: "4.9",
-      students: "320.1k",
-      price: "$49",
-    },
-    {
-      id: 7,
-      name: "Kristin Watson",
-      jobProfile: {
-        title: "Data Scientist",
-        backgroundColor: "bg-teal-100",
-        textColor: "text-teal-800",
-      },
-      href: "#",
-      imageSrc: "/coach-2.png",
-      rating: "5.0",
-      students: "180.2k",
-      price: "$49",
-    },
-    {
-      id: 8,
-      name: "Cameron Williamson",
-      jobProfile: {
-        title: "DevOps Engineer",
-        backgroundColor: "bg-orange-100",
-        textColor: "text-orange-800",
-      },
-      href: "#",
-      imageSrc: "/coach-3.png",
-      rating: "4.7",
-      students: "210.4k",
-      price: "$49",
-    },
-    {
-      id: 9,
-      name: "Courtney Henry",
-      jobProfile: {
-        title: "Cybersecurity Specialist",
-        backgroundColor: "bg-indigo-100",
-        textColor: "text-indigo-800",
-      },
-      href: "#",
-      imageSrc: "/coach-4.png",
-      rating: "4.8",
-      students: "170.8k",
-      price: "$49",
-    },
-    {
-      id: 10,
-      name: "Brooklyn Simmons",
-      jobProfile: {
-        title: "Cloud Architect",
-        backgroundColor: "bg-gray-100",
-        textColor: "text-gray-800",
-      },
-      href: "#",
-      imageSrc: "/coach-5.png",
-      rating: "4.9",
-      students: "140.5k",
-      price: "$49",
-    },
-    {
-      id: 11,
-      name: "Darlene Robertson",
-      jobProfile: {
-        title: "Machine Learning Engineer",
-        backgroundColor: "bg-cyan-100",
-        textColor: "text-cyan-800",
-      },
-      href: "#",
-      imageSrc: "/coach-6.png",
-      rating: "4.8",
-      students: "195.2k",
-      price: "$59",
-    },
-    {
-      id: 12,
-      name: "Ronald Richards",
-      jobProfile: {
-        title: "AI Researcher",
-        backgroundColor: "bg-pink-100",
-        textColor: "text-pink-800",
-      },
-      href: "#",
-      imageSrc: "/coach-7.png",
-      rating: "5.0",
-      students: "175.3k",
-      price: "$69",
-    },
-    {
-      id: 13,
-      name: "Jerome Bell",
-      jobProfile: {
-        title: "Backend Developer",
-        backgroundColor: "bg-lime-100",
-        textColor: "text-lime-800",
-      },
-      href: "#",
-      imageSrc: "/coach-8.png",
-      rating: "4.9",
-      students: "220.6k",
-      price: "$49",
-    },
-    {
-      id: 14,
-      name: "Kathryn Murphy",
-      jobProfile: {
-        title: "Software Architect",
-        backgroundColor: "bg-amber-100",
-        textColor: "text-amber-800",
-      },
-      href: "#",
-      imageSrc: "/coach-1.png",
-      rating: "5.0",
-      students: "160.8k",
-      price: "$89",
-    },
-    {
-      id: 15,
-      name: "Annette Black",
-      jobProfile: {
-        title: "Database Administrator",
-        backgroundColor: "bg-emerald-100",
-        textColor: "text-emerald-800",
-      },
-      href: "#",
-      imageSrc: "/coach-2.png",
-      rating: "4.8",
-      students: "210.2k",
-      price: "$49",
-    },
-    {
-      id: 16,
-      name: "Jacob Jones",
-      jobProfile: {
-        title: "Network Engineer",
-        backgroundColor: "bg-violet-100",
-        textColor: "text-violet-800",
-      },
-      href: "#",
-      imageSrc: "/coach-3.png",
-      rating: "5.0",
-      students: "140.9k",
-      price: "$59",
-    },
-    {
-      id: 17,
-      name: "Arlene McCoy",
-      jobProfile: {
-        title: "System Administrator",
-        backgroundColor: "bg-rose-100",
-        textColor: "text-rose-800",
-      },
-      href: "#",
-      imageSrc: "/coach-4.png",
-      rating: "4.7",
-      students: "180.3k",
-      price: "$49",
-    },
-    {
-      id: 18,
-      name: "Esther Howard",
-      jobProfile: {
-        title: "Cloud Engineer",
-        backgroundColor: "bg-fuchsia-100",
-        textColor: "text-fuchsia-800",
-      },
-      href: "#",
-      imageSrc: "/coach-5.png",
-      rating: "4.9",
-      students: "150.7k",
-      price: "$69",
-    },
-    {
-      id: 19,
-      name: "Guy Hawkins",
-      jobProfile: {
-        title: "Blockchain Developer",
-        backgroundColor: "bg-red-100",
-        textColor: "text-red-800",
-      },
-      href: "#",
-      imageSrc: "/coach-6.png",
-      rating: "5.0",
-      students: "130.5k",
-      price: "$79",
-    },
-    {
-      id: 20,
-      name: "Eleanor Pena",
-      jobProfile: {
-        title: "Cybersecurity Analyst",
-        backgroundColor: "bg-blue-100",
-        textColor: "text-blue-800",
-      },
-      href: "#",
-      imageSrc: "/coach-7.png",
-      rating: "4.8",
-      students: "165.4k",
-      price: "$49",
-    },
-    {
-      id: 21,
-      name: "Guy Hawkins",
-      jobProfile: {
-        title: "Next.js Developer",
-        backgroundColor: "bg-red-100",
-        textColor: "text-red-800",
-      },
-      href: "#",
-      imageSrc: "/coach-6.png",
-      rating: "5.0",
-      students: "130.5k",
-      price: "$79",
-    },
-    {
-      id: 20,
-      name: "Eleanor Pena",
-      jobProfile: {
-        title: "UX/UI",
-        backgroundColor: "bg-blue-100",
-        textColor: "text-blue-800",
-      },
-      href: "#",
-      imageSrc: "/coach-7.png",
-      rating: "4.8",
-      students: "165.4k",
-      price: "$49",
     },
   ];
 
@@ -546,13 +236,12 @@ const UserDashboardPage = () => {
     } catch (error) {}
   };
 
-
-
   const handleGetUserProgram = async () => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push("/login?redirect=/user-dashboard");
     }
+    setIsLoading(true);
     try {
       const response = await axios.get("/api/getUserProgram", {
         headers: {
@@ -561,17 +250,15 @@ const UserDashboardPage = () => {
       });
       console.log("response::", response);
       if (response.status === 200) {
-        setProgram(response);
+        setProgram(response?.data?.programs);
+        setIsLoading(false);
       }
     } catch (error) {}
   };
 
-
   useEffect(() => {
     handleGetUserProgram();
   }, []);
-
-
 
   useEffect(() => {
     handleGetBookings();
@@ -607,37 +294,6 @@ const UserDashboardPage = () => {
                     {userdata?.fullname}
                   </h1>
                 </div>
-                {/* <div
-                  id='row3'
-                  className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-500'>
-                  <div className='flex items-center space-x-1'>
-                    <img
-                      src='/Star.png'
-                      alt='Star'
-                      className='w-3 sm:w-4 h-3 sm:h-4'
-                    />
-                    <span className='text-[#1D2026] font-bold'>4.8</span>
-                    <span className='text-[#6E7485]'>(134,633 reviews)</span>
-                  </div>
-                  <div className='flex items-center space-x-1'>
-                    <img
-                      src='/Users.png'
-                      alt='Users'
-                      className='w-3 sm:w-4 h-3 sm:h-4'
-                    />
-                    <span className='text-[#1D2026] font-bold'>430,117</span>
-                    <span className='text-[#6E7485]'>students</span>
-                  </div>
-                  <div className='flex items-center space-x-1'>
-                    <img
-                      src='/PlayCircle.png'
-                      alt='Play Circle'
-                      className='w-3 sm:w-4 h-3 sm:h-4'
-                    />
-                    <span className='text-[#1D2026] font-bold'>7</span>
-                    <span className='text-[#6E7485]'>courses</span>
-                  </div>
-                </div> */}
               </div>
             </div>
 
@@ -807,9 +463,242 @@ const UserDashboardPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="resume_charts mt-5">
-                    <h2>Charts Sections</h2>
-                    <ResumeChart />
+                  <div className="booking_data mt-10">
+                    <h2 className="text-xl font-bold my-5 text-blue-950">
+                      My Bookings
+                    </h2>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <thead>
+                          <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                            <th className="p-4">Coach</th>
+                            <th className="p-4">Booking Time</th>
+                            <th className="p-4">Date</th>
+                            <th className="p-4">Timezone</th>
+                            <th className="p-4">Email</th>
+                            <th className="p-4">Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {isLoading ? (
+                            Array(5)
+                              .fill("")
+                              .map((_, index) => (
+                                <tr
+                                  key={index}
+                                  className="border-b border-gray-200"
+                                >
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+                                    <div className="flex-1">
+                                      <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                                    </div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-32"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-20"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-24"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-32"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
+                                  </td>
+                                </tr>
+                              ))
+                          ) : bookings.length > 0 ? (
+                            bookings.map((booking) => (
+                              <tr
+                                key={booking._id}
+                                className="border-b border-gray-200"
+                              >
+                                {/* Coach Info */}
+                                <td className="p-4 flex items-center space-x-3">
+                                  <img
+                                    src={booking?.coachId?.profileImage}
+                                    alt={booking?.coachId?.name}
+                                    className="w-10 h-10 object-cover rounded-full"
+                                  />
+                                  <div>
+                                    <p className="text-sm font-semibold">
+                                      {booking?.coachId?.name}
+                                    </p>
+                                  </div>
+                                </td>
+
+                                {/* Booking Time */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {booking?.slotTime?.startTime} -{" "}
+                                  {booking?.slotTime?.endTime}
+                                </td>
+
+                                {/* Date */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {format(
+                                    new Date(booking?.date),
+                                    "MMM dd, yyyy"
+                                  )}
+                                </td>
+
+                                {/* Timezone */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {booking?.timezone}
+                                </td>
+
+                                {/* Email */}
+                                <td className="p-4 text-xs text-gray-700 ">
+                                  <span className="flex items-center">
+                                    <Mail className="mr-2 h-4 w-4 flex-shrink-0 text-gray-500" />
+                                    {booking?.coachId?.email}
+                                  </span>
+                                </td>
+
+                                {/* Rate */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  <span className="flex items-center">
+                                    <DollarSign className="mr-2 h-4 w-4 flex-shrink-0 text-gray-500" />
+                                    {booking?.coachId?.ratesPerHour?.charges}
+                                    /hour
+                                  </span>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td
+                                colSpan="6"
+                                className="text-center py-4 text-gray-500"
+                              >
+                                No Data Available
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="program_data mt-10">
+                  <h2 className="text-xl font-bold my-5 text-blue-950">
+                      My Programs
+                    </h2>
+                    <div className="overflow-x-auto">
+                      {isLoading ? (
+                        // Skeleton loader for table rows
+                        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                          <thead>
+                            <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                              <th className="p-4">Program</th>
+                              <th className="p-4">Description</th>
+                              <th className="p-4">Coach</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Array(6)
+                              .fill(0)
+                              .map((_, index) => (
+                                <tr
+                                  key={index}
+                                  className="border-b border-gray-200 animate-pulse"
+                                >
+                                  {/* Program Image */}
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <div className="w-16 h-16 bg-gray-200 rounded-md"></div>
+                                    <div className="w-full">
+                                      <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+                                    </div>
+                                  </td>
+                                  {/* Description */}
+                                  <td className="p-4">
+                                    <div className="h-4 bg-gray-200 rounded mb-2 w-40"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-32"></div>
+                                  </td>
+                                  {/* Coach */}
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                                    <div className="w-full">
+                                      <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                                      <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      ) : program.length > 0 ? (
+                        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                          <thead>
+                            <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                              <th className="p-4">Program</th>
+                              <th className="p-4">Description</th>
+                              <th className="p-4">Coach</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {program.map((item, index) => (
+                              <tr
+                                key={index}
+                                className="border-b border-gray-200"
+                              >
+                                {/* Program Info */}
+                                <td className="p-4 flex items-center space-x-3">
+                                  <img
+                                    src={item.programId?.programImage}
+                                    alt={item.programId?.title}
+                                    className="w-16 h-16 object-cover rounded-md"
+                                    priority
+                                  />
+                                  <div>
+                                    <p className="text-sm font-semibold">
+                                      {item.programId?.title}
+                                    </p>
+                                  </div>
+                                </td>
+
+                                {/* Description */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {item.programId?.description}
+                                </td>
+
+                                {/* Coach Info */}
+                                <td className="p-4 flex items-center space-x-3">
+                                  <img
+                                    src={item?.coachId?.profileImage}
+                                    alt={item?.coachId?.name}
+                                    className="w-10 h-10 object-cover rounded-full"
+                                    priority
+                                  />
+                                  <div>
+                                    <p className="text-sm font-semibold">
+                                      {item.coachId?.name}
+                                    </p>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      ) : (
+                        <Card className="w-full">
+                          <CardHeader>
+                            <CardTitle className="text-center text-lg font-semibold text-gray-500">
+                              No Data Available
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex justify-center items-center py-4">
+                              <p className="text-sm text-gray-500">
+                                There are no programs to display at the moment.
+                              </p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -823,37 +712,23 @@ const UserDashboardPage = () => {
                   <div className="coach_section">
                     <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-                        {/* {bookings.length > 0 && bookings.map((booking) => (
-                          <Card key={booking._id} className="w-full">
-                            <CardHeader>
-                              <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
-                                <Avatar className="w-12 h-12 mb-2 sm:mb-0">
-                                  <AvatarImage src={booking?.coachId?.profileImage} alt={booking?.coachId?.name} className="object-cover" />
-                                  <AvatarFallback>{booking?.coachId?.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <h3 className="text-base sm:text-lg font-semibold">{booking?.coachId?.name}</h3>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking?.slotTime?.startTime} - {booking?.slotTime?.endTime}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{format(new Date(booking?.date), 'MMM dd, yyyy')}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking?.timezone}</p>
-                                </div>
-                              </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                              <div className="space-y-2">
-                                <div className="flex items-center">
-                                  <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm truncate">{booking?.coachId?.email}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm">{booking?.coachId?.ratesPerHour?.charges}/hour</span>
+                        {isLoading ? (
+                          Array(6)
+                            .fill(0)
+                            .map((_, index) => (
+                              <div key={index} className="animate-pulse">
+                                <div className="w-full bg-gray-200 rounded-lg h-24"></div>
+                                <div className="flex items-center space-x-4 mt-4">
+                                  <div className="w-12 h-12 rounded-full bg-gray-200"></div>
+                                  <div className="flex-1 space-y-2">
+                                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+                                  </div>
                                 </div>
                               </div>
-                            </CardContent>
-                          </Card>
-                        ))} */}
-                        {bookings.length > 0 ? (
+                            ))
+                        ) : bookings.length > 0 ? (
                           bookings.map((booking) => (
                             <Card key={booking._id} className="w-full">
                               <CardHeader>
@@ -942,86 +817,84 @@ const UserDashboardPage = () => {
                   <div className="coach_section">
                     <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
                       <div>
-                        {/* {coaches.slice(0, 4).map((item, index) => (
-                          <div
-                            key={item.id}
-                            className="group relative bg-white cursor-pointer"
-                          >
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                              <img
-                                alt={item.imageAlt}
-                                src={item.imageSrc}
-                                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                              />
-                            </div>
-                            <div className="coaching_name text-center mt-2">
-                              <h3 className="text-sm text-gray-700">
-                                {item.name}
-                              </h3>
-                              <p className="text-[12px] text-gray-700">
-                                {item?.jobProfile?.title}
-                              </p>
-                            </div>
-                            <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
-                              <div className="flex items-center gap-2">
-                                <FaStar className="text-orange-500" />
-                                <p className="text-sm text-gray-700">
-                                  {item.rating}
-                                </p>
-                              </div>
-                              <p className="text-sm font-medium text-gray-900">
-                                {item.students}{" "}
-                                <span className="text-gray-500 ml-1 text-sm">
-                                  students
-                                </span>
-                              </p>
-                            </div>
-                          </div>
-                        ))} */}
-                        <div>
-                          {/* card */}
-                          <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
-                            <div className="w-full block h-full">
-                              {/* Next.js Image component */}
-                              <Image
-                                alt="blog photo"
-                                src="/coach-7.png"
-                                width={320}
-                                height={160}
-                                className="max-h-40 w-full object-cover"
-                                priority
-                              />
-                              <div className="bg-white w-full p-4">
-                                <p className="text-gray-800 text-base font-medium mb-2">
-                                  A comprehensive guide about online education.
-                                </p>
-                                <p className="text-gray-600 font-light text-sm">
-                                  It is difficult to believe that we have become
-                                  so used to having instant access to
-                                  information at...
-                                </p>
-                                <div className="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium">
+                        {isLoading ? (
+                          // Skeleton loader
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {Array(6)
+                              .fill(0)
+                              .map((_, index) => (
+                                <div key={index} className="animate-pulse">
+                                  <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 bg-gray-200"></div>
+                                  <div className="bg-white p-4 mt-4">
+                                    <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                                    <div className="flex items-center mt-4">
+                                      <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                                      <div className="pl-3">
+                                        <div className="h-4 bg-gray-200 rounded mb-1 w-24"></div>
+                                        <div className="h-3 bg-gray-200 rounded w-16"></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div className="flex items-center mt-2">
-                                  <Image
-                                    className="w-10 h-10 object-cover rounded-full"
-                                    alt="User avatar"
-                                    src="/coach-7.png"
-                                    width={40}
-                                    height={40}
+                              ))}
+                          </div>
+                        ) : program.length > 0 ? (
+                          program.map((item, index) => (
+                            <div key={index}>
+                              <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
+                                <div className="w-full block h-full">
+                                  <img
+                                    alt="blog photo"
+                                    src={item.programId?.programImage}
+                                    className="max-h-40 w-full object-cover"
                                     priority
                                   />
-                                  <div className="pl-3">
-                                    <div className="font-medium text-sm">Jean Marc</div>
-                                    <div className="text-gray-600 text-sm">
-                                      CTO of Supercars
+                                  <div className="bg-white w-full p-4">
+                                    <p className="text-gray-800 text-base font-medium mb-2">
+                                      {item?.programId?.title}
+                                    </p>
+                                    <p className="text-gray-600 font-light text-sm">
+                                      {item?.programId?.description}
+                                    </p>
+                                    <div className="flex items-center mt-2">
+                                      <img
+                                        className="w-10 h-10 object-cover rounded-full"
+                                        alt="User avatar"
+                                        src={item?.coachId?.profileImage}
+                                        priority
+                                      />
+                                      <div className="pl-3">
+                                        <div className="font-medium text-sm">
+                                          {item?.coachId?.name}
+                                        </div>
+                                        <div className="text-gray-600 text-sm">
+                                          CTO of Supercars
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
+                          ))
+                        ) : (
+                          <Card className="w-full">
+                            <CardHeader>
+                              <CardTitle className="text-center text-lg font-semibold text-gray-500">
+                                No Data Available
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="flex justify-center items-center py-4">
+                                <p className="text-sm text-gray-500">
+                                  There are no programs to display at the
+                                  moment.
+                                </p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )}
                       </div>
                     </div>
                   </div>

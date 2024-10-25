@@ -8,9 +8,6 @@ const EnrollStudentPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [programs, setPrograms] = useState([]);
 
-
-
-
   const handleGetCoachProgramsBooking = async () => {
     const { accessToken } = await GetTokens();
     setIsLoading(true);
@@ -27,61 +24,83 @@ const EnrollStudentPage = () => {
     }
   };
 
-
-  const dates = programs.map(item => new Date(item.date).toISOString().split('T')[0]);
-
+  const dates = programs.map(
+    (item) => new Date(item.date).toISOString().split("T")[0]
+  );
 
   useEffect(() => {
     handleGetCoachProgramsBooking();
   }, []);
 
+  console.log("progrmas", programs);
 
   return (
     <div className="max-w-7xl mx-auto my-20">
-        <h1 className="text-3xl font-bold mb-10">Enroll Student Page</h1>
-          {programs?.length > 0 &&
-            programs?.map((item, index) => (
-                <div key={item?._id}>
-                  <div className="overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200 w-[400px]" >
-                    {/* Image */}
-                    <figure>
-                      <img
-                        src={item?.programId?.programImage}
-                        alt="card image"
-                        className="aspect-video w-full"
+      <h1 className="text-3xl font-bold mb-10">Enroll Student Page</h1>
+      {programs?.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                  User Image
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                  User Name
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                  User Email
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                  Program Enroll Date
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                   Program Title
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {programs.map((item) => (
+                <tr key={item?._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                  <img
+                        className="w-14 h-14 object-cover rounded-full"
+                        alt="User avatar"
+                        src={item?.user?.profilePicture}
                       />
-                    </figure>
-                    {/* Body */}
-                    <div className="p-6">
-                      <header className="mb-4">
-                        <h3 className="text-xl font-medium text-slate-700">
-                          {item?.programId?.title}
-                        </h3>
-                        <p className="text-sm text-slate-400">
-                          {" "}
-                          {dates}
-                        </p>
-                      </header>
-                      <p>{item?.programId?.description}</p>
-                      <div className="flex items-center mt-2 border-t border-gray-200 py-5">
-                        <img
-                          className="w-10 h-10 object-cover rounded-full"
-                          alt="User avatar"
-                          src={item?.user?.profilePicture}
-                        />
-
-                        <div className="pl-3">
-                          <div className="font-medium">{item?.user?.fullname}</div>
-                          <div className="text-gray-600 text-sm">
-                          {item?.user?.email}
-                          </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                    {item?.user?.fullname}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {item?.user?.email}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {dates}{" "}
+                    {/* Ensure dates is defined and formatted properly */}
+                  </td>
+                 
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <img
+                        className="w-10 h-10 object-cover rounded-full"
+                        alt="User avatar"
+                        src={item?.programId?.programImage}
+                      />
+                      <div className="pl-3">
+                        <div className="font-medium">
+                          {item?.programId?.title.slice(0, 30)}...
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-            ))}
-      </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -23,68 +23,6 @@ import axios, { all } from "axios";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 
-// const coachAvailabilty = [
-//   {
-//     userId: "U001",
-//     date: "2024-10-10",
-//     startTime: "10:00",
-//     endTime: "11:00",
-//   },
-//   {
-//     userId: "U002",
-//     date: "2024-10-10",
-//     startTime: "11:00",
-//     endTime: "12:00",
-//   },
-//   {
-//     userId: "U003",
-//     date: "2024-10-11",
-//     startTime: "14:00",
-//     endTime: "15:30",
-//   },
-//   {
-//     userId: "U004",
-//     date: "2024-10-11",
-//     startTime: "16:00",
-//     endTime: "17:00",
-//   },
-//   {
-//     userId: "U005",
-//     date: "2024-10-12",
-//     startTime: "09:30",
-//     endTime: "11:00",
-//   },
-//   {
-//     userId: "U006",
-//     date: "2024-10-12",
-//     startTime: "12:00",
-//     endTime: "13:00",
-//   },
-//   {
-//     userId: "U007",
-//     date: "2024-10-13",
-//     startTime: "14:30",
-//     endTime: "15:30",
-//   },
-//   {
-//     userId: "U008",
-//     date: "2024-10-13",
-//     startTime: "16:00",
-//     endTime: "17:00",
-//   },
-//   {
-//     userId: "U009",
-//     date: "2024-10-14",
-//     startTime: "10:00",
-//     endTime: "11:30",
-//   },
-//   {
-//     userId: "U010",
-//     date: "2024-10-14",
-//     startTime: "13:00",
-//     endTime: "14:30",
-//   },
-// ];
 
 const CoachCalendar = () => {
   const [bookingSlot, setBookingSlot] = useState([]);
@@ -110,25 +48,6 @@ const CoachCalendar = () => {
     } catch (error) {}
   };
 
-  // const convertTo24Hour = (time12h) => {
-  //   const [time, modifier] = time12h.split(" ");
-
-  //   let [hours, minutes] = time.split(":");
-
-  //   if (hours === "12") {
-  //     hours = "00"; // 12 AM is 00 in 24-hour format
-  //   }
-
-  //   if (modifier === "PM" && hours !== "12") {
-  //     hours = parseInt(hours, 10) + 12; // Convert PM to 24-hour format
-  //   }
-
-  //   // Ensure hours and minutes are always two digits (e.g., "9" becomes "09")
-  //   hours = hours?.padStart(2, "0");
-  //   minutes = minutes?.padStart(2, "0");
-
-  //   return `${hours}:${minutes}:00`;
-  // };
 
   const convertTo24Hour = (time12h) => {
     const [time, modifier] = time12h.split(" ");
@@ -166,6 +85,12 @@ const CoachCalendar = () => {
     }));
     setCalendarEvents(events);
   };
+
+
+
+  console.log("bookingSlot::",bookingSlot)
+
+
 
   useEffect(() => {
     handleGetBookings();

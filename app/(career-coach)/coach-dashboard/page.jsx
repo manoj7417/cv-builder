@@ -102,13 +102,10 @@ const CoachDashboardPage = () => {
         },
       });
       if (response.status === 200) {
-
         setBookingSlot(response.data.bookings);
         setLoading(false);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -189,6 +186,9 @@ const CoachDashboardPage = () => {
                           <div className="ml-1">
                             <p className="text-[13px] font-bold text-white">
                               {item?.userId?.fullname}
+                            </p>
+                            <p className="text-[13px] font-bold text-white">
+                              {item?.userId?.email}
                             </p>
                           </div>
                         </div>
@@ -324,10 +324,13 @@ const CoachDashboardPage = () => {
                               .toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
-                        <span>{item.userId.fullname}</span>
+                        <div className="flex flex-col">
+                          <span>{item.userId.fullname}</span>
+                          <span>{item.userId.email}</span>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-red-500">
+                    <TableCell className="text-green-500">
                       {item.status}
                     </TableCell>
                     <TableCell>
