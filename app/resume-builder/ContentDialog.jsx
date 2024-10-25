@@ -203,7 +203,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
   const data = useResumeStore((state) => state.resume.data);
-  const resumeData = useResumeStore((state) => state.resume.data);
+  const resumeData = useResumeStore((state) => state.resume);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -254,7 +254,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
         const blob = new Blob([response.data], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = 'generated.pdf';
+        link.download = resumeData.title;
         link.click();
         return;
       }

@@ -13,6 +13,7 @@ import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
+import { LogOut, User } from "lucide-react";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
@@ -124,19 +125,19 @@ const ResumeBuilderPage = () => {
                     >
                       <div className="py-1" role="none">
                         <Link
-                          href="/settings/profile"
-                          className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+                          href="/user-dashboard"
+                          className=" px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                           role="menuitem"
                         >
-                          <IoSettingsOutline className="mr-2" />
-                          Settings
+                          <User className=" h-4 mr-2" />
+                          Profile
                         </Link>
                         <div
-                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                          className="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                           role="menuitem"
                           onClick={handleLogout}
                         >
-                          <MdLogout className="mr-2" />
+                          <LogOut className=" h-4 mr-2" />
                           Logout
                         </div>
                       </div>
@@ -147,7 +148,6 @@ const ResumeBuilderPage = () => {
             </div>
           </div>
         </div>
-
         <div className="lg:w-[50%] w-full h-full overflow-auto forms_section">
           <ResumeForm />
         </div>

@@ -9,7 +9,7 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
-import { FaCrown, FaDownload, FaRegFilePdf } from "react-icons/fa";
+import { FaCheckCircle, FaCrown, FaDownload, FaRegFilePdf } from "react-icons/fa";
 import {
   Drawer,
   DrawerContent,
@@ -31,6 +31,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -55,10 +56,12 @@ const ResumeTooltip = dynamic(
 import { convert } from "html-to-text";
 import { IoDocumentText } from "react-icons/io5";
 import Link from "next/link";
-import { FaFilePdf } from "react-icons/fa6";
+import { FaFilePdf, FaSpinner } from "react-icons/fa6";
 import ContentDialog from "./ContentDialog";
 import FullResumeModal from "./FullResumeModal";
 import ServicesPopUp from "@/components/component/ServicesPopUp";
+import { Button } from "@/components/ui/button";
+import { PricingData } from "@/constants/prices";
 
 const images = [
   {
@@ -228,21 +231,48 @@ const ResumeView = () => {
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
-  const { userState } = useUserStore((state) => state);
   const { userdata } = useUserStore((state) => state.userState);
   const resumeData = useResumeStore((state) => state.resume);
   const [funfact, setFunFact] = useState(funfacts[randomNumber]);
   const [animation, setAnimation] = useState(Loaders[randomAnimation]);
-  const { undo, redo, canUndo, canRedo } = useTemporalResumeStore((state) => ({
-    undo: state.undo,
-    redo: state.redo,
-    canUndo: state.canUndo,
-    canRedo: state.canRedo,
-  }));
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
   const updateRedirectPricingRoute = useUserStore(
     (state) => state.updateRedirectPricingRoute
   );
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const serviceCards = {
+    id: 1,
+    cardTitle: "Genies Pro Suite",
+    cardDescription:
+      "Get a premium hold of services such as CV Creator, CV Optimiser, and CV Match to create the best Resume by integrating AI for perfection",
+    free: {
+      title: "Free",
+      link: "/cv-studio",
+    },
+    popUpDescription:
+      "Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
+    features: [
+      "ATS Compatible CV Templates",
+      "AI-Based Smart  Resume Builder",
+      "20+ Downloadable Professional CV Templates",
+      "20 CV scans for Perfection",
+      "AI-Based and Job-Specific CV Match Tool",
+      "Enhance CV with AI and Increase ATS Compatibility Score",
+      ,
+    ],
+    planName: "CVSTUDIO",
+  }
+  const [geoinfo, setGeoInfo] = useState({
+    ip: "",
+    countryName: "",
+    countryCode: "",
+    city: "",
+    timezone: "",
+    currency: "",
+  });
+  const [selectedPlan, setSelectedPlan] = useState('monthly');
+  const userState = useUserStore((state) => state.userState);
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -250,9 +280,33 @@ const ResumeView = () => {
     }
   };
 
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        let currency = data.currency || "USD";
+        setGeoInfo({
+          ...geoinfo,
+          ip: data.ip,
+          countryName: data.country_name,
+          countryCode: data.country_calling_code,
+          city: data.city,
+          timezone: data.timezone,
+          currency: currency,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
     if (!userdata.subscription.plan.includes('CVSTUDIO')) {
+      const pricing = PricingData['CVSTUDIO'][geoinfo.currency || "USD"];
+      const { MP, DP } = pricing;
+      setSelectedCard({ ...serviceCards, MP, DP });
       setShowModal(true);
     } else {
       handleDownloadResume(accessToken.value);
@@ -317,30 +371,57 @@ const ResumeView = () => {
     }
   };
 
-  const downloadAsText = () => {
-    const el = document.getElementById("resume");
-    const resume = el.innerHTML;
-    const resumeText = convert(resume, {
-      wordwrap: 130,
-      selectors: [{ selector: "a", options: { ignoreHref: true } }],
-    });
-    const blob = new Blob([resumeText], { type: "text/plain" });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "resume.txt";
-    a.target = "_blank";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-    setShowModal(false);
-  };
 
   const handleTemplateChange = (val) => {
     setResumeData("metadata.template", val);
     setIsDrawerOpen(false);
   };
+
+  const handlePlanChange = (plan) => {
+    setSelectedPlan(plan);
+  }
+
+  const UpgradePlan = async() => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken) {
+      return router.push("/login?redirect=pricing");
+    }
+    const data = {
+      email: userState?.userdata?.email,
+      success_url: "https://geniescareerhub.com/paymentSuccess",
+      cancel_url: window.location.href,
+      duration: selectedPlan,
+      currency: geoinfo?.currency || "USD",
+      planName: "CVSTUDIO",
+    };
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "/api/upgradePricing",
+        { data },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        const { url } = response.data;
+        window.location = url;
+      }
+    } catch (error) {
+      if(error.response.status === 401 && error.response.data.error === "Unauthorized"){
+        await RemoveTokens();
+        toast("Please login again to proceed");
+        router.push("/login?redirect=pricing");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -436,6 +517,14 @@ const ResumeView = () => {
     setAnimation((state) => newAnimation);
     setFunFact((state) => newFuncfact);
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
+  useEffect(() => {
+    getGeoInfo()
+  }, [])
 
   return (
     <>
@@ -534,51 +623,142 @@ const ResumeView = () => {
               </button>
             </ResumeTooltip>
             <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white" showCloseButton={true}
-                onClick={() => setShowModal(false)}>
+              <DialogContent
+                className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
+                showCloseButton={true}
+                onClick={handleCloseModal}
+              >
                 <DialogHeader>
-                  <DialogTitle className="text-2xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
-                    Oops! You have not subscribed yet
+                  <DialogTitle>
+                    <h2 className="text-xl sm:text-2xl lg:text-2xl my-2 text-center">
+                      {selectedCard?.cardTitle}
+                    </h2>
                   </DialogTitle>
-                  <p className="lg:w-full w-1/2 mx-auto text-center text-[12px] sm:text-base text-gray-600 mt-2">
-                    You need to upgrade to download your CV as a PDF, or else
-                    you can download as a Text for free
-                  </p>
+                  <DialogDescription>
+                    <p className="text-sm sm:text-sm text-justify">
+                      {selectedCard?.popUpDescription}
+                    </p>
+                  </DialogDescription>
                 </DialogHeader>
-                <div className="modal_content_section flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-6">
-                  <div className="w-full sm:w-1/2 flex justify-center mb-6 sm:mb-0">
-                    <div className="image_content text-center">
-                      <Image priority
-                        src="/illustration-manager-choosing-new-worker.png"
-                        alt="choice-worker-concept-illustrated"
-                        className="w-[200px] h-[200px] sm:w-[300px] sm:h-[250px] lg:w-[300px] lg:h-[200px] 2xl:w-[400px] 2xl:h-[400px] object-contain mx-auto"
-                        width={400}
-                        height={500}
-                      />
+                {
+                  selectedCard &&
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                      <div className="modal_left">
+                        <div className="modal_list">
+                          <ul className="space-y-2">
+                            {selectedCard?.features.map((feature, index) => (
+                              <li
+                                key={index}
+                                className="flex items-center text-xs sm:text-sm text-gray-600"
+                              >
+                                <FaCheckCircle
+                                  className="text-blue-950 mr-2"
+                                  style={{ minWidth: "15px", minHeight: "15px" }}
+                                />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
+                        <div className="text-center">
+                          <p className="text-lg sm:text-xl text-gray-500">
+                            Choose your plan
+                          </p>
+                          <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                            <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                              {selectedPlan === "monthly"
+                                ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
+                                : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`}
+                            </h1>
+                            <p className="text-gray-500 text-xs sm:text-sm px-2">
+                              {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                            </p>
+                            <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">60% off</p>
+                          </div>
+                          <div className="mt-6 space-y-4 sm:space-y-8">
+                            <div
+                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
+                                ? "border-blue-500 shadow-lg"
+                                : ""
+                                }`}
+                              onClick={() => handlePlanChange("monthly")}
+                            >
+                              <div className="flex justify-between items-center">
+                                <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                  Monthly
+                                </div>
+                                <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                  <p>
+                                    {selectedCard['DP'].symbol}
+                                    {selectedCard['DP'].price}
+                                  </p>
+                                  <p className="line-through text-xs ml-1">
+                                    {selectedCard['MP'].symbol}
+                                    {selectedCard['MP'].price}
+                                  </p>
+                                </div>
+                                <input
+                                  type="checkbox"
+                                  className="hidden"
+                                  checked={selectedPlan === "monthly"}
+                                  onChange={() => handlePlanChange("monthly")}
+                                />
+                              </div>
+                            </div>
+                            <div
+                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
+                                ? "border-blue-500 shadow-lg"
+                                : ""
+                                }`}
+                              onClick={() => handlePlanChange("yearly")}
+                            >
+                              <div className="flex justify-between items-center">
+                                <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                  Yearly
+                                </div>
+
+                                <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                  <p>
+                                    {selectedCard['DP'].symbol}
+                                    {selectedCard['DP'].price * 10}
+                                  </p>
+                                  <p className="line-through text-xs ml-1">
+                                    {selectedCard['MP'].symbol}
+                                    {selectedCard['MP'].price * 10}
+                                  </p>
+                                </div>
+                                <input
+                                  type="checkbox"
+                                  className="hidden"
+                                  checked={selectedPlan === "yearly"}
+                                  onChange={() => handlePlanChange("yearly")}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="w-full sm:w-1/2 flex justify-center">
-                    <div className="flex flex-col gap-4 sm:gap-8 p-4 sm:p-6 items-center w-full">
-                      <button
-                        className="w-full max-w-[250px] sm:max-w-[300px] border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold text-center"
-                        onClick={downloadAsText}
-                      >
-                        Download as Text
-                        <IoDocumentText className="text-blue-700 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
-                      </button>
-                      <Link
-                        href="/pricing?scroll=1"
-                        className="w-full max-w-[300px] py-3 sm:py-4 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
-                        disabled
-                      >
-                        Download as PDF
-                        <FaFilePdf className="text-green-500 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
-                        <br />
-                        (Upgrade Required)
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                }
+                <DialogFooter className="mt-4 sm:mt-8">
+                  <Button
+                    className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                    onClick={() => UpgradePlan(selectedCard)}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        Upgrading <FaSpinner className="animate-spin ml-2" />
+                      </>
+                    ) : (
+                      "Upgrade Now"
+                    )}
+                  </Button>
+                </DialogFooter>
               </DialogContent>
             </Dialog>
 

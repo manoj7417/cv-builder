@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { LiaTimesSolid } from "react-icons/lia";
 import axios from "axios";
+import { useResumeStore } from "@/app/store/ResumeStore";
 
 
 const ResumeViewPage = ({ resumeData, setResumeData, isOverlayOpen, setIsOverlayOpen }) => {
@@ -19,7 +20,7 @@ const ResumeViewPage = ({ resumeData, setResumeData, isOverlayOpen, setIsOverlay
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  
 
 
   const handleClickOutside = (event) => {

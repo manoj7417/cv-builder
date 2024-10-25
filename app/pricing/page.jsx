@@ -21,10 +21,11 @@ import { FaCheckCircle, FaSpinner } from "react-icons/fa";
 import { useUserStore } from "../store/UserStore";
 import { PricingData } from "@/constants/prices";
 import axios from "axios";
-import { GetTokens } from "../actions";
+import { GetTokens, RemoveTokens } from "../actions";
 import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -61,14 +62,14 @@ const PricingFunc = () => {
         link: "/cv-studio",
       },
       popUpDescription:
-        "Build a job application that suits the exact description that your employers are looking forward to. With tools such as CV Creator, CV Optimiser, and CV Match, create the perfect Resume that is not only optimised for Application Tracking Software but also leaves an exemplary first impression",
+        "Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
       features: [
-        "Access to Professional ATS Compatible CV Templates",
-        "Create CVs through the AI-based CV Creator tool",
-        "Download 20 CVs in PDF Format",
-        "Get 20 scans through CV Optimiser and make a better CV",
-        "Match the best resume with job-specific CVs with AI-based CV Match",
-        "Enhance your CV with AI and increase the ATS Compatibility Score",
+        "ATS Compatible CV Templates",
+        "AI-Based Smart  Resume Builder",
+        "20+ Downloadable Professional CV Templates",
+        "20 CV scans for Perfection",
+        "AI-Based and Job-Specific CV Match Tool",
+        "Enhance CV with AI and Increase ATS Compatibility Score",
         ,
       ],
       planName: "CVSTUDIO",
@@ -143,8 +144,8 @@ const PricingFunc = () => {
   const handleOpenAIDialog = (cardData) => {
     const planName = cardData.planName;
     const pricing = PricingData[planName][geoinfo.currency || "USD"];
-    const { symbol, price } = pricing;
-    setSelectedCard({ ...cardData, symbol, price });
+    const { MP, DP } = pricing;
+    setSelectedCard({ ...cardData, MP, DP });
     setIsDialogOpen(true);
   };
 
@@ -277,6 +278,11 @@ const PricingFunc = () => {
         window.location = url;
       }
     } catch (error) {
+      if(error.response.status === 401 && error.response.data.error === "Unauthorized"){
+        await RemoveTokens();
+        toast("Please login again to proceed");
+        router.push("/login?redirect=pricing");
+      }
     } finally {
       setLoading(false);
     }
@@ -331,9 +337,7 @@ const PricingFunc = () => {
             </DialogTitle>
             <DialogDescription>
               <p className="text-sm sm:text-base text-justify">
-                Get a premium hold of services such as CV Creator, CV Optimiser,
-                and CV Match to create the best Resume by integrating AI for
-                perfection
+                Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.
               </p>
             </DialogDescription>
           </DialogHeader>
@@ -345,44 +349,42 @@ const PricingFunc = () => {
                     className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  Access to Professional ATS Compatible CV Templates
+                  ATS Compatible CV Templates
                 </li>
                 <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
                     className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  Create CVs through the AI-based CV Creator tool
+                  AI-Based Smart  Resume Builder
                 </li>
                 <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
                     className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  Download 20 CVs in PDF Format
+                  20+ Downloadable Professional CV Templates
                 </li>
                 <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
                     className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  Get 20 scans through CV Optimiser and make a better CV
+                  20 CV scans for Perfection
                 </li>
                 <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
                     className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  Match the best resume with job-specific CVs with AI-based CV
-                  Match
+                  AI-Based and Job-Specific CV Match Tool
                 </li>
                 <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
                     className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  Enhance your CV with AI and increase the ATS Compatibility
-                  Score
+                  Enhance CV with AI and Increase ATS Compatibility Score
                 </li>
               </ul>
             </div>
@@ -416,95 +418,110 @@ const PricingFunc = () => {
               </p>
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-              <div className="modal_left">
-                <div className="modal_list">
-                  <ul className="space-y-2">
-                    {selectedCard?.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center text-xs sm:text-sm text-gray-600"
-                      >
-                        <FaCheckCircle
-                          className="text-blue-950 mr-2"
-                          style={{ minWidth: "15px", minHeight: "15px" }}
-                        />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
-                <div className="text-center">
-                  <p className="text-lg sm:text-xl text-gray-500">
-                    Choose your plan
-                  </p>
-                  <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
-                    <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
-                      {selectedPlan === "monthly"
-                        ? `${selectedCard?.symbol}${selectedCard?.price}`
-                        : `${selectedCard?.symbol}${selectedCard?.price * 10}`}
-                    </h1>
-                    <p className="text-gray-500 text-xs sm:text-sm px-2">
-                      {selectedPlan === "monthly" ? "per Month" : "per Year"}
-                    </p>
+          {
+            selectedCard &&
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                <div className="modal_left">
+                  <div className="modal_list">
+                    <ul className="space-y-2">
+                      {selectedCard?.features.map((feature, index) => (
+                        <li
+                          key={index}
+                          className="flex items-center text-xs sm:text-sm text-gray-600"
+                        >
+                          <FaCheckCircle
+                            className="text-blue-950 mr-2"
+                            style={{ minWidth: "15px", minHeight: "15px" }}
+                          />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="mt-6 space-y-4 sm:space-y-8">
-                    <div
-                      className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                        selectedPlan === "monthly"
-                          ? "border-blue-500 shadow-lg"
-                          : ""
-                      }`}
-                      onClick={() => handlePlanChange("monthly")}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                          Monthly
-                        </div>
-                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
-                          {selectedCard?.symbol}
-                          {selectedCard?.price}
-                        </div>
-                        <input
-                          type="checkbox"
-                          hidden
-                          checked={selectedPlan === "monthly"}
-                          onChange={() => handlePlanChange("monthly")}
-                        />
-                      </div>
+                </div>
+                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8">
+                  <div className="text-center">
+                    <p className="text-lg sm:text-xl text-gray-500">
+                      Choose your plan
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                        {selectedPlan === "monthly"
+                        ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
+                        : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price)*10}`}
+                      </h1>
+                      <p className="text-gray-500 text-xs sm:text-sm px-2">
+                        {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                      </p>
+                      <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">60% off</p>
                     </div>
-                    <div
-                      className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                        selectedPlan === "yearly"
+                    <div className="mt-6 space-y-4 sm:space-y-8">
+                      <div
+                        className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
                           ? "border-blue-500 shadow-lg"
                           : ""
-                      }`}
-                      onClick={() => handlePlanChange("yearly")}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                          Yearly
+                          }`}
+                        onClick={() => handlePlanChange("monthly")}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                            Monthly
+                          </div>
+                          <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                            <p>
+                              {selectedCard['DP'].symbol}
+                              {selectedCard['DP'].price}
+                            </p>
+                            <p className="line-through text-xs ml-1">
+                              {selectedCard['MP'].symbol}
+                              {selectedCard['MP'].price}
+                            </p>
+                          </div>
+                          <input
+                            type="checkbox"
+                            className="hidden"
+                            checked={selectedPlan === "monthly"}
+                            onChange={() => handlePlanChange("monthly")}
+                          />
                         </div>
-                        <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base">
-                          {selectedCard?.symbol}
-                          {selectedCard?.price * 10}
+                      </div>
+                      <div
+                        className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
+                          ? "border-blue-500 shadow-lg"
+                          : ""
+                          }`}
+                        onClick={() => handlePlanChange("yearly")}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                            Yearly
+                          </div>
+
+                          <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                            <p>
+                              {selectedCard['DP'].symbol}
+                              {selectedCard['DP'].price * 10}
+                            </p>
+                            <p className="line-through text-xs ml-1">
+                              {selectedCard['MP'].symbol}
+                              {selectedCard['MP'].price * 10}
+                            </p>
+                          </div>
+                          <input
+                            type="checkbox"
+                            className="hidden"
+                            checked={selectedPlan === "yearly"}
+                            onChange={() => handlePlanChange("yearly")}
+                          />
                         </div>
-                        <input
-                          type="checkbox"
-                          hidden
-                          checked={selectedPlan === "yearly"}
-                          onChange={() => handlePlanChange("yearly")}
-                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          }
           <DialogFooter className="mt-4 sm:mt-8">
             <Button
               className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
@@ -598,9 +615,8 @@ const PricingFunc = () => {
                 return (
                   <div
                     key={item.id} // Ensure key prop is here on the top-level element
-                    className={`flex rounded-md ${
-                      index + 1 === scroll ? "animate-bounce" : ""
-                    } `}
+                    className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
+                      } `}
                     id={`pricing-` + `${index + 1}`}
                   >
                     <div
