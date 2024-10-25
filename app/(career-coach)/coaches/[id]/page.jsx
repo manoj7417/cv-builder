@@ -92,6 +92,7 @@ const CoachDetailsPage = () => {
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
+  const [isBuyingProgram , setIsBuyingProgram] = useState(false);
 
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
@@ -338,17 +339,19 @@ const CoachDetailsPage = () => {
   };
 
   const handleBuyProgram = async (course) => {
+
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches/${id}`);
     }
+    setIsBuyingProgram(true);
     try {
       const response = await axios.post(
         "/api/buyprogram",
         {
           programId: course._id,
           coachId: course.coachId,
-          amount: course.amount,
+          amount: 1,
           currency: "USD",
           success_url: window.location.href,
           cancel_url: window.location.href,
@@ -365,6 +368,8 @@ const CoachDetailsPage = () => {
     } catch (error) {
       console.log(error);
       toast.error("Error buying program");
+    }finally{
+      setIsBuyingProgram(false);
     }
   };
 
@@ -865,6 +870,7 @@ const CoachDetailsPage = () => {
                                             onClick={() =>
                                               handleBuyProgram(course)
                                             }
+                                            disabled={isBuyingProgram}
                                           >
                                             Buy Now
                                           </Button>

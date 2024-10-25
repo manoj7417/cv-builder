@@ -1,23 +1,46 @@
-import { Currency } from "lucide-react"
 
 export const PricingData = {
   CVSTUDIO: {
     name: "CV STUDIO",
     INR: {
-      price: 1500,
-      symbol: "₹"
+      MP: {
+        price: 3000,
+        symbol: "₹"
+      },
+      DP: {
+        price: 1050,
+        symbol: "₹"
+      }
     },
     USD: {
-      price: 20,
-      symbol: "$"
+      MP: {
+        price: 40,
+        symbol: "$"
+      },
+      DP: {
+        price: 15,
+        symbol: "$"
+      }
     },
     EUR: {
-      price: 25,
-      symbol: "€"
+      MP: {
+        price: 50,
+        symbol: "€"
+      },
+      DP: {
+        price: 17.5,
+        symbol: "€"
+      }
     },
     GBP: {
-      price: 20,
-      symbol: "£"
+      MP: {
+        price: 40,
+        symbol: "£"
+      },
+      DP: {
+        price: 15,
+        symbol: "£"
+      }
     }
   },
   AICareerCoach: {
@@ -56,7 +79,7 @@ export const PricingData = {
     GBP: {
       price: 150,
       symbol: "£"
-      
+
     }
   },
   PsychometricTestingTools: {
