@@ -18,13 +18,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, DollarSign, Mail } from "lucide-react";
 import { format } from "date-fns";
 import { ResumeChart } from "./ResumeChart";
+import Link from "next/link";
+import Image from "next/image";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { userdata } = useUserStore((state) => state.userState);
-  // const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [program, setProgram] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggle = (index) => {
     if (open === index) {
@@ -32,180 +36,6 @@ const UserDashboardPage = () => {
     }
     setOpen(index);
   };
-
-
-  const bookings = [
-    {
-      _id: "1",
-      coachId: {
-        name: "John Doe",
-        profileImage: "/images/john_doe.jpg",
-        email: "john.doe@example.com",
-        ratesPerHour: {
-          charges: "$50",
-        },
-      },
-      slotTime: {
-        startTime: "10:00 AM",
-        endTime: "11:00 AM",
-      },
-      date: "2024-10-10T00:00:00Z",
-      timezone: "PST",
-    },
-    {
-      _id: "2",
-      coachId: {
-        name: "Jane Smith",
-        profileImage: "/images/jane_smith.jpg",
-        email: "jane.smith@example.com",
-        ratesPerHour: {
-          charges: "$60",
-        },
-      },
-      slotTime: {
-        startTime: "12:00 PM",
-        endTime: "1:00 PM",
-      },
-      date: "2024-10-11T00:00:00Z",
-      timezone: "EST",
-    },
-    {
-      _id: "3",
-      coachId: {
-        name: "Emily Johnson",
-        profileImage: "/images/emily_johnson.jpg",
-        email: "emily.johnson@example.com",
-        ratesPerHour: {
-          charges: "$55",
-        },
-      },
-      slotTime: {
-        startTime: "2:00 PM",
-        endTime: "3:00 PM",
-      },
-      date: "2024-10-12T00:00:00Z",
-      timezone: "CST",
-    },
-    {
-      _id: "4",
-      coachId: {
-        name: "Michael Brown",
-        profileImage: "/images/michael_brown.jpg",
-        email: "michael.brown@example.com",
-        ratesPerHour: {
-          charges: "$65",
-        },
-      },
-      slotTime: {
-        startTime: "4:00 PM",
-        endTime: "5:00 PM",
-      },
-      date: "2024-10-13T00:00:00Z",
-      timezone: "PST",
-    },
-    {
-      _id: "5",
-      coachId: {
-        name: "Sarah Wilson",
-        profileImage: "/images/sarah_wilson.jpg",
-        email: "sarah.wilson@example.com",
-        ratesPerHour: {
-          charges: "$45",
-        },
-      },
-      slotTime: {
-        startTime: "9:00 AM",
-        endTime: "10:00 AM",
-      },
-      date: "2024-10-14T00:00:00Z",
-      timezone: "GMT",
-    },
-    {
-      _id: "6",
-      coachId: {
-        name: "Chris Evans",
-        profileImage: "/images/chris_evans.jpg",
-        email: "chris.evans@example.com",
-        ratesPerHour: {
-          charges: "$70",
-        },
-      },
-      slotTime: {
-        startTime: "6:00 PM",
-        endTime: "7:00 PM",
-      },
-      date: "2024-10-15T00:00:00Z",
-      timezone: "EST",
-    },
-    {
-      _id: "7",
-      coachId: {
-        name: "Sophia Miller",
-        profileImage: "/images/sophia_miller.jpg",
-        email: "sophia.miller@example.com",
-        ratesPerHour: {
-          charges: "$55",
-        },
-      },
-      slotTime: {
-        startTime: "8:00 AM",
-        endTime: "9:00 AM",
-      },
-      date: "2024-10-16T00:00:00Z",
-      timezone: "PST",
-    },
-    {
-      _id: "8",
-      coachId: {
-        name: "David Lee",
-        profileImage: "/images/david_lee.jpg",
-        email: "david.lee@example.com",
-        ratesPerHour: {
-          charges: "$75",
-        },
-      },
-      slotTime: {
-        startTime: "11:00 AM",
-        endTime: "12:00 PM",
-      },
-      date: "2024-10-17T00:00:00Z",
-      timezone: "CST",
-    },
-    {
-      _id: "9",
-      coachId: {
-        name: "Olivia Martinez",
-        profileImage: "/images/olivia_martinez.jpg",
-        email: "olivia.martinez@example.com",
-        ratesPerHour: {
-          charges: "$80",
-        },
-      },
-      slotTime: {
-        startTime: "3:00 PM",
-        endTime: "4:00 PM",
-      },
-      date: "2024-10-18T00:00:00Z",
-      timezone: "GMT",
-    },
-    {
-      _id: "10",
-      coachId: {
-        name: "Liam Anderson",
-        profileImage: "/images/liam_anderson.jpg",
-        email: "liam.anderson@example.com",
-        ratesPerHour: {
-          charges: "$85",
-        },
-      },
-      slotTime: {
-        startTime: "5:00 PM",
-        endTime: "6:00 PM",
-      },
-      date: "2024-10-19T00:00:00Z",
-      timezone: "PST",
-    },
-  ];
 
   const handleGetBookings = async () => {
     const { accessToken } = await GetTokens();
@@ -221,10 +51,32 @@ const UserDashboardPage = () => {
       if (response.status === 200) {
         setBookings(response.data.bookings);
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
+
+  const handleGetUserProgram = async () => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push("/login?redirect=/user-dashboard");
+    }
+    setIsLoading(true);
+    try {
+      const response = await axios.get("/api/getUserProgram", {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      console.log("response::", response);
+      if (response.status === 200) {
+        setProgram(response?.data?.programs);
+        setIsLoading(false);
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    handleGetUserProgram();
+  }, []);
 
   useEffect(() => {
     handleGetBookings();
@@ -238,13 +90,17 @@ const UserDashboardPage = () => {
           <div className="sm:container md:container lg:container xl:container 2xl:container bg-[#FFF] h-auto -mt-20 w-full flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row justify-between items-center border border-[#FFDDD1] p-4">
             {/* Left Side */}
             <div
-              id='blog_header_left_side'
-              className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>
-              <div className='w-44 h-44'>
+              id="blog_header_left_side"
+              className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4"
+            >
+              <div className="w-44 h-44">
                 <img
-                  src={userdata?.profilePicture || "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"}
-                  alt='Coach'
-                  className='w-full  object-cover w-full h-full rounded-full '
+                  src={
+                    userdata?.profilePicture ||
+                    "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
+                  }
+                  alt="Coach"
+                  className="w-full  object-cover h-full rounded-full "
                 />
               </div>
               <div id="coach_details" className="pt-4 sm:pt-10">
@@ -256,37 +112,6 @@ const UserDashboardPage = () => {
                     {userdata?.fullname}
                   </h1>
                 </div>
-                {/* <div
-                  id='row3'
-                  className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-500'>
-                  <div className='flex items-center space-x-1'>
-                    <img
-                      src='/Star.png'
-                      alt='Star'
-                      className='w-3 sm:w-4 h-3 sm:h-4'
-                    />
-                    <span className='text-[#1D2026] font-bold'>4.8</span>
-                    <span className='text-[#6E7485]'>(134,633 reviews)</span>
-                  </div>
-                  <div className='flex items-center space-x-1'>
-                    <img
-                      src='/Users.png'
-                      alt='Users'
-                      className='w-3 sm:w-4 h-3 sm:h-4'
-                    />
-                    <span className='text-[#1D2026] font-bold'>430,117</span>
-                    <span className='text-[#6E7485]'>students</span>
-                  </div>
-                  <div className='flex items-center space-x-1'>
-                    <img
-                      src='/PlayCircle.png'
-                      alt='Play Circle'
-                      className='w-3 sm:w-4 h-3 sm:h-4'
-                    />
-                    <span className='text-[#1D2026] font-bold'>7</span>
-                    <span className='text-[#6E7485]'>courses</span>
-                  </div>
-                </div> */}
               </div>
             </div>
 
@@ -359,15 +184,16 @@ const UserDashboardPage = () => {
               >
                 Bookings
               </TabsTrigger>
-              {/* <TabsTrigger
-                value="coaching"
-                className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "coaching" ? "active" : ""
-                  } data-[state=active]:shadow-none`}
-                onClick={() => setActiveTab("coaching")}
-              >
-                Coaching
-              </TabsTrigger>
               <TabsTrigger
+                value="program"
+                className={`tabs-trigger text-blue-950 rounded-md text-base ${
+                  activeTab === "program" ? "active" : ""
+                } data-[state=active]:shadow-none`}
+                onClick={() => setActiveTab("program")}
+              >
+                Program
+              </TabsTrigger>
+              {/* <TabsTrigger
                 value="whishlist"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${activeTab === "whishlist" ? "active" : ""
                   } data-[state=active]:shadow-none`}
@@ -455,9 +281,242 @@ const UserDashboardPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="resume_charts mt-5">
-                    <h2>Charts Sections</h2>
-                    <ResumeChart />
+                  <div className="booking_data mt-10">
+                    <h2 className="text-xl font-bold my-5 text-blue-950">
+                      My Bookings
+                    </h2>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <thead>
+                          <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                            <th className="p-4">Coach</th>
+                            <th className="p-4">Booking Time</th>
+                            <th className="p-4">Date</th>
+                            <th className="p-4">Timezone</th>
+                            <th className="p-4">Email</th>
+                            <th className="p-4">Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {isLoading ? (
+                            Array(5)
+                              .fill("")
+                              .map((_, index) => (
+                                <tr
+                                  key={index}
+                                  className="border-b border-gray-200"
+                                >
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+                                    <div className="flex-1">
+                                      <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                                    </div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-32"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-20"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-24"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-32"></div>
+                                  </td>
+                                  <td className="p-4 text-xs">
+                                    <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
+                                  </td>
+                                </tr>
+                              ))
+                          ) : bookings.length > 0 ? (
+                            bookings.map((booking) => (
+                              <tr
+                                key={booking._id}
+                                className="border-b border-gray-200"
+                              >
+                                {/* Coach Info */}
+                                <td className="p-4 flex items-center space-x-3">
+                                  <img
+                                    src={booking?.coachId?.profileImage}
+                                    alt={booking?.coachId?.name}
+                                    className="w-10 h-10 object-cover rounded-full"
+                                  />
+                                  <div>
+                                    <p className="text-sm font-semibold">
+                                      {booking?.coachId?.name}
+                                    </p>
+                                  </div>
+                                </td>
+
+                                {/* Booking Time */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {booking?.slotTime?.startTime} -{" "}
+                                  {booking?.slotTime?.endTime}
+                                </td>
+
+                                {/* Date */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {format(
+                                    new Date(booking?.date),
+                                    "MMM dd, yyyy"
+                                  )}
+                                </td>
+
+                                {/* Timezone */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {booking?.timezone}
+                                </td>
+
+                                {/* Email */}
+                                <td className="p-4 text-xs text-gray-700 ">
+                                  <span className="flex items-center">
+                                    <Mail className="mr-2 h-4 w-4 flex-shrink-0 text-gray-500" />
+                                    {booking?.coachId?.email}
+                                  </span>
+                                </td>
+
+                                {/* Rate */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  <span className="flex items-center">
+                                    <DollarSign className="mr-2 h-4 w-4 flex-shrink-0 text-gray-500" />
+                                    {booking?.coachId?.ratesPerHour?.charges}
+                                    /hour
+                                  </span>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td
+                                colSpan="6"
+                                className="text-center py-4 text-gray-500"
+                              >
+                                No Data Available
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="program_data mt-10">
+                  <h2 className="text-xl font-bold my-5 text-blue-950">
+                      My Programs
+                    </h2>
+                    <div className="overflow-x-auto">
+                      {isLoading ? (
+                        // Skeleton loader for table rows
+                        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                          <thead>
+                            <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                              <th className="p-4">Program</th>
+                              <th className="p-4">Description</th>
+                              <th className="p-4">Coach</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Array(6)
+                              .fill(0)
+                              .map((_, index) => (
+                                <tr
+                                  key={index}
+                                  className="border-b border-gray-200 animate-pulse"
+                                >
+                                  {/* Program Image */}
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <div className="w-16 h-16 bg-gray-200 rounded-md"></div>
+                                    <div className="w-full">
+                                      <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+                                    </div>
+                                  </td>
+                                  {/* Description */}
+                                  <td className="p-4">
+                                    <div className="h-4 bg-gray-200 rounded mb-2 w-40"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-32"></div>
+                                  </td>
+                                  {/* Coach */}
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                                    <div className="w-full">
+                                      <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                                      <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      ) : program.length > 0 ? (
+                        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                          <thead>
+                            <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                              <th className="p-4">Program</th>
+                              <th className="p-4">Description</th>
+                              <th className="p-4">Coach</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {program.map((item, index) => (
+                              <tr
+                                key={index}
+                                className="border-b border-gray-200"
+                              >
+                                {/* Program Info */}
+                                <td className="p-4 flex items-center space-x-3">
+                                  <img
+                                    src={item.programId?.programImage}
+                                    alt={item.programId?.title}
+                                    className="w-16 h-16 object-cover rounded-md"
+                                    priority
+                                  />
+                                  <div>
+                                    <p className="text-sm font-semibold">
+                                      {item.programId?.title}
+                                    </p>
+                                  </div>
+                                </td>
+
+                                {/* Description */}
+                                <td className="p-4 text-xs text-gray-700">
+                                  {item.programId?.description}
+                                </td>
+
+                                {/* Coach Info */}
+                                <td className="p-4 flex items-center space-x-3">
+                                  <img
+                                    src={item?.coachId?.profileImage}
+                                    alt={item?.coachId?.name}
+                                    className="w-10 h-10 object-cover rounded-full"
+                                    priority
+                                  />
+                                  <div>
+                                    <p className="text-sm font-semibold">
+                                      {item.coachId?.name}
+                                    </p>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      ) : (
+                        <Card className="w-full">
+                          <CardHeader>
+                            <CardTitle className="text-center text-lg font-semibold text-gray-500">
+                              No Data Available
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex justify-center items-center py-4">
+                              <p className="text-sm text-gray-500">
+                                There are no programs to display at the moment.
+                              </p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -466,99 +525,201 @@ const UserDashboardPage = () => {
               <div className="career_section max-w-full md:max-w-5xl mx-auto">
                 <div className="space-y-3">
                   <h2 className="lg:text-start text-center text-xl font-bold text-blue-950">
-                    Bookings
+                    My Bookings
                   </h2>
                   <div className="coach_section">
                     <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-                        {bookings.length > 0 && bookings.map((booking) => (
-                          <Card key={booking._id} className="w-full">
-                            <CardHeader>
-                              <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
-                                <Avatar className="w-12 h-12 mb-2 sm:mb-0">
-                                  <AvatarImage src={booking?.coachId?.profileImage} alt={booking?.coachId?.name} className="object-cover" />
-                                  <AvatarFallback>{booking?.coachId?.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <h3 className="text-base sm:text-lg font-semibold">{booking?.coachId?.name}</h3>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking?.slotTime?.startTime} - {booking?.slotTime?.endTime}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{format(new Date(booking?.date), 'MMM dd, yyyy')}</p>
-                                  <p className="text-xs sm:text-sm text-gray-500">{booking?.timezone}</p>
+                        {isLoading ? (
+                          Array(6)
+                            .fill(0)
+                            .map((_, index) => (
+                              <div key={index} className="animate-pulse">
+                                <div className="w-full bg-gray-200 rounded-lg h-24"></div>
+                                <div className="flex items-center space-x-4 mt-4">
+                                  <div className="w-12 h-12 rounded-full bg-gray-200"></div>
+                                  <div className="flex-1 space-y-2">
+                                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+                                  </div>
                                 </div>
+                              </div>
+                            ))
+                        ) : bookings.length > 0 ? (
+                          bookings.map((booking) => (
+                            <Card key={booking._id} className="w-full">
+                              <CardHeader>
+                                <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                                  <Avatar className="w-12 h-12 mb-2 sm:mb-0">
+                                    <AvatarImage
+                                      src={booking?.coachId?.profileImage}
+                                      alt={booking?.coachId?.name}
+                                      className="object-cover"
+                                    />
+                                    <AvatarFallback>
+                                      {booking?.coachId?.name
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div>
+                                    <h3 className="text-base sm:text-lg font-semibold">
+                                      {booking?.coachId?.name}
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-gray-500">
+                                      {booking?.slotTime?.startTime} -{" "}
+                                      {booking?.slotTime?.endTime}
+                                    </p>
+                                    <p className="text-xs sm:text-sm text-gray-500">
+                                      {format(
+                                        new Date(booking?.date),
+                                        "MMM dd, yyyy"
+                                      )}
+                                    </p>
+                                    <p className="text-xs sm:text-sm text-gray-500">
+                                      {booking?.timezone}
+                                    </p>
+                                  </div>
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <div className="space-y-2">
+                                  <div className="flex items-center">
+                                    <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
+                                    <span className="text-xs sm:text-sm truncate">
+                                      {booking?.coachId?.email}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center">
+                                    <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
+                                    <span className="text-xs sm:text-sm">
+                                      {booking?.coachId?.ratesPerHour?.charges}
+                                      /hour
+                                    </span>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))
+                        ) : (
+                          <Card className="w-full">
+                            <CardHeader>
+                              <CardTitle className="text-center text-lg font-semibold text-gray-500">
+                                No Data Available
                               </CardTitle>
                             </CardHeader>
                             <CardContent>
-                              <div className="space-y-2">
-                                <div className="flex items-center">
-                                  <Mail className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm truncate">{booking?.coachId?.email}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <DollarSign className="mr-2 h-4 w-4 flex-shrink-0" />
-                                  <span className="text-xs sm:text-sm">{booking?.coachId?.ratesPerHour?.charges}/hour</span>
-                                </div>
+                              <div className="flex justify-center items-center py-4">
+                                <p className="text-sm text-gray-500">
+                                  There are no bookings to display at the
+                                  moment.
+                                </p>
                               </div>
                             </CardContent>
                           </Card>
-                        ))}
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </TabsContent>
-            {/* <TabsContent className="mb-6" value="coaching">
+            <TabsContent className="mb-6" value="program">
               <div className="career_section max-w-full md:max-w-5xl mx-auto">
                 <div className="space-y-3">
                   <h2 className="lg:text-start text-center text-xl font-bold text-blue-950">
-                    My Coaches
+                    My Programs
                   </h2>
                   <div className="coach_section">
                     <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
-                      <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        {coaches.slice(0, 4).map((item, index) => (
-                          <div
-                            key={item.id}
-                            className="group relative bg-white cursor-pointer"
-                          >
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                              <img
-                                alt={item.imageAlt}
-                                src={item.imageSrc}
-                                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                              />
+                      <div>
+                        {isLoading ? (
+                          // Skeleton loader
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {Array(6)
+                              .fill(0)
+                              .map((_, index) => (
+                                <div key={index} className="animate-pulse">
+                                  <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 bg-gray-200"></div>
+                                  <div className="bg-white p-4 mt-4">
+                                    <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                                    <div className="flex items-center mt-4">
+                                      <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                                      <div className="pl-3">
+                                        <div className="h-4 bg-gray-200 rounded mb-1 w-24"></div>
+                                        <div className="h-3 bg-gray-200 rounded w-16"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        ) : program.length > 0 ? (
+                          program.map((item, index) => (
+                            <div key={index}>
+                              <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
+                                <div className="w-full block h-full">
+                                  <img
+                                    alt="blog photo"
+                                    src={item.programId?.programImage}
+                                    className="max-h-40 w-full object-cover"
+                                    priority
+                                  />
+                                  <div className="bg-white w-full p-4">
+                                    <p className="text-gray-800 text-base font-medium mb-2">
+                                      {item?.programId?.title}
+                                    </p>
+                                    <p className="text-gray-600 font-light text-sm">
+                                      {item?.programId?.description}
+                                    </p>
+                                    <div className="flex items-center mt-2">
+                                      <img
+                                        className="w-10 h-10 object-cover rounded-full"
+                                        alt="User avatar"
+                                        src={item?.coachId?.profileImage}
+                                        priority
+                                      />
+                                      <div className="pl-3">
+                                        <div className="font-medium text-sm">
+                                          {item?.coachId?.name}
+                                        </div>
+                                        <div className="text-gray-600 text-sm">
+                                          CTO of Supercars
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <div className="coaching_name text-center mt-2">
-                              <h3 className="text-sm text-gray-700">
-                                {item.name}
-                              </h3>
-                              <p className="text-[12px] text-gray-700">
-                                {item?.jobProfile?.title}
-                              </p>
-                            </div>
-                            <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
-                              <div className="flex items-center gap-2">
-                                <FaStar className="text-orange-500" />
-                                <p className="text-sm text-gray-700">
-                                  {item.rating}
+                          ))
+                        ) : (
+                          <Card className="w-full">
+                            <CardHeader>
+                              <CardTitle className="text-center text-lg font-semibold text-gray-500">
+                                No Data Available
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="flex justify-center items-center py-4">
+                                <p className="text-sm text-gray-500">
+                                  There are no programs to display at the
+                                  moment.
                                 </p>
                               </div>
-                              <p className="text-sm font-medium text-gray-900">
-                                {item.students}{" "}
-                                <span className="text-gray-500 ml-1 text-sm">
-                                  students
-                                </span>
-                              </p>
-                            </div>
-                          </div>
-                        ))}
+                            </CardContent>
+                          </Card>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </TabsContent>
-            <TabsContent className="mb-6" value="whishlist">
+            {/* <TabsContent className="mb-6" value="whishlist">
               <div className="max-w-full md:max-w-5xl mx-auto summary_section">
                 <div>
                   <Whishlist />

@@ -118,7 +118,7 @@ export default function Home() {
       </Head>
 
       <main>
-        {isLoading ? (
+        {/* {isLoading ? (
           <LoaderUI />
         ) : (
           <>
@@ -126,7 +126,12 @@ export default function Home() {
             <HomepageNew />
             <Footer />
           </>
-        )}
+        )} */}
+          <>
+            <ResumeHeader />
+            <HomepageNew />
+            <Footer />
+          </>
       </main>
     </>
   );

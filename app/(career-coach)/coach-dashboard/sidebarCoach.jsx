@@ -49,7 +49,7 @@ const SidebarCoach = () => {
 
   const getProgramLinkClass = (tab) => {
     return activeTab.includes(tab)
-      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto py-2"
+      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto py-2 px-2"
       : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm  font-bold w-full py-2";
   }
 
@@ -163,6 +163,17 @@ const SidebarCoach = () => {
                 }>
                 <MdEventAvailable className="text-lg mr-3" />
                 My Appointment
+              </Link>
+            </li>
+            <li className={getLinkClass("/coach-dashboard/enroll-student")}>
+              <Link
+                href={"/coach-dashboard/enroll-student"}
+                className='flex items-center w-full p-2 px-3'
+                onClick={() =>
+                  handleSetActiveTab("/coach-dashboard/enroll-student")
+                }>
+                <MdEventAvailable className="text-lg mr-3" />
+                 Enroll Students
               </Link>
             </li>
             <li>
