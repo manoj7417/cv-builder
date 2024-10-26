@@ -184,7 +184,7 @@ export default function TabResume() {
                             alt={item.name}
                             className={`object-fit rounded-md w-full ${isImageLoading ? "hidden" : ""
                               }`}
-                            onLoadingComplete={() => setIsImageLoading(false)}
+                            onLoad={() => setIsImageLoading(false)}
                             placeholder='blur'
                             blurDataURL={`data:image/svg+xml;base64,${btoa(
                               '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><rect width="100%" height="100%" fill="#f0f0f0"/></svg>'
@@ -264,7 +264,7 @@ export default function TabResume() {
                               alt={item.name}
                               className={`object-fit rounded-md w-full ${isImageLoading ? "hidden" : ""
                                 }`}
-                              onLoadingComplete={() =>
+                              onLoad={() =>
                                 setIsImageLoading(false)
                               }
                               placeholder='blur'

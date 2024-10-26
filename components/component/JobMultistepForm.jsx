@@ -741,7 +741,7 @@ function JobMultistepForm({
                                       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                                         <div className="flex flex-col w-full md:w-1/2 space-y-1 pr-2">
                                           <Label
-                                            for="start_date"
+                                            htmlFor="start_date"
                                             className="block"
                                           >
                                             Start Date
@@ -760,7 +760,7 @@ function JobMultistepForm({
                                         </div>
                                         <div className="flex flex-col w-full md:w-1/2 space-y-1 pl-2">
                                           <Label
-                                            for="end_date"
+                                            htmlFor="end_date"
                                             className="block"
                                           >
                                             End Date
@@ -943,7 +943,7 @@ function JobMultistepForm({
                                   </div>
                                   <div className="flex sm:flex-row flex-col px-2">
                                     <div className="flex flex-col w-full md:w-1/2 space-y-1 pr-2 lg:py-0 py-5">
-                                      <Label for="start_date" className="block">
+                                      <Label htmlFor="start_date" className="block">
                                         Start Date
                                       </Label>
                                       <div className="w-full">
@@ -961,7 +961,7 @@ function JobMultistepForm({
                                       </div>
                                     </div>
                                     <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around lg:pl-2 pl-0">
-                                      <Label for="end_date" className="block">
+                                      <Label htmlFor="end_date" className="block">
                                         End Date
                                       </Label>
                                       <div className="w-full">
@@ -1112,7 +1112,7 @@ function JobMultistepForm({
                                   </div>
                                   <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                                     <div className="flex flex-col w-full space-y-2 pr-2 lg:py-0 py-5">
-                                      <Label for="start_date" className="block">
+                                      <Label htmlFor="start_date" className="block">
                                         Start Date
                                       </Label>
                                       <div className="w-full">
@@ -1130,7 +1130,7 @@ function JobMultistepForm({
                                       </div>
                                     </div>
                                     <div className="flex flex-col w-full space-y-2 justify-around lg:pl-2 pl-0">
-                                      <Label for="end_date" className="block">
+                                      <Label htmlFor="end_date" className="block">
                                         End Date
                                       </Label>
                                       <div className="w-full">
