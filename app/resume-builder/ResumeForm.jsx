@@ -1003,7 +1003,7 @@ export default function ResumeForm() {
             <Label className='text-sm text-blue-900 font-bold'>
               Resume Title
             </Label>
-            <Input value={title} onChange={handleResumeTitleChange} />
+            <Input value={title || ''} onChange={handleResumeTitleChange} />
           </div>
           {ImageTemplates.includes(data.metadata.template) && (
             <div className='w-full mt-5'>
@@ -1018,7 +1018,7 @@ export default function ResumeForm() {
                 placeholder='Enter your name'
                 name='name'
                 onChange={(e) => setResumeData("basics.name", e.target.value)}
-                value={data?.basics?.name}
+                value={data?.basics?.name || ""}
               />
             </div>
             <div className='space-y-2 my-2'>
@@ -1031,7 +1031,7 @@ export default function ResumeForm() {
                 onChange={(e) =>
                   setResumeData("basics.jobtitle", e.target.value)
                 }
-                value={data?.basics?.jobtitle}
+                value={data?.basics?.jobtitle || ""}
               />
             </div>
           </div>
@@ -1044,7 +1044,7 @@ export default function ResumeForm() {
                 type='email'
                 name='email'
                 onChange={(e) => setResumeData("basics.email", e.target.value)}
-                value={data?.basics?.email}
+                value={data?.basics?.email || ""}
               />
             </div>
             <div className='space-y-2 my-2'>
@@ -1053,7 +1053,7 @@ export default function ResumeForm() {
                 id='phone'
                 placeholder='Enter phone number'
                 name='phone'
-                value={data?.basics?.phone}
+                value={data?.basics?.phone || ""}
                 onChange={(e) => setResumeData("basics.phone", e.target.value)}
               />
             </div>
@@ -1064,7 +1064,7 @@ export default function ResumeForm() {
               <Input
                 id='country'
                 placeholder='Enter Country Name'
-                value={data?.basics?.country}
+                value={data?.basics?.country || ""}
                 name='country'
                 onChange={(e) =>
                   setResumeData("basics.country", e.target.value)
@@ -1078,7 +1078,7 @@ export default function ResumeForm() {
                 placeholder='Enter City Name'
                 name='city'
                 onChange={(e) => setResumeData("basics.city", e.target.value)}
-                value={data?.basics?.city}
+                value={data?.basics?.city || ""}
               />
             </div>
           </div>
@@ -1097,7 +1097,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={data?.sections?.summary?.name}
+                  value={data?.sections?.summary?.name || ""}
                   onChange={(e) =>
                     setResumeData("sections.summary.name", e.target.value)
                   }
@@ -1107,12 +1107,14 @@ export default function ResumeForm() {
                 open={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}>
                 <DialogTrigger asChild>
-                  <button
-                    className='generate-ai flex items-center'
-                    onClick={handleOpenAIDialog}>
-                    Generate with AI
-                    <BsStars className=' text-yellow-500 ml-2' />
-                  </button>
+                  <div>
+                    <button
+                      className='generate-ai flex items-center'
+                      onClick={handleOpenAIDialog}>
+                      Generate with AI
+                      <BsStars className=' text-yellow-500 ml-2' />
+                    </button>
+                  </div>
                 </DialogTrigger>
                 <MultiStepForm
                   handleCloseAIDialog={handleCloseAIDialog}
@@ -1141,7 +1143,7 @@ export default function ResumeForm() {
                   height: "200px",
                   position: "relative",
                 }}
-                value={data?.sections?.summary.content}
+                value={data?.sections?.summary.content || ""}
                 onTextChange={handleChangeProfileSummaryChange}
               />
             </div>
@@ -1159,7 +1161,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={data?.sections?.education?.name}
+                  value={data?.sections?.education?.name || ""}
                   onChange={(e) =>
                     setResumeData("sections.education.name", e.target.value)
                   }
@@ -1236,7 +1238,7 @@ export default function ResumeForm() {
                                 <Input
                                   id='institute'
                                   placeholder='Institute Name'
-                                  value={item.institute}
+                                  value={item.institute || ""}
                                   onChange={(e) =>
                                     handleEducationChange(e, index)
                                   }
@@ -1249,7 +1251,7 @@ export default function ResumeForm() {
                                   id='degree'
                                   placeholder='Degree Name'
                                   type='text'
-                                  value={item.degree}
+                                  value={item.degree || ""}
                                   name='degree'
                                   onChange={(e) =>
                                     handleEducationChange(e, index)
@@ -1276,7 +1278,7 @@ export default function ResumeForm() {
                                   </div>
                                 </div>
                                 <div className='flex flex-col w-full md:w-1/2 space-y-2   lg:pl-2 pl-0 lg:py-0 py-5'>
-                                  <Label for='end_date' className='block'>
+                                  <Label htmlFor='end_date' className='block'>
                                     End Date
                                   </Label>
                                   <div className='w-full'>
@@ -1322,7 +1324,7 @@ export default function ResumeForm() {
                                 <Input
                                   placeholder='Enter city name'
                                   type='text'
-                                  value={item.city}
+                                  value={item.city || ""}
                                   name='city'
                                   onChange={(e) =>
                                     handleEducationChange(e, index)
@@ -1377,7 +1379,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={data?.sections?.experience?.name}
+                  value={data?.sections?.experience?.name || ''}
                   onChange={(e) =>
                     setResumeData("sections.experience.name", e.target.value)
                   }
@@ -1453,7 +1455,7 @@ export default function ResumeForm() {
                                 <Input
                                   id='institute'
                                   placeholder='Enter Job title'
-                                  value={item.jobtitle}
+                                  value={item.jobtitle || ""}
                                   name='jobtitle'
                                   onChange={(e) =>
                                     handleExperienceChange(e, index)
@@ -1466,7 +1468,7 @@ export default function ResumeForm() {
                                   id='degree'
                                   placeholder='Employer name'
                                   type='text'
-                                  value={item.employer}
+                                  value={item.employer || ""}
                                   name='employer'
                                   onChange={(e) =>
                                     handleExperienceChange(e, index)
@@ -1477,7 +1479,7 @@ export default function ResumeForm() {
                             <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 px-2'>
                               <div className='flex flex-col md:flex-row '>
                                 <div className='flex flex-col w-full md:w-1/2 space-y-2  pr-2 lg:py-0 py-5'>
-                                  <Label for='start_date' className='block'>
+                                  <Label htmlFor='start_date' className='block'>
                                     Start Date
                                   </Label>
                                   <div className='w-full'>
@@ -1495,7 +1497,7 @@ export default function ResumeForm() {
                                   </div>
                                 </div>
                                 <div className='flex flex-col w-full md:w-1/2 space-y-2   lg:pl-2 pl-0'>
-                                  <Label for='end_date' className='block'>
+                                  <Label htmlFor='end_date' className='block'>
                                     End Date
                                   </Label>
                                   <div className='w-full'>
@@ -1544,7 +1546,7 @@ export default function ResumeForm() {
                                   id='city'
                                   placeholder='Enter city name'
                                   type='text'
-                                  value={item.city}
+                                  value={item.city || ""}
                                   name='city'
                                   onChange={(e) =>
                                     handleExperienceChange(e, index)
@@ -1609,7 +1611,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={data?.sections?.projects?.name}
+                  value={data?.sections?.projects?.name || ""}
                   onChange={(e) =>
                     setResumeData("sections.projects.name", e.target.value)
                   }
@@ -1681,7 +1683,7 @@ export default function ResumeForm() {
                                 <Input
                                   id='institute'
                                   placeholder='Enter Project title'
-                                  value={item.title}
+                                  value={item.title || ""}
                                   name='title'
                                   onChange={(e) =>
                                     handleProjectChange(e, index)
@@ -1694,7 +1696,7 @@ export default function ResumeForm() {
                                   id='degree'
                                   placeholder='Enter project subtitle'
                                   type='text'
-                                  value={item.subtitle}
+                                  value={item.subtitle || ""}
                                   name='subtitle'
                                   onChange={(e) =>
                                     handleProjectChange(e, index)
@@ -1720,7 +1722,7 @@ export default function ResumeForm() {
                                   </div>
                                 </div>
                                 <div className='flex flex-col w-full md:w-1/2 space-y-2  lg:pl-2 pl-0 lg:py-0 py-5'>
-                                  <Label for='end_date' className='block'>
+                                  <Label htmlFor='end_date' className='block'>
                                     End Date
                                   </Label>
                                   <div className='w-full'>
@@ -1807,7 +1809,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={sections?.skills?.name}
+                  value={sections?.skills?.name || ""}
                   onChange={handleSkillsLabelChange}
                 />
               </div>
@@ -1865,7 +1867,7 @@ export default function ResumeForm() {
                             <div className=' w-1/2'>
                               <Label htmlFor={`skills-${index}`}>Name</Label>
                               <Input
-                                value={skills?.name}
+                                value={skills?.name || ""}
                                 onChange={(e) =>
                                   handleSkillNameChange(e.target.value, index)
                                 }
@@ -1919,7 +1921,7 @@ export default function ResumeForm() {
               </Label>
               <CustomLabelInput
                 className='hidden group-hover:block '
-                value={sections?.hobbies?.name}
+                value={sections?.hobbies?.name || ""}
                 onChange={handlehobbieslevelChange}
               />
             </div>
@@ -1991,7 +1993,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={sections?.awards?.name}
+                  value={sections?.awards?.name || ''}
                   onChange={handleawardslevelChange}
                 />
               </div>
@@ -2053,7 +2055,7 @@ export default function ResumeForm() {
                                     Name
                                   </Label>
                                   <Input
-                                    value={award?.name}
+                                    value={award?.name || ""}
                                     onChange={(e) =>
                                       handleAwardNameChange(
                                         e.target.value,
@@ -2080,7 +2082,7 @@ export default function ResumeForm() {
                                     </div>
                                     <Input
                                       placeholder='Enter url'
-                                      value={stripProtocol(award?.url)}
+                                      value={stripProtocol(award?.url) || ''}
                                       onChange={(e) =>
                                         handleAwardurlChange(e, index)
                                       }
@@ -2093,7 +2095,7 @@ export default function ResumeForm() {
                                   <Label>Issuer</Label>
                                   <Input
                                     placeholder='Enter Issuer'
-                                    value={award?.issuer}
+                                    value={award?.issuer || ''}
                                     onChange={(e) =>
                                       handleAwardInfoChange(e, index)
                                     }
@@ -2161,7 +2163,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block '
-                  value={sections?.reference?.name}
+                  value={sections?.reference?.name || ''}
                   onChange={handlereferencelevelChange}
                 />
               </div>
@@ -2223,7 +2225,7 @@ export default function ResumeForm() {
                                     Name
                                   </Label>
                                   <Input
-                                    value={reference?.name}
+                                    value={reference?.name || ''}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
@@ -2248,7 +2250,7 @@ export default function ResumeForm() {
                                     </div>
                                     <Input
                                       placeholder='Enter url'
-                                      value={stripProtocol(reference?.url)}
+                                      value={stripProtocol(reference?.url) || ''}
                                       onChange={(e) =>
                                         handleReferenceUrlChange(e, index)
                                       }
@@ -2261,7 +2263,7 @@ export default function ResumeForm() {
                                   <Label>JobTitle</Label>
                                   <Input
                                     placeholder='Enter Issuer'
-                                    value={reference?.jobTitle}
+                                    value={reference?.jobTitle || ''}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
@@ -2273,7 +2275,7 @@ export default function ResumeForm() {
                                   <Label>Organization</Label>
                                   <Input
                                     placeholder='Enter Organization'
-                                    value={reference?.organization}
+                                    value={reference?.organization || ''}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
@@ -2287,7 +2289,7 @@ export default function ResumeForm() {
                                   <Label>Email</Label>
                                   <Input
                                     placeholder='Enter email'
-                                    value={reference?.email}
+                                    value={reference?.email || ''}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
@@ -2299,7 +2301,7 @@ export default function ResumeForm() {
                                   <Label>Phone</Label>
                                   <Input
                                     placeholder='Enter a phone number'
-                                    value={reference?.phone}
+                                    value={reference?.phone || ''}
                                     onChange={(e) =>
                                       handleReferenceInfoChange(e, index)
                                     }
@@ -2345,7 +2347,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block'
-                  value={sections?.certificates?.name}
+                  value={sections?.certificates?.name || ''}
                   onChange={handlecertificatesLabelChange}
                 />
               </div>
@@ -2407,7 +2409,7 @@ export default function ResumeForm() {
                                     Name
                                   </Label>
                                   <Input
-                                    value={certificate?.name}
+                                    value={certificate?.name || ''}
                                     onChange={(e) =>
                                       handlecertificateInfoChange(e, index)
                                     }
@@ -2432,7 +2434,7 @@ export default function ResumeForm() {
                                     </div>
                                     <Input
                                       placeholder='Enter url'
-                                      value={stripProtocol(certificate.url)}
+                                      value={stripProtocol(certificate.url) || ''}
                                       onChange={(e) =>
                                         handlecertificateurlChange(e, index)
                                       }
@@ -2488,7 +2490,7 @@ export default function ResumeForm() {
                 </Label>
                 <CustomLabelInput
                   className='hidden group-hover:block'
-                  value={sections?.language?.name}
+                  value={sections?.language?.name || ''}
                   onChange={handlelanguageLabelChange}
                 />
               </div>
@@ -2542,7 +2544,7 @@ export default function ResumeForm() {
                             <div className=' w-1/2'>
                               <Label htmlFor={`language-${index}`}>Name</Label>
                               <Input
-                                value={language?.name}
+                                value={language?.name || ''}
                                 onChange={(e) =>
                                   handlelanguageNameChange(
                                     e.target.value,
@@ -2615,7 +2617,7 @@ export default function ResumeForm() {
               </Popover>
               <Input
                 id='theme.primary'
-                value={data.metadata.theme.primary}
+                value={data.metadata.theme.primary || ''}
                 className='pl-2 w-36 rounded-md'
                 onChange={(event) => {
                   setResumeData("metadata.theme.primary", event.target.value);

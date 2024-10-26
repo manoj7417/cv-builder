@@ -88,7 +88,6 @@ function Profile() {
         setIsEditable(false);
       }
     } catch (error) {
-      console.error("Error updating profile:", error);
     } finally {
       setIsUpdatingData(false);
     }
@@ -499,7 +498,7 @@ function Profile() {
                           </button>
                           <button
                             type="submit"
-                            className="bg-[#FF6636] text-white py-2 px-4 rounded text-sm"
+                            className="bg-[#FF6636] text-white py-2 px-4 rounded text-sm flex items-center"
                             disabled={isUpdatingData}
                           >
                             {isUpdatingData ? (

@@ -483,6 +483,7 @@ const PricingFunc = () => {
                             className="hidden"
                             checked={selectedPlan === "monthly"}
                             onChange={() => handlePlanChange("monthly")}
+                            value="monthly"
                           />
                         </div>
                       </div>
@@ -513,6 +514,7 @@ const PricingFunc = () => {
                             className="hidden"
                             checked={selectedPlan === "yearly"}
                             onChange={() => handlePlanChange("yearly")}
+                            value="yearly"
                           />
                         </div>
                       </div>
