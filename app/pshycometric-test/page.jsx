@@ -3,7 +3,6 @@ import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
-
 import { useUserStore } from "../store/UserStore";
 import NewResumeHeader from "../Layout/NewResumeHeader";
 import Header from "../Layout/Header";
