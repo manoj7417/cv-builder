@@ -77,14 +77,14 @@ const Page = () => {
       >
         <div className="container lg:pt-0 pt-10">
           <div className="flex flex-col justify-center ">
-            <Image priority
+            <Image 
               src={"/arrowright.png"}
               width={100}
               height={100}
               alt="arrowright"
               className="absolute top-[20%] left-0 w-auto h-auto"
             />
-            <Image priority
+            <Image 
               src={"/arrowleft.png"}
               width={100}
               height={100}

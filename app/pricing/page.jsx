@@ -556,17 +556,15 @@ const PricingFunc = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5" ref={serviceCardsRef}>
                 {serviceCards?.length > 0 &&
                   serviceCards.map((item, index) => {
-                    // Assign background color based on index
-                    const bgColor =
-                      backgroundColors[index % backgroundColors.length];
-                    // Define the click handler for each card
+                    const bgColor = backgroundColors[index % backgroundColors.length];
                     const handleCardClick = () => {
                       if (index === 0) {
-                        handleOpenAIDialog(item); // Open popup for the first card
+                        handleOpenAIDialog(item); 
                       } else if (index === 2) {
                         router.push("/coaches");
+                      }else if(index === 3){
+                        router.push("/pshycometric-test");
                       } else {
-                        // Redirect to the "coming soon" page for other cards
                         router.push("/coming-soon");
                       }
                     };
@@ -594,8 +592,8 @@ const PricingFunc = () => {
                               onClick={handleCardClick}
                               className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
                             >
-                              {index === 2 ? "View" : "Subscribe"}
-                            </button>
+                              {index === 3 ? "Try Now" : index === 2 ? "View" : "Subscribe"}
+                              </button>
                           </div>
                         </div>
                         <div className="bg-white lg:block hidden">

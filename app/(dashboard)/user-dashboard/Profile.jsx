@@ -480,7 +480,7 @@ function Profile() {
 
                   <div className="my-3">
                     <Label>Plan</Label>
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 py-2">
                       {userdata?.subscription?.plan  && userdata.subscription.plan.map((item , index)=> (<span key={index} className="bg-[#FF6636] text-white px-2 py-1 rounded mx-2 ">{item}</span>))}
                     </p>
                   </div>

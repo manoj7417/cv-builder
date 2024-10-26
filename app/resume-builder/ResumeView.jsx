@@ -676,7 +676,7 @@ const ResumeView = () => {
                             <p className="text-gray-500 text-xs sm:text-sm px-2">
                               {selectedPlan === "monthly" ? "per Month" : "per Year"}
                             </p>
-                            <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">60% off</p>
+                            <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">65% off</p>
                           </div>
                           <div className="mt-6 space-y-4 sm:space-y-8">
                             <div

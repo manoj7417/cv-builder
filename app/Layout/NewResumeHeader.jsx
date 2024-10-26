@@ -101,7 +101,6 @@ export default function NewResumeHeader() {
                         height={100}
                         alt="newlogo"
                         className="h-auto object-contain new-header-mobile"
-                        loading="lazy"
                       />
                     </a>
                   </div>
