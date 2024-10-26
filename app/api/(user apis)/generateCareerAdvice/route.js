@@ -1,5 +1,4 @@
 import { serverInstance } from '@/lib/serverApi';
-
 export async function POST(req, res) {
     try {
         const data = await req.json();
