@@ -10,7 +10,6 @@ import Header from "../Layout/Header";
 import { FaStar } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaRocket, FaCrown } from "react-icons/fa";
-
 import { useEffect, useState } from "react";
 import "../components/HomepageNew/Homepage.css";
 import Link from "next/link";
