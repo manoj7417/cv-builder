@@ -405,7 +405,7 @@ const UserDashboardPage = () => {
             <TabsContent value="dashboard" className="mb-4">
               <div className="actions_section max-w-full md:max-w-5xl mx-auto">
                 <div>
-                  <h2 className="text-xl font-bold mb-6 text-blue-950 lg:text-start text-center">
+                  {/* <h2 className="text-xl font-bold mb-6 text-blue-950 lg:text-start text-center">
                     Dashboard
                   </h2>
                   <div className="dashboard">
@@ -462,7 +462,7 @@ const UserDashboardPage = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="booking_data mt-10">
                     <h2 className="text-xl font-bold my-5 text-blue-950">
                       My Bookings

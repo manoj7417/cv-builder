@@ -538,19 +538,19 @@ export default function DashboardIdea() {
                         suitable CV template.
                       </p>
                     </div>
-                    <div className='lg:w-[45%] w-full h-[250px] image_content flex flex-col justify-start items-center'>
+                    <div className='lg:w-[45%] w-full h-[500px] image_content flex flex-col justify-start items-center'>
                       <img
-                        src='Artboard_ats.png'
+                        src='anaz-1.png'
                         alt='icon4'
                         className='object-contain mr-32'
                       />
-                      <div className='flex lg:flex-row flex-col justify-center items-center'>
+                      {/* <div className='flex lg:flex-row flex-col justify-center items-center'>
                         <img
                           src='ats_basic_information.png'
                           alt='icon4'
                           className='object-contain'
                         />
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className='arrow absolute left-[40%] -bottom-40'>
@@ -572,7 +572,7 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
                       <div className='flex justify-center items-center'>
                         <img
-                          src='/profile_update_ats.png'
+                          src='/anaz-2.png'
                           alt='icon4'
                           className='w-full h-full object-cover'
                         />
@@ -656,7 +656,7 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent'>
                       <div className='flex justify-center items-center'>
                         <img
-                          src='/profile_education_ats.png'
+                          src='/anaz-3.png'
                           alt='icon4'
                           className='w-full h-full object-cover'
                         />
@@ -693,7 +693,7 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent'>
                       <div className='flex justify-center items-center'>
                         <img
-                          src='/profile_experience_ats.png'
+                          src='/anaz-4.png'
                           alt='icon4'
                           className='w-full h-full object-cover'
                         />
@@ -764,7 +764,7 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:bg-transparent'>
                       <div className='flex justify-center items-center'>
                         <img
-                          src='/profile_skills_hobbies.png'
+                          src='/anaz-5.png'
                           alt='icon5'
                           className='w-full h-full object-cover'
                         />
@@ -802,7 +802,7 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-[450px] image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent'>
                       <div className='flex flex-col gap-10 justify-start items-center mt-10'>
                         <img
-                          src='/profile_awards_certificates_language.png'
+                          src='/anaz-6.png'
                           alt='icon5'
                           className='w-full h-full object-cover'
                         />
@@ -835,7 +835,7 @@ export default function DashboardIdea() {
                   </div> */}
                 </div>
 
-                <div className='step_7 w-[80%]'>
+                <div className='step_7 w-[80%] mt-[140px]'>
                   <h3 className='text-4xl text-black font-bold py-3'>
                     YOUR ATS RESUME SCORE DECODED
                   </h3>
@@ -1017,7 +1017,7 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent  order-last lg:order-first'>
                       <div className='flex flex-col gap-10 justify-start items-center mt-0'>
                         <img
-                          src='/profile_cv_insights.png'
+                          src='/cv-optimizer-12.png'
                           alt='icon5'
                           className='w-full h-full object-cover'
                         />
@@ -1096,20 +1096,20 @@ export default function DashboardIdea() {
                     <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent'>
                       <div className='flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row gap-5 justify-center items-center'>
                         <img
-                          src='/profile_clarity_ats.png'
+                          src='/az-441.png'
                           alt='icon1'
-                          className='w-[150px] h-[150px] object-cover'
+                          className='w-full h-full object-contain'
                         />
-                        <img
-                          src='/profile_relevance_ats.png'
+                        {/* <img
+                          src='/az-22.png'
                           alt='icon2'
-                          className='w-[150px] h-[150px] object-cover'
+                          className='w-[150px] h-[200px] object-cover'
                         />
                         <img
-                          src='/profile_content_ats.png'
+                          src='/az-33.png'
                           alt='icon3'
-                          className='w-[150px] h-[150px] object-cover'
-                        />
+                          className='w-[150px] h-[200px] object-cover'
+                        /> */}
                       </div>
                     </div>
                   </div>
