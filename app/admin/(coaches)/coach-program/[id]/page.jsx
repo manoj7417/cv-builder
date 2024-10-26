@@ -65,7 +65,6 @@ const EditCoachProgram = () => {
         setIsLoading(false);
       }
     };
-
   useEffect(() => {
     handleFetchCoachProgram();
   }, []);
