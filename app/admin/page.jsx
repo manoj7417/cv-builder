@@ -171,7 +171,7 @@ const AdminPage = () => {
                           {coach.name}
                         </div>
                         <div className="text-[11px] text-[#000000]">
-                          {coach.typeOfCoaching}
+                          {coach.typeOfCoaching.slice(0,20)}...
                         </div>
                         <div className="pt-2 pb-3 text-[#4E5566]">
                           <Link
@@ -230,7 +230,7 @@ const AdminPage = () => {
                             {coach.name}
                           </div>
                           <div className="xl:text-[14px] text-[12px] text-[#7E92A2] xl:mt-2 mt-0">
-                            {coach.typeOfCoaching}{" "}
+                            {coach.typeOfCoaching.slice(0,20)}...
                           </div>
                         </div>
                         <div className="text-right">
