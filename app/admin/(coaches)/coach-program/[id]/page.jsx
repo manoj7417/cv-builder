@@ -7,15 +7,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { Router } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-
+import { toast } from "react-toastify";
 const EditCoachProgram = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [programData, setProgramData] = useState([]);
-
+  const router = useRouter();
   const handleFetchCoachProgram = async () => {
     const { accessToken } = await GetTokens();
     try {
@@ -32,11 +33,10 @@ const EditCoachProgram = () => {
       console.log(error);
     }
   };
-
     const handleApprovalToggle = async (program) => {
       const { accessToken } = await GetTokens();
       const updatedStatus = !program.isapproved;
-
+      setIsLoading(true);
       try {
         await axios.put(
           `/api/editCoachProgram/${id}`,
@@ -50,6 +50,10 @@ const EditCoachProgram = () => {
             },
           }
         );
+        toast.success("Program approval status updated successfully.",{
+          position:"top-right"
+        });
+        router.push(`/admin/coach-program`);
         setProgramData((prevData) =>
           prevData.map((p) =>
             p._id === program._id ? { ...p, isapproved: updatedStatus } : p
@@ -57,15 +61,15 @@ const EditCoachProgram = () => {
         );
       } catch (error) {
         console.error("Failed to update approval status:", error);
+      }finally{
+        setIsLoading(false);
       }
     };
-
   useEffect(() => {
     handleFetchCoachProgram();
   }, []);
 
   console.log("programData::", programData);
-
 
   return (
     <>
@@ -106,11 +110,11 @@ const EditCoachProgram = () => {
                       </div>
 
                       <div className="program_title">
-                        <h2 className="text-5xl font-bold mb-2">
-                          {program.title}
+                        <h2 className="text-xl font-bold mb-2">
+                          <span>Course Title :</span>{program.title}
                         </h2>
-                        <p className="text-gray-700 mb-2 text-xl">
-                          {program.description}
+                        <p className="text-gray-700 mb-2 text-base">
+                          <span className="font-bold">Course Description : </span>{program.description}
                         </p>
                       </div>
                     </div>
@@ -177,7 +181,7 @@ const EditCoachProgram = () => {
                         ))}
                       </Accordion>
                     </div>
-                    <div className="program_prerequisites">
+                    <div className="program_prerequisites mt-2">
                       <h2 className="text-2xl font-bold mb-4">
                         Course Prerequisites
                       </h2>
@@ -202,8 +206,9 @@ const EditCoachProgram = () => {
                       <button
                         className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
                         onClick={() => handleApprovalToggle(program._id)}
+                        disabled={isLoading}
                       >
-                        Approve Program
+                        {isLoading ? 'Processing...' : 'Approve Program'}
                       </button>
                     </div>
                   </div>
