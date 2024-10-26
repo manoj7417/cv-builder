@@ -1127,7 +1127,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto flex lg:flex-row flex-col">
             <div className="faq_image lg:w-[50%] w-full lg:block hidden">
               <div className="image_div w-[400px] h-[400px]">
-                <img src="/faq_image.png" alt="faq" className="w-full h-full" />
+                <img src="/faq_image.png" alt="faq" className="w-full h-full object-contain" />
               </div>
             </div>
             <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">

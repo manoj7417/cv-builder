@@ -12,6 +12,7 @@ import { FaRocket, FaCrown } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import "../components/HomepageNew/Homepage.css";
 import Link from "next/link";
+import { ResumeHeader } from "../Layout/ResumeHeader";
 
 const Page = () => {
   const userState = useUserStore((state) => state.userState);
@@ -68,7 +69,7 @@ const Page = () => {
 
   return (
     <>
-      {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />}
+      <ResumeHeader/>
       <section
         className="flex lg:items-center items-start pb-0 justify-center  w-full pt-10 md:pt-16 lg:pt-20  px-5 relative"
         style={{ background: "url(/ptest.jpg)" }}

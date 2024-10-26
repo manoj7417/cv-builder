@@ -30,6 +30,7 @@ const UserDashboardPage = () => {
   const [program, setProgram] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
   const toggle = (index) => {
     if (open === index) {
       return setOpen(null);
@@ -116,7 +117,7 @@ const UserDashboardPage = () => {
             </div>
 
             {/* Right Side */}
-            <div
+            {/* <div
               id="blog_header_right_side"
               className="text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0"
             >
@@ -160,7 +161,7 @@ const UserDashboardPage = () => {
                   className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="tabs_section mt-10">
