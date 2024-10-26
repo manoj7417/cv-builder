@@ -278,7 +278,7 @@ const PricingFunc = () => {
         window.location = url;
       }
     } catch (error) {
-      if(error.response.status === 401 && error.response.data.error === "Unauthorized"){
+      if (error.response.status === 401 && error.response.data.error === "Unauthorized") {
         await RemoveTokens();
         toast("Please login again to proceed");
         router.push("/login?redirect=pricing");
@@ -448,8 +448,8 @@ const PricingFunc = () => {
                     <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
                       <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
                         {selectedPlan === "monthly"
-                        ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
-                        : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price)*10}`}
+                          ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
+                          : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`}
                       </h1>
                       <p className="text-gray-500 text-xs sm:text-sm px-2">
                         {selectedPlan === "monthly" ? "per Month" : "per Year"}
@@ -541,7 +541,7 @@ const PricingFunc = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <section className="w-full h-screen 2xl:mt-40 lg:mt-56 md:mt-40  mt-20">
+      <section className="w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10">
         <div className="w-full h-full flex justify-center items-center">
           <div className="text-start">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
@@ -549,121 +549,70 @@ const PricingFunc = () => {
               <br />
               <span className="text-blue-700">Flexible Pricing</span>
             </h1>
-
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 lg:max-w-3xl w-[70%] text-center xs:text-start mx-auto">
-              With careful plans designed to cater to all your needs, simple and
-              transparent pricing, and secured pricing, you are one step closer
-              to your dream career.
+            <p className=" w-[60%] mx-auto my-3 text-base text-center">
+              Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.
             </p>
-            <div className="flex lg:flex-row flex-col lg:w-full w-[60%] mx-auto text-center justify-center xs:justify-start gap-5">
-              <button
-                className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent"
-                onClick={scrollToServiceCards}
-              >
-                View Plans
-              </button>
-              <Link
-                href={"/cv-studio"}
-                className="bg-sky-100  text-blue-950 py-3 px-8 rounded border-2 border-blue-950"
-              >
-                Start Free Trial
-              </Link>
-            </div>
-            {/* Add Image below the content */}
-            <div className="mt-8 flex justify-center">
-              <Image
-                priority
-                src="/pricing-pic.png" // replace with your image path
-                alt="Pricing"
-                width={500} // adjust as needed
-                height={300} // adjust as needed
-                className="lg:w-[500px] w-[400px] lg:h-[500px] h-[300px] lg:object-cover object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        className="2xl:p-20 lg:p-20 p-10 bg-blue-50"
-        ref={serviceCardsRef}
-      >
-        <div className="text-center card_main_title">
-          <h2 className="lg:text-5xl text-3xl font-bold">
-            Different Services,
-            <span className="text-blue-700">Infinite possibilities.</span>{" "}
-          </h2>
-          <p className="lg:w-[40%] w-full mx-auto my-3 text-base">
-            Our services are designed to help you navigate through career
-            challenges with ease. Accordingly, we have created plans that help
-            you approach your career with perfection.
-          </p>
-        </div>
-        <div className="flex justify-center py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5">
-            {serviceCards?.length > 0 &&
-              serviceCards.map((item, index) => {
-                // Assign background color based on index
-                const bgColor =
-                  backgroundColors[index % backgroundColors.length];
-                // Define the click handler for each card
-                const handleCardClick = () => {
-                  if (index === 0) {
-                    handleOpenAIDialog(item); // Open popup for the first card
-                  } else {
-                    // Redirect to the "coming soon" page for other cards
-                    router.push("/coming-soon");
-                  }
-                };
-                return (
-                  <div
-                    key={item.id} // Ensure key prop is here on the top-level element
-                    className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
-                      } `}
-                    id={`pricing-` + `${index + 1}`}
-                  >
-                    <div
-                      className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
-                    >
-                      <div className="p-4">
-                        <h1 className="lg:text-2xl text-xl font-semibold text-white">
-                          {item?.cardTitle}
-                        </h1>
-                        <p className="mt-3 text-sm text-white">
-                          {item?.cardDescription}
-                        </p>
-                      </div>
-                      <div className="p-4 actions_buttons flex justify-between">
-                        {index === 0 && (
-                          <div
-                            onClick={handleOpenFreeDialog}
-                            href={item?.free?.link}
-                            className="cursor-pointer rounded-sm bg-transparent px-5 py-2 text-sm font-semibold text-white border-2 border-white"
-                          >
-                            {item?.free?.title}
-                          </div>
-                        )}
-                        <button
-                          type="button"
-                          onClick={handleCardClick}
-                          className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+            <div className="flex justify-center py-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5" ref={serviceCardsRef}>
+                {serviceCards?.length > 0 &&
+                  serviceCards.map((item, index) => {
+                    // Assign background color based on index
+                    const bgColor =
+                      backgroundColors[index % backgroundColors.length];
+                    // Define the click handler for each card
+                    const handleCardClick = () => {
+                      if (index === 0) {
+                        handleOpenAIDialog(item); // Open popup for the first card
+                      } else if (index === 2) {
+                        router.push("/coaches");
+                      } else {
+                        // Redirect to the "coming soon" page for other cards
+                        router.push("/coming-soon");
+                      }
+                    };
+                    return (
+                      <div
+                        key={item.id} // Ensure key prop is here on the top-level element
+                        className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
+                          } `}
+                        id={`pricing-` + `${index + 1}`}
+                      >
+                        <div
+                          className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
                         >
-                          Subscribe
-                        </button>
+                          <div className="p-4">
+                            <h1 className="lg:text-2xl text-xl font-semibold text-white">
+                              {item?.cardTitle}
+                            </h1>
+                            <p className="mt-3 text-sm text-white">
+                              {item?.cardDescription}
+                            </p>
+                          </div>
+                          <div className="p-4 actions_buttons flex justify-between">
+                            <button
+                              type="button"
+                              onClick={handleCardClick}
+                              className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+                            >
+                              {index === 2 ? "View" : "Subscribe"}
+                            </button>
+                          </div>
+                        </div>
+                        <div className="bg-white lg:block hidden">
+                          <Image
+                            priority
+                            src={item?.imageUrl}
+                            alt="Card Image"
+                            width={500}
+                            height={500}
+                            className={`w-[350px] h-[250px] object-contain`}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="bg-white lg:block hidden">
-                      <Image
-                        priority
-                        src={item?.imageUrl} // replace with the correct image path
-                        alt="Card Image"
-                        width={500} // adjust as needed
-                        height={500} // adjust as needed
-                        className={`w-[350px] h-[250px] object-contain`}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+                    );
+                  })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
