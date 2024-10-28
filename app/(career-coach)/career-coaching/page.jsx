@@ -605,7 +605,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                    I was having some real trouble with job applications; presumably, my CV was not that good. Then, one of my friends said something about a new website called Genies Career Hub. They use AI in making your CV, and it's simply incredible. It instantly corrects every error, frames perfect templates for the different types of job roles. And I started seeing an increase in interview callbacks, which really helped. The price is also more competitive when compared to many others in the market. I am actually looking forward to getting other services also.
+                    I was having some real trouble with job applications; presumably, my CV was not that good. Then, one of my friends said something about a new website called Genies Career Hub. They use AI in making your CV, and it&apos;s simply incredible. It instantly corrects every error, frames perfect templates for the different types of job roles. And I started seeing an increase in interview callbacks, which really helped. The price is also more competitive when compared to many others in the market. I am actually looking forward to getting other services also.
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
@@ -645,7 +645,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                    I used to be like, "Why is it a hassle making a CV?", and I would always feel utterly unmotivated while doing it. But Genies Career Hub made this all so much easier. Its use of AI is brilliant; it even suggests the skills that should go on your CV. I'd heard about something called Applicant Tracking Systems, but I didn't know anything about them, and for a while, I thought that could be the reason my applications weren't getting through. Now, I send in applications and get interview calls; it's really put me in the spotlight!
+                    I used to be like, &quot;Why is it a hassle making a CV?&quot;, and I would always feel utterly unmotivated while doing it. But Genies Career Hub made this all so much easier. Its use of AI is brilliant; it even suggests the skills that should go on your CV. I&apos;d heard about something called Applicant Tracking Systems, but I didn&apos;t know anything about them, and for a while, I thought that could be the reason my applications weren&apos;t getting through. Now, I send in applications and get interview calls; it&apos;s really put me in the spotlight!
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
@@ -683,7 +683,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                    I used to struggle with my job applications, and my CV probably wasn't that good. A pal recommended this website: Genies Career Hub. They use AI in the creation of your CV, and it's great. Every little mistake is corrected on the spot, and the templates are great, really tailored for each job position. I can also see an increase in interview callbacks, which helps a lot. It is a lot cheaper compared to many other services.
+                    I used to struggle with my job applications, and my CV probably wasn&apos;t that good. A pal recommended this website: Genies Career Hub. They use AI in the creation of your CV, and it&apos;s great. Every little mistake is corrected on the spot, and the templates are great, really tailored for each job position. I can also see an increase in interview callbacks, which helps a lot. It is a lot cheaper compared to many other services.
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
