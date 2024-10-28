@@ -403,10 +403,11 @@ const PricingFunc = () => {
           </div>
         </div>
       </section>
-      <script
+      {/* <script
         type='application/ld+json'
+        defer
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      /> */}
       <Dialog
         open={isFreeDialogOpen}
         onClose={() => setIsFreeDialogOpen(false)}>
