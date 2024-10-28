@@ -87,9 +87,11 @@ const PricingFunc = () => {
       popUpDescription:
         "Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
       features: [
-        "Personalised Career Guidance from an AI-based online Career Coach",
-        "Ask as many questions, in as many domains as you seek assistance with",
-        "Get instant solutions to your problems",
+        "Personalised Career Assistance from Artificial Intelligence-based Career Coach",
+        "Get access to one-on-one online virtual coaching",
+        "No need to schedule an appointment, take assistance anytime and anywhere",
+        "Get one comprehensive session including addressing the issue, finding the right solution, and getting suggestions on the same",
+        "Find the best possible solutions from a limitless range of career options",
       ],
       planName: "AICareerCoach",
     },
@@ -423,7 +425,7 @@ const PricingFunc = () => {
           </DialogHeader>
           {selectedCard && (
             <div className='grid gap-4 py-4'>
-              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start '>
                 <div className='modal_left'>
                   <div className='modal_list'>
                     <ul className='space-y-2'>
@@ -441,19 +443,24 @@ const PricingFunc = () => {
                     </ul>
                   </div>
                 </div>
-                <div className='modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8'>
+                <div className='modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative'>
                   <div className='text-center'>
-                    <p className='text-lg sm:text-xl text-gray-500'>
-                      Choose your plan
+                    <p className=' text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2'>
+                      {selectedCard?.discount}% off
                     </p>
+                    {selectedCard?.choosePlan && (
+                      <p className='text-lg sm:text-xl text-gray-500'>
+                        Choose your plan
+                      </p>
+                    )}
                     <div className='flex flex-col sm:flex-row items-center justify-center mt-4'>
-                      <h3 className='text-xl sm:text-2xl font-semibold text-gray-800 capitalize'>
+                      <h1 className='text-xl sm:text-2xl font-semibold text-gray-800 capitalize'>
                         {selectedPlan === "monthly"
                           ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
                           : `${selectedCard["DP"].symbol}${
                               +selectedCard["DP"].price * 10
                             }`}
-                      </h3>
+                      </h1>
                       <p className='text-gray-500 text-xs sm:text-sm px-2'>
                         {selectedPlan === "monthly" ? "per Month" : "per Year"}
                       </p>
@@ -548,11 +555,11 @@ const PricingFunc = () => {
       <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
         <div className='w-full h-full flex justify-center items-center'>
           <div className='text-start'>
-            <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
+            <h3 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
               Grow beyond expectations with
               <br />
               <span className='text-blue-700'>Flexible Pricing</span>
-            </h1>
+            </h3>
             <p className=' w-[60%] mx-auto my-3 text-base text-center'>
               Our professional CV Maker assists you in landing that interview
               call! Our professional tools like CV Creator, CV Optimiser, and CV
@@ -631,10 +638,10 @@ const PricingFunc = () => {
   );
 };
 
-  export default function Pricing() {
-    return (
-      <Suspense>
-        <PricingFunc />
-      </Suspense>
-    );
-  }
+export default function Pricing() {
+  return (
+    <Suspense>
+      <PricingFunc />
+    </Suspense>
+  );
+}
