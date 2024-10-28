@@ -63,9 +63,9 @@ const CVStudioPage = () => {
                       style={{ height: 200, width: "100%" }}
                     />
                     <div className='p-4 text-center'>
-                      <h1 className='text-2xl font-semibold'>
+                      <h2 className='text-2xl font-semibold'>
                         {animation?.title}
-                      </h1>
+                      </h2>
                       <p className='my-1 text-sm text-gray-600'>
                         {animation?.description}
                       </p>

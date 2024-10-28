@@ -289,7 +289,10 @@ const PricingFunc = () => {
         window.location = url;
       }
     } catch (error) {
-      if (error.response.status === 401 && error.response.data.error === "Unauthorized") {
+      if (
+        error.response.status === 401 &&
+        error.response.data.error === "Unauthorized"
+      ) {
         await RemoveTokens();
         toast("Please login again to proceed");
         router.push("/login?redirect=pricing");
@@ -327,83 +330,84 @@ const PricingFunc = () => {
   return (
     <>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Dialog
         open={isFreeDialogOpen}
-        onClose={() => setIsFreeDialogOpen(false)}
-      >
+        onClose={() => setIsFreeDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="w-[700px] h-[500px]"
+          className='w-[700px] h-[500px]'
           showCloseButton={true}
-          onClick={handleCloseFreeDialog}
-        >
+          onClick={handleCloseFreeDialog}>
           <DialogHeader>
             <DialogTitle>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl my-2 text-center">
+              <h2 className='text-xl sm:text-2xl lg:text-3xl my-2 text-center'>
                 Genies Pro Suite
               </h2>
             </DialogTitle>
             <DialogDescription>
-              <p className="text-sm sm:text-base text-justify">
-                Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.
+              <p className='text-sm sm:text-base text-justify'>
+                Our professional CV Maker assists you in landing that interview
+                call! Our professional tools like CV Creator, CV Optimiser, and
+                CV Match create well-researched, analytically optimised resumes
+                that are approved by recruiters across the globe and established
+                ATS systems.
               </p>
             </DialogDescription>
           </DialogHeader>
-          <div className="modal_content">
-            <div className="modal_list">
-              <ul className="space-y-4">
-                <li className="flex items-center text-xs sm:text-base text-gray-600">
+          <div className='modal_content'>
+            <div className='modal_list'>
+              <ul className='space-y-4'>
+                <li className='flex items-center text-xs sm:text-base text-gray-600'>
                   <FaCheckCircle
-                    className="text-blue-950 mr-2"
+                    className='text-blue-950 mr-2'
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   ATS Compatible CV Templates
                 </li>
-                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                <li className='flex items-center text-xs sm:text-base text-gray-600'>
                   <FaCheckCircle
-                    className="text-blue-950 mr-2"
+                    className='text-blue-950 mr-2'
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
-                  AI-Based Smart  Resume Builder
+                  AI-Based Smart Resume Builder
                 </li>
-                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                <li className='flex items-center text-xs sm:text-base text-gray-600'>
                   <FaCheckCircle
-                    className="text-blue-950 mr-2"
+                    className='text-blue-950 mr-2'
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   20+ Downloadable Professional CV Templates
                 </li>
-                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                <li className='flex items-center text-xs sm:text-base text-gray-600'>
                   <FaCheckCircle
-                    className="text-blue-950 mr-2"
+                    className='text-blue-950 mr-2'
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   20 CV scans for Perfection
                 </li>
-                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                <li className='flex items-center text-xs sm:text-base text-gray-600'>
                   <FaCheckCircle
-                    className="text-blue-950 mr-2"
+                    className='text-blue-950 mr-2'
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   AI-Based and Job-Specific CV Match Tool
                 </li>
-                <li className="flex items-center text-xs sm:text-base text-gray-600">
+                <li className='flex items-center text-xs sm:text-base text-gray-600'>
                   <FaCheckCircle
-                    className="text-blue-950 mr-2"
+                    className='text-blue-950 mr-2'
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   Enhance CV with AI and Increase ATS Compatibility Score
                 </li>
               </ul>
             </div>
-            <div className="start_button text-center mt-10">
+            <div className='start_button text-center mt-10'>
               <Link
                 href={"/cv-studio"}
-                className="bg-blue-950 text-white px-5 py-2 text-base"
-              >
+                className='bg-blue-950 text-white px-5 py-2 text-base'>
                 Start Free Trial
               </Link>
             </div>
@@ -413,36 +417,33 @@ const PricingFunc = () => {
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
+          className='max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6'
           showCloseButton={true}
-          onClick={handleCloseAIDialog}
-        >
+          onClick={handleCloseAIDialog}>
           <DialogHeader>
             <DialogTitle>
-              <h2 className="text-xl sm:text-2xl lg:text-2xl my-2 text-center">
+              <h2 className='text-xl sm:text-2xl lg:text-2xl my-2 text-center'>
                 {selectedCard?.cardTitle}
               </h2>
             </DialogTitle>
             <DialogDescription>
-              <p className="text-sm sm:text-sm text-justify">
+              <p className='text-sm sm:text-sm text-justify'>
                 {selectedCard?.popUpDescription}
               </p>
             </DialogDescription>
           </DialogHeader>
-          {
-            selectedCard &&
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-                <div className="modal_left">
-                  <div className="modal_list">
-                    <ul className="space-y-2">
+          {selectedCard && (
+            <div className='grid gap-4 py-4'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start'>
+                <div className='modal_left'>
+                  <div className='modal_list'>
+                    <ul className='space-y-2'>
                       {selectedCard?.features.map((feature, index) => (
                         <li
                           key={index}
-                          className="flex items-center text-xs sm:text-sm text-gray-600"
-                        >
+                          className='flex items-center text-xs sm:text-sm text-gray-600'>
                           <FaCheckCircle
-                            className="text-blue-950 mr-2"
+                            className='text-blue-950 mr-2'
                             style={{ minWidth: "15px", minHeight: "15px" }}
                           />
                           {feature}
@@ -541,6 +542,7 @@ const PricingFunc = () => {
                               value="yearly"
                             />
                           </div>
+
                         </div>
                       </div>
                     }
@@ -548,16 +550,15 @@ const PricingFunc = () => {
                 </div>
               </div>
             </div>
-          }
-          <DialogFooter className="mt-4 sm:mt-8">
+          )}
+          <DialogFooter className='mt-4 sm:mt-8'>
             <Button
-              className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+              className='bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto'
               onClick={() => UpgradePlan(selectedCard)}
-              disabled={loading}
-            >
+              disabled={loading}>
               {loading ? (
                 <>
-                  Upgrading <FaSpinner className="animate-spin ml-2" />
+                  Upgrading <FaSpinner className='animate-spin ml-2' />
                 </>
               ) : (
                 "Upgrade Now"
@@ -566,22 +567,29 @@ const PricingFunc = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <section className="w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10">
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="text-start">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
+      <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
+        <div className='w-full h-full flex justify-center items-center'>
+          <div className='text-start'>
+            <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
               Grow beyond expectations with
               <br />
-              <span className="text-blue-700">Flexible Pricing</span>
+              <span className='text-blue-700'>Flexible Pricing</span>
             </h1>
-            <p className=" w-[60%] mx-auto my-3 text-base text-center">
-              Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.
+            <p className=' w-[60%] mx-auto my-3 text-base text-center'>
+              Our professional CV Maker assists you in landing that interview
+              call! Our professional tools like CV Creator, CV Optimiser, and CV
+              Match create well-researched, analytically optimised resumes that
+              are approved by recruiters across the globe and established ATS
+              systems.
             </p>
-            <div className="flex justify-center py-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5" ref={serviceCardsRef}>
+            <div className='flex justify-center py-8'>
+              <div
+                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5'
+                ref={serviceCardsRef}>
                 {serviceCards?.length > 0 &&
                   serviceCards.map((item, index) => {
-                    const bgColor = backgroundColors[index % backgroundColors.length];
+                    const bgColor =
+                      backgroundColors[index % backgroundColors.length];
                     const handleCardClick = () => {
                       if (index === 0 || index === 1) {
                         handleOpenAIDialog(item);
@@ -594,24 +602,23 @@ const PricingFunc = () => {
                     return (
                       <div
                         key={item.id} // Ensure key prop is here on the top-level element
-                        className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
-                          } `}
-                        id={`pricing-` + `${index + 1}`}
-                      >
+                        className={`flex rounded-md ${
+                          index + 1 === scroll ? "animate-bounce" : ""
+                        } `}
+                        id={`pricing-` + `${index + 1}`}>
                         <div
-                          className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
-                        >
-                          <div className="p-4">
-                            <h1 className="lg:text-2xl text-xl font-semibold text-white">
+                          className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}>
+                          <div className='p-4'>
+                            <h2 className='lg:text-2xl text-xl font-semibold text-white'>
                               {item?.cardTitle}
-                            </h1>
-                            <p className="mt-3 text-sm text-white">
+                            </h2>
+                            <p className='mt-3 text-sm text-white'>
                               {item?.cardDescription}
                             </p>
                           </div>
-                          <div className="p-4 actions_buttons flex justify-between">
+                          <div className='p-4 actions_buttons flex justify-between'>
                             <button
-                              type="button"
+                              type='button'
                               onClick={handleCardClick}
                               className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
                             >
@@ -619,11 +626,11 @@ const PricingFunc = () => {
                             </button>
                           </div>
                         </div>
-                        <div className="bg-white lg:block hidden">
+                        <div className='bg-white lg:block hidden'>
                           <Image
                             priority
                             src={item?.imageUrl}
-                            alt="Card Image"
+                            alt='Card Image'
                             width={500}
                             height={500}
                             className={`w-[350px] h-[250px] object-contain`}

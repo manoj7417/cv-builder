@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useState } from "react";
 import AccordionItem from "./AccordionItem";
@@ -108,17 +110,20 @@ const FAQSection = () => {
 
   return (
     <>
-      <div className="faq_section bg-gradient-to-b from-[#e4f5fc] to-[white]  px-10 py-20" id="FAQS">
-        <div className="faq_title">
-          <h2 className="2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-black text-center">
+      <div
+        className='faq_section bg-gradient-to-b from-[#e4f5fc] to-[white]  px-10 py-20'
+        id='FAQS'>
+        <div className='faq_title'>
+          <h1 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 tracking-tighter text-black text-center'>
             Frequently Asked Questions!
-          </h2>
-          <p className="w-full mx-auto text-center my-4 text-[#7C7C7C]">
-            Want to know more about Genies Career Hub? <br className="lg:block hidden"/> We have answered a
-            few of your questions.
+          </h1>
+          <p className='w-full mx-auto text-center my-4 text-[#7C7C7C]'>
+            Want to know more about Genies Career Hub?{" "}
+            <br className='lg:block hidden' /> We have answered a few of your
+            questions.
           </p>
         </div>
-        <div className="accordion_content max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 gap-10">
+        <div className='accordion_content max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 gap-10'>
           {faqData?.map((item, index) => (
             <AccordionItem
               open={index === open}

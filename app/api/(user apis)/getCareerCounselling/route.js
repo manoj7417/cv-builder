@@ -9,11 +9,14 @@ export async function POST(req, res) {
                 'Authorization': token
             }
         });
-        return new Response(JSON.stringify(response), {
+        
+        // Return only the response data, not the whole response object
+        return new Response(JSON.stringify(response.data), {
             status: response.status || 200,
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
+        console.log(error);
         const errorMessage = error.response ? error.response.data : { error: "Error generating career counselling test" };
         const statusCode = error.response ? error.response.status : 500;
         return new Response(JSON.stringify(errorMessage), {

@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React from "react";
 import WorkTogether from "@/components/component/WorkTogether";
@@ -45,82 +47,83 @@ const CareerServices = () => {
       "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes.",
   };
 
-
   const jsonLd1 = {
-    "@context": "https://schema.org/", 
-    "@type": "BreadcrumbList", 
-    "itemListElement": [{
-      "@type": "ListItem", 
-      "position": 1, 
-      "name": "Career Coach",
-      "item": "https://www.geniescareerhub.com/career-services"  
-    },{
-      "@type": "ListItem", 
-      "position": 2, 
-      "name": "Career Counseling",
-      "item": "https://www.geniescareerhub.com/career-services"  
-    },{
-      "@type": "ListItem", 
-      "position": 3, 
-      "name": "Career Advisor",
-      "item": "https://www.geniescareerhub.com/career-services"  
-    },{
-      "@type": "ListItem", 
-      "position": 4, 
-      "name": "Define Career",
-      "item": "https://www.geniescareerhub.com/career-services"  
-    }]
-  
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Career Coach",
+        item: "https://www.geniescareerhub.com/career-services",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Career Counseling",
+        item: "https://www.geniescareerhub.com/career-services",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Career Advisor",
+        item: "https://www.geniescareerhub.com/career-services",
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Define Career",
+        item: "https://www.geniescareerhub.com/career-services",
+      },
+    ],
   };
 
   return (
     <>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
       />
       <section
-        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-40  px-5 relative"
-        id="free"
-      >
-        <div className="container ">
-          <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">AI Career Coaching,</span> Your
+        className='flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-40  px-5 relative'
+        id='free'>
+        <div className='container '>
+          <h1 className='text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1'>
+            <span className='text-[#2C98CA]'>AI Career Coaching,</span> Your
             Personalized Career Guide!
           </h1>
-          <p className="text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
+          <p className='text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
             Receive expert career guidance powered by AI to help you achieve
             your goals and stand out in the job market.
           </p>
 
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
+          <div className='flex justify-center'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10'>
               {cvStudio.map((animation, index) => (
                 <div key={index}>
-                  <div className="max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between shadow-lg">
+                  <div className='max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between shadow-lg'>
                     <Lottie
                       animationData={animation?.image}
                       loop={true}
                       autoplay={true}
                       style={{ height: 200, width: "100%" }}
                     />
-                    <div className="flex-grow p-4 text-center">
-                      <h1 className="text-2xl font-semibold">
+                    <div className='flex-grow p-4 text-center'>
+                      <h2 className='text-2xl font-semibold'>
                         {animation?.title}
-                      </h1>
-                      <p className="my-4 text-sm text-gray-600">
+                      </h2>
+                      <p className='my-4 text-sm text-gray-600'>
                         {animation?.description}
                       </p>
                     </div>
-                    <div className="p-4">
+                    <div className='p-4'>
                       <Link
                         href={animation?.link}
-                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 p-3 text-sm font-semibold text-white shadow-sm text-center"
-                      >
+                        className='mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 p-3 text-sm font-semibold text-white shadow-sm text-center'>
                         Try Now
                       </Link>
                     </div>

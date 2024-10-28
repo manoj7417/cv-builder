@@ -68,7 +68,6 @@ const EditCoachProgram = () => {
   useEffect(() => {
     handleFetchCoachProgram();
   }, []);
-
   console.log("programData::", programData);
 
   return (
