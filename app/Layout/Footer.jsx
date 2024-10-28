@@ -99,14 +99,14 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/coming-soon' className='text-black transition'>
+                  <a href='/coaches' className='text-black transition'>
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </a>
                 </li>
                 <li>
                   <a
-                    href='/career-counselling'
+                    href='/pshycometric-test'
                     className='text-black transition'>
                     Psychometric Test
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
@@ -152,7 +152,7 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href='https://geniescareerhub.com/'
                     className='text-black transition'
@@ -161,7 +161,7 @@ export default function Footer() {
                     Blog
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div>
