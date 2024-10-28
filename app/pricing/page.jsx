@@ -454,13 +454,13 @@ const PricingFunc = () => {
                       </p>
                     )}
                     <div className='flex flex-col sm:flex-row items-center justify-center mt-4'>
-                      <h1 className='text-xl sm:text-2xl font-semibold text-gray-800 capitalize'>
+                      <h3 className='text-xl sm:text-2xl font-semibold text-gray-800 capitalize'>
                         {selectedPlan === "monthly"
                           ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
                           : `${selectedCard["DP"].symbol}${
                               +selectedCard["DP"].price * 10
                             }`}
-                      </h1>
+                      </h3>
                       <p className='text-gray-500 text-xs sm:text-sm px-2'>
                         {selectedPlan === "monthly" ? "per Month" : "per Year"}
                       </p>
@@ -555,11 +555,11 @@ const PricingFunc = () => {
       <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
         <div className='w-full h-full flex justify-center items-center'>
           <div className='text-start'>
-            <h3 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
+            <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
               Grow beyond expectations with
               <br />
               <span className='text-blue-700'>Flexible Pricing</span>
-            </h3>
+            </h1>
             <p className=' w-[60%] mx-auto my-3 text-base text-center'>
               Our professional CV Maker assists you in landing that interview
               call! Our professional tools like CV Creator, CV Optimiser, and CV
