@@ -605,16 +605,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                      Earlier, I was facing certain struggles with my job
-                      applications. Perhaps my CV was not up to the mark. A
-                      friend of mine suggested this new website named Genies
-                      Career Hub. They use AI for CV Creation and it is so fine.
-                      Every mistake gets corrected then and there and the
-                      templates are crafted perfectly for the job roles. I
-                      witnessed a rise in the callbacks for Interviews which was
-                      very helpful. The pricing is better than many others in
-                      the market. Really can not wait to use the other parts of
-                      the services as well.
+                    I was having some real trouble with job applications; presumably, my CV was not that good. Then, one of my friends said something about a new website called Genies Career Hub. They use AI in making your CV, and it's simply incredible. It instantly corrects every error, frames perfect templates for the different types of job roles. And I started seeing an increase in interview callbacks, which really helped. The price is also more competitive when compared to many others in the market. I am actually looking forward to getting other services also.
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
@@ -654,14 +645,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                      I was wondering why CV-making is so tough and I really get
-                      lethargic during it. But Genies Career Hub was so quick
-                      with it. The use of AI is good and it suggests you the
-                      skills that your CV needs. Also, I did not know about the
-                      ATS thing but maybe that is why my applications were not
-                      getting accepted. I am sending out job applications and
-                      receiving calls for interview. It really puts me out on
-                      the spot.
+                    I used to be like, "Why is it a hassle making a CV?", and I would always feel utterly unmotivated while doing it. But Genies Career Hub made this all so much easier. Its use of AI is brilliant; it even suggests the skills that should go on your CV. I'd heard about something called Applicant Tracking Systems, but I didn't know anything about them, and for a while, I thought that could be the reason my applications weren't getting through. Now, I send in applications and get interview calls; it's really put me in the spotlight!
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
@@ -699,15 +683,7 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                      Earlier, I was facing certain struggles with my job
-                      applications. Perhaps my CV was not up to the mark. A
-                      friend of mine suggested this new website named Genies
-                      Career Hub. They use AI for CV Creation and it is so fine.
-                      Every mistake gets corrected then and there and the
-                      templates are crafted perfectly for the job roles. I
-                      witnessed a rise in the callbacks for Interviews which was
-                      very helpful. The pricing is better than many others in
-                      the market.
+                    I used to struggle with my job applications, and my CV probably wasn't that good. A pal recommended this website: Genies Career Hub. They use AI in the creation of your CV, and it's great. Every little mistake is corrected on the spot, and the templates are great, really tailored for each job position. I can also see an increase in interview callbacks, which helps a lot. It is a lot cheaper compared to many other services.
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
