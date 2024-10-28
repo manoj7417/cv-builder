@@ -80,21 +80,6 @@ export default function Home() {
           }}
         />
       
-        
-        {/* <script 
-          async 
-          src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
-          ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-HVD8Y7BEDE');
-          `,
-          }}
-        /> */}
 
         <script
           dangerouslySetInnerHTML={{
@@ -118,15 +103,6 @@ export default function Home() {
       </Head>
 
       <main>
-        {/* {isLoading ? (
-          <LoaderUI />
-        ) : (
-          <>
-            <ResumeHeader />
-            <HomepageNew />
-            <Footer />
-          </>
-        )} */}
           <>
             <ResumeHeader />
             <HomepageNew />
