@@ -420,7 +420,6 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     getGeoInfo()
   }, [])
 
-
   return (
     <>
 

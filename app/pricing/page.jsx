@@ -91,9 +91,7 @@ const PricingFunc = () => {
       popUpDescription:
         "Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
       features: [
-        "Personalised Career Guidance from an AI-based online Career Coach",
-        "Ask as many questions, in as many domains as you seek assistance with",
-        "Get instant solutions to your problems",
+        "Personalised Career Assistance from Artificial Intelligence-based Career Coach" , "Get access to one-on-one online virtual coaching", "No need to schedule an appointment, take assistance anytime and anywhere", "Get one comprehensive session including addressing the issue, finding the right solution, and getting suggestions on the same","Find the best possible solutions from a limitless range of career options"
       ],
       planName: "AICareerCoach",
       discount: 97,
@@ -434,7 +432,7 @@ const PricingFunc = () => {
           </DialogHeader>
           {selectedCard && (
             <div className='grid gap-4 py-4'>
-              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start '>
                 <div className='modal_left'>
                   <div className='modal_list'>
                     <ul className='space-y-2'>
@@ -454,7 +452,7 @@ const PricingFunc = () => {
                 </div>
                 <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
                   <div className="text-center">
-                      <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">{selectedCard?.discount}% off</p>
+                    <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">{selectedCard?.discount}% off</p>
                     {
                       selectedCard?.choosePlan &&
                       <p className="text-lg sm:text-xl text-gray-500">
@@ -477,7 +475,6 @@ const PricingFunc = () => {
                       <p className="text-gray-500 text-xs  px-2">
                         {selectedPlan === "monthly" ? selectedCard?.monthLabel : selectedCard?.yearLabel}
                       </p>
-
                     </div>
                     {
                       selectedCard?.choosePlan &&
@@ -602,9 +599,8 @@ const PricingFunc = () => {
                     return (
                       <div
                         key={item.id} // Ensure key prop is here on the top-level element
-                        className={`flex rounded-md ${
-                          index + 1 === scroll ? "animate-bounce" : ""
-                        } `}
+                        className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
+                          } `}
                         id={`pricing-` + `${index + 1}`}>
                         <div
                           className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}>
