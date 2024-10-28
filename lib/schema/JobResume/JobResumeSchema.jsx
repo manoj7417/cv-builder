@@ -3,8 +3,8 @@ export const JobResumeSchema = [
         name: "Business Analyst",
         data: {
             basics: {
-                name: "Jane Dhoe",
-                email: "Jane.Dhoe@gmail.com",
+                name: "Jane Jones",
+                email: "Jane.Jones@gmail.com",
                 phone: "+9112345678",
                 country: "CA",
                 city: "San Francisco",
