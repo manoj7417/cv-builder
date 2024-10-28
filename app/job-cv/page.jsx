@@ -548,14 +548,14 @@ export default function Home() {
           </Dialog>
           <div className="max-w-[100rem] mx-auto flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
             <div className="flex flex-col items-center lg:items-start">
-              <h1
+              <h2
                 className="font-extrabold text-[2rem] md:text-[3rem] lg:pe-20 mb-6 text-center lg:text-left"
                 style={{ lineHeight: "1.3 !important" }}
               >
                 Build a <span className="text-blue-900">CV</span> that opens
                 doors to your ideal{" "}
                 <span className="text-blue-900">career!</span>
-              </h1>
+              </h2>
               <div className="flex flex-col sm:flex-row gap-2 py-3 rounded-lg w-full">
                 <div className="w-full sm:px-0 px-4 mb-4 sm:mb-0">
                   <SearchBar
@@ -651,9 +651,9 @@ export default function Home() {
               {/* START-FIRST SECTION */}
               <div className="grid grid-col-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-14">
                 <div className="bg-[#FFFCDC] p-7">
-                  <h1 className="text-[#2C98CA] text-lg font-semibold">
+                  <h2 className="text-[#2C98CA] text-lg font-semibold">
                     Pre-written content
-                  </h1>
+                  </h2>
                   <p className="text-base pt-3 text-[#1B1B1F]">
                     Our database has numerous pre-written resumes tailored to
                     distinctive job descriptions, recruitment requirements, and
@@ -664,9 +664,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="bg-[#ECFFE7] p-7">
-                  <h1 className="text-[#2C98CA] text-lg font-semibold">
+                  <h2 className="text-[#2C98CA] text-lg font-semibold">
                     Professional CV ensured
-                  </h1>
+                  </h2>
                   <p className="text-base pt-3 text-[#1B1B1F]">
                     Wondering how appropriate and impressive the pre-written
                     resumes are?
@@ -681,9 +681,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="bg-[#CEEFFF] p-5">
-                  <h1 className="text-[#2C98CA] text-lg font-semibold">
+                  <h2 className="text-[#2C98CA] text-lg font-semibold">
                     45+ pre-written Resumes
-                  </h1>
+                  </h2>
                   <p className="text-base pt-3 text-[#1B1B1F]">
                     The CV match database is designed to help you get matched
                     with your perfect resume. To ensure this, we have myriad
@@ -701,9 +701,9 @@ export default function Home() {
                   <div className="w-[100%] sm:w-[68%] md:w-[68%] lg:w-[68%] xl:w-[68%] 2xl:w-[68%]">
                     <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14">
                       <div className="bg-[#FFD9ED] p-5">
-                        <h1 className="text-[#2C98CA] text-lg font-semibold">
+                        <h2 className="text-[#2C98CA] text-lg font-semibold">
                           AI expertise integrated
-                        </h1>
+                        </h2>
                         <p className="text-base pt-3 text-[#1B1B1F]">
                           We make the process easier for you with the help of
                           Artificial Intelligence. We understand how tiresome
@@ -716,9 +716,9 @@ export default function Home() {
                         </p>
                       </div>
                       <div className="bg-[#D8DAFF] p-7">
-                        <h1 className="text-[#2C98CA] text-lg font-semibold">
+                        <h2 className="text-[#2C98CA] text-lg font-semibold">
                           Edit your CV the way you want
-                        </h1>
+                        </h2>
                         <p className="text-base pt-3 text-[#1B1B1F]">
                           We completely comprehend the need for a personalised
                           resume. This is why we ensure that every step in your
