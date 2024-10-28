@@ -648,8 +648,8 @@ const PricingFunc = () => {
 
 export default function Pricing() {
   return (
-    <Suspense>
+   
       <PricingFunc />
-    </Suspense>
+  
   );
 }
