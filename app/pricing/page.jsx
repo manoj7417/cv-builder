@@ -73,6 +73,10 @@ const PricingFunc = () => {
         ,
       ],
       planName: "CVSTUDIO",
+      discount: 65,
+      monthLabel: "per month",
+      yearLabel: "per year",
+      choosePlan: true
     },
     {
       id: 2,
@@ -92,6 +96,10 @@ const PricingFunc = () => {
         "Get instant solutions to your problems",
       ],
       planName: "AICareerCoach",
+      discount: 97,
+      monthLabel: "per test",
+      yearLabel: "per test",
+      choosePlan: false
     },
     {
       id: 3,
@@ -112,6 +120,7 @@ const PricingFunc = () => {
         "Easy support and assistance from Genies Career Hub team",
       ],
       planName: "VirtualCoaching",
+      choosePlan: false
     },
     {
       id: 4,
@@ -132,6 +141,7 @@ const PricingFunc = () => {
         "Solutions and recommendations based on the results of your test",
       ],
       planName: "PsychometricTestingTools",
+      choosePlan: false
     },
   ];
 
@@ -143,6 +153,7 @@ const PricingFunc = () => {
   ];
   const handleOpenAIDialog = (cardData) => {
     const planName = cardData.planName;
+    planName && setSelectedPlan('monthly');
     const pricing = PricingData[planName][geoinfo.currency || "USD"];
     const { MP, DP } = pricing;
     setSelectedCard({ ...cardData, MP, DP });
@@ -441,89 +452,100 @@ const PricingFunc = () => {
                     </ul>
                   </div>
                 </div>
-                <div className='modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8'>
-                  <div className='text-center'>
-                    <p className='text-lg sm:text-xl text-gray-500'>
-                      Choose your plan
-                    </p>
-                    <div className='flex flex-col sm:flex-row items-center justify-center mt-4'>
-                      <h3 className='text-xl sm:text-2xl font-semibold text-gray-800 capitalize'>
+                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                  <div className="text-center">
+                      <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">{selectedCard?.discount}% off</p>
+                    {
+                      selectedCard?.choosePlan &&
+                      <p className="text-lg sm:text-xl text-gray-500">
+                        Choose your plan
+                      </p>
+                    }
+                    <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
                         {selectedPlan === "monthly"
                           ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
-                          : `${selectedCard["DP"].symbol}${
-                              +selectedCard["DP"].price * 10
-                            }`}
-                      </h3>
-                      <p className='text-gray-500 text-xs sm:text-sm px-2'>
-                        {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                          : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`
+                        }
+                      </h1>
+                      <p className="text-gray-500 text-xs sm:text-sm px-2 line-through">
+                        {selectedPlan === "monthly"
+                          ? `${selectedCard["MP"].symbol}${selectedCard["MP"].price}`
+                          : `${selectedCard["MP"].symbol}${+(selectedCard["MP"].price) * 10}`
+                        }
                       </p>
-                      <p className=' text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2'>
-                        65% off
+                      <p className="text-gray-500 text-xs  px-2">
+                        {selectedPlan === "monthly" ? selectedCard?.monthLabel : selectedCard?.yearLabel}
                       </p>
+
                     </div>
-                    <div className='mt-6 space-y-4 sm:space-y-8'>
-                      <div
-                        className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                          selectedPlan === "monthly"
+                    {
+                      selectedCard?.choosePlan &&
+                      <div className="mt-6 space-y-4 sm:space-y-8">
+                        <div
+                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
                             ? "border-blue-500 shadow-lg"
                             : ""
-                        }`}
-                        onClick={() => handlePlanChange("monthly")}>
-                        <div className='flex justify-between items-center'>
-                          <div className='subscription-panel-offer-commitment font-bold text-sm sm:text-base'>
-                            Monthly
+                            }`}
+                          onClick={() => handlePlanChange("monthly")}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                              Monthly
+                            </div>
+                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                              <p>
+                                {selectedCard['DP'].symbol}
+                                {selectedCard['DP'].price}
+                              </p>
+                              <p className="line-through text-xs ml-1">
+                                {selectedCard['MP'].symbol}
+                                {selectedCard['MP'].price}
+                              </p>
+                            </div>
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={selectedPlan === "monthly"}
+                              onChange={() => handlePlanChange("monthly")}
+                              value="monthly"
+                            />
                           </div>
-                          <div className='subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center'>
-                            <p>
-                              {selectedCard["DP"].symbol}
-                              {selectedCard["DP"].price}
-                            </p>
-                            <p className='line-through text-xs ml-1'>
-                              {selectedCard["MP"].symbol}
-                              {selectedCard["MP"].price}
-                            </p>
-                          </div>
-                          <input
-                            type='checkbox'
-                            className='hidden'
-                            checked={selectedPlan === "monthly"}
-                            onChange={() => handlePlanChange("monthly")}
-                            value='monthly'
-                          />
                         </div>
-                      </div>
-                      <div
-                        className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                          selectedPlan === "yearly"
+                        <div
+                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
                             ? "border-blue-500 shadow-lg"
                             : ""
-                        }`}
-                        onClick={() => handlePlanChange("yearly")}>
-                        <div className='flex justify-between items-center'>
-                          <div className='subscription-panel-offer-commitment font-bold text-sm sm:text-base'>
-                            Yearly
+                            }`}
+                          onClick={() => handlePlanChange("yearly")}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                              Yearly
+                            </div>
+
+                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                              <p>
+                                {selectedCard['DP'].symbol}
+                                {selectedCard['DP'].price * 10}
+                              </p>
+                              <p className="line-through text-xs ml-1">
+                                {selectedCard['MP'].symbol}
+                                {selectedCard['MP'].price * 10}
+                              </p>
+                            </div>
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={selectedPlan === "yearly"}
+                              onChange={() => handlePlanChange("yearly")}
+                              value="yearly"
+                            />
                           </div>
 
-                          <div className='subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center'>
-                            <p>
-                              {selectedCard["DP"].symbol}
-                              {selectedCard["DP"].price * 10}
-                            </p>
-                            <p className='line-through text-xs ml-1'>
-                              {selectedCard["MP"].symbol}
-                              {selectedCard["MP"].price * 10}
-                            </p>
-                          </div>
-                          <input
-                            type='checkbox'
-                            className='hidden'
-                            checked={selectedPlan === "yearly"}
-                            onChange={() => handlePlanChange("yearly")}
-                            value='yearly'
-                          />
                         </div>
                       </div>
-                    </div>
+                    }
                   </div>
                 </div>
               </div>
@@ -569,14 +591,12 @@ const PricingFunc = () => {
                     const bgColor =
                       backgroundColors[index % backgroundColors.length];
                     const handleCardClick = () => {
-                      if (index === 0) {
+                      if (index === 0 || index === 1) {
                         handleOpenAIDialog(item);
                       } else if (index === 2) {
                         router.push("/coaches");
                       } else if (index === 3) {
                         router.push("/pshycometric-test");
-                      } else {
-                        router.push("/coming-soon");
                       }
                     };
                     return (
@@ -600,12 +620,9 @@ const PricingFunc = () => {
                             <button
                               type='button'
                               onClick={handleCardClick}
-                              className='rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black'>
-                              {index === 3
-                                ? "Try Now"
-                                : index === 2
-                                ? "View"
-                                : "Subscribe"}
+                              className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+                            >
+                              {index === 3 ? "Try now for free" : index === 2 ? "View" : "Subscribe"}
                             </button>
                           </div>
                         </div>
