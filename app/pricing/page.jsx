@@ -327,6 +327,82 @@ const PricingFunc = () => {
 
   return (
     <>
+    <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
+        <div className='w-full h-full flex justify-center items-center'>
+          <div className='text-start'>
+            <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
+              Grow beyond expectations with
+              <br />
+              <span className='text-blue-700'>Flexible Pricing</span>
+            </h1>
+            <p className=' w-[60%] mx-auto my-3 text-base text-center'>
+              Our professional CV Maker assists you in landing that interview
+              call! Our professional tools like CV Creator, CV Optimiser, and CV
+              Match create well-researched, analytically optimised resumes that
+              are approved by recruiters across the globe and established ATS
+              systems.
+            </p>
+            <div className='flex justify-center py-8'>
+              <div
+                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5'
+                ref={serviceCardsRef}>
+                {serviceCards?.length > 0 &&
+                  serviceCards.map((item, index) => {
+                    const bgColor =
+                      backgroundColors[index % backgroundColors.length];
+                    const handleCardClick = () => {
+                      if (index === 0 || index === 1) {
+                        handleOpenAIDialog(item);
+                      } else if (index === 2) {
+                        router.push("/coaches");
+                      } else if (index === 3) {
+                        router.push("/pshycometric-test");
+                      }
+                    };
+                    return (
+                      <div
+                        key={item.id} // Ensure key prop is here on the top-level element
+                        className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
+                          } `}
+                        id={`pricing-` + `${index + 1}`}>
+                        <div
+                          className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}>
+                          <div className='p-4'>
+                            <h2 className='lg:text-2xl text-xl font-semibold text-white'>
+                              {item?.cardTitle}
+                            </h2>
+                            <p className='mt-3 text-sm text-white'>
+                              {item?.cardDescription}
+                            </p>
+                          </div>
+                          <div className='p-4 actions_buttons flex justify-between'>
+                            <button
+                              type='button'
+                              onClick={handleCardClick}
+                              className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+                            >
+                              {index === 3 ? "Try now for free" : index === 2 ? "View" : "Subscribe"}
+                            </button>
+                          </div>
+                        </div>
+                        <div className='bg-white lg:block hidden'>
+                          <Image
+                            priority
+                            src={item?.imageUrl}
+                            alt='Card Image'
+                            width={500}
+                            height={500}
+                            className={`w-[350px] h-[250px] object-contain`}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -564,82 +640,7 @@ const PricingFunc = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
-        <div className='w-full h-full flex justify-center items-center'>
-          <div className='text-start'>
-            <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
-              Grow beyond expectations with
-              <br />
-              <span className='text-blue-700'>Flexible Pricing</span>
-            </h1>
-            <p className=' w-[60%] mx-auto my-3 text-base text-center'>
-              Our professional CV Maker assists you in landing that interview
-              call! Our professional tools like CV Creator, CV Optimiser, and CV
-              Match create well-researched, analytically optimised resumes that
-              are approved by recruiters across the globe and established ATS
-              systems.
-            </p>
-            <div className='flex justify-center py-8'>
-              <div
-                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5'
-                ref={serviceCardsRef}>
-                {serviceCards?.length > 0 &&
-                  serviceCards.map((item, index) => {
-                    const bgColor =
-                      backgroundColors[index % backgroundColors.length];
-                    const handleCardClick = () => {
-                      if (index === 0 || index === 1) {
-                        handleOpenAIDialog(item);
-                      } else if (index === 2) {
-                        router.push("/coaches");
-                      } else if (index === 3) {
-                        router.push("/pshycometric-test");
-                      }
-                    };
-                    return (
-                      <div
-                        key={item.id} // Ensure key prop is here on the top-level element
-                        className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
-                          } `}
-                        id={`pricing-` + `${index + 1}`}>
-                        <div
-                          className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}>
-                          <div className='p-4'>
-                            <h2 className='lg:text-2xl text-xl font-semibold text-white'>
-                              {item?.cardTitle}
-                            </h2>
-                            <p className='mt-3 text-sm text-white'>
-                              {item?.cardDescription}
-                            </p>
-                          </div>
-                          <div className='p-4 actions_buttons flex justify-between'>
-                            <button
-                              type='button'
-                              onClick={handleCardClick}
-                              className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
-                            >
-                              {index === 3 ? "Try now for free" : index === 2 ? "View" : "Subscribe"}
-                            </button>
-                          </div>
-                        </div>
-                        <div className='bg-white lg:block hidden'>
-                          <Image
-                            priority
-                            src={item?.imageUrl}
-                            alt='Card Image'
-                            width={500}
-                            height={500}
-                            className={`w-[350px] h-[250px] object-contain`}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </>
   );
 };
