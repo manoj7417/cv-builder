@@ -1,11 +1,11 @@
 import { GetTemplate } from "@/components/resume-templates/GetTemplate";
 import { cn } from "@/lib/utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useResumeStore } from "../store/ResumeStore";
-import { FaFilePdf } from "react-icons/fa";
+import { FaCheckCircle, FaFilePdf } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
-import { GetTokens } from "../actions";
+import { GetTokens, RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 import { funfacts } from "@/constants/funfacts";
 import Loader1 from "@/public/animations/downloadLoader1.json";
@@ -30,6 +30,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -41,6 +42,8 @@ import { useUserStore } from "../store/UserStore";
 import { convert } from "html-to-text";
 import ServicesPopUp from "@/components/component/ServicesPopUp";
 import axios from "axios";
+import { PricingData } from "@/constants/prices";
+import { Button } from "@/components/ui/button";
 
 const Loaders = [Loader1, Loader2, Loader3, Loader4, Loader5];
 const images = [
@@ -209,7 +212,39 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const [showModal, setShowModal] = useState(false);
   const { userdata } = useUserStore((state) => state.userState);
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
-
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState('monthly');
+  const serviceCards = {
+    id: 1,
+    cardTitle: "Genies Pro Suite",
+    cardDescription:
+      "Get a premium hold of services such as CV Creator, CV Optimiser, and CV Match to create the best Resume by integrating AI for perfection",
+    free: {
+      title: "Free",
+      link: "/cv-studio",
+    },
+    popUpDescription:
+      "Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
+    features: [
+      "ATS Compatible CV Templates",
+      "AI-Based Smart  Resume Builder",
+      "20+ Downloadable Professional CV Templates",
+      "20 CV scans for Perfection",
+      "AI-Based and Job-Specific CV Match Tool",
+      "Enhance CV with AI and Increase ATS Compatibility Score",
+      ,
+    ],
+    planName: "CVSTUDIO",
+  }
+  const [geoinfo, setGeoInfo] = useState({
+    ip: "",
+    countryName: "",
+    countryCode: "",
+    city: "",
+    timezone: "",
+    currency: "",
+  });
   const pageSizeMap = {
     a4: {
       width: 210,
@@ -228,11 +263,18 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
     if (!userdata.subscription.plan.includes("CVSTUDIO")) {
+      const pricing = PricingData['CVSTUDIO'][geoinfo.currency || "USD"];
+      const { MP, DP } = pricing;
+      setSelectedCard({ ...serviceCards, MP, DP });
       setShowModal(true);
     } else {
       handleDownloadResume(accessToken.value);
     }
   };
+
+  const handlePlanChange = (plan) => {
+    setSelectedPlan(plan);
+  }
 
   const handleDownloadResume = async (token) => {
     const el = document.getElementById("resume");
@@ -258,7 +300,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
         link.click();
         return;
       }
-      
+
     } catch (error) {
       if (
         error?.response?.status === 403 &&
@@ -292,25 +334,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     }
   };
 
-  const downloadAsText = () => {
-    const el = document.getElementById("resume");
-    const resume = el.innerHTML;
-    const resumeText = convert(resume, {
-      wordwrap: 130,
-      selectors: [{ selector: "a", options: { ignoreHref: true } }],
-    });
-    const blob = new Blob([resumeText], { type: "text/plain" });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "resume.txt";
-    a.target = "_blank";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-    setShowModal(false);
-  };
+
 
   const handleTemplateChange = (val) => {
     setResumeData("metadata.template", val);
@@ -326,13 +350,224 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     setFunFact((state) => newFuncfact);
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        let currency = data.currency || "USD";
+        setGeoInfo({
+          ...geoinfo,
+          ip: data.ip,
+          countryName: data.country_name,
+          countryCode: data.country_calling_code,
+          city: data.city,
+          timezone: data.timezone,
+          currency: currency,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+
+
+  const UpgradePlan = async() => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken) {
+      return router.push("/login?redirect=pricing");
+    }
+    const data = {
+      email: userdata?.email,
+      success_url: "https://geniescareerhub.com/paymentSuccess",
+      cancel_url: window.location.href,
+      duration: selectedPlan,
+      currency: geoinfo?.currency || "USD",
+      planName: "CVSTUDIO",
+    };
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "/api/upgradePricing",
+        { data },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        const { url } = response.data;
+        window.location = url;
+      }
+    } catch (error) {
+      if(error.response.status === 401 && error.response.data.error === "Unauthorized"){
+        await RemoveTokens();
+        toast("Please login again to proceed");
+        router.push("/login?redirect=pricing");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getGeoInfo()
+  }, [])
+
+
   return (
     <>
+
       {isContentVisible && (
         <div
           className=" bg-black bg-opacity-80 inset-0 z-50 w-full h-full fixed overflow-hidden lg:hidden block"
-          // onClick={() => setIsContentVisible(false)}
+        // onClick={() => setIsContentVisible(false)}
         >
+          <Dialog open={showModal} onOpenChange={setShowModal}>
+            <DialogContent
+              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
+              showCloseButton={true}
+              onClick={handleCloseModal}
+            >
+              <DialogHeader>
+                <DialogTitle>
+                  <h2 className="text-sm sm:text-2xl lg:text-2xl my-2 text-center">
+                    {selectedCard?.cardTitle}
+                  </h2>
+                </DialogTitle>
+                <DialogDescription>
+                  <p className="text-xs sm:text-sm text-justify">
+                    {selectedCard?.popUpDescription}
+                  </p>
+                </DialogDescription>
+              </DialogHeader>
+              {
+                selectedCard &&
+                <div className="grid gap-4 py-1 sm:py-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                    <div className="modal_left">
+                      <div className="modal_list">
+                        <ul className="space-y-2">
+                          {selectedCard?.features.map((feature, index) => (
+                            <li
+                              key={index}
+                              className="flex items-center text-xs sm:text-sm text-gray-600"
+                            >
+                              <FaCheckCircle
+                                className="text-blue-950 mr-2"
+                                style={{ minWidth: "15px", minHeight: "15px" }}
+                              />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="modal_right bg-gray-100 px-4  py-2 sm:px-6 sm:py-8">
+                      <div className="text-center">
+                        <p className="text-lg sm:text-xl text-gray-500">
+                          Choose your plan
+                        </p>
+                        <div className="flex items-center justify-center mt-4">
+                          <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                            {selectedPlan === "monthly"
+                              ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
+                              : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`}
+                          </h1>
+                          <p className="text-gray-500 text-xs sm:text-sm px-2">
+                            {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                          </p>
+                          <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">65% off</p>
+                        </div>
+                        <div className="mt-6 space-y-4 sm:space-y-8">
+                          <div
+                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
+                              ? "border-blue-500 shadow-lg"
+                              : ""
+                              }`}
+                            onClick={() => handlePlanChange("monthly")}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                Monthly
+                              </div>
+                              <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                <p>
+                                  {selectedCard['DP'].symbol}
+                                  {selectedCard['DP'].price}
+                                </p>
+                                <p className="line-through text-xs ml-1">
+                                  {selectedCard['MP'].symbol}
+                                  {selectedCard['MP'].price}
+                                </p>
+                              </div>
+                              <input
+                                type="checkbox"
+                                className="hidden"
+                                checked={selectedPlan === "monthly"}
+                                onChange={() => handlePlanChange("monthly")}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
+                              ? "border-blue-500 shadow-lg"
+                              : ""
+                              }`}
+                            onClick={() => handlePlanChange("yearly")}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                Yearly
+                              </div>
+
+                              <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                <p>
+                                  {selectedCard['DP'].symbol}
+                                  {selectedCard['DP'].price * 10}
+                                </p>
+                                <p className="line-through text-xs ml-1">
+                                  {selectedCard['MP'].symbol}
+                                  {selectedCard['MP'].price * 10}
+                                </p>
+                              </div>
+                              <input
+                                type="checkbox"
+                                className="hidden"
+                                checked={selectedPlan === "yearly"}
+                                onChange={() => handlePlanChange("yearly")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+              <DialogFooter className="mt-4 sm:mt-8">
+                <Button
+                  className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                  onClick={() => UpgradePlan(selectedCard)}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      Upgrading <FaSpinner className="animate-spin ml-2" />
+                    </>
+                  ) : (
+                    "Upgrade Now"
+                  )}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
           <div className="bg-gray-900 text-white flex justify-between items-center p-4">
             <div className="choose_templates">
               <ResumeTooltip icon={LuLayoutGrid} title="Choose Templates">
@@ -395,57 +630,6 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 {isLoading ? "Processing..." : "Download"}
               </button>
             </div>
-            <Dialog open={showModal} onOpenChange={setShowModal}>
-              <DialogContent
-                className="sm:max-w-[60dvw] sm:h-[70dvh] p-0 bg-white"
-                showCloseButton={true}
-                onClick={() => setShowModal(false)}
-              >
-                <DialogHeader>
-                  <DialogTitle className="text-xl 2xl:text-5xl lg:text-4xl text-center mt-10 sm:mt-20 text-blue-900">
-                    Oops! You have not subscribed yet
-                  </DialogTitle>
-                  <p className="lg:w-full w-1/2 mx-auto text-center text-[12px] sm:text-base text-gray-600 mt-2">
-                    You need to upgrade to download your CV as a PDF, or else
-                    you can download as a Text for free
-                  </p>
-                </DialogHeader>
-                <div className="modal_content_section flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-6 border-2">
-                  <div className="w-full sm:w-1/2 flex justify-center mb-6 sm:mb-0">
-                    <div className="image_content text-center">
-                      <Image
-                        src="/illustration-manager-choosing-new-worker.png"
-                        alt="choice-worker-concept-illustrated"
-                        className="w-[200px] h-[200px] sm:w-[300px] sm:h-[250px] lg:w-[300px] lg:h-[200px] 2xl:w-[400px] 2xl:h-[400px] object-contain mx-auto "
-                        width={400}
-                        height={500}
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full sm:w-1/2 flex justify-center">
-                    <div className="flex flex-col gap-4 sm:gap-8 p-4 sm:p-6 items-center w-full">
-                      <button
-                        className="w-full max-w-[250px] sm:max-w-[300px] border-2 border-blue-700 hover:border-blue-950 text-blue-700 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold text-center"
-                        onClick={downloadAsText}
-                      >
-                        Download as Text
-                        <IoDocumentText className="text-blue-700 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
-                      </button>
-                      <Link
-                        href="/pricing"
-                        className="w-full max-w-[250px] sm:max-w-[300px] py-2 sm:py-3 border-2 border-green-500 hover:border-green-700 text-green-500 rounded-md text-xs sm:text-sm font-bold text-center"
-                        disabled
-                      >
-                        Download as PDF
-                        <FaFilePdf className="text-green-500 inline-flex ml-2 text-lg sm:text-xl animate-bounce" />
-                        <br />
-                        (Upgrade Required)
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
             <Dialog open={isServiceDialogOpen}>
               <ServicesPopUp
                 isServiceDialogOpen={isServiceDialogOpen}
@@ -479,6 +663,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
             </div>
           </div>
         </div>
+
       )}
     </>
   );
