@@ -46,20 +46,44 @@ export const PricingData = {
   AICareerCoach: {
     name: "AI Career Coach",
     INR: {
-      price: 5000,
-      symbol: "₹"
+      MP: {
+        price: 10900,
+        symbol: "₹"
+      },
+      DP: {
+        price: 327,
+        symbol: "₹"
+      }
     },
     USD: {
-      price: 120,
-      symbol: "$"
+      MP: {
+        price: 130,
+        symbol: "$"
+      },
+      DP: {
+        price: 3.89,
+        symbol: "$"
+      }
     },
     EUR: {
-      price: 110,
-      symbol: "€"
+      MP: {
+        price: 120,
+        symbol: "€"
+      },
+      DP: {
+        price: 3.6,
+        symbol: "€"
+      }
     },
     GBP: {
-      price: 100,
-      symbol: "£"
+      MP: {
+        price: 100,
+        symbol: "£"
+      },
+      DP: {
+        price: 3,
+        symbol: "£"
+      }
     }
   },
   VirtualCoaching: {
