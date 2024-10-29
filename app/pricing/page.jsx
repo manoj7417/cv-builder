@@ -1,4 +1,3 @@
-"use server"
 import React from 'react'
 import PricingCard from './PricingCard'
 
@@ -14,6 +13,7 @@ const page = () => {
       };
   return (
     <>
+    <main>
     <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
         <div className='w-full h-full flex justify-center items-center'>
           <div className='text-start'>
@@ -35,6 +35,7 @@ const page = () => {
           </div>
         </div>
       </section>
+    </main>  
       <script
         type='application/ld+json'
         defer
