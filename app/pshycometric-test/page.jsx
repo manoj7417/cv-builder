@@ -108,7 +108,7 @@ const Page = () => {
                 </a>
 
                 {/* Premium Button */}
-                <Link href="/career-counselling">
+                <Link href="/coming-soon">
                   {" "}
                   <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white lg:py-4 lg:px-8 p-3 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
                     <FaCrown className="mr-2 animate-pulse" />
