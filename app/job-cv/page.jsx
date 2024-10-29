@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
@@ -426,19 +428,19 @@ export default function Home() {
     <main>
       <>
         <script
-          type="application/ld+json"
+          type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <script
-          type="application/ld+json"
+          type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
         />
         <script
-          type="application/ld+json"
+          type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd2) }}
         />
         <ResumeHeader />
-        <section className="mt-16 py-20 bg-white text-black">
+        <section className='mt-16 py-20 bg-white text-black'>
           <Dialog open={showMultiStepDialog}>
             <JobMultistepForm
               showMultiStepDialog={showMultiStepDialog}
@@ -454,80 +456,75 @@ export default function Home() {
           </Dialog>
           <Dialog open={showDialog}>
             <DialogContent
-              className="max-w-[92dvw] md:max-w-[60dvw] sm:max-w-[60dvw] p-0 rounded-xl"
+              className='max-w-[92dvw] md:max-w-[60dvw] sm:max-w-[60dvw] p-0 rounded-xl'
               showCloseButton={true}
-              onClick={() => setShowDialog(false)}
-            >
-              <h1 className="text-center pt-4 text-xl font-bold text-gray-500">
+              onClick={() => setShowDialog(false)}>
+              <h3 className='text-center pt-4 text-xl font-bold text-gray-500'>
                 Upload and attach files, or start afresh!
-              </h1>
-              <p className="text-center px-6 md:px-12 sm:px-12 text-gray-500">
+              </h3>
+              <p className='text-center px-6 md:px-12 sm:px-12 text-gray-500'>
                 Drag and drop your resume file or upload from Google Drive or
                 Dropbox. We can also send you an email to reply with your
                 attachment whenever you are ready.
               </p>
-              <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
-                <div className="flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]">
+              <div className='flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around'>
+                <div className='flex items-center justify-center w-[100%] md:w-[100%] sm:w-[50%]'>
                   <label
-                    htmlFor="dropzone-file"
-                    className="flex flex-col items-center justify-center w-full sm:h-64 h-full  border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"
-                  >
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    htmlFor='dropzone-file'
+                    className='flex flex-col items-center justify-center w-full sm:h-64 h-full  border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50'>
+                    <div className='flex flex-col items-center justify-center pt-5 pb-6'>
                       <svg
-                        className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 20 16"
-                      >
+                        className='w-8 h-8 mb-4 text-gray-500 dark:text-gray-400'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 20 16'>
                         <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2'
                         />
                       </svg>
-                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold">Click to upload</span>{" "}
+                      <p className='mb-2 text-sm text-gray-500 dark:text-gray-400'>
+                        <span className='font-semibold'>Click to upload</span>{" "}
                         or drag and drop
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className='text-xs text-gray-500 dark:text-gray-400'>
                         PDF
                       </p>
                     </div>
                     <input
-                      id="dropzone-file"
-                      type="file"
-                      className="hidden"
+                      id='dropzone-file'
+                      type='file'
+                      className='hidden'
                       onChange={handleuploadResume}
                     />
                   </label>
                 </div>
                 <div
-                  className="flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                  onClick={handleOpenMultiStepForm}
-                >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  className='flex flex-col justify-center items-center  w-[100%] md:w-[100%] sm:w-[50%]  cursor-pointer border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600'
+                  onClick={handleOpenMultiStepForm}>
+                  <div className='flex flex-col items-center justify-center pt-5 pb-6'>
                     <svg
-                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
+                      className='w-8 h-8 mb-4 text-gray-500 dark:text-gray-400'
+                      aria-hidden='true'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'>
                       <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 4v16m0 0-3-3m3 3 3-3M4 12h16m0 0-3 3m3-3-3-3"
+                        stroke='currentColor'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M12 4v16m0 0-3-3m3 3 3-3M4 12h16m0 0-3 3m3-3-3-3'
                       />
                     </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Start Afresh...</span>
+                    <p className='mb-2 text-sm text-gray-500 dark:text-gray-400'>
+                      <span className='font-semibold'>Start Afresh...</span>
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                    <p className='text-xs text-gray-500 dark:text-gray-400 text-center'>
                       Personalized career advice, CV building, and more.
                     </p>
                   </div>
@@ -537,95 +534,92 @@ export default function Home() {
           </Dialog>
           <Dialog open={generatingResume}>
             <DialogContent onClick={handleDialogClose}>
-              <div className="mx-auto flex items-center flex-col">
+              <div className='mx-auto flex items-center flex-col'>
                 <Lottie
                   animationData={animation}
-                  className="w-[300px] h-[300px]"
+                  className='w-[300px] h-[300px]'
                 />
-                <p className="mt-1">Preparing your CV</p>
+                <p className='mt-1'>Preparing your CV</p>
               </div>
             </DialogContent>
           </Dialog>
-          <div className="max-w-[100rem] mx-auto flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36">
-            <div className="flex flex-col items-center lg:items-start">
-              <h2
-                className="font-extrabold text-[2rem] md:text-[3rem] lg:pe-20 mb-6 text-center lg:text-left"
-                style={{ lineHeight: "1.3 !important" }}
-              >
-                Build a <span className="text-blue-900">CV</span> that opens
+          <div className='max-w-[100rem] mx-auto flex flex-col lg:flex-row justify-center items-center px-4 lg:px-36'>
+            <div className='flex flex-col items-center lg:items-start'>
+              <h1
+                className='font-extrabold text-[2rem] md:text-[3rem] lg:pe-20 mb-6 text-center lg:text-left'
+                style={{ lineHeight: "1.3 !important" }}>
+                Build a <span className='text-blue-900'>CV</span> that opens
                 doors to your ideal{" "}
-                <span className="text-blue-900">career!</span>
-              </h2>
-              <div className="flex flex-col sm:flex-row gap-2 py-3 rounded-lg w-full">
-                <div className="w-full sm:px-0 px-4 mb-4 sm:mb-0">
+                <span className='text-blue-900'>career!</span>
+              </h1>
+              <div className='flex flex-col sm:flex-row gap-2 py-3 rounded-lg w-full'>
+                <div className='w-full sm:px-0 px-4 mb-4 sm:mb-0'>
                   <SearchBar
                     jobRole={jobRole}
                     setJobRole={setJobRole}
                     options={options}
                   />
                 </div>
-                <div className="w-full flex items-center">
+                <div className='w-full flex items-center'>
                   <Dialog open={isServiceDialogOpen}>
                     <ServicesPopUp
                       isServiceDialogOpen={isServiceDialogOpen}
                       setIsServiceDialogOpen={setIsServiceDialogOpen}
-                      serviceName="Create CV"
+                      serviceName='Create CV'
                     />
                   </Dialog>
                   <button
-                    className="bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm"
-                    onClick={() => handleGenerateNow()}
-                  >
+                    className='bg-blue-900 text-white px-5 py-2 rounded-lg flex items-center gap-2 mx-auto text-sm'
+                    onClick={() => handleGenerateNow()}>
                     Generate Now{" "}
-                    <RiAiGenerate className="text-base font-bold" />
+                    <RiAiGenerate className='text-base font-bold' />
                   </button>
                 </div>
               </div>
             </div>
-            <div className="mt-10 sm:mt-0 w-full lg:max-w-4xl sm:p-10 p-0">
+            <div className='mt-10 sm:mt-0 w-full lg:max-w-4xl sm:p-10 p-0'>
               <Image
                 priority
-                src="/cvgenerator.png"
+                src='/cvgenerator.png'
                 width={1300}
                 height={700}
-                alt="Job CV"
-                className="w-full lg:max-w-4xl"
+                alt='Job CV'
+                className='w-full lg:max-w-4xl'
                 style={{ height: "auto", width: "100%", maxHeight: "30rem" }}
               />
             </div>
           </div>
         </section>
         <section>
-          <div className="container mx-auto py-12 px-4  ">
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-6 lg:p-12 rounded-3xl">
-              <div className="text-center md:text-left ">
+          <div className='container mx-auto py-12 px-4  '>
+            <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#f5f5f5] p-6 lg:p-12 rounded-3xl'>
+              <div className='text-center md:text-left '>
                 <h2
-                  className="text-2xl md:text-[2rem] font-bold mb-6"
-                  style={{ lineHeight: "1.3 !important" }}
-                >
+                  className='text-2xl md:text-[2rem] font-bold mb-6'
+                  style={{ lineHeight: "1.3 !important" }}>
                   Connect with a
-                  <span className="text-blue-900"> Career Coach </span>for
+                  <span className='text-blue-900'> Career Coach </span>for
                   Expert Advice, Anytime, Anywhere!
                 </h2>
-                <button className="bg-blue-900 text-white px-4 py-2 rounded text-sm">
-                  <Link href="/contact-us">Work With Coach</Link>
+                <button className='bg-blue-900 text-white px-4 py-2 rounded text-sm'>
+                  <Link href='/contact-us'>Work With Coach</Link>
                 </button>
               </div>
-              <div className="flex flex-col sm:flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl gap-5">
-                <div className="text-2xl font-bold text-black mb-6 md:mb-0 text-center">
+              <div className='flex flex-col sm:flex-col md:flex-row justify-around items-center bg-white p-4 lg:p-8 rounded-3xl gap-5'>
+                <div className='text-2xl font-bold text-black mb-6 md:mb-0 text-center'>
                   <CountUp start={1} end={200} duration={2} />+
-                  <p className="text-lg font-semibold">Templates</p>
+                  <p className='text-lg font-semibold'>Templates</p>
                 </div>
 
-                <div className="text-2xl font-bold text-black mb-6 md:mb-0 text-center">
+                <div className='text-2xl font-bold text-black mb-6 md:mb-0 text-center'>
                   <CountUp start={1} end={40} duration={2} />
                   k+
-                  <p className="text-lg font-semibold">Users</p>
+                  <p className='text-lg font-semibold'>Users</p>
                 </div>
 
-                <div className="text-2xl font-bold text-black text-center">
+                <div className='text-2xl font-bold text-black text-center'>
                   <CountUp start={1} end={50} duration={2} />+
-                  <p className="text-lg font-semibold">Coaches</p>
+                  <p className='text-lg font-semibold'>Coaches</p>
                 </div>
               </div>
             </div>
@@ -633,28 +627,28 @@ export default function Home() {
         </section>
         {/* START-NEW STEPS CONTENT */}
         {/* ***********************NEW SECTION START *****************/}
-        <div id="mainDiv" className="w-full bg-white">
+        <div id='mainDiv' className='w-full bg-white'>
           <section>
-            <div className="steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10 ">
-              <div className="flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10">
-                <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20">
+            <div className='steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10 '>
+              <div className='flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10'>
+                <h2 className='text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20'>
                   Find your{" "}
-                  <span className="text-[#2C98CA]">Professional CV</span>{" "}
+                  <span className='text-[#2C98CA]'>Professional CV</span>{" "}
                 </h2>
-                <h2 className="text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20">
+                <h2 className='text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20'>
                   in Six Simple Steps!
                 </h2>
               </div>
             </div>
 
-            <div className="max-w-7xl mx-auto steps_intro lg:py-0 sm:p-5 p-5">
+            <div className='max-w-7xl mx-auto steps_intro lg:py-0 sm:p-5 p-5'>
               {/* START-FIRST SECTION */}
-              <div className="grid grid-col-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-14">
-                <div className="bg-[#FFFCDC] p-7">
-                  <h2 className="text-[#2C98CA] text-lg font-semibold">
+              <div className='grid grid-col-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-14'>
+                <div className='bg-[#FFFCDC] p-7'>
+                  <h2 className='text-[#2C98CA] text-lg font-semibold'>
                     Pre-written content
                   </h2>
-                  <p className="text-base pt-3 text-[#1B1B1F]">
+                  <p className='text-base pt-3 text-[#1B1B1F]'>
                     Our database has numerous pre-written resumes tailored to
                     distinctive job descriptions, recruitment requirements, and
                     candidate capabilities. All you need to do is select the
@@ -663,15 +657,15 @@ export default function Home() {
                     get a more personalised <b>CV</b>.
                   </p>
                 </div>
-                <div className="bg-[#ECFFE7] p-7">
-                  <h2 className="text-[#2C98CA] text-lg font-semibold">
+                <div className='bg-[#ECFFE7] p-7'>
+                  <h2 className='text-[#2C98CA] text-lg font-semibold'>
                     Professional CV ensured
                   </h2>
-                  <p className="text-base pt-3 text-[#1B1B1F]">
+                  <p className='text-base pt-3 text-[#1B1B1F]'>
                     Wondering how appropriate and impressive the pre-written
                     resumes are?
                   </p>
-                  <p className="text-base pt-3 text-[#1B1B1F]">
+                  <p className='text-base pt-3 text-[#1B1B1F]'>
                     CV Match is an algorithm backed by data created by experts
                     and resume professionals from across the globe. The CVs that
                     we have in stock for you are not only compatible with
@@ -680,11 +674,11 @@ export default function Home() {
                     match you with the best CV for your profile!  
                   </p>
                 </div>
-                <div className="bg-[#CEEFFF] p-5">
-                  <h2 className="text-[#2C98CA] text-lg font-semibold">
+                <div className='bg-[#CEEFFF] p-5'>
+                  <h2 className='text-[#2C98CA] text-lg font-semibold'>
                     45+ pre-written Resumes
                   </h2>
-                  <p className="text-base pt-3 text-[#1B1B1F]">
+                  <p className='text-base pt-3 text-[#1B1B1F]'>
                     The CV match database is designed to help you get matched
                     with your perfect resume. To ensure this, we have myriad
                     options available for you. With more than 45+ pre-written
@@ -695,16 +689,16 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="max-w-7xl mx-auto mt-12">
-                <div className="flex flex-row w-[100%]">
-                  <div className="w-[0%] sm:w-[16%] md:w-[16%] lg:w-[16%] xl:w-[16%] 2xl:w-[16%]"></div>
-                  <div className="w-[100%] sm:w-[68%] md:w-[68%] lg:w-[68%] xl:w-[68%] 2xl:w-[68%]">
-                    <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14">
-                      <div className="bg-[#FFD9ED] p-5">
-                        <h2 className="text-[#2C98CA] text-lg font-semibold">
+              <div className='max-w-7xl mx-auto mt-12'>
+                <div className='flex flex-row w-[100%]'>
+                  <div className='w-[0%] sm:w-[16%] md:w-[16%] lg:w-[16%] xl:w-[16%] 2xl:w-[16%]'></div>
+                  <div className='w-[100%] sm:w-[68%] md:w-[68%] lg:w-[68%] xl:w-[68%] 2xl:w-[68%]'>
+                    <div className='grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14'>
+                      <div className='bg-[#FFD9ED] p-5'>
+                        <h2 className='text-[#2C98CA] text-lg font-semibold'>
                           AI expertise integrated
                         </h2>
-                        <p className="text-base pt-3 text-[#1B1B1F]">
+                        <p className='text-base pt-3 text-[#1B1B1F]'>
                           We make the process easier for you with the help of
                           Artificial Intelligence. We understand how tiresome
                           and time-consuming the process of CV building can be.
@@ -715,11 +709,11 @@ export default function Home() {
                           for you that exactly fits your needs.
                         </p>
                       </div>
-                      <div className="bg-[#D8DAFF] p-7">
-                        <h2 className="text-[#2C98CA] text-lg font-semibold">
+                      <div className='bg-[#D8DAFF] p-7'>
+                        <h2 className='text-[#2C98CA] text-lg font-semibold'>
                           Edit your CV the way you want
                         </h2>
-                        <p className="text-base pt-3 text-[#1B1B1F]">
+                        <p className='text-base pt-3 text-[#1B1B1F]'>
                           We completely comprehend the need for a personalised
                           resume. This is why we ensure that every step in your
                           CV creation process allows flexibility. After we match
@@ -732,37 +726,37 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="w-[0%] sm:w-[16%] md:w-[16%] lg:w-[16%] xl:w-[16%] 2xl:w-[16%]"></div>
+                  <div className='w-[0%] sm:w-[16%] md:w-[16%] lg:w-[16%] xl:w-[16%] 2xl:w-[16%]'></div>
                 </div>
               </div>
               {/* END-FIRST SECTION */}
 
               {/* START-SECOND SECTION */}
-              <div className="flex lg:flex-row flex-col gap-5 my-20">
-                <div className="lg:w-[67%] w-full steps_content">
-                  <h3 className="text-5xl text-[#1B1B1F] font-bold py-3 text-center md:text-left lg:text-left xl:text-left 2xl:text-left leading-normal">
+              <div className='flex lg:flex-row flex-col gap-5 my-20'>
+                <div className='lg:w-[67%] w-full steps_content'>
+                  <h3 className='text-5xl text-[#1B1B1F] font-bold py-3 text-center md:text-left lg:text-left xl:text-left 2xl:text-left leading-normal'>
                     Maximise Impact by personalising your CV
                   </h3>
-                  <p className="text-lg py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left text-[#1B1B1F]">
+                  <p className='text-lg py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left text-[#1B1B1F]'>
                     Your <b>professional Curriculum Vitae</b> creation process
                     does not have to be hefty. You can get a job-winning CV in
                     just six simple steps. Follow, and build yours! -
                   </p>
                 </div>
-                <div className="lg:w-[33%] w-full h-auto">
-                  <div className="flex flex-row justify-between items-baseline">
+                <div className='lg:w-[33%] w-full h-auto'>
+                  <div className='flex flex-row justify-between items-baseline'>
                     <div>
                       <img
-                        src="/stand_out_and_personalize_your_cv.png"
-                        alt="icon4"
-                        className="w-full h-full  object-contain"
+                        src='/stand_out_and_personalize_your_cv.png'
+                        alt='icon4'
+                        className='w-full h-full  object-contain'
                       />
                     </div>
-                    <div className="pb-10">
+                    <div className='pb-10'>
                       <img
-                        src="/Artboard_ats.png"
-                        alt="icon4"
-                        className="w-full h-full  object-contain"
+                        src='/Artboard_ats.png'
+                        alt='icon4'
+                        className='w-full h-full  object-contain'
                       />
                     </div>
                   </div>
@@ -771,13 +765,13 @@ export default function Home() {
 
               {/* END-SECOND SECTION */}
 
-              <div className="step_1">
-                <div className="flex lg:flex-row flex-col gap-10 my-20 relative lg:p-1 p-5">
-                  <div className="lg:w-[55%] w-full steps_content">
-                    <h4 className="font-bold text-[#101827] text-2xl italic">
+              <div className='step_1'>
+                <div className='flex lg:flex-row flex-col gap-10 my-20 relative lg:p-1 p-5'>
+                  <div className='lg:w-[55%] w-full steps_content'>
+                    <h4 className='font-bold text-[#101827] text-2xl italic'>
                       Step 1
                     </h4>
-                    <p className="text-base py-3 text-[#1B1B1F]">
+                    <p className='text-base py-3 text-[#1B1B1F]'>
                       To start with the CV creation process through the CV Match
                       tool, you need to simply enter your job role. The entered
                       job description is analysed by the tool in order to gain
@@ -785,53 +779,53 @@ export default function Home() {
                       must be utilised for that CV.
                     </p>
                   </div>
-                  <div className="lg:w-[45%] w-full h-auto image_content flex flex-col justify-start items-center">
+                  <div className='lg:w-[45%] w-full h-auto image_content flex flex-col justify-start items-center'>
                     {/* <img
                       src="Artboard_ats.png"
                       alt="icon4"
                       className="object-contain mr-32"
                     /> */}
-                    <div className="flex lg:flex-row flex-col justify-center items-center">
+                    <div className='flex lg:flex-row flex-col justify-center items-center'>
                       <img
-                        src="CV_MATCH_Step 1.png"
-                        alt="icon4"
-                        className="object-contain"
+                        src='CV_MATCH_Step 1.png'
+                        alt='icon4'
+                        className='object-contain'
                       />
                     </div>
                   </div>
 
-                  <div className="arrow absolute left-[38%] -bottom-40">
+                  <div className='arrow absolute left-[38%] -bottom-40'>
                     <img
-                      src="/ats_step_arrow_1.png"
-                      alt="arrow"
-                      className="w-52 h-52 object-contain lg:block hidden"
+                      src='/ats_step_arrow_1.png'
+                      alt='arrow'
+                      className='w-52 h-52 object-contain lg:block hidden'
                     />
                     <img
-                      src="/arrow2.png"
-                      alt="arrow"
-                      className="w-52 h-52 object-contain lg:hidden block"
+                      src='/arrow2.png'
+                      alt='arrow'
+                      className='w-52 h-52 object-contain lg:hidden block'
                     />
                   </div>
                 </div>
               </div>
               {/*START-STEP-2 FOR MOBILE ONLY  */}
-              <div className=" block sm:block md:block lg:hidden xl:hidden 2xl:hidden step_2 relative mt-20">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
-                    <div className="flex flex-col justify-center items-center">
+              <div className=' block sm:block md:block lg:hidden xl:hidden 2xl:hidden step_2 relative mt-20'>
+                <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
+                    <div className='flex flex-col justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 2.png"
-                        alt="icon4"
-                        className="w-full h-full object-cover"
+                        src='/CV_MATCH_Step 2.png'
+                        alt='icon4'
+                        className='w-full h-full object-cover'
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full steps_content mt-10">
-                    <h4 className="font-bold text-[#101827] text-2xl italic">
+                  <div className='lg:w-[50%] w-full steps_content mt-10'>
+                    <h4 className='font-bold text-[#101827] text-2xl italic'>
                       Step 2
                     </h4>
 
-                    <p className="text-base py-3 text-[#1B1B1F]">
+                    <p className='text-base py-3 text-[#1B1B1F]'>
                       The CV Match not only helps you make a new resume
                       instantly without any hassle but also rectifies your
                       present CV. All you need to do is make a choice if you
@@ -842,21 +836,21 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-[#2C98CA]">Or</p>
+                <div className='text-center'>
+                  <p className='text-2xl font-bold text-[#2C98CA]'>Or</p>
                 </div>
-                <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
-                    <div className="flex flex-col justify-center items-center">
+                <div className='flex lg:flex-row flex-col gap-10  lg:p-1 p-5'>
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
+                    <div className='flex flex-col justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 2.1.png"
-                        alt="icon4"
-                        className="w-full h-full object-cover"
+                        src='/CV_MATCH_Step 2.1.png'
+                        alt='icon4'
+                        className='w-full h-full object-cover'
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full steps_content mt-10">
-                    <p className="text-base py-3 text-[#1B1B1F]">
+                  <div className='lg:w-[50%] w-full steps_content mt-10'>
+                    <p className='text-base py-3 text-[#1B1B1F]'>
                       If you end up choosing the “Start Afresh” option, there
                       are little pointers that you need to provide to our CV
                       Match tool. While creating a <b>professional CV</b> there
@@ -869,23 +863,23 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="arrow absolute left-[35%] -bottom-45">
+                <div className='arrow absolute left-[35%] -bottom-45'>
                   <img
-                    src="/ats_step_arrow_2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain"
+                    src='/ats_step_arrow_2.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain'
                   />
                 </div>
               </div>
               {/*END-STEP-2 FOR MOBILE ONLY  */}
               {/*START-STEP-2 FOR SM MD LG XL 2XL SCREENS  */}
-              <div className="hidden sm:hidden md:hidden lg:block xl:block 2xl:block step_2 relative mt-32 mb-32">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[40%] w-full steps_content mt-10">
-                    <h4 className="font-bold text-[#101827] text-2xl italic">
+              <div className='hidden sm:hidden md:hidden lg:block xl:block 2xl:block step_2 relative mt-32 mb-32'>
+                <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                  <div className='lg:w-[40%] w-full steps_content mt-10'>
+                    <h4 className='font-bold text-[#101827] text-2xl italic'>
                       Step 2
                     </h4>
-                    <p className="text-base py-3 text-[#1B1B1F] ">
+                    <p className='text-base py-3 text-[#1B1B1F] '>
                       The CV Match not only helps you make a new resume
                       instantly without any hassle but also rectifies your
                       present CV. All you need to do is make a choice if you
@@ -895,13 +889,13 @@ export default function Home() {
                       craft a new resume for you, just based on that!
                     </p>
                   </div>
-                  <div className="lg:w-[10%] w-full ">
-                    <p className="text-2xl font-bold text-[#2C98CA] mt-20 text-center">
+                  <div className='lg:w-[10%] w-full '>
+                    <p className='text-2xl font-bold text-[#2C98CA] mt-20 text-center'>
                       Or
                     </p>
                   </div>
-                  <div className="lg:w-[40%] w-full steps_content mt-10">
-                    <p className="text-base py-3 text-[#1B1B1F]">
+                  <div className='lg:w-[40%] w-full steps_content mt-10'>
+                    <p className='text-base py-3 text-[#1B1B1F]'>
                       If you end up choosing the “Start Afresh” option, there
                       are little pointers that you need to provide to our CV
                       Match tool. While creating a <b>professional CV</b> there
@@ -914,44 +908,44 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                <div className='flex lg:flex-row flex-col gap-10  lg:p-1 p-5'>
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
                     ``
-                    <div className="flex flex-col justify-center items-center">
+                    <div className='flex flex-col justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 2.png"
-                        alt="icon4"
-                        className="w-full h-80 object-cover"
+                        src='/CV_MATCH_Step 2.png'
+                        alt='icon4'
+                        className='w-full h-80 object-cover'
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
-                    <div className="flex flex-col justify-center items-center">
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
+                    <div className='flex flex-col justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 2.1.png"
-                        alt="icon4"
-                        className="w-full h-80 object-cover"
+                        src='/CV_MATCH_Step 2.1.png'
+                        alt='icon4'
+                        className='w-full h-80 object-cover'
                       />
                     </div>
                   </div>
                 </div>
-                <div className="arrow absolute left-[35%] -bottom-35">
+                <div className='arrow absolute left-[35%] -bottom-35'>
                   <img
-                    src="/ats_step_arrow_2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain"
+                    src='/ats_step_arrow_2.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain'
                   />
                 </div>
               </div>
               {/*END-STEP-2 FOR SM MD LG XL 2XL SCREENS  */}
-              <div className="step_3 relative mt-30">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full steps_content mt-10">
-                    <h4 className="font-bold text-[#101827] text-2xl italic">
+              <div className='step_3 relative mt-30'>
+                <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                  <div className='lg:w-[50%] w-full steps_content mt-10'>
+                    <h4 className='font-bold text-[#101827] text-2xl italic'>
                       Step 3
                     </h4>
                     {/* <h3 className="text-3xl text-black  py-3">EDUCATION </h3> */}
-                    <p className="text-base py-3 text-[#1B1B1F]">
+                    <p className='text-base py-3 text-[#1B1B1F]'>
                       The Genies Career Hub’s CV Match tool is all about
                       personalisation and customisation. Your{" "}
                       <b>professional curriculum vitae</b> must look exactly the
@@ -965,47 +959,47 @@ export default function Home() {
                       click, “Next” if you are a fresher!
                     </p>
                   </div>
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent">
-                    <div className="flex justify-center items-center">
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent'>
+                    <div className='flex justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 3.png"
-                        alt="icon4"
-                        className="w-full h-full object-cover"
+                        src='/CV_MATCH_Step 3.png'
+                        alt='icon4'
+                        className='w-full h-full object-cover'
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="arrow absolute left-[33%] -bottom-40">
+                <div className='arrow absolute left-[33%] -bottom-40'>
                   <img
-                    src="/ats_step_arrow_1.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:block hidden"
+                    src='/ats_step_arrow_1.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain lg:block hidden'
                   />
                   <img
-                    src="/arrow2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:hidden block"
+                    src='/arrow2.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain lg:hidden block'
                   />
                 </div>
               </div>
-              <div className="step_4 relative">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[40%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent">
-                    <div className="flex justify-center items-center">
+              <div className='step_4 relative'>
+                <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                  <div className='lg:w-[40%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent'>
+                    <div className='flex justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 4.png"
-                        alt="icon4"
-                        className="w-full h-full object-cover"
+                        src='/CV_MATCH_Step 4.png'
+                        alt='icon4'
+                        className='w-full h-full object-cover'
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[60%] w-full steps_content mt-16">
-                    <h4 className="font-bold text-[#101827] text-2xl italic">
+                  <div className='lg:w-[60%] w-full steps_content mt-16'>
+                    <h4 className='font-bold text-[#101827] text-2xl italic'>
                       Step 4
                     </h4>
                     {/* <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3> */}
-                    <p className="text-base py-3 text-[#1B1B1F]">
+                    <p className='text-base py-3 text-[#1B1B1F]'>
                       Adding education qualifications in your resume adds
                       academic value to it. Just mention all the important
                       details pertaining to your educational background such as
@@ -1017,28 +1011,28 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="arrow absolute left-[30%] -bottom-40">
+                <div className='arrow absolute left-[30%] -bottom-40'>
                   <img
-                    src="/ats_step_arrow_5.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:block hidden"
+                    src='/ats_step_arrow_5.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain lg:block hidden'
                   />
                   <img
-                    src="/ats_step_arrow_2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain lg:hidden block"
+                    src='/ats_step_arrow_2.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain lg:hidden block'
                   />
                 </div>
               </div>
 
               {/*START-STEP-5 FOR SM MD LG XL 2XL SCREENS  */}
-              <div className="block sm:block md:block lg:block xl:block 2xl:block step_2 relative mt-32">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[100%] w-full steps_content mt-10">
-                    <h4 className="font-bold text-[#101827] text-2xl italic">
+              <div className='block sm:block md:block lg:block xl:block 2xl:block step_2 relative mt-32'>
+                <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                  <div className='lg:w-[100%] w-full steps_content mt-10'>
+                    <h4 className='font-bold text-[#101827] text-2xl italic'>
                       Step 5
                     </h4>
-                    <p className="text-base py-3 text-[#1B1B1F] ">
+                    <p className='text-base py-3 text-[#1B1B1F] '>
                       Apart from educational and experience based backgrounds,
                       you can also add details pertaining to the previous
                       projects that you have pursued so far. This shall provide
@@ -1050,55 +1044,55 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
+                <div className='flex lg:flex-row flex-col gap-10  lg:p-1 p-5'>
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
                     ``
-                    <div className="flex flex-col justify-center items-center">
+                    <div className='flex flex-col justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 5.png"
-                        alt="icon4"
-                        className="w-full h-80 object-cover"
+                        src='/CV_MATCH_Step 5.png'
+                        alt='icon4'
+                        className='w-full h-80 object-cover'
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
-                    <div className="flex flex-col justify-center items-center">
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent '>
+                    <div className='flex flex-col justify-center items-center'>
                       <img
-                        src="/CV_MATCH_Step 5.1.png"
-                        alt="icon4"
-                        className="w-full h-80 object-cover"
+                        src='/CV_MATCH_Step 5.1.png'
+                        alt='icon4'
+                        className='w-full h-80 object-cover'
                       />
                     </div>
                   </div>
                 </div>
-                <div className="arrow absolute left-[35%] -bottom-30 md:left-[58%] lg:left-[58%] xl:left-[58%] 2xl:left-[58%]">
+                <div className='arrow absolute left-[35%] -bottom-30 md:left-[58%] lg:left-[58%] xl:left-[58%] 2xl:left-[58%]'>
                   <img
-                    src="/ats_step_arrow_2.png"
-                    alt="arrow"
-                    className="w-52 h-52 object-contain"
+                    src='/ats_step_arrow_2.png'
+                    alt='arrow'
+                    className='w-52 h-52 object-contain'
                   />
                 </div>
               </div>
               {/*END-STEP-5 FOR SM MD LG XL 2XL SCREENS  */}
-              <div className="step_6 relative">
-                <div className="flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5">
-                  <div className="lg:w-[50%] w-full h-auto image_content flex justify-center  lg:order-first order-last lg:bg-transparent">
-                    <div className="flex flex-col gap-10 justify-start  mt-10">
+              <div className='step_6 relative'>
+                <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
+                  <div className='lg:w-[50%] w-full h-auto image_content flex justify-center  lg:order-first order-last lg:bg-transparent'>
+                    <div className='flex flex-col gap-10 justify-start  mt-10'>
                       <img
-                        src="/CV_MATCH_Step 6.png"
-                        alt="icon5"
-                        className="w-full h-full object-cover"
+                        src='/CV_MATCH_Step 6.png'
+                        alt='icon5'
+                        className='w-full h-full object-cover'
                       />
                     </div>
                   </div>
-                  <div className="lg:w-[50%] w-full steps_content pt-20">
-                    <h4 className="font-bold text-black text-2xl italic">
+                  <div className='lg:w-[50%] w-full steps_content pt-20'>
+                    <h4 className='font-bold text-black text-2xl italic'>
                       Step 6
                     </h4>
                     {/* <h3 className="text-3xl text-black  py-3">
                       AWARDS, CERTIFICATES AND LANGUAGE
                     </h3> */}
-                    <p className="text-base py-3">
+                    <p className='text-base py-3'>
                       CV Match analyses all the relevant details to provide you
                       with a Professional CV that helps you present your
                       professional case with adeptness. The presented CV shall
@@ -1123,15 +1117,19 @@ export default function Home() {
         {/* NEW SECTION END */}
 
         {/* START-FAQS */}
-        <section className="faq py-20">
-          <div className="max-w-7xl mx-auto flex lg:flex-row flex-col">
-            <div className="faq_image lg:w-[50%] w-full lg:block hidden">
-              <div className="image_div w-[400px] h-[400px]">
-                <img src="/faq_image.png" alt="faq" className="w-full h-full object-contain" />
+        <section className='faq py-20'>
+          <div className='max-w-7xl mx-auto flex lg:flex-row flex-col'>
+            <div className='faq_image lg:w-[50%] w-full lg:block hidden'>
+              <div className='image_div w-[400px] h-[400px]'>
+                <img
+                  src='/faq_image.png'
+                  alt='faq'
+                  className='w-full h-full object-contain'
+                />
               </div>
             </div>
-            <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">
-              <h2 className="text-3xl text-center text-bold font-semibold my-5">
+            <div className='faq_content lg:w-[50%] w-full lg:p-1 p-5'>
+              <h2 className='text-3xl text-center text-bold font-semibold my-5'>
                 Frequently Asked Questions
               </h2>
               {faqData?.map((item, index) => (

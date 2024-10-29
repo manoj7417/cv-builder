@@ -1,3 +1,5 @@
+/** @format */
+
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
@@ -24,36 +26,19 @@ export const metadata = {
     title: "Cookies & Tracking Policy: Genies Career Hub",
     description:
       "Check out all the details about the Cookies and Trackers that the Genies Career Hub platform employs in order to process your personal data and information.",
-    image:
-      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {
-    canonical: 'https://www.geniescareerhub.com/cookies-tracking-policy',
+    canonical: "https://www.geniescareerhub.com/cookies-tracking-policy",
   },
 };
-
 
 const Layout = ({ children }) => {
   return (
     <>
-    <head>
-    <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ 
-            __html: JSON.stringify({
-              "@context": "https://schema.org/",
-              "@type": "Organization",
-              "url": "https://www.geniescareerhub.com/",
-              "logo": "https://geniescareerhub.com/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
-              "name": "geniescareerhub.com",
-              "description": "Genies Career Hub creates your resume in an easy going process. We provide more than 23+ professional approved ATS-friendly resume templates and features like CV Creator, CV Optimiser and CV Match. Additionally, our new features of Psychometric Test with incorporating AI and Career Coach feature providing best expertise in creating professional resumes."
-            })
-          }}
-          />
-    </head>
-      <main className="terms_condition">
-        <div className="terms_condition_container">
-          <div className="wrapper">
+      <main className='terms_condition'>
+        <div className='terms_condition_container'>
+          <div className='wrapper'>
             <ResumeHeader />
             {children}
             <Footer />
