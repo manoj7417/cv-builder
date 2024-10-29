@@ -1,6 +1,5 @@
 import React from 'react'
 import PricingCard from './PricingCard'
-
 const page = () => {
     const jsonLd = {
         "@context": "https://schema.org/",
