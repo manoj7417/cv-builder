@@ -910,9 +910,9 @@ const CoachDetailsPage = () => {
                     ) : (
                       <div className="mt-5 text-gray-600 text-xl text-center">
                         No programs yet explore more coaches{" "}
-                        <a className="font-bold" href="/coaches">
+                        <Link className="font-bold" href="/coaches">
                           View all coaches
-                        </a>
+                        </Link>
                       </div>
                     )}
                   </div>

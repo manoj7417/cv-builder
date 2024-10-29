@@ -100,12 +100,12 @@ const Page = () => {
               </p>
               <div className="flex lg:flex-row flex-col gap-4 md:gap-8 sm:gap-8 justify-center items-center pt-8 pb-6">
                 {/* Try it Free Button */}
-                <a href="#free">
+                <Link href="#free">
                   <button className="flex items-center bg-blue-950 text-white lg:py-4 lg:px-8 p-3 rounded shadow-lg hover:bg-blue-950 transition duration-300 transform hover:scale-105">
                     <FaRocket className="mr-2" />
                     Try it Free
                   </button>
-                </a>
+                </Link>
 
                 {/* Premium Button */}
                 <Link href="/coming-soon">
@@ -154,11 +154,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TEST</p>
                       <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=NumericalReasoning">
+                   <Link href="/mcq?name=NumericalReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -179,11 +179,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TEST</p>
                       <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=VerbalReasoning">
+                   <Link href="/mcq?name=VerbalReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -207,11 +207,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TESTS</p>
                       <p className="text-gray-500">5 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=DiagrammaticReasoning">
+                   <Link href="/mcq?name=DiagrammaticReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -238,11 +238,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TESTS</p>
                       <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=SituationalJudgement">
+                   <Link href="/mcq?name=SituationalJudgement">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -264,11 +264,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TESTS</p>
                       <p className="text-gray-500">9 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=AbstractReasoning">
+                   <Link href="/mcq?name=AbstractReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -290,11 +290,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TESTS</p>
                       <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=SpatialReasoning">
+                   <Link href="/mcq?name=SpatialReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -320,11 +320,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TESTS</p>
                       <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=LogicalReasoning">
+                   <Link href="/mcq?name=LogicalReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -348,11 +348,11 @@ const Page = () => {
                       <p className="text-gray-500">1 TESTS</p>
                       <p className="text-gray-500">10 QUESTIONS</p>
                     </div>
-                    <a href="/mcq?name=MechanicalReasoning">
+                   <Link href="/mcq?name=MechanicalReasoning">
                       <button className="text-blue-500 font-semibold">
                         Start Now!
                       </button>
-                    </a>
+                   </Link>
                   </div>
                   <div className="flex mt-4">
                     {[...Array(5)].map((_, i) => (
@@ -468,11 +468,11 @@ const Page = () => {
                     {/* <button className="bg-yellow-500 text-white py-2 px-4 rounded shadow hover:bg-yellow-600 transition duration-200">
                       WATCH VIDEO
                     </button> */}
-                    <a href="/career-counselling">
+                   <Link href="/career-counselling">
                       <button className="bg-green-600 text-white py-2 px-4 rounded shadow hover:bg-green-700 transition duration-200">
                         TRY NOW
                       </button>
-                    </a>
+                   </Link>
                   </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center md:justify-end">
@@ -542,12 +542,12 @@ const Page = () => {
                   </div>
                 </div>
                 <div className="mt-12 flex justify-center">
-                  <a href="/career-counselling">
+                 <Link href="/career-counselling">
                     <button className="flex items-center bg-gradient-to-r from-[#3c5087] to-[#3873b7] text-white py-4 px-8 rounded shadow-lg hover:bg-gradient-to-l  transition duration-300 transform hover:scale-105">
                       <FaCrown className="mr-2 animate-pulse" />
                       TRY WITH US
                     </button>
-                  </a>
+                 </Link>
                 </div>
               </div>
             </div>

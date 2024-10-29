@@ -99,7 +99,7 @@ export default function CourseSlider() {
               <div className="steps_details lg:text-base text-sm font-medium mb-4">
                 {item.stepDetails}
                 <div className="button_wrapper mt-5">
-                  <a
+                  <Link
                     href={item?.link}
                     className="get_start_btn  mx-auto sm:mx-0 course_button"
                   >
@@ -121,7 +121,7 @@ export default function CourseSlider() {
                         <path d="m12 5 7 7-7 7" />
                       </svg>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

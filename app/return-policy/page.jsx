@@ -61,12 +61,12 @@ const ReturnPolicyPage = () => {
             <ol className="list-decimal pl-5 space-y-2">
               <li className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 Contact Us: Reach out to our friendly customer support team at{" "}
-                <a
+               <Link
                   href="mailto:support@geniescareerhub.com"
                   className="text-blue-500 hover:underline"
                 >
                   support@geniescareerhub.com
-                </a>{" "}
+               </Link>{" "}
                 with your order details.
               </li>
               <li className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
@@ -111,12 +111,12 @@ const ReturnPolicyPage = () => {
             <ol className="list-decimal pl-5 space-y-2">
               <li className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 Contact Us: Email our helpful support team at{" "}
-                <a
+               <Link
                   href="mailto:support@geniescareerhub.com"
                   className="text-blue-500 hover:underline"
                 >
                   support@geniescareerhub.com
-                </a>{" "}
+               </Link>{" "}
                 with your subscription details.
               </li>
               <li className="text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
