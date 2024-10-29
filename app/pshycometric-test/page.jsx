@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import "../components/HomepageNew/Homepage.css";
 import Link from "next/link";
 import { ResumeHeader } from "../Layout/ResumeHeader";
+
 const Page = () => {
   const userState = useUserStore((state) => state.userState);
   const tools = [
