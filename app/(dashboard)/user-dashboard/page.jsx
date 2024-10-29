@@ -107,11 +107,15 @@ const UserDashboardPage = () => {
               <div id="coach_details" className="pt-4 sm:pt-10">
                 <div
                   id="row1"
-                  className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3"
+                  className="flex flex-col items-start space-y-2 sm:space-y-0 sm:space-x-2 pb-3 px-3"
                 >
-                  <h1 className="font-bold text-[#1D2026] text-2xl sm:text-3xl">
-                    {userdata?.fullname}
+                  <h1 className="font-bold text-[#1D2026] text-2xl sm:text-3xl px-2">
+                    {userdata?.fullname.charAt(0).toUpperCase() +
+                      userdata?.fullname.slice(1)}
                   </h1>
+                  <p className="text-sm text-gray-500">{userdata?.email}</p>
+                  <p className="text-sm text-gray-500">{userdata?.occupation}</p>
+                  <p className="text-sm text-gray-500">{userdata?.address}</p>
                 </div>
               </div>
             </div>
@@ -202,7 +206,7 @@ const UserDashboardPage = () => {
               >
                 Whishlist
               </TabsTrigger> */}
-              <TabsTrigger
+              {/* <TabsTrigger
                 value="purchaseHistory"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${
                   activeTab === "purchaseHistory" ? "active" : ""
@@ -210,7 +214,7 @@ const UserDashboardPage = () => {
                 onClick={() => setActiveTab("purchaseHistory")}
               >
                 Purchase History
-              </TabsTrigger>
+              </TabsTrigger> */}
               <TabsTrigger
                 value="settings"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${
@@ -727,7 +731,7 @@ const UserDashboardPage = () => {
                 </div>
               </div>
             </TabsContent> */}
-            <TabsContent className="mb-6" value="purchaseHistory">
+            {/* <TabsContent className="mb-6" value="purchaseHistory">
               <div className="max-w-full md:max-w-5xl mx-auto summary_section">
                 <div>
                   <h2 className="text-xl font-bold mb-6 text-blue-950 lg:text-start text-center">
@@ -738,7 +742,7 @@ const UserDashboardPage = () => {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </TabsContent> */}
             <TabsContent className="mb-6" value="settings">
               <div className="max-w-full md:max-w-5xl mx-auto summary_section">
                 <div>
