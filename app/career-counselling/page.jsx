@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import UserData from "./UserData";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { GetTokens } from "../actions";
+import { GetTokens, RemoveTokens } from "../actions";
 import { TiTick } from "react-icons/ti";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import CustomLoader from "../ui/CustomLoader";
 import "./CareerCounselling.css";
@@ -18,6 +18,10 @@ import { Button } from "@/components/ui/button";
 import { ImSpinner3 } from "react-icons/im";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 import { toast } from "react-toastify";
+import { FaSpinner } from "react-icons/fa6";
+import { FaCheckCircle } from "react-icons/fa";
+import { PricingData } from "@/constants/prices";
+import { useUserStore } from "../store/UserStore";
 export default function Page() {
   const [showIntro, setShowIntro] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -30,6 +34,41 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [startingTest, setStartingTest] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState("monthly");
+  const [geoinfo, setGeoInfo] = useState({
+    ip: "",
+    countryName: "",
+    countryCode: "",
+    city: "",
+    timezone: "",
+    currency: "",
+  });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [pricingInfo, setPricingInfo] = useState({
+    id: 2,
+    cardTitle: "AI Career Coach",
+    cardDescription:
+      "Take career assistance anytime and anywhere in different domains with an Artificial Intelligence-based Career Coach",
+    free: {
+      title: "Free",
+      link: "/coming-soon",
+    },
+    popUpDescription:
+      "Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
+    features: [
+      "Personalised Career Assistance from Artificial Intelligence-based Career Coach", "Get access to one-on-one online virtual coaching", "No need to schedule an appointment, take assistance anytime and anywhere", "Get one comprehensive session including addressing the issue, finding the right solution, and getting suggestions on the same", "Find the best possible solutions from a limitless range of career options"
+    ],
+    planName: "AICareerCoach",
+    discount: 97,
+    monthLabel: "per test",
+    yearLabel: "per test",
+    choosePlan: false,
+    DP: PricingData['AICareerCoach'][geoinfo.currency || "USD"]["DP"],
+    MP: PricingData['AICareerCoach'][geoinfo.currency || "USD"]["MP"]
+  })
+  const [upgradingPlan, setIsUpgradingPlan] = useState(false)
+  const userState = useUserStore((state) => state.userState);
+
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -166,7 +205,7 @@ export default function Page() {
       setPopupData(response?.data?.data);
       setLoading(false);
     } catch (error) {
-      
+
     }
   };
 
@@ -185,18 +224,171 @@ export default function Page() {
         setContentType("userData");
       }
     } catch (error) {
-      error.response.status === 403 && router.push("/pricing");
+      error.response.status === 403 && setIsDialogOpen(true)
     } finally {
       setStartingTest(false);
     }
   };
 
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        let currency = data.currency || "USD";
+        setGeoInfo({
+          ...geoinfo,
+          ip: data.ip,
+          countryName: data.country_name,
+          countryCode: data.country_calling_code,
+          city: data.city,
+          timezone: data.timezone,
+          currency: currency,
+        });
+        const DP = PricingData["AICareerCoach"][currency]["DP"];
+        const MP = PricingData["AICareerCoach"][currency]["MP"];
+        setPricingInfo({ ...pricingInfo, DP, MP })
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+
+  const handleCloseAIDialog = () => {
+    setIsDialogOpen(false);
+  }
+
+  const UpgradePlan = async (plan) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken) {
+      return router.push("/login?redirect=pricing");
+    }
+    const data = {
+      email: userState?.userdata?.email,
+      plan,
+      success_url: "https://geniescareerhub.com/paymentSuccess",
+      cancel_url: window.location.href,
+      duration: selectedPlan,
+      currency: geoinfo?.currency || "USD",
+      planName: plan.planName,
+    };
+    setIsUpgradingPlan(true);
+    try {
+      const response = await axios.post(
+        "/api/upgradePricing",
+        { data },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken.value,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        const { url } = response.data;
+        window.location = url;
+      }
+    } catch (error) {
+      if (
+        error.response.status === 401 &&
+        error.response.data.error === "Unauthorized"
+      ) {
+        await RemoveTokens();
+        toast("Please login again to proceed");
+        router.push("/login?redirect=pricing");
+      }
+    } finally {
+      setIsUpgradingPlan(false);
+    }
+  }
+
   useEffect(() => {
     fetchSummary();
   }, []);
 
+  useEffect(() => {
+    getGeoInfo();
+  }, []);
+
   return (
     <>
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+        <DialogTrigger asChild></DialogTrigger>
+        <DialogContent
+          className='max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6'
+          showCloseButton={true}
+          onClick={handleCloseAIDialog}>
+          <DialogHeader>
+            <DialogTitle>
+              <h2 className='text-xl sm:text-2xl lg:text-2xl my-2 text-center'>
+                {pricingInfo?.cardTitle}
+              </h2>
+            </DialogTitle>
+            <DialogDescription>
+              <p className='text-sm sm:text-sm text-justify'>
+                {pricingInfo?.popUpDescription}
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          {pricingInfo && (
+            <div className='grid gap-4 py-4'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start '>
+                <div className='modal_left'>
+                  <div className='modal_list'>
+                    <ul className='space-y-2'>
+                      {pricingInfo?.features.map((feature, index) => (
+                        <li
+                          key={index}
+                          className='flex items-center text-xs sm:text-sm text-gray-600'>
+                          <FaCheckCircle
+                            className='text-blue-950 mr-2'
+                            style={{ minWidth: "15px", minHeight: "15px" }}
+                          />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                  <div className="text-center">
+                    <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">{pricingInfo?.discount}% off</p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                        {
+                          `${pricingInfo["DP"].symbol}${pricingInfo["DP"].price}`
+                        }
+                      </h1>
+                      <p className="text-gray-500 text-xs sm:text-sm px-2 line-through">
+                        {
+                          `${pricingInfo["MP"].symbol}${pricingInfo["MP"].price}`
+                        }
+                      </p>
+                      <p className="text-gray-500 text-xs  px-2">
+                        {pricingInfo?.monthLabel}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <DialogFooter className='mt-4 sm:mt-8'>
+            <Button
+              className='bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto'
+              onClick={() => UpgradePlan(pricingInfo)}
+              disabled={upgradingPlan}>
+              {upgradingPlan ? (
+                <>
+                  Upgrading <FaSpinner className='animate-spin ml-2' />
+                </>
+              ) : (
+                "Upgrade Now"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <ResumeHeader />
       <section className="career_counselling">
         <div className="flex min-h-[500px] w-full bg-background p-5">
