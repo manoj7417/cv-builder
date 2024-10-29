@@ -36,15 +36,11 @@ export const metadata = {
 const Layout = ({ children }) => {
   return (
     <>
-      <main className="terms_condition">
-        <div className="terms_condition_container">
-          <div className="wrapper">
+     
             <ResumeHeader />
             {children}
             <Footer />
-          </div>
-        </div>
-      </main>
+          
     </>
   );
 };
