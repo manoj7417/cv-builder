@@ -351,7 +351,7 @@ const CoachDetailsPage = () => {
         {
           programId: course._id,
           coachId: course.coachId,
-          amount: 1,
+          amount: course.amount,
           currency: "USD",
           success_url: window.location.href,
           cancel_url: window.location.href,
