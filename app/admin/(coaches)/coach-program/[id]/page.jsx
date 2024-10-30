@@ -28,9 +28,8 @@ const EditCoachProgram = () => {
       });
       setProgramData(response?.data?.programs);
       setIsLoading(false);
-      console.log("response::", response?.data?.programs);
     } catch (error) {
-      console.log(error);
+      
     }
   };
     const handleApprovalToggle = async (program) => {
@@ -68,7 +67,7 @@ const EditCoachProgram = () => {
   useEffect(() => {
     handleFetchCoachProgram();
   }, []);
-  console.log("programData::", programData);
+
 
   return (
     <>

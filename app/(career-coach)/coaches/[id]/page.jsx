@@ -118,7 +118,7 @@ const CoachDetailsPage = () => {
         }));
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -198,7 +198,7 @@ const CoachDetailsPage = () => {
   function createOneHourTimeSlotsForRange(slots, coachBookings, date) {
     const updatedSlots = [];
     const selectedDateBookings = coachBookings.filter((booking) => dayjs(booking.date).format('YYYY-MM-DD') === date);
-    console.log(selectedDateBookings)
+
     slots.forEach((slot) => {
       const startIndex = timeSlots.indexOf(slot.startTime);
       const endIndex = timeSlots.indexOf(slot.endTime);
@@ -284,7 +284,7 @@ const CoachDetailsPage = () => {
       setIsBookingSlot(false);
     }
   };
-  console.log(window.location.origin)
+
 
   //function for total time
   const totalTime = programData?.map((item) =>
@@ -328,7 +328,7 @@ const CoachDetailsPage = () => {
         );
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -372,7 +372,6 @@ const CoachDetailsPage = () => {
       );
       window.location.href = response.data.url;
     } catch (error) {
-      console.log(error);
       toast.error("Error buying program");
     } finally {
       setIsBuyingProgram(false);

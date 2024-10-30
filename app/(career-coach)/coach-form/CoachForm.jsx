@@ -328,7 +328,6 @@ const CoachForm = () => {
   const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
 
 
-  console.log("profileVideo:::",profileVideo)
 
   const handleInputChange = (e) => {
     setprofileVideo(e.target.value); // Update the state with the input value
@@ -343,7 +342,7 @@ const CoachForm = () => {
     try {
       const response = await axios.post("/api/coachAccount", { accessToken: accessToken.value, refreshToken: refreshToken.value });
       if (response.status === 200) {
-        console.log(response.data.data.userdata)
+        
       }
     } catch (error) {
 

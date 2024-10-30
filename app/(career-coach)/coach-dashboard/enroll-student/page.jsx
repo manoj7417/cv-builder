@@ -32,7 +32,7 @@ const EnrollStudentPage = () => {
     handleGetCoachProgramsBooking();
   }, []);
 
-  console.log("progrmas", programs);
+
 
   return (
     <div className="max-w-7xl mx-auto my-20">

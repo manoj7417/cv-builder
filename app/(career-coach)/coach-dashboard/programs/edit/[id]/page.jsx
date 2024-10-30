@@ -26,7 +26,7 @@ function EditProgramfunc() {
       });
       setViewPrograms(data?.program);
     } catch (error) {
-      console.log(error);
+      
     } finally {
       setIsInfoLoading(false);
     }
