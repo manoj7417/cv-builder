@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -114,14 +116,14 @@ const CoachDashboardPage = () => {
 
   return (
     <>
-      <div className="w-full bg-white p-7">
-        <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row w-full mt-10">
+      <div className='w-full bg-white p-7'>
+        <div className='flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row w-full mt-10'>
           {/* START-PART 1 */}
-          <div className="w-[100%] sm:w-[100%] md:w-[100%] lg:w-[100%] xl:w-[70%] 2xl:w-[70%]">
-            <h2 className="text-2xl my-3 font-bold  text-[#092C4C]">
+          <div className='w-[100%] sm:w-[100%] md:w-[100%] lg:w-[100%] xl:w-[70%] 2xl:w-[70%]'>
+            <h2 className='text-2xl my-3 font-bold  text-[#092C4C]'>
               Upcoming Appointment
             </h2>
-            <div className="flex gap-5 flex-wrap">
+            <div className='flex gap-5 flex-wrap'>
               {loading
                 ? Array.from({ length: 4 }).map(
                     (
@@ -129,30 +131,30 @@ const CoachDashboardPage = () => {
                       index // Render 4 skeleton cards
                     ) => (
                       <div key={index}>
-                        <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-gray-200 rounded-lg p-5 relative overflow-hidden">
+                        <div className='h-auto w-full xl:w-[300px] lg:w-[300px] bg-gray-200 rounded-lg p-5 relative overflow-hidden'>
                           {/* Skeleton for title and icon */}
-                          <div className="flex justify-between items-center">
-                            <Skeleton className="h-6 w-32" />
-                            <Skeleton className="h-6 w-6 rounded-full" />
+                          <div className='flex justify-between items-center'>
+                            <Skeleton className='h-6 w-32' />
+                            <Skeleton className='h-6 w-6 rounded-full' />
                           </div>
                           {/* Skeleton for avatar and name */}
-                          <div className="flex items-center mb-6 w-full mt-5">
-                            <Skeleton className="w-12 h-12 rounded-full" />
-                            <Skeleton className="ml-2 h-4 w-20" />
+                          <div className='flex items-center mb-6 w-full mt-5'>
+                            <Skeleton className='w-12 h-12 rounded-full' />
+                            <Skeleton className='ml-2 h-4 w-20' />
                           </div>
                           {/* Skeleton for appointment date and country */}
-                          <div className="flex justify-between items-center mt-2">
-                            <Skeleton className="h-4 w-24" />
-                            <Skeleton className="h-4 w-16" />
+                          <div className='flex justify-between items-center mt-2'>
+                            <Skeleton className='h-4 w-24' />
+                            <Skeleton className='h-4 w-16' />
                           </div>
-                          <div className="flex justify-between items-center mt-2">
-                            <Skeleton className="h-4 w-24" />
-                            <Skeleton className="h-4 w-16" />
+                          <div className='flex justify-between items-center mt-2'>
+                            <Skeleton className='h-4 w-24' />
+                            <Skeleton className='h-4 w-16' />
                           </div>
                           {/* Skeleton for buttons */}
-                          <div className="flex justify-between items-center mt-10">
-                            <Skeleton className="h-10 w-24 rounded-full" />
-                            <Skeleton className="h-10 w-24 rounded-full" />
+                          <div className='flex justify-between items-center mt-10'>
+                            <Skeleton className='h-10 w-24 rounded-full' />
+                            <Skeleton className='h-10 w-24 rounded-full' />
                           </div>
                         </div>
                       </div>
@@ -161,59 +163,59 @@ const CoachDashboardPage = () => {
                 : bookingSlot.length > 0 &&
                   bookingSlot.map((item, index) => (
                     <div key={index}>
-                      <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
-                        <div className="flex justify-between items-center">
-                          <div className="text-lg font-bold text-[#FFF]">
+                      <div className='h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden'>
+                        <div className='flex justify-between items-center'>
+                          <div className='text-lg font-bold text-[#FFF]'>
                             Next Appointment
                           </div>
                           <div>
                             <img
-                              src="/coach_dot_icon.png"
-                              alt=""
-                              className=""
+                              src='/coach_dot_icon.png'
+                              alt=''
+                              className=''
                             />
                           </div>
                         </div>
-                        <div className="flex items-center mb-6 w-full mt-5">
-                          <div className="w-12 h-auto overflow-hidden rounded-full">
+                        <div className='flex items-center mb-6 w-full mt-5'>
+                          <div className='w-12 h-auto overflow-hidden rounded-full'>
                             <Image
-                              src="/new_appointment_img.png"
-                              alt="Profile Image"
+                              src='/new_appointment_img.png'
+                              alt='Profile Image'
                               width={44}
                               height={44}
                             />
                           </div>
-                          <div className="ml-1">
-                            <p className="text-[13px] font-bold text-white">
+                          <div className='ml-1'>
+                            <p className='text-[13px] font-bold text-white'>
                               {item?.userId?.fullname}
                             </p>
-                            <p className="text-[13px] font-bold text-white">
+                            <p className='text-[13px] font-bold text-white'>
                               {item?.userId?.email}
                             </p>
                           </div>
                         </div>
-                        <div className="flex justify-between items-center mt-2">
-                          <div className="text-sm text-[#FFF]">
+                        <div className='flex justify-between items-center mt-2'>
+                          <div className='text-sm text-[#FFF]'>
                             Appointment Date
                           </div>
-                          <div className="text-sm text-[#FFF]">Country</div>
+                          <div className='text-sm text-[#FFF]'>Country</div>
                         </div>
-                        <div className="flex justify-between items-center mt-2">
-                          <div className="text-sm font-bold text-[#FFF]">
+                        <div className='flex justify-between items-center mt-2'>
+                          <div className='text-sm font-bold text-[#FFF]'>
                             {formatDate(item?.date)}
                           </div>
-                          <div className="text-sm font-bold text-[#FFF]">
+                          <div className='text-sm font-bold text-[#FFF]'>
                             {item?.country}
                           </div>
                         </div>
-                        <div className="flex justify-between items-center mt-10">
-                          <div className="text-sm font-bold text-[#FFF]">
-                            <button className="rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black">
+                        <div className='flex justify-between items-center mt-10'>
+                          <div className='text-sm font-bold text-[#FFF]'>
+                            <button className='rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black'>
                               Start
                             </button>
                           </div>
-                          <div className="text-sm font-bold text-[#FFF]">
-                            <button className="rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black">
+                          <div className='text-sm font-bold text-[#FFF]'>
+                            <button className='rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black'>
                               Cancel
                             </button>
                           </div>
@@ -225,36 +227,36 @@ const CoachDashboardPage = () => {
           </div>
           {/* END-PART 1 */}
           {/* START-PART 3 */}
-          <div className="w-[100%] sm:w-[100%] pt-7 lg:pt-0 md:w-[100%] lg:w-[100%] xl:w-[30%] 2xl:w-[30%] lg:pl-10 xl:pl-10 2xl:pl-10">
-            <div className="flex flex-col sm:flex-row md:flex-row lg:flex-col gap-7 justify-around">
-              <div className="bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg text-left">
-                <div className="text-[18px] font-bold text-[#7E92A2]">
+          <div className='w-[100%] sm:w-[100%] pt-7 lg:pt-0 md:w-[100%] lg:w-[100%] xl:w-[30%] 2xl:w-[30%] lg:pl-10 xl:pl-10 2xl:pl-10'>
+            <div className='flex flex-col sm:flex-row md:flex-row lg:flex-col gap-7 justify-around'>
+              <div className='bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg text-left'>
+                <div className='text-[18px] font-bold text-[#7E92A2]'>
                   Total No. Of Students
                 </div>
-                <div className="flex justify-between w-full mt-7">
-                  <div className="text-[48px] font-bold text-[#092C4C]">00</div>
+                <div className='flex justify-between w-full mt-7'>
+                  <div className='text-[48px] font-bold text-[#092C4C]'>00</div>
                   <div>
                     <Image
-                      src="/total_students.png"
-                      alt="Profile Image"
+                      src='/total_students.png'
+                      alt='ProfileImage'
                       width={80}
                       height={80}
                     />
                   </div>
                 </div>
               </div>
-              <div className="bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg text-left">
-                <div className="text-[18px] font-bold text-[#7E92A2]">
+              <div className='bg-[#FFFFFF] border border-[#EAEEF4] p-5 rounded-lg text-left'>
+                <div className='text-[18px] font-bold text-[#7E92A2]'>
                   Total Appointment
                 </div>
-                <div className="flex justify-between w-full mt-7">
-                  <div className="text-[48px] font-bold text-[#092C4C]">
+                <div className='flex justify-between w-full mt-7'>
+                  <div className='text-[48px] font-bold text-[#092C4C]'>
                     {bookingSlot.length}
                   </div>
                   <div>
                     <Image
-                      src="/total_appointment.png"
-                      alt="Profile Image"
+                      src='/total_appointment.png'
+                      alt='Profile Image'
                       width={80}
                       height={80}
                     />
@@ -266,9 +268,9 @@ const CoachDashboardPage = () => {
           {/* END-PART 3 */}
         </div>
       </div>
-      <div className="max-w-5xl ms-10 appointment">
-        <div className="main_heading">
-          <h2 className="text-2xl font-bold  text-[#092C4C]">
+      <div className='max-w-5xl ms-10 appointment'>
+        <div className='main_heading'>
+          <h2 className='text-2xl font-bold  text-[#092C4C]'>
             Today’ s Appointment
           </h2>
         </div>
@@ -290,28 +292,28 @@ const CoachDashboardPage = () => {
                   ) => (
                     <TableRow key={index}>
                       <TableCell>
-                        <div className="flex items-center space-x-3">
-                          <Skeleton className="w-10 h-10 rounded-full" />
-                          <Skeleton className="h-4 w-32" />
+                        <div className='flex items-center space-x-3'>
+                          <Skeleton className='w-10 h-10 rounded-full' />
+                          <Skeleton className='h-4 w-32' />
                         </div>
                       </TableCell>
                       <TableCell>
-                        <Skeleton className="h-4 w-20" />
+                        <Skeleton className='h-4 w-20' />
                       </TableCell>
                       <TableCell>
-                        <Skeleton className="h-4 w-24" />
+                        <Skeleton className='h-4 w-24' />
                       </TableCell>
                       <TableCell>
-                        <Skeleton className="h-4 w-20" />
+                        <Skeleton className='h-4 w-20' />
                       </TableCell>
                     </TableRow>
                   )
                 )
               : bookingSlot.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell className="font-medium">
-                      <div className="flex items-center space-x-3">
-                        <Avatar className="w-10 h-10">
+                    <TableCell className='font-medium'>
+                      <div className='flex items-center space-x-3'>
+                        <Avatar className='w-10 h-10'>
                           <AvatarImage
                             src={item.userId.avatar}
                             alt={item.userId.fullname}
@@ -324,13 +326,13 @@ const CoachDashboardPage = () => {
                               .toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
-                        <div className="flex flex-col">
+                        <div className='flex flex-col'>
                           <span>{item.userId.fullname}</span>
                           <span>{item.userId.email}</span>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-green-500">
+                    <TableCell className='text-green-500'>
                       {item.status}
                     </TableCell>
                     <TableCell>

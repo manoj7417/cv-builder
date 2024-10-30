@@ -1,3 +1,5 @@
+/** @format */
+
 import Head from "next/head";
 import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
@@ -25,22 +27,19 @@ export const metadata = {
     title: "Pricing: Genies Career Hub",
     description:
       "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
-    image:
-      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {
-    canonical: 'https://www.geniescareerhub.com/pricing',
+    canonical: "https://www.geniescareerhub.com/pricing",
   },
 };
 
 const Layout = ({ children }) => {
   return (
     <>
-     
-            <ResumeHeader />
-            {children}
-            <Footer />
-          
+      <ResumeHeader />
+      {children}
+      <Footer />
     </>
   );
 };

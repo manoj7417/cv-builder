@@ -103,9 +103,9 @@ export default function ContactPageTwo() {
                 <h1 className='text-2xl sm:text-3xl font-bold text-blue-800 md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl'>
                   Get in touch
                 </h1>
-                <p className='mt-4 text-sm sm:text-lg md:text-lg xl:text-lg 2xl:text-lg text-gray-600'>
+                <h2 className='mt-4 text-sm sm:text-lg md:text-lg xl:text-lg 2xl:text-lg text-gray-600'>
                   Our team would love to hear from you!
-                </p>
+                </h2>
                 <form action='' className='mt-8 space-y-4'>
                   <div className='grid w-full gap-y-4 md:gap-x-4 lg:grid-cols-2'>
                     <div className='grid w-full  items-center gap-1.5'>
