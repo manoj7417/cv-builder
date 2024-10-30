@@ -455,9 +455,9 @@ const Page = () => {
             <div className=' flex items-center justify-center py-12'>
               <div className='container mx-auto px-4 flex flex-col md:flex-row items-center'>
                 <div className='md:w-1/2 text-center md:text-left mb-8 md:mb-0'>
-                  <h1 className='text-4xl font-bold mb-4'>
+                  <h2 className='text-4xl font-bold mb-4'>
                     Talent Assessments Powered by AI for Flawless Judgement
-                  </h1>
+                  </h2>
                   <p className='text-gray-700 mb-6'>
                     Hire candidates that are worthy of selection and escape the
                     matrix of faulty hiring by analysing the relative skills of
@@ -493,10 +493,10 @@ const Page = () => {
             <div className='w-full'>
               <div className='min-h-screen p-6'>
                 <div className='text-center mb-12'>
-                  <h1 className='text-3xl font-bold'>
+                  <h2 className='text-3xl font-bold'>
                     Perfect Hiring and Progressive Employee <br></br>{" "}
                     Development with Psychometric Assessment Tools
-                  </h1>
+                  </h2>
                   <p className='mt-2 text-lg'>
                     Employ the perfect four Psychometric Assessment Test Tools
                     to filter out perfect candidates and inspire competent

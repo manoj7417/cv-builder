@@ -6,11 +6,11 @@ import { ResumeHeader } from "../Layout/ResumeHeader";
 
 export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
-  title: "Career Assessment MCQs - Test Your Skills with Genies Career Hub",
+  title: "Coming Soon - Exciting Career Services Await You!",
   description:
-    "Challenge yourself with career-focused MCQs designed to help identify your skills, strengths, and areas for improvement. Take the next step toward your ideal career path with Genies Career Hub.",
+    "We're working hard to bring you innovative career services and tools. Stay tuned for our launch and get ready to explore your potential with Genies Career Hub!",
   alternates: {
-    canonical: "https://www.geniescareerhub.com/mcq",
+    canonical: "https://www.geniescareerhub.com/coming-soon",
   },
 };
 
