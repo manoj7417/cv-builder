@@ -67,7 +67,6 @@ const UserDashboardPage = () => {
           Authorization: `Bearer ${accessToken.value}`,
         },
       });
-      console.log("response::", response);
       if (response.status === 200) {
         setProgram(response?.data?.programs);
         setIsLoading(false);

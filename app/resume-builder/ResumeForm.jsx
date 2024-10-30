@@ -959,7 +959,7 @@ export default function ResumeForm() {
   }
 
   const stripProtocol = (url) => {
-    console.log(url)
+
     if (url) {
       return url.replace(/^https?:\/\//i, "");
     }

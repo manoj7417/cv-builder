@@ -33,9 +33,8 @@ const AdminCoachProgram = () => {
       });
       setProgramData(response?.data?.programs);
       setIsLoading(false);
-      console.log("response::", response?.data?.programs);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -47,7 +46,6 @@ const AdminCoachProgram = () => {
     handleFetchCoachProgram();
   }, []);
 
-  console.log("programData:::", programData);
 
   return (
     <>

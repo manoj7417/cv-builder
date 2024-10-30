@@ -97,7 +97,7 @@ function CreateProgram() {
                 toast.success("Image uploaded successfully");
             }
         } catch (error) {
-            console.log(error)
+            
             toast.error("Error uploading image");
         } finally {
             setIsUploading(false);

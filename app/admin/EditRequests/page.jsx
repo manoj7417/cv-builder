@@ -24,7 +24,7 @@ function EditRequests() {
                 }
             })
             if (response.status === 200) {
-                console.log(response.data)
+                
             }
         } catch (error) {
 

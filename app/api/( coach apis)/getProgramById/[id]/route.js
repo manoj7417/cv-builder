@@ -17,7 +17,7 @@ export async function GET(req, { params }) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.log(error);
+    
     const errorMessage = error.response
       ? error.response.data
       : { error: "Error getting program" };

@@ -43,7 +43,7 @@ const CoachCalendar = () => {
       if (response.status === 200) {
         handleConvertBookingDataFormat(response.data.bookings);
         setBookingSlot(response.data.bookings);
-        console.log(response.data.bookings);
+        
       }
     } catch (error) {}
   };
@@ -86,9 +86,6 @@ const CoachCalendar = () => {
     setCalendarEvents(events);
   };
 
-
-
-  console.log("bookingSlot::",bookingSlot)
 
 
 

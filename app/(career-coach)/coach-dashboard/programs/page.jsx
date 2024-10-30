@@ -55,13 +55,12 @@ function Programs() {
             headers: { Authorization: `Bearer ${accessToken?.value}` },
           })
           .then((response) => {
-            console.log(response.status);
             if (response.status) {
               handlefilterProgram(id);
             }
           })
           .catch((err) => {
-            console.log(err);
+            ;
             throw err;
           }),
         {
