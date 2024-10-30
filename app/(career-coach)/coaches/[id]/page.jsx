@@ -92,7 +92,8 @@ const CoachDetailsPage = () => {
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
-  const [isBuyingProgram , setIsBuyingProgram] = useState(false);
+  const [isBuyingProgram, setIsBuyingProgram] = useState(false);
+  const [coachBookings, setCoachBookings] = useState([]);
 
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
@@ -167,7 +168,6 @@ const CoachDetailsPage = () => {
 
   // Function to handle date selection and fetch available slots
   const handleDateSelect = (dayOfWeek, date) => {
-    console.log(dayOfWeek, date)
     setSelectedDate({
       date,
       dayOfWeek,
@@ -176,18 +176,13 @@ const CoachDetailsPage = () => {
       (day) => day.dayOfWeek === dayOfWeek
     );
     if (selectedDay?.isAvailable) {
-      const newSlots = createOneHourTimeSlotsForRange(selectedDay?.slots);
+      const newSlots = createOneHourTimeSlotsForRange(selectedDay?.slots, coachBookings, date);
       setSelectedDaySlots(newSlots);
     } else {
       setSelectedDaySlots(null);
     }
   };
 
-  const formatDate = (date) => {
-    if (!date) return "";
-    const options = { day: "numeric", month: "long", year: "numeric" }; // Day, full month, and year
-    return date?.toLocaleDateString("en-GB", options); // 'en-GB' for day-first format
-  };
 
   const isSameMonth = (date1, date2) => {
     return (
@@ -200,8 +195,10 @@ const CoachDetailsPage = () => {
     setCurrentMonth(newMonth);
   };
 
-  function createOneHourTimeSlotsForRange(slots) {
+  function createOneHourTimeSlotsForRange(slots, coachBookings, date) {
     const updatedSlots = [];
+    const selectedDateBookings = coachBookings.filter((booking) => dayjs(booking.date).format('YYYY-MM-DD') === date);
+    console.log(selectedDateBookings)
     slots.forEach((slot) => {
       const startIndex = timeSlots.indexOf(slot.startTime);
       const endIndex = timeSlots.indexOf(slot.endTime);
@@ -212,10 +209,20 @@ const CoachDetailsPage = () => {
 
       // Break the current range into 1-hour intervals
       for (let i = startIndex; i < endIndex; i++) {
-        updatedSlots.push({
+        const newSlot = {
           startTime: timeSlots[i],
           endTime: timeSlots[i + 1],
-        });
+        };
+
+
+        const isBooked = selectedDateBookings.some((booking) =>
+          booking.slotTime.startTime === newSlot.startTime &&
+          booking.slotTime.endTime === newSlot.endTime
+        );
+
+        if (!isBooked) {
+          updatedSlots.push(newSlot);
+        }
       }
     });
 
@@ -242,7 +249,6 @@ const CoachDetailsPage = () => {
 
 
   const handleConfirmSlot = async (data) => {
-    console.log(data)
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches/${id}`);
@@ -257,7 +263,7 @@ const CoachDetailsPage = () => {
       notes: data?.message,
       date: selectedDate?.date,
       slotTime: modalSelectedSlot?.slot,
-      success_url: window.location.href,
+      success_url: `${window.location.origin}/user-dashboard`,
       cancel_url: window.location.href,
       currency: "USD",
       amount: 1,
@@ -278,6 +284,7 @@ const CoachDetailsPage = () => {
       setIsBookingSlot(false);
     }
   };
+  console.log(window.location.origin)
 
   //function for total time
   const totalTime = programData?.map((item) =>
@@ -300,6 +307,7 @@ const CoachDetailsPage = () => {
     try {
       const response = await axios.get(`/api/getCoachDetails/${id}`);
       if (response.status === 200) {
+        setCoachBookings(response.data.coach.bookings)
         updateSingleCoach(response.data.coach);
       }
     } catch (error) {
@@ -362,13 +370,11 @@ const CoachDetailsPage = () => {
           },
         }
       );
-
-      // Open the received URL
-      window.location.href = response.data.url; // Redirect to the URL
+      window.location.href = response.data.url;
     } catch (error) {
       console.log(error);
       toast.error("Error buying program");
-    }finally{
+    } finally {
       setIsBuyingProgram(false);
     }
   };
@@ -926,11 +932,11 @@ const CoachDetailsPage = () => {
                       id="book_an_appointment_tab"
                       className="flex gap-10 items-baseline justify-around"
                     >
-                      <div id="showCalender">
+                      <div id="showCalender" className="w-1/2 flex justify-center items-center">
                         <Calendar
                           mode="single"
                           onMonthChange={handleMonthChange}
-                          className="shadow-lg"
+                          className="shadow-lg rounded-md w-[300px]"
                           components={{
                             Day: ({ date }) => {
                               const dayOfWeek = getDayOfWeek(date);
@@ -941,6 +947,7 @@ const CoachDetailsPage = () => {
                                 date,
                                 currentMonth
                               );
+                              const isCurrentDate = dayjs().isSame(date, 'day');
 
                               const handleDayClick = () => {
                                 const formattedDate = dayjs(date).format('YYYY-MM-DD');
@@ -949,9 +956,15 @@ const CoachDetailsPage = () => {
                                 }
                               };
 
+                              const isSelected = selectedDate.date === dayjs(date).format('YYYY-MM-DD');
+
                               const dayClasses = isDisabled
                                 ? "text-gray-400 cursor-not-allowed bg-transparent"
-                                : "text-gray-800 cursor-pointer bg-gray-100 rounded-full";
+                                : isSelected
+                                  ? "text-white bg-blue-900 cursor-pointer rounded-full"
+                                  : isCurrentDate
+                                    ? "text-gray-800 bg-blue-500 text-white cursor-pointer rounded-full shadow"
+                                    : "text-gray-800 cursor-pointer bg-gray-100/70 shadow-sm rounded-full";
                               return isInCurrentMonth ? (
                                 <Button
                                   className={`w-9 h-9 p-2 rounded-md ${dayClasses}`}
@@ -964,7 +977,7 @@ const CoachDetailsPage = () => {
                                     </span>
 
                                     {isAvailable && !isDisabled && (
-                                      <span className="absolute w-1 h-1 rounded-full bg-blue-500 top-5" />
+                                      <span className={`absolute w-1 h-1 rounded-full  top-5 ${isSelected ? "bg-white" : "bg-blue-500"}`} />
                                     )}
                                   </p>
                                 </Button>
@@ -973,42 +986,56 @@ const CoachDetailsPage = () => {
                           }}
                         />
                       </div>
-                      {selectedDate.date && (
-                        <div>
-                          {selectedDaySlots ? (
-                            <div className="selected-date-info">
-                              <p className="text-gray-500 font-medium text-sm my-2">
-                                {selectedDate?.dayOfWeek},
-                                {selectedDate?.date}
-                              </p>
-                              <p className="text-gray-600 font-medium text-sm my-2">
-                                TimeZone: {singleCoach?.availability?.timeZone}
-                              </p>
-                              <div>
-                                {selectedDaySlots.map((slot, index) => (
-                                  <p
-                                    key={index}
-                                    onClick={() => handleSlotClick(slot)}
-                                    className="text-sm bg-blue-950 text-white py-2 px-5 text-center  rounded-md font-medium my-2 cursor-pointer"
-                                  >
-                                    {slot.startTime}
+                      <div className="w-1/2  flex justify-center items-center">
+                        {selectedDate.date && (
+                          <div className="selected-date-container p-4 bg-white rounded-lg w-full">
+                            {selectedDaySlots ? (
+                              <div className="selected-date-info">
+                                <div className="date-display text-center mb-4">
+                                  <p className="text-lg font-semibold text-gray-800">
+                                    {selectedDate?.dayOfWeek}, {dayjs(selectedDate?.date).format("MMMM D, YYYY")}
                                   </p>
-                                ))}
+                                  <p className="text-sm text-gray-500 font-medium">
+                                    TimeZone: {singleCoach?.availability?.timeZone}
+                                  </p>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                  {selectedDaySlots.map((slot, index) => (
+                                    <div
+                                      key={index}
+                                      onClick={() => handleSlotClick(slot)}
+                                      className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-12 flex items-center justify-center overflow-hidden"
+                                    >
+                                      {/* Default slot time text */}
+                                      <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
+                                        {slot.startTime}
+                                      </span>
+
+                                      {/* Hover "Book →" text */}
+                                      <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                                        Book slot
+                                      </span>
+                                    </div>
+                                  ))}
+                                </div>
+
+
                               </div>
-                            </div>
-                          ) : (
-                            <div>
-                              <h4 className="text-black font-bold text-base">
-                                No Slots available
-                              </h4>
-                              <p className="text-gray-500 font-medium text-sm my-2">
-                                {selectedDate?.date},
-                                {selectedDate?.dayOfWeek}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      )}
+                            ) : (
+                              <div className="no-slots text-center">
+                                <h4 className="text-lg font-bold text-black mb-2">
+                                  No Slots Available
+                                </h4>
+                                <p className="text-sm text-gray-500 font-medium">
+                                  {dayjs(selectedDate?.date).format("MMMM D, YYYY")}, {selectedDate?.dayOfWeek}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
 
                       <Dialog open={isDialogOpen}>
                         <DialogContent
