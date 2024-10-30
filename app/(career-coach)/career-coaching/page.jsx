@@ -258,9 +258,9 @@ const ComingSoonPage = () => {
         <div className='container lg:pt-0 py-10 z-10'>
           <div className='flex flex-col justify-center'>
             <div className='space-y-2 mx-auto'>
-              <h1 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white'>
+              <h2 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white'>
                 Complete Satisfaction
-              </h1>
+              </h2>
               <div className='flex justify-center mt-4'>
                 {[...Array(5)].map((_, index) => (
                   <svg

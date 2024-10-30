@@ -81,6 +81,8 @@ export function middleware(req) {
     "Content-Security-Policy",
     contentSecurityPolicyHeaderValue
   );
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("X-Content-Type-Options", "nosniff");
 
   return response;
 }
