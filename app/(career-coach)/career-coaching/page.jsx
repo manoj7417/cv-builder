@@ -297,11 +297,11 @@ const ComingSoonPage = () => {
         <div className='container lg:pt-0 pt-20'>
           <div className='flex flex-col justify-center'>
             <div className='space-y-2 mx-auto'>
-              <h1 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center items-center font-extrabold'>
+              <h2 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center items-center font-extrabold'>
                 We Offer Coaching For
                 <br />
                 <span className='text-black'>Every</span> Domain
-              </h1>
+              </h2>
               <div className='flex justify-center mt-4'></div>
               <p className='max-w-[800px] mx-auto text-center text-gray text-[18px] pt-4'>
                 Our career coaching and consultation services cover all aspects
