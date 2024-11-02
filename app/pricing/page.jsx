@@ -31,7 +31,7 @@ const page = () => {
             </p>
             <div className='flex justify-center py-8'>
            
-<Suspense fallback={<div>Loading...</div>}>
+<Suspense fallback={<div>Loading Pricing plan ...</div>}>
   <PricingCard />
 </Suspense>
 
