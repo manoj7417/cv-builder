@@ -68,7 +68,7 @@ const RefundPolicyPage = () => {
               Process for Requesting a Refund
             </h2>
             <ol className='list-decimal ml-5'>
-              <li className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
+              {/* <li className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
                 Contact our customer support team at{" "}
                 <Link
                   href='mailto:support@geniescareerhub.com'
@@ -76,7 +76,7 @@ const RefundPolicyPage = () => {
                   support@geniescareerhub.com
                 </Link>{" "}
                 with your refund request and order details.
-              </li>
+              </li> */}
               <li className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
                 Our team will review your request and respond within 3 business
                 days with the outcome or request for additional information.
