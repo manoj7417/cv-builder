@@ -26,14 +26,7 @@ import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-
-export async function getServerSideProps() {
-  // Fetch your data here
-  const pricingData = await fetchPricingData();
-  console.log("doesnt work:", pricingData);
-  return { props: { pricingData } };
-}
-const PricingFunc = ({pricingData}) => {
+const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isFreeDialogOpen, setIsFreeDialogOpen] = useState(false);
