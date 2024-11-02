@@ -1,6 +1,6 @@
 
-import React from 'react'
-import PricingCard from './PricingCard'
+import React, { Suspense } from 'react'
+const PricingCard = React.lazy(() => import('./PricingCard'));
 const page = () => {
     const jsonLd = {
         "@context": "https://schema.org/",
@@ -30,7 +30,11 @@ const page = () => {
               systems.
             </p>
             <div className='flex justify-center py-8'>
-             <PricingCard/>
+           
+<Suspense fallback={<div>Loading...</div>}>
+  <PricingCard />
+</Suspense>
+
             </div>
           </div>
         </div>
