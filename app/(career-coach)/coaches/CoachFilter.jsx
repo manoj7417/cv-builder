@@ -306,9 +306,9 @@ export default function CoachFilter({
 
           <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
             <div className='flex items-center justify-between border-b border-gray-200 pb-6 pt-24'>
-              <h1 className='2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold tracking-tight text-gray-900'>
+              <h2 className='2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold tracking-tight text-gray-900'>
                 Best Coaches
-              </h1>
+              </h2>
               <div className='input_search lg:w-[40%] w-full'>
                 <div className='relative'>
                   <input
@@ -390,9 +390,9 @@ export default function CoachFilter({
             </div>
 
             <section aria-labelledby='products-heading' className='pb-24 pt-6'>
-              <h2 id='products-heading' className='sr-only'>
+              <h3 id='products-heading' className='sr-only'>
                 Products
-              </h2>
+              </h3>
 
               <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4 sticky top-0'>
                 {/* Filters */}
