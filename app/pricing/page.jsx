@@ -37,7 +37,6 @@ const page = () => {
     </main>  
       <script
         type='application/ld+json'
-        defer
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       </>

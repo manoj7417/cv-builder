@@ -170,8 +170,8 @@ const PricingFunc = () => {
     setIsDialogOpen(false);
   };
 
-  const getGeoInfo = () => {
-    axios
+  const getGeoInfo = async() => {
+    await axios
       .get("https://ipapi.co/json/")
       .then((response) => {
         let data = response.data;
@@ -302,9 +302,9 @@ const PricingFunc = () => {
 
 
 
-  useEffect(() => {
-    getGeoInfo();
-  }, []);
+  // useEffect(() => {
+  //   getGeoInfo();
+  // }, []);
 
   useEffect(() => {
     const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
