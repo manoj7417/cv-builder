@@ -303,20 +303,20 @@ export default function PricingFunc () {
 
 
 
-  useEffect(() => {
-    getGeoInfo();
-  }, []);
+  // useEffect(() => {
+  //   getGeoInfo();
+  // }, []);
 
-  useEffect(() => {
-    const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
-    if (serviceCardsSection) {
-      const offsetTop = serviceCardsSection.offsetTop - 250;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-    }
-  }, [scroll]);
+  // useEffect(() => {
+  //   const serviceCardsSection = document.getElementById(`pricing-${scroll}`);
+  //   if (serviceCardsSection) {
+  //     const offsetTop = serviceCardsSection.offsetTop - 250;
+  //     window.scrollTo({
+  //       top: offsetTop,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }, [scroll]);
 
   return (
     <>
