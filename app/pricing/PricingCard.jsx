@@ -26,7 +26,8 @@ import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-const PricingFunc = () => {
+
+export default function PricingFunc () {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isFreeDialogOpen, setIsFreeDialogOpen] = useState(false);
@@ -616,10 +617,3 @@ const PricingFunc = () => {
   );
 };
 
-export default function Pricing() {
-  return (
-   
-      <PricingFunc />
-  
-  );
-}

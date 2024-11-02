@@ -29,9 +29,9 @@ const page = () => {
               are approved by recruiters across the globe and established ATS
               systems.
             </p>
-            {/* <div className='flex justify-center py-8'>
+            <div className='flex justify-center py-8'>
              <PricingCard/>
-            </div> */}
+            </div>
           </div>
         </div>
       </section>
