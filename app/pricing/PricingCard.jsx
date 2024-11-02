@@ -22,7 +22,7 @@ import { useUserStore } from "../store/UserStore";
 import { PricingData } from "@/constants/prices";
 import axios from "axios";
 import { GetTokens, RemoveTokens } from "../actions";
-import { loadRazorpayScript } from "../utils/razorpayUtils";
+// import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -192,66 +192,66 @@ export default function PricingFunc () {
       });
   };
 
-  const GetPlanWithRazorpay = async (plan) => {
-    const { accessToken } = await GetTokens();
-    if (!accessToken) {
-      return router.push("/login?redirect=new-pricing");
-    }
-    const data = {
-      planName: plan?.planName,
-      currency: geoinfo.currency,
-      duration: selectedPlan,
-    };
-    const res = await loadRazorpayScript();
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        "/api/pricing",
-        { data },
-        {
-          headers: {
-            Authorization: "Bearer " + accessToken.value,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.status === 200) {
-        const { orderId, amount, currency, key } = response.data;
-        const options = {
-          key,
-          amount,
-          currency,
-          name: "Genies Career Hub",
-          description: "Upgrade Plan",
-          order_id: orderId,
-          handler: async (response) => {
-            const paymentData = {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            };
-          },
-          prefill: {
-            email: userState?.userdata?.email,
-          },
-          theme: {
-            color: "#F37254",
-          },
-        };
+  // const GetPlanWithRazorpay = async (plan) => {
+  //   const { accessToken } = await GetTokens();
+  //   if (!accessToken) {
+  //     return router.push("/login?redirect=new-pricing");
+  //   }
+  //   const data = {
+  //     planName: plan?.planName,
+  //     currency: geoinfo.currency,
+  //     duration: selectedPlan,
+  //   };
+  //   const res = await loadRazorpayScript();
+  //   if (!res) {
+  //     alert("Razorpay SDK failed to load. Are you online?");
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   try {
+  //     const response = await axios.post(
+  //       "/api/pricing",
+  //       { data },
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer " + accessToken.value,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     if (response.status === 200) {
+  //       const { orderId, amount, currency, key } = response.data;
+  //       const options = {
+  //         key,
+  //         amount,
+  //         currency,
+  //         name: "Genies Career Hub",
+  //         description: "Upgrade Plan",
+  //         order_id: orderId,
+  //         handler: async (response) => {
+  //           const paymentData = {
+  //             razorpay_order_id: response.razorpay_order_id,
+  //             razorpay_payment_id: response.razorpay_payment_id,
+  //             razorpay_signature: response.razorpay_signature,
+  //           };
+  //         },
+  //         prefill: {
+  //           email: userState?.userdata?.email,
+  //         },
+  //         theme: {
+  //           color: "#F37254",
+  //         },
+  //       };
 
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-      }
-    } catch (error) {
-      console.error("Payment error:", error);
-    } finally {
-      setLoading(false); // Stop loader
-    }
-  };
+  //       const rzp = new window.Razorpay(options);
+  //       rzp.open();
+  //     }
+  //   } catch (error) {
+  //     console.error("Payment error:", error);
+  //   } finally {
+  //     setLoading(false); // Stop loader
+  //   }
+  // };
 
   const handlePlanChange = (plan) => {
     setSelectedPlan(plan);
