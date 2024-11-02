@@ -1,4 +1,4 @@
-'use client'
+'use server'
 import React from 'react'
 import PricingCard from './PricingCard'
 const page = () => {
