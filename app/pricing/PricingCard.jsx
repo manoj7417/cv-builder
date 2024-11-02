@@ -300,8 +300,6 @@ const PricingFunc = () => {
     }
   };
 
-
-
   // useEffect(() => {
   //   getGeoInfo();
   // }, []);
