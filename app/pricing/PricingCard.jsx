@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { FaCheckCircle, FaSpinner } from "react-icons/fa";
 import { useUserStore } from "../store/UserStore";
-import { PricingData } from "@/constants/prices";
+// import { PricingData } from "@/constants/prices";
 import axios from "axios";
 import { GetTokens, RemoveTokens } from "../actions";
 // import { loadRazorpayScript } from "../utils/razorpayUtils";
@@ -33,14 +33,14 @@ export default function PricingFunc () {
   const [isFreeDialogOpen, setIsFreeDialogOpen] = useState(false);
   const serviceCardsRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [geoinfo, setGeoInfo] = useState({
-    ip: "",
-    countryName: "",
-    countryCode: "",
-    city: "",
-    timezone: "",
-    currency: "",
-  });
+  // const [geoinfo, setGeoInfo] = useState({
+  //   ip: "",
+  //   countryName: "",
+  //   countryCode: "",
+  //   city: "",
+  //   timezone: "",
+  //   currency: "",
+  // });
   const searchParams = useSearchParams();
   const scroll = searchParams.get("scroll");
   const router = useRouter();
@@ -150,10 +150,11 @@ export default function PricingFunc () {
     "bg-[#75009E]",
     "bg-[#D10000]",
   ];
+
   const handleOpenAIDialog = (cardData) => {
     const planName = cardData.planName;
     planName && setSelectedPlan('monthly');
-    const pricing = PricingData[planName][geoinfo.currency || "USD"];
+    // const pricing = PricingData[planName][geoinfo.currency || "USD"];
     const { MP, DP } = pricing;
     setSelectedCard({ ...cardData, MP, DP });
     setIsDialogOpen(true);
@@ -171,26 +172,26 @@ export default function PricingFunc () {
     setIsDialogOpen(false);
   };
 
-  const getGeoInfo = () => {
-    axios
-      .get("https://ipapi.co/json/")
-      .then((response) => {
-        let data = response.data;
-        let currency = data.currency || "USD";
-        setGeoInfo({
-          ...geoinfo,
-          ip: data.ip,
-          countryName: data.country_name,
-          countryCode: data.country_calling_code,
-          city: data.city,
-          timezone: data.timezone,
-          currency: currency,
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching geo information:", error);
-      });
-  };
+  // const getGeoInfo = () => {
+  //   axios
+  //     .get("https://ipapi.co/json/")
+  //     .then((response) => {
+  //       let data = response.data;
+  //       let currency = data.currency || "USD";
+  //       setGeoInfo({
+  //         ...geoinfo,
+  //         ip: data.ip,
+  //         countryName: data.country_name,
+  //         countryCode: data.country_calling_code,
+  //         city: data.city,
+  //         timezone: data.timezone,
+  //         currency: currency,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching geo information:", error);
+  //     });
+  // };
 
   // const GetPlanWithRazorpay = async (plan) => {
   //   const { accessToken } = await GetTokens();
@@ -389,9 +390,9 @@ export default function PricingFunc () {
           onClick={handleCloseFreeDialog}>
           <DialogHeader>
             <DialogTitle>
-              <h2 className='text-xl sm:text-2xl lg:text-3xl my-2 text-center'>
+              <h3 className='text-xl sm:text-2xl lg:text-3xl my-2 text-center'>
                 Genies Pro Suite
-              </h2>
+              </h3>
             </DialogTitle>
             <DialogDescription>
               <p className='text-sm sm:text-base text-justify'>
@@ -468,9 +469,9 @@ export default function PricingFunc () {
           onClick={handleCloseAIDialog}>
           <DialogHeader>
             <DialogTitle>
-              <h2 className='text-xl sm:text-2xl lg:text-2xl my-2 text-center'>
+              <h4 className='text-xl sm:text-2xl lg:text-2xl my-2 text-center'>
                 {selectedCard?.cardTitle}
-              </h2>
+              </h4>
             </DialogTitle>
             <DialogDescription>
               <p className='text-sm sm:text-sm text-justify'>
