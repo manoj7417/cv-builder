@@ -87,9 +87,9 @@ export default function HomepageNew() {
             alt={service.alt}
           />
         </div>
-        <h2 className="mt-2 text-lg font-bold text-black sm:text-2xl">
+        <p className="mt-2 text-lg font-bold text-black sm:text-2xl">
           {service.title}
-        </h2>
+        </p>
         <p className="mt-2 text-xs text-black sm:text-sm sm:text-md whitespace-normal">
           {service.description}
         </p>
@@ -150,9 +150,9 @@ export default function HomepageNew() {
 
       <section className="w-full z-40 relative">
         <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
-          <h3 className="lg:text-5xl text-3xl font-bold ">
+          <h2 className="lg:text-5xl text-3xl font-bold ">
             How Career Genies Hub helps you
-          </h3>
+          </h2>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
           <div className="lg:flex align-middle overflow-hidden hidden -ml-16">

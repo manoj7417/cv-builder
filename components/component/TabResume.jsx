@@ -129,9 +129,9 @@ export default function TabResume() {
       <div className='bg-gradient-to-b from-[#e4f5fc] to-[white]'>
         <div className='rounded-t-xl p-6'>
           <div className='tabs_heading'>
-            <h5 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-black text-center'>
+            <h4 className='2xl:text-6xl lg:text-5xl text-3xl font-bold mt-5 text-black text-center'>
               Discover CVs that fit your Dream Job
-            </h5>
+            </h4>
             <p className='lg:w-1/2 w-full mx-auto lg:text-xl text-sm text-center my-4 text-[#7C7C7C]'>
               Start your journey with Genies Career Hub CV Maker and unlock the
               door to a world where your talents are valued and your career
