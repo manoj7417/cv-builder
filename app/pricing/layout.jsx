@@ -32,11 +32,6 @@ export const metadata = {
   alternates: {
     canonical: "https://www.geniescareerhub.com/pricing",
   },
-  // Additional metadata
-  robots: {
-    index: false, // Set to false for noindex
-    follow: true, // Allow following links
-  },
   keywords: "pricing, career hub, plans, Genies Career Hub",
   author: "Genies Career Hub Team",
 };
