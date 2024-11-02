@@ -30,6 +30,20 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ["jsx", "js", "tsx", "ts"],
+  async headers() {
+    return [
+      {
+        
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN", 
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
