@@ -976,7 +976,7 @@ const CoachDetailsPage = () => {
                                     </span>
 
                                     {isAvailable && !isDisabled && (
-                                      <span className={`absolute w-1 h-1 rounded-full  top-5 ${isSelected ? "bg-white" : "bg-blue-500"}`} />
+                                      <span className={`absolute w-1 h-1 rounded-full  top-5 ${isSelected ? "bg-green-500" : "bg-green-500"}`} />
                                     )}
                                   </p>
                                 </Button>
