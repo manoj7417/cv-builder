@@ -2,10 +2,14 @@ import { serverInstance } from '@/lib/serverApi';
 
 export async function GET(req, res) {
     try {
+       
         const response = await serverInstance.get('/coach/all');
+        
         return new Response(JSON.stringify(response.data), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' }
+            status: response.status || 200,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     } catch (error) {
         const errorMessage = error.response ? error.response.data : { error: "Error forgetting password" };

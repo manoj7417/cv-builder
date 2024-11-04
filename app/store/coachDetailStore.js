@@ -1,3 +1,4 @@
+import axios from "axios";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
@@ -13,12 +14,9 @@ const useCoachesDetailStore = create(
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
-        const response = await fetch("/api/getAllCoaches", {
-          headers: {
-            "Cache-Control": "no-store", // Disable cache to fetch fresh data
-          },
-        });
-        const data = await response.json();
+        const response = await axios.get("/api/getAllCoaches");
+        const data = await response.data;
+        console.log(data)
         set({ coaches: data.coaches });
       } catch (error) {
         console.error(error);

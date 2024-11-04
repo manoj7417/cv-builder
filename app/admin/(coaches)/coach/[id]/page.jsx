@@ -107,12 +107,12 @@ const CoachDetailsPage = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchAllCoaches();
-    };
-
-    fetchData();
+    fetchAllCoaches(); // Initial fetch
+    const intervalId = setInterval(fetchAllCoaches, 5000); // Refetch every 5 seconds
+  
+    return () => clearInterval(intervalId); // Clear interval on component unmount
   }, [fetchAllCoaches]);
+  
 
   useEffect(() => {
     if (id) {
