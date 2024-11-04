@@ -46,7 +46,7 @@ export default function Footer() {
               <li>
                 <div className='text-black transition hover:text-sky-500'>
                   <Link
-                    href='https://www.aedin.com/company/100784711/admin/feed/posts/'
+                    href='https://www.linkedin.com/company/genies-career-hub/'
                     target='_blank'>
                     <span className='sr-only'>aedIn</span>
                     <FaLinkedin className='h-6 w-6' />
