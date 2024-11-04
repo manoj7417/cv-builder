@@ -92,6 +92,5 @@ export function middleware(req) {
     "Content-Security-Policy",
     contentSecurityPolicyHeaderValue
   );
-
   return response;
 }

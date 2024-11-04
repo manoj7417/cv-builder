@@ -84,7 +84,7 @@ export default function AboutUs() {
   const Card = ({ icon, title, description }) => (
     <div className='bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center'>
       <div className='w-12 h-12 mb-4'>{icon}</div>
-      <h2 className='text-xl font-bold mb-2'>{title}</h2>
+      <p className='text-xl font-bold mb-2'>{title} </p>
       <p className='text-gray-600'>{description}</p>
     </div>
   );
@@ -145,9 +145,9 @@ export default function AboutUs() {
       <section className='py-12 bg-gray-100'>
         <div className='container mx-auto max-w-7xl  gap-x-8 px-8 sm:gap-x-8 sm:px-8 md:gap-x-8 md:px-8 lg:gap-x-8 lg:px-8 xl:gap-x-8 xl:px-8 2xl:gap-x-8 2xl:px-8'>
           <div className='w-[70%] mx-auto'>
-            <h2 className='my-5 text-3xl font-bold text-center sm:text-left md:text-left lg:text-center xl:text-ceter 2xl:text-center text-[#005599] md:text-4xl lg:text-5xl'>
+            <h3 className='my-5 text-3xl font-bold text-center sm:text-left md:text-left lg:text-center xl:text-ceter 2xl:text-center text-[#005599] md:text-4xl lg:text-5xl'>
               Comprehensive Services to Cater to all your Career Requirements
-            </h2>
+            </h3>
             <p className='my-8 text-lg text-center sm:text-center md:text-center lg:text-center xl:text-center 2xl:text-center text-gray-700'>
               Our aim at Genies Career Hub is to help every aspiring career
               applicant achieve their Career goals. We offer services that
@@ -160,9 +160,9 @@ export default function AboutUs() {
               <div className='w-12 h-12 mx-auto mb-4'>
                 <FaRocket className='aicon w-12 h-12' />
               </div>
-              <h2 className='text-xl font-bold mb-2'>
+              <h3 className='text-xl font-bold mb-2'>
                 Job Application Services
-              </h2>
+              </h3>
               <p className='text-sm apara'>
                 From CV Creation to CV Optimisation, we help you build the
                 perfect application for your dream career role and put your best
@@ -175,7 +175,7 @@ export default function AboutUs() {
               <div className='w-12 h-12 mx-auto mb-4'>
                 <FaBriefcase className='aicon w-12 h-12' />
               </div>
-              <h2 className='text-xl font-bold mb-2'>Career Assistance</h2>
+              <h4 className='text-xl font-bold mb-2'>Career Assistance</h4>
               <p className='text-sm apara'>
                 Whether you are seeking job transition, career change, or
                 looking to grow your career dynamically, we offer personalised
@@ -188,7 +188,7 @@ export default function AboutUs() {
               <div className='w-12 h-12 mx-auto mb-4'>
                 <FaLightbulb className='aicon w-12 h-12' />
               </div>
-              <h2 className='text-xl font-bold mb-2'>Job Match</h2>
+              <p className='text-xl font-bold mb-2'>Job Match</p>
               <p className='text-sm apara'>
                 Finding the exact job that matches your career profile and
                 skillset can be challenging. But, with expert support and
@@ -203,9 +203,9 @@ export default function AboutUs() {
         <div className='max-w-6xl mx-auto  py-10'>
           <div className='flex flex-col md:flex-row items-center gap-4'>
             <div className='w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8'>
-              <h2 className='trust font-bold text-gray-800'>
+              <p className='trust font-bold text-gray-800'>
                 Career Coaching: Your Key to Success
-              </h2>
+              </p>
               <p className='mt-4 text-gray-600'>
                 Our career coaching services are backed by years of expertise.
                 The experienced Career Coaches you connect with through the
@@ -258,9 +258,9 @@ export default function AboutUs() {
           <div className='flex flex-col md:flex-row items-center gap-4 overflow-hidden'>
             {/* Left Column - Text */}
             <div className='text-center md:text-left mt-8 md:mt-0'>
-              <h2 className='text-xl font-bold text-gray-800'>
+              <p className='text-xl font-bold text-gray-800'>
                 Unlock your true potential with Career Guidance.
-              </h2>
+              </p>
               <p className='mt-4 text-gray-600'>
                 Understanding what suits your profile can be a challenge.
                 However, with Genies Career Hub, this process is simplified. Our
@@ -379,9 +379,9 @@ export default function AboutUs() {
         <div className='max-w-6xl mx-auto'>
           <div className='flex flex-col md:flex-row items-center gap-4'>
             <div className='w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8'>
-              <h2 className='trust font-bold text-gray-800'>
+              <p className='trust font-bold text-gray-800'>
                 Diverse Expertise, Myriad Experience
-              </h2>
+              </p>
               <p className='mt-4 text-gray-600'>
                 The team of Career Genies holds rich experience in arenas such
                 as Recruitment, Creative Writing, Career Coaching, Information
@@ -405,9 +405,9 @@ export default function AboutUs() {
         <div className='max-w-6xl mx-auto pb-20'>
           <div className='flex flex-col md:flex-row items-center gap-4'>
             <div className='w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8'>
-              <h2 className='trust font-bold text-gray-800'>
+              <p className='trust font-bold text-gray-800'>
                 The Genies Career Hub: A New Chapter for The Career Genies
-              </h2>
+              </p>
               <p className='mt-4 text-gray-600'>
                 Launched in 2024, Genies Career Hub is an innovative and
                 revolutionised career-developed platform that seamlessly

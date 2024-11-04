@@ -1,5 +1,18 @@
 /** @format */
 
+const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' blob: data:;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+`;
+
 const nextConfig = {
   output: "standalone",
   images: {
@@ -30,6 +43,28 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ["jsx", "js", "tsx", "ts"],
+  async headers() {
+    return [
+      {
+        // Apply this header to all routes
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: cspHeader.replace(/\n/g, ""),
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

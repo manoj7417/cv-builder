@@ -51,9 +51,9 @@ const RefundPolicyPage = () => {
                 case-by-case basis for potential partial refunds.
               </li>
             </ul>
-            <h2 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
+            <h3 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
               Non-refundable Services
-            </h2>
+            </h3>
             <ul className='list-disc ml-5'>
               <li className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
                 Services that have been fully utilized or completed are
@@ -64,9 +64,9 @@ const RefundPolicyPage = () => {
                 their personalized nature.
               </li>
             </ul>
-            <h2 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
+            <h4 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
               Process for Requesting a Refund
-            </h2>
+            </h4>
             <ol className='list-decimal ml-5'>
               <li className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
                 Contact our customer support team at{" "}
@@ -86,26 +86,26 @@ const RefundPolicyPage = () => {
                 of payment within 14 business days.
               </li>
             </ol>
-            <h2 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
+            <h5 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
               Exceptions
-            </h2>
+            </h5>
             <p className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
               In the event of extenuating circumstances, we may consider refund
               requests beyond the standard eligibility criteria at our
               discretion.
             </p>
-            <h2 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
+            <h6 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
               Contact Information
-            </h2>
+            </h6>
             <p className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
               For any inquiries regarding our refund policy or to discuss a
               specific case, please reach out to our customer support team. We
               value your business and will collaborate with you to resolve any
               issues to your satisfaction.
             </p>
-            <h2 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
+            <h6 className='text-2xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl font-bold'>
               Refund Processing Time
-            </h2>
+            </h6>
             <p className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg my-2'>
               At Genies Career Hub, we process all refunds promptly and
               efficiently. Once a refund is approved, it will be processed and

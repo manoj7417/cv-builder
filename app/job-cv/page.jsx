@@ -631,13 +631,13 @@ export default function Home() {
           <section>
             <div className='steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10 '>
               <div className='flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10'>
-                <h2 className='text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20'>
+                <h3 className='text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20'>
                   Find your{" "}
                   <span className='text-[#2C98CA]'>Professional CV</span>{" "}
-                </h2>
-                <h2 className='text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20'>
+                </h3>
+                <h4 className='text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20'>
                   in Six Simple Steps!
-                </h2>
+                </h4>
               </div>
             </div>
 
@@ -645,9 +645,9 @@ export default function Home() {
               {/* START-FIRST SECTION */}
               <div className='grid grid-col-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-14'>
                 <div className='bg-[#FFFCDC] p-7'>
-                  <h2 className='text-[#2C98CA] text-lg font-semibold'>
+                  <h5 className='text-[#2C98CA] text-lg font-semibold'>
                     Pre-written content
-                  </h2>
+                  </h5>
                   <p className='text-base pt-3 text-[#1B1B1F]'>
                     Our database has numerous pre-written resumes tailored to
                     distinctive job descriptions, recruitment requirements, and
@@ -658,9 +658,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div className='bg-[#ECFFE7] p-7'>
-                  <h2 className='text-[#2C98CA] text-lg font-semibold'>
+                  <h6 className='text-[#2C98CA] text-lg font-semibold'>
                     Professional CV ensured
-                  </h2>
+                  </h6>
                   <p className='text-base pt-3 text-[#1B1B1F]'>
                     Wondering how appropriate and impressive the pre-written
                     resumes are?
@@ -675,9 +675,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div className='bg-[#CEEFFF] p-5'>
-                  <h2 className='text-[#2C98CA] text-lg font-semibold'>
+                  <p className='text-[#2C98CA] text-lg font-semibold'>
                     45+ pre-written Resumes
-                  </h2>
+                  </p>
                   <p className='text-base pt-3 text-[#1B1B1F]'>
                     The CV match database is designed to help you get matched
                     with your perfect resume. To ensure this, we have myriad
@@ -695,9 +695,9 @@ export default function Home() {
                   <div className='w-[100%] sm:w-[68%] md:w-[68%] lg:w-[68%] xl:w-[68%] 2xl:w-[68%]'>
                     <div className='grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14'>
                       <div className='bg-[#FFD9ED] p-5'>
-                        <h2 className='text-[#2C98CA] text-lg font-semibold'>
+                        <p className='text-[#2C98CA] text-lg font-semibold'>
                           AI expertise integrated
-                        </h2>
+                        </p>
                         <p className='text-base pt-3 text-[#1B1B1F]'>
                           We make the process easier for you with the help of
                           Artificial Intelligence. We understand how tiresome
@@ -710,9 +710,9 @@ export default function Home() {
                         </p>
                       </div>
                       <div className='bg-[#D8DAFF] p-7'>
-                        <h2 className='text-[#2C98CA] text-lg font-semibold'>
+                        <p className='text-[#2C98CA] text-lg font-semibold'>
                           Edit your CV the way you want
-                        </h2>
+                        </p>
                         <p className='text-base pt-3 text-[#1B1B1F]'>
                           We completely comprehend the need for a personalised
                           resume. This is why we ensure that every step in your
@@ -734,9 +734,9 @@ export default function Home() {
               {/* START-SECOND SECTION */}
               <div className='flex lg:flex-row flex-col gap-5 my-20'>
                 <div className='lg:w-[67%] w-full steps_content'>
-                  <h3 className='text-5xl text-[#1B1B1F] font-bold py-3 text-center md:text-left lg:text-left xl:text-left 2xl:text-left leading-normal'>
+                  <p className='text-5xl text-[#1B1B1F] font-bold py-3 text-center md:text-left lg:text-left xl:text-left 2xl:text-left leading-normal'>
                     Maximise Impact by personalising your CV
-                  </h3>
+                  </p>
                   <p className='text-lg py-3 pl-0 md:pl-6 lg:pl-6 xl:pl-6 2xl:pl-0 text-center md:text-left lg:text-left xl:text-left 2xl:text-left text-[#1B1B1F]'>
                     Your <b>professional Curriculum Vitae</b> creation process
                     does not have to be hefty. You can get a job-winning CV in
@@ -821,9 +821,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className='lg:w-[50%] w-full steps_content mt-10'>
-                    <h4 className='font-bold text-[#101827] text-2xl italic'>
+                    <h5 className='font-bold text-[#101827] text-2xl italic'>
                       Step 2
-                    </h4>
+                    </h5>
 
                     <p className='text-base py-3 text-[#1B1B1F]'>
                       The CV Match not only helps you make a new resume
@@ -876,9 +876,9 @@ export default function Home() {
               <div className='hidden sm:hidden md:hidden lg:block xl:block 2xl:block step_2 relative mt-32 mb-32'>
                 <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
                   <div className='lg:w-[40%] w-full steps_content mt-10'>
-                    <h4 className='font-bold text-[#101827] text-2xl italic'>
+                    <h6 className='font-bold text-[#101827] text-2xl italic'>
                       Step 2
-                    </h4>
+                    </h6>
                     <p className='text-base py-3 text-[#1B1B1F] '>
                       The CV Match not only helps you make a new resume
                       instantly without any hassle but also rectifies your
@@ -941,9 +941,9 @@ export default function Home() {
               <div className='step_3 relative mt-30'>
                 <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
                   <div className='lg:w-[50%] w-full steps_content mt-10'>
-                    <h4 className='font-bold text-[#101827] text-2xl italic'>
+                    <p className='font-bold text-[#101827] text-2xl italic'>
                       Step 3
-                    </h4>
+                    </p>
                     {/* <h3 className="text-3xl text-black  py-3">EDUCATION </h3> */}
                     <p className='text-base py-3 text-[#1B1B1F]'>
                       The Genies Career Hub’s CV Match tool is all about
@@ -995,9 +995,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className='lg:w-[60%] w-full steps_content mt-16'>
-                    <h4 className='font-bold text-[#101827] text-2xl italic'>
+                    <p className='font-bold text-[#101827] text-2xl italic'>
                       Step 4
-                    </h4>
+                    </p>
                     {/* <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3> */}
                     <p className='text-base py-3 text-[#1B1B1F]'>
                       Adding education qualifications in your resume adds
@@ -1029,9 +1029,9 @@ export default function Home() {
               <div className='block sm:block md:block lg:block xl:block 2xl:block step_2 relative mt-32'>
                 <div className='flex lg:flex-row flex-col gap-10 mt-20 lg:p-1 p-5'>
                   <div className='lg:w-[100%] w-full steps_content mt-10'>
-                    <h4 className='font-bold text-[#101827] text-2xl italic'>
+                    <p className='font-bold text-[#101827] text-2xl italic'>
                       Step 5
-                    </h4>
+                    </p>
                     <p className='text-base py-3 text-[#1B1B1F] '>
                       Apart from educational and experience based backgrounds,
                       you can also add details pertaining to the previous
@@ -1129,9 +1129,9 @@ export default function Home() {
               </div>
             </div>
             <div className='faq_content lg:w-[50%] w-full lg:p-1 p-5'>
-              <h2 className='text-3xl text-center text-bold font-semibold my-5'>
+              <p className='text-3xl text-center text-bold font-semibold my-5'>
                 Frequently Asked Questions
-              </h2>
+              </p>
               {faqData?.map((item, index) => (
                 <AccordionItem
                   open={index === open}
