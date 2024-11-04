@@ -6,8 +6,7 @@ export async function GET(req, res) {
         return new Response(JSON.stringify(response.data), {
             status: response.status || 200,
             headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-store', // Add this header to prevent caching
+                'Content-Type': 'application/json'
             },
         });
     } catch (error) {
