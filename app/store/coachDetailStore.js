@@ -21,7 +21,7 @@ const useCoachesDetailStore = create(
               }
           });
           const data = response.data;
-          console.log(data);
+          console.log(data.coaches);
           set({ coaches: data.coaches });
       } catch (error) {
           console.error(error);

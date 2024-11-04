@@ -53,7 +53,7 @@ const Coach = () => {
 
   useEffect(() => {
     fetchAllCoaches(); // Fetch coaches when the component mounts
-  }, [fetchAllCoaches]);
+  }, []);
 
   return (
     <div className="bg-white  px-10">
