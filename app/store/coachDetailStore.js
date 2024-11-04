@@ -13,7 +13,7 @@ const useCoachesDetailStore = create(
 
     // Fetch all coaches data
     fetchAllCoaches: async () => {
-      set({ isLoading: true });
+      set({ isLoading: true, coaches: [] }); // Force reset of coaches array
       try {
         const response = await axios.get('/api/getAllCoaches', {
           headers: {
@@ -28,6 +28,7 @@ const useCoachesDetailStore = create(
         set({ isLoading: false });
       }
     },
+    
 
     // Filter and set a single coach by ID
     filterCoachById: (id) =>

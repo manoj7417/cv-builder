@@ -52,8 +52,19 @@ const Coach = () => {
   };
 
   useEffect(() => {
-    fetchAllCoaches(); // Fetch coaches when the component mounts
-  }, [fetchAllCoaches]);
+    const fetchData = async () => {
+      await fetchAllCoaches();
+    };
+  
+    fetchData();
+  }, []); // No dependency array, so it fetches only on mount
+
+  useEffect(() => {
+    const handleFocus = () => fetchAllCoaches();
+  
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
+  }, []);
 
   return (
     <div className="bg-white  px-10">
