@@ -266,7 +266,7 @@ const CoachDetailsPage = () => {
       success_url: `${window.location.origin}/user-dashboard`,
       cancel_url: window.location.href,
       currency: "USD",
-      amount: 1,
+      amount: singleCoach?.ratesPerHour?.charges,
     };
     try {
       const response = await axios.post("/api/bookSlot", obj, {
