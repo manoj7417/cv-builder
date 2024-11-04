@@ -55,7 +55,6 @@ const CoachDetailsPage = () => {
     singleCoach?.video?.isVerified
   );
 
-  console.log("isCvVerified::", isCvVerified);
 
   const handleApproveData = async (data) => {
     const { accessToken } = await GetTokens();
