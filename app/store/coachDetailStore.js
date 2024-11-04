@@ -14,16 +14,21 @@ const useCoachesDetailStore = create(
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
-        const response = await axios.get("/api/getAllCoaches", { headers: { 'Cache-Control': 'no-store' } });
-        const data = await response.data;
-        console.log(data)
-        set({ coaches: data.coaches });
+          const response = await axios.get("/api/getAllCoaches", {
+              headers: {
+                  'Cache-Control': 'no-store, no-cache, must-revalidate',
+                  'Pragma': 'no-cache', // HTTP 1.0 backward compatibility
+              }
+          });
+          const data = response.data;
+          console.log(data);
+          set({ coaches: data.coaches });
       } catch (error) {
-        console.error(error);
+          console.error(error);
       } finally {
-        set({ isLoading: false });
+          set({ isLoading: false });
       }
-    },
+  },
 
     // Filter and set a single coach by ID
     filterCoachById: (id) =>
