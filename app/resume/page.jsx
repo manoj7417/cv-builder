@@ -641,10 +641,10 @@ Follow the suggestions given below the score to get a higher score and better ca
         </section>
         <section>
           <div className='steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10'>
-            <h2 className='text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-justify lg:px-20 xl:px-10 2xl:px-10'>
+            <h3 className='text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-justify lg:px-20 xl:px-10 2xl:px-10'>
               CV Templates that fit your desired{" "}
               <span className='text-[#2C98CA]'>Job Role</span>
-            </h2>
+            </h3>
             <div className='left_icon absolute lg:bottom-32 top-38 lg:left-20 left-10'>
               <img src='/resume-icon.png' alt='icon1' />
             </div>
@@ -1261,9 +1261,9 @@ Follow the suggestions given below the score to get a higher score and better ca
           </div>
           <div className='inner_content flex flex-col lg:flex-row absolute top-20 md:top-40 left-1/2 transform -translate-x-1/2 max-w-7xl w-full px-4 md:px-8 gap-10'>
             <div className='lg:w-[50%] w-full relative text-center lg:text-left'>
-              <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900'>
+              <h4 className='text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900'>
                 Why do you need our CV Creator to create your Resume?
-              </h2>
+              </h4>
               <div className='image_section my-4 md:my-6'>
                 <img
                   src='/resume-icon5.png'
@@ -1323,13 +1323,17 @@ Follow the suggestions given below the score to get a higher score and better ca
           <div className='max-w-7xl mx-auto flex lg:flex-row flex-col'>
             <div className='faq_image lg:w-[50%] w-full lg:block hidden'>
               <div className='image_div w-[400px] h-[400px]'>
-                <img src='/faq_image.png' alt='faq' className='w-full h-full object-contain' />
+                <img
+                  src='/faq_image.png'
+                  alt='faq'
+                  className='w-full h-full object-contain'
+                />
               </div>
             </div>
             <div className='faq_content lg:w-[50%] w-full lg:p-1 p-5'>
-              <h2 className='text-3xl text-center text-bold font-semibold my-5'>
+              <h5 className='text-3xl text-center text-bold font-semibold my-5'>
                 Frequently Asked Questions
-              </h2>
+              </h5>
               {faqData?.map((item, index) => (
                 <AccordionItem
                   open={index === open}

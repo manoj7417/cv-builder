@@ -350,9 +350,9 @@ export default function DashboardIdea() {
             <section>
               <div className='steps_main_section max-w-7xl mx-auto relative lg:p-0 p-10 '>
                 <div className='flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10'>
-                  <h2 className='text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-20'>
+                  <p className='text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-20'>
                     One Step Ahead of
-                  </h2>
+                  </p>
                   <h2 className='text-4xl lg:text-5xl font-bold  w-full pt-1  text-[#2C98CA]'>
                     Conventional CV Checkers
                   </h2>
@@ -1235,7 +1235,11 @@ export default function DashboardIdea() {
           <div className='max-w-7xl mx-auto flex lg:flex-row flex-col'>
             <div className='faq_image lg:w-[50%] w-full lg:block hidden'>
               <div className='image_div w-[400px] h-[400px]'>
-                <img src='/faq_image.png' alt='faq' className='w-full h-full object-contain' />
+                <img
+                  src='/faq_image.png'
+                  alt='faq'
+                  className='w-full h-full object-contain'
+                />
               </div>
             </div>
             <div className='faq_content lg:w-[50%] w-full lg:p-1 p-5'>

@@ -140,9 +140,15 @@ const Page = () => {
             <div className='container mx-auto px-4'>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
                 <div className='bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative'>
+<<<<<<< HEAD
+                  <h4 className='text-xl font-bold mb-2'>
+                    Numerical Reasoning
+                  </h4>
+=======
                   <p className='text-xl font-bold mb-2'>
                     Numerical Reasoning
                   </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Discover your adeptness with Numerical Values and
                     Mathematical Calculations by testing your conceptual basics
@@ -167,7 +173,11 @@ const Page = () => {
                   <div className='absolute bottom-0 left-0 h-1 w-full bg-blue-950 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left'></div>
                 </div>
                 <div className='bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative'>
+<<<<<<< HEAD
+                  <h5 className='text-xl font-bold mb-2'>Verbal Reasoning</h5>
+=======
                   <p className='text-xl font-bold mb-2'>Verbal Reasoning</p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Check your compatibility with language comprehension and
                     communicative skills with the Verbal Personality Assessment
@@ -193,9 +203,15 @@ const Page = () => {
                 </div>
 
                 <div className='bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative'>
+<<<<<<< HEAD
+                  <h6 className='text-xl font-bold mb-2'>
+                    Diagrammatic Reasoning
+                  </h6>
+=======
                   <p className='text-xl font-bold mb-2'>
                     Diagrammatic Reasoning
                   </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Initiate your career dynamically with the Diagrammatic
                     Reasoning aptitude questions by analysing your aptitude with
@@ -224,9 +240,15 @@ const Page = () => {
               </div>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
                 <div className='relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden'>
+<<<<<<< HEAD
+                  <h6 className='text-xl font-bold mb-2'>
+                    Situational Judgement
+                  </h6>
+=======
                   <p className='text-xl font-bold mb-2'>
                     Situational Judgement
                   </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Test your ability to navigate through tough situations and
                     challenges that come up in the workplace by opting for the
@@ -334,9 +356,13 @@ const Page = () => {
                 </div>
 
                 <div className='relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden'>
+<<<<<<< HEAD
+                  <p className='text-xl font-bold mb-2'>Mechanical Reasoning</p>
+=======
                   <p className='text-xl font-bold mb-2'>
                     Mechanical Reasoning
                   </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Check your compatibility with Machine-based situations and
                     reasoning activities with the Mechanical Psychometric
