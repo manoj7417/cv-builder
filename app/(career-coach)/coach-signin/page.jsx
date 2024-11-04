@@ -121,7 +121,7 @@ export default function CoachLogin() {
           <div className='w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen'>
             <div className='w-[70%] mt-14'>
               <h1 className='text-white text-center text-2xl font-semibold'>
-                Join as a Coach and inspire the next generation of achievers!
+                Thankyou for joining as a Coach and inspire the next generation of achievers!
               </h1>
             </div>
 

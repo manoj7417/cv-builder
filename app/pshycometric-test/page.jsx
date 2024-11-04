@@ -128,9 +128,9 @@ const Page = () => {
         id='free'>
         <div className='container lg:pt-0 pt-10'>
           <div className='  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
-            <h3 className='text-[30px] md:text-[52px] sm:text-[52px] font-bold'>
+            <p className='text-[30px] md:text-[52px] sm:text-[52px] font-bold'>
               Witness the Magic of Science <br></br> inspire your Career
-            </h3>
+            </p>
             <p className='text-[#7C7C7C] font-bold'>
               Try and Test the free psychometric examination to explore the
               possibilities of an organised career.
@@ -140,9 +140,15 @@ const Page = () => {
             <div className='container mx-auto px-4'>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
                 <div className='bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative'>
+<<<<<<< HEAD
                   <h4 className='text-xl font-bold mb-2'>
                     Numerical Reasoning
                   </h4>
+=======
+                  <p className='text-xl font-bold mb-2'>
+                    Numerical Reasoning
+                  </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Discover your adeptness with Numerical Values and
                     Mathematical Calculations by testing your conceptual basics
@@ -167,7 +173,11 @@ const Page = () => {
                   <div className='absolute bottom-0 left-0 h-1 w-full bg-blue-950 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left'></div>
                 </div>
                 <div className='bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative'>
+<<<<<<< HEAD
                   <h5 className='text-xl font-bold mb-2'>Verbal Reasoning</h5>
+=======
+                  <p className='text-xl font-bold mb-2'>Verbal Reasoning</p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Check your compatibility with language comprehension and
                     communicative skills with the Verbal Personality Assessment
@@ -193,9 +203,15 @@ const Page = () => {
                 </div>
 
                 <div className='bg-white p-6 rounded-lg shadow-lg group overflow-hidden relative'>
+<<<<<<< HEAD
                   <h6 className='text-xl font-bold mb-2'>
                     Diagrammatic Reasoning
                   </h6>
+=======
+                  <p className='text-xl font-bold mb-2'>
+                    Diagrammatic Reasoning
+                  </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Initiate your career dynamically with the Diagrammatic
                     Reasoning aptitude questions by analysing your aptitude with
@@ -224,9 +240,15 @@ const Page = () => {
               </div>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
                 <div className='relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden'>
+<<<<<<< HEAD
                   <h6 className='text-xl font-bold mb-2'>
                     Situational Judgement
                   </h6>
+=======
+                  <p className='text-xl font-bold mb-2'>
+                    Situational Judgement
+                  </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Test your ability to navigate through tough situations and
                     challenges that come up in the workplace by opting for the
@@ -308,7 +330,7 @@ const Page = () => {
 
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
                 <div className='relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden'>
-                  <h2 className='text-xl font-bold mb-2'>Logical Reasoning</h2>
+                  <p className='text-xl font-bold mb-2'>Logical Reasoning</p>
                   <p className='text-gray-700 mb-4'>
                     Examine your proficiency in Logically analysing situations
                     and finding out the best solutions by attempting the Logical
@@ -334,7 +356,13 @@ const Page = () => {
                 </div>
 
                 <div className='relative bg-white p-6 rounded-lg shadow-lg group overflow-hidden'>
+<<<<<<< HEAD
                   <p className='text-xl font-bold mb-2'>Mechanical Reasoning</p>
+=======
+                  <p className='text-xl font-bold mb-2'>
+                    Mechanical Reasoning
+                  </p>
+>>>>>>> 7fce7ade9e24c5ad858b74c078df392f8b830e27
                   <p className='text-gray-700 mb-4'>
                     Check your compatibility with Machine-based situations and
                     reasoning activities with the Mechanical Psychometric
@@ -506,9 +534,9 @@ const Page = () => {
                         <div
                           key={index}
                           className={`p-6 rounded-lg shadow-md border-t-4 ${tool.bgColor} ${tool.borderColor}`}>
-                          <h3 className='text-xl font-semibold mb-2'>
+                          <p className='text-xl font-semibold mb-2'>
                             {tool.title}
-                          </h3>
+                          </p>
                           <p className='mb-4'>{tool.description}</p>
                         </div>
                       ))}
@@ -527,9 +555,9 @@ const Page = () => {
                         <div
                           key={index}
                           className={`p-6 rounded-lg shadow-md border-t-4 ${tool.bgColor} ${tool.borderColor}`}>
-                          <h3 className='text-xl font-semibold mb-2'>
+                          <p className='text-xl font-semibold mb-2'>
                             {tool.title}
-                          </h3>
+                          </p>
                           <p className='mb-4'>{tool.description}</p>
                         </div>
                       ))}

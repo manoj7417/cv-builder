@@ -111,9 +111,9 @@ export default function CoachesPage() {
     <>
       <div className="bg-gray-200">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold text-blue-950 text-center my-10">
+          <h1 className="2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold text-blue-950 text-center my-10">
             Popular instructor in Career Development
-          </h2>
+          </h1>
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {isLoading  ? (
@@ -146,7 +146,7 @@ export default function CoachesPage() {
                       />
                     </div>
                     <div className="coaching_name text-center mt-2">
-                      <h3 className="text-sm text-gray-700">{item.name}</h3>
+                      <p className="text-sm text-gray-700">{item.name}</p>
                       <p className="text-[12px] text-gray-700">
                         {item?.jobProfile?.title}
                       </p>
@@ -176,9 +176,9 @@ export default function CoachesPage() {
                 className="courses_box w-[150px] sm:w-[200px] h-[70px] sm:h-[90px] bg-gray-100 shadow-xl p-4 sm:p-5 text-center cursor-pointer"
                 onClick={() => handleCategoryClick(val?.id)}
               >
-                <h3 className="text-gray-600 text-sm sm:text-base">
+                <p className="text-gray-600 text-sm sm:text-base">
                   {val?.categoryTitle}
-                </h3>
+                </p>
                 <p className="text-xs sm:text-sm">{val?.courses} courses</p>
               </div>
             ))}
@@ -186,9 +186,9 @@ export default function CoachesPage() {
 
         {selectedCategoryDetails && (
           <div className="selected_category mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
-            <h4 className="text-center text-sm sm:text-lg font-semibold text-gray-700 mt-5 sm:mt-3">
+            <p className="text-center text-sm sm:text-lg font-semibold text-gray-700 mt-5 sm:mt-3">
               Popular Keywords:
-            </h4>
+            </p>
             <ul className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-4">
               {selectedCategoryDetails.subCategory.map((subCat, idx) => (
                 <li
