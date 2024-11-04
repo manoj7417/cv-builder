@@ -115,7 +115,7 @@ export default function UserData() {
                   className="max-w-[20vw] lg:max-w-[80px]"
                 />
                 <p className="text-center mx-auto text-base lg:text-xl">
-                  <span className="text-[#FC0000] font-semibold">
+                  <span className="text-green-500 font-semibold">
                     Please wait for a moment...
                   </span>
                   <br />
