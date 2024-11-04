@@ -80,7 +80,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className='flex lg:h-full h-auto lg:fixed lg:top-0 relative pb-5'>
+    <div className='flex lg:h-screen shadow-2xl h-screen lg:fixed lg:top-0 relative pb-5 w-full md:w-[20%] lg:w-[20%] min-w-[220px]'>
       <button
         className='md:hidden p-4 focus:outline-none'
         onClick={toggleSidebar}>

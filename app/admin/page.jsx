@@ -135,11 +135,13 @@ const AdminPage = () => {
             className='lg:col-span-8 xl:col-span-8 2xl:col-span-8 bg-white rounded-2xl p-5 drop-shadow-md'>
             <div className='flex flex-row justify-between bg-white'>
               <div className='text-lg font-bold text-[#000000]'>Coaches</div>
-              <div className='text-sm text-[#1D4ED8] font-semibold'>
+              <Link
+                href='/admin/coach'
+                className='text-sm text-[#1D4ED8] font-semibold'>
                 View all
-              </div>
+              </Link>
             </div>
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 gap-4 pt-3 bg-white '>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 pt-3 bg-white '>
               {coaches?.length > 0 ? (
                 coaches.slice(0, 10).map((coach) => {
                   // Define button styles based on approval status
