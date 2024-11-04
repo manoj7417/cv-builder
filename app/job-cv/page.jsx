@@ -25,6 +25,9 @@ import { ResumeHeader } from "../Layout/ResumeHeader";
 import Link from "next/link";
 import ServicesPopUp from "@/components/component/ServicesPopUp";
 import { Button } from "@/components/ui/button";
+import * as pdfjsLib from "pdfjs-dist";  
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.js';
 
 const options = [
   "Accountant",
