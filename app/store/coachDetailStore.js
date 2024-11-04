@@ -1,6 +1,5 @@
-// useCoachesStore.js
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
 const myMiddlewares = (f) => devtools(f, { name: "coachDetail" });
 
@@ -9,10 +8,16 @@ const useCoachesDetailStore = create(
     coaches: [],
     singleCoach: {},
     isLoading: true,
+
+    // Fetch all coaches data
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
-        const response = await fetch("/api/getAllCoaches");
+        const response = await fetch("/api/getAllCoaches", {
+          headers: {
+            "Cache-Control": "no-store", // Disable cache to fetch fresh data
+          },
+        });
         const data = await response.json();
         set({ coaches: data.coaches });
       } catch (error) {
@@ -22,7 +27,7 @@ const useCoachesDetailStore = create(
       }
     },
 
-    // Filter and set a single coach by id
+    // Filter and set a single coach by ID
     filterCoachById: (id) =>
       set((state) => {
         const coach = state.coaches.find((coach) => coach._id === id);
@@ -37,9 +42,7 @@ const useCoachesDetailStore = create(
           ...updatedFields, // Merges the existing singleCoach with new updated fields
         },
       })),
-  }),{
-    enabled:true
-  })
+  }))
 );
 
 export default useCoachesDetailStore;
