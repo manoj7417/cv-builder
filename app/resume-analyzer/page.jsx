@@ -29,13 +29,14 @@ import ServicesPopUp from "@/components/component/ServicesPopUp";
 import AccordionItem from "@/components/component/AccordionItem";
 import parse from "html-react-parser";
 import axios from "axios";
+import * as pdfjsLib from "pdfjs-dist";  
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.js';
 const faqData = [
   {
     id: 1,
     ques: "What is unique about Genies Career Hub’s CV Optimiser?",
-    ans: `
-     This CV Optimiser thoroughly analyses your resume with AI and provides you suggestions with the <a href="https://www.geniescareerhub.com/resume-analyzer" class="font-bold">ATS Resume Score</a>. This feedback contains the clarity, relevance, and content of your resume with a score and suggestions to improve the ATS of your resume. Following these insights, you can increase your score and get better and more opportunities.
-    `,
+    ans: `This CV Optimiser analyses your resume with AI. Check your <a href="https://www.geniescareerhub.com/resume-analyzer" rel="noopener noreferrer" target="_blank" className="font-bold">ATS Resume Score</a>.`
   },
   {
     id: 2,
@@ -1144,7 +1145,7 @@ export default function DashboardIdea() {
                         download the improvised resume quickly
                       </p>
                     </div>
-                    <div className='lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent hidden lg:block'></div>
+                    <div className='lg:w-[50%] w-full h-[250px] image_content flex justify-center items-center  lg:bg-transparent  lg:block'></div>
                   </div>
                 </div>
                 {/*  */}
