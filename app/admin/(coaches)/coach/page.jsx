@@ -53,9 +53,11 @@ const Coach = () => {
   };
 
   useEffect(() => {
-    fetchAllCoaches();
     getAllCoaches();
-  }, [fetchAllCoaches]);
+    
+  }, []);
+
+  console.log(coaches)
 
   const getAllCoaches = async () => {
     const response = await axios.get("/api/getAllCoaches");

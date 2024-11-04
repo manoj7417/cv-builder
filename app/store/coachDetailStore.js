@@ -8,7 +8,7 @@ const useCoachesDetailStore = create(
   myMiddlewares((set) => ({
     coaches: [],
     singleCoach: {},
-    isLoading: true,
+    isLoading: false,
 
     // Fetch all coaches data
     fetchAllCoaches: async () => {
@@ -16,7 +16,6 @@ const useCoachesDetailStore = create(
     try {
         const response = await axios.get("/api/getAllCoaches");
         const data = response.data;
-        console.log(data);
         set({ coaches: data.coaches });
     } catch (error) {
         console.error(error);
