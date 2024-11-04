@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import axios from "axios";
+import { get } from "http";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -40,8 +41,8 @@ const people = [
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
-
+  const {  isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  const [coaches, setCoaches] = useState([]);
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
@@ -52,8 +53,14 @@ const Coach = () => {
   };
 
   useEffect(() => {
-    fetchAllCoaches(); // Fetch coaches when the component mounts
-  }, []);
+    fetchAllCoaches();
+    getAllCoaches();
+  }, [fetchAllCoaches]);
+
+  const getAllCoaches = async () => {
+    const response = await axios.get("/api/getAllCoaches");
+    setCoaches(response.data.coaches);
+  }
 
   return (
     <div className="bg-white  px-10">

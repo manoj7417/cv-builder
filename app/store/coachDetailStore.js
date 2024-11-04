@@ -1,6 +1,7 @@
 import axios from "axios";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+
 const myMiddlewares = (f) => devtools(f, { name: "coachDetail" });
 
 const useCoachesDetailStore = create(
@@ -11,23 +12,18 @@ const useCoachesDetailStore = create(
 
     // Fetch all coaches data
     fetchAllCoaches: async () => {
-      set({ isLoading: true });
-      try {
-          const response = await axios.get("/api/getAllCoaches", {
-              headers: {
-                  'Cache-Control': 'no-store, no-cache, must-revalidate',
-                  'Pragma': 'no-cache', // HTTP 1.0 backward compatibility
-              }
-          });
-          const data = response.data;
-          console.log(data.coaches);
-          set({ coaches: data.coaches });
-      } catch (error) {
-          console.error(error);
-      } finally {
-          set({ isLoading: false });
-      }
-  },
+    set({ isLoading: true });
+    try {
+        const response = await axios.get("/api/getAllCoaches");
+        const data = response.data;
+        console.log(data);
+        set({ coaches: data.coaches });
+    } catch (error) {
+        console.error(error);
+    } finally {
+        set({ isLoading: false });
+    }
+},
 
     // Filter and set a single coach by ID
     filterCoachById: (id) =>
