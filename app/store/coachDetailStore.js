@@ -1,7 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-
 const myMiddlewares = (f) => devtools(f, { name: "coachDetail" });
 
 const useCoachesDetailStore = create(
