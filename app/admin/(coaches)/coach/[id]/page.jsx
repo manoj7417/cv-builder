@@ -507,18 +507,23 @@ const CoachDetailsPage = () => {
                   </div>
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className="mt-4">
-                    {profileVideo?.url &&
-                    ReactPlayer.canPlay(profileVideo?.url) ? (
+                    {profileVideo?.url && ReactPlayer.canPlay(profileVideo?.url) ? (
                       <ReactPlayer
                         url={profileVideo?.url}
                         controls
                         width="100%"
                         height="300px"
+                        config={{
+                          youtube: {
+                            playerVars: { rel: 0, showinfo: 0, origin: "https://www.geniescareerhub.com" },
+                          },
+                        }}
                       />
                     ) : (
                       <p>No video has been added yet.</p>
                     )}
                   </div>
+
                 </div>
 
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

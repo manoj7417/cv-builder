@@ -74,7 +74,7 @@ const nextConfig = {
               img-src 'self' data: blob: https://res.cloudinary.com https://static.vecteezy.com https://via.placeholder.com https://geniescareerhubbucket.lon1.digitaloceanspaces.com https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com https://uxwing.com https://upload.wikimedia.org http://localhost:3000 https://geniescareerhub.com;
               font-src 'self' data:;
               connect-src 'self' blob: https://goldfish-app-a2e3u.ondigitalocean.app http://localhost:3000 https://geniescareerhub.com https://www.google-analytics.com https://ipapi.co;
-              frame-src 'self' https://www.youtube.com;
+              frame-src 'self' https://www.youtube.com https://docs.google.com;
               worker-src 'self' blob:;
             `.trim().replace(/\s+/g, ' '),
           },          
