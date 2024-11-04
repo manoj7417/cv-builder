@@ -1,14 +1,12 @@
-import { serverInstance } from '@/lib/serverApi';
-
 export async function GET(req, res) {
     try {
-       
         const response = await serverInstance.get('/coach/all');
         
         return new Response(JSON.stringify(response.data), {
             status: response.status || 200,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-store' // Disable caching
             }
         });
     } catch (error) {
