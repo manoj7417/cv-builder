@@ -1,9 +1,10 @@
-import { serverInstance } from "@/lib/serverApi";
+export async function GET(req) {
+  const timestamp = req.nextUrl.searchParams.get('_t'); // Retrieve the timestamp
 
-export async function GET(req, res) {
+
   try {
     const response = await serverInstance.get(`/coach/all`, {
-      params: { _t: new Date().getTime() } 
+      params: { _t: timestamp },  // Pass timestamp to backend for unique cache-busting
     });
     
     return new Response(JSON.stringify(response.data), {
