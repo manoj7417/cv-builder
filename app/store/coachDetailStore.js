@@ -35,12 +35,21 @@ const useCoachesDetailStore = create(
 
     // Update singleCoach by merging existing properties with new ones
     updateSingleCoach: (updatedFields) =>
-      set((state) => ({
-        singleCoach: {
+      set((state) => {
+        const updatedCoach = {
           ...state.singleCoach,
           ...updatedFields, // Merges the existing singleCoach with new updated fields
-        },
-      })),
+        };
+
+        const updatedCoaches = state.coaches.map((coach) =>
+          coach._id === updatedCoach._id ? updatedCoach : coach
+        );
+
+        return {
+          singleCoach: updatedCoach,
+          coaches: updatedCoaches,
+        };
+      }),
   }))
 );
 
