@@ -14,7 +14,7 @@ const useCoachesDetailStore = create(
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
-        const response = await axios.get("/api/getAllCoaches");
+        const response = await axios.get(`/api/getAllCoaches?timestamp=${new Date().getTime()}`);
         const data = await response.data;
         await set({ coaches: data.coaches });
        
