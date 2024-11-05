@@ -71,7 +71,7 @@ const Coach = () => {
           "x-api-key" : "careerGenie_Key"
         }
       });
-      console.log(response)
+      console.log(response.data)
 
     } catch (error) {
       console.error(error);
