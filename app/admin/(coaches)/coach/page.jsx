@@ -17,18 +17,30 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
+import useSWR from "swr";
 
 
+const fetcher = (url) =>
+  fetch(url, {
+    headers: { "Cache-Control": "no-store" },
+  }).then((res) => res.json());
 
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
+  const { data, error, isLoading } = useSWR("/api/getAllCoaches", fetcher, {
+    refreshInterval: 30000,       // Re-fetch data every 30 seconds
+    revalidateOnFocus: true,       // Re-fetch on window focus
+    revalidateIfStale: true,       // Re-fetch if data is stale
+  });
+
+  const coaches = data?.coaches || []; // Handle case where data may still be undefined
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
-  const [coaches, setAllCoaches] = useState([]);
-  const [isLoading,setIsLoading] = useState(true);
+  // const [coaches, setAllCoaches] = useState([]);
+  // const [isLoading,setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
