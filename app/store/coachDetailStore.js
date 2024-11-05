@@ -1,3 +1,5 @@
+/** @format */
+
 import axios from "axios";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -12,17 +14,17 @@ const useCoachesDetailStore = create(
 
     // Fetch all coaches data
     fetchAllCoaches: async () => {
-    set({ isLoading: true });
-    try {
+      set({ isLoading: true });
+      try {
         const response = await axios.get("/api/getAllCoaches");
         const data = response.data;
         set({ coaches: data.coaches });
-    } catch (error) {
+      } catch (error) {
         console.error(error);
-    } finally {
+      } finally {
         set({ isLoading: false });
-    }
-},
+      }
+    },
 
     // Filter and set a single coach by ID
     filterCoachById: (id) =>
