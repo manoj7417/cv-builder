@@ -28,6 +28,7 @@ const fetcher = (url) =>
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
+  const [data, setData] = useState([])
   // const { data, error, isLoading } = useSWR(
   //   `/api/getAllCoaches?_t=${new Date().getTime()}`,  // Add timestamp for each request
   //   fetcher,
@@ -38,23 +39,23 @@ const Coach = () => {
   //     dedupingInterval: 0,             // Force SWR to re-fetch on every call
   //   }
   // );
-  
+
 
   // const coaches = data?.coaches || [];
-   // Handle case where data may still be undefined
+  // Handle case where data may still be undefined
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
   const [coaches, setAllCoaches] = useState([]);
-  const [isLoading,setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
 
   const fetchAllCoaches = async () => {
     try {
-      const response = await axios.get(`/api/getAllCoaches`,{ headers: { "Cache-Control": "no-store" },});
+      const response = await axios.get(`/api/getAllCoaches`, { headers: { "Cache-Control": "no-store" }, });
       const data = await response.data;
       setAllCoaches(data.coaches);
       setIsLoading(false);
@@ -63,9 +64,27 @@ const Coach = () => {
     }
   };
 
+  const getAllCoaches = async () => {
+    try {
+      const response = await axios.get('https://goldfish-app-a2e3u.ondigitalocean.app/api/coach/all',{
+        headers : {
+          "x-api-key" : "careerGenie_Key"
+        }
+      });
+      console.log(response)
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     fetchAllCoaches();
-  },[]);
+  }, []);
+
+  useEffect(() => {
+    getAllCoaches();
+  }, [])
 
 
 
@@ -244,7 +263,7 @@ const Coach = () => {
                     <>
                       {coaches.length > 0 &&
                         coaches
-                            .filter(
+                          .filter(
                             (coach) =>
                               coach.isApproved &&
                               coach.approvalStatus === "approved"
