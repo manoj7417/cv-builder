@@ -31,10 +31,7 @@ const CoachDetailsPage = () => {
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("details");
-  const {
-    updateSingleCoach,
-    fetchAllCoaches
-  } = useCoachesDetailStore();
+
 
 
   const [singleCoach, setSingleCoach] = useState(null);

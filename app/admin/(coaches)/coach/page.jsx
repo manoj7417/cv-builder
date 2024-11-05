@@ -46,25 +46,23 @@ const Coach = () => {
     }
   };
 
-  const getAllCoaches = async () => {
-    try {
-      const response = await axios.get('/api/getAllCoaches');
-      console.log(response)
-      setAllCoaches(response.data.coaches);
-      setIsLoading(false);
+  // const getAllCoaches = async () => {
+  //   try {
+  //     const response = await axios.get('/api/getAllCoaches');
+  //     console.log(response)
+  //     setAllCoaches(response.data.coaches);
+  //     setIsLoading(false);
 
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   useEffect(() => {
     fetchAllCoaches();
   }, []);
 
-  useEffect(() => {
-    getAllCoaches();
-  }, [])
+
 
 
 
