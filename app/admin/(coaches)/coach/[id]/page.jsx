@@ -77,8 +77,7 @@ const CoachDetailsPage = () => {
         }
       );
       if (response.status === 200) {
-        updateSingleCoach(response?.data?.data);
-        fetchAllCoaches();
+      
         router.push("/admin/coach");
         toast.success("Update Coach Details submitted successfully");
       }
