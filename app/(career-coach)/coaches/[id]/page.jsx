@@ -10,7 +10,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -69,8 +68,6 @@ const CoachDetailsPage = () => {
     reset,
   } = useForm();
 
-  const { updateSingleCoach } =
-    useCoachesDetailStore();
   const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
   const router = useRouter();
@@ -308,7 +305,6 @@ const CoachDetailsPage = () => {
       const response = await axios.get(`/api/getCoachDetails/${id}`);
       if (response.status === 200) {
         setCoachBookings(response.data.coach.bookings)
-        updateSingleCoach(response.data.coach);
       }
     } catch (error) {
       console.error(error);

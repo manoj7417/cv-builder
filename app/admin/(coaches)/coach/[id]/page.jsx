@@ -4,7 +4,6 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { useParams, useRouter } from "next/navigation";
 import { FaCheckCircle, FaEye, FaTimesCircle } from "react-icons/fa";
 import {
@@ -33,9 +32,6 @@ const CoachDetailsPage = () => {
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("details");
-  const {
-    updateSingleCoach,
-  } = useCoachesDetailStore();
 
   const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
@@ -79,9 +75,8 @@ const CoachDetailsPage = () => {
           },
         }
       );
-      console.log(response)
       if (response.status === 200) {
-        updateSingleCoach(response?.data);
+       
         router.push("/admin/coach");
         toast.success("Update Coach Details submitted successfully");
       }
