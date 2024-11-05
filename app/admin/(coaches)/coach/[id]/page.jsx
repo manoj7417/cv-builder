@@ -22,6 +22,7 @@ import { GetTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import ReactPlayer from "react-player";
+import { FiTerminal } from "react-icons/fi";
 
 const CoachDetailsPage = () => {
   const {
@@ -33,13 +34,10 @@ const CoachDetailsPage = () => {
 
   const [activeTab, setActiveTab] = useState("details");
   const {
-    singleCoach,
-    fetchAllCoaches,
-    filterCoachById,
-    isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
 
+  const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -109,40 +107,49 @@ const CoachDetailsPage = () => {
   };
 
   useEffect(() => {
-    fetchAllCoaches(); // Initial fetch
-    const intervalId = setInterval(fetchAllCoaches, 5000); // Refetch every 5 seconds
-  
-    return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, [fetchAllCoaches]);
-  
+    fetchCoachDetails(); // Fetch coach details on component mount
+  }, []);
 
-  useEffect(() => {
-    if (id) {
-      filterCoachById(id);
+  const fetchCoachDetails = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = response.data;
+      console.log(data.coaches);
+      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      if (coach) {
+        setSingleCoach(coach); // Set the single coach data if found
+      } else {
+        toast.error("Coach not found");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error fetching coach details");
     }
-  }, [id, filterCoachById]);
+  };
 
+
+  
   const {
-    name,
-    email,
-    phone,
-    bio,
-    coachingDescription,
-    profileVideo,
-    profileImage,
-    dateofBirth,
-    experience,
-    address,
-    city,
-    country,
-    zip,
-    bankDetails,
-    ratesPerHour,
-    cv,
-    signedAggrement,
-    typeOfCoaching,
-    skills,
-  } = singleCoach;
+    name = "",
+    email = "",
+    phone = "",
+    bio = "",
+    coachingDescription = "",
+    profileVideo = {},
+    profileImage = "/path/to/default-avatar.png", // Default avatar if no profile image
+    dateofBirth = "",
+    experience = "",
+    address = "",
+    city = "",
+    country = "",
+    zip = "",
+    bankDetails = {},
+    ratesPerHour = {},
+    cv = {},
+    signedAggrement = {},
+    typeOfCoaching = "",
+    skills = []
+  } = singleCoach || {};
 
   return (
     <>
