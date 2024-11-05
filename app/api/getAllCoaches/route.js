@@ -7,11 +7,8 @@ export async function GET(req, res) {
       return new Response(JSON.stringify(response.data), {
         status: response.status || 200,
         headers: {
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0',
-        },
+          'Content-Type': 'application/json'
+        }
       });
     } catch (error) {
       const errorMessage = error.response ? error.response.data : { error: "An error occurred" };

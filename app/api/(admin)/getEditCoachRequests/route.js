@@ -9,8 +9,7 @@ export async function GET(req, res) {
             }
         });
         return new Response(JSON.stringify(response.data), {
-            status: response.status || 200,
-            headers: { 'Content-Type': 'application/json' }
+            status: response.status,
         });
     } catch (error) {
         const errorMessage = error.response ? error.response.data : { error: "Error getting edit coach requests" };
