@@ -2,8 +2,9 @@ import { serverInstance } from "@/lib/serverApi";
 
 export async function GET(req, res) {
   try {
-    const response = await serverInstance.get('/coach/all');
-    console.log(response.data.coaches[15].approvalStatus);
+    const response = await serverInstance.get(`/coach/all`, {
+      params: { _t: new Date().getTime() } 
+    });
     
     return new Response(JSON.stringify(response.data), {
       status: response.status || 200,
