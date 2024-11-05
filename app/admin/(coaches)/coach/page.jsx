@@ -18,35 +18,23 @@ import {
   FaUser,
 } from "react-icons/fa";
 import useSWR from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 
-const fetcher = (url) =>
-  fetch(url, {
-    headers: { "Cache-Control": "no-store" },
-  }).then((res) => res.json());
 
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  const { data, error, isLoading } = useSWR(
-    `/api/getAllCoaches?_t=${new Date().getTime()}`,  // Add timestamp for each request
-    fetcher,
-    {
-      refreshInterval: 30000,         // Fetch every 30 seconds
-      revalidateOnFocus: true,         // Fetch when window regains focus
-      revalidateIfStale: true,         // Refetch if data is stale
-      dedupingInterval: 0,             // Force SWR to re-fetch on every call
-    }
-  );
-  
-
-  const coaches = data?.coaches || []; // Handle case where data may still be undefined
+  const { data, error } = useSWR('/api/getAllCoaches', fetcher)
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
   // const [coaches, setAllCoaches] = useState([]);
-  // const [isLoading,setIsLoading] = useState(true);
+  const [isLoading,setIsLoading] = useState(false);
+
+  const coaches = data?.coaches || []; // Handle case where data may still be undefined
+
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };

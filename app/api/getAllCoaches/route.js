@@ -1,12 +1,15 @@
-export async function GET(req) {
-  const timestamp = req.nextUrl.searchParams.get('_t'); // Retrieve the timestamp
+import { serverInstance } from '@/lib/serverApi';
 
-
+export async function GET() {
   try {
     const response = await serverInstance.get(`/coach/all`, {
-      params: { _t: timestamp },  // Pass timestamp to backend for unique cache-busting
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
     });
-    
+
     return new Response(JSON.stringify(response.data), {
       status: response.status || 200,
       headers: {
@@ -14,10 +17,11 @@ export async function GET(req) {
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0',
-        'Surrogate-Control': 'no-store'
+        'Surrogate-Control': 'no-store',
       },
     });
   } catch (error) {
+    console.error("API error:", error);
     const errorMessage = error.response ? error.response.data : { error: "An error occurred" };
     const statusCode = error.response ? error.response.status : 500;
     
@@ -28,7 +32,7 @@ export async function GET(req) {
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0',
-        'Surrogate-Control': 'no-store'
+        'Surrogate-Control': 'no-store',
       },
     });
   }
