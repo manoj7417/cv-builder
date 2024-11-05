@@ -79,8 +79,9 @@ const CoachDetailsPage = () => {
           },
         }
       );
+      console.log(response)
       if (response.status === 200) {
-        updateSingleCoach(response?.data?.data);
+        updateSingleCoach(response?.data);
         router.push("/admin/coach");
         toast.success("Update Coach Details submitted successfully");
       }
