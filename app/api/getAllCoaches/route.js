@@ -1,8 +1,11 @@
 
 import { serverInstance } from '@/lib/serverApi';
+import { cookies } from 'next/headers';
 
-export async function GET(req) {
+
+export async function GET(req,res) {
   try {
+    cookies();
     const response = await serverInstance.get(`/coach/all`);
     return new Response(JSON.stringify(response.data), {
       status: response.status || 200,
