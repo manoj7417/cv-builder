@@ -1,19 +1,31 @@
 /** @format */
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GetTokens } from "../actions";
 import axios from "axios";
 import Image from "next/image";
 
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
+
 import { useUserStore } from "@/app/store/UserStore";
 import Link from "next/link";
 const AdminPage = () => {
-  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+
   const { userdata } = useUserStore((state) => state.userState);
+  const [coaches, setAllCoaches] = useState([]);
+
   useEffect(() => {
-    fetchAllCoaches(); // Fetch coaches when the component mounts
-  }, [fetchAllCoaches]);
+    fetchAllCoaches();
+  },[]);
+
+  const fetchAllCoaches = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = await response.data;
+      setAllCoaches(data.coaches);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>

@@ -1,3 +1,4 @@
+
 import { serverInstance } from '@/lib/serverApi';
 
 export async function GET(req) {
@@ -21,4 +22,4 @@ export async function GET(req) {
       },
     });
   }
-}
+  

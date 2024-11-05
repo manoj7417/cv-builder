@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CoachFilter from "./CoachFilter";
 import { useRouter } from "next/navigation";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
+
 import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
+import axios from "axios";
 
 const categories = [
   {
@@ -88,7 +89,9 @@ export default function CoachesPage() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id);
   const router = useRouter();
 
-  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+
+  const [coaches, setAllCoaches] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
 
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -105,7 +108,18 @@ export default function CoachesPage() {
 
   useEffect(() => {
     fetchAllCoaches();
-  }, []);
+  },[]);
+
+  const fetchAllCoaches = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = await response.data;
+      setAllCoaches(data.coaches);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>

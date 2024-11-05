@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
+
 import CoachTableSkeleton from "@/components/component/AdminDashboard/CoachTableSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,45 +17,27 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
-import useSWR from "swr";
 
 
-const fetcher = (url) =>
-  fetch(url, {
-    headers: { "Cache-Control": "no-store" },
-  }).then((res) => res.json());
 
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
   const [data, setData] = useState([])
-  // const { data, error, isLoading } = useSWR(
-  //   `/api/getAllCoaches?_t=${new Date().getTime()}`,  // Add timestamp for each request
-  //   fetcher,
-  //   {
-  //     refreshInterval: 30000,         // Fetch every 30 seconds
-  //     revalidateOnFocus: true,         // Fetch when window regains focus
-  //     revalidateIfStale: true,         // Refetch if data is stale
-  //     dedupingInterval: 0,             // Force SWR to re-fetch on every call
-  //   }
-  // );
 
-
-  // const coaches = data?.coaches || [];
-  // Handle case where data may still be undefined
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
   const [coaches, setAllCoaches] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading,setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
 
   const fetchAllCoaches = async () => {
     try {
-      const response = await axios.get(`/api/getAllCoaches`, { headers: { "Cache-Control": "no-store" }, });
+      const response = await axios.get(`/api/getAllCoaches`);
       const data = await response.data;
       setAllCoaches(data.coaches);
       setIsLoading(false);
