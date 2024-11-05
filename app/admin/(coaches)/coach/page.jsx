@@ -23,7 +23,6 @@ import {
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  // const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
 
   const handleTabChange = (value) => {
     setActiveTab(value);
@@ -34,17 +33,13 @@ const Coach = () => {
     router.push(`/admin/coach/${id}`);
   };
 
-  // useEffect(() => {
-  //  fetchAllCoaches();
-  // }, [fetchAllCoaches]); // No dependency array, so it fetches only on mount
-
   useEffect(() => {
     fetchAllCoaches();
   },[]);
 
   const fetchAllCoaches = async () => {
     try {
-      const response = await axios.get(`/api/getAllCoaches`);
+      const response = await axios.get(`/api/getAllCoaches`,{ headers: { "Cache-Control": "no-store" },});
       const data = await response.data;
       setAllCoaches(data.coaches);
       setIsLoading(false);
