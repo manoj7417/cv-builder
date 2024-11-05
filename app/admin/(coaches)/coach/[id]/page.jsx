@@ -114,7 +114,6 @@ const CoachDetailsPage = () => {
     try {
       const response = await axios.get(`/api/getAllCoaches`);
       const data = response.data;
-      console.log(data.coaches);
       const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
       if (coach) {
         setSingleCoach(coach); // Set the single coach data if found

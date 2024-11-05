@@ -69,9 +69,9 @@ const CoachDetailsPage = () => {
     reset,
   } = useForm();
 
-  const { singleCoach, filterCoachById, updateSingleCoach } =
+  const { updateSingleCoach } =
     useCoachesDetailStore();
-
+  const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("about");
@@ -389,6 +389,26 @@ const CoachDetailsPage = () => {
   useEffect(() => {
     handleFetchCoachProgramById(id);
   }, [id]);
+
+  useEffect(() => {
+    fetchCoachDetails(); // Fetch coach details on component mount
+  }, []);
+
+  const fetchCoachDetails = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = response.data;
+      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      if (coach) {
+        setSingleCoach(coach); // Set the single coach data if found
+      } else {
+        toast.error("Coach not found");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error fetching coach details");
+    }
+  };
 
   return (
     <>

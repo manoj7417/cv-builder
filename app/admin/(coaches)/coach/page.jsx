@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
+
 import CoachTableSkeleton from "@/components/component/AdminDashboard/CoachTableSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,24 +17,18 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
-import useSWR from "swr";
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 
 
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  const { data, error } = useSWR('/api/getAllCoaches', fetcher)
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
-  // const [coaches, setAllCoaches] = useState([]);
-  const [isLoading,setIsLoading] = useState(false);
-
-  const coaches = data?.coaches || []; // Handle case where data may still be undefined
-
+  const [coaches, setAllCoaches] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
@@ -45,7 +39,7 @@ const Coach = () => {
 
   const fetchAllCoaches = async () => {
     try {
-      const response = await axios.get(`/api/getAllCoaches`,{ headers: { "Cache-Control": "no-store" },});
+      const response = await axios.get(`/api/getAllCoaches`);
       const data = await response.data;
       setAllCoaches(data.coaches);
       setIsLoading(false);

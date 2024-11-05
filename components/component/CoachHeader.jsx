@@ -1,35 +1,33 @@
 /** @format */
 
 "use client";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 
 export function CoachHeader({ id }) {
-  const {
-    singleCoach,
-    fetchAllCoaches,
-    filterCoachById,
-    isLoading,
-    updateSingleCoach,
-  } = useCoachesDetailStore();
+  const [singleCoach, setSingleCoach] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchAllCoaches();
-    };
+    fetchCoachDetails(); // Fetch coach details on component mount
+  }, []);
 
-    fetchData();
-  }, [fetchAllCoaches]);
-
-  useEffect(() => {
-    if (id) {
-      // Debugging log
-      filterCoachById(id);
+  const fetchCoachDetails = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = response.data;
+      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      if (coach) {
+        setSingleCoach(coach); // Set the single coach data if found
+      } else {
+        toast.error("Coach not found");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error fetching coach details");
     }
-  }, [id, filterCoachById]);
+  };
 
   return (
     <>
