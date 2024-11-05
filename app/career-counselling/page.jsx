@@ -283,7 +283,7 @@ export default function Page() {
     const data = {
       email: userState?.userdata?.email,
       plan,
-      success_url: "https://geniescareerhub.com/paymentSuccess",
+      success_url: "https://geniescareerhub.com/paymentSuccess?redirect=career-counselling",
       cancel_url: window.location.href,
       duration: selectedPlan,
       currency: geoinfo?.currency || "USD",

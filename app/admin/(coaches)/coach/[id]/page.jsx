@@ -32,6 +32,11 @@ const CoachDetailsPage = () => {
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("details");
+  const {
+    updateSingleCoach,
+    fetchAllCoaches
+  } = useCoachesDetailStore();
+
 
   const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
@@ -76,7 +81,8 @@ const CoachDetailsPage = () => {
         }
       );
       if (response.status === 200) {
-       
+        updateSingleCoach(response?.data?.data);
+        fetchAllCoaches();
         router.push("/admin/coach");
         toast.success("Update Coach Details submitted successfully");
       }
@@ -102,10 +108,6 @@ const CoachDetailsPage = () => {
     setActiveTab(value);
   };
 
-  useEffect(() => {
-    fetchCoachDetails(); // Fetch coach details on component mount
-  }, []);
-
   const fetchCoachDetails = async () => {
     try {
       const response = await axios.get(`/api/getAllCoaches`);
@@ -122,8 +124,10 @@ const CoachDetailsPage = () => {
     }
   };
 
+  useEffect(() => {
+    fetchCoachDetails();
+  }, []);
 
-  
   const {
     name = "",
     email = "",
@@ -131,7 +135,7 @@ const CoachDetailsPage = () => {
     bio = "",
     coachingDescription = "",
     profileVideo = {},
-    profileImage = "/path/to/default-avatar.png", // Default avatar if no profile image
+    profileImage = "/path/to/default-avatar.png", 
     dateofBirth = "",
     experience = "",
     address = "",
@@ -366,17 +370,15 @@ const CoachDetailsPage = () => {
                                 className='hidden'
                               />
                               <div
-                                className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                  singleCoach?.isApproved || isCvVerified
-                                    ? "bg-green-600"
-                                    : ""
-                                }`}>
+                                className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${singleCoach?.isApproved || isCvVerified
+                                  ? "bg-green-600"
+                                  : ""
+                                  }`}>
                                 <div
-                                  className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                    singleCoach?.isApproved || isCvVerified
-                                      ? "translate-x-full"
-                                      : ""
-                                  }`}
+                                  className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${singleCoach?.isApproved || isCvVerified
+                                    ? "translate-x-full"
+                                    : ""
+                                    }`}
                                 />
                               </div>
                             </label>
@@ -410,7 +412,7 @@ const CoachDetailsPage = () => {
                           <p className='text-base font-medium text-gray-700'>
                             <div className='flex items-center space-x-2'>
                               {singleCoach?.isApproved ||
-                              isAgreementVerified ? (
+                                isAgreementVerified ? (
                                 <span className='text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100'>
                                   Approved
                                 </span>
@@ -426,19 +428,17 @@ const CoachDetailsPage = () => {
                                   className='hidden'
                                 />
                                 <div
-                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    singleCoach?.isApproved ||
+                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${singleCoach?.isApproved ||
                                     isAgreementVerified
-                                      ? "bg-green-600"
-                                      : ""
-                                  }`}>
+                                    ? "bg-green-600"
+                                    : ""
+                                    }`}>
                                   <div
-                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      singleCoach?.isApproved ||
+                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${singleCoach?.isApproved ||
                                       isAgreementVerified
-                                        ? "translate-x-full"
-                                        : ""
-                                    }`}
+                                      ? "translate-x-full"
+                                      : ""
+                                      }`}
                                   />
                                 </div>
                               </label>
@@ -478,17 +478,15 @@ const CoachDetailsPage = () => {
                                   className='hidden'
                                 />
                                 <div
-                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    singleCoach?.isApproved || isVideoVerified
-                                      ? "bg-green-600"
-                                      : ""
-                                  }`}>
+                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${singleCoach?.isApproved || isVideoVerified
+                                    ? "bg-green-600"
+                                    : ""
+                                    }`}>
                                   <div
-                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      singleCoach?.isApproved || isVideoVerified
-                                        ? "translate-x-full"
-                                        : ""
-                                    }`}
+                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${singleCoach?.isApproved || isVideoVerified
+                                      ? "translate-x-full"
+                                      : ""
+                                      }`}
                                   />
                                 </div>
                               </label>
@@ -501,7 +499,7 @@ const CoachDetailsPage = () => {
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className='mt-4'>
                     {profileVideo?.url &&
-                    ReactPlayer.canPlay(profileVideo?.url) ? (
+                      ReactPlayer.canPlay(profileVideo?.url) ? (
                       <ReactPlayer
                         url={profileVideo?.url}
                         controls

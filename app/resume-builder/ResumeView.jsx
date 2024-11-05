@@ -388,7 +388,7 @@ const ResumeView = () => {
     }
     const data = {
       email: userState?.userdata?.email,
-      success_url: "https://geniescareerhub.com/paymentSuccess",
+      success_url: "https://geniescareerhub.com/paymentSuccess?redirect=resume",
       cancel_url: window.location.href,
       duration: selectedPlan,
       currency: geoinfo?.currency || "USD",

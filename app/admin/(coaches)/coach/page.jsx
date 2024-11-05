@@ -23,6 +23,8 @@ import {
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
+  const [data, setData] = useState([])
+
 
   const handleTabChange = (value) => {
     setActiveTab(value);
@@ -32,10 +34,6 @@ const Coach = () => {
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
-
-  useEffect(() => {
-    fetchAllCoaches();
-  },[]);
 
   const fetchAllCoaches = async () => {
     try {
@@ -47,6 +45,30 @@ const Coach = () => {
       console.error(error);
     }
   };
+
+  const getAllCoaches = async () => {
+    try {
+      const response = await axios.get('https://goldfish-app-a2e3u.ondigitalocean.app/api/coach/all',{
+        headers : {
+          "x-api-key" : "careerGenie_Key"
+        }
+      });
+      console.log(response)
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchAllCoaches();
+  }, []);
+
+  useEffect(() => {
+    getAllCoaches();
+  }, [])
+
+
 
   return (
     <div className="bg-white  px-10">
@@ -223,7 +245,7 @@ const Coach = () => {
                     <>
                       {coaches.length > 0 &&
                         coaches
-                            .filter(
+                          .filter(
                             (coach) =>
                               coach.isApproved &&
                               coach.approvalStatus === "approved"
