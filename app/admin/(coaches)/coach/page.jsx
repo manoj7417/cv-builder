@@ -52,8 +52,8 @@ const Coach = () => {
   };
 
   useEffect(() => {
-    fetchAllCoaches(); // Fetch coaches when the component mounts
-  }, [fetchAllCoaches]);
+   fetchAllCoaches();
+  }, [fetchAllCoaches]); // No dependency array, so it fetches only on mount
 
   return (
     <div className="bg-white  px-10">
