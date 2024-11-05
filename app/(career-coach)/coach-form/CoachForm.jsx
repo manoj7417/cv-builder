@@ -44,6 +44,7 @@ import Image from "next/image";
 import dayjs from "dayjs";
 import { FcCancel } from "react-icons/fc";
 import { CiCircleRemove } from "react-icons/ci";
+import Link from "next/link";
 const CoachForm = () => {
   const steps = [
     {
@@ -435,11 +436,11 @@ const CoachForm = () => {
                     Congratulations! Your form has been approved. You can now
                     access the coach dashboard.
                   </p>
-                  <a href="/coach-dashboard">
+                  <Link href="/coach-dashboard">
                     <button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-900 transition duration-200 mt-5">
                       Go to Dashboard
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}

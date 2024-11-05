@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,6 +22,7 @@ import { GetTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import ReactPlayer from "react-player";
+import { FiTerminal } from "react-icons/fi";
 
 const CoachDetailsPage = () => {
   const {
@@ -31,13 +34,10 @@ const CoachDetailsPage = () => {
 
   const [activeTab, setActiveTab] = useState("details");
   const {
-    singleCoach,
-    fetchAllCoaches,
-    filterCoachById,
-    isLoading,
     updateSingleCoach,
   } = useCoachesDetailStore();
 
+  const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -52,6 +52,7 @@ const CoachDetailsPage = () => {
     "isVideoVerified",
     singleCoach?.video?.isVerified
   );
+
 
   const handleApproveData = async (data) => {
     const { accessToken } = await GetTokens();
@@ -84,7 +85,6 @@ const CoachDetailsPage = () => {
         toast.success("Update Coach Details submitted successfully");
       }
     } catch (error) {
-      
       toast.error("Error in submitting the detail");
     }
   };
@@ -107,63 +107,70 @@ const CoachDetailsPage = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchAllCoaches();
-    };
+    fetchCoachDetails(); // Fetch coach details on component mount
+  }, []);
 
-    fetchData();
-  }, [fetchAllCoaches]);
-
-  useEffect(() => {
-    if (id) {
-      filterCoachById(id);
+  const fetchCoachDetails = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = response.data;
+      console.log(data.coaches);
+      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      if (coach) {
+        setSingleCoach(coach); // Set the single coach data if found
+      } else {
+        toast.error("Coach not found");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error fetching coach details");
     }
-  }, [id, filterCoachById]);
+  };
 
+
+  
   const {
-    name,
-    email,
-    phone,
-    bio,
-    coachingDescription,
-    profileVideo,
-    profileImage,
-    dateofBirth,
-    experience,
-    address,
-    city,
-    country,
-    zip,
-    bankDetails,
-    ratesPerHour,
-    cv,
-    signedAggrement,
-    typeOfCoaching,
-    skills,
-  } = singleCoach;
+    name = "",
+    email = "",
+    phone = "",
+    bio = "",
+    coachingDescription = "",
+    profileVideo = {},
+    profileImage = "/path/to/default-avatar.png", // Default avatar if no profile image
+    dateofBirth = "",
+    experience = "",
+    address = "",
+    city = "",
+    country = "",
+    zip = "",
+    bankDetails = {},
+    ratesPerHour = {},
+    cv = {},
+    signedAggrement = {},
+    typeOfCoaching = "",
+    skills = []
+  } = singleCoach || {};
 
   return (
     <>
-      <div className="w-full h-auto mt-10 bg-white m-10 p-10">
+      <div className='h-full bg-white m-4 p-5'>
         <form
           onSubmit={handleSubmit(handleApproveData)}
-          className="flex flex-col"
-        >
-          <div className="main_heading_section flex justify-between">
-            <h1 className="text-xl text-black font-bold">{name}</h1>
-            <div className="approve_button flex gap-10">
+          className='flex flex-col'>
+          <div className='main_heading_section flex justify-between'>
+            <h1 className='text-xl text-black font-bold'>{name}</h1>
+            <div className='approve_button flex gap-10'>
               {singleCoach?.isApproved ? (
-                <Button className="bg-blue-700 text-white px-10 py-2 rounded-md">
+                <Button className='bg-blue-700 text-white px-10 py-2 rounded-md'>
                   Update Status
                 </Button>
               ) : (
                 <Button
-                  className="bg-blue-700 text-white px-10 py-2 rounded-md"
-                  type="submit"
+                  className='bg-blue-700 text-white px-10 py-2 rounded-md'
+                  type='submit'
                   disabled={
                     !isCvVerified || !isAgreementVerified || isSubmitting
-                  }
-                >
+                  }>
                   Approve
                 </Button>
               )}
@@ -172,121 +179,117 @@ const CoachDetailsPage = () => {
           <Tabs
             value={activeTab}
             onValueChange={handleTabChange}
-            defaultValue="details"
-            className="w-full h-screen flex flex-col"
-          >
-            <TabsList className="flex justify-start">
+            defaultValue='details'
+            className='w-full h-screen flex flex-col'>
+            <TabsList className='flex justify-start'>
               <TabsTrigger
-                value="details"
-                className="px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]"
-              >
+                value='details'
+                className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
                 Details
               </TabsTrigger>
               <TabsTrigger
-                value="bankDetails"
-                className="px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]"
-              >
+                value='bankDetails'
+                className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
                 Bank Details
               </TabsTrigger>
               <TabsTrigger
-                value="documents"
-                className="px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]"
-              >
+                value='documents'
+                className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
                 Documents
               </TabsTrigger>
             </TabsList>
-            <div className="border-b-2 border-gray-300 my-3"></div>
-            <TabsContent value="details" className="flex-grow p-6">
-              <h2 className="text-xl font-bold">Personal Information</h2>
-              <div className="personal_details_section flex w-full gap-10 h-full mt-10">
-                <div className="lg:w-[20%] w-full profile_image">
-                  <div className="image_section w-[200px] h-[200px] text-center flex justify-center">
+            <div className='border-b-2 border-gray-300 my-3'></div>
+            <TabsContent value='details' className='flex-grow p-6'>
+              <h2 className='text-xl font-bold'>Personal Information</h2>
+              <div className='personal_details_section flex w-full gap-10 h-full mt-10'>
+                <div className='lg:w-[20%] w-full profile_image'>
+                  <div className='image_section w-[200px] h-[200px] text-center flex justify-center'>
                     <img
                       src={profileImage}
-                      alt="profileImage"
-                      className="w-full h-full rounded-full object-cover"
+                      alt='profileImage'
+                      className='w-full h-full rounded-full object-cover'
                     />
                   </div>
                 </div>
-                <div className="lg:w-[80%] w-full personal_details">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className='lg:w-[80%] w-full personal_details'>
+                  <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Email
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {email}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Phone
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {phone}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Experience
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {experience} years
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Type of Coaching
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {typeOfCoaching}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Skills
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {skills}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className='block text-sm font-medium text-gray-700'>
                         Date of Birth
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {new Date(dateofBirth).toLocaleDateString()}
                       </div>
                     </div>
 
-                    <div className="col-span-3">
-                      <label className="block text-sm font-medium text-gray-700">
+                    <div className='col-span-3'>
+                      <label className='block text-sm font-medium text-gray-700'>
                         Bio
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {bio}
                       </div>
                     </div>
 
-                    <div className="col-span-3">
-                      <label className="block text-sm font-medium text-gray-700">
+                    <div className='col-span-3'>
+                      <label className='block text-sm font-medium text-gray-700'>
                         Coaching Description
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {coachingDescription}
                       </div>
                     </div>
 
-                    <div className="col-span-3">
-                      <label className="block text-sm font-medium text-gray-700">
+                    <div className='col-span-3'>
+                      <label className='block text-sm font-medium text-gray-700'>
                         Address
                       </label>
-                      <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                      <div className='mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                         {address}, {city}, {country} - {zip}
                       </div>
                     </div>
@@ -294,86 +297,85 @@ const CoachDetailsPage = () => {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="bankDetails" className="flex-grow p-6">
-              <div className="mt-6">
-                <h2 className="text-lg font-bold mb-4">Bank Details</h2>
+            <TabsContent value='bankDetails' className='flex-grow p-6'>
+              <div className='mt-6'>
+                <h2 className='text-lg font-bold mb-4'>Bank Details</h2>
 
-                <div className="mb-4">
-                  <p className="text-sm font-medium text-gray-700">Bank Name</p>
-                  <div className="block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                <div className='mb-4'>
+                  <p className='text-sm font-medium text-gray-700'>Bank Name</p>
+                  <div className='block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                     {bankDetails?.bankName || "N/A"}
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <p className="text-sm font-medium text-gray-700">
+                <div className='mb-4'>
+                  <p className='text-sm font-medium text-gray-700'>
                     Account Number
                   </p>
-                  <div className="block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                  <div className='block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                     {bankDetails?.accountNumber}
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <p className="text-sm font-medium text-gray-700">IFSC Code</p>
-                  <div className="block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                <div className='mb-4'>
+                  <p className='text-sm font-medium text-gray-700'>IFSC Code</p>
+                  <div className='block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                     {bankDetails?.code?.ifscCode || "N/A"}
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <p className="text-sm font-medium text-gray-700">
+                <div className='mb-4'>
+                  <p className='text-sm font-medium text-gray-700'>
                     Rates Per Hour
                   </p>
-                  <div className="block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
+                  <div className='block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
                     ${ratesPerHour?.charges}
                   </div>
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="documents" className="flex-grow p-6">
-              <div className="mt-6">
-                <h2 className="text-lg font-bold mb-4">Documents</h2>
-                <div className="mb-4">
-                  <div className="maint-title flex items-center gap-5">
-                    <p className="text-base font-bold text-gray-700">CV</p>
+            <TabsContent value='documents' className='flex-grow p-6'>
+              <div className='mt-6'>
+                <h2 className='text-lg font-bold mb-4'>Documents</h2>
+                <div className='mb-4'>
+                  <div className='maint-title flex items-center gap-5'>
+                    <p className='text-base font-bold text-gray-700'>CV</p>
                     <FaEye
-                      className="text-blue-500 text-xl cursor-pointer"
+                      className='text-blue-500 text-xl cursor-pointer'
                       onClick={() => openModal(cv?.link)}
-                      title="View Cv"
+                      title='View Cv'
                     />
                   </div>
-                  <div className="flex">
-                    <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                      <div className="text-green-500 hover:underline flex gap-5">
-                        <FaCheckCircle className="text-xl " />
+                  <div className='flex'>
+                    <div className='flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
+                      <div className='text-green-500 hover:underline flex gap-5'>
+                        <FaCheckCircle className='text-xl ' />
                         {cv?.link ? cv?.link.split("/").pop() : "View CV"}
                       </div>
                       <div>
-                        <p className="text-base my-2 font-medium text-gray-700">
-                          <div className="flex items-center space-x-2">
+                        <p className='text-base my-2 font-medium text-gray-700'>
+                          <div className='flex items-center space-x-2'>
                             {singleCoach?.isApproved || isCvVerified ? (
-                              <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
+                              <span className='text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100'>
                                 Approved
                               </span>
                             ) : (
-                              <span className="text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100">
+                              <span className='text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100'>
                                 Not Approved
                               </span>
                             )}
-                            <label className="flex items-center cursor-pointer">
+                            <label className='flex items-center cursor-pointer'>
                               <input
-                                type="checkbox"
+                                type='checkbox'
                                 {...register("isCvVerified")}
-                                className="hidden"
+                                className='hidden'
                               />
                               <div
                                 className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
                                   singleCoach?.isApproved || isCvVerified
                                     ? "bg-green-600"
                                     : ""
-                                }`}
-                              >
+                                }`}>
                                 <div
                                   className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
                                     singleCoach?.isApproved || isCvVerified
@@ -390,43 +392,43 @@ const CoachDetailsPage = () => {
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <div className="maint-title flex items-center gap-5">
-                    <p className="text-xl font-bold text-gray-700">
+                <div className='mb-4'>
+                  <div className='maint-title flex items-center gap-5'>
+                    <p className='text-xl font-bold text-gray-700'>
                       Signed Aggrement
                     </p>
                   </div>
-                  <div className="flex">
-                    <div className="flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                      <div className="text-green-500 hover:underline flex gap-5">
-                        <FaCheckCircle className="text-xl " />
+                  <div className='flex'>
+                    <div className='flex justify-between mt-5 w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900'>
+                      <div className='text-green-500 hover:underline flex gap-5'>
+                        <FaCheckCircle className='text-xl ' />
                         {signedAggrement?.link
                           ? signedAggrement?.link.split("/").pop()
                           : "View CV"}
                         <FaEye
-                          className="text-blue-500 text-xl cursor-pointer"
+                          className='text-blue-500 text-xl cursor-pointer'
                           onClick={() => openModal(signedAggrement?.link)}
                         />
                       </div>
                       <div>
-                        <p className="text-base font-medium text-gray-700">
-                          <p className="text-base font-medium text-gray-700">
-                            <div className="flex items-center space-x-2">
+                        <p className='text-base font-medium text-gray-700'>
+                          <p className='text-base font-medium text-gray-700'>
+                            <div className='flex items-center space-x-2'>
                               {singleCoach?.isApproved ||
                               isAgreementVerified ? (
-                                <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
+                                <span className='text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100'>
                                   Approved
                                 </span>
                               ) : (
-                                <span className="text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100">
+                                <span className='text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100'>
                                   Not Approved
                                 </span>
                               )}
-                              <label className="flex items-center cursor-pointer">
+                              <label className='flex items-center cursor-pointer'>
                                 <input
-                                  type="checkbox"
+                                  type='checkbox'
                                   {...register("isAgreementVerified")}
-                                  className="hidden"
+                                  className='hidden'
                                 />
                                 <div
                                   className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
@@ -434,8 +436,7 @@ const CoachDetailsPage = () => {
                                     isAgreementVerified
                                       ? "bg-green-600"
                                       : ""
-                                  }`}
-                                >
+                                  }`}>
                                   <div
                                     className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
                                       singleCoach?.isApproved ||
@@ -454,45 +455,42 @@ const CoachDetailsPage = () => {
                   </div>
                 </div>
 
-                <div className="sm:col-span-6 mt-10">
-                  <div className="flex items-center justify-between">
+                <div className='sm:col-span-6 mt-10'>
+                  <div className='flex items-center justify-between'>
                     <label
-                      htmlFor="profileVideo"
-                      className="text-xl font-bold text-gray-700"
-                    >
+                      htmlFor='profileVideo'
+                      className='text-xl font-bold text-gray-700'>
                       Profile Video
                     </label>
                     {profileVideo?.url && (
-                      <div className="mr-2">
-                        <p className="text-base font-medium text-gray-700">
-                          <p className="text-base font-medium text-gray-700">
-                            <div className="flex items-center space-x-2">
-                              {profileVideo?.isApproved || isVideoVerified ? (
-                                <span className="text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100">
+                      <div className='mr-2'>
+                        <p className='text-base font-medium text-gray-700'>
+                          <p className='text-base font-medium text-gray-700'>
+                            <div className='flex items-center space-x-2'>
+                              {singleCoach?.isApproved || isVideoVerified ? (
+                                <span className='text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100'>
                                   Approved
                                 </span>
                               ) : (
-                                <span className="text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100">
+                                <span className='text-xs text-red-800  px-2 py-1  rounded-lg bg-red-100'>
                                   Not Approved
                                 </span>
                               )}
-                              <label className="flex items-center cursor-pointer">
+                              <label className='flex items-center cursor-pointer'>
                                 <input
-                                  type="checkbox"
+                                  type='checkbox'
                                   {...register("isVideoVerified")}
-                                  className="hidden"
+                                  className='hidden'
                                 />
                                 <div
                                   className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    profileVideo?.isApproved || isVideoVerified
+                                    singleCoach?.isApproved || isVideoVerified
                                       ? "bg-green-600"
                                       : ""
-                                  }`}
-                                >
+                                  }`}>
                                   <div
                                     className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      profileVideo?.isApproved ||
-                                      isVideoVerified
+                                      singleCoach?.isApproved || isVideoVerified
                                         ? "translate-x-full"
                                         : ""
                                     }`}
@@ -506,36 +504,36 @@ const CoachDetailsPage = () => {
                     )}
                   </div>
                   {/* Displaying the YouTube video using ReactPlayer */}
-                  <div className="mt-4">
+                  <div className='mt-4'>
                     {profileVideo?.url &&
                     ReactPlayer.canPlay(profileVideo?.url) ? (
                       <ReactPlayer
                         url={profileVideo?.url}
                         controls
-                        width="100%"
-                        height="300px"
+                        width='100%'
+                        height='300px'
                       />
                     ) : (
                       <p>No video has been added yet.</p>
                     )}
                   </div>
+
                 </div>
 
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                   <DialogContent
-                    showCloseButton="true"
+                    showCloseButton='true'
                     onClick={handleCloseModal}
-                    className=""
-                  >
+                    className=''>
                     <DialogHeader>
                       <DialogTitle>PDF Viewer</DialogTitle>
                     </DialogHeader>
-                    <div className="relative w-full h-full no-scrollbar overflow-auto max-h-[70vh] sm:max-h-[75vh] md:max-h-[80vh] lg:max-h-[85vh] xl:max-h-[80vh]">
+                    <div className='relative w-full h-full no-scrollbar overflow-auto max-h-[70vh] sm:max-h-[75vh] md:max-h-[80vh] lg:max-h-[85vh] xl:max-h-[80vh]'>
                       {pdfUrl && (
                         <iframe
                           src={`https://docs.google.com/gview?url=${pdfUrl}&embedded=true`}
-                          className="w-full h-[90vh]"
-                          title="Document Viewer"
+                          className='w-full h-[90vh]'
+                          title='Document Viewer'
                         />
                       )}
                     </div>

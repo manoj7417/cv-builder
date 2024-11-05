@@ -49,6 +49,7 @@ const ComingSoon = () => {
     >
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="text-center">
+          <h1 className="hidden">Coming Soon</h1>
           <Lottie
             animationData={Countanimation}
             loop={true}

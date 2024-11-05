@@ -391,6 +391,7 @@ const Certificates = ({ fontStyle, colorText, colorBackground }) => {
                       <a
                         href={item?.url}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="break-normal text-16px items-center font-bold inline-flex"
                       >
                         {item?.name}
@@ -443,6 +444,7 @@ const Awards = ({ fontStyle, colorText, colorBackground }) => {
                           <a
                             href={item?.url}
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="break-normal text-16px items-center font-bold inline-flex"
                           >
                             {item?.name}
@@ -536,6 +538,7 @@ const References = ({ fontStyle, colorText, colorBackground }) => {
                           <a
                             href={item?.url}
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="break-normal text-16px items-center font-bold inline-flex"
                           >
                             {item?.name}

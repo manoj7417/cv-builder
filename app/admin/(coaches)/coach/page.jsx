@@ -17,43 +17,54 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
+import useSWR from "swr";
 
-const people = [
-  {
-    id: 1,
-    name: "John Doe",
-    fees: "75.00 USD",
-    role: "Career Development",
-    image:
-      "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-    fees: "75.00 USD",
-    role: "Career Development",
-    image:
-      "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
-  },
-];
+
+const fetcher = (url) =>
+  fetch(url, {
+    headers: { "Cache-Control": "no-store" },
+  }).then((res) => res.json());
 
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  const { data, error, isLoading } = useSWR(
+    `/api/getAllCoaches?_t=${new Date().getTime()}`,  // Add timestamp for each request
+    fetcher,
+    {
+      refreshInterval: 30000,         // Fetch every 30 seconds
+      revalidateOnFocus: true,         // Fetch when window regains focus
+      revalidateIfStale: true,         // Refetch if data is stale
+      dedupingInterval: 0,             // Force SWR to re-fetch on every call
+    }
+  );
+  
+
+  const coaches = data?.coaches || []; // Handle case where data may still be undefined
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
-  const [allCoaches, setAllCoaches] = useState([]);
-
+  // const [coaches, setAllCoaches] = useState([]);
+  // const [isLoading,setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
 
   useEffect(() => {
-    fetchAllCoaches(); // Fetch coaches when the component mounts
-  }, [fetchAllCoaches]);
+    fetchAllCoaches();
+  },[]);
+
+  const fetchAllCoaches = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`,{ headers: { "Cache-Control": "no-store" },});
+      const data = await response.data;
+      setAllCoaches(data.coaches);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="bg-white  px-10">

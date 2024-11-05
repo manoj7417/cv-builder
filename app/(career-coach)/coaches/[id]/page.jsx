@@ -266,7 +266,7 @@ const CoachDetailsPage = () => {
       success_url: `${window.location.origin}/user-dashboard`,
       cancel_url: window.location.href,
       currency: "USD",
-      amount: 1,
+      amount: singleCoach?.ratesPerHour?.charges,
     };
     try {
       const response = await axios.post("/api/bookSlot", obj, {
@@ -915,9 +915,9 @@ const CoachDetailsPage = () => {
                     ) : (
                       <div className="mt-5 text-gray-600 text-xl text-center">
                         No programs yet explore more coaches{" "}
-                        <a className="font-bold" href="/coaches">
+                        <Link className="font-bold" href="/coaches">
                           View all coaches
-                        </a>
+                        </Link>
                       </div>
                     )}
                   </div>
@@ -976,7 +976,7 @@ const CoachDetailsPage = () => {
                                     </span>
 
                                     {isAvailable && !isDisabled && (
-                                      <span className={`absolute w-1 h-1 rounded-full  top-5 ${isSelected ? "bg-white" : "bg-blue-500"}`} />
+                                      <span className={`absolute w-1 h-1 rounded-full  top-5 ${isSelected ? "bg-green-500" : "bg-green-500"}`} />
                                     )}
                                   </p>
                                 </Button>

@@ -74,18 +74,20 @@ const ComingSoonPage = () => {
   return (
     <>
       {/* {userState?.isAuthenticated ? <NewResumeHeader /> : <Header />} */}
-      <ResumeHeader/>
+      <ResumeHeader />
       <section className='flex lg:items-center items-start justify-center pb-8 w-full pt-10 md:pt-10 lg:pt-10  px-5 relative'>
         <div className='container lg:pt-0 pt-10'>
           <div className='flex flex-col justify-center '>
-            <Image priority
+            <Image
+              priority
               src={"/arrowright.png"}
               width={100}
               height={100}
               alt='arrowright'
               className='absolute top-[20%] left-0 w-auto h-auto'
             />
-            <Image priority
+            <Image
+              priority
               src={"/arrowleft.png"}
               width={100}
               height={100}
@@ -105,7 +107,11 @@ const ComingSoonPage = () => {
                   COACH
                 </span>
                 <span>
-                  <img src='/coach.png' className='h-64 ml-4 image-animation' />
+                  <img
+                    src='/coach.png'
+                    className='h-64 ml-4 image-animation'
+                    alt='coach'
+                  />
                 </span>
               </h1>
               <p className='max-w-[800px]  mx-auto text-center text-[#7C7C7C] lg:text-[18px] text-sm'>
@@ -252,9 +258,9 @@ const ComingSoonPage = () => {
         <div className='container lg:pt-0 py-10 z-10'>
           <div className='flex flex-col justify-center'>
             <div className='space-y-2 mx-auto'>
-              <h1 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white'>
+              <h2 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center flex items-center font-extrabold text-white'>
                 Complete Satisfaction
-              </h1>
+              </h2>
               <div className='flex justify-center mt-4'>
                 {[...Array(5)].map((_, index) => (
                   <svg
@@ -291,11 +297,11 @@ const ComingSoonPage = () => {
         <div className='container lg:pt-0 pt-20'>
           <div className='flex flex-col justify-center'>
             <div className='space-y-2 mx-auto'>
-              <h1 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center items-center font-extrabold'>
+              <h2 className='text-[45px] md:text-[80px] sm:text-[80px] mt-4 text-center justify-center items-center font-extrabold'>
                 We Offer Coaching For
                 <br />
                 <span className='text-black'>Every</span> Domain
-              </h1>
+              </h2>
               <div className='flex justify-center mt-4'></div>
               <p className='max-w-[800px] mx-auto text-center text-gray text-[18px] pt-4'>
                 Our career coaching and consultation services cover all aspects
@@ -474,9 +480,8 @@ const ComingSoonPage = () => {
             {/* Left Column - Text */}
             <div className='w-full md:w-[40%] mt-8 md:mt-0 md:pl-8'>
               <h2 className='trust font-bold text-gray-800'>
-                A Traditional &{" "}
-                <span className='text-black'>Transparent</span> Career
-                Coaching
+                A Traditional & <span className='text-black'>Transparent</span>{" "}
+                Career Coaching
               </h2>
               <p className='mt-4 text-gray-600'>
                 Experience the best of Career Consultancy with us at Genies
@@ -605,7 +610,17 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                    I was having some real trouble with job applications; presumably, my CV was not that good. Then, one of my friends said something about a new website called Genies Career Hub. They use AI in making your CV, and it&apos;s simply incredible. It instantly corrects every error, frames perfect templates for the different types of job roles. And I started seeing an increase in interview callbacks, which really helped. The price is also more competitive when compared to many others in the market. I am actually looking forward to getting other services also.
+                      I was having some real trouble with job applications;
+                      presumably, my CV was not that good. Then, one of my
+                      friends said something about a new website called Genies
+                      Career Hub. They use AI in making your CV, and it&apos;s
+                      simply incredible. It instantly corrects every error,
+                      frames perfect templates for the different types of job
+                      roles. And I started seeing an increase in interview
+                      callbacks, which really helped. The price is also more
+                      competitive when compared to many others in the market. I
+                      am actually looking forward to getting other services
+                      also.
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
@@ -645,7 +660,17 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                    I used to be like, &quot;Why is it a hassle making a CV?&quot;, and I would always feel utterly unmotivated while doing it. But Genies Career Hub made this all so much easier. Its use of AI is brilliant; it even suggests the skills that should go on your CV. I&apos;d heard about something called Applicant Tracking Systems, but I didn&apos;t know anything about them, and for a while, I thought that could be the reason my applications weren&apos;t getting through. Now, I send in applications and get interview calls; it&apos;s really put me in the spotlight!
+                      I used to be like, &quot;Why is it a hassle making a
+                      CV?&quot;, and I would always feel utterly unmotivated
+                      while doing it. But Genies Career Hub made this all so
+                      much easier. Its use of AI is brilliant; it even suggests
+                      the skills that should go on your CV. I&apos;d heard about
+                      something called Applicant Tracking Systems, but I
+                      didn&apos;t know anything about them, and for a while, I
+                      thought that could be the reason my applications
+                      weren&apos;t getting through. Now, I send in applications
+                      and get interview calls; it&apos;s really put me in the
+                      spotlight!
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>
@@ -683,7 +708,14 @@ const ComingSoonPage = () => {
                   </svg>
                   <blockquote>
                     <p className='lg:text-2xl text-sm font-medium text-white '>
-                    I used to struggle with my job applications, and my CV probably wasn&apos;t that good. A pal recommended this website: Genies Career Hub. They use AI in the creation of your CV, and it&apos;s great. Every little mistake is corrected on the spot, and the templates are great, really tailored for each job position. I can also see an increase in interview callbacks, which helps a lot. It is a lot cheaper compared to many other services.
+                      I used to struggle with my job applications, and my CV
+                      probably wasn&apos;t that good. A pal recommended this
+                      website: Genies Career Hub. They use AI in the creation of
+                      your CV, and it&apos;s great. Every little mistake is
+                      corrected on the spot, and the templates are great, really
+                      tailored for each job position. I can also see an increase
+                      in interview callbacks, which helps a lot. It is a lot
+                      cheaper compared to many other services.
                     </p>
                   </blockquote>
                   <figcaption className='flex items-center justify-center mt-6 space-x-3'>

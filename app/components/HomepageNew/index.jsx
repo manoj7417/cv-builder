@@ -87,9 +87,9 @@ export default function HomepageNew() {
             alt={service.alt}
           />
         </div>
-        <h3 className="mt-2 text-lg font-bold text-black sm:text-2xl">
+        <p className="mt-2 text-lg font-bold text-black sm:text-2xl">
           {service.title}
-        </h3>
+        </p>
         <p className="mt-2 text-xs text-black sm:text-sm sm:text-md whitespace-normal">
           {service.description}
         </p>
@@ -146,35 +146,7 @@ export default function HomepageNew() {
         </div>
       </section>
 
-      {showModal && <GetStartedModal onClose={handleCloseModal} />}
 
-      {showFloatingButton && (
-        <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
-          <button
-            className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block"
-            onClick={handleButtonClick}
-          >
-            <span>Explore Now</span>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-arrow-right"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </div>
-          </button>
-        </div>
-      )}
 
       <section className="w-full z-40 relative">
         <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
@@ -202,6 +174,36 @@ export default function HomepageNew() {
         {/* <FAQSection /> */}
         <ServiceSection />
       </section>
+
+      {showModal && <GetStartedModal onClose={handleCloseModal} />}
+
+{showFloatingButton && (
+  <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
+    <button
+      className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block"
+      onClick={handleButtonClick}
+    >
+      <span>Explore Now</span>
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={24}
+          height={24}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="lucide lucide-arrow-right"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </div>
+    </button>
+  </div>
+)}
     </>
   );
 }

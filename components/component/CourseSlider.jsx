@@ -67,10 +67,10 @@ export default function CourseSlider() {
   return (
     <div className="bg-gray-100 rounded-3xl p-6 sm:p-10 steps_slider shadow-xl">
       <div className="steps_slider_title mb-5 sm:block hidden">
-        <h2 className="lg:text-3xl text-xl text-black font-bold">
+        <h3 className="lg:text-3xl text-xl text-black font-bold">
           A Step Closer to Your Dream Job with
           <span className="font-bold text-blue-600"> Genies Pro Studio</span>
-        </h2>
+        </h3>
         <p className="lg:text-base text-sm mt-3">
           Our AI-driven Genies CV Pro Studio is a comprehensive suite of three
           pioneering, revolutionary tools. It’s your personal all-in-one
@@ -99,7 +99,7 @@ export default function CourseSlider() {
               <div className="steps_details lg:text-base text-sm font-medium mb-4">
                 {item.stepDetails}
                 <div className="button_wrapper mt-5">
-                  <a
+                  <Link
                     href={item?.link}
                     className="get_start_btn  mx-auto sm:mx-0 course_button"
                   >
@@ -121,7 +121,7 @@ export default function CourseSlider() {
                         <path d="m12 5 7 7-7 7" />
                       </svg>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

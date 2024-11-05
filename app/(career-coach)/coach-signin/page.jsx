@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import React, { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
@@ -20,7 +22,7 @@ import "swiper/css"; // Import core Swiper styles
 import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
 import { SetTokens } from "@/app/actions";
-import { useCoachStore } from '../../store/coachStore'
+import { useCoachStore } from "../../store/coachStore";
 
 //
 export default function CoachLogin() {
@@ -29,7 +31,7 @@ export default function CoachLogin() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { loginUser } = useCoachStore()
+  const { loginUser } = useCoachStore();
 
   const email = useRef(null);
   const router = useRouter();
@@ -44,14 +46,14 @@ export default function CoachLogin() {
       const response = await axios.post("/api/loginCoach", data);
       if (response.status === 200) {
         toast.success("Login successful");
-        const { accessToken, refreshToken } = response.data.data
-        await SetTokens({ accessToken, refreshToken })
-        loginUser(response.data.data.userdata)
-        const { isApproved } = response.data.data.userdata
+        const { accessToken, refreshToken } = response.data.data;
+        await SetTokens({ accessToken, refreshToken });
+        loginUser(response.data.data.userdata);
+        const { isApproved } = response.data.data.userdata;
         if (isApproved) {
-          return router.push("/coach-dashboard")
+          return router.push("/coach-dashboard");
         }
-        router.push('/coach-form')
+        router.push("/coach-form");
       }
     } catch (error) {
       toast.error(error.response?.data?.error || "Something went wrong");
@@ -70,7 +72,7 @@ export default function CoachLogin() {
       const response = await axios.post("/api/forgotCoachPassword", {
         email: email.current.value,
       });
-      
+
       if (response.status === 200) {
         toast.success("Reset password link sent to your email");
         setShowDialog(false);
@@ -86,27 +88,25 @@ export default function CoachLogin() {
     <>
       <Dialog open={showDialog}>
         <DialogContent
-          className=" w-96"
+          className=' w-96'
           onClick={handleDialogClose}
-          showCloseButton
-        >
+          showCloseButton>
           <div>
             <h1>The reset password link will be send to the entered email</h1>
             <Input
-              placeholder="Enter your email address"
-              className="mt-4"
+              placeholder='Enter your email address'
+              className='mt-4'
               ref={email}
             />
-            <div className="w-full my-3 flex justify-end items-center">
+            <div className='w-full my-3 flex justify-end items-center'>
               <Button
-                className=" disabled:bg-opacity-85"
+                className=' disabled:bg-opacity-85'
                 disabled={sendingMail}
-                onClick={handleSendResetEmail}
-              >
+                onClick={handleSendResetEmail}>
                 {sendingMail ? (
                   <>
                     Sending
-                    <ImSpinner3 className="animate-spin ml-2" size={16} />
+                    <ImSpinner3 className='animate-spin ml-2' size={16} />
                   </>
                 ) : (
                   "Send"
@@ -116,13 +116,13 @@ export default function CoachLogin() {
           </div>
         </DialogContent>
       </Dialog>
-      <section className="w-full h-screen">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 place-items-center">
-          <div className="w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen">
-            <div className="w-[70%] mt-14">
-              <h2 className="text-white text-center text-2xl font-semibold">
-                Join as a Coach and inspire the next generation of achievers!
-              </h2>
+      <section className='w-full h-screen'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-7 place-items-center'>
+          <div className='w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen'>
+            <div className='w-[70%] mt-14'>
+              <h1 className='text-white text-center text-2xl font-semibold'>
+                Thankyou for joining as a Coach and inspire the next generation of achievers!
+              </h1>
             </div>
 
             {/* Swiper Slider with Pagination */}
@@ -132,32 +132,31 @@ export default function CoachLogin() {
               autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
               spaceBetween={20} // Space between slides
               slidesPerView={1} // Show one slide at a time
-              className="mb-10 w-[60%] rounded-md"
-            >
+              className='mb-10 w-[60%] rounded-md'>
               <SwiperSlide>
-                <div className="p-4 rounded-md">
+                <div className='p-4 rounded-md'>
                   <img
-                    className="mx-auto h-auto  rounded-md object-contain"
-                    src="/coachSignin1.png"
-                    alt="coach-register"
+                    className='mx-auto h-auto  rounded-md object-contain'
+                    src='/coachSignin1.png'
+                    alt='coach-register'
                   />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="p-4 rounded-md ">
+                <div className='p-4 rounded-md '>
                   <img
-                    className="mx-auto h-auto  rounded-md object-contain"
-                    src="/coachSignin2.png"
-                    alt="coach-register"
+                    className='mx-auto h-auto  rounded-md object-contain'
+                    src='/coachSignin2.png'
+                    alt='coach-register'
                   />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="p-4 rounded-md ">
+                <div className='p-4 rounded-md '>
                   <img
-                    className="mx-auto h-auto rounded-md object-contain"
-                    src="/coachSignin3.png"
-                    alt="coach-register"
+                    className='mx-auto h-auto rounded-md object-contain'
+                    src='/coachSignin3.png'
+                    alt='coach-register'
                   />
                 </div>
               </SwiperSlide>
@@ -165,36 +164,34 @@ export default function CoachLogin() {
             </Swiper>
             {/* Custom Pagination Styles */}
           </div>
-          <div className="flex justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24 w-full">
-            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
+          <div className='flex justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24 w-full'>
+            <div className='xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md'>
+              <h2 className='text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl'>
                 Sign in
               </h2>
-              <p className="mt-2 text-[13px] text-gray-600">
+              <p className='mt-2 text-[13px] text-gray-600'>
                 Don&apos;t have an account?{" "}
                 <Link
-                  href="/coach-registration"
-                  title=""
-                  className="font-semibold text-black transition-all duration-200 hover:underline"
-                >
+                  href='/coach-registration'
+                  title=''
+                  className='font-semibold text-black transition-all duration-200 hover:underline'>
                   Create a free account
                 </Link>
               </p>
-              <form onSubmit={handleSubmit(handleCoachLogin)} className="mt-8">
-                <div className="space-y-5">
+              <form onSubmit={handleSubmit(handleCoachLogin)} className='mt-8'>
+                <div className='space-y-5'>
                   <div>
                     <Label
-                      htmlFor=""
-                      className="text-base font-medium text-gray-900"
-                    >
+                      htmlFor=''
+                      className='text-base font-medium text-gray-900'>
                       {" "}
                       Email{" "}
                     </Label>
-                    <div className="mt-2">
+                    <div className='mt-2'>
                       <Input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                        type="email"
-                        placeholder="Email"
+                        className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
+                        type='email'
+                        placeholder='Email'
                         {...register("email", {
                           required: {
                             value: true,
@@ -203,27 +200,26 @@ export default function CoachLogin() {
                         })}
                       />
                       {errors?.email && (
-                        <p className="text-red-500 text-sm mt-2">
+                        <p className='text-red-500 text-sm mt-2'>
                           {errors?.email?.message}
                         </p>
                       )}
                     </div>
                   </div>
                   <div>
-                    <div className="flex items-center justify-between">
+                    <div className='flex items-center justify-between'>
                       <Label
-                        htmlFor=""
-                        className="text-base font-medium text-gray-900"
-                      >
+                        htmlFor=''
+                        className='text-base font-medium text-gray-900'>
                         {" "}
                         Password{" "}
                       </Label>
                     </div>
-                    <div className="mt-2 relative">
+                    <div className='mt-2 relative'>
                       <Input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                        className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
+                        placeholder='Password'
                         {...register("password", {
                           required: {
                             value: true,
@@ -232,19 +228,19 @@ export default function CoachLogin() {
                         })}
                       />
                       {errors?.password && (
-                        <p className="text-red-500 text-sm mt-2">
+                        <p className='text-red-500 text-sm mt-2'>
                           {errors?.password?.message}
                         </p>
                       )}
-                      <div className="top-0 right-0 absolute h-10 md:h-10 flex items-center justify-center pr-3">
+                      <div className='top-0 right-0 absolute h-10 md:h-10 flex items-center justify-center pr-3'>
                         {showPassword ? (
                           <IoEye
-                            className="cursor-pointer h-4 w-4"
+                            className='cursor-pointer h-4 w-4'
                             onClick={() => setShowPassword(false)}
                           />
                         ) : (
                           <IoEyeOff
-                            className="cursor-pointer h-4 w-4"
+                            className='cursor-pointer h-4 w-4'
                             onClick={() => setShowPassword(true)}
                           />
                         )}
@@ -260,26 +256,25 @@ export default function CoachLogin() {
                       </div>
                     </div> */}
                   </div>
-                  <div className="terms_condition">
-                    <div className="flex items-center justify-between">
+                  <div className='terms_condition'>
+                    <div className='flex items-center justify-between'>
                       <div>
-                        <div className="field field-checkbox flex items-center">
+                        <div className='field field-checkbox flex items-center'>
                           <input
-                            id="rememberMe"
-                            type="checkbox"
-                            name="terms"
-                            className="form-checkbox lg:h-4 lg:w-4 h-3 w-3"
+                            id='rememberMe'
+                            type='checkbox'
+                            name='terms'
+                            className='form-checkbox lg:h-4 lg:w-4 h-3 w-3'
                             {...register("rememberMe", { required: false })}
                           />
                           <label
-                            htmlFor="rememberMe"
-                            className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
-                          >
+                            htmlFor='rememberMe'
+                            className='ml-2 text-xs sm:text-sm  text-[12px] text-gray-700'>
                             <p>Remember me</p>
                           </label>
                         </div>
                         {errors.rememberMe && (
-                          <div className="text-red-500 text-sm my-2">
+                          <div className='text-red-500 text-sm my-2'>
                             You must remember me
                           </div>
                         )}
@@ -287,43 +282,39 @@ export default function CoachLogin() {
                       <div>
                         <div
                           onClick={() => setShowDialog(true)}
-                          className="text-sm font-semibold text-[#007AFF] hover:underline cursor-pointer"
-                        >
+                          className='text-sm font-semibold text-[#007AFF] hover:underline cursor-pointer'>
                           {" "}
                           Forgot password?{" "}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="terms_condition">
-                    <div className="field field-checkbox flex items-center">
+                  <div className='terms_condition'>
+                    <div className='field field-checkbox flex items-center'>
                       <input
-                        id="terms"
-                        type="checkbox"
-                        name="terms"
-                        className="form-checkbox lg:h-4 lg:w-4 h-3 w-3"
+                        id='terms'
+                        type='checkbox'
+                        name='terms'
+                        className='form-checkbox lg:h-4 lg:w-4 h-3 w-3'
                         {...register("terms", { required: true })}
                       />
                       <label
-                        htmlFor="terms"
-                        className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
-                      >
+                        htmlFor='terms'
+                        className='ml-2 text-xs sm:text-sm  text-[12px] text-gray-700'>
                         <p>
                           I agree to all the
                           <Link
-                            href="/terms-condition"
-                            target="_blank"
-                            className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
-                          >
+                            href='/terms-condition'
+                            target='_blank'
+                            className='text-[#007AFF] underline underline-offset-4 ml-1 font-semibold'>
                             {" "}
                             Terms
                           </Link>
-                          <span className="pl-1">and</span>
+                          <span className='pl-1'>and</span>
                           <Link
-                            href="/privacy-policy"
-                            target="_blank"
-                            className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
-                          >
+                            href='/privacy-policy'
+                            target='_blank'
+                            className='text-[#007AFF] underline underline-offset-4 ml-1 font-semibold'>
                             {" "}
                             Privacy policy
                           </Link>
@@ -331,27 +322,26 @@ export default function CoachLogin() {
                       </label>
                     </div>
                     {errors.terms && (
-                      <div className="text-red-500 text-sm my-2">
+                      <div className='text-red-500 text-sm my-2'>
                         You must agree to the terms and conditions
                       </div>
                     )}
                   </div>
                   <div>
                     <Button
-                      type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:bg-[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
-                      disabled={loading}
-                    >
+                      type='submit'
+                      className='inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:bg-[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white'
+                      disabled={loading}>
                       {loading ? (
                         <>
                           Login
-                          <ImSpinner3 className="animate-spin ml-2" size={16} />
+                          <ImSpinner3 className='animate-spin ml-2' size={16} />
                         </>
                       ) : (
                         <>
                           Login
                           <MdOutlineKeyboardArrowRight
-                            className="ml-2"
+                            className='ml-2'
                             size={16}
                           />
                         </>
