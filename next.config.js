@@ -69,15 +69,15 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: `
               default-src 'self';
-              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.youtube.com https://cdnjs.cloudflare.com;
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.youtube.com https://cdnjs.cloudflare.com https://www.clarity.ms;
               style-src 'self' 'unsafe-inline';
-              img-src 'self' data: blob: https://res.cloudinary.com https://static.vecteezy.com https://via.placeholder.com https://geniescareerhubbucket.lon1.digitaloceanspaces.com https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com https://uxwing.com https://upload.wikimedia.org http://localhost:3000 https://geniescareerhub.com;
+              img-src 'self' data: blob: https://res.cloudinary.com https://static.vecteezy.com https://via.placeholder.com https://geniescareerhubbucket.lon1.digitaloceanspaces.com https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com https://uxwing.com https://upload.wikimedia.org http://localhost:3000 https://geniescareerhub.com https://c.clarity.ms;
               font-src 'self' data:;
-             connect-src 'self' blob: https://goldfish-app-a2e3u.ondigitalocean.app http://localhost:3000 https://geniescareerhub.com https://www.google-analytics.com https://ipapi.co ws://127.0.0.1:51673;
+              connect-src 'self' blob: https://goldfish-app-a2e3u.ondigitalocean.app http://localhost:3000 https://geniescareerhub.com https://www.google-analytics.com https://ipapi.co ws://127.0.0.1:51673 https://l.clarity.ms;
               frame-src 'self' https://www.youtube.com https://docs.google.com;
               worker-src 'self' blob:;
             `.trim().replace(/\s+/g, ' '),
-          },          
+          },
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
