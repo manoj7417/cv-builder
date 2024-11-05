@@ -28,32 +28,29 @@ const fetcher = (url) =>
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  const { data, error, isLoading } = useSWR(
-    `/api/getAllCoaches?_t=${new Date().getTime()}`,  // Add timestamp for each request
-    fetcher,
-    {
-      refreshInterval: 30000,         // Fetch every 30 seconds
-      revalidateOnFocus: true,         // Fetch when window regains focus
-      revalidateIfStale: true,         // Refetch if data is stale
-      dedupingInterval: 0,             // Force SWR to re-fetch on every call
-    }
-  );
+  // const { data, error, isLoading } = useSWR(
+  //   `/api/getAllCoaches?_t=${new Date().getTime()}`,  // Add timestamp for each request
+  //   fetcher,
+  //   {
+  //     refreshInterval: 30000,         // Fetch every 30 seconds
+  //     revalidateOnFocus: true,         // Fetch when window regains focus
+  //     revalidateIfStale: true,         // Refetch if data is stale
+  //     dedupingInterval: 0,             // Force SWR to re-fetch on every call
+  //   }
+  // );
   
 
-  const coaches = data?.coaches || []; // Handle case where data may still be undefined
+  // const coaches = data?.coaches || [];
+   // Handle case where data may still be undefined
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
-  // const [coaches, setAllCoaches] = useState([]);
-  // const [isLoading,setIsLoading] = useState(true);
+  const [coaches, setAllCoaches] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
-
-  useEffect(() => {
-    fetchAllCoaches();
-  },[]);
 
   const fetchAllCoaches = async () => {
     try {
@@ -65,6 +62,12 @@ const Coach = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchAllCoaches();
+  },[]);
+
+
 
   return (
     <div className="bg-white  px-10">
