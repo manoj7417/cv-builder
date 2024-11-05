@@ -14,8 +14,9 @@ const useCoachesDetailStore = create(
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
-        const response = await axios.get(`/api/getAllCoaches?timestamp=${new Date().getTime()}`);
+        const response = await axios.get(`/api/getAllCoaches`);
         const data = await response.data;
+        console.log(data.coaches[15].approvalStatus);
         await set({ coaches: data.coaches });
        
       } catch (error) {
