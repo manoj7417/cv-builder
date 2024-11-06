@@ -10,7 +10,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -69,9 +68,7 @@ const CoachDetailsPage = () => {
     reset,
   } = useForm();
 
-  const { singleCoach, filterCoachById, updateSingleCoach } =
-    useCoachesDetailStore();
-
+  const [singleCoach, setSingleCoach] = useState(null);
   const { id } = useParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("about");
@@ -308,7 +305,6 @@ const CoachDetailsPage = () => {
       const response = await axios.get(`/api/getCoachDetails/${id}`);
       if (response.status === 200) {
         setCoachBookings(response.data.coach.bookings)
-        updateSingleCoach(response.data.coach);
       }
     } catch (error) {
       console.error(error);
@@ -389,6 +385,26 @@ const CoachDetailsPage = () => {
   useEffect(() => {
     handleFetchCoachProgramById(id);
   }, [id]);
+
+  useEffect(() => {
+    fetchCoachDetails(); // Fetch coach details on component mount
+  }, []);
+
+  const fetchCoachDetails = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = response.data;
+      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      if (coach) {
+        setSingleCoach(coach); // Set the single coach data if found
+      } else {
+        toast.error("Coach not found");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error fetching coach details");
+    }
+  };
 
   return (
     <>

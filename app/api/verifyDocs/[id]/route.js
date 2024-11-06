@@ -18,6 +18,7 @@ export async function PATCH(req, { params }) {
             }
         });
     } catch (error) {
+        
         const errorMessage = error.response ? error.response.data : { error: "Error updating in coach data" };
         const statusCode = error.response ? error.response.status : 500;
         return new Response(JSON.stringify(errorMessage), {

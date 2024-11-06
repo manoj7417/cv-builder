@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import useCoachesDetailStore from "@/app/store/coachDetailStore";
+export const dynamic = "force-dynamic";
 import CoachTableSkeleton from "@/components/component/AdminDashboard/CoachTableSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,41 +18,53 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-const people = [
-  {
-    id: 1,
-    name: "John Doe",
-    fees: "75.00 USD",
-    role: "Career Development",
-    image:
-      "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-    fees: "75.00 USD",
-    role: "Career Development",
-    image:
-      "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
-  },
-];
+
 
 const Coach = () => {
   const [activeTab, setActiveTab] = useState("all");
   const router = useRouter();
-  const { coaches, isLoading, fetchAllCoaches } = useCoachesDetailStore();
+  const [data, setData] = useState([])
+
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
-
+  const [coaches, setAllCoaches] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
   const handleCoachDetails = (id) => {
     router.push(`/admin/coach/${id}`);
   };
 
+  const fetchAllCoaches = async () => {
+    try {
+      const response = await axios.get(`/api/getAllCoaches`);
+      const data = await response.data;
+      setAllCoaches(data.coaches);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const getAllCoaches = async () => {
+  //   try {
+  //     const response = await axios.get('/api/getAllCoaches');
+  //     console.log(response)
+  //     setAllCoaches(response.data.coaches);
+  //     setIsLoading(false);
+
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
   useEffect(() => {
     fetchAllCoaches();
-  }, [fetchAllCoaches]); // No dependency array, so it fetches only on mount
+  }, []);
+
+
+
+
 
   return (
     <div className='bg-white  px-10'>
