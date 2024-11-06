@@ -1,3 +1,5 @@
+/** @format */
+
 import { DatePicker } from "antd";
 import { Button } from "../ui/button";
 import {
@@ -24,9 +26,8 @@ export const MultiStepForm = ({
   setSteps,
   isLoading,
   handleGenerateProfileSummary,
-  handleCloseAIDialog
+  handleCloseAIDialog,
 }) => {
-
   const handleJobTitleChange = (e) => {
     const newFormDate = { ...formData, jobTitle: e.target.value };
     setFormData(newFormDate);
@@ -52,11 +53,13 @@ export const MultiStepForm = ({
     }
     const newDate = dayjs(e).format("YYYY-MM-DD");
     setFormData({
-      ...formData, experience: {
-        ...formData.experience, startDate: newDate
-      }
-    })
-  }
+      ...formData,
+      experience: {
+        ...formData.experience,
+        startDate: newDate,
+      },
+    });
+  };
 
   const handleAddEndDate = (e) => {
     if (!e) {
@@ -64,41 +67,46 @@ export const MultiStepForm = ({
     }
     const newDate = dayjs(e).format("YYYY-MM-DD");
     setFormData({
-      ...formData, experience: {
-        ...formData.experience, endDate: newDate
-      }
-    })
-  }
+      ...formData,
+      experience: {
+        ...formData.experience,
+        endDate: newDate,
+      },
+    });
+  };
 
   const disabledEndDate = (current) => {
-    const startDate = dayjs(formData.experience.startDate, 'YYYY-MM-DD');
-    const nextDay = startDate.add(1, 'day');
-  return current && current < nextDay;
-  }
+    const startDate = dayjs(formData.experience.startDate, "YYYY-MM-DD");
+    const nextDay = startDate.add(1, "day");
+    return current && current < nextDay;
+  };
 
   if (steps === 1) {
     return (
-      <DialogContent onClick={handleCloseAIDialog} className="sm:max-w-[500px]" showCloseButton={true}>
+      <DialogContent
+        onClick={handleCloseAIDialog}
+        className='sm:max-w-[500px]'
+        showCloseButton={true}>
         <DialogHeader>
           <DialogTitle>
-            <div className=" flex items-center">
-              <p className="mr-3">0%</p>
-              <Progress value={1} className=" shadow-sm h-4 border" />
+            <div className=' flex items-center'>
+              <p className='mr-3'>0%</p>
+              <Progress value={1} className=' shadow-sm h-4 border' />
             </div>
           </DialogTitle>
           <DialogDescription>
-            Enter your Job Profile here and tap on the Next option to save your
+            Enter your Job Title here and tap on the Next button to save your
             details.
           </DialogDescription>
         </DialogHeader>
         <div>
-          <Label htmlFor="name" className="text-right">
+          <Label htmlFor='name' className='text-right'>
             Job Title
           </Label>
           <Input
-            id="jobTitle"
-            placeholder="Enter your job title"
-            className="mt-2"
+            id='jobTitle'
+            placeholder='Enter your job title'
+            className='mt-2'
             onChange={handleJobTitleChange}
             value={formData.jobTitle}
           />
@@ -106,8 +114,7 @@ export const MultiStepForm = ({
         <DialogFooter>
           <Button
             onClick={() => setSteps((prev) => prev + 1)}
-            disabled={formData?.jobTitle.length == 0}
-          >
+            disabled={formData?.jobTitle.length == 0}>
             Next
           </Button>
         </DialogFooter>
@@ -115,12 +122,15 @@ export const MultiStepForm = ({
     );
   } else if (steps === 2) {
     return (
-      <DialogContent className="sm:max-w-[500px]" onClick={handleCloseAIDialog} showCloseButton={true}>
+      <DialogContent
+        className='sm:max-w-[500px]'
+        onClick={handleCloseAIDialog}
+        showCloseButton={true}>
         <DialogHeader>
           <DialogTitle>
-            <div className=" flex items-center">
-              <p className="mr-3">25%</p>
-              <Progress value={25} className=" shadow-sm h-4 border" />
+            <div className=' flex items-center'>
+              <p className='mr-3'>25%</p>
+              <Progress value={25} className=' shadow-sm h-4 border' />
             </div>
           </DialogTitle>
           <DialogDescription>
@@ -128,74 +138,83 @@ export const MultiStepForm = ({
             Title, Company Name, Start Date, End Date, and Job Description.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid grid-cols-2 gap-5">
-          <div className="w-full">
-            <Label htmlFor="name" className="text-right">
+        <div className='grid grid-cols-2 gap-5'>
+          <div className='w-full'>
+            <Label htmlFor='name' className='text-right'>
               Job Title{" "}
-              <span className=" text-10px italic ml-1 text-gray-500">
+              <span className=' text-10px italic ml-1 text-gray-500'>
                 (optional)
               </span>
             </Label>
             <Input
-              name="jobTitle"
-              placeholder="Enter your job title"
-              className="mt-2"
+              name='jobTitle'
+              placeholder='Enter your job title'
+              className='mt-2'
               value={formData.experience.jobTitle}
               onChange={handleExperienceChange}
             />
           </div>
-          <div className="w-full">
-            <Label htmlFor="employer" className="text-right">
+          <div className='w-full'>
+            <Label htmlFor='employer' className='text-right'>
               Comapny
-              <span className=" text-10px italic ml-1 text-gray-500">
+              <span className=' text-10px italic ml-1 text-gray-500'>
                 (optional)
               </span>
             </Label>
             <Input
-              name="companyName"
-              placeholder="Enter comapany name"
-              className="mt-2"
+              name='companyName'
+              placeholder='Enter comapany name'
+              className='mt-2'
             />
           </div>
         </div>
         <div>
-          <div className="grid grid-cols-2 gap-5">
+          <div className='grid grid-cols-2 gap-5'>
             <div>
-              <Label htmlFor="employer" className="text-right">
+              <Label htmlFor='employer' className='text-right'>
                 Start Date
-                <span className=" text-10px italic ml-1 text-gray-500">
+                <span className=' text-10px italic ml-1 text-gray-500'>
                   (optional)
                 </span>
               </Label>
-              <DatePicker placeholder="Start Date" name="startDate" className="w-full" maxDate={dayjs()} onChange={handleAddStartDate} />
+              <DatePicker
+                placeholder='Start Date'
+                name='startDate'
+                className='w-full'
+                maxDate={dayjs()}
+                onChange={handleAddStartDate}
+              />
             </div>
             <div>
-              <Label htmlFor="employer" className="text-right">
+              <Label htmlFor='employer' className='text-right'>
                 End Date
-                <span className=" text-10px italic ml-1 text-gray-500">
+                <span className=' text-10px italic ml-1 text-gray-500'>
                   (optional)
                 </span>
               </Label>
-              <DatePicker placeholder="End Date" name="endDate" maxDate={dayjs()} className="w-full"
+              <DatePicker
+                placeholder='End Date'
+                name='endDate'
+                maxDate={dayjs()}
+                className='w-full'
                 disabled={!formData.experience.startDate}
                 onChange={handleAddEndDate}
-                disabledDate={(e) =>
-                  disabledEndDate(e)
-                } />
+                disabledDate={(e) => disabledEndDate(e)}
+              />
             </div>
           </div>
         </div>
         <div>
-          <Label htmlFor="employer" className="text-right">
+          <Label htmlFor='employer' className='text-right'>
             Job Description
-            <span className=" text-10px italic ml-1 text-gray-500">
+            <span className=' text-10px italic ml-1 text-gray-500'>
               (optional)
             </span>
           </Label>
-          <Textarea placeholder="Job Description" />
+          <Textarea placeholder='Job Description' />
         </div>
         <DialogFooter>
-          <div className="flex justify-between items-center w-full">
+          <div className='flex justify-between items-center w-full'>
             <Button onClick={() => setSteps((prev) => prev - 1)}>Back</Button>
             <Button onClick={() => setSteps((prev) => prev + 1)}>Next</Button>
           </div>
@@ -204,12 +223,15 @@ export const MultiStepForm = ({
     );
   } else if (steps === 3) {
     return (
-      <DialogContent className="sm:max-w-[500px]" onClick={handleCloseAIDialog} showCloseButton={true}>
+      <DialogContent
+        className='sm:max-w-[500px]'
+        onClick={handleCloseAIDialog}
+        showCloseButton={true}>
         <DialogHeader>
           <DialogTitle>
-            <div className=" flex items-center">
-              <p className="mr-3">50%</p>
-              <Progress value={50} className=" shadow-sm h-4 border" />
+            <div className=' flex items-center'>
+              <p className='mr-3'>50%</p>
+              <Progress value={50} className=' shadow-sm h-4 border' />
             </div>
           </DialogTitle>
           <DialogDescription>
@@ -219,13 +241,13 @@ export const MultiStepForm = ({
         </DialogHeader>
         <div>
           <Textarea
-            placeholder="Enter relevant skills "
+            placeholder='Enter your relevant skills '
             value={formData.skills}
             onChange={handleskillsChange}
           />
         </div>
         <DialogFooter>
-          <div className="w-full flex justify-between items-center">
+          <div className='w-full flex justify-between items-center'>
             <div>
               <Button onClick={() => setSteps((prev) => prev - 1)}>Back</Button>
             </div>
@@ -235,8 +257,7 @@ export const MultiStepForm = ({
                   handleGenerateProfileSummary();
                   setSteps((prev) => prev + 1);
                 }}
-                disabled={formData.skills.length === 0}
-              >
+                disabled={formData.skills.length === 0}>
                 Submit
               </Button>
             </div>
@@ -246,25 +267,30 @@ export const MultiStepForm = ({
     );
   } else if (steps === 4) {
     return (
-      <DialogContent className="sm:max-w-[500px]" onClick={handleCloseAIDialog} showCloseButton={true}>
+      <DialogContent
+        className='sm:max-w-[500px]'
+        onClick={handleCloseAIDialog}
+        showCloseButton={true}>
         {isLoading ? (
-          <div className="text-center">
+          <div className='text-center'>
             <AiGenerateLoader />
-            <p className="text-gray-800 text-base">
+            <p className='text-gray-800 text-base'>
               Generating presonalized profile summary with
-              <span className=" text-violet-700 font-bold ml-2 text-base">AI</span>
+              <span className=' text-violet-700 font-bold ml-2 text-base'>
+                AI
+              </span>
             </p>
           </div>
         ) : (
           <DialogHeader>
             <DialogTitle>
-              <div className=" flex items-center">
-                <p className="mr-3">100%</p>
-                <Progress value={100} className=" shadow-sm h-4 border" />
+              <div className=' flex items-center'>
+                <p className='mr-3'>100%</p>
+                <Progress value={100} className=' shadow-sm h-4 border' />
               </div>
             </DialogTitle>
             <DialogDescription>
-              <div className="mt-5 text-center">
+              <div className='mt-5 text-center'>
                 AI has generated your personalised profile summary
               </div>
             </DialogDescription>
