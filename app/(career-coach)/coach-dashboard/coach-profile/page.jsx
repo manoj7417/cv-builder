@@ -324,7 +324,7 @@ const CoachProfile = () => {
         accountNumber: userdata?.bankDetails?.accountNumber,
         ifscCode: userdata?.bankDetails?.code?.value,
         ratesPerHour: userdata?.ratesPerHour?.charges,
-        profileVideo: userdata?.profileVideo,
+        profileVideo: userdata?.profileVideo?.url,
       });
     }
   }, [userdata, reset]);
@@ -828,7 +828,7 @@ const CoachProfile = () => {
                       type='text'
                       {...register("profileVideo")}
                       id='profileVideo'
-                      value={profileVideo?.url}
+                      // value={profileVideo?.url}
                       placeholder='Enter video URL'
                       disabled={!isEditable}
                       className='border border-gray-300 p-2 rounded w-full mt-2'

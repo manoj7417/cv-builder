@@ -68,6 +68,10 @@ const CoachDetailsPage = () => {
         ...singleCoach.signedAggrement,
         isVerified: data?.isAgreementVerified,
       },
+      profileVideo:{
+        ...singleCoach.profileVideo,
+        isApproved:data?.isVideoVerified
+      }
     };
     try {
       const response = await axios.patch(

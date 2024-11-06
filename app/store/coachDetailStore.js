@@ -2,9 +2,9 @@
 
 import axios from "axios";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
-const myMiddlewares = (f) => devtools(f, { name: "coachDetail" });
+const myMiddlewares = (f) => persist(f, { name: "coachDetail" });
 
 const useCoachesDetailStore = create(
   myMiddlewares((set) => ({
@@ -16,10 +16,11 @@ const useCoachesDetailStore = create(
     fetchAllCoaches: async () => {
       set({ isLoading: true });
       try {
-        const response = await axios.get(`/api/getAllCoaches?timestamp=${new Date().getTime()}`);
+        const response = await axios.get(
+          `/api/getAllCoaches?timestamp=${new Date().getTime()}`
+        );
         const data = await response.data;
         await set({ coaches: data.coaches });
-       
       } catch (error) {
         console.error(error);
       } finally {
@@ -36,12 +37,21 @@ const useCoachesDetailStore = create(
 
     // Update singleCoach by merging existing properties with new ones
     updateSingleCoach: (updatedFields) =>
-      set((state) => ({
-        singleCoach: {
+      set((state) => {
+        const updatedCoach = {
           ...state.singleCoach,
           ...updatedFields, // Merges the existing singleCoach with new updated fields
-        },
-      })),
+        };
+
+        const updatedCoaches = state.coaches.map((coach) =>
+          coach._id === updatedCoach._id ? updatedCoach : coach
+        );
+
+        return {
+          singleCoach: updatedCoach,
+          coaches: updatedCoaches,
+        };
+      }),
   }))
 );
 
