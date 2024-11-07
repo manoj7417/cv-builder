@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-
+export const dynamic = "force-dynamic";
 import CoachTableSkeleton from "@/components/component/AdminDashboard/CoachTableSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,27 +46,22 @@ const Coach = () => {
     }
   };
 
-  const getAllCoaches = async () => {
-    try {
-      const response = await axios.get('https://goldfish-app-a2e3u.ondigitalocean.app/api/coach/all',{
-        headers : {
-          "x-api-key" : "careerGenie_Key"
-        }
-      });
-      console.log(response.data)
-
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // const getAllCoaches = async () => {
+  //   try {
+  //     const response = await axios.get('/api/getAllCoaches');
+  //     console.log(response)
+  //     setAllCoaches(response.data.coaches);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   useEffect(() => {
     fetchAllCoaches();
   }, []);
 
-  useEffect(() => {
-    getAllCoaches();
-  }, [])
+
 
 
 

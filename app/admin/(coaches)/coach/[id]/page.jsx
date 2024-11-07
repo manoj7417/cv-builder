@@ -1,5 +1,4 @@
 /** @format */
-
 "use client";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -32,10 +31,7 @@ const CoachDetailsPage = () => {
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("details");
-  const {
-    updateSingleCoach,
-    fetchAllCoaches
-  } = useCoachesDetailStore();
+
 
 
   const [singleCoach, setSingleCoach] = useState(null);
@@ -81,8 +77,7 @@ const CoachDetailsPage = () => {
         }
       );
       if (response.status === 200) {
-        updateSingleCoach(response?.data?.data);
-        fetchAllCoaches();
+      
         router.push("/admin/coach");
         toast.success("Update Coach Details submitted successfully");
       }
