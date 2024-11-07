@@ -92,17 +92,18 @@ function CreateProgram() {
             const response = await axios.post("/api/uploadImage", formData);
             if (response.status === 200) {
                 const imageUrl = response.data.url;
-                setValue("programImage", imageUrl);
-                clearErrors("programImage");
+                setValue("programImage", imageUrl, { shouldValidate: true }); // Set value with immediate validation
+                clearErrors("programImage"); // Clear any existing error for this field
                 toast.success("Image uploaded successfully");
             }
         } catch (error) {
-            
             toast.error("Error uploading image");
         } finally {
             setIsUploading(false);
         }
-    }
+    };
+    
+    
 
     useEffect(() => {
         setIsMounted(true);
