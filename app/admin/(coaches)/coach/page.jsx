@@ -52,7 +52,6 @@ const Coach = () => {
   //     console.log(response)
   //     setAllCoaches(response.data.coaches);
   //     setIsLoading(false);
-
   //   } catch (error) {
   //     console.error(error);
   //   }
