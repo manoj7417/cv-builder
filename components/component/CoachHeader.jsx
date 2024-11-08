@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 export function CoachHeader({ coachData }) {
+  console.log("coachData", coachData);
   // const [singleCoach, setSingleCoach] = useState(null);
 
   // const fetchCoachDetails = async () => {
@@ -116,7 +117,7 @@ export function CoachHeader({ coachData }) {
 
         {/* Right Side */}
 
-        {coachData?.socialLinks > 0 && (
+        {/* {coachData?.socialLinks > 0 && (
           <div
             id='blog_header_right_side'
             className='text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0'>
@@ -183,6 +184,37 @@ export function CoachHeader({ coachData }) {
                   className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
                 />
               </Link>
+            </div>
+          </div>
+        )} */}
+        {coachData?.socialLinks?.length > 0 && (
+          <div
+            id='blog_header_right_side'
+            className='text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0'>
+            <div id='socialMediaIcons' className='flex space-x-2 justify-end'>
+              {coachData.socialLinks.map((socialLink) => {
+                const iconSrc = {
+                  facebook: "/facebook_icon.png",
+                  twitter: "/twitter_icon.png",
+                  instagram: "/instagram_icon.png",
+                  youtube: "/youtube_icon.png",
+                  whatsapp: "/whatsapp_icon.png",
+                };
+
+                return (
+                  <Link
+                    key={socialLink.id} // Unique key for each social link
+                    href={`https://${socialLink.link}`}
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <img
+                      src={iconSrc[socialLink.name.toLowerCase()]}
+                      alt={socialLink.name}
+                      className='w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto'
+                    />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}

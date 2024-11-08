@@ -58,6 +58,7 @@ import {
   FaYoutube,
   FaLink,
 } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const CoachForm = () => {
   const steps = [
@@ -140,6 +141,7 @@ const CoachForm = () => {
   const { updateUserData } = useCoachStore();
   const imageUrl = watch("profileImage");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -426,6 +428,11 @@ const CoachForm = () => {
         refreshToken: refreshToken.value,
       });
       if (response.status === 200) {
+        updateUserData(response.data.data.userdata);
+        const { isApproved } = response.data.data.userdata;
+        if (isApproved) {
+          return router.push("/coach-dashboard");
+        }
       }
     } catch (error) {}
   };
