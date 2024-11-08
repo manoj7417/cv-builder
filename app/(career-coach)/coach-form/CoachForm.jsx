@@ -3,7 +3,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { motion } from "framer-motion";
 import { DatePicker } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -86,7 +86,7 @@ const CoachForm = () => {
       fields: ["docsUpload"],
     },
   ];
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(0);
   const delta = currentStep - previousStep;
   const defaultImage = "https://via.placeholder.com/150";
@@ -100,12 +100,14 @@ const CoachForm = () => {
     trigger,
     setValue,
     clearErrors,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       email: userdata?.email || "",
       name: userdata?.name || "",
+      socialLinks: [],
     },
   });
   // { resolver: yupResolver(schema) }
@@ -123,6 +125,10 @@ const CoachForm = () => {
   const { updateUserData } = useCoachStore();
   const imageUrl = watch("profileImage");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "socialLinks",
+  });
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -156,6 +162,9 @@ const CoachForm = () => {
 
   //upload cv
   const cvFile = watch("cvUpload");
+  const socialPlatform = watch("socialPlatform");
+  const socialLink = watch("socialLink");
+
   const error = errors.cvUpload?.message;
 
   // For CV UploadF
@@ -202,13 +211,13 @@ const CoachForm = () => {
     if (file) {
       setIsUploadingDocs(true);
       const formData = new FormData();
-      formData.append("docsUpload", file); 
+      formData.append("docsUpload", file);
       try {
         setIsDocumentLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); 
+        const response = await axios.post("/api/uploadImage", formData);
         if (response.status === 200) {
           const docUrl = response.data.url;
-          setValue("docsUpload", docUrl); 
+          setValue("docsUpload", docUrl);
           setIsDocumentLoading(false);
           setDocsUrl(docUrl);
         } else {
@@ -232,8 +241,8 @@ const CoachForm = () => {
     fileType === "cv"
       ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
       : fileType === "docs"
-        ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
-        : null;
+      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+      : null;
 
   const handleViewFile = (type) => {
     setFileType(type);
@@ -328,8 +337,6 @@ const CoachForm = () => {
   //START-COACH PROFILE VIDEO UPLOAD
   const [profileVideo, setprofileVideo] = useState(""); // State to store YouTube link
 
-
-
   const handleInputChange = (e) => {
     setprofileVideo(e.target.value); // Update the state with the input value
   };
@@ -341,14 +348,32 @@ const CoachForm = () => {
   const handleCoachAuth = async () => {
     const { accessToken, refreshToken } = await GetTokens();
     try {
-      const response = await axios.post("/api/coachAccount", { accessToken: accessToken.value, refreshToken: refreshToken.value });
+      const response = await axios.post("/api/coachAccount", {
+        accessToken: accessToken.value,
+        refreshToken: refreshToken.value,
+      });
       if (response.status === 200) {
-        
       }
-    } catch (error) {
+    } catch (error) {}
+  };
 
+  const handleAddSocialLink = () => {
+    if (socialLink === "") {
+      setError("socialLink","Please fill all the fields",{shouldFocus: true});
+      return;
     }
-  }
+    if ( socialPlatform === "") {
+      setError("socialPlatform","Please fill all the fields",{shouldFocus: true});
+      return;
+    }
+    append({ name: socialPlatform, link: socialLink });
+    setValue("socialLink", "");
+    setValue("socialPlatform", "");
+  };
+
+  const handleAddSocialPlatform = (value) => {
+    setValue("socialPlatform", value);
+  };
 
   useEffect(() => {
     if (userdata?.formFilled) {
@@ -357,7 +382,6 @@ const CoachForm = () => {
     // if (userdata?.profileVideo?.url) {
     //   setProfileVideo(userdata.profileVideo.url); // Set the default value from the database
     // }
-
   }, []);
 
   useEffect(() => {
@@ -913,7 +937,7 @@ const CoachForm = () => {
                       </div>
                     </div>
                     {/* END- COACH INTRODUCTION VIDEO */}
-                    <div className="sm:col-span-3">
+                    <div className="sm:col-span-6">
                       <label
                         htmlFor="skills"
                         className="block text-sm font-medium leading-6 text-gray-900"
@@ -957,6 +981,60 @@ const CoachForm = () => {
                           </p>
                         )}
                       </div>
+                    </div>
+                    {/* social links */}
+                    <div className="sm:col-span-2">
+                      <Controller
+                        name="socialPlatform"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            onValueChange={(value) =>
+                              handleAddSocialPlatform(value)
+                            }
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select Social Links" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem value="facebook">
+                                  Facebook
+                                </SelectItem>
+                                <SelectItem value="instagram">
+                                  Instagram
+                                </SelectItem>
+                                <SelectItem value="linkedin">
+                                  LinkedIn
+                                </SelectItem>
+                                <SelectItem value="youtube">YouTube</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                       {errors.socialPlatform?.message && (
+                          <p className="mt-2 text-sm text-red-400">
+                            {errors.socialPlatform.message}
+                          </p>
+                        )}
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Input type="text" {...register("socialLink")} />
+                      {errors.socialLink?.message && (
+                          <p className="mt-2 text-sm text-red-400">
+                            {errors.socialLink.message}
+                          </p>
+                        )}
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Button type="button" onClick={handleAddSocialLink}>
+                        ADD
+                      </Button>
+                    </div>
+                    <div className="sm:col-span-3">
+                     { console.log(fields)}
                     </div>
                     <div className="sm:col-span-3">
                       <label
