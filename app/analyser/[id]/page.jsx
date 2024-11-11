@@ -147,9 +147,7 @@ const FeedbackFuction = () => {
             Upload and attach files, or start afresh!
           </h1>
           <p className="text-center text-sm sm:text-lg md:px-12 sm:px-12 text-gray-500">
-            Drag and drop your resume file or upload from Google Drive or
-            Dropbox. We can also send you an email to reply with your
-            attachment whenever you are ready.
+          Select and upload the pdf file of the resume or simply upload your resume pdf from google drive or saved files. You can also choose to start creating a resume without using an existing resume file
           </p>
           <div className="flex w-full flex-col md:flex-row sm:flex-row gap-8 bg-gradient-to-r bg-white p-6 rounded-xl justify-around">
             <div
@@ -177,7 +175,7 @@ const FeedbackFuction = () => {
                     />
                   </svg>
                   <p class="mb-2 text-sm text-gray-500">
-                    <span class="font-semibold">Optimize</span> current resume
+                    <span class="font-semibold">Optimise</span> current resume
                   </p>
                 </div>
               </label>
@@ -208,7 +206,7 @@ const FeedbackFuction = () => {
                   </span>
                 </p>
                 <p className="text-xs text-gray-500 text-center">
-                  Personalized career advice, CV building, and more.
+                Build from the scratch, quickly and effortlessly.
                 </p>
               </div>
             </div>
