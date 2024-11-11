@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import ResumeTooltip from "@/components/component/ResumeTooltip";
 import axios from "axios";
 import { GetTokens } from "@/app/actions";
@@ -41,10 +41,12 @@ const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
   const { updateUserData } = useCoachStore();
+  console.log("userdata::", userdata);
   const {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors, isSubmitting, isDirty },
     watch,
     reset,
@@ -74,6 +76,7 @@ const CoachProfile = () => {
       cv: userdata?.cv?.link,
       signedAggrement: userdata?.signedAggrement?.link,
       profileVideo: userdata?.profileVideo,
+      socialLinks: userdata?.socialLinks || [],
     },
   });
 
@@ -91,6 +94,13 @@ const CoachProfile = () => {
   const [cvFileUrl, setCvFileUrl] = useState(userdata?.cv?.link || "");
   const [docsUrl, setDocsUrl] = useState(userdata?.signedAggrement?.link || "");
   const [isApiLoading, setIsApiLoading] = useState(false);
+
+  const { fields } = useFieldArray({
+    control,
+    name: "socialLinks",
+  });
+
+  console.log("fields::", fields);
 
   const cvFile = watch("cvUpload");
   const docsFile = watch("docsUpload");
@@ -323,7 +333,8 @@ const CoachProfile = () => {
         accountNumber: userdata?.bankDetails?.accountNumber,
         ifscCode: userdata?.bankDetails?.code?.value,
         ratesPerHour: userdata?.ratesPerHour?.charges,
-        profileVideo: userdata?.profileVideo,
+        profileVideo: userdata?.profileVideo?.url,
+        socialLinks: userdata?.socialLinks || [],
       });
     }
   }, [userdata, reset]);
@@ -529,6 +540,28 @@ const CoachProfile = () => {
                         className='w-full'
                         disabled={!isEditable}
                       />
+                    </div>
+
+                    <div className='col-span-3'>
+                      <label>Social Links</label>
+                      {fields.map((item, index) => (
+                        <div key={item.id} style={{ marginBottom: "10px" }}>
+                          <label className='mb-5'>{item.name}</label>
+                          <Controller
+                            name={`socialLinks.${index}.link`}
+                            control={control}
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                type='text'
+                                className='w-full'
+                                disabled={!isEditable} // Disable input when not in edit mode
+                                placeholder={`Link for ${item.name}`}
+                              />
+                            )}
+                          />
+                        </div>
+                      ))}
                     </div>
 
                     <div className='col-span-3'>
@@ -827,7 +860,7 @@ const CoachProfile = () => {
                       type='text'
                       {...register("profileVideo")}
                       id='profileVideo'
-                      value={profileVideo?.url}
+                      // value={profileVideo?.url}
                       placeholder='Enter video URL'
                       disabled={!isEditable}
                       className='border border-gray-300 p-2 rounded w-full mt-2'

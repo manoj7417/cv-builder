@@ -548,13 +548,14 @@ export const Template3 = () => {
                   }}>
                   Details
                 </h2>
-                <div className={`text-gray-600 my-4 ${fontStyle.contactFont}`}>
+                <div
+                  className={`text-gray-600 my-4 ${fontStyle.contactFont} space-y-3`}>
                   {basics?.email && (
                     <a
                       href={`mailto:${basics?.email}`}
                       className='hover:underline flex items-center mt-1  text-wrap w-full '>
                       <MdOutlineMailOutline className='mr-2' />
-                      <p className='w-[90%] text-wrap break-normal'>
+                      <p className='w-[90%] text-wrap break-all'>
                         {basics?.email}
                       </p>
                     </a>

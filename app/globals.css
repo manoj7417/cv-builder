@@ -1,19 +1,21 @@
+/** @format */
+
 @import url("/fonts/fonts.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer components {
   .clip-resume {
-    clip-path: polygon(0% 0%,
-        100% 0%,
-        100% 90%,
-        30% 89%,
-        14% 100%,
-        0 88%,
-        0 91%);
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 90%,
+      30% 89%,
+      14% 100%,
+      0 88%,
+      0 91%
+    );
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -53,7 +55,6 @@
     @apply focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[color:var(--theme-purple)] hover:opacity-80 hover:outline-[color:var(--theme-purple)];
   }
 }
-
 
 .accordion_item ul {
   list-style: disc;
@@ -348,15 +349,15 @@ html {
     background: #3a3b3c;
   }
 
-  .mobile_responsive_nav #menu-btn:checked~.nav-links {
+  .mobile_responsive_nav #menu-btn:checked ~ .nav-links {
     left: 0%;
   }
 
-  .mobile_responsive_nav #menu-btn:checked~.btn.menu-btn {
+  .mobile_responsive_nav #menu-btn:checked ~ .btn.menu-btn {
     display: none;
   }
 
-  .mobile_responsive_nav #close-btn:checked~.btn.menu-btn {
+  .mobile_responsive_nav #close-btn:checked ~ .btn.menu-btn {
     display: block;
   }
 
@@ -384,10 +385,10 @@ html {
   }
 
   /* .mobile_responsive_nav #showDrop:checked~.drop-menu, */
-  .mobile_responsive_nav #resume:checked~.mega-box,
-  .mobile_responsive_nav #cover:checked~.mega-box,
-  .mobile_responsive_nav #career:checked~.mega-box,
-  .mobile_responsive_nav #blog:checked~.mega-box {
+  .mobile_responsive_nav #resume:checked ~ .mega-box,
+  .mobile_responsive_nav #cover:checked ~ .mega-box,
+  .mobile_responsive_nav #career:checked ~ .mega-box,
+  .mobile_responsive_nav #blog:checked ~ .mega-box {
     max-height: 100%;
   }
 
@@ -616,10 +617,12 @@ footer a:hover svg {
   position: absolute;
   width: 150%;
   height: 40px;
-  background-image: linear-gradient(45deg,
-      #ff6547 0%,
-      #ffb144 51%,
-      #ff7053 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff6547 0%,
+    #ffb144 51%,
+    #ff7053 100%
+  );
   transform: rotate(-45deg) translateY(-20px);
   display: flex;
   align-items: center;
@@ -641,10 +644,12 @@ footer a:hover svg {
   height: 10px;
   z-index: -1;
   box-shadow: 140px -140px #cc3f47;
-  background-image: linear-gradient(45deg,
-      #ff512f 0%,
-      #f09819 51%,
-      #ff512f 100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
 }
 
 .file {
@@ -654,11 +659,11 @@ footer a:hover svg {
   align-items: center;
 }
 
-.file>input[type="file"] {
+.file > input[type="file"] {
   display: none;
 }
 
-.file>label {
+.file > label {
   font-size: 1rem;
   font-weight: 300;
   cursor: pointer;
@@ -711,11 +716,13 @@ footer a:hover svg {
 .floating_wrapper {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.1) 20%,
-      rgba(255, 255, 255, 0.95) 70%,
-      rgba(255, 255, 255, 1) 78%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.95) 70%,
+    rgba(255, 255, 255, 1) 78%
+  );
 }
 
 .floating_button {
@@ -809,7 +816,6 @@ footer a:hover svg {
 .new_resume_header .nav-link-grow-up:hover::before {
   height: 3px;
 }
-
 
 .new_resume_header .active-link {
   opacity: 1;
@@ -1105,18 +1111,14 @@ footer a:hover svg {
   border-color: rgb(229 231 235);
 }
 
-ol>li {
+ol > li {
   display: list-item !important;
 }
 
-
 @media only screen and (max-width: 600px) {
-
-
   .steps_slider .swiper-pagination .swiper-pagination-bullet {
     display: none !important;
   }
-
 
   .mobile_footer img {
     width: 100px;
@@ -1124,23 +1126,22 @@ ol>li {
   }
 
   .cv_slider .swiper {
-     width:250px
+    width: 250px;
   }
-    .swiper-pagination-horizontal{
-      position: sticky !important;
-          top: 100% !important;
-    }
-        .swiper-slide {
-          flex-shrink: 0;
-          width: 100%;
-          height: 100%;
-          position: relative;
-          transition-property: transform;
-          display: flex !important;
-          justify-content: center !important;
-        }
+  .swiper-pagination-horizontal {
+    position: sticky !important;
+    top: 100% !important;
+  }
+  .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    display: flex !important;
+    justify-content: center !important;
+  }
 }
-
 
 /* target the active bullet */
 .cv_slider .swiper-pagination-bullet-active {
@@ -1155,15 +1156,13 @@ ol>li {
   bottom: 0px !important;
 }
 
-
 .cv_slider .swiper {
   height: 75%;
 }
 
-.resume_slider  .swiper {
+.resume_slider .swiper {
   height: 450px;
 }
-
 
 .bgNdnL {
   opacity: 1;
@@ -1172,8 +1171,6 @@ ol>li {
   transition-delay: 0.2s;
 }
 
-
-
 .epiSoF {
   opacity: 0;
   transition-property: opacity;
@@ -1181,12 +1178,9 @@ ol>li {
   display: none;
 }
 
-
-
-
 /* Change Calendar CSS Starts Here  */
 
 .fc .fc-button {
- background-color: #031d44 !important;
- color: white !important;
+  background-color: #031d44 !important;
+  color: white !important;
 }

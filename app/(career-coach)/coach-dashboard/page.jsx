@@ -124,105 +124,111 @@ const CoachDashboardPage = () => {
               Upcoming Appointment
             </h2>
             <div className='flex gap-5 flex-wrap'>
-              {loading
-                ? Array.from({ length: 4 }).map(
-                    (
-                      _,
-                      index // Render 4 skeleton cards
-                    ) => (
-                      <div key={index}>
-                        <div className='h-auto w-full xl:w-[300px] lg:w-[300px] bg-gray-200 rounded-lg p-5 relative overflow-hidden'>
-                          {/* Skeleton for title and icon */}
-                          <div className='flex justify-between items-center'>
-                            <Skeleton className='h-6 w-32' />
-                            <Skeleton className='h-6 w-6 rounded-full' />
-                          </div>
-                          {/* Skeleton for avatar and name */}
-                          <div className='flex items-center mb-6 w-full mt-5'>
-                            <Skeleton className='w-12 h-12 rounded-full' />
-                            <Skeleton className='ml-2 h-4 w-20' />
-                          </div>
-                          {/* Skeleton for appointment date and country */}
-                          <div className='flex justify-between items-center mt-2'>
-                            <Skeleton className='h-4 w-24' />
-                            <Skeleton className='h-4 w-16' />
-                          </div>
-                          <div className='flex justify-between items-center mt-2'>
-                            <Skeleton className='h-4 w-24' />
-                            <Skeleton className='h-4 w-16' />
-                          </div>
-                          {/* Skeleton for buttons */}
-                          <div className='flex justify-between items-center mt-10'>
-                            <Skeleton className='h-10 w-24 rounded-full' />
-                            <Skeleton className='h-10 w-24 rounded-full' />
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  )
-                : bookingSlot.length > 0 &&
-                  bookingSlot.map((item, index) => (
+              {loading ? (
+                Array.from({ length: 4 }).map(
+                  (
+                    _,
+                    index // Render 4 skeleton cards
+                  ) => (
                     <div key={index}>
-                      <div className='h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden'>
+                      <div className='h-auto w-full xl:w-[300px] lg:w-[300px] bg-gray-200 rounded-lg p-5 relative overflow-hidden'>
+                        {/* Skeleton for title and icon */}
                         <div className='flex justify-between items-center'>
-                          <div className='text-lg font-bold text-[#FFF]'>
-                            Next Appointment
-                          </div>
-                          <div>
-                            <img
-                              src='/coach_dot_icon.png'
-                              alt=''
-                              className=''
-                            />
-                          </div>
+                          <Skeleton className='h-6 w-32' />
+                          <Skeleton className='h-6 w-6 rounded-full' />
                         </div>
+                        {/* Skeleton for avatar and name */}
                         <div className='flex items-center mb-6 w-full mt-5'>
-                          <div className='w-12 h-auto overflow-hidden rounded-full'>
-                            <Image
-                              src='/new_appointment_img.png'
-                              alt='Profile Image'
-                              width={44}
-                              height={44}
-                            />
-                          </div>
-                          <div className='ml-1'>
-                            <p className='text-[13px] font-bold text-white'>
-                              {item?.userId?.fullname}
-                            </p>
-                            <p className='text-[13px] font-bold text-white'>
-                              {item?.userId?.email}
-                            </p>
-                          </div>
+                          <Skeleton className='w-12 h-12 rounded-full' />
+                          <Skeleton className='ml-2 h-4 w-20' />
+                        </div>
+                        {/* Skeleton for appointment date and country */}
+                        <div className='flex justify-between items-center mt-2'>
+                          <Skeleton className='h-4 w-24' />
+                          <Skeleton className='h-4 w-16' />
                         </div>
                         <div className='flex justify-between items-center mt-2'>
-                          <div className='text-sm text-[#FFF]'>
-                            Appointment Date
-                          </div>
-                          <div className='text-sm text-[#FFF]'>Country</div>
+                          <Skeleton className='h-4 w-24' />
+                          <Skeleton className='h-4 w-16' />
                         </div>
-                        <div className='flex justify-between items-center mt-2'>
-                          <div className='text-sm font-bold text-[#FFF]'>
-                            {formatDate(item?.date)}
-                          </div>
-                          <div className='text-sm font-bold text-[#FFF]'>
-                            {item?.country}
-                          </div>
-                        </div>
+                        {/* Skeleton for buttons */}
                         <div className='flex justify-between items-center mt-10'>
-                          <div className='text-sm font-bold text-[#FFF]'>
-                            <button className='rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black'>
-                              Start
-                            </button>
-                          </div>
-                          <div className='text-sm font-bold text-[#FFF]'>
-                            <button className='rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black'>
-                              Cancel
-                            </button>
-                          </div>
+                          <Skeleton className='h-10 w-24 rounded-full' />
+                          <Skeleton className='h-10 w-24 rounded-full' />
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )
+                )
+              ) : bookingSlot.length > 0 ? (
+                bookingSlot.map((item, index) => (
+                  <div key={index}>
+                    <div className='h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden'>
+                      <div className='flex justify-between items-center'>
+                        <div className='text-lg font-bold text-[#FFF]'>
+                          Next Appointment
+                        </div>
+                        <div>
+                          <img src='/coach_dot_icon.png' alt='' className='' />
+                        </div>
+                      </div>
+                      <div className='flex items-center mb-6 w-full mt-5'>
+                        <div className='w-12 h-auto overflow-hidden rounded-full'>
+                          <Image
+                            src='/new_appointment_img.png'
+                            alt='Profile Image'
+                            width={44}
+                            height={44}
+                          />
+                        </div>
+                        <div className='ml-1'>
+                          <p className='text-[13px] font-bold text-white'>
+                            {item?.userId?.fullname}
+                          </p>
+                          <p className='text-[13px] font-bold text-white'>
+                            {item?.userId?.email}
+                          </p>
+                        </div>
+                      </div>
+                      <div className='flex justify-between items-center mt-2'>
+                        <div className='text-sm text-[#FFF]'>
+                          Appointment Date
+                        </div>
+                        <div className='text-sm text-[#FFF]'>Country</div>
+                      </div>
+                      <div className='flex justify-between items-center mt-2'>
+                        <div className='text-sm font-bold text-[#FFF]'>
+                          {formatDate(item?.date)}
+                        </div>
+                        <div className='text-sm font-bold text-[#FFF]'>
+                          {item?.country}
+                        </div>
+                      </div>
+                      <div className='flex justify-between items-center mt-10'>
+                        <div className='text-sm font-bold text-[#FFF]'>
+                          <button className='rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black'>
+                            Start
+                          </button>
+                        </div>
+                        <div className='text-sm font-bold text-[#FFF]'>
+                          <button className='rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black'>
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className='flex justify-center items-center p-6'>
+                  <div className='text-center p-4 border rounded-lg shadow-lg'>
+                    <h2 className='text-sm font-medium'>No Data Available</h2>
+                    <p className='text-gray-500'>
+                      There are currently no appointment slots available.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           {/* END-PART 1 */}
@@ -284,63 +290,78 @@ const CoachDashboardPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {loading
-              ? Array.from({ length: 5 }).map(
-                  (
-                    _,
-                    index // Example: Render 5 skeleton rows
-                  ) => (
-                    <TableRow key={index}>
-                      <TableCell>
-                        <div className='flex items-center space-x-3'>
-                          <Skeleton className='w-10 h-10 rounded-full' />
-                          <Skeleton className='h-4 w-32' />
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton className='h-4 w-20' />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton className='h-4 w-24' />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton className='h-4 w-20' />
-                      </TableCell>
-                    </TableRow>
-                  )
-                )
-              : bookingSlot.map((item, index) => (
+            {loading ? (
+              Array.from({ length: 5 }).map(
+                (
+                  _,
+                  index // Example: Render 5 skeleton rows
+                ) => (
                   <TableRow key={index}>
-                    <TableCell className='font-medium'>
+                    <TableCell>
                       <div className='flex items-center space-x-3'>
-                        <Avatar className='w-10 h-10'>
-                          <AvatarImage
-                            src={item.userId.avatar}
-                            alt={item.userId.fullname}
-                          />
-                          <AvatarFallback>
-                            {item.userId.fullname
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")
-                              .toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className='flex flex-col'>
-                          <span>{item.userId.fullname}</span>
-                          <span>{item.userId.email}</span>
-                        </div>
+                        <Skeleton className='w-10 h-10 rounded-full' />
+                        <Skeleton className='h-4 w-32' />
                       </div>
                     </TableCell>
-                    <TableCell className='text-green-500'>
-                      {item.status}
+                    <TableCell>
+                      <Skeleton className='h-4 w-20' />
                     </TableCell>
                     <TableCell>
-                      {item.slotTime.startTime}-{item.slotTime.endTime}
+                      <Skeleton className='h-4 w-24' />
                     </TableCell>
-                    <TableCell>{item.country}</TableCell>
+                    <TableCell>
+                      <Skeleton className='h-4 w-20' />
+                    </TableCell>
                   </TableRow>
-                ))}
+                )
+              )
+            ) : bookingSlot.length > 0 ? (
+              bookingSlot.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className='font-medium'>
+                    <div className='flex items-center space-x-3'>
+                      <Avatar className='w-10 h-10'>
+                        <AvatarImage
+                          src={item.userId.avatar}
+                          alt={item.userId.fullname}
+                        />
+                        <AvatarFallback>
+                          {item.userId.fullname
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className='flex flex-col'>
+                        <span>{item.userId.fullname}</span>
+                        <span>{item.userId.email}</span>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className='text-green-500'>
+                    {item.status}
+                  </TableCell>
+                  <TableCell>
+                    {item.slotTime.startTime}-{item.slotTime.endTime}
+                  </TableCell>
+                  <TableCell>{item.country}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <table className='min-w-full border border-gray-200 shadow-lg'>
+                <tbody>
+                  <tr>
+                    <td className='p-6 text-center'>
+                      <h2 className='text-sm font-medium'>No Data Available</h2>
+                      <p className='text-gray-500'>
+                        There are currently no appointments available.
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
           </TableBody>
         </Table>
       </div>
