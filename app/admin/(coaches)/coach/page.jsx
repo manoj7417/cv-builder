@@ -45,7 +45,6 @@ const Coach = () => {
       console.error(error);
     }
   };
-
   // const getAllCoaches = async () => {
   //   try {
   //     const response = await axios.get('/api/getAllCoaches');
