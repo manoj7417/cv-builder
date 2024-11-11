@@ -11,7 +11,6 @@ export async function GET(req,res) {
       status: response.status || 200,
     });
   } catch (error) {
-    console.log(error)
     const errorMessage = error.response ? error.response.data : { error: "An error occurred" };
     const statusCode = error.response ? error.response.status : 500;
 
@@ -19,5 +18,6 @@ export async function GET(req,res) {
       status: statusCode,
     });
   }
+}
   
 }
