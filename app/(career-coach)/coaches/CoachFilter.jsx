@@ -35,7 +35,7 @@ import useDebounce from "@/app/hook/useDebounce";
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
   { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
+  { name: "Latest", href: "#", current: false },
 ];
 
 const subCategories = [
@@ -48,7 +48,7 @@ const subCategories = [
 const filters = [
   {
     id: "coachCourses",
-    name: "Coach Courses",
+    name: "Courses",
     options: [
       { value: "javascript", label: "JavaScript", checked: false },
       { value: "react", label: "React", checked: false },
@@ -72,7 +72,7 @@ const filters = [
   },
   {
     id: "coachProfile",
-    name: "Coach Job Profile",
+    name: "Job Profile",
     options: [
       { value: "web", label: "Web Developer", checked: false },
       { value: "react", label: "React Native Developer", checked: false },
@@ -100,7 +100,7 @@ const filters = [
   },
   {
     id: "rating",
-    name: "Coach Rating",
+    name: "Rating",
     options: [
       { value: "4.7", label: "4.7", checked: false },
       { value: "4.8", label: "4.8", checked: false },

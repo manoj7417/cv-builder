@@ -125,7 +125,7 @@ const ComingSoonPage = () => {
                 <div className='button_wrapper '>
                   <Link href='/coaches'>
                     <button className='get_start_btn'>
-                      <span className='btn_text'>Hire Coach</span>
+                      <span className='btn_text'>Find a Coach</span>
                       <div className='btn_overlay'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
