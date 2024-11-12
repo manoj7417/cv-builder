@@ -42,9 +42,6 @@ const AdminPage = () => {
             </div>
           </div>
         </div>
-
-        {/* END-HEADER */}
-        {/* START-DASHBOARD TOP CARD */}
         <div className='grid grid-cols-2 sm:grid-cols-3  md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-4 p-5 sm:pl-10 md:pl-10 lg:pl-10 xl:pl-10 2xl:pl-10'>
           <div className='bg-[#FFFFFF] border border-[#EAEEF4] p-4 rounded-xl text-left drop-shadow-md'>
             <div className='text-[14px] font-bold text-[#7E92A2]'>

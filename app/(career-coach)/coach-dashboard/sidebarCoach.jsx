@@ -110,12 +110,9 @@ const SidebarCoach = () => {
         <HiMenu className='w-8 h-8' />
       </button>
 
-      {/* Sidebar for Mobile and Desktop */}
       <div
-        className={`fixed inset-y-0 left-0 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}>
-        {/* Close button for mobile sidebar */}
+        className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}>
         <div className='flex justify-end mr-5 md:hidden'>
           <button
             className=' mb-4 focus:outline-none cursor-pointer'
@@ -123,7 +120,7 @@ const SidebarCoach = () => {
             <IoMdClose className='w-8 h-8' />
           </button>
         </div>
-        <div className='dashboard_logo p-5 mb-5'>
+        <div className='dashboard_logo px-5 mb-5'>
           <Image
             src='/admin-logo.png'
             alt='logo'
@@ -238,7 +235,6 @@ const SidebarCoach = () => {
             </li>
           </ul>
         </nav>
-        {/* Profile Section */}
         <div className='flex items-center justify-between  absolute l-0 bottom-0 w-full px-2'>
           <TooltipProvider>
             <Avatar className='h-10 w-10'>

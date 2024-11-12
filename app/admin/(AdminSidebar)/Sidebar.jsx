@@ -23,6 +23,7 @@ import { GetTokens, RemoveTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { RiUserSettingsLine } from "react-icons/ri";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,8 +44,8 @@ const Sidebar = () => {
 
   const getLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center p-3 rounded-md bg-[#1D4ED8] text-white cursor-pointer text-sm shadow-md"
-      : "flex items-center p-3 text-gray-500 rounded-md hover:shadow-xl cursor-pointer text-sm text-blue-700";
+      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto"
+      : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm  font-bold w-full";
   };
 
   const handleLogout = async () => {
@@ -80,7 +81,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className='flex lg:h-screen shadow-2xl h-screen lg:fixed lg:top-0 relative pb-5 w-full md:w-[20%] lg:w-[20%] min-w-[220px]'>
+    <div className='flex lg:h-full lg:fixed lg:top-0  pb-5 shadow-xl w-[16%] absolute z-50 h-screen bg-white pt-5'>
       <button
         className='md:hidden p-4 focus:outline-none'
         onClick={toggleSidebar}>
@@ -88,9 +89,8 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`fixed inset-y-0 left-0 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 bg-white p-4 transition-transform duration-300 ease-in-out z-50 w-full`}>
+        className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}>
         <div className='flex justify-end mr-5 md:hidden'>
           <button
             className=' mb-4 focus:outline-none cursor-pointer'
@@ -99,14 +99,20 @@ const Sidebar = () => {
           </button>
         </div>
         <div className='dashboard_logo px-5 mb-5'>
-          <Image src='/admin-logo.png' alt='logo' width={200} height={200} />
+          <Image
+            src='/admin-logo.png'
+            alt='logo'
+            width={200}
+            height={200}
+            className='w-[90%]'
+          />
         </div>
-        <nav className=' space-y-5 py-8'>
+        <nav className=' space-y-5 py-8 px-2'>
           <ul className='space-y-4 lg:w-full'>
             <li
               className={getLinkClass("/admin")}
               onClick={() => handleSetActiveTab("/admin")}>
-              <Link href='/admin' className='flex items-center w-full'>
+              <Link href='/admin' className='flex items-center w-full h-full p-2 px-3'>
                 <FaKey className='w-4 h-4 mr-4' />
                 <span className='font-semibold'>Dashboard</span>
               </Link>
@@ -115,7 +121,7 @@ const Sidebar = () => {
             <li
               className={getLinkClass("/admin/coach")}
               onClick={() => handleSetActiveTab("/admin/coach")}>
-              <Link href={"/admin/coach"} className='flex items-center w-full'>
+              <Link href={"/admin/coach"} className='flex items-center w-full h-full p-2 px-3'>
                 <LuUserSquare2 className='w-6 h-6 mr-4' />
                 <span className='font-semibold'>Coaches</span>
               </Link>
@@ -125,20 +131,9 @@ const Sidebar = () => {
               onClick={() => handleSetActiveTab("/admin/coach-program")}>
               <Link
                 href={"/admin/coach-program"}
-                className='flex items-center w-full'>
+                className='flex items-center w-full h-full p-2 px-3'>
                 <RiUserSettingsLine className='w-5 h-5 mr-4' />
                 <span className='font-semibold'>Coach Program</span>
-              </Link>
-            </li>
-            {/* Other Items with Custom Icons */}
-            <li className={getLinkClass("/admin/EditRequests")}>
-              <Link
-                href="/admin/EditRequests"
-                className="flex items-center w-full"
-                onClick={() => handleSetActiveTab("/admin/EditRequests")}
-              >
-                <IoDocumentsOutline className="w-6 h-6 mr-4" />
-                <span className="font-semibold ">Edit Requests</span>
               </Link>
             </li>
             {/* <li className={getLinkClass("/admin/viewUsers")}>
@@ -154,17 +149,17 @@ const Sidebar = () => {
           </ul>
         </nav>
         {/* Profile Section */}
-        <div className='flex items-center justify-between  absolute bottom-0 min-w-[200px] '>
+        <div className='flex items-center justify-between  absolute bottom-0 px-2 w-full'>
           <TooltipProvider>
-            <img
-              src={userdata?.profilePicture || "/avatar.jpg"} // Replace with your profile image path
-              alt='Profile Image'
-              width={52} // Width should match the container's width
-              height={52} // Height should match the container's height
-              className='object-cover h-10 w-10 rounded-full'
-            />
-            <div>
-              <p className='font-semibold text-gray-800 text-base'>
+            <Avatar className='h-10 w-10'>
+              <AvatarImage
+                src={userdata?.profilePicture}
+                alt={userdata?.profilePicture || "avatar"}
+              />
+              <AvatarFallback>{userdata?.fullname?.slice(0, 1)}</AvatarFallback>
+            </Avatar>
+            <div className='w-3/5'>
+              <p className='font-semibold text-gray-800 text-base '>
                 {userdata?.fullname}
               </p>
             </div>
