@@ -22,21 +22,23 @@ const menuItems = [
     href: "/cv-studio",
   },
   {
-    name: "Pricing",
-    href: "/pricing",
+    name: "Coaching",
+    href: "/career-services",
   },
   {
-    name: "About Us",
-    href: "/about-us",
+    name: "Pricing",
+    href: "/pricing",
   },
   {
     name: "Contact Us",
     href: "/contact-us",
   },
   {
-    name: "Coaching",
-    href: "/career-services",
+    name: "About Us",
+    href: "/about-us",
   },
+  
+  
 ];
 
 export function ResumeHeader() {

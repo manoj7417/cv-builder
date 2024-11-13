@@ -91,6 +91,7 @@ const Coach = () => {
     setFilter(type)
   }
 
+
   useEffect(() => {
     fetchAllCoaches();
     handlegetEditCoach()
