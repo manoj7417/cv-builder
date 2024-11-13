@@ -184,6 +184,7 @@ const CoachProfile = () => {
         link: docsUrl,
       },
       experience: data.experience,
+      socialLinks: data?.socialLinks || [],
       typeOfCoaching: data.typeOfCoaching,
       skills: data.skills,
       dateofBirth: data.dateofBirth,

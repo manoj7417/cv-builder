@@ -57,36 +57,15 @@ const EditCoachRequest = () => {
 
   const handleApproveData = async (data) => {
     const { accessToken } = await GetTokens();
-    const combinedData = {
-      ...singleCoach,
-      cv: {
-        ...singleCoach.cv,
-        isVerified: data?.isCvVerified,
-      },
-      signedAggrement: {
-        ...singleCoach.signedAggrement,
-        isVerified: data?.isAgreementVerified,
-      },
-      profileVideo: {
-        ...singleCoach.profileVideo,
-        isApproved: data?.isVideoVerified,
-      },
-    };
     try {
-      const response = await axios.patch(
-        `/api/verifyDocs/${id}`,
-        {
-          combinedData,
+      const response = await axios.patch(`/api/approveRequests/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken.value}`,
-          },
-        }
-      );
+      });
       if (response.status === 200) {
         router.push("/admin/coach");
-        toast.success("Update Coach Details submitted successfully");
+        toast.success("Approve Coach Details successfully");
       }
     } catch (error) {
       toast.error("Error in submitting the detail");
@@ -122,7 +101,6 @@ const EditCoachRequest = () => {
           Authorization: `Bearer ${accessToken.value}`,
         },
       });
-      console.log("response::", response);
       setSingleCoach(response.data.editRequest);
     } catch (error) {
       console.error(error);
@@ -172,10 +150,7 @@ const EditCoachRequest = () => {
               ) : (
                 <Button
                   className='bg-blue-700 text-white px-10 py-2 rounded-md'
-                  type='submit'
-                  disabled={
-                    !isCvVerified || !isAgreementVerified || isSubmitting
-                  }>
+                  type='submit'>
                   Approve
                 </Button>
               )}

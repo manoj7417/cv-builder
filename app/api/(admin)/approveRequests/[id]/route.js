@@ -1,12 +1,12 @@
 /** @format */
 import { serverInstance } from "@/lib/serverApi";
 
-export async function POST(req, { params }) {
+export async function PATCH(req, { params }) {
   try {
     const { id } = params;
     const data = await req.json();
     const token = req.headers.get("Authorization");
-    const response = await serverInstance.post(
+    const response = await serverInstance.patch(
       `/admin/approve/editCoachRequest/${id}`,
       data,
       {
@@ -22,7 +22,7 @@ export async function POST(req, { params }) {
   } catch (error) {
     const errorMessage = error.response
       ? error.response.data
-      : { error: "Error in updating coach edit request" };
+      : { error: "Error in updating approve request" };
     const statusCode = error.response ? error.response.status : 500;
 
     return new Response(JSON.stringify(errorMessage), {
