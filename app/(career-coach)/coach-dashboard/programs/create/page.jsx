@@ -73,17 +73,19 @@ function CreateProgram() {
     try {
       let isValid = true;
       data.days.forEach((day, dayIndex) => {
-        const totalSubModulesTime = day.subModules.reduce(
-          (total, subModule) => total + (subModule.timeToComplete || 0),
-          0
-        );
-        if (totalSubModulesTime !== day.timeToComplete) {
-          isValid = false;
-          setError(`days.${dayIndex}`, {
-            type: "manual",
-            message:
-              "Total time of sub-modules must match the time to complete for the day",
-          });
+        if (day.subModules && day.subModules.length > 0) { // Check if subModules exist
+          const totalSubModulesTime = day.subModules.reduce(
+            (total, subModule) => total + (subModule.timeToComplete || 0),
+            0
+          );
+          if (totalSubModulesTime !== day.timeToComplete) {
+            isValid = false;
+            setError(`days.${dayIndex}`, {
+              type: "manual",
+              message:
+                "Total time of sub-modules must match the time to complete for the day",
+            });
+          }
         }
       });
 
@@ -106,6 +108,7 @@ function CreateProgram() {
       setIscreatingProgram(false);
     }
   };
+
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
