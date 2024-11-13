@@ -20,19 +20,19 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-
-
 const Coach = () => {
   const router = useRouter();
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [coaches, setAllCoaches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [requests, setRequests] = useState([])
-  const [filter, setFilter] = useState('all')
+  const [requests, setRequests] = useState([]);
+  const [filter, setFilter] = useState("all");
+
+  console.log("requests::", requests);
 
   const handleCoachDetails = (id) => {
-    if (filter === 'editRequests') {
-      router.push(`/admin/coach/${id}/edit`)
+    if (filter === "editRequests") {
+      router.push(`/admin/coach/${id}/edit`);
       return;
     }
     router.push(`/admin/coach/${id}`);
@@ -51,75 +51,111 @@ const Coach = () => {
   };
 
   const handlegetEditCoach = async () => {
-    const { accessToken } = await GetTokens()
+    const { accessToken } = await GetTokens();
     if (!accessToken && !accessToken.value) {
-      toast("Please login")
-      return
+      toast("Please login");
+      return;
     }
     try {
       const response = await axios.get("/api/getEditCoachRequests", {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
-        }
-      })
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
       if (response.status === 200) {
-        setRequests(response.data.editCoaches)
+        setRequests(response.data.editCoaches);
       }
     } catch (error) {
-
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleFilterData = (type) => {
-    setIsLoading(true)
-    if (type === 'editRequests') {
-      setData(requests)
-      setFilter('editRequests')
-      setIsLoading(false)
+    setIsLoading(true);
+    if (type === "editRequests") {
+      setData(requests);
+      setFilter("editRequests");
+      setIsLoading(false);
       return;
     }
-    if (type === 'all') {
-      setData(coaches)
-      setFilter('all')
-      setIsLoading(false)
+    if (type === "all") {
+      setData(coaches);
+      setFilter("all");
+      setIsLoading(false);
       return;
     }
-    const filteredData = coaches.filter(coach => coach.approvalStatus === type);
+    const filteredData = coaches.filter(
+      (coach) => coach.approvalStatus === type
+    );
     setData(filteredData);
-    setIsLoading(false)
-    setFilter(type)
-  }
-
+    setIsLoading(false);
+    setFilter(type);
+  };
 
   useEffect(() => {
     fetchAllCoaches();
-    handlegetEditCoach()
+    handlegetEditCoach();
   }, []);
-
-
-
-
 
   return (
     <div className='bg-white  px-10'>
       <h1 className='text-2xl p-5 font-bold'>Coaches</h1>
-      <div className=" flex items-center">
-        <div className="mx-2">
-          <Badge className={`bg-blue-200 text-blue-500 py-1 cursor-pointer ${filter === "all" ? "bg-blue-500 text-white shadow-xl px-3 py-2" : ""}`} onClick={() => handleFilterData("all")}>All</Badge>
+      <div className=' flex items-center'>
+        <div className='mx-2'>
+          <Badge
+            className={`bg-blue-200 text-blue-500 py-1 cursor-pointer ${
+              filter === "all"
+                ? "bg-blue-500 text-white shadow-xl px-3 py-2"
+                : ""
+            }`}
+            onClick={() => handleFilterData("all")}>
+            All
+          </Badge>
         </div>
-        <div className="mx-2">
-          <Badge className={`bg-green-200 text-green-500 py-1 cursor-pointer ${filter === "approved" ? "bg-green-500 text-white shadow-xl px-3 py-2" : ""}`} onClick={() => handleFilterData("approved")}>Approved</Badge>
+        <div className='mx-2'>
+          <Badge
+            className={`bg-green-200 text-green-500 py-1 cursor-pointer ${
+              filter === "approved"
+                ? "bg-green-500 text-white shadow-xl px-3 py-2"
+                : ""
+            }`}
+            onClick={() => handleFilterData("approved")}>
+            Approved
+          </Badge>
         </div>
-        <div className="mx-2">
-          <Badge className={`bg-yellow-200 text-yellow-500 py-1 cursor-pointer ${filter === "pending" ? "bg-yellow-500 text-white shadow-xl px-3 py-2" : ""}`} onClick={() => handleFilterData("pending")}>Pending</Badge>
+        <div className='mx-2'>
+          <Badge
+            className={`bg-yellow-200 text-yellow-500 py-1 cursor-pointer ${
+              filter === "pending"
+                ? "bg-yellow-500 text-white shadow-xl px-3 py-2"
+                : ""
+            }`}
+            onClick={() => handleFilterData("pending")}>
+            Pending
+          </Badge>
         </div>
-        <div className="mx-2">
-          <Badge className={`bg-red-200 text-red-500 py-1 cursor-pointer ${filter === "rejected" ? "bg-red-500 text-white shadow-xl px-3 py-2" : ""}`} onClick={() => handleFilterData("rejected")}>Rejected</Badge>
+        <div className='mx-2'>
+          <Badge
+            className={`bg-red-200 text-red-500 py-1 cursor-pointer ${
+              filter === "rejected"
+                ? "bg-red-500 text-white shadow-xl px-3 py-2"
+                : ""
+            }`}
+            onClick={() => handleFilterData("rejected")}>
+            Rejected
+          </Badge>
         </div>
-        <div className="mx-2">
-          <Badge className={`bg-orange-200 text-orange-500 py-1 cursor-pointer ${filter === "editRequests" ? "bg-orange-500 text-white shadow-xl px-3 py-2" : ""}`} onClick={() => handleFilterData("editRequests")}>Edit Requests</Badge>
+        <div className='mx-2'>
+          <Badge
+            className={`bg-orange-200 text-orange-500 py-1 cursor-pointer ${
+              filter === "editRequests"
+                ? "bg-orange-500 text-white shadow-xl px-3 py-2"
+                : ""
+            }`}
+            onClick={() => handleFilterData("editRequests")}>
+            Edit Requests
+          </Badge>
         </div>
       </div>
       <div className='inline-block min-w-full py-2 align-middle '>
@@ -153,8 +189,11 @@ const Coach = () => {
               ) : (
                 <>
                   {data.length > 0 &&
-                    (data?.map((coach) => (
-                      <tr key={coach?.name} className='w-full border hover:bg-gray-50 cursor-pointer' onClick={() => handleCoachDetails(coach?._id)}>
+                    data?.map((coach) => (
+                      <tr
+                        key={coach?.name}
+                        className='w-full border hover:bg-gray-50 cursor-pointer'
+                        onClick={() => handleCoachDetails(coach?._id)}>
                         <td className='px-4 py-4 w-[25%]'>
                           <div className='flex items-center'>
                             <div className='h-10 w-10 flex-shrink-0'>
@@ -202,8 +241,7 @@ const Coach = () => {
                           </Button>
                         </td>
                       </tr>
-                    )))
-                  }
+                    ))}
                 </>
               )}
             </tbody>
@@ -215,22 +253,20 @@ const Coach = () => {
               <FaUser className='text-4xl text-blue-800' />
             </div>
             <p className='flex justify-center items-center mt-5'>
-              {
-                filter === "approved"
-                  ? "No Approved Coaches Found"
-                  : filter === "pending"
-                    ? "No Pending Coaches Found"
-                    : filter === "rejected"
-                      ? "No Rejected Coaches Found"
-                      : filter === "editRequests"
-                        ? "No Edit Requests Found"
-                        : "No Coaches Found"
-              }
+              {filter === "approved"
+                ? "No Approved Coaches Found"
+                : filter === "pending"
+                ? "No Pending Coaches Found"
+                : filter === "rejected"
+                ? "No Rejected Coaches Found"
+                : filter === "editRequests"
+                ? "No Edit Requests Found"
+                : "No Coaches Found"}
             </p>
           </div>
         )}
       </div>
-    </div >
+    </div>
   );
 };
 

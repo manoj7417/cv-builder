@@ -41,7 +41,6 @@ const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
   const { updateUserData } = useCoachStore();
-  console.log("userdata::", userdata);
   const {
     register,
     handleSubmit,
@@ -100,8 +99,6 @@ const CoachProfile = () => {
     name: "socialLinks",
   });
 
-  console.log("fields::", fields);
-
   const cvFile = watch("cvUpload");
   const docsFile = watch("docsUpload");
 
@@ -152,6 +149,7 @@ const CoachProfile = () => {
   };
 
   const handleEditProfile = async (data) => {
+    console.log("data::", data);
     const { accessToken } = await GetTokens();
     const payload = {
       name: data.name,
@@ -168,10 +166,16 @@ const CoachProfile = () => {
       city: data.city,
       country: data.country,
       zip: data.zip,
-      bankName: data.bankName,
-      accountNumber: data.accountNumber,
-      ifscCode: data.ifscCode,
-      ratesPerHour: data.ratesPerHour,
+      bankDetails: {
+        accountNumber: data.accountNumber,
+        code: {
+          value: data.ifscCode,
+        },
+        bankName: data.bankName,
+      },
+      ratesPerHour: {
+        charges: data.ratesPerHour,
+      },
       cv: {
         link: cvFileUrl,
       },
@@ -188,6 +192,7 @@ const CoachProfile = () => {
       coachingDescription: data.coachingDescription,
       address: data.address,
     };
+    console.log("payload::", payload);
     setIsApiLoading(true);
     try {
       const response = await axios.post("/api/editCoachInfo", payload, {
@@ -890,7 +895,7 @@ const CoachProfile = () => {
                         height='300px'
                       />
                     ) : (
-                      <p>
+                      <p className='text-sm'>
                         Please enter a valid YouTube URL to preview the video.
                       </p>
                     )}

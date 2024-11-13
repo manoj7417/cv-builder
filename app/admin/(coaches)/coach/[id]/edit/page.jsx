@@ -24,6 +24,8 @@ import { FiTerminal } from "react-icons/fi";
 
 const EditCoachRequest = () => {
   const { id } = useParams();
+  console.log("id::", id);
+
   const [activeTab, setActiveTab] = useState("details");
   const [singleCoach, setSingleCoach] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -108,11 +110,20 @@ const EditCoachRequest = () => {
     setActiveTab(value);
   };
 
-  const fetchCoachDetails = async () => {
+  const fetchEditCoachDetails = async () => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken && !accessToken.value) {
+      toast("Please login");
+      return;
+    }
     try {
-      const response = await axios.get(`/api/getAllCoaches`);
-      const data = response.data.coaches;   
-      console.log("data::",data);
+      const response = await axios.get(`/api/getEditCoachDetails/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      console.log("response::", response);
+      setSingleCoach(response.data.editRequest);
     } catch (error) {
       console.error(error);
       toast.error("Error fetching coach details");
@@ -120,7 +131,7 @@ const EditCoachRequest = () => {
   };
 
   useEffect(() => {
-    fetchCoachDetails();
+    fetchEditCoachDetails();
   }, []);
 
   const {
