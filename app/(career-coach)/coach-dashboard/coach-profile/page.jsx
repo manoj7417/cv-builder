@@ -887,19 +887,20 @@ const CoachProfile = () => {
 
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className='mt-4'>
-                    {profileVideo?.url &&
-                    ReactPlayer.canPlay(profileVideo?.url) ? (
-                      <ReactPlayer
-                        url={profileVideo?.url}
-                        controls
-                        width='100%'
-                        height='300px'
-                      />
-                    ) : (
-                      <p className='text-sm'>
-                        Please enter a valid YouTube URL to preview the video.
-                      </p>
-                    )}
+                    {profileVideo?.url ? (
+                      ReactPlayer.canPlay(profileVideo?.url) ? (
+                        <ReactPlayer
+                          url={profileVideo?.url}
+                          controls
+                          width='100%'
+                          height='300px'
+                        />
+                      ) : (
+                        <p className='text-sm'>
+                          Please enter a valid YouTube URL to preview the video.
+                        </p>
+                      )
+                    ) : null}
                   </div>
                 </div>
                 {/* END- COACH INTRODUCTION VIDEO */}

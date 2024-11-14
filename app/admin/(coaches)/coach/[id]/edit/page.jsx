@@ -485,17 +485,20 @@ const EditCoachRequest = () => {
                   </div>
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className='mt-4'>
-                    {profileVideo?.url &&
-                    ReactPlayer.canPlay(profileVideo?.url) ? (
-                      <ReactPlayer
-                        url={profileVideo?.url}
-                        controls
-                        width='100%'
-                        height='300px'
-                      />
-                    ) : (
-                      <p>No video has been added yet.</p>
-                    )}
+                    {profileVideo?.url ? (
+                      ReactPlayer.canPlay(profileVideo?.url) ? (
+                        <ReactPlayer
+                          url={profileVideo?.url}
+                          controls
+                          width='100%'
+                          height='300px'
+                        />
+                      ) : (
+                        <p>
+                          Please enter a valid YouTube URL to preview the video.
+                        </p>
+                      )
+                    ) : null}
                   </div>
                 </div>
 

@@ -606,7 +606,7 @@ const CoachForm = () => {
                     Personal Information
                   </h2>
                   <p className='mt-1 text-sm leading-6 text-gray-600'>
-                   Enter your personal details 
+                    Enter your personal details
                   </p>
                   <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
                     <div className='sm:col-span-full'>
@@ -978,19 +978,21 @@ const CoachForm = () => {
 
                       {/* Displaying the YouTube video using ReactPlayer */}
                       <div className='mt-4'>
-                        {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
-                          <ReactPlayer
-                            url={profileVideo}
-                            controls
-                            width='100%'
-                            height='300px'
-                          />
-                        ) : (
-                          <p>
-                            Please enter a valid YouTube URL to preview the
-                            video.
-                          </p>
-                        )}
+                        {profileVideo ? (
+                          ReactPlayer.canPlay(profileVideo?.url) ? (
+                            <ReactPlayer
+                              url={profileVideo?.url}
+                              controls
+                              width='100%'
+                              height='300px'
+                            />
+                          ) : (
+                            <p>
+                              Please enter a valid YouTube URL to preview the
+                              video.
+                            </p>
+                          )
+                        ) : null}
                       </div>
                     </div>
                     {/* END- COACH INTRODUCTION VIDEO */}
