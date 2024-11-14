@@ -179,7 +179,9 @@ const CoachProfile = () => {
       cv: {
         link: cvFileUrl,
       },
-      profileVideo: data.profileVideo,
+      profileVideo: {
+        url:data.profileVideo?.url
+      },
       signedAggrement: {
         link: docsUrl,
       },
@@ -425,7 +427,7 @@ const CoachProfile = () => {
                 <div className='lg:w-[20%] w-full profile_image'>
                   <div className='flex'>
                     <div className='mt-4'>
-                      <div className='flex'>
+                      <div className='flex flex-col'>
                         <img
                           src={userdata?.profileImage || defaultImage}
                           alt='profileimage'

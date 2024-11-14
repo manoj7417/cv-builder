@@ -28,7 +28,6 @@ const Coach = () => {
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState("all");
 
-  console.log("requests::", requests);
 
   const handleCoachDetails = (id) => {
     if (filter === "editRequests") {
