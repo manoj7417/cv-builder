@@ -45,6 +45,90 @@ export const useResumeStore = create(myMiddlewares((set) => ({
         state.resume.data.sections = sections;
         debouncedUpdateResume(JSON.parse(JSON.stringify(state?.resume)))
         return { resume: { ...state.resume } }
+    }),
+    clearResumeData: () => set((state) => {
+        state.resume.data.basics = {
+            name: "",
+            email: "",
+            phone: "",
+            country: "",
+            city: "",
+            jobtitle: "",
+            url: {
+                label: "",
+                href: "",
+            },
+            customFields: [],
+            picture: {
+                url: "",
+                visible: true
+            },
+        };
+        state.resume.data.sections = {
+            summary: {
+                name: "Profile",
+                visible: true,
+                id: "profile",
+                content: "",
+            },
+            education: {
+                name: "Education",
+                visible: true,
+                id: "education",
+                items: [],
+            },
+            experience: {
+                name: "Experience",
+                visible: true,
+                id: "experience",
+                items: [],
+            },
+            projects: {
+                name: "Projects",
+                visible: true,
+                id: "projects",
+                items: [],
+            },
+            skills: {
+                name: "Skills",
+                visible: true,
+                id: "skills",
+                items: [],
+            },
+            hobbies: {
+                name: "Hobbies",
+                visible: true,
+                id: "hobbies",
+                items: [],
+            },
+            certificates: {
+                name: "Certificates",
+                visible: true,
+                id: "certificates",
+                items: [],
+            },
+            reference: {
+                name: "References",
+                visible: true,
+                id: "reference",
+                items: [],
+            },
+            language: {
+                name: "Language",
+                visible: true,
+                id: "language",
+                items: []
+            },
+            awards: {
+                name: "Awards",
+                visible: true,
+                id: "awards",
+                items: [],
+            },
+            custom: {}
+        },
+            debouncedUpdateResume(JSON.parse(JSON.stringify(state?.resume)))
+        return { ...state.resume }
     })
 })))
 

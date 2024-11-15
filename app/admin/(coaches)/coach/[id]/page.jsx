@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import ReactPlayer from "react-player";
 import { FiTerminal } from "react-icons/fi";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 const CoachDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("details");
@@ -29,6 +30,8 @@ const CoachDetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const [pdfUrl, setPdfUrl] = useState("");
+  const [showApproveDialog, setShowApproveDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const {
     register,
@@ -93,8 +96,8 @@ const CoachDetailsPage = () => {
 
   const openModal = (url) => {
     if (url) {
-      setPdfUrl(url); // Set the PDF URL only if it exists
-      setIsModalOpen(true); // Open the modal
+      setPdfUrl(url);
+      setIsModalOpen(true);
     } else {
       toast.error("No document available to view");
     }
@@ -112,9 +115,9 @@ const CoachDetailsPage = () => {
     try {
       const response = await axios.get(`/api/getAllCoaches`);
       const data = response.data;
-      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      const coach = data.coaches.find((coach) => coach._id === id);
       if (coach) {
-        setSingleCoach(coach); // Set the single coach data if found
+        setSingleCoach(coach);
       } else {
         toast.error("Coach not found");
       }
@@ -150,9 +153,42 @@ const CoachDetailsPage = () => {
     skills = [],
   } = singleCoach || {};
 
+  const handleRejectCoach = () => {
+    console.log("Coach Rejected")
+  }
+
   return (
     <>
+
+      <AlertDialog open={showDeleteDialog} >
+        <AlertDialogContent className='bg-white'>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Coach request will be rejected.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction className="bg-red-700 text-white">Reject</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       <div className='h-full bg-white m-4 p-5'>
+        <AlertDialog open={showApproveDialog} >
+          <AlertDialogContent className='bg-white'>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will approve the coach and coach can continue to their dashboard.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction className="bg-green-700 text-white" type="submit">Approve</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
         <form
           onSubmit={handleSubmit(handleApproveData)}
           className='flex flex-col'>
@@ -164,14 +200,21 @@ const CoachDetailsPage = () => {
                   Update Status
                 </Button>
               ) : (
-                <Button
-                  className='bg-blue-700 text-white px-10 py-2 rounded-md'
-                  type='submit'
-                  disabled={
-                    !isCvVerified || !isAgreementVerified || isSubmitting
-                  }>
-                  Approve
-                </Button>
+                <>
+                  <Button className='bg-red-700 text-white px-10 py-2 rounded-md' type="button"
+                    onClick={() => handleRejectCoach()}>
+                    Reject
+                  </Button>
+                  <Button
+                    className='bg-blue-700 text-white px-10 py-2 rounded-md'
+                    type='button'
+                    onClick={() => setShowApproveDialog(true)}
+                    disabled={
+                      !isCvVerified || !isAgreementVerified || isSubmitting
+                    }>
+                    Approve
+                  </Button>
+                </>
               )}
             </div>
           </div>
@@ -370,17 +413,15 @@ const CoachDetailsPage = () => {
                                 className='hidden'
                               />
                               <div
-                                className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                  singleCoach?.isApproved || isCvVerified
-                                    ? "bg-green-600"
-                                    : ""
-                                }`}>
+                                className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${singleCoach?.isApproved || isCvVerified
+                                  ? "bg-green-600"
+                                  : ""
+                                  }`}>
                                 <div
-                                  className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                    singleCoach?.isApproved || isCvVerified
-                                      ? "translate-x-full"
-                                      : ""
-                                  }`}
+                                  className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${singleCoach?.isApproved || isCvVerified
+                                    ? "translate-x-full"
+                                    : ""
+                                    }`}
                                 />
                               </div>
                             </label>
@@ -414,7 +455,7 @@ const CoachDetailsPage = () => {
                           <p className='text-base font-medium text-gray-700'>
                             <div className='flex items-center space-x-2'>
                               {singleCoach?.isApproved ||
-                              isAgreementVerified ? (
+                                isAgreementVerified ? (
                                 <span className='text-xs text-green-800  px-2 py-1  rounded-lg bg-green-100'>
                                   Approved
                                 </span>
@@ -430,19 +471,17 @@ const CoachDetailsPage = () => {
                                   className='hidden'
                                 />
                                 <div
-                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    singleCoach?.isApproved ||
+                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${singleCoach?.isApproved ||
                                     isAgreementVerified
-                                      ? "bg-green-600"
-                                      : ""
-                                  }`}>
+                                    ? "bg-green-600"
+                                    : ""
+                                    }`}>
                                   <div
-                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      singleCoach?.isApproved ||
+                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${singleCoach?.isApproved ||
                                       isAgreementVerified
-                                        ? "translate-x-full"
-                                        : ""
-                                    }`}
+                                      ? "translate-x-full"
+                                      : ""
+                                      }`}
                                   />
                                 </div>
                               </label>
@@ -482,17 +521,15 @@ const CoachDetailsPage = () => {
                                   className='hidden'
                                 />
                                 <div
-                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${
-                                    singleCoach?.isApproved || isVideoVerified
-                                      ? "bg-green-600"
-                                      : ""
-                                  }`}>
+                                  className={`relative w-12 h-6 bg-gray-200 rounded-full transition-colors duration-200 ${singleCoach?.isApproved || isVideoVerified
+                                    ? "bg-green-600"
+                                    : ""
+                                    }`}>
                                   <div
-                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${
-                                      singleCoach?.isApproved || isVideoVerified
-                                        ? "translate-x-full"
-                                        : ""
-                                    }`}
+                                    className={`absolute left-0 top-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ${singleCoach?.isApproved || isVideoVerified
+                                      ? "translate-x-full"
+                                      : ""
+                                      }`}
                                   />
                                 </div>
                               </label>
@@ -505,7 +542,7 @@ const CoachDetailsPage = () => {
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className='mt-4'>
                     {profileVideo?.url &&
-                    ReactPlayer.canPlay(profileVideo?.url) ? (
+                      ReactPlayer.canPlay(profileVideo?.url) ? (
                       <ReactPlayer
                         url={profileVideo?.url}
                         controls

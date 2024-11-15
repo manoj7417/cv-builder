@@ -41,7 +41,6 @@ const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const { userdata } = useCoachStore((state) => state.userState);
   const { updateUserData } = useCoachStore();
-  console.log("userdata::", userdata);
   const {
     register,
     handleSubmit,

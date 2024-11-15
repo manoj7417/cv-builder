@@ -25,150 +25,175 @@ const templatesData = [
     src: "/Template3.png",
     alt: "Template3.png",
     type: templateType.free,
+    color: "#004B04"
   },
   {
     name: "Template5",
     src: "/Template5.png",
     alt: "Template5.png",
     type: templateType.dummy,
+    color: '#AC80B2'
   },
   {
     name: "Template4",
     src: "/Template4.png",
     alt: "Template4.png",
     type: templateType.premium,
+    color: '#3188A6'
   },
   {
     name: "Template6",
     src: "/Template6-1.png",
     alt: "Template6-1.png",
     type: templateType.dummy,
+    color: '#7DB6AF'
   },
   {
     name: "Template1",
     src: "/Template1.png",
     alt: "Template1.png",
     type: templateType.premium,
+    color: '#3895BD'
   },
   {
     name: "Template7",
-    src: "/Template7-1.png",
+    src: "/Template7-1.png", 
     alt: "Template7-1.png",
     type: templateType.dummy,
+    color: '#D5809C'
   },
   {
     name: "Template8",
     src: "/Template8.png",
     alt: "Template8.png",
     type: templateType.dummy,
+    color: '#abbbd0'
   },
   {
     name: "Template9",
     src: "/Template9.png",
     alt: "Template9.png",
     type: templateType.premium,
+    color: '#627F63'
   },
   {
     name: "Template10",
     src: "/Template10-1.png",
     alt: "Template10-1.png",
     type: templateType.dummy,
+    color: '#FB933B'
   },
   {
     name: "Template11",
     src: "/Template11-(new).png",
     alt: "Template11-(new).png",
     type: templateType.dummy,
+    color: '#1B3477'
   },
   {
     name: "Template12",
     src: "/Template12-1.png",
     alt: "Template12-1.png",
     type: templateType.dummy,
+    color : "#0D3572"
   },
   {
     name: "Template13",
     src: "/Template13-1.png",
     alt: "template13-1.png",
     type: templateType.dummy,
+    color: '#0F0F0F'
   },
   {
     name: "Template14",
     src: "/Template14-1.png",
     alt: "Template14-1.png",
     type: templateType.dummy,
+    color: '#3798B9'
   },
   {
     name: "Template15",
     src: "/Template15-1.png",
     alt: "Template15-1.png",
     type: templateType.dummy,
+    color: '#E4F2F2'
   },
   {
     name: "Template16",
     src: "/Template16-1.png",
     alt: "Template16-1.png",
     type: templateType.dummy,
+    color: '#3697B9'
   },
   {
     name: "Template17",
     src: "/Template17-1.png",
     alt: "Template17-1.png",
     type: templateType.dummy,
+    color: '#F9CC13'
   },
   {
     name: "Template18",
     src: "/Template18-1.png",
     alt: "Template18-1.png",
     type: templateType.dummy,
+    color: '#343434'
   },
   {
     name: "Template19",
     src: "/Template19-(new).png",
     alt: "Template19-(new).png",
     type: templateType.free,
+    color: "#021E69"
   },
   {
     name: "Template20",
     src: "/Template20-1.png",
     alt: "Template20-1.png",
     type: templateType.dummy,
+    color: "#182E42"
   },
   {
     name: "Template21",
     src: "/Template21.png",
     alt: "Template21.png",
     type: templateType.premium,
+    color: '#193043'
   },
   {
     name: "Template22",
     src: "/Template22-1.png",
     alt: "Template22-1.png",
     type: templateType.dummy,
+    color: '#1A2D42'
   },
   {
     name: "Template23",
     src: "/Template23.png",
     alt: "Template23.png",
     type: templateType.premium,
+    color: "#1A2F43"
   },
   {
     name: "Template24",
     src: "/Template24.png",
     alt: "Template24.png",
     type: templateType.dummy,
+    color: "#182E43"
   },
   {
     name: "Template25",
     src: "/Template25.png",
     alt: "Template25.png",
     type: templateType.dummy,
+    color: "#6EB46E"
   },
   {
     name: "Template26",
     src: "/Template26.png",
     alt: "Template26.png",
     type: templateType.dummy,
+    color: "#DB2877"
   },
 ];
 
@@ -179,7 +204,7 @@ export default function Slider() {
   const replaceResumeData = useResumeStore((state) => state.replaceResumeData);
   const router = useRouter();
 
-  const handleCreateCV = async (template) => {
+  const handleCreateCV = async (template, color) => {
     const { accessToken } = await GetTokens();
     if (!accessToken && !accessToken?.value) {
       toast("Please login to use this template");
@@ -189,14 +214,14 @@ export default function Slider() {
     }
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/createNewResume", { template }, { headers: { Authorization: `Bearer ${accessToken?.value}` } });
+      const response = await axios.post("/api/createPrefilledResume", { template, color }, { headers: { Authorization: `Bearer ${accessToken?.value}` } });
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
-        router.push("/resume-builder");
+        router.push("/resume-builder?newresume=true");
       }
     } catch (error) {
-      
+
     } finally {
       setIsLoading(false);
     }
@@ -279,7 +304,7 @@ export default function Slider() {
                     >
                       <Button
                         className="inline-flex items-center justify-center rounded-md bg-[#0EA5E9] px-4 text-[12px] font-medium text-white shadow transition-colors hover:bg-[#0284C7] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                        onClick={() => handleCreateCV(item.name)}
+                        onClick={() => handleCreateCV(item.name, item.color)}
                         disabled={loading}
                       >
                         {loading ? (
