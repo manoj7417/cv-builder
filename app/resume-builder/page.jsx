@@ -7,13 +7,17 @@ import { MdDownload, MdLogout, MdOutlineKeyboardArrowLeft } from "react-icons/md
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RemoveTokens } from "../actions";
 import { toast } from "react-toastify";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import { LogOut, User } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader } from "@/components/ui/dialog";
+import { AlertDialogHeader } from "@/components/ui/alert-dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { useResumeStore } from "../store/ResumeStore";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
@@ -27,7 +31,10 @@ const ResumeBuilderPage = () => {
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =
     userdata?.profilePicture || "https://via.placeholder.com/150";
-
+  const searchParams = useSearchParams()
+  const newResume = searchParams.get('newresume')
+  const [showDialog, setShowDialog] = useState(newResume || false)
+  const { clearResumeData } = useResumeStore(state => state)
   const handleLogout = async () => {
     await RemoveTokens();
     toast.success("User logout successfully", {
@@ -55,6 +62,15 @@ const ResumeBuilderPage = () => {
     }
   };
 
+  const handleCloseDialog = () => {
+    setShowDialog(false)
+  }
+
+  const handleStartResumeFromScratch = () => {
+    clearResumeData()
+    setShowDialog(false)
+  }
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -62,8 +78,29 @@ const ResumeBuilderPage = () => {
     };
   }, []);
 
+
   return (
     <>
+      <Dialog open={showDialog}>
+        <DialogContent showCloseButton={true} onClick={handleCloseDialog}>
+          <DialogHeader>
+            <DialogTitle></DialogTitle>
+            <DialogDescription>
+
+            </DialogDescription>
+            <div className="flex flex-col items-center">
+              <Button onClick={() => setShowDialog(false)}>Continue with dummy data</Button>
+              <div className="flex w-full py-5 items-center justify-center">
+                <hr className="w-1/3 bg-blue-900" /><p className="px-5">OR</p><hr className="w-1/3 bg-blue-900" />
+              </div>
+              <Button onClick={handleStartResumeFromScratch}>
+                Start from scratch
+              </Button>
+
+            </div>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
       <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="actions_button bg-gray-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
           <div className="w-full mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">

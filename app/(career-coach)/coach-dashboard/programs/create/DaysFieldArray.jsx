@@ -6,8 +6,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { CirclePlus, Trash2 } from 'lucide-react';
 import React from 'react'
 import { useFieldArray, useWatch } from 'react-hook-form';
-import PrerequisitesFieldArray from './PrerequisitesFieldArray';
-import SubModuleFieldArray from './SubModuleFieldArray';
+import dynamic from 'next/dynamic';
+const PrerequisitesFieldArray = dynamic(() => import('./PrerequisitesFieldArray'), { ssr: false });
+const SubModuleFieldArray = dynamic(() => import('./SubModuleFieldArray'), { ssr: false });
 
 function DaysFieldArray({ control, register, errors }) {
     const { fields: dayFields, append: appendDay, remove: removeDay } = useFieldArray({

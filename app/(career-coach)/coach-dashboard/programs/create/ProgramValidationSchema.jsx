@@ -29,9 +29,14 @@ const dayValidationSchema = Yup.object().shape({
     prerequisites: Yup.array().of(prerequisiteValidationSchema).optional(),
     subModules: Yup.array()
         .of(subModuleValidationSchema)
-        .required('At least one sub-module is required for the day')
-        .min(1, 'At least one sub-module is required for the day'),
+        .optional()
+        .when('subModules', {
+            is: (subModules) => subModules && subModules.length > 0,
+            then: Yup.array().min(1, 'At least one sub-module is required if sub-modules exist'),
+            otherwise: Yup.array().notRequired()
+        }),
 });
+
 
 
 export const ProgramValidationSchema = Yup.object().shape({
