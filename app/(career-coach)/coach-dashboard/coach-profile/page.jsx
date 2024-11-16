@@ -99,8 +99,6 @@ const CoachProfile = () => {
     name: "socialLinks",
   });
 
-  console.log("fields::", fields);
-
   const cvFile = watch("cvUpload");
   const docsFile = watch("docsUpload");
 
@@ -151,6 +149,7 @@ const CoachProfile = () => {
   };
 
   const handleEditProfile = async (data) => {
+    console.log("data::", data);
     const { accessToken } = await GetTokens();
     const payload = {
       name: data.name,
@@ -167,18 +166,27 @@ const CoachProfile = () => {
       city: data.city,
       country: data.country,
       zip: data.zip,
-      bankName: data.bankName,
-      accountNumber: data.accountNumber,
-      ifscCode: data.ifscCode,
-      ratesPerHour: data.ratesPerHour,
+      bankDetails: {
+        accountNumber: data.accountNumber,
+        code: {
+          value: data.ifscCode,
+        },
+        bankName: data.bankName,
+      },
+      ratesPerHour: {
+        charges: data.ratesPerHour,
+      },
       cv: {
         link: cvFileUrl,
       },
-      profileVideo: data.profileVideo,
+      profileVideo: {
+        url:data.profileVideo?.url
+      },
       signedAggrement: {
         link: docsUrl,
       },
       experience: data.experience,
+      socialLinks: data?.socialLinks || [],
       typeOfCoaching: data.typeOfCoaching,
       skills: data.skills,
       dateofBirth: data.dateofBirth,
@@ -187,6 +195,7 @@ const CoachProfile = () => {
       coachingDescription: data.coachingDescription,
       address: data.address,
     };
+    console.log("payload::", payload);
     setIsApiLoading(true);
     try {
       const response = await axios.post("/api/editCoachInfo", payload, {
@@ -418,7 +427,7 @@ const CoachProfile = () => {
                 <div className='lg:w-[20%] w-full profile_image'>
                   <div className='flex'>
                     <div className='mt-4'>
-                      <div className='flex'>
+                      <div className='flex flex-col'>
                         <img
                           src={userdata?.profileImage || defaultImage}
                           alt='profileimage'
@@ -880,19 +889,20 @@ const CoachProfile = () => {
 
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className='mt-4'>
-                    {profileVideo?.url &&
-                    ReactPlayer.canPlay(profileVideo?.url) ? (
-                      <ReactPlayer
-                        url={profileVideo?.url}
-                        controls
-                        width='100%'
-                        height='300px'
-                      />
-                    ) : (
-                      <p>
-                        Please enter a valid YouTube URL to preview the video.
-                      </p>
-                    )}
+                    {profileVideo?.url ? (
+                      ReactPlayer.canPlay(profileVideo?.url) ? (
+                        <ReactPlayer
+                          url={profileVideo?.url}
+                          controls
+                          width='100%'
+                          height='300px'
+                        />
+                      ) : (
+                        <p className='text-sm'>
+                          Please enter a valid YouTube URL to preview the video.
+                        </p>
+                      )
+                    ) : null}
                   </div>
                 </div>
                 {/* END- COACH INTRODUCTION VIDEO */}
