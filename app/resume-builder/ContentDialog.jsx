@@ -73,14 +73,14 @@ const images = [
   },
   {
     name: "Template6",
-    src: "/Template6-1.png",
-    alt: "Template6-1.png",
+    src: "/Template6.png",
+    alt: "Template6.png",
     type: templateType.premium,
   },
   {
     name: "Template7",
-    src: "/Template7-1.png",
-    alt: "Template7-1.png",
+    src: "/Template7.png",
+    alt: "Template7.png",
     type: templateType.premium,
   },
   {
@@ -97,14 +97,14 @@ const images = [
   },
   {
     name: "Template10",
-    src: "/Template10-1.png",
-    alt: "Template10-1.png",
+    src: "/Template10.png",
+    alt: "Template10.png",
     type: templateType.premium,
   },
   {
     name: "Template11",
-    src: "/Template11-(new).png",
-    alt: "Template11-(new).png",
+    src: "/Template11.png",
+    alt: "Template11.png",
     type: templateType.premium,
   },
   {
@@ -151,8 +151,8 @@ const images = [
   },
   {
     name: "Template19",
-    src: "/Template19-(new).png",
-    alt: "Template19-(new).png",
+    src: "/Template19.png",
+    alt: "Template19.png",
   },
   {
     name: "Template20",

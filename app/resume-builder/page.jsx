@@ -81,7 +81,7 @@ const ResumeBuilderPage = () => {
 
   return (
     <>
-      <Dialog open={showDialog}>
+      {/* <Dialog open={showDialog}>
         <DialogContent showCloseButton={true} onClick={handleCloseDialog}>
           <DialogHeader>
             <DialogTitle></DialogTitle>
@@ -100,7 +100,7 @@ const ResumeBuilderPage = () => {
             </div>
           </DialogHeader>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
       <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="actions_button bg-gray-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
           <div className="w-full mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">

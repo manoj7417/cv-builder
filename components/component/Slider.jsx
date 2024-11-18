@@ -43,8 +43,8 @@ const templatesData = [
   },
   {
     name: "Template6",
-    src: "/Template6-1.png",
-    alt: "Template6-1.png",
+    src: "/Template6.png",
+    alt: "Template6.png",
     type: templateType.dummy,
     color: '#7DB6AF'
   },
@@ -57,8 +57,8 @@ const templatesData = [
   },
   {
     name: "Template7",
-    src: "/Template7-1.png", 
-    alt: "Template7-1.png",
+    src: "/Template7.png", 
+    alt: "Template7.png",
     type: templateType.dummy,
     color: '#D5809C'
   },
@@ -78,78 +78,78 @@ const templatesData = [
   },
   {
     name: "Template10",
-    src: "/Template10-1.png",
-    alt: "Template10-1.png",
+    src: "/Template10.png",
+    alt: "Template10.png",
     type: templateType.dummy,
     color: '#FB933B'
   },
   {
     name: "Template11",
-    src: "/Template11-(new).png",
-    alt: "Template11-(new).png",
+    src: "/Template11.png",
+    alt: "Template11.png",
     type: templateType.dummy,
     color: '#1B3477'
   },
   {
     name: "Template12",
-    src: "/Template12-1.png",
-    alt: "Template12-1.png",
+    src: "/Template12.png",
+    alt: "Template12.png",
     type: templateType.dummy,
     color : "#0D3572"
   },
   {
     name: "Template13",
-    src: "/Template13-1.png",
-    alt: "template13-1.png",
+    src: "/Template13.png",
+    alt: "template13.png",
     type: templateType.dummy,
     color: '#0F0F0F'
   },
   {
     name: "Template14",
-    src: "/Template14-1.png",
-    alt: "Template14-1.png",
+    src: "/Template14.png",
+    alt: "Template14.png",
     type: templateType.dummy,
     color: '#3798B9'
   },
   {
     name: "Template15",
-    src: "/Template15-1.png",
-    alt: "Template15-1.png",
+    src: "/Template15.png",
+    alt: "Template15.png",
     type: templateType.dummy,
     color: '#E4F2F2'
   },
   {
     name: "Template16",
-    src: "/Template16-1.png",
-    alt: "Template16-1.png",
+    src: "/Template16.png",
+    alt: "Template16.png",
     type: templateType.dummy,
     color: '#3697B9'
   },
   {
     name: "Template17",
-    src: "/Template17-1.png",
-    alt: "Template17-1.png",
+    src: "/Template17.png",
+    alt: "Template17.png",
     type: templateType.dummy,
     color: '#F9CC13'
   },
   {
     name: "Template18",
-    src: "/Template18-1.png",
-    alt: "Template18-1.png",
+    src: "/Template18.png",
+    alt: "Template18.png",
     type: templateType.dummy,
     color: '#343434'
   },
   {
     name: "Template19",
-    src: "/Template19-(new).png",
-    alt: "Template19-(new).png",
+    src: "/Template19.png",
+    alt: "Template19.png",
     type: templateType.free,
     color: "#021E69"
   },
   {
     name: "Template20",
-    src: "/Template20-1.png",
-    alt: "Template20-1.png",
+    src: "/Template20.png",
+    alt: "Template20.png",
     type: templateType.dummy,
     color: "#182E42"
   },
@@ -162,8 +162,8 @@ const templatesData = [
   },
   {
     name: "Template22",
-    src: "/Template22-1.png",
-    alt: "Template22-1.png",
+    src: "/Template22.png",
+    alt: "Template22.png",
     type: templateType.dummy,
     color: '#1A2D42'
   },
