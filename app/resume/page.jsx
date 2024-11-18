@@ -31,6 +31,7 @@ import ServicesPopUp from "@/components/component/ServicesPopUp";
 import FAQSection from "@/components/component/FAQSection";
 import AccordionItem from "@/components/component/AccordionItem";
 import parse from "html-react-parser";
+import { GiBullseye } from "react-icons/gi";
 
 const ImageCarousel = dynamic(
   () => import("@/components/component/ImageCarousel"),
@@ -412,6 +413,65 @@ const ProfessionalTemplates = [
   },
 ];
 
+
+const GraduateTemplates = [
+  
+  {
+    name: "Template16",
+    src: "/Template16-1.png",
+    alt: "/Template16-1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template22",
+    src: "/Template22-1.png",
+    alt: "/Template22-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template1",
+    src: "/Template1.png",
+    alt: "Template1.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "/Template3.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template20",
+    src: "/Template20-1.png",
+    alt: "/Template20-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template3",
+    src: "/Template3.png",
+    alt: "/Template3.png",
+    type: templateType.premium,
+  },
+  {
+    name: "Template18",
+    src: "/Template18-1.png",
+    alt: "/Template18-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template15",
+    src: "/Template15-1.png",
+    alt: "/Template15-1.png",
+    type: templateType.free,
+  },
+  {
+    name: "Template12",
+    src: "/Template12-1.png",
+    alt: "/Template12-1.png",
+    type: templateType.premium,
+  },
+];
+
 const faqData = [
   {
     id: 1,
@@ -607,7 +667,7 @@ Follow the suggestions given below the score to get a higher score and better ca
                     <PiFolderSimpleUser className='text-blue-700 h-8 w-8 me-3' />
                     Student
                   </TabsTrigger>
-                  <TabsTrigger value='ats'>
+                  <TabsTrigger value='professional'>
                     <MdQueryStats className='text-orange-600 h-8 w-8 me-3' />
                     Professional
                   </TabsTrigger>
@@ -615,9 +675,13 @@ Follow the suggestions given below the score to get a higher score and better ca
                     <IoShirt className='text-green-700 h-8 w-8 me-3' />
                     Creative
                   </TabsTrigger>
-                  <TabsTrigger value='professional'>
+                  <TabsTrigger value='graduate'>
                     <RiShirtFill className='text-red-700 h-8 w-8 me-3' />
                     Graduate
+                  </TabsTrigger>
+                  <TabsTrigger value='ats'>
+                    <GiBullseye  className='text-pink-700 h-8 w-8 me-3' />
+                    ATS
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent className='py-7' value='all'>
@@ -626,14 +690,17 @@ Follow the suggestions given below the score to get a higher score and better ca
                 <TabsContent className='py-7' value='simple'>
                   <NewSlider data={SimpleTemplates} />
                 </TabsContent>
-                <TabsContent className='py-7' value='ats'>
-                  <NewSlider data={ATSTemplates} />
+                <TabsContent className='py-7' value='professional'>
+                  <NewSlider data={ProfessionalTemplates} />
                 </TabsContent>
                 <TabsContent className='py-7' value='designer'>
                   <NewSlider data={DesignerTemplates} />
                 </TabsContent>
-                <TabsContent className='py-7' value='professional'>
-                  <NewSlider data={ProfessionalTemplates} />
+                <TabsContent className='py-7' value='graduate'>
+                  <NewSlider data={GraduateTemplates} />
+                </TabsContent>
+                <TabsContent className='py-7' value='ats'>
+                  <NewSlider data={ATSTemplates} />
                 </TabsContent>
               </Tabs>
             </div>
