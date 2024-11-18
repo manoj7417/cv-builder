@@ -7,6 +7,7 @@ import CoachFilter from "./CoachFilter";
 import { useRouter } from "next/navigation";
 import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
 import axios from "axios";
+
 const categories = [
   {
     id: 1,
