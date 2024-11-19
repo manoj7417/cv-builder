@@ -49,6 +49,8 @@ import LanguageSelect from "@/components/component/LanguageSelect";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
+import { FaDatabase } from "react-icons/fa6";
+import { LuRefreshCw } from "react-icons/lu";
 
 const ImageTemplates = [
   "Template1",
@@ -1171,14 +1173,14 @@ export default function ResumeForm() {
             </div>
             {isNewResume && (
               <div className="action_buttons flex flex-col gap-5 justify-center">
-                <Button onClick={handleDummyData} className="text-sm">
-                  Continue with dummy data
+                <Button onClick={handleDummyData} className="text-xs generate-ai">
+                 <FaDatabase  className="text-white mr-2"/> Start with mock data
                 </Button>
                 <Button
                   onClick={handleStartResumeFromScratch}
-                  className="text-sm"
+                  className="text-xs generate-ai"
                 >
-                  Start from scratch
+                 <LuRefreshCw className="text-white mr-2"/> Start with fresh
                 </Button>
               </div>
             )}
