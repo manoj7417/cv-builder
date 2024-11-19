@@ -165,10 +165,10 @@ export default function HomepageNew() {
                 </span>
               </h2>
               <p className="text-sm my-5">
-                In today's competitive job market, your CV is your first
+                In today&apos;s competitive job market, your CV is your first
                 impression—and it needs to pass not only human scrutiny but also
-                Applicant Tracking Systems (ATS). Here’s why an ATS-friendly CV
-                could be the game-changer you’ve been looking for:
+                Applicant Tracking Systems (ATS). Here&apos;s why an ATS-friendly CV
+                could be the game-changer you&apos;ve been looking for:
               </p>
               <ul className="space-y-3 text-sm">
                 <li>
@@ -184,7 +184,7 @@ export default function HomepageNew() {
                     Enhanced Keyword Optimization
                   </strong>{" "}
                   - By integrating relevant keywords, your CV ranks higher in
-                  searches, aligning perfectly with the role's requirements.
+                  searches, aligning perfectly with the role&apso;s requirements.
                 </li>
                 <li>
                   <strong className="text-[#1D4ED8]">
