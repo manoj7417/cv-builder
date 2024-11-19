@@ -156,14 +156,14 @@ export const MultiStepForm = ({
           </div>
           <div className='w-full'>
             <Label htmlFor='employer' className='text-right'>
-              Comapny
+              Company
               <span className=' text-10px italic ml-1 text-gray-500'>
                 (optional)
               </span>
             </Label>
             <Input
               name='companyName'
-              placeholder='Enter comapany name'
+              placeholder='Enter company name'
               className='mt-2'
             />
           </div>
