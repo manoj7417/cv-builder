@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +52,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await RemoveTokens();
+      await signOut();
       toast.success("Logged out");
       router.push("/login");
     } catch (error) {

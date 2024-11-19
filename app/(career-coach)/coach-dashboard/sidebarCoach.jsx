@@ -32,6 +32,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { signOut } from "next-auth/react";
 
 const SidebarCoach = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,6 +73,7 @@ const SidebarCoach = () => {
   const handleLogout = async () => {
     try {
       await RemoveTokens();
+      await signOut();
       toast.success("Logged out");
       router.push("/coach-signin");
     } catch (error) {

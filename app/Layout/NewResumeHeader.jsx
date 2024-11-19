@@ -19,6 +19,7 @@ import { deleteCookie } from "cookies-next";
 import { useUserStore } from "../store/UserStore";
 import { RemoveTokens } from "../actions";
 import "./header.css";
+import { signOut } from "next-auth/react";
 
 const navigation = [
   { name: "CV Creator", href: "/resume", current: true },
@@ -52,6 +53,7 @@ export default function NewResumeHeader() {
 
   const handleLogout = async () => {
     await RemoveTokens();
+    await signOut();
     toast.success("User logout successfully", {
       position: "top-right",
     });

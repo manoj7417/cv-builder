@@ -16,6 +16,7 @@ import { Button } from "../../../components/ui/button";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { Label } from "@/components/ui/label";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
 
 function LoginUser() {
   const router = useRouter();
@@ -353,6 +354,9 @@ function LoginUser() {
                         </>
                       )}
                     </button>
+                     <div className="google_button mt-5">
+                     <SignInGoogle/>
+                     </div>
                   </div>
                   <div className="flex items-center justify-center">
                     <div className="flex-grow border-t border-gray-300"></div>
@@ -360,6 +364,9 @@ function LoginUser() {
                     <div className="flex-grow border-t border-gray-300"></div>
                   </div>
                   <div className="flex justify-center">
+                    
+                   
+
                     <Link
                       href="/coach-signin"
                       className="font-semibold text-blue-700 transition-all duration-200  hover:underline"

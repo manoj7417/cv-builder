@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader } from "@/compon
 import { AlertDialogHeader } from "@/components/ui/alert-dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useResumeStore } from "../store/ResumeStore";
+import { signOut } from "next-auth/react";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
@@ -37,6 +38,7 @@ const ResumeBuilderPage = () => {
   const { clearResumeData } = useResumeStore(state => state)
   const handleLogout = async () => {
     await RemoveTokens();
+    await signOut();
     toast.success("User logout successfully", {
       position: "top-right",
     });

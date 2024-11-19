@@ -35,6 +35,6 @@
     "app/middleware.js",
     "middleware.js",
     "utils/typography.js"
-  ],
+, "app/api/auth/[...nextauth]/route.js"  ],
   "exclude": ["node_modules"]
 }

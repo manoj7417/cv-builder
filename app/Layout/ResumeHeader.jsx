@@ -15,6 +15,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { PiReadCvLogo } from "react-icons/pi";
 import { FaUserCircle } from "react-icons/fa";
+import { signOut } from "next-auth/react";
 
 const menuItems = [
   {
@@ -54,6 +55,7 @@ export function ResumeHeader() {
 
   const handleLogout = async () => {
     await RemoveTokens();
+    await signOut();
     toast.success("User logout successfully", {
       position: "top-right",
     });
