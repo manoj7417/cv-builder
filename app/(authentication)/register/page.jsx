@@ -12,6 +12,7 @@ import { registerUser } from "../../api/api";
 import { Input } from "@/components/ui/input";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import axios from "axios";
+import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
 
 export default function Register() {
   const router = useRouter();
@@ -193,7 +194,7 @@ export default function Register() {
             </div>
           </div>
         </div>
-        <div className="flex lg:items-center items-start justify-center px-4 py-1 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="flex lg:items-center items-start justify-center px-4  sm:px-6  lg:px-8 ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-5   sm:py-0 px-2 sm:px-10  rounded-2xl">
             <Link
               href={"/"}
@@ -468,6 +469,11 @@ export default function Register() {
                     )}
                   </button>
                 </div>
+
+                <div className="google_button mt-5">
+                     <SignInGoogle type="SignUp"/>
+                     </div> 
+
                 <p className="mt-2 lg:text-base text-sm text-gray-600 lg:text-start text-center">
                   Already have an account?
                   <Link

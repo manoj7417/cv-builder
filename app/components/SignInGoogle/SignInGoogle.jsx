@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FaGoogle } from "react-icons/fa6";
 
 
-export default function SignIn() {
+export default function SignIn ({type}) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [apiCalled, setApiCalled] = useState(false); // To prevent multiple API calls
@@ -60,7 +60,7 @@ export default function SignIn() {
       )} */}
        <button type="button" onClick={() => signIn("google")} className="bg-gray-100 p-3  text-base rounded-md w-full flex items-center justify-center">
         <FaGoogle className="mr-2 text-red-500" />
-         Sign in with Google</button>
+          {`${type} with Google`} </button>
     </div>
   );
 }

@@ -226,7 +226,7 @@ function LoginUser() {
       </Dialog>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
-          <div className="flex lg:items-center items-start justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+          <div className="flex lg:items-center items-start justify-center px-4  sm:px-6  lg:px-8">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full sm:border-0 border-0 shadow-none shadow-blue-100 sm:shadow-none   sm:py-0 py-20 px-8 sm:px-0 rounded-2xl">
               <Link
                 href={"/"}
@@ -355,7 +355,7 @@ function LoginUser() {
                       )}
                     </button>
                      <div className="google_button mt-5">
-                     <SignInGoogle/>
+                     <SignInGoogle type="signIn"/>
                      </div>
                   </div>
                   <div className="flex items-center justify-center">
