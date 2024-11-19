@@ -11,7 +11,11 @@ import WorkTogether from "@/components/component/WorkTogether";
 import GetStartedModal from "@/components/component/GetStartedModal";
 import CourseSlider from "@/components/component/CourseSlider";
 import "./Homepage.css";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 export default function HomepageNew() {
+  const router = useRouter();
   const [hovered, setHovered] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -97,6 +101,10 @@ export default function HomepageNew() {
     ));
   }
 
+  const handleAtsButtonClick = () => {
+    router.push("/resume?atsbutton=true");
+  };
+
   return (
     <>
       <section className="w-full min-h-screen sm:top-0 p-4 pt-28 sm:p-18 bg-gray-100 text-black flex items-center">
@@ -110,7 +118,7 @@ export default function HomepageNew() {
               <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-xl font-medium mb-4 sm:mb-10 lg:mb-5 max-w-4xl text-center xs:text-start mx-auto">
                 We have a passion to mentor you on your entire career path, help
                 you realize what you want to do, how to get into that career,
-                and utilise  experts to guide you on how to excel within it.
+                and utilise experts to guide you on how to excel within it.
               </p>
               <div className="flex justify-center xs:justify-start">
                 <button
@@ -121,7 +129,8 @@ export default function HomepageNew() {
                 </button>
               </div>
             </div>
-            <Image priority
+            <Image
+              priority
               src="/v1.png"
               alt="home-creative-down"
               height={300}
@@ -145,8 +154,64 @@ export default function HomepageNew() {
           </div>
         </div>
       </section>
-
-
+      <section className="ats_section bg-blue-50 relative bg-[url('/ats-bg.png')] bg-contain bg-right bg-no-repeat">
+        <div className="max-w-7xl mx-auto py-10">
+          <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-10">
+            <div className="grid-span-6 md:px-20 px-5">
+              <h2 className="md:text-4xl text-[25px] text-black">
+                Are you struggling to land a interview
+                <span className="text-[#1D4ED8] font-medium ml-2">
+                  try ATS friendly CV and land dream job
+                </span>
+              </h2>
+              <p className="text-sm my-5">
+                In today's competitive job market, your CV is your first
+                impression—and it needs to pass not only human scrutiny but also
+                Applicant Tracking Systems (ATS). Here’s why an ATS-friendly CV
+                could be the game-changer you’ve been looking for:
+              </p>
+              <ul className="space-y-3 text-sm">
+                <li>
+                  <strong className="text-[#1D4ED8]">
+                    Increased Visibility
+                  </strong>{" "}
+                  - ATS scans and filters resumes before they reach recruiters.
+                  An ATS-friendly CV ensures your application gets noticed by
+                  aligning with job-specific keywords and formatting standards.
+                </li>
+                <li>
+                  <strong className="text-[#1D4ED8]">
+                    Enhanced Keyword Optimization
+                  </strong>{" "}
+                  - By integrating relevant keywords, your CV ranks higher in
+                  searches, aligning perfectly with the role's requirements.
+                </li>
+                <li>
+                  <strong className="text-[#1D4ED8]">
+                    Professional Formatting
+                  </strong>{" "}
+                  - ATS systems often reject resumes with fancy fonts, graphics,
+                  or unconventional layouts. A clean, structured format
+                  increases your chances of passing the ATS filter.
+                </li>
+              </ul>
+              <div className="buttons_actions mt-5">
+                <Button onClick={handleAtsButtonClick}>
+                  Build an ATS-friendly CV
+                </Button>
+              </div>
+            </div>
+            <div className="grid-span-6">
+              <div className="resume_parent">
+                <img className="resume_img_1" src="/15.png" />
+                <img className="resume_img_2" src="/17.png" />
+                <img className="resume_img_3" src="/18.png" />
+                <img className="resume_img_4 md:block hidden" src="/16.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="w-full z-40 relative">
         <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
@@ -177,33 +242,33 @@ export default function HomepageNew() {
 
       {showModal && <GetStartedModal onClose={handleCloseModal} />}
 
-{showFloatingButton && (
-  <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
-    <button
-      className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block"
-      onClick={handleButtonClick}
-    >
-      <span>Explore Now</span>
-      <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={24}
-          height={24}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-arrow-right"
-        >
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </div>
-    </button>
-  </div>
-)}
+      {showFloatingButton && (
+        <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
+          <button
+            className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block"
+            onClick={handleButtonClick}
+          >
+            <span>Explore Now</span>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-arrow-right"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </div>
+          </button>
+        </div>
+      )}
     </>
   );
 }
