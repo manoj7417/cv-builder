@@ -355,7 +355,7 @@ function LoginUser() {
                       )}
                     </button>
                      <div className="google_button mt-5">
-                     <SignInGoogle type="signIn"/>
+                     <SignInGoogle type="SignIn"/>
                      </div>
                   </div>
                   <div className="flex items-center justify-center">
