@@ -22,7 +22,7 @@ import NewSlider from "@/components/component/NewSlider";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 import { useEffect, useState } from "react";
 import { useResumeStore } from "@/app/store/ResumeStore";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { GetTokens } from "@/app/actions";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
@@ -503,6 +503,8 @@ export default function DashboardIdea() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isAtsTab = searchParams.get("atsbutton") === "true";
 
   const toggle = (index) => {
     if (open === index) {
@@ -657,7 +659,7 @@ Follow the suggestions given below the score to get a higher score and better ca
               <h2 className='2xl:text-6xl lg:text-5xl text-2xl font-bold mt-10 text-black text-center'>
                 Choose From Our Detailed Templates Options
               </h2>
-              <Tabs className='w-full py-5' defaultValue='all'>
+              <Tabs className='w-full py-5' defaultValue={isAtsTab ? "ats" : "all"}>
                 <TabsList className='mb-4 flex w-full justify-center flex-wrap py-10 h-auto'>
                   <TabsTrigger value='all'>
                     <FaBorderAll className='text-pink-600 h-8 w-8 me-3' />
