@@ -316,105 +316,108 @@ export default function Register() {
                       )}
                     </div>
                     {/* Validation List */}
-                    <div className="mt-2">
-                      <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${validation.length
-                              ? "text-green-500"
-                              : "text-red-500"
-                            }`}
-                        >
-                          <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.length
+                    {
+                      watch("password") && (<div className="mt-2">
+                        <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
+                          <li
+                            className={`flex items-center space-x-2 text-sm ${validation.length
                                 ? "text-green-500"
-                                : "border border-gray-400"
+                                : "text-red-500"
                               }`}
                           >
-                            {validation.length ? "✔" : ""}
-                          </span>
-                          <span className="text-xs sm:text-sm">
-                            Min 8 letters
-                          </span>
-                        </li>
-                        {/* Uppercase validation */}
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${validation.uppercase
-                              ? "text-green-500"
-                              : "text-red-500"
-                            }`}
-                        >
-                          <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.uppercase
+                            <span
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.length
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                                }`}
+                            >
+                              {validation.length ? "✔" : ""}
+                            </span>
+                            <span className="text-xs sm:text-sm">
+                              Min 8 letters
+                            </span>
+                          </li>
+                          {/* Uppercase validation */}
+                          <li
+                            className={`flex items-center space-x-2 text-sm ${validation.uppercase
                                 ? "text-green-500"
-                                : "border border-gray-400"
+                                : "text-red-500"
                               }`}
                           >
-                            {validation.uppercase ? "✔" : ""}
-                          </span>
-                          <span className="text-xs sm:text-sm">
-                            1 uppercase character
-                          </span>
-                        </li>
-
-                        {/* Lowercase validation */}
-                        <li
-                          className={`flex items-center text-sm space-x-2 ${validation.lowercase
-                              ? "text-green-500"
-                              : "text-red-500"
-                            }`}
-                        >
-                          <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.lowercase
+                            <span
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.uppercase
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                                }`}
+                            >
+                              {validation.uppercase ? "✔" : ""}
+                            </span>
+                            <span className="text-xs sm:text-sm">
+                              1 uppercase character
+                            </span>
+                          </li>
+  
+                          {/* Lowercase validation */}
+                          <li
+                            className={`flex items-center text-sm space-x-2 ${validation.lowercase
                                 ? "text-green-500"
-                                : "border border-gray-400"
+                                : "text-red-500"
                               }`}
                           >
-                            {validation.lowercase ? "✔" : ""}
-                          </span>
-                          <span className="text-xs sm:text-sm">
-                            1 lowercase character
-                          </span>
-                        </li>
-
-                        {/* Number validation */}
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${validation.number
-                              ? "text-green-500"
-                              : "text-red-500"
-                            }`}
-                        >
-                          <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.number
+                            <span
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.lowercase
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                                }`}
+                            >
+                              {validation.lowercase ? "✔" : ""}
+                            </span>
+                            <span className="text-xs sm:text-sm">
+                              1 lowercase character
+                            </span>
+                          </li>
+  
+                          {/* Number validation */}
+                          <li
+                            className={`flex items-center space-x-2 text-sm ${validation.number
                                 ? "text-green-500"
-                                : "border border-gray-400"
+                                : "text-red-500"
                               }`}
                           >
-                            {validation.number ? "✔" : ""}
-                          </span>
-                          <span className="text-xs sm:text-sm">1 number</span>
-                        </li>
-
-                        {/* Special character validation */}
-                        <li
-                          className={`flex items-center space-x-2 text-sm ${validation.specialChar
-                              ? "text-green-500"
-                              : "text-red-500"
-                            }`}
-                        >
-                          <span
-                            className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.specialChar
+                            <span
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.number
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                                }`}
+                            >
+                              {validation.number ? "✔" : ""}
+                            </span>
+                            <span className="text-xs sm:text-sm">1 number</span>
+                          </li>
+  
+                          {/* Special character validation */}
+                          <li
+                            className={`flex items-center space-x-2 text-sm ${validation.specialChar
                                 ? "text-green-500"
-                                : "border border-gray-400"
+                                : "text-red-500"
                               }`}
                           >
-                            {validation.specialChar ? "✔" : ""}
-                          </span>
-                          <span className="text-xs sm:text-sm">
-                            1 special character
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
+                            <span
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.specialChar
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                                }`}
+                            >
+                              {validation.specialChar ? "✔" : ""}
+                            </span>
+                            <span className="text-xs sm:text-sm">
+                              1 special character
+                            </span>
+                          </li>
+                        </ul>
+                      </div>)
+                    }
+                    
                   </div>
                 </div>
                 <div className="field field-checkbox flex items-center">
