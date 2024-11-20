@@ -156,7 +156,7 @@ export default function HomepageNew() {
       </section>
       <section className="ats_section bg-blue-50 relative bg-[url('/ats-bg.png')] bg-contain bg-right bg-no-repeat">
         <div className="max-w-7xl mx-auto py-10">
-          <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-10">
+          <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-48">
             <div className="grid-span-6 md:px-20 px-5">
               <h2 className="md:text-4xl text-[25px] text-black">
                 Are you struggling to land a interview
