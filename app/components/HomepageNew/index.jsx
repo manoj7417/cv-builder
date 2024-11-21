@@ -158,9 +158,9 @@ export default function HomepageNew() {
         <div className="max-w-7xl mx-auto py-10">
           <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-48">
             <div className="grid-span-6 md:px-20 px-5">
-              <h2 className="md:text-4xl text-[25px] text-black">
+              <h2 className="md:text-4xl text-[25px] text-black font-bold">
                 Are you struggling to land a interview
-                <span className="text-[#1D4ED8] font-medium ml-2">
+                <span className="text-[#1D4ED8] font-bold ml-2">
                   try ATS friendly CV and land dream job
                 </span>
               </h2>
@@ -216,7 +216,7 @@ export default function HomepageNew() {
       <section className="w-full z-40 relative">
         <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
           <h2 className="lg:text-5xl text-3xl font-bold ">
-            How Career Genies Hub helps you
+            How Genies Career Hub helps you
           </h2>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
