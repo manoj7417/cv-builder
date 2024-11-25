@@ -20,6 +20,8 @@ import { format } from "date-fns";
 import { ResumeChart } from "./ResumeChart";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import UserBookingSlot from "./BookingSlot";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -28,7 +30,14 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
+  console.log("program::",program)
   const [isLoading, setIsLoading] = useState(true);
+  const [showBooking, setShowBooking] = useState(false);
+
+
+  const handleBookSlotClick = () => {
+    setShowBooking(true);
+  };
 
 
   const toggle = (index) => {
@@ -417,6 +426,7 @@ const UserDashboardPage = () => {
                               <th className="p-4">Program</th>
                               <th className="p-4">Description</th>
                               <th className="p-4">Coach</th>
+                              <th className="p-4">Book Slot</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -447,17 +457,22 @@ const UserDashboardPage = () => {
                                       <div className="h-4 bg-gray-200 rounded w-16"></div>
                                     </div>
                                   </td>
+                                  <td>
+                                  <div className="w-24 h-8 bg-gray-300 rounded animate-pulse"></div>
+                                  </td>
                                 </tr>
                               ))}
                           </tbody>
                         </table>
                       ) : program.length > 0 ? (
+                        <>
                         <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
                           <thead>
                             <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
                               <th className="p-4">Program</th>
                               <th className="p-4">Description</th>
                               <th className="p-4">Coach</th>
+                              <th className="p-4 whitespace-nowrap">Book Slot</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -491,7 +506,7 @@ const UserDashboardPage = () => {
                                   <img
                                     src={item?.coachId?.profileImage}
                                     alt={item?.coachId?.name}
-                                    className="w-10 h-10 object-cover rounded-full"
+                                    className="w-16 h-16 object-cover rounded-full"
                                     priority
                                   />
                                   <div>
@@ -500,10 +515,20 @@ const UserDashboardPage = () => {
                                     </p>
                                   </div>
                                 </td>
+                                <td className="p-2 text-center">
+                                    <Button className="text-xs p-2" onClick={handleBookSlotClick}>Book Slot</Button>
+                                  </td>
                               </tr>
                             ))}
                           </tbody>
                         </table>
+                        {showBooking && (
+                          <div className="booking-modal">
+                            <UserBookingSlot />
+                          </div>
+                        )}
+                        </>
+                         
                       ) : (
                         <Card className="w-full">
                           <CardHeader>
