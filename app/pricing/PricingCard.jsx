@@ -50,7 +50,13 @@ const PricingFunc = () => {
   const [discount, setcouDiscount] = useState(0);
   const [couloading, setcouLoading] = useState(false);
   const [couponError, setCouponError] = useState("");
+  const [couponApplied, setCouponApplied] = useState(false);
   const [clientSecret, setClientSecret] = useState(null);
+  const discountCode = searchParams.get("coupon") === "true";
+  const [isTrialSelected, setIsTrialSelected] = useState(false);
+
+  console.log("Sending couponCode:", couponCode);
+  console.log("Sending planName:", selectedCard?.planName);
   // Function to scroll to the service cards section
   const scrollToServiceCards = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -82,7 +88,7 @@ const PricingFunc = () => {
       discount: 65,
       monthLabel: "per month",
       yearLabel: "per year",
-      choosePlan: true
+      choosePlan: true,
     },
     {
       id: 2,
@@ -97,13 +103,17 @@ const PricingFunc = () => {
       popUpDescription:
         "Find solutions to your career problems at any moment with Artificial Intelligence based Career Coach, designed by professionals and inspired by leading Career Coaches across the globe. Easy and quick to use, get help and insights into a myriad set of domains",
       features: [
-        "Personalised Career Assistance from Artificial Intelligence-based Career Coach" , "Get access to one-on-one online virtual coaching", "No need to schedule an appointment, take assistance anytime and anywhere", "Get one comprehensive session including addressing the issue, finding the right solution, and getting suggestions on the same","Find the best possible solutions from a limitless range of career options"
+        "Personalised Career Assistance from Artificial Intelligence-based Career Coach",
+        "Get access to one-on-one online virtual coaching",
+        "No need to schedule an appointment, take assistance anytime and anywhere",
+        "Get one comprehensive session including addressing the issue, finding the right solution, and getting suggestions on the same",
+        "Find the best possible solutions from a limitless range of career options",
       ],
       planName: "AICareerCoach",
       discount: 97,
       monthLabel: "per test",
       yearLabel: "per test",
-      choosePlan: false
+      choosePlan: false,
     },
     {
       id: 3,
@@ -124,7 +134,7 @@ const PricingFunc = () => {
         "Easy support and assistance from Genies Career Hub team",
       ],
       planName: "VirtualCoaching",
-      choosePlan: false
+      choosePlan: false,
     },
     {
       id: 4,
@@ -145,7 +155,7 @@ const PricingFunc = () => {
         "Solutions and recommendations based on the results of your test",
       ],
       planName: "PsychometricTestingTools",
-      choosePlan: false
+      choosePlan: false,
     },
   ];
 
@@ -157,7 +167,7 @@ const PricingFunc = () => {
   ];
   const handleOpenAIDialog = (cardData) => {
     const planName = cardData.planName;
-    planName && setSelectedPlan('monthly');
+    planName && setSelectedPlan("monthly");
     const pricing = PricingData[planName][geoinfo.currency || "USD"];
     const { MP, DP } = pricing;
     setSelectedCard({ ...cardData, MP, DP });
@@ -275,7 +285,7 @@ const PricingFunc = () => {
       duration: selectedPlan,
       currency: geoinfo?.currency || "USD",
       planName: plan.planName,
-      discount: discount
+      discount: discount,
     };
     setLoading(true);
     try {
@@ -292,8 +302,7 @@ const PricingFunc = () => {
       if (response.status === 200) {
         if (response.data.clientSecret) {
           setClientSecret(response.data.clientSecret);
-        }
-        else{
+        } else {
           const { url } = response.data;
           window.location = url;
         }
@@ -315,29 +324,34 @@ const PricingFunc = () => {
   const applyCoupon = async () => {
     setcouLoading(true);
     setCouponError("");
-  
+
     try {
       const response = await axios.post("/api/applyCoupon", {
         couponCode,
         planName: selectedCard.planName,
       });
-  
+
       if (response.status === 200) {
         const { discount } = response.data;
         setcouDiscount(discount); // Update the discount state
         toast.success("Coupon applied successfully!");
         setcouLoading(false);
+        setCouponApplied(true);
       }
     } catch (error) {
-      setCouponError(
-        error.response?.data?.message || "Invalid coupon code."
-      );
+      setCouponError(error.response?.data?.message || "Invalid coupon code.");
       setcouLoading(false);
     } finally {
       setLoading(false);
+      setCouponApplied(false);
     }
   };
 
+  const handleTrialCheckboxChange = () => {
+    setIsTrialSelected(!isTrialSelected);
+    setCouponCode(isTrialSelected ? "" : "TRIAL14"); // Set TRIAL14 if selected, clear otherwise
+    setCouponApplied(false); // Reset coupon applied status
+  };
 
   useEffect(() => {
     getGeoInfo();
@@ -356,81 +370,88 @@ const PricingFunc = () => {
 
   return (
     <>
-    
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5"
+        ref={serviceCardsRef}
+      >
+        {serviceCards?.length > 0 &&
+          serviceCards.map((item, index) => {
+            const bgColor = backgroundColors[index % backgroundColors.length];
+            const handleCardClick = () => {
+              if (index === 0 || index === 1) {
+                handleOpenAIDialog(item);
+              } else if (index === 2) {
+                router.push("/coaches");
+              } else if (index === 3) {
+                router.push("/pshycometric-test");
+              }
+            };
+            return (
               <div
-                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:gap-8 lg:gap-20 gap-5'
-                ref={serviceCardsRef}>
-                {serviceCards?.length > 0 &&
-                  serviceCards.map((item, index) => {
-                    const bgColor =
-                      backgroundColors[index % backgroundColors.length];
-                    const handleCardClick = () => {
-                      if (index === 0 || index === 1) {
-                        handleOpenAIDialog(item);
-                      } else if (index === 2) {
-                        router.push("/coaches");
-                      } else if (index === 3) {
-                        router.push("/pshycometric-test");
-                      }
-                    };
-                    return (
-                      <div
-                        key={item.id} // Ensure key prop is here on the top-level element
-                        className={`flex rounded-md ${index + 1 === scroll ? "animate-bounce" : ""
-                          } `}
-                        id={`pricing-` + `${index + 1}`}>
-                        <div
-                          className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}>
-                          <div className='p-4'>
-                            <h2 className='lg:text-2xl text-xl font-semibold text-white'>
-                              {item?.cardTitle}
-                            </h2>
-                            <p className='mt-3 text-sm text-white'>
-                              {item?.cardDescription}
-                            </p>
-                          </div>
-                          <div className='p-4 actions_buttons flex justify-between'>
-                            <button
-                              type='button'
-                              onClick={handleCardClick}
-                              className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
-                            >
-                              {index === 3 ? "Try now for free" : index === 2 ? "View" : "Subscribe"}
-                            </button>
-                          </div>
-                        </div>
-                        <div className='bg-white lg:block hidden'>
-                          <Image
-                            priority
-                            src={item?.imageUrl}
-                            alt='Card Image'
-                            width={500}
-                            height={500}
-                            className={`w-[350px] h-[250px] object-contain`}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
+                key={item.id} // Ensure key prop is here on the top-level element
+                className={`flex rounded-md ${
+                  index + 1 === scroll ? "animate-bounce" : ""
+                } `}
+                id={`pricing-` + `${index + 1}`}
+              >
+                <div
+                  className={`w-[350px] h-[270px]  border flex flex-col shadow-lg justify-between ${bgColor} rounded-md`}
+                >
+                  <div className="p-4">
+                    <h2 className="lg:text-2xl text-xl font-semibold text-white">
+                      {item?.cardTitle}
+                    </h2>
+                    <p className="mt-3 text-sm text-white">
+                      {item?.cardDescription}
+                    </p>
+                  </div>
+                  <div className="p-4 actions_buttons flex justify-between">
+                    <button
+                      type="button"
+                      onClick={handleCardClick}
+                      className="rounded-sm bg-white px-5 py-2 text-sm font-semibold text-black"
+                    >
+                      {index === 3
+                        ? "Try now for free"
+                        : index === 2
+                        ? "View"
+                        : "Subscribe"}
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-white lg:block hidden">
+                  <Image
+                    priority
+                    src={item?.imageUrl}
+                    alt="Card Image"
+                    width={500}
+                    height={500}
+                    className={`w-[350px] h-[250px] object-contain`}
+                  />
+                </div>
               </div>
-           
-     
+            );
+          })}
+      </div>
+
       <Dialog
         open={isFreeDialogOpen}
-        onClose={() => setIsFreeDialogOpen(false)}>
+        onClose={() => setIsFreeDialogOpen(false)}
+      >
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className='w-[700px] h-[500px]'
+          className="w-[700px] h-[500px]"
           showCloseButton={true}
-          onClick={handleCloseFreeDialog}>
+          onClick={handleCloseFreeDialog}
+        >
           <DialogHeader>
             <DialogTitle>
-              <h2 className='text-xl sm:text-2xl lg:text-3xl my-2 text-center'>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl my-2 text-center">
                 Genies Pro Suite
               </h2>
             </DialogTitle>
             <DialogDescription>
-              <p className='text-sm sm:text-base text-justify'>
+              <p className="text-sm sm:text-base text-justify">
                 Our professional CV Maker assists you in landing that interview
                 call! Our professional tools like CV Creator, CV Optimiser, and
                 CV Match create well-researched, analytically optimised resumes
@@ -439,57 +460,58 @@ const PricingFunc = () => {
               </p>
             </DialogDescription>
           </DialogHeader>
-          <div className='modal_content'>
-            <div className='modal_list'>
-              <ul className='space-y-4'>
-                <li className='flex items-center text-xs sm:text-base text-gray-600'>
+          <div className="modal_content">
+            <div className="modal_list">
+              <ul className="space-y-4">
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
-                    className='text-blue-950 mr-2'
+                    className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   ATS Compatible CV Templates
                 </li>
-                <li className='flex items-center text-xs sm:text-base text-gray-600'>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
-                    className='text-blue-950 mr-2'
+                    className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   AI-Based Smart Resume Builder
                 </li>
-                <li className='flex items-center text-xs sm:text-base text-gray-600'>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
-                    className='text-blue-950 mr-2'
+                    className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   20+ Downloadable Professional CV Templates
                 </li>
-                <li className='flex items-center text-xs sm:text-base text-gray-600'>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
-                    className='text-blue-950 mr-2'
+                    className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   20 CV scans for Perfection
                 </li>
-                <li className='flex items-center text-xs sm:text-base text-gray-600'>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
-                    className='text-blue-950 mr-2'
+                    className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   AI-Based and Job-Specific CV Match Tool
                 </li>
-                <li className='flex items-center text-xs sm:text-base text-gray-600'>
+                <li className="flex items-center text-xs sm:text-base text-gray-600">
                   <FaCheckCircle
-                    className='text-blue-950 mr-2'
+                    className="text-blue-950 mr-2"
                     style={{ minWidth: "15px", minHeight: "15px" }}
                   />
                   Enhance CV with AI and Increase ATS Compatibility Score
                 </li>
               </ul>
             </div>
-            <div className='start_button text-center mt-10'>
+            <div className="start_button text-center mt-10">
               <Link
                 href={"/cv-studio"}
-                className='bg-blue-950 text-white px-5 py-2 text-base'>
+                className="bg-blue-950 text-white px-5 py-2 text-base"
+              >
                 Start Free Trial
               </Link>
             </div>
@@ -497,203 +519,245 @@ const PricingFunc = () => {
         </DialogContent>
       </Dialog>
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-      {clientSecret ? (
-    <DialogContent className="max-w-md mx-auto p-6">
-      <DialogHeader>
-        <DialogTitle>Enter Card Details</DialogTitle>
-      </DialogHeader>
-      <PaymentSetup
-        clientSecret={clientSecret}
-        onSuccess={() => {
-          toast.success("Card details saved successfully!");
-          setClientSecret(null);
-          setIsDialogOpen(false);
-        }}
-      />
-    </DialogContent>
-  ) : <>
-       <DialogTrigger asChild></DialogTrigger>
-        <DialogContent
-          className='max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6'
-          showCloseButton={true}
-          onClick={handleCloseAIDialog}>
-          <DialogHeader>
-            <DialogTitle>
-              <h2 className='text-xl sm:text-2xl lg:text-2xl my-2 text-center'>
-                {selectedCard?.cardTitle}
-              </h2>
-            </DialogTitle>
-            <DialogDescription>
-              <p className='text-sm sm:text-sm text-justify'>
-                {selectedCard?.popUpDescription}
-              </p>
-            </DialogDescription>
-          </DialogHeader>
-          {selectedCard && (
-            <div className='grid gap-4 py-4'>
-              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 items-start '>
-                <div className='modal_left'>
-                  <div className='modal_list'>
-                    <ul className='space-y-2'>
-                      {selectedCard?.features.map((feature, index) => (
-                        <li
-                          key={index}
-                          className='flex items-center text-xs sm:text-sm text-gray-600'>
-                          <FaCheckCircle
-                            className='text-blue-950 mr-2'
-                            style={{ minWidth: "15px", minHeight: "15px" }}
-                          />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-4">
-    {/* <div className="flex items-center space-x-2">
-      <input
-        type="text"
-        placeholder="Enter Coupon Code"
-        className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring focus:border-blue-500"
-        value={couponCode}
-        onChange={(e) => setCouponCode(e.target.value)}
-      />
-      <button
-        className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg"
-        onClick={applyCoupon}
-        disabled={loading || !couponCode.trim()}
-      >
-        {couloading ? "Applying..." : "Apply"}
-      </button>
-    </div>
-    {couponError && (
-      <p className="mt-2 text-xs text-red-500">{couponError}</p>
-    )} */}
-  </div>
-                  </div>
-                </div>
-                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
-                  <div className="text-center">
-                    <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">{selectedCard?.discount}% off</p>
-                    {
-                      selectedCard?.choosePlan &&
-                      <p className="text-lg sm:text-xl text-gray-500">
-                        Choose your plan
-                      </p>
-                    }
-                    <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
-                      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
-                        {selectedPlan === "monthly"
-                          ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
-                          : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`
-                        }
-                      </h1>
-                      <p className="text-gray-500 text-xs sm:text-sm px-2 line-through">
-                        {selectedPlan === "monthly"
-                          ? `${selectedCard["MP"].symbol}${selectedCard["MP"].price}`
-                          : `${selectedCard["MP"].symbol}${+(selectedCard["MP"].price) * 10}`
-                        }
-                      </p>
-                      <p className="text-gray-500 text-xs  px-2">
-                        {selectedPlan === "monthly" ? selectedCard?.monthLabel : selectedCard?.yearLabel}
-                      </p>
-                    </div>
-                    {
-                      selectedCard?.choosePlan &&
-                      <div className="mt-6 space-y-4 sm:space-y-8">
-                        <div
-                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
-                            ? "border-blue-500 shadow-lg"
-                            : ""
-                            }`}
-                          onClick={() => handlePlanChange("monthly")}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                              Monthly
-                            </div>
-                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
-                              <p>
-                                {selectedCard['DP'].symbol}
-                                {selectedCard['DP'].price}
-                              </p>
-                              <p className="line-through text-xs ml-1">
-                                {selectedCard['MP'].symbol}
-                                {selectedCard['MP'].price}
-                              </p>
-                            </div>
-                            <input
-                              type="checkbox"
-                              className="hidden"
-                              checked={selectedPlan === "monthly"}
-                              onChange={() => handlePlanChange("monthly")}
-                              value="monthly"
-                            />
-                          </div>
-                        </div>
-                        <div
-                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
-                            ? "border-blue-500 shadow-lg"
-                            : ""
-                            }`}
-                          onClick={() => handlePlanChange("yearly")}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                              Yearly
-                            </div>
-
-                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
-                              <p>
-                                {selectedCard['DP'].symbol}
-                                {selectedCard['DP'].price * 10}
-                              </p>
-                              <p className="line-through text-xs ml-1">
-                                {selectedCard['MP'].symbol}
-                                {selectedCard['MP'].price * 10}
-                              </p>
-                            </div>
-                            <input
-                              type="checkbox"
-                              className="hidden"
-                              checked={selectedPlan === "yearly"}
-                              onChange={() => handlePlanChange("yearly")}
-                              value="yearly"
-                            />
-                          </div>
-
-                        </div>
+        {clientSecret ? (
+          <DialogContent className="max-w-md mx-auto p-6">
+            <DialogHeader>
+              <DialogTitle>Enter Card Details</DialogTitle>
+            </DialogHeader>
+            <PaymentSetup
+              clientSecret={clientSecret}
+              onSuccess={() => {
+                toast.success("Card details saved successfully!");
+                setClientSecret(null);
+                setIsDialogOpen(false);
+              }}
+            />
+          </DialogContent>
+        ) : (
+          <>
+            <DialogTrigger asChild></DialogTrigger>
+            <DialogContent
+              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
+              showCloseButton={true}
+              onClick={handleCloseAIDialog}
+            >
+              <DialogHeader>
+                <DialogTitle>
+                  <h2 className="text-xl sm:text-2xl lg:text-2xl my-2 text-center">
+                    {selectedCard?.cardTitle}
+                  </h2>
+                </DialogTitle>
+                <DialogDescription>
+                  <p className="text-sm sm:text-sm text-justify">
+                    {selectedCard?.popUpDescription}
+                  </p>
+                </DialogDescription>
+              </DialogHeader>
+              {selectedCard && (
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start ">
+                    <div className="modal_left">
+                      <div className="modal_list">
+                        <ul className="space-y-2">
+                          {selectedCard?.features.map((feature, index) => (
+                            <li
+                              key={index}
+                              className="flex items-center text-xs sm:text-sm text-gray-600"
+                            >
+                              <FaCheckCircle
+                                className="text-blue-950 mr-2"
+                                style={{ minWidth: "15px", minHeight: "15px" }}
+                              />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    }
+                      <div className="coupon_section text-start mt-6">
+                        <p className="font-semibold text-sm my-5">
+                          Apply Coupon Code Here
+                        </p>
+
+                        {/* Trial checkbox */}
+                        <div
+                          className={`relative flex items-center mb-4 p-2 rounded-md border-2 ${
+                            isTrialSelected
+                              ? "border-green-500"
+                              : "border-blue-500"
+                          }`}
+                          onClick={handleTrialCheckboxChange}
+                        >
+                          <span className="ml-2 text-sm">
+                            <strong className={`${isTrialSelected} ? "text-green-500" : "text-blue-500`}>TRIAL14</strong> is a 14 days free
+                            trial pack. After 14 days, the price will be charged
+                            automatically.
+                          </span>
+                        </div>
+
+                        {/* Input field and apply button */}
+                        <div className="mb-4 flex justify-between items-center gap-5">
+                          <input
+                            type="text"
+                            placeholder="Enter coupon code"
+                            value={couponCode} // Bind the state
+                            onChange={(e) => setCouponCode(e.target.value)} // Update state
+                            disabled={couponApplied} // Disable input after applying coupon
+                            className={`border px-4 py-2 rounded-md w-full ${
+                              couponApplied ? "bg-gray-200" : "border-gray-300"
+                            }`}
+                          />
+                          <button
+                            onClick={applyCoupon}
+                            className="bg-blue-950 text-white px-5 py-2 rounded-md text-base"
+                            disabled={
+                              couloading || couponApplied || !couponCode
+                            } // Disable button if loading, coupon applied, or empty input
+                          >
+                            {couloading
+                              ? "Applying..."
+                              : couponApplied
+                              ? "Coupon Applied"
+                              : "Apply"}
+                          </button>
+                        </div>
+
+                        {/* Show success or error messages */}
+                        {couponError && (
+                          <p className="text-red-600 mt-2">{couponError}</p>
+                        )}
+                        {couponApplied && (
+                          <p className="text-green-600 mt-2">
+                            Coupon applied successfully! Discount: {discount}%
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                      <div className="text-center">
+                        <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">
+                          {selectedCard?.discount}% off
+                        </p>
+                        {selectedCard?.choosePlan && (
+                          <p className="text-lg sm:text-xl text-gray-500">
+                            Choose your plan
+                          </p>
+                        )}
+                        <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                          <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                            {selectedPlan === "monthly"
+                              ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
+                              : `${selectedCard["DP"].symbol}${
+                                  +selectedCard["DP"].price * 10
+                                }`}
+                          </h1>
+                          <p className="text-gray-500 text-xs sm:text-sm px-2 line-through">
+                            {selectedPlan === "monthly"
+                              ? `${selectedCard["MP"].symbol}${selectedCard["MP"].price}`
+                              : `${selectedCard["MP"].symbol}${
+                                  +selectedCard["MP"].price * 10
+                                }`}
+                          </p>
+                          <p className="text-gray-500 text-xs  px-2">
+                            {selectedPlan === "monthly"
+                              ? selectedCard?.monthLabel
+                              : selectedCard?.yearLabel}
+                          </p>
+                        </div>
+                        {selectedCard?.choosePlan && (
+                          <div className="mt-6 space-y-4 sm:space-y-8">
+                            <div
+                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                                selectedPlan === "monthly"
+                                  ? "border-blue-500 shadow-lg"
+                                  : ""
+                              }`}
+                              onClick={() => handlePlanChange("monthly")}
+                            >
+                              <div className="flex justify-between items-center">
+                                <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                  Monthly
+                                </div>
+                                <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                  <p>
+                                    {selectedCard["DP"].symbol}
+                                    {selectedCard["DP"].price}
+                                  </p>
+                                  <p className="line-through text-xs ml-1">
+                                    {selectedCard["MP"].symbol}
+                                    {selectedCard["MP"].price}
+                                  </p>
+                                </div>
+                                <input
+                                  type="checkbox"
+                                  className="hidden"
+                                  checked={selectedPlan === "monthly"}
+                                  onChange={() => handlePlanChange("monthly")}
+                                  value="monthly"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                                selectedPlan === "yearly"
+                                  ? "border-blue-500 shadow-lg"
+                                  : ""
+                              }`}
+                              onClick={() => handlePlanChange("yearly")}
+                            >
+                              <div className="flex justify-between items-center">
+                                <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                  Yearly
+                                </div>
+
+                                <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                  <p>
+                                    {selectedCard["DP"].symbol}
+                                    {selectedCard["DP"].price * 10}
+                                  </p>
+                                  <p className="line-through text-xs ml-1">
+                                    {selectedCard["MP"].symbol}
+                                    {selectedCard["MP"].price * 10}
+                                  </p>
+                                </div>
+                                <input
+                                  type="checkbox"
+                                  className="hidden"
+                                  checked={selectedPlan === "yearly"}
+                                  onChange={() => handlePlanChange("yearly")}
+                                  value="yearly"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          )}
-          <DialogFooter className='mt-4 sm:mt-8'>
-            <Button
-              className='bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto'
-              onClick={() => UpgradePlan(selectedCard)}
-              disabled={loading}>
-              {loading ? (
-                <>
-                  Upgrading <FaSpinner className='animate-spin ml-2' />
-                </>
-              ) : (
-                "Upgrade Now"
               )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </>
-      }
+              <DialogFooter className="mt-4 sm:mt-8">
+                <Button
+                  className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                  onClick={() => UpgradePlan(selectedCard)}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      Upgrading <FaSpinner className="animate-spin ml-2" />
+                    </>
+                  ) : (
+                    "Upgrade Now"
+                  )}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </>
+        )}
       </Dialog>
     </>
   );
 };
 
 export default function Pricing() {
-  return (
-   
-      <PricingFunc />
-  
-  );
+  return <PricingFunc />;
 }

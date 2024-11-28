@@ -2,6 +2,9 @@
 import React, { Suspense } from 'react'
 const PricingCard = React.lazy(() => import('./PricingCard'));
 const page = () => {
+
+
+  
     const jsonLd = {
         "@context": "https://schema.org/",
         "@type": "Organization",
@@ -16,7 +19,7 @@ const page = () => {
     <main>
     <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-20'>
         <div className='w-full h-full flex justify-center items-center'>
-          <div className='text-start'>
+          <div className='text-start mt-20'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
               Grow beyond expectations with
               <br />
