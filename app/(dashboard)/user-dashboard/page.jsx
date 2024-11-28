@@ -570,7 +570,7 @@ const UserDashboardPage = () => {
                                   </div>
                                 </div>
                                 <Button
-                                  className="text-xs p-2"
+                                  className="text-xs p-2 cursor-pointer"
                                   onClick={() =>
                                     handleBookSlotClick(item?.coachId?.id)
                                   }
@@ -585,7 +585,7 @@ const UserDashboardPage = () => {
                             open={isDrawerOpen}
                             onOpenChange={setIsDrawerOpen}
                           >
-                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[500px] h-full md:overflow-hidden overflow-y-scroll">
+                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[550px] h-full overflow-y-scroll">
                               {/* Close Button */}
                               <div className="flex md:justify-end justify-between mt-10">
                               <div className="main_title md:hidden block">
