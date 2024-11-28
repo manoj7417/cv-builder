@@ -26,6 +26,7 @@ import { loadRazorpayScript } from "../utils/razorpayUtils";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
+import PaymentSetup from "../components/PaymentSetup/PaymentSetup";
 const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -45,6 +46,11 @@ const PricingFunc = () => {
   const router = useRouter();
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setcouDiscount] = useState(0);
+  const [couloading, setcouLoading] = useState(false);
+  const [couponError, setCouponError] = useState("");
+  const [clientSecret, setClientSecret] = useState(null);
   // Function to scroll to the service cards section
   const scrollToServiceCards = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -269,6 +275,7 @@ const PricingFunc = () => {
       duration: selectedPlan,
       currency: geoinfo?.currency || "USD",
       planName: plan.planName,
+      discount: discount
     };
     setLoading(true);
     try {
@@ -283,8 +290,13 @@ const PricingFunc = () => {
         }
       );
       if (response.status === 200) {
-        const { url } = response.data;
-        window.location = url;
+        if (response.data.clientSecret) {
+          setClientSecret(response.data.clientSecret);
+        }
+        else{
+          const { url } = response.data;
+          window.location = url;
+        }
       }
     } catch (error) {
       if (
@@ -300,6 +312,31 @@ const PricingFunc = () => {
     }
   };
 
+  const applyCoupon = async () => {
+    setcouLoading(true);
+    setCouponError("");
+  
+    try {
+      const response = await axios.post("/api/applyCoupon", {
+        couponCode,
+        planName: selectedCard.planName,
+      });
+  
+      if (response.status === 200) {
+        const { discount } = response.data;
+        setcouDiscount(discount); // Update the discount state
+        toast.success("Coupon applied successfully!");
+        setcouLoading(false);
+      }
+    } catch (error) {
+      setCouponError(
+        error.response?.data?.message || "Invalid coupon code."
+      );
+      setcouLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   useEffect(() => {
@@ -460,7 +497,22 @@ const PricingFunc = () => {
         </DialogContent>
       </Dialog>
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <DialogTrigger asChild></DialogTrigger>
+      {clientSecret ? (
+    <DialogContent className="max-w-md mx-auto p-6">
+      <DialogHeader>
+        <DialogTitle>Enter Card Details</DialogTitle>
+      </DialogHeader>
+      <PaymentSetup
+        clientSecret={clientSecret}
+        onSuccess={() => {
+          toast.success("Card details saved successfully!");
+          setClientSecret(null);
+          setIsDialogOpen(false);
+        }}
+      />
+    </DialogContent>
+  ) : <>
+       <DialogTrigger asChild></DialogTrigger>
         <DialogContent
           className='max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6'
           showCloseButton={true}
@@ -495,6 +547,27 @@ const PricingFunc = () => {
                         </li>
                       ))}
                     </ul>
+                    <div className="mt-4">
+    {/* <div className="flex items-center space-x-2">
+      <input
+        type="text"
+        placeholder="Enter Coupon Code"
+        className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring focus:border-blue-500"
+        value={couponCode}
+        onChange={(e) => setCouponCode(e.target.value)}
+      />
+      <button
+        className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg"
+        onClick={applyCoupon}
+        disabled={loading || !couponCode.trim()}
+      >
+        {couloading ? "Applying..." : "Apply"}
+      </button>
+    </div>
+    {couponError && (
+      <p className="mt-2 text-xs text-red-500">{couponError}</p>
+    )} */}
+  </div>
                   </div>
                 </div>
                 <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
@@ -610,8 +683,9 @@ const PricingFunc = () => {
             </Button>
           </DialogFooter>
         </DialogContent>
+      </>
+      }
       </Dialog>
-      
     </>
   );
 };
