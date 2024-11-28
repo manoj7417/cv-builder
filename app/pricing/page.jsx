@@ -14,7 +14,7 @@ const page = () => {
   return (
     <>
     <main>
-    <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-10'>
+    <section className='w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-20'>
         <div className='w-full h-full flex justify-center items-center'>
           <div className='text-start'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start'>
@@ -22,7 +22,7 @@ const page = () => {
               <br />
               <span className='text-blue-700'>Flexible Pricing</span>
             </h1>
-            <p className=' w-[60%] mx-auto my-3 text-base text-center'>
+            <p className='md:w-[60%] w-[80%] mx-auto my-3 text-base text-center'>
               Our professional CV Maker assists you in landing that interview
               call! Our professional tools like CV Creator, CV Optimiser, and CV
               Match create well-researched, analytically optimised resumes that
