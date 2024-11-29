@@ -55,8 +55,6 @@ const PricingFunc = () => {
   const discountCode = searchParams.get("coupon") === "true";
   const [isTrialSelected, setIsTrialSelected] = useState(false);
 
-  console.log("Sending couponCode:", couponCode);
-  console.log("Sending planName:", selectedCard?.planName);
   // Function to scroll to the service cards section
   const scrollToServiceCards = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -368,6 +366,12 @@ const PricingFunc = () => {
     }
   }, [scroll]);
 
+  useEffect(() => {
+    if (discountCode && serviceCards?.length > 0) {
+      handleOpenAIDialog(serviceCards[0]);
+    }
+  }, [discountCode]);
+
   return (
     <>
       <div
@@ -433,8 +437,7 @@ const PricingFunc = () => {
             );
           })}
       </div>
-
-      <Dialog
+      {/* <Dialog
         open={isFreeDialogOpen}
         onClose={() => setIsFreeDialogOpen(false)}
       >
@@ -517,7 +520,7 @@ const PricingFunc = () => {
             </div>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         {clientSecret ? (
           <DialogContent className="max-w-md mx-auto p-6">
@@ -537,7 +540,7 @@ const PricingFunc = () => {
           <>
             <DialogTrigger asChild></DialogTrigger>
             <DialogContent
-              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
+              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-full lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
               showCloseButton={true}
               onClick={handleCloseAIDialog}
             >
@@ -573,64 +576,76 @@ const PricingFunc = () => {
                           ))}
                         </ul>
                       </div>
-                      <div className="coupon_section text-start mt-6">
-                        <p className="font-semibold text-sm my-5">
-                          Apply Coupon Code Here
-                        </p>
-
-                        {/* Trial checkbox */}
-                        <div
-                          className={`relative flex items-center mb-4 p-2 rounded-md border-2 ${
-                            isTrialSelected
-                              ? "border-green-500"
-                              : "border-blue-500"
-                          }`}
-                          onClick={handleTrialCheckboxChange}
-                        >
-                          <span className="ml-2 text-sm">
-                            <strong className={`${isTrialSelected} ? "text-green-500" : "text-blue-500`}>TRIAL14</strong> is a 14 days free
-                            trial pack. After 14 days, the price will be charged
-                            automatically.
-                          </span>
-                        </div>
-
-                        {/* Input field and apply button */}
-                        <div className="mb-4 flex justify-between items-center gap-5">
-                          <input
-                            type="text"
-                            placeholder="Enter coupon code"
-                            value={couponCode} // Bind the state
-                            onChange={(e) => setCouponCode(e.target.value)} // Update state
-                            disabled={couponApplied} // Disable input after applying coupon
-                            className={`border px-4 py-2 rounded-md w-full ${
-                              couponApplied ? "bg-gray-200" : "border-gray-300"
-                            }`}
-                          />
-                          <button
-                            onClick={applyCoupon}
-                            className="bg-blue-950 text-white px-5 py-2 rounded-md text-base"
-                            disabled={
-                              couloading || couponApplied || !couponCode
-                            } // Disable button if loading, coupon applied, or empty input
-                          >
-                            {couloading
-                              ? "Applying..."
-                              : couponApplied
-                              ? "Coupon Applied"
-                              : "Apply"}
-                          </button>
-                        </div>
-
-                        {/* Show success or error messages */}
-                        {couponError && (
-                          <p className="text-red-600 mt-2">{couponError}</p>
-                        )}
-                        {couponApplied && (
-                          <p className="text-green-600 mt-2">
-                            Coupon applied successfully! Discount: {discount}%
+                      {selectedCard?.id === 1 && (
+                        <div className="coupon_section text-start mt-6">
+                          <p className="font-semibold text-sm my-5">
+                            Apply Coupon Code Here
                           </p>
-                        )}
-                      </div>
+
+                          {/* Trial checkbox */}
+                          <div
+                            className={`relative flex items-center mb-4 p-2 rounded-md border-2 cursor-pointer ${
+                              isTrialSelected
+                                ? "border-green-500"
+                                : "border-blue-500"
+                            }`}
+                            onClick={handleTrialCheckboxChange}
+                          >
+                            <span className="ml-2 text-sm">
+                              <strong
+                                className={
+                                  isTrialSelected
+                                    ? "text-green-500"
+                                    : "text-blue-500"
+                                }
+                              >
+                                TRIAL14
+                              </strong>{" "}
+                              is a 14 days free trial pack. After 14 days, the
+                              price will be charged automatically.
+                            </span>
+                          </div>
+
+                          {/* Input field and apply button */}
+                          <div className="mb-4 flex justify-between items-center gap-5">
+                            <input
+                              type="text"
+                              placeholder="Enter coupon code"
+                              value={couponCode} // Bind the state
+                              onChange={(e) => setCouponCode(e.target.value)} // Update state
+                              disabled={couponApplied} // Disable input after applying coupon
+                              className={`border px-4 py-2 rounded-md w-full ${
+                                couponApplied
+                                  ? "bg-gray-200"
+                                  : "border-gray-300"
+                              }`}
+                            />
+                            <button
+                              onClick={applyCoupon}
+                              className="bg-blue-950 text-white px-5 py-2 rounded-md text-base"
+                              disabled={
+                                couloading || couponApplied || !couponCode
+                              }
+                            >
+                              {couloading
+                                ? "Applying..."
+                                : couponApplied
+                                ? "Coupon Applied"
+                                : "Apply"}
+                            </button>
+                          </div>
+
+                          {/* Show success or error messages */}
+                          {couponError && (
+                            <p className="text-red-600 mt-2">{couponError}</p>
+                          )}
+                          {couponApplied && (
+                            <p className="text-green-600 mt-2">
+                              Coupon applied successfully! Discount: {discount}%
+                            </p>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
                       <div className="text-center">
@@ -735,7 +750,7 @@ const PricingFunc = () => {
                   </div>
                 </div>
               )}
-              <DialogFooter className="mt-4 sm:mt-8">
+              <DialogFooter className="mt-4 sm:mt-8 fixed bottom-[50px] right-[20px]">
                 <Button
                   className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
                   onClick={() => UpgradePlan(selectedCard)}

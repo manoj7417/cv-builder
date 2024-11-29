@@ -46,6 +46,7 @@ export function ResumeHeader() {
   const dropdownRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
+  const shouldHideBanner = pathname.includes('/analyser/');
   const logoutUser = useUserStore((state) => state?.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
@@ -119,7 +120,7 @@ export function ResumeHeader() {
           showBanner ? "h-[120px]" : "h-[70px]"
         }`}
       >
-        {showBanner && (
+        {!shouldHideBanner &&showBanner && (
           <div className="top_banner bg-blue-900 text-white py-4 px-6 text-center">
             <p className="text-sm sm:text-base font-medium marquee-text">
               🎉 Limited Time Offer! Get 14% off on Genies Pro CV Studio.
