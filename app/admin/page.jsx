@@ -151,53 +151,54 @@ const AdminPage = () => {
               </Link>
             </div>
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 pt-3 bg-white '>
-              {coaches?.length > 0 ? (
-                coaches.slice(0, 10).map((coach) => {
-                  // Define button styles based on approval status
-                  const buttonStyle = {
-                    approved: "bg-green-500 text-white",
-                    pending: "bg-yellow-500 text-black",
-                    cancelled: "bg-red-500 text-white",
-                  };
-                  const capitalizedStatus =
-                    coach.approvalStatus.charAt(0).toUpperCase() +
-                    coach.approvalStatus.slice(1).toLowerCase();
-                  return (
-                    <div
-                      key={coach.name}
-                      className='bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl'>
-                      <div className='flex flex-col items-center'>
-                        <div className='pt-3 pb-3'>
-                          <img
+            {coaches?.length > 0 ? (
+    coaches.slice(0, 10).map((coach) => {
+        const buttonStyle = {
+            approved: "bg-green-500 text-white",
+            pending: "bg-yellow-500 text-black",
+            cancelled: "bg-red-500 text-white",
+        };
+        const capitalizedStatus =
+            coach.approvalStatus?.charAt(0).toUpperCase() +
+            coach.approvalStatus?.slice(1).toLowerCase() || "Unknown";
+
+        return (
+            <div
+                key={coach.name}
+                className='bg-[#DDEDFF6B] mt-3 pl-3 rounded-2xl'>
+                <div className='flex flex-col items-center'>
+                    <div className='pt-3 pb-3'>
+                        <img
                             className='h-16 w-16 rounded-full object-cover'
                             src={coach.profileImage || "/default_coach.png"}
                             alt='coachImage'
-                          />
-                        </div>
-                        <div className='font-bold text-base text-[#000000]'>
-                          {coach.name}
-                        </div>
-                        <div className='text-[11px] text-[#000000]'>
-                          {coach.typeOfCoaching.slice(0, 20)}...
-                        </div>
-                        <div className='pt-2 pb-3 text-[#4E5566]'>
-                          <Link
+                        />
+                    </div>
+                    <div className='font-bold text-base text-[#000000]'>
+                        {coach.name || "Unnamed Coach"}
+                    </div>
+                    <div className='text-[11px] text-[#000000]'>
+                        {coach.typeOfCoaching?.slice(0, 20) || "Not specified"}...
+                    </div>
+                    <div className='pt-2 pb-3 text-[#4E5566]'>
+                        <Link
                             href={`/admin/coach`}
                             className={`border p-1 text-[12px] rounded-md ${
-                              buttonStyle[coach.approvalStatus.toLowerCase()]
+                                buttonStyle[coach.approvalStatus?.toLowerCase()] || ""
                             }`}>
                             {capitalizedStatus}
-                          </Link>
-                        </div>
-                      </div>
+                        </Link>
                     </div>
-                  );
-                })
-              ) : (
-                <div className='text-center text-[#4E5566] mt-5'>
-                  No coaches available.
                 </div>
-              )}
+            </div>
+        );
+    })
+) : (
+    <div className='text-center text-[#4E5566] mt-5'>
+        No coaches available.
+    </div>
+)}
+
             </div>
           </div>
           <div
