@@ -61,6 +61,7 @@ export const authOptions = {
           console.log("Account object during login:", account);
           token.accessToken = account.access_token;
           token.refreshToken = account.refresh_token || token.refreshToken;
+          token.idToken = account.id_token;
           token.accessTokenExpires = Date.now() + account.expires_in * 1000;
         }
       
@@ -76,6 +77,7 @@ export const authOptions = {
       // Pass the access token and refresh token to the client
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
+      session.idToken= token.idToken;
       session.error = token.error;
       return session;
     },
