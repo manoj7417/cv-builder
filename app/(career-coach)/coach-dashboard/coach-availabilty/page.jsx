@@ -14,6 +14,7 @@ import { FiPlus } from "react-icons/fi";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCoachStore } from "@/app/store/coachStore";
 import { toast } from "react-toastify";
+import SignInGoogle from "../../../components/SignInGoogle/SignInGoogle";
 
 const CoachAvailability = () => {
   const { userdata } = useCoachStore(state => state.userState)
@@ -156,6 +157,10 @@ const CoachAvailability = () => {
   return (
     <div className="w-full mx-auto mt-18 lg:p-10 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
       <div className="main_heading my-5 mt-10">
+        <div>
+          <p>Sync calender</p>
+          <SignInGoogle type="Sync calender" />
+        </div>
         <h1 className="text-xl text-blue-950 font-bold">Time Availabilty</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
