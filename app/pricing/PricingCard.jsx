@@ -540,7 +540,8 @@ const PricingFunc = () => {
           <>
             <DialogTrigger asChild></DialogTrigger>
             <DialogContent
-              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-full lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
+              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-full ..
+              lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
               showCloseButton={true}
               onClick={handleCloseAIDialog}
             >
