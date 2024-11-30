@@ -124,7 +124,7 @@
   
   /* Running text animation */
   .marquee-text {
-    display: inline-block;
+    /* display: inline-block; */
     white-space: nowrap;
     /* animation: marquee 10s linear infinite; */
     animation: zoomInOut 2s infinite;
@@ -149,6 +149,8 @@
       transform: scale(1.2); /* Zoom in */
     }
   }
+
+  
 
 
 /* New Resume Header CSS Ends Here  */

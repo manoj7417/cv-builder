@@ -52,6 +52,8 @@ const PricingFunc = () => {
   const [couponError, setCouponError] = useState("");
   const [couponApplied, setCouponApplied] = useState(false);
   const [clientSecret, setClientSecret] = useState(null);
+  console.log("clientSecret::", clientSecret);
+
   const discountCode = searchParams.get("coupon") === "true";
   const [isTrialSelected, setIsTrialSelected] = useState(false);
 
@@ -367,10 +369,10 @@ const PricingFunc = () => {
   }, [scroll]);
 
   useEffect(() => {
-    if (discountCode && serviceCards?.length > 0) {
+    if (discountCode && serviceCards?.length > 0 &&  geoinfo.currency) {
       handleOpenAIDialog(serviceCards[0]);
     }
-  }, [discountCode]);
+  }, [discountCode, geoinfo.currency]);
 
   return (
     <>

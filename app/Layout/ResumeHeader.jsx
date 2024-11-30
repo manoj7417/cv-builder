@@ -46,7 +46,7 @@ export function ResumeHeader() {
   const dropdownRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
-  const shouldHideBanner = pathname.includes('/analyser/');
+  const shouldHideBanner = pathname.includes("/analyser/");
   const logoutUser = useUserStore((state) => state?.logoutUser);
   const { userState } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
@@ -101,10 +101,9 @@ export function ResumeHeader() {
     }
   };
 
-
-  const handleCoupon =()=>{
+  const handleCoupon = () => {
     router.push("/pricing?coupon=true");
-  }
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -120,13 +119,28 @@ export function ResumeHeader() {
           showBanner ? "h-[120px]" : "h-[70px]"
         }`}
       >
-        {!shouldHideBanner &&showBanner && (
-          <div className="top_banner bg-blue-900 text-white py-4 px-6 text-center">
-            <p className="text-sm sm:text-base font-medium marquee-text">
-              🎉 Limited Time Offer! Get 14% off on Genies Pro CV Studio.
+        {!shouldHideBanner && showBanner && (
+          <div className="top_banner bg-blue-900 text-white py-3 px-4 text-center">
+             {/* For Desktop devices  */}
+            <p className="text-xs sm:text-sm md:text-base font-medium lg:flex hidden flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 marquee-text">
+              <span>
+                🎉 Limited Time Offer! Get 14% off on Genies Pro CV Studio.
+              </span>
               <span
-              onClick={handleCoupon}
-                class="underline font-semibold hover:no-underline cursor-pointer"
+                onClick={handleCoupon}
+                className="underline font-semibold hover:no-underline cursor-pointer sm:ml-2"
+              >
+                Grab Now
+              </span>
+            </p>
+            {/* For mobile devices  */}
+            <p className="text-xs sm:text-sm md:text-base font-medium flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0  lg:hidden">
+              <span>
+                🎉 Limited Time Offer! Get 14% off on Genies Pro CV Studio.
+              </span>
+              <span
+                onClick={handleCoupon}
+                className="underline font-semibold hover:no-underline cursor-pointer sm:ml-2"
               >
                 Grab Now
               </span>
