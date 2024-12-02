@@ -71,7 +71,6 @@ const UserBookingSlot = ({ coach_Id }) => {
   const [singleCoach, setSingleCoach] = useState(null);
   const id = coach_Id;
   const router = useRouter();
-  // const [activeTab, setActiveTab] = useState("about");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDaySlots, setSelectedDaySlots] = useState(null);
   const [modalSelectedSlot, setModalSelectedSlot] = useState(null);

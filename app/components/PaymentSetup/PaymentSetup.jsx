@@ -11,9 +11,9 @@ import { loadStripe } from "@stripe/stripe-js";
 
 let stripePromise;
 
-if (typeof window !== "undefined") {
-  stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-}
+  // if (typeof window !== "undefined") {
+  //   stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+  // }
 
 const CardDetailsForm = ({ clientSecret, onSuccess }) => {
   const stripe = useStripe();
@@ -109,12 +109,32 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
   );
 };
 
-const PaymentSetup = ({ clientSecret, onSuccess }) => {
+const PaymentSetup = ({stripeKey, clientSecret, onSuccess }) => {
+
+  if (!stripePromise) {
+    stripePromise = loadStripe(stripeKey);
+  }
+
+
   return (
     <Elements stripe={stripePromise}>
       <CardDetailsForm clientSecret={clientSecret} onSuccess={onSuccess} />
     </Elements>
   );
 };
+
+
+export async function getServerSideProps() {
+
+  const stripeKey = process.env.STRIPE_PUBLISHABLE_KEY;
+  console.log("Stripe Key from server:", stripeKey);
+
+  return {
+    props: {
+      stripeKey,
+      clientSecret
+    },
+  };
+}
 
 export default PaymentSetup;

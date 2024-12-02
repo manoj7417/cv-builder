@@ -44,7 +44,7 @@ const UserDashboardPage = () => {
   };
 
   const handleCloseDrawer = () => {
-    setIsDrawerOpen(false); // Close the Drawer
+    setIsDrawerOpen(false);
   };
 
   const toggle = (index) => {
