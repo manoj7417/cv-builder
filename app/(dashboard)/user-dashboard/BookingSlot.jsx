@@ -318,9 +318,9 @@ const UserBookingSlot = ({ coach_Id }) => {
     try {
       const response = await axios.get(`/api/getAllCoaches`);
       const data = response.data;
-      const coach = data.coaches.find((coach) => coach._id === id); // Find the specific coach by ID
+      const coach = data.coaches.find((coach) => coach._id === id);
       if (coach) {
-        setSingleCoach(coach); // Set the single coach data if found
+        setSingleCoach(coach);
       } else {
         toast.error("Coach not found");
       }
@@ -333,6 +333,9 @@ const UserBookingSlot = ({ coach_Id }) => {
   useEffect(() => {
     fetchCoachDetails(); // Fetch coach details on component mount
   }, []);
+
+  
+
 
   return (
     <>

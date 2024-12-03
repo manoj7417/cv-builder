@@ -86,6 +86,7 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
+  console.log("programData::",programData)
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
