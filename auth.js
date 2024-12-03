@@ -51,29 +51,34 @@ export default NextAuth({
           prompt: "consent", // Forces re-consent to get a refresh_token
         },
       },
-    }),    
+    }),
   ],
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, account, user }) {
       if (account) {
-        console.log("Account object during login:", account);
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token || token.refreshToken;
+        token.idToken = account.id_token; // Include idToken here
         token.accessTokenExpires = Date.now() + account.expires_in * 1000;
       }
-
+    
+      // Return the token directly if it hasn't expired
       if (Date.now() < token.accessTokenExpires) {
         return token;
       }
-
-      console.log("Access token expired, refreshing...");
+    
+      // Refresh the access token if it has expired
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.refreshToken = token.refreshToken;
-      session.error = token.error;
+      session.user = {
+        ...session.user,
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
+        idToken: token.idToken, // Add idToken here
+      };
       return session;
     },
   },
+  debug: true,
 });
