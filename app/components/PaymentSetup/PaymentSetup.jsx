@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Elements,
   CardNumberElement,
@@ -11,9 +11,10 @@ import { loadStripe } from "@stripe/stripe-js";
 
 let stripePromise;
 
-  // if (typeof window !== "undefined") {
-  //   stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
-  // }
+
+// if (typeof window !== "undefined") {
+//   stripePromise = loadStripe(stripeKey);
+// }
 
 const CardDetailsForm = ({ clientSecret, onSuccess }) => {
   const stripe = useStripe();
@@ -109,12 +110,35 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
   );
 };
 
-const PaymentSetup = ({stripeKey, clientSecret, onSuccess }) => {
+const PaymentSetup = ({ clientSecret, onSuccess }) => {
+  const [stripePromise, setStripePromise] = useState(null);
+
+  useEffect(() => {
+    const fetchStripeKey = async () => {
+      try {
+        const response = await fetch("/api/getStripeKey", { method: "GET" });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch the Stripe key");
+        }
+        const { stripeKey } = await response.json();
+
+        if (stripeKey) {
+          setStripePromise(loadStripe(stripeKey)); // Use the fetched key
+        } else {
+          console.error("No Stripe key found in the response");
+        }
+      } catch (error) {
+        console.error("Error fetching Stripe key:", error);
+      }
+    };
+
+    fetchStripeKey();
+  }, []);
 
   if (!stripePromise) {
-    stripePromise = loadStripe(stripeKey);
+    return <div>Loading Stripe...</div>;
   }
-
 
   return (
     <Elements stripe={stripePromise}>
@@ -123,18 +147,16 @@ const PaymentSetup = ({stripeKey, clientSecret, onSuccess }) => {
   );
 };
 
+// export async function getServerSideProps() {
 
-export async function getServerSideProps() {
+//   const stripeKey = process.env.STRIPE_PUBLISHABLE_KEY;
+//   console.log("Stripe Key from server:", stripeKey);
 
-  const stripeKey = process.env.STRIPE_PUBLISHABLE_KEY;
-  console.log("Stripe Key from server:", stripeKey);
-
-  return {
-    props: {
-      stripeKey,
-      clientSecret
-    },
-  };
-}
+//   return {
+//     props: {
+//       stripeKey,
+//     },
+//   };
+// }
 
 export default PaymentSetup;
