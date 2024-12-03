@@ -24,7 +24,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import core Swiper styles
 import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
-
+import SignInGoogle from '../../components/SignInGoogle/SignInGoogle'
+import CoachSignIn from "@/app/components/CoachGoogleSignIn/CoachSignIn";
 //
 export default function CoachRegistration() {
   const formSchema = yup.object().shape({
@@ -410,6 +411,7 @@ export default function CoachRegistration() {
                       </>
                     )}
                   </Button>
+                  <CoachSignIn type="Sign Up" />
                   <p className='mt-10 text-sm text-gray-600 text-center'>
                     Already have an account?
                     <Link

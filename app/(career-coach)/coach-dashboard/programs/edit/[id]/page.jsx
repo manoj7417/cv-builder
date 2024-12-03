@@ -145,7 +145,7 @@ function EditProgramfunc() {
                   Course Prerequisites
                 </h2>
                 <ul className='list-disc list-inside space-y-4'>
-                  {viewPrograms?.prerequisites.map((item) => (
+                  {viewPrograms?.prerequisites?.map((item) => (
                     <li key={item._id} className='text-md'>
                       <span className='font-bold'>{item.description}:</span>{" "}
                       <Link

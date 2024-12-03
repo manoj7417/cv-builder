@@ -24,11 +24,13 @@ import { GetTokens } from "@/app/actions";
 import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Skeleton from "react-loading-skeleton";
+import { useRouter } from "next/navigation";
 
 const CoachDashboardPage = () => {
   const { userdata } = useCoachStore((state) => state.userState);
   const [bookingSlot, setBookingSlot] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter()
 
   const invoices = [
     {

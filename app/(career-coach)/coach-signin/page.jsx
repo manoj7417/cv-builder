@@ -23,6 +23,7 @@ import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
 import { SetTokens } from "@/app/actions";
 import { useCoachStore } from "../../store/coachStore";
+import CoachSignIn from "@/app/components/CoachGoogleSignIn/CoachSignIn";
 
 //
 export default function CoachLogin() {
@@ -347,6 +348,7 @@ export default function CoachLogin() {
                         </>
                       )}
                     </Button>
+                    <CoachSignIn type="Sign In" />
                   </div>
                 </div>
               </form>

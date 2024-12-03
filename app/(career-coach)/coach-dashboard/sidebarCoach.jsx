@@ -76,7 +76,9 @@ const SidebarCoach = () => {
       await signOut();
       toast.success("Logged out");
       router.push("/coach-signin");
+      signOut();
     } catch (error) {
+      console.log(error);
       toast.error("Error logging out");
     }
   };

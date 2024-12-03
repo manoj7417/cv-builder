@@ -10,12 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  ChevronRight,
-  Upload,
-  LoaderCircle,
-  ArrowLeft,
-} from "lucide-react";
+import { ChevronRight, Upload, LoaderCircle, ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
@@ -30,9 +25,14 @@ import {
 } from "@/components/ui/tooltip";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-const PrerequisitesFieldArray = dynamic(() => import('./PrerequisitesFieldArray'), { ssr: false });
-const DaysFieldArray = dynamic(() => import('./DaysFieldArray'), { ssr: false });
-const { ProgramValidationSchema } = dynamic(() => import('./ProgramValidationSchema'), { ssr: false });
+const PrerequisitesFieldArray = dynamic(
+  () => import("./PrerequisitesFieldArray"),
+  { ssr: false }
+);
+const DaysFieldArray = dynamic(() => import("./DaysFieldArray"), {
+  ssr: false,
+});
+import { ProgramValidationSchema } from "./ProgramValidationSchema";
 
 function CreateProgram() {
   const [isMounted, setIsMounted] = useState(false);
@@ -70,36 +70,17 @@ function CreateProgram() {
   const handleCreateProgram = async (data) => {
     const { accessToken } = await GetTokens();
     try {
-      let isValid = true;
-      data.days.forEach((day, dayIndex) => {
-        if (day.subModules && day.subModules.length > 0) { // Check if subModules exist
-          const totalSubModulesTime = day.subModules.reduce(
-            (total, subModule) => total + (subModule.timeToComplete || 0),
-            0
-          );
-          if (totalSubModulesTime !== day.timeToComplete) {
-            isValid = false;
-            setError(`days.${dayIndex}`, {
-              type: "manual",
-              message:
-                "Total time of sub-modules must match the time to complete for the day",
-            });
-          }
-        }
+      setIscreatingProgram(true);
+      const response = await axios.post("/api/createProgram", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken?.value}`,
+        },
       });
-
-      if (isValid) {
-        setIscreatingProgram(true);
-        const response = await axios.post("/api/createProgram", data, {
-          headers: {
-            Authorization: `Bearer ${accessToken?.value}`,
-          },
-        });
-        if (response.status === 201) {
-          toast.success("Program created successfully");
-          reset();
-          router.push("/coach-dashboard/programs");
-        }
+  
+      if (response.status === 201) {
+        toast.success("Program created successfully");
+        reset();
+        router.push("/coach-dashboard/programs");
       }
     } catch (error) {
       toast.error("Error creating program");
@@ -107,7 +88,7 @@ function CreateProgram() {
       setIscreatingProgram(false);
     }
   };
-
+  
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
@@ -121,7 +102,7 @@ function CreateProgram() {
       const response = await axios.post("/api/uploadImage", formData);
       if (response.status === 200) {
         const imageUrl = response.data.url;
-        setValue("programImage", imageUrl, { shouldValidate: true }); // Set value with immediate validation
+        setValue("programImage", imageUrl); // Set value with immediate validation
         clearErrors("programImage"); // Clear any existing error for this field
         toast.success("Image uploaded successfully");
       }
