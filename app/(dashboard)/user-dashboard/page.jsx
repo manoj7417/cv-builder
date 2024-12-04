@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./user.css";
-import { FaRegPlayCircle, FaStar } from "react-icons/fa";
+import { FaRegPlayCircle, FaStar, FaTimes } from "react-icons/fa";
 import Profile from "./Profile";
 import Whishlist from "./Wishlist";
 
@@ -20,6 +20,9 @@ import { format } from "date-fns";
 import { ResumeChart } from "./ResumeChart";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import UserBookingSlot from "./BookingSlot";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -28,8 +31,21 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
+  console.log("program::", program);
   const [isLoading, setIsLoading] = useState(true);
+  // const [showBooking, setShowBooking] = useState(false);
+  const [selectedCoachId, setSelectedCoachId] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const handleBookSlotClick = (id) => {
+    setSelectedCoachId(id);
+    // setShowBooking(true);
+    setIsDrawerOpen(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+  };
 
   const toggle = (index) => {
     if (open === index) {
@@ -93,7 +109,7 @@ const UserDashboardPage = () => {
               id="blog_header_left_side"
               className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4"
             >
-              <div className="w-44 h-44">
+              <div className="md:w-44 w-24 md:h-44 h-24 mx-auto">
                 <img
                   src={
                     userdata?.profilePicture ||
@@ -106,14 +122,16 @@ const UserDashboardPage = () => {
               <div id="coach_details" className="pt-4 sm:pt-10">
                 <div
                   id="row1"
-                  className="flex flex-col items-start space-y-2 sm:space-y-0 sm:space-x-2 pb-3 px-3"
+                  className="flex flex-col md:items-start items-center space-y-2 sm:space-y-0 sm:space-x-2 pb-3 px-3"
                 >
                   <h1 className="font-bold text-[#1D2026] text-2xl sm:text-3xl px-2">
                     {userdata?.fullname.charAt(0).toUpperCase() +
                       userdata?.fullname.slice(1)}
                   </h1>
                   <p className="text-sm text-gray-500">{userdata?.email}</p>
-                  <p className="text-sm text-gray-500">{userdata?.occupation}</p>
+                  <p className="text-sm text-gray-500">
+                    {userdata?.occupation}
+                  </p>
                   <p className="text-sm text-gray-500">{userdata?.address}</p>
                 </div>
               </div>
@@ -285,7 +303,7 @@ const UserDashboardPage = () => {
                       </div>
                     </div>
                   </div> */}
-                  <div className="booking_data mt-10">
+                  {/* <div className="booking_data mt-10">
                     <h2 className="text-xl font-bold my-5 text-blue-950">
                       My Bookings
                     </h2>
@@ -339,7 +357,6 @@ const UserDashboardPage = () => {
                                 key={booking._id}
                                 className="border-b border-gray-200"
                               >
-                                {/* Coach Info */}
                                 <td className="p-4 flex items-center space-x-3">
                                   <img
                                     src={booking?.coachId?.profileImage}
@@ -353,13 +370,11 @@ const UserDashboardPage = () => {
                                   </div>
                                 </td>
 
-                                {/* Booking Time */}
                                 <td className="p-4 text-xs text-gray-700">
                                   {booking?.slotTime?.startTime} -{" "}
                                   {booking?.slotTime?.endTime}
                                 </td>
 
-                                {/* Date */}
                                 <td className="p-4 text-xs text-gray-700">
                                   {format(
                                     new Date(booking?.date),
@@ -367,12 +382,10 @@ const UserDashboardPage = () => {
                                   )}
                                 </td>
 
-                                {/* Timezone */}
                                 <td className="p-4 text-xs text-gray-700">
                                   {booking?.timezone}
                                 </td>
 
-                                {/* Email */}
                                 <td className="p-4 text-xs text-gray-700 ">
                                   <span className="flex items-center">
                                     <Mail className="mr-2 h-4 w-4 flex-shrink-0 text-gray-500" />
@@ -380,7 +393,6 @@ const UserDashboardPage = () => {
                                   </span>
                                 </td>
 
-                                {/* Rate */}
                                 <td className="p-4 text-xs text-gray-700">
                                   <span className="flex items-center">
                                     <DollarSign className="mr-2 h-4 w-4 flex-shrink-0 text-gray-500" />
@@ -403,9 +415,9 @@ const UserDashboardPage = () => {
                         </tbody>
                       </table>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="program_data mt-10">
-                  <h2 className="text-xl font-bold my-5 text-blue-950">
+                    <h2 className="text-xl font-bold my-5 text-blue-950 md:text-start text-center">
                       My Programs
                     </h2>
                     <div className="overflow-x-auto">
@@ -417,6 +429,7 @@ const UserDashboardPage = () => {
                               <th className="p-4">Program</th>
                               <th className="p-4">Description</th>
                               <th className="p-4">Coach</th>
+                              <th className="p-4">Book Slot</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -447,63 +460,153 @@ const UserDashboardPage = () => {
                                       <div className="h-4 bg-gray-200 rounded w-16"></div>
                                     </div>
                                   </td>
+                                  <td>
+                                    <div className="w-24 h-8 bg-gray-300 rounded animate-pulse"></div>
+                                  </td>
                                 </tr>
                               ))}
                           </tbody>
                         </table>
                       ) : program.length > 0 ? (
-                        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
-                          <thead>
-                            <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
-                              <th className="p-4">Program</th>
-                              <th className="p-4">Description</th>
-                              <th className="p-4">Coach</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+                        <>
+                          <table className="hidden md:table min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                            <thead>
+                              <tr className="bg-gray-100 border-b border-gray-200 text-gray-600 uppercase text-xs font-semibold text-left">
+                                <th className="p-4">Program</th>
+                                <th className="p-4">Description</th>
+                                <th className="p-4">Coach</th>
+                                <th className="p-4 whitespace-nowrap">
+                                  Book Slot
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {program.map((item, index) => (
+                                <tr
+                                  key={index}
+                                  className="border-b border-gray-200 flex flex-col md:table-row"
+                                >
+                                  {/* Program Info */}
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <img
+                                      src={item.programId?.programImage}
+                                      alt={item.programId?.title}
+                                      className="w-16 h-16 object-cover rounded-md"
+                                      priority
+                                    />
+                                    <div>
+                                      <p className="text-sm font-semibold">
+                                        {item.programId?.title}
+                                      </p>
+                                    </div>
+                                  </td>
+
+                                  {/* Description */}
+                                  <td className="p-4 text-xs text-gray-700">
+                                    {item.programId?.description}
+                                  </td>
+
+                                  {/* Coach Info */}
+                                  <td className="p-4 flex items-center space-x-3">
+                                    <img
+                                      src={item?.coachId?.profileImage}
+                                      alt={item?.coachId?.name}
+                                      className="w-16 h-16 object-cover rounded-full"
+                                      priority
+                                    />
+                                    <div>
+                                      <p className="text-sm font-semibold">
+                                        {item.coachId?.name}
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td className="p-2 text-center">
+                                    <Button
+                                      className="text-xs p-2"
+                                      onClick={() =>
+                                        handleBookSlotClick(item?.coachId?.id)
+                                      }
+                                    >
+                                      Book Slot
+                                    </Button>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+
+                          {/* Cards for Small Screens */}
+                          <div className="md:hidden space-y-4 m-5">
                             {program.map((item, index) => (
-                              <tr
+                              <div
                                 key={index}
-                                className="border-b border-gray-200"
+                                className="p-4 bg-white border border-gray-200 rounded-md shadow-sm flex flex-col space-y-4"
                               >
-                                {/* Program Info */}
-                                <td className="p-4 flex items-center space-x-3">
+                                <div className="flex items-center space-x-3">
                                   <img
                                     src={item.programId?.programImage}
                                     alt={item.programId?.title}
-                                    className="w-16 h-16 object-cover rounded-md"
-                                    priority
+                                    className="w-10 h-10 object-cover rounded-md"
                                   />
                                   <div>
-                                    <p className="text-sm font-semibold">
+                                    <p className="text-xs font-semibold">
                                       {item.programId?.title}
                                     </p>
                                   </div>
-                                </td>
-
-                                {/* Description */}
-                                <td className="p-4 text-xs text-gray-700">
+                                </div>
+                                <p className="text-xs text-gray-700">
                                   {item.programId?.description}
-                                </td>
-
-                                {/* Coach Info */}
-                                <td className="p-4 flex items-center space-x-3">
+                                </p>
+                                <div className="flex items-center space-x-3">
                                   <img
                                     src={item?.coachId?.profileImage}
                                     alt={item?.coachId?.name}
                                     className="w-10 h-10 object-cover rounded-full"
-                                    priority
                                   />
                                   <div>
                                     <p className="text-sm font-semibold">
                                       {item.coachId?.name}
                                     </p>
                                   </div>
-                                </td>
-                              </tr>
+                                </div>
+                                <Button
+                                  className="text-xs p-2 cursor-pointer"
+                                  onClick={() =>
+                                    handleBookSlotClick(item?.coachId?.id)
+                                  }
+                                >
+                                  Book Slot
+                                </Button>
+                              </div>
                             ))}
-                          </tbody>
-                        </table>
+                          </div>
+
+                          <Drawer
+                            open={isDrawerOpen}
+                            onOpenChange={setIsDrawerOpen}
+                          >
+                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[550px] h-full overflow-y-scroll">
+                              {/* Close Button */}
+                              <div className="flex md:justify-end justify-between mt-10">
+                              <div className="main_title md:hidden block">
+                                <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
+                              </div>
+                                <Button
+                                  className="text-sm"
+                                  onClick={handleCloseDrawer}
+                                >
+                                  <FaTimes className="" />
+                                </Button>
+                              </div>
+
+                              {/* Booking Slot Component */}
+                              <div className="main_title md:block hidden">
+                                <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
+                              </div>
+                              <UserBookingSlot coach_Id={selectedCoachId} />
+                            </DrawerContent>
+                          </Drawer>
+                        </>
                       ) : (
                         <Card className="w-full">
                           <CardHeader>

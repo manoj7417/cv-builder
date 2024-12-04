@@ -41,7 +41,7 @@ import {
 import { ImSpinner3, ImSpinner8 } from "react-icons/im";
 import { Button } from "@/components/ui/button";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { GetTokens } from "@/app/actions";
+import { GetTokens, RemoveTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -59,6 +59,7 @@ import {
   FaLink,
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const CoachForm = () => {
   const steps = [
@@ -455,6 +456,10 @@ const CoachForm = () => {
   //   setValue("socialPlatform", "");
   // };
 
+  
+ ;
+  
+  
   useEffect(() => {
     if (userdata?.formFilled) {
       setIsDialogOpen(true);
@@ -1001,7 +1006,7 @@ const CoachForm = () => {
 
                       {/* Displaying the YouTube video using ReactPlayer */}
                       <div className="mt-4">
-                        {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
+                        {/* {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
                           <ReactPlayer
                             url={profileVideo}
                             controls
@@ -1013,7 +1018,22 @@ const CoachForm = () => {
                             Please enter a valid YouTube URL to preview the
                             video.
                           </p>
-                        )}
+                        )} */}
+                        {profileVideo ? (
+                          ReactPlayer.canPlay(profileVideo) ? (
+                            <ReactPlayer
+                              url={profileVideo}
+                              controls
+                              width="100%"
+                              height="300px"
+                            />
+                          ) : (
+                            <p className="text-red-500">
+                              Please enter a valid YouTube URL to preview the
+                              video.
+                            </p>
+                          )
+                        ) : null}
                       </div>
                     </div>
                     {/* END- COACH INTRODUCTION VIDEO */}
