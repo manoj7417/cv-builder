@@ -124,7 +124,7 @@ const SidebarCoach = () => {
             <IoMdClose className='w-8 h-8' />
           </button>
         </div>
-        <div className='dashboard_logo px-5 mb-5'>
+        <div className='dashboard_logo p-5 mb-5'>
           <Image
             src='/admin-logo.png'
             alt='logo'

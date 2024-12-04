@@ -456,10 +456,6 @@ const CoachForm = () => {
   //   setValue("socialPlatform", "");
   // };
 
-  
- ;
-  
-  
   useEffect(() => {
     if (userdata?.formFilled) {
       setIsDialogOpen(true);
@@ -488,7 +484,7 @@ const CoachForm = () => {
                       alt=""
                       width={100}
                       height={100}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain animate-spin-slow"
                     />
                   </div>
                   <div className="text-center py-4">
@@ -496,7 +492,8 @@ const CoachForm = () => {
                       Document Verification Pending
                     </h1>
                     <p className="mt-3 text-gray-500">
-                      Your documents are now being verified , please wait
+                      Your documents are now being verified, please wait. It may
+                      take up to <b>24 to 48 hours</b> to verify them.
                     </p>
                   </div>
                 </div>
@@ -1044,9 +1041,10 @@ const CoachForm = () => {
                       >
                         Skills
                       </label>
-                      <div className="mt-2">
+                      <div className="mt-2 relative">
                         <Controller
                           name="skills"
+                          className="absolute top-0 left-0"
                           control={control}
                           render={({ field }) => (
                             <Select onValueChange={field.onChange}>

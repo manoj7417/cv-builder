@@ -585,8 +585,7 @@ const UserDashboardPage = () => {
                             open={isDrawerOpen}
                             onOpenChange={setIsDrawerOpen}
                           >
-                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[550px] h-full overflow-y-scroll">
-                              {/* Close Button */}
+                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[515px] h-[90%] overflow-y-scroll">
                               <div className="flex md:justify-end justify-between mt-10">
                               <div className="main_title md:hidden block">
                                 <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
@@ -599,7 +598,6 @@ const UserDashboardPage = () => {
                                 </Button>
                               </div>
 
-                              {/* Booking Slot Component */}
                               <div className="main_title md:block hidden">
                                 <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
                               </div>

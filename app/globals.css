@@ -1184,3 +1184,22 @@ ol > li {
   background-color: #031d44 !important;
   color: white !important;
 }
+
+/* Drawer used in User Booking */
+[vaul-drawer][vaul-drawer-direction="bottom"]::after {
+  top: 100%;
+  bottom: initial;
+  left: 0;
+  right: 0;
+  height: auto !important;
+}
+
+@media only screen and (max-width: 600px) {
+  [vaul-drawer][vaul-drawer-direction="bottom"]::after {
+    top: 100%;
+    bottom: initial;
+    left: 0;
+    right: 0;
+    height: 100% !important;
+  }
+}
