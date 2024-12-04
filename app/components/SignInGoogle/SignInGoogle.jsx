@@ -18,17 +18,19 @@ export default function SignIn ({type}) {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
 
+
+  
+
   useEffect(() => {
     const handleGoogleLogin = async () => {
       if (status === "authenticated" && session?.idToken && !apiCalled) {
-        setApiCalled(true); // Ensure this logic runs only once
+        setApiCalled(true);
         try {
           const response = await axios.post("/api/googleLogin", {
             idToken: session.idToken,
           });
 
           if (response.status === 200) {
-            
             toast.success("Login Successful!");
             const { accessToken, refreshToken, userdata } = response.data.data;
                 await SetTokens({ accessToken, refreshToken });
@@ -46,6 +48,7 @@ export default function SignIn ({type}) {
     };
 
     handleGoogleLogin();
+
   }, [status, session?.idToken, apiCalled]); // Trigger only when `status` or `session.idToken` changes
 
   return (

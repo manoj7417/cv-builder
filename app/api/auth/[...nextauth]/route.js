@@ -58,7 +58,6 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, account }) {
         if (account) {
-          console.log("Account object during login:", account);
           token.accessToken = account.access_token;
           token.refreshToken = account.refresh_token || token.refreshToken;
           token.idToken = account.id_token;
@@ -68,8 +67,6 @@ export const authOptions = {
         if (Date.now() < token.accessTokenExpires) {
           return token;
         }
-      
-        console.log("Access token expired, refreshing...");
         return await refreshAccessToken(token);
       }      
 ,
