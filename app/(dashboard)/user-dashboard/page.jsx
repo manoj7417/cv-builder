@@ -35,10 +35,12 @@ const UserDashboardPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);
+  const [selectedProgramId, setSelectedProgramId] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const handleBookSlotClick = (id) => {
+  const handleBookSlotClick = (id , programId) => {
     setSelectedCoachId(id);
+    setSelectedProgramId(programId);
     // setShowBooking(true);
     setIsDrawerOpen(true);
   };
@@ -104,7 +106,6 @@ const UserDashboardPage = () => {
       <div className="max-w-5xl mx-auto">
         <div className="profile_header">
           <div className="sm:container md:container lg:container xl:container 2xl:container bg-[#FFF] h-auto -mt-20 w-full flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row justify-between items-center border border-[#FFDDD1] p-4">
-            {/* Left Side */}
             <div
               id="blog_header_left_side"
               className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4"
@@ -524,7 +525,7 @@ const UserDashboardPage = () => {
                                     <Button
                                       className="text-xs p-2"
                                       onClick={() =>
-                                        handleBookSlotClick(item?.coachId?.id)
+                                        handleBookSlotClick(item?.coachId?.id , item?._id)
                                       }
                                     >
                                       Book Slot
@@ -585,7 +586,7 @@ const UserDashboardPage = () => {
                             open={isDrawerOpen}
                             onOpenChange={setIsDrawerOpen}
                           >
-                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[515px] h-[90%] overflow-y-scroll">
+                            <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[550px] h-full overflow-y-scroll">
                               <div className="flex md:justify-end justify-between mt-10">
                               <div className="main_title md:hidden block">
                                 <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
@@ -601,7 +602,7 @@ const UserDashboardPage = () => {
                               <div className="main_title md:block hidden">
                                 <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
                               </div>
-                              <UserBookingSlot coach_Id={selectedCoachId} />
+                              <UserBookingSlot coach_Id={selectedCoachId} programId={selectedProgramId} />
                             </DrawerContent>
                           </Drawer>
                         </>
@@ -790,9 +791,6 @@ const UserDashboardPage = () => {
                                       <div className="pl-3">
                                         <div className="font-medium text-sm">
                                           {item?.coachId?.name}
-                                        </div>
-                                        <div className="text-gray-600 text-sm">
-                                          CTO of Supercars
                                         </div>
                                       </div>
                                     </div>
