@@ -58,12 +58,16 @@ export default NextAuth({
       if (account) {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token || token.refreshToken;
-        token.idToken = account.id_token;
+        token.idToken = account.id_token; // Include idToken here
         token.accessTokenExpires = Date.now() + account.expires_in * 1000;
       }
+    
+      // Return the token directly if it hasn't expired
       if (Date.now() < token.accessTokenExpires) {
         return token;
       }
+    
+      // Refresh the access token if it has expired
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {
@@ -71,8 +75,7 @@ export default NextAuth({
         ...session.user,
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
-        idToken: token.idToken,
-        googleUserId: token.googleUserId,
+        idToken: token.idToken, // Add idToken here
       };
       return session;
     },
