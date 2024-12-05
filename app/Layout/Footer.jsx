@@ -187,7 +187,7 @@ export default function Footer() {
                   <Link
                     href='/terms-condition'
                     className='text-black transition'>
-                    Terms & Condition
+                    Terms & Conditions
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>

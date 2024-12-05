@@ -23,6 +23,7 @@ import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
 import { SetTokens } from "@/app/actions";
 import { useCoachStore } from "../../store/coachStore";
+import CoachSignIn from "@/app/components/CoachGoogleSignIn/CoachSignIn";
 
 //
 export default function CoachLogin() {
@@ -118,10 +119,10 @@ export default function CoachLogin() {
       </Dialog>
       <section className='w-full h-screen'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-7 place-items-center'>
-          <div className='w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-screen'>
+          <div className='w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-auto'>
             <div className='w-[70%] mt-14'>
               <h1 className='text-white text-center text-2xl font-semibold'>
-                Thankyou for joining as a Coach and inspire the next generation of achievers!
+                Thank you for joining as a Coach and inspire the next generation of achievers!
               </h1>
             </div>
 
@@ -347,6 +348,7 @@ export default function CoachLogin() {
                         </>
                       )}
                     </Button>
+                    <CoachSignIn type="Sign In" />
                   </div>
                 </div>
               </form>

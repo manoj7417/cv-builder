@@ -358,7 +358,7 @@ const CoachProfile = () => {
               <p className=' text-sm text-blue-400 flex items-center'>
                 <IoMdInformationCircleOutline className='mx-2 text-lg' />
                 Your request for updating profile information has been sent to
-                the <span className='font-bold mx-1'>admin</span> for approval.
+                the <span className='font-bold mx-1'>admin</span> for approval.It may take up to 24 to 48 hours to verify them
               </p>
             </div>
           )}

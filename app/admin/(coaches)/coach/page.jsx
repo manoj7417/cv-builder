@@ -19,6 +19,7 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Coach = () => {
   const router = useRouter();
@@ -27,6 +28,7 @@ const Coach = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState("all");
+
 
 
   const handleCoachDetails = (id) => {
@@ -51,7 +53,7 @@ const Coach = () => {
 
   const handlegetEditCoach = async () => {
     const { accessToken } = await GetTokens();
-    if (!accessToken && !accessToken.value) {
+    if (!accessToken && !accessToken?.value) {
       toast("Please login");
       return;
     }
