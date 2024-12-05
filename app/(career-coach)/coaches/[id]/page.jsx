@@ -86,6 +86,7 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
+  console.log("programData::",programData)
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
@@ -568,7 +569,7 @@ const CoachDetailsPage = () => {
                   onClick={() => handleTabClick("programs")}>
                   Enroll in Program
                 </div>
-                <div
+                {/* <div
                   className={`cursor-pointer p-3 ${
                     activeTab === "appointment"
                       ? "font-bold border-b-2 border-[#FF6636]"
@@ -576,7 +577,7 @@ const CoachDetailsPage = () => {
                   }`}
                   onClick={() => handleTabClick("appointment")}>
                   Book An Appointment
-                </div>
+                </div> */}
               </div>
 
               {activeTab === "about" && (
@@ -918,7 +919,7 @@ const CoachDetailsPage = () => {
                 </>
               )}
 
-              {activeTab === "appointment" && (
+              {/* {activeTab === "appointment" && (
                 <>
                   <div>
                     <div
@@ -1012,12 +1013,9 @@ const CoachDetailsPage = () => {
                                       key={index}
                                       onClick={() => handleSlotClick(slot)}
                                       className='group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-12 flex items-center justify-center overflow-hidden'>
-                                      {/* Default slot time text */}
                                       <span className='slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0'>
                                         {slot.startTime}
                                       </span>
-
-                                      {/* Hover "Book →" text */}
                                       <span className='slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0'>
                                         Book slot
                                       </span>
@@ -1101,7 +1099,7 @@ const CoachDetailsPage = () => {
                     </div>
                   </div>
                 </>
-              )}
+              )} */}
             </div>
           </div>
         </div>

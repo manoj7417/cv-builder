@@ -2,17 +2,21 @@
 
 import React from "react";
 import CoachForm from "./CoachForm";
+import CoachLogoutButton from "./CoachLogoutButton";
 
 const CoachFormPage = () => {
   return (
-    <div className="h-full">
-      <div className='w-full h-full mx-auto'>
-        <div className='flex coach_form_section h-full'>
-          <div className='lg:w-[30%] w-full h-[1140px] bg-blue-500 lg:block hidden'></div>
-          <div className='lg:w-[70%] w-full  coach_form py-10 px-10'>
-            <CoachForm />
-          </div>
+    <div className="h-full flex">
+      {/* Left Side: Fixed Section */}
+      <div className="lg:w-[30%] w-full h-auto bg-blue-500 hidden lg:block sticky top-0">
+        <div className="m-5">
+          <CoachLogoutButton />
         </div>
+      </div>
+
+      {/* Right Side: Scrollable Content */}
+      <div className="lg:w-[70%] w-full h-full overflow-y-auto py-10 px-10">
+        <CoachForm />
       </div>
     </div>
   );

@@ -414,13 +414,10 @@ export default function Page() {
                   <div className='flex justify-center items-center flex-1 mt-10'>
                     <div className='text-center'>
                       <h1 className='text-2xl lg:text-5xl  font-bold text-blue-950'>
-                        Welcome to the Career Counselling
+                      Your Career Path, Defined in a Minute
                       </h1>
-                      <p className='mt-4 lg:w-1/2 w-full mx-auto'>
-                        Please take a few moments to answer the following
-                        questions. Your responses will help us better understand
-                        your current pursuits, hobbies, strengths, and career
-                        aspirations.
+                      <p className='mt-4 lg:w-[60%] w-full mx-auto'>
+                      Find the answer to your Career Questions quickly with Artificial Intelligence. Our AI Career Coaching feature is inspired and trained by expert Career Coaches from around the globe. This tool solves Career conundrums in the easiest way. Just answer a few questions and enter your details and your Career Plan will be ready!  
                       </p>
                       <Button
                         onClick={handleStartTest}
@@ -432,7 +429,7 @@ export default function Page() {
                             <ImSpinner3 className='w-3 h-3 ml-1 animate-spin' />
                           </>
                         ) : (
-                          "Start Test"
+                          "Talk to AI Coach"
                         )}
                       </Button>
                     </div>

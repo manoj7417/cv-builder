@@ -112,8 +112,45 @@
     left: 0;
     width: 100%;
     z-index: 999;
-    height: 70px;
+    /* height: 70px; */
 }
+
+
+/* Add a container for overflow-hidden */
+.top_banner {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Running text animation */
+  .marquee-text {
+    /* display: inline-block; */
+    white-space: nowrap;
+    /* animation: marquee 10s linear infinite; */
+    animation: zoomInOut 2s infinite;
+  }
+  
+  /* Keyframes for text animation */
+  @keyframes marquee {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+
+  @keyframes zoomInOut {
+    0%, 100% {
+      transform: scale(1); /* Normal size */
+    }
+    50% {
+      transform: scale(1.2); /* Zoom in */
+    }
+  }
+
+  
 
 
 /* New Resume Header CSS Ends Here  */

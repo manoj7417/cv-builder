@@ -41,7 +41,7 @@ import {
 import { ImSpinner3, ImSpinner8 } from "react-icons/im";
 import { Button } from "@/components/ui/button";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { GetTokens } from "@/app/actions";
+import { GetTokens, RemoveTokens } from "@/app/actions";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -59,6 +59,7 @@ import {
   FaLink,
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const CoachForm = () => {
   const steps = [
@@ -236,19 +237,58 @@ const CoachForm = () => {
   const error = errors.cvUpload?.message;
 
   // For CV UploadF
+  // const handleCVUpload = async (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setIsUploadingCV(true);
+  //     const formData = new FormData();
+  //     formData.append("cvUpload", file);
+  //     try {
+  //       setIsCvLoading(true);
+  //       const response = await axios.post("/api/uploadImage", formData);
+  //       if (response.status === 200) {
+  //         const cvUrl = response.data.url;
+  //         setValue("cvUpload", cvUrl);
+  //         setCvFileUrl(cvUrl);
+  //       } else {
+  //         console.error("CV upload failed.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error uploading CV:", error);
+  //     } finally {
+  //       setIsUploadingCV(false);
+  //       setIsCvLoading(false);
+  //     }
+  //   }
+  // };
+
   const handleCVUpload = async (e) => {
     const file = e.target.files[0];
+
     if (file) {
+      // Validate file type
+      const validTypes = [
+        "application/pdf", // PDF
+        "application/msword", // DOC
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // DOCX
+      ];
+      if (!validTypes.includes(file.type)) {
+        alert("Please upload a valid PDF or Word document.");
+        return;
+      }
+
       setIsUploadingCV(true);
       const formData = new FormData();
-      formData.append("cvUpload", file); // Assuming "cv" is the expected field in the backend
+      formData.append("cvUpload", file); // Assuming "cvUpload" is the field expected by the backend
+
       try {
         setIsCvLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        const response = await axios.post("/api/uploadImage", formData); // Adjust API endpoint if needed
+
         if (response.status === 200) {
           const cvUrl = response.data.url;
           setValue("cvUpload", cvUrl); // Set CV URL in form data
-          setCvFileUrl(cvUrl);
+          setCvFileUrl(cvUrl); // Set URL to state for further use
         } else {
           console.error("CV upload failed.");
         }
@@ -274,32 +314,83 @@ const CoachForm = () => {
   const docsError = errors.docsUpload?.message;
 
   // For Document Upload
+  // const handleDocUpload = async (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setIsUploadingDocs(true);
+  //     const formData = new FormData();
+  //     formData.append("docsUpload", file);
+  //     try {
+  //       setIsDocumentLoading(true);
+  //       const response = await axios.post("/api/uploadImage", formData);
+  //       if (response.status === 200) {
+  //         const docUrl = response.data.url;
+  //         setValue("docsUpload", docUrl);
+  //         setIsDocumentLoading(false);
+  //         setDocsUrl(docUrl);
+  //       } else {
+  //         console.error("Document upload failed.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error uploading document:", error);
+  //     } finally {
+  //       setIsUploadingDocs(false);
+  //     }
+  //   }
+  // };
+
+  // Common function to remove uploaded file
+
   const handleDocUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setIsUploadingDocs(true);
       const formData = new FormData();
       formData.append("docsUpload", file);
+  
       try {
         setIsDocumentLoading(true);
-        const response = await axios.post("/api/uploadImage", formData);
+  
+        // Validate file type (now supports .doc, .docx, and .pdf)
+        const allowedTypes = [
+          "application/msword", // .doc
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+          "application/pdf", // .pdf
+        ];
+  
+        if (!allowedTypes.includes(file.type)) {
+          console.error("Invalid file type. Please upload a DOC, DOCX, or PDF file.");
+          toast.error("Invalid file type. Only DOC, DOCX, and PDF files are supported.");
+          setIsDocumentLoading(false);
+          return;
+        }
+  
+        // Upload file to the server
+        const response = await axios.post("/api/uploadImage", formData); // Ensure this is the correct endpoint
         if (response.status === 200) {
           const docUrl = response.data.url;
-          setValue("docsUpload", docUrl);
           setIsDocumentLoading(false);
+          setValue("docsUpload", docUrl);
           setDocsUrl(docUrl);
+  
+          toast.success("Document uploaded successfully.");
         } else {
-          console.error("Document upload failed.");
+          console.error("Document upload failed with status:", response.status);
+          toast.error("Failed to upload the document.");
         }
       } catch (error) {
         console.error("Error uploading document:", error);
+        toast.error("An error occurred during the upload.");
       } finally {
         setIsUploadingDocs(false);
+        setIsDocumentLoading(false);
       }
+    } else {
+      toast.error("No file selected.");
     }
   };
+  
 
-  // Common function to remove uploaded file
   const handleRemoveDocs = () => {
     setValue("docsUpload", null); // Clear the uploaded file from form state
   };
@@ -307,9 +398,13 @@ const CoachForm = () => {
   // Use Google Docs Viewer if needed
   const googleViewerUrl =
     fileType === "cv"
-      ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
+      ? `https://docs.google.com/gview?url=${encodeURIComponent(
+          cvFileUrl
+        )}&embedded=true`
       : fileType === "docs"
-      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+      ? `https://docs.google.com/gview?url=${encodeURIComponent(
+          docsUrl
+        )}&embedded=true`
       : null;
 
   const handleViewFile = (type) => {
@@ -483,7 +578,7 @@ const CoachForm = () => {
                       alt=""
                       width={100}
                       height={100}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain animate-spin-slow"
                     />
                   </div>
                   <div className="text-center py-4">
@@ -491,7 +586,8 @@ const CoachForm = () => {
                       Document Verification Pending
                     </h1>
                     <p className="mt-3 text-gray-500">
-                      Your documents are now being verified , please wait
+                      Your documents are now being verified, please wait. It may
+                      take up to <b>24 to 48 hours</b> to verify them.
                     </p>
                   </div>
                 </div>
@@ -897,7 +993,7 @@ const CoachForm = () => {
                           <input
                             type="file"
                             id="cvUpload"
-                            accept="application/pdf"
+                            accept=".pdf,.doc,.docx"
                             className="hidden"
                             onChange={handleCVUpload}
                           />
@@ -1001,7 +1097,7 @@ const CoachForm = () => {
 
                       {/* Displaying the YouTube video using ReactPlayer */}
                       <div className="mt-4">
-                        {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
+                        {/* {profileVideo && ReactPlayer.canPlay(profileVideo) ? (
                           <ReactPlayer
                             url={profileVideo}
                             controls
@@ -1013,7 +1109,22 @@ const CoachForm = () => {
                             Please enter a valid YouTube URL to preview the
                             video.
                           </p>
-                        )}
+                        )} */}
+                        {profileVideo ? (
+                          ReactPlayer.canPlay(profileVideo) ? (
+                            <ReactPlayer
+                              url={profileVideo}
+                              controls
+                              width="100%"
+                              height="300px"
+                            />
+                          ) : (
+                            <p className="text-red-500">
+                              Please enter a valid YouTube URL to preview the
+                              video.
+                            </p>
+                          )
+                        ) : null}
                       </div>
                     </div>
                     {/* END- COACH INTRODUCTION VIDEO */}
@@ -1024,9 +1135,10 @@ const CoachForm = () => {
                       >
                         Skills
                       </label>
-                      <div className="mt-2">
+                      <div className="mt-2 relative">
                         <Controller
                           name="skills"
+                          className="absolute top-0 left-0"
                           control={control}
                           render={({ field }) => (
                             <Select onValueChange={field.onChange}>
@@ -1383,10 +1495,9 @@ const CoachForm = () => {
                             <input
                               type="file"
                               id="docsUpload"
-                              hidden
-                              accept="application/pdf"
+                              accept=".doc,.docx,.pdf"
+                              className="hidden"
                               onChange={handleDocUpload}
-                              className="hidden w-full text-gray-900 border rounded-md py-1.5"
                             />
                             {docsFile && (
                               <>

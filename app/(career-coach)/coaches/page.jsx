@@ -178,7 +178,7 @@ export default function CoachesPage() {
           </div>
         </div>
       </div>
-      <div className="coach_course py-10 sm:py-20">
+      {/* <div className="coach_course py-10 sm:py-20">
         <div className="flex flex-wrap justify-center gap-4 sm:gap-10">
           {categories?.length > 0 &&
             categories?.map((val) => (
@@ -212,7 +212,7 @@ export default function CoachesPage() {
             </ul>
           </div>
         )}
-      </div>
+      </div> */}
       <div className="coach_filter">
         <CoachFilter
           coaches={coaches}
