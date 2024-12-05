@@ -84,6 +84,7 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
+  const [meetUrl,setMeetUrl] = useState(null)
 
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
@@ -248,6 +249,7 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
         },
       });
       if (response.status === 201) {
+        setMeetUrl(response.data)
         console.log(response.data);
       }
     } catch (error) {
