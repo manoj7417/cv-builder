@@ -237,19 +237,58 @@ const CoachForm = () => {
   const error = errors.cvUpload?.message;
 
   // For CV UploadF
+  // const handleCVUpload = async (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setIsUploadingCV(true);
+  //     const formData = new FormData();
+  //     formData.append("cvUpload", file);
+  //     try {
+  //       setIsCvLoading(true);
+  //       const response = await axios.post("/api/uploadImage", formData);
+  //       if (response.status === 200) {
+  //         const cvUrl = response.data.url;
+  //         setValue("cvUpload", cvUrl);
+  //         setCvFileUrl(cvUrl);
+  //       } else {
+  //         console.error("CV upload failed.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error uploading CV:", error);
+  //     } finally {
+  //       setIsUploadingCV(false);
+  //       setIsCvLoading(false);
+  //     }
+  //   }
+  // };
+
   const handleCVUpload = async (e) => {
     const file = e.target.files[0];
+
     if (file) {
+      // Validate file type
+      const validTypes = [
+        "application/pdf", // PDF
+        "application/msword", // DOC
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // DOCX
+      ];
+      if (!validTypes.includes(file.type)) {
+        alert("Please upload a valid PDF or Word document.");
+        return;
+      }
+
       setIsUploadingCV(true);
       const formData = new FormData();
-      formData.append("cvUpload", file); // Assuming "cv" is the expected field in the backend
+      formData.append("cvUpload", file); // Assuming "cvUpload" is the field expected by the backend
+
       try {
         setIsCvLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        const response = await axios.post("/api/uploadImage", formData); // Adjust API endpoint if needed
+
         if (response.status === 200) {
           const cvUrl = response.data.url;
           setValue("cvUpload", cvUrl); // Set CV URL in form data
-          setCvFileUrl(cvUrl);
+          setCvFileUrl(cvUrl); // Set URL to state for further use
         } else {
           console.error("CV upload failed.");
         }
@@ -275,32 +314,83 @@ const CoachForm = () => {
   const docsError = errors.docsUpload?.message;
 
   // For Document Upload
+  // const handleDocUpload = async (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setIsUploadingDocs(true);
+  //     const formData = new FormData();
+  //     formData.append("docsUpload", file);
+  //     try {
+  //       setIsDocumentLoading(true);
+  //       const response = await axios.post("/api/uploadImage", formData);
+  //       if (response.status === 200) {
+  //         const docUrl = response.data.url;
+  //         setValue("docsUpload", docUrl);
+  //         setIsDocumentLoading(false);
+  //         setDocsUrl(docUrl);
+  //       } else {
+  //         console.error("Document upload failed.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error uploading document:", error);
+  //     } finally {
+  //       setIsUploadingDocs(false);
+  //     }
+  //   }
+  // };
+
+  // Common function to remove uploaded file
+
   const handleDocUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setIsUploadingDocs(true);
       const formData = new FormData();
       formData.append("docsUpload", file);
+  
       try {
         setIsDocumentLoading(true);
-        const response = await axios.post("/api/uploadImage", formData);
+  
+        // Validate file type (now supports .doc, .docx, and .pdf)
+        const allowedTypes = [
+          "application/msword", // .doc
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+          "application/pdf", // .pdf
+        ];
+  
+        if (!allowedTypes.includes(file.type)) {
+          console.error("Invalid file type. Please upload a DOC, DOCX, or PDF file.");
+          toast.error("Invalid file type. Only DOC, DOCX, and PDF files are supported.");
+          setIsDocumentLoading(false);
+          return;
+        }
+  
+        // Upload file to the server
+        const response = await axios.post("/api/uploadImage", formData); // Ensure this is the correct endpoint
         if (response.status === 200) {
           const docUrl = response.data.url;
-          setValue("docsUpload", docUrl);
           setIsDocumentLoading(false);
+          setValue("docsUpload", docUrl);
           setDocsUrl(docUrl);
+  
+          toast.success("Document uploaded successfully.");
         } else {
-          console.error("Document upload failed.");
+          console.error("Document upload failed with status:", response.status);
+          toast.error("Failed to upload the document.");
         }
       } catch (error) {
         console.error("Error uploading document:", error);
+        toast.error("An error occurred during the upload.");
       } finally {
         setIsUploadingDocs(false);
+        setIsDocumentLoading(false);
       }
+    } else {
+      toast.error("No file selected.");
     }
   };
+  
 
-  // Common function to remove uploaded file
   const handleRemoveDocs = () => {
     setValue("docsUpload", null); // Clear the uploaded file from form state
   };
@@ -308,9 +398,13 @@ const CoachForm = () => {
   // Use Google Docs Viewer if needed
   const googleViewerUrl =
     fileType === "cv"
-      ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
+      ? `https://docs.google.com/gview?url=${encodeURIComponent(
+          cvFileUrl
+        )}&embedded=true`
       : fileType === "docs"
-      ? `https://docs.google.com/gview?url=${docsUrl}&embedded=true`
+      ? `https://docs.google.com/gview?url=${encodeURIComponent(
+          docsUrl
+        )}&embedded=true`
       : null;
 
   const handleViewFile = (type) => {
@@ -899,7 +993,7 @@ const CoachForm = () => {
                           <input
                             type="file"
                             id="cvUpload"
-                            accept="application/pdf"
+                            accept=".pdf,.doc,.docx"
                             className="hidden"
                             onChange={handleCVUpload}
                           />
@@ -1401,10 +1495,9 @@ const CoachForm = () => {
                             <input
                               type="file"
                               id="docsUpload"
-                              hidden
-                              accept="application/pdf"
+                              accept=".doc,.docx,.pdf"
+                              className="hidden"
                               onChange={handleDocUpload}
-                              className="hidden w-full text-gray-900 border rounded-md py-1.5"
                             />
                             {docsFile && (
                               <>
