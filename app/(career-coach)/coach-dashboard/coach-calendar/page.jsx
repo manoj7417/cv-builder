@@ -41,9 +41,14 @@ const CoachCalendar = () => {
       });
       if (response.status === 200) {
         const bookings = handleConvertBookingDataFormat(response.data.bookings);
-        const googleEvents = convertGoogleCalendarDataToFullCalendarEvents(response.data.googleEvents);
+        const googleEvents = convertGoogleCalendarDataToFullCalendarEvents(
+          response.data.googleEvents
+        );
+        if (bookings.length > 0) {
+          setCalendarEvents([...calendarEvents, ...googleEvents, ...bookings]);
+          return;
+        }
         setCalendarEvents([...calendarEvents, ...googleEvents]);
-        setBookingSlot(response.data.bookings);
       }
     } catch (error) {}
   };
@@ -51,19 +56,20 @@ const CoachCalendar = () => {
   const convertGoogleCalendarDataToFullCalendarEvents = (calendarData) => {
     return calendarData.map((event, index) => ({
       id: event.id,
-      title: event.summary || "Untitled Event", 
-      start: event.start.dateTime || event.start.date, 
-      end: event.end.dateTime || event.end.date, 
-      url: event.htmlLink, 
+      title: event.summary || "Untitled Event",
+      start: event.start.dateTime || event.start.date,
+      end: event.end.dateTime || event.end.date,
+      url: event.htmlLink,
       backgroundColor: index % 2 === 0 ? "#f5a623" : "#4caf50", // Alternating background colors
       borderColor: index % 2 === 0 ? "#f5a623" : "#4caf50", // Alternating border colors
       textColor: "#fff", // Text color
       allDay: Boolean(event.start.date), // True if it's an all-day event
       extendedProps: {
-        attendees: event.attendees?.map((attendee) => ({
-          email: attendee.email,
-          responseStatus: attendee.responseStatus,
-        })) || [],
+        attendees:
+          event.attendees?.map((attendee) => ({
+            email: attendee.email,
+            responseStatus: attendee.responseStatus,
+          })) || [],
         organizer: event.organizer?.email || "Unknown Organizer", // Organizer info
         hangoutLink: event.hangoutLink || null, // Google Meet link if available
         conferenceData: event.conferenceData || null, // Additional conference data
@@ -106,8 +112,9 @@ const CoachCalendar = () => {
       allDay: false,
     }));
     if (events.length > 0) {
-      setCalendarEvents([...calendarEvents, ...events]);
+      return events;
     }
+    return [];
   };
 
   useEffect(() => {

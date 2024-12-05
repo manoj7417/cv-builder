@@ -106,7 +106,7 @@ const SidebarCoach = () => {
   }, []);
 
   return (
-    <div className='flex lg:h-full h-auto lg:fixed lg:top-0 relative pb-5 shadow-xl'>
+    <div className='flex lg:h-full h-auto lg:fixed lg:top-0 relative py-5 shadow-xl'>
       {/* Mobile Hamburger Menu Button */}
       <button
         className='md:hidden p-4 focus:outline-none'
@@ -124,7 +124,7 @@ const SidebarCoach = () => {
             <IoMdClose className='w-8 h-8' />
           </button>
         </div>
-        <div className='dashboard_logo px-5 mb-5'>
+        <div className='dashboard_logo p-5 mb-5'>
           <Image
             src='/admin-logo.png'
             alt='logo'

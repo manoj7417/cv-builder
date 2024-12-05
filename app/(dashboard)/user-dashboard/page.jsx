@@ -31,7 +31,6 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
-  console.log("program::", program);
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);

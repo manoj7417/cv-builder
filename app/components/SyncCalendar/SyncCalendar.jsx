@@ -11,31 +11,31 @@ function SyncCalendar({ calendarEvents, setCalendarEvents }) {
   const [apiCalled, setApiCalled] = useState(false);
 
   const convertGoogleCalendarDataToFullCalendarEvents = (calendarData) => {
-    console.log(calendarData);
     return calendarData.map((event, index) => ({
       id: event.id,
       title: event.summary || "Untitled Event", 
       start: event.start.dateTime || event.start.date, 
       end: event.end.dateTime || event.end.date, 
       url: event.htmlLink, 
-      backgroundColor: index % 2 === 0 ? "#f5a623" : "#4caf50", // Alternating background colors
-      borderColor: index % 2 === 0 ? "#f5a623" : "#4caf50", // Alternating border colors
-      textColor: "#fff", // Text color
-      allDay: Boolean(event.start.date), // True if it's an all-day event
+      backgroundColor: index % 2 === 0 ? "#f5a623" : "#4caf50", 
+      borderColor: index % 2 === 0 ? "#f5a623" : "#4caf50", 
+      textColor: "#fff", 
+      allDay: Boolean(event.start.date), 
       extendedProps: {
         attendees: event.attendees?.map((attendee) => ({
           email: attendee.email,
           responseStatus: attendee.responseStatus,
         })) || [],
-        organizer: event.organizer?.email || "Unknown Organizer", // Organizer info
-        hangoutLink: event.hangoutLink || null, // Google Meet link if available
-        conferenceData: event.conferenceData || null, // Additional conference data
+        organizer: event.organizer?.email || "Unknown Organizer", 
+        hangoutLink: event.hangoutLink || null, 
+        conferenceData: event.conferenceData || null, 
       },
     }));
   };
 
   useEffect(() => {
     const handleGoogleLogin = async () => {
+      const { accessToken } = await GetTokens();
       if (status === "authenticated" && session?.idToken && !apiCalled) {
         setApiCalled(true);
         try {
@@ -43,13 +43,16 @@ function SyncCalendar({ calendarEvents, setCalendarEvents }) {
             idToken: session.idToken,
             accessToken: session?.user?.accessToken,
             refreshToken: session?.user?.refreshToken,
+          },{
+            headers : {
+              Authorization: `Bearer ${accessToken.value}`
+            }
           });
           if (response.status === 200) {
-            //  console.log(response.data.events)
             const formattedEvents = convertGoogleCalendarDataToFullCalendarEvents(
               response.data.events
             );
-            setCalendarEvents([...calendarEvents, ...formattedEvents]);
+            setCalendarEvents([formattedEvents]);
             toast.success("Synced with Google Calendar");
           }
         } catch (error) {
