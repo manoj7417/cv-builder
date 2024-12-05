@@ -573,7 +573,7 @@ const UserDashboardPage = () => {
                                 <Button
                                   className="text-xs p-2 cursor-pointer"
                                   onClick={() =>
-                                    handleBookSlotClick(item?.coachId?.id)
+                                    handleBookSlotClick(item?.coachId?.id , item?._id)
                                   }
                                 >
                                   Book Slot

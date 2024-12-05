@@ -60,7 +60,8 @@ const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
 
-const UserBookingSlot = ({ coach_Id , programId }) => {
+const UserBookingSlot = ({ coach_Id, programId }) => {
+  console.log("programId", programId);
   /************************ */
   const {
     register,
@@ -84,7 +85,8 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
-  const [meetUrl,setMeetUrl] = useState(null)
+  const [meetUrl, setMeetUrl] = useState(null);
+  console.log("meetUrl::", meetUrl);
 
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
@@ -240,7 +242,7 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
       notes: data?.message,
       date: selectedDate?.date,
       slotTime: modalSelectedSlot?.slot,
-      programId : programId,
+      programId: programId,
     };
     try {
       const response = await axios.post("/api/bookSlot", obj, {
@@ -249,8 +251,9 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
         },
       });
       if (response.status === 201) {
-        setMeetUrl(response.data)
-        console.log(response.data);
+        setMeetUrl(response.data?.data?.meetingLink);
+        console.log(response.data?.data);
+        setIsDialogOpen(false);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Error booking slot");
@@ -402,13 +405,13 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
             }}
           />
         </div>
-        <div className="flex flex-col items-center justify-start w-full lg:w-1/2 mt-6 lg:mt-0">
+        {/* <div className="flex flex-col items-center justify-start w-full lg:w-1/2 mt-6 lg:mt-0">
           {selectedDate.date && (
             <div className="selected-date-container p-4 bg-white rounded-lg w-full">
               {selectedDaySlots ? (
                 <div className="selected-date-info">
                   <div className="date-display text-center mb-4">
-                    <p className="text-lg font-semibold text-gray-800">
+                      <p className="text-lg font-semibold text-gray-800">
                       {selectedDate?.dayOfWeek},{" "}
                       {dayjs(selectedDate?.date).format("MMMM D, YYYY")}
                     </p>
@@ -422,7 +425,7 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
                       <div
                         key={index}
                         onClick={() => handleSlotClick(slot)}
-                        className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-8 flex items-center justify-center overflow-hidden"
+                        className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
                       >
                         <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
                           {slot.startTime}
@@ -446,6 +449,84 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
                 </div>
               )}
             </div>
+          )}
+        </div> */}
+        <div className="flex flex-col items-center justify-start w-full lg:w-1/2 mt-6 lg:mt-0">
+          {meetUrl ? (
+            // Show the "Join Meeting" button if meetUrl exists
+            <div className="meeting-link-container text-center p-4 bg-white rounded-lg w-full">
+              <div className="date-display text-center mb-4">
+                <p className="text-lg font-semibold text-gray-800">
+                  {selectedDate?.dayOfWeek},{" "}
+                  {dayjs(selectedDate?.date).format("MMMM D, YYYY")}
+                </p>
+                <p className="text-sm text-gray-500 font-medium">
+                  TimeZone: {singleCoach?.availability?.timeZone}
+                </p>
+              </div>
+              <div className="flex gap-5 justify-center items-baseline">
+                <h4 className="text-lg font-bold text-black mb-4">
+                  Your Meeting Link
+                </h4>
+                <p className="text-lg  text-blue-500 font-medium transition duration-300 transform hover:bg-blue-700">
+                  {meetUrl}
+                </p>
+              </div>
+              <Link
+                href={meetUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700"
+              >
+                Join Meeting
+              </Link>
+            </div>
+          ) : (
+            // Show the original slot selection UI if meetUrl does not exist
+            selectedDate.date && (
+              <div className="selected-date-container p-4 bg-white rounded-lg w-full">
+                {selectedDaySlots ? (
+                  <div className="selected-date-info">
+                    <div className="date-display text-center mb-4">
+                      <p className="text-lg font-semibold text-gray-800">
+                        {selectedDate?.dayOfWeek},{" "}
+                        {dayjs(selectedDate?.date).format("MMMM D, YYYY")}
+                      </p>
+                      <p className="text-sm text-gray-500 font-medium">
+                        TimeZone: {singleCoach?.availability?.timeZone}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      {selectedDaySlots.map((slot, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleSlotClick(slot)}
+                          className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
+                        >
+                          <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
+                            {slot.startTime}
+                          </span>
+                          <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                            Book slot
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="no-slots text-center">
+                    <h4 className="text-lg font-bold text-black mb-2">
+                      No Slots Available
+                    </h4>
+                    <p className="text-sm text-gray-500 font-medium">
+                      {dayjs(selectedDate?.date).format("MMMM D, YYYY")},{" "}
+                      {selectedDate?.dayOfWeek}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )
           )}
         </div>
 
@@ -506,111 +587,6 @@ const UserBookingSlot = ({ coach_Id , programId }) => {
           </DialogContent>
         </Dialog>
       </div>
-
-      {/* <div className="md:hidden container mx-auto bg-white mt-10 w-full flex flex-col mb-20 border border-blue-200 rounded-md p-4 lg:flex-row lg:gap-10 h-screen overflow-y-auto">
-  <div className="flex flex-col items-center justify-center w-full lg:w-1/2">
-    <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">Select a Date</h2>
-    <Calendar
-      mode="single"
-      onMonthChange={handleMonthChange}
-      className="shadow-lg rounded-md w-full max-w-[300px]"
-      components={{
-        Day: ({ date }) => {
-          const dayOfWeek = getDayOfWeek(date);
-          const dayOfMonth = getDayOfMonth(date);
-          const isAvailable = isDayAvailable(dayOfWeek);
-          const isDisabled = disablePastDates(date);
-          const isInCurrentMonth = isSameMonth(date, currentMonth);
-          const isCurrentDate = dayjs().isSame(date, "day");
-
-          const handleDayClick = () => {
-            const formattedDate = dayjs(date).format("YYYY-MM-DD");
-            if (!isDisabled) {
-              handleDateSelect(dayOfWeek, formattedDate);
-            }
-          };
-
-          const isSelected =
-            selectedDate.date === dayjs(date).format("YYYY-MM-DD");
-
-          const dayClasses = isDisabled
-            ? "text-gray-400 cursor-not-allowed bg-transparent"
-            : isSelected
-            ? "text-white bg-blue-900 cursor-pointer rounded-full"
-            : isCurrentDate
-            ? "text-gray-800 bg-blue-500 text-white cursor-pointer rounded-full shadow"
-            : "text-gray-800 cursor-pointer bg-gray-100/70 shadow-sm rounded-full";
-          return isInCurrentMonth ? (
-            <button
-              className={`w-9 h-9 p-2 rounded-md ${dayClasses}`}
-              title={dayOfWeek}
-              onClick={handleDayClick}
-            >
-              <p className="flex flex-col items-center justify-center relative">
-                <span className="text-sm">{dayOfMonth}</span>
-                {isAvailable && !isDisabled && (
-                  <span
-                    className={`absolute w-1 h-1 rounded-full top-5 ${
-                      isSelected ? "bg-green-500" : "bg-green-500"
-                    }`}
-                  />
-                )}
-              </p>
-            </button>
-          ) : null;
-        },
-      }}
-    />
-  </div>
-
-  <div className="flex flex-col items-center justify-start w-full lg:w-1/2 mt-6 lg:mt-0">
-    {selectedDate.date ? (
-      <div className="selected-date-container bg-white rounded-lg w-full max-w-md p-4 shadow">
-        <div className="text-center mb-4">
-          <p className="text-lg font-semibold text-gray-800">
-            {selectedDate?.dayOfWeek},{" "}
-            {dayjs(selectedDate?.date).format("MMMM D, YYYY")}
-          </p>
-          <p className="text-sm text-gray-500 font-medium">
-            TimeZone: {singleCoach?.availability?.timeZone || "N/A"}
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {selectedDaySlots && selectedDaySlots.length > 0 ? (
-            selectedDaySlots.map((slot, index) => (
-              <div
-                key={index}
-                onClick={() => handleSlotClick(slot)}
-                className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-8 flex items-center justify-center overflow-hidden"
-              >
-                <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
-                  {slot.startTime}
-                </span>
-                <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                  Book Slot
-                </span>
-              </div>
-            ))
-          ) : (
-            <div className="no-slots text-center col-span-2">
-              <h4 className="text-lg font-bold text-black mb-2">
-                No Slots Available
-              </h4>
-              <p className="text-sm text-gray-500 font-medium">
-                {dayjs(selectedDate?.date).format("MMMM D, YYYY")},{" "}
-                {selectedDate?.dayOfWeek}
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-    ) : (
-      <div className="text-center text-gray-500 mt-4">
-        Please select a date to view available slots.
-      </div>
-    )}
-  </div>
-</div> */}
     </>
   );
 };
