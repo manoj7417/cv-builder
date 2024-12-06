@@ -81,7 +81,7 @@ export default function CoachRegistration() {
         router.push("/coach-signin");
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || "Error in register");
+      toast.error(error.response?.data?.message || "Error in registration");
     } finally {
       setIsLoading(false);
     }
