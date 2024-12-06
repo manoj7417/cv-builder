@@ -124,7 +124,7 @@ export function ResumeHeader() {
              {/* For Desktop devices  */}
             <p className="text-xs sm:text-sm md:text-base font-medium lg:flex hidden flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 marquee-text">
               <span>
-                🎉 Limited Time Offer! Get 14% off on Genies Pro CV Studio.
+                🎉 Limited Time Offer! Free 14 Days Trial on Genies Pro CV Studio.
               </span>
               <span
                 onClick={handleCoupon}
