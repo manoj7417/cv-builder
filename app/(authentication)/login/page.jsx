@@ -18,7 +18,6 @@ import { Label } from "@/components/ui/label";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
 
-
 function LoginUser() {
   const router = useRouter();
   const searchParams = useSearchParams();
