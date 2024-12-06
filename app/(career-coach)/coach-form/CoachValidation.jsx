@@ -31,7 +31,7 @@ export const schema = yup.object().shape({
   bankName: yup.string().required("Bank Name is required"),
   ifscCode: yup.string().required("IFSC Code is required"),
   bankAccountNumber: yup.string().required("Bank Account Number is required"),
-  charges: yup.number().typeError("Charges must be a number").required("Price is required").min(1, "charges must not be less than $1/hr"),
+  // charges: yup.number().typeError("Charges must be a number").required("Price is required").min(1, "charges must not be less than $1/hr"),
   cvUpload: yup.string().required("CV is required"),
   docsUpload: yup.string().required("Signed Aggrement Document is required"),
 });

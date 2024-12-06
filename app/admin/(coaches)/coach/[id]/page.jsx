@@ -355,14 +355,14 @@ const CoachDetailsPage = () => {
                   </div>
                 </div>
 
-                <div className="mb-4">
+                {/* <div className="mb-4">
                   <p className="text-sm font-medium text-gray-700">
                     Rates Per Hour
                   </p>
                   <div className="block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
                     ${ratesPerHour?.charges}
                   </div>
-                </div>
+                </div> */}
               </div>
             </TabsContent>
             <TabsContent value="documents" className="flex-grow p-6">

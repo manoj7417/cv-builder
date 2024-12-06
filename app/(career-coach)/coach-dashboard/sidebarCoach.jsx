@@ -177,7 +177,7 @@ const SidebarCoach = () => {
                 My Appointment
               </Link>
             </li>
-            <li className={getLinkClass("/coach-dashboard/enroll-student")}>
+            {/* <li className={getLinkClass("/coach-dashboard/enroll-student")}>
               <Link
                 href={"/coach-dashboard/enroll-student"}
                 className='flex items-center w-full p-2 px-3'
@@ -187,7 +187,7 @@ const SidebarCoach = () => {
                 <MdEventAvailable className='text-lg mr-3' />
                 Enroll Students
               </Link>
-            </li>
+            </li> */}
             <li>
               <Accordion className='w-full ' type='single' collapsible>
                 <AccordionItem value='item'>

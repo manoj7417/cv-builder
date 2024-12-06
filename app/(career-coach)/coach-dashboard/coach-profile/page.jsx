@@ -551,10 +551,10 @@ const CoachProfile = () => {
                     </div>
 
                     <div className='col-span-3'>
-                      <label>Social Links</label>
+                      <label className="block text-sm font-medium text-gray-700">Social Links</label>
                       {fields.map((item, index) => (
                         <div key={item.id} style={{ marginBottom: "10px" }}>
-                          <label className='mb-5'>{item.name}</label>
+                          <label className='my-2 block text-base font-medium text-gray-700'>{item.name}</label>
                           <Controller
                             name={`socialLinks.${index}.link`}
                             control={control}
@@ -645,7 +645,7 @@ const CoachProfile = () => {
                     />
                   </div>
 
-                  <div className='mb-4'>
+                  {/* <div className='mb-4'>
                     <p className='text-sm font-medium text-gray-700'>
                       Rates Per Hour
                     </p>
@@ -655,7 +655,7 @@ const CoachProfile = () => {
                       className='w-full'
                       disabled={!isEditable}
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </TabsContent>

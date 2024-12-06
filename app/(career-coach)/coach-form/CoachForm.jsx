@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { schema } from "./CoachValidation";
 import {
+  MdDownload,
   MdKeyboardArrowRight,
   MdOutlineFileUpload,
   MdOutlineKeyboardArrowLeft,
@@ -94,7 +95,7 @@ const CoachForm = () => {
     {
       id: "Step 3",
       name: "Bank Details",
-      fields: ["bankName", "bankAccountNumber", "ifscCode", "charges"],
+      fields: ["bankName", "bankAccountNumber", "ifscCode"],
     },
     {
       id: "Step 4",
@@ -347,24 +348,28 @@ const CoachForm = () => {
       setIsUploadingDocs(true);
       const formData = new FormData();
       formData.append("docsUpload", file);
-  
+
       try {
         setIsDocumentLoading(true);
-  
+
         // Validate file type (now supports .doc, .docx, and .pdf)
         const allowedTypes = [
           "application/msword", // .doc
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
           "application/pdf", // .pdf
         ];
-  
+
         if (!allowedTypes.includes(file.type)) {
-          console.error("Invalid file type. Please upload a DOC, DOCX, or PDF file.");
-          toast.error("Invalid file type. Only DOC, DOCX, and PDF files are supported.");
+          console.error(
+            "Invalid file type. Please upload a DOC, DOCX, or PDF file."
+          );
+          toast.error(
+            "Invalid file type. Only DOC, DOCX, and PDF files are supported."
+          );
           setIsDocumentLoading(false);
           return;
         }
-  
+
         // Upload file to the server
         const response = await axios.post("/api/uploadImage", formData); // Ensure this is the correct endpoint
         if (response.status === 200) {
@@ -372,7 +377,7 @@ const CoachForm = () => {
           setIsDocumentLoading(false);
           setValue("docsUpload", docUrl);
           setDocsUrl(docUrl);
-  
+
           toast.success("Document uploaded successfully.");
         } else {
           console.error("Document upload failed with status:", response.status);
@@ -389,7 +394,6 @@ const CoachForm = () => {
       toast.error("No file selected.");
     }
   };
-  
 
   const handleRemoveDocs = () => {
     setValue("docsUpload", null); // Clear the uploaded file from form state
@@ -461,9 +465,9 @@ const CoachForm = () => {
       },
       coachingDescription: data.coachingDescription,
       address: data.address,
-      ratesPerHour: {
-        charges: data.charges,
-      },
+      // ratesPerHour: {
+      //   charges: data.charges,
+      // },
       formFilled: true,
     };
     console.log(payload);
@@ -1425,7 +1429,7 @@ const CoachForm = () => {
                           )}
                         </div>
                       </div>
-                      <div className="sm:col-span-3">
+                      {/* <div className="sm:col-span-3">
                         <label
                           htmlFor="price"
                           className="block text-sm font-medium leading-6 text-gray-900"
@@ -1444,7 +1448,7 @@ const CoachForm = () => {
                             </p>
                           )}
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </motion.div>
                 </>
@@ -1465,12 +1469,28 @@ const CoachForm = () => {
 
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-full">
-                      <label
-                        htmlFor="cvUpload"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Signed and Accepted Agreement
-                      </label>
+                      <div className="flex justify-between items-center">
+                        <label
+                          htmlFor="cvUpload"
+                          className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                          Signed and Accepted Agreement
+                        </label>
+                        {/* <Button>
+                            Download Agreement
+                            <MdDownload className="inline ml-2 animate-pulse" />
+                          </Button> */}
+                        <Link
+                          href={"/CoachingContract.pdf"}
+                          download="Coaching Contract.pdf" 
+                          target="_blank"
+                          downloaded file
+                          className="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800 transition"
+                        >
+                          Download Agreement
+                          <MdDownload className="ml-2 animate-pulse" />
+                        </Link>
+                      </div>
                       <div className="flex gap-5 items-center">
                         <div className="mt-2">
                           <div className="flex items-center ">

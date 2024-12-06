@@ -6,7 +6,7 @@ import CoachLogoutButton from "./CoachLogoutButton";
 
 const CoachFormPage = () => {
   return (
-    <div className="h-full flex">
+    <div className="h-screen flex">
       {/* Left Side: Fixed Section */}
       <div className="lg:w-[30%] w-full h-auto bg-blue-500 hidden lg:block sticky top-0">
         <div className="m-5">
