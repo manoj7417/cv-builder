@@ -86,7 +86,6 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
-  console.log("programData::",programData)
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
@@ -348,6 +347,7 @@ const CoachDetailsPage = () => {
     }
     setIsBuyingProgram(true);
     try {
+      const url = `${window.location.protocol}//${window.location.hostname}/user-dashboard`;
       const response = await axios.post(
         "/api/buyprogram",
         {
@@ -355,7 +355,7 @@ const CoachDetailsPage = () => {
           coachId: course.coachId,
           amount: course.amount,
           currency: "USD",
-          success_url: window.location.href,
+          success_url: url,
           cancel_url: window.location.href,
         },
         {
