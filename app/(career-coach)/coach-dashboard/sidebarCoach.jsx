@@ -96,7 +96,6 @@ const SidebarCoach = () => {
       }
     } catch (error) {
       await RemoveTokens();
-      toast.error("Error loggin in");
       router.push("/coach-signin");
     }
   };

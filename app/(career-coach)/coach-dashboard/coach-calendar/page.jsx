@@ -31,7 +31,7 @@ const CoachCalendar = () => {
   const handleGetBookings = async () => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
-      return router.push("/login?redirect=/user-dashboard");
+      return router.push("/coach-signin?redirect=/coach-dashboard/coach-calendar");
     }
     try {
       const response = await axios.get("/api/bookings", {
@@ -45,10 +45,10 @@ const CoachCalendar = () => {
           response.data.googleEvents
         );
         if (bookings.length > 0) {
-          setCalendarEvents([...calendarEvents, ...googleEvents, ...bookings]);
+          setCalendarEvents([ ...googleEvents, ...bookings]);
           return;
         }
-        setCalendarEvents([...calendarEvents, ...googleEvents]);
+        setCalendarEvents([...googleEvents]);
       }
     } catch (error) {}
   };
