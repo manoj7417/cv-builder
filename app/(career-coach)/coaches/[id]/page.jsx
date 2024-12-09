@@ -86,6 +86,7 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
+  console.log("programData::", programData);
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
@@ -304,6 +305,7 @@ const CoachDetailsPage = () => {
     try {
       const response = await axios.get(`/api/getCoachDetails/${id}`);
       if (response.status === 200) {
+        setProgramData(response?.data?.coach?.programs);
         setCoachBookings(response.data.coach.bookings);
       }
     } catch (error) {
@@ -314,7 +316,7 @@ const CoachDetailsPage = () => {
   const handleFetchCoachProgramById = async (id) => {
     try {
       const response = await axios.get(`/api/getCoachProgram/${id}`);
-      setProgramData(response?.data?.programs);
+      // setProgramData(response?.data?.programs);
       setIsLoading(false);
       if (response?.data?.programs.length > 0) {
         setActiveProgramTab(response?.data?.programs[0]._id);
@@ -712,14 +714,12 @@ const CoachDetailsPage = () => {
                     ) : programData?.length > 0 ? (
                       <>
                         {programData
-                          ?.filter(
-                            (program) => program._id === activeProgramTab
-                          )
+                          // ?.filter(
+                          //   (program) => program._id === activeProgramTab
+                          // )
                           ?.map((course, courseIndex) => {
                             const totalTimeInHours =
                               calculateTotalTimeInHours(course); // Calculate total time for the selected course
-
-                            // Construct the course details array inside the map function where the total time is available
                             const courseDetails = [
                               {
                                 icon: <FaVideo className='text-blue-500' />,
