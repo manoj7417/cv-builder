@@ -274,7 +274,7 @@ const PricingFunc = () => {
 
   const UpgradePlan = async (plan) => {
     const { accessToken } = await GetTokens();
-    if (!accessToken) {
+    if (!accessToken && !accessToken?.value) {
       return router.push("/login?redirect=pricing");
     }
     const data = {

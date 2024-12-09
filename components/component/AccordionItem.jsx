@@ -4,7 +4,7 @@ import { Collapse } from "react-collapse";
 import parse from "html-react-parser";
 
 const AccordionItem = ({ open, toggle, ques, ans, pathname }) => {
-  const isResume = pathname === "/resume" || pathname === "/resume-analyzer";
+  const isResume = pathname === "/resume" || pathname === "/resume-analyzer" || pathname === "/new-coach";
 
   return (
     <>
