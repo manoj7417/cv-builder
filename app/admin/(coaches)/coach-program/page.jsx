@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CoachTableSkeleton from "@/components/component/AdminDashboard/CoachTableSkeleton";
 import { FaDollarSign, FaUser } from "react-icons/fa6";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { FaLongArrowAltRight, FaPoundSign } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
@@ -153,7 +153,7 @@ const AdminCoachProgram = () => {
                               </td>
                               <td className="px-4 py-4 text-center w-[25%]">
                                 <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                  <FaDollarSign className="text-orange-500" />{" "}
+                                  <FaPoundSign className="text-orange-500" />{" "}
                                   {coach?.amount}
                                 </div>
                               </td>

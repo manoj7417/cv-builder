@@ -38,6 +38,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { ImSpinner3, ImSpinner8 } from "react-icons/im";
 import { Button } from "@/components/ui/button";
@@ -61,6 +62,7 @@ import {
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { Plus } from "lucide-react";
 
 const CoachForm = () => {
   const steps = [
@@ -144,6 +146,15 @@ const CoachForm = () => {
   const imageUrl = watch("profileImage");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
+  const [options, setOptions] = useState([
+    "Leadership Coaching",
+    "Career Coaching",
+    "Life Coaching",
+    "Executive Coaching",
+    "Personal Development",
+  ]);
+  const [newOption, setNewOption] = useState("");
+  const [newOptionError, setNewOptionError] = useState("");
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -470,7 +481,6 @@ const CoachForm = () => {
       // },
       formFilled: true,
     };
-    console.log(payload);
     try {
       const response = await axios.patch("/api/coachForm", payload, {
         headers: {
@@ -553,6 +563,27 @@ const CoachForm = () => {
   //   setValue("socialLink", "");
   //   setValue("socialPlatform", "");
   // };
+
+  const handleAddOption = () => {
+    if (newOption.trim() === "") {
+      setNewOptionError("Option cannot be empty");
+      return;
+    }
+    if (options.includes(newOption)) {
+      setNewOptionError("This option already exists");
+      return;
+    }
+    setOptions([...options, newOption]);
+    toast.success("Option added");
+    setNewOption("");
+    setIsDialogOpen(false);
+  };
+
+  const handleCloseAddoptionDialog = () => {
+    setNewOption("");
+    setNewOptionError(null);
+    setIsDialogOpen(false);
+  };
 
   useEffect(() => {
     if (userdata?.formFilled) {
@@ -1072,7 +1103,7 @@ const CoachForm = () => {
                     <div className="sm:col-span-6">
                       <label
                         htmlFor="profileVideo"
-                        className="block text-sm font-medium leading-6 text-gray-900"
+                        className="block text-base font-bold leading-6 text-gray-900"
                       >
                         Profile Video
                       </label>
@@ -1123,7 +1154,7 @@ const CoachForm = () => {
                               height="300px"
                             />
                           ) : (
-                            <p className="text-red-500">
+                            <p className="text-red-500 text-sm">
                               Please enter a valid YouTube URL to preview the
                               video.
                             </p>
@@ -1135,48 +1166,76 @@ const CoachForm = () => {
                     <div className="sm:col-span-6">
                       <label
                         htmlFor="skills"
-                        className="block text-sm font-medium leading-6 text-gray-900"
+                        className="block text-base font-bold leading-6 text-gray-900"
                       >
                         Skills
                       </label>
-                      <div className="mt-2 relative">
+                      <div className="mt-2 relative flex justify-between">
                         <Controller
                           name="skills"
                           className="absolute top-0 left-0"
                           control={control}
                           render={({ field }) => (
                             <Select onValueChange={field.onChange}>
-                              <SelectTrigger className="w-full">
+                              <SelectTrigger className="w-[78%]">
                                 <SelectValue placeholder="Select a skills" />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectGroup>
-                                  <SelectItem value="leadership">
-                                    Leadership Coaching
-                                  </SelectItem>
-                                  <SelectItem value="career">
-                                    Career Coaching
-                                  </SelectItem>
-                                  <SelectItem value="life">
-                                    Life Coaching
-                                  </SelectItem>
-                                  <SelectItem value="executive">
-                                    Executive Coaching
-                                  </SelectItem>
-                                  <SelectItem value="personal-development">
-                                    Personal Development
-                                  </SelectItem>
+                                  {options.map((option,index) => (
+                                    <SelectItem value={option} key={index}>
+                                      {option}
+                                    </SelectItem>
+                                  ))}
                                 </SelectGroup>
                               </SelectContent>
                             </Select>
                           )}
                         />
-                        {errors.skills?.message && (
-                          <p className="mt-2 text-sm text-red-400">
-                            {errors.skills.message}
-                          </p>
-                        )}
+                        <Button
+                          className="w-[20%]"
+                          type="button"
+                          onClick={() => setIsDialogOpen(true)}
+                        >
+                          <Plus className="h-4 w-4 mr-2" />
+                          Add New Option
+                        </Button>
+                        <Dialog
+                          open={isDialogOpen}
+                          onOpenChange={setIsDialogOpen}
+                        >
+                          <DialogTrigger asChild></DialogTrigger>
+                          <DialogContent onClick={handleCloseAddoptionDialog}>
+                            <DialogHeader>
+                              <DialogTitle>Add New Option</DialogTitle>
+                            </DialogHeader>
+                            <div className="flex flex-col space-y-4">
+                              <Input
+                                type="text"
+                                placeholder="Enter new option"
+                                value={newOption}
+                                onChange={(e) => {
+                                  setNewOption(e.target.value);
+                                  setError(null);
+                                }}
+                              />
+                              <Button onClick={handleAddOption}>
+                                Add Option
+                              </Button>
+                              {newOptionError && (
+                                <p className="text-sm text-red-500">
+                                  {newOptionError}
+                                </p>
+                              )}
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </div>
+                      {errors.skills?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.skills.message}
+                        </p>
+                      )}
                     </div>
                     {/* social links */}
                     <div className="sm:col-span-2">
@@ -1482,9 +1541,10 @@ const CoachForm = () => {
                           </Button> */}
                         <Link
                           href={"/CoachingContract.pdf"}
-                          download="Coaching Contract.pdf" 
+                          download="Coaching Contract.pdf"
                           target="_blank"
-                          downloaded file
+                          downloaded
+                          file
                           className="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800 transition"
                         >
                           Download Agreement

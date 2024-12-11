@@ -494,7 +494,7 @@ const CoachDetailsPage = () => {
                       htmlFor="profileVideo"
                       className="text-xl font-bold text-gray-700"
                     >
-                      Profile Video
+                     {profileVideo?.url && "Profile Video"}
                     </label>
                     {profileVideo?.url && (
                       <div className="mr-2">
@@ -540,17 +540,13 @@ const CoachDetailsPage = () => {
                   </div>
                   {/* Displaying the YouTube video using ReactPlayer */}
                   <div className="mt-4">
-                    {profileVideo && ReactPlayer.canPlay(profileVideo?.url) ? (
+                    {profileVideo && ReactPlayer.canPlay(profileVideo?.url) && (
                       <ReactPlayer
                         url={profileVideo?.url}
                         controls
                         width="100%"
                         height="300px"
                       />
-                    ) : (
-                      <p className="text-sm">
-                        Please enter a valid YouTube URL to preview the video.
-                      </p>
                     )}
                   </div>
                 </div>
