@@ -3,6 +3,7 @@ import AccordionItem from "@/components/component/AccordionItem";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import NewMultiForm from "./NewMultiForm";
 
 const faqData = [
   {
@@ -25,6 +26,7 @@ const faqData = [
 const CoachNewPage = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [findCoachPopUp, setFindCoachPopup] = useState(false);
 
   const toggle = (index) => {
     if (open === index) {
@@ -52,7 +54,10 @@ const CoachNewPage = () => {
                 className="2xl:w-[500px] 2xl:h-[400px] lg:w-[800px] lg:h-[400px] object-contain"
               />
               <div className="flex justify-center xs:justify-start">
-                <button className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500">
+                <button
+                  className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
+                  onClick={() => setFindCoachPopup(true)}
+                >
                   Find Your Coach
                 </button>
               </div>
@@ -62,8 +67,16 @@ const CoachNewPage = () => {
       </section>
       <section className="faq py-20">
         <div className="main_heading text-center">
-          <h2 className="text-3xl text-center text-bold font-semibold my-5">You <span className="text-blue-700">deserve</span> the <span className="text-blue-700">best coaches</span> in the world</h2>
-          <p className="max-w-3xl mx-auto text-sm">When it comes to reaching your fullest potential, settling for anything less than the best is not an option. Our expert coaches are here to guide you with proven strategies, personalized insights, and a passion for helping you succeed.</p>
+          <h2 className="text-3xl text-center text-bold font-semibold my-5">
+            You <span className="text-blue-700">deserve</span> the{" "}
+            <span className="text-blue-700">best coaches</span> in the world
+          </h2>
+          <p className="max-w-3xl mx-auto text-sm">
+            When it comes to reaching your fullest potential, settling for
+            anything less than the best is not an option. Our expert coaches are
+            here to guide you with proven strategies, personalized insights, and
+            a passion for helping you succeed.
+          </p>
         </div>
         <div className="max-w-[70rem] mx-auto flex lg:flex-row flex-col py-10">
           <div className="faq_image lg:w-[50%] w-full lg:block hidden">
@@ -76,7 +89,10 @@ const CoachNewPage = () => {
             </div>
           </div>
           <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">
-          <h2 className="text-3xl text-bold font-semibold my-5">You <span className="text-blue-700">deserve</span> the <span className="text-blue-700">best coaches</span> in the world</h2>
+            <h2 className="text-3xl text-bold font-semibold my-5">
+              You <span className="text-blue-700">deserve</span> the{" "}
+              <span className="text-blue-700">best coaches</span> in the world
+            </h2>
             {faqData?.map((item, index) => (
               <AccordionItem
                 open={index === open}
@@ -90,6 +106,10 @@ const CoachNewPage = () => {
           </div>
         </div>
       </section>
+      <NewMultiForm
+        setFindCoachPopup={setFindCoachPopup}
+        findCoachPopUp={findCoachPopUp}
+      />
     </div>
   );
 };
