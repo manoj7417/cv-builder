@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useRouter } from "next/navigation";
 
 const formSteps = [
   {
@@ -59,6 +60,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [selectedValue, setSelectedValue] = useState(null);
+  const router = useRouter()
 
   const handleNext = () => {
     if (selectedValue) {
@@ -89,6 +91,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
       ...formData,
       [`step_${currentStep + 1}`]: selectedValue,
     };
+    router.push("/coachesNewPage")
     console.log("All Form Data: ", finalData);
     setFindCoachPopup(false);
   };

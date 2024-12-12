@@ -4,6 +4,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import NewMultiForm from "./NewMultiForm";
+import CoachServiceSlider from "@/components/component/CoachServiceSlider";
+import { Button } from "@/components/ui/button";
 
 const faqData = [
   {
@@ -110,6 +112,23 @@ const CoachNewPage = () => {
         setFindCoachPopup={setFindCoachPopup}
         findCoachPopUp={findCoachPopUp}
       />
+      <div className="top_services bg-gray-100 p-10">
+        <div className="flex max-w-7xl mx-auto ">
+          <div className="lg:w-[30%] w-full py-5 px-2">
+            <h2 className="text-3xl font-bold">Our Top Services</h2>
+            <p className="text-sm my-4">
+              When it comes to reaching your fullest potential, settling for
+              anything less than the best is not an option. Our expert coaches
+              are here to guide you with proven strategies, personalized
+              insights, and a passion for helping you succeed.
+            </p>
+            <Button>See All Services</Button>
+          </div>
+          <div className="lg:w-[70%] w-full">
+            <CoachServiceSlider />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

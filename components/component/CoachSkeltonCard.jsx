@@ -4,7 +4,7 @@ const CoachSkeltonCard = () => {
   return (
     <div className="group relative bg-white p-4 border rounded-lg animate-pulse">
       {/* Image Skeleton */}
-      <div className="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
+      <div className="w-24 h-24 bg-gray-200 rounded-lg overflow-hidden">
         <div className="h-full w-full bg-gray-300"></div>
       </div>
 
