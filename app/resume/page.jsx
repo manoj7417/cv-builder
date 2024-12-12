@@ -503,6 +503,7 @@ export default function DashboardIdea() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const [defaultTab, setDefaultTab] = useState("all");
 
   const toggle = (index) => {
     if (open === index) {
@@ -510,6 +511,20 @@ export default function DashboardIdea() {
     }
     setOpen(index);
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const ats = urlParams.get("ats"); 
+      if (ats === "true") {
+        setDefaultTab("ats");
+      }
+    }
+  }, []); // Runs only once on component mount
+  
+  useEffect(() => {
+    console.log("Updated defaultTab:", defaultTab);
+  }, [defaultTab]); // Logs whenever defaultTab changes
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userState"));
@@ -657,7 +672,7 @@ Follow the suggestions given below the score to get a higher score and better ca
               <h2 className='2xl:text-6xl lg:text-5xl text-2xl font-bold mt-10 text-black text-center'>
                 Choose From Our Detailed Templates Options
               </h2>
-              <Tabs className='w-full py-5' defaultValue='all'>
+              <Tabs className='w-full py-5' value={defaultTab} onValueChange={setDefaultTab}>
                 <TabsList className='mb-4 flex w-full justify-center flex-wrap py-10 h-auto'>
                   <TabsTrigger value='all'>
                     <FaBorderAll className='text-pink-600 h-8 w-8 me-3' />
