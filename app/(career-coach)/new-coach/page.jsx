@@ -47,13 +47,13 @@ const CoachNewPage = () => {
               </h1>
               <Image
                 priority
-                src="/newCoach.png"
+                src="/new_coach.gif"
                 alt="newCoach"
-                height={300}
-                width={450}
-                className="2xl:w-[500px] 2xl:h-[400px] lg:w-[800px] lg:h-[400px] object-contain"
+                height={100}
+                width={100}
+                className="w-[500px] h-[500px] mx-auto object-contain"
               />
-              <div className="flex justify-center xs:justify-start">
+              <div className="flex justify-center xs:justify-start mt-5">
                 <button
                   className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
                   onClick={() => setFindCoachPopup(true)}

@@ -95,6 +95,7 @@
     "react-contenteditable": "^3.3.7",
     "react-countdown": "^2.3.5",
     "react-countup": "^6.5.3",
+    "react-credit-cards-2": "^1.0.3",
     "react-datepicker": "^7.3.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
