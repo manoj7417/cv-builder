@@ -29,6 +29,7 @@ export const metadata = {
   alternates: {
     canonical: 'https://www.geniescareerhub.com/resume',
   },
+  robots: "index, follow",
 };
 
 const Layout = ({ children }) => {
