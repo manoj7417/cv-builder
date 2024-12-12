@@ -124,12 +124,6 @@ const Coach = () => {
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-3.5  text-sm font-normal text-gray-700 text-center"
-                    >
-                      Fees
-                    </th>
-                    <th
-                      scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
                     >
                       Status
@@ -169,12 +163,6 @@ const Coach = () => {
                                     {coach?.email}
                                   </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td className="px-4 py-4 text-center w-[25%]">
-                              <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                <FaDollarSign className="text-orange-500" />{" "}
-                                {coach?.ratesPerHour?.charges}
                               </div>
                             </td>
                             <td className="px-4 py-4 w-[25%]">
@@ -217,12 +205,6 @@ const Coach = () => {
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
                     >
                       <span>Coach</span>
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5  text-sm font-normal text-gray-700 text-center"
-                    >
-                      Fees
                     </th>
                     <th
                       scope="col"
@@ -271,12 +253,6 @@ const Coach = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-4 py-4 text-center w-[25%]">
-                                <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                  <FaDollarSign className="text-orange-500" />{" "}
-                                  {coach?.ratesPerHour?.charges}
-                                </div>
-                              </td>
                               <td className="px-4 py-4 w-[25%]">
                                 <div className="flex justify-center">
                                   {coach.isApproved ? (
@@ -318,12 +294,7 @@ const Coach = () => {
                     >
                       <span>Coach</span>
                     </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5  text-sm font-normal text-gray-700 text-center"
-                    >
-                      Fees
-                    </th>
+                    
                     <th
                       scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
@@ -371,12 +342,6 @@ const Coach = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-4 py-4 text-center w-[25%]">
-                                <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                  <FaDollarSign className="text-orange-500" />{" "}
-                                  {coach?.ratesPerHour?.charges}
-                                </div>
-                              </td>
                               <td className="px-4 py-4 w-[25%]">
                                 <div className="flex justify-center">
                                   {coach.isApproved ? (
@@ -418,12 +383,7 @@ const Coach = () => {
                     >
                       <span>Coach</span>
                     </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5  text-sm font-normal text-gray-700 text-center"
-                    >
-                      Fees
-                    </th>
+                    
                     <th
                       scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
@@ -464,12 +424,7 @@ const Coach = () => {
                     >
                       <span>Coach</span>
                     </th>
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5  text-sm font-normal text-gray-700 text-center"
-                    >
-                      Fees
-                    </th>
+                    
                     <th
                       scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
@@ -513,12 +468,7 @@ const Coach = () => {
                                 </div>
                               </div>
                             </td>
-                            <td className="px-4 py-4 text-center w-[25%]">
-                              <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                <FaDollarSign className="text-orange-500" />{" "}
-                                {coach?.ratesPerHour?.charges}
-                              </div>
-                            </td>
+                            
                             <td className="px-4 py-4 w-[25%]">
                               <div className="flex justify-center">
                                 {coach.isApproved ? (

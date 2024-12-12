@@ -43,6 +43,7 @@ export const ProgramValidationSchema = Yup.object().shape({
     )
     .required("Amount is required")
     .positive("Amount must be greater than $1"),
+  currency: Yup.string().required("Currency is required"),
   description: Yup.string().required("Program description is required"),
   programImage: Yup.string()
     .matches(URL, "Enter a valid URL")
@@ -52,8 +53,5 @@ export const ProgramValidationSchema = Yup.object().shape({
     .notRequired()
     .matches(URL, { message: "Enter a valid URL", excludeEmptyString: true }),
   prerequisites: Yup.array().of(prerequisiteValidationSchema).optional(),
-  days: Yup.array()
-    .of(dayValidationSchema)
-    .required("At least one day is required in the program")
-    .min(1, "At least one day is required in the program"),
+  content: Yup.string().required(),
 });
