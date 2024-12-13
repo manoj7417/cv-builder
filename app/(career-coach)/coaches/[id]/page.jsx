@@ -74,6 +74,7 @@ const CoachDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("about");
   const [isLoading, setIsLoading] = useState(true);
   const [activeProgramTab, setActiveProgramTab] = useState("program1");
+  console.log("activeProgramTab::", activeProgramTab);
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDaySlots, setSelectedDaySlots] = useState(null);
@@ -502,7 +503,7 @@ const CoachDetailsPage = () => {
                                   onClick={() =>
                                     handleProgramTabClick(program._id)
                                   }>
-                                  {program.title}{" "}
+                                  {program.title}
                                   {/* Display the program title here */}
                                 </button>
                               </li>
@@ -511,7 +512,7 @@ const CoachDetailsPage = () => {
                         ) : (
                           <div className='mt-5 text-gray-600 text-xl'>
                             No data available
-                          </div> // Render "No data available" message if programData is empty
+                          </div>
                         )}
                       </div>
                     </div>
@@ -714,10 +715,11 @@ const CoachDetailsPage = () => {
                     ) : programData?.length > 0 ? (
                       <>
                         {programData
-                          // ?.filter(
-                          //   (program) => program._id === activeProgramTab
-                          // )
+                          ?.filter(
+                            (program) => program._id === activeProgramTab
+                          )
                           ?.map((course, courseIndex) => {
+                            console.log("course::",course);
                             const totalTimeInHours =
                               calculateTotalTimeInHours(course); // Calculate total time for the selected course
                             const courseDetails = [

@@ -31,7 +31,7 @@ const formSteps = [
       "IT",
       "Designing",
       "Healthcare",
-      "Development",
+      "Others",
     ],
   },
   {

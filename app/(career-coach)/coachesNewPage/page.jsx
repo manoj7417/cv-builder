@@ -13,42 +13,47 @@ import {
 } from "@/components/ui/dialog";
 import { AiOutlineCheck } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { GetTokens } from "@/app/actions";
 
-const programs = [
-  {
-    title: "Brand Strategy Development",
-    description:
-      "Crafting personalized strategies to build and enhance brand identity and market presence.",
-    price: "$10",
-  },
-  {
-    title: "Digital Marketing Optimization",
-    description:
-      "Guiding clients on effective SEO, social media marketing, email campaigns, and online advertising techniques.",
-    price: "$10",
-  },
-  {
-    title: "Content Marketing Mastery",
-    description:
-      "Providing insights on creating compelling content that drives engagement and generates leads.",
-    price: "$10",
-  },
-  {
-    title: "Performance Analytics & Growth Planning",
-    description:
-      "Helping clients analyze marketing data to optimize campaigns and plan for sustainable growth.",
-    price: "$10",
-  },
-];
+// const programs = [
+//   {
+//     title: "Brand Strategy Development",
+//     description:
+//       "Crafting personalized strategies to build and enhance brand identity and market presence.",
+//     price: "$10",
+//   },
+//   {
+//     title: "Digital Marketing Optimization",
+//     description:
+//       "Guiding clients on effective SEO, social media marketing, email campaigns, and online advertising techniques.",
+//     price: "$10",
+//   },
+//   {
+//     title: "Content Marketing Mastery",
+//     description:
+//       "Providing insights on creating compelling content that drives engagement and generates leads.",
+//     price: "$10",
+//   },
+//   {
+//     title: "Performance Analytics & Growth Planning",
+//     description:
+//       "Helping clients analyze marketing data to optimize campaigns and plan for sustainable growth.",
+//     price: "$10",
+//   },
+// ];
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
+  console.log("coaches::", coaches);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
+  console.log("selectedProgram::", selectedProgram);
+  const [geoData, setGeoData] = useState(null);
+  const [isBuyingProgram, setIsBuyingProgram] = useState(false);
 
-  console.log("selectedCoach::",selectedCoach)
+  console.log("selectedCoach::", selectedCoach);
 
   const handleDialogToggle = () => {
     setIsOpen((prev) => !prev);
@@ -78,8 +83,56 @@ const CoachPage = () => {
     setSelectedCoach(coach);
   };
 
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        setGeoData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+
+  const handleBuyProgram = async (course) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push(`/login?redirect=/coaches/${id}`);
+    }
+    setIsBuyingProgram(true);
+    try {
+      const url = `${window.location.protocol}//${window.location.hostname}/user-dashboard`;
+      const response = await axios.post(
+        "/api/buyprogram",
+        {
+          programId: course._id,
+          coachId: course.coachId,
+          amount: course.amount,
+          currency: "USD",
+          success_url: url,
+          cancel_url: window.location.href,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken?.value}`,
+          },
+        }
+      );
+      window.location.href = response.data.url;
+    } catch (error) {
+      toast.error("Error buying program");
+    } finally {
+      setIsBuyingProgram(false);
+    }
+  };
+
   useEffect(() => {
     fetchAllCoaches();
+  }, []);
+
+  useEffect(() => {
+    getGeoInfo();
   }, []);
 
   return (
@@ -229,7 +282,7 @@ const CoachPage = () => {
       <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
           {/* Coach Selection Section */}
-          <div className="coach_card lg:w-[30%] w-full h-auto lg:h-screen lg:sticky top-[100px]">
+          <div className="coach_card lg:w-[30%] w-full h-auto lg:h-screen lg:sticky top-[100px] overflow-y-scroll no-scrollbar">
             <h2 className="text-xl lg:text-2xl font-bold">
               Choose the <span className="text-blue-700">coach</span> who aligns
               best with your <span className="text-blue-700">goals.</span>
@@ -348,7 +401,7 @@ const CoachPage = () => {
                     className="w-full lg:w-auto"
                     onClick={handleDialogToggle}
                   >
-                    Schedule A Meet
+                    Book Now
                   </Button>
                 </div>
 
@@ -362,7 +415,7 @@ const CoachPage = () => {
                       >
                         About
                       </TabsTrigger>
-                      <TabsTrigger
+                      {/* <TabsTrigger
                         value="coaching"
                         className="rounded-md text-xs sm:text-sm"
                       >
@@ -373,7 +426,7 @@ const CoachPage = () => {
                         className="rounded-md text-xs sm:text-sm"
                       >
                         Reviews
-                      </TabsTrigger>
+                      </TabsTrigger> */}
                     </TabsList>
                     <div className="tabs_inner_content my-5">
                       <TabsContent value="about">
@@ -424,106 +477,94 @@ const CoachPage = () => {
             </DialogTitle>
           </DialogHeader>
           <div>
-            <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
-              <div className="coach_related_programs">
-                <ul className="my-5">
-                  {programs.map((program, index) => (
-                    <li
-                      key={index}
-                      className={`flex gap-5 items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
-                        selectedProgram === index
-                          ? 'border-blue-500 bg-blue-100'
-                          : 'border-transparent'
-                      }`}
-                      onClick={() =>
-                        setSelectedProgram(
-                          index === selectedProgram ? null : index
-                        )
-                      }
-                    >
-                      <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                      <div className="program_inner_content space-y-2">
-                        <h3 className="text-sm font-bold">{program.title}</h3>
-                        <p className="text-xs">{program.description}</p>
-                      </div>
-                      <div className="program_price font-bold text-sm">
-                        {program.price}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="coach_booking border p-5 rounded-md">
-                {/* Conditionally render the selected program details */}
-                {selectedProgram !== null && (
-                  <>
-                    <div className="program_details flex">
-                      <div className="coach_program_heading flex gap-2">
-                        <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                        <div>
-                          <h2 className="text-sm font-bold">
-                            {programs[selectedProgram].title}
-                          </h2>
-                          <p className="text-xs">
-                            {programs[selectedProgram].description}
-                          </p>
+            {selectedCoach?.programs.length > 0 ? (
+              <>
+                <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
+                  <div className="coach_related_programs">
+                    <ul className="my-5">
+                      {selectedCoach?.programs.map((program, index) => (
+                        <li
+                          key={index}
+                          className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
+                            selectedProgram === index
+                              ? "border-blue-500 bg-blue-100"
+                              : "border-transparent"
+                          }`}
+                          onClick={() =>
+                            setSelectedProgram(
+                              index === selectedProgram ? null : index
+                            )
+                          }
+                        >
+                          <div className="program_inner_content space-y-2 flex gap-5 items-center">
+                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                            <div>
+                              <h3 className="text-sm font-bold">
+                                {program.title}
+                              </h3>
+                              <p className="text-xs">{program.description}</p>
+                            </div>
+                          </div>
+                          <div className="program_price font-bold text-sm">
+                            ${program.amount}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="coach_booking border p-5 rounded-md">
+                    {selectedProgram !== null && (
+                      <>
+                        <div className="program_details flex">
+                          <div className="coach_program_heading flex gap-2">
+                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                            <div>
+                              <h2 className="text-sm font-bold">
+                                {
+                                  selectedCoach?.programs[selectedProgram]
+                                    ?.title
+                                }
+                              </h2>
+                              <p className="text-xs">
+                                {
+                                  selectedCoach?.programs[selectedProgram]
+                                    ?.description
+                                }
+                              </p>
+                            </div>
+                          </div>
+                          <div className="coach_price">
+                            <div className="text-sm font-bold">
+                              $
+                              {selectedCoach?.programs[selectedProgram]?.amount}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="coach_price">
-                        <div className="text-sm font-bold">
-                          {programs[selectedProgram].price}
+                        <div
+                          className="schedule_meet mt-5"
+                          onClick={() =>
+                            handleBuyProgram(
+                              selectedCoach?.programs[selectedProgram]
+                            )
+                          }
+                        >
+                          <Button>Schedule a Meet</Button>
                         </div>
-                      </div>
-                    </div>
-                    <div className="program_details mt-2">
-                      <ul className="list-disc p-5 space-y-3">
-                        <li>
-                          <strong className="text-sm">Brand Identity Creation</strong>
-                          <ul>
-                            <li className="text-xs">
-                              Developing a unique brand name, logo, tagline, and
-                              visual elements.
-                            </li>
-                            <li className="text-xs">
-                              Crafting a consistent brand voice and tone to
-                              communicate effectively with the target audience.
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <strong className="text-sm">Market Research & Analysis</strong>
-                          <ul>
-                            <li className="text-xs">
-                              Conducting competitor analysis and audience
-                              segmentation.
-                            </li>
-                            <li className="text-xs">
-                              Identifying market trends and customer needs to
-                              position the brand effectively.
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <strong className="text-sm">Value Proposition Development</strong>
-                          <ul>
-                            <li className="text-xs">
-                              Defining the brand’s unique selling points (USPs).
-                            </li>
-                            <li className="text-xs">
-                              Highlighting the benefits and values that
-                              differentiate the brand from competitors.
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="schedule_meet">
-                        <Button>Schedule a Meet</Button>
-                    </div>
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="no_program_card flex flex-col items-center justify-center text-center p-5 bg-gray-100 rounded-lg mt-5">
+                <h2 className="text-lg font-bold text-gray-600">
+                  No Program Yet
+                </h2>
+                <p className="text-sm text-gray-500">
+                  The selected coach doesn't have any programs at the moment.
+                </p>
               </div>
-            </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
