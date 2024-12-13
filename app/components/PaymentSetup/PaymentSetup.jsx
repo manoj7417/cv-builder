@@ -108,9 +108,7 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
       </button> */}
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Left Side - Payment Form */}
           <div className="md:w-1/2">
-            {/* Full Name Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Full Name
@@ -121,7 +119,6 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
                 className="border rounded-lg p-2 w-full"
               />
             </div>
-            {/* Email Field */}
             <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Email
@@ -132,7 +129,6 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
                 className="border rounded-lg p-2 w-full"
               />
             </div>
-            {/* Card Number Field */}
             <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Card Number
@@ -143,7 +139,6 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
               />
             </div>
             <div className="flex space-x-4 mt-4">
-              {/* Expiry Date Field */}
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Expiry Date
@@ -153,7 +148,6 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
                   className="border rounded-lg p-2 w-full"
                 />
               </div>
-              {/* CVC Field */}
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   CVC
@@ -167,7 +161,6 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
             {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
 
-          {/* Right Side - User Suggestion */}
           <div className="md:w-1/2 bg-gray-100 p-4 rounded-lg">
             <h2 className="text-lg font-bold text-blue-800">
               Trial Period Notice
