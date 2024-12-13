@@ -12,7 +12,12 @@ import {
 import { Input } from "@/components/ui/input";
 import 'react-credit-cards-2/dist/es/styles-compiled.css'
 
-const CreditCardForm = ({handlerSubmit,loading,error}) => {
+const CreditCardForm = ({
+    handleSubmit: handleSubmitProp,
+    error,
+    loading,
+    stripe,
+  }) => {
   const {
     register,
     handleSubmit,
@@ -45,9 +50,9 @@ const CreditCardForm = ({handlerSubmit,loading,error}) => {
   };
 
   const onSubmit = (data) => {
-    handlerSubmit(data);
+    handleSubmitProp(data);
     setFormData(data);
-    reset(); // Reset the form after submission
+    reset();
   };
 
   return (
