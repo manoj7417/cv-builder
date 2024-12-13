@@ -86,6 +86,7 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
+  console.log("programData::", programData);
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);
@@ -305,6 +306,7 @@ const CoachDetailsPage = () => {
     try {
       const response = await axios.get(`/api/getCoachDetails/${id}`);
       if (response.status === 200) {
+        setProgramData(response?.data?.coach?.programs);
         setCoachBookings(response.data.coach.bookings);
       }
     } catch (error) {
@@ -736,7 +738,6 @@ const CoachDetailsPage = () => {
                                 {/* <li>• {totalTimeInHours} total hours</li> */}
                               </ul>
                             </div>
-
                             <div dangerouslySetInnerHTML={{__html : displayProgram?.content}}>
 
                             </div>

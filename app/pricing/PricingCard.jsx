@@ -271,7 +271,7 @@ const PricingFunc = () => {
 
   const UpgradePlan = async (plan) => {
     const { accessToken } = await GetTokens();
-    if (!accessToken) {
+    if (!accessToken && !accessToken?.value) {
       return router.push("/login?redirect=pricing");
     }
     const data = {
@@ -539,7 +539,7 @@ const PricingFunc = () => {
           <>
             <DialogTrigger asChild></DialogTrigger>
             <DialogContent
-              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-full ..
+              className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-[45%] ..
               lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
               showCloseButton={true}
               onClick={handleCloseAIDialog}

@@ -150,7 +150,7 @@ export default function CoachRegistration() {
         </div>
 
         <div className='flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24'>
-          <div className='xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-xl'>
+          <div className='xl:mx-auto xl:w-full xl:max-w-md 2xl:max-w-xl'>
             <h2 className='text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl'>
               Create an Account to Register as a Coach
             </h2>

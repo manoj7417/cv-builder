@@ -60,8 +60,7 @@ const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
 
-const UserBookingSlot = ({ coach_Id, programId }) => {
-  console.log("programId", programId);
+const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   /************************ */
   const {
     register,
@@ -86,7 +85,6 @@ const UserBookingSlot = ({ coach_Id, programId }) => {
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
   const [meetUrl, setMeetUrl] = useState(null);
-  console.log("meetUrl::", meetUrl);
 
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
@@ -252,6 +250,7 @@ const UserBookingSlot = ({ coach_Id, programId }) => {
       });
       if (response.status === 201) {
         setMeetUrl(response.data?.data?.meetingLink);
+        onMeetUrlUpdate(response.data?.data?.meetingLink)
         console.log(response.data?.data);
         setIsDialogOpen(false);
       }

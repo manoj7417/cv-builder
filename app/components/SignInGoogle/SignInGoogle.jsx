@@ -8,7 +8,7 @@ import { SetTokens } from "@/app/actions";
 import { useUserStore } from "@/app/store/UserStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaGoogle } from "react-icons/fa6";
-
+import {FcGoogle} from "react-icons/fc";
 
 export default function SignIn ({type}) {
   const router = useRouter();
@@ -62,7 +62,7 @@ export default function SignIn ({type}) {
         <button onClick={() => signIn("google")}>Sign in with Google</button>
       )} */}
        <button type="button" onClick={() => signIn("google")} className="bg-gray-100 p-3  text-base rounded-md w-full flex items-center justify-center">
-        <FaGoogle className="mr-2 text-red-500" />
+        <FcGoogle className="mr-2 text-red-500" />
           {`${type} with Google`} </button>
     </div>
   );

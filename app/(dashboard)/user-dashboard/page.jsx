@@ -29,6 +29,7 @@ const UserDashboardPage = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { userdata } = useUserStore((state) => state.userState);
+  console.log("userdata::", userdata);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,8 +37,14 @@ const UserDashboardPage = () => {
   const [selectedCoachId, setSelectedCoachId] = useState(null);
   const [selectedProgramId, setSelectedProgramId] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [meetUrl, setMeetUrl] = useState(null);
+  console.log("meetUrl::", meetUrl);
 
-  const handleBookSlotClick = (id , programId) => {
+  const handleMeetUrlUpdate = (url) => {
+    setMeetUrl(url);
+  };
+
+  const handleBookSlotClick = (id, programId) => {
     setSelectedCoachId(id);
     setSelectedProgramId(programId);
     // setShowBooking(true);
@@ -138,6 +145,46 @@ const UserDashboardPage = () => {
             </div>
 
             {/* Right Side */}
+            {userdata?.links?.length > 0 && (
+              <div
+                id="blog_header_right_side"
+                className="text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0"
+              >
+                <div
+                  id="socialMediaIcons"
+                  className="flex space-x-2 justify-end"
+                >
+                  {userdata.links.map((socialLink) => {
+                    const iconSrc = {
+                      facebook: "/facebook_icon.png",
+                      twitter: "/twitter_icon.png",
+                      instagram: "/instagram_icon.png",
+                      youtube: "/youtube_icon.png",
+                      whatsapp: "/whatsapp_icon.png",
+                    };
+
+                    return (
+                      <Link
+                        key={socialLink.id} // Unique key for each social link
+                        href={`${
+                          socialLink.link.startsWith("http")
+                            ? socialLink.link
+                            : `https://${socialLink.link}`
+                        }`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src={iconSrc[socialLink.name.toLowerCase()]}
+                          alt={socialLink.name}
+                          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-auto lg:h-auto xl:w-auto xl:h-auto 2xl:w-auto 2xl:h-auto"
+                        />
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             {/* <div
               id="blog_header_right_side"
               className="text-left sm:text-left md:text-right lg:text-right xl:text-right 2xl:text-right space-y-2 mt-4 sm:mt-0"
@@ -481,104 +528,144 @@ const UserDashboardPage = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              {program.map((item, index) => (
-                                <tr
-                                  key={index}
-                                  className="border-b border-gray-200 flex flex-col md:table-row"
-                                >
-                                  {/* Program Info */}
-                                  <td className="p-4 flex items-center space-x-3">
-                                    <img
-                                      src={item.programId?.programImage}
-                                      alt={item.programId?.title}
-                                      className="w-16 h-16 object-cover rounded-md"
-                                      priority
-                                    />
-                                    <div>
-                                      <p className="text-sm font-semibold">
-                                        {item.programId?.title}
-                                      </p>
-                                    </div>
-                                  </td>
-
-                                  {/* Description */}
-                                  <td className="p-4 text-xs text-gray-700">
-                                    {item.programId?.description}
-                                  </td>
-
-                                  {/* Coach Info */}
-                                  <td className="p-4 flex items-center space-x-3">
-                                    <img
-                                      src={item?.coachId?.profileImage}
-                                      alt={item?.coachId?.name}
-                                      className="w-16 h-16 object-cover rounded-full"
-                                      priority
-                                    />
-                                    <div>
-                                      <p className="text-sm font-semibold">
-                                        {item.coachId?.name}
-                                      </p>
-                                    </div>
-                                  </td>
-                                  <td className="p-2 text-center">
-                                    <Button
-                                      className="text-xs p-2"
-                                      onClick={() =>
-                                        handleBookSlotClick(item?.coachId?.id , item?._id)
-                                      }
+                              {program.map(
+                                (item, index) =>
+                                  item?.programId && (
+                                    <tr
+                                      key={index}
+                                      className="border-b border-gray-200 flex flex-col md:table-row"
                                     >
-                                      Book Slot
-                                    </Button>
-                                  </td>
-                                </tr>
-                              ))}
+                                      {/* Program Info */}
+                                      <td className="p-4 flex items-center space-x-3">
+                                        <img
+                                          src={item.programId?.programImage}
+                                          alt={item.programId?.title}
+                                          className="w-16 h-16 object-cover rounded-md"
+                                          priority
+                                        />
+                                        <div>
+                                          <p className="text-sm font-semibold">
+                                            {item.programId?.title}
+                                          </p>
+                                        </div>
+                                      </td>
+
+                                      {/* Description */}
+                                      <td className="p-4 text-xs text-gray-700">
+                                        {item.programId?.description?.slice(
+                                          0,
+                                          100
+                                        )}
+                                      </td>
+
+                                      {/* Coach Info */}
+                                      <td className="p-4 flex items-center space-x-3">
+                                        <img
+                                          src={item?.coachId?.profileImage}
+                                          alt={item?.coachId?.name}
+                                          className="w-16 h-16 object-cover rounded-full"
+                                          priority
+                                        />
+                                        <div>
+                                          <p className="text-sm font-semibold">
+                                            {item.coachId?.name}
+                                          </p>
+                                        </div>
+                                      </td>
+                                      <td className="p-2 text-center">
+                                        {meetUrl ? (
+                                          <Link
+                                            href={meetUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                          >
+                                            Join Meeting
+                                          </Link>
+                                        ) : (
+                                          <Button
+                                            className="text-xs p-2"
+                                            onClick={() =>
+                                              handleBookSlotClick(
+                                                item?.coachId?.id,
+                                                item?._id
+                                              )
+                                            }
+                                          >
+                                            Book Slot
+                                          </Button>
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )
+                              )}
                             </tbody>
                           </table>
 
                           {/* Cards for Small Screens */}
                           <div className="md:hidden space-y-4 m-5">
-                            {program.map((item, index) => (
-                              <div
-                                key={index}
-                                className="p-4 bg-white border border-gray-200 rounded-md shadow-sm flex flex-col space-y-4"
-                              >
-                                <div className="flex items-center space-x-3">
-                                  <img
-                                    src={item.programId?.programImage}
-                                    alt={item.programId?.title}
-                                    className="w-10 h-10 object-cover rounded-md"
-                                  />
-                                  <div>
-                                    <p className="text-xs font-semibold">
-                                      {item.programId?.title}
+                            {program.map(
+                              (item, index) =>
+                                item?.programId && (
+                                  <div
+                                    key={index}
+                                    className="p-4 bg-white border border-gray-200 rounded-md shadow-sm flex flex-col space-y-4"
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <img
+                                        src={item.programId?.programImage}
+                                        alt={item.programId?.title}
+                                        className="w-10 h-10 object-cover rounded-md"
+                                      />
+                                      <div>
+                                        <p className="text-xs font-semibold">
+                                          {item.programId?.title}
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <p className="text-xs text-gray-700">
+                                      {item.programId?.description?.slice(
+                                        0,
+                                        50
+                                      )}
                                     </p>
+                                    <div className="flex items-center space-x-3">
+                                      <img
+                                        src={item?.coachId?.profileImage}
+                                        alt={item?.coachId?.name}
+                                        className="w-10 h-10 object-cover rounded-full"
+                                      />
+                                      <div>
+                                        <p className="text-sm font-semibold">
+                                          {item.coachId?.name}
+                                        </p>
+                                      </div>
+                                    </div>
+                                    {meetUrl ? (
+                                      <Link
+                                        href={meetUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                      >
+                                        Join Meeting
+                                      </Link>
+                                    ) : (
+                                      <Button
+                                        className="text-xs p-2 cursor-pointer"
+                                        onClick={() =>
+                                          handleBookSlotClick(
+                                            item?.coachId?.id,
+                                            item?._id
+                                          )
+                                        }
+                                      >
+                                        Book Slot
+                                      </Button>
+                                    )}
                                   </div>
-                                </div>
-                                <p className="text-xs text-gray-700">
-                                  {item.programId?.description}
-                                </p>
-                                <div className="flex items-center space-x-3">
-                                  <img
-                                    src={item?.coachId?.profileImage}
-                                    alt={item?.coachId?.name}
-                                    className="w-10 h-10 object-cover rounded-full"
-                                  />
-                                  <div>
-                                    <p className="text-sm font-semibold">
-                                      {item.coachId?.name}
-                                    </p>
-                                  </div>
-                                </div>
-                                <Button
-                                  className="text-xs p-2 cursor-pointer"
-                                  onClick={() =>
-                                    handleBookSlotClick(item?.coachId?.id , item?._id)
-                                  }
-                                >
-                                  Book Slot
-                                </Button>
-                              </div>
-                            ))}
+                                )
+                            )}
                           </div>
 
                           <Drawer
@@ -587,9 +674,11 @@ const UserDashboardPage = () => {
                           >
                             <DrawerContent className="p-4 fixed bottom-0 w-full md:h-[550px] h-[90%] overflow-y-scroll">
                               <div className="flex md:justify-end justify-between mt-10">
-                              <div className="main_title md:hidden block">
-                                <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
-                              </div>
+                                <div className="main_title md:hidden block">
+                                  <h2 className="text-2xl font-semibold text-center underline underline-offset-4">
+                                    Book a Slot
+                                  </h2>
+                                </div>
                                 <Button
                                   className="text-sm"
                                   onClick={handleCloseDrawer}
@@ -599,9 +688,15 @@ const UserDashboardPage = () => {
                               </div>
 
                               <div className="main_title md:block hidden">
-                                <h2 className="text-2xl font-semibold text-center underline underline-offset-4">Book a Slot</h2>
+                                <h2 className="text-2xl font-semibold text-center underline underline-offset-4">
+                                  Book a Slot
+                                </h2>
                               </div>
-                              <UserBookingSlot coach_Id={selectedCoachId} programId={selectedProgramId} />
+                              <UserBookingSlot
+                                coach_Id={selectedCoachId}
+                                programId={selectedProgramId}
+                                onMeetUrlUpdate={handleMeetUrlUpdate}
+                              />
                             </DrawerContent>
                           </Drawer>
                         </>
@@ -763,41 +858,47 @@ const UserDashboardPage = () => {
                               ))}
                           </div>
                         ) : program.length > 0 ? (
-                          program.map((item, index) => (
-                            <div key={index}>
-                              <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
-                                <div className="w-full block h-full">
-                                  <img
-                                    alt="blog photo"
-                                    src={item.programId?.programImage}
-                                    className="max-h-40 w-full object-cover"
-                                    priority
-                                  />
-                                  <div className="bg-white w-full p-4">
-                                    <p className="text-gray-800 text-base font-medium mb-2">
-                                      {item?.programId?.title}
-                                    </p>
-                                    <p className="text-gray-600 font-light text-sm">
-                                      {item?.programId?.description}
-                                    </p>
-                                    <div className="flex items-center mt-2">
+                          program.map(
+                            (item, index) =>
+                              item?.programId && (
+                                <div key={index}>
+                                  <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
+                                    <div className="w-full block h-full">
                                       <img
-                                        className="w-10 h-10 object-cover rounded-full"
-                                        alt="User avatar"
-                                        src={item?.coachId?.profileImage}
+                                        alt="blog photo"
+                                        src={item.programId?.programImage}
+                                        className="max-h-40 w-full object-cover"
                                         priority
                                       />
-                                      <div className="pl-3">
-                                        <div className="font-medium text-sm">
-                                          {item?.coachId?.name}
+                                      <div className="bg-white w-full p-4">
+                                        <p className="text-gray-800 text-base font-medium mb-2">
+                                          {item?.programId?.title}
+                                        </p>
+                                        <p className="text-gray-600 font-light text-sm">
+                                          {item?.programId?.description.slice(
+                                            0,
+                                            100
+                                          )}
+                                        </p>
+                                        <div className="flex items-center mt-2">
+                                          <img
+                                            className="w-10 h-10 object-cover rounded-full"
+                                            alt="User avatar"
+                                            src={item?.coachId?.profileImage}
+                                            priority
+                                          />
+                                          <div className="pl-3">
+                                            <div className="font-medium text-sm">
+                                              {item?.coachId?.name}
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                          ))
+                              )
+                          )
                         ) : (
                           <Card className="w-full">
                             <CardHeader>
