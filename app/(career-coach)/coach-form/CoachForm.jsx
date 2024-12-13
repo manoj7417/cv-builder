@@ -130,7 +130,6 @@ const CoachForm = () => {
       socialLinks: [],
     },
   });
-  // { resolver: yupResolver(schema) }
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [isCvLoading, setIsCvLoading] = useState(false);
   const [isDocumentLoading, setIsDocumentLoading] = useState(false);
@@ -166,7 +165,7 @@ const CoachForm = () => {
     instagram: <FaInstagram className="text-pink-500" />,
     linkedin: <FaLinkedin className="text-blue-700" />,
     youtube: <FaYoutube className="text-red-600" />,
-    other: <FaGlobe className="text-gray-500" />, // Default icon for "other" or unknown platforms
+    other: <FaGlobe className="text-gray-500" />,
   };
 
   const handleImageUpload = async (e) => {
@@ -191,19 +190,14 @@ const CoachForm = () => {
     }
   };
 
-  // Remove the uploaded image
   const removeImage = () => {
     setValue("profileImage", null);
     setValue("profileImage", null); // Clear the value in the form
     clearErrors("profileImage"); // Clear validation errors if any
   };
 
-  // Upload CV Functionlaity starts here
-
-  //upload cv
   const cvFile = watch("cvUpload");
 
-  //Socials
   const socialPlatform = watch("socialPlatform");
   const socialLink = watch("socialLink");
 
@@ -407,10 +401,9 @@ const CoachForm = () => {
   };
 
   const handleRemoveDocs = () => {
-    setValue("docsUpload", null); // Clear the uploaded file from form state
+    setValue("docsUpload", null);
   };
 
-  // Use Google Docs Viewer if needed
   const googleViewerUrl =
     fileType === "cv"
       ? `https://docs.google.com/gview?url=${encodeURIComponent(
@@ -438,7 +431,7 @@ const CoachForm = () => {
     const { accessToken } = await GetTokens();
     setIsSubmitting(true);
     // Map over the socialLinks array and structure it as desired
-    const formattedSocialLinks = data.socialLinks.map((socialLink) => ({
+    const formattedSocialLinks = data?.socialLinks?.map((socialLink) => ({
       name: socialLink.name,
       link: socialLink.link,
     }));
@@ -476,9 +469,6 @@ const CoachForm = () => {
       },
       coachingDescription: data.coachingDescription,
       address: data.address,
-      // ratesPerHour: {
-      //   charges: data.charges,
-      // },
       formFilled: true,
     };
     try {
@@ -537,8 +527,45 @@ const CoachForm = () => {
         refreshToken: refreshToken.value,
       });
       if (response.status === 200) {
+        console.log(response.data.data.userdata);
+        const data = response.data.data.userdata;
+        const date = dayjs(data.dateofBirth)
+        if(data?.cv?.link){
+          setCvFileUrl(data.cv.link);
+        }
+        if(data?.signedAggrement?.link){
+          setDocsUrl(data.signedAggrement.link);
+        }
+        // reset(response.data.data.userdata);
+        reset({
+          name: data?.name || "",
+          email: data?.email || "",
+          profileImage: data?.profileImage || "",
+          phone: data?.phone || "",
+          profileVideo: data?.profileVideo?.url || "",
+          address: data?.address || "",
+          country: data?.country || "",
+          city: data?.city || "",
+          zip: data?.zip || "",
+          placeofBirth: data?.placeofBirth || "",
+          cv: data?.cv?.url || "",
+          signedAggrement: data?.signedAggrement?.url || "",
+          experience: data?.experience || "",
+          typeOfCoaching: data?.typeOfCoaching || "",
+          skills: data?.skills || "",
+          placeofBirth: data?.placeofBirth || "",
+          bio: data?.bio || "",
+          coachingDescription: data?.coachingDescription || "",
+          cvUpload: data?.cv?.link || "",
+          bankAccountNumber: data?.bankDetails?.accountNumber || "",
+          bankName: data?.bankDetails?.bankName || "",
+          ifscCode: data?.bankDetails?.code?.value || "",
+          docsUpload: data?.signedAggrement?.link || "",
+          dateofBirth : date,
+
+        });
         updateUserData(response.data.data.userdata);
-        const { isApproved } = response.data.data.userdata;
+
         if (isApproved) {
           return router.push("/coach-dashboard");
         }
@@ -603,56 +630,7 @@ const CoachForm = () => {
       {userdata?.formFilled ? (
         <>
           <section>
-            {userdata.approvalStatus === "pending" ? (
-              <>
-                {/* START-IF FORMFILLED IS PENDING */}
-                <div className="h-screen flex flex-col items-center justify-center">
-                  <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
-                    <Image
-                      src={"/hourglass.png"}
-                      alt=""
-                      width={100}
-                      height={100}
-                      className="w-full h-full object-contain animate-spin-slow"
-                    />
-                  </div>
-                  <div className="text-center py-4">
-                    <h1 className="text-2xl font-bold text-gray-600">
-                      Document Verification Pending
-                    </h1>
-                    <p className="mt-3 text-gray-500">
-                      Your documents are now being verified, please wait. It may
-                      take up to <b>24 to 48 hours</b> to verify them.
-                    </p>
-                  </div>
-                </div>
-                {/* END-IF FORMFILLED IS PENDING */}
-              </>
-            ) : userdata.approvalStatus === "rejected" ? (
-              <>
-                {/* START-IF FORMFILLED IS REJECTED OR CANCELLED */}
-                <div className="h-screen flex flex-col items-center justify-center">
-                  <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
-                    <Image
-                      src={"/rejected.png"}
-                      alt=""
-                      width={100}
-                      height={100}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  <div className="text-center py-4">
-                    <h1 className="text-2xl font-bold text-gray-600">
-                      Document Rejected
-                    </h1>
-                    <p className="mt-3 text-gray-500">
-                      Unfortunately, your form has been rejected.
-                    </p>
-                  </div>
-                </div>
-                {/* END-IF FORMFILLED IS REJECTED OR CANCELLED */}
-              </>
-            ) : (
+            {userdata.isApproved ? (
               <div className=" h-screen flex flex-col items-center justify-center">
                 <div className="h-32 w-32 p-5 rounded-full bg-yellow-50">
                   <Image
@@ -678,6 +656,57 @@ const CoachForm = () => {
                   </Link>
                 </div>
               </div>
+            ) : userdata.approvalStatus === "pending" ? (
+              <>
+                {/* START-IF FORMFILLED IS PENDING */}
+                <div className="h-screen flex flex-col items-center justify-center">
+                  <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
+                    <Image
+                      src={"/hourglass.png"}
+                      alt=""
+                      width={100}
+                      height={100}
+                      className="w-full h-full object-contain animate-spin-slow"
+                    />
+                  </div>
+                  <div className="text-center py-4">
+                    <h1 className="text-2xl font-bold text-gray-600">
+                      Document Verification Pending
+                    </h1>
+                    <p className="mt-3 text-gray-500">
+                      Your documents are now being verified, please wait. It may
+                      take up to <b>24 to 48 hours</b> to verify them.
+                    </p>
+                  </div>
+                </div>
+                {/* END-IF FORMFILLED IS PENDING */}
+              </>
+            ) : (
+              userdata.approvalStatus === "rejected" && (
+                <>
+                  {/* START-IF FORMFILLED IS REJECTED OR CANCELLED */}
+                  <div className="h-screen flex flex-col items-center justify-center">
+                    <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
+                      <Image
+                        src={"/rejected.png"}
+                        alt=""
+                        width={100}
+                        height={100}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="text-center py-4">
+                      <h1 className="text-2xl font-bold text-gray-600">
+                        Document Rejected
+                      </h1>
+                      <p className="mt-3 text-gray-500">
+                        Unfortunately, your form has been rejected.
+                      </p>
+                    </div>
+                  </div>
+                  {/* END-IF FORMFILLED IS REJECTED OR CANCELLED */}
+                </>
+              )
             )}
           </section>
         </>
@@ -822,7 +851,6 @@ const CoachForm = () => {
                         <Controller
                           name="dateofBirth"
                           control={control}
-                          // rules={{ required: "Date of Birth is required" }}
                           render={({ field }) => (
                             <DatePicker
                               {...field}
@@ -1182,7 +1210,7 @@ const CoachForm = () => {
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectGroup>
-                                  {options.map((option,index) => (
+                                  {options.map((option, index) => (
                                     <SelectItem value={option} key={index}>
                                       {option}
                                     </SelectItem>
@@ -1351,7 +1379,7 @@ const CoachForm = () => {
                           render={({ field }) => (
                             <Select onValueChange={field.onChange}>
                               <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a Coahing" />
+                                <SelectValue placeholder="Select a Coaching" />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectGroup>
