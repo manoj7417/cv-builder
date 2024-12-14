@@ -56,7 +56,6 @@ const PricingFunc = () => {
   const discountCode = searchParams.get("coupon") === "true";
   const [isTrialSelected, setIsTrialSelected] = useState(false);
 
-  // Function to scroll to the service cards section
   const scrollToServiceCards = () => {
     serviceCardsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -263,7 +262,7 @@ const PricingFunc = () => {
     } catch (error) {
       console.error("Payment error:", error);
     } finally {
-      setLoading(false); // Stop loader
+      setLoading(false); 
     }
   };
 

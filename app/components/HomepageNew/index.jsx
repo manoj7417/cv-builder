@@ -102,7 +102,7 @@ export default function HomepageNew() {
   }
 
   const handleAtsButtonClick = () => {
-    router.push("/resume?atsbutton=true");
+    router.push("/resume?ats=true");
   };
 
   return (

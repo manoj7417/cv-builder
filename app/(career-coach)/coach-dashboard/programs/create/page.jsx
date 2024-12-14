@@ -29,10 +29,10 @@ const PrerequisitesFieldArray = dynamic(
   () => import("./PrerequisitesFieldArray"),
   { ssr: false }
 );
-const DaysFieldArray = dynamic(() => import("./DaysFieldArray"), {
-  ssr: false,
-});
 import { ProgramValidationSchema } from "./ProgramValidationSchema";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function CreateProgram() {
   const [isMounted, setIsMounted] = useState(false);
@@ -63,10 +63,13 @@ function CreateProgram() {
       description: "",
       prerequisites: [],
       days: [],
+      currency : "GBP"
     },
   });
   const profileImage = watch("programImage");
   const programVideo = watch("programVideo");
+  const content = watch("content");
+  const currency = watch('currency')
   const handleCreateProgram = async (data) => {
     const { accessToken } = await GetTokens();
     try {
@@ -76,7 +79,7 @@ function CreateProgram() {
           Authorization: `Bearer ${accessToken?.value}`,
         },
       });
-  
+
       if (response.status === 201) {
         toast.success("Program created successfully");
         reset();
@@ -88,7 +91,6 @@ function CreateProgram() {
       setIscreatingProgram(false);
     }
   };
-  
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
@@ -111,6 +113,10 @@ function CreateProgram() {
     } finally {
       setIsUploading(false);
     }
+  };
+
+  const handlecontentvalueChange = (e) => {
+    setValue("content", e);
   };
 
   useEffect(() => {
@@ -185,8 +191,8 @@ function CreateProgram() {
                 </Button>
               </div>
             ) : (
-              <div className="flex justify-around items-center">
-                <div className="w-2/5 flex justify-center items-center">
+              <div className="flex items-center py-2">
+                <div className="w-2/5 flex items-center">
                   <Button
                     onClick={handleOpenFileInput}
                     disabled={isUploadingImage}
@@ -211,12 +217,6 @@ function CreateProgram() {
                     onChange={handleUploadImage}
                   />
                 </div>
-                <p>OR</p>
-                <Input
-                  {...register("programImage")}
-                  className="my-2 w-2/5"
-                  placeholder="Enter image url"
-                />
               </div>
             )}
             <p className="text-red-500 text-sm ml-2">
@@ -248,14 +248,29 @@ function CreateProgram() {
             </p>
           </div>
           <div className="py-2">
-            <Label>Amount ($)</Label>
-            <Input
-              type="number"
-              className="my-2"
-              {...register("amount")}
-              placeholder="Enter amount in dollars ($)"
-              min={"1"}
-            />
+            <Label>Amount</Label>
+            <div className="flex items-center">
+              <Select
+                onValueChange={(value) => setValue("currency", value)}
+                defaultValue="GBP"
+              >
+                <SelectTrigger className="w-1/3">
+                  <SelectValue placeholder="Currency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="GBP">GBP (£)</SelectItem>
+                  <SelectItem value="USD">USD ($)</SelectItem>
+                  <SelectItem value="INR">INR (₹)</SelectItem>
+                </SelectContent>
+              </Select>
+              <Input
+                type="number"
+                className="my-2"
+                {...register("amount")}
+                placeholder="Enter amount"
+                min={"1"}
+              />
+            </div>
           </div>
           <PrerequisitesFieldArray
             control={control}
@@ -263,11 +278,19 @@ function CreateProgram() {
             errors={errors}
             name={"prerequisites"}
           />
-          <DaysFieldArray
-            control={control}
-            register={register}
-            errors={errors}
-          />
+          <div>
+            <h1 className="py-4 text-lg font-bold">Program description</h1>
+            <ReactQuill
+              style={{
+                height: "250px",
+                margin: "10px 0px 50px",
+              }}
+              theme="snow"
+              value={content}
+              onChange={handlecontentvalueChange}
+              placeholder="Write your program here..."
+            />
+          </div>
           <div className="w-full flex justify-end py-4">
             <Button type="submit" disabled={isCreatingProgram}>
               {isCreatingProgram ? (
