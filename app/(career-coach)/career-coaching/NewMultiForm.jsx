@@ -91,7 +91,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
       ...formData,
       [`step_${currentStep + 1}`]: selectedValue,
     };
-    router.push("/coachesNewPage")
+    router.push("/coachesProgram")
     console.log("All Form Data: ", finalData);
     setFindCoachPopup(false);
   };

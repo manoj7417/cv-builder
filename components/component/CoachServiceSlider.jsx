@@ -48,13 +48,13 @@ export default function CoachServiceSlider({ data, slidesPerView }) {
             <SwiperSlide key={index}>
               <div
                 key={card.id}
-                className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 min-h-[420px]"
+                className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 lg:w-[300px] w-full lg:h-[400px] h-full"
               >
                 <figure>
                   <img
                     src={card.image}
                     alt={`${card.title} image`}
-                    className="aspect-video w-full object-cover"
+                    className="w-[400px] h-[200px] object-cover"
                   />
                 </figure>
                 <div className="p-6">
