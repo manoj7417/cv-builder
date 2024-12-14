@@ -52,6 +52,17 @@ const CoachPage = () => {
   console.log("selectedProgram::", selectedProgram);
   const [geoData, setGeoData] = useState(null);
   const [isBuyingProgram, setIsBuyingProgram] = useState(false);
+  const [showFullContent, setShowFullContent] = useState({
+    bio: false,
+    coachingDescription: false,
+  });
+
+  const toggleContent = (type) => {
+    setShowFullContent((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
+  };
 
   console.log("selectedCoach::", selectedCoach);
 
@@ -378,9 +389,27 @@ const CoachPage = () => {
                       </h2>
                     </div>
                     <div className="coach_details">
-                      <p className="text-sm text-gray-500">
+                      <p
+                        className={`text-sm text-gray-500 ${
+                          !showFullContent.coachingDescription
+                            ? "line-clamp-3"
+                            : ""
+                        }`}
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
                         {selectedCoach?.coachingDescription}
                       </p>
+                      <button
+                        onClick={() => toggleContent("coachingDescription")}
+                        className="text-blue-600 mt-2 hover:underline"
+                      >
+                        {showFullContent?.coachingDescription
+                          ? "Show Less"
+                          : "Show More"}
+                      </button>
                     </div>
                   </div>
                   {/* Coach Image */}
@@ -411,7 +440,7 @@ const CoachPage = () => {
                     <TabsList className="flex flex-wrap">
                       <TabsTrigger
                         value="about"
-                        className="rounded-md text-xs sm:text-sm"
+                        className="rounded-md text-xs sm:text-sm ms-0"
                       >
                         About
                       </TabsTrigger>
@@ -430,7 +459,39 @@ const CoachPage = () => {
                     </TabsList>
                     <div className="tabs_inner_content my-5">
                       <TabsContent value="about">
-                        <p>{selectedCoach?.bio}</p>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                            !showFullContent.bio ? "max-h-16" : "max-h-full"
+                          }`}
+                        >
+                          <p
+                            className={`text-sm text-gray-500 transition-all duration-300 ease-in-out ${
+                              !showFullContent.bio ? "line-clamp-3" : ""
+                            }`}
+                            style={{
+                              display: "-webkit-box",
+                              WebkitBoxOrient: "vertical",
+                              WebkitLineClamp: showFullContent.bio ? "none" : 3,
+                              overflow: showFullContent.bio
+                                ? "visible"
+                                : "hidden",
+                              height: showFullContent.bio ? "auto" : "4.5em",
+                              maxHeight: !showFullContent.bio
+                                ? "4.5em"
+                                : "none",
+                              opacity: showFullContent.bio ? 1 : 0.7,
+                              transition: "height 0.3s ease, opacity 0.3s ease",
+                            }}
+                          >
+                            {selectedCoach?.bio}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => toggleContent("bio")}
+                          className="text-blue-600 mt-2 hover:underline"
+                        >
+                          {showFullContent?.bio ? "Show Less" : "Show More"}
+                        </button>
                       </TabsContent>
                       <TabsContent value="coaching">
                         <p>
