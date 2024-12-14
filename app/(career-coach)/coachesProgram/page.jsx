@@ -622,7 +622,7 @@ const CoachPage = () => {
                   No Program Yet
                 </h2>
                 <p className="text-sm text-gray-500">
-                  The selected coach doesn't have any programs at the moment.
+                  The selected coach does not have any programs at the moment.
                 </p>
               </div>
             )}
