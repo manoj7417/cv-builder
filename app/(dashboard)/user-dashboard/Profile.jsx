@@ -11,11 +11,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiLoaderAlt } from "react-icons/bi";
-import {
-  FaChevronRight,
-} from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
 import { GoKey } from "react-icons/go";
-import { ImSpinner3 } from "react-icons/im";
+import { ImSpinner2, ImSpinner3 } from "react-icons/im";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { toast } from "react-toastify";
 
@@ -42,6 +40,7 @@ function Profile() {
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const userdata = userState?.userdata || {};
   const [isUpdatingData, setIsUpdatingData] = useState(false);
+  const [isunsubscribing, setIsUnsubscribing] = useState(false);
 
   useEffect(() => {
     if (userState?.userdata) {
@@ -74,8 +73,8 @@ function Profile() {
       const { accessToken } = await GetTokens();
       const response = await axios.patch("/api/updateUserProfile", data, {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
-        }
+          Authorization: `Bearer ${accessToken.value}`,
+        },
       });
       if (response.status === 200) {
         const { userdata } = response.data.data;
@@ -109,7 +108,7 @@ function Profile() {
       const response = await axios.patch("/api/uploadProfilePicture", data, {
         headers: {
           Authorization: `Bearer ${accessToken.value}`,
-        }
+        },
       });
       if (response.status === 200) {
         const { userdata } = response.data;
@@ -132,14 +131,12 @@ function Profile() {
       formData.append("file", file);
 
       await updateUserImage(formData);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error uploading profile picture:", error);
     } finally {
       setIsUploadingImage(false);
     }
   };
-
 
   const handleResetPassword = () => {
     setPasswordError("");
@@ -213,6 +210,29 @@ function Profile() {
     } finally {
       setIsSendingMail(false);
       setShowEmailDialog(false);
+    }
+  };
+
+  const handleUnsubscribeUser = async () => {
+    setIsUnsubscribing(true);
+    try {
+      const { accessToken } = await GetTokens();
+      const response = await axios.post("/api/unsubscribeUser", {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      if (response.status === 200) {
+        toast.success("Successfully unsubscribed");
+        setIsEditable(false);
+        setShowDialog(false);
+      } else {
+        toast.error("Error unsubscribing user");
+      }
+    } catch (error) {
+      toast.error("Error unsubscribing user");
+    } finally {
+      setIsUnsubscribing(false);
     }
   };
 
@@ -481,7 +501,15 @@ function Profile() {
                   <div className="my-3">
                     <Label>Plan</Label>
                     <p className="text-gray-500 py-2">
-                      {userdata?.subscription?.plan  && userdata.subscription.plan.map((item , index)=> (<span key={index} className="bg-[#FF6636] text-white px-2 py-1 rounded mx-2 ">{item}</span>))}
+                      {userdata?.subscription?.plan &&
+                        userdata.subscription.plan.map((item, index) => (
+                          <span
+                            key={index}
+                            className="bg-[#FF6636] text-white px-2 py-1 rounded mx-2 "
+                          >
+                            {item}
+                          </span>
+                        ))}
                     </p>
                   </div>
 
@@ -512,13 +540,32 @@ function Profile() {
                           </button>
                         </div>
                       ) : (
-                        <Button
-                          type="button"
-                          className="w-[150px] inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 px-4 border h-10 cursor-pointer text-white bg-[#FF6636] hover:bg-[#FF6636]"
-                          onClick={() => setIsEditable(true)}
-                        >
-                          Edit
-                        </Button>
+                        <>
+                          <Button
+                            type="button"
+                            className="w-[150px] inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 px-4 border h-10 cursor-pointer text-white bg-[#FF6636] hover:bg-[#FF6636]"
+                            onClick={() => setIsEditable(true)}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            type="button"
+                            className="w-[150px] inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium disabled:pointer-events-none disabled:opacity-50 px-4 border h-10 cursor-pointer text-white bg-[#FF6636] hover:bg-[#FF6636] ml-4"
+                            onClick={handleUnsubscribeUser}
+                            disabled={isunsubscribing}
+                          >
+                            <>
+                              {isunsubscribing ? (
+                                <>
+                                  Unsubscribing
+                                  <ImSpinner2 className="h-4 w-4 animate-spin ml-2" />
+                                </>
+                              ) : (
+                                "Unsubscribe"
+                              )}
+                            </>
+                          </Button>
+                        </>
                       )}
                     </div>
                     {/* <div>

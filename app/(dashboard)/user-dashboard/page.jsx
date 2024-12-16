@@ -23,13 +23,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import UserBookingSlot from "./BookingSlot";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
+import { Label } from "@/components/ui/label";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { userdata } = useUserStore((state) => state.userState);
-  console.log("userdata::", userdata);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +38,6 @@ const UserDashboardPage = () => {
   const [selectedProgramId, setSelectedProgramId] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [meetUrl, setMeetUrl] = useState(null);
-  console.log("meetUrl::", meetUrl);
 
   const handleMeetUrlUpdate = (url) => {
     setMeetUrl(url);
@@ -135,11 +134,25 @@ const UserDashboardPage = () => {
                     {userdata?.fullname.charAt(0).toUpperCase() +
                       userdata?.fullname.slice(1)}
                   </h1>
-                  <p className="text-sm text-gray-500">{userdata?.email}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 my-1">{userdata?.email}</p>
+                  <p className="text-sm text-gray-500 ny-1">
                     {userdata?.occupation}
                   </p>
-                  <p className="text-sm text-gray-500">{userdata?.address}</p>
+                  <p className="text-sm text-gray-500 my-1">{userdata?.address}</p>
+                  <div className="my-3">
+                    <Label className="text-gray-500">Plans</Label>
+                    <p className="text-gray-500 my-2">
+                      {userdata?.subscription?.plan &&
+                        userdata.subscription.plan.map((item, index) => (
+                          <span
+                            key={index}
+                            className="bg-[#FF6636] text-white px-2 py-1 rounded mr-2"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
