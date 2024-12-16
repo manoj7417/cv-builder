@@ -27,6 +27,9 @@ import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import PaymentSetup from "../components/PaymentSetup/PaymentSetup";
+import 'react-credit-cards-2/dist/es/styles-compiled.css'
+
+
 const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -549,8 +552,7 @@ const PricingFunc = () => {
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-[45%] ..
-              lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
+          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-[75%] lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
           showCloseButton={true}
           onClick={handleCloseAIDialog}
         >

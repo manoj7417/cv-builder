@@ -63,7 +63,6 @@ export default function CoachServiceSlider({ data, slidesPerView }) {
                       <h3 className="text-lg font-semibold text-gray-800">
                         {card.title}
                       </h3>
-                      <p className="text-sm text-gray-400">By Jk Jones</p>
                     </div>
                   </header>
                   <p className="text-sm">{card.description.slice(0, 100)}</p>

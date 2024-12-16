@@ -326,7 +326,7 @@ const CoachPage = () => {
                           <img
                             alt={item.imageAlt}
                             src={item.profileImage}
-                            className="object-cover w-24 h-24 sm:w-28 sm:h-28"
+                            className="object-cover w-24 h-24 sm:w-28 sm:h-28 rounded-md"
                           />
                         </figure>
                         <div className="flex-1 p-4 sm:p-6 sm:mx-6 sm:px-0">
@@ -418,7 +418,7 @@ const CoachPage = () => {
                       <img
                         alt={selectedCoach?.name}
                         src={selectedCoach?.profileImage}
-                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto"
+                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-md"
                       />
                     </div>
                   </div>
@@ -440,7 +440,7 @@ const CoachPage = () => {
                     <TabsList className="flex flex-wrap">
                       <TabsTrigger
                         value="about"
-                        className="rounded-md text-xs sm:text-sm ms-0"
+                        className="rounded-md text-xs sm:text-xl ms-0"
                       >
                         About
                       </TabsTrigger>

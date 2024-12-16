@@ -29,21 +29,21 @@ const faqData = [
 const topServices = [
   {
     id: 1,
-    image: "/sliderImage.png",
+    image: "/cv reviews.png",
     title: "CV Reviews",
     description:
       "Get help formulating the best job application by reviewing your resume for perfection!",
   },
   {
     id: 2,
-    image: "/sliderImage.png",
+    image: "/quick connect.png",
     title: "Quick Connect",
     description:
       "Need a quick response to your immediate questions? Connect with us and find your solutions",
   },
   {
     id: 3,
-    image: "/sliderImage.png",
+    image: "/job search.png",
     title: "Job Search",
     description:
       "Do you need help finding your profile's most suitable job description and opportunities? We will help you!",
@@ -53,35 +53,35 @@ const topServices = [
 const additionalServices = [
   {
     id: 1,
-    image: "/sliderImage.png",
+    image: "/Networking Strategy.png",
     title: "Networking Strategy",
     description:
       "Develop an understanding of building and utilising your professional networks in order to advance your career.",
   },
   {
     id: 2,
-    image: "/sliderImage.png",
+    image: "/newCoach12.png",
     title: "Cover Letter Writing",
     description:
       "Need more than a CV? Top recruiters and job application experts inspire you to create your cover letters!",
   },
   {
     id: 3,
-    image: "/sliderImage.png",
+    image: "/interview coaching.png",
     title: "Interview Coaching",
     description:
       "From introduction to intricate questions, prepare for the ultimate stage between you and your dream job",
   },
   {
     id: 4,
-    image: "/sliderImage.png",
+    image: "/Leadership Coaching.png",
     title: "Leadership Coaching",
     description:
       "Lead your professional squad with more conviction and confidence by developing and honing your skills",
   },
   {
     id: 5,
-    image: "/sliderImage.png",
+    image: "/career pathing.png",
     title: "Career Pathing",
     description:
       "Chart your career path with top experts and build your professional goals around your interests and skills.",
@@ -95,49 +95,49 @@ const additionalServices = [
   },
   {
     id: 7,
-    image: "/sliderImage.png",
+    image: "/Work-Life Balance Coaching.png",
     title: "Work-Life Balance Coaching",
     description:
       "Move on from the work-life juggle and learn how to build a healthy balance between your personal and professional life.",
   },
   {
     id: 8,
-    image: "/sliderImage.png",
+    image: "/Salary Negotiation.png",
     title: "Salary Negotiation",
     description:
       "Learn strategising and negotiating for fair compensation and competitive salaries from the best Career Coaches",
   },
   {
     id: 9,
-    image: "/sliderImage.png",
+    image: "/Career Transition Coaching.png",
     title: "Career Transition Coaching",
     description:
       "Do you wish to transition between your present job or an entire career? With structured guidance, you can avoid stress and confusion.",
   },
   {
     id: 10,
-    image: "/sliderImage.png",
+    image: "/remote work coaching.png",
     title: "Remote Work Coaching ",
     description:
       "Transition smoothly into work-from-home settings with a career coach without compromising your productivity.",
   },
   {
     id: 11,
-    image: "/sliderImage.png",
+    image: "/DEI Coaching.png",
     title: "DEI Coaching ",
     description:
       "Learn how to lead and develop a Diverse, Equitable, and Inclusive workplace environment for cultural competence",
   },
   {
     id: 12,
-    image: "/sliderImage.png",
+    image: "/Resolution and Negotiation.png",
     title: "Conflict Resolution and Negotiation",
     description:
       "Resolve and negotiate workplace conflicts effortlessly and efficiently by training in conflict resolution strategies.",
   },
   {
     id: 13,
-    image: "/sliderImage.png",
+    image: "/Time Management and Productivity.png",
     title: "Time Management and Productivity",
     description:
       "Make the best of your working hours and improve your professional performance with effective time management.",
@@ -147,21 +147,21 @@ const additionalServices = [
 const workServicesData = [
   {
     id: 1,
-    image: "/sliderImage.png",
+    image: "/professional development.png",
     title: "Professional Development",
     description:
       "Get your help in Skill Enhancement, Self Awareness, and Continuous Learning to advance your professional development journey.Career Coaches can help you identify your aptitude and acumen and provide the best strategies to enhance them for maximum benefit. They can also help you gain profound insight into your strengths, weaknesses, and values. You shall develop self-awareness which will inspire independent professional thinking. The constant support will motivate you to learn and understand your personal growth path.",
   },
   {
     id: 2,
-    image: "/sliderImage.png",
+    image: "/career growth.png",
     title: "Career Growth",
     description:
       "Setting a career goal, creating a growth mindset, and building a strong path can be challenging. Career coaches can ease this process efficiently with their experience and expertise. They can assist you in Goal Setting, Career Pathing, and Job Search Strategies to ensure maximum Career Growth.They can help you prepare actionable career plans to fix your professional mindset on ambitious, achievable goals. Based on these aspirations, career coaches will help you develop a path that allows the delivery of goals. To enhance your career further, you can also build job acquisition strategies.",
   },
   {
     id: 3,
-    image: "/sliderImage.png",
+    image: "/workplace contentment.png",
     title: "Workplace Contentment",
     description:
       "With Career Coaches, achieving the ultimate Work-Life balance, Conflict Resolution Management, and Job Satisfaction is never a challenge. You can get help with impactful strategies and communication to achieve maximised professional success.Career coaches can ease your professional processes by helping with stress management, setting workplace priorities, teaching effective communication, and developing problem-solving skills. They can also assist with identifying passion and aligning career priorities with your values and cognition. Guidance can ease your pathway and help you achieve job satisfaction.",
@@ -298,7 +298,7 @@ const CoachNewPage = () => {
               boost your present career profile or improve your job application.
               Check out our diverse selection of Coaching Services.
             </p>
-            <Button onClick={scrollToAdditionalServices}>See All Services</Button>
+            <Button onClick={scrollToAdditionalServices}>Explore More</Button>
           </div>
           <div className="lg:w-[70%] w-full">
             <CoachServiceSlider data={topServices} slidesPerView={2.5} />
@@ -336,7 +336,6 @@ const CoachNewPage = () => {
                         <h3 className="text-lg font-semibold text-gray-800">
                           {card.title}
                         </h3>
-                        <p className="text-sm text-gray-400">By Jk Jones</p>
                       </div>
                     </header>
                     <p className="text-sm">{card.description.slice(0, 100)}</p>
