@@ -298,7 +298,10 @@ const PricingFunc = () => {
           },
         }
       );
-      if (response.status === 200) {
+      if(response.status === 200 && response.data.error === "Trial coupon already redeemed"){
+        toast.error("Trial coupon already redeemed");
+      }
+      else if (response.status === 200 && response.data.message === "Setup link created. Card details need to be provided."){
         if (response.data.clientSecret) {
           setClientSecret(response.data.clientSecret);
           setIsFreeDialogOpen(true)
@@ -308,7 +311,9 @@ const PricingFunc = () => {
           window.location = url;
         }
       }
+      
     } catch (error) {
+    
       if (
         error.response.status === 401 &&
         error.response.data.error === "Unauthorized"
