@@ -117,9 +117,6 @@ const CoachDashboardPage = () => {
               ) : bookingSlot.length > 0 ? (
                 bookingSlot.map((item, index) => (
                   <div key={index}>
-                    {
-                      console.log(item)
-                    }
                     <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-[#1d4ed8] rounded-lg p-5 relative overflow-hidden">
                       <div className="flex justify-between items-center">
                         <div className="text-lg font-bold text-[#FFF]">

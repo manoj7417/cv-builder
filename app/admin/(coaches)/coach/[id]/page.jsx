@@ -31,7 +31,6 @@ const CoachDetailsPage = () => {
   const router = useRouter();
   const [pdfUrl, setPdfUrl] = useState("");
 
-  console.log("singleCoach", singleCoach);
 
   const {
     register,
@@ -154,7 +153,6 @@ const CoachDetailsPage = () => {
     skills = [],
   } = singleCoach || {};
 
-  console.log("singleCoach", singleCoach);
 
   return (
     <>

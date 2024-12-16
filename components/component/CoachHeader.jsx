@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 export function CoachHeader({ coachData }) {
-  console.log("coachData", coachData);
   // const [singleCoach, setSingleCoach] = useState(null);
 
   // const fetchCoachDetails = async () => {

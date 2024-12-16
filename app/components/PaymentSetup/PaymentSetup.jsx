@@ -349,7 +349,6 @@
   // export async function getServerSideProps() {
 
   //   const stripeKey = process.env.STRIPE_PUBLISHABLE_KEY;
-  //   console.log("Stripe Key from server:", stripeKey);
 
   //   return {
   //     props: {

@@ -63,7 +63,6 @@ const Coach = () => {
         setRequests(response.data.editCoaches);
       }
     } catch (error) {
-      console.log(error);
     } finally {
       setIsLoading(false);
     }

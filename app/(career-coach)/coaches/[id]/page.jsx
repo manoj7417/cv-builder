@@ -74,7 +74,6 @@ const CoachDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("about");
   const [isLoading, setIsLoading] = useState(true);
   const [activeProgramTab, setActiveProgramTab] = useState("program1");
-  console.log("activeProgramTab::", activeProgramTab);
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDaySlots, setSelectedDaySlots] = useState(null);
@@ -87,7 +86,6 @@ const CoachDetailsPage = () => {
   const [geoData, setGeoData] = useState(null);
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
-  console.log("programData::", programData);
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
   const [videoUrl, setVideoUrl] = useState("");
   const [programAlreadyPurchased, setProgramAlreadyPurchased] = useState(false);

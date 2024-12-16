@@ -22,7 +22,6 @@ async function refreshAccessToken(token) {
     const response = await axios.post(url, params);
     const refreshedTokens = response.data;
 
-    console.log("Refreshed tokens:", refreshedTokens);
 
     return {
       ...token,

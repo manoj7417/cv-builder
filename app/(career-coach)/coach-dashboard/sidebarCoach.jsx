@@ -78,7 +78,6 @@ const SidebarCoach = () => {
       router.push("/coach-signin");
       signOut();
     } catch (error) {
-      console.log(error);
       toast.error("Error logging out");
     }
   };
