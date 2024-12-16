@@ -66,4 +66,4 @@ export default function SignIn ({type}) {
           {`${type} with Google`} </button>
     </div>
   );
-}
+} 

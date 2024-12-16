@@ -159,40 +159,47 @@ export default function HomepageNew() {
           <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-48">
             <div className="grid-span-6 md:px-20 px-5">
               <h2 className="md:text-4xl text-[25px] text-black font-bold">
-                Are you struggling to land a interview
+                Facing CV Rejections? It’s Time for You to start creating
                 <span className="text-[#1D4ED8] font-bold ml-2">
-                  try ATS friendly CV and land dream job
+                  ATS-Friendly CVs!
                 </span>
               </h2>
               <p className="text-sm my-5">
-                In today&apos;s competitive job market, your CV is your first
-                impression—and it needs to pass not only human scrutiny but also
-                Applicant Tracking Systems (ATS). Here&apos;s why an ATS-friendly CV
-                could be the game-changer you&apos;ve been looking for:
+                Sending out CVs as a part of a job application is the first and
+                non-negotiable step. However, many job applications get rejected
+                in this very process because employers, recruiters, or companies
+                now depend on <b>ATS scanner</b>. These are{" "}
+                <b>Application Tracking System</b> scrutinises for your
+                information before manual checks. But in case your CV is not
+                compatible with the ATS, it gets rejected, irrespective of the
+                quality of your profile.
+              </p>
+              <p className="text-sm my-5">
+                Thus, you need to build <b>resume formatting</b> that passes
+                through every <b>ATS Checker</b>. Genies Career Hub is the exact
+                change in approach that you need. Here’s how we amplify your
+                CV-making process to eliminate rejection:
               </p>
               <ul className="space-y-3 text-sm">
                 <li>
                   <strong className="text-[#1D4ED8]">
-                    Increased Visibility
+                    Right ATS Resume Format
                   </strong>{" "}
-                  - ATS scans and filters resumes before they reach recruiters.
-                  An ATS-friendly CV ensures your application gets noticed by
-                  aligning with job-specific keywords and formatting standards.
+                  -Templates that fit right into the <b>ATS system</b> and{" "}
+                  <b>CV checker</b>
+                  format.
+                </li>
+                <li>
+                  <strong className="text-[#1D4ED8]">Optimisation</strong> -
+                   <b>Enhanced CV</b> with keyword and format optimised content
+                  for assured <b>ATS CV Checker</b> approval
                 </li>
                 <li>
                   <strong className="text-[#1D4ED8]">
-                    Enhanced Keyword Optimization
+                    Professional Insights Integrated
                   </strong>{" "}
-                  - By integrating relevant keywords, your CV ranks higher in
-                  searches, aligning perfectly with the role&apso;s requirements.
-                </li>
-                <li>
-                  <strong className="text-[#1D4ED8]">
-                    Professional Formatting
-                  </strong>{" "}
-                  - ATS systems often reject resumes with fancy fonts, graphics,
-                  or unconventional layouts. A clean, structured format
-                  increases your chances of passing the ATS filter.
+                  - An <b>ATS friendly resume</b> that is created by carefully
+                  integrating career professional insights
                 </li>
               </ul>
               <div className="buttons_actions mt-5">

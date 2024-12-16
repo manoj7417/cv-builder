@@ -74,6 +74,7 @@ const CoachDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("about");
   const [isLoading, setIsLoading] = useState(true);
   const [activeProgramTab, setActiveProgramTab] = useState("program1");
+  console.log("activeProgramTab::", activeProgramTab);
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDaySlots, setSelectedDaySlots] = useState(null);

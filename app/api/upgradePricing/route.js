@@ -1,8 +1,10 @@
 import { serverInstance } from '@/lib/serverApi';
+import { toast } from 'react-toastify';
 
 export async function POST(req, res) {
     try {
         const { data } = await req.json();
+        // console.log(data);
         const token = req.headers.get('Authorization');
         const response = await serverInstance.post('/stripe/createSubscription', data, {
             headers: {
@@ -10,6 +12,7 @@ export async function POST(req, res) {
                 'Content-Type': 'application/json'
             }
         });
+      
         return new Response(JSON.stringify(response.data), {
             status: 200,
             headers: {
@@ -17,6 +20,7 @@ export async function POST(req, res) {
             }
         });
     } catch (error) { 
+    
         return new Response(JSON.stringify({ error: error.response.data.error }), {
             status: error.response.status,
             headers: { 'Content-Type': 'application/json' }
