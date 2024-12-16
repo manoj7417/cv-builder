@@ -38,3 +38,4 @@
 , "app/api/auth/[...nextauth]/route.ts"  ],
   "exclude": ["node_modules"]
 }
+
