@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 export async function POST(req, res) {
     try {
         const { data } = await req.json();
-        // console.log(data);
         const token = req.headers.get('Authorization');
         const response = await serverInstance.post('/stripe/createSubscription', data, {
             headers: {

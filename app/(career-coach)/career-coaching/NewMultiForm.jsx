@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const formSteps = [
   {
@@ -37,12 +45,7 @@ const formSteps = [
   {
     id: 4,
     ques: "What level of experience are you aiming to achieve?",
-    answers: [
-      "Entry-Level",
-      "Mid-Career",
-      "Experienced",
-      "Leadership Roles",
-    ],
+    answers: ["Entry-Level", "Mid-Career", "Experienced", "Leadership Roles"],
   },
   {
     id: 5,
@@ -60,7 +63,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [selectedValue, setSelectedValue] = useState(null);
-  const router = useRouter()
+  const router = useRouter();
 
   const handleNext = () => {
     if (selectedValue) {
@@ -86,14 +89,19 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
     setSelectedValue(value);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const finalData = {
       ...formData,
       [`step_${currentStep + 1}`]: selectedValue,
     };
-    router.push("/coachesProgram")
-    console.log("All Form Data: ", finalData);
-    setFindCoachPopup(false);
+    try {
+      const response = await axios.post("/api/filterCoach", finalData);
+      router.push("/coachesProgram");
+    } catch (error) {
+      toast.error("Error submitting form");
+    } finally {
+      setFindCoachPopup(false);
+    }
   };
 
   return (
@@ -104,7 +112,9 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
         onClick={() => setFindCoachPopup(false)}
       >
         <DialogHeader>
-          <DialogTitle className="text-center text-xl font-semibold">Find Coach</DialogTitle>
+          <DialogTitle className="text-center text-xl font-semibold">
+            Find Coach
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={onSubmit} className="space-y-6">
           <div>
@@ -137,7 +147,6 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
               ))}
             </RadioGroup>
           </div>
-
           <DialogFooter className="flex justify-between mt-6">
             {currentStep > 0 && (
               <Button
@@ -158,7 +167,11 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
                 Next
               </Button>
             ) : (
-              <Button type="button" onClick={onSubmit} className="bg-[#7c84a2] text-white">
+              <Button
+                type="button"
+                onClick={onSubmit}
+                className="bg-[#7c84a2] text-white"
+              >
                 Submit
               </Button>
             )}

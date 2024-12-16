@@ -135,9 +135,6 @@ const UserDashboardPage = () => {
                       userdata?.fullname.slice(1)}
                   </h1>
                   <p className="text-sm text-gray-500 my-1">{userdata?.email}</p>
-                  <p className="text-sm text-gray-500 ny-1">
-                    {userdata?.occupation}
-                  </p>
                   <p className="text-sm text-gray-500 my-1">{userdata?.address}</p>
                   <div className="my-3">
                     <Label className="text-gray-500">Plans</Label>

@@ -24,8 +24,6 @@ import { FiTerminal } from "react-icons/fi";
 
 const EditCoachRequest = () => {
   const { id } = useParams();
-  console.log("id::", id);
-
   const [activeTab, setActiveTab] = useState("details");
   const [singleCoach, setSingleCoach] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

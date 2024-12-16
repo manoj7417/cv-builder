@@ -67,7 +67,6 @@ const authOptions = {
         return token;
       }
 
-      console.log("Access token expired, refreshing...");
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {

@@ -523,7 +523,6 @@ export default function DashboardIdea() {
   }, []); // Runs only once on component mount
   
   useEffect(() => {
-    console.log("Updated defaultTab:", defaultTab);
   }, [defaultTab]); // Logs whenever defaultTab changes
 
   useEffect(() => {

@@ -40,7 +40,6 @@ function CoachSignIn({type}) {
                   router.push("/coach-form");
             }
           } catch (error) {
-            console.log(error)
           }finally{
             setIsLoading(false);
           }

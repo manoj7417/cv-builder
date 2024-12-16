@@ -149,7 +149,6 @@ const CoachProfile = () => {
   };
 
   const handleEditProfile = async (data) => {
-    console.log("data::", data);
     const { accessToken } = await GetTokens();
     const payload = {
       name: data.name,
@@ -195,7 +194,6 @@ const CoachProfile = () => {
       coachingDescription: data.coachingDescription,
       address: data.address,
     };
-    console.log("payload::", payload);
     setIsApiLoading(true);
     try {
       const response = await axios.post("/api/editCoachInfo", payload, {

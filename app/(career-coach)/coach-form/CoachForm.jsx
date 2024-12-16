@@ -527,7 +527,6 @@ const CoachForm = () => {
         refreshToken: refreshToken.value,
       });
       if (response.status === 200) {
-        console.log(response.data.data.userdata);
         const data = response.data.data.userdata;
         const date = dayjs(data.dateofBirth)
         if(data?.cv?.link){

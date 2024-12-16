@@ -90,7 +90,6 @@ export default function CoachRegistration() {
   const handleSignupwithGoogle = async () => {
     try {
       const response = await axios.get('/api/googleRegisteration')
-      console.log(response)
       if (response.status === 200) {
         window.location.href = response.data.redirectUrl
       }

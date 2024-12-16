@@ -44,12 +44,10 @@ import { GetTokens } from "@/app/actions";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
-  console.log("coaches::", coaches);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
-  console.log("selectedProgram::", selectedProgram);
   const [geoData, setGeoData] = useState(null);
   const [isBuyingProgram, setIsBuyingProgram] = useState(false);
   const [showFullContent, setShowFullContent] = useState({
@@ -64,7 +62,6 @@ const CoachPage = () => {
     }));
   };
 
-  console.log("selectedCoach::", selectedCoach);
 
   const handleDialogToggle = () => {
     setIsOpen((prev) => !prev);

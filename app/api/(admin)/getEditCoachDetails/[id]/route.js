@@ -11,13 +11,11 @@ export async function GET(req, { params }) {
         Authorization: token,
       },
     });
-    console.log("response::", response);
     return new Response(JSON.stringify(response.data), {
       status: response.status || 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.log("error::", error);
     const errorMessage = error.response
       ? error.response.data
       : { error: "Error getting program" };

@@ -251,7 +251,6 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
       if (response.status === 201) {
         setMeetUrl(response.data?.data?.meetingLink);
         onMeetUrlUpdate(response.data?.data?.meetingLink)
-        console.log(response.data?.data);
         setIsDialogOpen(false);
       }
     } catch (error) {
@@ -271,7 +270,6 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   //     slotTime: modalSelectedSlot?.slot,
   //   };
   //   const { accessToken } = await GetTokens();
-  //   console.log(accessToken);
   //   try {
   //     const response = await axios.post("/api/bookSlot", obj, {
   //       headers: {

@@ -222,7 +222,6 @@ export default function Page() {
       setPopupData(response?.data?.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
     }
   };
 
