@@ -31,6 +31,7 @@ const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isFreeDialogOpen, setIsFreeDialogOpen] = useState(false);
+  console.log("isFreeDialogOpen::", isFreeDialogOpen);
   const serviceCardsRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [geoinfo, setGeoInfo] = useState({
