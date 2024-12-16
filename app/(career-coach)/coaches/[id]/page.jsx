@@ -493,7 +493,7 @@ const CoachDetailsPage = () => {
                               </li>
                             ))}
                           </ul>
-                        ) : programData.length > 0 ? ( // Check if programData has items
+                        ) : programData.length > 0 ? ( 
                           <ul className="space-y-2 mt-5">
                             {programData.map((program) => (
                               <li key={program._id}>
@@ -506,7 +506,6 @@ const CoachDetailsPage = () => {
                                   onClick={() => setDisplayProgram(program)}
                                 >
                                   {program.title}{" "}
-                                  {/* Display the program title here */}
                                 </button>
                               </li>
                             ))}
@@ -514,7 +513,7 @@ const CoachDetailsPage = () => {
                         ) : (
                           <div className="mt-5 text-gray-600 text-xl">
                             No data available
-                          </div> // Render "No data available" message if programData is empty
+                          </div> 
                         )}
                       </div>
                     </div>
