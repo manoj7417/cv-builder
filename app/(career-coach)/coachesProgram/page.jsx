@@ -14,6 +14,7 @@ import {
 import { AiOutlineCheck } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { GetTokens } from "@/app/actions";
+import { useRouter } from "next/navigation";
 
 // const programs = [
 //   {
@@ -48,12 +49,15 @@ const CoachPage = () => {
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
+  console.log("selectedProgram::",selectedProgram)
   const [geoData, setGeoData] = useState(null);
   const [isBuyingProgram, setIsBuyingProgram] = useState(false);
   const [showFullContent, setShowFullContent] = useState({
     bio: false,
     coachingDescription: false,
   });
+  const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
 
   const toggleContent = (type) => {
     setShowFullContent((prev) => ({
@@ -62,9 +66,13 @@ const CoachPage = () => {
     }));
   };
 
-
   const handleDialogToggle = () => {
     setIsOpen((prev) => !prev);
+    setIsMobile((prev) => !prev);
+  };
+
+  const handleMobileToggle = () => {
+    setIsMobile((prev) => !prev);
   };
 
   const fetchAllCoaches = async () => {
@@ -135,6 +143,10 @@ const CoachPage = () => {
     }
   };
 
+  const handleMobileView = () => {
+    setIsMobile(true);
+  };
+
   useEffect(() => {
     fetchAllCoaches();
   }, []);
@@ -144,148 +156,6 @@ const CoachPage = () => {
   }, []);
 
   return (
-    // <div className="max-w-7xl mx-auto my-40">
-    //   <div className="coach_main_div w-full h-full flex gap-10">
-    //     <div className="coach_card lg:w-[30%] w-full h-screen sticky top-[100px]">
-    //       <h2 className="text-2xl font-bold">
-    //         Choose the <span className="text-blue-700">coach</span> who aligns
-    //         best with your <span className="text-blue-700">goals.</span>
-    //       </h2>
-    //       <p className="text-sm my-5">
-    //         Explore your top coach recommendations and select the one that best
-    //         fits your needs below.
-    //       </p>
-
-    //       <div className="coach_card_inner flex flex-col gap-5">
-    //         {isLoading ? (
-    //           <>
-    //             {Array(4)
-    //               .fill(0)
-    //               .map((_, index) => (
-    //                 <CoachSkeltonCard key={index} />
-    //               ))}
-    //           </>
-    //         ) : (
-    //           coaches?.length > 0 &&
-    //           coaches
-    //             ?.filter(
-    //               (coach) =>
-    //                 coach.isApproved && coach.approvalStatus === "approved"
-    //             )
-    //             ?.map((item, index) => (
-    //               <div key={index}  onClick={() => handleSelectCoach(item)}
-    //               className={`p-2 flex flex-col overflow-hidden rounded shadow-md text-slate-500 shadow-slate-200 sm:flex-row cursor-pointer ${
-    //                 selectedCoach?._id === item._id ? "bg-blue-200" : ""
-    //               }`}>
-    //                 <figure className="flex-1">
-    //                   <img
-    //                     alt={item.imageAlt}
-    //                     src={item.profileImage}
-    //                     className="object-cover w-28 h-28"
-    //                   />
-    //                 </figure>
-    //                 <div className="flex-1 p-6 sm:mx-6 sm:px-0">
-    //                   <header className="flex gap-4 mb-4">
-    //                     <div>
-    //                       <h3 className="text-base font-medium text-slate-900">
-    //                         {item.name}
-    //                       </h3>
-    //                       <p className="text-xs text-slate-800">
-    //                         {/* {item?.jobProfile?.title} */}
-    //                          {item?.email}
-    //                       </p>
-    //                     </div>
-    //                   </header>
-    //                 </div>
-    //               </div>
-    //             ))
-    //         )}
-    //       </div>
-    //     </div>
-    //     <div className="coach_details lg:w-[70%] w-full bg-blue-100 p-10">
-    //       <div className="flex items-center">
-    //         <div className="coach_description w-[70%]">
-    //           <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
-    //             Top Match
-    //           </span>
-    //           <div className="coach_name my-5">
-    //             <h1 className="text-3xl font-bold">{selectedCoach?.name}</h1>
-    //             <h2 className="text-base">{selectedCoach?.typeOfCoaching}</h2>
-    //           </div>
-    //           <div className="coach_details">
-    //             <p className="text-sm text-gray-500">
-    //               {selectedCoach?.coachingDescription}
-    //             </p>
-    //           </div>
-    //         </div>
-    //         <div className="coach_image_div w-[30%]">
-    //           <div className="coach_image p-10">
-    //             <img
-    //               alt={selectedCoach?.name}
-    //               src={selectedCoach?.profileImage}
-    //               className="object-cover w-40 h-40"
-    //             />
-    //           </div>
-    //         </div>
-    //       </div>
-    //       <div className="book_appointment mt-5">
-    //         <Button>Schedule A Meet</Button>
-    //       </div>
-    //       <div className="coach_details_tabs my-10">
-    //         <Tabs defaultValue="about">
-    //           <TabsList className="flex">
-    //             <TabsTrigger value="about" className="rounded-md text-sm">
-    //               About
-    //             </TabsTrigger>
-    //             <TabsTrigger value="coaching" className="rounded-md text-sm">
-    //               Coaching Style And Experience
-    //             </TabsTrigger>
-    //             <TabsTrigger value="pricing" className="rounded-md text-sm">
-    //               Pricing
-    //             </TabsTrigger>
-    //             <TabsTrigger value="reviews" className="rounded-md text-sm">
-    //               Reviews
-    //             </TabsTrigger>
-    //           </TabsList>
-    //           <div className="tabs_inner_content my-5">
-    //             <TabsContent value="about">
-    //               <p>
-    //                 {selectedCoach?.bio}
-    //               </p>
-    //             </TabsContent>
-    //             <TabsContent value="coaching">
-    //               <p>
-    //                 John Peter brings over 15 years of hands-on experience in
-    //                 the marketing industry, helping businesses and individuals
-    //                 navigate the complexities of branding, digital marketing,
-    //                 and career development. His journey has seen him work with a
-    //                 wide array of clients—from startups looking to make a mark
-    //                 to established brands seeking to reposition or elevate their
-    //                 market presence.
-    //               </p>
-    //             </TabsContent>
-    //             <TabsContent value="pricing">
-    //               Make changes to your account here. $450
-    //             </TabsContent>
-    //             <TabsContent value="reviews">
-    //               Matt is a real pro - highly competent, engaged, and
-    //               insightful. He hadn't previously advised anyone in my field -
-    //               about which he was completely up-front - but he asked smart
-    //               questions and listened carefully. His resume suggestions were
-    //               perfect, often involving (in retrospect) simple solutions that
-    //               had eluded me. Matt's strategic acumen also really came
-    //               through during our consultation and was very helpful in
-    //               reframing my approach to job hunting. Overall, a great
-    //               experience thanks to Matt's skill as a coach combined with his
-    //               willingness to go the extra mile for his clients. Highly
-    //               recommended.
-    //             </TabsContent>
-    //           </div>
-    //         </Tabs>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <>
       <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
@@ -315,7 +185,7 @@ const CoachPage = () => {
                       <div
                         key={index}
                         onClick={() => handleSelectCoach(item)}
-                        className={`p-2 flex flex-col sm:flex-row overflow-hidden rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer ${
+                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer lg:border-none border border-gray-300 ${
                           selectedCoach?._id === item._id ? "bg-blue-50" : ""
                         }`}
                       >
@@ -327,14 +197,20 @@ const CoachPage = () => {
                           />
                         </figure>
                         <div className="flex-1 p-4 sm:p-6 sm:mx-6 sm:px-0">
-                          <header className="flex gap-4 mb-4">
+                          <header className="flex gap-4">
                             <div>
                               <h3 className="text-base font-medium text-slate-900">
                                 {item.name}
                               </h3>
-                              <p className="text-xs text-slate-800">
+                              <p className="text-xs text-slate-800 text-wrap">
                                 {item?.email}
                               </p>
+                              <Button
+                                className="lg:hidden bolck px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer"
+                                onClick={handleMobileView}
+                              >
+                                Book Now
+                              </Button>
                             </div>
                           </header>
                         </div>
@@ -344,7 +220,7 @@ const CoachPage = () => {
           </div>
 
           {/* Coach Details Section */}
-          <div className="coach_details lg:w-[70%] w-full bg-blue-100 p-6 sm:p-10">
+          <div className="lg:block hidden coach_details lg:w-[70%] w-full bg-blue-100 p-6 sm:p-10">
             {isLoading ? (
               <div className="animate-pulse space-y-5">
                 {/* Skeleton for Top Match */}
@@ -374,6 +250,7 @@ const CoachPage = () => {
                 <div className="flex flex-col lg:flex-row items-start lg:items-center">
                   {/* Coach Description */}
                   <div className="coach_description w-full lg:w-[70%]">
+                    
                     <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
                       Top Match
                     </span>
@@ -441,18 +318,6 @@ const CoachPage = () => {
                       >
                         About
                       </TabsTrigger>
-                      {/* <TabsTrigger
-                        value="coaching"
-                        className="rounded-md text-xs sm:text-sm"
-                      >
-                        Coaching Style & Experience
-                      </TabsTrigger>
-                      <TabsTrigger
-                        value="reviews"
-                        className="rounded-md text-xs sm:text-sm"
-                      >
-                        Reviews
-                      </TabsTrigger> */}
                     </TabsList>
                     <div className="tabs_inner_content my-5">
                       <TabsContent value="about">
@@ -626,6 +491,144 @@ const CoachPage = () => {
           </div>
         </DialogContent>
       </Dialog>
+      {/* Mobile Dialog */}
+      <div className="lg:hidden">
+        <Dialog
+          open={isMobile}
+          onOpenChange={handleDialogToggle}
+        >
+          <DialogContent className="w-full sm:w-[90%] md:w-[80%] max-w-lg p-6 bg-blue-100 h-[500px] overflow-y-scroll" showCloseButton={true} onClick={handleMobileToggle}>
+            {isLoading ? (
+              <div className="animate-pulse space-y-5">
+                {/* Skeleton for Top Match */}
+                <div className="h-6 w-24 bg-gray-300 rounded"></div>
+                <div className="h-8 w-3/4 bg-gray-300 rounded"></div>
+                <div className="h-4 w-full bg-gray-300 rounded"></div>
+                <div className="h-10 w-3/4 bg-gray-300 rounded mx-auto"></div>
+              </div>
+            ) : (
+              <div>
+                <div className="flex flex-col lg:flex-row items-start lg:items-center">
+                  {/* Coach Description */}
+                  <div className="coach_description w-full lg:w-[70%]">
+                    <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
+                      Top Match
+                    </span>
+                    <div className="coach_name my-5">
+                      <h1 className="text-2xl lg:text-3xl font-bold">
+                        {selectedCoach?.name}
+                      </h1>
+                      <h2 className="text-sm lg:text-base">
+                        {selectedCoach?.typeOfCoaching}
+                      </h2>
+                    </div>
+                    <div className="coach_details">
+                      <p
+                        className={`text-sm text-gray-500 ${
+                          !showFullContent.coachingDescription
+                            ? "line-clamp-3"
+                            : ""
+                        }`}
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {selectedCoach?.coachingDescription}
+                      </p>
+                      <button
+                        onClick={() => toggleContent("coachingDescription")}
+                        className="text-blue-600 mt-2 hover:underline"
+                      >
+                        {showFullContent?.coachingDescription
+                          ? "Show Less"
+                          : "Show More"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Coach Image */}
+                  <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
+                    <div className="coach_image p-6 sm:p-10">
+                      <img
+                        alt={selectedCoach?.name}
+                        src={selectedCoach?.profileImage}
+                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-md"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Book Appointment Button */}
+                <div className="book_appointment mt-5">
+                  <Button onClick={handleDialogToggle}>Book Now</Button>
+                </div>
+
+                {/* Tabs Section */}
+                <div className="coach_details_tabs my-10">
+                  <Tabs defaultValue="about">
+                    <TabsList className="flex flex-wrap">
+                      <TabsTrigger
+                        value="about"
+                        className="rounded-md text-xs sm:text-xl ms-0"
+                      >
+                        About
+                      </TabsTrigger>
+                    </TabsList>
+                    <div className="tabs_inner_content my-5">
+                      <TabsContent value="about">
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                            !showFullContent.bio ? "max-h-16" : "max-h-full"
+                          }`}
+                        >
+                          <p
+                            className={`text-sm text-gray-500 transition-all duration-300 ease-in-out ${
+                              !showFullContent.bio ? "line-clamp-3" : ""
+                            }`}
+                            style={{
+                              display: "-webkit-box",
+                              WebkitBoxOrient: "vertical",
+                              WebkitLineClamp: showFullContent.bio ? "none" : 3,
+                              overflow: showFullContent.bio
+                                ? "visible"
+                                : "hidden",
+                              height: showFullContent.bio ? "auto" : "4.5em",
+                              maxHeight: !showFullContent.bio
+                                ? "4.5em"
+                                : "none",
+                              opacity: showFullContent.bio ? 1 : 0.7,
+                              transition: "height 0.3s ease, opacity 0.3s ease",
+                            }}
+                          >
+                            {selectedCoach?.bio}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => toggleContent("bio")}
+                          className="text-blue-600 mt-2 hover:underline"
+                        >
+                          {showFullContent?.bio ? "Show Less" : "Show More"}
+                        </button>
+                      </TabsContent>
+                      <TabsContent value="coaching">
+                        <p>
+                          I have a experience of {selectedCoach?.experience} and
+                          have a skill of {selectedCoach?.skills}
+                        </p>
+                      </TabsContent>
+                      <TabsContent value="reviews">
+                        Matt is a real pro—highly competent, engaged, and
+                        insightful. Highly recommended.
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+      </div>
     </>
   );
 };
