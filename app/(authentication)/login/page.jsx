@@ -484,13 +484,17 @@ function LoginUser() {
           </div>
         </div>
       </section>
-      <Script
-    dangerouslySetInnerHTML={{
-      __html: `
-        gtag('event', 'conversion', {'send_to': 'AW-16573743263/4bYaCLnbyPgZEJ-B_d49'});
-      `,
-    }}
-  />
+      
+
+<Script
+  id="google-conversion-event" // Add a unique ID
+  dangerouslySetInnerHTML={{
+    __html: `
+      gtag('event', 'conversion', {'send_to': 'AW-16573743263/4bYaCLnbyPgZEJ-B_d49'});
+    `,
+  }}
+/>
+
     </>
   );
 }
