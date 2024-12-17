@@ -33,9 +33,7 @@ export function CoachHeader({ coachData }) {
 
   return (
     <>
-      {/* <div className='mt-20 bg-[#E0F2FF] h-40 w-full flex justify-center '></div> */}
       <div className='sm:container md:container lg:container xl:container 2xl:container bg-[#FFF] h-auto -mt-20 w-full flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row justify-between items-center border border-[#FFDDD1] p-4'>
-        {/* Left Side */}
         <div
           id='blog_header_left_side'
           className='flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4'>

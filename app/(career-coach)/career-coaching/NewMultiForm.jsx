@@ -98,7 +98,6 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
       const response = await axios.post("/api/filterCoach", finalData);
       router.push("/coachesProgram");
     } catch (error) {
-      toast.error("Error submitting form");
     } finally {
       setFindCoachPopup(false);
     }
