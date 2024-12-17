@@ -7,6 +7,8 @@ import NewMultiForm from "./NewMultiForm";
 import CoachServiceSlider from "@/components/component/CoachServiceSlider";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa6";
+import Link from "next/link";
+import CoachWorksSlider from "@/components/component/CoachWorksSlider";
 
 const faqData = [
   {
@@ -39,7 +41,7 @@ const topServices = [
     image: "/quick connect.png",
     title: "Quick Connect",
     description:
-      "Need a quick response to your immediate questions? Connect with us and find your solutions",
+      "Need a quick response to your immediate questions? Connect with us and find your solutions.",
   },
   {
     id: 3,
@@ -70,14 +72,14 @@ const additionalServices = [
     image: "/interview coaching.png",
     title: "Interview Coaching",
     description:
-      "From introduction to intricate questions, prepare for the ultimate stage between you and your dream job",
+      "From introduction to intricate questions, prepare for the ultimate stage between you and your dream job.",
   },
   {
     id: 4,
     image: "/Leadership Coaching.png",
     title: "Leadership Coaching",
     description:
-      "Lead your professional squad with more conviction and confidence by developing and honing your skills",
+      "Lead your professional squad with more conviction and confidence by developing and honing your skills.",
   },
   {
     id: 5,
@@ -91,7 +93,7 @@ const additionalServices = [
     image: "/sliderImage.png",
     title: "Personal Branding",
     description:
-      "Set yourself apart from the competition of job seekers by developing a strong personality and image",
+      "Set yourself apart from the competition of job seekers by developing a strong personality and image.",
   },
   {
     id: 7,
@@ -105,7 +107,7 @@ const additionalServices = [
     image: "/Salary Negotiation.png",
     title: "Salary Negotiation",
     description:
-      "Learn strategising and negotiating for fair compensation and competitive salaries from the best Career Coaches",
+      "Learn strategising and negotiating for fair compensation and competitive salaries from the best Career Coaches.",
   },
   {
     id: 9,
@@ -126,7 +128,7 @@ const additionalServices = [
     image: "/DEI Coaching.png",
     title: "DEI Coaching ",
     description:
-      "Learn how to lead and develop a Diverse, Equitable, and Inclusive workplace environment for cultural competence",
+      "Learn how to lead and develop a Diverse, Equitable, and Inclusive workplace environment for cultural competence.",
   },
   {
     id: 12,
@@ -135,14 +137,40 @@ const additionalServices = [
     description:
       "Resolve and negotiate workplace conflicts effortlessly and efficiently by training in conflict resolution strategies.",
   },
-  {
-    id: 13,
-    image: "/Time Management and Productivity.png",
-    title: "Time Management and Productivity",
-    description:
-      "Make the best of your working hours and improve your professional performance with effective time management.",
-  },
+  // {
+  //   id: 13,
+  //   image: "/Time Management and Productivity.png",
+  //   title: "Time Management and Productivity",
+  //   description:
+  //     "Make the best of your working hours and improve your professional performance with effective time management.",
+  // },
 ];
+
+// const workServicesData = [
+//   {
+//     id: 1,
+//     image: "/professional development.png",
+//     title: "Professional Development",
+//     description:
+//       "Get your help in Skill Enhancement, Self Awareness, and Continuous Learning to advance your professional development journey.Career Coaches can help you identify your aptitude and acumen and provide the best strategies to enhance them for maximum benefit. They can also help you gain profound insight into your strengths, weaknesses, and values. You shall develop self-awareness which will inspire independent professional thinking. The constant support will motivate you to learn and understand your personal growth path.",
+//   },
+//   {
+//     id: 2,
+//     image: "/career growth.png",
+//     title: "Career Growth",
+//     description:
+//       "Setting a career goal, creating a growth mindset, and building a strong path can be challenging. Career coaches can ease this process efficiently with their experience and expertise. They can assist you in Goal Setting, Career Pathing, and Job Search Strategies to ensure maximum Career Growth.They can help you prepare actionable career plans to fix your professional mindset on ambitious, achievable goals. Based on these aspirations, career coaches will help you develop a path that allows the delivery of goals. To enhance your career further, you can also build job acquisition strategies.",
+//   },
+//   {
+//     id: 3,
+//     image: "/workplace contentment.png",
+//     title: "Workplace Contentment",
+//     description:
+//       "With Career Coaches, achieving the ultimate Work-Life balance, Conflict Resolution Management, and Job Satisfaction is never a challenge. You can get help with impactful strategies and communication to achieve maximised professional success.Career coaches can ease your professional processes by helping with stress management, setting workplace priorities, teaching effective communication, and developing problem-solving skills. They can also assist with identifying passion and aligning career priorities with your values and cognition. Guidance can ease your pathway and help you achieve job satisfaction.",
+//   },
+// ];
+
+
 
 const workServicesData = [
   {
@@ -150,23 +178,26 @@ const workServicesData = [
     image: "/professional development.png",
     title: "Professional Development",
     description:
-      "Get your help in Skill Enhancement, Self Awareness, and Continuous Learning to advance your professional development journey.Career Coaches can help you identify your aptitude and acumen and provide the best strategies to enhance them for maximum benefit. They can also help you gain profound insight into your strengths, weaknesses, and values. You shall develop self-awareness which will inspire independent professional thinking. The constant support will motivate you to learn and understand your personal growth path.",
+      "Career Coaches can help you identify your strengths, weaknesses, and values to develop self-awareness for independent professional thinking. The constant support will motivate you to learn and understand your growth path.",
   },
   {
     id: 2,
     image: "/career growth.png",
     title: "Career Growth",
     description:
-      "Setting a career goal, creating a growth mindset, and building a strong path can be challenging. Career coaches can ease this process efficiently with their experience and expertise. They can assist you in Goal Setting, Career Pathing, and Job Search Strategies to ensure maximum Career Growth.They can help you prepare actionable career plans to fix your professional mindset on ambitious, achievable goals. Based on these aspirations, career coaches will help you develop a path that allows the delivery of goals. To enhance your career further, you can also build job acquisition strategies.",
+      "Setting a career goal, creating a growth mindset, and building a strong path can be challenging. Career coaches can ease this process efficiently. They can assist you with relative strategies to ensure maximum Career Growth.",
   },
   {
     id: 3,
     image: "/workplace contentment.png",
     title: "Workplace Contentment",
     description:
-      "With Career Coaches, achieving the ultimate Work-Life balance, Conflict Resolution Management, and Job Satisfaction is never a challenge. You can get help with impactful strategies and communication to achieve maximised professional success.Career coaches can ease your professional processes by helping with stress management, setting workplace priorities, teaching effective communication, and developing problem-solving skills. They can also assist with identifying passion and aligning career priorities with your values and cognition. Guidance can ease your pathway and help you achieve job satisfaction.",
+      "Ease your professional process with stress management, setting workplace priorities, learning effective communication, and developing problem-solving skills. Our guidance can help you achieve job satisfaction.",
   },
 ];
+
+
+
 
 const CoachNewPage = () => {
   const [open, setOpen] = useState(false);
@@ -210,13 +241,19 @@ const CoachNewPage = () => {
                 width={100}
                 className="w-[500px] h-[500px] mx-auto object-contain"
               />
-              <div className="flex justify-center xs:justify-start mt-5">
+              <div className="flex lg:flex-row flex-col text-center justify-center xs:justify-start mt-5 gap-5">
                 <button
                   className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
                   onClick={() => setFindCoachPopup(true)}
                 >
                   Find Your Coach
                 </button>
+                <Link
+                href={"/coach-registration"}
+                  className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
+                >
+                  Register as a Coach
+                </Link>
               </div>
             </div>
           </div>
@@ -228,13 +265,10 @@ const CoachNewPage = () => {
             How it <span className="text-blue-700">works?</span>
           </h2>
           <p className="max-w-3xl mx-auto text-base my-4">
-            When it comes to reaching your fullest potential, settling for
-            anything less than the best is not an option. Our expert coaches are
-            here to guide you with proven strategies, personalized insights, and
-            a passion for helping you succeed.
+          Our community of experienced career coaches, specialising in an extended horizon of career domains, is here to help you. We host coaches from across the globe who come together on this platform. They aim to assist you with your career puzzles and help you grow in your career path. All you need to do is identify your exact set of struggles and find the most suitable coach on this platform. 
           </p>
         </div>
-        <div className="flex flex-wrap justify-between items-stretch gap-5 max-w-7xl mx-auto">
+        <div className="flex flex-wrap justify-between items-stretch gap-5 max-w-7xl mx-auto mt-5">
           <div className="step1 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
             <h2 className="text-3xl font-bold">Step 1</h2>
             <p className="text-sm my-2">
@@ -245,7 +279,7 @@ const CoachNewPage = () => {
 
           {/* Arrow between Step 1 and Step 2 */}
           <div className="hidden lg:flex items-center justify-center">
-            <FaArrowRight className="text-gray-500 text-3xl animate-bounce" />
+            <FaArrowRight className="text-blue-800 text-3xl animate-bounce" />
           </div>
 
           <div className="step2 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
@@ -258,7 +292,7 @@ const CoachNewPage = () => {
 
           {/* Arrow between Step 1 and Step 2 */}
           <div className="hidden lg:flex items-center justify-center">
-            <FaArrowRight className="text-gray-500 text-3xl animate-bounce" />
+            <FaArrowRight className="text-blue-800 text-3xl animate-bounce" />
           </div>
 
           <div className="step3 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
@@ -271,13 +305,13 @@ const CoachNewPage = () => {
 
           {/* Arrow between Step 3 and Step 4 */}
           <div className="hidden lg:flex items-center justify-center">
-            <FaArrowRight className="text-gray-500 text-3xl animate-bounce" />
+            <FaArrowRight className="text-blue-800 text-3xl animate-bounce" />
           </div>
 
           <div className="step4 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
             <h2 className="text-3xl font-bold">Step 4</h2>
             <p className="text-sm my-2">
-              Connect with your Coach per your coaching appointment schedule and
+              Connect with your Coach as per your coaching appointment schedule and
               find the answers to all your questions.
             </p>
           </div>
@@ -301,7 +335,7 @@ const CoachNewPage = () => {
             <Button onClick={scrollToAdditionalServices}>Explore More</Button>
           </div>
           <div className="lg:w-[70%] w-full">
-            <CoachServiceSlider data={topServices} slidesPerView={2.5} />
+            <CoachServiceSlider data={topServices} slidesPerView={2.5} setFindCoachPopup={setFindCoachPopup}/>
           </div>
         </div>
       </div>
@@ -321,7 +355,8 @@ const CoachNewPage = () => {
               {additionalServices.map((card) => (
                 <div
                   key={card.id}
-                  className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 min-w-[300px] min-h-[200px]"
+                  className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 min-w-[300px] min-h-[200px] cursor-pointer hover:scale-105 transition duration-300 ease-in-out"
+                  onClick={()=>setFindCoachPopup(true)}
                 >
                   <figure>
                     <img
@@ -338,7 +373,7 @@ const CoachNewPage = () => {
                         </h3>
                       </div>
                     </header>
-                    <p className="text-sm">{card.description.slice(0, 100)}</p>
+                    <p className="text-sm">{card.description}</p>
                   </div>
                 </div>
               ))}
@@ -358,11 +393,11 @@ const CoachNewPage = () => {
               the bigger picture? The advantages of having constant guidance and
               the consistent presence of a Career Coach need to be realised. Get
               coached to unlock opportunities and improvements that can make the
-              most significant difference in your career
+              most significant difference in your career.
             </p>
           </div>
           <div className="lg:w-[70%] w-full">
-            <CoachServiceSlider data={workServicesData} slidesPerView={2.5} />
+            <CoachWorksSlider data={workServicesData} slidesPerView={2.5} setFindCoachPopup={setFindCoachPopup}/>
           </div>
         </div>
       </div>

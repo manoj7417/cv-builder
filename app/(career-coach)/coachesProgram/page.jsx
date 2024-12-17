@@ -319,7 +319,7 @@ const CoachPage = () => {
                           selectedCoach?._id === item._id ? "bg-blue-50" : ""
                         }`}
                       >
-                        <figure className="flex-1">
+                        <figure className="flex-shrink-0">
                           <img
                             alt={item.imageAlt}
                             src={item.profileImage}
