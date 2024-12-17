@@ -42,7 +42,7 @@ const menuItems = [
     name: "Login as Coach",
     href: "/coach-signin",
     className:
-      "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8",
+      "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-blue-600",
   },
 ];
 
