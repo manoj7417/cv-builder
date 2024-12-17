@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import UserBookingSlot from "./BookingSlot";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
+import { getPlanExpiry } from "@/utils/getPlanExpiry";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -134,21 +135,22 @@ const UserDashboardPage = () => {
                     {userdata?.fullname.charAt(0).toUpperCase() +
                       userdata?.fullname.slice(1)}
                   </h1>
-                  <p className="text-sm text-gray-500 my-1">{userdata?.email}</p>
-                  <p className="text-sm text-gray-500 my-1">{userdata?.address}</p>
-                  <div className="my-3">
-                    <Label className="text-gray-500">Plans</Label>
-                    <p className="text-gray-500 my-2">
+                  <p className="text-sm text-gray-500 my-1">
+                    {userdata?.email}
+                  </p>
+                  <p className="text-sm text-gray-500 my-1">
+                    {userdata?.address}
+                  </p>
+                  <div className="py-2 flex">
                       {userdata?.subscription?.plan &&
                         userdata.subscription.plan.map((item, index) => (
-                          <span
-                            key={index}
-                            className="bg-[#FF6636] text-white px-2 py-1 rounded mr-2"
-                          >
-                            {item}
-                          </span>
+                          <p className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3" key={index}>
+                            <span className="text-base">{item}</span>
+                            <span className="text-xs ml-4" >
+                            {getPlanExpiry(item, userdata)}
+                            </span>
+                          </p>
                         ))}
-                    </p>
                   </div>
                 </div>
               </div>
