@@ -146,7 +146,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
               ))}
             </RadioGroup>
           </div>
-          <DialogFooter className="flex justify-between mt-6">
+          <DialogFooter className="flex justify-between mt-6 gap-5">
             {currentStep > 0 && (
               <Button
                 type="button"
