@@ -17,6 +17,7 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 import { Label } from "@/components/ui/label";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
+import Script from "next/script";
 
 
 function LoginUser() {
@@ -483,6 +484,17 @@ function LoginUser() {
           </div>
         </div>
       </section>
+      
+
+<Script
+  id="google-conversion-event" // Add a unique ID
+  dangerouslySetInnerHTML={{
+    __html: `
+      gtag('event', 'conversion', {'send_to': 'AW-16573743263/4bYaCLnbyPgZEJ-B_d49'});
+    `,
+  }}
+/>
+
     </>
   );
 }

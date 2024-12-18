@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-export default function CoachServiceSlider({ data, slidesPerView,setFindCoachPopup }) {
+export default function CoachWorksSlider({ data, slidesPerView,setFindCoachPopup }) {
 
 
   
@@ -51,7 +51,7 @@ export default function CoachServiceSlider({ data, slidesPerView,setFindCoachPop
             <SwiperSlide key={index}>
               <div
                 key={card.id}
-                className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 lg:w-[300px] w-full lg:h-[400px] h-[400px] cursor-pointer"
+                className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 lg:w-[300px] w-full lg:max-h-[600px] h-[600px] cursor-pointer"
                 onClick={()=>setFindCoachPopup(true)}
               >
                 <figure>
@@ -69,7 +69,7 @@ export default function CoachServiceSlider({ data, slidesPerView,setFindCoachPop
                       </h3>
                     </div>
                   </header>
-                  <p className="text-sm">{card.description.slice(0, 200)}</p>
+                  <p className="text-sm leading-relaxed">{card.description}</p>
                 </div>
               </div>
             </SwiperSlide>

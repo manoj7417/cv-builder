@@ -92,7 +92,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href='/coaches' className='text-black transition'>
+                  <Link href='/career-coaching' className='text-black transition'>
                     Career Coaching
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>

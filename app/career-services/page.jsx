@@ -17,21 +17,21 @@ const CareerServices = () => {
       title: "AI Career Coaching",
       image: a1,
       description:
-        "Receive personalized career guidance and actionable insights, powered by advanced AI algorithms.",
+        "Take a personalised quick session with the advanced AI Career Coach anytime and anywhere.",
       link: "/career-counselling",
     },
     {
       title: "1 to 1 Career Coaching",
       image: a2,
       description:
-        "Work directly with a professional career coach to strategize and achieve your career goals.",
+        "Find the best guidance from our esteemed global community of Career Coaches!",
       link: "/career-coaching",
     },
     {
       title: "Psychometric Test Tool",
       image: a3,
       description:
-        "Assess your personality traits and cognitive abilities to discover the career paths best suited to you",
+        "Assess your professional traits and cognitive abilities to make the best of your skill set.",
       current: false,
       link: "/pshycometric-test",
     },
@@ -89,16 +89,15 @@ const CareerServices = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
       />
       <section
-        className='flex lg:items-center items-start pb-0 justify-center  w-full pt-24 md:pt-16 lg:pt-40  px-5 relative'
+        className='flex lg:items-center items-start pb-0 justify-center  w-full pt-40 md:pt-16 lg:pt-40  px-5 relative'
         id='free'>
         <div className='container '>
           <h1 className='text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1'>
-            <span className='text-[#2C98CA]'>AI Career Coaching,</span> Your
-            Personalized Career Guide!
+            <span className='text-[#2C98CA]'>Get Coached,</span> Your
+            For Perfection!
           </h1>
-          <p className='text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
-            Receive expert career guidance powered by AI to help you achieve
-            your goals and stand out in the job market.
+          <p className='lg:w-[60%] w-full mx-auto text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
+          Find Career Coaches, take Psychometric Tests, or consult the AI Career Coach to find answers to your professional queries and grow past the limitations of your career.
           </p>
 
           <div className='flex justify-center'>

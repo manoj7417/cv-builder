@@ -38,6 +38,12 @@ const menuItems = [
     name: "About Us",
     href: "/about-us",
   },
+  {
+    name: "Login as Coach",
+    href: "/coach-signin",
+    className:
+      "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-blue-600",
+  },
 ];
 
 export function ResumeHeader() {
@@ -121,10 +127,11 @@ export function ResumeHeader() {
       >
         {!shouldHideBanner && showBanner && (
           <div className="top_banner bg-blue-900 text-white py-3 px-4 text-center">
-             {/* For Desktop devices  */}
+            {/* For Desktop devices  */}
             <p className="text-xs sm:text-sm md:text-base font-medium lg:flex hidden flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 marquee-text">
               <span>
-                🎉 Limited Time Offer! Free 14 Days Trial on Genies Pro CV Studio.
+                🎉 Limited Time Offer! Free 14 Days Trial on Genies Pro CV
+                Studio.
               </span>
               <span
                 onClick={handleCoupon}
@@ -163,11 +170,24 @@ export function ResumeHeader() {
           </div>
           <div className="hidden lg:block">
             <ul className="ml-12 inline-flex space-x-8">
-              {menuItems.map((item) => (
+              {/* {menuItems.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
                     className="inline-flex items-center text-base text-blue-950 font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))} */}
+              {menuItems.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className={
+                      item.className ||
+                      "inline-flex items-center text-base text-blue-950 font-medium hover:text-blue-700 transition"
+                    }
                   >
                     {item.name}
                   </Link>
