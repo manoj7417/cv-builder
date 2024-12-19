@@ -104,10 +104,10 @@ const ResumeBuilderPage = () => {
         </DialogContent>
       </Dialog> */}
       <div className="flex md:flex-row flex-col w-full h-full relative">
-        <div className="actions_button bg-gray-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[50px] z-20">
-          <div className="w-full mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">
+        <div className="actions_button bg-gray-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[70px] z-20">
+          <div className="w-[76rem] mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">
             <div className="header_section w-full md:block hidden">
-              <Button
+              {/* <Button
                 onClick={() => router.back()}
                 className="group relative inline-flex items-center justify-center overflow-hidden border-2 border-blue-950 px-8 py-1 rounded-md font-medium text-white bg-white shadow-md transition duration-300 ease-out"
               >
@@ -133,7 +133,20 @@ const ResumeBuilderPage = () => {
                 <span className="invisible relative text-blue-900 font-bold">
                   Back
                 </span>
-              </Button>
+              </Button> */}
+              <div className="inline-flex items-center space-x-2">
+            <Link href="/">
+              <Image
+                priority
+                // src="/genies-career-hub-logo.png"
+                src={"/beta-logo.png"}
+                width={100}
+                height={100}
+                alt="white_logo"
+                className="w-16 h-16 object-contain"
+              />
+            </Link>
+          </div>
             </div>
             <div className="profile_section">
               <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
