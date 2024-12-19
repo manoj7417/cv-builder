@@ -247,7 +247,7 @@ const CoachPage = () => {
               </div>
             ) : (
               <div>
-                <div className="flex flex-col lg:flex-row items-start lg:items-center">
+                <div className="flex flex-row items-start lg:items-center">
                   {/* Coach Description */}
                   <div className="coach_description w-full lg:w-[70%]">
                     
@@ -508,7 +508,7 @@ const CoachPage = () => {
               </div>
             ) : (
               <div>
-                <div className="flex flex-col lg:flex-row items-start lg:items-center">
+                <div className="flex flex-row items-start lg:items-center">
                   {/* Coach Description */}
                   <div className="coach_description w-full lg:w-[70%]">
                     <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
@@ -522,7 +522,22 @@ const CoachPage = () => {
                         {selectedCoach?.typeOfCoaching}
                       </h2>
                     </div>
-                    <div className="coach_details">
+                    
+                  </div>
+
+                  {/* Coach Image */}
+                  <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
+                    <div className="coach_image p-6 sm:p-10">
+                      <img
+                        alt={selectedCoach?.name}
+                        src={selectedCoach?.profileImage}
+                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-md"
+                      />
+                    </div>
+                  </div>
+                  
+                </div>
+                <div className="coach_details">
                       <p
                         className={`text-sm text-gray-500 ${
                           !showFullContent.coachingDescription
@@ -538,27 +553,13 @@ const CoachPage = () => {
                       </p>
                       <button
                         onClick={() => toggleContent("coachingDescription")}
-                        className="text-blue-600 mt-2 hover:underline"
+                        className="text-blue-600 mt-2 hover:underline text-sm"
                       >
                         {showFullContent?.coachingDescription
                           ? "Show Less"
                           : "Show More"}
                       </button>
                     </div>
-                  </div>
-
-                  {/* Coach Image */}
-                  <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
-                    <div className="coach_image p-6 sm:p-10">
-                      <img
-                        alt={selectedCoach?.name}
-                        src={selectedCoach?.profileImage}
-                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-md"
-                      />
-                    </div>
-                  </div>
-                </div>
-
                 {/* Book Appointment Button */}
                 <div className="book_appointment mt-5">
                   <Button onClick={handleDialogToggle}>Book Now</Button>
@@ -606,7 +607,7 @@ const CoachPage = () => {
                         </div>
                         <button
                           onClick={() => toggleContent("bio")}
-                          className="text-blue-600 mt-2 hover:underline"
+                          className="text-blue-600 mt-2 hover:underline text-sm"
                         >
                           {showFullContent?.bio ? "Show Less" : "Show More"}
                         </button>

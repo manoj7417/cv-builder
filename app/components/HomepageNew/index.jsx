@@ -107,7 +107,7 @@ export default function HomepageNew() {
 
   return (
     <>
-      <section className="w-full min-h-screen sm:top-0 p-4 pt-28 sm:p-18 bg-gray-100 text-black flex items-center">
+      <section className="w-full min-h-screen sm:top-0 p-4 pt-40 sm:p-18 bg-gray-100 text-black flex items-center">
         <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
           <div className="flex flex-col xs:flex-row items-center max-w-6xl 2xl:mt-10 lg:mt-5">
             <div className="text-start">

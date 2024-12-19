@@ -494,7 +494,7 @@ export default function Register() {
                 </div>
 
                 <div className="google_button mt-5">
-                  <SignInGoogle type="SignUp"/>
+                  {/* <SignInGoogle type="SignUp"/> */}
                   {/* <Button onClick={handleSignUpWithGoogle}>Signup with google</Button> */}
                 </div>
 

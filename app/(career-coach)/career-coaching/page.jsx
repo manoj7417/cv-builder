@@ -50,6 +50,27 @@ const topServices = [
     description:
       "Do you need help finding your profile's most suitable job description and opportunities? We will help you!",
   },
+  {
+    id: 4,
+    image: "/cv reviews.png",
+    title: "CV Reviews",
+    description:
+      "Get help formulating the best job application by reviewing your resume for perfection!",
+  },
+  {
+    id: 5,
+    image: "/quick connect.png",
+    title: "Quick Connect",
+    description:
+      "Need a quick response to your immediate questions? Connect with us and find your solutions.",
+  },
+  {
+    id: 6,
+    image: "/job search.png",
+    title: "Job Search",
+    description:
+      "Do you need help finding your profile's most suitable job description and opportunities? We will help you!",
+  },
 ];
 
 const additionalServices = [
@@ -189,6 +210,27 @@ const workServicesData = [
   },
   {
     id: 3,
+    image: "/workplace contentment.png",
+    title: "Workplace Contentment",
+    description:
+      "Ease your professional process with stress management, setting workplace priorities, learning effective communication, and developing problem-solving skills. Our guidance can help you achieve job satisfaction.",
+  },
+   {
+    id: 4,
+    image: "/professional development.png",
+    title: "Professional Development",
+    description:
+      "Career Coaches can help you identify your strengths, weaknesses, and values to develop self-awareness for independent professional thinking. The constant support will motivate you to learn and understand your growth path.",
+  },
+  {
+    id: 5,
+    image: "/career growth.png",
+    title: "Career Growth",
+    description:
+      "Setting a career goal, creating a growth mindset, and building a strong path can be challenging. Career coaches can ease this process efficiently. They can assist you with relative strategies to ensure maximum Career Growth.",
+  },
+  {
+    id: 6,
     image: "/workplace contentment.png",
     title: "Workplace Contentment",
     description:

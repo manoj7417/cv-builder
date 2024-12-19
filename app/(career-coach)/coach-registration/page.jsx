@@ -26,6 +26,7 @@ import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
 import SignInGoogle from '../../components/SignInGoogle/SignInGoogle'
 import CoachSignIn from "@/app/components/CoachGoogleSignIn/CoachSignIn";
+import Image from "next/image";
 //
 export default function CoachRegistration() {
   const formSchema = yup.object().shape({
@@ -100,7 +101,7 @@ export default function CoachRegistration() {
 
   return (
     <section className=' place-items-center h-screen'>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-24 w-full h-full'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 w-full h-full'>
         <div className='h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0'>
           <div className='w-[70%] mt-14'>
             <h1 className='text-white text-center text-2xl font-semibold'>
@@ -148,9 +149,22 @@ export default function CoachRegistration() {
           {/* Custom Pagination Styles */}
         </div>
 
-        <div className='flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24'>
+        <div className='flex flex-col items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-10'>
+        <Link
+              href={"/"}
+              className="flex justify-center items-center my-5"
+            >
+              <Image
+                priority
+                src="/genies-career-hub-logo.png"
+                width={100}
+                height={100}
+                alt="white_logo"
+                className="w-28 h-auto object-contain"
+              />
+            </Link>
           <div className='xl:mx-auto xl:w-full xl:max-w-md 2xl:max-w-xl'>
-            <h2 className='text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl'>
+            <h2 className='text-xl lg:text-start text-center font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl'>
               Create an Account to Register as a Coach
             </h2>
             <form onSubmit={handleSubmit(handleCoachDetails)} className='mt-8'>
