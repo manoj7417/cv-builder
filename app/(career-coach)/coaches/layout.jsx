@@ -3,9 +3,9 @@
 import { ResumeHeader } from "@/app/Layout/ResumeHeader";
 import Footer from "../../Layout/Footer";
 export const metadata = {
-  title: "Expert Career Advisor for Career Change and Life Coach ",
+  title: "Career Coaches & Counselling: Genies Career Hub",
   description:
-    "Choose Career Counselling and Coach and get help from a professional job and career advisor on how to proceed with Career Change, Resume Services, and more.",
+    " Find your Career Path, or effectively enhance present one, with ease through our platform by connecting with best Career Coaches from across the globe.",
   alternates: {
     canonical: "https://www.geniescareerhub.com/coaches",
   },

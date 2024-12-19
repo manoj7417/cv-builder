@@ -96,7 +96,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
     };
     try {
       const response = await axios.post("/api/filterCoach", finalData);
-      router.push("/coachesProgram");
+      router.push("/coaches");
     } catch (error) {
     } finally {
       setFindCoachPopup(false);

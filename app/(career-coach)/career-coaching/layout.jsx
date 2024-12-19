@@ -2,14 +2,14 @@
 
 import { ResumeHeader } from "@/app/Layout/ResumeHeader";
 import Footer from "../../Layout/Footer";
-// export const metadata = {
-//   title: "Expert Career Advisor for Career Change and Life Coach ",
-//   description:
-//     "Choose Career Counselling and Coach and get help from a professional job and career advisor on how to proceed with Career Change, Resume Services, and more.",
-//   alternates: {
-//     canonical: "https://www.geniescareerhub.com/coaches",
-//   },
-// };
+export const metadata = {
+  title: "Explore Career Coach & Advisor: Genies Career Hub",
+  description:
+    "Sort your Life and Career with expert job and career coaching, resume services, life coach, career change advice, developing skills for life, and more",
+  alternates: {
+    canonical: "https://www.geniescareerhub.com/coaches",
+  },
+};
 
 const Layout = ({ children }) => {
   return (

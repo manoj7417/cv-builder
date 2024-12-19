@@ -1,9 +1,9 @@
 /** @format */
 
 export const metadata = {
-  title: "Expert Career Advisor for Career Change and Life Coach ",
+  title: "Sign In on your Coach dashboard: Genies Career Hub",
   description:
-    "Choose Career Counselling and Coach and get help from a professional job and career advisor on how to proceed with Career Change, Resume Services, and more.",
+    " Log In on your Career Coach profile through the Coach Sign-In page on the Genies Career Hub using the registration credentials and get started",
   alternates: {
     canonical: "https://www.geniescareerhub.com/coach-signin",
   },

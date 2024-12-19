@@ -122,7 +122,7 @@ export default function CoachLogin() {
       </Dialog>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 place-items-center w-full h-screen">
-          <div className="w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-auto">
+          <div className="w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-full justify-center">
             <div className="w-[70%] mt-14">
               <h1 className="text-white text-center text-2xl font-semibold">
                 Thank you for joining as a Coach and inspire the next generation

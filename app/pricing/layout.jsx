@@ -5,7 +5,7 @@ import Footer from "../Layout/Footer";
 import { ResumeHeader } from "../Layout/ResumeHeader";
 export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
-  title: "Pricing: Genies Career Hub",
+  title: " Pricing and Payments: Genies Career Hub",
   description:
     "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
   openGraph: {

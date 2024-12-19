@@ -1,225 +1,637 @@
-/** @format */
 "use client";
-import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
-import CoachFilter from "./CoachFilter";
-import { useRouter } from "next/navigation";
 import CoachSkeltonCard from "@/components/component/CoachSkeltonCard";
+import { Button } from "@/components/ui/button";
 import axios from "axios";
-const categories = [
-  {
-    id: 1,
-    categoryTitle: "HTML5",
-    courses: "2736",
-    subCategory: [
-      "HTML5",
-      "Web Development",
-      "Responsive Developments",
-      "Developments",
-      "Programing",
-    ],
-  },
-  {
-    id: 2,
-    categoryTitle: "CSS3",
-    courses: "13,932",
-    subCategory: [
-      "CSS3",
-      "Web Development",
-      "Responsive Developments",
-      "Developments",
-      "Programing",
-    ],
-  },
-  {
-    id: 3,
-    categoryTitle: "Javascript",
-    courses: "52,822",
-    subCategory: [
-      "Javascript",
-      "Web Development",
-      "Responsive Developments",
-      "Developments",
-      "Programing",
-    ],
-  },
-  {
-    id: 4,
-    categoryTitle: "Saas",
-    courses: "20,126",
-    subCategory: [
-      "Saas",
-      "Web Development",
-      "Responsive Developments",
-      "Developments",
-      "Programing",
-    ],
-  },
-  {
-    id: 5,
-    categoryTitle: "Laravel",
-    courses: "6,196",
-    subCategory: [
-      "Laravel",
-      "Web Development",
-      "Responsive Developments",
-      "Developments",
-      "Programing",
-    ],
-  },
-  {
-    id: 6,
-    categoryTitle: "Django",
-    courses: "22,649",
-    subCategory: [
-      "Django",
-      "Web Development",
-      "Responsive Developments",
-      "Developments",
-      "Programing",
-    ],
-  },
-];
+import React, { useEffect, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { AiOutlineCheck } from "react-icons/ai";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { GetTokens } from "@/app/actions";
+import { useRouter } from "next/navigation";
 
-export default function CoachesPage() {
-  // Set the default selected category (e.g., the first category)
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id);
-  const router = useRouter();
+// const programs = [
+//   {
+//     title: "Brand Strategy Development",
+//     description:
+//       "Crafting personalized strategies to build and enhance brand identity and market presence.",
+//     price: "$10",
+//   },
+//   {
+//     title: "Digital Marketing Optimization",
+//     description:
+//       "Guiding clients on effective SEO, social media marketing, email campaigns, and online advertising techniques.",
+//     price: "$10",
+//   },
+//   {
+//     title: "Content Marketing Mastery",
+//     description:
+//       "Providing insights on creating compelling content that drives engagement and generates leads.",
+//     price: "$10",
+//   },
+//   {
+//     title: "Performance Analytics & Growth Planning",
+//     description:
+//       "Helping clients analyze marketing data to optimize campaigns and plan for sustainable growth.",
+//     price: "$10",
+//   },
+// ];
 
-
+const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
-  const [isLoading,setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCoach, setSelectedCoach] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(0);
+  console.log("selectedProgram::",selectedProgram)
+  const [geoData, setGeoData] = useState(null);
+  const [isBuyingProgram, setIsBuyingProgram] = useState(false);
+  const [showFullContent, setShowFullContent] = useState({
+    bio: false,
+    coachingDescription: false,
+  });
+  const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
 
-  const handleCategoryClick = (categoryId) => {
-    setSelectedCategory(categoryId);
+  const toggleContent = (type) => {
+    setShowFullContent((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
   };
 
-  // Find the currently selected category's details
-  const selectedCategoryDetails = categories.find(
-    (category) => category.id === selectedCategory
-  );
-
-  const handleCoachDetails = (id) => {
-    router.push(`coaches/${id}`);
+  const handleDialogToggle = () => {
+    setIsOpen((prev) => !prev);
+    setIsMobile((prev) => !prev);
   };
 
-  useEffect(() => {
-    fetchAllCoaches();
-  },[]);
+  const handleMobileToggle = () => {
+    setIsMobile((prev) => !prev);
+  };
 
   const fetchAllCoaches = async () => {
     try {
       const response = await axios.get(`/api/getAllCoaches`);
       const data = await response.data;
-      setAllCoaches(data.coaches);
+      //   setAllCoaches(data.coaches);
+      const approvedCoaches = data.coaches.filter(
+        (coach) => coach.isApproved && coach.approvalStatus === "approved"
+      );
+      setAllCoaches(approvedCoaches);
+
+      // Set the first approved coach as selected by default
+      if (approvedCoaches.length > 0) {
+        setSelectedCoach(approvedCoaches[0]);
+      }
       setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleSelectCoach = (coach) => {
+    setSelectedCoach(coach);
+  };
+
+  const getGeoInfo = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        let data = response.data;
+        setGeoData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching geo information:", error);
+      });
+  };
+
+  const handleBuyProgram = async (course) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push(`/login?redirect=/coaches/${id}`);
+    }
+    setIsBuyingProgram(true);
+    try {
+      const url = `${window.location.protocol}//${window.location.hostname}/user-dashboard`;
+      const response = await axios.post(
+        "/api/buyprogram",
+        {
+          programId: course._id,
+          coachId: course.coachId,
+          amount: course.amount,
+          currency: "USD",
+          success_url: url,
+          cancel_url: window.location.href,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken?.value}`,
+          },
+        }
+      );
+      window.location.href = response.data.url;
+    } catch (error) {
+      toast.error("Error buying program");
+    } finally {
+      setIsBuyingProgram(false);
+    }
+  };
+
+  const handleMobileView = () => {
+    setIsMobile(true);
+  };
+
+  useEffect(() => {
+    fetchAllCoaches();
+  }, []);
+
+  useEffect(() => {
+    getGeoInfo();
+  }, []);
+
   return (
     <>
-      <div className="bg-gray-200">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h1 className="2xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold text-blue-950 text-center my-10">
-            Popular instructor in Career Development
-          </h1>
+      <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
+        <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
+          {/* Coach Selection Section */}
+          <div className="coach_card lg:w-[30%] w-full h-auto lg:h-screen lg:sticky top-[100px] overflow-y-scroll no-scrollbar">
+            <h2 className="text-xl lg:text-2xl font-bold">
+              Choose the <span className="text-blue-700">coach</span> who aligns
+              best with your <span className="text-blue-700">goals.</span>
+            </h2>
+            <p className="text-sm my-5">
+              Explore your top coach recommendations and select the one that
+              best fits your needs below.
+            </p>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {isLoading  ? (
-              <>
-                {Array(4)
-                  .fill(0)
-                  .map((_, index) => (
-                    <CoachSkeltonCard key={index} />
-                  ))}
-              </>
-            ) : (
-              coaches?.length > 0 &&
-              coaches
-                ?.filter(
-                  (coach) =>
-                    coach.isApproved && coach.approvalStatus === "approved"
-                )
-                .slice(0, 4)
-                .map((item, index) => (
-                  <div
-                    key={item.id}
-                    className="group relative bg-white cursor-pointer rounded-md"
-                    onClick={() => handleCoachDetails(item?._id)}
-                  >
-                    <div className="aspect-h-3 aspect-w-4 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60 rounded-t-md">
-                      <img
-                        alt={item.imageAlt}
-                        src={item.profileImage}
-                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                      />
-                    </div>
-                    <div className="coaching_name text-center mt-2">
-                      <p className="text-sm text-gray-700">{item.name}</p>
-                      <p className="text-[12px] text-gray-700">
-                        {item?.jobProfile?.title}
-                      </p>
-                    </div>
-                    <div className="mt-4 p-5 flex justify-between border-t border-gray-200">
-                      {/* <div className='flex items-center gap-2'>
-                        <FaStar className='text-orange-500' />
-                        <p className='text-sm text-gray-700'>{item.rating}</p>
+            <div className="coach_card_inner flex flex-col gap-5">
+              {isLoading
+                ? Array(4)
+                    .fill(0)
+                    .map((_, index) => <CoachSkeltonCard key={index} />)
+                : coaches?.length > 0 &&
+                  coaches
+                    .filter(
+                      (coach) =>
+                        coach.isApproved && coach.approvalStatus === "approved"
+                    )
+                    .map((item, index) => (
+                      <div
+                        key={index}
+                        onClick={() => handleSelectCoach(item)}
+                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer lg:border-none border border-gray-300 ${
+                          selectedCoach?._id === item._id ? "bg-blue-50" : ""
+                        }`}
+                      >
+                        <figure className="flex-shrink-0">
+                          <img
+                            alt={item.imageAlt}
+                            src={item.profileImage}
+                            className="object-cover w-24 h-24 sm:w-28 sm:h-28 rounded-md"
+                          />
+                        </figure>
+                        <div className="flex-1 p-4 sm:p-6 sm:mx-6 sm:px-0">
+                          <header className="flex gap-4">
+                            <div>
+                              <h3 className="text-base font-medium text-slate-900">
+                                {item.name}
+                              </h3>
+                              <p className="text-xs text-slate-800 text-wrap">
+                                {item?.email}
+                              </p>
+                              <Button
+                                className="lg:hidden bolck px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer"
+                                onClick={handleMobileView}
+                              >
+                                Book Now
+                              </Button>
+                            </div>
+                          </header>
+                        </div>
                       </div>
-                      <p className='text-sm font-medium text-gray-900'>
-                        {item.students}{" "}
-                        <span className='text-gray-500 ml-1 text-sm'>students</span>
-                      </p> */}
+                    ))}
+            </div>
+          </div>
+
+          {/* Coach Details Section */}
+          <div className="lg:block hidden coach_details lg:w-[70%] w-full bg-blue-100 p-6 sm:p-10">
+            {isLoading ? (
+              <div className="animate-pulse space-y-5">
+                {/* Skeleton for Top Match */}
+                <div className="h-6 w-24 bg-gray-300 rounded"></div>
+
+                {/* Skeleton for Coach Name */}
+                <div className="h-8 w-3/4 bg-gray-300 rounded"></div>
+                <div className="h-4 w-1/2 bg-gray-300 rounded"></div>
+
+                {/* Skeleton for Coach Description */}
+                <div className="h-4 w-full bg-gray-300 rounded"></div>
+                <div className="h-4 w-5/6 bg-gray-300 rounded"></div>
+                <div className="h-4 w-3/4 bg-gray-300 rounded"></div>
+
+                {/* <div className="h-28 w-28 sm:h-40 sm:w-40 bg-gray-300 rounded-full mx-auto"></div> */}
+
+                <div className="h-10 w-3/4 bg-gray-300 rounded mx-auto"></div>
+
+                <div className="flex gap-4 mt-5">
+                  <div className="h-6 w-24 bg-gray-300 rounded"></div>
+                  <div className="h-6 w-32 bg-gray-300 rounded"></div>
+                  <div className="h-6 w-20 bg-gray-300 rounded"></div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="flex flex-row items-start lg:items-center">
+                  {/* Coach Description */}
+                  <div className="coach_description w-full lg:w-[70%]">
+                    
+                    <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
+                      Top Match
+                    </span>
+                    <div className="coach_name my-5">
+                      <h1 className="text-2xl lg:text-3xl font-bold">
+                        {selectedCoach?.name}
+                      </h1>
+                      <h2 className="text-sm lg:text-base">
+                        {selectedCoach?.typeOfCoaching}
+                      </h2>
+                    </div>
+                    <div className="coach_details">
+                      <p
+                        className={`text-sm text-gray-500 ${
+                          !showFullContent.coachingDescription
+                            ? "line-clamp-3"
+                            : ""
+                        }`}
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {selectedCoach?.coachingDescription}
+                      </p>
+                      <button
+                        onClick={() => toggleContent("coachingDescription")}
+                        className="text-blue-600 mt-2 hover:underline"
+                      >
+                        {showFullContent?.coachingDescription
+                          ? "Show Less"
+                          : "Show More"}
+                      </button>
                     </div>
                   </div>
-                ))
+                  {/* Coach Image */}
+                  <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
+                    <div className="coach_image p-6 sm:p-10">
+                      <img
+                        alt={selectedCoach?.name}
+                        src={selectedCoach?.profileImage}
+                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-md"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Book Appointment Button */}
+                <div className="book_appointment mt-5">
+                  <Button
+                    className="w-full lg:w-auto"
+                    onClick={handleDialogToggle}
+                  >
+                    Book Now
+                  </Button>
+                </div>
+
+                {/* Tabs Section */}
+                <div className="coach_details_tabs my-10">
+                  <Tabs defaultValue="about">
+                    <TabsList className="flex flex-wrap">
+                      <TabsTrigger
+                        value="about"
+                        className="rounded-md text-xs sm:text-xl ms-0"
+                      >
+                        About
+                      </TabsTrigger>
+                    </TabsList>
+                    <div className="tabs_inner_content my-5">
+                      <TabsContent value="about">
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                            !showFullContent.bio ? "max-h-16" : "max-h-full"
+                          }`}
+                        >
+                          <p
+                            className={`text-sm text-gray-500 transition-all duration-300 ease-in-out ${
+                              !showFullContent.bio ? "line-clamp-3" : ""
+                            }`}
+                            style={{
+                              display: "-webkit-box",
+                              WebkitBoxOrient: "vertical",
+                              WebkitLineClamp: showFullContent.bio ? "none" : 3,
+                              overflow: showFullContent.bio
+                                ? "visible"
+                                : "hidden",
+                              height: showFullContent.bio ? "auto" : "4.5em",
+                              maxHeight: !showFullContent.bio
+                                ? "4.5em"
+                                : "none",
+                              opacity: showFullContent.bio ? 1 : 0.7,
+                              transition: "height 0.3s ease, opacity 0.3s ease",
+                            }}
+                          >
+                            {selectedCoach?.bio}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => toggleContent("bio")}
+                          className="text-blue-600 mt-2 hover:underline"
+                        >
+                          {showFullContent?.bio ? "Show Less" : "Show More"}
+                        </button>
+                      </TabsContent>
+                      <TabsContent value="coaching">
+                        <p>
+                          I have a experience of {selectedCoach?.experience} and
+                          have a skill of {selectedCoach?.skills}
+                        </p>
+                      </TabsContent>
+                      <TabsContent value="reviews">
+                        Matt is a real pro—highly competent, engaged, and
+                        insightful. Highly recommended.
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </div>
+              </div>
             )}
           </div>
         </div>
       </div>
-      {/* <div className="coach_course py-10 sm:py-20">
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-10">
-          {categories?.length > 0 &&
-            categories?.map((val) => (
-              <div
-                key={val.id}
-                className="courses_box w-[150px] sm:w-[200px] h-[70px] sm:h-[90px] bg-gray-100 shadow-xl p-4 sm:p-5 text-center cursor-pointer"
-                onClick={() => handleCategoryClick(val?.id)}
-              >
-                <p className="text-gray-600 text-sm sm:text-base">
-                  {val?.categoryTitle}
-                </p>
-                <p className="text-xs sm:text-sm">{val?.courses} courses</p>
+      {/* Shadcn UI Dialog */}
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent
+          className="max-w-5xl mx-auto"
+          showCloseButton={true}
+          onClick={handleDialogToggle}
+        >
+          <DialogHeader>
+            <DialogTitle>
+              <div className="coach_header flex gap-5 items-center">
+                <div className="coach_image">
+                  <img
+                    src={selectedCoach?.profileImage}
+                    alt={selectedCoach?.name}
+                    className="w-12 h-12 object-contain"
+                  />
+                </div>
+                <div className="coach_details">
+                  <h1 className="text-lg font-bold">
+                    Book a meeting with {selectedCoach?.name}
+                  </h1>
+                  <h2 className="text-sm">{selectedCoach?.typeOfCoaching}</h2>
+                </div>
               </div>
-            ))}
-        </div>
-
-        {selectedCategoryDetails && (
-          <div className="selected_category mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
-            <p className="text-center text-sm sm:text-lg font-semibold text-gray-700 mt-5 sm:mt-3">
-              Popular Keywords:
-            </p>
-            <ul className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-4">
-              {selectedCategoryDetails.subCategory.map((subCat, idx) => (
-                <li
-                  key={idx}
-                  className="bg-gray-100 px-3 py-1 sm:px-4 sm:py-2 rounded-md shadow-md text-gray-700 text-xs sm:text-sm"
-                >
-                  {subCat}
-                </li>
-              ))}
-            </ul>
+            </DialogTitle>
+          </DialogHeader>
+          <div>
+            {selectedCoach?.programs.length > 0 ? (
+              <>
+                <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
+                  <div className="coach_related_programs">
+                    <ul className="my-5">
+                      {selectedCoach?.programs.map((program, index) => (
+                        <li
+                          key={index}
+                          className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
+                            selectedProgram === index
+                              ? "border-blue-500 bg-blue-100"
+                              : "border-transparent"
+                          }`}
+                          onClick={() =>
+                            setSelectedProgram(
+                              index === selectedProgram ? null : index
+                            )
+                          }
+                        >
+                          <div className="program_inner_content space-y-2 flex gap-5 items-center">
+                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                            <div>
+                              <h3 className="text-sm font-bold">
+                                {program.title}
+                              </h3>
+                              <p className="text-xs">{program.description}</p>
+                            </div>
+                          </div>
+                          <div className="program_price font-bold text-sm">
+                            ${program.amount}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="coach_booking border p-5 rounded-md">
+                    {selectedProgram !== null && (
+                      <>
+                        <div className="program_details flex">
+                          <div className="coach_program_heading flex gap-2">
+                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                            <div>
+                              <h2 className="text-sm font-bold">
+                                {
+                                  selectedCoach?.programs[selectedProgram]
+                                    ?.title
+                                }
+                              </h2>
+                              <p className="text-xs">
+                                {
+                                  selectedCoach?.programs[selectedProgram]
+                                    ?.description
+                                }
+                              </p>
+                            </div>
+                          </div>
+                          <div className="coach_price">
+                            <div className="text-sm font-bold">
+                              $
+                              {selectedCoach?.programs[selectedProgram]?.amount}
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="schedule_meet mt-5"
+                          onClick={() =>
+                            handleBuyProgram(
+                              selectedCoach?.programs[selectedProgram]
+                            )
+                          }
+                        >
+                          <Button>Schedule a Meet</Button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="no_program_card flex flex-col items-center justify-center text-center p-5 bg-gray-100 rounded-lg mt-5">
+                <h2 className="text-lg font-bold text-gray-600">
+                  No Program Yet
+                </h2>
+                <p className="text-sm text-gray-500">
+                  The selected coach does not have any programs at the moment.
+                </p>
+              </div>
+            )}
           </div>
-        )}
-      </div> */}
-      <div className="coach_filter">
-        <CoachFilter
-          coaches={coaches}
-          isLoading={isLoading}
-          handleCoachDetails={handleCoachDetails}
-        />
+        </DialogContent>
+      </Dialog>
+      {/* Mobile Dialog */}
+      <div className="lg:hidden">
+        <Dialog
+          open={isMobile}
+          onOpenChange={handleDialogToggle}
+        >
+          <DialogContent className="w-full sm:w-[90%] md:w-[80%] max-w-lg p-6 bg-blue-100 h-[500px] overflow-y-scroll" showCloseButton={true} onClick={handleMobileToggle}>
+            {isLoading ? (
+              <div className="animate-pulse space-y-5">
+                {/* Skeleton for Top Match */}
+                <div className="h-6 w-24 bg-gray-300 rounded"></div>
+                <div className="h-8 w-3/4 bg-gray-300 rounded"></div>
+                <div className="h-4 w-full bg-gray-300 rounded"></div>
+                <div className="h-10 w-3/4 bg-gray-300 rounded mx-auto"></div>
+              </div>
+            ) : (
+              <div>
+                <div className="flex flex-row items-start lg:items-center">
+                  {/* Coach Description */}
+                  <div className="coach_description w-full lg:w-[70%]">
+                    <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
+                      Top Match
+                    </span>
+                    <div className="coach_name my-5">
+                      <h1 className="text-2xl lg:text-3xl font-bold">
+                        {selectedCoach?.name}
+                      </h1>
+                      <h2 className="text-sm lg:text-base">
+                        {selectedCoach?.typeOfCoaching}
+                      </h2>
+                    </div>
+                    
+                  </div>
+
+                  {/* Coach Image */}
+                  <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
+                    <div className="coach_image p-6 sm:p-10">
+                      <img
+                        alt={selectedCoach?.name}
+                        src={selectedCoach?.profileImage}
+                        className="object-cover w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-md"
+                      />
+                    </div>
+                  </div>
+                  
+                </div>
+                <div className="coach_details">
+                      <p
+                        className={`text-sm text-gray-500 ${
+                          !showFullContent.coachingDescription
+                            ? "line-clamp-3"
+                            : ""
+                        }`}
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {selectedCoach?.coachingDescription}
+                      </p>
+                      <button
+                        onClick={() => toggleContent("coachingDescription")}
+                        className="text-blue-600 mt-2 hover:underline text-sm"
+                      >
+                        {showFullContent?.coachingDescription
+                          ? "Show Less"
+                          : "Show More"}
+                      </button>
+                    </div>
+                {/* Book Appointment Button */}
+                <div className="book_appointment mt-5">
+                  <Button onClick={handleDialogToggle}>Book Now</Button>
+                </div>
+
+                {/* Tabs Section */}
+                <div className="coach_details_tabs my-10">
+                  <Tabs defaultValue="about">
+                    <TabsList className="flex flex-wrap">
+                      <TabsTrigger
+                        value="about"
+                        className="rounded-md text-xs sm:text-xl ms-0"
+                      >
+                        About
+                      </TabsTrigger>
+                    </TabsList>
+                    <div className="tabs_inner_content my-5">
+                      <TabsContent value="about">
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                            !showFullContent.bio ? "max-h-16" : "max-h-full"
+                          }`}
+                        >
+                          <p
+                            className={`text-sm text-gray-500 transition-all duration-300 ease-in-out ${
+                              !showFullContent.bio ? "line-clamp-3" : ""
+                            }`}
+                            style={{
+                              display: "-webkit-box",
+                              WebkitBoxOrient: "vertical",
+                              WebkitLineClamp: showFullContent.bio ? "none" : 3,
+                              overflow: showFullContent.bio
+                                ? "visible"
+                                : "hidden",
+                              height: showFullContent.bio ? "auto" : "4.5em",
+                              maxHeight: !showFullContent.bio
+                                ? "4.5em"
+                                : "none",
+                              opacity: showFullContent.bio ? 1 : 0.7,
+                              transition: "height 0.3s ease, opacity 0.3s ease",
+                            }}
+                          >
+                            {selectedCoach?.bio}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => toggleContent("bio")}
+                          className="text-blue-600 mt-2 hover:underline text-sm"
+                        >
+                          {showFullContent?.bio ? "Show Less" : "Show More"}
+                        </button>
+                      </TabsContent>
+                      <TabsContent value="coaching">
+                        <p>
+                          I have a experience of {selectedCoach?.experience} and
+                          have a skill of {selectedCoach?.skills}
+                        </p>
+                      </TabsContent>
+                      <TabsContent value="reviews">
+                        Matt is a real pro—highly competent, engaged, and
+                        insightful. Highly recommended.
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
-}
+};
+
+export default CoachPage;
