@@ -5,9 +5,9 @@ export const metadata = {
   description:
     "Find the best CV template and top-rated UK CV format options for your job application resume on our CV builder.",
   openGraph: {
-    title: "Professional CV Builder | Expert Curriculum Vitae Format",
+    title: "Best CV Builder | Top Rated UK CV Format template",
     description:
-      "Check out the best curriculum vitae templates that follow industry-standard CV Format and create your resume in minutes with our Curriculum Vitae CV Builder.",
+      "Find the best CV template and top-rated UK CV format options for your job application resume on our CV builder.",
     url: "/resume",
     images: [
       {
