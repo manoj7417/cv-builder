@@ -16,7 +16,6 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 
-
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -84,11 +83,13 @@ const CoachPage = () => {
   };
 
   const handleBuyProgram = async (course) => {
+    console.log("handleBuyProgram", course);
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
-      return router.push(`/login?redirect=/coaches/${id}`);
+      return router.push(`/login?redirect=/coaches`);
     }
     setIsBuyingProgram(true);
+    setIsLoading(true);
     try {
       const url = `${window.location.protocol}//${window.location.hostname}/user-dashboard`;
       const response = await axios.post(
@@ -108,10 +109,12 @@ const CoachPage = () => {
         }
       );
       window.location.href = response.data.url;
+      setIsLoading(false);
     } catch (error) {
       toast.error("Error buying program");
     } finally {
       setIsBuyingProgram(false);
+      setIsLoading(false);
     }
   };
 
@@ -222,7 +225,6 @@ const CoachPage = () => {
                 <div className="flex flex-row items-start lg:items-center">
                   {/* Coach Description */}
                   <div className="coach_description w-full lg:w-[70%]">
-                    
                     <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
                       Top Match
                     </span>
@@ -443,7 +445,35 @@ const CoachPage = () => {
                             )
                           }
                         >
-                          <Button>Schedule a Meet</Button>
+                          <Button>
+                            {isLoading ? (
+                              <span className="flex items-center gap-2">
+                                <svg
+                                  className="animate-spin h-5 w-5 text-white"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                  ></circle>
+                                  <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                  ></path>
+                                </svg>
+                                Loading...
+                              </span>
+                            ) : (
+                              "Schedule a Meet"
+                            )}
+                          </Button>
                         </div>
                       </>
                     )}
@@ -465,11 +495,12 @@ const CoachPage = () => {
       </Dialog>
       {/* Mobile Dialog */}
       <div className="lg:hidden">
-        <Dialog
-          open={isMobile}
-          onOpenChange={handleMobileToggle}
-        >
-          <DialogContent className="w-full sm:w-[90%] md:w-[80%] max-w-lg p-6 bg-blue-100 h-[500px] overflow-y-scroll" showCloseButton={true} onClick={handleMobileToggle}>
+        <Dialog open={isMobile} onOpenChange={handleMobileToggle}>
+          <DialogContent
+            className="w-full sm:w-[90%] md:w-[80%] max-w-lg p-6 bg-blue-100 h-[500px] overflow-y-scroll"
+            showCloseButton={true}
+            onClick={handleMobileToggle}
+          >
             {isLoading ? (
               <div className="animate-pulse space-y-5">
                 <div className="h-6 w-24 bg-gray-300 rounded"></div>
@@ -492,7 +523,6 @@ const CoachPage = () => {
                         {selectedCoach?.typeOfCoaching}
                       </h2>
                     </div>
-                    
                   </div>
 
                   <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
@@ -504,31 +534,28 @@ const CoachPage = () => {
                       />
                     </div>
                   </div>
-                  
                 </div>
                 <div className="coach_details">
-                      <p
-                        className={`text-sm text-gray-500 ${
-                          !showFullContent.coachingDescription
-                            ? "line-clamp-3"
-                            : ""
-                        }`}
-                        style={{
-                          display: "-webkit-box",
-                          WebkitBoxOrient: "vertical",
-                        }}
-                      >
-                        {selectedCoach?.coachingDescription}
-                      </p>
-                      <button
-                        onClick={() => toggleContent("coachingDescription")}
-                        className="text-blue-600 mt-2 hover:underline text-sm"
-                      >
-                        {showFullContent?.coachingDescription
-                          ? "Show Less"
-                          : "Show More"}
-                      </button>
-                    </div>
+                  <p
+                    className={`text-sm text-gray-500 ${
+                      !showFullContent.coachingDescription ? "line-clamp-3" : ""
+                    }`}
+                    style={{
+                      display: "-webkit-box",
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
+                    {selectedCoach?.coachingDescription}
+                  </p>
+                  <button
+                    onClick={() => toggleContent("coachingDescription")}
+                    className="text-blue-600 mt-2 hover:underline text-sm"
+                  >
+                    {showFullContent?.coachingDescription
+                      ? "Show Less"
+                      : "Show More"}
+                  </button>
+                </div>
                 <div className="book_appointment mt-5">
                   <Button onClick={handleDialogToggle}>Book Now</Button>
                 </div>
