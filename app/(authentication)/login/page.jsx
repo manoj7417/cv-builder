@@ -370,9 +370,9 @@ function LoginUser() {
                     
                     <Link
                       href="/coach-signin"
-                      className="font-semibold text-blue-700 transition-all duration-200  hover:underline"
+                      className="font-semibold text-blue-700 transition-all duration-200 underline underline-offset-4"
                     >
-                      Login as a coach
+                      Login as a Coach
                     </Link>
                   </div>
                 </div>

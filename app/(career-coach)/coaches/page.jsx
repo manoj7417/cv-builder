@@ -16,32 +16,6 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 
-// const programs = [
-//   {
-//     title: "Brand Strategy Development",
-//     description:
-//       "Crafting personalized strategies to build and enhance brand identity and market presence.",
-//     price: "$10",
-//   },
-//   {
-//     title: "Digital Marketing Optimization",
-//     description:
-//       "Guiding clients on effective SEO, social media marketing, email campaigns, and online advertising techniques.",
-//     price: "$10",
-//   },
-//   {
-//     title: "Content Marketing Mastery",
-//     description:
-//       "Providing insights on creating compelling content that drives engagement and generates leads.",
-//     price: "$10",
-//   },
-//   {
-//     title: "Performance Analytics & Growth Planning",
-//     description:
-//       "Helping clients analyze marketing data to optimize campaigns and plan for sustainable growth.",
-//     price: "$10",
-//   },
-// ];
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
@@ -49,7 +23,6 @@ const CoachPage = () => {
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
-  console.log("selectedProgram::",selectedProgram)
   const [geoData, setGeoData] = useState(null);
   const [isBuyingProgram, setIsBuyingProgram] = useState(false);
   const [showFullContent, setShowFullContent] = useState({
@@ -68,7 +41,6 @@ const CoachPage = () => {
 
   const handleDialogToggle = () => {
     setIsOpen((prev) => !prev);
-    setIsMobile((prev) => !prev);
   };
 
   const handleMobileToggle = () => {
@@ -495,12 +467,11 @@ const CoachPage = () => {
       <div className="lg:hidden">
         <Dialog
           open={isMobile}
-          onOpenChange={handleDialogToggle}
+          onOpenChange={handleMobileToggle}
         >
           <DialogContent className="w-full sm:w-[90%] md:w-[80%] max-w-lg p-6 bg-blue-100 h-[500px] overflow-y-scroll" showCloseButton={true} onClick={handleMobileToggle}>
             {isLoading ? (
               <div className="animate-pulse space-y-5">
-                {/* Skeleton for Top Match */}
                 <div className="h-6 w-24 bg-gray-300 rounded"></div>
                 <div className="h-8 w-3/4 bg-gray-300 rounded"></div>
                 <div className="h-4 w-full bg-gray-300 rounded"></div>
@@ -509,7 +480,6 @@ const CoachPage = () => {
             ) : (
               <div>
                 <div className="flex flex-row items-start lg:items-center">
-                  {/* Coach Description */}
                   <div className="coach_description w-full lg:w-[70%]">
                     <span className="inline-flex items-center rounded-md px-4 py-2 text-xs font-medium bg-[#F89A14] text-white">
                       Top Match
@@ -525,7 +495,6 @@ const CoachPage = () => {
                     
                   </div>
 
-                  {/* Coach Image */}
                   <div className="coach_image_div w-full lg:w-[30%] mt-5 lg:mt-0">
                     <div className="coach_image p-6 sm:p-10">
                       <img
@@ -560,12 +529,10 @@ const CoachPage = () => {
                           : "Show More"}
                       </button>
                     </div>
-                {/* Book Appointment Button */}
                 <div className="book_appointment mt-5">
                   <Button onClick={handleDialogToggle}>Book Now</Button>
                 </div>
 
-                {/* Tabs Section */}
                 <div className="coach_details_tabs my-10">
                   <Tabs defaultValue="about">
                     <TabsList className="flex flex-wrap">
