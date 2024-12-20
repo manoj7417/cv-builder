@@ -295,6 +295,7 @@ const CoachForm = () => {
           const cvUrl = response.data.url;
           setValue("cvUpload", cvUrl); // Set CV URL in form data
           setCvFileUrl(cvUrl); // Set URL to state for further use
+          toast.success("Cv uploaded successfully.");
         } else {
           console.error("CV upload failed.");
         }
@@ -711,7 +712,7 @@ const CoachForm = () => {
         </>
       ) : (
         <>
-          <section className="px-10 py-5">
+          <section className="lg:px-10 px-2 py-5">
             {/* steps */}
             <nav aria-label="Progress">
               <ol
@@ -773,8 +774,8 @@ const CoachForm = () => {
                   </p>
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-full">
-                      <div className="flex">
-                        <div className="mt-4  w-1/2">
+                      <div className="flex lg:flex-row flex-col">
+                        <div className="mt-4  lg:w-1/2 w-full">
                           <div className="flex">
                             <img
                               src={imageUrl || defaultImage}
@@ -816,7 +817,7 @@ const CoachForm = () => {
                             {errors?.profileImage?.message}
                           </p>
                         </div>
-                        <div className="sm:col-span-3 w-1/2 flex flex-col justify-center pl-4">
+                        <div className="sm:col-span-3 lg:w-1/2 w-full flex flex-col justify-center lg:pl-4 pl-0">
                           <label
                             htmlFor="fullname"
                             className="block text-sm font-medium leading-6 text-gray-900"
@@ -1033,12 +1034,12 @@ const CoachForm = () => {
                       >
                         Upload CV (PDF only)
                       </label>
-                      <div className="flex gap-5 items-center">
+                      <div className="flex lg:flex-row flex-col gap-5 lg:items-center items-start">
                         <div className="mt-2">
                           {/* Controller for handling file input */}
                           <label
                             htmlFor="cvUpload"
-                            className="flex items-center cursor-pointer space-x-2 text-sky-600"
+                            className="flex items-center cursor-pointer space-x-2 text-sky-600 "
                           >
                             {isUploadingCV ? (
                               <>
@@ -1063,7 +1064,7 @@ const CoachForm = () => {
                         <div className="mt-2 flex items-center space-x-2 text-green-600">
                           {cvFile ? (
                             <>
-                              <span>{cvFileUrl?.split("/")?.pop()}</span>
+                              <span className="text-sm">{cvFileUrl?.split("/")?.pop()}</span>
                               <FaCheckCircle className="text-xl" />
 
                               {/* View PDF Icon */}
@@ -1197,14 +1198,14 @@ const CoachForm = () => {
                       >
                         Skills
                       </label>
-                      <div className="mt-2 relative flex justify-between">
+                      <div className="mt-2 relative flex lg:flex-row flex-col gap-5 justify-between">
                         <Controller
                           name="skills"
                           className="absolute top-0 left-0"
                           control={control}
                           render={({ field }) => (
                             <Select onValueChange={field.onChange}>
-                              <SelectTrigger className="w-[78%]">
+                              <SelectTrigger className="lg:w-[78%] w-full">
                                 <SelectValue placeholder="Select a skills" />
                               </SelectTrigger>
                               <SelectContent>
@@ -1220,7 +1221,7 @@ const CoachForm = () => {
                           )}
                         />
                         <Button
-                          className="w-[20%]"
+                          className="lg:w-[20%] w-full"
                           type="button"
                           onClick={() => setIsDialogOpen(true)}
                         >
@@ -1555,7 +1556,7 @@ const CoachForm = () => {
 
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-full">
-                      <div className="flex justify-between items-center">
+                      <div className="flex lg:flex-row gap-5 justify-between lg:items-center items-start">
                         <label
                           htmlFor="cvUpload"
                           className="block text-sm font-medium leading-6 text-gray-900"
@@ -1580,7 +1581,7 @@ const CoachForm = () => {
                       </div>
                       <div className="flex gap-5 items-center">
                         <div className="mt-2">
-                          <div className="flex items-center ">
+                          <div className="flex lg:flex-row flex-col lg:items-center items-start">
                             <label
                               htmlFor="docsUpload"
                               className="flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 "
@@ -1609,7 +1610,7 @@ const CoachForm = () => {
                             {docsFile && (
                               <>
                                 <div className="mt-2 flex items-center space-x-2 text-green-600 py-2">
-                                  <span>{docsUrl?.split("/")?.pop()}</span>
+                                  <span className="text-sm">{docsUrl?.split("/")?.pop()}</span>
                                   <FaCheckCircle className="text-xl" />
                                   {/* View PDF Icon */}
                                   {docsUrl && (
