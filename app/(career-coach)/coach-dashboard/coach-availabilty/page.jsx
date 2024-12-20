@@ -1,6 +1,6 @@
 "use client";
 import { Switch } from "@/components/ui/switch";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import TimeZone from "./TimeZone";
 import DateOverrides from "./DateOverrides";
@@ -8,18 +8,30 @@ import axios from "axios";
 import { GetTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { ImSpinner3 } from "react-icons/im";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { MdDeleteOutline } from "react-icons/md";
 import { FiPlus } from "react-icons/fi";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useCoachStore } from "@/app/store/coachStore";
 import { toast } from "react-toastify";
 
 const CoachAvailability = () => {
-  const { userdata } = useCoachStore(state => state.userState)
+  const { userdata } = useCoachStore((state) => state.userState);
   const [dateOverridesData, setDateOverridesData] = useState(null);
-  const [dateOverrides, setDateOverrides] = useState([])
-  const [isupdatingdata, setIsUpdatingData] = useState(false)
+  const [dateOverrides, setDateOverrides] = useState([]);
+  const [isupdatingdata, setIsUpdatingData] = useState(false);
   const daysOfWeek = [
     "Sunday",
     "Monday",
@@ -54,7 +66,7 @@ const CoachAvailability = () => {
     "8:00 PM",
     "9:00 PM",
     "10:00 PM",
-    "11:00 PM"
+    "11:00 PM",
   ];
 
   const currentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -66,13 +78,15 @@ const CoachAvailability = () => {
 
   const { control, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
-      availabilityDays: userdata?.availability?.dates?.length > 0 ? userdata.availability.dates : defaultAvailabilityDays,
+      availabilityDays:
+        userdata?.availability?.dates?.length > 0
+          ? userdata.availability.dates
+          : defaultAvailabilityDays,
       timeZone: currentTimeZone,
     },
   });
 
-
-  const watchAvailabilityDays = watch("availabilityDays")
+  const watchAvailabilityDays = watch("availabilityDays");
 
   const handleSwitchChange = (i) => {
     const updatedDays = [...watchAvailabilityDays];
@@ -85,27 +99,31 @@ const CoachAvailability = () => {
   };
 
   const onSubmit = async (data) => {
-    const dates = data.availabilityDays
-    setIsUpdatingData(true)
-    const { accessToken } = await GetTokens()
+    const dates = data.availabilityDays;
+    setIsUpdatingData(true);
+    const { accessToken } = await GetTokens();
     const result = {
       dates,
       timeZone: data.timeZone,
       dateOverrides,
     };
     try {
-      const response = await axios.patch("/api/updateCoachAvailability", result, {
-        headers: {
-          Authorization: `Bearer ${accessToken?.value}`
+      const response = await axios.patch(
+        "/api/updateCoachAvailability",
+        result,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken?.value}`,
+          },
         }
-      })
+      );
       if (response.status === 200) {
-        toast.success("Availability updated")
+        toast.success("Availability updated");
       }
     } catch (error) {
-      toast.error("Error updating availability")
+      toast.error("Error updating availability");
     } finally {
-      setIsUpdatingData(false)
+      setIsUpdatingData(false);
     }
   };
 
@@ -115,9 +133,8 @@ const CoachAvailability = () => {
     return timeSlot.filter((_, idx) => idx > selectedIndex);
   };
 
-
   const getLastEndTime = (dayIndex, index) => {
-    const slotLength = watchAvailabilityDays[dayIndex]?.slots.length - 1
+    const slotLength = watchAvailabilityDays[dayIndex]?.slots.length - 1;
     const lastField = watchAvailabilityDays[dayIndex]?.slots[slotLength];
     return lastField?.endTime || "";
   };
@@ -138,9 +155,6 @@ const CoachAvailability = () => {
     setValue("availabilityDays", updatedDays);
   };
 
-
-
-
   const handleSelectChange = (index, fieldName, value, dayIndex) => {
     setValue(`availabilityDays.${dayIndex}.slots.${index}.${fieldName}`, value);
   };
@@ -149,14 +163,19 @@ const CoachAvailability = () => {
     const selectedTimeIndex = timeSlot.findIndex((slot) => slot === time);
     if (selectedTimeIndex === -1) return [];
     const availableEndTimes = timeSlot.slice(selectedTimeIndex + 1);
-    return availableEndTimes
-  }
+    return availableEndTimes;
+  };
 
+  useEffect(() => {
+    if (userdata?.availability) {
+      setValue("availabilityDays", userdata.availability.dates);
+    }
+  }, [userdata]);
 
+  
   return (
     <div className="w-full mx-auto mt-18 lg:p-10 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
       <div className="main_heading my-5 mt-10">
-        
         <h1 className="text-xl text-blue-950 font-bold">Time Availabilty</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -178,11 +197,12 @@ const CoachAvailability = () => {
                       checked={day.isAvailable}
                       onCheckedChange={() => handleSwitchChange(dayIndex)}
                     />
-                    <p className="text-gray-800 font-semibold">{day.dayOfWeek}</p>
+                    <p className="text-gray-800 font-semibold">
+                      {day.dayOfWeek}
+                    </p>
                   </div>
 
-                  {
-                    day.isAvailable &&
+                  {day.isAvailable && (
                     <div className="w-full">
                       {day.slots.map((slot, index) => (
                         <div
@@ -195,7 +215,18 @@ const CoachAvailability = () => {
                                 name={`availability.${dayIndex}.slots.${index}.startTime`}
                                 control={control}
                                 render={({ field }) => (
-                                  <Select {...field} value={slot.startTime} onValueChange={(value) => handleSelectChange(index, 'startTime', value, dayIndex)}>
+                                  <Select
+                                    {...field}
+                                    value={slot.startTime}
+                                    onValueChange={(value) =>
+                                      handleSelectChange(
+                                        index,
+                                        "startTime",
+                                        value,
+                                        dayIndex
+                                      )
+                                    }
+                                  >
                                     <SelectTrigger className="w-[150px]">
                                       <SelectValue placeholder="Select a time" />
                                     </SelectTrigger>
@@ -219,13 +250,27 @@ const CoachAvailability = () => {
                                 name={`availability.${dayIndex}.slots.${index}.endTime`}
                                 control={control}
                                 render={({ field }) => (
-                                  <Select {...field} value={slot.endTime} onValueChange={(value) => handleSelectChange(index, 'endTime', value, dayIndex)}>
+                                  <Select
+                                    {...field}
+                                    value={slot.endTime}
+                                    onValueChange={(value) =>
+                                      handleSelectChange(
+                                        index,
+                                        "endTime",
+                                        value,
+                                        dayIndex
+                                      )
+                                    }
+                                  >
                                     <SelectTrigger className="w-[150px]">
                                       <SelectValue placeholder="Select a time" />
                                     </SelectTrigger>
                                     <SelectContent>
                                       <SelectGroup>
-                                        {GetendTimeSlots(slot.startTime, dayIndex).map((time, idx) => (
+                                        {GetendTimeSlots(
+                                          slot.startTime,
+                                          dayIndex
+                                        ).map((time, idx) => (
                                           <SelectItem key={idx} value={time}>
                                             {time}
                                           </SelectItem>
@@ -243,7 +288,9 @@ const CoachAvailability = () => {
                                   <TooltipTrigger asChild>
                                     <button
                                       type="button"
-                                      onClick={() => handleDeleteSlot(dayIndex, index)}
+                                      onClick={() =>
+                                        handleDeleteSlot(dayIndex, index)
+                                      }
                                       className="text-red-600 flex items-center justify-center hover:bg-gray-100 p-2 rounded-md"
                                       aria-label="Delete time slot"
                                     >
@@ -259,7 +306,9 @@ const CoachAvailability = () => {
                                   <TooltipTrigger asChild>
                                     <button
                                       type="button"
-                                      onClick={() => handleAddSlots(dayIndex, index)}
+                                      onClick={() =>
+                                        handleAddSlots(dayIndex, index)
+                                      }
                                       className="text-blue-950 flex items-center justify-center hover:bg-gray-100 p-2 rounded-md"
                                       aria-label="Add time slot"
                                     >
@@ -274,10 +323,9 @@ const CoachAvailability = () => {
                             </TooltipProvider>
                           </div>
                         </div>
-                      ))
-                      }
-                    </div >
-                  }
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -289,7 +337,6 @@ const CoachAvailability = () => {
                 dateOverrides={dateOverrides}
                 setDateOverrides={setDateOverrides}
               />
-
             </div>
           </div>
           <div className="lg:w-[30%] w-full time_zone">
@@ -309,11 +356,13 @@ const CoachAvailability = () => {
             disabled={isupdatingdata}
             className="bg-blue-950 text-white px-5 py-2"
           >
-            {
-              isupdatingdata ?
-                <>Saving <ImSpinner3 className="animate-spin text-xl ml-2" /></> :
-                "Save"
-            }
+            {isupdatingdata ? (
+              <>
+                Saving <ImSpinner3 className="animate-spin text-xl ml-2" />
+              </>
+            ) : (
+              "Save"
+            )}
           </Button>
         </div>
       </form>

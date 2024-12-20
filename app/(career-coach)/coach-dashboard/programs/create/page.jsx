@@ -32,7 +32,13 @@ const PrerequisitesFieldArray = dynamic(
 import { ProgramValidationSchema } from "./ProgramValidationSchema";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function CreateProgram() {
   const [isMounted, setIsMounted] = useState(false);
@@ -63,13 +69,13 @@ function CreateProgram() {
       description: "",
       prerequisites: [],
       days: [],
-      currency : "GBP"
+      currency: "GBP",
     },
   });
   const profileImage = watch("programImage");
   const programVideo = watch("programVideo");
   const content = watch("content");
-  const currency = watch('currency')
+  const currency = watch("currency");
   const handleCreateProgram = async (data) => {
     const { accessToken } = await GetTokens();
     try {
@@ -86,6 +92,7 @@ function CreateProgram() {
         router.push("/coach-dashboard/programs");
       }
     } catch (error) {
+      console.log(error);
       toast.error("Error creating program");
     } finally {
       setIscreatingProgram(false);
