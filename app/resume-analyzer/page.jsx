@@ -299,19 +299,11 @@ export default function DashboardIdea() {
           <div className='flex flex-col max-w-8xl text-center px-8  lg:px-32 pt-16 sm:pt-28'>
             <div className=' flex flex-col'>
               <h1 className='text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 lg:px-32'>
-                An <span className='text-blue-600'>Optimised CV</span> goes a
+                An <span className='text-blue-600'> ATS Resume </span> goes a
                 Long Way
               </h1>
               <p className='text-gray-700 text-sm lg:text-md sm:text-lg lg:px-32'>
-                Wondering why your CV does not get through the initial rounds of
-                selection? Analyse your CV with our AI-based CV Optimiser and
-                get industry expertise integrated to create an Application
-                Tracking System (ATS) friendly resume and flawless application
-                profile that gets passed through{" "}
-                <Link href='/resume-analyzer' className='font-bold'>
-                  ATS CV checker
-                </Link>{" "}
-                .
+              Wondering why your CV does not get through the initial rounds of selection? Analyse your CV for ATS compatibility with our AI-based ATS Resume Checker. Get industry expertise integrated to create an Application Tracking system-friendly resume and flawless application profile that gets passed through the ATS CV checker.
               </p>
               <Dialog open={isServiceDialogOpen}>
                 <ServicesPopUp

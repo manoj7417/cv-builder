@@ -1,8 +1,8 @@
 export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
-  title: "ATS Resume Checker | Build an ATS Enhanced Resume",
+  title: "Best ATS CV Checker Online | Check Resume for ATS Now ",
   description:
-    "Use our Application Tracking System Resume Optimizer and Analyzer to create an enhanced resume with proper resume formatting and ATS CV Checker compatibility.",
+    "Use the Genies Career Hub ATS CV checker to check resume for ATS. Optimise it further for getting a job-winning application tracking system ATS resume",
   openGraph: {
     title: "ATS Resume Checker | Build an ATS Enhanced Resume",
     description:
