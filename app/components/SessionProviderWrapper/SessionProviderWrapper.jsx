@@ -14,7 +14,7 @@ function TokenRefresher() {
 
       if (!currentSession || currentSession.error === "RefreshAccessTokenError") {
         console.error("Session expired or refresh failed. Logging out...");
-        signOut(); // Log the user out if token refresh fails
+        signOut({ redirect: false }); // Log the user out if token refresh fails
       }
     }, 5 * 60 * 1000); // Refresh every 5 minutes
 

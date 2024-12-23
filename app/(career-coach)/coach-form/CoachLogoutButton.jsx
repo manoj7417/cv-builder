@@ -1,7 +1,7 @@
 "use client";
 import { RemoveTokens } from "@/app/actions";
 import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { RiArrowLeftSLine } from "react-icons/ri";
@@ -14,9 +14,10 @@ const CoachLogoutButton = () => {
     try {
       await RemoveTokens();
       toast.success("Logged out");
-      signOut();
+      signOut({redirect: false});
       router.push("/coach-signin");
     } catch (error) {
+      console.error(error);
       toast.error("Error logging out");
     }
   };

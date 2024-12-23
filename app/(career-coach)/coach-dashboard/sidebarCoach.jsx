@@ -73,10 +73,9 @@ const SidebarCoach = () => {
   const handleLogout = async () => {
     try {
       await RemoveTokens();
-      await signOut();
+      await signOut({ redirect: false });
       toast.success("Logged out");
       router.push("/coach-signin");
-      signOut();
     } catch (error) {
       toast.error("Error logging out");
     }
@@ -92,9 +91,12 @@ const SidebarCoach = () => {
       const response = await axios.post("/api/coachAccount", data);
       if (response.status === 200) {
         updateUserData(response.data.data.userdata);
+        
       }
     } catch (error) {
       await RemoveTokens();
+      signOut({ redirect: false });
+      toast.error("Error logging in");
       router.push("/coach-signin");
     }
   };
