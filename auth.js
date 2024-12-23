@@ -74,7 +74,7 @@ export default NextAuth({
         ...session.user,
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
-        idToken: token.idToken, // Add idToken here
+        idToken: token.idToken, 
       };
       return session;
     },

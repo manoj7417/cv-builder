@@ -52,7 +52,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await RemoveTokens();
-      await signOut();
+      await signOut({ redirect: false });
       toast.success("Logged out");
       router.push("/login");
     } catch (error) {
