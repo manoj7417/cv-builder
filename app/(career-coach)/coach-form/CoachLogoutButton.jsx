@@ -14,6 +14,7 @@ const CoachLogoutButton = () => {
     try {
       await RemoveTokens();
       toast.success("Logged out");
+      signOut();
       router.push("/coach-signin");
     } catch (error) {
       toast.error("Error logging out");
