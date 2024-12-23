@@ -38,7 +38,7 @@ const ResumeBuilderPage = () => {
   const { clearResumeData } = useResumeStore(state => state)
   const handleLogout = async () => {
     await RemoveTokens();
-    await signOut();
+    await signOut({ redirect: false });
     toast.success("User logout successfully", {
       position: "top-right",
     });

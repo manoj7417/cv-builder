@@ -449,7 +449,7 @@ const CoachProfile = () => {
                               <input
                                 type='file'
                                 accept='image/*'
-                                hidden='true'
+                                hidden
                                 onChange={handleImageUpload}
                               />
                             </label>

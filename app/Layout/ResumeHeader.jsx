@@ -81,7 +81,7 @@ export function ResumeHeader() {
 
   const handleLogout = async () => {
     await RemoveTokens();
-    await signOut();
+    await signOut({ redirect: false });
     toast.success("User logout successfully", {
       position: "top-right",
     });
