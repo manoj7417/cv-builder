@@ -27,8 +27,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import PaymentSetup from "../components/PaymentSetup/PaymentSetup";
-import 'react-credit-cards-2/dist/es/styles-compiled.css'
-
+import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -50,7 +49,8 @@ const PricingFunc = () => {
   const router = useRouter();
   const userState = useUserStore((state) => state.userState);
   const [selectedPlan, setSelectedPlan] = useState("monthly");
-  const [couponCode, setCouponCode] = useState("");
+  // const [couponCode, setCouponCode] = useState("");
+  const couponCode = "TRIAL14";
   const [discount, setcouDiscount] = useState(0);
   const [couloading, setcouLoading] = useState(false);
   const [couponError, setCouponError] = useState("");
@@ -266,7 +266,7 @@ const PricingFunc = () => {
     } catch (error) {
       console.error("Payment error:", error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -301,22 +301,26 @@ const PricingFunc = () => {
           },
         }
       );
-      if(response.status === 200 && response.data.error === "Trial coupon already redeemed"){
+      if (
+        response.status === 200 &&
+        response.data.error === "Trial coupon already redeemed"
+      ) {
         toast.error("Trial coupon already redeemed");
-      }
-      else if (response.status === 200 && response.data.message === "Setup link created. Card details need to be provided."){
+      } else if (
+        response.status === 200 &&
+        response.data.message ===
+          "Setup link created. Card details need to be provided."
+      ) {
         if (response.data.clientSecret) {
           setClientSecret(response.data.clientSecret);
-          setIsFreeDialogOpen(true)
+          setIsFreeDialogOpen(true);
           setIsDialogOpen(false);
         } else {
           const { url } = response.data;
           window.location = url;
         }
       }
-      
     } catch (error) {
-    
       if (
         error.response.status === 401 &&
         error.response.data.error === "Unauthorized"
@@ -342,8 +346,13 @@ const PricingFunc = () => {
 
       if (response.status === 200) {
         const { discount } = response.data;
-        setcouDiscount(discount); // Update the discount state
-        toast.success("Coupon applied successfully!");
+        setcouDiscount(discount);
+        if (couponCode === "TRIAL14") {
+          setIsTrialSelected(true);
+          toast.success("Trial coupon applied successfully!");
+        } else {
+          toast.success("Coupon applied successfully!");
+        }
         setcouLoading(false);
         setCouponApplied(true);
       }
@@ -532,27 +541,34 @@ const PricingFunc = () => {
           </div>
         </DialogContent>
       </Dialog> */}
-      <Dialog open={isFreeDialogOpen} onClose={() => setIsFreeDialogOpen(false)}>
-      <DialogContent className="max-w-5xl mx-auto p-6" onClick={handleCloseFreeDialog} showCloseButton>
-        <DialogHeader>
-          <DialogTitle className="text-3xl text-blue-800">
-            Enter Card Details
-          </DialogTitle>
-        </DialogHeader>
-        <PaymentSetup
-          clientSecret={clientSecret}
-          onSuccess={() => {
-            toast.success("Card details saved successfully!");
-            setClientSecret(null);
-            setIsDialogOpen(false);
-          }}
-        />
-      </DialogContent>
+      <Dialog
+        open={isFreeDialogOpen}
+        onClose={() => setIsFreeDialogOpen(false)}
+      >
+        <DialogContent
+          className="max-w-5xl mx-auto p-6"
+          onClick={handleCloseFreeDialog}
+          showCloseButton
+        >
+          <DialogHeader>
+            <DialogTitle className="text-3xl text-blue-800">
+              Enter Card Details
+            </DialogTitle>
+          </DialogHeader>
+          <PaymentSetup
+            clientSecret={clientSecret}
+            onSuccess={() => {
+              toast.success("Card details saved successfully!");
+              setClientSecret(null);
+              setIsDialogOpen(false);
+            }}
+          />
+        </DialogContent>
       </Dialog>
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent
-          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-[75%] lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
+          className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-auto lg:h-[95%] h-[500px] lg:overflow-visible overflow-y-scroll"
           showCloseButton={true}
           onClick={handleCloseAIDialog}
         >
@@ -589,13 +605,13 @@ const PricingFunc = () => {
                     </ul>
                   </div>
                   {selectedCard?.id === 1 && (
-                    <div className="coupon_section text-start mt-6">
+                    <div className="coupon_section text-start mt-10">
                       <p className="font-semibold text-sm my-5">
                         Apply Coupon Code Here
                       </p>
 
                       {/* Trial checkbox */}
-                      <div
+                      {/* <div
                         className={`relative flex items-center mb-4 p-2 rounded-md border-2 cursor-pointer ${
                           isTrialSelected
                             ? "border-green-500"
@@ -616,11 +632,11 @@ const PricingFunc = () => {
                           is a 14 days free trial pack. After 14 days, the price
                           will be charged automatically.
                         </span>
-                      </div>
+                      </div> */}
 
                       {/* Input field and apply button */}
                       <div className="mb-4 flex justify-between items-center gap-5">
-                        <input
+                        {/* <input
                           type="text"
                           placeholder="Enter coupon code"
                           value={couponCode} // Bind the state
@@ -629,11 +645,32 @@ const PricingFunc = () => {
                           className={`border px-4 py-2 rounded-md w-full ${
                             couponApplied ? "bg-gray-200" : "border-gray-300"
                           }`}
-                        />
+                        /> */}
+                        <div
+                          className={`relative border-2 border-dotted rounded-md py-2 px-4 flex items-center justify-center w-full transition-colors duration-300 ${
+                            couponApplied
+                              ? "bg-green-200 border-green-500"
+                              : couponError
+                              ? "bg-red-100 border-red-500"
+                              : "bg-blue-50 border-blue-500 hover:bg-blue-100"
+                          }`}
+                        >
+                          <span
+                            className={`font-semibold text-sm ${
+                              couponApplied
+                                ? "text-green-700"
+                                : couponError
+                                ? "text-red-700"
+                                : "text-blue-500"
+                            }`}
+                          >
+                            {couponCode}
+                          </span>
+                        </div>
                         <button
                           onClick={applyCoupon}
-                          className="bg-blue-950 text-white px-5 py-2 rounded-md text-base"
-                          disabled={couloading || couponApplied || !couponCode}
+                          className="bg-blue-950 text-white px-5 py-2 rounded-md text-sm"
+                          disabled={couloading || couponApplied}
                         >
                           {couloading
                             ? "Applying..."
@@ -655,7 +692,7 @@ const PricingFunc = () => {
                     </div>
                   )}
                 </div>
-                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                {/* <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
                   <div className="text-center">
                     <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">
                       {selectedCard?.discount}% off
@@ -754,11 +791,147 @@ const PricingFunc = () => {
                       </div>
                     )}
                   </div>
+                  <div className="upgrade_button text-end mt-5">
+                    <Button
+                      className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                      onClick={() => UpgradePlan(selectedCard)}
+                      disabled={loading}
+                    >
+                      {loading ? (
+                        <>
+                          Upgrading <FaSpinner className="animate-spin ml-2" />
+                        </>
+                      ) : (
+                        "Upgrade Now"
+                      )}
+                    </Button>
+                  </div>
+                </div> */}
+                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                  <div className="text-center">
+                    <p className="text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">
+                      {isTrialSelected
+                        ? "100% off"
+                        : `${selectedCard?.discount}% off`}
+                    </p>
+                    {selectedCard?.choosePlan && !isTrialSelected && (
+                      <p className="text-lg sm:text-xl text-gray-500">
+                        Choose your plan
+                      </p>
+                    )}
+                    <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
+                      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
+                        {isTrialSelected // Check if trial coupon is selected
+                          ? "$0" // Display $0 if trial coupon is selected
+                          : selectedPlan === "monthly"
+                          ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
+                          : `${selectedCard["DP"].symbol}${
+                              +selectedCard["DP"].price * 10
+                            }`}
+                      </h1>
+                      <p className="text-gray-500 text-xs sm:text-sm px-2 line-through">
+                        {isTrialSelected // Check if trial coupon is selected
+                          ? "$0" // Display $0 for the crossed out price if trial coupon is selected
+                          : selectedPlan === "monthly"
+                          ? `${selectedCard["MP"].symbol}${selectedCard["MP"].price}`
+                          : `${selectedCard["MP"].symbol}${
+                              +selectedCard["MP"].price * 10
+                            }`}
+                      </p>
+                      <p className="text-gray-500 text-xs px-2">
+                        {selectedPlan === "monthly"
+                          ? selectedCard?.monthLabel
+                          : selectedCard?.yearLabel}
+                      </p>
+                    </div>
+                    {selectedCard?.choosePlan && !isTrialSelected && (
+                      <div className="mt-6 space-y-4 sm:space-y-8">
+                        {/* Monthly and Yearly plan selection */}
+                        <div
+                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                            selectedPlan === "monthly"
+                              ? "border-blue-500 shadow-lg"
+                              : ""
+                          }`}
+                          onClick={() => handlePlanChange("monthly")}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                              Monthly
+                            </div>
+                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                              <p>
+                                {selectedCard["DP"].symbol}
+                                {selectedCard["DP"].price}
+                              </p>
+                              <p className="line-through text-xs ml-1">
+                                {selectedCard["MP"].symbol}
+                                {selectedCard["MP"].price}
+                              </p>
+                            </div>
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={selectedPlan === "monthly"}
+                              onChange={() => handlePlanChange("monthly")}
+                              value="monthly"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                            selectedPlan === "yearly"
+                              ? "border-blue-500 shadow-lg"
+                              : ""
+                          }`}
+                          onClick={() => handlePlanChange("yearly")}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                              Yearly
+                            </div>
+                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                              <p>
+                                {selectedCard["DP"].symbol}
+                                {selectedCard["DP"].price * 10}
+                              </p>
+                              <p className="line-through text-xs ml-1">
+                                {selectedCard["MP"].symbol}
+                                {selectedCard["MP"].price * 10}
+                              </p>
+                            </div>
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={selectedPlan === "yearly"}
+                              onChange={() => handlePlanChange("yearly")}
+                              value="yearly"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="upgrade_button text-end mt-5">
+                    <Button
+                      className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                      onClick={() => UpgradePlan(selectedCard)}
+                      disabled={loading}
+                    >
+                      {loading ? (
+                        <>
+                          Upgrading <FaSpinner className="animate-spin ml-2" />
+                        </>
+                      ) : (
+                        "Upgrade Now"
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           )}
-          <DialogFooter className="mt-4 sm:mt-8 absolute bottom-[20px] right-[20px]">
+          {/* <DialogFooter className="mt-4 sm:mt-8 absolute bottom-[20px] right-[20px]">
             <Button
               className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
               onClick={() => UpgradePlan(selectedCard)}
@@ -772,7 +945,7 @@ const PricingFunc = () => {
                 "Upgrade Now"
               )}
             </Button>
-          </DialogFooter>
+          </DialogFooter> */}
         </DialogContent>
       </Dialog>
     </>

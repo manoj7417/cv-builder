@@ -635,7 +635,7 @@ const CoachForm = () => {
                 <div className="h-32 w-32 p-5 rounded-full bg-yellow-50">
                   <Image
                     src={"/approved.png"}
-                    alt=""
+                    alt="approved"
                     width={100}
                     height={100}
                     className="w-full h-full object-contain"
@@ -689,7 +689,7 @@ const CoachForm = () => {
                     <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
                       <Image
                         src={"/rejected.png"}
-                        alt=""
+                        alt="rejected"
                         width={100}
                         height={100}
                         className="w-full h-full object-contain"

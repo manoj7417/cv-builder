@@ -1203,3 +1203,19 @@ ol > li {
     height: 100% !important;
   }
 }
+
+
+
+.coach_main_div ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.coach_main_div ::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+.coach_main_div ::-webkit-scrollbar-thumb {
+  background: #ccc; 
+}

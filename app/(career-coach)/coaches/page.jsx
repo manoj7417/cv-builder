@@ -135,7 +135,7 @@ const CoachPage = () => {
       <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
           {/* Coach Selection Section */}
-          <div className="coach_card lg:w-[30%] w-full h-auto lg:h-screen lg:sticky top-[100px] overflow-y-scroll no-scrollbar">
+          <div className="coach_card lg:w-[30%] w-full h-auto lg:max-h-[500px] lg:sticky top-[100px] lg:overflow-y-scroll overflow-hidden">
             <h2 className="text-xl lg:text-2xl font-bold">
               Choose the <span className="text-blue-700">coach</span> who aligns
               best with your <span className="text-blue-700">goals.</span>
@@ -160,8 +160,8 @@ const CoachPage = () => {
                       <div
                         key={index}
                         onClick={() => handleSelectCoach(item)}
-                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer lg:border-none border border-gray-300 ${
-                          selectedCoach?._id === item._id ? "bg-blue-50" : ""
+                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer ${
+                          selectedCoach?._id === item._id ? "bg-blue-50 border border-blue-500" : ""
                         }`}
                       >
                         <figure className="flex-shrink-0">
