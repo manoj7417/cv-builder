@@ -758,7 +758,7 @@ const PricingFunc = () => {
               </div>
             </div>
           )}
-          <DialogFooter className="mt-4 sm:mt-8 fixed bottom-[50px] right-[20px]">
+          <DialogFooter className="mt-4 sm:mt-8 absolute bottom-[20px] right-[20px]">
             <Button
               className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
               onClick={() => UpgradePlan(selectedCard)}
