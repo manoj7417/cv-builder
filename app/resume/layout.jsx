@@ -1,13 +1,13 @@
 import React from "react";
 export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
-  title: "Best CV Builder | Top Rated UK CV Format template",
+  title: "Best CV Builder | Top Rated UK CV Format Template",
   description:
-    "Find the best CV template and top-rated UK CV format options for your job application resume on our CV builder.",
+    "Find the best CV template and top-rated UK CV format options for your job application on our CV builder. Build your job-winning resume easily in minutes!",
   openGraph: {
-    title: "Best CV Builder | Top Rated UK CV Format template",
+    title: "Best CV Builder | Top Rated UK CV Format Template",
     description:
-      "Find the best CV template and top-rated UK CV format options for your job application resume on our CV builder.",
+      "Find the best CV template and top-rated UK CV format options for your job application on our CV builder. Build your job-winning resume easily in minutes!",
     url: "/resume",
     images: [
       {
