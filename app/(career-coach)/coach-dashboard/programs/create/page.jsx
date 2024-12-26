@@ -92,7 +92,6 @@ function CreateProgram() {
         router.push("/coach-dashboard/programs");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error creating program");
     } finally {
       setIscreatingProgram(false);
@@ -111,8 +110,8 @@ function CreateProgram() {
       const response = await axios.post("/api/uploadImage", formData);
       if (response.status === 200) {
         const imageUrl = response.data.url;
-        setValue("programImage", imageUrl); // Set value with immediate validation
-        clearErrors("programImage"); // Clear any existing error for this field
+        setValue("programImage", imageUrl); 
+        clearErrors("programImage");
         toast.success("Image uploaded successfully");
       }
     } catch (error) {
@@ -255,26 +254,13 @@ function CreateProgram() {
             </p>
           </div>
           <div className="py-2">
-            <Label>Amount</Label>
+            <Label>Amount (£)</Label>
             <div className="flex items-center">
-              <Select
-                onValueChange={(value) => setValue("currency", value)}
-                defaultValue="GBP"
-              >
-                <SelectTrigger className="w-1/3">
-                  <SelectValue placeholder="Currency" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="GBP">GBP (£)</SelectItem>
-                  <SelectItem value="USD">USD ($)</SelectItem>
-                  <SelectItem value="INR">INR (₹)</SelectItem>
-                </SelectContent>
-              </Select>
               <Input
                 type="number"
                 className="my-2"
                 {...register("amount")}
-                placeholder="Enter amount"
+                placeholder="Enter amount in GBP (£)"
                 min={"1"}
               />
             </div>

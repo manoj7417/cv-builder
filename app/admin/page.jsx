@@ -172,15 +172,15 @@ const AdminPage = () => {
                         <div className="pt-3 pb-3">
                           <img
                             className="h-16 w-16 rounded-full object-cover"
-                            src={coach.profileImage || "/default_coach.png"}
+                            src={coach?.profileImage || "/default_coach.png"}
                             alt="coachImage"
                           />
                         </div>
                         <div className="font-bold text-base text-[#000000]">
-                          {coach.name || "Unnamed Coach"}
+                          {coach?.name || "Unnamed Coach"}
                         </div>
                         <div className="text-[11px] text-[#000000]">
-                          {coach.typeOfCoaching?.slice(0, 20) ||
+                          {coach?.typeOfCoaching?.slice(0, 20) ||
                             "Not specified"}
                           ...
                         </div>
@@ -189,7 +189,7 @@ const AdminPage = () => {
                             href={`/admin/coach`}
                             className={`border p-1 text-[12px] rounded-md ${
                               buttonStyle[
-                                coach.approvalStatus?.toLowerCase()
+                                coach?.approvalStatus?.toLowerCase()
                               ] || ""
                             }`}
                           >
@@ -223,35 +223,35 @@ const AdminPage = () => {
               {coaches?.length > 0 ? (
                 coaches
                   .filter(
-                    (coach) => coach.approvalStatus.toLowerCase() === "approved"
+                    (coach) => coach?.approvalStatus?.toLowerCase() === "approved"
                   )
                   .map((coach) => (
                     <div
-                      key={coach.name}
+                      key={coach?.name}
                       className="flex items-center mb-6 w-full mt-5 pr-5"
                     >
                       <div className="w-16 h-auto overflow-hidden rounded-full">
                         <img
                           className="xl:h-14 xl:w-16 w-12 h-12 rounded-full object-cover"
-                          src={coach.profileImage || "/default_coach.png"}
+                          src={coach?.profileImage || "/default_coach.png"}
                           alt="CoachImage"
                         />
                       </div>
                       <div className="ml-1 flex justify-between w-full">
                         <div>
                           <div className="xl:text-[14px] text-[12px] font-bold text-[#092C4C]">
-                            {coach.name}
+                            {coach?.name}
                           </div>
                           <div className="xl:text-[14px] text-[12px] text-[#7E92A2] xl:mt-2 mt-0">
-                            {coach.typeOfCoaching.slice(0, 20)}...
+                            {coach?.typeOfCoaching?.slice(0, 20)}...
                           </div>
                         </div>
                         <div className="text-right">
                           <div className="xl:text-[14px] text-[12px] font-bold text-[#092C4C]">
-                            {coach.price}
+                            {coach?.price}
                           </div>
                           <div className="xl:text-[14px] text-[12px] text-[#18A53F] xl:mt-2 mt-0 font-bold uppercase">
-                            {coach.approvalStatus}
+                            {coach?.approvalStatus}
                           </div>
                         </div>
                       </div>

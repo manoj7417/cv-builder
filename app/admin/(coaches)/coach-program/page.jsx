@@ -57,7 +57,7 @@ const AdminCoachProgram = () => {
               value="all"
               className="px-4 py-2 text-sm text-blue-500 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-500"
             >
-              All Coache Programs
+              All Coach Programs
             </TabsTrigger>
             <TabsTrigger
               value="accepted"
@@ -190,7 +190,7 @@ const AdminCoachProgram = () => {
                     <FaUser className="text-4xl text-blue-800" />
                   </div>
                   <p className="flex justify-center items-center mt-5">
-                    No Coache Programs Found
+                    No Coach Programs Found
                   </p>
                 </div>
               )}
@@ -268,10 +268,10 @@ const AdminCoachProgram = () => {
                                   </div>
                                 </td>
                                 <td className="px-4 py-4 text-center w-[25%]">
-                                <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                  {getCurrencySymbol(coach?.currency)}{" "}
-                                  {coach?.amount}
-                                </div>
+                                  <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
+                                    {getCurrencySymbol(coach?.currency)}{" "}
+                                    {coach?.amount}
+                                  </div>
                                 </td>
                                 <td className="px-4 py-4 w-[25%]">
                                   <div className="flex justify-center">
@@ -295,7 +295,7 @@ const AdminCoachProgram = () => {
                     <FaUser className="text-4xl text-blue-800" />
                   </div>
                   <p className="flex justify-center items-center mt-5">
-                    No Coache Programs Found
+                    No Coach Programs Found
                   </p>
                 </div>
               )}
@@ -376,10 +376,10 @@ const AdminCoachProgram = () => {
                                   </div>
                                 </td>
                                 <td className="px-4 py-4 text-center w-[25%]">
-                                <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
-                                  {getCurrencySymbol(coach?.currency)}{" "}
-                                  {coach?.amount}
-                                </div>
+                                  <div className="flex gap-1 items-center justify-center text-sm text-gray-900">
+                                    {getCurrencySymbol(coach?.currency)}{" "}
+                                    {coach?.amount}
+                                  </div>
                                 </td>
                                 <td className="px-4 py-4 w-[25%]">
                                   <div className="flex justify-center">
@@ -407,7 +407,7 @@ const AdminCoachProgram = () => {
                     <FaUser className="text-4xl text-blue-800" />
                   </div>
                   <p className="flex justify-center items-center mt-5">
-                    No Coache Programs Found
+                    No Coach Programs Found
                   </p>
                 </div>
               )}

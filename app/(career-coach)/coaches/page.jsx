@@ -30,6 +30,7 @@ const CoachPage = () => {
   });
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
+  const [currency, setCurrency] = useState("USD");
 
   const toggleContent = (type) => {
     setShowFullContent((prev) => ({
@@ -56,7 +57,6 @@ const CoachPage = () => {
       );
       setAllCoaches(approvedCoaches);
 
-      // Set the first approved coach as selected by default
       if (approvedCoaches.length > 0) {
         setSelectedCoach(approvedCoaches[0]);
       }
@@ -76,6 +76,7 @@ const CoachPage = () => {
       .then((response) => {
         let data = response.data;
         setGeoData(data);
+        setCurrency(data.currency);
       })
       .catch((error) => {
         console.error("Error fetching geo information:", error);
@@ -83,7 +84,6 @@ const CoachPage = () => {
   };
 
   const handleBuyProgram = async (course) => {
-    console.log("handleBuyProgram", course);
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches`);
@@ -97,8 +97,8 @@ const CoachPage = () => {
         {
           programId: course._id,
           coachId: course.coachId,
-          amount: course.amount,
-          currency: "USD",
+          amount: currency === "INR" ? course.INRrate : currency === "USD" ? course.USDrate : course.amount,
+          currency: currency === "INR" ? "INR" : currency === "USD" ? "USD" : "GBP",
           success_url: url,
           cancel_url: window.location.href,
         },
@@ -442,8 +442,7 @@ const CoachPage = () => {
                           </div>
                           <div className="coach_price">
                             <div className="text-sm font-bold">
-                              $
-                              {selectedCoach?.programs[selectedProgram]?.amount}
+                            {currency === "INR" ? `₹${selectedCoach?.programs[selectedProgram]?.INRrate}` : currency === "USD" ? `$${selectedCoach?.programs[selectedProgram]?.USDrate}` : `£${selectedCoach?.programs[selectedProgram]?.amount}`}
                             </div>
                           </div>
                         </div>
