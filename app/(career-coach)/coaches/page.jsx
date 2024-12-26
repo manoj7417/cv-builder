@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
-  console.log("coaches::",coaches)
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -136,7 +135,7 @@ const CoachPage = () => {
       <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
           {/* Coach Selection Section */}
-          <div className="coach_card lg:w-[30%] w-full h-auto lg:max-h-[500px] lg:sticky top-[100px] lg:overflow-y-scroll overflow-hidden pr-2">
+          <div className="coach_card lg:w-[30%] w-full h-auto lg:h-screen lg:sticky top-[100px] overflow-y-scroll no-scrollbar">
             <h2 className="text-xl lg:text-2xl font-bold">
               Choose the <span className="text-blue-700">coach</span> who aligns
               best with your <span className="text-blue-700">goals.</span>
@@ -156,7 +155,8 @@ const CoachPage = () => {
                     .filter(
                       (coach) =>
                         coach.isApproved && coach.approvalStatus === "approved"
-                    ).sort((a, b) => {
+                    )
+                    .sort((a, b) => {
                       const hasProgramsA = a.programs?.length > 0;
                       const hasProgramsB = b.programs?.length > 0;
                       return hasProgramsB - hasProgramsA;
@@ -165,8 +165,8 @@ const CoachPage = () => {
                       <div
                         key={index}
                         onClick={() => handleSelectCoach(item)}
-                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer ${
-                          selectedCoach?._id === item._id ? "bg-blue-50 border border-blue-500" : ""
+                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer lg:border-none border border-gray-300 ${
+                          selectedCoach?._id === item._id ? "bg-blue-50" : ""
                         }`}
                       >
                         <figure className="flex-shrink-0">
@@ -182,7 +182,7 @@ const CoachPage = () => {
                               <h3 className="text-base font-medium text-slate-900">
                                 {item.name}
                               </h3>
-                              <p className="text-xs text-slate-800 break-all">
+                              <p className="text-xs text-slate-800 text-wrap">
                                 {item?.email}
                               </p>
                               <Button
@@ -379,39 +379,44 @@ const CoachPage = () => {
             </DialogTitle>
           </DialogHeader>
           <div>
-            {selectedCoach?.programs.length > 0 && selectedCoach?.programs?.isapproved === true ? (
+            {selectedCoach?.programs.length > 0 ? (
               <>
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
                   <div className="coach_related_programs">
                     <ul className="my-5">
-                      {selectedCoach?.programs.map((program, index) => (
-                        <li
-                          key={index}
-                          className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
-                            selectedProgram === index
-                              ? "border-blue-500 bg-blue-100"
-                              : "border-transparent"
-                          }`}
-                          onClick={() =>
-                            setSelectedProgram(
-                              index === selectedProgram ? null : index
-                            )
-                          }
-                        >
-                          <div className="program_inner_content space-y-2 flex gap-5 items-center">
-                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                            <div>
-                              <h3 className="text-sm font-bold">
-                                {program.title}
-                              </h3>
-                              <p className="text-xs">{program.description}</p>
-                            </div>
-                          </div>
-                          <div className="program_price font-bold text-sm">
-                            ${program.amount}
-                          </div>
-                        </li>
-                      ))}
+                      {selectedCoach?.programs.map(
+                        (program, index) =>
+                          program.isapproved === true && (
+                            <li
+                              key={index}
+                              className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
+                                selectedProgram === index
+                                  ? "border-blue-500 bg-blue-100"
+                                  : "border-transparent"
+                              }`}
+                              onClick={() =>
+                                setSelectedProgram(
+                                  index === selectedProgram ? null : index
+                                )
+                              }
+                            >
+                              <div className="program_inner_content space-y-2 flex gap-5 items-center">
+                                <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                                <div>
+                                  <h3 className="text-sm font-bold">
+                                    {program.title}
+                                  </h3>
+                                  <p className="text-xs">
+                                    {program.description}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="program_price font-bold text-sm">
+                                ${program.amount}
+                              </div>
+                            </li>
+                          )
+                      )}
                     </ul>
                   </div>
                   <div className="coach_booking border p-5 rounded-md">
