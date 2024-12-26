@@ -63,6 +63,7 @@ import {
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { Plus } from "lucide-react";
+import CoachSearchBar from "@/components/component/CoachSearchBar";
 
 const CoachForm = () => {
   const steps = [
@@ -146,11 +147,38 @@ const CoachForm = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
   const [options, setOptions] = useState([
-    "Leadership Coaching",
+    "Leadership",
+    "Time Management",
+    "Communication",
+    "Conflict Resolution",
+    "Team Building",
+    "Motivational Speaking",
+    "Performance Coaching",
+    "Strategic Planning",
+    "Career Development",
+    "Emotional Intelligence",
+    "Stress Management",
+    "Public Speaking",
+    "Mentoring",
+    "Negotiation",
+    "Problem Solving",
+    "Interpersonal Skills",
+    "Decision Making",
+    "Change Management",
+    "Project Management",
+    "Organizational Development",
+  ]);
+  const [typeOfCoachingOptions, setTypeOfCoachingOptions] = useState([
     "Career Coaching",
     "Life Coaching",
     "Executive Coaching",
-    "Personal Development",
+    "Health and Wellness Coaching",
+    "Relationship Coaching",
+    "Business Coaching",
+    "Financial Coaching",
+    "Parenting Coaching",
+    "Spiritual Coaching",
+    "Leadership Coaching"
   ]);
   const [newOption, setNewOption] = useState("");
   const [newOptionError, setNewOptionError] = useState("");
@@ -272,11 +300,10 @@ const CoachForm = () => {
     const file = e.target.files[0];
 
     if (file) {
-      // Validate file type
       const validTypes = [
-        "application/pdf", // PDF
-        "application/msword", // DOC
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // DOCX
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       ];
       if (!validTypes.includes(file.type)) {
         alert("Please upload a valid PDF or Word document.");
@@ -285,16 +312,16 @@ const CoachForm = () => {
 
       setIsUploadingCV(true);
       const formData = new FormData();
-      formData.append("cvUpload", file); // Assuming "cvUpload" is the field expected by the backend
+      formData.append("cvUpload", file);
 
       try {
         setIsCvLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); // Adjust API endpoint if needed
+        const response = await axios.post("/api/uploadImage", formData);
 
         if (response.status === 200) {
           const cvUrl = response.data.url;
-          setValue("cvUpload", cvUrl); // Set CV URL in form data
-          setCvFileUrl(cvUrl); // Set URL to state for further use
+          setValue("cvUpload", cvUrl);
+          setCvFileUrl(cvUrl);
           toast.success("Cv uploaded successfully.");
         } else {
           console.error("CV upload failed.");
@@ -529,11 +556,11 @@ const CoachForm = () => {
       });
       if (response.status === 200) {
         const data = response.data.data.userdata;
-        const date = dayjs(data.dateofBirth)
-        if(data?.cv?.link){
+        const date = dayjs(data.dateofBirth);
+        if (data?.cv?.link) {
           setCvFileUrl(data.cv.link);
         }
-        if(data?.signedAggrement?.link){
+        if (data?.signedAggrement?.link) {
           setDocsUrl(data.signedAggrement.link);
         }
         // reset(response.data.data.userdata);
@@ -561,8 +588,7 @@ const CoachForm = () => {
           bankName: data?.bankDetails?.bankName || "",
           ifscCode: data?.bankDetails?.code?.value || "",
           docsUpload: data?.signedAggrement?.link || "",
-          dateofBirth : date,
-
+          dateofBirth: date,
         });
         updateUserData(response.data.data.userdata);
 
@@ -635,7 +661,7 @@ const CoachForm = () => {
                 <div className="h-32 w-32 p-5 rounded-full bg-yellow-50">
                   <Image
                     src={"/approved.png"}
-                    alt=""
+                    alt="approved"
                     width={100}
                     height={100}
                     className="w-full h-full object-contain"
@@ -689,7 +715,7 @@ const CoachForm = () => {
                     <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
                       <Image
                         src={"/rejected.png"}
-                        alt=""
+                        alt="rejected"
                         width={100}
                         height={100}
                         className="w-full h-full object-contain"
@@ -1063,7 +1089,9 @@ const CoachForm = () => {
                         <div className="mt-2 flex items-center space-x-2 text-green-600">
                           {cvFile ? (
                             <>
-                              <span className="text-sm">{cvFileUrl?.split("/")?.pop()}</span>
+                              <span className="text-sm">
+                                {cvFileUrl?.split("/")?.pop()}
+                              </span>
                               <FaCheckCircle className="text-xl" />
 
                               {/* View PDF Icon */}
@@ -1198,7 +1226,12 @@ const CoachForm = () => {
                         Skills
                       </label>
                       <div className="mt-2 relative flex lg:flex-row flex-col gap-5 justify-between">
-                        <Controller
+                        <CoachSearchBar
+                          name="skills"
+                          control={control}
+                          options={options}
+                        />
+                        {/* <Controller
                           name="skills"
                           className="absolute top-0 left-0"
                           control={control}
@@ -1256,7 +1289,7 @@ const CoachForm = () => {
                               )}
                             </div>
                           </DialogContent>
-                        </Dialog>
+                        </Dialog> */}
                       </div>
                       {errors.skills?.message && (
                         <p className="mt-2 text-sm text-red-400">
@@ -1372,7 +1405,7 @@ const CoachForm = () => {
                         Type of Coaching
                       </label>
                       <div className="mt-2">
-                        <Controller
+                        {/* <Controller
                           name="typeOfCoaching"
                           control={control}
                           render={({ field }) => (
@@ -1398,6 +1431,11 @@ const CoachForm = () => {
                               </SelectContent>
                             </Select>
                           )}
+                        /> */}
+                         <CoachSearchBar
+                          name="typeOfCoaching"
+                          control={control}
+                          options={typeOfCoachingOptions}
                         />
                         {errors.typeOfCoaching?.message && (
                           <p className="mt-2 text-sm text-red-400">
@@ -1609,7 +1647,9 @@ const CoachForm = () => {
                             {docsFile && (
                               <>
                                 <div className="mt-2 flex items-center space-x-2 text-green-600 py-2">
-                                  <span className="text-sm">{docsUrl?.split("/")?.pop()}</span>
+                                  <span className="text-sm">
+                                    {docsUrl?.split("/")?.pop()}
+                                  </span>
                                   <FaCheckCircle className="text-xl" />
                                   {/* View PDF Icon */}
                                   {docsUrl && (

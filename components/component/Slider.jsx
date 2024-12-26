@@ -242,7 +242,7 @@ export default function Slider() {
           <br />
           <span className="flex text-[#2C98CA] lg:text-5xl text-3xl justify-center mt-2">
             Perfection
-            <Image priority src="/Vector.svg" height={37} width={39} alt="vector" />{" "}
+            <Image priority src="/Vector.svg" height={37} width={39} alt="vector" />
           </span>
         </h3>
         <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">

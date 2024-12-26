@@ -1,15 +1,24 @@
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
+import { useController } from "react-hook-form";
 
-const SearchBar = ({ options, setJobRole, jobRole }) => {
+const CoachSearchBar = ({ name, control, options }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
+  
+  const {
+    field: { value, onChange },
+  } = useController({
+    name,
+    control,
+    defaultValue: "", // Initial value for the controlled input
+  });
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setJobRole(value);
-    if (value) {
-      const filtered = options.filter(option =>
-        option.toLowerCase().includes(value.toLowerCase())
+    const inputValue = e.target.value;
+    onChange(inputValue); // Update React Hook Form state
+    if (inputValue) {
+      const filtered = options.filter((option) =>
+        option.toLowerCase().includes(inputValue.toLowerCase())
       );
       setFilteredOptions(filtered);
     } else {
@@ -18,7 +27,7 @@ const SearchBar = ({ options, setJobRole, jobRole }) => {
   };
 
   const handleOptionClick = (option) => {
-    setJobRole(option);
+    onChange(option); // Update React Hook Form state with selected option
     setFilteredOptions([]);
   };
 
@@ -26,7 +35,7 @@ const SearchBar = ({ options, setJobRole, jobRole }) => {
     <div className="relative w-full">
       <Input
         type="text"
-        value={jobRole}
+        value={value}
         onChange={handleInputChange}
         className="p-2 border rounded w-full text-gray-500 caret-blue-900"
         placeholder="Job Title / Job Role / Profession"
@@ -35,7 +44,7 @@ const SearchBar = ({ options, setJobRole, jobRole }) => {
       {filteredOptions.length > 0 && (
         <ul
           className="absolute left-0 right-0 bg-white text-gray-500 border mt-1 rounded shadow-lg z-10"
-          style={{ maxHeight: '160px', overflowY: 'auto' }}
+          style={{ maxHeight: "160px", overflowY: "auto" }}
         >
           {filteredOptions.map((option, index) => (
             <li
@@ -52,4 +61,4 @@ const SearchBar = ({ options, setJobRole, jobRole }) => {
   );
 };
 
-export default SearchBar;
+export default CoachSearchBar;

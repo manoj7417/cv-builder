@@ -74,6 +74,7 @@
     "lodash.set": "^4.3.2",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.376.0",
+    "mammoth": "^1.8.0",
     "mini-svg-data-uri": "^1.4.4",
     "moment-timezone": "^0.5.45",
     "next": "14.0.4",

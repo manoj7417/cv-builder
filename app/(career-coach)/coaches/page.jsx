@@ -156,6 +156,11 @@ const CoachPage = () => {
                       (coach) =>
                         coach.isApproved && coach.approvalStatus === "approved"
                     )
+                    .sort((a, b) => {
+                      const hasProgramsA = a.programs?.length > 0;
+                      const hasProgramsB = b.programs?.length > 0;
+                      return hasProgramsB - hasProgramsA;
+                    })
                     .map((item, index) => (
                       <div
                         key={index}
@@ -379,37 +384,39 @@ const CoachPage = () => {
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
                   <div className="coach_related_programs">
                     <ul className="my-5">
-                      {selectedCoach?.programs.map((program, index) => (
-                        <li
-                          key={index}
-                          className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
-                            selectedProgram === index
-                              ? "border-blue-500 bg-blue-100"
-                              : "border-transparent"
-                          }`}
-                          onClick={() =>
-                            setSelectedProgram(
-                              index === selectedProgram ? null : index
-                            )
-                          }
-                        >
-                          <div className="program_inner_content space-y-2 flex gap-5 items-center">
-                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                            <div>
-                              <h3 className="text-sm font-bold">
-                                {program.title}
-                              </h3>
-                              <p className="text-xs">{program.description}</p>
-                            </div>
-                          </div>
-                          <div className="program_price font-bold text-sm">
-                            {
-                              console.log(program.amount)
-                            }
-                          {currency === "INR" ? `₹${program?.INRrate}` : currency === "USD" ? `$${program?.USDrate}` : `£${program?.amount}`}
-                          </div>
-                        </li>
-                      ))}
+                      {selectedCoach?.programs.map(
+                        (program, index) =>
+                          program.isapproved === true && (
+                            <li
+                              key={index}
+                              className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
+                                selectedProgram === index
+                                  ? "border-blue-500 bg-blue-100"
+                                  : "border-transparent"
+                              }`}
+                              onClick={() =>
+                                setSelectedProgram(
+                                  index === selectedProgram ? null : index
+                                )
+                              }
+                            >
+                              <div className="program_inner_content space-y-2 flex gap-5 items-center">
+                                <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                                <div>
+                                  <h3 className="text-sm font-bold">
+                                    {program.title}
+                                  </h3>
+                                  <p className="text-xs">
+                                    {program.description}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="program_price font-bold text-sm">
+                                ${program.amount}
+                              </div>
+                            </li>
+                          )
+                      )}
                     </ul>
                   </div>
                   <div className="coach_booking border p-5 rounded-md">

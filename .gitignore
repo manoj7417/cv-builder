@@ -6,7 +6,6 @@
 .yarn/install-state.gz
 .env.local
 .env.production
-
 # testing
 /coverage
 
@@ -16,7 +15,6 @@
 
 # production
 /build
-
 # misc
 .DS_Store
 *.pem
