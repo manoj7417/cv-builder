@@ -54,7 +54,11 @@ const CoachPage = () => {
       //   setAllCoaches(data.coaches);
       const approvedCoaches = data.coaches.filter(
         (coach) => coach.isApproved && coach.approvalStatus === "approved"
-      );
+      ) .sort((a, b) => {
+        const hasProgramsA = a.programs?.length > 0;
+        const hasProgramsB = b.programs?.length > 0;
+        return hasProgramsB - hasProgramsA;
+      })
       setAllCoaches(approvedCoaches);
 
       if (approvedCoaches.length > 0) {
@@ -135,11 +139,11 @@ const CoachPage = () => {
       <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
           {/* Coach Selection Section */}
-          <div className="coach_card lg:w-[30%] w-full h-auto lg:h-screen lg:sticky top-[100px] overflow-y-scroll no-scrollbar">
-            <h2 className="text-xl lg:text-2xl font-bold">
+          <div className="coach_card lg:w-[30%] w-full lg:h-screen lg:sticky top-[100px] overflow-y-scroll h-[500px] pr-2">
+            <h1 className="text-xl lg:text-2xl font-bold">
               Choose the <span className="text-blue-700">coach</span> who aligns
               best with your <span className="text-blue-700">goals.</span>
-            </h2>
+            </h1>
             <p className="text-sm my-5">
               Explore your top coach recommendations and select the one that
               best fits your needs below.
@@ -182,7 +186,7 @@ const CoachPage = () => {
                               <h3 className="text-base font-medium text-slate-900">
                                 {item.name}
                               </h3>
-                              <p className="text-xs text-slate-800 text-wrap">
+                              <p className="text-xs text-slate-800 break-all">
                                 {item?.email}
                               </p>
                               <Button
@@ -234,9 +238,9 @@ const CoachPage = () => {
                       Top Match
                     </span>
                     <div className="coach_name my-5">
-                      <h1 className="text-2xl lg:text-3xl font-bold">
+                      <h2 className="text-2xl lg:text-3xl font-bold">
                         {selectedCoach?.name}
-                      </h1>
+                      </h2>
                       <h2 className="text-sm lg:text-base">
                         {selectedCoach?.typeOfCoaching}
                       </h2>

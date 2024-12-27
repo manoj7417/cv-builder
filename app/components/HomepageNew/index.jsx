@@ -210,10 +210,10 @@ export default function HomepageNew() {
             </div>
             <div className="grid-span-6">
               <div className="resume_parent">
-                <img className="resume_img_1" src="/15.png" />
-                <img className="resume_img_2" src="/17.png" />
-                <img className="resume_img_3" src="/18.png" />
-                <img className="resume_img_4 md:block hidden" src="/16.png" />
+                <img className="resume_img_1" src="/15.png" alt="15AtsImage"/>
+                <img className="resume_img_2" src="/17.png" alt="17AtsImage"/>
+                <img className="resume_img_3" src="/18.png" alt="18AtsImage"/>
+                <img className="resume_img_4 md:block hidden" src="/16.png" alt="18AtsImage"/>
               </div>
             </div>
           </div>
@@ -222,9 +222,9 @@ export default function HomepageNew() {
 
       <section className="w-full z-40 relative">
         <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
-          <h2 className="lg:text-5xl text-3xl font-bold ">
+          <h3 className="lg:text-5xl text-3xl font-bold ">
             How Genies Career Hub helps you
-          </h2>
+          </h3>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
           <div className="lg:flex align-middle overflow-hidden hidden -ml-16">

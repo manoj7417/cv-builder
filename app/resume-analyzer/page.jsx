@@ -1310,9 +1310,9 @@ export default function DashboardIdea() {
               </div>
             </div>
             <div className="faq_content lg:w-[50%] w-full lg:p-1 p-5">
-              <h2 className="text-3xl text-center text-bold font-semibold my-5">
+              <h3 className="text-3xl text-center text-bold font-semibold my-5">
                 Frequently Asked Questions
-              </h2>
+              </h3>
               {faqData?.map((item, index) => (
                 <AccordionItem
                   open={index === open}

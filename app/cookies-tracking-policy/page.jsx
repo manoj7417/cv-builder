@@ -31,9 +31,9 @@ const Page = () => {
             Cookie Policy
           </h1>
           <section className='mb-8'>
-            <h1 className='text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4'>
+            <h2 className='text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4'>
               A Brief Introduction to The Topic
-            </h1>
+            </h2>
             <p className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4'>
               Genies Career Hub is here! We respect your privacy and strive to
               provide a transparent service. This Cookie Policy describes how we

@@ -26,9 +26,9 @@ const ReturnPolicyPage = () => {
             Returns Policy
           </h1>
           <section className='mb-3'>
-            <h1 className='text-sm sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl mb-2'>
+            <h2 className='text-sm sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl mb-2'>
               Understand the Importance of Returns
-            </h1>
+            </h2>
           </section>
           <section className='mb-8'>
             <h2 className='text-2xl sm:text-2xl  md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl  mb-2 font-bold'>

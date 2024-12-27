@@ -21,13 +21,13 @@ const page = () => {
                 <br />
                 <span className="text-blue-700">Flexible Pricing</span>
               </h1>
-              <p className="md:w-[60%] w-[80%] mx-auto my-3 text-base text-center">
+              <h2 className="md:w-[60%] w-[80%] mx-auto my-3 text-base text-center">
                 Our professional CV Maker assists you in landing that interview
                 call! Our professional tools like CV Creator, CV Optimiser, and
                 CV Match create well-researched, analytically optimised resumes
                 that are approved by recruiters across the globe and established
                 ATS systems.
-              </p>
+              </h2>
               <div className="flex justify-center py-8">
                 <Suspense fallback={<div>Loading Pricing plan ...</div>}>
                   <PricingCard />

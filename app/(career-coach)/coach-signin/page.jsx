@@ -124,10 +124,10 @@ export default function CoachLogin() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 place-items-center w-full h-screen">
           <div className="w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 h-full justify-center">
             <div className="w-[70%] mt-14">
-              <h1 className="text-white text-center text-2xl font-semibold">
+              <div className="text-white text-center text-2xl font-semibold">
                 Thank you for joining as a Coach and inspire the next generation
                 of achievers!
-              </h1>
+              </div>
             </div>
 
             {/* Swiper Slider with Pagination */}
@@ -185,9 +185,9 @@ export default function CoachLogin() {
               />
             </Link>
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
+              <h1 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
                 Sign in
-              </h2>
+              </h1>
               <p className="mt-2 text-[13px] text-gray-600">
                 Don&apos;t have an account?{" "}
                 <Link
