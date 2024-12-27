@@ -412,7 +412,7 @@ const CoachPage = () => {
                                 </div>
                               </div>
                               <div className="program_price font-bold text-sm">
-                                ${program.amount}
+                                {currency === "INR" ? `₹${program.INRrate}` : currency === "USD" ? `$${program.USDrate}` : `£${program.amount}`}
                               </div>
                             </li>
                           )
