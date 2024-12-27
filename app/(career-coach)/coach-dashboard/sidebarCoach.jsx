@@ -95,7 +95,7 @@ const SidebarCoach = () => {
       }
     } catch (error) {
       await RemoveTokens();
-      signOut({ redirect: false });
+      await signOut({ redirect: false });
       toast.error("Error logging in");
       router.push("/coach-signin");
     }

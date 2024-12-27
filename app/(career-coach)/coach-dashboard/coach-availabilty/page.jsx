@@ -170,6 +170,7 @@ const CoachAvailability = () => {
     if (userdata?.availability) {
       setValue("availabilityDays", userdata.availability.dates);
     }
+    
   }, [userdata]);
 
   
