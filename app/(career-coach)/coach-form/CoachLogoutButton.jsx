@@ -14,7 +14,7 @@ const CoachLogoutButton = () => {
     try {
       await RemoveTokens();
       toast.success("Logged out");
-      signOut({redirect: false});
+      await signOut({ redirect: false });
       router.push("/coach-signin");
     } catch (error) {
       console.error(error);
@@ -24,8 +24,11 @@ const CoachLogoutButton = () => {
 
   return (
     <div>
-      <Button className="bg-white text-black animate-bounce" onClick={handleLogout}>
-       <RiArrowLeftSLine className="inline text-base"/> Logout
+      <Button
+        className="bg-white text-black animate-bounce"
+        onClick={handleLogout}
+      >
+        <RiArrowLeftSLine className="inline text-base" /> Logout
       </Button>
     </div>
   );

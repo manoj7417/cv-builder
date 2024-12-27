@@ -61,7 +61,6 @@ import {
   FaLink,
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import { Plus } from "lucide-react";
 import CoachSearchBar from "@/components/component/CoachSearchBar";
 
