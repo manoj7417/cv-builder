@@ -96,9 +96,9 @@ const CareerServices = () => {
             <span className='text-[#2C98CA]'>Get Coached,</span> Your
             For Perfection!
           </h1>
-          <h2 className='lg:w-[60%] w-full mx-auto text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
+          <p className='lg:w-[60%] w-full mx-auto text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
           Find Career Coaches, take Psychometric Tests, or consult the AI Career Coach to find answers to your professional queries and grow past the limitations of your career.
-          </h2>
+          </p>
 
           <div className='flex justify-center'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10'>

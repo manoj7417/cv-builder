@@ -16,18 +16,17 @@ const page = () => {
         <section className="w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-20">
           <div className="w-full h-full flex justify-center items-center">
             <div className="text-start mt-20">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold mb-4 sm:mb-6 text-center xs:text-start">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold text-center xs:text-start">
                 Grow beyond expectations with
-                <br />
-                <span className="text-blue-700">Flexible Pricing</span>
               </h1>
-              <h2 className="md:w-[60%] w-[80%] mx-auto my-3 text-base text-center">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold text-center xs:text-start text-blue-700 my-2">Flexible Pricing</h2>
+              <p className="md:w-[60%] w-[80%] mx-auto my-3 text-base text-center">
                 Our professional CV Maker assists you in landing that interview
                 call! Our professional tools like CV Creator, CV Optimiser, and
                 CV Match create well-researched, analytically optimised resumes
                 that are approved by recruiters across the globe and established
                 ATS systems.
-              </h2>
+              </p>
               <div className="flex justify-center py-8">
                 <Suspense fallback={<div>Loading Pricing plan ...</div>}>
                   <PricingCard />

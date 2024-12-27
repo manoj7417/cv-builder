@@ -64,6 +64,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { Plus } from "lucide-react";
 import CoachSearchBar from "@/components/component/CoachSearchBar";
+import CoachLogoutButton from "./CoachLogoutButton";
 
 const CoachForm = () => {
   const steps = [
@@ -739,6 +740,9 @@ const CoachForm = () => {
       ) : (
         <>
           <section className="lg:px-10 px-2 py-5">
+             <div className="lg:hidden flex justify-end ">
+              <CoachLogoutButton/>
+             </div>
             {/* steps */}
             <nav aria-label="Progress">
               <ol

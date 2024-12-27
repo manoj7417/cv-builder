@@ -49,7 +49,7 @@ const CVStudioPage = () => {
           </h1>
           <h2 className='text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
             Build tailored CVs and reach out to potential employers with
-            confidence.
+            confidence
           </h2>
           <div className='flex justify-center'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10'>

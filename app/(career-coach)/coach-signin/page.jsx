@@ -188,7 +188,7 @@ export default function CoachLogin() {
               <h1 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
                 Sign in
               </h1>
-              <p className="mt-2 text-[13px] text-gray-600">
+              <h2 className="mt-2 text-[13px] text-gray-600">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/coach-registration"
@@ -197,7 +197,7 @@ export default function CoachLogin() {
                 >
                   Create a free account
                 </Link>
-              </p>
+              </h2>
               <form onSubmit={handleSubmit(handleCoachLogin)} className="mt-8">
                 <div className="space-y-5">
                   <div>

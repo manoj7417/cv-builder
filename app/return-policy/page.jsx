@@ -31,9 +31,9 @@ const ReturnPolicyPage = () => {
             </h2>
           </section>
           <section className='mb-8'>
-            <h2 className='text-2xl sm:text-2xl  md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl  mb-2 font-bold'>
+            <h3 className='text-2xl sm:text-2xl  md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl  mb-2 font-bold'>
               Return to Work:
-            </h2>
+            </h3>
             <h3 className='text-xl font-semibold mb-2'>Recent Purchases</h3>
             <p className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg'>
               All services purchased in the last 14 days will receive a full

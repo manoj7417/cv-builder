@@ -144,10 +144,10 @@ const CoachPage = () => {
               Choose the <span className="text-blue-700">coach</span> who aligns
               best with your <span className="text-blue-700">goals.</span>
             </h1>
-            <p className="text-sm my-5">
+            <h2 className="text-sm my-5">
               Explore your top coach recommendations and select the one that
               best fits your needs below.
-            </p>
+            </h2>
 
             <div className="coach_card_inner flex flex-col gap-5">
               {isLoading

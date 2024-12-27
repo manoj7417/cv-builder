@@ -3,7 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import ResumeForm from "./ResumeForm";
 import ResumeView from "./ResumeView";
 import Link from "next/link";
-import { MdDownload, MdLogout, MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import {
+  MdDownload,
+  MdLogout,
+  MdOutlineKeyboardArrowLeft,
+} from "react-icons/md";
 import Image from "next/image";
 import { useUserStore } from "../store/UserStore";
 import ContentDialog from "./ContentDialog";
@@ -14,11 +18,18 @@ import { toast } from "react-toastify";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import { LogOut, User } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+} from "@/components/ui/dialog";
 import { AlertDialogHeader } from "@/components/ui/alert-dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useResumeStore } from "../store/ResumeStore";
 import { signOut } from "next-auth/react";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { FaUserLarge } from "react-icons/fa6";
 
 const ResumeBuilderPage = () => {
   const router = useRouter();
@@ -32,10 +43,10 @@ const ResumeBuilderPage = () => {
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage =
     userdata?.profilePicture || "https://via.placeholder.com/150";
-  const searchParams = useSearchParams()
-  const newResume = searchParams.get('newresume')
-  const [showDialog, setShowDialog] = useState(newResume || false)
-  const { clearResumeData } = useResumeStore(state => state)
+  const searchParams = useSearchParams();
+  const newResume = searchParams.get("newresume");
+  const [showDialog, setShowDialog] = useState(newResume || false);
+  const { clearResumeData } = useResumeStore((state) => state);
   const handleLogout = async () => {
     await RemoveTokens();
     await signOut({ redirect: false });
@@ -65,13 +76,13 @@ const ResumeBuilderPage = () => {
   };
 
   const handleCloseDialog = () => {
-    setShowDialog(false)
-  }
+    setShowDialog(false);
+  };
 
   const handleStartResumeFromScratch = () => {
-    clearResumeData()
-    setShowDialog(false)
-  }
+    clearResumeData();
+    setShowDialog(false);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -79,7 +90,6 @@ const ResumeBuilderPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
 
   return (
     <>
@@ -135,21 +145,74 @@ const ResumeBuilderPage = () => {
                 </span>
               </Button> */}
               <div className="inline-flex items-center space-x-2">
-            <Link href="/">
-              <Image
-                priority
-                // src="/genies-career-hub-logo.png"
-                src={"/beta-logo.png"}
-                width={100}
-                height={100}
-                alt="white_logo"
-                className="w-16 h-16 object-contain"
-              />
-            </Link>
-          </div>
+                <Link href="/">
+                  <Image
+                    priority
+                    // src="/genies-career-hub-logo.png"
+                    src={"/beta-logo.png"}
+                    width={100}
+                    height={100}
+                    alt="white_logo"
+                    className="w-16 h-16 object-contain"
+                  />
+                </Link>
+              </div>
             </div>
             <div className="profile_section">
-              <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
+              {/* <div className="back_icons flex gap-5">
+                <div>
+                  <RiArrowGoBackFill
+                    className="text-blue-950 text-xl cursor-pointer"
+                    onClick={() => router.back()}
+                  />
+                </div>
+                <div>
+                  <Link href="/user-dashboard" role="menuitem">
+                    <FaUserLarge className="text-blue-950 text-xl cursor-pointer" />
+                  </Link>
+                </div>
+                <div>
+                  <MdLogout
+                    className="text-blue-950 text-xl cursor-pointer"
+                    onClick={handleLogout}
+                  />
+                </div>
+              </div> */}
+              <div className="back_icons flex gap-5 relative">
+                {/* Go Back Icon */}
+                <div className="group relative">
+                  <RiArrowGoBackFill
+                    className="text-blue-950 text-xl cursor-pointer"
+                    onClick={() => router.back()}
+                  />
+                  <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded shadow-lg">
+                    Back
+                  </span>
+                </div>
+
+                {/* User Dashboard Icon */}
+                <div className="group relative">
+                  <Link href="/user-dashboard" role="menuitem">
+                    <FaUserLarge className="text-blue-950 text-xl cursor-pointer" />
+                  </Link>
+                  <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded shadow-lg">
+                    User
+                  </span>
+                </div>
+
+                {/* Logout Icon */}
+                <div className="group relative">
+                  <MdLogout
+                    className="text-blue-950 text-xl cursor-pointer"
+                    onClick={handleLogout}
+                  />
+                  <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded shadow-lg">
+                    Logout
+                  </span>
+                </div>
+              </div>
+
+              {/* <div className="ml-auto flex items-center px-6 lg:ml-4 lg:p-0">
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setIsToggleOpen(!isToggleOpen)}
@@ -196,7 +259,7 @@ const ResumeBuilderPage = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -210,12 +273,7 @@ const ResumeBuilderPage = () => {
           className={`preview_button bg-blue-950 text-white fixed bottom-10 right-5 p-3 rounded-full lg:hidden block cursor-pointer transition-all duration-300`}
           onClick={handlePreviewClick}
         >
-          <span
-            className={`text-sm ${showText
-              ? "bgNdnL"
-              : "epiSoF"
-              }`}
-          >
+          <span className={`text-sm ${showText ? "bgNdnL" : "epiSoF"}`}>
             Preview and Download
           </span>
           <MdDownload className="text-xl inline-flex mx-1 animate-bounce" />

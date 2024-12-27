@@ -158,12 +158,12 @@ export default function HomepageNew() {
         <div className="max-w-7xl mx-auto py-10">
           <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-48">
             <div className="grid-span-6 md:px-20 px-5">
-              <h2 className="md:text-4xl text-[25px] text-black font-bold">
+              <p className="md:text-4xl text-[25px] text-black font-bold">
                 Facing CV Rejections? It’s Time for You to start creating
                 <span className="text-[#1D4ED8] font-bold ml-2">
                   ATS-Friendly CVs!
                 </span>
-              </h2>
+              </p>
               <p className="text-sm my-5">
                 Sending out CVs as a part of a job application is the first and
                 non-negotiable step. However, many job applications get rejected
@@ -222,9 +222,9 @@ export default function HomepageNew() {
 
       <section className="w-full z-40 relative">
         <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
-          <h3 className="lg:text-5xl text-3xl font-bold ">
+          <h2 className="lg:text-5xl text-3xl font-bold ">
             How Genies Career Hub helps you
-          </h3>
+          </h2>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 sm:py-20 bg-white">
           <div className="lg:flex align-middle overflow-hidden hidden -ml-16">
