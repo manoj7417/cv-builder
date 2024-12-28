@@ -20,6 +20,7 @@ const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
+  console.log("selectedCoach", selectedCoach);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
   const [geoData, setGeoData] = useState(null);
@@ -31,6 +32,7 @@ const CoachPage = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const [currency, setCurrency] = useState("USD");
+  const [purchasedPrograms, setPurchasedPrograms] = useState({});
 
   const toggleContent = (type) => {
     setShowFullContent((prev) => ({
@@ -52,13 +54,15 @@ const CoachPage = () => {
       const response = await axios.get(`/api/getAllCoaches`);
       const data = await response.data;
       //   setAllCoaches(data.coaches);
-      const approvedCoaches = data.coaches.filter(
-        (coach) => coach.isApproved && coach.approvalStatus === "approved"
-      ) .sort((a, b) => {
-        const hasProgramsA = a.programs?.length > 0;
-        const hasProgramsB = b.programs?.length > 0;
-        return hasProgramsB - hasProgramsA;
-      })
+      const approvedCoaches = data.coaches
+        .filter(
+          (coach) => coach.isApproved && coach.approvalStatus === "approved"
+        )
+        .sort((a, b) => {
+          const hasProgramsA = a.programs?.length > 0;
+          const hasProgramsB = b.programs?.length > 0;
+          return hasProgramsB - hasProgramsA;
+        });
       setAllCoaches(approvedCoaches);
 
       if (approvedCoaches.length > 0) {
@@ -87,6 +91,31 @@ const CoachPage = () => {
       });
   };
 
+  const checkCoursePurchased = async (programId) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "/api/programStatus",
+        { programId },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken.value}`,
+          },
+        }
+      );
+      console.log("response::", response);
+      if (response.data.purchased) {
+        setPurchasedPrograms((prevState) => ({
+          ...prevState,
+          [programId]: true,
+        }));
+      }
+    } catch (error) {}
+  };
+
   const handleBuyProgram = async (course) => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
@@ -101,8 +130,14 @@ const CoachPage = () => {
         {
           programId: course._id,
           coachId: course.coachId,
-          amount: currency === "INR" ? course.INRrate : currency === "USD" ? course.USDrate : course.amount,
-          currency: currency === "INR" ? "INR" : currency === "USD" ? "USD" : "GBP",
+          amount:
+            currency === "INR"
+              ? course.INRrate
+              : currency === "USD"
+              ? course.USDrate
+              : course.amount,
+          currency:
+            currency === "INR" ? "INR" : currency === "USD" ? "USD" : "GBP",
           success_url: url,
           cancel_url: window.location.href,
         },
@@ -114,6 +149,7 @@ const CoachPage = () => {
       );
       window.location.href = response.data.url;
       setIsLoading(false);
+      checkCoursePurchased(course._id);
     } catch (error) {
       toast.error("Error buying program");
     } finally {
@@ -133,6 +169,15 @@ const CoachPage = () => {
   useEffect(() => {
     getGeoInfo();
   }, []);
+
+  useEffect(() => {
+    if (selectedProgram !== null) {
+      checkCoursePurchased(selectedCoach?.programs[selectedProgram]?._id);
+    }
+  }, [selectedProgram, selectedCoach]);
+
+  const programDetails = selectedCoach?.programs[selectedProgram];
+  const isPurchased = purchasedPrograms[programDetails?._id];
 
   return (
     <>
@@ -383,7 +428,7 @@ const CoachPage = () => {
             </DialogTitle>
           </DialogHeader>
           <div>
-            {selectedCoach?.programs.length > 0 ? (
+            {selectedCoach?.programs.filter((program) => program.isapproved).length > 0 ? (
               <>
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
                   <div className="coach_related_programs">
@@ -398,11 +443,13 @@ const CoachPage = () => {
                                   ? "border-blue-500 bg-blue-100"
                                   : "border-transparent"
                               }`}
-                              onClick={() =>
-                                setSelectedProgram(
-                                  index === selectedProgram ? null : index
-                                )
-                              }
+                              onClick={() => {
+                                // Ensure program is only selectable once
+                                if (selectedProgram !== index) {
+                                  setSelectedProgram(index);
+                                  // setProgramDetails(program)
+                                }
+                              }}
                             >
                               <div className="program_inner_content space-y-2 flex gap-5 items-center">
                                 <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
@@ -416,17 +463,21 @@ const CoachPage = () => {
                                 </div>
                               </div>
                               <div className="program_price font-bold text-sm">
-                                {currency === "INR" ? `₹${program.INRrate}` : currency === "USD" ? `$${program.USDrate}` : `£${program.amount}`}
+                                {currency === "INR"
+                                  ? `₹${program.INRrate}`
+                                  : currency === "USD"
+                                  ? `$${program.USDrate}`
+                                  : `£${program.amount}`}
                               </div>
                             </li>
                           )
                       )}
                     </ul>
                   </div>
-                  <div className="coach_booking border p-5 rounded-md">
+                  {/* <div className="coach_booking border p-5 rounded-md">
                     {selectedProgram !== null && (
                       <>
-                        <div className="program_details flex">
+                        <div className="program_details flex justify-between ">
                           <div className="coach_program_heading flex gap-2">
                             <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
                             <div>
@@ -487,6 +538,71 @@ const CoachPage = () => {
                               "Schedule a Meet"
                             )}
                           </Button>
+                        </div>
+                      </>
+                    )}
+                  </div> */}
+                  <div className="coach_booking border p-5 rounded-md">
+                    {selectedProgram !== null && (
+                      <>
+                        <div className="program_details flex justify-between ">
+                          <div className="coach_program_heading flex gap-2">
+                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                            <div>
+                              <h2 className="text-sm font-bold">
+                                {programDetails?.title}
+                              </h2>
+                              <p className="text-xs">
+                                {programDetails?.description}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="coach_price">
+                            <div className="text-sm font-bold">
+                              {currency === "INR"
+                                ? `₹${programDetails?.INRrate}`
+                                : currency === "USD"
+                                ? `$${programDetails?.USDrate}`
+                                : `£${programDetails?.amount}`}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="schedule_meet mt-5">
+                          {isPurchased ? (
+                            <Button disabled>Already Purchased</Button>
+                          ) : (
+                            <Button
+                              onClick={() => handleBuyProgram(programDetails)}
+                            >
+                              {isLoading ? (
+                                <span className="flex items-center gap-2">
+                                  <svg
+                                    className="animate-spin h-5 w-5 text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <circle
+                                      className="opacity-25"
+                                      cx="12"
+                                      cy="12"
+                                      r="10"
+                                      stroke="currentColor"
+                                      strokeWidth="4"
+                                    ></circle>
+                                    <path
+                                      className="opacity-75"
+                                      fill="currentColor"
+                                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                    ></path>
+                                  </svg>
+                                  Scheduling...
+                                </span>
+                              ) : (
+                                "Schedule a Meet"
+                              )}
+                            </Button>
+                          )}
                         </div>
                       </>
                     )}
