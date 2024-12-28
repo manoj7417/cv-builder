@@ -210,7 +210,7 @@ export default function HomepageNew() {
             </div>
             <div className="grid-span-6">
               <div className="resume_parent">
-                <img className="resume_img_1" src="/15.png" alt="15AtsImage"/>
+                <img className="resume_img_1" src="/15.png" alt="15AtsImage" sizes="100px" width={100} height={100}/>
                 <img className="resume_img_2" src="/17.png" alt="17AtsImage"/>
                 <img className="resume_img_3" src="/18.png" alt="18AtsImage"/>
                 <img className="resume_img_4 md:block hidden" src="/16.png" alt="18AtsImage"/>
