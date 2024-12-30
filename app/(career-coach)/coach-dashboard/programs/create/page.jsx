@@ -77,7 +77,7 @@ function CreateProgram() {
   const content = watch("content");
   const currency = watch("currency");
   const handleCreateProgram = async (data) => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     try {
       setIscreatingProgram(true);
       const response = await axios.post("/api/createProgram", data, {

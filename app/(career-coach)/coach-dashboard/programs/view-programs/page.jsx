@@ -237,7 +237,7 @@ const ViewProgramsPage = () => {
   
 
   const handleCoachProgramBookings = async () => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     try {
       const response = await axios.get("/api/getCoachProgramBooking", {
         headers: {

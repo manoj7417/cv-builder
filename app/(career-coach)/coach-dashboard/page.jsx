@@ -46,7 +46,7 @@ const CoachDashboardPage = () => {
 }
 
   const handleGetBookings = async () => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     if (!accessToken || !accessToken.value) {
       return router.push("/login?redirect=/user-dashboard");
     }

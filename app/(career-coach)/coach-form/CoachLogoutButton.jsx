@@ -12,7 +12,7 @@ const CoachLogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      await RemoveTokens();
+      await RemoveTokens(true);
       toast.success("Logged out");
       await signOut({ redirect: false });
       router.push("/coach-signin");

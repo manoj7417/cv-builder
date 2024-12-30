@@ -48,8 +48,8 @@ export default function CoachLogin() {
       const response = await axios.post("/api/loginCoach", data);
       if (response.status === 200) {
         toast.success("Login successful");
-        const { accessToken, refreshToken } = response.data.data;
-        await SetTokens({ accessToken, refreshToken });
+        const { accessToken:coachAccessToken, refreshToken:coachRefreshToken } = response.data.data;
+        await SetTokens({ accessToken: coachAccessToken, refreshToken: coachRefreshToken,isCoach: true });
         loginUser(response.data.data.userdata);
         const { isApproved } = response.data.data.userdata;
         if (isApproved) {

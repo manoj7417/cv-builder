@@ -456,7 +456,7 @@ const CoachForm = () => {
   // Upload Docs Functionlaity ends here
 
   const processForm = async (data) => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     setIsSubmitting(true);
     // Map over the socialLinks array and structure it as desired
     const formattedSocialLinks = data?.socialLinks?.map((socialLink) => ({
@@ -548,7 +548,7 @@ const CoachForm = () => {
   };
 
   const handleCoachAuth = async () => {
-    const { accessToken, refreshToken } = await GetTokens();
+    const { accessToken, refreshToken } = await GetTokens(true);
     try {
       const response = await axios.post("/api/coachAccount", {
         accessToken: accessToken.value,

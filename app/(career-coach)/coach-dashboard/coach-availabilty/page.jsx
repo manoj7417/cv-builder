@@ -101,7 +101,7 @@ const CoachAvailability = () => {
   const onSubmit = async (data) => {
     const dates = data.availabilityDays;
     setIsUpdatingData(true);
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     const result = {
       dates,
       timeZone: data.timeZone,

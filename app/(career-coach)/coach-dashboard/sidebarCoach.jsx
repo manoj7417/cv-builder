@@ -82,7 +82,7 @@ const SidebarCoach = () => {
   };
 
   const handleAccountRequest = async () => {
-    const { accessToken, refreshToken } = await GetTokens();
+    const { accessToken, refreshToken } = await GetTokens(true);
     const data = {
       accessToken: accessToken?.value,
       refreshToken: refreshToken?.value,

@@ -92,7 +92,7 @@ const CoachPage = () => {
   };
 
   const checkCoursePurchased = async (programId) => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     if (!accessToken || !accessToken.value) {
       return;
     }
@@ -117,7 +117,7 @@ const CoachPage = () => {
   };
 
   const handleBuyProgram = async (course) => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches`);
     }

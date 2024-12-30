@@ -149,7 +149,7 @@ const CoachProfile = () => {
   };
 
   const handleEditProfile = async (data) => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     const payload = {
       name: data.name,
       email: data.email,

@@ -9,7 +9,7 @@ const EnrollStudentPage = () => {
   const [programs, setPrograms] = useState([]);
 
   const handleGetCoachProgramsBooking = async () => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     setIsLoading(true);
     try {
       const response = await axios.get("/api/getCoachProgramBooking", {

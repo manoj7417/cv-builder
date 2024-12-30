@@ -29,7 +29,7 @@ const CoachCalendar = () => {
   const router = useRouter();
 
   const handleGetBookings = async () => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     if (!accessToken || !accessToken.value) {
       return router.push("/coach-signin?redirect=/coach-dashboard/coach-calendar");
     }

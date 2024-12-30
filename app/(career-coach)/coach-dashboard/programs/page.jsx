@@ -20,7 +20,7 @@ function Programs() {
   const [programs, setPrograms] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const handleGetPrograms = async () => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     try {
       const response = await axios.get("/api/getAllcoachProgram", {
         headers: { Authorization: `Bearer ${accessToken?.value}` },
@@ -45,7 +45,7 @@ function Programs() {
       confirmButtonText: "Yes, delete it!",
     });
 
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
 
     if (result.isConfirmed) {
       toast.promise(

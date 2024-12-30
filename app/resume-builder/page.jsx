@@ -148,7 +148,6 @@ const ResumeBuilderPage = () => {
                 <Link href="/">
                   <Image
                     priority
-                    // src="/genies-career-hub-logo.png"
                     src={"/beta-logo.png"}
                     width={100}
                     height={100}
@@ -178,7 +177,7 @@ const ResumeBuilderPage = () => {
                   />
                 </div>
               </div> */}
-              <div className="back_icons flex gap-5 relative">
+              <div className="back_icons items-center flex gap-5 relative">
                 {/* Go Back Icon */}
                 <div className="group relative">
                   <RiArrowGoBackFill
@@ -193,7 +192,15 @@ const ResumeBuilderPage = () => {
                 {/* User Dashboard Icon */}
                 <div className="group relative">
                   <Link href="/user-dashboard" role="menuitem">
-                    <FaUserLarge className="text-blue-950 text-xl cursor-pointer" />
+                    {/* <FaUserLarge className="text-blue-950 text-xl cursor-pointer" /> */}
+                    <img
+                      src={
+                        userImage ||
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
+                      }
+                      alt="user-name"
+                      className="w-10 h-7 rounded-full object-cover border-2 border-blue-800 "
+                    />
                   </Link>
                   <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded shadow-lg">
                     User

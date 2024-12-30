@@ -20,7 +20,7 @@ function EditProgramfunc() {
   const [viewPrograms, setViewPrograms] = useState([]);
 
   const handleGetProgrambyId = async (id) => {
-    const { accessToken } = await GetTokens();
+    const { accessToken } = await GetTokens(true);
     try {
       const { data } = await axios.get(`/api/getProgramById/${id}`, {
         headers: {
