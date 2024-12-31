@@ -182,7 +182,8 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useForm, useFieldArray } from "react-hook-form";
-import parse from "html-react-parser";
+import { htmlToText } from "html-to-text";
+import { XIcon } from "lucide-react";
 
 function EditProgramfunc() {
   const { id } = useParams();
@@ -227,6 +228,12 @@ function EditProgramfunc() {
     }
   };
 
+
+  const handleImageRemove = () => {
+    setPreviewImage(""); // Clear the preview image
+    setValue("programImage", ""); // Clear the form field value for programImage
+  };
+
   const handleGetProgramById = async (id) => {
     const { accessToken } = await GetTokens(true);
     try {
@@ -243,7 +250,7 @@ function EditProgramfunc() {
       setValue("description", data?.program?.description || "");
       setValue("amount", data?.program?.amount || 0);
       // setValue("content", data?.program?.content || "");
-      setValue("content", parse(data?.program?.content || "", { wordwrap: 130 }));
+      setValue("content", htmlToText(data?.program?.content || "", { wordwrap: 130 }));
       setValue("days", data?.program?.days || []);
       setValue("prerequisites", data?.program?.prerequisites || []);
       setPreviewImage(data?.program?.programImage || "");
@@ -279,9 +286,9 @@ function EditProgramfunc() {
           <p>Loading...</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded-lg p-4 max-w-5xl mx-auto">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded-lg p-5 max-w-5xl mx-auto">
           <div className="program_video">
-            <label className="block font-medium mb-2">Program Video URL</label>
+            <label className="block font-bold mb-2 ">Program Video URL</label>
             <input
               {...register("programVideo")}
               type="url"
@@ -295,27 +302,47 @@ function EditProgramfunc() {
             )}
           </div>
 
-          <div className="program_image mb-4">
-            <label className="block font-medium mb-2">Program Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              className="block w-full border border-gray-300 rounded p-2 mb-4"
-              onChange={handleImageUpload}
-            />
-            {previewImage ? (
-              <img
-                src={previewImage}
-                alt="Program Preview"
-                className="w-32 h-32 object-cover rounded-full mt-4"
+          <div className="program_image my-4">
+            <label className="block font-bold mb-2">Program Image</label>
+            <div className="relative">
+              <button
+                type="button"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+                onClick={() => document.getElementById("fileUpload").click()}
+              >
+                Upload Image
+              </button>
+              <input
+                id="fileUpload"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageUpload}
               />
+            </div>
+            {previewImage ? (
+              <div className="relative">
+                <img
+                  src={previewImage}
+                  alt="Program Preview"
+                  className="w-32 h-32 object-cover rounded-full mt-4"
+                />
+                <button
+                  type="button"
+                  onClick={handleImageRemove}
+                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                >
+                  <XIcon className="h-5 w-5" />
+                </button>
+              </div>
             ) : (
-              <p className="text-gray-500">No image selected</p>
+              <p className="text-gray-500 mt-2">No image selected</p>
             )}
           </div>
 
+
           <div className="program_details">
-            <label className="block font-medium mb-2">Course Title</label>
+            <label className="block font-bold mb-2">Course Title</label>
             <input
               {...register("title")}
               type="text"
@@ -323,14 +350,14 @@ function EditProgramfunc() {
               placeholder="Enter the course title"
             />
 
-            <label className="block font-medium mb-2">Course Description</label>
+            <label className="block font-bold mb-2">Course Description</label>
             <textarea
               {...register("description")}
               className="block w-full border border-gray-300 rounded p-2 mb-4"
               placeholder="Enter the course description"
             />
 
-            <label className="block font-medium mb-2">Amount</label>
+            <label className="block font-bold mb-2">Amount</label>
             <input
               {...register("amount")}
               type="number"
@@ -338,7 +365,7 @@ function EditProgramfunc() {
               placeholder="Enter the amount"
             />
 
-            <label className="block font-medium mb-2">Content</label>
+            <label className="block font-bold mb-2">Content</label>
             <textarea
               {...register("content")}
               className="block w-full border border-gray-300 rounded p-2"
