@@ -15,6 +15,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
@@ -117,7 +118,7 @@ const CoachPage = () => {
   };
 
   const handleBuyProgram = async (course) => {
-    const { accessToken } = await GetTokens(true);
+    const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push(`/login?redirect=/coaches`);
     }
@@ -231,9 +232,9 @@ const CoachPage = () => {
                               <h3 className="text-base font-medium text-slate-900">
                                 {item.name}
                               </h3>
-                              <p className="text-xs text-slate-800 break-all">
+                              {/* <p className="text-xs text-slate-800 break-all">
                                 {item?.email}
-                              </p>
+                              </p> */}
                               <Button
                                 className="lg:hidden bolck px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer"
                                 onClick={handleMobileView}
