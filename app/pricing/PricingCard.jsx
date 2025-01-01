@@ -301,6 +301,7 @@ const PricingFunc = () => {
           },
         }
       );
+      
       if (
         response.status === 200 &&
         response.data.error === "Trial coupon already redeemed"
@@ -315,10 +316,11 @@ const PricingFunc = () => {
           setClientSecret(response.data.clientSecret);
           setIsFreeDialogOpen(true);
           setIsDialogOpen(false);
-        } else {
-          const { url } = response.data;
-          window.location = url;
-        }
+        } 
+      }else {
+        const { url } = response.data;
+        console.log(url);
+        window.location = url;
       }
     } catch (error) {
       if (
