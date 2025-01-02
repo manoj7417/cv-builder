@@ -91,7 +91,6 @@ const SidebarCoach = () => {
       const response = await axios.post("/api/coachAccount", data);
       if (response.status === 200) {
         updateUserData(response.data.data.userdata);
-        
       }
     } catch (error) {
       await RemoveTokens();
@@ -106,74 +105,84 @@ const SidebarCoach = () => {
   }, []);
 
   return (
-    <div className='flex lg:h-full h-auto lg:fixed lg:top-0 relative py-5 shadow-xl'>
+    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative py-5 shadow-xl">
       {/* Mobile Hamburger Menu Button */}
       <button
-        className='md:hidden p-4 focus:outline-none'
-        onClick={toggleSidebar}>
-        <HiMenu className='w-8 h-8' />
+        className="md:hidden p-4 focus:outline-none"
+        onClick={toggleSidebar}
+      >
+        <HiMenu className="w-8 h-8" />
       </button>
 
       <div
-        className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}>
-        <div className='flex justify-end mr-5 md:hidden'>
+        className={`fixed inset-y-0 left-0 transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}
+      >
+        <div className="flex justify-end mr-5 md:hidden">
           <button
-            className=' mb-4 focus:outline-none cursor-pointer'
-            onClick={toggleSidebar}>
-            <IoMdClose className='w-8 h-8' />
+            className=" mb-4 focus:outline-none cursor-pointer"
+            onClick={toggleSidebar}
+          >
+            <IoMdClose className="w-8 h-8" />
           </button>
         </div>
-        <div className='dashboard_logo p-5 mb-5'>
-          <Image
-            src='/admin-logo.png'
-            alt='logo'
-            width={200}
-            height={200}
-            className='w-[90%]'
-          />
+        <div className="dashboard_logo p-5 mb-5">
+          <Link href={'/'}>
+            <Image
+              src="/admin-logo.png"
+              alt="logo"
+              width={200}
+              height={200}
+              className="w-[90%]"
+            />
+          </Link>
         </div>
-        <nav className=' space-y-5 py-8'>
-          <ul className='space-y-4 lg:w-full p-2'>
+        <nav className=" space-y-5 py-8">
+          <ul className="space-y-4 lg:w-full p-2">
             <li className={getLinkClass("/coach-dashboard")}>
               <Link
-                href='/coach-dashboard'
-                className='flex items-center w-full h-full p-2 px-3'
-                onClick={() => handleSetActiveTab("/coach-dashboard")}>
-                <MdDashboard className='text-lg mr-3' />
+                href="/coach-dashboard"
+                className="flex items-center w-full h-full p-2 px-3"
+                onClick={() => handleSetActiveTab("/coach-dashboard")}
+              >
+                <MdDashboard className="text-lg mr-3" />
                 Dashboard
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-availabilty")}>
               <Link
                 href={"/coach-dashboard/coach-availabilty"}
-                className='flex items-center w-full p-2 px-3'
+                className="flex items-center w-full p-2 px-3"
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-availabilty")
-                }>
-                <MdEventAvailable className='text-lg mr-3' />
+                }
+              >
+                <MdEventAvailable className="text-lg mr-3" />
                 Availability
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-profile")}>
               <Link
                 href={"/coach-dashboard/coach-profile"}
-                className='flex items-center w-full p-2 px-3'
+                className="flex items-center w-full p-2 px-3"
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-profile")
-                }>
-                <User className='h-5 mr-3' />
+                }
+              >
+                <User className="h-5 mr-3" />
                 My Profile
               </Link>
             </li>
             <li className={getLinkClass("/coach-dashboard/coach-calendar")}>
               <Link
                 href={"/coach-dashboard/coach-calendar"}
-                className='flex items-center w-full p-2 px-3'
+                className="flex items-center w-full p-2 px-3"
                 onClick={() =>
                   handleSetActiveTab("/coach-dashboard/coach-calendar")
-                }>
-                <MdEventAvailable className='text-lg mr-3' />
+                }
+              >
+                <MdEventAvailable className="text-lg mr-3" />
                 My Appointment
               </Link>
             </li>
@@ -189,46 +198,47 @@ const SidebarCoach = () => {
               </Link>
             </li> */}
             <li>
-              <Accordion className='w-full ' type='single' collapsible>
-                <AccordionItem value='item'>
+              <Accordion className="w-full " type="single" collapsible>
+                <AccordionItem value="item">
                   <AccordionTrigger
-                    className={getProgramLinkClass(
-                      "/coach-dashboard/programs"
-                    )}>
-                    <div className='flex px-3'>
-                      <LibraryBig className='h-5 mr-3' />
+                    className={getProgramLinkClass("/coach-dashboard/programs")}
+                  >
+                    <div className="flex px-3">
+                      <LibraryBig className="h-5 mr-3" />
                       <p>Programs</p>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className='ml-3 py-1'>
+                    <ul className="ml-3 py-1">
                       <li
                         className={getSubLinkClass(
                           "/coach-dashboard/programs/create"
-                        )}>
+                        )}
+                      >
                         <Link
-                          href='/coach-dashboard/programs/create'
+                          href="/coach-dashboard/programs/create"
                           onClick={() =>
                             handleSetActiveTab(
                               "/coach-dashboard/programs/create"
                             )
                           }
-                          className='flex p-2 w-full'>
-                          <BadgePlus className='h-5 mr-2' />
+                          className="flex p-2 w-full"
+                        >
+                          <BadgePlus className="h-5 mr-2" />
                           Create Program
                         </Link>
                       </li>
                       <li
-                        className={getSubLinkClass(
-                          "/coach-dashboard/programs"
-                        )}>
+                        className={getSubLinkClass("/coach-dashboard/programs")}
+                      >
                         <Link
-                          href='/coach-dashboard/programs'
-                          className='flex p-2 w-full'
+                          href="/coach-dashboard/programs"
+                          className="flex p-2 w-full"
                           onClick={() =>
                             handleSetActiveTab("/coach-dashboard/programs")
-                          }>
-                          <SquareDashedKanban className='h-5 mr-2' />
+                          }
+                        >
+                          <SquareDashedKanban className="h-5 mr-2" />
                           Manage Programs
                         </Link>
                       </li>
@@ -239,29 +249,30 @@ const SidebarCoach = () => {
             </li>
           </ul>
         </nav>
-        <div className='flex items-center justify-between  absolute l-0 bottom-0 w-full px-2'>
+        <div className="flex items-center justify-between  absolute l-0 bottom-0 w-full px-2">
           <TooltipProvider>
-            <Avatar className='h-10 w-10'>
+            <Avatar className="h-10 w-10">
               <AvatarImage
                 src={userdata?.profileImage}
                 alt={userdata?.name || "avatar"}
               />
               <AvatarFallback>{userdata?.name?.slice(0, 1)}</AvatarFallback>
             </Avatar>
-            <div className='w-3/5'>
-              <p className='font-semibold text-gray-800 text-base '>
+            <div className="w-3/5">
+              <p className="font-semibold text-gray-800 text-base ">
                 {userdata?.name}
               </p>
             </div>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  variant='ghost'
-                  size='icon'
-                  className='text-gray-600 hover:text-gray-800'
-                  onClick={handleLogout}>
-                  <FiLogOut className='w-5 h-5' />
-                  <span className='sr-only'>Logout</span>
+                  variant="ghost"
+                  size="icon"
+                  className="text-gray-600 hover:text-gray-800"
+                  onClick={handleLogout}
+                >
+                  <FiLogOut className="w-5 h-5" />
+                  <span className="sr-only">Logout</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>

@@ -740,7 +740,7 @@ const UserDashboardPage = () => {
                     My Bookings
                   </h2>
                   <div className="coach_section">
-                    <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
+                    <div className="mx-auto max-w-2xl lg:max-w-7xl">
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
                         {isLoading ? (
                           Array(6)

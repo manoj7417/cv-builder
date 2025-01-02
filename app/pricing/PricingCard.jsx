@@ -636,16 +636,6 @@ const PricingFunc = () => {
 
                       {/* Input field and apply button */}
                       <div className="mb-4 flex justify-between items-center gap-5">
-                        {/* <input
-                          type="text"
-                          placeholder="Enter coupon code"
-                          value={couponCode} // Bind the state
-                          onChange={(e) => setCouponCode(e.target.value)} // Update state
-                          disabled={couponApplied} // Disable input after applying coupon
-                          className={`border px-4 py-2 rounded-md w-full ${
-                            couponApplied ? "bg-gray-200" : "border-gray-300"
-                          }`}
-                        /> */}
                         <div
                           className={`relative border-2 border-dotted rounded-md py-2 px-4 flex items-center justify-center w-full transition-colors duration-300 ${
                             couponApplied
@@ -810,19 +800,22 @@ const PricingFunc = () => {
                 <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
                   <div className="text-center">
                     <p className="text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">
-                      {isTrialSelected
+                      {/* Apply isTrialSelected condition only for the card with id === 1 */}
+                      {selectedCard?.id === 1 && isTrialSelected
                         ? "100% off"
                         : `${selectedCard?.discount}% off`}
                     </p>
-                    {selectedCard?.choosePlan && !isTrialSelected && (
-                      <p className="text-lg sm:text-xl text-gray-500">
-                        Choose your plan
-                      </p>
-                    )}
+                    {selectedCard?.choosePlan &&
+                      selectedCard?.id !== 1 &&
+                      !isTrialSelected && (
+                        <p className="text-lg sm:text-xl text-gray-500">
+                          Choose your plan
+                        </p>
+                      )}
                     <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
                       <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
-                        {isTrialSelected // Check if trial coupon is selected
-                          ? "$0" // Display $0 if trial coupon is selected
+                        {selectedCard?.id === 1 && isTrialSelected
+                          ? "$0"
                           : selectedPlan === "monthly"
                           ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
                           : `${selectedCard["DP"].symbol}${
@@ -830,8 +823,8 @@ const PricingFunc = () => {
                             }`}
                       </h1>
                       <p className="text-gray-500 text-xs sm:text-sm px-2 line-through">
-                        {isTrialSelected // Check if trial coupon is selected
-                          ? "$0" // Display $0 for the crossed out price if trial coupon is selected
+                        {selectedCard?.id === 1 && isTrialSelected
+                          ? "$0"
                           : selectedPlan === "monthly"
                           ? `${selectedCard["MP"].symbol}${selectedCard["MP"].price}`
                           : `${selectedCard["MP"].symbol}${
@@ -844,73 +837,75 @@ const PricingFunc = () => {
                           : selectedCard?.yearLabel}
                       </p>
                     </div>
-                    {selectedCard?.choosePlan && !isTrialSelected && (
-                      <div className="mt-6 space-y-4 sm:space-y-8">
-                        {/* Monthly and Yearly plan selection */}
-                        <div
-                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                            selectedPlan === "monthly"
-                              ? "border-blue-500 shadow-lg"
-                              : ""
-                          }`}
-                          onClick={() => handlePlanChange("monthly")}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                              Monthly
+                    {selectedCard?.choosePlan &&
+                      selectedCard?.id !== 1 &&
+                      !isTrialSelected && (
+                        <div className="mt-6 space-y-4 sm:space-y-8">
+                          {/* Monthly and Yearly plan selection */}
+                          <div
+                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                              selectedPlan === "monthly"
+                                ? "border-blue-500 shadow-lg"
+                                : ""
+                            }`}
+                            onClick={() => handlePlanChange("monthly")}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                Monthly
+                              </div>
+                              <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                <p>
+                                  {selectedCard["DP"].symbol}
+                                  {selectedCard["DP"].price}
+                                </p>
+                                <p className="line-through text-xs ml-1">
+                                  {selectedCard["MP"].symbol}
+                                  {selectedCard["MP"].price}
+                                </p>
+                              </div>
+                              <input
+                                type="checkbox"
+                                className="hidden"
+                                checked={selectedPlan === "monthly"}
+                                onChange={() => handlePlanChange("monthly")}
+                                value="monthly"
+                              />
                             </div>
-                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
-                              <p>
-                                {selectedCard["DP"].symbol}
-                                {selectedCard["DP"].price}
-                              </p>
-                              <p className="line-through text-xs ml-1">
-                                {selectedCard["MP"].symbol}
-                                {selectedCard["MP"].price}
-                              </p>
+                          </div>
+                          <div
+                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                              selectedPlan === "yearly"
+                                ? "border-blue-500 shadow-lg"
+                                : ""
+                            }`}
+                            onClick={() => handlePlanChange("yearly")}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
+                                Yearly
+                              </div>
+                              <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
+                                <p>
+                                  {selectedCard["DP"].symbol}
+                                  {selectedCard["DP"].price * 10}
+                                </p>
+                                <p className="line-through text-xs ml-1">
+                                  {selectedCard["MP"].symbol}
+                                  {selectedCard["MP"].price * 10}
+                                </p>
+                              </div>
+                              <input
+                                type="checkbox"
+                                className="hidden"
+                                checked={selectedPlan === "yearly"}
+                                onChange={() => handlePlanChange("yearly")}
+                                value="yearly"
+                              />
                             </div>
-                            <input
-                              type="checkbox"
-                              className="hidden"
-                              checked={selectedPlan === "monthly"}
-                              onChange={() => handlePlanChange("monthly")}
-                              value="monthly"
-                            />
                           </div>
                         </div>
-                        <div
-                          className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
-                            selectedPlan === "yearly"
-                              ? "border-blue-500 shadow-lg"
-                              : ""
-                          }`}
-                          onClick={() => handlePlanChange("yearly")}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="subscription-panel-offer-commitment font-bold text-sm sm:text-base">
-                              Yearly
-                            </div>
-                            <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
-                              <p>
-                                {selectedCard["DP"].symbol}
-                                {selectedCard["DP"].price * 10}
-                              </p>
-                              <p className="line-through text-xs ml-1">
-                                {selectedCard["MP"].symbol}
-                                {selectedCard["MP"].price * 10}
-                              </p>
-                            </div>
-                            <input
-                              type="checkbox"
-                              className="hidden"
-                              checked={selectedPlan === "yearly"}
-                              onChange={() => handlePlanChange("yearly")}
-                              value="yearly"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                      )}
                   </div>
                   <div className="upgrade_button text-end mt-5">
                     <Button
