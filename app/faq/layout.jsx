@@ -5,11 +5,11 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Frequently Asked Questions | Genies Career Hub",
   description:
-    "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
+    "Have more questions about the Genies Career Hub UK? Find all answers about the CV Studio, Career Coach, Psychometric Test, Pricing, and more in FAQs section.",
   openGraph: {
     title: "Frequently Asked Questions | Genies Career Hub",
     description:
-      "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
+      "Have more questions about the Genies Career Hub UK? Find all answers about the CV Studio, Career Coach, Psychometric Test, Pricing, and more in FAQs section.",
     url: "/faq",
     images: [
       {
@@ -24,7 +24,7 @@ export const metadata = {
     site: "@geniescareerhub",
     title: "Frequently Asked Questions | Genies Career Hub",
     description:
-      "Looking for more or seeking a solution for your education problems? Contact Us personally and get more information and support on Genies Career Hub now.",
+      "Have more questions about the Genies Career Hub UK? Find all answers about the CV Studio, Career Coach, Psychometric Test, Pricing, and more in FAQs section.",
     image:
       "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },

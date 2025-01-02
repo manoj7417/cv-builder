@@ -7,7 +7,7 @@ export const metadata = {
   description:
     "Sort your Life and Career with expert job and career coaching, resume services, life coach, career change advice, developing skills for life, and more",
   alternates: {
-    canonical: "https://www.geniescareerhub.com/coaches",
+    canonical: "https://www.geniescareerhub.com/career-coaching",
   },
 };
 

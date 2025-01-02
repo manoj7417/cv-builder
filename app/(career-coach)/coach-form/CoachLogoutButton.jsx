@@ -24,11 +24,8 @@ const CoachLogoutButton = () => {
 
   return (
     <div>
-      <Button
-        className="bg-white text-black animate-bounce"
-        onClick={handleLogout}
-      >
-        <RiArrowLeftSLine className="inline text-base" /> Logout
+      <Button className="lg:bg-white bg-blue-800 lg:text-black text-white animate-bounce" onClick={handleLogout}>
+       <RiArrowLeftSLine className="inline text-base"/> Logout
       </Button>
     </div>
   );

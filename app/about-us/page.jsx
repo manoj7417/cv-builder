@@ -145,9 +145,9 @@ export default function AboutUs() {
       <section className='py-12 bg-gray-100'>
         <div className='container mx-auto max-w-7xl  gap-x-8 px-8 sm:gap-x-8 sm:px-8 md:gap-x-8 md:px-8 lg:gap-x-8 lg:px-8 xl:gap-x-8 xl:px-8 2xl:gap-x-8 2xl:px-8'>
           <div className='w-[70%] mx-auto'>
-            <h3 className='my-5 text-3xl font-bold text-center sm:text-left md:text-left lg:text-center xl:text-ceter 2xl:text-center text-[#005599] md:text-4xl lg:text-5xl'>
+            <p className='my-5 text-3xl font-bold text-center sm:text-left md:text-left lg:text-center xl:text-ceter 2xl:text-center text-[#005599] md:text-4xl lg:text-5xl'>
               Comprehensive Services to Cater to all your Career Requirements
-            </h3>
+            </p>
             <p className='my-8 text-lg text-center sm:text-center md:text-center lg:text-center xl:text-center 2xl:text-center text-gray-700'>
               Our aim at Genies Career Hub is to help every aspiring career
               applicant achieve their Career goals. We offer services that
@@ -346,9 +346,9 @@ export default function AboutUs() {
         <div className='max-w-6xl mx-auto  py-10'>
           <div className='flex flex-col md:flex-row items-center gap-4'>
             <div className='w-full text-center md:text-left sm:text-left mt-8 md:mt-0 md:pl-8'>
-              <h2 className='trust font-bold text-gray-800'>
+              <h3 className='trust font-bold text-gray-800'>
                 Guiding, Empowering, and Fuelling your Growth with Expertise
-              </h2>
+              </h3>
               <p className='mt-4 text-gray-600'>
                 Take a stroll through our journey as we evolve from Career
                 Genies to Genies Career Hub. Our story began with Career Genies,

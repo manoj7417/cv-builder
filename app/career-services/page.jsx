@@ -112,9 +112,9 @@ const CareerServices = () => {
                       style={{ height: 200, width: "100%" }}
                     />
                     <div className='flex-grow p-4 text-center'>
-                      <h2 className='text-2xl font-semibold'>
+                      <h3 className='text-2xl font-semibold'>
                         {animation?.title}
-                      </h2>
+                      </h3>
                       <p className='my-4 text-sm text-gray-600'>
                         {animation?.description}
                       </p>

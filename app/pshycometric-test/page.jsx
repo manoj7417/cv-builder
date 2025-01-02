@@ -128,9 +128,9 @@ const Page = () => {
         id='free'>
         <div className='container lg:pt-0 pt-10'>
           <div className='  space-y-2  mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
-            <p className='text-[30px] md:text-[52px] sm:text-[52px] font-bold'>
+            <h2 className='text-[30px] md:text-[52px] sm:text-[52px] font-bold'>
               Witness the Magic of Science <br></br> inspire your Career
-            </p>
+            </h2>
             <p className='text-[#7C7C7C] font-bold'>
               Try and Test the free psychometric examination to explore the
               possibilities of an organised career.

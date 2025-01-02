@@ -24,9 +24,9 @@ const TermsConditionPage = () => {
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-bold mb-6">Terms and Conditions</h1>
           <section className="mb-8">
-            <h1 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
+            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">
               1. CV Creator, Optimizer, and CV Match
-            </h1>
+            </h2>
             <div className="mb-6">
               <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">a. Eligibility:</h3>
               <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
@@ -48,7 +48,7 @@ const TermsConditionPage = () => {
               </p>
             </div>
             <div className="mb-6">
-              <h2 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">c. Accuracy:</h2>
+              <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">c. Accuracy:</h3>
               <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
                 <li>
                   We strive to be accurate, but always check the CV generated
@@ -87,7 +87,7 @@ const TermsConditionPage = () => {
             </div>
           </section>
           <section className="mb-8">
-            <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">3. AI Career Coach</h2>
+            <h3 className="text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold mb-4">3. AI Career Coach</h3>
             <div className="mb-6">
               <h6 className="text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl font-semibold mb-2">a. Guidance:</h6>
               <ul className="list-disc pl-5 space-y-2 text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">

@@ -158,12 +158,12 @@ export default function HomepageNew() {
         <div className="max-w-7xl mx-auto py-10">
           <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-48">
             <div className="grid-span-6 md:px-20 px-5">
-              <h2 className="md:text-4xl text-[25px] text-black font-bold">
+              <p className="md:text-4xl text-[25px] text-black font-bold">
                 Facing CV Rejections? It’s Time for You to start creating
                 <span className="text-[#1D4ED8] font-bold ml-2">
                   ATS-Friendly CVs!
                 </span>
-              </h2>
+              </p>
               <p className="text-sm my-5">
                 Sending out CVs as a part of a job application is the first and
                 non-negotiable step. However, many job applications get rejected
@@ -210,10 +210,10 @@ export default function HomepageNew() {
             </div>
             <div className="grid-span-6">
               <div className="resume_parent">
-                <img className="resume_img_1" src="/15.png" />
-                <img className="resume_img_2" src="/17.png" />
-                <img className="resume_img_3" src="/18.png" />
-                <img className="resume_img_4 md:block hidden" src="/16.png" />
+                <img className="resume_img_1" src="/15.png" alt="15AtsImage"/>
+                <img className="resume_img_2" src="/17.png" alt="17AtsImage"/>
+                <img className="resume_img_3" src="/18.png" alt="18AtsImage"/>
+                <img className="resume_img_4 md:block hidden" src="/16.png" alt="18AtsImage"/>
               </div>
             </div>
           </div>
