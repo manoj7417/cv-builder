@@ -35,6 +35,7 @@ import "react-quill/dist/quill.snow.css";
 
 function UpdateProgram() {
   const { id } = useParams();
+  console.log("id", id);
   const [isMounted, setIsMounted] = useState(false);
   const fileInputRef = useRef(null);
   const [isUploadingImage, setIsUploading] = useState(false);

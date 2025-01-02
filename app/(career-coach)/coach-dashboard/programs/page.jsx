@@ -46,7 +46,6 @@ function Programs() {
     });
 
     const { accessToken } = await GetTokens(true);
-
     if (result.isConfirmed) {
       toast.promise(
         axios
