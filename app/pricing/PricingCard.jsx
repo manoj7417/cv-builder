@@ -33,7 +33,7 @@ const PricingFunc = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isFreeDialogOpen, setIsFreeDialogOpen] = useState(false);
-  console.log("isFreeDialogOpen::", isFreeDialogOpen);
+
   const serviceCardsRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [geoinfo, setGeoInfo] = useState({
@@ -301,6 +301,7 @@ const PricingFunc = () => {
           },
         }
       );
+      
       if (
         response.status === 200 &&
         response.data.error === "Trial coupon already redeemed"
@@ -315,10 +316,11 @@ const PricingFunc = () => {
           setClientSecret(response.data.clientSecret);
           setIsFreeDialogOpen(true);
           setIsDialogOpen(false);
-        } else {
-          const { url } = response.data;
-          window.location = url;
-        }
+        } 
+      }else {
+        const { url } = response.data;
+     
+        window.location = url;
       }
     } catch (error) {
       if (
