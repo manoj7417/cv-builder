@@ -91,6 +91,14 @@ const CoachAvailability = () => {
   const handleSwitchChange = (i) => {
     const updatedDays = [...watchAvailabilityDays];
     updatedDays[i].isAvailable = !updatedDays[i].isAvailable;
+    if (!updatedDays[i].slots || updatedDays[i].slots.length === 0) {
+      updatedDays[i].slots = [
+        {
+          startTime: "9:00 AM",
+          endTime: "5:00 PM",
+        },
+      ];
+    }
     setValue("availabilityDays", updatedDays);
   };
 
@@ -170,10 +178,8 @@ const CoachAvailability = () => {
     if (userdata?.availability) {
       setValue("availabilityDays", userdata.availability.dates);
     }
-    
   }, [userdata]);
 
-  
   return (
     <div className="w-full mx-auto mt-18 lg:p-10 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
       <div className="main_heading my-5 mt-10">

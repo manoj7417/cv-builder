@@ -684,7 +684,6 @@ const CoachForm = () => {
               </div>
             ) : userdata.approvalStatus === "pending" ? (
               <>
-                {/* START-IF FORMFILLED IS PENDING */}
                 <div className="h-screen flex flex-col items-center justify-center">
                   <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
                     <Image
@@ -705,12 +704,10 @@ const CoachForm = () => {
                     </p>
                   </div>
                 </div>
-                {/* END-IF FORMFILLED IS PENDING */}
               </>
             ) : (
               userdata.approvalStatus === "rejected" && (
                 <>
-                  {/* START-IF FORMFILLED IS REJECTED OR CANCELLED */}
                   <div className="h-screen flex flex-col items-center justify-center">
                     <div className=" h-32 w-32 p-5 rounded-full bg-yellow-50">
                       <Image
@@ -730,7 +727,6 @@ const CoachForm = () => {
                       </p>
                     </div>
                   </div>
-                  {/* END-IF FORMFILLED IS REJECTED OR CANCELLED */}
                 </>
               )
             )}

@@ -35,20 +35,25 @@ const CoachDashboardPage = () => {
   const router = useRouter();
 
   function formatDate(item) {
-    const date = dayjs(item.date); 
-    const formattedDate = date.format("MMM D, YYYY"); 
-    
-    
-    const startTime = dayjs(`${formattedDate} ${item.slotTime.startTime}`, "MMM D, YYYY h:mm A").format("HH:mm"); 
-    const endTime = dayjs(`${formattedDate} ${item.slotTime.endTime}`, "MMM D, YYYY h:mm A").format("HH:mm"); 
+    const date = dayjs(item.date);
+    const formattedDate = date.format("MMM D, YYYY");
+
+    const startTime = dayjs(
+      `${formattedDate} ${item.slotTime.startTime}`,
+      "MMM D, YYYY h:mm A"
+    ).format("HH:mm");
+    const endTime = dayjs(
+      `${formattedDate} ${item.slotTime.endTime}`,
+      "MMM D, YYYY h:mm A"
+    ).format("HH:mm");
 
     return `${formattedDate}, ${startTime} - ${endTime}`;
-}
+  }
 
   const handleGetBookings = async () => {
     const { accessToken } = await GetTokens(true);
     if (!accessToken || !accessToken.value) {
-      return router.push("/login?redirect=/user-dashboard");
+      return router.push("/login?redirect=/coach-signin");
     }
     setLoading(true);
     try {
