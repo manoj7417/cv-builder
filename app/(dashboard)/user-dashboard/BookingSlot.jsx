@@ -70,6 +70,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   } = useForm();
 
   const [singleCoach, setSingleCoach] = useState(null);
+  console.log("singleCoach::", singleCoach);
   const id = coach_Id;
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -84,6 +85,8 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
+  console.log("coachBookings", coachBookings);
+
   const [meetUrl, setMeetUrl] = useState(null);
 
   const checkCoursePurchased = async (programId) => {
@@ -133,12 +136,40 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   };
 
   // Check if a specific day is available based on the provided data
-  const isDayAvailable = (dayOfWeek) => {
+  const isDayAvailable = (dayOfWeek,date) => {
+
+    const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
+
+    const checkIfDateExists = (date) => {
+      return singleCoach?.availability?.dateOverrides.some(item => dayjs(item.date).format("YYYY-MM-DD") === formattedDateToCheck);
+    };
+
+    // Check if the date exists in dateOverrides
+  if (checkIfDateExists(formattedDateToCheck)) {
+    console.log("Formatted Date found in dateOverrides:", formattedDateToCheck);
+    
+    // Fetch the dateOverride for the selected date
+    const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+      (override) => dayjs(override.date).format("YYYY-MM-DD") === formattedDateToCheck
+    );
+
+    // Return the slots from the dateOverride if available
+    if (dateOverride && dateOverride.slots) {
+      console.log("Date Override Slots:", dateOverride.slots);
+      return dateOverride.slots;
+    }
+  }
+     
+
+    
     const availableDay = singleCoach?.availability?.dates?.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
+
     return availableDay ? availableDay.isAvailable : false;
+
   };
+  
 
   // Function to handle date selection and fetch available slots
   const handleDateSelect = (dayOfWeek, date) => {
@@ -146,6 +177,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
       date,
       dayOfWeek,
     });
+    console.log("date", date);
     const selectedDay = singleCoach?.availability.dates.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
@@ -357,7 +389,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
               Day: ({ date }) => {
                 const dayOfWeek = getDayOfWeek(date);
                 const dayOfMonth = getDayOfMonth(date);
-                const isAvailable = isDayAvailable(dayOfWeek);
+                const isAvailable = isDayAvailable(dayOfWeek,date);
                 const isDisabled = disablePastDates(date);
                 const isInCurrentMonth = isSameMonth(date, currentMonth);
                 const isCurrentDate = dayjs().isSame(date, "day");
@@ -371,6 +403,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
 
                 const isSelected =
                   selectedDate.date === dayjs(date).format("YYYY-MM-DD");
+
 
                 const dayClasses = isDisabled
                   ? "text-gray-400 cursor-not-allowed bg-transparent"

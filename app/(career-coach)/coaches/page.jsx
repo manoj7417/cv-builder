@@ -21,7 +21,6 @@ const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
-  console.log("selectedCoach", selectedCoach);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
   const [geoData, setGeoData] = useState(null);
@@ -93,7 +92,7 @@ const CoachPage = () => {
   };
 
   const checkCoursePurchased = async (programId) => {
-    const { accessToken } = await GetTokens(true);
+    const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return;
     }
@@ -179,6 +178,7 @@ const CoachPage = () => {
 
   const programDetails = selectedCoach?.programs[selectedProgram];
   const isPurchased = purchasedPrograms[programDetails?._id];
+  console.log("isPurchased::", isPurchased);
 
   return (
     <>
