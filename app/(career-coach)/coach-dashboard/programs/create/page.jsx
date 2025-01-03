@@ -180,7 +180,7 @@ function CreateProgram() {
           </div>
           <div className="my-2">
             <Label>
-              Program Image<span className="text-red-500 ml-1">*</span>
+              Program Image
             </Label>
             {profileImage ? (
               <div className="flex items-center py-4">
