@@ -553,7 +553,7 @@ const UserDashboardPage = () => {
                                           src={item.programId?.programImage}
                                           alt={item.programId?.title}
                                           className="w-16 h-16 object-cover rounded-md"
-                                          priority
+                                          priority="true"
                                         />
                                         <div>
                                           <p className="text-sm font-semibold">
@@ -576,7 +576,7 @@ const UserDashboardPage = () => {
                                           src={item?.coachId?.profileImage}
                                           alt={item?.coachId?.name}
                                           className="w-16 h-16 object-cover rounded-full"
-                                          priority
+                                          priority="true"
                                         />
                                         <div>
                                           <p className="text-sm font-semibold">
@@ -880,7 +880,7 @@ const UserDashboardPage = () => {
                                         alt="blog photo"
                                         src={item.programId?.programImage}
                                         className="max-h-40 w-full object-cover"
-                                        priority
+                                        priority="true"
                                       />
                                       <div className="bg-white w-full p-4">
                                         <p className="text-gray-800 text-base font-medium mb-2">
@@ -897,7 +897,7 @@ const UserDashboardPage = () => {
                                             className="w-10 h-10 object-cover rounded-full"
                                             alt="User avatar"
                                             src={item?.coachId?.profileImage}
-                                            priority
+                                            priority="true"
                                           />
                                           <div className="pl-3">
                                             <div className="font-medium text-sm">

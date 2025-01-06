@@ -276,7 +276,7 @@ const CoachNewPage = () => {
                 <span className="text-blue-700">One Right Approach</span>
               </h1>
               <Image
-                priority
+                priority="true"
                 src="/new_coach.gif"
                 alt="newCoach"
                 height={100}

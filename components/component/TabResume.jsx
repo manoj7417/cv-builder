@@ -177,7 +177,7 @@ export default function TabResume() {
                               <span className='mx-2'>Loading...</span>
                             </div>
                           )}
-                          <Image priority
+                          <Image priority="true"
                             src={item.src}
                             width={800}
                             height={400}
@@ -257,7 +257,7 @@ export default function TabResume() {
                                 <span className='mx-2'>Loading...</span>
                               </div>
                             )}
-                            <Image priority
+                            <Image priority="true"
                               src={item.src}
                               width={800}
                               height={400}

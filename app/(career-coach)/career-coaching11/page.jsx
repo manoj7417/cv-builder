@@ -79,7 +79,7 @@ const ComingSoonPage = () => {
         <div className='container lg:pt-0 pt-10'>
           <div className='flex flex-col justify-center '>
             <Image
-              priority
+              priority="true"
               src={"/arrowright.png"}
               width={100}
               height={100}
@@ -87,7 +87,7 @@ const ComingSoonPage = () => {
               className='absolute top-[20%] left-0 w-auto h-auto'
             />
             <Image
-              priority
+              priority="true"
               src={"/arrowleft.png"}
               width={100}
               height={100}

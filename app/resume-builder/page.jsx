@@ -147,7 +147,7 @@ const ResumeBuilderPage = () => {
               <div className="inline-flex items-center space-x-2">
                 <Link href="/">
                   <Image
-                    priority
+                    priority="true"
                     src={"/beta-logo.png"}
                     width={100}
                     height={100}

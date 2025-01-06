@@ -540,7 +540,7 @@ function JobMultistepForm({
         <div className="flex justify-around">
           <div className="w-1/3 h-full hidden sm:block">
             <Image
-              priority
+              priority="true"
               src="/illustration-manager-choosing-new-worker.png"
               alt="choice-worker-concept-illustrated"
               className="absolute bottom-5"
@@ -632,7 +632,7 @@ function JobMultistepForm({
         <div className="flex flex-col-reverse sm:flex-row justify-around overflow-hidden">
           <div className="sm:w-1/3 w-full h-64 sm:h-full hidden sm:block">
             <Image
-              priority
+              priority="true"
               src="/illustration-manager-choosing-new-worker.png"
               alt="choice-worker-concept-illustrated"
               objectFit="cover"
@@ -856,7 +856,7 @@ function JobMultistepForm({
         <div className="flex flex-col-reverse sm:flex-row justify-around overflow-hidden">
           <div className="sm:w-1/3 w-full h-64 sm:h-full hidden sm:block">
             <Image
-              priority
+              priority="true"
               src="/illustration-manager-choosing-new-worker.png"
               alt="choice-worker-concept-illustrated"
               objectFit="cover"
@@ -1042,7 +1042,7 @@ function JobMultistepForm({
         <div className="flex flex-col-reverse sm:flex-row justify-around overflow-hidden">
           <div className="sm:w-1/3 w-full h-64 sm:h-full hidden sm:block">
             <Image
-              priority
+              priority="true"
               src="/illustration-manager-choosing-new-worker.png"
               alt="choice-worker-concept-illustrated"
               objectFit="cover"
@@ -1224,7 +1224,7 @@ function JobMultistepForm({
         <div className="flex flex-col-reverse sm:flex-row justify-around overflow-hidden">
           <div className="sm:w-1/3 w-full h-64 sm:h-full hidden sm:block">
             <Image
-              priority
+              priority="true"
               src="/illustration-manager-choosing-new-worker.png"
               alt="choice-worker-concept-illustrated"
               objectFit="cover"
@@ -1268,7 +1268,7 @@ function JobMultistepForm({
         <div className="flex flex-col-reverse sm:flex-row justify-around">
           <div className="sm:w-1/3 w-full h-64 sm:h-full hidden sm:block">
             <Image
-              priority
+              priority="true"
               src="/illustration-manager-choosing-new-worker.png"
               alt="choice-worker-concept-illustrated"
               objectFit="cover"

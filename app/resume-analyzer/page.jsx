@@ -403,7 +403,7 @@ export default function DashboardIdea() {
             </div>
             <div className="mt-10 lg:mt-0 flex justify-center lg:justify-start">
               <Image
-                priority
+                priority="true"
                 src="/1enhance.png"
                 className="rounded-t-3xl w-full sm:w-1/2 mx-auto h-auto responsive-image"
                 alt="@shadcn"

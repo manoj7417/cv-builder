@@ -561,7 +561,7 @@ export default function Page() {
                                     <div className='grid grid-cols-1 place-items-center w-full'>
                                       <div className='ai-image'>
                                         <Image
-                                          priority
+                                          priority="true"
                                           src='/testpopup.png'
                                           width={200}
                                           height={200}
@@ -571,7 +571,7 @@ export default function Page() {
                                       </div>
                                       <div className='ai-content flex flex-col items-center justify-center gap-5 p-2 w-full'>
                                         <Image
-                                          priority
+                                          priority="true"
                                           src='/testtimer.png'
                                           width={80}
                                           height={100}
