@@ -417,42 +417,43 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     } catch (error) {}
   };
 
-  const handleCurrentSlot = (dayOfWeek, date) => {
-    setSelectedDate({
-      date,
-      dayOfWeek,
-    });
-    const dateOverride = singleCoach?.availability?.dateOverrides?.find(
-      (override) =>
-        dayjs(override.date).format("YYYY-MM-DD") ===
-        dayjs(date).format("YYYY-MM-DD")
-    );
+  // const handleCurrentSlot = (dayOfWeek, date) => {
+  //   setSelectedDate({
+  //     date,
+  //     dayOfWeek,
+  //   });
+  //   // Check if the selected date has an override in dateOverrides
+  //   const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+  //     (override) =>
+  //       dayjs(override.date).format("YYYY-MM-DD") ===
+  //       dayjs(date).format("YYYY-MM-DD")
+  //   );
 
 
-    // If the date is overridden and is unavailable, set slots to null
-    if (dateOverride?.isUnavailable) {
-      setSelectedDaySlots(null);
-      return;
-    }
+  //   // If the date is overridden and is unavailable, set slots to null
+  //   if (dateOverride?.isUnavailable) {
+  //     setSelectedDaySlots(null);
+  //     return;
+  //   }
 
-    // Check availability for the day of the week
-    const selectedDay = singleCoach?.availability?.dates.find(
-      (day) => day.dayOfWeek === dayOfWeek
-    );
+  //   // Check availability for the day of the week
+  //   const selectedDay = singleCoach?.availability?.dates.find(
+  //     (day) => day.dayOfWeek === dayOfWeek
+  //   );
 
 
-    if (selectedDay?.isAvailable) {
-      // Create slots based on availability and bookings
-      const newSlots = createOneHourTimeSlotsForRange(
-        dateOverride?.slots || selectedDay?.slots,
-        coachBookings,
-        date
-      );
-      setSelectedDaySlots(newSlots);
-    } else {
-      setSelectedDaySlots(null);
-    }
-  };
+  //   if (selectedDay?.isAvailable) {
+  //     // Create slots based on availability and bookings
+  //     const newSlots = createOneHourTimeSlotsForRange(
+  //       dateOverride?.slots || selectedDay?.slots,
+  //       coachBookings,
+  //       date
+  //     );
+  //     setSelectedDaySlots(newSlots);
+  //   } else {
+  //     setSelectedDaySlots(null);
+  //   }
+  // };
 
   useEffect(() => {
     getGeoInfo();
@@ -486,15 +487,8 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     fetchCoachDetails();
   }, []);
 
-  useEffect(() => {
-    const currentDate = dayjs(); // Get the current date
-    const formattedCurrentDate = currentDate.format("YYYY-MM-DD");
-    const currentDayOfWeek = currentDate.format("dddd");
+  
 
-    console.log(currentDayOfWeek, formattedCurrentDate);
-
-    handleCurrentSlot(currentDayOfWeek, formattedCurrentDate);
-  }, []);
 
   return (
     <>
