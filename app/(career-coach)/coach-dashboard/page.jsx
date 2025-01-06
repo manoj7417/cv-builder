@@ -53,7 +53,7 @@ const CoachDashboardPage = () => {
   const handleGetBookings = async () => {
     const { accessToken } = await GetTokens(true);
     if (!accessToken || !accessToken.value) {
-      return router.push("/login?redirect=/coach-signin");
+      return router.push("/coach-signin");
     }
     setLoading(true);
     try {
