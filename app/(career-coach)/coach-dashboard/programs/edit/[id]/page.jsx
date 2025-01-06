@@ -42,6 +42,7 @@ function UpdateProgram() {
   const [isCreatingProgram, setIscreatingProgram] = useState(false);
   const router = useRouter();
   const [isInfoLoading, setIsInfoLoading] = useState(true);
+  
 
   const handleOpenFileInput = () => {
     if (fileInputRef.current) {
@@ -79,18 +80,24 @@ function UpdateProgram() {
   const currency = watch("currency");
 
   const handleUpateProgram = async (data) => {
-    console.log(data)
-    // try {
-    //   const { accessToken } = await GetTokens(true);
-    //   await axios.put(`/api/updateProgram/${id}`, data, {
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken.value}`,
-    //     },
-    //   });
-    //   alert("Program updated successfully!");
-    // } catch (error) {
-    //   console.error("Error updating program:", error);
-    // }
+    setIscreatingProgram(true);
+    try {
+      const { accessToken } = await GetTokens(true);
+     const response =  await axios.put(`/api/updateProgram/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      if (response.status === 200) {
+        toast.success("Program updated successfully");
+        router.push("/coach-dashboard/programs");
+      }
+    } catch (error) {
+      console.error("Error updating program:", error);
+      toast.error("Error updating program");
+    }finally{
+      setIscreatingProgram(false);
+    }
   };
 
 
@@ -129,8 +136,6 @@ function UpdateProgram() {
           Authorization: `Bearer ${accessToken.value}`,
         },
       });
-      console.log("data::",data);
-       // Populate form fields
        setValue("programVideo", data?.program?.programVideo || "");
        setValue("programImage", data?.program?.programImage || "");
        setValue("title", data?.program?.title || "");
@@ -139,16 +144,12 @@ function UpdateProgram() {
        setValue("content", data?.program?.content || "");
        setValue("days", data?.program?.days || []);
        setValue("prerequisites", data?.program?.prerequisites || []);
-       setPreviewImage(data?.program?.programImage || "");
- 
+       setPreviewImage(data?.program?.programImage || ""); 
     } catch (error) {
-      console.error(error);
     } finally {
       setIsInfoLoading(false);
     }
   };
-
-  
 
   useEffect(() => {
     handleGetProgramById(id);
