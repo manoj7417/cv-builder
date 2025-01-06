@@ -106,7 +106,6 @@ const CoachPage = () => {
           },
         }
       );
-      console.log("response::", response);
       if (response.data.purchased) {
         setPurchasedPrograms((prevState) => ({
           ...prevState,
@@ -124,6 +123,7 @@ const CoachPage = () => {
     setIsBuyingProgram(true);
     setIsLoading(true);
     try {
+
       const url = `${window.location.protocol}//${window.location.hostname}/user-dashboard`;
       const response = await axios.post(
         "/api/buyprogram",
@@ -147,7 +147,13 @@ const CoachPage = () => {
           },
         }
       );
+      if (response.status === 201) {
+
       window.location.href = response.data.url;
+      } else if (response.status === 200) {
+        toast.error(response.data.message);
+      }
+
       setIsLoading(false);
       checkCoursePurchased(course._id);
     } catch (error) {
@@ -178,7 +184,7 @@ const CoachPage = () => {
 
   const programDetails = selectedCoach?.programs[selectedProgram];
   const isPurchased = purchasedPrograms[programDetails?._id];
-  console.log("isPurchased::", isPurchased);
+
 
   return (
     <>
