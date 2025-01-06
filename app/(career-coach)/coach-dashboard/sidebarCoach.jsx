@@ -93,8 +93,9 @@ const SidebarCoach = () => {
         updateUserData(response.data.data.userdata);
       }
     } catch (error) {
-      await RemoveTokens();
+      await RemoveTokens(true);
       await signOut({ redirect: false });
+      console.log(error);
       toast.error("Error logging in");
       router.push("/coach-signin");
     }
@@ -128,7 +129,7 @@ const SidebarCoach = () => {
           </button>
         </div>
         <div className="dashboard_logo p-5 mb-5">
-          <Link href={'/'}>
+          <Link href={"/"}>
             <Image
               src="/admin-logo.png"
               alt="logo"
