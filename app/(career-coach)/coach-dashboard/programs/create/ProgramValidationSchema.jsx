@@ -24,7 +24,7 @@ export const ProgramValidationSchema = Yup.object().shape({
   currency: Yup.string().required("Currency is required"),
   description: Yup.string().required("Program description is required"),
   programImage: Yup.string()
-    .required("Program Image URL is required"),
+    .notRequired(),
   programVideo: Yup.string()
     .nullable()
     .notRequired(),

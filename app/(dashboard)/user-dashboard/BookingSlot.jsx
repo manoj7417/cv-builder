@@ -60,7 +60,7 @@ const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
 
-const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
+const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
   /************************ */
   const {
     register,
@@ -84,6 +84,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
+
   const [meetUrl, setMeetUrl] = useState(null);
 
   const checkCoursePurchased = async (programId) => {
@@ -133,25 +134,130 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   };
 
   // Check if a specific day is available based on the provided data
-  const isDayAvailable = (dayOfWeek) => {
+  // const isDayAvailable = (dayOfWeek,date) => {
+
+  //   const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
+
+  //   const checkIfDateExists = (date) => {
+  //     return singleCoach?.availability?.dateOverrides.some(item => dayjs(item.date).format("YYYY-MM-DD") === formattedDateToCheck);
+  //   };
+
+  //   // Check if the date exists in dateOverrides
+  // if (checkIfDateExists(formattedDateToCheck)) {
+  //   console.log("Formatted Date found in dateOverrides:", formattedDateToCheck);
+
+  //   // Fetch the dateOverride for the selected date
+  //   const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+  //     (override) => dayjs(override.date).format("YYYY-MM-DD") === formattedDateToCheck
+  //   );
+
+  //   // Return the slots from the dateOverride if available
+  //   if (dateOverride && dateOverride.slots) {
+  //     console.log("Date Override Slots:", dateOverride.slots);
+  //     return dateOverride.slots;
+  //   }
+  // }
+
+  //   const availableDay = singleCoach?.availability?.dates?.find(
+  //     (day) => day.dayOfWeek === dayOfWeek
+  //   );
+
+  //   return availableDay ? availableDay.isAvailable : false;
+
+  // };
+  const isDayAvailable = (dayOfWeek, date) => {
+    const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
+
+    // Helper function to check if the date exists in dateOverrides
+    const checkIfDateExists = (date) => {
+      return singleCoach?.availability?.dateOverrides?.some(
+        (item) => dayjs(item.date).format("YYYY-MM-DD") === date
+      );
+    };
+
+    // Check if the date exists in dateOverrides
+    if (checkIfDateExists(formattedDateToCheck)) {
+      // Fetch the dateOverride for the selected date
+      const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+        (override) =>
+          dayjs(override.date).format("YYYY-MM-DD") === formattedDateToCheck
+      );
+
+      if (dateOverride) {
+        // If `isUnavailable` is true, return false (no slots available)
+        if (dateOverride.isUnavailable) {
+          return false;
+        }
+
+        // Otherwise, return the slots from the dateOverride
+        if (dateOverride.slots) {
+          return dateOverride.slots;
+        }
+      }
+    }
+
+    // If no dateOverride is found, check the availability for the day of the week
     const availableDay = singleCoach?.availability?.dates?.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
-    return availableDay ? availableDay.isAvailable : false;
+
+    return availableDay
+      ? availableDay.isAvailable
+        ? availableDay.slots
+        : false
+      : false;
   };
 
   // Function to handle date selection and fetch available slots
+  // const handleDateSelect = (dayOfWeek, date) => {
+  //   setSelectedDate({
+  //     date,
+  //     dayOfWeek,
+  //   });
+  //   console.log("date", date);
+  //   const selectedDay = singleCoach?.availability.dates.find(
+  //     (day) => day.dayOfWeek === dayOfWeek
+  //   );
+  //   if (selectedDay?.isAvailable) {
+  //     const newSlots = createOneHourTimeSlotsForRange(
+  //       selectedDay?.slots,
+  //       coachBookings,
+  //       date
+  //     );
+  //     setSelectedDaySlots(newSlots);
+  //   } else {
+  //     setSelectedDaySlots(null);
+  //   }
+  // };
+
   const handleDateSelect = (dayOfWeek, date) => {
     setSelectedDate({
       date,
       dayOfWeek,
     });
-    const selectedDay = singleCoach?.availability.dates.find(
+
+    // Check if the selected date has an override in dateOverrides
+    const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+      (override) =>
+        dayjs(override.date).format("YYYY-MM-DD") ===
+        dayjs(date).format("YYYY-MM-DD")
+    );
+
+    // If the date is overridden and is unavailable, set slots to null
+    if (dateOverride?.isUnavailable) {
+      setSelectedDaySlots(null);
+      return;
+    }
+
+    // Check availability for the day of the week
+    const selectedDay = singleCoach?.availability?.dates.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
+
     if (selectedDay?.isAvailable) {
+      // Create slots based on availability and bookings
       const newSlots = createOneHourTimeSlotsForRange(
-        selectedDay?.slots,
+        dateOverride?.slots || selectedDay?.slots,
         coachBookings,
         date
       );
@@ -250,7 +356,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
       });
       if (response.status === 201) {
         setMeetUrl(response.data?.data?.meetingLink);
-        onMeetUrlUpdate(response.data?.data?.meetingLink)
+        onMeetUrlUpdate(response.data?.data?.meetingLink);
         setIsDialogOpen(false);
       }
     } catch (error) {
@@ -282,6 +388,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   const totalTime = programData?.map((item) =>
     item?.days?.reduce((total, day) => total + day.timeToComplete, 0)
   );
+
   const totalTimeInHours = (totalTime / 60).toFixed(1);
 
   const handleFetchCoachDetailsById = async (id) => {
@@ -308,6 +415,43 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
         );
       }
     } catch (error) {}
+  };
+
+  const handleCurrentSlot = (dayOfWeek, date) => {
+    setSelectedDate({
+      date,
+      dayOfWeek,
+    });
+    const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+      (override) =>
+        dayjs(override.date).format("YYYY-MM-DD") ===
+        dayjs(date).format("YYYY-MM-DD")
+    );
+
+
+    // If the date is overridden and is unavailable, set slots to null
+    if (dateOverride?.isUnavailable) {
+      setSelectedDaySlots(null);
+      return;
+    }
+
+    // Check availability for the day of the week
+    const selectedDay = singleCoach?.availability?.dates.find(
+      (day) => day.dayOfWeek === dayOfWeek
+    );
+
+
+    if (selectedDay?.isAvailable) {
+      // Create slots based on availability and bookings
+      const newSlots = createOneHourTimeSlotsForRange(
+        dateOverride?.slots || selectedDay?.slots,
+        coachBookings,
+        date
+      );
+      setSelectedDaySlots(newSlots);
+    } else {
+      setSelectedDaySlots(null);
+    }
   };
 
   useEffect(() => {
@@ -339,7 +483,17 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
   };
 
   useEffect(() => {
-    fetchCoachDetails(); // Fetch coach details on component mount
+    fetchCoachDetails();
+  }, []);
+
+  useEffect(() => {
+    const currentDate = dayjs(); // Get the current date
+    const formattedCurrentDate = currentDate.format("YYYY-MM-DD");
+    const currentDayOfWeek = currentDate.format("dddd");
+
+    console.log(currentDayOfWeek, formattedCurrentDate);
+
+    handleCurrentSlot(currentDayOfWeek, formattedCurrentDate);
   }, []);
 
   return (
@@ -357,7 +511,7 @@ const UserBookingSlot = ({ coach_Id, programId,onMeetUrlUpdate  }) => {
               Day: ({ date }) => {
                 const dayOfWeek = getDayOfWeek(date);
                 const dayOfMonth = getDayOfMonth(date);
-                const isAvailable = isDayAvailable(dayOfWeek);
+                const isAvailable = isDayAvailable(dayOfWeek, date);
                 const isDisabled = disablePastDates(date);
                 const isInCurrentMonth = isSameMonth(date, currentMonth);
                 const isCurrentDate = dayjs().isSame(date, "day");
