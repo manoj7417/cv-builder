@@ -61,14 +61,12 @@ const locales = {
 };
 
 const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
-  /************************ */
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-
   const [singleCoach, setSingleCoach] = useState(null);
   const id = coach_Id;
   const router = useRouter();
@@ -84,7 +82,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
-
   const [meetUrl, setMeetUrl] = useState(null);
 
   const checkCoursePurchased = async (programId) => {
@@ -255,7 +252,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     );
 
     if (selectedDay?.isAvailable) {
-      // Create slots based on availability and bookings
       const newSlots = createOneHourTimeSlotsForRange(
         dateOverride?.slots || selectedDay?.slots,
         coachBookings,
@@ -417,32 +413,31 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     } catch (error) {}
   };
 
-  const handleCurrentSlot = (dayOfWeek, date) => {
+  const handleCurrentSlot = (coach) => {
+    const currentDate = dayjs();
+    const date = currentDate.format("YYYY-MM-DD");
+    const dayOfWeek = currentDate.format("dddd");
+
     setSelectedDate({
       date,
       dayOfWeek,
     });
-    const dateOverride = singleCoach?.availability?.dateOverrides?.find(
+    const dateOverride = coach?.availability?.dateOverrides?.find(
       (override) =>
         dayjs(override.date).format("YYYY-MM-DD") ===
         dayjs(date).format("YYYY-MM-DD")
     );
 
-
-    // If the date is overridden and is unavailable, set slots to null
     if (dateOverride?.isUnavailable) {
       setSelectedDaySlots(null);
       return;
     }
 
-    // Check availability for the day of the week
-    const selectedDay = singleCoach?.availability?.dates.find(
+    const selectedDay = coach?.availability?.dates.find(
       (day) => day.dayOfWeek === dayOfWeek
     );
 
-
     if (selectedDay?.isAvailable) {
-      // Create slots based on availability and bookings
       const newSlots = createOneHourTimeSlotsForRange(
         dateOverride?.slots || selectedDay?.slots,
         coachBookings,
@@ -473,6 +468,7 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
       const coach = data.coaches.find((coach) => coach._id === id);
       if (coach) {
         setSingleCoach(coach);
+        handleCurrentSlot(coach);
       } else {
         toast.error("Coach not found");
       }
@@ -484,16 +480,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
 
   useEffect(() => {
     fetchCoachDetails();
-  }, []);
-
-  useEffect(() => {
-    const currentDate = dayjs(); // Get the current date
-    const formattedCurrentDate = currentDate.format("YYYY-MM-DD");
-    const currentDayOfWeek = currentDate.format("dddd");
-
-    console.log(currentDayOfWeek, formattedCurrentDate);
-
-    handleCurrentSlot(currentDayOfWeek, formattedCurrentDate);
   }, []);
 
   return (
