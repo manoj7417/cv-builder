@@ -177,6 +177,7 @@ const CoachAvailability = () => {
   useEffect(() => {
     if (userdata?.availability) {
       setValue("availabilityDays", userdata.availability.dates);
+      setDateOverrides(userdata.availability.dateOverrides);
     }
   }, [userdata]);
 
@@ -339,8 +340,6 @@ const CoachAvailability = () => {
             <div className="date_overrides mt-10">
               <DateOverrides
                 timeSlot={timeSlot}
-                getFilteredTimeSlots={getFilteredTimeSlots}
-                onUpdateOverrides={handleDateOverridesUpdate}
                 dateOverrides={dateOverrides}
                 setDateOverrides={setDateOverrides}
               />

@@ -24,6 +24,8 @@ import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import CalendarComponent from "./CalendarComponent";
 import SingleSelectCalendar from "./SingleSelectCalendar";
+import axios from "axios";
+import { GetTokens } from "@/app/actions";
 
 const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
   const [isUnavailable, setIsUnavailable] = useState(false);
@@ -68,19 +70,22 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
   };
 
   const getFilteredSecondTimeSlots = (firstSelectedTime) => {
-    const firstTimeIndex = selectedDatesTimes.findIndex((slot) => slot.startTime === firstSelectedTime);
+    const firstTimeIndex = selectedDatesTimes.findIndex(
+      (slot) => slot.startTime === firstSelectedTime
+    );
     if (firstTimeIndex !== -1) {
       return timeSlot.slice(firstTimeIndex + 1);
     }
     return [];
   };
 
-  const handlesaveDateOverrides = (newDateOverrides) => {
+  const handlesaveDateOverrides = async (newDateOverrides) => {
     const mergedOverrides = [...dateOverrides, ...newDateOverrides];
     const sortedOverrides = mergedOverrides.sort(
       (a, b) => new Date(a.date) - new Date(b.date)
     );
     setDateOverrides(sortedOverrides);
+    await handleUpdateDateOverride(sortedOverrides);
   };
 
   const handleSaveChanges = () => {
@@ -93,9 +98,10 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
     handleDialogClose();
   };
 
-  const handleDeleteDateOverride = (i) => {
+  const handleDeleteDateOverride = async (i) => {
     const newDateOverRides = dateOverrides.filter((_, index) => index !== i);
     setDateOverrides(newDateOverRides);
+    await handleUpdateDateOverride(newDateOverRides);
   };
 
   const handleEditDateOverride = (i) => {
@@ -125,7 +131,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
     setMode("multiple");
   };
 
-  const UpdateOverrideDate = (date, newDate, slots, isUnavailable) => {
+  const UpdateOverrideDate = async (date, newDate, slots, isUnavailable) => {
     const newDateOverRides = dateOverrides.map((dateOverride, index) => {
       if (dateOverride.date === date) {
         return {
@@ -141,6 +147,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
       (a, b) => new Date(a.date) - new Date(b.date)
     );
     setDateOverrides(sortedOverrides);
+    await handleUpdateDateOverride(sortedOverrides);
   };
 
   const handleupdateOverride = () => {
@@ -151,6 +158,22 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
       isUnavailable
     );
     handleDialogClose();
+  };
+
+  const handleUpdateDateOverride = async (data) => {
+    const { accessToken } = await GetTokens(true);
+    try {
+      const response = await axios.patch("/api/updatedateOverride", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      if (response.status === 200) {
+        toast.success("Date override updated");
+      }
+    } catch (error) {
+      toast.error("Error updating date override");
+    }
   };
 
   return (

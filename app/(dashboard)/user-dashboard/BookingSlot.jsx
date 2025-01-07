@@ -61,14 +61,12 @@ const locales = {
 };
 
 const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
-  /************************ */
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-
   const [singleCoach, setSingleCoach] = useState(null);
   const id = coach_Id;
   const router = useRouter();
@@ -84,7 +82,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
   const [isBookingSlot, setIsBookingSlot] = useState(false);
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
-
   const [meetUrl, setMeetUrl] = useState(null);
 
   const checkCoursePurchased = async (programId) => {
@@ -255,7 +252,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     );
 
     if (selectedDay?.isAvailable) {
-      // Create slots based on availability and bookings
       const newSlots = createOneHourTimeSlotsForRange(
         dateOverride?.slots || selectedDay?.slots,
         coachBookings,
@@ -366,24 +362,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     }
   };
 
-  //function for total time
-
-  // const handleConfirmSlot = async (data) => {
-  //   setIsBookingSlot(true);
-  //   const obj = {
-  //     ...data,
-  //     date: selectedDate?.date,
-  //     slotTime: modalSelectedSlot?.slot,
-  //   };
-  //   const { accessToken } = await GetTokens();
-  //   try {
-  //     const response = await axios.post("/api/bookSlot", obj, {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken.value}`,
-  //       },
-  //     });
-  //   } catch (error) {}
-  // };
 
   const totalTime = programData?.map((item) =>
     item?.days?.reduce((total, day) => total + day.timeToComplete, 0)
@@ -417,43 +395,42 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     } catch (error) {}
   };
 
-  // const handleCurrentSlot = (dayOfWeek, date) => {
-  //   setSelectedDate({
-  //     date,
-  //     dayOfWeek,
-  //   });
-  //   // Check if the selected date has an override in dateOverrides
-  //   const dateOverride = singleCoach?.availability?.dateOverrides?.find(
-  //     (override) =>
-  //       dayjs(override.date).format("YYYY-MM-DD") ===
-  //       dayjs(date).format("YYYY-MM-DD")
-  //   );
+  const handleCurrentSlot = (coach) => {
+    const currentDate = dayjs();
+    const date = currentDate.format("YYYY-MM-DD");
+    const dayOfWeek = currentDate.format("dddd");
 
+    setSelectedDate({
+      date,
+      dayOfWeek,
+    });
+    const dateOverride = coach?.availability?.dateOverrides?.find(
+      (override) =>
+        dayjs(override.date).format("YYYY-MM-DD") ===
+        dayjs(date).format("YYYY-MM-DD")
+    );
 
-  //   // If the date is overridden and is unavailable, set slots to null
-  //   if (dateOverride?.isUnavailable) {
-  //     setSelectedDaySlots(null);
-  //     return;
-  //   }
+    if (dateOverride?.isUnavailable) {
+      setSelectedDaySlots(null);
+      return;
+    }
 
-  //   // Check availability for the day of the week
-  //   const selectedDay = singleCoach?.availability?.dates.find(
-  //     (day) => day.dayOfWeek === dayOfWeek
-  //   );
+    const selectedDay = coach?.availability?.dates.find(
+      (day) => day.dayOfWeek === dayOfWeek
+    );
 
+    if (selectedDay?.isAvailable) {
+      const newSlots = createOneHourTimeSlotsForRange(
+        dateOverride?.slots || selectedDay?.slots,
+        coachBookings,
+        date
+      );
+      setSelectedDaySlots(newSlots);
+    } else {
+      setSelectedDaySlots(null);
+    }
+  };
 
-  //   if (selectedDay?.isAvailable) {
-  //     // Create slots based on availability and bookings
-  //     const newSlots = createOneHourTimeSlotsForRange(
-  //       dateOverride?.slots || selectedDay?.slots,
-  //       coachBookings,
-  //       date
-  //     );
-  //     setSelectedDaySlots(newSlots);
-  //   } else {
-  //     setSelectedDaySlots(null);
-  //   }
-  // };
 
   useEffect(() => {
     getGeoInfo();
@@ -474,6 +451,7 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
       const coach = data.coaches.find((coach) => coach._id === id);
       if (coach) {
         setSingleCoach(coach);
+        handleCurrentSlot(coach);
       } else {
         toast.error("Coach not found");
       }
@@ -486,9 +464,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
   useEffect(() => {
     fetchCoachDetails();
   }, []);
-
-  
-
 
   return (
     <>
