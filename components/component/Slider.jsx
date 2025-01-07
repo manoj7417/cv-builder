@@ -242,7 +242,7 @@ export default function Slider() {
           <br />
           <span className="flex text-[#2C98CA] lg:text-5xl text-3xl justify-center mt-2">
             Perfection
-            <Image priority src="/Vector.svg" height={37} width={39} alt="vector" />
+            <Image priority="true" src="/Vector.svg" height={37} width={39} alt="vector" />
           </span>
         </h3>
         <p className="text-center max-w-4xl mx-auto text-[#7C7C7C]">
@@ -290,7 +290,7 @@ export default function Slider() {
                       </div>
                     )}
                     <div className="images_section w-[200px] h-[300px]">
-                      <Image priority
+                      <Image priority="true"
                         alt={item.alt}
                         className="h-full w-full object-fill transition-all duration-300 group-hover:scale-105"
                         src={item.src}

@@ -158,7 +158,7 @@ export function ResumeHeader() {
           <div className="inline-flex items-center space-x-2">
             <Link href="/">
               <Image
-                priority
+                priority="true"
                 // src="/genies-career-hub-logo.png"
                 src={"/beta-logo.png"}
                 width={100}
@@ -211,7 +211,7 @@ export function ResumeHeader() {
                       />
                     ) : (
                       <Image
-                        priority
+                        priority="true"
                         src="/avatar.png"
                         alt="Avatar"
                         height={100}
@@ -273,7 +273,7 @@ export function ResumeHeader() {
                     <div className="inline-flex items-center space-x-2">
                       <Link href={"/"}>
                         <Image
-                          priority
+                          priority="true"
                           src="/genies-career-hub-logo.png"
                           width={50}
                           height={50}

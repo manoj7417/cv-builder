@@ -19,7 +19,6 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
 import Script from "next/script";
 
-
 function LoginUser() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -127,7 +126,9 @@ function LoginUser() {
           showCloseButton
         >
           <div>
-            <h1>Reset Password</h1>
+            <DialogTitle>
+              <h1 className="text-xl font-semibold">Reset Password</h1>
+            </DialogTitle>
             <Input
               placeholder="Enter your email address"
               className="mt-4"
@@ -161,8 +162,9 @@ function LoginUser() {
             <div className="flex justify-center items-center w-20 h-20 mx-auto bg-gray-100 rounded-full">
               <HiOutlineMailOpen className="text-blue-950 h-16 w-16" />
             </div>
+            <DialogTitle>
             <h1 className="text-center text-2xl">You&apos;re almost there!</h1>
-
+            </DialogTitle>
             {showResendButton ? (
               <div className=" py-5">
                 <form onSubmit={handleSubmit(handleResendVerificationEmail)}>
@@ -235,7 +237,7 @@ function LoginUser() {
                 className="flex justify-center items-center mb-[60px]"
               >
                 <Image
-                  priority
+                  priority="true"
                   src="/genies-career-hub-logo.png"
                   width={100}
                   height={100}
@@ -356,10 +358,10 @@ function LoginUser() {
                         </>
                       )}
                     </button>
-                    
-                     <div className="google_button mt-5">
-                     {/* <SignInGoogle type="Sign in"/> */}
-                     </div>
+
+                    <div className="google_button mt-5">
+                      {/* <SignInGoogle type="Sign in"/> */}
+                    </div>
                   </div>
                   <div className="flex items-center justify-center">
                     <div className="flex-grow border-t border-gray-300"></div>
@@ -367,7 +369,6 @@ function LoginUser() {
                     <div className="flex-grow border-t border-gray-300"></div>
                   </div>
                   <div className="flex justify-center">
-                    
                     <Link
                       href="/coach-signin"
                       className="font-semibold text-blue-700 transition-all duration-200 underline underline-offset-4"
@@ -382,7 +383,7 @@ function LoginUser() {
           <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
             <div className="absolute inset-0">
               <Image
-                priority
+                priority="true"
                 width={500}
                 height={500}
                 className="h-full w-full rounded-md object-cover object-center"
@@ -484,17 +485,15 @@ function LoginUser() {
           </div>
         </div>
       </section>
-      
 
-<Script
-  id="google-conversion-event" // Add a unique ID
-  dangerouslySetInnerHTML={{
-    __html: `
+      <Script
+        id="google-conversion-event" // Add a unique ID
+        dangerouslySetInnerHTML={{
+          __html: `
       gtag('event', 'conversion', {'send_to': 'AW-16573743263/4bYaCLnbyPgZEJ-B_d49'});
     `,
-  }}
-/>
-
+        }}
+      />
     </>
   );
 }

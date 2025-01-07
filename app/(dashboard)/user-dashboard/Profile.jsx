@@ -373,7 +373,7 @@ function Profile() {
                   ) : (
                     <>
                       <Image
-                        priority
+                        priority="true"
                         src="/avatar.webp"
                         className="mx-auto h-full w-full object-cover"
                         alt="avatar.png"

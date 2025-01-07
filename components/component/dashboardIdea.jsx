@@ -73,7 +73,7 @@ export default function DashboardIdea() {
                     <CardDescription>A personal project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 1"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -91,7 +91,7 @@ export default function DashboardIdea() {
                     <CardDescription>Another personal project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 2"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -109,7 +109,7 @@ export default function DashboardIdea() {
                     <CardDescription>A third personal project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 3"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -131,7 +131,7 @@ export default function DashboardIdea() {
                     <CardDescription>A professional project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 1"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -149,7 +149,7 @@ export default function DashboardIdea() {
                     <CardDescription>Another professional project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 2"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -167,7 +167,7 @@ export default function DashboardIdea() {
                     <CardDescription>A third professional project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 3"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -189,7 +189,7 @@ export default function DashboardIdea() {
                     <CardDescription>A side project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 1"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -207,7 +207,7 @@ export default function DashboardIdea() {
                     <CardDescription>Another side project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 2"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}
@@ -225,7 +225,7 @@ export default function DashboardIdea() {
                     <CardDescription>A third side project I worked on.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Image priority
+                    <Image priority="true"
                       alt="Project 3"
                       className="aspect-video w-full rounded-md object-cover"
                       height={300}

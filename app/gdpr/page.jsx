@@ -107,7 +107,7 @@ const Page = () => {
               Information Security
             </h5>
             <p className='text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mb-4'>
-              Data security is our foremost priority at the Genies Career Hub,
+              Data security is our foremost priority="true" at the Genies Career Hub,
               and we take several organisational and technical safeguards to
               defend personal information, such as:
             </p>

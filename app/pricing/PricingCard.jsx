@@ -447,7 +447,7 @@ const PricingFunc = () => {
                 </div>
                 <div className="bg-white lg:block hidden">
                   <Image
-                    priority
+                    priority="true"
                     src={item?.imageUrl}
                     alt="Card Image"
                     width={500}

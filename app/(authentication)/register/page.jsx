@@ -114,7 +114,7 @@ export default function Register() {
         <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
           <div className="absolute inset-0">
             <Image
-              priority
+              priority="true"
               width={500}
               height={500}
               className="h-full w-full rounded-md object-cover object-center"
@@ -221,7 +221,7 @@ export default function Register() {
               className="flex justify-center items-center mb-4 sm:mb-[60px]"
             >
               <Image
-                priority
+                priority="true"
                 src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}

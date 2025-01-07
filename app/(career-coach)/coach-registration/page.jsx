@@ -155,7 +155,7 @@ export default function CoachRegistration() {
               className="flex justify-center items-center my-5"
             >
               <Image
-                priority
+                priority="true"
                 src="/genies-career-hub-logo.png"
                 width={100}
                 height={100}

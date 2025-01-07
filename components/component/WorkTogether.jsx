@@ -31,7 +31,7 @@ const WorkTogether = () => {
           </div>
           <div className='work_image lg:px-2 px-8'>
             <Image
-              priority
+              priority="true"
               src={"/hybridwork.png"}
               width={500}
               height={500}

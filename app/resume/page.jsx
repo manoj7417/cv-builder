@@ -656,7 +656,7 @@ Follow the suggestions given below the score to get a higher score and better ca
                 </div>
               </div>
               <Image
-                priority
+                priority="true"
                 src="/resume.png"
                 className="w-50 h-50 px-7 mt-10 pt-7 rounded-t-3xl"
                 alt="@shadcn"

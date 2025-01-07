@@ -787,7 +787,7 @@ const ResumeView = () => {
                                 className="image_section_1 "
                                 onClick={() => handleTemplateChange(image.name)}
                               >
-                                <Image priority
+                                <Image priority="true"
                                   src={image.src}
                                   alt={image.alt}
                                   className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"

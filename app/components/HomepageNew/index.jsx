@@ -130,7 +130,7 @@ export default function HomepageNew() {
               </div>
             </div>
             <Image
-              priority
+              priority="true"
               src="/v1.png"
               alt="home-creative-down"
               height={300}

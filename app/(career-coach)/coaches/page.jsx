@@ -409,6 +409,7 @@ const CoachPage = () => {
         </div>
       </div>
       {/* Shadcn UI Dialog */}
+      <div className="lg:block hidden">
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
           className="max-w-5xl mx-auto"
@@ -438,7 +439,7 @@ const CoachPage = () => {
             {selectedCoach?.programs.filter((program) => program.isapproved).length > 0 ? (
               <>
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
-                  <div className="coach_related_programs">
+                  <div className="coach_related_programs h-[75vh] overflow-y-scroll">
                     <ul className="my-5">
                       {selectedCoach?.programs.map(
                         (program, index) =>
@@ -629,6 +630,7 @@ const CoachPage = () => {
           </div>
         </DialogContent>
       </Dialog>
+      </div>
       {/* Mobile Dialog */}
       <div className="lg:hidden">
         <Dialog open={isMobile} onOpenChange={handleMobileToggle}>

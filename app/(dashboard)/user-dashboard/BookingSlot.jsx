@@ -362,24 +362,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     }
   };
 
-  //function for total time
-
-  // const handleConfirmSlot = async (data) => {
-  //   setIsBookingSlot(true);
-  //   const obj = {
-  //     ...data,
-  //     date: selectedDate?.date,
-  //     slotTime: modalSelectedSlot?.slot,
-  //   };
-  //   const { accessToken } = await GetTokens();
-  //   try {
-  //     const response = await axios.post("/api/bookSlot", obj, {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken.value}`,
-  //       },
-  //     });
-  //   } catch (error) {}
-  // };
 
   const totalTime = programData?.map((item) =>
     item?.days?.reduce((total, day) => total + day.timeToComplete, 0)
@@ -448,6 +430,7 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
       setSelectedDaySlots(null);
     }
   };
+
 
   useEffect(() => {
     getGeoInfo();
