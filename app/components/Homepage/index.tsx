@@ -66,7 +66,7 @@ export default function Homepage() {
               <div className="FoldImageAnimated_content">
                 <div className="FoldImageAnimated_front">
                   <div className="relative">
-                    <Image priority="true"
+                    <Image priority={true}
                       alt="Resume Example 3"
                       src="/resume11.png"
                       width={550}
@@ -87,7 +87,7 @@ export default function Homepage() {
                 <div className="FoldImageAnimated_back">
                   <div className="FoldImageAnimated_resumeFourContainer">
                     <div className="FoldImageAnimated_resumeFour">
-                      <Image priority="true"
+                      <Image priority={true}
                         alt="Resume Example 4"
                         src="/resum12.png"
                         className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"

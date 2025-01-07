@@ -10,7 +10,7 @@ import axios from "axios";
 import Link from "next/link";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { Dialog, DialogContent } from "../../../components/ui/dialog";
+import { Dialog, DialogContent , DialogTitle } from "../../../components/ui/dialog";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import { HiOutlineMailOpen } from "react-icons/hi";
