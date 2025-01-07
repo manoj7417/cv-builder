@@ -35,14 +35,12 @@ import "react-quill/dist/quill.snow.css";
 
 function UpdateProgram() {
   const { id } = useParams();
-  console.log("id", id);
   const [isMounted, setIsMounted] = useState(false);
   const fileInputRef = useRef(null);
   const [isUploadingImage, setIsUploading] = useState(false);
   const [isCreatingProgram, setIscreatingProgram] = useState(false);
   const router = useRouter();
   const [isInfoLoading, setIsInfoLoading] = useState(true);
-  
 
   const handleOpenFileInput = () => {
     if (fileInputRef.current) {
@@ -77,13 +75,18 @@ function UpdateProgram() {
   const profileImage = watch("programImage");
   const programVideo = watch("programVideo");
   const content = watch("content");
+  const description = watch("description");
   const currency = watch("currency");
+
+  const handleDescriptionChange = (value) => {
+    setValue("description", value);
+  };
 
   const handleUpateProgram = async (data) => {
     setIscreatingProgram(true);
     try {
       const { accessToken } = await GetTokens(true);
-     const response =  await axios.put(`/api/updateProgram/${id}`, data, {
+      const response = await axios.put(`/api/updateProgram/${id}`, data, {
         headers: {
           Authorization: `Bearer ${accessToken.value}`,
         },
@@ -95,11 +98,10 @@ function UpdateProgram() {
     } catch (error) {
       console.error("Error updating program:", error);
       toast.error("Error updating program");
-    }finally{
+    } finally {
       setIscreatingProgram(false);
     }
   };
-
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
@@ -136,15 +138,15 @@ function UpdateProgram() {
           Authorization: `Bearer ${accessToken.value}`,
         },
       });
-       setValue("programVideo", data?.program?.programVideo || "");
-       setValue("programImage", data?.program?.programImage || "");
-       setValue("title", data?.program?.title || "");
-       setValue("description", data?.program?.description || "");
-       setValue("amount", data?.program?.amount || 0);
-       setValue("content", data?.program?.content || "");
-       setValue("days", data?.program?.days || []);
-       setValue("prerequisites", data?.program?.prerequisites || []);
-       setPreviewImage(data?.program?.programImage || ""); 
+      setValue("programVideo", data?.program?.programVideo || "");
+      setValue("programImage", data?.program?.programImage || "");
+      setValue("title", data?.program?.title || "");
+      setValue("description", data?.program?.description || "");
+      setValue("amount", data?.program?.amount || 0);
+      setValue("content", data?.program?.content || "");
+      setValue("days", data?.program?.days || []);
+      setValue("prerequisites", data?.program?.prerequisites || []);
+      setPreviewImage(data?.program?.programImage || "");
     } catch (error) {
     } finally {
       setIsInfoLoading(false);
@@ -194,20 +196,33 @@ function UpdateProgram() {
             />
             <p className="text-red-500 text-sm ml-2">{errors.title?.message}</p>
           </div>
-          <div>
+          <div
+            className="my
+          -5"
+          >
             <Label>
               Description<span className="text-red-500 ml-1">*</span>
             </Label>
-            <Textarea
+            {/* <Textarea
               placeholder="Enter program description"
               className="my-2"
               {...register("description")}
+            /> */}
+            <ReactQuill
+              theme="snow"
+              value={description}
+              onChange={handleDescriptionChange}
+              style={{
+                height: "150px",
+                margin: "10px 0px",
+              }}
+              placeholder="Enter program description"
             />
             <p className="text-red-500 text-sm ml-2">
               {errors.description?.message}
             </p>
           </div>
-          <div className="my-2">
+          <div className="mt-20 mb-5">
             <Label>
               Program Image<span className="text-red-500 ml-1">*</span>
             </Label>

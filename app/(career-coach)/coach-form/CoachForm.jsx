@@ -64,6 +64,9 @@ import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import CoachSearchBar from "@/components/component/CoachSearchBar";
 import CoachLogoutButton from "./CoachLogoutButton";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 const CoachForm = () => {
   const steps = [
@@ -178,7 +181,7 @@ const CoachForm = () => {
     "Financial Coaching",
     "Parenting Coaching",
     "Spiritual Coaching",
-    "Leadership Coaching"
+    "Leadership Coaching",
   ]);
   const [newOption, setNewOption] = useState("");
   const [newOptionError, setNewOptionError] = useState("");
@@ -442,6 +445,16 @@ const CoachForm = () => {
           docsUrl
         )}&embedded=true`
       : null;
+
+  const handleCoachDescription = (value) => {
+    setValue("coachingDescription", value);
+    register("coachingDescription", { required: true });
+  };
+
+  const handleBioChange =(value)=>{
+    setValue("bio", value);
+    register("bio", { required: true });
+  }
 
   const handleViewFile = (type) => {
     setFileType(type);
@@ -735,9 +748,9 @@ const CoachForm = () => {
       ) : (
         <>
           <section className="lg:px-10 px-2 py-5">
-             <div className="lg:hidden flex justify-end ">
-              <CoachLogoutButton/>
-             </div>
+            <div className="lg:hidden flex justify-end ">
+              <CoachLogoutButton />
+            </div>
             {/* steps */}
             <nav aria-label="Progress">
               <ol
@@ -1431,7 +1444,7 @@ const CoachForm = () => {
                             </Select>
                           )}
                         /> */}
-                         <CoachSearchBar
+                        <CoachSearchBar
                           name="typeOfCoaching"
                           control={control}
                           options={typeOfCoachingOptions}
@@ -1451,10 +1464,19 @@ const CoachForm = () => {
                         Coaching Description
                       </label>
                       <div className="mt-2">
-                        <Textarea
+                        {/* <Textarea
                           type="text"
                           {...register("coachingDescription")}
                           autoComplete="coachingDescription"
+                        /> */}
+                        <ReactQuill
+                          theme="snow"
+                          onChange={handleCoachDescription} // Handle changes
+                          style={{
+                            height: "150px",
+                            margin: "10px 0px 50px",
+                          }}
+                          placeholder="Write the coaching description here..."
                         />
                         {errors.coachingDescription?.message && (
                           <p className="mt-2 text-sm text-red-400">
@@ -1471,10 +1493,19 @@ const CoachForm = () => {
                         Bio of Coach
                       </label>
                       <div className="mt-2">
-                        <Textarea
+                        {/* <Textarea
                           type="text"
                           {...register("bio")}
                           autoComplete="bio"
+                        /> */}
+                        <ReactQuill
+                          theme="snow"
+                          onChange={handleBioChange} // Handle changes
+                          style={{
+                            height: "150px",
+                            margin: "10px 0px 50px",
+                          }}
+                          placeholder="Write your bio here..."
                         />
                         {errors.bio?.message && (
                           <p className="mt-2 text-sm text-red-400">

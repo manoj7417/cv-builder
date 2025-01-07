@@ -31,7 +31,6 @@ const CoachDetailsPage = () => {
   const router = useRouter();
   const [pdfUrl, setPdfUrl] = useState("");
 
-
   const {
     register,
     handleSubmit,
@@ -152,7 +151,6 @@ const CoachDetailsPage = () => {
     typeOfCoaching = "",
     skills = [],
   } = singleCoach || {};
-
 
   return (
     <>
@@ -301,7 +299,12 @@ const CoachDetailsPage = () => {
                         Bio
                       </label>
                       <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                        {bio}
+                        <div
+                          className="bio-content"
+                          dangerouslySetInnerHTML={{
+                            __html: bio,
+                          }}
+                        />
                       </div>
                     </div>
 
@@ -310,7 +313,12 @@ const CoachDetailsPage = () => {
                         Coaching Description
                       </label>
                       <div className="mt-1 block w-full px-3 py-2 border-b border-gray-300 text-sm text-gray-900">
-                        {coachingDescription}
+                        <div
+                          className="coachingDescription-content"
+                          dangerouslySetInnerHTML={{
+                            __html: coachingDescription,
+                          }}
+                        />
                       </div>
                     </div>
 
@@ -492,7 +500,7 @@ const CoachDetailsPage = () => {
                       htmlFor="profileVideo"
                       className="text-xl font-bold text-gray-700"
                     >
-                     {profileVideo?.url && "Profile Video"}
+                      {profileVideo?.url && "Profile Video"}
                     </label>
                     {profileVideo?.url && (
                       <div className="mr-2">

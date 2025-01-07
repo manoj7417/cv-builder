@@ -58,7 +58,6 @@ function Programs() {
             }
           })
           .catch((err) => {
-            ;
             throw err;
           }),
         {
@@ -125,9 +124,12 @@ function Programs() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="flex-grow h-20 overflow-hidden">
-                      <p className="text-sm text-muted-foreground h-full line-clamp-3">
+                      {/* <p className="text-sm text-muted-foreground h-full line-clamp-3">
                         {program.description}
-                      </p>
+                      </p> */}
+                      <div
+                        dangerouslySetInnerHTML={{ __html: program.description }}
+                      ></div>
                     </CardContent>
                     <CardFooter className="flex justify-end space-x-2 items-center py-4">
                       <Link

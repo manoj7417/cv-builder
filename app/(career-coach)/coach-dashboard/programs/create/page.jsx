@@ -111,7 +111,7 @@ function CreateProgram() {
       const response = await axios.post("/api/uploadImage", formData);
       if (response.status === 200) {
         const imageUrl = response.data.url;
-        setValue("programImage", imageUrl); 
+        setValue("programImage", imageUrl);
         clearErrors("programImage");
         toast.success("Image uploaded successfully");
       }
@@ -124,6 +124,11 @@ function CreateProgram() {
 
   const handlecontentvalueChange = (e) => {
     setValue("content", e);
+  };
+
+  const handleDescriptionChange = (value) => {
+    setValue("description", value);
+    register("description", { required: true });
   };
 
   useEffect(() => {
@@ -165,23 +170,30 @@ function CreateProgram() {
             />
             <p className="text-red-500 text-sm ml-2">{errors.title?.message}</p>
           </div>
-          <div>
+          <div className="my-5">
             <Label>
               Description<span className="text-red-500 ml-1">*</span>
             </Label>
-            <Textarea
+            {/* <Textarea
               placeholder="Enter program description"
               className="my-2"
               {...register("description")}
+            /> */}
+            <ReactQuill
+              theme="snow"
+              onChange={handleDescriptionChange} // Handle changes
+              style={{
+                height: "150px",
+                margin: "10px 0px",
+              }}
+              placeholder="Enter program description"
             />
             <p className="text-red-500 text-sm ml-2">
               {errors.description?.message}
             </p>
           </div>
-          <div className="my-2">
-            <Label>
-              Program Image
-            </Label>
+          <div className="mt-14 mb-5">
+            <Label>Program Image</Label>
             {profileImage ? (
               <div className="flex items-center py-4">
                 <img
@@ -273,10 +285,10 @@ function CreateProgram() {
             name={"prerequisites"}
           />
           <div>
-            <h1 className="py-4 text-lg font-bold">Program description</h1>
+            <h1 className="py-4 text-lg font-bold">Program Content</h1>
             <ReactQuill
               style={{
-                height: "250px",
+                height: "150px",
                 margin: "10px 0px 50px",
               }}
               theme="snow"
