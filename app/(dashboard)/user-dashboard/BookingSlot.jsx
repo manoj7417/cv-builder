@@ -130,38 +130,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     return date.getDate();
   };
 
-  // Check if a specific day is available based on the provided data
-  // const isDayAvailable = (dayOfWeek,date) => {
-
-  //   const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
-
-  //   const checkIfDateExists = (date) => {
-  //     return singleCoach?.availability?.dateOverrides.some(item => dayjs(item.date).format("YYYY-MM-DD") === formattedDateToCheck);
-  //   };
-
-  //   // Check if the date exists in dateOverrides
-  // if (checkIfDateExists(formattedDateToCheck)) {
-  //   console.log("Formatted Date found in dateOverrides:", formattedDateToCheck);
-
-  //   // Fetch the dateOverride for the selected date
-  //   const dateOverride = singleCoach?.availability?.dateOverrides?.find(
-  //     (override) => dayjs(override.date).format("YYYY-MM-DD") === formattedDateToCheck
-  //   );
-
-  //   // Return the slots from the dateOverride if available
-  //   if (dateOverride && dateOverride.slots) {
-  //     console.log("Date Override Slots:", dateOverride.slots);
-  //     return dateOverride.slots;
-  //   }
-  // }
-
-  //   const availableDay = singleCoach?.availability?.dates?.find(
-  //     (day) => day.dayOfWeek === dayOfWeek
-  //   );
-
-  //   return availableDay ? availableDay.isAvailable : false;
-
-  // };
   const isDayAvailable = (dayOfWeek, date) => {
     const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
 
@@ -205,27 +173,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
       : false;
   };
 
-  // Function to handle date selection and fetch available slots
-  // const handleDateSelect = (dayOfWeek, date) => {
-  //   setSelectedDate({
-  //     date,
-  //     dayOfWeek,
-  //   });
-  //   console.log("date", date);
-  //   const selectedDay = singleCoach?.availability.dates.find(
-  //     (day) => day.dayOfWeek === dayOfWeek
-  //   );
-  //   if (selectedDay?.isAvailable) {
-  //     const newSlots = createOneHourTimeSlotsForRange(
-  //       selectedDay?.slots,
-  //       coachBookings,
-  //       date
-  //     );
-  //     setSelectedDaySlots(newSlots);
-  //   } else {
-  //     setSelectedDaySlots(null);
-  //   }
-  // };
 
   const handleDateSelect = (dayOfWeek, date) => {
     setSelectedDate({
