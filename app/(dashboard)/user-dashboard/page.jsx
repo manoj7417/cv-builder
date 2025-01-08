@@ -33,6 +33,7 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
+  console.log("program::",program)
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);
@@ -40,6 +41,8 @@ const UserDashboardPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleBookSlotClick = (id, programId) => {
+    console.log("programId", programId);
+    console.log("id", id);
     setSelectedCoachId(id);
     setSelectedProgramId(programId);
     setIsDrawerOpen(true);
@@ -156,15 +159,13 @@ const UserDashboardPage = () => {
                   <p className="text-sm text-gray-500 my-1">
                     {userdata?.address}
                   </p>
-                  <div className="py-2 flex">
-                    {userdata?.subscription?.plan &&
-                      userdata.subscription.plan.map((item, index) => (
-                        <p
-                          className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3"
-                          key={index}
-                        >
-                          <span className="text-base">{item}</span>
-                          <span className="text-xs ml-4">
+
+                  <div className="py-2 flex lg:flex-row flex-col gap-5 justify-center items-center">
+                      {userdata?.subscription?.plan &&
+                        userdata.subscription.plan.map((item, index) => (
+                          <p className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3" key={index}>
+                            <span className="text-base">{item}</span>
+                            <span className="text-xs ml-4" >
                             {getPlanExpiry(item, userdata)}
                           </span>
                         </p>

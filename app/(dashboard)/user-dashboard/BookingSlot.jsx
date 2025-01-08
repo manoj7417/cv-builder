@@ -176,6 +176,7 @@ const UserBookingSlot = ({
       : false;
   };
 
+
   const handleDateSelect = (dayOfWeek, date) => {
     setSelectedDate({
       date,
