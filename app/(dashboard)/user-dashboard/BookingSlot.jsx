@@ -60,7 +60,12 @@ const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
 
-const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
+const UserBookingSlot = ({
+  coach_Id,
+  programId,
+  program,
+  setProgram,
+}) => {
   const {
     register,
     handleSubmit,
@@ -125,47 +130,13 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     return date.toLocaleDateString("en-US", options);
   };
 
-  // Function to get the day of the month
   const getDayOfMonth = (date) => {
     return date.getDate();
   };
 
-  // Check if a specific day is available based on the provided data
-  // const isDayAvailable = (dayOfWeek,date) => {
-
-  //   const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
-
-  //   const checkIfDateExists = (date) => {
-  //     return singleCoach?.availability?.dateOverrides.some(item => dayjs(item.date).format("YYYY-MM-DD") === formattedDateToCheck);
-  //   };
-
-  //   // Check if the date exists in dateOverrides
-  // if (checkIfDateExists(formattedDateToCheck)) {
-  //   console.log("Formatted Date found in dateOverrides:", formattedDateToCheck);
-
-  //   // Fetch the dateOverride for the selected date
-  //   const dateOverride = singleCoach?.availability?.dateOverrides?.find(
-  //     (override) => dayjs(override.date).format("YYYY-MM-DD") === formattedDateToCheck
-  //   );
-
-  //   // Return the slots from the dateOverride if available
-  //   if (dateOverride && dateOverride.slots) {
-  //     console.log("Date Override Slots:", dateOverride.slots);
-  //     return dateOverride.slots;
-  //   }
-  // }
-
-  //   const availableDay = singleCoach?.availability?.dates?.find(
-  //     (day) => day.dayOfWeek === dayOfWeek
-  //   );
-
-  //   return availableDay ? availableDay.isAvailable : false;
-
-  // };
   const isDayAvailable = (dayOfWeek, date) => {
     const formattedDateToCheck = dayjs(date).format("YYYY-MM-DD");
 
-    // Helper function to check if the date exists in dateOverrides
     const checkIfDateExists = (date) => {
       return singleCoach?.availability?.dateOverrides?.some(
         (item) => dayjs(item.date).format("YYYY-MM-DD") === date
@@ -204,28 +175,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
         : false
       : false;
   };
-
-  // Function to handle date selection and fetch available slots
-  // const handleDateSelect = (dayOfWeek, date) => {
-  //   setSelectedDate({
-  //     date,
-  //     dayOfWeek,
-  //   });
-  //   console.log("date", date);
-  //   const selectedDay = singleCoach?.availability.dates.find(
-  //     (day) => day.dayOfWeek === dayOfWeek
-  //   );
-  //   if (selectedDay?.isAvailable) {
-  //     const newSlots = createOneHourTimeSlotsForRange(
-  //       selectedDay?.slots,
-  //       coachBookings,
-  //       date
-  //     );
-  //     setSelectedDaySlots(newSlots);
-  //   } else {
-  //     setSelectedDaySlots(null);
-  //   }
-  // };
 
   const handleDateSelect = (dayOfWeek, date) => {
     setSelectedDate({
@@ -352,8 +301,8 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
       });
       if (response.status === 201) {
         setMeetUrl(response.data?.data?.meetingLink);
-        onMeetUrlUpdate(response.data?.data?.meetingLink);
         setIsDialogOpen(false);
+        handleUpdateUserProgram(programId, response.data?.data?.meetingLink);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Error booking slot");
@@ -362,6 +311,15 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
     }
   };
 
+  const handleUpdateUserProgram = (programId, meetingLink) => {
+    const updatedPrograms = program.map((program) => {
+      if (program.programId._id === programId) {
+        return { ...program, meetingLink };
+      }
+      return program;
+    });
+    setProgram(updatedPrograms);
+  };
 
   const totalTime = programData?.map((item) =>
     item?.days?.reduce((total, day) => total + day.timeToComplete, 0)
@@ -430,7 +388,6 @@ const UserBookingSlot = ({ coach_Id, programId, onMeetUrlUpdate }) => {
       setSelectedDaySlots(null);
     }
   };
-
 
   useEffect(() => {
     getGeoInfo();

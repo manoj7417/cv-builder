@@ -38,16 +38,10 @@ const UserDashboardPage = () => {
   const [selectedCoachId, setSelectedCoachId] = useState(null);
   const [selectedProgramId, setSelectedProgramId] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [meetUrl, setMeetUrl] = useState(null);
-
-  const handleMeetUrlUpdate = (url) => {
-    setMeetUrl(url);
-  };
 
   const handleBookSlotClick = (id, programId) => {
     setSelectedCoachId(id);
     setSelectedProgramId(programId);
-    // setShowBooking(true);
     setIsDrawerOpen(true);
   };
 
@@ -61,8 +55,20 @@ const UserDashboardPage = () => {
     }
     setOpen(index);
   };
+  const mapMeetingLinksToPrograms = (programs, bookings) => {
+    return programs.map((program) => {
+      const userBooking = bookings.find(
+        (booking) => booking.programId === program.programId._id
+      );
 
-  const handleGetBookings = async () => {
+      if (userBooking) {
+        return { ...program, meetingLink: userBooking?.meetingLink };
+      }
+      return program;
+    });
+  };
+
+  const handleGetBookings = async (programs) => {
     const { accessToken } = await GetTokens();
     if (!accessToken || !accessToken.value) {
       return router.push("/login?redirect=/user-dashboard");
@@ -75,6 +81,14 @@ const UserDashboardPage = () => {
       });
       if (response.status === 200) {
         setBookings(response.data.bookings);
+        const updatedPrograms = mapMeetingLinksToPrograms(
+          programs,
+          response.data.bookings
+        );
+        setProgram(updatedPrograms);
+        // const updatedPrograms = programs.map((program) => {
+        //   if(program)
+        // });
       }
     } catch (error) {}
   };
@@ -93,17 +107,18 @@ const UserDashboardPage = () => {
       });
       if (response.status === 200) {
         setProgram(response?.data?.programs);
+        await handleGetBookings(response?.data?.programs);
         setIsLoading(false);
       }
     } catch (error) {}
   };
 
-  useEffect(() => {
-    handleGetUserProgram();
-  }, []);
+  const fetchUserProgram = async () => {
+    await handleGetUserProgram();
+  };
 
   useEffect(() => {
-    handleGetBookings();
+    fetchUserProgram();
   }, []);
 
   return (
@@ -142,15 +157,18 @@ const UserDashboardPage = () => {
                     {userdata?.address}
                   </p>
                   <div className="py-2 flex">
-                      {userdata?.subscription?.plan &&
-                        userdata.subscription.plan.map((item, index) => (
-                          <p className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3" key={index}>
-                            <span className="text-base">{item}</span>
-                            <span className="text-xs ml-4" >
+                    {userdata?.subscription?.plan &&
+                      userdata.subscription.plan.map((item, index) => (
+                        <p
+                          className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3"
+                          key={index}
+                        >
+                          <span className="text-base">{item}</span>
+                          <span className="text-xs ml-4">
                             {getPlanExpiry(item, userdata)}
-                            </span>
-                          </p>
-                        ))}
+                          </span>
+                        </p>
+                      ))}
                   </div>
                 </div>
               </div>
@@ -256,7 +274,7 @@ const UserDashboardPage = () => {
               >
                 Dashboard
               </TabsTrigger>
-              <TabsTrigger
+              {/* <TabsTrigger
                 value="Bookings"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${
                   activeTab === "Bookings" ? "active" : ""
@@ -264,7 +282,7 @@ const UserDashboardPage = () => {
                 onClick={() => setActiveTab("Bookings")}
               >
                 Bookings
-              </TabsTrigger>
+              </TabsTrigger> */}
               <TabsTrigger
                 value="program"
                 className={`tabs-trigger text-blue-950 rounded-md text-base ${
@@ -585,9 +603,9 @@ const UserDashboardPage = () => {
                                         </div>
                                       </td>
                                       <td className="p-2 text-center">
-                                        {meetUrl ? (
+                                        {item?.meetingLink ? (
                                           <Link
-                                            href={meetUrl}
+                                            href={item.meetingLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
@@ -600,7 +618,7 @@ const UserDashboardPage = () => {
                                             onClick={() =>
                                               handleBookSlotClick(
                                                 item?.coachId?.id,
-                                                item?._id
+                                                item?.programId?._id
                                               )
                                             }
                                           >
@@ -653,9 +671,9 @@ const UserDashboardPage = () => {
                                         </p>
                                       </div>
                                     </div>
-                                    {meetUrl ? (
+                                    {item?.meetingLink ? (
                                       <Link
-                                        href={meetUrl}
+                                        href={item.meetingLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
@@ -668,7 +686,7 @@ const UserDashboardPage = () => {
                                         onClick={() =>
                                           handleBookSlotClick(
                                             item?.coachId?.id,
-                                            item?._id
+                                            item?.programId?._id
                                           )
                                         }
                                       >
@@ -707,7 +725,8 @@ const UserDashboardPage = () => {
                               <UserBookingSlot
                                 coach_Id={selectedCoachId}
                                 programId={selectedProgramId}
-                                onMeetUrlUpdate={handleMeetUrlUpdate}
+                                program={program}
+                                setProgram={setProgram}
                               />
                             </DrawerContent>
                           </Drawer>
@@ -733,7 +752,7 @@ const UserDashboardPage = () => {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent className="mb-6" value="Bookings">
+            {/* <TabsContent className="mb-6" value="Bookings">
               <div className="career_section max-w-full md:max-w-5xl mx-auto">
                 <div className="space-y-3">
                   <h2 className="lg:text-start text-center text-xl font-bold text-blue-950">
@@ -837,7 +856,7 @@ const UserDashboardPage = () => {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </TabsContent> */}
             <TabsContent className="mb-6" value="program">
               <div className="career_section max-w-full md:max-w-5xl mx-auto">
                 <div className="space-y-3">
