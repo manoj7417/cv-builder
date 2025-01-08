@@ -124,24 +124,22 @@ const CoachProfile = () => {
     }
   };
 
-  // Remove the uploaded image
   const removeImage = () => {
     setValue("profileImage", null);
-    setValue("profileImage", null); // Clear the value in the form
-    clearErrors("profileImage"); // Clear validation errors if any
+    setValue("profileImage", null); 
   };
 
   const openModal = (url) => {
     if (url) {
-      setPdfUrl(url); // Set the PDF URL only if it exists
-      setIsModalOpen(true); // Open the modal
+      setPdfUrl(url); 
+      setIsModalOpen(true); 
     } else {
       toast.error("No document available to view");
     }
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false);
   };
 
   const handleTabChange = (value) => {
@@ -209,26 +207,24 @@ const CoachProfile = () => {
     } catch (error) {
       toast.error("An error occured in updating the profile details");
     } finally {
-      setIsApiLoading(false); // Stop loading
+      setIsApiLoading(false); 
       setIsEditable(false);
     }
   };
 
-  // Upload CV Functionlaity starts here
 
-  // For CV UploadF
   const handleCVUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setIsUploadingCV(true);
       const formData = new FormData();
-      formData.append("cvUpload", file); // Assuming "cv" is the expected field in the backend
+      formData.append("cvUpload", file);
       try {
         setIsCvLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        const response = await axios.post("/api/uploadImage", formData); 
         if (response.status === 200) {
           const cvUrl = response.data.url;
-          setValue("cvUpload", cvUrl); // Set CV URL in form data
+          setValue("cvUpload", cvUrl); 
           setCvFileUrl(cvUrl);
         } else {
           console.error("CV upload failed.");
@@ -247,19 +243,19 @@ const CoachProfile = () => {
     setCvFileUrl(null);
   };
 
-  // For Document Upload
+
   const handleDocUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setIsUploadingDocs(true);
       const formData = new FormData();
-      formData.append("docsUpload", file); // Assuming "document" is the expected field in the backend
+      formData.append("docsUpload", file); 
       try {
         setIsDocumentLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); // Change the API endpoint if needed
+        const response = await axios.post("/api/uploadImage", formData); 
         if (response.status === 200) {
           const docUrl = response.data.url;
-          setValue("docsUpload", docUrl); // Set document URL in form data
+          setValue("docsUpload", docUrl); 
           setIsDocumentLoading(false);
           setDocsUrl(docUrl);
         } else {
@@ -273,13 +269,11 @@ const CoachProfile = () => {
     }
   };
 
-  // Common function to remove uploaded file
   const handleRemoveDocs = () => {
-    setValue("docsUpload", ""); // Clear the form field (make sure "docsUpload" matches your field name)
-    setDocsUrl(null); // Clear the state holding the file URL
+    setValue("docsUpload", ""); 
+    setDocsUrl(null); 
   };
 
-  // Use Google Docs Viewer if needed
   const googleViewerUrl =
     fileType === "cv"
       ? `https://docs.google.com/gview?url=${cvFileUrl}&embedded=true`
@@ -289,29 +283,27 @@ const CoachProfile = () => {
 
   const handleViewFile = (type) => {
     setFileType(type);
-    setIsModalOpen(true); // Open the modal when the view icon is clicked
+    setIsModalOpen(true); 
   };
 
-  //START-COACH PROFILE VIDEO UPLOAD
-  // Watch for changes in the profileVideo field
-  const profileVideo = watch("profileVideo"); // State to store YouTube link
+  
+  const profileVideo = watch("profileVideo"); 
 
-  // Handle removing the YouTube link
   const handleRemoveLink = () => {
     setValue("profileVideo", "");
   };
 
   useEffect(() => {
     if (userdata?.cv?.link) {
-      setValue("cv", userdata.cv.link); // Set CV URL in the form
-      setCvFileUrl(userdata.cv.link); // Update state to show the file in UI
+      setValue("cv", userdata.cv.link); 
+      setCvFileUrl(userdata.cv.link); 
     }
   }, [userdata, setValue]);
 
   useEffect(() => {
     if (userdata?.signedAggrement?.link) {
-      setValue("docs", userdata.signedAggrement.link); // Set CV URL in the form
-      setDocsUrl(userdata.signedAggrement.link); // Update state to show the file in UI
+      setValue("docs", userdata.signedAggrement.link); 
+      setDocsUrl(userdata.signedAggrement.link); 
     }
   }, [userdata, setValue]);
 
@@ -326,7 +318,7 @@ const CoachProfile = () => {
         typeOfCoaching: userdata?.typeOfCoaching,
         skills: userdata?.skills,
         dateofBirth: userdata?.dateofBirth
-          ? new Date(userdata.dateofBirth).toISOString().split("T")[0] // Convert ISO date to YYYY-MM-DD
+          ? new Date(userdata.dateofBirth).toISOString().split("T")[0] 
           : "",
         placeofBirth: userdata?.placeofBirth,
         bio: userdata?.bio,
