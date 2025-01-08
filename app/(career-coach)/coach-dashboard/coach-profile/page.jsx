@@ -36,6 +36,9 @@ import {
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMdCloudUpload, IoMdInformationCircleOutline } from "react-icons/io";
 import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
@@ -93,6 +96,8 @@ const CoachProfile = () => {
   const [cvFileUrl, setCvFileUrl] = useState(userdata?.cv?.link || "");
   const [docsUrl, setDocsUrl] = useState(userdata?.signedAggrement?.link || "");
   const [isApiLoading, setIsApiLoading] = useState(false);
+  const coachingDescription = watch("coachingDescription");
+  const bio = watch("bio");
 
   const { fields } = useFieldArray({
     control,
@@ -292,6 +297,14 @@ const CoachProfile = () => {
   const handleRemoveLink = () => {
     setValue("profileVideo", "");
   };
+
+  const handleCoachDescription = (value) => {
+    setValue("coachingDescription", value);
+  };
+
+  const handleBioChange =(value)=>{
+    setValue("bio", value);
+  }
 
   useEffect(() => {
     if (userdata?.cv?.link) {
@@ -566,22 +579,46 @@ const CoachProfile = () => {
                       <label className='block text-sm font-medium text-gray-700'>
                         Bio
                       </label>
-                      <Textarea
+                      {/* <Textarea
                         {...register("bio")}
                         className='w-full'
                         disabled={!isEditable}
-                      />
+                      /> */}
+                       <ReactQuill
+                          theme="snow"
+                          value={bio}
+                          onChange={handleBioChange} // Handle changes
+                          style={{
+                            height: "150px",
+                            margin: "10px 0px 50px",
+                          }}
+                          placeholder="Write your bio here..."
+                          
+                          readOnly={!isEditable}
+                        />
                     </div>
 
                     <div className='col-span-3'>
                       <label className='block text-sm font-medium text-gray-700'>
                         Coaching Description
                       </label>
-                      <Textarea
+                      {/* <Textarea
                         {...register("coachingDescription")}
                         className='w-full'
                         disabled={!isEditable}
-                      />
+                      /> */}
+                      <ReactQuill
+                          theme="snow"
+                          value={coachingDescription}
+                          onChange={handleCoachDescription} // Handle changes
+                          style={{
+                            height: "150px",
+                            margin: "10px 0px 50px",
+                          }}
+                          placeholder="Write the coaching description here..."
+                          disabled={!isEditable}
+                          readOnly={!isEditable}
+                        />
                     </div>
 
                     <div className='col-span-3'>

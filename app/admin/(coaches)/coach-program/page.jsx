@@ -133,10 +133,16 @@ const AdminCoachProgram = () => {
                                   </div>
                                   <div className="ml-4">
                                     <div className="text-sm font-medium text-gray-900">
-                                      {coach?.title}
+                                      {coach?.title.slice(0, 20)}...
                                     </div>
                                     <div className="text-sm text-gray-700">
-                                      {coach?.description.slice(0, 20)}
+                                      {/* {coach?.description.slice(0, 20)} */}
+                                      <div
+                                        className="coachingDescription-content"
+                                        dangerouslySetInnerHTML={{
+                                          __html: coach?.description.slice(0, 40),
+                                        }}
+                                      />
                                     </div>
                                   </div>
                                 </div>
