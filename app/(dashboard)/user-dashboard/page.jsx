@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./user.css";
-import { FaRegPlayCircle, FaStar, FaTimes } from "react-icons/fa";
+import {
+  FaExclamationCircle,
+  FaRegPlayCircle,
+  FaStar,
+  FaTimes,
+} from "react-icons/fa";
 import Profile from "./Profile";
 import Whishlist from "./Wishlist";
 
@@ -25,6 +30,16 @@ import UserBookingSlot from "./BookingSlot";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { getPlanExpiry } from "@/utils/getPlanExpiry";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { FaStarAndCrescent } from "react-icons/fa6";
 
 const UserDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -33,12 +48,24 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
-  console.log("program::",program)
+  console.log("program::", program);
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);
   const [selectedProgramId, setSelectedProgramId] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [rateMeetingModalOpen, setRateMeetingModalOpen] = useState(false);
+  const [raiseConcernModalOpen, setRaiseConcernModalOpen] = useState(false);
+  const [currentProgramId, setCurrentProgramId] = useState(null);
+
+  //For rating
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+  const [totalStars, setTotalStars] = useState(5);
+
+  const handleRatingChange = (e) => {
+    setTotalStars(parseInt(Boolean(e.target.value, 10) ? e.target.value : 5));
+  };
 
   const handleBookSlotClick = (id, programId) => {
     console.log("programId", programId);
@@ -46,6 +73,16 @@ const UserDashboardPage = () => {
     setSelectedCoachId(id);
     setSelectedProgramId(programId);
     setIsDrawerOpen(true);
+  };
+
+  const handleRateMeeting = (programId) => {
+    setCurrentProgramId(programId);
+    setRateMeetingModalOpen(true);
+  };
+
+  const handleRaiseConcern = (programId) => {
+    setCurrentProgramId(programId);
+    setRaiseConcernModalOpen(true);
   };
 
   const handleCloseDrawer = () => {
@@ -161,11 +198,14 @@ const UserDashboardPage = () => {
                   </p>
 
                   <div className="py-2 flex lg:flex-row flex-col gap-5 justify-center items-center">
-                      {userdata?.subscription?.plan &&
-                        userdata.subscription.plan.map((item, index) => (
-                          <p className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3" key={index}>
-                            <span className="text-base">{item}</span>
-                            <span className="text-xs ml-4" >
+                    {userdata?.subscription?.plan &&
+                      userdata.subscription.plan.map((item, index) => (
+                        <p
+                          className="bg-blue-100  text-blue-950 px-5 py-1 rounded-full flex items-center mr-3"
+                          key={index}
+                        >
+                          <span className="text-base">{item}</span>
+                          <span className="text-xs ml-4">
                             {getPlanExpiry(item, userdata)}
                           </span>
                         </p>
@@ -511,6 +551,10 @@ const UserDashboardPage = () => {
                                 <th className="p-4 whitespace-nowrap">
                                   Book Slot
                                 </th>
+                                <th className="p-4 whitespace-nowrap">
+                                  Raise Concern
+                                </th>
+                                <th className="p-4">Rating</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -560,14 +604,102 @@ const UserDashboardPage = () => {
                                       </td>
                                       <td className="p-2 text-center">
                                         {item?.meetingLink ? (
-                                          <Link
-                                            href={item.meetingLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                          <>
+                                            <Link
+                                              href={item.meetingLink}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                            >
+                                              Join Meeting
+                                            </Link>
+                                          </>
+                                        ) : (
+                                          <Button
+                                            className="text-xs p-2"
+                                            onClick={() =>
+                                              handleBookSlotClick(
+                                                item?.coachId?.id,
+                                                item?.programId?._id
+                                              )
+                                            }
                                           >
-                                            Join Meeting
-                                          </Link>
+                                            Book Slot
+                                          </Button>
+                                        )}
+                                      </td>
+                                      <td className="p-2 text-center">
+                                        {item?.meetingLink ? (
+                                          <>
+                                            {/* Raise a Concern */}
+                                            <button
+                                              className="text-sm bg-red-600 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-red-500 whitespace-nowrap"
+                                              onClick={() =>
+                                                handleRaiseConcern(
+                                                  item?.programId?._id
+                                                )
+                                              }
+                                            >
+                                              <FaExclamationCircle className="text-lg" />
+                                              {/* Raise a Concern */}
+                                            </button>
+                                          </>
+                                        ) : (
+                                          <Button
+                                            className="text-xs p-2"
+                                            onClick={() =>
+                                              handleBookSlotClick(
+                                                item?.coachId?.id,
+                                                item?.programId?._id
+                                              )
+                                            }
+                                          >
+                                            Book Slot
+                                          </Button>
+                                        )}
+                                      </td>
+                                      <td className="rating_tabs p-2 text-center">
+                                        {item?.meetingLink ? (
+                                          <>
+                                              {/* Ratings  */}
+                                            {[...Array(totalStars)].map(
+                                              (star, index) => {
+                                                const currentRating = index + 1;
+
+                                                return (
+                                                  <label key={index}>
+                                                    <input
+                                                      key={star}
+                                                      type="radio"
+                                                      name="rating"
+                                                      value={currentRating}
+                                                      onChange={() =>
+                                                        setRating(currentRating)
+                                                      }
+                                                    />
+                                                    <span
+                                                      className="star"
+                                                      style={{
+                                                        color:
+                                                          currentRating <=
+                                                          (hover || rating)
+                                                            ? "#ffc107"
+                                                            : "#e4e5e9",
+                                                      }}
+                                                      onMouseEnter={() =>
+                                                        setHover(currentRating)
+                                                      }
+                                                      onMouseLeave={() =>
+                                                        setHover(null)
+                                                      }
+                                                    >
+                                                      &#9733;
+                                                    </span>
+                                                  </label>
+                                                );
+                                              }
+                                            )}
+                                          </>
                                         ) : (
                                           <Button
                                             className="text-xs p-2"
@@ -849,7 +981,7 @@ const UserDashboardPage = () => {
                             (item, index) =>
                               item?.programId && (
                                 <div key={index}>
-                                  <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
+                                  <div className="flex gap-10 overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
                                     <div className="w-full block h-full">
                                       <img
                                         alt="blog photo"
@@ -864,7 +996,7 @@ const UserDashboardPage = () => {
                                         <p className="text-gray-600 font-light text-sm">
                                           {item?.programId?.description.slice(
                                             0,
-                                            100
+                                            50
                                           )}
                                         </p>
                                         <div className="flex items-center mt-2">
@@ -941,6 +1073,81 @@ const UserDashboardPage = () => {
           </Tabs>
         </div>
       </div>
+
+      {/* Rate the Meeting Modal */}
+      <Dialog
+        open={rateMeetingModalOpen}
+        onOpenChange={setRateMeetingModalOpen}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Rate the Meeting</DialogTitle>
+            <DialogDescription>
+              Please provide your feedback for the meeting.
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            {/* Add your rating UI components here */}
+            <p>Rating for program ID: {currentProgramId}</p>
+          </div>
+          <DialogFooter>
+            <button
+              className="bg-gray-200 px-4 py-2 rounded-md"
+              onClick={() => setRateMeetingModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded-md"
+              onClick={() => {
+                // Handle submission
+                setRateMeetingModalOpen(false);
+              }}
+            >
+              Submit
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Raise a Concern Modal */}
+      <Dialog
+        open={raiseConcernModalOpen}
+        onOpenChange={setRaiseConcernModalOpen}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Raise a Concern</DialogTitle>
+            <DialogDescription>
+              Let us know about any issues or concerns regarding this meeting.
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            {/* Add your concern input UI components here */}
+            <textarea
+              className="w-full border rounded-md p-2"
+              placeholder="Describe your concern"
+            ></textarea>
+          </div>
+          <DialogFooter>
+            <button
+              className="bg-gray-200 px-4 py-2 rounded-md"
+              onClick={() => setRaiseConcernModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded-md"
+              onClick={() => {
+                // Handle submission
+                setRaiseConcernModalOpen(false);
+              }}
+            >
+              Submit
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

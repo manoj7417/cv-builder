@@ -1219,3 +1219,14 @@ ol > li {
 .coach_main_div ::-webkit-scrollbar-thumb {
   background: #ccc; 
 }
+
+
+
+.rating_tabs input[type="radio"] {
+  display: none;
+}
+.rating_tabs .star {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 5px;
+}

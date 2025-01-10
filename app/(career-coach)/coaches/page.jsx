@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
+  console.log("coaches::",coaches)
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -295,31 +296,6 @@ const CoachPage = () => {
                       </h2>
                     </div>
                     <div className="coach_details">
-                      {/* <div
-                        dangerouslySetInnerHTML={{
-                          __html: selectedCoach?.coachingDescription,
-                        }}
-                        className={`text-sm text-gray-500 ${
-                          !showFullContent.coachingDescription
-                            ? "line-clamp-3"
-                            : ""
-                        }`}
-                        style={{
-                          display: "-webkit-box",
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                          WebkitLineClamp: 3,
-                        }}
-                      ></div>
-
-                      <button
-                        onClick={() => toggleContent("coachingDescription")}
-                        className="text-blue-600 mt-2 hover:underline"
-                      >
-                        {showFullContent?.coachingDescription
-                          ? "Show Less"
-                          : "Show More"}
-                      </button> */}
                       <div
                         className={`overflow-hidden transition-all duration-300 ease-in-out ${
                           !showFullContent.coachingDescription
@@ -530,7 +506,6 @@ const CoachPage = () => {
                                     : "border-transparent"
                                 }`}
                                 onClick={() => {
-                                  // Ensure program is only selectable once
                                   if (selectedProgram !== index) {
                                     setSelectedProgram(index);
                                     // setProgramDetails(program)
@@ -543,9 +518,6 @@ const CoachPage = () => {
                                     <h3 className="text-sm font-bold">
                                       {program.title}
                                     </h3>
-                                    {/* <p className="text-xs">
-                                      {program.description}
-                                    </p> */}
                                     <div
                                       className="text-xs programDescription-content"
                                       dangerouslySetInnerHTML={{
@@ -566,74 +538,7 @@ const CoachPage = () => {
                         )}
                       </ul>
                     </div>
-                    {/* <div className="coach_booking border p-5 rounded-md">
-                    {selectedProgram !== null && (
-                      <>
-                        <div className="program_details flex justify-between ">
-                          <div className="coach_program_heading flex gap-2">
-                            <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                            <div>
-                              <h2 className="text-sm font-bold">
-                                {
-                                  selectedCoach?.programs[selectedProgram]
-                                    ?.title
-                                }
-                              </h2>
-                              <p className="text-xs">
-                                {
-                                  selectedCoach?.programs[selectedProgram]
-                                    ?.description
-                                }
-                              </p>
-                            </div>
-                          </div>
-                          <div className="coach_price">
-                            <div className="text-sm font-bold">
-                            {currency === "INR" ? `₹${selectedCoach?.programs[selectedProgram]?.INRrate}` : currency === "USD" ? `$${selectedCoach?.programs[selectedProgram]?.USDrate}` : `£${selectedCoach?.programs[selectedProgram]?.amount}`}
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          className="schedule_meet mt-5"
-                          onClick={() =>
-                            handleBuyProgram(
-                              selectedCoach?.programs[selectedProgram]
-                            )
-                          }
-                        >
-                          <Button>
-                            {isLoading ? (
-                              <span className="flex items-center gap-2">
-                                <svg
-                                  className="animate-spin h-5 w-5 text-white"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <circle
-                                    className="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    strokeWidth="4"
-                                  ></circle>
-                                  <path
-                                    className="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                                  ></path>
-                                </svg>
-                                Scheduling...
-                              </span>
-                            ) : (
-                              "Schedule a Meet"
-                            )}
-                          </Button>
-                        </div>
-                      </>
-                    )}
-                  </div> */}
+
                     <div className="coach_booking border p-5 rounded-md">
                       {selectedProgram !== null && (
                         <>
@@ -647,7 +552,7 @@ const CoachPage = () => {
                                 <div
                                   className="text-xs programDescription-content"
                                   dangerouslySetInnerHTML={{
-                                    __html: programDetails.description,
+                                    __html: programDetails?.description,
                                   }}
                                 />
                               </div>
@@ -719,7 +624,7 @@ const CoachPage = () => {
         </Dialog>
       </div>
       {/* Mobile Dialog */}
-      <div className="lg:hidden">
+      <div className="lg:hidden block">
         <Dialog open={isMobile} onOpenChange={handleMobileToggle}>
           <DialogContent
             className="w-full sm:w-[90%] md:w-[80%] max-w-lg p-6 bg-blue-100 h-[500px] overflow-y-scroll"
@@ -761,20 +666,46 @@ const CoachPage = () => {
                   </div>
                 </div>
                 <div className="coach_details">
-                  <p
-                    className={`text-sm text-gray-500 ${
-                      !showFullContent.coachingDescription ? "line-clamp-3" : ""
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      !showFullContent.coachingDescription
+                        ? "max-h-16"
+                        : "max-h-full"
                     }`}
-                    style={{
-                      display: "-webkit-box",
-                      WebkitBoxOrient: "vertical",
-                    }}
                   >
-                    {selectedCoach?.coachingDescription}
-                  </p>
+                    <div
+                      className={`text-sm text-gray-500 transition-all duration-300 ease-in-out ${
+                        !showFullContent.coachingDescription
+                          ? "line-clamp-3"
+                          : ""
+                      }`}
+                      style={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: showFullContent.coachingDescription
+                          ? "none"
+                          : 3,
+                        overflow: showFullContent.coachingDescription
+                          ? "visible"
+                          : "hidden",
+                        height: showFullContent.coachingDescription
+                          ? "auto"
+                          : "4.5em",
+                        maxHeight: !showFullContent.coachingDescription
+                          ? "4.5em"
+                          : "none",
+                        opacity: showFullContent.coachingDescription ? 1 : 0.7,
+                        transition: "height 0.3s ease, opacity 0.3s ease",
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: selectedCoach?.coachingDescription || "",
+                      }}
+                    />
+                  </div>
+
                   <button
                     onClick={() => toggleContent("coachingDescription")}
-                    className="text-blue-600 mt-2 hover:underline text-sm"
+                    className="text-blue-600 mt-2 hover:underline"
                   >
                     {showFullContent?.coachingDescription
                       ? "Show Less"
@@ -820,13 +751,15 @@ const CoachPage = () => {
                               opacity: showFullContent.bio ? 1 : 0.7,
                               transition: "height 0.3s ease, opacity 0.3s ease",
                             }}
-                          >
-                            {selectedCoach?.bio}
-                          </p>
+                            dangerouslySetInnerHTML={{
+                              __html: selectedCoach?.bio || "", // Insert the HTML content here
+                            }}
+                          />
                         </div>
+
                         <button
                           onClick={() => toggleContent("bio")}
-                          className="text-blue-600 mt-2 hover:underline text-sm"
+                          className="text-blue-600 mt-2 hover:underline"
                         >
                           {showFullContent?.bio ? "Show Less" : "Show More"}
                         </button>
