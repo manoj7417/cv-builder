@@ -20,7 +20,7 @@ import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Clock, DollarSign, Mail } from "lucide-react";
+import { BookAIcon, Clock, DollarSign, Mail } from "lucide-react";
 import { format } from "date-fns";
 import { ResumeChart } from "./ResumeChart";
 import Link from "next/link";
@@ -39,16 +39,23 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { FaStarAndCrescent } from "react-icons/fa6";
+import { FaRegStar, FaSpinner, FaStarAndCrescent } from "react-icons/fa6";
+import ResumeTooltip from "@/components/component/ResumeTooltip";
+import { useForm } from "react-hook-form";
 
 const UserDashboardPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
-  console.log("program::", program);
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);
@@ -57,14 +64,24 @@ const UserDashboardPage = () => {
   const [rateMeetingModalOpen, setRateMeetingModalOpen] = useState(false);
   const [raiseConcernModalOpen, setRaiseConcernModalOpen] = useState(false);
   const [currentProgramId, setCurrentProgramId] = useState(null);
+  const [isConcernLoading, setIsConcernLoading] = useState(false);
 
   //For rating
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
-  const [totalStars, setTotalStars] = useState(5);
+  const [rating, setRating] = useState(0);  // Track rating (1-5 stars)
+  const [feedback, setFeedback] = useState(''); // Track feedback
 
-  const handleRatingChange = (e) => {
-    setTotalStars(parseInt(Boolean(e.target.value, 10) ? e.target.value : 5));
+  const handleStarClick = (value) => {
+    setRating(value);
+  };
+
+  const handleFeedbackChange = (e) => {
+    setFeedback(e.target.value);
+  };
+
+  const handleRateSubmit = () => {
+    // Handle submission (send rating and feedback to your API or state)
+    console.log(`Rating: ${rating}, Feedback: ${feedback}, Program ID: ${currentProgramId}`);
+    setRateMeetingModalOpen(false);
   };
 
   const handleBookSlotClick = (id, programId) => {
@@ -85,6 +102,28 @@ const UserDashboardPage = () => {
     setRaiseConcernModalOpen(true);
   };
 
+  const handleRaiseConcernData = async (data) => {
+    const { accessToken } = await GetTokens();
+    if (!accessToken || !accessToken.value) {
+      return router.push("/login?redirect=/user-dashboard");
+    }
+    setIsConcernLoading(true)
+    try {
+      const response = await axios.post("/api/raiseQuery", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+      console.log("response::", response);
+      
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsConcernLoading(false);
+      setRaiseConcernModalOpen(false)
+    }
+  };
+
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
   };
@@ -95,18 +134,118 @@ const UserDashboardPage = () => {
     }
     setOpen(index);
   };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    // Get the day, month, and year
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // months are zero-indexed
+    const year = date.getFullYear();
+
+    // Return the formatted date string
+    return `${day}-${month}-${year}`;
+  };
+
+  // Function to check if the current time is past the slot's end time
+  const checkIfShowJoinMeeting = (booking, timezone) => {
+    if (!booking) return false;
+
+    const {
+      date,
+      slotTime: { endTime },
+    } = booking;
+
+    // Combine the booking date and endTime to create a full Date object
+    const bookingEndTimeString = `${date.split("T")[0]} ${endTime}`;
+    const bookingEndTime = new Date(
+      new Date(bookingEndTimeString).toLocaleString("en-US", {
+        timeZone: timezone,
+      })
+    );
+
+    // Get the current time in the same timezone
+    const currentTime = new Date(
+      new Date().toLocaleString("en-US", { timeZone: timezone })
+    );
+
+    // Compare booking date and current date
+    const bookingDate = new Date(
+      new Date(date).toLocaleString("en-US", { timeZone: timezone })
+    );
+
+    const currentDate = new Date(
+      new Date(currentTime.toDateString()).toLocaleString("en-US", {
+        timeZone: timezone,
+      })
+    );
+
+
+    // return bookingEndTime > currentDate
+    console.log(bookingEndTime > currentDate && bookingEndTime.getTime() > currentTime.getTime())
+    return bookingEndTime > currentDate && bookingEndTime.getTime() > currentTime.getTime()
+
+    // // If the booking date is in the past, return false
+    // if (bookingEndTime < currentDate) {
+    //   return false;
+    // }
+
+    // // If the booking date is the same as the current date but the time slot has passed, return false
+    // if (bookingDate.getTime() === currentDate.getTime() && currentTime >= bookingEndTime) {
+    //   return false;
+    // }
+
+    // // If the booking date is in the future, return true
+    // if (bookingDate > currentDate) {
+    //   return true;
+    // }
+
+    // // If the booking date is the same as the current date and the slot is still valid, return true
+    // return true;
+  };
+
   const mapMeetingLinksToPrograms = (programs, bookings) => {
     return programs.map((program) => {
+      // Find the user's booking that matches the program
       const userBooking = bookings.find(
         (booking) => booking.programId === program.programId._id
       );
 
       if (userBooking) {
-        return { ...program, meetingLink: userBooking?.meetingLink };
+        // Use the updated checkIfShowJoinMeeting function
+        const showJoinMeeting = checkIfShowJoinMeeting(
+          userBooking,
+          userBooking.timezone
+        );
+
+        // Format the booking date for display purposes
+        const formattedDate = formatDate(userBooking.date);
+
+        // Return the program with updated properties
+        return {
+          ...program,
+          meetingLink: userBooking.meetingLink,
+          showJoinMeeting, // Whether to show "Join Meeting"
+          formattedDate, // Formatted date for UI
+        };
       }
+
+      // If no matching booking, return the program as is
       return program;
     });
   };
+
+  // const mapMeetingLinksToPrograms = (programs, bookings) => {
+  //   return programs.map((program) => {
+  //     const userBooking = bookings.find(
+  //       (booking) => booking.programId === program.programId._id
+  //     );
+  //     if (userBooking) {
+  //       return { ...program, meetingLink: userBooking?.meetingLink };
+  //     }
+  //     return program;
+  //   });
+  // };
 
   const handleGetBookings = async (programs) => {
     const { accessToken } = await GetTokens();
@@ -551,10 +690,6 @@ const UserDashboardPage = () => {
                                 <th className="p-4 whitespace-nowrap">
                                   Book Slot
                                 </th>
-                                <th className="p-4 whitespace-nowrap">
-                                  Raise Concern
-                                </th>
-                                <th className="p-4">Rating</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -606,98 +741,62 @@ const UserDashboardPage = () => {
                                         {item?.meetingLink ? (
                                           <>
                                             <Link
-                                              href={item.meetingLink}
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                              className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                              href={
+                                                item.showJoinMeeting
+                                                  ? item.meetingLink
+                                                  : "#"
+                                              }
+                                              target={
+                                                item.showJoinMeeting
+                                                  ? "_blank"
+                                                  : undefined
+                                              }
+                                              rel={
+                                                item.showJoinMeeting
+                                                  ? "noopener noreferrer"
+                                                  : undefined
+                                              }
+                                              className={`text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                                !item.showJoinMeeting
+                                                  ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
+                                                  : ""
+                                              }`}
                                             >
-                                              Join Meeting
+                                              Join Meet
                                             </Link>
-                                          </>
-                                        ) : (
-                                          <Button
-                                            className="text-xs p-2"
-                                            onClick={() =>
-                                              handleBookSlotClick(
-                                                item?.coachId?.id,
-                                                item?.programId?._id
-                                              )
-                                            }
-                                          >
-                                            Book Slot
-                                          </Button>
-                                        )}
-                                      </td>
-                                      <td className="p-2 text-center">
-                                        {item?.meetingLink ? (
-                                          <>
-                                            {/* Raise a Concern */}
-                                            <button
-                                              className="text-sm bg-red-600 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-red-500 whitespace-nowrap"
-                                              onClick={() =>
-                                                handleRaiseConcern(
-                                                  item?.programId?._id
-                                                )
-                                              }
-                                            >
-                                              <FaExclamationCircle className="text-lg" />
-                                              {/* Raise a Concern */}
-                                            </button>
-                                          </>
-                                        ) : (
-                                          <Button
-                                            className="text-xs p-2"
-                                            onClick={() =>
-                                              handleBookSlotClick(
-                                                item?.coachId?.id,
-                                                item?.programId?._id
-                                              )
-                                            }
-                                          >
-                                            Book Slot
-                                          </Button>
-                                        )}
-                                      </td>
-                                      <td className="rating_tabs p-2 text-center">
-                                        {item?.meetingLink ? (
-                                          <>
-                                              {/* Ratings  */}
-                                            {[...Array(totalStars)].map(
-                                              (star, index) => {
-                                                const currentRating = index + 1;
-
-                                                return (
-                                                  <label key={index}>
-                                                    <input
-                                                      key={star}
-                                                      type="radio"
-                                                      name="rating"
-                                                      value={currentRating}
-                                                      onChange={() =>
-                                                        setRating(currentRating)
-                                                      }
-                                                    />
-                                                    <span
-                                                      className="star"
-                                                      style={{
-                                                        color:
-                                                          currentRating <=
-                                                          (hover || rating)
-                                                            ? "#ffc107"
-                                                            : "#e4e5e9",
-                                                      }}
-                                                      onMouseEnter={() =>
-                                                        setHover(currentRating)
-                                                      }
-                                                      onMouseLeave={() =>
-                                                        setHover(null)
-                                                      }
-                                                    >
-                                                      &#9733;
-                                                    </span>
-                                                  </label>
-                                                );
-                                              }
+                                            {!item.showJoinMeeting && (
+                                              <>
+                                                <ResumeTooltip
+                                                  icon={FaExclamationCircle}
+                                                  title="Raise Concern"
+                                                >
+                                                  <button
+                                                    className="text-xs bg-red-600 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-red-500 whitespace-nowrap m-2"
+                                                    onClick={() =>
+                                                      handleRaiseConcern(
+                                                        item?.programId?._id
+                                                      )
+                                                    }
+                                                  >
+                                                    <FaExclamationCircle className="text-sm" />
+                                                  </button>
+                                                </ResumeTooltip>
+                                                <ResumeTooltip
+                                                  icon={FaStar}
+                                                  title="Rate us"
+                                                >
+                                                  <button
+                                                    className="text-xs bg-blue-900 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                                    onClick={() =>
+                                                      handleRateMeeting(
+                                                        item?.programId?._id
+                                                      )
+                                                    }
+                                                  >
+                                                    <FaStar className="text-sm" />
+                                                  </button>
+                                                </ResumeTooltip>
+                                              </>
                                             )}
                                           </>
                                         ) : (
@@ -1075,7 +1174,7 @@ const UserDashboardPage = () => {
       </div>
 
       {/* Rate the Meeting Modal */}
-      <Dialog
+      {/* <Dialog
         open={rateMeetingModalOpen}
         onOpenChange={setRateMeetingModalOpen}
       >
@@ -1087,7 +1186,6 @@ const UserDashboardPage = () => {
             </DialogDescription>
           </DialogHeader>
           <div>
-            {/* Add your rating UI components here */}
             <p>Rating for program ID: {currentProgramId}</p>
           </div>
           <DialogFooter>
@@ -1100,7 +1198,6 @@ const UserDashboardPage = () => {
             <button
               className="bg-blue-600 text-white px-4 py-2 rounded-md"
               onClick={() => {
-                // Handle submission
                 setRateMeetingModalOpen(false);
               }}
             >
@@ -1108,7 +1205,55 @@ const UserDashboardPage = () => {
             </button>
           </DialogFooter>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
+       <Dialog open={rateMeetingModalOpen} onOpenChange={setRateMeetingModalOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Rate the Meeting</DialogTitle>
+          <DialogDescription>
+            Please provide your feedback for the meeting.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="flex items-center space-x-2 mb-4">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <div
+              key={value}
+              onClick={() => handleStarClick(value)}
+              className="cursor-pointer"
+            >
+              {rating >= value ? (
+                <FaStar className="text-yellow-500 text-xl" />
+              ) : (
+                <FaRegStar className="text-gray-300 text-xl" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <textarea
+          className="w-full p-2 border rounded-md mt-2"
+          placeholder="Provide your feedback here..."
+          value={feedback}
+          onChange={handleFeedbackChange}
+        />
+
+        <DialogFooter>
+          <button
+            className="bg-gray-200 px-4 py-2 rounded-md"
+            onClick={() => setRateMeetingModalOpen(false)}
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded-md"
+            onClick={handleRateSubmit}
+          >
+            Submit
+          </button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
 
       {/* Raise a Concern Modal */}
       <Dialog
@@ -1122,30 +1267,39 @@ const UserDashboardPage = () => {
               Let us know about any issues or concerns regarding this meeting.
             </DialogDescription>
           </DialogHeader>
-          <div>
-            {/* Add your concern input UI components here */}
-            <textarea
-              className="w-full border rounded-md p-2"
-              placeholder="Describe your concern"
-            ></textarea>
-          </div>
-          <DialogFooter>
-            <button
-              className="bg-gray-200 px-4 py-2 rounded-md"
-              onClick={() => setRaiseConcernModalOpen(false)}
-            >
-              Cancel
-            </button>
-            <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-md"
-              onClick={() => {
-                // Handle submission
-                setRaiseConcernModalOpen(false);
-              }}
-            >
-              Submit
-            </button>
-          </DialogFooter>
+
+          <form onSubmit={handleSubmit(handleRaiseConcernData)}>
+            <div>
+              <textarea
+                {...register("query", {
+                  required: "Please describe your concern",
+                })}
+                className="w-full border rounded-md p-2"
+                placeholder="Describe your concern"
+              ></textarea>
+              {errors.query && (
+                <p className="text-red-500 text-sm">{errors.query.message}</p>
+              )}{" "}
+              {/* Display error message */}
+            </div>
+
+            <DialogFooter>
+              <button
+                type="button"
+                className="bg-gray-200 px-4 py-2 rounded-md"
+                onClick={() => setRaiseConcernModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                disabled={isConcernLoading}
+              >
+                {isConcernLoading ? <FaSpinner className="animate-spin" /> : "Submit"}
+              </button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </>

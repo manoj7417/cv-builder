@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
-  console.log("coaches::",coaches)
+  console.log("coaches::", coaches);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -492,7 +492,7 @@ const CoachPage = () => {
               {selectedCoach?.programs.filter((program) => program.isapproved)
                 .length > 0 ? (
                 <>
-                  <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
+                  {/* <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
                     <div className="coach_related_programs h-[75vh] overflow-y-scroll">
                       <ul className="my-5">
                         {selectedCoach?.programs.map(
@@ -540,6 +540,215 @@ const CoachPage = () => {
                     </div>
 
                     <div className="coach_booking border p-5 rounded-md">
+                      {selectedProgram !== null && (
+                        <>
+                          <div className="program_details flex justify-between ">
+                            <div className="coach_program_heading flex gap-2">
+                              <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
+                              <div>
+                                <h2 className="text-sm font-bold">
+                                  {programDetails?.title}
+                                </h2>
+                                <div
+                                  className="text-xs programDescription-content"
+                                  dangerouslySetInnerHTML={{
+                                    __html: programDetails?.description,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div className="coach_price">
+                              <div className="text-sm font-bold">
+                                {currency === "INR"
+                                  ? `₹${programDetails?.INRrate}`
+                                  : currency === "USD"
+                                  ? `$${programDetails?.USDrate}`
+                                  : `£${programDetails?.amount}`}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="schedule_meet mt-5">
+                            {isPurchased ? (
+                              <Button disabled>Already Purchased</Button>
+                            ) : (
+                              <Button
+                                onClick={() => handleBuyProgram(programDetails)}
+                              >
+                                {isLoading ? (
+                                  <span className="flex items-center gap-2">
+                                    <svg
+                                      className="animate-spin h-5 w-5 text-white"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <circle
+                                        className="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        strokeWidth="4"
+                                      ></circle>
+                                      <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                      ></path>
+                                    </svg>
+                                    Scheduling...
+                                  </span>
+                                ) : (
+                                  "Schedule a Meet"
+                                )}
+                              </Button>
+                            )}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div> */}
+                  <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
+                    {/* Coach Related Programs Section */}
+                    <div className="coach_related_programs h-[75vh] overflow-y-scroll lg:hidden block">
+                      <ul className="my-5">
+                        {selectedCoach?.programs.map(
+                          (program, index) =>
+                            program.isapproved === true && (
+                              <li
+                                key={index}
+                                className={`flex flex-col gap-4 py-4 px-4 cursor-pointer border-2 rounded-md ${
+                                  selectedProgram === index
+                                    ? "border-blue-500 bg-blue-100"
+                                    : "border-transparent"
+                                }`}
+                                onClick={() => {
+                                  if (selectedProgram !== index) {
+                                    setSelectedProgram(index);
+                                    // Optionally set additional program details
+                                  }
+                                }}
+                              >
+                                <div>
+                                    <div className="program_title flex gap-2 items-center">
+                                      <BsCheckCircleFill className="text-blue-500 w-4 h-4" />
+                                      <h3 className="text-sm font-bold">
+                                        {program.title}
+                                      </h3>
+                                    </div>
+                                    <div
+                                      className="text-xs px-5 py-2 programDescription-content"
+                                      dangerouslySetInnerHTML={{
+                                        __html: program.description,
+                                      }}
+                                    />
+                                  </div>
+                                <div className="flex justify-between items-center">
+                                  <div className="program_price font-bold text-sm">
+                                    {currency === "INR"
+                                      ? `₹${program.INRrate}`
+                                      : currency === "USD"
+                                      ? `$${program.USDrate}`
+                                      : `£${program.amount}`}
+                                  </div>
+                                  <div className="schedule_meet">
+                                    {isPurchased ? (
+                                      <Button disabled>
+                                        Already Purchased
+                                      </Button>
+                                    ) : (
+                                      <Button
+                                        onClick={() =>
+                                          handleBuyProgram(program)
+                                        }
+                                      >
+                                        {isLoading &&
+                                        selectedProgram === index ? (
+                                          <span className="flex items-center gap-2">
+                                            <svg
+                                              className="animate-spin h-5 w-5 text-white"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              fill="none"
+                                              viewBox="0 0 24 24"
+                                            >
+                                              <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                              ></circle>
+                                              <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                              ></path>
+                                            </svg>
+                                            Scheduling...
+                                          </span>
+                                        ) : (
+                                          "Schedule a Meet"
+                                        )}
+                                      </Button>
+                                    )}
+                                  </div>
+                                </div>
+                              </li>
+                            )
+                        )}
+                      </ul>
+                    </div>
+                    <div className="coach_related_programs h-[75vh] overflow-y-scroll lg:block hidden">
+                      <ul className="my-5">
+                        {selectedCoach?.programs.map(
+                          (program, index) =>
+                            program.isapproved === true && (
+                              <li
+                                key={index}
+                                className={`flex gap-5 justify-between py-2 px-4 cursor-pointer border-2 rounded-md ${
+                                  selectedProgram === index
+                                    ? "border-blue-500 bg-blue-100"
+                                    : "border-transparent"
+                                }`}
+                                onClick={() => {
+                                  if (selectedProgram !== index) {
+                                    setSelectedProgram(index);
+                                    // setProgramDetails(program)
+                                  }
+                                }}
+                              >
+                                <div className="program_inner_content space-y-2 flex gap-5 items-center">
+                                  <div>
+                                    <div className="program_title flex gap-2 items-center">
+                                      <BsCheckCircleFill className="text-blue-500 w-4 h-4" />
+                                      <h3 className="text-sm font-bold">
+                                        {program.title}
+                                      </h3>
+                                    </div>
+                                    <div
+                                      className="text-xs px-5 py-2 programDescription-content"
+                                      dangerouslySetInnerHTML={{
+                                        __html: program.description,
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="program_price font-bold text-sm">
+                                  {currency === "INR"
+                                    ? `₹${program.INRrate}`
+                                    : currency === "USD"
+                                    ? `$${program.USDrate}`
+                                    : `£${program.amount}`}
+                                </div>
+                              </li>
+                            )
+                        )}
+                      </ul>
+                    </div>
+
+                    {/* Coach Booking Section - Hidden on Mobile */}
+                    <div className="coach_booking border p-5 rounded-md hidden lg:block">
                       {selectedProgram !== null && (
                         <>
                           <div className="program_details flex justify-between ">
