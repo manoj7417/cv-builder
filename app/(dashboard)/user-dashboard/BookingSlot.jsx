@@ -60,12 +60,7 @@ const locales = {
   "en-US": require("date-fns/locale/en-US"),
 };
 
-const UserBookingSlot = ({
-  coach_Id,
-  programId,
-  program,
-  setProgram,
-}) => {
+const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
   const {
     register,
     handleSubmit,
@@ -77,6 +72,7 @@ const UserBookingSlot = ({
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDaySlots, setSelectedDaySlots] = useState(null);
+  console.log("selectedDaySlots::", selectedDaySlots);
   const [modalSelectedSlot, setModalSelectedSlot] = useState(null);
   const [selectedDate, setSelectedDate] = useState({
     date: dayjs().format("YYYY-MM-DD"),
@@ -88,6 +84,16 @@ const UserBookingSlot = ({
   const [programData, setProgramData] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
   const [meetUrl, setMeetUrl] = useState(null);
+
+
+  const isSlotDisabled = (slot, selectedDate) => {
+    const now = dayjs();
+    const slotDateTime = dayjs(
+      `${selectedDate} ${slot.startTime}`,
+      "YYYY-MM-DD h:mm A"
+    );
+    return slotDateTime.isBefore(now); 
+  };
 
   const checkCoursePurchased = async (programId) => {
     const { accessToken } = await GetTokens();
@@ -175,7 +181,6 @@ const UserBookingSlot = ({
         : false
       : false;
   };
-
 
   const handleDateSelect = (dayOfWeek, date) => {
     setSelectedDate({
@@ -535,7 +540,7 @@ const UserBookingSlot = ({
             <div className="meeting-link-container text-center p-4 bg-white rounded-lg w-full">
               <div className="date-display text-center mb-4">
                 <p className="text-lg font-semibold text-gray-800">
-                  {selectedDate?.dayOfWeek},{" "}
+                  {selectedDate?.dayOfWeek},
                   {dayjs(selectedDate?.date).format("MMMM D, YYYY")}
                 </p>
                 <p className="text-sm text-gray-500 font-medium">
@@ -576,20 +581,49 @@ const UserBookingSlot = ({
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      {selectedDaySlots.map((slot, index) => (
-                        <div
+                      {selectedDaySlots.map((slot, index) => {
+
+                      const isConfirmDisabled = isSlotDisabled(slot, selectedDate.date);
+
+                        return (
+                          // <div
+                          //   key={index}
+                          //   onClick={() => handleSlotClick(slot)}
+                          //   className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
+                          // >
+                          //   <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
+                          //     {slot.startTime}
+                          //   </span>
+                          //   <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                          //     Book slot
+                          //   </span>
+                          // </div>
+                          <div
                           key={index}
-                          onClick={() => handleSlotClick(slot)}
-                          className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
+                          onClick={() => {
+                            if (!isConfirmDisabled) handleSlotClick(slot); // Only handle click if not disabled
+                          }}
+                          className={`group relative py-2 px-5 rounded-md font-medium text-center transition duration-300 transform h-10 flex items-center justify-center overflow-hidden ${
+                            isConfirmDisabled
+                              ? "bg-gray-300 text-black cursor-not-allowed" // Disabled style
+                              : "bg-blue-950 text-white hover:bg-blue-700" // Enabled style
+                          }`}
                         >
-                          <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
+                          <span
+                            className={`slot-text transition-all duration-300 transform ${
+                              isConfirmDisabled ? "opacity-50" : "group-hover:-translate-x-full group-hover:opacity-0"
+                            }`}
+                          >
                             {slot.startTime}
                           </span>
-                          <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                            Book slot
-                          </span>
+                          {!isConfirmDisabled && (
+                            <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                              Book slot
+                            </span>
+                          )}
                         </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 ) : (

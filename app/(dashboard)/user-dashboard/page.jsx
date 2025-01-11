@@ -42,6 +42,7 @@ import {
 import { FaRegStar, FaSpinner, FaStarAndCrescent } from "react-icons/fa6";
 import ResumeTooltip from "@/components/component/ResumeTooltip";
 import { useForm } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
 
 const UserDashboardPage = () => {
   const {
@@ -179,7 +180,6 @@ const UserDashboardPage = () => {
         timeZone: timezone,
       })
     );
-
 
     // return bookingEndTime > currentDate
     console.log(bookingEndTime > currentDate && bookingEndTime.getTime() > currentTime.getTime())
@@ -1207,7 +1207,7 @@ const UserDashboardPage = () => {
         </DialogContent>
       </Dialog> */}
        <Dialog open={rateMeetingModalOpen} onOpenChange={setRateMeetingModalOpen}>
-      <DialogContent>
+      <DialogContent showCloseButton={true} onClick={() => setRateMeetingModalOpen(false)}>
         <DialogHeader>
           <DialogTitle>Rate the Meeting</DialogTitle>
           <DialogDescription>
@@ -1231,7 +1231,7 @@ const UserDashboardPage = () => {
           ))}
         </div>
 
-        <textarea
+        <Textarea
           className="w-full p-2 border rounded-md mt-2"
           placeholder="Provide your feedback here..."
           value={feedback}
@@ -1239,18 +1239,18 @@ const UserDashboardPage = () => {
         />
 
         <DialogFooter>
-          <button
-            className="bg-gray-200 px-4 py-2 rounded-md"
+          <Button
+            className="bg-gray-200 text-black px-4 py-2 rounded-md"
             onClick={() => setRateMeetingModalOpen(false)}
           >
             Cancel
-          </button>
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded-md"
+          </Button>
+          <Button
+            className="px-4 py-2 rounded-md"
             onClick={handleRateSubmit}
           >
             Submit
-          </button>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -1260,7 +1260,7 @@ const UserDashboardPage = () => {
         open={raiseConcernModalOpen}
         onOpenChange={setRaiseConcernModalOpen}
       >
-        <DialogContent>
+        <DialogContent showCloseButton={true} onClick={() => setRaiseConcernModalOpen(false)}>
           <DialogHeader>
             <DialogTitle>Raise a Concern</DialogTitle>
             <DialogDescription>
@@ -1270,34 +1270,34 @@ const UserDashboardPage = () => {
 
           <form onSubmit={handleSubmit(handleRaiseConcernData)}>
             <div>
-              <textarea
+              <Textarea
                 {...register("query", {
                   required: "Please describe your concern",
                 })}
                 className="w-full border rounded-md p-2"
                 placeholder="Describe your concern"
-              ></textarea>
+              ></Textarea>
               {errors.query && (
                 <p className="text-red-500 text-sm">{errors.query.message}</p>
               )}{" "}
               {/* Display error message */}
             </div>
 
-            <DialogFooter>
-              <button
+            <DialogFooter className="mt-5">
+              <Button
                 type="button"
-                className="bg-gray-200 px-4 py-2 rounded-md"
+                className="bg-gray-200 text-black px-4 py-2 rounded-md"
                 onClick={() => setRaiseConcernModalOpen(false)}
               >
                 Cancel
-              </button>
-              <button
+              </Button>
+              <Button
                 type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                className="px-4 py-2 rounded-md"
                 disabled={isConcernLoading}
               >
                 {isConcernLoading ? <FaSpinner className="animate-spin" /> : "Submit"}
-              </button>
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>
