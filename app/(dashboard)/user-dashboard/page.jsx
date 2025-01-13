@@ -68,8 +68,8 @@ const UserDashboardPage = () => {
   const [isConcernLoading, setIsConcernLoading] = useState(false);
 
   //For rating
-  const [rating, setRating] = useState(0);  // Track rating (1-5 stars)
-  const [feedback, setFeedback] = useState(''); // Track feedback
+  const [rating, setRating] = useState(0); // Track rating (1-5 stars)
+  const [feedback, setFeedback] = useState(""); // Track feedback
 
   const handleStarClick = (value) => {
     setRating(value);
@@ -81,7 +81,9 @@ const UserDashboardPage = () => {
 
   const handleRateSubmit = () => {
     // Handle submission (send rating and feedback to your API or state)
-    console.log(`Rating: ${rating}, Feedback: ${feedback}, Program ID: ${currentProgramId}`);
+    console.log(
+      `Rating: ${rating}, Feedback: ${feedback}, Program ID: ${currentProgramId}`
+    );
     setRateMeetingModalOpen(false);
   };
 
@@ -108,7 +110,7 @@ const UserDashboardPage = () => {
     if (!accessToken || !accessToken.value) {
       return router.push("/login?redirect=/user-dashboard");
     }
-    setIsConcernLoading(true)
+    setIsConcernLoading(true);
     try {
       const response = await axios.post("/api/raiseQuery", data, {
         headers: {
@@ -116,12 +118,14 @@ const UserDashboardPage = () => {
         },
       });
       console.log("response::", response);
-      
+      toast.success("Your concern has been raised successfully!", {
+        position: "top-right",
+      });
     } catch (error) {
       console.log(error);
     } finally {
       setIsConcernLoading(false);
-      setRaiseConcernModalOpen(false)
+      setRaiseConcernModalOpen(false);
     }
   };
 
@@ -182,8 +186,14 @@ const UserDashboardPage = () => {
     );
 
     // return bookingEndTime > currentDate
-    console.log(bookingEndTime > currentDate && bookingEndTime.getTime() > currentTime.getTime())
-    return bookingEndTime > currentDate && bookingEndTime.getTime() > currentTime.getTime()
+    console.log(
+      bookingEndTime > currentDate &&
+        bookingEndTime.getTime() > currentTime.getTime()
+    );
+    return (
+      bookingEndTime > currentDate &&
+      bookingEndTime.getTime() > currentTime.getTime()
+    );
 
     // // If the booking date is in the past, return false
     // if (bookingEndTime < currentDate) {
@@ -880,82 +890,82 @@ const UserDashboardPage = () => {
                                         Book Slot
                                       </Button>
                                     )} */}
-                                     <div className="flex p-2 text-center">
-                                        {item?.meetingLink ? (
-                                          <>
-                                            <Link
-                                              href={
-                                                item.showJoinMeeting
-                                                  ? item.meetingLink
-                                                  : "#"
-                                              }
-                                              target={
-                                                item.showJoinMeeting
-                                                  ? "_blank"
-                                                  : undefined
-                                              }
-                                              rel={
-                                                item.showJoinMeeting
-                                                  ? "noopener noreferrer"
-                                                  : undefined
-                                              }
-                                              className={`block w-full text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
-                                                !item.showJoinMeeting
-                                                  ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
-                                                  : ""
-                                              }`}
-                                            >
-                                              Join Meet
-                                            </Link>
-                                            {!item.showJoinMeeting && (
-                                              <>
-                                                <ResumeTooltip
-                                                  icon={FaExclamationCircle}
-                                                  title="Raise Concern"
-                                                >
-                                                  <button
-                                                    className="text-xs bg-red-600 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-red-500 whitespace-nowrap m-2"
-                                                    onClick={() =>
-                                                      handleRaiseConcern(
-                                                        item?.programId?._id
-                                                      )
-                                                    }
-                                                  >
-                                                    <FaExclamationCircle className="text-sm" />
-                                                  </button>
-                                                </ResumeTooltip>
-                                                <ResumeTooltip
-                                                  icon={FaStar}
-                                                  title="Rate us"
-                                                >
-                                                  <button
-                                                    className="text-xs bg-blue-900 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
-                                                    onClick={() =>
-                                                      handleRateMeeting(
-                                                        item?.programId?._id
-                                                      )
-                                                    }
-                                                  >
-                                                    <FaStar className="text-sm" />
-                                                  </button>
-                                                </ResumeTooltip>
-                                              </>
-                                            )}
-                                          </>
-                                        ) : (
-                                          <Button
-                                            className="text-xs p-2 w-full"
-                                            onClick={() =>
-                                              handleBookSlotClick(
-                                                item?.coachId?.id,
-                                                item?.programId?._id
-                                              )
+                                    <div className="flex p-2 text-center">
+                                      {item?.meetingLink ? (
+                                        <>
+                                          <Link
+                                            href={
+                                              item.showJoinMeeting
+                                                ? item.meetingLink
+                                                : "#"
                                             }
+                                            target={
+                                              item.showJoinMeeting
+                                                ? "_blank"
+                                                : undefined
+                                            }
+                                            rel={
+                                              item.showJoinMeeting
+                                                ? "noopener noreferrer"
+                                                : undefined
+                                            }
+                                            className={`block w-full text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                              !item.showJoinMeeting
+                                                ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
+                                                : ""
+                                            }`}
                                           >
-                                            Book Slot
-                                          </Button>
-                                        )}
-                                      </div>
+                                            Join Meet
+                                          </Link>
+                                          {!item.showJoinMeeting && (
+                                            <>
+                                              <ResumeTooltip
+                                                icon={FaExclamationCircle}
+                                                title="Raise Concern"
+                                              >
+                                                <button
+                                                  className="text-xs bg-red-600 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-red-500 whitespace-nowrap m-2"
+                                                  onClick={() =>
+                                                    handleRaiseConcern(
+                                                      item?.programId?._id
+                                                    )
+                                                  }
+                                                >
+                                                  <FaExclamationCircle className="text-sm" />
+                                                </button>
+                                              </ResumeTooltip>
+                                              <ResumeTooltip
+                                                icon={FaStar}
+                                                title="Rate us"
+                                              >
+                                                <button
+                                                  className="text-xs bg-blue-900 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                                  onClick={() =>
+                                                    handleRateMeeting(
+                                                      item?.programId?._id
+                                                    )
+                                                  }
+                                                >
+                                                  <FaStar className="text-sm" />
+                                                </button>
+                                              </ResumeTooltip>
+                                            </>
+                                          )}
+                                        </>
+                                      ) : (
+                                        <Button
+                                          className="text-xs p-2 w-full"
+                                          onClick={() =>
+                                            handleBookSlotClick(
+                                              item?.coachId?.id,
+                                              item?.programId?._id
+                                            )
+                                          }
+                                        >
+                                          Book Slot
+                                        </Button>
+                                      )}
+                                    </div>
                                   </div>
                                 )
                             )}
@@ -1128,7 +1138,7 @@ const UserDashboardPage = () => {
                   </h2>
                   <div className="coach_section">
                     <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
-                      <div>
+                      {/* <div className="flex lg:flex-row flex-col gap-5">
                         {isLoading ? (
                           // Skeleton loader
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1156,7 +1166,7 @@ const UserDashboardPage = () => {
                             (item, index) =>
                               item?.programId && (
                                 <div key={index}>
-                                  <div className="flex gap-10 overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 cursor-pointer">
+                                  <div className="flex gap-10 overflow-hidden shadow-lg rounded-lg w-60 md:w-80 cursor-pointer min-h-[320px]">
                                     <div className="w-full block h-full">
                                       <img
                                         alt="blog photo"
@@ -1169,10 +1179,7 @@ const UserDashboardPage = () => {
                                           {item?.programId?.title}
                                         </p>
                                         <p className="text-gray-600 font-light text-sm">
-                                          {item?.programId?.description.slice(
-                                            0,
-                                            50
-                                          )}
+                                          {item?.programId?.description}
                                         </p>
                                         <div className="flex items-center mt-2">
                                           <img
@@ -1185,6 +1192,88 @@ const UserDashboardPage = () => {
                                             <div className="font-medium text-sm">
                                               {item?.coachId?.name}
                                             </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                          )
+                        ) : (
+                          <Card className="w-full">
+                            <CardHeader>
+                              <CardTitle className="text-center text-lg font-semibold text-gray-500">
+                                No Data Available
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="flex justify-center items-center py-4">
+                                <p className="text-sm text-gray-500">
+                                  There are no programs to display at the
+                                  moment.
+                                </p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )}
+                      </div> */}
+                      <div className="flex lg:flex-row flex-col gap-5">
+                        {isLoading ? (
+                          // Skeleton loader
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {Array(6)
+                              .fill(0)
+                              .map((_, index) => (
+                                <div key={index} className="animate-pulse">
+                                  <div className="overflow-hidden shadow-lg rounded-lg h-90 w-60 md:w-80 bg-gray-200"></div>
+                                  <div className="bg-white p-4 mt-4">
+                                    <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                                    <div className="flex items-center mt-4">
+                                      <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                                      <div className="pl-3">
+                                        <div className="h-4 bg-gray-200 rounded mb-1 w-24"></div>
+                                        <div className="h-3 bg-gray-200 rounded w-16"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        ) : program.length > 0 ? (
+                          program.map(
+                            (item, index) =>
+                              item?.programId && (
+                                <div key={index} className="w-60 md:w-80">
+                                  <div className="flex flex-col overflow-hidden shadow-lg rounded-lg h-full bg-white min-h-[350px]">
+                                    <div>
+                                      <img
+                                        alt="program image"
+                                        src={item.programId?.programImage}
+                                        className="max-h-40 w-full object-cover"
+                                        priority="true"
+                                      />
+                                    </div>
+                                    <div className="flex flex-col justify-between flex-1 p-4">
+                                      <div>
+                                        <p className="text-gray-800 text-base font-medium mb-2">
+                                          {item?.programId?.title}
+                                        </p>
+                                        <p className="text-gray-600 font-light text-sm">
+                                          {item?.programId?.description}
+                                        </p>
+                                      </div>
+                                      <div className="flex items-center mt-4">
+                                        <img
+                                          className="w-10 h-10 object-cover rounded-full"
+                                          alt="Coach avatar"
+                                          src={item?.coachId?.profileImage}
+                                          priority="true"
+                                        />
+                                        <div className="pl-3">
+                                          <div className="font-medium text-sm">
+                                            {item?.coachId?.name}
                                           </div>
                                         </div>
                                       </div>
@@ -1282,61 +1371,67 @@ const UserDashboardPage = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog> */}
-       <Dialog open={rateMeetingModalOpen} onOpenChange={setRateMeetingModalOpen}>
-      <DialogContent showCloseButton={true} onClick={() => setRateMeetingModalOpen(false)}>
-        <DialogHeader>
-          <DialogTitle>Rate the Meeting</DialogTitle>
-          <DialogDescription>
-            Please provide your feedback for the meeting.
-          </DialogDescription>
-        </DialogHeader>
-        
-        <div className="flex items-center space-x-2 mb-4">
-          {[1, 2, 3, 4, 5].map((value) => (
-            <div
-              key={value}
-              onClick={() => handleStarClick(value)}
-              className="cursor-pointer"
+      <Dialog
+        open={rateMeetingModalOpen}
+        onOpenChange={setRateMeetingModalOpen}
+      >
+        <DialogContent
+          showCloseButton={true}
+          onClick={() => setRateMeetingModalOpen(false)}
+        >
+          <DialogHeader>
+            <DialogTitle>Rate the Meeting</DialogTitle>
+            <DialogDescription>
+              Please provide your feedback for the meeting.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex items-center space-x-2 mb-4">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <div
+                key={value}
+                onClick={() => handleStarClick(value)}
+                className="cursor-pointer"
+              >
+                {rating >= value ? (
+                  <FaStar className="text-yellow-500 text-xl" />
+                ) : (
+                  <FaRegStar className="text-gray-300 text-xl" />
+                )}
+              </div>
+            ))}
+          </div>
+
+          <Textarea
+            className="w-full p-2 border rounded-md mt-2"
+            placeholder="Provide your feedback here..."
+            value={feedback}
+            onChange={handleFeedbackChange}
+          />
+
+          <DialogFooter className="flex lg:flex-row flex-col mt-5 gap-5">
+            <Button
+              className="bg-gray-200 text-black px-4 py-2 rounded-md"
+              onClick={() => setRateMeetingModalOpen(false)}
             >
-              {rating >= value ? (
-                <FaStar className="text-yellow-500 text-xl" />
-              ) : (
-                <FaRegStar className="text-gray-300 text-xl" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        <Textarea
-          className="w-full p-2 border rounded-md mt-2"
-          placeholder="Provide your feedback here..."
-          value={feedback}
-          onChange={handleFeedbackChange}
-        />
-
-        <DialogFooter className="flex lg:flex-row flex-col mt-5 gap-5">
-          <Button
-            className="bg-gray-200 text-black px-4 py-2 rounded-md"
-            onClick={() => setRateMeetingModalOpen(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            className="px-4 py-2 rounded-md"
-            onClick={handleRateSubmit}
-          >
-            Submit
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+              Cancel
+            </Button>
+            <Button className="px-4 py-2 rounded-md" onClick={handleRateSubmit}>
+              Submit
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Raise a Concern Modal */}
       <Dialog
         open={raiseConcernModalOpen}
         onOpenChange={setRaiseConcernModalOpen}
       >
-        <DialogContent showCloseButton={true} onClick={() => setRaiseConcernModalOpen(false)}>
+        <DialogContent
+          showCloseButton={true}
+          onClick={() => setRaiseConcernModalOpen(false)}
+        >
           <DialogHeader>
             <DialogTitle>Raise a Concern</DialogTitle>
             <DialogDescription>
@@ -1372,7 +1467,11 @@ const UserDashboardPage = () => {
                 className="px-4 py-2 rounded-md"
                 disabled={isConcernLoading}
               >
-                {isConcernLoading ? <FaSpinner className="animate-spin" /> : "Submit"}
+                {isConcernLoading ? (
+                  <FaSpinner className="animate-spin" />
+                ) : (
+                  "Submit"
+                )}
               </Button>
             </DialogFooter>
           </form>
