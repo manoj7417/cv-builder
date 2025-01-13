@@ -547,11 +547,11 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                   TimeZone: {singleCoach?.availability?.timeZone}
                 </p>
               </div>
-              <div className="flex gap-5 justify-center items-baseline">
-                <h4 className="text-lg font-bold text-black mb-4">
+              <div className="flex lg:flex-row flex-col lg:gap-5 gap-0 justify-center lg:items-baseline items-center">
+                <h4 className="text-lg font-bold text-black lg:mb-4 mb-0">
                   Your Meeting Link
                 </h4>
-                <p className="text-lg  text-blue-500 font-medium transition duration-300 transform hover:bg-blue-700">
+                <p className="text-lg  text-blue-500 font-medium cursor-pointer lg:mb-0 mb-5">
                   {meetUrl}
                 </p>
               </div>
@@ -559,7 +559,7 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                 href={meetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700"
+                className="bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 lg:mt-2 mt-5"
               >
                 Join Meeting
               </Link>

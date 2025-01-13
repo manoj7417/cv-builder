@@ -858,7 +858,7 @@ const UserDashboardPage = () => {
                                         </p>
                                       </div>
                                     </div>
-                                    {item?.meetingLink ? (
+                                    {/* {item?.meetingLink ? (
                                       <Link
                                         href={item.meetingLink}
                                         target="_blank"
@@ -879,7 +879,83 @@ const UserDashboardPage = () => {
                                       >
                                         Book Slot
                                       </Button>
-                                    )}
+                                    )} */}
+                                     <div className="flex p-2 text-center">
+                                        {item?.meetingLink ? (
+                                          <>
+                                            <Link
+                                              href={
+                                                item.showJoinMeeting
+                                                  ? item.meetingLink
+                                                  : "#"
+                                              }
+                                              target={
+                                                item.showJoinMeeting
+                                                  ? "_blank"
+                                                  : undefined
+                                              }
+                                              rel={
+                                                item.showJoinMeeting
+                                                  ? "noopener noreferrer"
+                                                  : undefined
+                                              }
+                                              className={`block w-full text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                                !item.showJoinMeeting
+                                                  ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
+                                                  : ""
+                                              }`}
+                                            >
+                                              Join Meet
+                                            </Link>
+                                            {!item.showJoinMeeting && (
+                                              <>
+                                                <ResumeTooltip
+                                                  icon={FaExclamationCircle}
+                                                  title="Raise Concern"
+                                                >
+                                                  <button
+                                                    className="text-xs bg-red-600 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-red-500 whitespace-nowrap m-2"
+                                                    onClick={() =>
+                                                      handleRaiseConcern(
+                                                        item?.programId?._id
+                                                      )
+                                                    }
+                                                  >
+                                                    <FaExclamationCircle className="text-sm" />
+                                                  </button>
+                                                </ResumeTooltip>
+                                                <ResumeTooltip
+                                                  icon={FaStar}
+                                                  title="Rate us"
+                                                >
+                                                  <button
+                                                    className="text-xs bg-blue-900 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                                    onClick={() =>
+                                                      handleRateMeeting(
+                                                        item?.programId?._id
+                                                      )
+                                                    }
+                                                  >
+                                                    <FaStar className="text-sm" />
+                                                  </button>
+                                                </ResumeTooltip>
+                                              </>
+                                            )}
+                                          </>
+                                        ) : (
+                                          <Button
+                                            className="text-xs p-2 w-full"
+                                            onClick={() =>
+                                              handleBookSlotClick(
+                                                item?.coachId?.id,
+                                                item?.programId?._id
+                                              )
+                                            }
+                                          >
+                                            Book Slot
+                                          </Button>
+                                        )}
+                                      </div>
                                   </div>
                                 )
                             )}
@@ -1238,7 +1314,7 @@ const UserDashboardPage = () => {
           onChange={handleFeedbackChange}
         />
 
-        <DialogFooter>
+        <DialogFooter className="flex lg:flex-row flex-col mt-5 gap-5">
           <Button
             className="bg-gray-200 text-black px-4 py-2 rounded-md"
             onClick={() => setRateMeetingModalOpen(false)}
@@ -1283,7 +1359,7 @@ const UserDashboardPage = () => {
               {/* Display error message */}
             </div>
 
-            <DialogFooter className="mt-5">
+            <DialogFooter className="flex lg:flex-row flex-col mt-5 gap-5">
               <Button
                 type="button"
                 className="bg-gray-200 text-black px-4 py-2 rounded-md"
