@@ -13,7 +13,7 @@ const page = () => {
   return (
     <>
       <main>
-        <section className="w-full h-auto 2xl:mt-20 lg:mt-20 md:mt-20  mt-20">
+        <section className="w-full h-auto 2xl:mt-10 lg:mt-10 md:mt-10  mt-10">
           <div className="w-full h-full flex justify-center items-center">
             <div className="text-start mt-20">
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-[60px] 2xl:text-7xl font-extrabold text-center xs:text-start">

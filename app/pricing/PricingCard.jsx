@@ -606,37 +606,12 @@ const PricingFunc = () => {
                       ))}
                     </ul>
                   </div>
-                  {selectedCard?.id === 1 && (
+                  {/* {selectedCard?.id === 1 && (
                     <div className="coupon_section text-start mt-10">
                       <p className="font-semibold text-sm my-5">
                         Apply Coupon Code Here
                       </p>
 
-                      {/* Trial checkbox */}
-                      {/* <div
-                        className={`relative flex items-center mb-4 p-2 rounded-md border-2 cursor-pointer ${
-                          isTrialSelected
-                            ? "border-green-500"
-                            : "border-blue-500"
-                        }`}
-                        onClick={handleTrialCheckboxChange}
-                      >
-                        <span className="ml-2 text-sm">
-                          <strong
-                            className={
-                              isTrialSelected
-                                ? "text-green-500"
-                                : "text-blue-500"
-                            }
-                          >
-                            TRIAL14
-                          </strong>{" "}
-                          is a 14 days free trial pack. After 14 days, the price
-                          will be charged automatically.
-                        </span>
-                      </div> */}
-
-                      {/* Input field and apply button */}
                       <div className="mb-4 flex justify-between items-center gap-5">
                         <div
                           className={`relative border-2 border-dotted rounded-md py-2 px-4 flex items-center justify-center w-full transition-colors duration-300 ${
@@ -671,8 +646,6 @@ const PricingFunc = () => {
                             : "Apply"}
                         </button>
                       </div>
-
-                      {/* Show success or error messages */}
                       {couponError && (
                         <p className="text-red-600 mt-2">{couponError}</p>
                       )}
@@ -682,9 +655,9 @@ const PricingFunc = () => {
                         </p>
                       )}
                     </div>
-                  )}
+                  )} */}
                 </div>
-                {/* <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
                   <div className="text-center">
                     <p className=" text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">
                       {selectedCard?.discount}% off
@@ -798,11 +771,10 @@ const PricingFunc = () => {
                       )}
                     </Button>
                   </div>
-                </div> */}
-                <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
+                </div>
+                {/* <div className="modal_right bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 relative">
                   <div className="text-center">
                     <p className="text-xs text-center border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2 w-20 absolute top-2 right-2">
-                      {/* Apply isTrialSelected condition only for the card with id === 1 */}
                       {selectedCard?.id === 1 && isTrialSelected
                         ? "100% off"
                         : `${selectedCard?.discount}% off`}
@@ -843,7 +815,6 @@ const PricingFunc = () => {
                       selectedCard?.id !== 1 &&
                       !isTrialSelected && (
                         <div className="mt-6 space-y-4 sm:space-y-8">
-                          {/* Monthly and Yearly plan selection */}
                           <div
                             className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
                               selectedPlan === "monthly"
@@ -924,7 +895,7 @@ const PricingFunc = () => {
                       )}
                     </Button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           )}

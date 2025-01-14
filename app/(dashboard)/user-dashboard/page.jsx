@@ -57,6 +57,7 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
+  console.log("program::",program)
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);
@@ -65,6 +66,8 @@ const UserDashboardPage = () => {
   const [rateMeetingModalOpen, setRateMeetingModalOpen] = useState(false);
   const [raiseConcernModalOpen, setRaiseConcernModalOpen] = useState(false);
   const [currentProgramId, setCurrentProgramId] = useState(null);
+  console.log("currentProgramId::",currentProgramId)
+
   const [isConcernLoading, setIsConcernLoading] = useState(false);
 
   //For rating
@@ -111,8 +114,9 @@ const UserDashboardPage = () => {
       return router.push("/login?redirect=/user-dashboard");
     }
     setIsConcernLoading(true);
+    const id = currentProgramId;
     try {
-      const response = await axios.post("/api/raiseQuery", data, {
+      const response = await axios.post(`/api/raiseQuery/${id}`, data, {
         headers: {
           Authorization: `Bearer ${accessToken.value}`,
         },
@@ -186,10 +190,6 @@ const UserDashboardPage = () => {
     );
 
     // return bookingEndTime > currentDate
-    console.log(
-      bookingEndTime > currentDate &&
-        bookingEndTime.getTime() > currentTime.getTime()
-    );
     return (
       bookingEndTime > currentDate &&
       bookingEndTime.getTime() > currentTime.getTime()
