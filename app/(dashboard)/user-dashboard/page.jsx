@@ -43,12 +43,14 @@ import { FaRegStar, FaSpinner, FaStarAndCrescent } from "react-icons/fa6";
 import ResumeTooltip from "@/components/component/ResumeTooltip";
 import { useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "react-toastify";
 
 const UserDashboardPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -122,11 +124,13 @@ const UserDashboardPage = () => {
         },
       });
       console.log("response::", response);
+      reset();
       toast.success("Your concern has been raised successfully!", {
         position: "top-right",
       });
     } catch (error) {
       console.log(error);
+      toast.error("Error raising concern");
     } finally {
       setIsConcernLoading(false);
       setRaiseConcernModalOpen(false);
