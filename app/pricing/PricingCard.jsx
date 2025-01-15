@@ -69,16 +69,15 @@ const PricingFunc = () => {
       id: 1,
       cardTitle: "Genies Pro Suite",
       cardDescription:
-        "Get a premium hold of services such as CV Creator, CV Optimiser, and CV Match to create the best Resume by integrating AI for perfection",
+        "Get a premium hold of services such as CV Optimiser, and CV Match to create the best Resume by integrating AI for perfection",
       imageUrl: card1,
       free: {
         title: "Free",
         link: "/cv-studio",
       },
       popUpDescription:
-        "Our professional CV Maker assists you in landing that interview call! Our professional tools, which are CV Optimiser and CV Match, create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
+        "Our professional Suite assists you in landing that interview call! Our tools, which are CV Optimiser and CV Match, create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
       features: [
-        "ATS Compatible CV Templates",
         "AI-Based Free Smart Resume Builder",
         "20 CV scans for Perfection",
         "AI-Based and Job-Specific CV Match Tool",
