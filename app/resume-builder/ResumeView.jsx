@@ -328,6 +328,9 @@ const ResumeView = () => {
         },
         responseType: 'arraybuffer'
       });
+
+      console.log("response", response);
+
       if (response.status === 200) {
         generateFunfact();
         const blob = new Blob([response.data], { type: 'application/pdf' });
