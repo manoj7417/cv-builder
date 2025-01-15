@@ -137,7 +137,7 @@ export default function CoachLogin() {
               autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
               spaceBetween={20} // Space between slides
               slidesPerView={1} // Show one slide at a time
-              className="mb-10 w-[60%] rounded-md"
+              className="w-[60%] rounded-md"
             >
               <SwiperSlide>
                 <div className="p-4 rounded-md">
