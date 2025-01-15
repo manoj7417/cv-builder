@@ -66,7 +66,11 @@ const CoachDashboardPage = () => {
         setBookingSlot(response.data.bookings);
         setLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -87,21 +91,18 @@ const CoachDashboardPage = () => {
                 Array.from({ length: 2 }).map(
                   (
                     _,
-                    index // Render 4 skeleton cards
+                    index
                   ) => (
                     <div key={index}>
                       <div className="h-auto w-full xl:w-[300px] lg:w-[300px] bg-gray-200 rounded-lg p-5 relative overflow-hidden">
-                        {/* Skeleton for title and icon */}
                         <div className="flex justify-between items-center">
                           <Skeleton className="h-6 w-32" />
                           <Skeleton className="h-6 w-6 rounded-full" />
                         </div>
-                        {/* Skeleton for avatar and name */}
                         <div className="flex items-center mb-6 w-full mt-5">
                           <Skeleton className="w-12 h-12 rounded-full" />
                           <Skeleton className="ml-2 h-4 w-20" />
                         </div>
-                        {/* Skeleton for appointment date and country */}
                         <div className="flex justify-between items-center mt-2">
                           <Skeleton className="h-4 w-24" />
                           <Skeleton className="h-4 w-16" />
@@ -110,7 +111,6 @@ const CoachDashboardPage = () => {
                           <Skeleton className="h-4 w-24" />
                           <Skeleton className="h-4 w-16" />
                         </div>
-                        {/* Skeleton for buttons */}
                         <div className="flex justify-between items-center mt-10">
                           <Skeleton className="h-10 w-24 rounded-full" />
                           <Skeleton className="h-10 w-24 rounded-full" />
@@ -171,11 +171,6 @@ const CoachDashboardPage = () => {
                             </button>
                           </Link>
                         </div>
-                        {/* <div className="text-sm font-bold text-[#FFF]">
-                          <button className="rounded-full p-3 xl:p-2 2xl:p-3 bg-white w-24 xl:w-20 text-black">
-                            Cancel
-                          </button>
-                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -190,6 +185,7 @@ const CoachDashboardPage = () => {
                   </div>
                 </div>
               )}
+              
             </div>
           </div>
           {/* END-PART 1 */}
@@ -250,7 +246,7 @@ const CoachDashboardPage = () => {
               <TableHead>Country</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="mt-5">
             {loading ? (
               Array.from({ length: 5 }).map(
                 (

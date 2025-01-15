@@ -76,11 +76,10 @@ const PricingFunc = () => {
         link: "/cv-studio",
       },
       popUpDescription:
-        "Our professional CV Maker assists you in landing that interview call! Our professional tools like CV Creator, CV Optimiser, and CV Match create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
+        "Our professional CV Maker assists you in landing that interview call! Our professional tools, which are CV Optimiser and CV Match, create well-researched, analytically optimised resumes that are approved by recruiters across the globe and established ATS systems.",
       features: [
         "ATS Compatible CV Templates",
-        "AI-Based Smart  Resume Builder",
-        "20+ Downloadable Professional CV Templates",
+        "AI-Based Free Smart Resume Builder",
         "20 CV scans for Perfection",
         "AI-Based and Job-Specific CV Match Tool",
         "Enhance CV with AI and Increase ATS Compatibility Score",

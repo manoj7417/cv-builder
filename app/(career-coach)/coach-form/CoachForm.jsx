@@ -1069,7 +1069,7 @@ const CoachForm = () => {
                         htmlFor="cvUpload"
                         className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        Upload CV (PDF only)
+                        Upload CV (PDF/Doc/Docs only)
                       </label>
                       <div className="flex lg:flex-row flex-col gap-5 lg:items-center items-start">
                         <div className="mt-2">
@@ -1635,8 +1635,8 @@ const CoachForm = () => {
                             <MdDownload className="inline ml-2 animate-pulse" />
                           </Button> */}
                         <Link
-                          href={"/CoachingContract.pdf"}
-                          download="Coaching Contract.pdf"
+                          href={"/GeniesCareerHub-CoachingContract.pdf"}
+                          download="GeniesCareerHub-CoachingContract.pdf"
                           target="_blank"
                           downloaded
                           file
