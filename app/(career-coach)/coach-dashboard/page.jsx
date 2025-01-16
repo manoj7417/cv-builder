@@ -80,7 +80,7 @@ const CoachDashboardPage = () => {
   return (
     <>
       <div className="w-full bg-white p-7">
-        <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row w-full mt-10">
+        <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row w-full lg:mt-10 mt-20">
           {/* START-PART 1 */}
           <div className="w-[100%] sm:w-[100%] md:w-[100%] lg:w-[100%] xl:w-[70%] 2xl:w-[70%]">
             <h2 className="text-2xl my-3 font-bold  text-[#092C4C]">
@@ -242,7 +242,7 @@ const CoachDashboardPage = () => {
             <TableRow>
               <TableHead>Username</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Slot Time</TableHead>
+              <TableHead className="whitespace-nowrap">Slot Time</TableHead>
               <TableHead>Country</TableHead>
             </TableRow>
           </TableHeader>
@@ -306,7 +306,8 @@ const CoachDashboardPage = () => {
                 </TableRow>
               ))
             ) : (
-              <table className="min-w-full border border-gray-200 shadow-lg">
+              <>
+              <table className="lg:block hidden min-w-full border border-gray-200 shadow-lg">
                 <tbody>
                   <tr>
                     <td className="p-6 text-center">
@@ -318,6 +319,15 @@ const CoachDashboardPage = () => {
                   </tr>
                 </tbody>
               </table>
+              <div className="lg:hidden flex justify-center items-center p-2">
+                  <div className="text-center p-2 w-[200px] border rounded-lg shadow-lg">
+                    <h2 className="text-sm font-medium">No Data Available</h2>
+                    <p className="text-gray-500">
+                      There are currently no appointment slots available.
+                    </p>
+                  </div>
+                </div>
+              </>
             )}
           </TableBody>
         </Table>

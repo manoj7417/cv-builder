@@ -125,8 +125,8 @@ const CoachCalendar = () => {
   return (
     <>
       <div>
-        <div className=" w-full px-10 justify-start items-start gap-8">
-          <div className="py-2 flex justify-end">
+        <div className=" w-full px-10 justify-start items-start gap-8 lg:mt-5 mt-20">
+          <div className="py-2 flex lg:justify-end justify-start">
             <SyncCalendar
               calendarEvents={calendarEvents}
               setCalendarEvents={setCalendarEvents}
@@ -149,6 +149,13 @@ const CoachCalendar = () => {
               dayMaxEvents={true}
               initialEvents={calendarEvents}
               events={calendarEvents}
+              windowResize={(arg) => {
+                if (window.innerWidth < 768) {
+                  arg.view.calendar.changeView("timeGridDay"); // Switch to day view for small screens
+                } else {
+                  arg.view.calendar.changeView("dayGridMonth");
+                }
+              }}
             />
           </div>
         </div>

@@ -79,7 +79,7 @@ function Programs() {
 
   return (
     <div className="w-full min-h-screen p-10">
-      <div className="w-full h-full">
+      <div className="w-full h-full lg:mt-0 mt-10">
         <div className="w-full flex justify-end">
           <Link href="/coach-dashboard/programs/create">
             <Button>

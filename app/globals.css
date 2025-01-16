@@ -1230,3 +1230,39 @@ ol > li {
   font-size: 2rem;
   margin: 5px;
 }
+
+
+
+@media (max-width: 768px) {
+  .fc-toolbar {
+    /* Wrap toolbar for small screens */
+    flex-wrap: wrap; 
+  }
+  .fc-toolbar .fc-toolbar-chunk {
+    margin-bottom: 8px; /* Add spacing between toolbar chunks */
+  }
+  .fc-event-title {
+    font-size: 12px; /* Smaller event title font size */
+  }
+  .fc {
+    font-size: 14px; /* General font size for small screens */
+  }
+}
+
+
+@media (max-width: 576px) {
+  .fc-event {
+    font-size: 10px; /* Reduce font size for events */
+    padding: 2px; /* Adjust padding */
+  }
+  .fc-toolbar-title {
+    font-size: 14px; /* Smaller toolbar title font */
+  }
+
+  .fc-toolbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start !important;
+  }
+}

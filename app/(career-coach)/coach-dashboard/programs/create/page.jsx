@@ -192,7 +192,7 @@ function CreateProgram() {
               {errors.description?.message}
             </p>
           </div>
-          <div className="mt-14 mb-5">
+          <div className="lg:mt-14 mt-20 mb-5">
             <Label>Program Image</Label>
             {profileImage ? (
               <div className="flex items-center py-4">
@@ -298,7 +298,7 @@ function CreateProgram() {
             />
           </div>
           <div className="w-full flex justify-end py-4">
-            <Button type="submit" disabled={isCreatingProgram}>
+            <Button type="submit" disabled={isCreatingProgram} className="lg:mt-0 mt-10">
               {isCreatingProgram ? (
                 <>
                   Creating Program{" "}

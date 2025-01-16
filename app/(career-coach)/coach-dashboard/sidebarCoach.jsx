@@ -106,7 +106,7 @@ const SidebarCoach = () => {
   }, []);
 
   return (
-    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative py-5 shadow-xl">
+    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative lg:py-5 py-0 lg:shadow-xl shadow-none">
       {/* Mobile Hamburger Menu Button */}
       <button
         className="md:hidden p-4 focus:outline-none"
@@ -120,15 +120,28 @@ const SidebarCoach = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}
       >
-        <div className="flex justify-end mr-5 md:hidden">
-          <button
-            className=" mb-4 focus:outline-none cursor-pointer"
-            onClick={toggleSidebar}
-          >
-            <IoMdClose className="w-8 h-8" />
-          </button>
+        <div className="flex justify-between md:hidden">
+          <div className="dashboard_logo p-4">
+            <Link href={"/"}>
+              <Image
+                src="/admin-logo.png"
+                alt="logo"
+                width={500}
+                height={500}
+                className="w-full"
+              />
+            </Link>
+          </div>
+          <div className="close_icon p-2">
+            <button
+              className="focus:outline-none cursor-pointer"
+              onClick={toggleSidebar}
+            >
+              <IoMdClose className="w-6 h-6" />
+            </button>
+          </div>
         </div>
-        <div className="dashboard_logo p-5 mb-5">
+        <div className="dashboard_logo p-5 mb-5 lg:block hidden">
           <Link href={"/"}>
             <Image
               src="/admin-logo.png"

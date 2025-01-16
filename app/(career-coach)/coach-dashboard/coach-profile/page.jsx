@@ -352,7 +352,7 @@ const CoachProfile = () => {
 
   return (
     <>
-      <div className='w-full h-auto mt-10 bg-white p-10'>
+      <div className='w-full h-auto mt-10 bg-white lg:p-10 p-5'>
         <form
           onSubmit={handleSubmit(handleEditProfile)}
           className='flex flex-col'>
@@ -406,7 +406,7 @@ const CoachProfile = () => {
             onValueChange={handleTabChange}
             defaultValue='details'
             className='w-full h-screen flex flex-col'>
-            <TabsList className='flex justify-start'>
+            <TabsList className='flex justify-start lg:gap-5 gap-0'>
               <TabsTrigger
                 value='details'
                 className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
@@ -423,10 +423,10 @@ const CoachProfile = () => {
                 Documents
               </TabsTrigger>
             </TabsList>
-            <div className='border-b-2 border-gray-300 my-3'></div>
+            <div className='lg:block hidden border-b-2 border-gray-300 my-3'></div>
             <TabsContent value='details' className='flex-grow p-6'>
               <h2 className='text-xl font-bold'>Personal Information</h2>
-              <div className='personal_details_section flex w-full gap-10 h-full mt-10'>
+              <div className='personal_details_section flex lg:flex-row flex-col w-full gap-10 h-full mt-10'>
                 <div className='lg:w-[20%] w-full profile_image'>
                   <div className='flex'>
                     <div className='mt-4'>
@@ -473,7 +473,7 @@ const CoachProfile = () => {
                   </div>
                 </div>
                 <div className='lg:w-[80%] w-full personal_details'>
-                  <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                  <div className='lg:grid block lg:space-y-0 space-y-5 grid-cols-1 md:grid-cols-3 gap-6'>
                     <div>
                       <label className='block text-sm font-medium text-gray-700'>
                         Email
@@ -599,7 +599,7 @@ const CoachProfile = () => {
                     </div>
 
                     <div className='col-span-3'>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className='block text-sm font-medium text-gray-700 lg:mt-0 mt-28'>
                         Coaching Description
                       </label>
                       {/* <Textarea
@@ -622,7 +622,7 @@ const CoachProfile = () => {
                     </div>
 
                     <div className='col-span-3'>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className='block text-sm font-medium text-gray-700 lg:mt-0 mt-20'>
                         Address
                       </label>
                       <Input
@@ -686,7 +686,7 @@ const CoachProfile = () => {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value='documents' className='flex-grow p-6'>
+            <TabsContent value='documents' className='flex-grow lg:p-6 p-2'>
               <div className='mt-6'>
                 <h2 className='text-lg font-bold mb-4'>Documents</h2>
 
@@ -694,10 +694,37 @@ const CoachProfile = () => {
                   <label
                     htmlFor='cvUpload'
                     className='block text-sm font-medium leading-6 text-gray-900'>
-                    Upload CV (PDF only)
+                    Upload CV (PDF/Doc/Docs only)
+                    <div className='lg:hidden block mt-2'>
+                      {/* Controller for handling file input */}
+                      {isEditable && (
+                        <label
+                          htmlFor='cvUpload'
+                          className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                          {isUploadingCV ? (
+                            <>
+                              <ImSpinner8 className='text-xl animate-spin' />
+                              <span className='text-sm'>Uploading</span>
+                            </>
+                          ) : (
+                            <>
+                              <IoMdCloudUpload className='text-xl' />
+                              <span className='text-sm'>Upload</span>
+                            </>
+                          )}
+                        </label>
+                      )}
+                      <input
+                        type='file'
+                        id='cvUpload'
+                        accept='application/pdf'
+                        className='hidden'
+                        onChange={handleCVUpload}
+                      />
+                    </div>
                   </label>
-                  <div className='flex gap-5 items-center'>
-                    <div className='mt-2'>
+                  <div className='flex lg:gap-5 gap-0 items-center'>
+                    <div className='mt-2 lg:block hidden'>
                       {/* Controller for handling file input */}
                       {isEditable && (
                         <label
@@ -728,7 +755,7 @@ const CoachProfile = () => {
                       {cvFileUrl ? (
                         <>
                           <span>{cvFileUrl?.split("/")?.pop()}</span>
-                          <FaCheckCircle className='text-xl' />
+                          <FaCheckCircle className='text-xl lg:block hidden' />
                           <button
                             type='button'
                             onClick={() => handleViewFile("cv")}
@@ -788,9 +815,44 @@ const CoachProfile = () => {
                     htmlFor='cvUpload'
                     className='block text-sm font-medium leading-6 text-gray-900'>
                     Signed and Accepted Agreement
+                    <div className='lg:hidden block mt-2'>
+                      <div className='flex items-center '>
+                        {isEditable && (
+                          <label
+                            htmlFor='docsUpload'
+                            className='flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 '>
+                            {isUploadingDocs ? (
+                              <>
+                                <ImSpinner8 className='text-xl animate-spin' />
+                                <span className='text-sm'>Uploading</span>
+                              </>
+                            ) : (
+                              <>
+                                <IoMdCloudUpload className='text-xl' />
+                                <span className='text-sm'>
+                                  Upload Documents
+                                </span>
+                              </>
+                            )}
+                          </label>
+                        )}
+
+                        <input
+                          type='file'
+                          id='docsUpload'
+                          hidden
+                          accept='application/pdf'
+                          onChange={handleDocUpload}
+                          className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                        />
+                      </div>
+                      <p className='mt-2 text-sm text-red-400'>
+                        {errors?.docsUpload?.message}
+                      </p>
+                    </div>
                   </label>
-                  <div className='flex gap-5 items-center'>
-                    <div className='mt-2'>
+                  <div className='flex lg:gap-5 gap-0 items-center'>
+                    <div className='lg:block hidden mt-2'>
                       <div className='flex items-center '>
                         {isEditable && (
                           <label
@@ -829,7 +891,7 @@ const CoachProfile = () => {
                       {docsUrl ? (
                         <>
                           <span>{docsUrl?.split("/")?.pop()}</span>
-                          <FaCheckCircle className='text-xl' />
+                          <FaCheckCircle className='text-xl lg:block hidden' />
 
                           {/* View PDF Icon */}
                           <button

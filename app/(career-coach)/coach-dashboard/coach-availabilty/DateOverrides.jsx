@@ -197,13 +197,14 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
             <DialogContent
               className="max-w-3xl border-none"
               onClick={handleDialogClose}
+              showCloseButton={true}
             >
               <DialogHeader>
                 <DialogTitle className="text-blue-950 ">
                   Select the dates to override
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex w-full justify-center">
+              <div className="flex w-full lg:flex-row flex-col justify-center">
                 <div className="lg:w-[50%] w-full calendar">
                   {mode === "multiple" ? (
                     <CalendarComponent
@@ -348,7 +349,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
                   )}
                 </div>
               </div>
-              <DialogFooter>
+              <DialogFooter className="flex gap-5">
                 <Button
                   type="button"
                   variant="outline"
