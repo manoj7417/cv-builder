@@ -1,7 +1,7 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -9,475 +9,123 @@
 
 <url>
   <loc>https://www.geniescareerhub.com/</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">1.00</priority="true">
-  <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fv1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/s1.svg</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/s2%20(2).svg</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/s3.svg</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/s4.svg</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fhome-creative-down.png&amp;w=3840&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Vector.svg</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate3.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate5.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate4.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate6-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate7-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate8.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate9.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate10-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate11-(new).png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate12-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate13-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate14-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate15-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate16-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate17-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate18-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate19-(new).png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate20-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate21.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate22-1.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate23.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate24.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate25.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate26.png&amp;w=384&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate20-1.png&amp;w=1920&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fhybridwork.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.geniescareerhub.com/cv-studio</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fhybridwork.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/pricing</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/about-us</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-    <image:image>
-        <image:loc>https://www.geniescareerhub.com/cgabout.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/cgabout2.png</image:loc>
-      </image:image>
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/contact-us</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-  <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fcontact-us.jpg&amp;w=2048&amp;q=75</image:loc>
-      </image:image>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.geniescareerhub.com/career-services</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-   <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fhybridwork.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.geniescareerhub.com/resume</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-   <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fresume.png&amp;w=1200&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate3.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate4.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate5.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate6-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate7-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate8.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate9.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate10-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate11-(new).png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate12-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate13-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate14-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate15-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate16-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate17-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate18-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate19-(new).png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate20-1.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2FTemplate21.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/resume-icon.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/resume-icon3.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/resume21.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-21.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/pro-tips.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/resume22.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/arrow1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-22.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-23.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-24.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-25.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-26-1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-26-2.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-27.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Step-28.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/background-image.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/resume-icon5.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/bg-icon1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/bg-icon2.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/bg-icon3.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/faq_image.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fhybridwork.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
+  <loc>https://www.geniescareerhub.com/pricing</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.geniescareerhub.com/resume-analyzer</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-  <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2F1enhance.png&amp;w=1200&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ATS_Resume.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ResumeFormatForAppTracking.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Artboard_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_basic_information.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_step_arrow_1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_update_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_step_arrow_2.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_education_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_experience_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_step_arrow_5.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_skills_hobbies.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_awards_certificates_language.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/pro-tips.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_ats_am_optimised_cv.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_cv_insights.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_clarity_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_relevance_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/profile_content_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_resume_checker.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/faq_image.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fhybridwork.png&amp;w=1080&amp;q=75</image:loc>
-      </image:image>
+  <loc>https://www.geniescareerhub.com/contact-us</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.geniescareerhub.com/job-cv</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-  <image:image>
-        <image:loc>https://www.geniescareerhub.com/_next/image?url=%2Fcvgenerator.png&amp;w=3840&amp;q=75</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/stand_out_and_personalize_your_cv.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/Artboard_ats.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%201.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_step_arrow_1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%202.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%202.1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_step_arrow_2.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%203.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%204.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/ats_step_arrow_5.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%205.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%205.1.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/CV_MATCH_Step%206.png</image:loc>
-      </image:image>
-      <image:image>
-        <image:loc>https://www.geniescareerhub.com/faq_image.png</image:loc>
-      </image:image>
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/terms-condition</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/coming-soon</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/login?redirect=%2Fcareer-counselling</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/faq</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/return-policy</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/privacy-policy</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/refund-policy</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/gdpr</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/editorial-guidlines</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/cookies-tracking-policy</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.80</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/career-coaching</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.64</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/coaches</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.51</priority="true">
-</url>
-<url>
-  <loc>https://www.geniescareerhub.com/coach-registration</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.51</priority="true">
+  <loc>https://www.geniescareerhub.com/about-us</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.geniescareerhub.com/coach-signin</loc>
-  <lastmod>2024-10-26T04:11:47+00:00</lastmod>
-  <priority="true">0.41</priority="true">
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/resume</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/resume-analyzer</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/job-cv</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/terms-condition</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/career-coaching</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/pshycometric-test</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/faq</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/return-policy</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/privacy-policy</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/refund-policy</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/gdpr</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/editorial-guidlines</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/cookies-tracking-policy</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/login?redirect=%2Fcareer-counselling</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/coach-registration</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/coming-soon</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.geniescareerhub.com/login?redirect=%2Fmcq</loc>
+  <lastmod>2025-01-17T09:57:10+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 

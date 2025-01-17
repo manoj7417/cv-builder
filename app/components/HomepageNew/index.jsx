@@ -242,7 +242,7 @@ export default function HomepageNew() {
         </div>
         <Slider />
         <TabResume />
-        <WorkTogether />
+        <WorkTog  ether />
         {/* <FAQSection /> */}
         <ServiceSection />
       </section>
