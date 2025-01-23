@@ -10,7 +10,11 @@ import axios from "axios";
 import Link from "next/link";
 import { ImSpinner3 } from "react-icons/im";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { Dialog, DialogContent , DialogTitle } from "../../../components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "../../../components/ui/dialog";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import { HiOutlineMailOpen } from "react-icons/hi";
@@ -163,7 +167,9 @@ function LoginUser() {
               <HiOutlineMailOpen className="text-blue-950 h-16 w-16" />
             </div>
             <DialogTitle>
-            <h1 className="text-center text-2xl">You&apos;re almost there!</h1>
+              <h1 className="text-center text-2xl">
+                You&apos;re almost there!
+              </h1>
             </DialogTitle>
             {showResendButton ? (
               <div className=" py-5">
