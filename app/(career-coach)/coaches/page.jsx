@@ -19,7 +19,6 @@ import { toast } from "react-toastify";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
-  console.log("coaches::", coaches);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
