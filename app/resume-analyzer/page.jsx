@@ -31,6 +31,7 @@ import axios from "axios";
 import * as pdfjsLib from "pdfjs-dist";
 import mammoth from "mammoth";
 import { default as DynamicImport } from "next/dynamic";
+import ClientOnly from '@/app/components/ClientOnly'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.js";
@@ -296,7 +297,7 @@ const ResumeAnalyzer = () => {
   };
 
   return (
-    <>
+    <ClientOnly>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -1314,7 +1315,7 @@ const ResumeAnalyzer = () => {
         <WorkTogether />
         <Footer />
       </main>
-    </>
+    </ClientOnly>
   );
 }
 

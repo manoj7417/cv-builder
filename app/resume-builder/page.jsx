@@ -31,6 +31,7 @@ import { signOut } from "next-auth/react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaUserLarge } from "react-icons/fa6";
 import { default as DynamicImport } from "next/dynamic";
+import ClientOnly from '@/app/components/ClientOnly'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = false
@@ -96,7 +97,7 @@ const ResumeBuilder = () => {
   }, []);
 
   return (
-    <>
+    <ClientOnly>
       {/* <Dialog open={showDialog}>
         <DialogContent showCloseButton={true} onClick={handleCloseDialog}>
           <DialogHeader>
@@ -294,7 +295,7 @@ const ResumeBuilder = () => {
           setIsContentVisible={setIsContentVisible}
         />
       </div>
-    </>
+    </ClientOnly>
   );
 };
 

@@ -102,7 +102,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         ></script>
       </head>
-      <body className={inter.className}>
+      <body suppressHydrationWarning={true} className={inter.className}>
         <SessionProviderWrapper>
           <ToastContainer
             position="top-right"
@@ -131,3 +131,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </html>
   );
 }
+
+// Add this to prevent SSR issues
+export const dynamic = 'force-dynamic'
