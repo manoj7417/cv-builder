@@ -50,6 +50,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <meta name="google-site-verification" content="MV-yaaKPZBvOe1niMmV31hi1adNIUNXXeMi9EWQlUMk" />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
