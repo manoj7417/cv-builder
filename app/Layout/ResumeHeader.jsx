@@ -327,12 +327,12 @@ export function ResumeHeader() {
                           CV History
                         </li>
                       </Link>
-                      <Link href="/job-dashboard">
+                      {/* <Link href="/job-dashboard">
                         <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
                           <PiReadCvLogo className="mr-2" />
                           Job Dashboard
                         </li>
-                      </Link>
+                      </Link> */}
                       <li
                         className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center"
                         onClick={handleLogout}
