@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import dynamic from 'next/dynamic'
 
-// Dynamic import for React-Quill (to avoid SSR issues)
+// Dynamic import for React-Quill with SSR disabled
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <div className="h-64 w-full bg-gray-50 animate-pulse rounded-lg"></div>,

@@ -1,6 +1,8 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request) {
   try {
     // Get all query parameters

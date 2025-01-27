@@ -1,8 +1,14 @@
 "use client";
-import Lottie from "lottie-react";
-import Countanimation from "@/public/animations/comingsoon.json";
+import dynamic from 'next/dynamic'
 import React from "react";
 import Countdown from "react-countdown";
+import Countanimation from "@/public/animations/comingsoon.json"
+
+// Dynamic import for Lottie
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <div className="h-[200px] sm:h-[300px] animate-pulse bg-gray-200 rounded-lg" />
+});
 
 // Function to get the future date 20 days from now
 const getFutureDate = () => {

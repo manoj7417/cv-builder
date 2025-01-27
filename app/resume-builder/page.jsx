@@ -30,8 +30,12 @@ import { useResumeStore } from "../store/ResumeStore";
 import { signOut } from "next-auth/react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaUserLarge } from "react-icons/fa6";
+import { default as DynamicImport } from "next/dynamic";
 
-const ResumeBuilderPage = () => {
+export const dynamic = 'force-dynamic'
+export const dynamicParams = false
+
+const ResumeBuilder = () => {
   const router = useRouter();
   const dropdownRef = useRef(null);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -63,8 +67,8 @@ const ResumeBuilderPage = () => {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
+    const scrollHeight = window.innerHeight;
+    const clientHeight = window.innerHeight;
 
     if (scrollTop === 0 || scrollTop + clientHeight >= scrollHeight) {
       setShowText(true);
@@ -294,4 +298,4 @@ const ResumeBuilderPage = () => {
   );
 };
 
-export default ResumeBuilderPage;
+export default ResumeBuilder;

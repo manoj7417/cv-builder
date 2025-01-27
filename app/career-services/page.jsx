@@ -1,15 +1,23 @@
 /** @format */
 
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import WorkTogether from "@/components/component/WorkTogether";
 import GetStartedModal from "@/components/component/GetStartedModal";
 import a1 from "../../public/animations/ai-career-coach.json";
 import a2 from "../../public/animations/1-1-career.json";
 import a3 from "../../public/animations/pschometric-test.json";
-import Lottie from "lottie-react";
+import { default as dynamicImport } from 'next/dynamic'
 import Link from "next/link";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+
+const Lottie = dynamicImport(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <div className="h-[200px] animate-pulse bg-gray-200" />
+})
+
+export const dynamic = 'force-dynamic'
+export const dynamicParams = false
 
 const CareerServices = () => {
   const cvStudio = [
@@ -77,6 +85,10 @@ const CareerServices = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    // document operations here
+  }, [])
 
   return (
     <>
