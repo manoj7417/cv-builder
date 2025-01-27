@@ -50,21 +50,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-      <meta name="google-site-verification" content="MV-yaaKPZBvOe1niMmV31hi1adNIUNXXeMi9EWQlUMk" />
+        <meta
+          name="google-site-verification"
+          content="MV-yaaKPZBvOe1niMmV31hi1adNIUNXXeMi9EWQlUMk"
+        />
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
+          src="https://www.googletagmanager.com/gtag/js?id=G-SCXB98QM5R"
         ></script>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-HVD8Y7BEDE');
-          `,
+            __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SCXB98QM5R');`,
           }}
-        />
+        ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
