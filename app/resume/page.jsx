@@ -646,10 +646,23 @@ Follow the suggestions given below the score to get a higher score and better ca
                   the job you are applying for to ensure that your CV gets
                   through every Application Tracking Software ATS CV Checker.
                 </p>
-                <div className="flex items-center justify-center space-x-4">
+                <div className="relative py-5">
+                  <p className="bg-gradient-to-r from-indigo-600 via-purple-400 to-pink-500 bg-clip-text text-transparent font-bold text-2xl lg:text-5xl sm:text-3xl text-center lg:px-20 xl:px-20 2xl:px-20 animate-bounce">
+                    Get a Free CV Template.
+                  </p>
+                  <div className="arrow absolute left-[34%] top-10">
+                    <img
+                      src="/arrow1.png"
+                      alt="arrow"
+                      className="w-36 h-36 object-contain lg:block hidden"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center">
                   <Button
                     onClick={() => router.push("/user-history")}
-                    className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-5 py-3"
+                    className="lg:text-base text-sm text-white bg-blue-900 rounded-md px-5 mt-10 py-3"
                   >
                     Create CV Now
                   </Button>

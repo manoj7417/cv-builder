@@ -19,6 +19,9 @@ export const metadata = {
   title: "Professional CV Templates for Perfect CV on Genies CV Maker",
   description:
     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
+  verification: {
+    google: "google7a709d33f5d56c51",
+  },
   openGraph: {
     url: "/",
     type: "website",
@@ -50,24 +53,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta
-          name="google-site-verification"
-          content="61LbG4ASq8urm_ZEHIr2jlNt13kGnN8n921g2EJF5po"
-        />
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-HVD8Y7BEDE"
+          src="https://www.googletagmanager.com/gtag/js?id=G-SCXB98QM5R"
         ></script>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-HVD8Y7BEDE');
-          `,
+            __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SCXB98QM5R');`,
           }}
-        />
+        ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -79,6 +77,19 @@ export default function RootLayout({ children }) {
           `,
           }}
         />
+        {/*  Hotjar Tracking Code for https://www.geniescareerhub.com/ */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: ` (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:5279200,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')`,
+          }}
+        ></script>
       </head>
       <body className={inter.className}>
         <SessionProviderWrapper>

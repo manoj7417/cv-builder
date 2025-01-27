@@ -19,8 +19,7 @@ import { toast } from "react-toastify";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
-  console.log("coaches::", coaches);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
@@ -630,19 +629,19 @@ const CoachPage = () => {
                                 }}
                               >
                                 <div>
-                                    <div className="program_title flex gap-2 items-center">
-                                      <BsCheckCircleFill className="text-blue-500 w-4 h-4" />
-                                      <h3 className="text-sm font-bold">
-                                        {program.title}
-                                      </h3>
-                                    </div>
-                                    <div
-                                      className="text-xs px-5 py-2 programDescription-content"
-                                      dangerouslySetInnerHTML={{
-                                        __html: program.description,
-                                      }}
-                                    />
+                                  <div className="program_title flex gap-2 items-center">
+                                    <BsCheckCircleFill className="text-blue-500 w-4 h-4" />
+                                    <h3 className="text-sm font-bold">
+                                      {program.title}
+                                    </h3>
                                   </div>
+                                  <div
+                                    className="text-xs px-5 py-2 programDescription-content"
+                                    dangerouslySetInnerHTML={{
+                                      __html: program.description,
+                                    }}
+                                  />
+                                </div>
                                 <div className="flex justify-between items-center">
                                   <div className="program_price font-bold text-sm">
                                     {currency === "INR"
@@ -748,7 +747,7 @@ const CoachPage = () => {
                     </div>
 
                     {/* Coach Booking Section - Hidden on Mobile */}
-                    <div className="coach_booking border p-5 rounded-md hidden lg:block">
+                    <div className="coach_booking border p-5 rounded-md hidden lg:block  h-[75vh] overflow-y-scroll">
                       {selectedProgram !== null && (
                         <>
                           <div className="program_details flex justify-between ">
