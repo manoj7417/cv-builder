@@ -55,7 +55,7 @@ export default function RootLayout({ children }) {
       <head>
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-SCXB98QM5R"
+          src="https://www.googletagmanager.com/gtag/js?id=GTM-KJ9G6JTK"
         ></script>
         <script
           dangerouslySetInnerHTML={{
@@ -107,8 +107,13 @@ export default function RootLayout({ children }) {
             transition={Slide}
           />
           <noscript>
-            <iframe
+            {/* <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-WJL6BJT6"
+              height="0"
+              width="0"
+            ></iframe> */}
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-KJ9G6JTK"
               height="0"
               width="0"
             ></iframe>
