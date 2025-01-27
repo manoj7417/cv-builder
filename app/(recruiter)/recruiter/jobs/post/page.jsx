@@ -2,10 +2,10 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
-import dynamic from 'next/dynamic'
+import { default as dynamicImport } from 'next/dynamic'
 
 // Dynamic import for React-Quill with SSR disabled
-const ReactQuill = dynamic(() => import('react-quill'), {
+const ReactQuill = dynamicImport(() => import('react-quill'), {
   ssr: false,
   loading: () => <div className="h-64 w-full bg-gray-50 animate-pulse rounded-lg"></div>,
 })
@@ -55,7 +55,9 @@ const editorStyles = {
   }
 }
 
-const PostJob = () => {
+export const dynamic = 'force-dynamic'
+
+export default function PostJob() {
  
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -608,6 +610,4 @@ const PostJob = () => {
       `}</style>
     </div>
   )
-}
-
-export default PostJob 
+} 
