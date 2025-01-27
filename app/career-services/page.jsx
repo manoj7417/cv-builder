@@ -10,6 +10,8 @@ import a3 from "../../public/animations/pschometric-test.json";
 import { default as dynamicImport } from 'next/dynamic'
 import Link from "next/link";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import ClientOnly from '@/app/components/ClientOnly'
+import JsonLdScripts from '@/app/components/JsonLdScripts'
 
 const Lottie = dynamicImport(() => import("lottie-react"), {
   ssr: false,
@@ -92,14 +94,9 @@ const CareerServices = () => {
 
   return (
     <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd1) }}
-      />
+      <ClientOnly>
+        <JsonLdScripts jsonLd={jsonLd} jsonLd1={jsonLd1} />
+      </ClientOnly>
       <section
         className='flex lg:items-center items-start pb-0 justify-center  w-full pt-40 md:pt-16 lg:pt-40  px-5 relative'
         id='free'>
@@ -121,7 +118,10 @@ const CareerServices = () => {
                       animationData={animation?.image}
                       loop={true}
                       autoplay={true}
-                      style={{ height: 200, width: "100%" }}
+                      style={{
+                        height: 200,
+                        width: '100%'
+                      }}
                     />
                     <div className='flex-grow p-4 text-center'>
                       <h3 className='text-2xl font-semibold'>

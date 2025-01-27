@@ -72,7 +72,10 @@ const CVStudioPage = () => {
                       animationData={animation?.image}
                       loop={true}
                       autoplay={true}
-                      style={{ height: 200, width: "100%" }}
+                      style={{
+                        height: 200,
+                        width: '100%'
+                      }}
                     />
                     <div className='p-4 text-center'>
                       <h3 className='text-2xl font-semibold'>
