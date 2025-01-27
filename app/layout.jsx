@@ -54,6 +54,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=GTM-KJ9G6JTK"
+        ></script>
+        <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
