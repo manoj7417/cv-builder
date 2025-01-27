@@ -101,6 +101,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')`,
           }}
         ></script>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KJ9G6JTK"
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+          ></iframe>
+        </noscript>
       </head>
       <body suppressHydrationWarning={true} className={inter.className}>
         <SessionProviderWrapper>
@@ -117,14 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             theme="colored"
             transition={Slide}
           />
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-KJ9G6JTK"
-              height="0"
-              width="0"
-              style="display:none;visibility:hidden"
-            ></iframe>
-          </noscript>
+
           {children}
         </SessionProviderWrapper>
       </body>
@@ -133,4 +134,4 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 // Add this to prevent SSR issues
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
