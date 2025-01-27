@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import a1 from "../../public/animations/a1.json";
 import a2 from "../../public/animations/a2.json";
 import a3 from "../../public/animations/a3.json";
-import Lottie from "lottie-react";
+import dynamic from 'next/dynamic';
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import "./getStarted.css"; // Import the CSS file
 import Link from "next/link";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <p></p>
+});
 
 const GetStartedModal = ({ onClose }) => {
   const [visible, setVisible] = useState(false);
