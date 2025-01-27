@@ -99,7 +99,6 @@ const Header = () => {
                 CV Optimiser
               </Link>
             </li>
-            {/* FeedBack  */}
             <li>
               <Link
                 className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/job-cv")}`}
@@ -112,24 +111,15 @@ const Header = () => {
                 </span>
               </Link>
             </li>
-            {/* <li>
+            <li className="nav-item">
               <Link
-                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/career-coaching")}`}
-                href="/career-coaching"
+                href="/recruiter/auth/signin"
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/recruiter/auth/signin")}`}
                 prefetch={false}
               >
-                Career Coaching
+                For Recruiters
               </Link>
             </li>
-            <li>
-              <Link
-                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/pshycometric-test")}`}
-                href="/pshycometric-test"
-                prefetch={false}
-              >
-                Psychometric Test
-              </Link>
-            </li> */}
           </ul>
           <ul>
             <li>

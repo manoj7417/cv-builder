@@ -217,6 +217,12 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* <div className="footer-links">
+            <Link href="/recruiter/signin" className="text-gray-600 hover:text-gray-900">
+              Recruiter Sign In
+            </Link>
+          </div> */}
+
           <p className='text-sm text-black'>
             &copy; {currentYear}. Genies career hub . All rights reserved.
             <br />

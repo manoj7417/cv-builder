@@ -87,6 +87,7 @@ const config: Config = {
     require("tailwind-scrollbar")({ nocompatible: true }),
     require("tailwindcss-animate"),
     require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
   ],
 };
 export default config;

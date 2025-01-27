@@ -16,12 +16,17 @@ import { MdLogout } from "react-icons/md";
 import { PiReadCvLogo } from "react-icons/pi";
 import { FaUserCircle } from "react-icons/fa";
 import { signOut } from "next-auth/react";
+import Cookies from "js-cookie";
 
 const menuItems = [
   {
     name: "CV Studio",
     href: "/cv-studio",
   },
+  // {
+  //   name: "Jobs",
+  //   href: "/jobs",
+  // },
   {
     name: "Coaching",
     href: "/career-services",
@@ -39,12 +44,59 @@ const menuItems = [
     href: "/about-us",
   },
   {
+    name: "For Recruiters",
+    href: "#",
+    dropdown: [
+      {
+        name: "Post a Job",
+        onClick: (router) => {
+          const token = Cookies.get('token');
+          if (token) {
+            router.push('/recruiter/jobs/post');
+          } else {
+            router.push('/recruiter/signin?redirect=/recruiter/jobs/post');
+          }
+        },
+      },
+      {
+        name: "Find Candidates",
+        onClick: (router) => {
+          const token = Cookies.get('token');
+          if (token) {
+            router.push('/recruiter/jobs');
+          } else {
+            router.push('/recruiter/signin?redirect=/recruiter/candidates');
+          }
+        },
+      },
+      {
+        name: "Recruiter Login",
+        onClick: (router) => router.push('/recruiter/signin'),
+      },
+      {
+        name: "Register as Recruiter",
+        onClick: (router) => router.push('/recruiter/signup'),
+      }
+    ]
+  },
+  {
     name: "Login as Coach",
     href: "/coach-signin",
     className:
       "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-blue-600",
   },
 ];
+
+const userStateDefault = {
+  isAuthenticated: false,
+  userdata: {
+    fullname: '',
+    profilePicture: '',
+    subscription: {
+      plan: ''
+    }
+  }
+};
 
 export function ResumeHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,11 +106,12 @@ export function ResumeHeader() {
   const pathname = usePathname();
   const shouldHideBanner = pathname.includes("/analyser/");
   const logoutUser = useUserStore((state) => state?.logoutUser);
-  const { userState } = useUserStore((state) => state);
+  const { userState = userStateDefault } = useUserStore((state) => state);
   const userdata = userState?.userdata || {};
   const userImage = userdata?.profilePicture;
   const [showBanner, setShowBanner] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -111,6 +164,14 @@ export function ResumeHeader() {
     router.push("/pricing?coupon=true");
   };
 
+  const handleDropdownHover = (index) => {
+    setActiveDropdown(index);
+  };
+
+  const handleDropdownLeave = () => {
+    setActiveDropdown(null);
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -154,39 +215,63 @@ export function ResumeHeader() {
           <div className="inline-flex items-center space-x-2">
             <Link href="/">
               <Image
-                priority="true"
-                // src="/genies-career-hub-logo.png"
-                src={"/beta-logo.png"}
+                priority
+                src="/beta-logo.png"
+                alt="Genies Career Hub"
                 width={100}
                 height={100}
-                alt="white_logo"
                 className="w-20 h-16 object-contain"
               />
             </Link>
           </div>
           <div className="hidden lg:block">
             <ul className="ml-12 inline-flex space-x-8">
-              {/* {menuItems.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="inline-flex items-center text-base text-blue-950 font-medium"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))} */}
-              {menuItems.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className={
-                      item.className ||
-                      "inline-flex items-center text-base text-blue-950 font-medium hover:text-blue-700 transition"
-                    }
-                  >
-                    {item.name}
-                  </Link>
+              {menuItems.map((item, index) => (
+                <li 
+                  key={item.name}
+                  className="relative group"
+                >
+                  {item.dropdown ? (
+                    <>
+                      <button
+                        className="inline-flex items-center text-base text-blue-950 font-medium hover:text-blue-700 transition"
+                        onMouseEnter={() => handleDropdownHover(index)}
+                      >
+                        {item.name}
+                        <ChevronDown className="ml-1 h-4 w-4" />
+                      </button>
+                      <div 
+                        className={`absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 transition-opacity duration-150 ${
+                          activeDropdown === index ? 'opacity-100 visible' : 'opacity-0 invisible'
+                        }`}
+                        onMouseEnter={() => handleDropdownHover(index)}
+                        onMouseLeave={() => handleDropdownLeave()}
+                      >
+                        <ul className="py-1">
+                          {item.dropdown.map((dropdownItem) => (
+                            <li key={dropdownItem.name}>
+                              <button
+                                onClick={() => dropdownItem.onClick(router)}
+                                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              >
+                                {dropdownItem.name}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={
+                        item.className ||
+                        "inline-flex items-center text-base text-blue-950 font-medium hover:text-blue-700 transition"
+                      }
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -199,20 +284,25 @@ export function ResumeHeader() {
                   onClick={toggleDropdown}
                 >
                   <span className="relative inline-block">
-                    {userdata?.profilePicture ? (
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src={userdata?.profilePicture}
-                        alt="Dan_Abromov"
+                    {userImage ? (
+                      <Image
+                        src={userImage}
+                        alt={`${userdata?.fullname || 'User'}'s avatar`}
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 rounded-full object-cover"
+                        onError={(e) => {
+                          e.target.src = '/avatar.png'
+                        }}
                       />
                     ) : (
                       <Image
-                        priority="true"
                         src="/avatar.png"
-                        alt="Avatar"
-                        height={100}
-                        width={100}
-                        className="w-8 h-8 object-contain"
+                        alt="Default avatar"
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 rounded-full object-cover"
+                        priority
                       />
                     )}
                   </span>
@@ -237,6 +327,12 @@ export function ResumeHeader() {
                           CV History
                         </li>
                       </Link>
+                      <Link href="/job-dashboard">
+                        <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
+                          <PiReadCvLogo className="mr-2" />
+                          Job Dashboard
+                        </li>
+                      </Link>
                       <li
                         className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center"
                         onClick={handleLogout}
@@ -259,7 +355,15 @@ export function ResumeHeader() {
             )}
           </div>
           <div className="ml-2 lg:hidden">
-            <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
+            <button
+              type="button"
+              onClick={toggleMenu}
+              className="inline-flex items-center lg:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-md"
+              aria-expanded={isMenuOpen}
+              aria-label="Toggle menu"
+            >
+              <Menu className="h-6 w-6 cursor-pointer" />
+            </button>
           </div>
           {isMenuOpen && (
             <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden">
@@ -292,15 +396,35 @@ export function ResumeHeader() {
                   <div className="mt-6">
                     <nav className="grid gap-y-4">
                       {menuItems.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
-                        >
-                          <span className="text-base font-medium text-blue-950">
-                            {item.name}
-                          </span>
-                        </Link>
+                        <React.Fragment key={item.name}>
+                          {item.dropdown ? (
+                            <>
+                              <div className="text-base font-medium text-blue-950 mb-2">
+                                {item.name}
+                              </div>
+                              {item.dropdown.map((dropdownItem) => (
+                                <button
+                                  key={dropdownItem.name}
+                                  onClick={() => dropdownItem.onClick(router)}
+                                  className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50 pl-6 w-full"
+                                >
+                                  <span className="text-base font-medium text-gray-600">
+                                    {dropdownItem.name}
+                                  </span>
+                                </button>
+                              ))}
+                            </>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
+                            >
+                              <span className="text-base font-medium text-blue-950">
+                                {item.name}
+                              </span>
+                            </Link>
+                          )}
+                        </React.Fragment>
                       ))}
                     </nav>
                   </div>
