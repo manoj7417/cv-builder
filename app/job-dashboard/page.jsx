@@ -7,7 +7,9 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { useUserStore } from '../store/UserStore'
 
-const JobDashboard = () => {
+export const dynamic = 'force-dynamic'
+
+export default function JobDashboard() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const jobId = searchParams.get('jobId')
@@ -772,5 +774,3 @@ const ApplicationModal = ({ isOpen, closeModal, job, onSubmit }) => {
     </Transition>
   )
 }
-
-export default JobDashboard

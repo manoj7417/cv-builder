@@ -1,7 +1,7 @@
 /** @format */
 
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Image from "next/image";
 import Slider from "../../../components/component/Slider";
 import { ServiceSection } from "@/components/component/service-section";
@@ -15,11 +15,20 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import dynamic from 'next/dynamic';
+import Loading from '@/app/loading';
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
   loading: () => <p></p>
 });
+
+function LoadingSpinner() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  )
+}
 
 export default function HomepageNew() {
   const router = useRouter();
@@ -113,7 +122,7 @@ export default function HomepageNew() {
   };
 
   return (
-    <>
+    <Suspense fallback={<LoadingSpinner />}>
       <section className="w-full min-h-screen sm:top-0 p-4 pt-40 sm:p-18 bg-gray-100 text-black flex items-center">
         <div className="flex flex-col items-center justify-between gap-0 sm:gap-8 w-full mx-auto">
           <div className="flex flex-col xs:flex-row items-center max-w-6xl 2xl:mt-10 lg:mt-5">
@@ -283,6 +292,6 @@ export default function HomepageNew() {
           </button>
         </div>
       )}
-    </>
+    </Suspense>
   );
 }
