@@ -1,6 +1,5 @@
-/** @format */
-
-"use client";
+'use client'
+import React, { useEffect } from 'react'
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -31,13 +30,14 @@ import parse from "html-react-parser";
 import axios from "axios";
 import * as pdfjsLib from "pdfjs-dist";
 import mammoth from "mammoth";
+import { default as DynamicImport } from "next/dynamic";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.js";
 const faqData = [
   {
     id: 1,
-    ques: "What is unique about Genies Career Hub’s CV Optimiser?",
+    ques: "What is unique about Genies Career Hub's CV Optimiser?",
     ans: `This CV Optimiser analyses your resume with AI. Check your <a href="https://www.geniescareerhub.com/resume-analyzer" rel="noopener noreferrer" target="_blank" className="font-bold">ATS Resume Score</a>.`,
   },
   {
@@ -72,7 +72,10 @@ const faqData = [
   },
 ];
 
-export default function DashboardIdea() {
+export const dynamic = 'force-dynamic'
+export const dynamicParams = false
+
+const ResumeAnalyzer = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [isAnalysing, setIsAnalysing] = useState(false);
@@ -86,6 +89,18 @@ export default function DashboardIdea() {
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
   const isCreditScore = true;
 
+  useEffect(() => {
+    // Move document operations here
+  }, []);
+
+  const handleScroll = () => {
+    // Use window.scrollY instead of document.documentElement
+    const scrollTop = window.scrollY
+    const scrollHeight = window.innerHeight
+    const clientHeight = window.innerHeight
+    // Rest of scroll handler...
+  }
+
   const docxToText = async (file) => {
     try {
       const arrayBuffer = await file.arrayBuffer();
@@ -96,36 +111,6 @@ export default function DashboardIdea() {
       return null;
     }
   };
-
-  // const handlepdfFileChange = async (e) => {
-  //   const { accessToken } = await GetTokens();
-  //   if (!accessToken) {
-  //     toast("Please login to use this template");
-  //     return router.push("/login?redirect=/resume-analyzer");
-  //   }
-  //   let selectedFile = e.target.files[0];
-  //   if (!selectedFile) return;
-  //   if (selectedFile?.type !== "application/pdf")
-  //     return toast.error("Please select a valid PDF file");
-  //   setIsAnalysing(true);
-  //   let reader = new FileReader();
-  //   reader.readAsDataURL(selectedFile);
-  //   reader.onloadend = async () => {
-  //     try {
-  //       const text = await pdfToText(selectedFile);
-  //       if (!text) {
-  //         setIsAnalysing(false);
-  //         setIsDialogOpen(true);
-  //         return;
-  //       }
-  //       localStorage.setItem("newResumeContent", text);
-  //       await getFeedback(text, accessToken.value);
-  //     } catch (error) {
-  //     } finally {
-  //       setIsAnalysing(false);
-  //     }
-  //   };
-  // };
 
   const handlepdfFileChange = async (e) => {
     const { accessToken } = await GetTokens();
@@ -272,7 +257,7 @@ export default function DashboardIdea() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is unique about Genies Career Hub’s CV Optimiser?",
+        name: "What is unique about Genies Career Hub's CV Optimiser?",
         acceptedAnswer: {
           "@type": "Answer",
           text: 'This CV Optimiser thoroughly analyses your resume with AI and provides you suggestions with the <a href="https://www.geniescareerhub.com/resume-analyzer"><strong>ATS Resume Score</strong></a>. This feedback contains the clarity, relevance, and content of your resume with a score and suggestions to improve the ATS of your resume. Following these insights, you can increase your score and get better and more opportunities.',
@@ -584,7 +569,7 @@ export default function DashboardIdea() {
                       But, the step prior to the optimisation is to create a
                       resume that is at least remotely relevant to the job
                       profile. Here is how you can make a CV that complies with
-                      the Application Tracking System’s functionality!
+                      the Application Tracking System&apos;s functionality!
                     </p>
                   </div>
                 </div>
@@ -985,7 +970,7 @@ export default function DashboardIdea() {
                           3. CONTENT
                         </h6>
                         <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
-                          “Content is the king,” and we ensure that by helping
+                          &quot;Content is the king,&quot; and we ensure that by helping
                           you incorporate exact keywords in your CV.
                         </p>
                       </div>
@@ -1332,3 +1317,5 @@ export default function DashboardIdea() {
     </>
   );
 }
+
+export default ResumeAnalyzer

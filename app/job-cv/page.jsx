@@ -1,8 +1,6 @@
-/** @format */
-
-"use client";
+'use client'
 import React, { useState, useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
+import { default as DynamicImport } from "next/dynamic";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 import { useUserStore } from "../store/UserStore";
@@ -131,7 +129,7 @@ const faqData = [
     id: 1,
     ques: "What is the CV Match feature?",
     ans: `
-      The unique concept of the Genies Career Hub’s CV Match feature is that it matches your job title or profession and prepares a <a href="https://www.geniescareerhub.com/resume" className="font-bold"> Professional Curriculum Vitae Templates</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
+      The unique concept of the Genies Career Hub's CV Match feature is that it matches your job title or profession and prepares a <a href="https://www.geniescareerhub.com/resume" className="font-bold"> Professional Curriculum Vitae Templates</a>. We even provide you with the option to start afresh or upload an existing CV, which will be analysed with AI and prepare your resume. Our AI feature asks for your basic details like name, education, skills, etc in short, after AI analysis, it creates sentences and profile descriptions most professionally.
     `,
   },
   {
@@ -167,7 +165,7 @@ const faqData = [
     id: 4,
     ques: "Can you achieve your dream job with CV Match?",
     ans: `
-    CV Match is your helping hand that will help you get that job that you waited for forever. It will make your task more manageable if you struggle with the professional way of writing a CV that meets your employer’s requirements. Just filling in some vital information will do so and get that job to you.
+    CV Match is your helping hand that will help you get that job that you waited for forever. It will make your task more manageable if you struggle with the professional way of writing a CV that meets your employer's requirements. Just filling in some vital information will do so and get that job to you.
     `,
   },
   {
@@ -185,7 +183,7 @@ Your electrical engineer CV will have all the technical skills that you want lik
 Get detailed nurse <a href="https://geniescareerhub.com/job-cv" className="font-bold">professional resume examples</a> with experience in clinical, and patient care skills, and specifications in the healthcare sector.<br/><br/>
 
 4. Project Manager<br/>
-We have CVs matching your profile of project manager’s management skills, leadership, experience and projects customisable by you. As a project manager, we showcase your risk managing, stakeholding and budgeting skills to attract recruiters.<br/><br/> 
+We have CVs matching your profile of project manager's management skills, leadership, experience and projects customisable by you. As a project manager, we showcase your risk managing, stakeholding and budgeting skills to attract recruiters.<br/><br/> 
 
 5. Chartered Accountant<br/>
 For a profile like a chartered accountant, we make sure the key qualifications like certifications, auditing, tax planning etc are being shown along with technical skills and experience.<br/><br/>
@@ -198,6 +196,9 @@ And we have many more options in the types of CV that you might get matched too.
     `,
   },
 ];
+
+export const dynamic = 'force-dynamic'
+export const dynamicParams = false
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -854,7 +855,7 @@ export default function Home() {
                   </div>
                   <div className='lg:w-[50%] w-full steps_content mt-10'>
                     <p className='text-base py-3 text-[#1B1B1F]'>
-                      If you end up choosing the “Start Afresh” option, there
+                      If you end up choosing the &quot;Start Afresh&quot; option, there
                       are little pointers that you need to provide to our CV
                       Match tool. While creating a <b>professional CV</b> there
                       are many things that need to be taken into account such as
@@ -899,7 +900,7 @@ export default function Home() {
                   </div>
                   <div className='lg:w-[40%] w-full steps_content mt-10'>
                     <p className='text-base py-3 text-[#1B1B1F]'>
-                      If you end up choosing the “Start Afresh” option, there
+                      If you end up choosing the &quot;Start Afresh&quot; option, there
                       are little pointers that you need to provide to our CV
                       Match tool. While creating a <b>professional CV</b> there
                       are many things that need to be taken into account such as
@@ -947,9 +948,9 @@ export default function Home() {
                     <p className='font-bold text-[#101827] text-2xl italic'>
                       Step 3
                     </p>
-                    {/* <h3 className="text-3xl text-black  py-3">EDUCATION </h3> */}
+                    {/* <h3 className="text-3xl text-black  py-3">EDUCATION </h3> */}
                     <p className='text-base py-3 text-[#1B1B1F]'>
-                      The Genies Career Hub’s CV Match tool is all about
+                      The Genies Career Hub&apos;s CV Match tool is all about
                       personalisation and customisation. Your{" "}
                       <b>professional curriculum vitae</b> must look exactly the
                       way you want. To ensure that, we have enables complete
@@ -959,7 +960,7 @@ export default function Home() {
                       CV to include.
                       <br />
                       Just enter your experience details or just go ahead and
-                      click, “Next” if you are a fresher!
+                      click, &quot;Next&quot; if you are a fresher!
                     </p>
                   </div>
                   <div className='lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:bg-transparent'>
@@ -1001,7 +1002,7 @@ export default function Home() {
                     <p className='font-bold text-[#101827] text-2xl italic'>
                       Step 4
                     </p>
-                    {/* <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3> */}
+                    {/* <h3 className="text-3xl text-black  py-3">EXPERIENCE </h3> */}
                     <p className='text-base py-3 text-[#1B1B1F]'>
                       Adding education qualifications in your resume adds
                       academic value to it. Just mention all the important
@@ -1101,7 +1102,7 @@ export default function Home() {
                       professional case with adeptness. The presented CV shall
                       open up in the CV Creator page. You can choose to
                       straightaway download it or edit it and make it better as
-                      per your preference. For us at Genies Career Hub, it’s all
+                      per your preference. For us at Genies Career Hub, it&apos;s all
                       about catering to your likes.
                     </p>
                   </div>
