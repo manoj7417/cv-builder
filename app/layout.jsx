@@ -19,6 +19,9 @@ export const metadata = {
   title: "Professional CV Templates for Perfect CV on Genies CV Maker",
   description:
     "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
+  verification: {
+    google: "google7a709d33f5d56c51",
+  },
   openGraph: {
     url: "/",
     type: "website",
@@ -50,10 +53,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta
-          name="google-site-verification"
-          content="google7a709d33f5d56c51"
-        />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-SCXB98QM5R"
