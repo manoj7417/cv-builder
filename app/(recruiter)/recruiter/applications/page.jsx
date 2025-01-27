@@ -218,7 +218,7 @@ const ApplicationsPage = () => {
               <UserIcon className="mx-auto h-12 w-12 text-gray-400" />
               <h3 className="mt-2 text-sm font-medium text-gray-900">No applications</h3>
               <p className="mt-1 text-sm text-gray-500">
-                You haven't received any applications yet.
+                You haven&apos;t received any applications yet.
               </p>
             </div>
           ) : (

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import axios from 'axios'
-import { getServerInstance } from '@/lib/serverInstance'
+import { serverInstance } from '@/lib/serverApi'
 
 export async function POST(request) {
   try {
@@ -13,9 +12,7 @@ export async function POST(request) {
       }, { status: 400 })
     }
 
-    const serverInstance = getServerInstance()
-
-    const response = await axios.post(`${serverInstance}/recruiters/resend-verification`,
+    const response = await serverInstance.post('/recruiters/resend-verification',
       { email },
       {
         headers: {

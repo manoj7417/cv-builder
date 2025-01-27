@@ -583,7 +583,7 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                                 id="candidate-found-description" 
                                 className="text-xs text-gray-500 mt-1"
                               >
-                                This will automatically set the closure reason to "hired"
+                                This will automatically set the closure reason to &quot;hired&quot;
                               </p>
                             </div>
                           </div>

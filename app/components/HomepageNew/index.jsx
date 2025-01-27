@@ -166,7 +166,7 @@ export default function HomepageNew() {
           <div className="grid md:grid-cols-2 grid-cols-1 h-full place-items-center md:gap-0 gap-48">
             <div className="grid-span-6 md:px-20 px-5">
               <p className="md:text-4xl text-[25px] text-black font-bold">
-                Facing CV Rejections? It's Time for You to start creating
+                Facing CV Rejections? It&apos;s Time for You to start creating
                 <span className="text-[#1D4ED8] font-bold ml-2">
                   ATS-Friendly CVs!
                 </span>
@@ -184,7 +184,7 @@ export default function HomepageNew() {
               <p className="text-sm my-5">
                 Thus, you need to build <b>resume formatting</b> that passes
                 through every <b>ATS Checker</b>. Genies Career Hub is the exact
-                change in approach that you need. Here's how we amplify your
+                change in approach that you need. Here&apos;s how we amplify your
                 CV-making process to eliminate rejection:
               </p>
               <ul className="space-y-3 text-sm">

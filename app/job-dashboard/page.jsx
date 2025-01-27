@@ -595,20 +595,18 @@ const JobDetails = ({ job, onApply, isApplied }) => {
 
 // Application Modal Component
 const ApplicationModal = ({ isOpen, closeModal, job, onSubmit }) => {
-  // Return null if no job is selected
-  if (!job) return null;
-
   const { userState } = useUserStore()
   const userData = userState?.userdata || {}
-
-  // Pre-fill form data with user details
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     fullName: userData?.fullname || '',
     email: userData?.email || '',
     phone: userData?.phone || '',
     cv: null,
   })
-  const [loading, setLoading] = useState(false)
+
+  // Return null if no job is selected
+  if (!job) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault()

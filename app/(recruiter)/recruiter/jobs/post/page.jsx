@@ -319,7 +319,7 @@ const PostJob = () => {
                           required
                         />
                         <p className="text-sm text-gray-500">
-                          Will be displayed as: "Hybrid - {formData.location}"
+                          Will be displayed as: &quot;Hybrid - {formData.location}&quot;
                         </p>
                       </div>
                     ) : formData.workType === 'onsite' ? (
@@ -334,7 +334,7 @@ const PostJob = () => {
                           required
                         />
                         <p className="text-sm text-gray-500">
-                          Will be displayed as: "In-Office - {formData.location}"
+                          Will be displayed as: &quot;In-Office - {formData.location}&quot;
                         </p>
                       </div>
                     ) : (
