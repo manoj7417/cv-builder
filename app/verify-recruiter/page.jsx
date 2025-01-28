@@ -1,83 +1,83 @@
-"use client"
-import { useEffect, useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
-import { toast } from 'react-hot-toast'
+"use client";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const VerifyRecruiter = () => {
-  const [verifying, setVerifying] = useState(true)
-  const [error, setError] = useState('')
-  const searchParams = useSearchParams()
-  const router = useRouter()
+  const [verifying, setVerifying] = useState(true);
+  const [error, setError] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const token = searchParams.get('token')
-        
+        const token = searchParams.get("token");
+
         if (!token) {
-          setError('Invalid verification link')
-          setVerifying(false)
-          return
+          setError("Invalid verification link");
+          setVerifying(false);
+          return;
         }
 
-        const response = await fetch('/api/recruiters/verify-email', {
-          method: 'POST',
+        const response = await fetch("/api/recruiters/verify-email", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ token })
-        })
+          body: JSON.stringify({ token }),
+        });
 
-        const data = await response.json()
+        const data = await response.json();
 
-        if (data.status === 'success') {
-          toast.success('Email verified successfully!')
+        if (data.status === "success") {
+          toast.success("Email verified successfully!");
           // Redirect to recruiter login
           setTimeout(() => {
-            router.push('/recruiter/login')
-          }, 2000)
+            router.push("/recruiter/signin");
+          }, 2000);
         } else {
-          setError(data.message || 'Verification failed')
+          setError(data.message || "Verification failed");
         }
       } catch (error) {
-        console.error('Verification error:', error)
-        setError('Failed to verify email. Please try again.')
+        console.error("Verification error:", error);
+        setError("Failed to verify email. Please try again.");
       } finally {
-        setVerifying(false)
+        setVerifying(false);
       }
-    }
+    };
 
-    verifyEmail()
-  }, [searchParams, router])
+    verifyEmail();
+  }, [searchParams, router]);
 
   const handleResendVerification = async () => {
     try {
-      const email = searchParams.get('email')
+      const email = searchParams.get("email");
       if (!email) {
-        toast.error('Email not found in verification link')
-        return
+        toast.error("Email not found in verification link");
+        return;
       }
 
-      const response = await fetch('/api/recruiters/resend-verification', {
-        method: 'POST',
+      const response = await fetch("/api/recruiters/resend-verification", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email })
-      })
+        body: JSON.stringify({ email }),
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
-      if (data.status === 'success') {
-        toast.success('Verification email resent successfully!')
+      if (data.status === "success") {
+        toast.success("Verification email resent successfully!");
       } else {
-        toast.error(data.message || 'Failed to resend verification email')
+        toast.error(data.message || "Failed to resend verification email");
       }
     } catch (error) {
-      console.error('Resend verification error:', error)
-      toast.error('Failed to resend verification email')
+      console.error("Resend verification error:", error);
+      toast.error("Failed to resend verification email");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -112,7 +112,7 @@ const VerifyRecruiter = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VerifyRecruiter 
+export default VerifyRecruiter;
