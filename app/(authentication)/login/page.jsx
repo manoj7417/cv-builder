@@ -125,13 +125,16 @@ function LoginUser() {
     <>
       <Dialog open={showDialog}>
         <DialogContent
-          className="w-96"
+          className="w-[500px]"
           onClick={handleDialogClose}
           showCloseButton
         >
           <div>
             <DialogTitle>
-              <h1 className="text-xl font-semibold">Reset Password</h1>
+              <h1 className="text-xl font-semibold">Reset Your Password</h1>
+              <p className="text-sm text-gray-400 font-normal">
+                Enter the email associated with your account
+              </p>
             </DialogTitle>
             <Input
               placeholder="Enter your email address"
@@ -140,7 +143,7 @@ function LoginUser() {
             />
             <div className="w-full my-3 flex justify-end items-center">
               <Button
-                className=" disabled:bg-opacity-85"
+                className=" disabled:bg-opacity-85 w-full"
                 disabled={sendingMail}
                 onClick={handleSendResetEmail}
               >
