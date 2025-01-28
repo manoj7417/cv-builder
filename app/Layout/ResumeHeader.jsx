@@ -23,10 +23,10 @@ const menuItems = [
     name: "CV Studio",
     href: "/cv-studio",
   },
-  // {
-  //   name: "Jobs",
-  //   href: "/jobs",
-  // },
+  {
+    name: "Jobs",
+    href: "/jobs",
+  },
   {
     name: "Coaching",
     href: "/career-services",
@@ -50,34 +50,34 @@ const menuItems = [
       {
         name: "Post a Job",
         onClick: (router) => {
-          const token = Cookies.get('token');
+          const token = Cookies.get("token");
           if (token) {
-            router.push('/recruiter/jobs/post');
+            router.push("/recruiter/jobs/post");
           } else {
-            router.push('/recruiter/signin?redirect=/recruiter/jobs/post');
+            router.push("/recruiter/signin?redirect=/recruiter/jobs/post");
           }
         },
       },
       {
         name: "Find Candidates",
         onClick: (router) => {
-          const token = Cookies.get('token');
+          const token = Cookies.get("token");
           if (token) {
-            router.push('/recruiter/jobs');
+            router.push("/recruiter/jobs");
           } else {
-            router.push('/recruiter/signin?redirect=/recruiter/candidates');
+            router.push("/recruiter/signin?redirect=/recruiter/candidates");
           }
         },
       },
       {
         name: "Recruiter Login",
-        onClick: (router) => router.push('/recruiter/signin'),
+        onClick: (router) => router.push("/recruiter/signin"),
       },
       {
         name: "Register as Recruiter",
-        onClick: (router) => router.push('/recruiter/signup'),
-      }
-    ]
+        onClick: (router) => router.push("/recruiter/signup"),
+      },
+    ],
   },
   {
     name: "Login as Coach",
@@ -90,12 +90,12 @@ const menuItems = [
 const userStateDefault = {
   isAuthenticated: false,
   userdata: {
-    fullname: '',
-    profilePicture: '',
+    fullname: "",
+    profilePicture: "",
     subscription: {
-      plan: ''
-    }
-  }
+      plan: "",
+    },
+  },
 };
 
 export function ResumeHeader() {
@@ -181,9 +181,7 @@ export function ResumeHeader() {
 
   return (
     <section className="new_resume_latest z-[100] fixed">
-      <div
-        className={`header_wrapper w-full h-[70px]`}
-      >
+      <div className={`header_wrapper w-full h-[70px]`}>
         {/* {!shouldHideBanner && showBanner && (
           <div className="top_banner bg-blue-900 text-white py-3 px-4 text-center">
             <p className="text-xs sm:text-sm md:text-base font-medium lg:flex hidden flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 marquee-text">
@@ -227,10 +225,7 @@ export function ResumeHeader() {
           <div className="hidden lg:block">
             <ul className="ml-12 inline-flex space-x-8">
               {menuItems.map((item, index) => (
-                <li 
-                  key={item.name}
-                  className="relative group"
-                >
+                <li key={item.name} className="relative group">
                   {item.dropdown ? (
                     <>
                       <button
@@ -240,9 +235,11 @@ export function ResumeHeader() {
                         {item.name}
                         <ChevronDown className="ml-1 h-4 w-4" />
                       </button>
-                      <div 
+                      <div
                         className={`absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 transition-opacity duration-150 ${
-                          activeDropdown === index ? 'opacity-100 visible' : 'opacity-0 invisible'
+                          activeDropdown === index
+                            ? "opacity-100 visible"
+                            : "opacity-0 invisible"
                         }`}
                         onMouseEnter={() => handleDropdownHover(index)}
                         onMouseLeave={() => handleDropdownLeave()}
@@ -287,12 +284,12 @@ export function ResumeHeader() {
                     {userImage ? (
                       <Image
                         src={userImage}
-                        alt={`${userdata?.fullname || 'User'}'s avatar`}
+                        alt={`${userdata?.fullname || "User"}'s avatar`}
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full object-cover"
                         onError={(e) => {
-                          e.target.src = '/avatar.png'
+                          e.target.src = "/avatar.png";
                         }}
                       />
                     ) : (
@@ -327,12 +324,12 @@ export function ResumeHeader() {
                           CV History
                         </li>
                       </Link>
-                      {/* <Link href="/job-dashboard">
+                      <Link href="/job-dashboard">
                         <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
                           <PiReadCvLogo className="mr-2" />
                           Job Dashboard
                         </li>
-                      </Link> */}
+                      </Link>
                       <li
                         className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center"
                         onClick={handleLogout}
