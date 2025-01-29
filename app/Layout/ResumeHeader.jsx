@@ -17,6 +17,7 @@ import { PiReadCvLogo } from "react-icons/pi";
 import { FaUserCircle } from "react-icons/fa";
 import { signOut } from "next-auth/react";
 import Cookies from "js-cookie";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const menuItems = [
   {
@@ -113,6 +114,12 @@ export function ResumeHeader() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const toggleDropdown = (index) => {
+    setOpenDropdown(openDropdown === index ? null : index);
+  };
+
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
 
@@ -146,9 +153,9 @@ export function ResumeHeader() {
     router.push("/login");
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -391,7 +398,7 @@ export function ResumeHeader() {
                     </div>
                   </div>
                   <div className="mt-6">
-                    <nav className="grid gap-y-4">
+                    {/* <nav className="grid gap-y-4">
                       {menuItems.map((item) => (
                         <React.Fragment key={item.name}>
                           {item.dropdown ? (
@@ -410,6 +417,54 @@ export function ResumeHeader() {
                                   </span>
                                 </button>
                               ))}
+                            </>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
+                            >
+                              <span className="text-base font-medium text-blue-950">
+                                {item.name}
+                              </span>
+                            </Link>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </nav> */}
+                    <nav className="grid gap-y-4">
+                      {menuItems.map((item, index) => (
+                        <React.Fragment key={item.name}>
+                          {item.dropdown ? (
+                            <>
+                              {/* Main Menu Item (Dropdown Trigger) */}
+                              <button
+                                className="flex items-center justify-between w-full text-base font-medium text-blue-950"
+                                onClick={() => toggleDropdown(index)}
+                              >
+                                {item.name}
+                                {openDropdown === index ? (
+                                  <FiChevronUp />
+                                ) : (
+                                  <FiChevronDown />
+                                )}
+                              </button>
+
+                              {/* Dropdown Menu */}
+                              {openDropdown === index && (
+                                <div className="pl-2 space-y-2">
+                                  {item.dropdown.map((dropdownItem) => (
+                                    <button
+                                      key={dropdownItem.name}
+                                      onClick={() =>
+                                        dropdownItem.onClick(router)
+                                      }
+                                      className="flex w-full items-center p-3 text-sm font-semibold text-gray-600 hover:bg-gray-50"
+                                    >
+                                      {dropdownItem.name}
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
                             </>
                           ) : (
                             <Link
