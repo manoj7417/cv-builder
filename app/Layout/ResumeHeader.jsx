@@ -17,17 +17,16 @@ import { PiReadCvLogo } from "react-icons/pi";
 import { FaUserCircle } from "react-icons/fa";
 import { signOut } from "next-auth/react";
 import Cookies from "js-cookie";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const menuItems = [
   {
     name: "CV Studio",
     href: "/cv-studio",
   },
-  {
-    name: "Jobs",
-    href: "/jobs",
-  },
+  // {
+  //   name: "Jobs",
+  //   href: "/jobs",
+  // },
   {
     name: "Coaching",
     href: "/career-services",
@@ -113,12 +112,10 @@ export function ResumeHeader() {
   const [showBanner, setShowBanner] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isRecruiterDropdownOpen, setIsRecruiterDropdownOpen] = useState(false);
 
-  const [openDropdown, setOpenDropdown] = useState(null);
-
-  const toggleDropdown = (index) => {
-    setOpenDropdown(openDropdown === index ? null : index);
-  };
+  const toggleRecruiterDropdown = () =>
+    setIsRecruiterDropdownOpen(!isRecruiterDropdownOpen);
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -153,9 +150,9 @@ export function ResumeHeader() {
     router.push("/login");
   };
 
-  // const toggleDropdown = () => {
-  //   setIsDropdownOpen(!isDropdownOpen);
-  // };
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -331,12 +328,12 @@ export function ResumeHeader() {
                           CV History
                         </li>
                       </Link>
-                      <Link href="/job-dashboard">
+                      {/* <Link href="/job-dashboard">
                         <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center">
                           <PiReadCvLogo className="mr-2" />
                           Job Dashboard
                         </li>
-                      </Link>
+                      </Link> */}
                       <li
                         className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm flex items-center"
                         onClick={handleLogout}
@@ -358,6 +355,7 @@ export function ResumeHeader() {
               </div>
             )}
           </div>
+          {/* Mobile Menu  */}
           <div className="ml-2 lg:hidden">
             <button
               type="button"
@@ -431,34 +429,31 @@ export function ResumeHeader() {
                         </React.Fragment>
                       ))}
                     </nav> */}
-                    <nav className="grid gap-y-4">
-                      {menuItems.map((item, index) => (
+                    <nav className="mt-6 grid gap-y-2">
+                      {menuItems.map((item) => (
                         <React.Fragment key={item.name}>
                           {item.dropdown ? (
                             <>
-                              {/* Main Menu Item (Dropdown Trigger) */}
                               <button
-                                className="flex items-center justify-between w-full text-base font-medium text-blue-950"
-                                onClick={() => toggleDropdown(index)}
+                                className="text-base font-medium text-blue-950 flex items-center justify-between w-full p-3"
+                                onClick={toggleRecruiterDropdown}
                               >
                                 {item.name}
-                                {openDropdown === index ? (
-                                  <FiChevronUp />
-                                ) : (
-                                  <FiChevronDown />
-                                )}
+                                <ChevronDown
+                                  className={`h-5 w-5 transition-transform ${
+                                    isRecruiterDropdownOpen ? "rotate-180" : ""
+                                  }`}
+                                />
                               </button>
-
-                              {/* Dropdown Menu */}
-                              {openDropdown === index && (
-                                <div className="pl-2 space-y-2">
+                              {isRecruiterDropdownOpen && (
+                                <div className="pl-6">
                                   {item.dropdown.map((dropdownItem) => (
                                     <button
                                       key={dropdownItem.name}
                                       onClick={() =>
                                         dropdownItem.onClick(router)
                                       }
-                                      className="flex w-full items-center p-3 text-sm font-semibold text-gray-600 hover:bg-gray-50"
+                                      className="block w-full text-left text-sm font-semibold text-gray-600 p-2 hover:bg-gray-50 rounded-md"
                                     >
                                       {dropdownItem.name}
                                     </button>
@@ -469,11 +464,9 @@ export function ResumeHeader() {
                           ) : (
                             <Link
                               href={item.href}
-                              className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
+                              className="block text-base font-medium text-blue-950 p-3 hover:bg-gray-50 rounded-md"
                             >
-                              <span className="text-base font-medium text-blue-950">
-                                {item.name}
-                              </span>
+                              {item.name}
                             </Link>
                           )}
                         </React.Fragment>
