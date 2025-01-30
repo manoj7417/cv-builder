@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
+import PasswordResetDialog from '@/app/components/PasswordResetDialog'
 
 const RecruiterSignIn = () => {
   const searchParams = useSearchParams()
@@ -13,6 +14,7 @@ const RecruiterSignIn = () => {
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -193,7 +195,14 @@ const RecruiterSignIn = () => {
                   </label>
                 </div>
 
-                <Link href="/forgot-password" className="text-sm font-medium text-primary hover:text-primary-dark transition-colors">
+                <Link 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsResetDialogOpen(true)
+                  }} 
+                  className="text-sm font-medium text-primary hover:text-primary-dark transition-colors"
+                >
                   Forgot password?
                 </Link>
               </div>
@@ -238,6 +247,12 @@ const RecruiterSignIn = () => {
           </div>
         </div>
       </div>
+
+      {/* Add the dialog */}
+      <PasswordResetDialog 
+        isOpen={isResetDialogOpen}
+        onClose={() => setIsResetDialogOpen(false)}
+      />
     </div>
   )
 }
