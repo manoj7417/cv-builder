@@ -208,7 +208,7 @@ export default function CoachLogin() {
                 className="w-28 h-auto object-contain"
               />
             </Link>
-            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+            <div className="lg:w-[450px] w-[350px] mx-auto">
               <h1 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
                 Sign in
               </h1>
