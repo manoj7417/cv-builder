@@ -128,7 +128,7 @@ const PasswordResetDialog = ({ isOpen, onClose }) => {
                       Check Your Email
                     </Dialog.Title>
                     <p className="text-sm text-gray-500 mb-4">
-                      We've sent a password reset link to {email}. Please check your email and follow the instructions.
+                      We&apos;ve sent a password reset link to {email}. Please check your email and follow the instructions.
                     </p>
                     <button
                       type="button"
