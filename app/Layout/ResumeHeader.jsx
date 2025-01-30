@@ -446,14 +446,14 @@ export function ResumeHeader() {
                                 />
                               </button>
                               {isRecruiterDropdownOpen && (
-                                <div className="pl-6">
+                                <div className="pl-2">
                                   {item.dropdown.map((dropdownItem) => (
                                     <button
                                       key={dropdownItem.name}
                                       onClick={() =>
                                         dropdownItem.onClick(router)
                                       }
-                                      className="block w-full text-left text-sm font-semibold text-gray-600 p-2 hover:bg-gray-50 rounded-md"
+                                      className="block w-full text-left text-sm text-gray-600 p-2 hover:bg-gray-50 rounded-md"
                                     >
                                       {dropdownItem.name}
                                     </button>

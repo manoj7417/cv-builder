@@ -29,7 +29,7 @@ function LoginUser() {
   const redirect = searchParams.get("redirect");
   const loginUser = useUserStore((state) => state.loginUser);
   const [showDialog, setShowDialog] = useState(false);
-  const email = useRef(null);
+  // const email = useRef(null);
   const [showVerificationDilaog, setShowVerificationDilaog] = useState(false);
 
   const {
@@ -40,6 +40,11 @@ function LoginUser() {
   } = useForm();
   const [loading, setIsLoading] = useState(false);
   const [sendingMail, setIsSendingMail] = useState(false);
+  const [email, setEmail] = useState(""); // State for the email value
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value); // Update email state as the user types
+  };
   const [showResendButton, setShowResendButton] = useState(false);
   const [isSendingVerificationEmail, setIsSendingVerificationEmail] =
     useState(false);
@@ -76,7 +81,8 @@ function LoginUser() {
     }
   };
 
-  const handleSendResetEmail = async () => {
+  const handleSendResetEmail = async (event) => {
+    event.preventDefault();
     const userEmail = email.current.value;
     setIsSendingMail(true);
     try {
@@ -88,9 +94,8 @@ function LoginUser() {
         toast.success("Reset password link sent to your email");
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.error || "Error sending reset password email"
-      );
+      console.log(error);
+      toast.error("Please enter email address");
     } finally {
       setIsSendingMail(false);
       setShowDialog(false);
@@ -125,7 +130,7 @@ function LoginUser() {
     <>
       <Dialog open={showDialog}>
         <DialogContent
-          className="w-[500px]"
+          className="w-[400px] rounded-lg"
           onClick={handleDialogClose}
           showCloseButton
         >
@@ -136,27 +141,32 @@ function LoginUser() {
                 Enter the email associated with your account
               </p>
             </DialogTitle>
-            <Input
-              placeholder="Enter your email address"
-              className="mt-4"
-              ref={email}
-            />
-            <div className="w-full my-3 flex justify-end items-center">
-              <Button
-                className=" disabled:bg-opacity-85 w-full"
-                disabled={sendingMail}
-                onClick={handleSendResetEmail}
-              >
-                {sendingMail ? (
-                  <>
-                    Sending
-                    <ImSpinner3 className="animate-spin ml-2" size={16} />
-                  </>
-                ) : (
-                  "Send"
-                )}
-              </Button>
-            </div>
+            <form onSubmit={handleSendResetEmail}>
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                className="mt-4"
+                // ref={email}
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <div className="w-full my-3 flex justify-end items-center">
+                <Button
+                  className="disabled:bg-opacity-85 w-full"
+                  disabled={sendingMail || !email.trim()}
+                  type="submit"
+                >
+                  {sendingMail ? (
+                    <>
+                      Sending
+                      <ImSpinner3 className="animate-spin ml-2" size={16} />
+                    </>
+                  ) : (
+                    "Send"
+                  )}
+                </Button>
+              </div>
+            </form>
           </div>
         </DialogContent>
       </Dialog>

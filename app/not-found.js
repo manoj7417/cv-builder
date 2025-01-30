@@ -20,7 +20,7 @@ const NotFoundPage = () => {
               homepage.
             </p>
             <Link
-              rel='noopener noreferrer'
+              // rel='noopener noreferrer'
               href='/'
               className='px-8 py-3 font-semibold rounded bg-blue-950 text-white'>
               Back to Homepage
