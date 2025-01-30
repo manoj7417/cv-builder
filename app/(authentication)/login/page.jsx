@@ -29,7 +29,6 @@ function LoginUser() {
   const redirect = searchParams.get("redirect");
   const loginUser = useUserStore((state) => state.loginUser);
   const [showDialog, setShowDialog] = useState(false);
-  // const email = useRef(null);
   const [showVerificationDilaog, setShowVerificationDilaog] = useState(false);
 
   const {
@@ -40,10 +39,10 @@ function LoginUser() {
   } = useForm();
   const [loading, setIsLoading] = useState(false);
   const [sendingMail, setIsSendingMail] = useState(false);
-  const [email, setEmail] = useState(""); // State for the email value
+  const [email, setEmail] = useState("");
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value); // Update email state as the user types
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
   const [showResendButton, setShowResendButton] = useState(false);
   const [isSendingVerificationEmail, setIsSendingVerificationEmail] =
@@ -83,19 +82,25 @@ function LoginUser() {
 
   const handleSendResetEmail = async (event) => {
     event.preventDefault();
-    const userEmail = email.current.value;
+    
+    if (!email.trim()) {
+      toast.error("Please enter email address");
+      return;
+    }
+
     setIsSendingMail(true);
     try {
       const response = await axios.post("/api/forgotPassword", {
-        email: userEmail,
+        email: email
       });
+      
       if (response.status === 200) {
-        email.current.value = null;
+        setEmail('');
         toast.success("Reset password link sent to your email");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Please enter email address");
+      toast.error("Failed to send reset email");
     } finally {
       setIsSendingMail(false);
       setShowDialog(false);
@@ -146,7 +151,6 @@ function LoginUser() {
                 type="email"
                 placeholder="Enter your email address"
                 className="mt-4"
-                // ref={email}
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -158,11 +162,10 @@ function LoginUser() {
                 >
                   {sendingMail ? (
                     <>
-                      Sending
-                      <ImSpinner3 className="animate-spin ml-2" size={16} />
+                      Sending...
                     </>
                   ) : (
-                    "Send"
+                    'Send Reset Link'
                   )}
                 </Button>
               </div>
@@ -506,7 +509,7 @@ function LoginUser() {
       </section>
 
       <Script
-        id="google-conversion-event" // Add a unique ID
+        id="google-conversion-event"
         dangerouslySetInnerHTML={{
           __html: `
       gtag('event', 'conversion', {'send_to': 'AW-16573743263/4bYaCLnbyPgZEJ-B_d49'});
