@@ -264,7 +264,7 @@ function LoginUser() {
               <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
                 Sign in
               </h2>
-              <p className="mt-2 text-sm text-gray-600 lg:text-start text-center">
+              <p className="mt-2 text-sm text-gray-600 text-start">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"

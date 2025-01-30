@@ -214,7 +214,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('monthly');
+  const [selectedPlan, setSelectedPlan] = useState("monthly");
   const serviceCards = {
     id: 1,
     cardTitle: "Genies Pro Suite",
@@ -236,7 +236,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
       ,
     ],
     planName: "CVSTUDIO",
-  }
+  };
   const [geoinfo, setGeoInfo] = useState({
     ip: "",
     countryName: "",
@@ -263,7 +263,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
     if (!userdata.subscription.plan.includes("CVSTUDIO")) {
-      const pricing = PricingData['CVSTUDIO'][geoinfo.currency || "USD"];
+      const pricing = PricingData["CVSTUDIO"][geoinfo.currency || "USD"];
       const { MP, DP } = pricing;
       setSelectedCard({ ...serviceCards, MP, DP });
       setShowModal(true);
@@ -274,7 +274,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
   const handlePlanChange = (plan) => {
     setSelectedPlan(plan);
-  }
+  };
 
   const handleDownloadResume = async (token) => {
     const el = document.getElementById("resume");
@@ -285,22 +285,21 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('/api/printResume', body, {
+      const response = await axios.post("/api/printResume", body, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        responseType: 'arraybuffer'
+        responseType: "arraybuffer",
       });
       if (response.status === 200) {
         generateFunfact();
-        const blob = new Blob([response.data], { type: 'application/pdf' });
-        const link = document.createElement('a');
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
         link.download = resumeData.title;
         link.click();
         return;
       }
-
     } catch (error) {
       if (
         error?.response?.status === 403 &&
@@ -334,8 +333,6 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     }
   };
 
-
-
   const handleTemplateChange = (val) => {
     setResumeData("metadata.template", val);
     setIsDrawerOpen(false);
@@ -351,8 +348,8 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
   };
 
   const handleCloseModal = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   const getGeoInfo = () => {
     axios
@@ -375,8 +372,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
       });
   };
 
-
-  const UpgradePlan = async() => {
+  const UpgradePlan = async () => {
     const { accessToken } = await GetTokens();
     if (!accessToken) {
       return router.push("/login?redirect=pricing");
@@ -406,7 +402,10 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
         window.location = url;
       }
     } catch (error) {
-      if(error.response.status === 401 && error.response.data.error === "Unauthorized"){
+      if (
+        error.response.status === 401 &&
+        error.response.data.error === "Unauthorized"
+      ) {
         await RemoveTokens();
         toast("Please login again to proceed");
         router.push("/login?redirect=pricing");
@@ -414,19 +413,18 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    getGeoInfo()
-  }, [])
+    getGeoInfo();
+  }, []);
 
   return (
     <>
-
       {isContentVisible && (
         <div
           className=" bg-black bg-opacity-80 inset-0 z-50 w-full h-full fixed overflow-hidden lg:hidden block"
-        // onClick={() => setIsContentVisible(false)}
+          // onClick={() => setIsContentVisible(false)}
         >
           <Dialog open={showModal} onOpenChange={setShowModal}>
             <DialogContent
@@ -446,8 +444,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                   </p>
                 </DialogDescription>
               </DialogHeader>
-              {
-                selectedCard &&
+              {selectedCard && (
                 <div className="grid gap-4 py-1 sm:py-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                     <div className="modal_left">
@@ -477,19 +474,26 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                           <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
                             {selectedPlan === "monthly"
                               ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
-                              : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`}
+                              : `${selectedCard["DP"].symbol}${
+                                  +selectedCard["DP"].price * 10
+                                }`}
                           </h1>
                           <p className="text-gray-500 text-xs sm:text-sm px-2">
-                            {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                            {selectedPlan === "monthly"
+                              ? "per Month"
+                              : "per Year"}
                           </p>
-                          <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">65% off</p>
+                          <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">
+                            65% off
+                          </p>
                         </div>
                         <div className="mt-6 space-y-4 sm:space-y-8">
                           <div
-                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
-                              ? "border-blue-500 shadow-lg"
-                              : ""
-                              }`}
+                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                              selectedPlan === "monthly"
+                                ? "border-blue-500 shadow-lg"
+                                : ""
+                            }`}
                             onClick={() => handlePlanChange("monthly")}
                           >
                             <div className="flex justify-between items-center">
@@ -498,12 +502,12 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                               </div>
                               <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
                                 <p>
-                                  {selectedCard['DP'].symbol}
-                                  {selectedCard['DP'].price}
+                                  {selectedCard["DP"].symbol}
+                                  {selectedCard["DP"].price}
                                 </p>
                                 <p className="line-through text-xs ml-1">
-                                  {selectedCard['MP'].symbol}
-                                  {selectedCard['MP'].price}
+                                  {selectedCard["MP"].symbol}
+                                  {selectedCard["MP"].price}
                                 </p>
                               </div>
                               <input
@@ -515,10 +519,11 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                             </div>
                           </div>
                           <div
-                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
-                              ? "border-blue-500 shadow-lg"
-                              : ""
-                              }`}
+                            className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                              selectedPlan === "yearly"
+                                ? "border-blue-500 shadow-lg"
+                                : ""
+                            }`}
                             onClick={() => handlePlanChange("yearly")}
                           >
                             <div className="flex justify-between items-center">
@@ -528,12 +533,12 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
 
                               <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
                                 <p>
-                                  {selectedCard['DP'].symbol}
-                                  {selectedCard['DP'].price * 10}
+                                  {selectedCard["DP"].symbol}
+                                  {selectedCard["DP"].price * 10}
                                 </p>
                                 <p className="line-through text-xs ml-1">
-                                  {selectedCard['MP'].symbol}
-                                  {selectedCard['MP'].price * 10}
+                                  {selectedCard["MP"].symbol}
+                                  {selectedCard["MP"].price * 10}
                                 </p>
                               </div>
                               <input
@@ -549,7 +554,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                     </div>
                   </div>
                 </div>
-              }
+              )}
               <DialogFooter className="mt-4 sm:mt-8">
                 <Button
                   className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
@@ -654,7 +659,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
                 minHeight: `${pageHeight}px`,
                 overflow: "auto",
                 transform: `scale(${scale})`,
-                margin: "-200px",
+                margin: "-235px -180px",
               }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -662,7 +667,6 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
             </div>
           </div>
         </div>
-
       )}
     </>
   );

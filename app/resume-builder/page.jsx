@@ -31,10 +31,10 @@ import { signOut } from "next-auth/react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaUserLarge } from "react-icons/fa6";
 import { default as DynamicImport } from "next/dynamic";
-import ClientOnly from '@/app/components/ClientOnly'
+import ClientOnly from "@/app/components/ClientOnly";
 
-export const dynamic = 'force-dynamic'
-export const dynamicParams = false
+export const dynamic = "force-dynamic";
+export const dynamicParams = false;
 
 const ResumeBuilder = () => {
   const router = useRouter();
@@ -204,7 +204,7 @@ const ResumeBuilder = () => {
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
                       }
                       alt="user-name"
-                      className="w-10 h-7 rounded-full object-cover border-2 border-blue-800 "
+                      className="w-8 h-8 rounded-full object-cover border-2 border-blue-800 "
                     />
                   </Link>
                   <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded shadow-lg">
