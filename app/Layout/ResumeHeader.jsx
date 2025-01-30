@@ -23,10 +23,10 @@ const menuItems = [
     name: "CV Studio",
     href: "/cv-studio",
   },
-  // {
-  //   name: "Jobs",
-  //   href: "/jobs",
-  // },
+  {
+    name: "Jobs",
+    href: "/jobs",
+  },
   {
     name: "Coaching",
     href: "/career-services",
