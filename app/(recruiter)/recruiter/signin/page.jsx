@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import React, { useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -7,10 +8,20 @@ import Cookies from "js-cookie";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+=======
+'use client'
+import React, { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import Cookies from 'js-cookie'
+import PasswordResetDialog from '@/app/components/PasswordResetDialog'
+>>>>>>> 5e483468eacc72a4252c743ca851a65adb7248ab
 
 const RecruiterSignIn = () => {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
+<<<<<<< HEAD
     email: "",
     password: "",
   });
@@ -23,6 +34,14 @@ const RecruiterSignIn = () => {
   const handleDialogClose = () => {
     setShowDialog(false);
   };
+=======
+    email: '',
+    password: ''
+  })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
+>>>>>>> 5e483468eacc72a4252c743ca851a65adb7248ab
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -365,7 +384,17 @@ const RecruiterSignIn = () => {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     </>
+=======
+
+      {/* Add the dialog */}
+      <PasswordResetDialog 
+        isOpen={isResetDialogOpen}
+        onClose={() => setIsResetDialogOpen(false)}
+      />
+    </div>
+>>>>>>> 5e483468eacc72a4252c743ca851a65adb7248ab
   );
 };
 
