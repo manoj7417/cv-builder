@@ -1,168 +1,177 @@
-'use client'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
-import { default as dynamicImport } from 'next/dynamic'
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { default as dynamicImport } from "next/dynamic";
 
 // Dynamic import for React-Quill with SSR disabled
-const ReactQuill = dynamicImport(() => import('react-quill'), {
+const ReactQuill = dynamicImport(() => import("react-quill"), {
   ssr: false,
-  loading: () => <div className="h-64 w-full bg-gray-50 animate-pulse rounded-lg"></div>,
-})
-import 'react-quill/dist/quill.snow.css'
+  loading: () => (
+    <div className="h-64 w-full bg-gray-50 animate-pulse rounded-lg"></div>
+  ),
+});
+import "react-quill/dist/quill.snow.css";
 
 // Quill editor configurations
 const editorModules = {
   toolbar: [
-    [{ 'header': [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    ['link'],
-    ['clean']
+    [{ header: [1, 2, 3, false] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link"],
+    ["clean"],
   ],
-}
+};
 
 const editorFormats = [
-  'header',
-  'bold', 'italic', 'underline', 'strike',
-  'list', 'bullet',
-  'link'
-]
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "list",
+  "bullet",
+  "link",
+];
 
 const CURRENCIES = [
-  { code: 'USD', symbol: '$', label: 'US Dollar' },
-  { code: 'EUR', symbol: '€', label: 'Euro' },
-  { code: 'GBP', symbol: '£', label: 'British Pound' },
-  { code: 'INR', symbol: '₹', label: 'Indian Rupee' },
-  { code: 'AUD', symbol: 'A$', label: 'Australian Dollar' },
-  { code: 'CAD', symbol: 'C$', label: 'Canadian Dollar' },
-]
+  { code: "USD", symbol: "$", label: "US Dollar" },
+  { code: "EUR", symbol: "€", label: "Euro" },
+  { code: "GBP", symbol: "£", label: "British Pound" },
+  { code: "INR", symbol: "₹", label: "Indian Rupee" },
+  { code: "AUD", symbol: "A$", label: "Australian Dollar" },
+  { code: "CAD", symbol: "C$", label: "Canadian Dollar" },
+];
 
 // First, update the editor container styles
 const editorStyles = {
-  '.ql-container': {
-    minHeight: '200px',
-    height: 'auto',
-    flex: '1',
-    display: 'flex',
-    flexDirection: 'column'
+  ".ql-container": {
+    minHeight: "200px",
+    height: "auto",
+    flex: "1",
+    display: "flex",
+    flexDirection: "column",
   },
-  '.ql-editor': {
-    minHeight: '200px',
-    height: 'auto',
-    flex: '1',
-    overflowY: 'auto'
-  }
-}
+  ".ql-editor": {
+    minHeight: "200px",
+    height: "auto",
+    flex: "1",
+    overflowY: "auto",
+  },
+};
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default function PostJob() {
- 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0])
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0]);
   const [formData, setFormData] = useState({
-    title: '',
-    company: '',
-    location: '',
-    type: 'Full-time',
-    description: '',
-    requirements: '',
+    title: "",
+    company: "",
+    location: "",
+    type: "Full-time",
+    description: "",
+    requirements: "",
     salary: {
-      min: '',
-      max: '',
-      currency: 'USD'
+      min: "",
+      max: "",
+      currency: "USD",
     },
-    workType: ''
-  })
+    workType: "",
+  });
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    if (name === 'workType') {
-      let locationValue = '';
-      if (value === 'remote') {
-        locationValue = 'Remote';
+
+    if (name === "workType") {
+      let locationValue = "";
+      if (value === "remote") {
+        locationValue = "Remote";
       }
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         workType: value,
-        location: value === 'remote' ? locationValue : prev.location
+        location: value === "remote" ? locationValue : prev.location,
       }));
-    } else if (name === 'location') {
-      const prefix = formData.workType === 'hybrid' ? 'Hybrid - ' : 
-                    formData.workType === 'onsite' ? 'In-Office - ' : '';
-      if (formData.workType === 'hybrid' || formData.workType === 'onsite') {
-        setFormData(prev => ({
+    } else if (name === "location") {
+      const prefix =
+        formData.workType === "hybrid"
+          ? "Hybrid - "
+          : formData.workType === "onsite"
+          ? "In-Office - "
+          : "";
+      if (formData.workType === "hybrid" || formData.workType === "onsite") {
+        setFormData((prev) => ({
           ...prev,
-          location: value
+          location: value,
         }));
       }
-    } else if (name.startsWith('salary.')) {
-      const salaryField = name.split('.')[1];
-      setFormData(prev => ({
+    } else if (name.startsWith("salary.")) {
+      const salaryField = name.split(".")[1];
+      setFormData((prev) => ({
         ...prev,
         salary: {
           ...prev.salary,
-          [salaryField]: value
-        }
+          [salaryField]: value,
+        },
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
-  }
+  };
 
   const handleCurrencyChange = (currency) => {
-    setSelectedCurrency(currency)
-    setFormData(prev => ({
+    setSelectedCurrency(currency);
+    setFormData((prev) => ({
       ...prev,
       salary: {
         ...prev.salary,
-        currency: currency.code
-      }
-    }))
-  }
+        currency: currency.code,
+      },
+    }));
+  };
 
   const handleDescriptionChange = (content) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      description: content
-    }))
-  }
+      description: content,
+    }));
+  };
 
   const handleRequirementsChange = (content) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      requirements: content
-    }))
-  }
+      requirements: content,
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const token = Cookies.get('token')
+      const token = Cookies.get("token");
       if (!token) {
-        throw new Error('No authentication token found')
+        throw new Error("No authentication token found");
       }
 
       let formattedLocation;
-      switch(formData.workType) {
-        case 'remote':
-          formattedLocation = 'Remote';
+      switch (formData.workType) {
+        case "remote":
+          formattedLocation = "Remote";
           break;
-        case 'hybrid':
+        case "hybrid":
           formattedLocation = `Hybrid - ${formData.location}`;
           break;
-        case 'onsite':
+        case "onsite":
           formattedLocation = `In-Office - ${formData.location}`;
           break;
         default:
@@ -175,46 +184,58 @@ export default function PostJob() {
         salary: {
           min: Number(formData.salary.min),
           max: Number(formData.salary.max),
-          currency: formData.salary.currency
-        }
-      }
-
-      const response = await fetch('/api/recruiters/jobs', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'token': token
+          currency: formData.salary.currency,
         },
-        body: JSON.stringify(jobData)
-      })
+      };
+
+      const response = await fetch("/api/recruiters/jobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify(jobData),
+      });
 
       if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Failed to post job')
+        const data = await response.json();
+        throw new Error(data.message || "Failed to post job");
       }
 
-      router.push('/recruiter/jobs')
+      router.push("/recruiter/jobs");
     } catch (error) {
-      console.error('Job posting error:', error)
-      setError(error.message)
+      console.error("Job posting error:", error);
+      setError(error.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Top Bar */}
       <div className="bg-white border-b">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-10">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-xl font-semibold text-gray-900">Create New Job Post</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Create New Job Post
+            </h1>
             <button
               onClick={() => router.back()}
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-[#0d3572] border border-[#0d3572] rounded-lg hover:bg-[#0d3572]/90"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
               </svg>
               Back to Jobs
             </button>
@@ -231,8 +252,16 @@ export default function PostJob() {
               <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    <svg
+                      className="h-5 w-5 text-red-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </div>
                   <div className="ml-3">
@@ -245,10 +274,15 @@ export default function PostJob() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Job Overview Section */}
               <div className="border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Job Overview</h2>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                  Job Overview
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="title"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Job Title*
                     </label>
                     <input
@@ -264,7 +298,10 @@ export default function PostJob() {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="company"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Company Name*
                     </label>
                     <input
@@ -301,7 +338,7 @@ export default function PostJob() {
                     <label className="block text-sm font-medium text-gray-700">
                       Location*
                     </label>
-                    {formData.workType === 'remote' ? (
+                    {formData.workType === "remote" ? (
                       <input
                         type="text"
                         name="location"
@@ -309,7 +346,7 @@ export default function PostJob() {
                         disabled
                         className="mt-1 block w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm"
                       />
-                    ) : formData.workType === 'hybrid' ? (
+                    ) : formData.workType === "hybrid" ? (
                       <div className="space-y-2">
                         <input
                           type="text"
@@ -321,10 +358,11 @@ export default function PostJob() {
                           required
                         />
                         <p className="text-sm text-gray-500">
-                          Will be displayed as: &quot;Hybrid - {formData.location}&quot;
+                          Will be displayed as: &quot;Hybrid -{" "}
+                          {formData.location}&quot;
                         </p>
                       </div>
-                    ) : formData.workType === 'onsite' ? (
+                    ) : formData.workType === "onsite" ? (
                       <div className="space-y-2">
                         <input
                           type="text"
@@ -336,7 +374,8 @@ export default function PostJob() {
                           required
                         />
                         <p className="text-sm text-gray-500">
-                          Will be displayed as: &quot;In-Office - {formData.location}&quot;
+                          Will be displayed as: &quot;In-Office -{" "}
+                          {formData.location}&quot;
                         </p>
                       </div>
                     ) : (
@@ -353,7 +392,10 @@ export default function PostJob() {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="type"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Employment Type*
                     </label>
                     <select
@@ -375,7 +417,9 @@ export default function PostJob() {
 
               {/* Salary Section */}
               <div className="border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Compensation</h2>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                  Compensation
+                </h2>
                 <div className="space-y-4">
                   {/* Currency Selection */}
                   <div>
@@ -386,8 +430,10 @@ export default function PostJob() {
                       <select
                         value={selectedCurrency.code}
                         onChange={(e) => {
-                          const currency = CURRENCIES.find(c => c.code === e.target.value)
-                          handleCurrencyChange(currency)
+                          const currency = CURRENCIES.find(
+                            (c) => c.code === e.target.value
+                          );
+                          handleCurrencyChange(currency);
                         }}
                         className="block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-[#0d3572] focus:ring-[#0d3572] sm:text-sm"
                       >
@@ -402,7 +448,10 @@ export default function PostJob() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="salary.min" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label
+                        htmlFor="salary.min"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
                         Minimum Salary*
                       </label>
                       <div className="relative">
@@ -420,13 +469,18 @@ export default function PostJob() {
                           placeholder="0"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                          <span className="text-gray-500 sm:text-sm">{selectedCurrency.code}</span>
+                          <span className="text-gray-500 sm:text-sm">
+                            {selectedCurrency.code}
+                          </span>
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="salary.max" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label
+                        htmlFor="salary.max"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
                         Maximum Salary*
                       </label>
                       <div className="relative">
@@ -444,7 +498,9 @@ export default function PostJob() {
                           placeholder="0"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                          <span className="text-gray-500 sm:text-sm">{selectedCurrency.code}</span>
+                          <span className="text-gray-500 sm:text-sm">
+                            {selectedCurrency.code}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -454,7 +510,9 @@ export default function PostJob() {
 
               {/* Description Section with Rich Text Editor */}
               <div className="border border-gray-200 rounded-lg p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Job Details</h2>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                  Job Details
+                </h2>
                 <div className="space-y-6">
                   {/* Description Editor */}
                   <div>
@@ -472,16 +530,18 @@ export default function PostJob() {
                             formats={editorFormats}
                             className="flex-1 overflow-y-auto"
                             style={{
-                              height: '250px',
-                              display: 'flex',
-                              flexDirection: 'column'
+                              height: "250px",
+                              display: "flex",
+                              flexDirection: "column",
                             }}
                           />
                         </div>
                       </div>
                     </div>
-                    {formData.description === '<p><br></p>' && (
-                      <p className="mt-2 text-sm text-red-600">Description is required</p>
+                    {formData.description === "<p><br></p>" && (
+                      <p className="mt-2 text-sm text-red-600">
+                        Description is required
+                      </p>
                     )}
                   </div>
 
@@ -501,16 +561,18 @@ export default function PostJob() {
                             formats={editorFormats}
                             className="flex-1 overflow-y-auto"
                             style={{
-                              height: '250px',
-                              display: 'flex',
-                              flexDirection: 'column'
+                              height: "250px",
+                              display: "flex",
+                              flexDirection: "column",
                             }}
                           />
                         </div>
                       </div>
                     </div>
-                    {formData.requirements === '<p><br></p>' && (
-                      <p className="mt-2 text-sm text-red-600">Requirements are required</p>
+                    {formData.requirements === "<p><br></p>" && (
+                      <p className="mt-2 text-sm text-red-600">
+                        Requirements are required
+                      </p>
                     )}
                   </div>
                 </div>
@@ -525,14 +587,30 @@ export default function PostJob() {
                 >
                   {loading ? (
                     <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Posting...
                     </>
                   ) : (
-                    'Post Job'
+                    "Post Job"
                   )}
                 </button>
               </div>
@@ -542,29 +620,75 @@ export default function PostJob() {
           {/* Right Column - Preview/Tips */}
           <div className="lg:w-80 flex-shrink-0 space-y-4">
             <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Tips for a Great Job Post</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Tips for a Great Job Post
+              </h3>
               <ul className="space-y-4 text-sm text-gray-600">
                 <li className="flex gap-3">
-                  <svg className="h-5 w-5 text-[#0d3572]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="h-5 w-5 text-[#0d3572]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
-                  <span>Be specific about requirements and responsibilities</span>
+                  <span>
+                    Be specific about requirements and responsibilities
+                  </span>
                 </li>
                 <li className="flex gap-3">
-                  <svg className="h-5 w-5 text-[#0d3572]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="h-5 w-5 text-[#0d3572]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
-                  <span>Include salary range to attract qualified candidates</span>
+                  <span>
+                    Include salary range to attract qualified candidates
+                  </span>
                 </li>
                 <li className="flex gap-3">
-                  <svg className="h-5 w-5 text-[#0d3572]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="h-5 w-5 text-[#0d3572]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <span>Highlight key benefits and growth opportunities</span>
                 </li>
                 <li className="flex gap-3">
-                  <svg className="h-5 w-5 text-[#0d3572]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="h-5 w-5 text-[#0d3572]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <span>Use clear, professional language</span>
                 </li>
@@ -572,13 +696,15 @@ export default function PostJob() {
             </div>
 
             <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Need Help?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Need Help?
+              </h3>
               <p className="text-sm text-gray-600 mb-4">
                 Having trouble creating your job post? Our team is here to help!
               </p>
               <button
                 type="button"
-                onClick={() => router.push('/contact-us')}
+                onClick={() => router.push("/contact-us")}
                 className="w-full inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-[#0d3572] border border-[#0d3572] rounded-lg hover:bg-[#0d3572]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0d3572]"
               >
                 Contact Support
@@ -609,5 +735,5 @@ export default function PostJob() {
         }
       `}</style>
     </div>
-  )
-} 
+  );
+}

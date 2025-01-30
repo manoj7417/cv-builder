@@ -76,9 +76,9 @@ const RecruiterSignUp = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center py-10 sm:py-12">
+    <div className="min-h-screen relative flex items-center justify-center py-0 sm:py-12">
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 lg:block hidden">
         <Image
           src="/recruitment.jpg"
           alt="Recruitment"
@@ -91,24 +91,26 @@ const RecruiterSignUp = () => {
 
       {/* Form Container */}
       <div className="relative w-full max-w-4xl mx-auto px-3 sm:px-6 md:px-8">
-        <div className="bg-white/95 backdrop-blur-sm p-3 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-white/20">
+        <div className="bg-white/95 backdrop-blur-sm p-3 sm:p-6 md:p-8 lg:rounded-2xl rounded-none lg:shadow-xl shadow-none border border-white/20">
           {/* Logo and Back Button Container */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-6 mb-4 sm:mb-8">
             {/* Logo */}
             <div className="w-20 sm:w-28">
-              <Image
-                src="/beta-logo.png"
-                alt="Logo"
-                width={100}
-                height={25}
-                className="object-contain w-full h-auto"
-              />
+              <Link href={"/"}>
+                <Image
+                  src="/beta-logo.png"
+                  alt="Logo"
+                  width={100}
+                  height={25}
+                  className="object-contain w-full h-auto"
+                />
+              </Link>
             </div>
 
             {/* Back Button */}
             <Link
               href="/"
-              className="group flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-2.5 bg-white hover:bg-gray-50 rounded-full text-gray-700 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-100"
+              className="group lg:flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-2.5 bg-white hover:bg-gray-50 rounded-full text-gray-700 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-100 hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +141,7 @@ const RecruiterSignUp = () => {
           </div>
 
           <form
-            className="mt-6 sm:mt-8 space-y-6 sm:space-y-8"
+            className="mt-0 sm:mt-8 space-y-6 sm:space-y-8"
             onSubmit={handleSubmit}
           >
             {/* Error Message */}
