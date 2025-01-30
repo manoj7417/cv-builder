@@ -35,12 +35,18 @@ export default function CoachLogin() {
   } = useForm();
   const { loginUser } = useCoachStore();
 
-  const email = useRef(null);
+  // const email = useRef(null);
   const router = useRouter();
   const [loading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [sendingMail, setIsSendingMail] = useState(false);
+
+  const [email, setEmail] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleCoachLogin = async (data) => {
     setIsLoading(true);
@@ -48,8 +54,15 @@ export default function CoachLogin() {
       const response = await axios.post("/api/loginCoach", data);
       if (response.status === 200) {
         toast.success("Login successful");
-        const { accessToken:coachAccessToken, refreshToken:coachRefreshToken } = response.data.data;
-        await SetTokens({ accessToken: coachAccessToken, refreshToken: coachRefreshToken,isCoach: true });
+        const {
+          accessToken: coachAccessToken,
+          refreshToken: coachRefreshToken,
+        } = response.data.data;
+        await SetTokens({
+          accessToken: coachAccessToken,
+          refreshToken: coachRefreshToken,
+          isCoach: true,
+        });
         loginUser(response.data.data.userdata);
         const { isApproved } = response.data.data.userdata;
         if (isApproved) {
@@ -68,19 +81,27 @@ export default function CoachLogin() {
     setShowDialog(false);
   };
 
-  const handleSendResetEmail = async () => {
+  const handleSendResetEmail = async (event) => {
+    event.preventDefault();
+
+    if (!email.trim()) {
+      toast.error("Please enter email address");
+      return;
+    }
     setIsSendingMail(true);
     try {
       const response = await axios.post("/api/forgotCoachPassword", {
-        email: email.current.value,
+        email: email.trim(),
       });
 
       if (response.status === 200) {
+        setEmail("");
         toast.success("Reset password link sent to your email");
         setShowDialog(false);
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || "Something went wrong");
+      toast.error("Failed to send reset email");
+      // toast.error(error.response?.data?.error || "Something went wrong");
     } finally {
       setIsSendingMail(false);
     }
@@ -90,33 +111,39 @@ export default function CoachLogin() {
     <>
       <Dialog open={showDialog}>
         <DialogContent
-          className=" w-96"
+          className="w-96 rounded-md"
           onClick={handleDialogClose}
           showCloseButton
         >
           <div>
-            <h1>The reset password link will be send to the entered email</h1>
-            <Input
-              placeholder="Enter your email address"
-              className="mt-4"
-              ref={email}
-            />
-            <div className="w-full my-3 flex justify-end items-center">
-              <Button
-                className=" disabled:bg-opacity-85"
-                disabled={sendingMail}
-                onClick={handleSendResetEmail}
-              >
-                {sendingMail ? (
-                  <>
-                    Sending
-                    <ImSpinner3 className="animate-spin ml-2" size={16} />
-                  </>
-                ) : (
-                  "Send"
-                )}
-              </Button>
-            </div>
+            <h1 className="text-xl font-semibold">Reset Your Password</h1>
+            <p className="text-sm text-gray-400 font-normal">
+              Enter the email associated with your account
+            </p>
+            <form onSubmit={handleSendResetEmail}>
+              <Input
+                placeholder="Enter your email address"
+                className="mt-4"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <div className="w-full my-3 flex justify-end items-center">
+                <Button
+                  className="disabled:bg-opacity-85 w-full disabled:cursor-not-allowed"
+                  disabled={sendingMail || !email.trim()}
+                  type="submit"
+                >
+                  {sendingMail ? (
+                    <>
+                      Sending
+                      <ImSpinner3 className="animate-spin ml-2" size={16} />
+                    </>
+                  ) : (
+                    "Send"
+                  )}
+                </Button>
+              </div>
+            </form>
           </div>
         </DialogContent>
       </Dialog>
@@ -171,10 +198,7 @@ export default function CoachLogin() {
             {/* Custom Pagination Styles */}
           </div>
           <div className="w-full h-full flex flex-col items-center justify-center max-w-[500px] mx-auto">
-            <Link
-              href={"/"}
-              className="flex justify-center items-center my-5"
-            >
+            <Link href={"/"} className="flex justify-center items-center my-5">
               <Image
                 priority="true"
                 src="/genies-career-hub-logo.png"
@@ -278,14 +302,14 @@ export default function CoachLogin() {
                       </div>
                     </div> */}
                   </div>
-                  <div className="terms_condition">
+                  <div className="remember-me">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="field field-checkbox flex items-center">
                           <input
                             id="rememberMe"
+                            name="rememberMe"
                             type="checkbox"
-                            name="terms"
                             className="form-checkbox lg:h-4 lg:w-4 h-3 w-3"
                             {...register("rememberMe", { required: false })}
                           />
@@ -317,8 +341,8 @@ export default function CoachLogin() {
                     <div className="field field-checkbox flex items-center">
                       <input
                         id="terms"
-                        type="checkbox"
                         name="terms"
+                        type="checkbox"
                         className="form-checkbox lg:h-4 lg:w-4 h-3 w-3"
                         {...register("terms", { required: true })}
                       />
