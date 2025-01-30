@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-"use client";
-import React, { useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import Cookies from "js-cookie";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-=======
 'use client'
 import React, { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -16,32 +5,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
 import PasswordResetDialog from '@/app/components/PasswordResetDialog'
->>>>>>> 5e483468eacc72a4252c743ca851a65adb7248ab
 
 const RecruiterSignIn = () => {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
-<<<<<<< HEAD
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [sendingMail, setIsSendingMail] = useState(false);
-  const email = useRef(null);
-
-  const handleDialogClose = () => {
-    setShowDialog(false);
-  };
-=======
     email: '',
     password: ''
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
->>>>>>> 5e483468eacc72a4252c743ca851a65adb7248ab
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -112,43 +85,7 @@ const RecruiterSignIn = () => {
 
   return (
     <>
-      <Dialog open={showDialog}>
-        <DialogContent
-          className="w-[400px] rounded-lg"
-          onClick={handleDialogClose}
-          showCloseButton
-        >
-          <div>
-            <DialogTitle>
-              <h1 className="text-xl font-semibold">Reset Your Password</h1>
-              <p className="text-sm text-gray-400 font-normal">
-                Enter the email associated with your account
-              </p>
-            </DialogTitle>
-            <Input
-              placeholder="Enter your email address"
-              className="mt-4"
-              ref={email}
-            />
-            <div className="w-full my-3 flex justify-end items-center">
-              <Button
-                className=" disabled:bg-opacity-85 w-full"
-                disabled={sendingMail}
-                onClick={handleSendResetEmail}
-              >
-                {sendingMail ? (
-                  <>
-                    Sending
-                    <ImSpinner3 className="animate-spin ml-2" size={16} />
-                  </>
-                ) : (
-                  "Send"
-                )}
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+
       <div className="flex min-h-screen bg-gray-50">
         {/* Left side - Image Section */}
         <div className="hidden lg:block relative w-1/2 bg-gray-900">
@@ -325,7 +262,7 @@ const RecruiterSignIn = () => {
 
                   <div
                     className="text-sm font-medium text-primary hover:text-primary-dark transition-colors cursor-pointer"
-                    onClick={() => setShowDialog(true)}
+                    onClick={() => setIsResetDialogOpen(true)}
                   >
                     Forgot password?
                   </div>
@@ -384,17 +321,13 @@ const RecruiterSignIn = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-    </>
-=======
 
       {/* Add the dialog */}
       <PasswordResetDialog 
         isOpen={isResetDialogOpen}
         onClose={() => setIsResetDialogOpen(false)}
       />
-    </div>
->>>>>>> 5e483468eacc72a4252c743ca851a65adb7248ab
+    </>
   );
 };
 
