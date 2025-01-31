@@ -1,5 +1,5 @@
-'use client'
-import React, { useEffect } from 'react'
+"use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -31,7 +31,7 @@ import axios from "axios";
 import * as pdfjsLib from "pdfjs-dist";
 import mammoth from "mammoth";
 import { default as DynamicImport } from "next/dynamic";
-import ClientOnly from '@/app/components/ClientOnly'
+import ClientOnly from "@/app/components/ClientOnly";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.js";
@@ -73,8 +73,8 @@ const faqData = [
   },
 ];
 
-export const dynamic = 'force-dynamic'
-export const dynamicParams = false
+export const dynamic = "force-dynamic";
+export const dynamicParams = false;
 
 const ResumeAnalyzer = () => {
   const [open, setOpen] = useState(false);
@@ -96,11 +96,11 @@ const ResumeAnalyzer = () => {
 
   const handleScroll = () => {
     // Use window.scrollY instead of document.documentElement
-    const scrollTop = window.scrollY
-    const scrollHeight = window.innerHeight
-    const clientHeight = window.innerHeight
+    const scrollTop = window.scrollY;
+    const scrollHeight = window.innerHeight;
+    const clientHeight = window.innerHeight;
     // Rest of scroll handler...
-  }
+  };
 
   const docxToText = async (file) => {
     try {
@@ -596,7 +596,7 @@ const ResumeAnalyzer = () => {
                       <img
                         src="anaz-1.png"
                         alt="icon4"
-                        className="object-contain mr-32"
+                        className="object-contain lg:mr-32 mr-0"
                       />
                       {/* <div className='flex lg:flex-row flex-col justify-center items-center'>
                         <img
@@ -971,8 +971,8 @@ const ResumeAnalyzer = () => {
                           3. CONTENT
                         </h6>
                         <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
-                          &quot;Content is the king,&quot; and we ensure that by helping
-                          you incorporate exact keywords in your CV.
+                          &quot;Content is the king,&quot; and we ensure that by
+                          helping you incorporate exact keywords in your CV.
                         </p>
                       </div>
                     </div>
@@ -1317,6 +1317,6 @@ const ResumeAnalyzer = () => {
       </main>
     </ClientOnly>
   );
-}
+};
 
-export default ResumeAnalyzer
+export default ResumeAnalyzer;

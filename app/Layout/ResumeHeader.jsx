@@ -453,7 +453,7 @@ export function ResumeHeader() {
                                       onClick={() =>
                                         dropdownItem.onClick(router)
                                       }
-                                      className="block w-full text-left text-sm text-gray-600 p-2 hover:bg-gray-50 rounded-md"
+                                      className="block w-full text-left text-base text-gray-600 p-2 hover:bg-gray-50 rounded-md"
                                     >
                                       {dropdownItem.name}
                                     </button>
