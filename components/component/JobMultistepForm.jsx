@@ -523,7 +523,6 @@ function JobMultistepForm({
         return router.push("/resume-builder");
       }
     } catch (error) {
-      
     } finally {
       handleCloseMultistepForm();
       setSteps(1);
@@ -943,7 +942,10 @@ function JobMultistepForm({
                                   </div>
                                   <div className="flex sm:flex-row flex-col px-2">
                                     <div className="flex flex-col w-full md:w-1/2 space-y-1 pr-2 lg:py-0 py-5">
-                                      <Label htmlFor="start_date" className="block">
+                                      <Label
+                                        htmlFor="start_date"
+                                        className="block"
+                                      >
                                         Start Date
                                       </Label>
                                       <div className="w-full">
@@ -961,7 +963,10 @@ function JobMultistepForm({
                                       </div>
                                     </div>
                                     <div className="flex flex-col w-full md:w-1/2 space-y-1 justify-around lg:pl-2 pl-0">
-                                      <Label htmlFor="end_date" className="block">
+                                      <Label
+                                        htmlFor="end_date"
+                                        className="block"
+                                      >
                                         End Date
                                       </Label>
                                       <div className="w-full">
@@ -1112,7 +1117,10 @@ function JobMultistepForm({
                                   </div>
                                   <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
                                     <div className="flex flex-col w-full space-y-2 pr-2 lg:py-0 py-5">
-                                      <Label htmlFor="start_date" className="block">
+                                      <Label
+                                        htmlFor="start_date"
+                                        className="block"
+                                      >
                                         Start Date
                                       </Label>
                                       <div className="w-full">
@@ -1130,7 +1138,10 @@ function JobMultistepForm({
                                       </div>
                                     </div>
                                     <div className="flex flex-col w-full space-y-2 justify-around lg:pl-2 pl-0">
-                                      <Label htmlFor="end_date" className="block">
+                                      <Label
+                                        htmlFor="end_date"
+                                        className="block"
+                                      >
                                         End Date
                                       </Label>
                                       <div className="w-full">
@@ -1277,11 +1288,11 @@ function JobMultistepForm({
               height={500}
             />
           </div>
-          <div className="w-1/2 h-full flex item-center">
+          <div className="w-full lg:w-1/2 flex items-center justify-center">
             <div className="mx-auto flex items-center justify-center flex-col">
               <Lottie
                 animationData={animation}
-                className="w-[300px] h-[300px] mx-auto"
+                className="w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] mx-auto"
               />
               <p className="mt-1">Preparing your CV</p>
             </div>
