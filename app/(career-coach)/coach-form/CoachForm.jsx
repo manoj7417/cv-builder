@@ -451,10 +451,10 @@ const CoachForm = () => {
     register("coachingDescription", { required: true });
   };
 
-  const handleBioChange =(value)=>{
+  const handleBioChange = (value) => {
     setValue("bio", value);
     register("bio", { required: true });
-  }
+  };
 
   const handleViewFile = (type) => {
     setFileType(type);
@@ -1174,6 +1174,10 @@ const CoachForm = () => {
                       >
                         Profile Video
                       </label>
+                      <p className="mt-1 text-sm leading-6 text-gray-600">
+                        Please provide a youtube video link for your profile
+                        video
+                      </p>
                       <div className="flex space-x-2">
                         <input
                           type="text"

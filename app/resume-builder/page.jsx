@@ -46,8 +46,7 @@ const ResumeBuilder = () => {
   const [showText, setShowText] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
-  const userImage =
-    userdata?.profilePicture || "https://via.placeholder.com/150";
+  const userImage = userdata?.profilePicture || "/avatar.png";
   const searchParams = useSearchParams();
   const newResume = searchParams.get("newresume");
   const [showDialog, setShowDialog] = useState(newResume || false);
@@ -199,12 +198,9 @@ const ResumeBuilder = () => {
                   <Link href="/user-dashboard" role="menuitem">
                     {/* <FaUserLarge className="text-blue-950 text-xl cursor-pointer" /> */}
                     <img
-                      src={
-                        userImage ||
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
-                      }
+                      src={userImage}
                       alt="user-name"
-                      className="w-8 h-8 rounded-full object-cover border-2 border-blue-800 "
+                      className="lg:w-14 w-10 h-10 rounded-full object-cover border-2 border-blue-800 "
                     />
                   </Link>
                   <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 hidden group-hover:block bg-gray-800 text-white text-xs py-1 px-2 rounded shadow-lg">

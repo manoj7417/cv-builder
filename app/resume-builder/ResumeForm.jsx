@@ -1174,14 +1174,18 @@ export default function ResumeForm() {
             </div>
             {isNewResume && (
               <div className="action_buttons flex flex-col gap-5 justify-center">
-                <Button onClick={handleDummyData} className="text-xs generate-ai">
-                 <FaDatabase  className="text-white mr-2"/> Start with mock data
+                <Button
+                  onClick={handleDummyData}
+                  className="text-xs generate-ai"
+                >
+                  <FaDatabase className="text-white mr-2" /> Start with mock
+                  data
                 </Button>
                 <Button
                   onClick={handleStartResumeFromScratch}
                   className="text-xs generate-ai"
                 >
-                 <LuRefreshCw className="text-white mr-2"/> Start with fresh
+                  <LuRefreshCw className="text-white mr-2" /> Start with fresh
                 </Button>
               </div>
             )}
@@ -2060,8 +2064,8 @@ export default function ResumeForm() {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          <div className=" grid-cols-2 gap-2 flex px-2">
-                            <div className=" w-1/2">
+                          <div className="lg:grid-cols-2 grid-cols-1 lg:gap-2 gap-5 flex lg:flex-row flex-col px-2">
+                            <div className="lg:w-1/2 w-full lg:mt-0 mt-2">
                               <Label htmlFor={`skills-${index}`}>Name</Label>
                               <Input
                                 value={skills?.name || ""}
@@ -2070,7 +2074,7 @@ export default function ResumeForm() {
                                 }
                               />
                             </div>
-                            <div className=" w-1/2 flex flex-col items-start justify-center">
+                            <div className="lg:w-1/2 w-full flex flex-col items-start justify-center">
                               <Label
                                 htmlFor={`skills-${index}`}
                                 className="mb-1"
@@ -2167,7 +2171,7 @@ export default function ResumeForm() {
                   );
                 })}
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between lg:gap-0 gap-2">
               <Input
                 onChange={handleChangeHobbies}
                 ref={hobbiesRef}
@@ -2253,7 +2257,7 @@ export default function ResumeForm() {
                           </AccordionTrigger>
                           <AccordionContent>
                             <div className="pt-5 pb-10 flex justify-between items-baseline w-full flex-col">
-                              <div className="w-full flex items-end justify-between px-4">
+                              <div className="w-full flex items-end justify-between px-4 lg:gap-0 gap-3">
                                 <div className="w-[80%]">
                                   <Label htmlFor={`skills-${index} my-2`}>
                                     Name
@@ -2295,8 +2299,8 @@ export default function ResumeForm() {
                                   </PopoverContent>
                                 </Popover>
                               </div>
-                              <div className="w-full my-3 px-4 flex items-end justify-between">
-                                <div className="w-[48%]">
+                              <div className="w-full my-3 px-4 flex lg:flex-row flex-col lg:items-end items-start justify-between lg:gap-0 gap-3">
+                                <div className="lg:w-[48%] w-full">
                                   <Label>Issuer</Label>
                                   <Input
                                     placeholder="Enter Issuer"
@@ -2308,7 +2312,7 @@ export default function ResumeForm() {
                                     className="mt-2"
                                   />
                                 </div>
-                                <div className="w-[48%]  flex flex-col">
+                                <div className="lg:w-[48%] w-full  flex flex-col">
                                   <Label>Date</Label>
                                   <DatePicker
                                     picker="month"

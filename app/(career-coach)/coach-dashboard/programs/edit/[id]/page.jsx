@@ -276,6 +276,9 @@ function UpdateProgram() {
           </div>
           <div className="py-2">
             <Label>Program Video</Label>
+            <p className="mt-1 text-sm leading-6 text-gray-600">
+              Please provide a youtube video link for your program video
+            </p>
             {programVideo ? (
               <div className="flex items-center py-4">
                 <ReactPlayer url={programVideo} />

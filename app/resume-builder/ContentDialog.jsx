@@ -245,6 +245,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
     timezone: "",
     currency: "",
   });
+
   const pageSizeMap = {
     a4: {
       width: 210,
