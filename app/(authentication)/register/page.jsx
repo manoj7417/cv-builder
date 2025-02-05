@@ -33,7 +33,7 @@ export default function Register() {
     numbercase: false,
     specialChar: false,
   });
-  const [OauthLoading, setOauthLoading] = useState(false)
+  const [OauthLoading, setOauthLoading] = useState(false);
 
   const password = watch("password", "");
   const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -75,7 +75,7 @@ export default function Register() {
     }
     setIsLoading(true);
     try {
-      const response = await axios.post('/api/userRegisteration', data)
+      const response = await axios.post("/api/userRegisteration", data);
       if (response.status === 201) {
         toast.success("Registration successful");
         toast.info("Verification link sent to your email address", {
@@ -93,7 +93,7 @@ export default function Register() {
   const handleSignUpWithGoogle = async () => {
     setOauthLoading(true);
     try {
-      const response = await axios.get('/api/googleRegisteration')
+      const response = await axios.get("/api/googleRegisteration");
       if (response.status === 201) {
         toast.success("Registration successful");
         toast.info("Verification link sent to your email address", {
@@ -336,20 +336,22 @@ export default function Register() {
                       )}
                     </div>
                     {/* Validation List */}
-                    {
-                      watch("password") && (<div className="mt-2">
+                    {watch("password") && (
+                      <div className="mt-2">
                         <ul className="grid lg:grid-cols-2 grid-cols-1 list-disc pl-0 space-y-2 text-gray-700 whitespace-nowrap">
                           <li
-                            className={`flex items-center space-x-2 text-sm ${validation.length
-                              ? "text-green-500"
-                              : "text-red-500"
-                              }`}
+                            className={`flex items-center space-x-2 text-sm ${
+                              validation.length
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
                           >
                             <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.length
-                                ? "text-green-500"
-                                : "border border-gray-400"
-                                }`}
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${
+                                validation.length
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                              }`}
                             >
                               {validation.length ? "✔" : ""}
                             </span>
@@ -359,16 +361,18 @@ export default function Register() {
                           </li>
                           {/* Uppercase validation */}
                           <li
-                            className={`flex items-center space-x-2 text-sm ${validation.uppercase
-                              ? "text-green-500"
-                              : "text-red-500"
-                              }`}
+                            className={`flex items-center space-x-2 text-sm ${
+                              validation.uppercase
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
                           >
                             <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.uppercase
-                                ? "text-green-500"
-                                : "border border-gray-400"
-                                }`}
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${
+                                validation.uppercase
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                              }`}
                             >
                               {validation.uppercase ? "✔" : ""}
                             </span>
@@ -379,16 +383,18 @@ export default function Register() {
 
                           {/* Lowercase validation */}
                           <li
-                            className={`flex items-center text-sm space-x-2 ${validation.lowercase
-                              ? "text-green-500"
-                              : "text-red-500"
-                              }`}
+                            className={`flex items-center text-sm space-x-2 ${
+                              validation.lowercase
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
                           >
                             <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.lowercase
-                                ? "text-green-500"
-                                : "border border-gray-400"
-                                }`}
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${
+                                validation.lowercase
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                              }`}
                             >
                               {validation.lowercase ? "✔" : ""}
                             </span>
@@ -399,16 +405,18 @@ export default function Register() {
 
                           {/* Number validation */}
                           <li
-                            className={`flex items-center space-x-2 text-sm ${validation.number
-                              ? "text-green-500"
-                              : "text-red-500"
-                              }`}
+                            className={`flex items-center space-x-2 text-sm ${
+                              validation.number
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
                           >
                             <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.number
-                                ? "text-green-500"
-                                : "border border-gray-400"
-                                }`}
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${
+                                validation.number
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                              }`}
                             >
                               {validation.number ? "✔" : ""}
                             </span>
@@ -417,16 +425,18 @@ export default function Register() {
 
                           {/* Special character validation */}
                           <li
-                            className={`flex items-center space-x-2 text-sm ${validation.specialChar
-                              ? "text-green-500"
-                              : "text-red-500"
-                              }`}
+                            className={`flex items-center space-x-2 text-sm ${
+                              validation.specialChar
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
                           >
                             <span
-                              className={`w-3 h-3 flex items-center justify-center rounded-full ${validation.specialChar
-                                ? "text-green-500"
-                                : "border border-gray-400"
-                                }`}
+                              className={`w-3 h-3 flex items-center justify-center rounded-full ${
+                                validation.specialChar
+                                  ? "text-green-500"
+                                  : "border border-gray-400"
+                              }`}
                             >
                               {validation.specialChar ? "✔" : ""}
                             </span>
@@ -435,9 +445,8 @@ export default function Register() {
                             </span>
                           </li>
                         </ul>
-                      </div>)
-                    }
-
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="field field-checkbox flex items-center">
@@ -494,8 +503,10 @@ export default function Register() {
                 </div>
 
                 <div className="google_button mt-5">
-                  {/* <SignInGoogle type="SignUp"/> */}
-                  {/* <Button onClick={handleSignUpWithGoogle}>Signup with google</Button> */}
+                  <SignInGoogle type="SignUp" />
+                  {/* <Button type="button" onClick={handleSignUpWithGoogle}>
+                    Signup with google
+                  </Button> */}
                 </div>
 
                 <p className="mt-2 lg:text-base text-sm text-gray-600 lg:text-start text-center">
