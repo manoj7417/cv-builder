@@ -183,7 +183,7 @@ function CreateProgram() {
               theme="snow"
               onChange={handleDescriptionChange} // Handle changes
               style={{
-                height: "150px",
+                height: "auto",
                 margin: "10px 0px",
               }}
               placeholder="Enter program description"
@@ -291,7 +291,7 @@ function CreateProgram() {
             <h1 className="py-4 text-lg font-bold">Program Content</h1>
             <ReactQuill
               style={{
-                height: "150px",
+                height: "auto",
                 margin: "10px 0px 50px",
               }}
               theme="snow"
