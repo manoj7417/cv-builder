@@ -2,19 +2,11 @@ import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
-// Explicitly mark as server-side only
-export const dynamic = 'force-dynamic'
+// Route Segment Config
 export const runtime = 'edge'
-export const preferredRegion = 'auto'
-export const maxDuration = 60
-
-// Disable static optimization
-export const config = {
-  api: {
-    bodyParser: false,
-    externalResolver: true,
-  },
-}
+export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
+export const revalidate = 0
 
 export async function GET(request) {
   try {
