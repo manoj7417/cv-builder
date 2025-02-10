@@ -47,6 +47,9 @@ export const metadata = {
   alternates: {
     canonical: "https://www.geniescareerhub.com",
   },
+  headers: {
+    'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59'
+  }
 };
 
 export default function RootLayout({ children }) {
