@@ -188,7 +188,7 @@ const CoachPage = () => {
       <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
           {/* Coach Selection Section */}
-          <div className="coach_card lg:w-[30%] w-full lg:h-screen lg:sticky top-[100px] overflow-y-scroll h-[500px] pr-2">
+          <div className="coach_card lg:w-[30%] w-full lg:h-screen lg:sticky top-[100px] overflow-y-scroll h-[700px] pr-2">
             <h1 className="text-xl lg:text-2xl font-bold">
               Choose the <span className="text-blue-700">coach</span> who aligns
               best with your <span className="text-blue-700">goals.</span>

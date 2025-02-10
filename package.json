@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "cross-env APP_ENV=production node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
     "start": "cross-env NODE_ENV=production next start"
-  },     
-  "dependencies": {
+  },   
+  "dependencies": { 
     "@alptugidin/react-circular-progress-bar": "^1.1.2",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.19.0",
@@ -85,7 +85,7 @@
     "pdfjs": "^2.5.0",
     "pdfjs-dist": "^3.7.107",
     "primereact": "^10.6.6",
-    "quill": "^2.0.2",
+    "quill": "^2.0.3",
     "razorpay": "^2.9.4",
     "react": "^18",
     "react-apexcharts": "^1.4.1",

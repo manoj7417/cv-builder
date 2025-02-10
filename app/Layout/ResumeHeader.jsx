@@ -23,10 +23,10 @@ const menuItems = [
     name: "CV Studio",
     href: "/cv-studio",
   },
-  // {
-  //   name: "Jobs",
-  //   href: "/jobs",
-  // },
+  {
+    name: "Jobs",
+    href: "/jobs",
+  },
   {
     name: "Coaching",
     href: "/career-services",
@@ -453,7 +453,7 @@ export function ResumeHeader() {
                                       onClick={() =>
                                         dropdownItem.onClick(router)
                                       }
-                                      className="block w-full text-left text-sm text-gray-600 p-2 hover:bg-gray-50 rounded-md"
+                                      className="block w-full text-left text-base text-gray-600 p-2 hover:bg-gray-50 rounded-md"
                                     >
                                       {dropdownItem.name}
                                     </button>
@@ -483,7 +483,7 @@ export function ResumeHeader() {
                           <span className="relative inline-block">
                             <img
                               className="h-10 w-10 rounded-full"
-                              src={userdata?.profilePicture}
+                              src={userdata?.profilePicture || "/avatar.png"}
                               alt="Dan_Abromov"
                             />
                           </span>
@@ -500,11 +500,9 @@ export function ResumeHeader() {
                         {isDropdownOpen && (
                           <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                             <ul>
-                              {/* <li className='px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm'>
-                                <a href='/user-profile/profile'>
-                                  Profile
-                                </a>
-                              </li> */}
+                              <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
+                                <a href="/user-dashboard">Profile</a>
+                              </li>
                               <li className="px-4 py-2 hover:bg-gray-100 rounded-md cursor-pointer text-sm">
                                 <Link href="/user-history">CV History</Link>
                               </li>

@@ -44,6 +44,7 @@ function LoginUser() {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
+
   const [showResendButton, setShowResendButton] = useState(false);
   const [isSendingVerificationEmail, setIsSendingVerificationEmail] =
     useState(false);
@@ -82,7 +83,7 @@ function LoginUser() {
 
   const handleSendResetEmail = async (event) => {
     event.preventDefault();
-    
+
     if (!email.trim()) {
       toast.error("Please enter email address");
       return;
@@ -91,15 +92,14 @@ function LoginUser() {
     setIsSendingMail(true);
     try {
       const response = await axios.post("/api/forgotPassword", {
-        email: email
+        email: email,
       });
-      
+
       if (response.status === 200) {
-        setEmail('');
+        setEmail("");
         toast.success("Reset password link sent to your email");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Failed to send reset email");
     } finally {
       setIsSendingMail(false);
@@ -160,13 +160,7 @@ function LoginUser() {
                   disabled={sendingMail || !email.trim()}
                   type="submit"
                 >
-                  {sendingMail ? (
-                    <>
-                      Sending...
-                    </>
-                  ) : (
-                    'Send Reset Link'
-                  )}
+                  {sendingMail ? <>Sending...</> : "Send Reset Link"}
                 </Button>
               </div>
             </form>
@@ -270,7 +264,7 @@ function LoginUser() {
               <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
                 Sign in
               </h2>
-              <p className="mt-2 text-sm text-gray-600 lg:text-start text-center">
+              <p className="mt-2 text-sm text-gray-600 text-start">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
@@ -382,7 +376,7 @@ function LoginUser() {
                     </button>
 
                     <div className="google_button mt-5">
-                      {/* <SignInGoogle type="Sign in"/> */}
+                      <SignInGoogle type="Sign in" />
                     </div>
                   </div>
                   <div className="flex items-center justify-center">

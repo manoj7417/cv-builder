@@ -183,7 +183,7 @@ function CreateProgram() {
               theme="snow"
               onChange={handleDescriptionChange} // Handle changes
               style={{
-                height: "150px",
+                height: "auto",
                 margin: "10px 0px",
               }}
               placeholder="Enter program description"
@@ -244,6 +244,9 @@ function CreateProgram() {
           </div>
           <div className="py-2">
             <Label>Program Video</Label>
+            <p className="mt-1 text-xs leading-6 text-gray-600">
+              Please provide a youtube video link for your program video
+            </p>
             {programVideo ? (
               <div className="flex items-center py-4">
                 <ReactPlayer url={programVideo} />
@@ -288,7 +291,7 @@ function CreateProgram() {
             <h1 className="py-4 text-lg font-bold">Program Content</h1>
             <ReactQuill
               style={{
-                height: "150px",
+                height: "auto",
                 margin: "10px 0px 50px",
               }}
               theme="snow"
@@ -298,7 +301,11 @@ function CreateProgram() {
             />
           </div>
           <div className="w-full flex justify-end py-4">
-            <Button type="submit" disabled={isCreatingProgram} className="lg:mt-0 mt-10">
+            <Button
+              type="submit"
+              disabled={isCreatingProgram}
+              className="lg:mt-0 mt-10"
+            >
               {isCreatingProgram ? (
                 <>
                   Creating Program{" "}

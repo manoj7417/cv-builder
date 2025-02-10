@@ -1272,10 +1272,10 @@ input[type="checkbox"] {
   accent-color: #2563eb; /* This is tailwind's blue-600 color */
 }
 
-input[type="checkbox"]:checked {
+/* input[type="checkbox"]:checked {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
-}
+} */
 
 input[type="checkbox"]:focus {
   --tw-ring-color: var(--primary-color);

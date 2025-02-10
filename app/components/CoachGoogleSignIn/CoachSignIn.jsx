@@ -1,8 +1,9 @@
 import { SetTokens } from "@/app/actions";
+import { useCoachStore } from "@/app/store/coachStore";
 import { useUserStore } from "@/app/store/UserStore";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -12,7 +13,7 @@ function CoachSignIn({ type }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [apiCalled, setApiCalled] = useState(false); // To prevent multiple API calls
-  const loginUser = useUserStore((state) => state.loginUser);
+  const loginUser = useCoachStore((state) => state.loginUser);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
