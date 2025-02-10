@@ -2,8 +2,11 @@ import { serverInstance } from "@/lib/serverApi";
 
 export async function GET(req, { params }) {
     try {
-        const { coachId } = params;
-        const response = await serverInstance.get(`/testimonial/coach/${coachId}`);
+        const { id } = params;
+        if (!id) {
+            console.log("No coach ID provided");
+        }
+        const response = await serverInstance.get(`/testimonial/coach/${id}`);
         return new Response(JSON.stringify(response.data), {
             status: response.status || 200,
             headers: { "Content-Type": "application/json" },
