@@ -148,18 +148,19 @@ const nextConfig = {
           {
             key: "Cache-Control",
             value: "no-store, max-age=0"
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*"
           }
         ]
       }
     ];
   },
   experimental: {
-    serverActions: true,
     workerThreads: false,
-    cpus: 1
-  },
-  generateStaticParams: async () => {
-    return []
+    cpus: 1,
+    serverComponentsExternalPackages: ['@/lib/serverApi']
   },
   async rewrites() {
     return {
@@ -167,23 +168,13 @@ const nextConfig = {
         {
           source: '/sitemap.xml',
           destination: '/api/sitemap',
-        },
-        {
-          source: '/api/:path*',
-          has: [
-            {
-              type: 'header',
-              key: 'x-skip-static',
-              value: '1',
-            },
-          ],
-          destination: '/api/:path*',
-        },
-      ],
+        }
+      ]
     }
   },
   serverRuntimeConfig: {
     mySecret: 'secret',
+    apiUrl: process.env.BASE_URL,
   },
   publicRuntimeConfig: {
     staticFolder: '/static',
