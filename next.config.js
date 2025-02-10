@@ -158,10 +158,10 @@ const nextConfig = {
     ];
   },
   experimental: {
+    isrMemoryCacheSize: 0,
     workerThreads: false,
     cpus: 1,
-    serverComponentsExternalPackages: ['@/lib/serverApi'],
-    isrMemoryCacheSize: 0
+    serverComponentsExternalPackages: ['@/lib/serverApi']
   },
   async rewrites() {
     return [

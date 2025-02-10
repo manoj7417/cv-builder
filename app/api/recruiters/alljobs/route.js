@@ -3,13 +3,12 @@ import { NextResponse } from 'next/server'
 
 // Add these exports to prevent static generation attempts
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const fetchCache = 'force-no-store'
 
 export async function GET(request) {
   try {
-    // Use searchParams in a way that works with static generation
-    const url = new URL(request.url)
-    const searchParams = url.searchParams
+    const { searchParams } = new URL(request.url)
+    const token = searchParams.get('token')
     
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
@@ -18,7 +17,6 @@ export async function GET(request) {
     const location = searchParams.get('location') || ''
     const sort = searchParams.get('sort') || '-createdAt'
     const status = searchParams.get('status') || ''
-    const token = searchParams.get('token') || ''   
 
     const response = await serverInstance.get('/recruiters/alljobs', {
       params: {

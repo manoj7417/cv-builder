@@ -7,6 +7,7 @@ import { BriefcaseIcon, MapPinIcon, CurrencyDollarIcon, CalendarIcon, UserGroupI
 import cookies from 'js-cookie'
 
 export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
 
 const ApplicationsPage = () => {
   const [applications, setApplications] = useState([])
