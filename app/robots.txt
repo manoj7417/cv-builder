@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
 
-Sitemap: https://www.geniescareerhub.com/sitemap.xml
+Sitemap: https://www.geniescareerhub.com/sitemap.xml 

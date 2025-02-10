@@ -10,6 +10,9 @@ import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Slide } from "react-toastify";
 import SessionProviderWrapper from "./components/SessionProviderWrapper/SessionProviderWrapper"; // Import the wrapper
+import * as fbq from './utils/fbPixel'
+import ErrorBoundary from './components/ErrorBoundary'
+import FacebookPixelNoscript from './components/FacebookPixelNoscript'
 
 const inter = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -49,6 +52,9 @@ export const metadata = {
   alternates: {
     canonical: "https://www.geniescareerhub.com",
   },
+  headers: {
+    'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59'
+  }
 };
 
 export default function RootLayout({ children }) {
@@ -89,19 +95,26 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1272392460689856');
-fbq('track', 'PageView')`,
-          }}></script>
+        <ErrorBoundary fallback={null}>
+          <script
+            id="fb-pixel"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '${fbq.FB_PIXEL_ID}');
+                fbq('track', 'PageView');
+              `,
+            }}
+          />
+        </ErrorBoundary>
       </head>
       <body suppressHydrationWarning={true} className={inter.className}>
         {/* Google Tag Manager (noscript) */}
@@ -114,15 +127,7 @@ fbq('track', 'PageView')`,
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <noscript>
-          <img
-            height='1'
-            width='1'
-            style='display:none'
-            src='https://www.facebook.com/tr?id=1272392460689856&ev=PageView&noscript=1'
-          />
-        </noscript>
-
+        <FacebookPixelNoscript />
         <SessionProviderWrapper>
           <ToastContainer
             position='top-right'
