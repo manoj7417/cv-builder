@@ -12,7 +12,9 @@ export const dynamicRoutes = [
   '/api/recruiters/applications',
   '/recruiter/applications',
   '/recruiter/jobs',
-  '/recruiter/dashboard'
+  '/recruiter/dashboard',
+  '/api/sitemap',
+  '/sitemap.xml'
 ]
 
 export const dynamicParams = true

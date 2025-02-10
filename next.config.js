@@ -165,6 +165,10 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
+          source: '/sitemap.xml',
+          destination: '/api/sitemap',
+        },
+        {
           source: '/api/:path*',
           has: [
             {
