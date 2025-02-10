@@ -21,6 +21,7 @@ const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCoach, setSelectedCoach] = useState(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
   const [geoData, setGeoData] = useState(null);
@@ -33,6 +34,8 @@ const CoachPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currency, setCurrency] = useState("USD");
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
+  const [getTestimonial, setTestimonial] = useState([]);
+  console.log("getTestimonial::", getTestimonial);
 
   const toggleContent = (type) => {
     setShowFullContent((prev) => ({
@@ -162,6 +165,17 @@ const CoachPage = () => {
     }
   };
 
+  const fechCoachTestimonial = async () => {
+    const coachId = selectedCoach?.id;
+    console.log("coachId::", coachId);
+    try {
+      const response = await axios.get(`/api/getTestimonial/${coachId}`);
+      setTestimonial(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleMobileView = () => {
     setIsMobile(true);
   };
@@ -172,6 +186,10 @@ const CoachPage = () => {
 
   useEffect(() => {
     getGeoInfo();
+  }, []);
+
+  useEffect(() => {
+    fechCoachTestimonial();
   }, []);
 
   useEffect(() => {
@@ -376,36 +394,15 @@ const CoachPage = () => {
                       >
                         About
                       </TabsTrigger>
+                      <TabsTrigger
+                        value="reviews"
+                        className="rounded-md text-xs sm:text-xl ms-0"
+                      >
+                        Reviews
+                      </TabsTrigger>
                     </TabsList>
                     <div className="tabs_inner_content my-5">
                       <TabsContent value="about">
-                        {/* <div
-                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            !showFullContent.bio ? "max-h-16" : "max-h-full"
-                          }`}
-                        >
-                          <p
-                            className={`text-sm text-gray-500 transition-all duration-300 ease-in-out ${
-                              !showFullContent.bio ? "line-clamp-3" : ""
-                            }`}
-                            style={{
-                              display: "-webkit-box",
-                              WebkitBoxOrient: "vertical",
-                              WebkitLineClamp: showFullContent.bio ? "none" : 3,
-                              overflow: showFullContent.bio
-                                ? "visible"
-                                : "hidden",
-                              height: showFullContent.bio ? "auto" : "4.5em",
-                              maxHeight: !showFullContent.bio
-                                ? "4.5em"
-                                : "none",
-                              opacity: showFullContent.bio ? 1 : 0.7,
-                              transition: "height 0.3s ease, opacity 0.3s ease",
-                            }}
-                          >
-                            {selectedCoach?.bio}
-                          </p>
-                        </div> */}
                         <div
                           className={`overflow-hidden transition-all duration-300 ease-in-out ${
                             !showFullContent.bio ? "max-h-16" : "max-h-full"
@@ -932,6 +929,12 @@ const CoachPage = () => {
                         className="rounded-md text-xs sm:text-xl ms-0"
                       >
                         About
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="reviews"
+                        className="rounded-md text-xs sm:text-xl ms-0"
+                      >
+                        Reviews
                       </TabsTrigger>
                     </TabsList>
                     <div className="tabs_inner_content my-5">
