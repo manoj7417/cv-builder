@@ -1,15 +1,17 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 
-// Add these exports to prevent static generation attempts
+export const runtime = 'edge' // Use edge runtime
 export const dynamic = 'force-dynamic'
-export const fetchCache = 'force-no-store'
 
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url)
+    // Use URL constructor to safely parse the URL
+    const url = new URL(request.url)
+    const searchParams = url.searchParams
     const token = searchParams.get('token')
     
+    // Rest of params
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
     const search = searchParams.get('search') || ''
@@ -29,15 +31,16 @@ export async function GET(request) {
         status
       },
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Cache-Control': 'no-store'
       }
     })
 
     return NextResponse.json({
       status: 'success',
       data: {
-        jobs: response.data.data?.jobs || response.data.data || response.data,
-        pagination: response.data.data?.pagination || {
+        jobs: response.data.data?.jobs || response.data.data || [],
+        pagination: {
           totalPages: Math.ceil((response.data.data?.total || 0) / limit),
           currentPage: parseInt(page),
           totalDocs: response.data.data?.total || 0
@@ -45,7 +48,8 @@ export async function GET(request) {
       }
     }, {
       headers: {
-        'Cache-Control': 'no-store'
+        'Cache-Control': 'no-store',
+        'CDN-Cache-Control': 'no-store'
       }
     })
   } catch (error) {

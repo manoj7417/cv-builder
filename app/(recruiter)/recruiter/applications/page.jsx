@@ -24,9 +24,18 @@ const ApplicationsPage = () => {
     try {
       const token = cookies.get('token')
       setLoading(true)
+      
       const response = await fetch(`/api/recruiters/alljobs?token=${token}`, {
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-store'
+        }
       })
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch applications')
+      }
+
       const data = await response.json()
 
       if (data.status === 'success') {
