@@ -2,27 +2,41 @@ import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
-// Force dynamic route
+// Explicitly mark as server-side only
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'
+export const preferredRegion = 'auto'
+export const maxDuration = 60
+
+// Disable static optimization
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+}
 
 export async function GET(request) {
   try {
-    // Use searchParams from nextUrl
-    const { searchParams } = request.nextUrl
-    
-    const page = searchParams.get('page') || '1'
-    const limit = searchParams.get('limit') || '10'
-    const status = searchParams.get('status') || ''
+    // Use URLSearchParams to parse query parameters
+    const url = new URL(request.url)
+    const page = url.searchParams.get('page') || '1'
+    const limit = url.searchParams.get('limit') || '10' 
+    const status = url.searchParams.get('status') || ''
 
     // Get token from cookies
     const cookieStore = cookies()
     const token = cookieStore.get('token')?.value
 
     if (!token) {
-      return NextResponse.json(
-        { message: 'Authentication required' },
-        { status: 401 }
+      return new NextResponse(
+        JSON.stringify({ message: 'Authentication required' }),
+        { 
+          status: 401,
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
       )
     }
 
@@ -38,13 +52,29 @@ export async function GET(request) {
       }
     })
 
-    return NextResponse.json(response.data)
+    // Return response with proper headers
+    return new NextResponse(
+      JSON.stringify(response.data),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    )
 
   } catch (error) {
     console.error('Applications fetch error:', error)
-    return NextResponse.json(
-      { message: error.message || 'Failed to fetch applications' },
-      { status: error.status || 500 }
+    return new NextResponse(
+      JSON.stringify({ 
+        message: error.message || 'Failed to fetch applications'
+      }),
+      {
+        status: error.status || 500,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
     )
   }
 } 
