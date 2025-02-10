@@ -8,9 +8,9 @@ export const revalidate = 0
 export const fetchCache = 'force-no-store'
 export const runtime = 'edge'
 
-export async function GET(request, context) {
+export async function GET(request) {
   try {
-    // Get query parameters in a way that works with static generation
+    // Use request.nextUrl instead of new URL(request.url)
     const searchParams = request.nextUrl.searchParams
     
     const page = searchParams.get('page') ?? '1'
