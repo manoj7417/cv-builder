@@ -160,7 +160,8 @@ const nextConfig = {
   experimental: {
     workerThreads: false,
     cpus: 1,
-    serverComponentsExternalPackages: ['@/lib/serverApi']
+    serverComponentsExternalPackages: ['@/lib/serverApi'],
+    isrMemoryCacheSize: 0
   },
   async rewrites() {
     return [

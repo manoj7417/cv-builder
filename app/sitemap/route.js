@@ -1,6 +1,8 @@
 import { BASE_URL } from '@/app/config'
 import { dynamicRoutes } from '@/app/config'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     // Combine static and dynamic routes
@@ -34,7 +36,7 @@ ${routes
     return new Response(sitemap.trim(), {
       headers: {
         'Content-Type': 'application/xml',
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=600'
+        'Cache-Control': 'no-store'
       },
     })
   } catch (error) {
