@@ -1,19 +1,30 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
+import { headers } from 'next/headers'
 
 // Change runtime to nodejs
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export async function GET(request) {
+export async function GET(request, { params }) {
   try {
-    // Use URL constructor to safely parse the URL
-    const url = new URL(request.url)
-    const searchParams = url.searchParams
+    // Get searchParams directly from request
+    const searchParams = request.nextUrl.searchParams
     const token = searchParams.get('token')
     
-    // Rest of params
+    if (!token) {
+      return new NextResponse(JSON.stringify({
+        status: 'error',
+        message: 'Authentication token is required'
+      }), {
+        status: 401,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    }
+
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
     const search = searchParams.get('search') || ''
@@ -21,6 +32,9 @@ export async function GET(request) {
     const location = searchParams.get('location') || ''
     const sort = searchParams.get('sort') || '-createdAt'
     const status = searchParams.get('status') || ''
+
+    const headersList = headers()
+    const host = headersList.get('host')
 
     const response = await serverInstance.get('/recruiters/alljobs', {
       params: {
@@ -33,7 +47,8 @@ export async function GET(request) {
         status
       },
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        Host: host
       }
     })
 

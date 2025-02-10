@@ -6,11 +6,6 @@ import { toast } from 'react-toastify'
 import { BriefcaseIcon, MapPinIcon, CurrencyDollarIcon, CalendarIcon, UserGroupIcon, ChartBarIcon, FunnelIcon, UserIcon, ClockIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import cookies from 'js-cookie'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-export const fetchCache = 'force-no-store'
-export const runtime = 'nodejs'
-
 const ApplicationsPage = () => {
   const [applications, setApplications] = useState([])
   const [loading, setLoading] = useState(true)
@@ -32,18 +27,21 @@ const ApplicationsPage = () => {
 
       setLoading(true)
       
-      const response = await fetch(`/api/recruiters/alljobs?token=${token}`, {
+      // Create URL with searchParams
+      const url = new URL('/api/recruiters/alljobs', window.location.origin)
+      url.searchParams.append('token', token)
+      
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
-        },
-        cache: 'no-store',
-        next: { revalidate: 0 }
+        }
       })
 
       if (!response.ok) {
-        throw new Error('Failed to fetch applications')
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Failed to fetch applications')
       }
 
       const data = await response.json()
@@ -55,8 +53,8 @@ const ApplicationsPage = () => {
       }
     } catch (error) {
       console.error('Error fetching applications:', error)
-      setError('Failed to load applications')
-      toast.error('Failed to load applications')
+      setError(error.message || 'Failed to load applications')
+      toast.error(error.message || 'Failed to load applications')
     } finally {
       setLoading(false)
     }
