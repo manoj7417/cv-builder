@@ -1,11 +1,12 @@
-export const dynamic = 'force-dynamic'
-
 'use client'
+
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { BriefcaseIcon, MapPinIcon, CurrencyDollarIcon, CalendarIcon, UserGroupIcon, ChartBarIcon, FunnelIcon, UserIcon, ClockIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import cookies from 'js-cookie'
+
+export const dynamic = 'force-dynamic'
 
 const ApplicationsPage = () => {
   const [applications, setApplications] = useState([])
