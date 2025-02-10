@@ -22,11 +22,11 @@ const ApplicationsPage = () => {
 
   const fetchApplications = async () => {
     try {
-
       const token = cookies.get('token')
-
       setLoading(true)
-      const response = await fetch(`/api/recruiters/alljobs?token=${token}`)
+      const response = await fetch(`/api/recruiters/alljobs?token=${token}`, {
+        cache: 'no-store'
+      })
       const data = await response.json()
 
       if (data.status === 'success') {
