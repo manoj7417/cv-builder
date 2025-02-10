@@ -16,7 +16,7 @@ export const config = {
     "/job-dashboard",
     "/recruiter/((?!reset-password|signin|signup).)*$", // Exclude auth routes
   ],
-};
+}; 
 
 export function middleware(req) {
   try {
