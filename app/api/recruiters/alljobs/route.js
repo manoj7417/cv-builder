@@ -26,19 +26,21 @@ export async function GET(request) {
         type,
         location,
         sort,
-        status,
-        token
+        status
+      },
+      headers: {
+        Authorization: `Bearer ${token}`
       }
     })
 
     return NextResponse.json({
       status: 'success',
       data: {
-        jobs: response.data.data?.jobs || response.data.data || [],
-        pagination: {
-          totalPages: response.data.data?.pagination?.totalPages || Math.ceil((response.data.data?.total || 0) / limit),
+        jobs: response.data.data?.jobs || response.data.data || response.data,
+        pagination: response.data.data?.pagination || {
+          totalPages: Math.ceil((response.data.data?.total || 0) / limit),
           currentPage: parseInt(page),
-          totalDocs: response.data.data?.pagination?.totalDocs || response.data.data?.total || response.data.total || 0
+          totalDocs: response.data.data?.total || 0
         }
       }
     }, {
