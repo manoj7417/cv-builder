@@ -1,16 +1,30 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
+import { headers } from 'next/headers'
 
-// Add these exports to prevent static generation attempts
+// Change runtime to nodejs
+export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export async function GET(request) {
+export async function GET(request, { params }) {
   try {
-    // Use searchParams in a way that works with static generation
-    const url = new URL(request.url)
-    const searchParams = url.searchParams
+    // Get searchParams directly from request
+    const searchParams = request.nextUrl.searchParams
+    const token = searchParams.get('token')
     
+    if (!token) {
+      return new NextResponse(JSON.stringify({
+        status: 'error',
+        message: 'Authentication token is required'
+      }), {
+        status: 401,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    }
+
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
     const search = searchParams.get('search') || ''
@@ -18,7 +32,9 @@ export async function GET(request) {
     const location = searchParams.get('location') || ''
     const sort = searchParams.get('sort') || '-createdAt'
     const status = searchParams.get('status') || ''
-    const token = searchParams.get('token') || ''   
+
+    const headersList = headers()
+    const host = headersList.get('host')
 
     const response = await serverInstance.get('/recruiters/alljobs', {
       params: {
@@ -28,34 +44,43 @@ export async function GET(request) {
         type,
         location,
         sort,
-        status,
-        token
+        status
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Host: host
       }
     })
 
-    return NextResponse.json({
+    return new NextResponse(JSON.stringify({
       status: 'success',
       data: {
         jobs: response.data.data?.jobs || response.data.data || [],
         pagination: {
-          totalPages: response.data.data?.pagination?.totalPages || Math.ceil((response.data.data?.total || 0) / limit),
+          totalPages: Math.ceil((response.data.data?.total || 0) / limit),
           currentPage: parseInt(page),
-          totalDocs: response.data.data?.pagination?.totalDocs || response.data.data?.total || response.data.total || 0
+          totalDocs: response.data.data?.total || 0
         }
       }
-    }, {
+    }), {
+      status: 200,
       headers: {
-        'Cache-Control': 'no-store'
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
       }
     })
   } catch (error) {
     console.error('Jobs fetch error:', error.response?.data || error.message)
-    return NextResponse.json(
-      { 
-        status: 'error',
-        message: error.response?.data?.message || 'Failed to fetch jobs' 
-      },
-      { status: error.response?.status || 500 }
-    )
+    return new NextResponse(JSON.stringify({
+      status: 'error',
+      message: error.response?.data?.message || 'Failed to fetch jobs'
+    }), {
+      status: error.response?.status || 500,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 } 

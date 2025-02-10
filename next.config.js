@@ -142,31 +142,52 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT' },
+          { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version' },
+          { key: 'Cache-Control', value: 'no-store, must-revalidate' },
+          { key: 'Pragma', value: 'no-cache' },
+          { key: 'Expires', value: '0' }
+        ]
+      }
     ];
   },
   experimental: {
+    isrMemoryCacheSize: 0,
+    workerThreads: false,
+    cpus: 1,
+    serverComponentsExternalPackages: ['@/lib/serverApi'],
     serverActions: true,
-  },
-  generateStaticParams: async () => {
-    return []
+    forceSwcTransforms: true,
+    optimizeCss: false,
+    scrollRestoration: true,
   },
   async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/api/:path*',
-          has: [
-            {
-              type: 'header',
-              key: 'x-skip-static',
-              value: '1',
-            },
-          ],
-          destination: '/api/:path*',
-        },
-      ],
-    }
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap'
+      },
+      {
+        source: '/sitemap',
+        destination: '/sitemap'
+      }
+    ]
+  },
+  serverRuntimeConfig: {
+    mySecret: 'secret',
+    apiUrl: process.env.BASE_URL,
+  },
+  publicRuntimeConfig: {
+    staticFolder: '/static',
+  },
+  typescript: {
+    ignoreBuildErrors: true
   },
 };
-
+ 
 module.exports = nextConfig;

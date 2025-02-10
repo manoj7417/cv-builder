@@ -9,7 +9,20 @@ export const dynamicRoutes = [
   '/coming-soon',
   '/api/recruiters/alljobs',
   '/api/recruiters/jobs',
-  '/api/recruiters/applications'
+  '/api/recruiters/applications',
+  '/recruiter/applications',
+  '/recruiter/jobs',
+  '/recruiter/dashboard',
+  '/api/sitemap',
+  '/sitemap.xml'
 ]
 
-export const dynamicParams = true 
+export const dynamicParams = true
+
+export const generateStaticParams = () => {
+  return []
+}
+
+export const fetchCache = 'force-no-store'
+
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.geniescareerhub.com' 

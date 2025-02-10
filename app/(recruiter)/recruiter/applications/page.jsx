@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
@@ -18,11 +19,31 @@ const ApplicationsPage = () => {
 
   const fetchApplications = async () => {
     try {
-
       const token = cookies.get('token')
+      if (!token) {
+        router.push('/recruiter/signin')
+        return
+      }
 
       setLoading(true)
-      const response = await fetch(`/api/recruiters/alljobs?token=${token}`)
+      
+      // Create URL with searchParams
+      const url = new URL('/api/recruiters/alljobs', window.location.origin)
+      url.searchParams.append('token', token)
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Failed to fetch applications')
+      }
+
       const data = await response.json()
 
       if (data.status === 'success') {
@@ -32,8 +53,8 @@ const ApplicationsPage = () => {
       }
     } catch (error) {
       console.error('Error fetching applications:', error)
-      setError('Failed to load applications')
-      toast.error('Failed to load applications')
+      setError(error.message || 'Failed to load applications')
+      toast.error(error.message || 'Failed to load applications')
     } finally {
       setLoading(false)
     }
