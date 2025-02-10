@@ -1,8 +1,10 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 
-export const runtime = 'edge' // Use edge runtime
+// Change runtime to nodejs
+export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET(request) {
   try {
@@ -31,12 +33,11 @@ export async function GET(request) {
         status
       },
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Cache-Control': 'no-store'
+        Authorization: `Bearer ${token}`
       }
     })
 
-    return NextResponse.json({
+    return new NextResponse(JSON.stringify({
       status: 'success',
       data: {
         jobs: response.data.data?.jobs || response.data.data || [],
@@ -46,20 +47,25 @@ export async function GET(request) {
           totalDocs: response.data.data?.total || 0
         }
       }
-    }, {
+    }), {
+      status: 200,
       headers: {
-        'Cache-Control': 'no-store',
-        'CDN-Cache-Control': 'no-store'
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
       }
     })
   } catch (error) {
     console.error('Jobs fetch error:', error.response?.data || error.message)
-    return NextResponse.json(
-      { 
-        status: 'error',
-        message: error.response?.data?.message || 'Failed to fetch jobs' 
-      },
-      { status: error.response?.status || 500 }
-    )
+    return new NextResponse(JSON.stringify({
+      status: 'error',
+      message: error.response?.data?.message || 'Failed to fetch jobs'
+    }), {
+      status: error.response?.status || 500,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 } 

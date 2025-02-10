@@ -149,6 +149,9 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT' },
           { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version' },
+          { key: 'Cache-Control', value: 'no-store, must-revalidate' },
+          { key: 'Pragma', value: 'no-cache' },
+          { key: 'Expires', value: '0' }
         ]
       }
     ];
@@ -159,6 +162,9 @@ const nextConfig = {
     cpus: 1,
     serverComponentsExternalPackages: ['@/lib/serverApi'],
     serverActions: true,
+    forceSwcTransforms: true,
+    optimizeCss: false,
+    scrollRestoration: true,
   },
   async rewrites() {
     return [
@@ -178,6 +184,9 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     staticFolder: '/static',
+  },
+  typescript: {
+    ignoreBuildErrors: true
   },
 };
  

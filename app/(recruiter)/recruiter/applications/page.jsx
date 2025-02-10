@@ -7,7 +7,9 @@ import { BriefcaseIcon, MapPinIcon, CurrencyDollarIcon, CalendarIcon, UserGroupI
 import cookies from 'js-cookie'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 export const fetchCache = 'force-no-store'
+export const runtime = 'nodejs'
 
 const ApplicationsPage = () => {
   const [applications, setApplications] = useState([])
@@ -23,13 +25,21 @@ const ApplicationsPage = () => {
   const fetchApplications = async () => {
     try {
       const token = cookies.get('token')
+      if (!token) {
+        router.push('/recruiter/signin')
+        return
+      }
+
       setLoading(true)
       
       const response = await fetch(`/api/recruiters/alljobs?token=${token}`, {
-        cache: 'no-store',
+        method: 'GET',
         headers: {
-          'Cache-Control': 'no-store'
-        }
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        },
+        cache: 'no-store',
+        next: { revalidate: 0 }
       })
 
       if (!response.ok) {
