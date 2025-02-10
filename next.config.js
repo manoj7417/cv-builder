@@ -189,5 +189,5 @@ const nextConfig = {
     staticFolder: '/static',
   },
 };
-
+ 
 module.exports = nextConfig;
