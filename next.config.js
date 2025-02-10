@@ -142,10 +142,21 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, max-age=0"
+          }
+        ]
+      }
     ];
   },
   experimental: {
     serverActions: true,
+    workerThreads: false,
+    cpus: 1
   },
   generateStaticParams: async () => {
     return []
@@ -166,6 +177,12 @@ const nextConfig = {
         },
       ],
     }
+  },
+  serverRuntimeConfig: {
+    mySecret: 'secret',
+  },
+  publicRuntimeConfig: {
+    staticFolder: '/static',
   },
 };
 

@@ -2,48 +2,53 @@ import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
+export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
+export const revalidate = 0
+
 export async function GET(request) {
   try {
-    // Get the URL search params
-    const { searchParams } = new URL(request.url)
+    const url = new URL(request.url)
+    const searchParams = url.searchParams
     
-    // Get the recruiter's ID from the cookie
-    const cookieStore = cookies()
-    const userDataCookie = cookieStore.get('auth')
-    const userData = userDataCookie ? JSON.parse(userDataCookie.value) : null
-    const userId = userData?.userdata?._id
+    const page = searchParams.get('page') || 1
+    const limit = searchParams.get('limit') || 10
+    const status = searchParams.get('status') || ''
 
-    if (!userId) {
+    const cookieStore = cookies()
+    const token = cookieStore.get('token')?.value
+
+    if (!token) {
       return NextResponse.json(
-        { 
-          status: 'error',
-          message: 'Unauthorized - Please login first' 
-        },
+        { message: 'Authentication required' },
         { status: 401 }
       )
     }
 
-    // Make request to backend with userId
     const response = await serverInstance.get('/recruiters/applications', {
-      params: {
-        userId,
-        page: searchParams.get('page') || 1,
-        limit: searchParams.get('limit') || 10
+      params: { page, limit, status },
+      headers: { Authorization: `Bearer ${token}` }
+    })
+
+    return NextResponse.json(response.data, {
+      headers: {
+        'Cache-Control': 'no-store, max-age=0'
       }
     })
-    
-    return NextResponse.json({
-      status: 'success',
-      data: response.data
-    })
+
   } catch (error) {
-    console.error('Applications fetch error:', error.response?.data || error.message)
+    console.error('Applications fetch error:', error)
     return NextResponse.json(
       { 
         status: 'error',
         message: error.response?.data?.message || 'Failed to fetch applications' 
       },
-      { status: error.response?.status || 500 }
+      { 
+        status: error.response?.status || 500,
+        headers: {
+          'Cache-Control': 'no-store, max-age=0'
+        }
+      }
     )
   }
 } 
