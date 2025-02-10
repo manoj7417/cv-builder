@@ -163,14 +163,12 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@/lib/serverApi']
   },
   async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/sitemap.xml',
-          destination: '/api/sitemap',
-        }
-      ]
-    }
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap'
+      }
+    ]
   },
   serverRuntimeConfig: {
     mySecret: 'secret',
