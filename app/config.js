@@ -6,5 +6,10 @@ export const dynamicRoutes = [
   '/career-services',
   '/recruiter',
   '/job-dashboard',
-  '/coming-soon'
-] 
+  '/coming-soon',
+  '/api/recruiters/alljobs',
+  '/api/recruiters/jobs',
+  '/api/recruiters/applications'
+]
+
+export const dynamicParams = true 

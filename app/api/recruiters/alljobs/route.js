@@ -1,12 +1,16 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 
+// Add these exports to prevent static generation attempts
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET(request) {
   try {
-    // Get all query parameters
-    const { searchParams } = new URL(request.url)
+    // Use searchParams in a way that works with static generation
+    const url = new URL(request.url)
+    const searchParams = url.searchParams
+    
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
     const search = searchParams.get('search') || ''
@@ -16,7 +20,6 @@ export async function GET(request) {
     const status = searchParams.get('status') || ''
     const token = searchParams.get('token') || ''   
 
-    // Make request to backend
     const response = await serverInstance.get('/recruiters/alljobs', {
       params: {
         page,
@@ -30,8 +33,7 @@ export async function GET(request) {
       }
     })
 
-    // Ensure we're sending the total count in the response
-    const responseData = {
+    return NextResponse.json({
       status: 'success',
       data: {
         jobs: response.data.data?.jobs || response.data.data || [],
@@ -41,9 +43,11 @@ export async function GET(request) {
           totalDocs: response.data.data?.pagination?.totalDocs || response.data.data?.total || response.data.total || 0
         }
       }
-    }
-
-    return NextResponse.json(responseData)
+    }, {
+      headers: {
+        'Cache-Control': 'no-store'
+      }
+    })
   } catch (error) {
     console.error('Jobs fetch error:', error.response?.data || error.message)
     return NextResponse.json(

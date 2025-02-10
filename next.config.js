@@ -125,7 +125,8 @@ const nextConfig = {
                 https://www.google.com 
                 https://static.hotjar.com 
                 https://ws8.hotjar.com
-                https://j.clarity.ms;
+                https://j.clarity.ms
+                https://connect.facebook.net;
               frame-src 'self' 
                 https://www.youtube.com 
                 https://docs.google.com 
@@ -142,6 +143,29 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  experimental: {
+    serverActions: true,
+  },
+  generateStaticParams: async () => {
+    return []
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/api/:path*',
+          has: [
+            {
+              type: 'header',
+              key: 'x-skip-static',
+              value: '1',
+            },
+          ],
+          destination: '/api/:path*',
+        },
+      ],
+    }
   },
 };
 
