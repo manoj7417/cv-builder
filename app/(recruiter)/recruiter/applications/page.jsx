@@ -27,15 +27,9 @@ const ApplicationsPage = () => {
 
       setLoading(true)
       
-      // Create URL with searchParams
-      const url = new URL('/api/recruiters/alljobs', window.location.origin)
-      url.searchParams.append('token', token)
-      
-      const response = await fetch(url, {
-        method: 'GET',
+      const response = await fetch('/api/recruiters/jobs', {
         headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache'
+          Authorization: `Bearer ${token}`
         }
       })
 
