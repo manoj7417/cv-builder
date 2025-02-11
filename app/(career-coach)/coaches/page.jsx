@@ -16,12 +16,13 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { GetTokens } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Star } from "lucide-react";
 
 const CoachPage = () => {
   const [coaches, setAllCoaches] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCoach, setSelectedCoach] = useState(null);
-
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(0);
   const [geoData, setGeoData] = useState(null);
@@ -34,7 +35,8 @@ const CoachPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currency, setCurrency] = useState("USD");
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
-  const [getTestimonial, setTestimonial] = useState([]);
+
+  const [getTestimonial, setGetTestimonial] = useState([]);
   console.log("getTestimonial::", getTestimonial);
 
   const toggleContent = (type) => {
@@ -165,19 +167,31 @@ const CoachPage = () => {
     }
   };
 
-  const fechCoachTestimonial = async () => {
-    const coachId = selectedCoach?.id;
-    console.log("coachId::", coachId);
-    try {
-      const response = await axios.get(`/api/getTestimonial/${coachId}`);
-      setTestimonial(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleMobileView = () => {
     setIsMobile(true);
+  };
+
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <Star
+        key={index}
+        className={`h-5 w-5 ${
+          index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+        }`}
+      />
+    ));
+  };
+
+  const fetchTestimonials = async () => {
+    const id = selectedCoach?.id;
+    console.log("coachId", id);
+    try {
+      const response = await axios.get(`/api/getTestimonial/${id}`);
+      console.log("response", response.data.testimonials);
+      setGetTestimonial(response.data.testimonials || []);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -189,14 +203,16 @@ const CoachPage = () => {
   }, []);
 
   useEffect(() => {
-    fechCoachTestimonial();
-  }, []);
-
-  useEffect(() => {
     if (selectedProgram !== null) {
       checkCoursePurchased(selectedCoach?.programs[selectedProgram]?._id);
     }
   }, [selectedProgram, selectedCoach]);
+
+  useEffect(() => {
+    if (selectedCoach?.id) {
+      fetchTestimonials();
+    }
+  }, [selectedCoach]);
 
   const programDetails = selectedCoach?.programs[selectedProgram];
   const isPurchased = purchasedPrograms[programDetails?._id];
@@ -446,8 +462,24 @@ const CoachPage = () => {
                         </p>
                       </TabsContent>
                       <TabsContent value="reviews">
-                        Matt is a real pro—highly competent, engaged, and
-                        insightful. Highly recommended.
+                        {getTestimonial.length > 0 ? (
+                          getTestimonial.map((item) => (
+                            <Card key={item._id} className="mb-4 shadow-lg">
+                              <CardHeader>
+                                <CardTitle className="flex items-center gap-2">
+                                  {renderStars(item.rating)}
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <p className="text-gray-700">{item.review}</p>
+                              </CardContent>
+                            </Card>
+                          ))
+                        ) : (
+                          <p className="text-center text-gray-500">
+                            No reviews available.
+                          </p>
+                        )}
                       </TabsContent>
                     </div>
                   </Tabs>
@@ -982,8 +1014,24 @@ const CoachPage = () => {
                         </p>
                       </TabsContent>
                       <TabsContent value="reviews">
-                        Matt is a real pro—highly competent, engaged, and
-                        insightful. Highly recommended.
+                        {getTestimonial.length > 0 ? (
+                          getTestimonial.map((item) => (
+                            <Card key={item._id} className="mb-4 shadow-lg">
+                              <CardHeader>
+                                <CardTitle className="flex items-center gap-2">
+                                  {renderStars(item.rating)}
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <p className="text-gray-700">{item.review}</p>
+                              </CardContent>
+                            </Card>
+                          ))
+                        ) : (
+                          <p className="text-center text-gray-500">
+                            No reviews available.
+                          </p>
+                        )}
                       </TabsContent>
                     </div>
                   </Tabs>
