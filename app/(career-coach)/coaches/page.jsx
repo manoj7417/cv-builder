@@ -35,9 +35,7 @@ const CoachPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currency, setCurrency] = useState("USD");
   const [purchasedPrograms, setPurchasedPrograms] = useState({});
-
   const [getTestimonial, setGetTestimonial] = useState([]);
-  console.log("getTestimonial::", getTestimonial);
 
   const toggleContent = (type) => {
     setShowFullContent((prev) => ({
@@ -219,7 +217,7 @@ const CoachPage = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto mt-[150px] mb-10 px-4">
+      <div className="max-w-full mx-auto mt-[150px] mb-10 lg:px-20 px-4">
         <div className="coach_main_div w-full flex flex-col lg:flex-row gap-10">
           {/* Coach Selection Section */}
           <div className="coach_card lg:w-[30%] w-full lg:h-screen lg:sticky top-[100px] overflow-y-scroll h-[700px] pr-2">
@@ -252,8 +250,10 @@ const CoachPage = () => {
                       <div
                         key={index}
                         onClick={() => handleSelectCoach(item)}
-                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer lg:border-none border border-gray-300 ${
-                          selectedCoach?._id === item._id ? "bg-blue-50" : ""
+                        className={`p-2 flex flex-row overflow-hidden items-center rounded shadow-md text-slate-500 shadow-slate-200 cursor-pointer lg:border-none border border-gray-300 transition-all duration-300 hover:border-blue-700 ${
+                          selectedCoach?._id === item._id
+                            ? "bg-blue-50 border-blue-700"
+                            : ""
                         }`}
                       >
                         <figure className="flex-shrink-0">
@@ -265,17 +265,11 @@ const CoachPage = () => {
                         </figure>
                         <div className="flex-1 p-4 sm:p-6 sm:mx-6 sm:px-0">
                           <header className="flex gap-4">
-                            <div>
+                            <div onClick={handleMobileView}>
                               <h3 className="text-base font-medium text-slate-900">
                                 {item.name}
                               </h3>
-                              {/* <p className="text-xs text-slate-800 break-all">
-                                {item?.email}
-                              </p> */}
-                              <Button
-                                className="lg:hidden bolck px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer"
-                                onClick={handleMobileView}
-                              >
+                              <Button className="lg:hidden block px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer">
                                 Book Now
                               </Button>
                             </div>
@@ -287,7 +281,7 @@ const CoachPage = () => {
           </div>
 
           {/* Coach Details Section */}
-          <div className="lg:block hidden coach_details lg:w-[70%] w-full bg-blue-100 p-6 sm:p-10">
+          <div className="lg:block hidden coach_details lg:w-[70%] w-full bg-blue-50 p-6 sm:p-10 rounded-md">
             {isLoading ? (
               <div className="animate-pulse space-y-5">
                 {/* Skeleton for Top Match */}
@@ -406,13 +400,13 @@ const CoachPage = () => {
                     <TabsList className="flex flex-wrap">
                       <TabsTrigger
                         value="about"
-                        className="rounded-md text-xs sm:text-xl ms-0"
+                        className="rounded-md text-xs sm:text-base ms-0"
                       >
                         About
                       </TabsTrigger>
                       <TabsTrigger
                         value="reviews"
-                        className="rounded-md text-xs sm:text-xl ms-0"
+                        className="rounded-md text-xs sm:text-base ms-0"
                       >
                         Reviews
                       </TabsTrigger>
@@ -464,19 +458,24 @@ const CoachPage = () => {
                       <TabsContent value="reviews">
                         {getTestimonial.length > 0 ? (
                           getTestimonial.map((item) => (
-                            <Card key={item._id} className="mb-4 shadow-lg">
+                            <Card
+                              key={item._id}
+                              className="mb-4 shadow-lg border border-gray-200 transition-all duration-300 hover:border-blue-500 hover:shadow-xl"
+                            >
                               <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
+                                <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                                   {renderStars(item.rating)}
                                 </CardTitle>
                               </CardHeader>
                               <CardContent>
-                                <p className="text-gray-700">{item.review}</p>
+                                <p className="text-gray-700 lg:text-sm text-xs leading-relaxed">
+                                  {item.review}
+                                </p>
                               </CardContent>
                             </Card>
                           ))
                         ) : (
-                          <p className="text-center text-gray-500">
+                          <p className="text-center text-gray-500 font-bold mt-20 lg:text-xl text-sm">
                             No reviews available.
                           </p>
                         )}
@@ -520,122 +519,6 @@ const CoachPage = () => {
               {selectedCoach?.programs.filter((program) => program.isapproved)
                 .length > 0 ? (
                 <>
-                  {/* <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
-                    <div className="coach_related_programs h-[75vh] overflow-y-scroll">
-                      <ul className="my-5">
-                        {selectedCoach?.programs.map(
-                          (program, index) =>
-                            program.isapproved === true && (
-                              <li
-                                key={index}
-                                className={`flex gap-5 justify-between items-center py-2 px-4 cursor-pointer border-2 rounded-md ${
-                                  selectedProgram === index
-                                    ? "border-blue-500 bg-blue-100"
-                                    : "border-transparent"
-                                }`}
-                                onClick={() => {
-                                  if (selectedProgram !== index) {
-                                    setSelectedProgram(index);
-                                    // setProgramDetails(program)
-                                  }
-                                }}
-                              >
-                                <div className="program_inner_content space-y-2 flex gap-5 items-center">
-                                  <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                                  <div>
-                                    <h3 className="text-sm font-bold">
-                                      {program.title}
-                                    </h3>
-                                    <div
-                                      className="text-xs programDescription-content"
-                                      dangerouslySetInnerHTML={{
-                                        __html: program.description,
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="program_price font-bold text-sm">
-                                  {currency === "INR"
-                                    ? `₹${program.INRrate}`
-                                    : currency === "USD"
-                                    ? `$${program.USDrate}`
-                                    : `£${program.amount}`}
-                                </div>
-                              </li>
-                            )
-                        )}
-                      </ul>
-                    </div>
-
-                    <div className="coach_booking border p-5 rounded-md">
-                      {selectedProgram !== null && (
-                        <>
-                          <div className="program_details flex justify-between ">
-                            <div className="coach_program_heading flex gap-2">
-                              <BsCheckCircleFill className="text-blue-500 w-8 h-8" />
-                              <div>
-                                <h2 className="text-sm font-bold">
-                                  {programDetails?.title}
-                                </h2>
-                                <div
-                                  className="text-xs programDescription-content"
-                                  dangerouslySetInnerHTML={{
-                                    __html: programDetails?.description,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                            <div className="coach_price">
-                              <div className="text-sm font-bold">
-                                {currency === "INR"
-                                  ? `₹${programDetails?.INRrate}`
-                                  : currency === "USD"
-                                  ? `$${programDetails?.USDrate}`
-                                  : `£${programDetails?.amount}`}
-                              </div>
-                            </div>
-                          </div>
-                          <div className="schedule_meet mt-5">
-                            {isPurchased ? (
-                              <Button disabled>Already Purchased</Button>
-                            ) : (
-                              <Button
-                                onClick={() => handleBuyProgram(programDetails)}
-                              >
-                                {isLoading ? (
-                                  <span className="flex items-center gap-2">
-                                    <svg
-                                      className="animate-spin h-5 w-5 text-white"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <circle
-                                        className="opacity-25"
-                                        cx="12"
-                                        cy="12"
-                                        r="10"
-                                        stroke="currentColor"
-                                        strokeWidth="4"
-                                      ></circle>
-                                      <path
-                                        className="opacity-75"
-                                        fill="currentColor"
-                                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                                      ></path>
-                                    </svg>
-                                    Scheduling...
-                                  </span>
-                                ) : (
-                                  "Schedule a Meet"
-                                )}
-                              </Button>
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div> */}
                   <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
                     {/* Coach Related Programs Section */}
                     <div className="coach_related_programs h-[75vh] overflow-y-scroll lg:hidden block">
@@ -958,13 +841,13 @@ const CoachPage = () => {
                     <TabsList className="flex flex-wrap">
                       <TabsTrigger
                         value="about"
-                        className="rounded-md text-xs sm:text-xl ms-0"
+                        className="rounded-md text-xs sm:text-base ms-0"
                       >
                         About
                       </TabsTrigger>
                       <TabsTrigger
                         value="reviews"
-                        className="rounded-md text-xs sm:text-xl ms-0"
+                        className="rounded-md text-xs sm:text-base ms-0"
                       >
                         Reviews
                       </TabsTrigger>
@@ -1023,12 +906,14 @@ const CoachPage = () => {
                                 </CardTitle>
                               </CardHeader>
                               <CardContent>
-                                <p className="text-gray-700">{item.review}</p>
+                                <p className="text-gray-700 text-xs">
+                                  {item.review}
+                                </p>
                               </CardContent>
                             </Card>
                           ))
                         ) : (
-                          <p className="text-center text-gray-500">
+                          <p className="text-center text-gray-500 font-bold mt-20 lg:text-xl text-sm">
                             No reviews available.
                           </p>
                         )}
