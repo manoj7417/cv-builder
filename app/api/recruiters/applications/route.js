@@ -10,29 +10,21 @@ export const revalidate = 0
 
 export async function GET(request) {
   try {
-    // Use URLSearchParams to parse query parameters
-    const url = new URL(request.url)
-    const page = url.searchParams.get('page') || '1'
-    const limit = url.searchParams.get('limit') || '10' 
-    const status = url.searchParams.get('status') || ''
+    const { searchParams } = new URL(request.url)
+    const page = searchParams.get('page') || '1'
+    const limit = searchParams.get('limit') || '10' 
+    const status = searchParams.get('status') || ''
 
-    // Get token from cookies
     const cookieStore = cookies()
     const token = cookieStore.get('token')?.value
 
     if (!token) {
-      return new NextResponse(
-        JSON.stringify({ message: 'Authentication required' }),
-        { 
-          status: 401,
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        }
-      )
+      return NextResponse.json({
+        status: 'error',
+        message: 'Authentication required'
+      }, { status: 401 })
     }
 
-    // Make API request
     const response = await serverInstance.get('/recruiters/applications', {
       params: {
         page: parseInt(page),
@@ -44,29 +36,16 @@ export async function GET(request) {
       }
     })
 
-    // Return response with proper headers
-    return new NextResponse(
-      JSON.stringify(response.data),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
+    return NextResponse.json({
+      status: 'success',
+      data: response.data
+    })
 
   } catch (error) {
-    console.error('Applications fetch error:', error)
-    return new NextResponse(
-      JSON.stringify({ 
-        message: error.message || 'Failed to fetch applications'
-      }),
-      {
-        status: error.status || 500,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
+    console.error('Applications fetch error:', error.response?.data || error.message)
+    return NextResponse.json({
+      status: 'error',
+      message: error.response?.data?.message || 'Failed to fetch applications'
+    }, { status: error.response?.status || 500 })
   }
 } 

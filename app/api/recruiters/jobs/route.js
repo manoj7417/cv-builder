@@ -1,10 +1,11 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
-
+import { cookies } from 'next/headers'
 export async function GET(request) {
   try {
     // Get token from request headers
-    const token = request.headers.get('token')
+    const token = cookies().get('token').value
+
     if (!token) {
       return NextResponse.json(
         { message: 'No token provided' },
