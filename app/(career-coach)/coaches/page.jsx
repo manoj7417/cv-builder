@@ -471,7 +471,7 @@ const CoachPage = () => {
                                 </CardTitle>
                               </CardHeader>
                               <CardContent>
-                                <p className="text-gray-700">"{item.review}"</p>
+                                <p className="text-gray-700">{item.review}</p>
                               </CardContent>
                             </Card>
                           ))
@@ -1023,7 +1023,7 @@ const CoachPage = () => {
                                 </CardTitle>
                               </CardHeader>
                               <CardContent>
-                                <p className="text-gray-700">"{item.review}"</p>
+                                <p className="text-gray-700">{item.review}</p>
                               </CardContent>
                             </Card>
                           ))
