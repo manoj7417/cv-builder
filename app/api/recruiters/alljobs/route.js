@@ -1,20 +1,23 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 
+// Add these route segment configs
 export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
+export const revalidate = 0
 
 export async function GET(request) {
   try {
-    // Use searchParams directly from the request object
-    const searchParams = request.nextUrl.searchParams
-    const page = searchParams.get('page') || 1
-    const limit = searchParams.get('limit') || 10
-    const search = searchParams.get('search') || ''
-    const type = searchParams.get('type') || ''
-    const location = searchParams.get('location') || ''
-    const sort = searchParams.get('sort') || '-createdAt'
-    const status = searchParams.get('status') || ''
-    const token = searchParams.get('token') || ''   
+    // Parse URL using standard URL API
+    const url = new URL(request.url)
+    const page = url.searchParams.get('page') || 1
+    const limit = url.searchParams.get('limit') || 10
+    const search = url.searchParams.get('search') || ''
+    const type = url.searchParams.get('type') || ''
+    const location = url.searchParams.get('location') || ''
+    const sort = url.searchParams.get('sort') || '-createdAt'
+    const status = url.searchParams.get('status') || ''
+    const token = url.searchParams.get('token') || ''   
 
     // Make request to backend
     const response = await serverInstance.get('/recruiters/alljobs', {
