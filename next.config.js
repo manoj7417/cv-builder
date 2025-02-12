@@ -161,7 +161,6 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1,
     serverComponentsExternalPackages: ['@/lib/serverApi'],
-    serverActions: true,
     forceSwcTransforms: true,
     optimizeCss: false,
     scrollRestoration: true,
