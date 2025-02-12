@@ -5,8 +5,8 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(request) {
   try {
-    // Get all query parameters
-    const { searchParams } = new URL(request.url)
+    // Use searchParams directly from the request object
+    const searchParams = request.nextUrl.searchParams
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
     const search = searchParams.get('search') || ''

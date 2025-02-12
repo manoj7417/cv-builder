@@ -1,11 +1,10 @@
 import { serverInstance } from '@/lib/serverApi'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+
 export async function GET(request) {
   try {
-    // Get token from request headers
-    const token = cookies().get('token').value
-
+    const token = cookies().get('token')?.value
     if (!token) {
       return NextResponse.json(
         { message: 'No token provided' },
@@ -13,8 +12,7 @@ export async function GET(request) {
       )
     }
 
-    // Get all query parameters
-    const { searchParams } = new URL(request.url)
+    const searchParams = request.nextUrl.searchParams
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
     const sortBy = searchParams.get('sortBy') || 'createdAt'
@@ -22,7 +20,6 @@ export async function GET(request) {
     const search = searchParams.get('search') || ''
     const type = searchParams.get('type') || ''
     const location = searchParams.get('location') || ''
-
 
     // Make request to backend with all filters
     const response = await serverInstance.get('/recruiters/jobs', {
@@ -39,7 +36,6 @@ export async function GET(request) {
         location
       }
     })
-
 
     // Return the entire response data structure
     return NextResponse.json(response.data)

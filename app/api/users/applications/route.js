@@ -3,17 +3,14 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url)
+    const searchParams = request.nextUrl.searchParams
     const userId = searchParams.get('userId')
     const page = searchParams.get('page') || 1
     const limit = searchParams.get('limit') || 10
 
     if (!userId) {
       return NextResponse.json(
-        { 
-          status: 'error',
-          message: 'User ID is required' 
-        },
+        { status: 'error', message: 'User ID is required' },
         { status: 400 }
       )
     }

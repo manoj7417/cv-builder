@@ -164,6 +164,7 @@ const nextConfig = {
     forceSwcTransforms: true,
     optimizeCss: false,
     scrollRestoration: true,
+    runtime: 'experimental-edge',
   },
   async rewrites() {
     return [
