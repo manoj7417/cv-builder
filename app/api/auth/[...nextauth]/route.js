@@ -79,11 +79,7 @@ const authOptions = {
   },
 };
 
-// Route Handlers for Next.js App Router
-export async function GET(req, res) {
-  return NextAuth(req, res, authOptions);
-}
+// Update the handler configuration
+const handler = NextAuth(authOptions);
 
-export async function POST(req, res) {
-  return NextAuth(req, res, authOptions);
-}
+export { handler as GET, handler as POST };
