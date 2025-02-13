@@ -132,7 +132,7 @@ const CorporatePage = () => {
                 Transform Your <span className="text-blue-300">Workforce</span> with Our Corporate Solutions
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
-                Comprehensive solutions designed to elevate your organization's performance and employee potential.
+                Comprehensive solutions designed to elevate your organization&apos;s performance and employee potential.
               </p>
               <div className="flex flex-wrap gap-4">
                 <button 
@@ -187,7 +187,7 @@ const CorporatePage = () => {
         >
           <h2 className="text-4xl font-bold mb-4">Our Corporate Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to meet your organization's unique needs and challenges.
+            Comprehensive solutions tailored to meet your organization&apos;s unique needs and challenges.
           </p>
         </motion.div>
 
@@ -291,7 +291,7 @@ const CorporatePage = () => {
           >
             <h2 className="text-4xl font-bold mb-6 text-white">Ready to Transform Your Workplace?</h2>
             <p className="text-gray-200 mb-8 max-w-2xl mx-auto">
-              Let's discuss how our corporate solutions can help your organization thrive in today's competitive landscape.
+              Let&apos;s discuss how our corporate solutions can help your organization thrive in today&apos;s competitive landscape.
             </p>
             <button 
               onClick={() => router.push('/contact-us')}
