@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
 import CoachWorksSlider from "@/components/component/CoachWorksSlider";
+import { motion } from "framer-motion";
 
 const faqData = [
   {
@@ -238,13 +239,59 @@ const workServicesData = [
   },
 ];
 
-
-
+// Add this new array after your existing data arrays
+const featuredCourses = [
+  {
+    id: 1,
+    title: "Resilience Building for Leaders and Their Teams",
+    subtitle: "Resilience Programmes",
+    description: "Develop robust leadership capabilities and team resilience through our comprehensive programme. Learn practical strategies to navigate challenges, maintain performance under pressure, and build a resilient organisational culture.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format",
+    curriculum: [
+      "Understanding resilience fundamentals",
+      "Stress management and coping strategies",
+      "Team dynamics and support systems",
+      "Leadership under pressure",
+      "Building sustainable resilience practices"
+    ],
+    benefits: [
+      "Build personal and team resilience",
+      "Develop stress management techniques",
+      "Enhance team performance under pressure",
+      "Create sustainable workplace wellbeing"
+    ],
+    instructor: "Kai-Nneka Townsend",
+    duration: "12 weeks"
+  },
+  {
+    id: 2,
+    title: "DiSC - Everything DiSC®",
+    subtitle: "The Culture Catalyst™",
+    description: "Transform your workplace culture with DiSC®. This powerful behavioural assessment tool helps teams understand communication styles, improve collaboration, and build stronger working relationships.",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format",
+    curriculum: [
+      "Understanding DiSC® profiles",
+      "Communication style mapping",
+      "Building effective relationships",
+      "Team dynamics optimisation",
+      "Conflict resolution strategies"
+    ],
+    benefits: [
+      "Enhance team communication",
+      "Improve workplace relationships",
+      "Develop emotional intelligence",
+      "Build effective leadership styles"
+    ],
+    instructor: "Kai-Nneka Townsend",
+    duration: "8 weeks"
+  }
+];
 
 const CoachNewPage = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [findCoachPopUp, setFindCoachPopup] = useState(false);
+  const [expandedCard, setExpandedCard] = useState(null);
 
   const toggle = (index) => {
     if (open === index) {
@@ -301,6 +348,131 @@ const CoachNewPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Featured Courses Section */}
+      <section className="featured-courses py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl font-semibold mb-4">
+              Featured <span className="text-blue-700">Programmes</span>
+            </h2>
+            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+              Transform your leadership and team dynamics with our specialised coaching programmes, 
+              designed to build resilience and enhance workplace culture.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {featuredCourses.map((course) => (
+              <motion.div
+                key={course.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group"
+              >
+                <div className="relative h-72">
+                  <Image
+                    src={course.image}
+                    alt={course.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                    <div className="absolute bottom-6 left-6 text-white">
+                      <p className="text-sm font-medium text-blue-400 mb-2">{course.subtitle}</p>
+                      <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="flex items-center">
+                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                          </svg>
+                          {course.duration}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-8">
+                  <p className="text-gray-600 mb-6 text-lg">{course.description}</p>
+                  
+                  <button 
+                    onClick={() => setExpandedCard(expandedCard === course.id ? null : course.id)}
+                    className="w-full flex items-center justify-between text-blue-600 hover:text-blue-700 transition-colors mb-6"
+                  >
+                    <span className="font-semibold">View Programme Details</span>
+                    <svg 
+                      className={`w-5 h-5 transform transition-transform ${expandedCard === course.id ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  <motion.div
+                    initial={false}
+                    animate={{ height: expandedCard === course.id ? 'auto' : 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-4">What You&apos;ll Learn:</h4>
+                        <ul className="space-y-3">
+                          {course.curriculum.map((item, index) => (
+                            <li key={index} className="flex items-center text-sm text-gray-600">
+                              <span className="h-2 w-2 bg-blue-600 rounded-full mr-3"></span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-4">Programme Benefits:</h4>
+                        <ul className="space-y-3">
+                          {course.benefits.map((benefit, index) => (
+                            <li key={index} className="flex items-center text-sm text-gray-600">
+                              <span className="h-2 w-2 bg-green-500 rounded-full mr-3"></span>
+                              {benefit}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  <div className="flex items-center justify-between border-t pt-6 mt-6">
+                    <div className="flex items-center">
+                      <div>
+                        <p className="text-sm text-gray-600">Programme Lead</p>
+                        <p className="text-base font-semibold">{course.instructor}</p>
+                      </div>
+                    </div>
+                    <Link
+                      href={`/contact-us?message=${encodeURIComponent(`Hi, I'm interested in the ${course.title} programme led by ${course.instructor}. I would like to learn more about this programme.`)}`}
+                      className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                    >
+                      Contact Coach
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="hows_it_work py-20">
         <div className="main_heading text-center">
           <h2 className="text-5xl text-center text-bold font-semibold my-5">
