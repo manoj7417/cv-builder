@@ -8,13 +8,16 @@ export const metadata = {
   title: "Personalized Career Counseling - Discover Your Path to Success",
   description:
     "Explore expert career counseling services to guide your career choices, build skills, and create a personalized path to achieve your professional goals. Get started today!",
+  alternates: {
+    canonical: "https://www.geniescareerhub.com/career-counselling",
+  },
 };
 
 const Layout = ({ children }) => {
   return (
-    <main className='resume_dashboard'>
-      <div className='resume_dashboard_container'>
-        <div className='wrapper'>
+    <main className="resume_dashboard">
+      <div className="resume_dashboard_container">
+        <div className="wrapper">
           {children}
           <Footer />
         </div>
