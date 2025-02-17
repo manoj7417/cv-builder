@@ -12,6 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { ImSpinner3 } from "react-icons/im";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useSearchParams } from 'next/navigation'
+
 const locations = [
   {
     title: "Head office",
@@ -29,13 +31,19 @@ const locations = [
 
 export default function ContactPageTwo() {
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams()
+  const defaultMessage = searchParams.get('message') || ''
+
   const [messageData, setMessageData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    message: "",
+    message: defaultMessage,
   });
+
+  const subject = searchParams.get('subject') || ''
+  const provider = searchParams.get('provider') || ''
 
   const checkFields = () => {
     for (const [key, value] of Object.entries(messageData)) {
@@ -185,6 +193,16 @@ export default function ContactPageTwo() {
                       onChange={handleMessageDataChange}
                     />
                   </div>
+                  <input 
+                    type="text"
+                    name="subject"
+                    defaultValue={subject}
+                  />
+                  <input 
+                    type="text"
+                    name="provider"
+                    defaultValue={provider}
+                  />
                   <Button
                     type='button'
                     className='w-full rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black items-center flex'

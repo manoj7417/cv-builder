@@ -5,19 +5,19 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 const services = {
-  'back-to-work-programs': {
+  'back-to-work-programmes': {
     title: "Back to Work Programs",
     description: "Specialized programs supporting mental health returnees and ex-offenders in workplace reintegration.",
     icon: "briefcase",
     category: "Inclusion",
     image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=500&auto=format",
     price: "Custom pricing based on program size",
-    fullDescription: `Our Back to Work Programs are designed to provide comprehensive support for individuals returning to the workforce. We offer:
-      • Personalized mentoring and coaching
+    fullDescription: `Our Back to Work Programmes are designed to provide comprehensive support for individuals returning to the workforce. We offer:
+      • Personalised mentoring and coaching
       • Skills assessment and development
       • Workplace readiness training
       • Ongoing support during transition
-      • Employer partnership programs`,
+      • Employer partnership programmes`,
     benefits: [
       "Increased workforce diversity",
       "Social impact contribution",
@@ -400,7 +400,7 @@ const services = {
     icon: "trending-up",
     category: "Development",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=500&auto=format",
-    fullDescription: `Accelerate career growth with our professional development programs:
+    fullDescription: `Accelerate career growth with our professional development programmes:
       • Skill assessment and planning
       • Industry-specific training
       • Certification preparation
@@ -609,6 +609,276 @@ const services = {
         ]
       }
     }
+  },
+  'mental-health-first-aid': {
+    title: "Mental Health First Aid for Corporates",
+    description: "Comprehensive training for workplace mental health support and crisis management.",
+    icon: "heartbeat",
+    category: "Wellness",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2000&auto=format",
+    fullDescription: `Equip your organisation with essential mental health support skills:
+      • Mental health first aid certification
+      • Crisis intervention training
+      • Stress management techniques
+      • Employee wellbeing programmes
+      • Support system implementation`,
+    benefits: [
+      "Improved employee wellbeing",
+      "Reduced workplace stress",
+      "Better crisis management",
+      "Enhanced workplace culture",
+      "Lower absenteeism rates"
+    ],
+    pricing: {
+      basic: {
+        name: "Essential Training",
+        price: "Starting at $2,000",
+        features: [
+          "Basic MHFA certification",
+          "Up to 10 participants",
+          "Course materials",
+          "Basic assessment"
+        ]
+      },
+      standard: {
+        name: "Comprehensive Program",
+        price: "Starting at $4,500",
+        features: [
+          "Advanced MHFA certification",
+          "Up to 20 participants",
+          "Implementation support",
+          "Crisis management protocols",
+          "6-month follow-up"
+        ]
+      },
+      premium: {
+        name: "Enterprise Solution",
+        price: "Custom Quote",
+        features: [
+          "Full organization coverage",
+          "Custom protocols",
+          "Ongoing support",
+          "Regular refresher courses",
+          "24/7 crisis support"
+        ]
+      }
+    }
+  },
+  'disability-confident': {
+    title: "Disability Confident",
+    description: "Programs to create inclusive workplaces and support disability employment.",
+    icon: "users",
+    category: "Inclusion",
+    image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=2000&auto=format",
+    fullDescription: `Create an inclusive workplace environment with our comprehensive program:
+      • Disability awareness training
+      • Workplace accessibility assessment
+      • Inclusive recruitment practices
+      • Reasonable adjustment protocols
+      • Support system implementation`,
+    benefits: [
+      "Enhanced workplace diversity",
+      "Improved accessibility",
+      "Legal compliance",
+      "Positive company image",
+      "Access to wider talent pool"
+    ],
+    pricing: {
+      starter: {
+        name: "Basic Assessment",
+        price: "Starting at $3,500",
+        features: [
+          "Initial assessment",
+          "Basic training",
+          "Compliance review",
+          "Recommendations report"
+        ]
+      },
+      professional: {
+        name: "Implementation Program",
+        price: "Starting at $8,000",
+        features: [
+          "Full assessment",
+          "Staff training",
+          "Policy development",
+          "Implementation support",
+          "6-month guidance"
+        ]
+      },
+      enterprise: {
+        name: "Complete Solution",
+        price: "Custom Quote",
+        features: [
+          "Organization-wide program",
+          "Custom policies",
+          "Full implementation",
+          "Ongoing support",
+          "Regular reviews"
+        ]
+      }
+    }
+  },
+  'sales-training': {
+    title: "Sales Training",
+    description: "Advanced sales techniques and strategies for revenue growth.",
+    icon: "chart-line",
+    category: "Training",
+    image: "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2000&auto=format",
+    fullDescription: `Enhance your sales team's performance with our comprehensive training:
+      • Modern sales techniques
+      • Customer behaviour psychology
+      • Digital sales tools
+      • Negotiation skills
+      • Programme management`,
+    benefits: [
+      "Increased conversion rates",
+      "Higher revenue generation",
+      "Improved customer relationships",
+      "Better team performance",
+      "Enhanced sales processes"
+    ],
+    pricing: {
+      basic: {
+        name: "Essential Sales Training",
+        price: "Starting at $2,500",
+        features: [
+          "Basic techniques",
+          "Up to 10 participants",
+          "1-day workshop",
+          "Basic materials"
+        ]
+      },
+      advanced: {
+        name: "Advanced Program",
+        price: "Starting at $6,000",
+        features: [
+          "Advanced techniques",
+          "Up to 20 participants",
+          "3-day workshop",
+          "Digital tools training",
+          "3-month support"
+        ]
+      },
+      premium: {
+        name: "Elite Sales Program",
+        price: "Custom Quote",
+        features: [
+          "Custom curriculum",
+          "Unlimited participants",
+          "Extended program",
+          "Personal coaching",
+          "Ongoing support"
+        ]
+      }
+    }
+  },
+  'recruitment-days': {
+    title: "Recruitment Days",
+    description: "Organized recruitment events to attract and assess top talent.",
+    icon: "user-plus",
+    category: "Recruitment",
+    image: "https://images.unsplash.com/photo-1560439514-4e9645039924?q=80&w=2000&auto=format",
+    fullDescription: `Streamline your hiring process with our organised recruitment events:
+      • Event planning and management
+      • Candidate screening
+      • Assessment centres
+      • Interview coordination
+      • Talent pool development`,
+    benefits: [
+      "Efficient hiring process",
+      "Access to wider talent pool",
+      "Standardized assessment",
+      "Time and cost savings",
+      "Enhanced employer branding"
+    ],
+    pricing: {
+      basic: {
+        name: "Single Day Event",
+        price: "Starting at $5,000",
+        features: [
+          "Full day event",
+          "Up to 50 candidates",
+          "Basic assessments",
+          "Event management"
+        ]
+      },
+      standard: {
+        name: "Multi-Day Program",
+        price: "Starting at $12,000",
+        features: [
+          "2-3 day event",
+          "Up to 100 candidates",
+          "Advanced assessments",
+          "Full coordination",
+          "Results analysis"
+        ]
+      },
+      premium: {
+        name: "Custom Program",
+        price: "Custom Quote",
+        features: [
+          "Customized duration",
+          "Unlimited candidates",
+          "Complete assessment center",
+          "Full recruitment support",
+          "Talent pool creation"
+        ]
+      }
+    }
+  },
+  'marketing-training': {
+    title: "Marketing Training",
+    description: "Modern marketing strategies and digital skills development.",
+    icon: "bullhorn",
+    category: "Training",
+    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2000&auto=format",
+    fullDescription: `Develop cutting-edge marketing capabilities within your organisation:
+      • Digital marketing strategies
+      • Social media management
+      • Content creation
+      • Analytics and metrics
+      • Brand development`,
+    benefits: [
+      "Enhanced digital presence",
+      "Better ROI tracking",
+      "Improved brand awareness",
+      "Increased engagement",
+      "Data-driven decisions"
+    ],
+    pricing: {
+      basic: {
+        name: "Fundamentals",
+        price: "Starting at $3,000",
+        features: [
+          "Basic principles",
+          "Up to 10 participants",
+          "2-day workshop",
+          "Essential tools training"
+        ]
+      },
+      professional: {
+        name: "Comprehensive Program",
+        price: "Starting at $7,500",
+        features: [
+          "Advanced strategies",
+          "Up to 20 participants",
+          "5-day program",
+          "Tools and software",
+          "3-month support"
+        ]
+      },
+      enterprise: {
+        name: "Custom Solution",
+        price: "Custom Quote",
+        features: [
+          "Tailored curriculum",
+          "Unlimited participants",
+          "Extended program",
+          "Implementation support",
+          "Ongoing consultation"
+        ]
+      }
+    }
   }
 }
 
@@ -651,7 +921,7 @@ const ServicePage = ({ params }) => {
             {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-                <h2 className="text-2xl font-bold mb-4">Program Overview</h2>
+                <h2 className="text-2xl font-bold mb-4">Programme Overview</h2>
                 <p className="whitespace-pre-line text-gray-600">{service.fullDescription}</p>
               </div>
 
@@ -668,28 +938,31 @@ const ServicePage = ({ params }) => {
               </div>
             </div>
 
-            {/* Pricing Cards */}
+            {/* Contact Card */}
             <div className="lg:col-span-1">
-              {Object.values(service.pricing).map((plan, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-lg p-6 mb-6">
-                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                  <p className="text-2xl font-bold text-blue-600 mb-4">{plan.price}</p>
-                  <ul className="space-y-2 mb-6">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm">
-                        <span className="text-green-500 mr-2">✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <button 
-                    onClick={() => router.push('/contact-us')}
-                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Contact Us
-                  </button>
-                </div>
-              ))}
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-xl font-bold mb-4">Interested in this Service?</h3>
+                <p className="text-gray-600 mb-6">
+                  Get in touch with our team to discuss how we can customise this service to your organisation&apos;s requirements.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  {service.features?.slice(0, 5).map((feature, idx) => (
+                    <li key={idx} className="flex items-center text-sm text-gray-600">
+                      <span className="text-green-500 mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button 
+                  onClick={() => router.push(`/contact-us?message=${encodeURIComponent(`Hello, I'm interested in learning more about your ${service.title} service and how it can benefit our organisation. I would like to discuss the possibilities and receive detailed information about customisation and implementation options.`)}`)}
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                >
+                  Contact Our Team
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>

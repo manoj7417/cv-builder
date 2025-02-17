@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaBriefcase, FaUsers, FaHandsHelping, FaGraduationCap, FaHeartbeat, FaLightbulb, FaChalkboardTeacher, FaArrowRight } from 'react-icons/fa'
+import { FaBriefcase, FaUsers, FaHandsHelping, FaGraduationCap, FaHeartbeat, FaLightbulb, FaChalkboardTeacher, FaArrowRight, FaChartLine, FaUserPlus, FaBullhorn } from 'react-icons/fa'
 import { MdBusinessCenter, MdVolunteerActivism, MdTrendingUp } from 'react-icons/md'
 import { BsPersonWorkspace } from 'react-icons/bs'
 import Image from 'next/image'
@@ -103,6 +103,46 @@ const CorporatePage = () => {
       category: "Leadership",
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=500&auto=format",
       slug: "leadership-development"
+    },
+    {
+      title: "Mental Health First Aid",
+      description: "Comprehensive training for workplace mental health support and crisis management.",
+      icon: <FaHeartbeat className="text-4xl text-blue-600" />,
+      category: "Wellness",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2000&auto=format",
+      slug: "mental-health-first-aid"
+    },
+    {
+      title: "Disability Confident",
+      description: "Programs to create inclusive workplaces and support disability employment.",
+      icon: <FaUsers className="text-4xl text-blue-600" />,
+      category: "Inclusion",
+      image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=2000&auto=format",
+      slug: "disability-confident"
+    },
+    {
+      title: "Sales Training",
+      description: "Advanced sales techniques and strategies for revenue growth.",
+      icon: <FaChartLine className="text-4xl text-blue-600" />,
+      category: "Training",
+      image: "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2000&auto=format",
+      slug: "sales-training"
+    },
+    {
+      title: "Recruitment Days",
+      description: "Organized recruitment events to attract and assess top talent.",
+      icon: <FaUserPlus className="text-4xl text-blue-600" />,
+      category: "Recruitment",
+      image: "https://images.unsplash.com/photo-1560439514-4e9645039924?q=80&w=2000&auto=format",
+      slug: "recruitment-days"
+    },
+    {
+      title: "Marketing Training",
+      description: "Modern marketing strategies and digital skills development.",
+      icon: <FaBullhorn className="text-4xl text-blue-600" />,
+      category: "Training",
+      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2000&auto=format",
+      slug: "marketing-training"
     }
   ]
 
