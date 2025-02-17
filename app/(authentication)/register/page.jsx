@@ -229,9 +229,9 @@ export default function Register() {
                 className="w-28 h-auto object-contain"
               />
             </Link>
-            <h2 className="text-2xl font-bold leading-tight text-blue-900 sm:text-4xl">
+            <h1 className="text-2xl font-bold leading-tight text-blue-900 sm:text-4xl">
               Sign up
-            </h2>
+            </h1>
             <form className="mt-5" onSubmit={handleSubmit(handleRegister)}>
               <div className="space-y-2 sm:space-y-5">
                 <div>
