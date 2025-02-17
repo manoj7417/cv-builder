@@ -141,7 +141,7 @@ function LoginUser() {
         >
           <div>
             <DialogTitle>
-              <h1 className="text-xl font-semibold">Reset Your Password</h1>
+              <h2 className="text-xl font-semibold">Reset Your Password</h2>
               <p className="text-sm text-gray-400 font-normal">
                 Enter the email associated with your account
               </p>
@@ -177,9 +177,9 @@ function LoginUser() {
               <HiOutlineMailOpen className="text-blue-950 h-16 w-16" />
             </div>
             <DialogTitle>
-              <h1 className="text-center text-2xl">
+              <h2 className="text-center text-2xl">
                 You&apos;re almost there!
-              </h1>
+              </h2>
             </DialogTitle>
             {showResendButton ? (
               <div className=" py-5">
@@ -261,9 +261,9 @@ function LoginUser() {
                   className="w-28 h-auto object-contain"
                 />
               </Link>
-              <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
+              <h1 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
                 Sign in
-              </h2>
+              </h1>
               <p className="mt-2 text-sm text-gray-600 text-start">
                 Don&apos;t have an account?{" "}
                 <Link
