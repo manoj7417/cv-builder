@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "cross-env APP_ENV=production node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
     "start": "cross-env NODE_ENV=production next start"
-  },   
+  },    
   "dependencies": {
     "@alptugidin/react-circular-progress-bar": "^1.1.2",
     "@cloudinary/react": "^1.13.0",
