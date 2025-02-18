@@ -5,7 +5,7 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Editorial Guidelines: Genies Career Hub",
   description:
-    "Know everything about the Brand’s style, structure, and strategy consistency of the Genies Career Hub as you join our prestigious community of Professionals.",
+    "Know everything about the Brand’s style, structure & strategy consistency of the Genies Career Hub as you join our prestigious community of Professionals.",
   openGraph: {
     title: "Editorial Guidelines: Genies Career Hub",
     description:

@@ -6,11 +6,11 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"), // Set your base URL
   title: "Terms and Conditions: Genies Career Hub",
   description:
-    "Read the important terms and conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction.",
+    "Read the important terms & conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction.",
   openGraph: {
     title: "Terms and Conditions: Genies Career Hub",
     description:
-      "Read the important terms and conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction.",
+      "Read the important terms & conditions of the Genies Career Hub platform as you join our community. We are dedicated to ensuring your complete satisfaction.",
     url: "/terms-condition",
     images: [
       {

@@ -5,11 +5,11 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Professional CV Studio: Genies Career Hub",
   description:
-    "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
+    "Our CV Studio is an integrated solution comprising of CV Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
   openGraph: {
     title: "Professional CV Studio: Genies Career Hub",
     description:
-      "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
+      "Our CV Studio is an integrated solution comprising of CV Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
     url: "/cv-studio",
     images: [
       {
@@ -25,14 +25,12 @@ export const metadata = {
     title: "Professional CV Studio: Genies Career Hub",
     description:
       "Our CV Studio is an integrated solution comprising of Curriculum Vitae Builder, ATS Resume Checker, and Professional CV Match to help you build a perfect CV.",
-    image:
-      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+    image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {
-    canonical: 'https://www.geniescareerhub.com/cv-studio',
+    canonical: "https://www.geniescareerhub.com/cv-studio",
   },
 };
-
 
 const Layout = ({ children }) => {
   return (

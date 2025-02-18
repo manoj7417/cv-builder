@@ -6,14 +6,14 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"), // Base URL
   title: "Professional Curriculum Vitae Match and Resume Coach",
   description: 
-    "Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert resume coach guidelines",
+    "Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert CV coach guidelines",
   canonical: "https://www.geniescareerhub.com/job-cv",
   openGraph: {
     url: "https://www.geniescareerhub.com/job-cv",
     type: "website",
     title: "Professional Curriculum Vitae Match and Resume Coach",
     description: 
-      "Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert resume coach guidelines",
+      "Get a professional Curriculum Vitae in minutes with Genies Career Hub CV Match: intelligent CV alignment algorithm inspired by expert CV coach guidelines",
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   twitter: {

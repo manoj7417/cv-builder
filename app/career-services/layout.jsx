@@ -4,7 +4,7 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Career Services: Genies Career Hub",
   description:
-    "Looking for Career Services, a Life Coach, or anything else? Check out our services in AI Career Coaching, 1-to-1 Career Coaching, and the Psychometric Test Tool.",
+    "Looking for Career Services or a Life Coach? Check out our services in AI Career Coaching, 1-to-1 Career Coaching & the Psychometric Test Tool.",
   openGraph: {
     title: "Career Services: Genies Career Hub",
     description:
