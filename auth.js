@@ -9,7 +9,7 @@ async function refreshAccessToken(token) {
       ...token,
       error: "NoRefreshToken",
     };
-  }
+  } 
 
   try {
     const url = "https://oauth2.googleapis.com/token";

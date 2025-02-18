@@ -10,9 +10,9 @@ import { ToastContainer } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Slide } from "react-toastify";
 import SessionProviderWrapper from "./components/SessionProviderWrapper/SessionProviderWrapper"; // Import the wrapper
-import * as fbq from './utils/fbPixel'
-import ErrorBoundary from './components/ErrorBoundary'
-import FacebookPixelNoscript from './components/FacebookPixelNoscript'
+import * as fbq from "./utils/fbPixel";
+import ErrorBoundary from "./components/ErrorBoundary";
+import FacebookPixelNoscript from "./components/FacebookPixelNoscript";
 
 const inter = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -46,20 +46,20 @@ export const metadata = {
     url: "/",
     title: "Professional CV Templates for Perfect CV on Genies CV Maker",
     description:
-      "Find best Curriculum Vitae Template and Career Assistance on top CV Maker and CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
+      "Find best Curriculum Vitae Template & Career Assistance on top CV Maker & CV Library Website, Genies Career Hub and create your CV best fit for Job Role.",
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {
     canonical: "https://www.geniescareerhub.com",
   },
   headers: {
-    'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59'
-  }
+    "Cache-Control": "public, s-maxage=10, stale-while-revalidate=59",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
         {/* Google Tag Manager */}
         <script
@@ -120,9 +120,9 @@ export default function RootLayout({ children }) {
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src='https://www.googletagmanager.com/ns.html?id=GTM-KJ9G6JTK'
-            height='0'
-            width='0'
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KJ9G6JTK"
+            height="0"
+            width="0"
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
@@ -130,7 +130,7 @@ export default function RootLayout({ children }) {
         <FacebookPixelNoscript />
         <SessionProviderWrapper>
           <ToastContainer
-            position='top-right'
+            position="top-right"
             autoClose={3000}
             hideProgressBar={true}
             newestOnTop={false}
@@ -139,7 +139,7 @@ export default function RootLayout({ children }) {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme='colored'
+            theme="colored"
             transition={Slide}
           />
           {children}

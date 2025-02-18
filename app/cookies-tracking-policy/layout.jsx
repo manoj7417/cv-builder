@@ -6,7 +6,7 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Cookies & Tracking Policy: Genies Career Hub",
   description:
-    "Check out all the details about the Cookies and Trackers that the Genies Career Hub platform employs in order to process your personal data and information.",
+    "Check out all the details about the Cookies & Trackers that the Genies Career Hub platform employs in order to process your personal data and information.",
   openGraph: {
     title: "Cookies & Tracking Policy: Genies Career Hub",
     description:
@@ -36,9 +36,9 @@ export const metadata = {
 const Layout = ({ children }) => {
   return (
     <>
-      <main className='terms_condition'>
-        <div className='terms_condition_container'>
-          <div className='wrapper'>
+      <main className="terms_condition">
+        <div className="terms_condition_container">
+          <div className="wrapper">
             <ResumeHeader />
             {children}
             <Footer />

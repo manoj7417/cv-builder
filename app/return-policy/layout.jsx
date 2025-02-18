@@ -5,11 +5,11 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Returns Policy: Genies Career Hub",
   description:
-    "Want to register a return or exchange an unwanted purchase? Check out terms, conditions, and policies for returns for complete details regarding your purchase.",
+    "Want to register a return or exchange an unwanted purchase? Check out our return policies for complete details regarding your purchase.",
   openGraph: {
     title: "Returns Policy: Genies Career Hub",
     description:
-      "Want to register a return or exchange an unwanted purchase? Check out terms, conditions, and policies for returns for complete details regarding your purchase.",
+      "Want to register a return or exchange an unwanted purchase? Check out our return policies for complete details regarding your purchase.",
     url: "/return-policy",
     images: [
       {
@@ -24,15 +24,13 @@ export const metadata = {
     site: "@geniescareerhub",
     title: "Returns Policy: Genies Career Hub",
     description:
-      "Want to register a return or exchange an unwanted purchase? Check out terms, conditions, and policies for returns for complete details regarding your purchase.",
-    image:
-      "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
+      "Want to register a return or exchange an unwanted purchase? Check out our return policies for complete details regarding your purchase.",
+    image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {
-    canonical: 'https://www.geniescareerhub.com/return-policy',
+    canonical: "https://www.geniescareerhub.com/return-policy",
   },
 };
-
 
 const Layout = ({ children }) => {
   return (

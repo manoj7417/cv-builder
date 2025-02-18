@@ -7,11 +7,11 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: " Pricing and Payments: Genies Career Hub",
   description:
-    "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
+    "What we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
   openGraph: {
     title: "Pricing: Genies Career Hub",
     description:
-      "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
+      "What we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
     url: "/pricing",
     images: [
       {
@@ -26,7 +26,7 @@ export const metadata = {
     site: "@geniescareerhub",
     title: "Pricing: Genies Career Hub",
     description:
-      "Love what we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
+      "What we have to offer? Check out Pricing quotation for Genies Career Hub and all the distinctive plans. Opt for the best plan and pay with convenience.",
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {

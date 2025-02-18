@@ -5,11 +5,11 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: " About Us and Our Journey: Genies Career Hub",
   description:
-    "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
+    "Know everything about Genies Career Hub & its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach.",
   openGraph: {
     title: "About Us: Genies Career Hub",
     description:
-      "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach and more.",
+      "Know everything about Genies Career Hub and its services. Create a stellar resume, take psychometric tests, find a Coach or consult AI Career Coach.",
     url: "/about-us",
     images: [
       {

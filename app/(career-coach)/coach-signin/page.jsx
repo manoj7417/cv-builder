@@ -210,7 +210,7 @@ export default function CoachLogin() {
             </Link>
             <div className="lg:w-[450px] w-[350px] mx-auto">
               <h1 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
-                Sign in
+               Coach Sign in
               </h1>
               <h2 className="mt-2 text-[13px] text-gray-600">
                 Don&apos;t have an account?{" "}

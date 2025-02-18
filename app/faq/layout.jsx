@@ -5,7 +5,7 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Frequently Asked Questions | Genies Career Hub",
   description:
-    "Have more questions about the Genies Career Hub UK? Find all answers about the CV Studio, Career Coach, Psychometric Test, Pricing, and more in FAQs section.",
+    "Have more questions about the Genies Career Hub UK? Find all answers about the CV Studio, Career Coach, Psychometric Test, Pricing & more in FAQs section.",
   openGraph: {
     title: "Frequently Asked Questions | Genies Career Hub",
     description:

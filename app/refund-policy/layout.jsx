@@ -5,7 +5,7 @@ export const metadata = {
   metadataBase: new URL("https://www.geniescareerhub.com"),
   title: "Refund Policy: Genies Career Hub",
   description:
-    "Seeking a Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
+    "Refund for your recent purchase? Check our policies regarding refunds and get all the necessary information you must know before requesting a refund.",
   openGraph: {
     title: "Refund Policy: Genies Career Hub",
     description:
@@ -28,7 +28,7 @@ export const metadata = {
     image: "/_next/image?url=%2Fbeta-logo.png&w=128&q=75",
   },
   alternates: {
-    canonical: 'https://www.geniescareerhub.com/refund-policy',
+    canonical: "https://www.geniescareerhub.com/refund-policy",
   },
 };
 

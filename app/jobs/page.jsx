@@ -91,10 +91,10 @@ const JobsPage = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
             Find Your Dream Job
           </h1>
-          <p className="text-xl text-gray-200 max-w-2xl animate-fade-in-delay">
+          <h2 className="text-xl text-gray-200 max-w-2xl animate-fade-in-delay">
             Discover opportunities that match your skills and aspirations.
             Browse through {totalJobs} open positions.
-          </p>
+          </h2>
         </div>
       </div>
 
