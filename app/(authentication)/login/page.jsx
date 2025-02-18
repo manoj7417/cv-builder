@@ -264,7 +264,7 @@ function LoginUser() {
               <h1 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
                 Sign in
               </h1>
-              <p className="mt-2 text-sm text-gray-600 text-start">
+              <h2 className="mt-2 text-sm text-gray-600 text-start">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
@@ -272,7 +272,7 @@ function LoginUser() {
                 >
                   Sign Up for Free!
                 </Link>
-              </p>
+              </h2>
               <form className="mt-5" onSubmit={handleSubmit(handleLogin)}>
                 <div className="space-y-5">
                   <div>

@@ -1,13 +1,15 @@
 "use client";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 import React from "react";
 import Countdown from "react-countdown";
-import Countanimation from "@/public/animations/comingsoon.json"
+import Countanimation from "@/public/animations/comingsoon.json";
 
 // Dynamic import for Lottie
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
-  loading: () => <div className="h-[200px] sm:h-[300px] animate-pulse bg-gray-200 rounded-lg" />
+  loading: () => (
+    <div className="h-[200px] sm:h-[300px] animate-pulse bg-gray-200 rounded-lg" />
+  ),
 });
 
 // Function to get the future date 20 days from now
@@ -23,18 +25,22 @@ const renderer = ({ days, hours, minutes, seconds }) => {
     <ul className="countdown flex space-x-2 sm:space-x-4 text-center justify-center">
       <li className="flex flex-col items-center">
         <span className="days text-4xl sm:text-6xl font-bold">{days}</span>
-        <p className="days_ref text-sm sm:text-base">days</p>
+        <h2 className="days_ref text-sm sm:text-base">days</h2>
       </li>
       <li className="flex flex-col items-center">
         <span className="hours text-4xl sm:text-6xl font-bold">{hours}</span>
         <p className="hours_ref text-sm sm:text-base">hours</p>
       </li>
       <li className="flex flex-col items-center">
-        <span className="minutes text-4xl sm:text-6xl font-bold">{minutes}</span>
+        <span className="minutes text-4xl sm:text-6xl font-bold">
+          {minutes}
+        </span>
         <p className="minutes_ref text-sm sm:text-base">minutes</p>
       </li>
       <li className="flex flex-col items-center">
-        <span className="seconds text-4xl sm:text-6xl font-bold">{seconds}</span>
+        <span className="seconds text-4xl sm:text-6xl font-bold">
+          {seconds}
+        </span>
         <p className="seconds_ref text-sm sm:text-base">seconds</p>
       </li>
     </ul>

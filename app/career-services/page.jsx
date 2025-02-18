@@ -7,19 +7,19 @@ import GetStartedModal from "@/components/component/GetStartedModal";
 import a1 from "../../public/animations/ai-career-coach.json";
 import a2 from "../../public/animations/1-1-career.json";
 import a3 from "../../public/animations/pschometric-test.json";
-import { default as dynamicImport } from 'next/dynamic'
+import { default as dynamicImport } from "next/dynamic";
 import Link from "next/link";
 import { FaArrowAltCircleRight } from "react-icons/fa";
-import ClientOnly from '@/app/components/ClientOnly'
-import JsonLdScripts from '@/app/components/JsonLdScripts'
+import ClientOnly from "@/app/components/ClientOnly";
+import JsonLdScripts from "@/app/components/JsonLdScripts";
 
 const Lottie = dynamicImport(() => import("lottie-react"), {
   ssr: false,
-  loading: () => <div className="h-[200px] animate-pulse bg-gray-200" />
-})
+  loading: () => <div className="h-[200px] animate-pulse bg-gray-200" />,
+});
 
-export const dynamic = 'force-dynamic'
-export const dynamicParams = false
+export const dynamic = "force-dynamic";
+export const dynamicParams = false;
 
 const CareerServices = () => {
   const cvStudio = [
@@ -90,7 +90,7 @@ const CareerServices = () => {
 
   useEffect(() => {
     // document operations here
-  }, [])
+  }, []);
 
   return (
     <>
@@ -98,43 +98,47 @@ const CareerServices = () => {
         <JsonLdScripts jsonLd={jsonLd} jsonLd1={jsonLd1} />
       </ClientOnly>
       <section
-        className='flex lg:items-center items-start pb-0 justify-center  w-full pt-40 md:pt-16 lg:pt-40  px-5 relative'
-        id='free'>
-        <div className='container '>
-          <h1 className='text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1'>
-            <span className='text-[#2C98CA]'>Get Coached,</span> Your
-            For Perfection!
+        className="flex lg:items-center items-start pb-0 justify-center  w-full pt-40 md:pt-16 lg:pt-40  px-5 relative"
+        id="free"
+      >
+        <div className="container ">
+          <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
+            <span className="text-[#2C98CA]">Get Coached,</span> Your For
+            Perfection!
           </h1>
-          <p className='lg:w-[60%] w-full mx-auto text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10'>
-          Find Career Coaches, take Psychometric Tests, or consult the AI Career Coach to find answers to your professional queries and grow past the limitations of your career.
-          </p>
+          <h2 className="lg:w-[60%] w-full mx-auto text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
+            Find Career Coaches, take Psychometric Tests, or consult the AI
+            Career Coach to find answers to your professional queries and grow
+            past the limitations of your career.
+          </h2>
 
-          <div className='flex justify-center'>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10'>
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-10">
               {cvStudio.map((animation, index) => (
                 <div key={index}>
-                  <div className='max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between shadow-lg'>
+                  <div className="max-w-[400px] min-h-[450px] h-[400px] rounded-md border flex flex-col justify-between shadow-lg">
                     <Lottie
                       animationData={animation?.image}
                       loop={true}
                       autoplay={true}
                       style={{
                         height: 200,
-                        width: '100%'
+                        width: "100%",
                       }}
                     />
-                    <div className='flex-grow p-4 text-center'>
-                      <h3 className='text-2xl font-semibold'>
+                    <div className="flex-grow p-4 text-center">
+                      <h3 className="text-2xl font-semibold">
                         {animation?.title}
                       </h3>
-                      <p className='my-4 text-sm text-gray-600'>
+                      <p className="my-4 text-sm text-gray-600">
                         {animation?.description}
                       </p>
                     </div>
-                    <div className='p-4'>
+                    <div className="p-4">
                       <Link
                         href={animation?.link}
-                        className='mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 p-3 text-sm font-semibold text-white shadow-sm text-center'>
+                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 p-3 text-sm font-semibold text-white shadow-sm text-center"
+                      >
                         Try Now
                       </Link>
                     </div>
