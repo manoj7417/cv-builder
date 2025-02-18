@@ -39,6 +39,7 @@ import ReactPlayer from "react-player";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import CoachSearchBar from "@/components/component/CoachSearchBar";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
@@ -98,6 +99,18 @@ const CoachProfile = () => {
   const [isApiLoading, setIsApiLoading] = useState(false);
   const coachingDescription = watch("coachingDescription");
   const bio = watch("bio");
+  const [typeOfCoachingOptions, setTypeOfCoachingOptions] = useState([
+    "Career Coaching",
+    "Life Coaching",
+    "Executive Coaching",
+    "Health and Wellness Coaching",
+    "Relationship Coaching",
+    "Business Coaching",
+    "Financial Coaching",
+    "Parenting Coaching",
+    "Spiritual Coaching",
+    "Leadership Coaching",
+  ]);
 
   const { fields } = useFieldArray({
     control,
@@ -517,10 +530,15 @@ const CoachProfile = () => {
                       <label className="block text-sm font-medium text-gray-700">
                         Type of Coaching
                       </label>
-                      <Input
+                      {/* <Input
                         {...register("typeOfCoaching")}
                         className="w-full"
                         disabled={!isEditable}
+                      /> */}
+                      <CoachSearchBar
+                        name="typeOfCoaching"
+                        control={control}
+                        options={typeOfCoachingOptions}
                       />
                     </div>
 
