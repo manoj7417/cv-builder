@@ -297,7 +297,7 @@ const ResumeAnalyzer = () => {
   };
 
   return (
-    <ClientOnly>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -348,10 +348,6 @@ const ResumeAnalyzer = () => {
           </Dialog>
           <div className="flex flex-col max-w-8xl text-center px-8  lg:px-32 pt-16 sm:pt-28">
             <div className=" flex flex-col">
-              <h1 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 text-center lg:px-20 xl:px-20 2xl:px-20">
-                Find the <span className="text-[#2C98CA]">Perfect CV </span> for
-                Your Dream Job
-              </h1>
               <h1 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 lg:px-32">
                 An <span className="text-blue-600">ATS Resume</span> goes a Long
                 Way
@@ -1319,7 +1315,7 @@ const ResumeAnalyzer = () => {
         <WorkTogether />
         <Footer />
       </main>
-    </ClientOnly>
+    </>
   );
 };
 
