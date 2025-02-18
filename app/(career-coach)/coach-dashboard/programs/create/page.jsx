@@ -185,6 +185,8 @@ function CreateProgram() {
               style={{
                 height: "auto",
                 margin: "10px 0px",
+                border: "1px solid #E5E7EB",
+                borderRadius: "5px",
               }}
               placeholder="Enter program description"
             />
@@ -293,6 +295,8 @@ function CreateProgram() {
               style={{
                 height: "auto",
                 margin: "10px 0px 50px",
+                border: "1px solid #E5E7EB",
+                borderRadius: "5px",
               }}
               theme="snow"
               value={content}
