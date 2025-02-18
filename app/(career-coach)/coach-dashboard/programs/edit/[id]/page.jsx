@@ -166,183 +166,217 @@ function UpdateProgram() {
   }
 
   return (
-    <div className="w-full py-4">
-      <div className="px-8">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <ArrowLeft
-                className="cursor-pointer"
-                onClick={() => router.back()}
-              />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Go Back</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-      <div className="w-full h-full rounded-lg px-8 py-4">
-        <form onSubmit={handleSubmit(handleUpateProgram)}>
-          <h1 className="py-4 text-lg font-bold">Update a program</h1>
-          <div className="py-2">
-            <Label>
-              Title<span className="text-red-500 ml-1">*</span>
-            </Label>
-            <Input
-              placeholder="Enter program title"
-              className="my-2"
-              {...register("title")}
-            />
-            <p className="text-red-500 text-sm ml-2">{errors.title?.message}</p>
-          </div>
-          <div
-            className="my
-          -5"
-          >
-            <Label>
-              Description<span className="text-red-500 ml-1">*</span>
-            </Label>
-            {/* <Textarea
-              placeholder="Enter program description"
-              className="my-2"
-              {...register("description")}
-            /> */}
-            <ReactQuill
-              theme="snow"
-              value={description}
-              onChange={handleDescriptionChange}
-              style={{
-                height: "150px",
-                margin: "10px 0px",
-              }}
-              placeholder="Enter program description"
-            />
-            <p className="text-red-500 text-sm ml-2">
-              {errors.description?.message}
-            </p>
-          </div>
-          <div className="mt-20 mb-5">
-            <Label>
-              Program Image<span className="text-red-500 ml-1">*</span>
-            </Label>
-            {profileImage ? (
-              <div className="flex items-center py-4">
-                <img
-                  src={profileImage}
-                  alt="profile image"
-                  className="w-52 h-52 object-cover rounded-lg"
-                />
-                <Button
-                  className="ml-4 bg-red-600 hover:bg-red-700"
-                  type="button"
-                  onClick={() => setValue("programImage", "")}
-                >
-                  Remove
-                </Button>
-              </div>
-            ) : (
-              <div className="flex items-center py-2">
-                <div className="w-2/5 flex items-center">
-                  <Button
-                    onClick={handleOpenFileInput}
-                    disabled={isUploadingImage}
-                    type="button"
-                  >
-                    {isUploadingImage ? (
-                      <>
-                        Uploading{" "}
-                        <LoaderCircle className="h-4 ml-1 animate-spin" />
-                      </>
-                    ) : (
-                      <>
-                        Upload <Upload className="h-4 ml-1" />
-                      </>
-                    )}
-                  </Button>
-                  <Input
-                    type="file"
-                    className="my-2  hidden"
-                    {...register("programImage")}
-                    ref={fileInputRef}
-                    onChange={handleUploadImage}
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-white border-b">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <ArrowLeft
+                    className="h-6 w-6 cursor-pointer hover:text-blue-600"
+                    onClick={() => router.back()}
                   />
-                </div>
-              </div>
-            )}
-            <p className="text-red-500 text-sm ml-2">
-              {errors.programImage?.message}
-            </p>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Go Back</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <h1 className="ml-4 text-xl font-semibold">Update Program</h1>
           </div>
-          <div className="py-2">
-            <Label>Program Video</Label>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Please provide a youtube video link for your program video
-            </p>
-            {programVideo ? (
-              <div className="flex items-center py-4">
-                <ReactPlayer url={programVideo} />
-                <Button
-                  className="ml-4 bg-red-600 hover:bg-red-700"
-                  type="button"
-                  onClick={() => setValue("programVideo", "")}
-                >
-                  Remove
-                </Button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <form onSubmit={handleSubmit(handleUpateProgram)} className="space-y-8">
+          <div className="bg-white rounded-lg shadow-sm border p-6 space-y-6">
+            {/* Title Section */}
+            <div>
+              <Label className="text-base">
+                Title<span className="text-red-500 ml-1">*</span>
+              </Label>
+              <Input
+                placeholder="Enter program title"
+                className="mt-2"
+                {...register("title")}
+              />
+              {errors.title && (
+                <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+              )}
+            </div>
+
+            {/* Description Section */}
+            <div>
+              <Label className="text-base">
+                Description<span className="text-red-500 ml-1">*</span>
+              </Label>
+              <div className="mt-2 editor-wrapper">
+                <ReactQuill
+                  theme="snow"
+                  value={description}
+                  onChange={handleDescriptionChange}
+                  placeholder="Enter program description"
+                  className="editor-container"
+                />
               </div>
-            ) : (
-              <Input
-                placeholder="Enter video url"
-                className="my-2"
-                {...register("programVideo")}
-              />
-            )}
-            <p className="text-red-500 text-sm ml-2">
-              {errors.programVideo?.message}
-            </p>
-          </div>
-          <div className="py-2">
-            <Label>Amount (£)</Label>
-            <div className="flex items-center">
-              <Input
-                type="number"
-                className="my-2"
-                {...register("amount")}
-                placeholder="Enter amount in GBP (£)"
-                min={"1"}
-              />
+              {errors.description && (
+                <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
+              )}
+            </div>
+
+            {/* Image Upload Section */}
+            <div className="mt-8">
+              <Label className="text-base">
+                Program Image<span className="text-red-500 ml-1">*</span>
+              </Label>
+              <div className="mt-2">
+                {profileImage ? (
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="relative w-full sm:w-64 h-64 bg-gray-100 rounded-lg overflow-hidden">
+                      <img
+                        src={profileImage}
+                        alt="Program preview"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={() => setValue("programImage", "")}
+                      className="self-start"
+                    >
+                      Remove Image
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center w-full sm:w-64 h-64 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleOpenFileInput}
+                      disabled={isUploadingImage}
+                      className="flex items-center gap-2"
+                    >
+                      {isUploadingImage ? (
+                        <>
+                          <LoaderCircle className="h-4 w-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="h-4 w-4" />
+                          Upload Image
+                        </>
+                      )}
+                    </Button>
+                    <Input
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      ref={fileInputRef}
+                      onChange={handleUploadImage}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Video Section */}
+            <div>
+              <Label className="text-base">Program Video</Label>
+              <p className="text-sm text-gray-500 mt-1">
+                Provide a YouTube video link for your program
+              </p>
+              <div className="mt-2">
+                {programVideo ? (
+                  <div className="space-y-4">
+                    <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+                      <ReactPlayer 
+                        url={programVideo} 
+                        width="100%"
+                        height="100%"
+                        className="react-player"
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={() => setValue("programVideo", "")}
+                    >
+                      Remove Video
+                    </Button>
+                  </div>
+                ) : (
+                  <Input
+                    placeholder="Enter YouTube URL"
+                    {...register("programVideo")}
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* Amount Section */}
+            <div>
+              <Label className="text-base">Amount (£)</Label>
+              <div className="mt-2 relative">
+                <Input
+                  type="number"
+                  {...register("amount")}
+                  placeholder="Enter amount"
+                  min="1"
+                  className="pl-8"
+                />
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                  £
+                </span>
+              </div>
+            </div>
+
+            {/* Prerequisites Section */}
+            <PrerequisitesFieldArray
+              control={control}
+              register={register}
+              errors={errors}
+              name="prerequisites"
+            />
+
+            {/* Program Description Section */}
+            <div>
+              <Label className="text-base">
+                Program Content<span className="text-red-500 ml-1">*</span>
+              </Label>
+              <div className="mt-2 editor-wrapper">
+                <ReactQuill
+                  theme="snow"
+                  value={content}
+                  onChange={handlecontentvalueChange}
+                  placeholder="Write your program content here..."
+                  className="editor-container"
+                />
+              </div>
             </div>
           </div>
-          <PrerequisitesFieldArray
-            control={control}
-            register={register}
-            errors={errors}
-            name={"prerequisites"}
-          />
-          <div>
-            <h1 className="py-4 text-lg font-bold">Program description</h1>
-            <ReactQuill
-              style={{
-                height: "250px",
-                margin: "10px 0px 50px",
-              }}
-              theme="snow"
-              value={content}
-              onChange={handlecontentvalueChange}
-              placeholder="Write your program here..."
-            />
-          </div>
-          <div className="w-full flex justify-end py-4">
-            <Button type="submit" disabled={isCreatingProgram}>
+
+          {/* Submit Button */}
+          <div className="flex justify-end">
+            <Button
+              type="submit"
+              disabled={isCreatingProgram}
+              className="min-w-[200px]"
+            >
               {isCreatingProgram ? (
-                <>
-                  Updaing Program{" "}
-                  <LoaderCircle className="h-4 ml-1 animate-spin" />
-                </>
+                <div className="flex items-center gap-2">
+                  <LoaderCircle className="h-4 w-4 animate-spin" />
+                  Updating...
+                </div>
               ) : (
-                <>
-                  Update Program <ChevronRight className="h-4 " />
-                </>
+                <div className="flex items-center gap-2">
+                  Update Program
+                  <ChevronRight className="h-4 w-4" />
+                </div>
               )}
             </Button>
           </div>
@@ -353,3 +387,72 @@ function UpdateProgram() {
 }
 
 export default UpdateProgram;
+
+<style jsx global>{`
+  .editor-wrapper {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .editor-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+  }
+
+  .editor-container .ql-toolbar {
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 0.75rem;
+  }
+
+  .editor-container .ql-container {
+    border: none;
+    flex: 1;
+    height: auto;
+  }
+
+  .editor-container .ql-editor {
+    min-height: 150px;
+    max-height: 500px;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 1rem;
+  }
+
+  .editor-container .ql-editor p {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Ensure content stays within bounds */
+  .editor-container .ql-editor * {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  /* Better toolbar responsiveness */
+  @media (max-width: 640px) {
+    .editor-container .ql-toolbar {
+      padding: 0.5rem;
+    }
+    
+    .editor-container .ql-toolbar .ql-formats {
+      margin-right: 8px;
+    }
+  }
+
+  /* Video player responsive styles */
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .react-player > div {
+    position: absolute;
+  }
+`}</style>
