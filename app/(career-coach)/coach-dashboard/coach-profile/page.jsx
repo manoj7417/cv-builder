@@ -39,6 +39,7 @@ import ReactPlayer from "react-player";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import CoachSearchBar from "@/components/component/CoachSearchBar";
 
 const CoachProfile = () => {
   const defaultImage = "https://via.placeholder.com/150";
@@ -98,6 +99,18 @@ const CoachProfile = () => {
   const [isApiLoading, setIsApiLoading] = useState(false);
   const coachingDescription = watch("coachingDescription");
   const bio = watch("bio");
+  const [typeOfCoachingOptions, setTypeOfCoachingOptions] = useState([
+    "Career Coaching",
+    "Life Coaching",
+    "Executive Coaching",
+    "Health and Wellness Coaching",
+    "Relationship Coaching",
+    "Business Coaching",
+    "Financial Coaching",
+    "Parenting Coaching",
+    "Spiritual Coaching",
+    "Leadership Coaching",
+  ]);
 
   const { fields } = useFieldArray({
     control,
@@ -131,13 +144,13 @@ const CoachProfile = () => {
 
   const removeImage = () => {
     setValue("profileImage", null);
-    setValue("profileImage", null); 
+    setValue("profileImage", null);
   };
 
   const openModal = (url) => {
     if (url) {
-      setPdfUrl(url); 
-      setIsModalOpen(true); 
+      setPdfUrl(url);
+      setIsModalOpen(true);
     } else {
       toast.error("No document available to view");
     }
@@ -182,7 +195,7 @@ const CoachProfile = () => {
         link: cvFileUrl,
       },
       profileVideo: {
-        url:data.profileVideo?.url
+        url: data.profileVideo?.url,
       },
       signedAggrement: {
         link: docsUrl,
@@ -212,11 +225,10 @@ const CoachProfile = () => {
     } catch (error) {
       toast.error("An error occured in updating the profile details");
     } finally {
-      setIsApiLoading(false); 
+      setIsApiLoading(false);
       setIsEditable(false);
     }
   };
-
 
   const handleCVUpload = async (e) => {
     const file = e.target.files[0];
@@ -226,10 +238,10 @@ const CoachProfile = () => {
       formData.append("cvUpload", file);
       try {
         setIsCvLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); 
+        const response = await axios.post("/api/uploadImage", formData);
         if (response.status === 200) {
           const cvUrl = response.data.url;
-          setValue("cvUpload", cvUrl); 
+          setValue("cvUpload", cvUrl);
           setCvFileUrl(cvUrl);
         } else {
           console.error("CV upload failed.");
@@ -248,19 +260,18 @@ const CoachProfile = () => {
     setCvFileUrl(null);
   };
 
-
   const handleDocUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setIsUploadingDocs(true);
       const formData = new FormData();
-      formData.append("docsUpload", file); 
+      formData.append("docsUpload", file);
       try {
         setIsDocumentLoading(true);
-        const response = await axios.post("/api/uploadImage", formData); 
+        const response = await axios.post("/api/uploadImage", formData);
         if (response.status === 200) {
           const docUrl = response.data.url;
-          setValue("docsUpload", docUrl); 
+          setValue("docsUpload", docUrl);
           setIsDocumentLoading(false);
           setDocsUrl(docUrl);
         } else {
@@ -275,8 +286,8 @@ const CoachProfile = () => {
   };
 
   const handleRemoveDocs = () => {
-    setValue("docsUpload", ""); 
-    setDocsUrl(null); 
+    setValue("docsUpload", "");
+    setDocsUrl(null);
   };
 
   const googleViewerUrl =
@@ -288,11 +299,10 @@ const CoachProfile = () => {
 
   const handleViewFile = (type) => {
     setFileType(type);
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
-  
-  const profileVideo = watch("profileVideo"); 
+  const profileVideo = watch("profileVideo");
 
   const handleRemoveLink = () => {
     setValue("profileVideo", "");
@@ -302,21 +312,21 @@ const CoachProfile = () => {
     setValue("coachingDescription", value);
   };
 
-  const handleBioChange =(value)=>{
+  const handleBioChange = (value) => {
     setValue("bio", value);
-  }
+  };
 
   useEffect(() => {
     if (userdata?.cv?.link) {
-      setValue("cv", userdata.cv.link); 
-      setCvFileUrl(userdata.cv.link); 
+      setValue("cv", userdata.cv.link);
+      setCvFileUrl(userdata.cv.link);
     }
   }, [userdata, setValue]);
 
   useEffect(() => {
     if (userdata?.signedAggrement?.link) {
-      setValue("docs", userdata.signedAggrement.link); 
-      setDocsUrl(userdata.signedAggrement.link); 
+      setValue("docs", userdata.signedAggrement.link);
+      setDocsUrl(userdata.signedAggrement.link);
     }
   }, [userdata, setValue]);
 
@@ -331,7 +341,7 @@ const CoachProfile = () => {
         typeOfCoaching: userdata?.typeOfCoaching,
         skills: userdata?.skills,
         dateofBirth: userdata?.dateofBirth
-          ? new Date(userdata.dateofBirth).toISOString().split("T")[0] 
+          ? new Date(userdata.dateofBirth).toISOString().split("T")[0]
           : "",
         placeofBirth: userdata?.placeofBirth,
         bio: userdata?.bio,
@@ -352,46 +362,50 @@ const CoachProfile = () => {
 
   return (
     <>
-      <div className='w-full h-auto mt-10 bg-white lg:p-10 p-5'>
+      <div className="w-full h-auto mt-10 bg-white lg:p-10 p-5">
         <form
           onSubmit={handleSubmit(handleEditProfile)}
-          className='flex flex-col'>
+          className="flex flex-col"
+        >
           {userdata?.isEditRequestSent && (
-            <div className='border-2 w-full p-3 h-24 rounded-md border-blue-300 bg-blue-100 flex items-center'>
-              <p className=' text-sm text-blue-400 flex items-center'>
-                <IoMdInformationCircleOutline className='mx-2 text-lg' />
+            <div className="border-2 w-full p-3 h-24 rounded-md border-blue-300 bg-blue-100 flex items-center">
+              <p className=" text-sm text-blue-400 flex items-center">
+                <IoMdInformationCircleOutline className="mx-2 text-lg" />
                 Your request for updating profile information has been sent to
-                the <span className='font-bold mx-1'>admin</span> for approval.It may take up to 24 to 48 hours to verify them
+                the <span className="font-bold mx-1">admin</span> for
+                approval.It may take up to 24 to 48 hours to verify them
               </p>
             </div>
           )}
           {userdata?.isEditRequestSent === false && (
-            <div className='main_heading_section flex justify-end w-full'>
-              <div className='approve_button flex gap-10 mt-4 border'>
+            <div className="main_heading_section flex justify-end w-full">
+              <div className="approve_button flex gap-10 mt-4 border">
                 {!isEditable && (
                   <Button
-                    className='bg-blue-700 text-white px-10 py-2 rounded-md flex items-center'
-                    type='button'
-                    onClick={() => setIsEditable(true)}>
+                    className="bg-blue-700 text-white px-10 py-2 rounded-md flex items-center"
+                    type="button"
+                    onClick={() => setIsEditable(true)}
+                  >
                     Edit
-                    <MdOutlineKeyboardArrowRight className='ml-2' size={16} />
+                    <MdOutlineKeyboardArrowRight className="ml-2" size={16} />
                   </Button>
                 )}
                 {isEditable && (
                   <Button
-                    className='bg-green-600 text-white px-10 py-2 rounded-md flex items-center'
-                    type='submit'
-                    disabled={isApiLoading}>
+                    className="bg-green-600 text-white px-10 py-2 rounded-md flex items-center"
+                    type="submit"
+                    disabled={isApiLoading}
+                  >
                     {isApiLoading ? (
                       <>
                         Saving...
-                        <ImSpinner3 className='animate-spin ml-2' size={16} />
+                        <ImSpinner3 className="animate-spin ml-2" size={16} />
                       </>
                     ) : (
                       <>
                         Save
                         <MdOutlineKeyboardArrowRight
-                          className='ml-2'
+                          className="ml-2"
                           size={16}
                         />
                       </>
@@ -404,56 +418,60 @@ const CoachProfile = () => {
           <Tabs
             value={activeTab}
             onValueChange={handleTabChange}
-            defaultValue='details'
-            className='w-full h-screen flex flex-col'>
-            <TabsList className='flex justify-start lg:gap-5 gap-0'>
+            defaultValue="details"
+            className="w-full h-screen flex flex-col"
+          >
+            <TabsList className="flex justify-start lg:gap-5 gap-0">
               <TabsTrigger
-                value='details'
-                className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
+                value="details"
+                className="px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]"
+              >
                 Details
               </TabsTrigger>
               <TabsTrigger
-                value='bankDetails'
-                className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
+                value="bankDetails"
+                className="px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]"
+              >
                 Bank Details
               </TabsTrigger>
               <TabsTrigger
-                value='documents'
-                className='px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]'>
+                value="documents"
+                className="px-4  text-sm data-[state=active]:decoration-sky-500  data-[state=active]:shadow-none py-3 data-[state=active]:border-b-4 data-[state=active]:border-blue-500 rounded-none data-[state=active]:rounded-none data-[state=active]:text-[#1D4ED8]"
+              >
                 Documents
               </TabsTrigger>
             </TabsList>
-            <div className='lg:block hidden border-b-2 border-gray-300 my-3'></div>
-            <TabsContent value='details' className='flex-grow p-6'>
-              <h2 className='text-xl font-bold'>Personal Information</h2>
-              <div className='personal_details_section flex lg:flex-row flex-col w-full gap-10 h-full mt-10'>
-                <div className='lg:w-[20%] w-full profile_image'>
-                  <div className='flex'>
-                    <div className='mt-4'>
-                      <div className='flex flex-col'>
+            <div className="lg:block hidden border-b-2 border-gray-300 my-3"></div>
+            <TabsContent value="details" className="flex-grow p-6">
+              <h2 className="text-xl font-bold">Personal Information</h2>
+              <div className="personal_details_section flex lg:flex-row flex-col w-full gap-10 h-full mt-10">
+                <div className="lg:w-[20%] w-full profile_image">
+                  <div className="flex">
+                    <div className="mt-4">
+                      <div className="flex flex-col">
                         <img
                           src={userdata?.profileImage || defaultImage}
-                          alt='profileimage'
-                          className='w-40 h-40 rounded-full object-cover shadow-md'
+                          alt="profileimage"
+                          className="w-40 h-40 rounded-full object-cover shadow-md"
                         />
 
-                        <div className='px-4 justify-center flex flex-col '>
+                        <div className="px-4 justify-center flex flex-col ">
                           {isEditable && (
-                            <label className=' cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4'>
+                            <label className=" cursor-pointer bg-blue-500 text-white px-2 py-2 rounded flex justify-center items-center w-auto text-sm mb-4">
                               {isImageUploading ? (
                                 <>
-                                  <ImSpinner3 className='m-1 animate-spin' />{" "}
+                                  <ImSpinner3 className="m-1 animate-spin" />{" "}
                                   Uploading
                                 </>
                               ) : (
                                 <>
-                                  <MdOutlineFileUpload className='inline-flex text-xl m-1' />{" "}
+                                  <MdOutlineFileUpload className="inline-flex text-xl m-1" />{" "}
                                   Upload
                                 </>
                               )}
                               <input
-                                type='file'
-                                accept='image/*'
+                                type="file"
+                                accept="image/*"
                                 hidden
                                 onChange={handleImageUpload}
                               />
@@ -461,10 +479,11 @@ const CoachProfile = () => {
                           )}
                           {imageUrl && isEditable && (
                             <Button
-                              type='button'
-                              className='text-white bg-red-500 hover:bg-red-700 flex justify-center'
-                              onClick={removeImage}>
-                              <RiDeleteBinLine className='m-1' /> Remove
+                              type="button"
+                              className="text-white bg-red-500 hover:bg-red-700 flex justify-center"
+                              onClick={removeImage}
+                            >
+                              <RiDeleteBinLine className="m-1" /> Remove
                             </Button>
                           )}
                         </div>
@@ -472,100 +491,109 @@ const CoachProfile = () => {
                     </div>
                   </div>
                 </div>
-                <div className='lg:w-[80%] w-full personal_details'>
-                  <div className='lg:grid block lg:space-y-0 space-y-5 grid-cols-1 md:grid-cols-3 gap-6'>
+                <div className="lg:w-[80%] w-full personal_details">
+                  <div className="lg:grid block lg:space-y-0 space-y-5 grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Email
                       </label>
                       <Input
                         {...register("email")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
 
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Phone
                       </label>
                       <Input
                         {...register("phone")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
 
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Experience
                       </label>
                       <Input
                         {...register("experience")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
 
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Type of Coaching
                       </label>
-                      <Input
+                      {/* <Input
                         {...register("typeOfCoaching")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
+                      /> */}
+                      <CoachSearchBar
+                        name="typeOfCoaching"
+                        control={control}
+                        options={typeOfCoachingOptions}
                       />
                     </div>
 
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Skills
                       </label>
                       <Input
                         {...register("skills")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
 
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Date of Birth
                       </label>
                       <Input
-                        type='date'
+                        type="date"
                         {...register("dateofBirth")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
 
                     <div>
-                      <label className='block text-sm font-medium text-gray-700'>
+                      <label className="block text-sm font-medium text-gray-700">
                         Place of Birth
                       </label>
                       <Input
-                        type='text'
+                        type="text"
                         {...register("placeofBirth")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
 
-                    <div className='col-span-3'>
-                      <label className="block text-sm font-medium text-gray-700">Social Links</label>
+                    <div className="col-span-3">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Social Links
+                      </label>
                       {fields.map((item, index) => (
                         <div key={item.id} style={{ marginBottom: "10px" }}>
-                          <label className='my-2 block text-base font-medium text-gray-700'>{item.name}</label>
+                          <label className="my-2 block text-base font-medium text-gray-700">
+                            {item.name}
+                          </label>
                           <Controller
                             name={`socialLinks.${index}.link`}
                             control={control}
                             render={({ field }) => (
                               <Input
                                 {...field}
-                                type='text'
-                                className='w-full'
+                                type="text"
+                                className="w-full"
                                 disabled={!isEditable} // Disable input when not in edit mode
                                 placeholder={`Link for ${item.name}`}
                               />
@@ -575,8 +603,8 @@ const CoachProfile = () => {
                       ))}
                     </div>
 
-                    <div className='col-span-3'>
-                      <label className='block text-sm font-medium text-gray-700'>
+                    <div className="col-span-3">
+                      <label className="block text-sm font-medium text-gray-700">
                         Bio
                       </label>
                       {/* <Textarea
@@ -584,22 +612,23 @@ const CoachProfile = () => {
                         className='w-full'
                         disabled={!isEditable}
                       /> */}
-                       <ReactQuill
-                          theme="snow"
-                          value={bio}
-                          onChange={handleBioChange} // Handle changes
-                          style={{
-                            height: "150px",
-                            margin: "10px 0px 50px",
-                          }}
-                          placeholder="Write your bio here..."
-                          
-                          readOnly={!isEditable}
-                        />
+                      <ReactQuill
+                        theme="snow"
+                        value={bio}
+                        onChange={handleBioChange} // Handle changes
+                        style={{
+                          height: "auto",
+                          margin: "10px 0px 50px",
+                          border: "1px solid #E5E7EB",
+                          borderRadius: "5px",
+                        }}
+                        placeholder="Write your bio here..."
+                        readOnly={!isEditable}
+                      />
                     </div>
 
-                    <div className='col-span-3'>
-                      <label className='block text-sm font-medium text-gray-700 lg:mt-0 mt-28'>
+                    <div className="col-span-3">
+                      <label className="block text-sm font-medium text-gray-700 lg:mt-0 mt-28">
                         Coaching Description
                       </label>
                       {/* <Textarea
@@ -608,26 +637,28 @@ const CoachProfile = () => {
                         disabled={!isEditable}
                       /> */}
                       <ReactQuill
-                          theme="snow"
-                          value={coachingDescription}
-                          onChange={handleCoachDescription} // Handle changes
-                          style={{
-                            height: "150px",
-                            margin: "10px 0px 50px",
-                          }}
-                          placeholder="Write the coaching description here..."
-                          disabled={!isEditable}
-                          readOnly={!isEditable}
-                        />
+                        theme="snow"
+                        value={coachingDescription}
+                        onChange={handleCoachDescription} // Handle changes
+                        style={{
+                          height: "auto",
+                          margin: "10px 0px 50px",
+                          border: "1px solid #E5E7EB",
+                          borderRadius: "5px",
+                        }}
+                        placeholder="Write the coaching description here..."
+                        disabled={!isEditable}
+                        readOnly={!isEditable}
+                      />
                     </div>
 
-                    <div className='col-span-3'>
-                      <label className='block text-sm font-medium text-gray-700 lg:mt-0 mt-20'>
+                    <div className="col-span-3">
+                      <label className="block text-sm font-medium text-gray-700 lg:mt-0 mt-20">
                         Address
                       </label>
                       <Input
                         {...register("address")}
-                        className='w-full'
+                        className="w-full"
                         disabled={!isEditable}
                       />
                     </div>
@@ -635,39 +666,39 @@ const CoachProfile = () => {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value='bankDetails' className='flex-grow p-6'>
-              <div className='mt-6'>
-                <h2 className='text-lg font-bold mb-4'>Bank Details</h2>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                  <div className='mb-4'>
-                    <p className='text-sm font-medium text-gray-700'>
+            <TabsContent value="bankDetails" className="flex-grow p-6">
+              <div className="mt-6">
+                <h2 className="text-lg font-bold mb-4">Bank Details</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="mb-4">
+                    <p className="text-sm font-medium text-gray-700">
                       Bank Name
                     </p>
                     <Input
                       {...register("bankName")}
-                      className='w-full'
+                      className="w-full"
                       disabled={!isEditable}
                     />
                   </div>
 
-                  <div className='mb-4'>
-                    <p className='text-sm font-medium text-gray-700'>
+                  <div className="mb-4">
+                    <p className="text-sm font-medium text-gray-700">
                       Account Number
                     </p>
                     <Input
                       {...register("accountNumber")}
-                      className='w-full'
+                      className="w-full"
                       disabled={!isEditable}
                     />
                   </div>
 
-                  <div className='mb-4'>
-                    <p className='text-sm font-medium text-gray-700'>
+                  <div className="mb-4">
+                    <p className="text-sm font-medium text-gray-700">
                       IFSC Code
                     </p>
                     <Input
                       {...register("ifscCode")}
-                      className='w-full'
+                      className="w-full"
                       disabled={!isEditable}
                     />
                   </div>
@@ -686,81 +717,85 @@ const CoachProfile = () => {
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value='documents' className='flex-grow lg:p-6 p-2'>
-              <div className='mt-6'>
-                <h2 className='text-lg font-bold mb-4'>Documents</h2>
+            <TabsContent value="documents" className="flex-grow lg:p-6 p-2">
+              <div className="mt-6">
+                <h2 className="text-lg font-bold mb-4">Documents</h2>
 
-                <div className='sm:col-span-6'>
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='cvUpload'
-                    className='block text-sm font-medium leading-6 text-gray-900'>
+                    htmlFor="cvUpload"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Upload CV (PDF/Doc/Docs only)
-                    <div className='lg:hidden block mt-2'>
+                    <div className="lg:hidden block mt-2">
                       {/* Controller for handling file input */}
                       {isEditable && (
                         <label
-                          htmlFor='cvUpload'
-                          className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                          htmlFor="cvUpload"
+                          className="flex items-center cursor-pointer space-x-2 text-sky-600"
+                        >
                           {isUploadingCV ? (
                             <>
-                              <ImSpinner8 className='text-xl animate-spin' />
-                              <span className='text-sm'>Uploading</span>
+                              <ImSpinner8 className="text-xl animate-spin" />
+                              <span className="text-sm">Uploading</span>
                             </>
                           ) : (
                             <>
-                              <IoMdCloudUpload className='text-xl' />
-                              <span className='text-sm'>Upload</span>
+                              <IoMdCloudUpload className="text-xl" />
+                              <span className="text-sm">Upload</span>
                             </>
                           )}
                         </label>
                       )}
                       <input
-                        type='file'
-                        id='cvUpload'
-                        accept='application/pdf'
-                        className='hidden'
+                        type="file"
+                        id="cvUpload"
+                        accept="application/pdf"
+                        className="hidden"
                         onChange={handleCVUpload}
                       />
                     </div>
                   </label>
-                  <div className='flex lg:gap-5 gap-0 items-center'>
-                    <div className='mt-2 lg:block hidden'>
+                  <div className="flex lg:gap-5 gap-0 items-center">
+                    <div className="mt-2 lg:block hidden">
                       {/* Controller for handling file input */}
                       {isEditable && (
                         <label
-                          htmlFor='cvUpload'
-                          className='flex items-center cursor-pointer space-x-2 text-sky-600'>
+                          htmlFor="cvUpload"
+                          className="flex items-center cursor-pointer space-x-2 text-sky-600"
+                        >
                           {isUploadingCV ? (
                             <>
-                              <ImSpinner8 className='text-xl animate-spin' />
-                              <span className='text-sm'>Uploading</span>
+                              <ImSpinner8 className="text-xl animate-spin" />
+                              <span className="text-sm">Uploading</span>
                             </>
                           ) : (
                             <>
-                              <IoMdCloudUpload className='text-xl' />
-                              <span className='text-sm'>Upload</span>
+                              <IoMdCloudUpload className="text-xl" />
+                              <span className="text-sm">Upload</span>
                             </>
                           )}
                         </label>
                       )}
                       <input
-                        type='file'
-                        id='cvUpload'
-                        accept='application/pdf'
-                        className='hidden'
+                        type="file"
+                        id="cvUpload"
+                        accept="application/pdf"
+                        className="hidden"
                         onChange={handleCVUpload}
                       />
                     </div>
-                    <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                    <div className="mt-2 flex items-center space-x-2 text-green-600">
                       {cvFileUrl ? (
                         <>
                           <span>{cvFileUrl?.split("/")?.pop()}</span>
-                          <FaCheckCircle className='text-xl lg:block hidden' />
+                          <FaCheckCircle className="text-xl lg:block hidden" />
                           <button
-                            type='button'
+                            type="button"
                             onClick={() => handleViewFile("cv")}
-                            className='text-blue-600 hover:text-blue-800'>
-                            <FaEye className='text-xl' /> {/* View Icon */}
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            <FaEye className="text-xl" /> {/* View Icon */}
                           </button>
                         </>
                       ) : (
@@ -770,10 +805,11 @@ const CoachProfile = () => {
                       {/* Remove File Button */}
                       {isEditable && cvFileUrl && (
                         <button
-                          type='button'
+                          type="button"
                           onClick={handleRemovecvUpload}
-                          className='text-red-500 hover:text-red-700'>
-                          <FaTimes className='text-sm' />
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes className="text-sm" />
                         </button>
                       )}
                     </div>
@@ -781,22 +817,23 @@ const CoachProfile = () => {
                     {/* ShadCN Dialog to display PDF */}
                     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                       <DialogContent
-                        showCloseButton='true'
-                        onClick={handleCloseModal}>
+                        showCloseButton="true"
+                        onClick={handleCloseModal}
+                      >
                         <DialogHeader>
                           <DialogTitle>CV Upload Preview</DialogTitle>
                         </DialogHeader>
                         {/* PDF Display using iframe */}
-                        <div className='relative w-full h-[80vh]'>
+                        <div className="relative w-full h-[80vh]">
                           {isCvLoading ? ( // Show loading spinner if PDF is still loading
-                            <div className='flex justify-center items-center h-full'>
-                              <FaSpinner className='animate-spin text-4xl text-blue-500' />
+                            <div className="flex justify-center items-center h-full">
+                              <FaSpinner className="animate-spin text-4xl text-blue-500" />
                             </div>
                           ) : googleViewerUrl ? ( // Show iframe once the URL is available
                             <iframe
                               src={googleViewerUrl}
-                              className='w-full h-full'
-                              title='PDF Preview'
+                              className="w-full h-full"
+                              title="PDF Preview"
                             />
                           ) : (
                             <p>No PDF file available</p> // Display message if no URL
@@ -805,31 +842,33 @@ const CoachProfile = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <p className='mt-2 text-sm text-red-400'>
+                  <p className="mt-2 text-sm text-red-400">
                     {errors?.cvUpload?.message}
                   </p>
                 </div>
 
-                <div className='sm:col-span-full'>
+                <div className="sm:col-span-full">
                   <label
-                    htmlFor='cvUpload'
-                    className='block text-sm font-medium leading-6 text-gray-900'>
+                    htmlFor="cvUpload"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Signed and Accepted Agreement
-                    <div className='lg:hidden block mt-2'>
-                      <div className='flex items-center '>
+                    <div className="lg:hidden block mt-2">
+                      <div className="flex items-center ">
                         {isEditable && (
                           <label
-                            htmlFor='docsUpload'
-                            className='flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 '>
+                            htmlFor="docsUpload"
+                            className="flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 "
+                          >
                             {isUploadingDocs ? (
                               <>
-                                <ImSpinner8 className='text-xl animate-spin' />
-                                <span className='text-sm'>Uploading</span>
+                                <ImSpinner8 className="text-xl animate-spin" />
+                                <span className="text-sm">Uploading</span>
                               </>
                             ) : (
                               <>
-                                <IoMdCloudUpload className='text-xl' />
-                                <span className='text-sm'>
+                                <IoMdCloudUpload className="text-xl" />
+                                <span className="text-sm">
                                   Upload Documents
                                 </span>
                               </>
@@ -838,35 +877,36 @@ const CoachProfile = () => {
                         )}
 
                         <input
-                          type='file'
-                          id='docsUpload'
+                          type="file"
+                          id="docsUpload"
                           hidden
-                          accept='application/pdf'
+                          accept="application/pdf"
                           onChange={handleDocUpload}
-                          className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                          className="hidden w-full text-gray-900 border rounded-md py-1.5"
                         />
                       </div>
-                      <p className='mt-2 text-sm text-red-400'>
+                      <p className="mt-2 text-sm text-red-400">
                         {errors?.docsUpload?.message}
                       </p>
                     </div>
                   </label>
-                  <div className='flex lg:gap-5 gap-0 items-center'>
-                    <div className='lg:block hidden mt-2'>
-                      <div className='flex items-center '>
+                  <div className="flex lg:gap-5 gap-0 items-center">
+                    <div className="lg:block hidden mt-2">
+                      <div className="flex items-center ">
                         {isEditable && (
                           <label
-                            htmlFor='docsUpload'
-                            className='flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 '>
+                            htmlFor="docsUpload"
+                            className="flex items-center cursor-pointer space-x-2 text-sky-600 mr-2 py-2 "
+                          >
                             {isUploadingDocs ? (
                               <>
-                                <ImSpinner8 className='text-xl animate-spin' />
-                                <span className='text-sm'>Uploading</span>
+                                <ImSpinner8 className="text-xl animate-spin" />
+                                <span className="text-sm">Uploading</span>
                               </>
                             ) : (
                               <>
-                                <IoMdCloudUpload className='text-xl' />
-                                <span className='text-sm'>
+                                <IoMdCloudUpload className="text-xl" />
+                                <span className="text-sm">
                                   Upload Documents
                                 </span>
                               </>
@@ -875,30 +915,31 @@ const CoachProfile = () => {
                         )}
 
                         <input
-                          type='file'
-                          id='docsUpload'
+                          type="file"
+                          id="docsUpload"
                           hidden
-                          accept='application/pdf'
+                          accept="application/pdf"
                           onChange={handleDocUpload}
-                          className='hidden w-full text-gray-900 border rounded-md py-1.5'
+                          className="hidden w-full text-gray-900 border rounded-md py-1.5"
                         />
                       </div>
-                      <p className='mt-2 text-sm text-red-400'>
+                      <p className="mt-2 text-sm text-red-400">
                         {errors?.docsUpload?.message}
                       </p>
                     </div>
-                    <div className='mt-2 flex items-center space-x-2 text-green-600'>
+                    <div className="mt-2 flex items-center space-x-2 text-green-600">
                       {docsUrl ? (
                         <>
                           <span>{docsUrl?.split("/")?.pop()}</span>
-                          <FaCheckCircle className='text-xl lg:block hidden' />
+                          <FaCheckCircle className="text-xl lg:block hidden" />
 
                           {/* View PDF Icon */}
                           <button
-                            type='button'
+                            type="button"
                             onClick={() => handleViewFile("docs")}
-                            className='text-blue-600 hover:text-blue-800'>
-                            <FaEye className='text-xl' /> {/* View Icon */}
+                            className="text-blue-600 hover:text-blue-800"
+                          >
+                            <FaEye className="text-xl" /> {/* View Icon */}
                           </button>
                         </>
                       ) : (
@@ -908,10 +949,11 @@ const CoachProfile = () => {
                       {/* Remove File Button */}
                       {isEditable && docsUrl && (
                         <button
-                          type='button'
+                          type="button"
                           onClick={handleRemoveDocs}
-                          className='text-red-500 hover:text-red-700'>
-                          <FaTimes className='text-sm' />
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes className="text-sm" />
                         </button>
                       )}
                     </div>
@@ -919,22 +961,23 @@ const CoachProfile = () => {
                     {/* ShadCN Dialog to display PDF */}
                     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                       <DialogContent
-                        showCloseButton='true'
-                        onClick={handleCloseModal}>
+                        showCloseButton="true"
+                        onClick={handleCloseModal}
+                      >
                         <DialogHeader>
                           <DialogTitle>Document Upload Preview</DialogTitle>
                         </DialogHeader>
                         {/* PDF Display using iframe */}
-                        <div className='relative w-full h-[80vh]'>
+                        <div className="relative w-full h-[80vh]">
                           {isDocumentLoading ? ( // Show loading spinner if PDF is still loading
-                            <div className='flex justify-center items-center h-full'>
-                              <FaSpinner className='animate-spin text-4xl text-blue-500' />
+                            <div className="flex justify-center items-center h-full">
+                              <FaSpinner className="animate-spin text-4xl text-blue-500" />
                             </div>
                           ) : googleViewerUrl ? ( // Show iframe once the URL is available
                             <iframe
                               src={googleViewerUrl}
-                              className='w-full h-full'
-                              title='PDF Preview'
+                              className="w-full h-full"
+                              title="PDF Preview"
                             />
                           ) : (
                             <p>No PDF file available</p> // Display message if no URL
@@ -946,21 +989,22 @@ const CoachProfile = () => {
                 </div>
 
                 {/* START- COACH INTRODUCTION VIDEO */}
-                <div className='sm:col-span-6 mt-5'>
+                <div className="sm:col-span-6 mt-5">
                   <label
-                    htmlFor='profileVideo'
-                    className='block text-sm font-medium leading-6 text-gray-900'>
+                    htmlFor="profileVideo"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Profile Video
                   </label>
-                  <div className='flex space-x-2'>
+                  <div className="flex space-x-2">
                     <Input
-                      type='text'
+                      type="text"
                       {...register("profileVideo")}
-                      id='profileVideo'
+                      id="profileVideo"
                       // value={profileVideo?.url}
-                      placeholder='Enter video URL'
+                      placeholder="Enter video URL"
                       disabled={!isEditable}
-                      className='border border-gray-300 p-2 rounded w-full mt-2'
+                      className="border border-gray-300 p-2 rounded w-full mt-2"
                     />
                     {/* Remove Button */}
 
@@ -968,26 +1012,27 @@ const CoachProfile = () => {
 
                     {isEditable && (
                       <button
-                        type='button'
+                        type="button"
                         onClick={handleRemoveLink}
-                        className='text-red-500 hover:text-red-700'>
-                        <FaTimes className='text-sm' />
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <FaTimes className="text-sm" />
                       </button>
                     )}
                   </div>
 
                   {/* Displaying the YouTube video using ReactPlayer */}
-                  <div className='mt-4'>
+                  <div className="mt-4">
                     {profileVideo?.url ? (
                       ReactPlayer.canPlay(profileVideo?.url) ? (
                         <ReactPlayer
                           url={profileVideo?.url}
                           controls
-                          width='100%'
-                          height='300px'
+                          width="100%"
+                          height="300px"
                         />
                       ) : (
-                        <p className='text-sm'>
+                        <p className="text-sm">
                           Please enter a valid YouTube URL to preview the video.
                         </p>
                       )

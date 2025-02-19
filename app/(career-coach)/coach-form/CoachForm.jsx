@@ -1477,8 +1477,10 @@ const CoachForm = () => {
                           theme="snow"
                           onChange={handleCoachDescription} // Handle changes
                           style={{
-                            height: "150px",
+                            height: "auto",
                             margin: "10px 0px 50px",
+                            border: "1px solid #E5E7EB",
+                            borderRadius: "5px",
                           }}
                           placeholder="Write the coaching description here..."
                         />
@@ -1506,8 +1508,10 @@ const CoachForm = () => {
                           theme="snow"
                           onChange={handleBioChange} // Handle changes
                           style={{
-                            height: "150px",
+                            height: "auto",
                             margin: "10px 0px 50px",
+                            border: "1px solid #E5E7EB",
+                            borderRadius: "5px",
                           }}
                           placeholder="Write your bio here..."
                         />

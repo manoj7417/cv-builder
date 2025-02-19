@@ -176,7 +176,7 @@ const AdminPage = () => {
                             alt="coachImage"
                           />
                         </div>
-                        <div className="font-bold text-base text-[#000000]">
+                        <div className="font-bold text-base text-[#000000] text-center">
                           {coach?.name || "Unnamed Coach"}
                         </div>
                         <div className="text-[11px] text-[#000000]">
@@ -223,7 +223,8 @@ const AdminPage = () => {
               {coaches?.length > 0 ? (
                 coaches
                   .filter(
-                    (coach) => coach?.approvalStatus?.toLowerCase() === "approved"
+                    (coach) =>
+                      coach?.approvalStatus?.toLowerCase() === "approved"
                   )
                   .map((coach) => (
                     <div
