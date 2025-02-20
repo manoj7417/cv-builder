@@ -105,6 +105,14 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href='/corporate'
+                    className='text-black transition'>
+                    Corporate Programs
+                    <MdOutlineKeyboardArrowRight className='inline text-xl' />
+                  </Link>
+                </li>
               </ul>
             </div>
 
