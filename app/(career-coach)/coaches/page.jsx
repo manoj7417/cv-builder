@@ -265,11 +265,14 @@ const CoachPage = () => {
                         </figure>
                         <div className="flex-1 p-4 sm:p-6 sm:mx-6 sm:px-0">
                           <header className="flex gap-4">
-                            <div onClick={handleMobileView}>
+                            <div>
                               <h3 className="text-base font-medium text-slate-900">
                                 {item.name}
                               </h3>
-                              <Button className="lg:hidden block px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer">
+                              <Button
+                                className="lg:hidden block px-2 py-1 w-20 h-10 text-xs my-2 cursor-pointer"
+                                onClick={handleMobileView}
+                              >
                                 Book Now
                               </Button>
                             </div>
