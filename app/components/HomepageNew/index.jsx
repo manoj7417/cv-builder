@@ -14,12 +14,12 @@ import "./Homepage.css";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import dynamic from 'next/dynamic';
-import Loading from '@/app/loading';
+import dynamic from "next/dynamic";
+import Loading from "@/app/loading";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
-  loading: () => <p></p>
+  loading: () => <p></p>,
 });
 
 function LoadingSpinner() {
@@ -27,7 +27,7 @@ function LoadingSpinner() {
     <div className="flex items-center justify-center min-h-screen">
       <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
     </div>
-  )
+  );
 }
 
 export default function HomepageNew() {
@@ -155,7 +155,7 @@ export default function HomepageNew() {
             />
           </div>
           <div className="flex-1 w-full overflow-hidden relative">
-            <div className="hidden lg:flex animate-marquee whitespace-nowrap p-9">
+            <div className="hidden lg:flex animate-marquee  whitespace-nowrap p-9">
               {Array(2)
                 .fill()
                 .map((_, index) => (
@@ -193,8 +193,8 @@ export default function HomepageNew() {
               <p className="text-sm my-5">
                 Thus, you need to build <b>resume formatting</b> that passes
                 through every <b>ATS Checker</b>. Genies Career Hub is the exact
-                change in approach that you need. Here&apos;s how we amplify your
-                CV-making process to eliminate rejection:
+                change in approach that you need. Here&apos;s how we amplify
+                your CV-making process to eliminate rejection:
               </p>
               <ul className="space-y-3 text-sm">
                 <li>
@@ -207,7 +207,7 @@ export default function HomepageNew() {
                 </li>
                 <li>
                   <strong className="text-[#1D4ED8]">Optimisation</strong> -
-                   <b>Enhanced CV</b> with keyword and format optimised content
+                  <b>Enhanced CV</b> with keyword and format optimised content
                   for assured <b>ATS CV Checker</b> approval
                 </li>
                 <li>
@@ -226,10 +226,21 @@ export default function HomepageNew() {
             </div>
             <div className="grid-span-6">
               <div className="resume_parent">
-                <img className="resume_img_1" src="/15.png" alt="15AtsImage" sizes="100px" width={100} height={100}/>
-                <img className="resume_img_2" src="/17.png" alt="17AtsImage"/>
-                <img className="resume_img_3" src="/18.png" alt="18AtsImage"/>
-                <img className="resume_img_4 md:block hidden" src="/16.png" alt="18AtsImage"/>
+                <img
+                  className="resume_img_1"
+                  src="/15.png"
+                  alt="15AtsImage"
+                  sizes="100px"
+                  width={100}
+                  height={100}
+                />
+                <img className="resume_img_2" src="/17.png" alt="17AtsImage" />
+                <img className="resume_img_3" src="/18.png" alt="18AtsImage" />
+                <img
+                  className="resume_img_4 md:block hidden"
+                  src="/16.png"
+                  alt="18AtsImage"
+                />
               </div>
             </div>
           </div>

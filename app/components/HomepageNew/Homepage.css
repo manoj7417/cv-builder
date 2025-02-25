@@ -339,4 +339,21 @@ button.get_start_btn.hire_coach_button {
 
 
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+
+
+
+
 /* New HomeBanner CSS Ends here  */
