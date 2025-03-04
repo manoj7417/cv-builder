@@ -14,6 +14,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import axios from "axios";
 import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
 import { Button } from "@/components/ui/button";
+import { GetTokens } from "@/app/actions";
 
 export default function Register() {
   const router = useRouter();
@@ -107,6 +108,16 @@ export default function Register() {
       setOauthLoading(false);
     }
   };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { accessToken } = await GetTokens();
+      if (accessToken) {
+        router.push("/");
+      }
+    };
+    checkAuth();
+  }, []);
 
   return (
     <section>

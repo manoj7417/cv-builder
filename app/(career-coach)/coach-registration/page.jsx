@@ -24,9 +24,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import core Swiper styles
 import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
-import SignInGoogle from '../../components/SignInGoogle/SignInGoogle'
+import SignInGoogle from "../../components/SignInGoogle/SignInGoogle";
 import CoachSignIn from "@/app/components/CoachGoogleSignIn/CoachSignIn";
 import Image from "next/image";
+import { GetTokens } from "@/app/actions";
 //
 export default function CoachRegistration() {
   const formSchema = yup.object().shape({
@@ -90,21 +91,31 @@ export default function CoachRegistration() {
 
   const handleSignupwithGoogle = async () => {
     try {
-      const response = await axios.get('/api/googleRegisteration')
+      const response = await axios.get("/api/googleRegisteration");
       if (response.status === 200) {
-        window.location.href = response.data.redirectUrl
+        window.location.href = response.data.redirectUrl;
       }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    const checkCoachAuth = async () => {
+      const { accessToken } = await GetTokens(true);
+      if (accessToken) {
+        router.push("/coach-dashboard");
+      }
+    };
+    checkCoachAuth();
+  }, []);
 
   return (
-    <section className='h-screen'>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 w-full h-full'>
-        <div className='h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 justify-center'>
-          <div className='w-[70%] mt-14'>
-            <h1 className='text-white text-center text-2xl font-semibold'>
+    <section className="h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full h-full">
+        <div className="h-full w-full hidden md:flex lg:flex flex-col items-center bg-[#007AFF] z-0 justify-center">
+          <div className="w-[70%] mt-14">
+            <h1 className="text-white text-center text-2xl font-semibold">
               Join as a Coach and inspire the next generation of achievers
             </h1>
           </div>
@@ -116,31 +127,32 @@ export default function CoachRegistration() {
             autoplay={{ delay: 3000, disableOnInteraction: false }} // Autoplay settings
             spaceBetween={20} // Space between slides
             slidesPerView={1} // Show one slide at a time
-            className='mt-4 w-[60%] rounded-md'>
+            className="mt-4 w-[60%] rounded-md"
+          >
             <SwiperSlide>
-              <div className='p-4 rounded-md '>
+              <div className="p-4 rounded-md ">
                 <img
-                  className='mx-auto h-auto  rounded-md object-contain'
-                  src='/coachSignin1.png'
-                  alt='coach-register'
+                  className="mx-auto h-auto  rounded-md object-contain"
+                  src="/coachSignin1.png"
+                  alt="coach-register"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='p-4 rounded-md '>
+              <div className="p-4 rounded-md ">
                 <img
-                  className='mx-auto h-auto  rounded-md object-contain'
-                  src='/coachSignin2.png'
-                  alt='coach-register'
+                  className="mx-auto h-auto  rounded-md object-contain"
+                  src="/coachSignin2.png"
+                  alt="coach-register"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='p-4 rounded-md '>
+              <div className="p-4 rounded-md ">
                 <img
-                  className='mx-auto h-auto rounded-md object-contain'
-                  src='/coachSignin3.png'
-                  alt='coach-register'
+                  className="mx-auto h-auto rounded-md object-contain"
+                  src="/coachSignin3.png"
+                  alt="coach-register"
                 />
               </div>
             </SwiperSlide>
@@ -149,62 +161,59 @@ export default function CoachRegistration() {
           {/* Custom Pagination Styles */}
         </div>
 
-        <div className='flex flex-col items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-10'>
-        <Link
-              href={"/"}
-              className="flex justify-center items-center my-5"
-            >
-              <Image
-                priority="true"
-                src="/genies-career-hub-logo.png"
-                width={100}
-                height={100}
-                alt="white_logo"
-                className="w-28 h-auto object-contain"
-              />
-            </Link>
-          <div className='xl:mx-auto xl:w-full xl:max-w-md 2xl:max-w-xl'>
-            <h2 className='text-xl lg:text-start text-center font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl'>
+        <div className="flex flex-col items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-10">
+          <Link href={"/"} className="flex justify-center items-center my-5">
+            <Image
+              priority="true"
+              src="/genies-career-hub-logo.png"
+              width={100}
+              height={100}
+              alt="white_logo"
+              className="w-28 h-auto object-contain"
+            />
+          </Link>
+          <div className="xl:mx-auto xl:w-full xl:max-w-md 2xl:max-w-xl">
+            <h2 className="text-xl lg:text-start text-center font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
               Create an Account to Register as a Coach
             </h2>
-            <form onSubmit={handleSubmit(handleCoachDetails)} className='mt-8'>
-              <div className='space-y-5'>
-                <div className='flex gap-5'>
-                  <div className='lg:w-1/2 w-full'>
+            <form onSubmit={handleSubmit(handleCoachDetails)} className="mt-8">
+              <div className="space-y-5">
+                <div className="flex gap-5">
+                  <div className="lg:w-1/2 w-full">
                     <div>
-                      <Label htmlFor='name' className='text-sm text-gray-900'>
+                      <Label htmlFor="name" className="text-sm text-gray-900">
                         First Name
                       </Label>
-                      <div className='mt-2'>
+                      <div className="mt-2">
                         <Input
-                          className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none'
-                          type='text'
-                          placeholder='First Name'
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
+                          type="text"
+                          placeholder="First Name"
                           {...register("firstName")}
                         />
                         {errors?.firstName && (
-                          <p className='text-red-500 text-sm mt-2'>
+                          <p className="text-red-500 text-sm mt-2">
                             {errors?.firstName?.message}
                           </p>
                         )}
                       </div>
                     </div>
                   </div>
-                  <div className='lg:w-1/2 w-full'>
+                  <div className="lg:w-1/2 w-full">
                     <div>
-                      <Label htmlFor='name' className='text-sm text-gray-900'>
+                      <Label htmlFor="name" className="text-sm text-gray-900">
                         {" "}
                         Last Name{" "}
                       </Label>
-                      <div className='mt-2'>
+                      <div className="mt-2">
                         <Input
-                          className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none'
-                          type='text'
-                          placeholder='Last Name'
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none"
+                          type="text"
+                          placeholder="Last Name"
                           {...register("lastName")}
                         />
                         {errors?.lastName && (
-                          <p className='text-red-500 text-sm mt-2'>
+                          <p className="text-red-500 text-sm mt-2">
                             {errors?.lastName?.message}
                           </p>
                         )}
@@ -212,43 +221,44 @@ export default function CoachRegistration() {
                     </div>
                   </div>
                 </div>
-                <div className='flex gap-5'>
-                  <div className='lg:w-1/2 w-full'>
+                <div className="flex gap-5">
+                  <div className="lg:w-1/2 w-full">
                     <div>
-                      <Label htmlFor='email' className='text-sm text-gray-900'>
+                      <Label htmlFor="email" className="text-sm text-gray-900">
                         {" "}
                         Email address{" "}
                       </Label>
-                      <div className='mt-2'>
+                      <div className="mt-2">
                         <Input
-                          className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
-                          type='email'
-                          placeholder='Email'
-                          id='email'
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                          type="email"
+                          placeholder="Email"
+                          id="email"
                           {...register("email")}
                         />
                         {errors?.email && (
-                          <p className='text-red-500 text-sm mt-2'>
+                          <p className="text-red-500 text-sm mt-2">
                             {errors?.email?.message}
                           </p>
                         )}
                       </div>
                     </div>
                   </div>
-                  <div className='lg:w-1/2 w-full'>
+                  <div className="lg:w-1/2 w-full">
                     <div>
-                      <div className='flex items-center justify-between mt-1'>
+                      <div className="flex items-center justify-between mt-1">
                         <Label
-                          htmlFor='password'
-                          className='text-sm text-gray-900'>
+                          htmlFor="password"
+                          className="text-sm text-gray-900"
+                        >
                           Phone Number
                         </Label>
                       </div>
                       <div>
                         <Controller
-                          name='phone'
+                          name="phone"
                           control={control}
-                          defaultValue=''
+                          defaultValue=""
                           rules={{
                             required: "Phone number is required",
                             validate: (value) =>
@@ -270,7 +280,7 @@ export default function CoachRegistration() {
                         />
                         {/* Display validation errors */}
                         {errors.phone && (
-                          <p className='text-red-500 mt-1'>
+                          <p className="text-red-500 mt-1">
                             {errors.phone.message}
                           </p>
                         )}
@@ -279,36 +289,37 @@ export default function CoachRegistration() {
                   </div>
                 </div>
                 {/*START-PASSWORD AND CONFIRM PASSWORD  */}
-                <div className='flex gap-5'>
-                  <div className='lg:w-1/2 w-full'>
+                <div className="flex gap-5">
+                  <div className="lg:w-1/2 w-full">
                     <div>
                       <Label
-                        htmlFor='password'
-                        className='text-sm text-gray-900'>
+                        htmlFor="password"
+                        className="text-sm text-gray-900"
+                      >
                         {" "}
                         Password{" "}
                       </Label>
-                      <div className='mt-2 relative'>
+                      <div className="mt-2 relative">
                         <Input
-                          className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type={showPassword ? "text" : "password"}
-                          placeholder='Password'
+                          placeholder="Password"
                           {...register("password")}
                         />
                         {errors?.password && (
-                          <p className='text-red-500 text-sm mt-2'>
+                          <p className="text-red-500 text-sm mt-2">
                             {errors?.password?.message}
                           </p>
                         )}
-                        <div className='top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3'>
+                        <div className="top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3">
                           {showPassword ? (
                             <IoEye
-                              className='cursor-pointer h-4 w-4'
+                              className="cursor-pointer h-4 w-4"
                               onClick={() => setShowPassword(false)}
                             />
                           ) : (
                             <IoEyeOff
-                              className='cursor-pointer h-4 w-4'
+                              className="cursor-pointer h-4 w-4"
                               onClick={() => setShowPassword(true)}
                             />
                           )}
@@ -316,36 +327,37 @@ export default function CoachRegistration() {
                       </div>
                     </div>
                   </div>
-                  <div className='lg:w-1/2 w-full'>
+                  <div className="lg:w-1/2 w-full">
                     <div>
                       <Label
-                        htmlFor='password'
-                        className='text-sm text-gray-900'>
+                        htmlFor="password"
+                        className="text-sm text-gray-900"
+                      >
                         {" "}
                         Confirm Password{" "}
                       </Label>
-                      <div className='mt-2 relative'>
+                      <div className="mt-2 relative">
                         <Input
-                          className='flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                           type={showconfirmPassword ? "text" : "password"}
-                          placeholder='Password'
+                          placeholder="Password"
                           {...register("cpassword")}
                         />
                         {errors?.cpassword && (
-                          <p className='text-red-500 text-sm mt-2'>
+                          <p className="text-red-500 text-sm mt-2">
                             {errors?.cpassword?.message}
                           </p>
                         )}
 
-                        <div className='top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3'>
+                        <div className="top-0 right-0 absolute h-10 md:h-12 flex items-center justify-center pr-3">
                           {showconfirmPassword ? (
                             <IoEye
-                              className='cursor-pointer h-4 w-4'
+                              className="cursor-pointer h-4 w-4"
                               onClick={() => setShowConfirmPassword(false)}
                             />
                           ) : (
                             <IoEyeOff
-                              className='cursor-pointer h-4 w-4'
+                              className="cursor-pointer h-4 w-4"
                               onClick={() => setShowConfirmPassword(true)}
                             />
                           )}
@@ -376,31 +388,34 @@ export default function CoachRegistration() {
                     </div>
                   )}
                 </div> */}
-                <div className='terms_condition'>
-                  <div className='field field-checkbox flex items-center'>
+                <div className="terms_condition">
+                  <div className="field field-checkbox flex items-center">
                     <input
-                      id='termsCondition'
-                      type='checkbox'
-                      className='form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600'
+                      id="termsCondition"
+                      type="checkbox"
+                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
                       {...register("terms", { required: true })}
                     />
                     <label
-                      htmlFor='checkbox'
-                      className='ml-2 text-xs sm:text-sm  text-[12px] text-gray-700'>
+                      htmlFor="checkbox"
+                      className="ml-2 text-xs sm:text-sm  text-[12px] text-gray-700"
+                    >
                       <p>
                         I agree to all the
                         <Link
-                          href='/terms-condition'
-                          target='_blank'
-                          className='text-[#007AFF] underline underline-offset-4 ml-1 font-semibold'>
+                          href="/terms-condition"
+                          target="_blank"
+                          className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
+                        >
                           {" "}
                           Terms
                         </Link>
-                        <span className='pl-1'>and</span>
+                        <span className="pl-1">and</span>
                         <Link
-                          href='/privacy-policy'
-                          target='_blank'
-                          className='text-[#007AFF] underline underline-offset-4 ml-1 font-semibold'>
+                          href="/privacy-policy"
+                          target="_blank"
+                          className="text-[#007AFF] underline underline-offset-4 ml-1 font-semibold"
+                        >
                           {" "}
                           Privacy policy
                         </Link>
@@ -408,7 +423,7 @@ export default function CoachRegistration() {
                     </label>
                   </div>
                   {errors?.terms && (
-                    <p className='text-red-500 text-sm mt-2'>
+                    <p className="text-red-500 text-sm mt-2">
                       {errors?.terms?.message}
                     </p>
                   )}
@@ -416,31 +431,33 @@ export default function CoachRegistration() {
 
                 <div>
                   <Button
-                    type='submit'
-                    className='inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white'
-                    disabled={isLoading}>
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-[#007AFF] hover:[#007AFF] px-3.5 py-2.5 font-semibold leading-7 text-white"
+                    disabled={isLoading}
+                  >
                     {isLoading ? (
                       <>
                         Creating Account
-                        <ImSpinner3 className='animate-spin ml-2' size={16} />
+                        <ImSpinner3 className="animate-spin ml-2" size={16} />
                       </>
                     ) : (
                       <>
                         Create Account
                         <MdOutlineKeyboardArrowRight
-                          className='ml-2'
+                          className="ml-2"
                           size={16}
                         />
                       </>
                     )}
                   </Button>
                   <CoachSignIn type="Sign Up" />
-                  <p className='mt-10 text-sm text-gray-600 text-center'>
+                  <p className="mt-10 text-sm text-gray-600 text-center">
                     Already have an account?
                     <Link
-                      href='/coach-signin'
-                      title=''
-                      className='font-medium text-blue-500 transition-all duration-200 hover:underline'>
+                      href="/coach-signin"
+                      title=""
+                      className="font-medium text-blue-500 transition-all duration-200 hover:underline"
+                    >
                       Log In
                     </Link>
                   </p>

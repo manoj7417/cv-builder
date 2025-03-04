@@ -1,10 +1,10 @@
 "use client";
-import React, { useRef, useState, useContext, Suspense } from "react";
+import React, { useRef, useState, useContext, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
-import { SetTokens } from "../../actions";
+import { GetTokens, SetTokens } from "../../actions";
 import { useUserStore } from "../../../app/store/UserStore";
 import axios from "axios";
 import Link from "next/link";
@@ -130,6 +130,18 @@ function LoginUser() {
       toast.error("Error sending verification email");
     }
   };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { accessToken } = await GetTokens();
+
+      if (accessToken) {
+        router.push("/");
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
     <>

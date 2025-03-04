@@ -1,7 +1,7 @@
 /** @format */
 
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -21,7 +21,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import core Swiper styles
 import "swiper/css/pagination"; // Import Swiper pagination module styles
 import { Autoplay, Pagination } from "swiper/modules"; // Import Pagination module
-import { SetTokens } from "@/app/actions";
+import { GetTokens, SetTokens } from "@/app/actions";
 import { useCoachStore } from "../../store/coachStore";
 import CoachSignIn from "@/app/components/CoachGoogleSignIn/CoachSignIn";
 import Image from "next/image";
@@ -106,6 +106,16 @@ export default function CoachLogin() {
       setIsSendingMail(false);
     }
   };
+
+  useEffect(() => {
+    const checkCoachAuth = async () => {
+      const { accessToken } = await GetTokens(true);
+      if (accessToken) {
+        router.push("/coach-dashboard");
+      }
+    };
+    checkCoachAuth();
+  }, []);
 
   return (
     <>
@@ -210,7 +220,7 @@ export default function CoachLogin() {
             </Link>
             <div className="lg:w-[450px] w-[350px] mx-auto">
               <h1 className="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl">
-               Coach Sign in
+                Coach Sign in
               </h1>
               <h2 className="mt-2 text-[13px] text-gray-600">
                 Don&apos;t have an account?{" "}
