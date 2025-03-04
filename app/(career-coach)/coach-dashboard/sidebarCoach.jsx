@@ -72,7 +72,7 @@ const SidebarCoach = () => {
 
   const handleLogout = async () => {
     try {
-      await RemoveTokens();
+      await RemoveTokens(true);
       await signOut({ redirect: false });
       toast.success("Logged out");
       router.push("/coach-signin");
