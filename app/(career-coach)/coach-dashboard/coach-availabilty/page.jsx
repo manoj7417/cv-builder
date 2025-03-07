@@ -354,7 +354,7 @@ const CoachAvailability = () => {
               />
             </div>
           </div>
-          <div className="lg:w-[30%] w-full time_zone lg:px-0 px-5">
+          <div className="lg:w-[30%] w-full time_zone lg:px-0 px-5 pb-10">
             <Controller
               name="timeZone" // Registering timeZone with react-hook-form
               control={control}

@@ -64,7 +64,10 @@ const TimeZone = ({ value, onChange }) => {
       {/* Popover for better dropdown control */}
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="w-[300px] justify-start">
+          <Button
+            variant="outline"
+            className="w-full sm:w-[300px] justify-start"
+          >
             {value ? (
               <span>
                 {timeZones.find((tz) => tz.zone === value)?.label || value}
@@ -74,7 +77,7 @@ const TimeZone = ({ value, onChange }) => {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[300px] p-2">
+        <PopoverContent className="w-full sm:w-[320px] p-2 z-[999] shadow-lg bg-white">
           {/* Search Input */}
           <Input
             type="text"
