@@ -179,9 +179,10 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
   return (
     <>
       <div className="main_title">
-        <h2 className="text-base font-bold text-blue-950">Date overrides</h2>
+        <h2 className="text-base font-bold text-blue-950">Date Overrides</h2>
         <p className="text-sm text-gray-500">
-          Add dates when your availability changes from your daily hours.
+          Adjust your availability for specific dates by overriding your usual
+          time slots or marking yourself as unavailable.
         </p>
         <div className="date_button">
           <button
@@ -195,7 +196,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
 
           <Dialog open={isModalOpen}>
             <DialogContent
-              className="max-w-3xl border-none"
+              className="max-w-full md:max-w-[45rem] 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6 2xl:h-auto lg:h-auto h-[500px] md:overflow-visible overflow-y-scroll"
               onClick={handleDialogClose}
               showCloseButton={true}
             >
@@ -204,7 +205,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
                   Select the dates to override
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex w-full lg:flex-row flex-col justify-center">
+              <div className="flex w-full md:flex-row flex-col justify-center">
                 <div className="lg:w-[50%] w-full calendar">
                   {mode === "multiple" ? (
                     <CalendarComponent

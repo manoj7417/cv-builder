@@ -146,7 +146,7 @@ function CreateProgram() {
           <Tooltip>
             <TooltipTrigger>
               <ArrowLeft
-                className="cursor-pointer"
+                className="cursor-pointer lg:block md:hidden hidden"
                 onClick={() => router.back()}
               />
             </TooltipTrigger>

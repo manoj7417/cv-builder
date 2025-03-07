@@ -106,10 +106,10 @@ const SidebarCoach = () => {
   }, []);
 
   return (
-    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative lg:py-5 py-0 lg:shadow-xl shadow-none w-[260px]">
+    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative lg:shadow-xl shadow-none">
       {/* Mobile Hamburger Menu Button */}
       <button
-        className="md:hidden p-4 focus:outline-none"
+        className="lg:hidden block p-4 focus:outline-none"
         onClick={toggleSidebar}
       >
         <HiMenu className="w-8 h-8" />
@@ -117,10 +117,10 @@ const SidebarCoach = () => {
 
       <div
         className={`fixed inset-y-0 left-0 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:translate-x-0 bg-white  transition-transform duration-300 ease-in-out z-50 w-full`}
+          isOpen ? "translate-x-0 w-[300px]" : "-translate-x-full -w-10"
+        } lg:relative lg:translate-x-0 bg-gray-50  transition-transform duration-300 ease-in-out z-50 w-[300px]`}
       >
-        <div className="flex justify-between md:hidden">
+        <div className="flex justify-between md:flex lg:hidden">
           <div className="dashboard_logo p-4">
             <Link href={"/"}>
               <Image
@@ -128,7 +128,7 @@ const SidebarCoach = () => {
                 alt="logo"
                 width={500}
                 height={500}
-                className="w-full"
+                className="w-[200px] h-[100px] object-contain"
               />
             </Link>
           </div>
@@ -263,7 +263,7 @@ const SidebarCoach = () => {
             </li>
           </ul>
         </nav>
-        <div className="flex items-center justify-between  absolute l-0 bottom-0 w-full px-2">
+        <div className="flex items-center justify-between  absolute l-0 bottom-5 w-full px-2">
           <TooltipProvider>
             <Avatar className="h-10 w-10">
               <AvatarImage

@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { useCoachStore } from "@/app/store/coachStore";
 import { toast } from "react-toastify";
+import { Label } from "@/components/ui/label";
 
 const CoachAvailability = () => {
   const { userdata } = useCoachStore((state) => state.userState);
@@ -182,9 +183,15 @@ const CoachAvailability = () => {
   }, [userdata]);
 
   return (
-    <div className="w-full mx-auto lg:mt-5 mt-10 lg:p-10 p-5 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
-      <div className="main_heading my-5 mt-10">
-        <h1 className="text-xl text-blue-950 font-bold">Time Availabilty</h1>
+    <div className="w-full mx-auto lg:mt-5 mt-10 lg:p-10 md:p-5 p-1 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
+      <div className="main_heading mb-5 mt-20 mx-5">
+        <h1 className="text-xl text-blue-950 font-bold">
+          Set Your Weekly Availability
+        </h1>
+        <p className="text-sm text-gray-600">
+          Coaches can define their available time slots based on their preferred
+          weekdays.
+        </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex lg:flex-row flex-col gap-5">
@@ -193,7 +200,7 @@ const CoachAvailability = () => {
               {watchAvailabilityDays.map((day, dayIndex) => (
                 <div
                   key={dayIndex}
-                  className="available flex lg:flex-row flex-col lg:gap-0 gap-5 items-start mb-4"
+                  className="available flex md:flex-row flex-col lg:gap-0 gap-5 items-start"
                   style={{
                     minHeight: "55px",
                     transition: "min-height 0.3s ease, height 0.3s ease",
@@ -219,6 +226,7 @@ const CoachAvailability = () => {
                         >
                           <div className="flex lg:gap-4 gap-1 items-center">
                             <div className="flex-1">
+                              <Label>Start Time</Label>
                               <Controller
                                 name={`availability.${dayIndex}.slots.${index}.startTime`}
                                 control={control}
@@ -254,6 +262,7 @@ const CoachAvailability = () => {
 
                             {/* Second Time Select */}
                             <div className="flex-1">
+                              <Label>End Time</Label>
                               <Controller
                                 name={`availability.${dayIndex}.slots.${index}.endTime`}
                                 control={control}
@@ -337,7 +346,7 @@ const CoachAvailability = () => {
                 </div>
               ))}
             </div>
-            <div className="date_overrides mt-10">
+            <div className="date_overrides mt-10 lg:px-0 px-5">
               <DateOverrides
                 timeSlot={timeSlot}
                 dateOverrides={dateOverrides}
@@ -345,7 +354,7 @@ const CoachAvailability = () => {
               />
             </div>
           </div>
-          <div className="lg:w-[30%] w-full time_zone">
+          <div className="lg:w-[30%] w-full time_zone lg:px-0 px-5">
             <Controller
               name="timeZone" // Registering timeZone with react-hook-form
               control={control}
@@ -356,7 +365,7 @@ const CoachAvailability = () => {
           </div>
         </div>
 
-        <div className="submit_button absolute top-10 right-10">
+        <div className="submit_button absolute lg:top-10 top-2 right-10">
           <Button
             type="submit"
             disabled={isupdatingdata}

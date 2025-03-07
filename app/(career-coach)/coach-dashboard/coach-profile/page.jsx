@@ -362,18 +362,19 @@ const CoachProfile = () => {
 
   return (
     <>
-      <div className="w-full h-auto mt-10 bg-white lg:p-10 p-5">
+      <div className="w-full h-auto lg:mt-10 md:mt-16 mt-20 bg-white lg:p-10 p-5">
         <form
           onSubmit={handleSubmit(handleEditProfile)}
           className="flex flex-col"
         >
           {userdata?.isEditRequestSent && (
-            <div className="border-2 w-full p-3 h-24 rounded-md border-blue-300 bg-blue-100 flex items-center">
-              <p className=" text-sm text-blue-400 flex items-center">
-                <IoMdInformationCircleOutline className="mx-2 text-lg" />
+            <div className="border-2 w-full p-3 rounded-md border-blue-300 bg-blue-100 flex items-start md:items-center">
+              <IoMdInformationCircleOutline className="text-blue-400 text-xl md:text-lg mx-2 flex-shrink-0" />
+              <p className="text-xs md:text-sm text-blue-400 leading-snug">
                 Your request for updating profile information has been sent to
-                the <span className="font-bold mx-1">admin</span> for
-                approval.It may take up to 24 to 48 hours to verify them
+                the
+                <span className="font-bold mx-1">admin</span> for approval. It
+                may take up to 24 to 48 hours to verify them.
               </p>
             </div>
           )}
