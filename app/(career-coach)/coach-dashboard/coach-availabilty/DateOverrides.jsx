@@ -42,6 +42,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
     },
   ]);
   const [singleSelectDate, setSingleSelectDate] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleTimeChange = (fieldName, value, index) => {
     const updatedSlots = selectedDatesTimes.map((slot, i) => {
@@ -201,181 +202,215 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
               showCloseButton={true}
             >
               <DialogHeader>
-                <DialogTitle className="text-blue-950 ">
-                  Select the dates to override
+                <DialogTitle className="text-blue-950">
+                  {currentStep === 1
+                    ? "Override Availability"
+                    : "Select the Dates to Override"}
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex w-full md:flex-row flex-col justify-center">
-                <div className="lg:w-[50%] w-full calendar">
-                  {mode === "multiple" ? (
-                    <CalendarComponent
-                      currentMonth={currentMonth}
-                      handleMonthChange={handleMonthChange}
-                      mode={mode}
-                      selectedDates={selectedDates}
-                      setSelectedDates={setSelectedDates}
-                      selectedDatesTimes={selectedDatesTimes}
-                      setSelectedDatesTimes={setSelectedDatesTimes}
-                      currentSelectedDates={currentSelectedDates}
-                      setCurrentSelectedDates={setCurrentSelectedDates}
-                      handleSaveChanges={handleSaveChanges}
-                      dateOverrides={dateOverrides}
-                    />
-                  ) : (
-                    <SingleSelectCalendar
-                      currentMonth={currentMonth}
-                      currentSelectedDates={currentSelectedDates}
-                      dateOverrides={dateOverrides}
-                      handleMonthChange={handleMonthChange}
-                      setCurrentSelectedDates={setCurrentSelectedDates}
-                    />
-                  )}
-                </div>
-                <div className="lg:w-[50%] w-full select_time">
-                  {currentSelectedDates.length > 0 && (
-                    <h3 className="text-sm text-black my-2">
-                      Which hours are you free?
-                    </h3>
-                  )}
 
-                  {currentSelectedDates.length > 0 && (
-                    <div className="my-4">
-                      {isUnavailable ? (
-                        <div className="mt-4">
-                          <input
-                            type="text"
-                            placeholder="Unavailable all day"
-                            disabled
-                            className="w-full px-4 py-2 border border-gray-300 rounded"
-                          />
-                        </div>
+              {/** Step 1: Introduction */}
+              {currentStep === 1 && (
+                <div className="px-4 py-6">
+                  <div className="flex flex-col md:flex-row items-center md:items- justify-center text-center md:text-left">
+                    {/* Left: Image */}
+                    <div className="md:w-1/2 flex justify-center">
+                      <img
+                        src="/calendar-illustration.webp"
+                        alt="Calendar Illustration"
+                        className="w-64 h-64 rounded-md"
+                      />
+                    </div>
+
+                    {/* Right: Content */}
+                    <div className="md:w-1/2 flex flex-col justify-center items-center md:items-start">
+                      <h2 className="text-xl font-semibold mt-4 md:mt-0">
+                        Set Your Custom Availability
+                      </h2>
+                      <p className="text-gray-600 mt-2 text-sm">
+                        Add dates when your availability changes from your daily
+                        schedule.
+                      </p>
+
+                      <div className="mt-6">
+                        <Button
+                          className="bg-blue-950 text-white"
+                          onClick={() => setCurrentStep(2)}
+                        >
+                          Get Started
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/** Step 2: Calendar & Time Selection (Your existing code) */}
+              {currentStep === 2 && (
+                <>
+                  <div className="flex w-full md:flex-row flex-col justify-center">
+                    <div className="lg:w-[50%] w-full calendar">
+                      {mode === "multiple" ? (
+                        <CalendarComponent
+                          currentMonth={currentMonth}
+                          handleMonthChange={handleMonthChange}
+                          mode={mode}
+                          selectedDates={selectedDates}
+                          setSelectedDates={setSelectedDates}
+                          selectedDatesTimes={selectedDatesTimes}
+                          setSelectedDatesTimes={setSelectedDatesTimes}
+                          currentSelectedDates={currentSelectedDates}
+                          setCurrentSelectedDates={setCurrentSelectedDates}
+                          handleSaveChanges={handleSaveChanges}
+                          dateOverrides={dateOverrides}
+                        />
                       ) : (
-                        selectedDatesTimes.map((slot, index) => (
-                          <div
-                            key={index}
-                            className="flex gap-4 mb-2 items-center"
-                          >
-                            <div className="flex-1">
-                              <Controller
-                                control={control}
-                                name={`startTime-${index}`}
-                                render={({ field }) => (
-                                  <Select
-                                    onValueChange={(value) =>
+                        <SingleSelectCalendar
+                          currentMonth={currentMonth}
+                          currentSelectedDates={currentSelectedDates}
+                          dateOverrides={dateOverrides}
+                          handleMonthChange={handleMonthChange}
+                          setCurrentSelectedDates={setCurrentSelectedDates}
+                        />
+                      )}
+                    </div>
+
+                    <div className="lg:w-[50%] w-full select_time">
+                      {currentSelectedDates.length > 0 && (
+                        <h3 className="text-sm text-black my-2">
+                          Which hours are you free?
+                        </h3>
+                      )}
+
+                      {currentSelectedDates.length > 0 && (
+                        <div className="my-4">
+                          {isUnavailable ? (
+                            <div className="mt-4">
+                              <input
+                                type="text"
+                                placeholder="Unavailable all day"
+                                disabled
+                                className="w-full px-4 py-2 border border-gray-300 rounded"
+                              />
+                            </div>
+                          ) : (
+                            selectedDatesTimes.map((slot, index) => (
+                              <div
+                                key={index}
+                                className="flex gap-4 mb-2 items-center"
+                              >
+                                <div className="flex-1">
+                                  <select
+                                    value={slot.startTime}
+                                    onChange={(e) =>
                                       handleTimeChange(
                                         "startTime",
-                                        value,
+                                        e.target.value,
                                         index
                                       )
                                     }
-                                    value={slot.startTime}
+                                    className="w-[150px] px-2 py-1 border rounded"
                                   >
-                                    <SelectTrigger className="w-[150px]">
-                                      <SelectValue placeholder="Select a time" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectGroup>
-                                        {timeSlot.map((time, idx) => (
-                                          <SelectItem key={idx} value={time}>
-                                            {time}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectGroup>
-                                    </SelectContent>
-                                  </Select>
-                                )}
-                              />
-                            </div>
+                                    <option value="">Select a time</option>
+                                    {timeSlot.map((time, idx) => (
+                                      <option key={idx} value={time}>
+                                        {time}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
 
-                            <div className="flex-1">
-                              <Controller
-                                control={control}
-                                name={`endTime-${index}`}
-                                render={({ field }) => (
-                                  <Select
-                                    onValueChange={(value) =>
-                                      handleTimeChange("endTime", value, index)
-                                    }
+                                <div className="flex-1">
+                                  <select
                                     value={slot.endTime}
+                                    onChange={(e) =>
+                                      handleTimeChange(
+                                        "endTime",
+                                        e.target.value,
+                                        index
+                                      )
+                                    }
+                                    className="w-[150px] px-2 py-1 border rounded"
                                   >
-                                    <SelectTrigger className="w-[150px]">
-                                      <SelectValue placeholder="Select a time" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectGroup>
-                                        {getFilteredSecondTimeSlots(
-                                          slot.startTime
-                                        ).map((time, idx) => (
-                                          <SelectItem key={idx} value={time}>
-                                            {time}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectGroup>
-                                    </SelectContent>
-                                  </Select>
-                                )}
-                              />
-                            </div>
+                                    <option value="">Select a time</option>
+                                    {getFilteredSecondTimeSlots(
+                                      slot.startTime
+                                    ).map((time, idx) => (
+                                      <option key={idx} value={time}>
+                                        {time}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
 
-                            {index > 0 ? (
-                              <button
-                                onClick={() => removeTimeSlot(index)}
-                                className="text-red-500"
-                              >
-                                <FaTrashAlt className="text-sm" />
-                              </button>
-                            ) : (
-                              <button
-                                onClick={() => addTimeSlot(index)}
-                                className="text-blue-950 flex items-center gap-1"
-                              >
-                                <FaPlus className="text-sm" />
-                              </button>
-                            )}
+                                {index > 0 ? (
+                                  <button
+                                    onClick={() => removeTimeSlot(index)}
+                                    className="text-red-500"
+                                  >
+                                    <FaTrashAlt className="text-sm" />
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={() => addTimeSlot(index)}
+                                    className="text-blue-950 flex items-center gap-1"
+                                  >
+                                    <FaPlus className="text-sm" />
+                                  </button>
+                                )}
+                              </div>
+                            ))
+                          )}
+                          <div className="mark_unavailable flex gap-2 mt-10">
+                            <Switch
+                              className="bg-gray-300"
+                              checked={isUnavailable}
+                              onCheckedChange={(checked) =>
+                                setIsUnavailable(checked)
+                              }
+                            />
+                            <p className="text-sm">
+                              Mark unavailable (All day)
+                            </p>
                           </div>
-                        ))
+                        </div>
                       )}
-                      {/* Mark unavailable toggle */}
-                      <div className="mark_unavailable flex gap-2 mt-10">
-                        <Switch
-                          className="bg-gray-300"
-                          checked={isUnavailable}
-                          onCheckedChange={(checked) =>
-                            setIsUnavailable(checked)
-                          }
-                        />
-                        <p className="text-sm">Mark unavailable (All day)</p>
-                      </div>
                     </div>
-                  )}
-                </div>
-              </div>
+                  </div>
+                </>
+              )}
+
+              {/** Footer Buttons */}
               <DialogFooter className="flex gap-5">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handleDialogClose}
-                >
-                  Cancel
-                </Button>
-                {currentSelectedDates.length > 0 ? (
-                  mode === "multiple" ? (
+                {currentStep === 2 ? (
+                  <>
                     <Button
                       type="button"
-                      className="bg-blue-950 text-white"
-                      onClick={handleSaveChanges}
+                      variant="outline"
+                      onClick={() => setCurrentStep(1)}
                     >
-                      Save changes
+                      Back
                     </Button>
-                  ) : (
-                    <Button
-                      type="button"
-                      className="bg-blue-950 text-white"
-                      onClick={handleupdateOverride}
-                    >
-                      Update override
-                    </Button>
-                  )
+                    {currentSelectedDates.length > 0 ? (
+                      mode === "multiple" ? (
+                        <Button
+                          type="button"
+                          className="bg-blue-950 text-white"
+                          onClick={handleSaveChanges}
+                        >
+                          Save changes
+                        </Button>
+                      ) : (
+                        <Button
+                          type="button"
+                          className="bg-blue-950 text-white"
+                          onClick={handleupdateOverride}
+                        >
+                          Update override
+                        </Button>
+                      )
+                    ) : null}
+                  </>
                 ) : null}
               </DialogFooter>
             </DialogContent>

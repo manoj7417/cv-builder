@@ -16,17 +16,17 @@ export const config = {
     "/job-dashboard",
     "/recruiter/((?!reset-password|signin|signup).)*$", // Exclude auth routes
   ],
-}; 
+};
 
 export function middleware(req) {
   try {
     if (req.nextUrl.pathname.startsWith('/recruiter')) {
       const token = req.cookies.get("token");
-      
+
       // Allow access to auth routes
-      if (req.nextUrl.pathname === '/recruiter/signin' || 
-          req.nextUrl.pathname === '/recruiter/signup' ||
-          req.nextUrl.pathname === '/recruiter/reset-password') {
+      if (req.nextUrl.pathname === '/recruiter/signin' ||
+        req.nextUrl.pathname === '/recruiter/signup' ||
+        req.nextUrl.pathname === '/recruiter/reset-password') {
         return NextResponse.next();
       }
 

@@ -30,6 +30,7 @@ export const useCoachStore = create(
                 cvUpload: null,
                 docsUpload: null,
             },
+            workingDates: [],
             loginUser: (userdata) => set((state) => ({
                 userState: { isAuthenticated: true, userdata: userdata }
             })),
@@ -44,7 +45,8 @@ export const useCoachStore = create(
                     ...state.userState,
                     userdata: newUserData
                 }
-            }))
+            })),
+            setWorkingDates: (dates) => set({ workingDates: dates }),
         })
     )
 

@@ -72,7 +72,8 @@ export async function SetTokens({ accessToken, refreshToken, isCoach = false }) 
             httpOnly: true,
             path: '/',
             secure: true,
-            maxAge: 24 * 60 * 60 * 1000 * 30,
+            // maxAge: 24 * 60 * 60 * 1000 * 30,
+            maxAge: 10,
             sameSite: "none",
         });
         cookies().set({
@@ -81,7 +82,8 @@ export async function SetTokens({ accessToken, refreshToken, isCoach = false }) 
             httpOnly: true,
             secure: true,
             path: '/',
-            maxAge: 10 * 24 * 60 * 60 * 1000 * 30,
+            // maxAge: 10 * 24 * 60 * 60 * 1000 * 30,
+            maxAge: 20,
             sameSite: "none",
         });
     }

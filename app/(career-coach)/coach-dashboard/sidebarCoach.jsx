@@ -106,7 +106,7 @@ const SidebarCoach = () => {
   }, []);
 
   return (
-    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative lg:shadow-xl shadow-none">
+    <div className="flex lg:h-full h-auto lg:fixed lg:top-0 relative lg:shadow-xl shadow-none bg-gray-50/5">
       {/* Mobile Hamburger Menu Button */}
       <button
         className="lg:hidden block p-4 focus:outline-none"

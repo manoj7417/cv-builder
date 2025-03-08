@@ -1,6 +1,6 @@
 "use client";
 import { Switch } from "@/components/ui/switch";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import TimeZone from "./TimeZone";
 import DateOverrides from "./DateOverrides";
@@ -28,11 +28,43 @@ import { useCoachStore } from "@/app/store/coachStore";
 import { toast } from "react-toastify";
 import { Label } from "@/components/ui/label";
 
+const groupDaysBySlots = (dates) => {
+  if (!dates || !Array.isArray(dates)) return []; // Prevent errors
+
+  const grouped = new Map();
+
+  dates.forEach((day) => {
+    const slotKey = JSON.stringify(
+      day.slots.map((slot) => `${slot.startTime}-${slot.endTime}`)
+    );
+
+    if (grouped.has(slotKey)) {
+      grouped.get(slotKey).days.push(day.dayOfWeek);
+    } else {
+      grouped.set(slotKey, {
+        days: [day.dayOfWeek],
+        slots: day.slots,
+      });
+    }
+  });
+
+  return Array.from(grouped.values());
+};
+
 const CoachAvailability = () => {
   const { userdata } = useCoachStore((state) => state.userState);
   const [dateOverridesData, setDateOverridesData] = useState(null);
   const [dateOverrides, setDateOverrides] = useState([]);
   const [isupdatingdata, setIsUpdatingData] = useState(false);
+  const [workingDays, setWorkingDays] = useState([]);
+  // const [workingDates, setWorkingDates] = useState(workingDays?.dates);
+  const { workingDates, setWorkingDates } = useCoachStore();
+
+  const groupedDays = useMemo(
+    () => groupDaysBySlots(workingDates),
+    [workingDates]
+  );
+
   const daysOfWeek = [
     "Sunday",
     "Monday",
@@ -116,6 +148,7 @@ const CoachAvailability = () => {
       timeZone: data.timeZone,
       dateOverrides,
     };
+    setWorkingDays(result);
     try {
       const response = await axios.patch(
         "/api/updateCoachAvailability",
@@ -182,21 +215,54 @@ const CoachAvailability = () => {
     }
   }, [userdata]);
 
+  useEffect(() => {
+    if (workingDays?.dates && Array.isArray(workingDays.dates)) {
+      setWorkingDates(workingDays.dates);
+    } else {
+      console.error("Error: workingDays is missing or incorrect:", workingDays);
+    }
+  }, [workingDays]);
+
+  useEffect(() => {
+    if (workingDates.length === 0 && workingDays?.dates) {
+      setWorkingDates(workingDays.dates);
+    }
+  }, [workingDays, workingDates, setWorkingDates]);
+
   return (
-    <div className="w-full mx-auto lg:mt-5 mt-10 lg:p-10 md:p-5 p-1 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
-      <div className="main_heading mb-5 mt-20 mx-5">
-        <h1 className="text-xl text-blue-950 font-bold">
+    <div className="w-full mx-auto lg:mt-5 mt-10 lg:px-10 md:px-5 px-1 lg:h-full h-[750px] lg:overflow-hidden overflow-y-scroll relative">
+      <div className="main_heading mb-5 mt-10 mx-5">
+        <div>
+          <h2 className="text-xl text-blue-950 font-bold">Working Schedule</h2>
+          <p className="text-sm text-gray-600 mb-2">
+            Coaches can define their available time slots based on their
+            preferred weekdays.
+          </p>
+          <ul>
+            {groupedDays.map((group, index) => (
+              <div key={index} className="flex gap-2">
+                <h3 className="text-sm">{group.days.join(" - ")},</h3>
+                {group.slots.map((slot) => (
+                  <p key={slot.id} className="text-sm">
+                    {slot.startTime} - {slot.endTime}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </ul>
+        </div>
+        {/* <h1 className="text-xl text-blue-950 font-bold">
           Set Your Weekly Availability
         </h1>
         <p className="text-sm text-gray-600">
           Coaches can define their available time slots based on their preferred
           weekdays.
-        </p>
+        </p> */}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex lg:flex-row flex-col gap-5">
-          <div className="lg:w-[70%] w-full form_calendar">
-            <div className="calendar_section rounded-md border-2 border-gray-200 p-5">
+          <div className="lg:w-[70%] w-full form_calendar shadow-lg border rounded-md p-5">
+            <div className="calendar_section">
               {watchAvailabilityDays.map((day, dayIndex) => (
                 <div
                   key={dayIndex}
@@ -308,7 +374,7 @@ const CoachAvailability = () => {
                                       onClick={() =>
                                         handleDeleteSlot(dayIndex, index)
                                       }
-                                      className="text-red-600 flex items-center justify-center hover:bg-gray-100 p-2 rounded-md"
+                                      className="text-red-600 mt-5 hover:bg-gray-100 p-2 rounded-md"
                                       aria-label="Delete time slot"
                                     >
                                       <MdDeleteOutline className="text-xl" />
@@ -326,7 +392,7 @@ const CoachAvailability = () => {
                                       onClick={() =>
                                         handleAddSlots(dayIndex, index)
                                       }
-                                      className="text-blue-950 flex items-center justify-center hover:bg-gray-100 p-2 rounded-md"
+                                      className="text-blue-950 mt-5 hover:bg-gray-100 p-2 rounded-md"
                                       aria-label="Add time slot"
                                     >
                                       <FiPlus className="text-xl" />
