@@ -336,7 +336,7 @@ export default function HomepageNew() {
               <br />5 Minutes.
             </h2>
             <p className="text-gray-500 mb-6">
-              Getting that dream job can seem like an impossible task. We're
+              Getting that dream job can seem like an impossible task. We are
               here to change that. Give yourself a real advantage with the best
               online resume maker: created by experts, improved by data, trusted
               by millions of professionals.
@@ -362,7 +362,7 @@ export default function HomepageNew() {
                 Choose a Free Resume Template
               </h3>
               <p className="text-sm">
-                You've got plenty of formatting and style options
+                You have got plenty of formatting and style options
               </p>
             </div>
 
