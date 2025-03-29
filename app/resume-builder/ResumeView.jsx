@@ -9,7 +9,12 @@ import { CiUndo } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { LuLayoutGrid } from "react-icons/lu";
-import { FaCheckCircle, FaCrown, FaDownload, FaRegFilePdf } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaCrown,
+  FaDownload,
+  FaRegFilePdf,
+} from "react-icons/fa";
 import {
   Drawer,
   DrawerContent,
@@ -262,7 +267,7 @@ const ResumeView = () => {
       ,
     ],
     planName: "CVSTUDIO",
-  }
+  };
   const [geoinfo, setGeoInfo] = useState({
     ip: "",
     countryName: "",
@@ -271,7 +276,7 @@ const ResumeView = () => {
     timezone: "",
     currency: "",
   });
-  const [selectedPlan, setSelectedPlan] = useState('monthly');
+  const [selectedPlan, setSelectedPlan] = useState("monthly");
   const userState = useUserStore((state) => state.userState);
 
   const handleClickOutside = (event) => {
@@ -303,38 +308,43 @@ const ResumeView = () => {
 
   const checkUserTemplate = async () => {
     const { accessToken } = await GetTokens();
-    if (!userdata.subscription.plan.includes('CVSTUDIO')) {
-      const pricing = PricingData['CVSTUDIO'][geoinfo.currency || "USD"];
+    if (!userdata.subscription.plan.includes("CVSTUDIO")) {
+      const pricing = PricingData["CVSTUDIO"][geoinfo.currency || "USD"];
       const { MP, DP } = pricing;
       setSelectedCard({ ...serviceCards, MP, DP });
       setShowModal(true);
     } else {
-      handleDownloadResume(accessToken.value);
+      handleDownloadResume(accessToken?.value);
     }
   };
 
   const handleDownloadResume = async (token) => {
+    console.log("token", token);
     const el = document.getElementById("resume");
     const resume = el.innerHTML;
+    if (!resume) {
+      console.error("Resume HTML is empty!");
+      return;
+    }
     const body = {
       html: resume,
     };
     setIsLoading(true);
 
     try {
-      const response = await axios.post('/api/printResume', body, {
+      const response = await axios.post("/api/printResume", body, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        responseType: 'arraybuffer'
+        responseType: "arraybuffer",
       });
 
       console.log("response", response);
 
       if (response.status === 200) {
         generateFunfact();
-        const blob = new Blob([response.data], { type: 'application/pdf' });
-        const link = document.createElement('a');
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
         link.download = resumeData.title;
         link.click();
@@ -374,7 +384,6 @@ const ResumeView = () => {
     }
   };
 
-
   const handleTemplateChange = (val) => {
     setResumeData("metadata.template", val);
     setIsDrawerOpen(false);
@@ -382,9 +391,9 @@ const ResumeView = () => {
 
   const handlePlanChange = (plan) => {
     setSelectedPlan(plan);
-  }
+  };
 
-  const UpgradePlan = async() => {
+  const UpgradePlan = async () => {
     const { accessToken } = await GetTokens();
     if (!accessToken) {
       return router.push("/login?redirect=pricing");
@@ -414,7 +423,10 @@ const ResumeView = () => {
         window.location = url;
       }
     } catch (error) {
-      if(error.response.status === 401 && error.response.data.error === "Unauthorized"){
+      if (
+        error.response.status === 401 &&
+        error.response.data.error === "Unauthorized"
+      ) {
         await RemoveTokens();
         toast("Please login again to proceed");
         router.push("/login?redirect=pricing");
@@ -422,9 +434,7 @@ const ResumeView = () => {
     } finally {
       setLoading(false);
     }
-  }
-
-
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -522,12 +532,12 @@ const ResumeView = () => {
   };
 
   const handleCloseModal = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   useEffect(() => {
-    getGeoInfo()
-  }, [])
+    getGeoInfo();
+  }, []);
 
   return (
     <>
@@ -643,8 +653,7 @@ const ResumeView = () => {
                     </p>
                   </DialogDescription>
                 </DialogHeader>
-                {
-                  selectedCard &&
+                {selectedCard && (
                   <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                       <div className="modal_left">
@@ -657,7 +666,10 @@ const ResumeView = () => {
                               >
                                 <FaCheckCircle
                                   className="text-blue-950 mr-2"
-                                  style={{ minWidth: "15px", minHeight: "15px" }}
+                                  style={{
+                                    minWidth: "15px",
+                                    minHeight: "15px",
+                                  }}
                                 />
                                 {feature}
                               </li>
@@ -674,19 +686,26 @@ const ResumeView = () => {
                             <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 capitalize">
                               {selectedPlan === "monthly"
                                 ? `${selectedCard["DP"].symbol}${selectedCard["DP"].price}`
-                                : `${selectedCard["DP"].symbol}${+(selectedCard["DP"].price) * 10}`}
+                                : `${selectedCard["DP"].symbol}${
+                                    +selectedCard["DP"].price * 10
+                                  }`}
                             </h1>
                             <p className="text-gray-500 text-xs sm:text-sm px-2">
-                              {selectedPlan === "monthly" ? "per Month" : "per Year"}
+                              {selectedPlan === "monthly"
+                                ? "per Month"
+                                : "per Year"}
                             </p>
-                            <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">65% off</p>
+                            <p className=" text-xs border rounded-lg border-violet-600 text-violet-600 bg-violet-100 px-2">
+                              65% off
+                            </p>
                           </div>
                           <div className="mt-6 space-y-4 sm:space-y-8">
                             <div
-                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "monthly"
-                                ? "border-blue-500 shadow-lg"
-                                : ""
-                                }`}
+                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                                selectedPlan === "monthly"
+                                  ? "border-blue-500 shadow-lg"
+                                  : ""
+                              }`}
                               onClick={() => handlePlanChange("monthly")}
                             >
                               <div className="flex justify-between items-center">
@@ -695,12 +714,12 @@ const ResumeView = () => {
                                 </div>
                                 <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
                                   <p>
-                                    {selectedCard['DP'].symbol}
-                                    {selectedCard['DP'].price}
+                                    {selectedCard["DP"].symbol}
+                                    {selectedCard["DP"].price}
                                   </p>
                                   <p className="line-through text-xs ml-1">
-                                    {selectedCard['MP'].symbol}
-                                    {selectedCard['MP'].price}
+                                    {selectedCard["MP"].symbol}
+                                    {selectedCard["MP"].price}
                                   </p>
                                 </div>
                                 <input
@@ -712,10 +731,11 @@ const ResumeView = () => {
                               </div>
                             </div>
                             <div
-                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${selectedPlan === "yearly"
-                                ? "border-blue-500 shadow-lg"
-                                : ""
-                                }`}
+                              className={`max-w-full sm:max-w-2xl px-6 py-4 sm:px-8 sm:py-5 mx-auto border cursor-pointer rounded-xl ${
+                                selectedPlan === "yearly"
+                                  ? "border-blue-500 shadow-lg"
+                                  : ""
+                              }`}
                               onClick={() => handlePlanChange("yearly")}
                             >
                               <div className="flex justify-between items-center">
@@ -725,12 +745,12 @@ const ResumeView = () => {
 
                                 <div className="subscription-panel-offer-commitment font-semibold text-sm sm:text-base flex items-center">
                                   <p>
-                                    {selectedCard['DP'].symbol}
-                                    {selectedCard['DP'].price * 10}
+                                    {selectedCard["DP"].symbol}
+                                    {selectedCard["DP"].price * 10}
                                   </p>
                                   <p className="line-through text-xs ml-1">
-                                    {selectedCard['MP'].symbol}
-                                    {selectedCard['MP'].price * 10}
+                                    {selectedCard["MP"].symbol}
+                                    {selectedCard["MP"].price * 10}
                                   </p>
                                 </div>
                                 <input
@@ -746,7 +766,7 @@ const ResumeView = () => {
                       </div>
                     </div>
                   </div>
-                }
+                )}
                 <DialogFooter className="mt-4 sm:mt-8">
                   <Button
                     className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
@@ -790,7 +810,8 @@ const ResumeView = () => {
                                 className="image_section_1 "
                                 onClick={() => handleTemplateChange(image.name)}
                               >
-                                <Image priority="true"
+                                <Image
+                                  priority="true"
                                   src={image.src}
                                   alt={image.alt}
                                   className="cursor-pointer hover:border-sky-700 hover:border-2 object-contain h-[300px] w-[300px]"

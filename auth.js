@@ -9,7 +9,7 @@ async function refreshAccessToken(token) {
       ...token,
       error: "NoRefreshToken",
     };
-  } 
+  }
 
   try {
     const url = "https://oauth2.googleapis.com/token";
@@ -20,7 +20,11 @@ async function refreshAccessToken(token) {
     params.append("refresh_token", token.refreshToken);
 
     const response = await axios.post(url, params);
+    console.log("response:", response);
     const refreshedTokens = response.data;
+
+
+    console.log("Refreshed token response:", refreshedTokens);
 
 
     return {
@@ -46,8 +50,8 @@ export default NextAuth({
       authorization: {
         params: {
           scope: "openid email profile https://www.googleapis.com/auth/calendar",
-          access_type: "offline", // Requests offline access
-          prompt: "consent", // Forces re-consent to get a refresh_token
+          access_type: "offline",
+          prompt: "consent",
         },
       },
     }),
@@ -60,12 +64,12 @@ export default NextAuth({
         token.idToken = account.id_token; // Include idToken here
         token.accessTokenExpires = Date.now() + account.expires_in * 1000;
       }
-    
+
       // Return the token directly if it hasn't expired
       if (Date.now() < token.accessTokenExpires) {
         return token;
       }
-    
+
       // Refresh the access token if it has expired
       return await refreshAccessToken(token);
     },
@@ -74,7 +78,7 @@ export default NextAuth({
         ...session.user,
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
-        idToken: token.idToken, 
+        idToken: token.idToken,
       };
       return session;
     },

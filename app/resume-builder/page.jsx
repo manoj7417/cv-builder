@@ -97,26 +97,6 @@ const ResumeBuilder = () => {
 
   return (
     <ClientOnly>
-      {/* <Dialog open={showDialog}>
-        <DialogContent showCloseButton={true} onClick={handleCloseDialog}>
-          <DialogHeader>
-            <DialogTitle></DialogTitle>
-            <DialogDescription>
-
-            </DialogDescription>
-            <div className="flex flex-col items-center">
-              <Button onClick={() => setShowDialog(false)}>Continue with dummy data</Button>
-              <div className="flex w-full py-5 items-center justify-center">
-                <hr className="w-1/3 bg-blue-900" /><p className="px-5">OR</p><hr className="w-1/3 bg-blue-900" />
-              </div>
-              <Button onClick={handleStartResumeFromScratch}>
-                Start from scratch
-              </Button>
-
-            </div>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog> */}
       <div className="flex md:flex-row flex-col w-full h-full relative">
         <div className="actions_button bg-gray-100 p-1 flex flex-row 2xl:justify-evenly 2xl:p-2 justify-evenly items-center fixed top-0 left-0 w-full h-[70px] z-20">
           <div className="w-[76rem] mx-[40px] flex flex-row lg:justify-between lg:mt-0 mt-3 justify-end items-center">

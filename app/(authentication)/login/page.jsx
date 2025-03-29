@@ -1,5 +1,11 @@
 "use client";
-import React, { useRef, useState, useContext, Suspense, useEffect } from "react";
+import React, {
+  useRef,
+  useState,
+  useContext,
+  Suspense,
+  useEffect,
+} from "react";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -257,10 +263,10 @@ function LoginUser() {
         </DialogContent>
       </Dialog>
       <section>
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
+        <div className="w-full h-full mt-20">
           <div className="flex lg:items-center items-start justify-center px-4  sm:px-6  lg:px-8">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full sm:border-0 border-0 shadow-none shadow-blue-100 sm:shadow-none   sm:py-0 py-20 px-8 sm:px-0 rounded-2xl">
-              <Link
+              {/* <Link
                 href={"/"}
                 className="flex justify-center items-center mb-[60px]"
               >
@@ -272,15 +278,15 @@ function LoginUser() {
                   alt="white_logo"
                   className="w-28 h-auto object-contain"
                 />
-              </Link>
-              <h1 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl mt-5">
+              </Link> */}
+              <h1 className="text-3xl font-bold leading-tight text-[#FF5C5C] sm:text-4xl mt-5">
                 Sign in
               </h1>
               <h2 className="mt-2 text-sm text-gray-600 text-start">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
-                  className="font-semibold text-black transition-all duration-200 hover:underline"
+                  className="font-semibold text-[#FF5C5C] transition-all duration-200 hover:underline"
                 >
                   Sign Up for Free!
                 </Link>
@@ -359,7 +365,7 @@ function LoginUser() {
                   </div>
                   <div>
                     <p
-                      className="text-14px text-blue-950 hover:underline cursor-pointer"
+                      className="text-14px text-[#FF5C5C] hover:underline cursor-pointer"
                       onClick={() => setShowDialog(true)}
                     >
                       Forgot password?
@@ -368,7 +374,7 @@ function LoginUser() {
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue-700 disabled:bg-opacity-85"
+                      className="inline-flex w-full items-center justify-center rounded-md bg-[#FF5C5C] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#FF5C5C  ] disabled:bg-opacity-85"
                       disabled={loading}
                     >
                       {loading ? (
@@ -391,24 +397,11 @@ function LoginUser() {
                       <SignInGoogle type="Sign in" />
                     </div>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <div className="flex-grow border-t border-gray-300"></div>
-                    <p className="px-4 text-base text-gray-600">Or</p>
-                    <div className="flex-grow border-t border-gray-300"></div>
-                  </div>
-                  <div className="flex justify-center">
-                    <Link
-                      href="/coach-signin"
-                      className="font-semibold text-blue-700 transition-all duration-200 underline underline-offset-4"
-                    >
-                      Login as a Coach
-                    </Link>
-                  </div>
                 </div>
               </form>
             </div>
           </div>
-          <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
+          {/* <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
             <div className="absolute inset-0">
               <Image
                 priority="true"
@@ -426,7 +419,7 @@ function LoginUser() {
                   Approach your Dream Profession with <br />
                   <Link href={"/"}>
                     <span className="bg-gradient-to-r from-blue-600 via-green-200 to-indigo-400 inline-block text-transparent bg-clip-text">
-                      Genies Career Hub!
+                      CV Builder!
                     </span>
                   </Link>
                 </h3>
@@ -510,7 +503,7 @@ function LoginUser() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

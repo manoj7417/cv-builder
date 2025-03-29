@@ -121,113 +121,10 @@ export default function Register() {
 
   return (
     <section>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
-        <div className="relative items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 hidden sm:flex">
-          <div className="absolute inset-0">
-            <Image
-              priority="true"
-              width={500}
-              height={500}
-              className="h-full w-full rounded-md object-cover object-center"
-              src="/newlogin.png"
-              alt="register"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-          <div className="relative">
-            <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
-              <h2 className="text-4xl font-bold text-white">
-                Approach your Dream Profession with <br />
-                <Link href={"/"}>
-                  <span className="bg-gradient-to-r from-blue-600 via-green-200 to-indigo-400 inline-block text-transparent bg-clip-text">
-                    Genies Career Hub!
-                  </span>
-                </Link>
-              </h2>
-              <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-                <li className="flex items-center space-x-3">
-                  <div className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-500">
-                    <svg
-                      className="h-3.5 w-3.5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
-                  <span className="text-lg font-medium text-white">
-                    Custom CVs
-                  </span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <div className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-500">
-                    <svg
-                      className="h-3.5 w-3.5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
-                  <span className="text-lg font-medium text-white">
-                    Skill Gaps Analyser
-                  </span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <div className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-500">
-                    <svg
-                      className="h-3.5 w-3.5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
-                  <span className="text-lg font-medium text-white">
-                    ATS Optimisation
-                  </span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <div className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-500">
-                    <svg
-                      className="h-3.5 w-3.5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
-                  <span className="text-lg font-medium text-white">
-                    AI-Based CV Creator
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div className="w-full h-full mt-20">
         <div className="flex lg:items-center items-start justify-center px-4  sm:px-6  lg:px-8 ">
-          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-5   sm:py-0 px-2 sm:px-10  rounded-2xl">
-            <Link
+          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-lg w-full  border-0 sm:border-0 shadow-blue-100 shadow-none  sm:shadow-none  py-5   sm:py-0 px-2 sm:px-10  rounded-2xl">
+            {/* <Link
               href={"/"}
               className="flex justify-center items-center mb-4 sm:mb-[60px]"
             >
@@ -239,8 +136,8 @@ export default function Register() {
                 alt="white_logo"
                 className="w-28 h-auto object-contain"
               />
-            </Link>
-            <h1 className="text-2xl font-bold leading-tight text-blue-900 sm:text-4xl">
+            </Link> */}
+            <h1 className="text-2xl font-bold leading-tight text-[#FF5C5C] sm:text-4xl">
               Sign up
             </h1>
             <form className="mt-5" onSubmit={handleSubmit(handleRegister)}>
@@ -476,7 +373,7 @@ export default function Register() {
                       By signing up you are agreeing to our
                       <Link
                         href="/terms-condition"
-                        className="text-blue-900 underline underline-offset-4 ml-1 font-semibold"
+                        className="text-[#FF5C5C] underline underline-offset-4 ml-1 font-semibold"
                       >
                         {" "}
                         Terms and Conditions
@@ -493,7 +390,7 @@ export default function Register() {
                 <div>
                   <button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-blue-900 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-blue/80 disabled:bg-opacity-80"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-[#FF5C5C] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#FF5C5C] disabled:bg-opacity-80"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -515,17 +412,14 @@ export default function Register() {
 
                 <div className="google_button mt-5">
                   <SignInGoogle type="SignUp" />
-                  {/* <Button type="button" onClick={handleSignUpWithGoogle}>
-                    Signup with google
-                  </Button> */}
                 </div>
 
-                <p className="mt-2 lg:text-base text-sm text-gray-600 lg:text-start text-center">
+                <p className="mt-2 lg:text-base text-sm text-gray-600 text-center">
                   Already have an account?
                   <Link
                     href="/login"
                     title=""
-                    className="font-semibold text-black transition-all duration-200 hover:underline"
+                    className="font-semibold text-[#FF5C5C] transition-all duration-200 hover:underline"
                   >
                     Sign In
                   </Link>
