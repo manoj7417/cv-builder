@@ -308,6 +308,7 @@ export default function HomepageNew() {
               <p className="text-gray-500 text-sm max-w-xs">
                 {feature.description}
               </p>
+              <h1>dksfjslkdfjlksdj</h1>
             </div>
           ))}
         </div>
