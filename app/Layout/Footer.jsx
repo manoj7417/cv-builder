@@ -18,55 +18,59 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <>
-      <footer className='bg-[#ffffff] relative'>
-        <div className='mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8'>
-          <div className='sm:flex sm:items-center sm:justify-center'>
-            <ul className='mt-8 flex justify-center gap-6 sm:mt-0'>
+      <footer className="bg-[#ffffff] relative">
+        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+          <div className="sm:flex sm:items-center sm:justify-center">
+            <ul className="mt-8 flex justify-center gap-6 sm:mt-0">
               <li>
                 <Link
-                  href='https://www.facebook.com/profile.php?id=61560696226983'
-                  target='_blank'>
-                  <div className='text-black  hover:text-blue-500'>
-                    <span className='sr-only'>Facebook</span>
+                  href="https://www.facebook.com/profile.php?id=61560696226983"
+                  target="_blank"
+                >
+                  <div className="text-black  hover:text-blue-500">
+                    <span className="sr-only">Facebook</span>
 
-                    <BsFacebook className='h-6 w-6' />
+                    <BsFacebook className="h-6 w-6" />
                   </div>
                 </Link>
               </li>
               <li>
                 <Link
-                  href='https://www.instagram.com/genies_career_hub/'
-                  target='_blank'>
-                  <div className='text-black transition hover:text-pink-700'>
-                    <span className='sr-only'>Instagram</span>
-                    <BsInstagram className='h-6 w-6' />
+                  href="https://www.instagram.com/genies_career_hub/"
+                  target="_blank"
+                >
+                  <div className="text-black transition hover:text-pink-700">
+                    <span className="sr-only">Instagram</span>
+                    <BsInstagram className="h-6 w-6" />
                   </div>
                 </Link>
               </li>
               <li>
-                <div className='text-black transition hover:text-sky-500'>
+                <div className="text-black transition hover:text-sky-500">
                   <Link
-                    href='https://www.linkedin.com/company/genies-career-hub/'
-                    target='_blank'>
-                    <span className='sr-only'>aedIn</span>
-                    <FaLinkedin className='h-6 w-6' />
+                    href="https://www.linkedin.com/company/genies-career-hub/"
+                    target="_blank"
+                  >
+                    <span className="sr-only">aedIn</span>
+                    <FaLinkedin className="h-6 w-6" />
                   </Link>
                 </div>
               </li>
               <li>
-                <div className='text-black transition hover:text-red-700'>
+                <div className="text-black transition hover:text-red-700">
                   <Link
-                    href='https://www.pinterest.co.uk/GeniesCareerHub/'
-                    target='_blank'>
-                    <span className='sr-only'>Pinterest</span>
-                    <FaPinterest className='h-6 w-6' />
+                    href="https://www.pinterest.co.uk/GeniesCareerHub/"
+                    target="_blank"
+                  >
+                    <span className="sr-only">Pinterest</span>
+                    <FaPinterest className="h-6 w-6" />
                   </Link>
                 </div>
               </li>
             </ul>
           </div>
 
-          <div className='grid grid-cols-1 gap-8 border-t border-gray-300 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16'>
+          {/* <div className='grid grid-cols-1 gap-8 border-t border-gray-300 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16'>
             <div>
               <p className='font-bold text-gray-900'>Services</p>
 
@@ -153,16 +157,7 @@ export default function Footer() {
                     <MdOutlineKeyboardArrowRight className='inline text-xl' />
                   </Link>
                 </li>
-                {/* <li>
-                 <Link
-                    href='https://geniescareerhub.com/'
-                    className='text-black transition'
-                    target='_blank'
-                  >
-                    Blog
-                    <MdOutlineKeyboardArrowRight className='inline text-xl' />
-                 </Link>
-                </li> */}
+               
               </ul>
             </div>
             <div>
@@ -223,7 +218,7 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
 
           {/* <div className="footer-links">
             <Link href="/recruiter/signin" className="text-gray-600 hover:text-gray-900">
@@ -231,15 +226,16 @@ export default function Footer() {
             </Link>
           </div> */}
 
-          <p className='text-sm text-black'>
-            &copy; {currentYear}. Genies career hub . All rights reserved.
+          <p className="text-sm text-black text-center">
+            &copy; {currentYear}. Project X . All rights reserved.
             <br />
             <br />
             powered by
             <Link
-              href='https://www.glassfrogtech.com/'
-              target='_blank'
-              className='hover:underline pl-1'>
+              href="https://www.glassfrogtech.com/"
+              target="_blank"
+              className="hover:underline pl-1"
+            >
               Glassfrog Technologies
             </Link>
           </p>
