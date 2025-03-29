@@ -20,17 +20,21 @@ import Cookies from "js-cookie";
 
 const menuItems = [
   {
-    name: "CV Studio",
-    href: "/cv-studio",
+    name: "Create CV",
+    href: "/resume",
   },
-  {
-    name: "Jobs",
-    href: "/jobs",
-  },
-  {
-    name: "Coaching",
-    href: "/career-services",
-  },
+  // {
+  //   name: "CV Studio",
+  //   href: "/cv-studio",
+  // },
+  // {
+  //   name: "Jobs",
+  //   href: "/jobs",
+  // },
+  // {
+  //   name: "Coaching",
+  //   href: "/career-services",
+  // },
   {
     name: "Pricing",
     href: "/pricing",
@@ -43,48 +47,48 @@ const menuItems = [
     name: "About Us",
     href: "/about-us",
   },
-  {
-    name: "For Recruiters",
-    href: "#",
-    dropdown: [
-      {
-        name: "Post a Job",
-        onClick: (router) => {
-          const token = Cookies.get("token");
-          if (token) {
-            router.push("/recruiter/jobs/post");
-          } else {
-            router.push("/recruiter/signin?redirect=/recruiter/jobs/post");
-          }
-        },
-      },
-      {
-        name: "Find Candidates",
-        onClick: (router) => {
-          const token = Cookies.get("token");
-          if (token) {
-            router.push("/recruiter/jobs");
-          } else {
-            router.push("/recruiter/signin?redirect=/recruiter/candidates");
-          }
-        },
-      },
-      {
-        name: "Recruiter Login",
-        onClick: (router) => router.push("/recruiter/signin"),
-      },
-      {
-        name: "Register as Recruiter",
-        onClick: (router) => router.push("/recruiter/signup"),
-      },
-    ],
-  },
-  {
-    name: "Login as Coach",
-    href: "/coach-signin",
-    className:
-      "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-blue-600",
-  },
+  // {
+  //   name: "For Recruiters",
+  //   href: "#",
+  //   dropdown: [
+  //     {
+  //       name: "Post a Job",
+  //       onClick: (router) => {
+  //         const token = Cookies.get("token");
+  //         if (token) {
+  //           router.push("/recruiter/jobs/post");
+  //         } else {
+  //           router.push("/recruiter/signin?redirect=/recruiter/jobs/post");
+  //         }
+  //       },
+  //     },
+  //     {
+  //       name: "Find Candidates",
+  //       onClick: (router) => {
+  //         const token = Cookies.get("token");
+  //         if (token) {
+  //           router.push("/recruiter/jobs");
+  //         } else {
+  //           router.push("/recruiter/signin?redirect=/recruiter/candidates");
+  //         }
+  //       },
+  //     },
+  //     {
+  //       name: "Recruiter Login",
+  //       onClick: (router) => router.push("/recruiter/signin"),
+  //     },
+  //     {
+  //       name: "Register as Recruiter",
+  //       onClick: (router) => router.push("/recruiter/signup"),
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Login as Coach",
+  //   href: "/coach-signin",
+  //   className:
+  //     "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-blue-600",
+  // },
 ];
 
 const userStateDefault = {
@@ -185,8 +189,8 @@ export function ResumeHeader() {
 
   return (
     <section className="new_resume_latest z-[100] fixed">
-      <div className={`header_wrapper w-full h-[70px]`}>
-        {/* {!shouldHideBanner && showBanner && (
+      <div className={`header_wrapper w-full h-[70px] bg-[#1acbbe]`}>
+        {!shouldHideBanner && showBanner && (
           <div className="top_banner bg-blue-900 text-white py-3 px-4 text-center">
             <p className="text-xs sm:text-sm md:text-base font-medium lg:flex hidden flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 marquee-text">
               <span>
@@ -212,19 +216,10 @@ export function ResumeHeader() {
               </span>
             </p>
           </div>
-        )} */}
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        )}
+        <div className="mx-auto flex max-w-7xl items-center justify-between h-full px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
-            <Link href="/">
-              <Image
-                priority
-                src="/beta-logo.png"
-                alt="Genies Career Hub"
-                width={100}
-                height={100}
-                className="w-20 h-16 object-contain"
-              />
-            </Link>
+            <Link href="/">Project X</Link>
           </div>
           <div className="hidden lg:block">
             <ul className="ml-12 inline-flex space-x-8">
@@ -267,7 +262,7 @@ export function ResumeHeader() {
                       href={item.href}
                       className={
                         item.className ||
-                        "inline-flex items-center text-base text-blue-950 font-medium hover:text-blue-700 transition"
+                        "inline-flex items-center text-base text-blue-950 font-medium hover:text-[#1e3a8a] transition"
                       }
                     >
                       {item.name}
@@ -347,7 +342,7 @@ export function ResumeHeader() {
             ) : (
               <div className="auths_button ml-2">
                 <button
-                  className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 rounded-md animate-bounce"
+                  className="border-2  text-sm hover:cursor-pointer bg-[#1e3a8a]  text-white px-6 py-1 rounded-md animate-bounce"
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>

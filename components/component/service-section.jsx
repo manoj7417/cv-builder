@@ -22,7 +22,6 @@ export function ServiceSection() {
   const handleSubscribe = async () => {
     const { accessToken } = await GetTokens();
 
-
     if (!email.current.value) {
       setEmailError(true);
       return;
@@ -32,15 +31,16 @@ export function ServiceSection() {
     setIsSubscribing(true);
 
     try {
-      const response = await axios.post('/api/newsletter', { email: email.current.value });
+      const response = await axios.post("/api/newsletter", {
+        email: email.current.value,
+      });
       if (response.status === 200) {
         setIsSubscribed(true);
         toast.success("You are subscribed to our newsletter", {
-          position: "top-right"
-        })
+          position: "top-right",
+        });
       }
     } catch (error) {
-      
     } finally {
       email.current.value = "";
       setIsSubscribing(false);
@@ -48,19 +48,19 @@ export function ServiceSection() {
   };
 
   return (
-    <div className="flex flex-col bg-gradient-to-b from-[#e4f5fc] to-[white] ">
+    <div className="flex flex-col  ">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 border-t bg-gradient-to-t from-white to-[#2C98CA33] scroll-mt-20">
+        <section className="w-full border-t scroll-mt-20">
           <div className=" grid items-center justify-center gap-4 px-4 text-center md:px-6">
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               <h4 className="lg:text-5xl text-2xl font-bold text-black">
                 Stay Ahead of the Curve!
               </h4>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-sm">
                 Subscribe to our newsletter and get the latest updates.
               </p>
-            </div>
-            <div className="mx-auto w-full max-w-sm space-y-2">
+            </div> */}
+            {/* <div className="mx-auto w-full max-w-sm space-y-2">
               <div className="flex lg:flex-row flex-col space-x-2 mb-5 gap-5">
                 <div>
                   <input
@@ -102,7 +102,7 @@ export function ServiceSection() {
                   Terms & Conditions
                 </Link>
               </p>
-            </div>
+            </div> */}
           </div>
         </section>
       </main>
