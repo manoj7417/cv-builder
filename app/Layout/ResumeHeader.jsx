@@ -190,33 +190,6 @@ export function ResumeHeader() {
   return (
     <section className="new_resume_latest z-[100] fixed">
       <div className={`header_wrapper w-full h-[70px] bg-[#1acbbe]`}>
-        {!shouldHideBanner && showBanner && (
-          <div className="top_banner bg-blue-900 text-white py-3 px-4 text-center">
-            <p className="text-xs sm:text-sm md:text-base font-medium lg:flex hidden flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 marquee-text">
-              <span>
-                🎉 Limited Time Offer! Free 14 Days Trial on Genies Pro CV
-                Studio.
-              </span>
-              <span
-                onClick={handleCoupon}
-                className="underline font-semibold hover:no-underline cursor-pointer sm:ml-2"
-              >
-                Grab Now
-              </span>
-            </p>
-            <p className="text-xs sm:text-sm md:text-base font-medium flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0  lg:hidden">
-              <span>
-                🎉 Limited Time Offer! Get 14% off on Genies Pro CV Studio.
-              </span>
-              <span
-                onClick={handleCoupon}
-                className="underline font-semibold hover:no-underline cursor-pointer sm:ml-2"
-              >
-                Grab Now
-              </span>
-            </p>
-          </div>
-        )}
         <div className="mx-auto flex max-w-7xl items-center justify-between h-full px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <Link href="/">Project X</Link>

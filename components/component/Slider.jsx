@@ -121,7 +121,7 @@ export default function Slider() {
               <div className="text-center">
                 <Button
                   className="inline-flex items-center justify-center rounded-md bg-[#1e3a8a] px-4 text-[12px] font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                  onClick={() => handleCreateCV(item.name, item.color)}
+                  onClick={() => handleCreateCV(item?.name, item?.color)}
                   disabled={loading}
                 >
                   {loading ? (
