@@ -71,151 +71,32 @@ import { PricingData } from "@/constants/prices";
 const images = [
   {
     name: "Template1",
-    src: "/Template1.png",
+    src: "/TemplateX-2.png",
     alt: "Template1.png",
     type: templateType.premium,
   },
   {
-    name: "Template3",
-    src: "/Template3.png",
-    alt: "Template3.png",
-    type: templateType.premium,
-  },
-  {
     name: "Template4",
-    src: "/Template4.png",
+    src: "/TemplateX-4.png",
     alt: "Template4.png",
     type: templateType.premium,
   },
   {
-    name: "Template5",
-    src: "/Template5.png",
-    alt: "Template5.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template6",
-    src: "/Template6.png",
-    alt: "Template6.png",
-    type: templateType.premium,
-  },
-  {
     name: "Template7",
-    src: "/Template7.png",
+    src: "/TemplateX-5.png",
     alt: "Template7.png",
     type: templateType.premium,
   },
   {
-    name: "Template8",
-    src: "/Template8.png",
-    alt: "Template8.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template9",
-    src: "/Template9.png",
-    alt: "Template9.png",
-    type: templateType.premium,
-  },
-  {
     name: "Template10",
-    src: "/Template10.png",
+    src: "/TemplateX-1.png",
     alt: "Template10.png",
     type: templateType.premium,
   },
   {
-    name: "Template11",
-    src: "/Template11.png",
-    alt: "Template11.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template13",
-    src: "/Template13.png",
-    alt: "Template13.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template15",
-    src: "/Template15.png",
-    alt: "Template15.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template12",
-    src: "/Template12.png",
-    alt: "Template12.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template14",
-    src: "/Template14.png",
-    alt: "Template14.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template16",
-    src: "/Template16.png",
-    alt: "Template16.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template18",
-    src: "/Template18.jpg",
-    alt: "Template18.jpg",
-    type: templateType.premium,
-  },
-  {
-    name: "Template17",
-    src: "/Template17.png",
-    alt: "Template17.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template19",
-    src: "/Template19.png",
-    alt: "Template19.png",
-  },
-  {
     name: "Template20",
-    src: "/Template20.png",
+    src: "/TemplateX-3.png",
     alt: "Template20.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template21",
-    src: "/Template21.png",
-    alt: "Template21.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template22",
-    src: "/Template22.png",
-    alt: "Template22.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template23",
-    src: "/Template23.png",
-    alt: "Template23.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template24",
-    src: "/Template24.png",
-    alt: "Template24.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template25",
-    src: "/Template25.png",
-    alt: "Template25.png",
-    type: templateType.premium,
-  },
-  {
-    name: "Template26",
-    src: "/Template26.png",
-    alt: "Template26.png",
     type: templateType.premium,
   },
 ];
@@ -235,6 +116,7 @@ const ResumeView = () => {
   const [showModal, setShowModal] = useState(false);
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
+  console.log("data:::", data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userdata } = useUserStore((state) => state.userState);
   const resumeData = useResumeStore((state) => state.resume);

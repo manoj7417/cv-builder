@@ -15,8 +15,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -152,7 +151,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template20",
+        template: "TemplateX-1",
         page: {
           format: {
             type: "a4",
@@ -193,8 +192,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -316,7 +314,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template19",
+        template: "TemplateX-2",
         page: {
           format: {
             type: "a4",
@@ -357,8 +355,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -494,7 +491,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template18",
+        template: "TemplateX-3",
         page: {
           format: {
             type: "a4",
@@ -535,8 +532,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -676,7 +672,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template14",
+        template: "TemplateX-4",
         page: {
           format: {
             type: "a4",
@@ -717,8 +713,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -846,7 +841,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template17",
+        template: "TemplateX-5",
         page: {
           format: {
             type: "a4",
@@ -1023,7 +1018,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template12",
+        template: "TemplateX-1",
         page: {
           format: {
             type: "a4",
@@ -1064,8 +1059,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -1222,7 +1216,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template15",
+        template: "TemplateX-4",
         page: {
           format: {
             type: "a4",
@@ -1263,8 +1257,7 @@ export const JobResumeSchema = [
         },
         customFields: [],
         picture: {
-          //   url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/GCH_template_images/hometemplateImage.png",
-          url: "/coach-2.png",
+          url: "https://geniescareerhubbucket.lon1.cdn.digitaloceanspaces.com/profile-pic-X.jpg",
           visible: true,
         },
       },
@@ -1458,7 +1451,7 @@ export const JobResumeSchema = [
         },
       },
       metadata: {
-        template: "Template13",
+        template: "TemplateX-5",
         page: {
           format: {
             type: "a4",

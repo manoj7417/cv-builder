@@ -21,30 +21,30 @@ export const templateType = {
 
 const templatesData = [
   {
-    name: "Template3",
-    src: "/Template3.png",
-    alt: "Template3.png",
+    name: "Template10",
+    src: "/TemplateX-1.png",
+    alt: "TemplateX-1",
     type: templateType.free,
     color: "#004B04",
   },
   {
-    name: "Template5",
-    src: "/Template5.png",
-    alt: "Template5.png",
+    name: "Template1",
+    src: "/TemplateX-2.png",
+    alt: "TemplateX-2",
     type: templateType.dummy,
     color: "#AC80B2",
   },
   {
-    name: "Template4",
-    src: "/Template4.png",
-    alt: "Template4.png",
+    name: "Template20",
+    src: "/TemplateX-3.png",
+    alt: "TemplateX-3",
     type: templateType.premium,
     color: "#3188A6",
   },
   {
-    name: "Template26",
-    src: "/Template26.png",
-    alt: "Template26.png",
+    name: "Template4",
+    src: "/TemplateX-4.png",
+    alt: "TemplateX-4",
     type: templateType.dummy,
     color: "#DB2877",
   },
@@ -58,6 +58,7 @@ export default function Slider() {
   const router = useRouter();
 
   const handleCreateCV = async (template, color) => {
+    console.log("template & color", template, color);
     const { accessToken } = await GetTokens();
     if (!accessToken && !accessToken?.value) {
       toast("Please login to use this template");
@@ -120,8 +121,10 @@ export default function Slider() {
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="text-center">
                 <Button
-                  className="inline-flex items-center justify-center rounded-md bg-[#1e3a8a] px-4 text-[12px] font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                  onClick={() => handleCreateCV(item?.name, item?.color)}
+                  className="inline-flex items-center justify-center rounded-md bg-[#FF5C5C] px-4 text-[12px] font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                  onClick={() =>
+                    handleCreateCV(template?.name, template?.color)
+                  }
                   disabled={loading}
                 >
                   {loading ? (
