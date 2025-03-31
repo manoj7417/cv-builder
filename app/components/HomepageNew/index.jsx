@@ -1,5 +1,3 @@
-/** @format */
-
 "use client";
 import { useEffect, useState, Suspense } from "react";
 import Image from "next/image";
@@ -29,19 +27,19 @@ const features = [
     title: "Easy to Use",
     description:
       "You can easily choose a theme & update your information in our input fields and save it, then your required resume will be ready.",
-    icon: <FaUserCheck className="text-[#1e3a8a] text-5xl mb-4" />,
+    icon: <FaUserCheck className="text-[#f76918] text-5xl mb-4" />,
   },
   {
     title: "Make CV Online",
     description:
       "You can easily choose a theme & update your information in our input fields and save it, then your required resume will be ready.",
-    icon: <FaFileAlt className="text-[#1e3a8a] text-5xl mb-4" />,
+    icon: <FaFileAlt className="text-[#f76918] text-5xl mb-4" />,
   },
   {
     title: "Get Support 24/7",
     description:
       "You can easily choose a theme & update your information in our input fields and save it, then your required resume will be ready.",
-    icon: <FaHeadset className="text-[#1e3a8a] text-5xl mb-4" />,
+    icon: <FaHeadset className="text-[#f76918] text-5xl mb-4" />,
   },
 ];
 const faqs = [
@@ -251,7 +249,10 @@ export default function HomepageNew() {
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                <h1
+                  className="text-8xl font-bold text-gray-900 mb-4"
+                  style={{ lineHeight: "1.2 !importatnt" }}
+                >
                   Create a Job-Ready Resume in Minutes
                 </h1>
               </div>
@@ -265,21 +266,30 @@ export default function HomepageNew() {
                 {/* Button */}
                 <button
                   onClick={handleButtonClick}
-                  className="bg-[#1e3a8a] text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
+                  className="bg-[#f76918] text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 "
                 >
                   Get Started
                 </button>
               </div>
             </div>
+            <video
+              className="rounded-2xl h-[28rem] pt-4" // You can add more classes to style the video
+              autoPlay
+              loop
+              muted // Optional: Mutes the video by default
+            >
+              <source src="/cv5.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-            <Image
+            {/* <Image
               priority="true"
               src="/cv.png"
               alt="home-creative-down"
               height={300}
               width={450}
               className="2xl:w-[500px] 2xl:h-[400px] lg:w-[500px] lg:h-[300px] object-contain"
-            />
+            /> */}
           </div>
           {/* <div className="flex-1 w-full overflow-hidden relative">
             <div className="hidden lg:flex animate-marquee  whitespace-nowrap p-9">
@@ -297,12 +307,13 @@ export default function HomepageNew() {
           </div> */}
         </div>
       </section>
+
       <section className="bg-white py-20 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col items-center">
               {feature.icon}
-              <h3 className="text-xl font-bold text-[#1e3a8a] mb-2">
+              <h3 className="text-xl font-bold text-[#f76918] mb-2">
                 {feature.title}
               </h3>
               <p className="text-gray-500 text-sm max-w-xs">
@@ -312,41 +323,83 @@ export default function HomepageNew() {
           ))}
         </div>
       </section>
-      <section className=" py-20 px-4">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-          {/* Left Image Block */}
-          <div className="relative">
-            <div className="w-full h-72 flex items-center justify-center">
-              <Image
-                src={"/banner2.png"}
-                width={1500}
-                height={1500}
-                alt="discover"
-                className=" p-4 sm:p-10"
-              />
+      <section className="container max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-24">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl font-bold leading-tight text-gray-800 sm:text-5xl">
+              Facing CV Rejections? It's Time for You to start
+              creatingATS-Friendly CVs!
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Sending out CVs as a part of a job application is the first and
+              non-negotiable step. However, many job applications get rejected
+              in this very process because employers, recruiters, or companies
+              now depend on ATS scanner. These are Application Tracking System
+              scrutinises for your information before manual checks. But in case
+              your CV is not compatible with the ATS, it gets rejected,
+              irrespective of the quality of your profile.
+            </p>
+            <div className="mt-8 flex gap-6 flex-wrap">
+              <button className="flex items-center gap-2 px-6 py-3 bg-[#f76918] text-white rounded-md shadow-md ">
+                <span>Create CV Now!</span>
+              </button>
             </div>
           </div>
 
-          <div>
-            <p className="text-[#1e3a8a] font-semibold uppercase mb-2">
+          <div className="lg:w-1/2">
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-col items-center">
+                <img
+                  className="rounded-lg" // You can add more classes to style the image
+                  src="/cv4.webp" // Replace with your image source
+                  alt="Your Image Description" // Optional: Add a description of the image for accessibility
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="container max-w-7xl mx-auto px-4  ">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="lg:w-1/2">
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-col items-center">
+                <video
+                  className="rounded-lg h-[28rem]" // You can add more classes to style the video
+                  autoPlay
+                  loop
+                  muted // Optional: Mutes the video by default
+                >
+                  <source src="/cv2.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+          <div className="lg:w-1/2">
+            <p className="text-[#f76918] font-semibold uppercase mb-2">
               How it works
             </p>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold leading-tight text-gray-800 sm:text-5xl">
               3 Steps.
               <br />5 Minutes.
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="mt-4 text-lg text-gray-600">
               Getting that dream job can seem like an impossible task. We are
               here to change that. Give yourself a real advantage with the best
               online resume maker: created by experts, improved by data, trusted
               by millions of professionals.
             </p>
-            <button className="bg-[#1e3a8a] text-white px-6 py-2 rounded-lg shadow  transition">
-              Create Resume Now
-            </button>
+            <div className="mt-8 flex gap-6 flex-wrap">
+              <button className="flex items-center gap-2 px-6 py-3 bg-[#f76918] text-white rounded-md shadow-md ">
+                <span>Create CV Now!</span>
+              </button>
+            </div>
           </div>
         </div>
+      </section>
 
+      <section className=" pb-20 px-4">
         {/* Step Boxes */}
         <div className="mt-20 flex justify-center items-center ">
           {/* Step 1 */}
@@ -390,6 +443,49 @@ export default function HomepageNew() {
               <p className="text-sm text-gray-600">
                 Download your resume or share your own online resume website
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-[#f6efe1] py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-semibold text-gray-800">
+              Creating CVs that Reflect Perfection
+            </h2>
+            <p className="text-lg text-gray-600">
+              Explore unlimited possibilities with the power of a
+              precision-crafted CV by creating a resume that aligns with your
+              Professional Profile, employing our customised Curriculum Vitae
+              template.
+            </p>
+            <ul className="space-y-4 text-lg text-gray-600">
+              <li className="flex items-center">
+                <span className="mr-3 text-green-500">✔️</span> Professional
+                Templates
+              </li>
+              <li className="flex items-center">
+                <span className="mr-3 text-green-500">✔️</span> User-Friendly
+                Interface
+              </li>
+              <li className="flex items-center">
+                <span className="mr-3 text-green-500">✔️</span> Instant Download
+                & Print Options
+              </li>
+            </ul>
+          </div>
+          <div className="relative">
+            <div className="absolute top-0 left-0 right-0 bottom-0  opacity-50"></div>
+            <div className="relative z-10">
+              <video
+                className="rounded-lg h-[28rem]" // You can add more classes to style the video
+                autoPlay
+                loop
+                muted // Optional: Mutes the video by default
+              >
+                <source src="/cv1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
@@ -470,6 +566,9 @@ export default function HomepageNew() {
           </div>
         </div>
       </section> */}
+      <section className="w-full z-40 relative ">
+        <Slider />
+      </section>
 
       <section className="w-full z-40 relative">
         {/* <div className="text-center xs:mt-5 z-50 p-10 border-t-2 lg:rounded-t-[50px] rounded-t-[20px] bg-white">
@@ -491,7 +590,7 @@ export default function HomepageNew() {
             <CourseSlider />
           </div>
         </div> */}
-        <Slider />
+
         <TabResume />
         <WorkTogether />
         <ServiceSection />

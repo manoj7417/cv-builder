@@ -1,5 +1,3 @@
-/** @format */
-
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -192,12 +190,14 @@ export function ResumeHeader() {
       <div className={`header_wrapper w-full h-[70px] bg-[#1acbbe]`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between h-full px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
-            <Link href="/">Project X</Link>
+            <Link href="/" className="font-bold">
+              Project X
+            </Link>
           </div>
           <div className="hidden lg:block">
             <ul className="ml-12 inline-flex space-x-8">
               {menuItems.map((item, index) => (
-                <li key={item.name} className="relative group">
+                <li key={item.name} className="relative group font-bold">
                   {item.dropdown ? (
                     <>
                       <button
@@ -235,7 +235,7 @@ export function ResumeHeader() {
                       href={item.href}
                       className={
                         item.className ||
-                        "inline-flex items-center text-base text-blue-950 font-medium hover:text-[#1e3a8a] transition"
+                        "inline-flex items-center text-base text-black font-bold  hover:text-[#f76918] transition"
                       }
                     >
                       {item.name}
@@ -315,7 +315,7 @@ export function ResumeHeader() {
             ) : (
               <div className="auths_button ml-2">
                 <button
-                  className="border-2  text-sm hover:cursor-pointer bg-[#1e3a8a]  text-white px-6 py-1 rounded-md animate-bounce"
+                  className="border-2  text-sm hover:cursor-pointer bg-[#f76918]  text-white px-6 py-1 rounded-md animate-bounce"
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>

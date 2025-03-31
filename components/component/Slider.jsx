@@ -58,7 +58,6 @@ export default function Slider() {
   const router = useRouter();
 
   const handleCreateCV = async (template, color) => {
-    console.log("template & color", template, color);
     const { accessToken } = await GetTokens();
     if (!accessToken && !accessToken?.value) {
       toast("Please login to use this template");
@@ -92,21 +91,12 @@ export default function Slider() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto py-12 px-4">
-      <h2 className="text-center text-3xl font-bold mb-10">
-        Creating CVs that Reflect Perfection
-      </h2>
-      <p className="text-center mb-16 text-gray-600 max-w-2xl mx-auto">
-        Explore unlimited possibilities with the power of a precision-crafted CV
-        by creating a resume that aligns with your Professional Profile,
-        employing our customised Curriculum Vitae template.
-      </p>
-
+    <div className="max-w-7xl mx-auto py-12 px-4 ">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {templatesData.map((template, index) => (
           <div
             key={index}
-            className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
+            className="group relative overflow-hidden transition-all duration-300 hover:scale-105"
           >
             <div className="h-[400px] w-full ">
               <Image
@@ -121,10 +111,8 @@ export default function Slider() {
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="text-center">
                 <Button
-                  className="inline-flex items-center justify-center rounded-md bg-[#FF5C5C] px-4 text-[12px] font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                  onClick={() =>
-                    handleCreateCV(template?.name, template?.color)
-                  }
+                  className="inline-flex items-center justify-center rounded-md bg-[#f76918] px-4 text-[12px] font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
+                  onClick={() => handleCreateCV(item?.name, item?.color)}
                   disabled={loading}
                 >
                   {loading ? (
