@@ -25,28 +25,28 @@ const templatesData = [
     src: "/TemplateX-1.png",
     alt: "TemplateX-1",
     type: templateType.free,
-    color: "#004B04",
+    color: "#F9BC2F",
   },
   {
     name: "Template1",
     src: "/TemplateX-2.png",
     alt: "TemplateX-2",
     type: templateType.dummy,
-    color: "#AC80B2",
+    color: "#2047A8",
   },
   {
     name: "Template20",
     src: "/TemplateX-3.png",
     alt: "TemplateX-3",
     type: templateType.premium,
-    color: "#3188A6",
+    color: "#15ABAB",
   },
   {
     name: "Template4",
     src: "/TemplateX-4.png",
     alt: "TemplateX-4",
     type: templateType.dummy,
-    color: "#DB2877",
+    color: "#3A8DEF",
   },
 ];
 
@@ -112,7 +112,9 @@ export default function Slider() {
               <div className="text-center">
                 <Button
                   className="inline-flex items-center justify-center rounded-md bg-[#f76918] px-4 text-[12px] font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:opacity-100 disabled:bg-[#82cdf0]"
-                  onClick={() => handleCreateCV(item?.name, item?.color)}
+                  onClick={() =>
+                    handleCreateCV(template?.name, template?.color)
+                  }
                   disabled={loading}
                 >
                   {loading ? (
