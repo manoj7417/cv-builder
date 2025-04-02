@@ -250,7 +250,7 @@ const ResumeView = () => {
         res.message === "Your download CV tokens have expired"
       ) {
         toast.info("Your plan validity has expired.", { autoclose: 3000 });
-        return router.push("/pricing?scroll=1");
+        return router.push("/pricing");
       }
       if (
         error?.response?.status === 403 &&
