@@ -689,7 +689,7 @@ const CoachForm = () => {
                     access the coach dashboard.
                   </p>
                   <Link href="/coach-dashboard">
-                    <button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-900 transition duration-200 mt-5">
+                    <button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-[#f76918] transition duration-200 mt-5">
                       Go to Dashboard
                     </button>
                   </Link>
@@ -1648,7 +1648,7 @@ const CoachForm = () => {
                           target="_blank"
                           downloaded
                           file
-                          className="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800 transition"
+                          className="inline-flex items-center px-4 py-2 bg-[#f76918] text-white rounded hover:bg-blue-800 transition"
                         >
                           Download Agreement
                           <MdDownload className="ml-2 animate-pulse" />

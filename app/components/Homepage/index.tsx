@@ -42,7 +42,7 @@ export default function Homepage() {
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
                     hovered
                       ? "bg-white text-blue-900 border-2 border-transparent"
-                      : "bg-blue-900 text-white"
+                      : "bg-[#f76918] text-white"
                   }`}
                   href="/resume"
                   onMouseEnter={toggleHover}
@@ -52,7 +52,7 @@ export default function Homepage() {
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-bold text-blue-900 font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
                     hovered
-                      ? "bg-blue-900 text-white border-2 border-transparent"
+                      ? "bg-[#f76918] text-white border-2 border-transparent"
                       : "bg-white border-2"
                   }`}
                   href="/resume-analyzer"

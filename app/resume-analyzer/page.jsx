@@ -369,7 +369,7 @@ const ResumeAnalyzer = () => {
               </Dialog>
               <div className="flex justify-center mt-12">
                 <label className="flex items-center space-x-4 bg-transparent text-blue rounded-lg uppercase cursor-pointer hover:bg-blue sm:mx-auto">
-                  <span className="text-md px-10 py-3 bg-blue-900 hover:bg-blue-600 rounded-md text-white font-semibold">
+                  <span className="text-md px-10 py-3 bg-[#f76918] hover:bg-blue-600 rounded-md text-white font-semibold">
                     Optimise CV Now
                   </span>
                   {/* <input

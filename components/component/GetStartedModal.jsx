@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import a1 from "../../public/animations/a1.json";
 import a2 from "../../public/animations/a2.json";
 import a3 from "../../public/animations/a3.json";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import "./getStarted.css"; // Import the CSS file
 import Link from "next/link";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
-  loading: () => <p></p>
+  loading: () => <p></p>,
 });
 
 const GetStartedModal = ({ onClose }) => {
@@ -36,19 +36,19 @@ const GetStartedModal = ({ onClose }) => {
         "Create your CV with professional templates, powered by Artificial Intelligence.",
       link: "/resume",
     },
-    {
-      title: "CV Optimiser",
-      description:
-        "Analyse your resume with AI and optimise it for your desired Job Profile.",
-      link: "/resume-analyzer",
-    },
-    {
-      title: "CV Match",
-      description:
-        "Assess your personality traits and cognitive abilities to find the best career path.",
-      current: false,
-      link: "/job-cv",
-    },
+    // {
+    //   title: "CV Optimiser",
+    //   description:
+    //     "Analyse your resume with AI and optimise it for your desired Job Profile.",
+    //   link: "/resume-analyzer",
+    // },
+    // {
+    //   title: "CV Match",
+    //   description:
+    //     "Assess your personality traits and cognitive abilities to find the best career path.",
+    //   current: false,
+    //   link: "/job-cv",
+    // },
   ];
 
   return (
@@ -67,8 +67,8 @@ const GetStartedModal = ({ onClose }) => {
         >
           {/* Modal content */}
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">Genies Pro CV Studio,</span> Your
-            Automated Resume Builder!
+            <span className="text-[#2C98CA]">Project X Pro CV Studio,</span>{" "}
+            Your Automated Resume Builder!
           </h1>
           <p className="text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
             Build tailored CVs and reach out to potential employers with

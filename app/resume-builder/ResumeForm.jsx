@@ -2416,7 +2416,7 @@ export default function ResumeForm() {
                                   <PopoverTrigger asChild>
                                     <Button
                                       variant="outline"
-                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
+                                      className="bg-[#f76918] hover:bg-blue-700 text-white hover:text-white"
                                     >
                                       <FiLink />
                                       Link
@@ -2588,7 +2588,7 @@ export default function ResumeForm() {
                                   <PopoverTrigger asChild>
                                     <Button
                                       variant="outline"
-                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
+                                      className="bg-[#f76918] hover:bg-blue-700 text-white hover:text-white"
                                     >
                                       <FiLink />
                                       Link
@@ -2778,7 +2778,7 @@ export default function ResumeForm() {
                                   <PopoverTrigger asChild>
                                     <Button
                                       variant="outline"
-                                      className="bg-blue-900 hover:bg-blue-700 text-white hover:text-white"
+                                      className="bg-[#f76918] hover:bg-blue-700 text-white hover:text-white"
                                     >
                                       <FiLink />
                                       Link

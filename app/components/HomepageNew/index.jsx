@@ -273,7 +273,7 @@ export default function HomepageNew() {
               </div>
             </div>
             <video
-              className="rounded-2xl h-[28rem] pt-4" // You can add more classes to style the video
+              className="rounded-2xl  pt-4" // You can add more classes to style the video
               autoPlay
               loop
               muted // Optional: Mutes the video by default

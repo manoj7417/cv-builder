@@ -532,7 +532,7 @@ function JobMultistepForm({
   if (steps === 1) {
     return (
       <DialogContent
-        className="h-full sm:max-w-[70dvw] sm:h-[80dvh] p-0 bg-blue-900"
+        className="h-full sm:max-w-[70dvw] sm:h-[80dvh] p-0 bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -624,7 +624,7 @@ function JobMultistepForm({
   if (steps === 2) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900 z"
+        className="sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-[#f76918] z"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -848,7 +848,7 @@ function JobMultistepForm({
   if (steps === 3) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900"
+        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -1040,7 +1040,7 @@ function JobMultistepForm({
   if (steps === 4) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900"
+        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -1228,7 +1228,7 @@ function JobMultistepForm({
   if (steps === 5) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar p-0 h-full sm:h-[80vh] bg-blue-900"
+        className="sm:max-w-[70dvw] no-scrollbar p-0 h-full sm:h-[80vh] bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
