@@ -106,7 +106,7 @@ const MultiStepFormDialog = ({ setFindCoachPopup, findCoachPopUp }) => {
   return (
     <Dialog open={findCoachPopUp} onOpenChange={setFindCoachPopup}>
       <DialogContent
-        className="max-w-5xl bg-blue-950 text-white"
+        className="max-w-5xl bg-[#f76918] text-white"
         showCloseButton={true}
         onClick={() => setFindCoachPopup(false)}
       >

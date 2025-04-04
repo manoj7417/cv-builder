@@ -794,7 +794,7 @@ const CoachProfile = () => {
                           <button
                             type="button"
                             onClick={() => handleViewFile("cv")}
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-[#f76918] hover:text-[#f76918]"
                           >
                             <FaEye className="text-xl" /> {/* View Icon */}
                           </button>
@@ -938,7 +938,7 @@ const CoachProfile = () => {
                           <button
                             type="button"
                             onClick={() => handleViewFile("docs")}
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-[#f76918] hover:text-[#f76918]"
                           >
                             <FaEye className="text-xl" /> {/* View Icon */}
                           </button>

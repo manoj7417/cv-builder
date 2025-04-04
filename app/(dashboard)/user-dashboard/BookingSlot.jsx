@@ -85,14 +85,13 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
   const [coachBookings, setCoachBookings] = useState([]);
   const [meetUrl, setMeetUrl] = useState(null);
 
-
   const isSlotDisabled = (slot, selectedDate) => {
     const now = dayjs();
     const slotDateTime = dayjs(
       `${selectedDate} ${slot.startTime}`,
       "YYYY-MM-DD h:mm A"
     );
-    return slotDateTime.isBefore(now); 
+    return slotDateTime.isBefore(now);
   };
 
   const checkCoursePurchased = async (programId) => {
@@ -461,7 +460,7 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                 const dayClasses = isDisabled
                   ? "text-gray-400 cursor-not-allowed bg-transparent"
                   : isSelected
-                  ? "text-white bg-blue-900 cursor-pointer rounded-full"
+                  ? "text-white bg-[#f76918] cursor-pointer rounded-full"
                   : isCurrentDate
                   ? "text-gray-800 bg-blue-500 text-white cursor-pointer rounded-full shadow"
                   : "text-gray-800 cursor-pointer bg-gray-100/70 shadow-sm rounded-full";
@@ -508,7 +507,7 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                       <div
                         key={index}
                         onClick={() => handleSlotClick(slot)}
-                        className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
+                        className="group relative bg-[#f76918] text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
                       >
                         <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
                           {slot.startTime}
@@ -559,7 +558,7 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                 href={meetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 lg:mt-2 mt-5"
+                className="bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 lg:mt-2 mt-5"
               >
                 Join Meeting
               </Link>
@@ -582,14 +581,16 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
 
                     <div className="grid grid-cols-2 gap-4">
                       {selectedDaySlots.map((slot, index) => {
-
-                      const isConfirmDisabled = isSlotDisabled(slot, selectedDate.date);
+                        const isConfirmDisabled = isSlotDisabled(
+                          slot,
+                          selectedDate.date
+                        );
 
                         return (
                           // <div
                           //   key={index}
                           //   onClick={() => handleSlotClick(slot)}
-                          //   className="group relative bg-blue-950 text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
+                          //   className="group relative bg-[#f76918] text-white py-2 px-5 rounded-md font-medium text-center cursor-pointer transition duration-300 transform hover:bg-blue-700 h-10 flex items-center justify-center overflow-hidden"
                           // >
                           //   <span className="slot-text transition-all duration-300 transform group-hover:-translate-x-full group-hover:opacity-0">
                           //     {slot.startTime}
@@ -599,29 +600,31 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                           //   </span>
                           // </div>
                           <div
-                          key={index}
-                          onClick={() => {
-                            if (!isConfirmDisabled) handleSlotClick(slot); // Only handle click if not disabled
-                          }}
-                          className={`group relative py-2 px-5 rounded-md font-medium text-center transition duration-300 transform h-10 flex items-center justify-center overflow-hidden ${
-                            isConfirmDisabled
-                              ? "bg-gray-300 text-black cursor-not-allowed" // Disabled style
-                              : "bg-blue-950 text-white hover:bg-blue-700" // Enabled style
-                          }`}
-                        >
-                          <span
-                            className={`slot-text transition-all duration-300 transform ${
-                              isConfirmDisabled ? "opacity-50" : "group-hover:-translate-x-full group-hover:opacity-0"
+                            key={index}
+                            onClick={() => {
+                              if (!isConfirmDisabled) handleSlotClick(slot); // Only handle click if not disabled
+                            }}
+                            className={`group relative py-2 px-5 rounded-md font-medium text-center transition duration-300 transform h-10 flex items-center justify-center overflow-hidden ${
+                              isConfirmDisabled
+                                ? "bg-gray-300 text-black cursor-not-allowed" // Disabled style
+                                : "bg-[#f76918] text-white hover:bg-blue-700" // Enabled style
                             }`}
                           >
-                            {slot.startTime}
-                          </span>
-                          {!isConfirmDisabled && (
-                            <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                              Book slot
+                            <span
+                              className={`slot-text transition-all duration-300 transform ${
+                                isConfirmDisabled
+                                  ? "opacity-50"
+                                  : "group-hover:-translate-x-full group-hover:opacity-0"
+                              }`}
+                            >
+                              {slot.startTime}
                             </span>
-                          )}
-                        </div>
+                            {!isConfirmDisabled && (
+                              <span className="slot-book absolute inset-0 flex items-center justify-center transform translate-x-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                                Book slot
+                              </span>
+                            )}
+                          </div>
                         );
                       })}
                     </div>
@@ -656,7 +659,7 @@ const UserBookingSlot = ({ coach_Id, programId, program, setProgram }) => {
                 </p>
 
                 <div className="slots_available flex flex-wrap">
-                  <p className="text-sm bg-blue-950 text-white py-2 px-5 text-center rounded-md font-medium my-2">
+                  <p className="text-sm bg-[#f76918] text-white py-2 px-5 text-center rounded-md font-medium my-2">
                     {modalSelectedSlot?.slot?.startTime} -{" "}
                     {modalSelectedSlot?.slot?.endTime}
                   </p>

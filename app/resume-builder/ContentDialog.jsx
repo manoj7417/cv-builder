@@ -558,7 +558,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
               )}
               <DialogFooter className="mt-4 sm:mt-8">
                 <Button
-                  className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                  className="bg-[#f76918] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
                   onClick={() => UpgradePlan(selectedCard)}
                   disabled={loading}
                 >
@@ -625,7 +625,7 @@ function ContentDialog({ isContentVisible, setIsContentVisible }) {
               <button
                 onClick={checkUserTemplate}
                 disabled={isLoading}
-                className="bg-blue-950 text-white px-4 py-2 rounded flex items-center"
+                className="bg-[#f76918] text-white px-4 py-2 rounded flex items-center"
               >
                 {isLoading ? (
                   <FaSpinner className="animate-spin text-xl mr-2" />

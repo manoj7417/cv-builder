@@ -103,7 +103,7 @@ const CareerServices = () => {
       >
         <div className="container ">
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">Get Coached,</span> Your For
+            <span className="text-[#f76918]">Get Coached,</span> Your For
             Perfection!
           </h1>
           <h2 className="lg:w-[60%] w-full mx-auto text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
@@ -137,7 +137,7 @@ const CareerServices = () => {
                     <div className="p-4">
                       <Link
                         href={animation?.link}
-                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 p-3 text-sm font-semibold text-white shadow-sm text-center"
+                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-[#f76918] p-3 text-sm font-semibold text-white shadow-sm text-center"
                       >
                         Try Now
                       </Link>

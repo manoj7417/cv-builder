@@ -1,20 +1,20 @@
-'use client'
-import React, { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
-import Cookies from 'js-cookie'
-import PasswordResetDialog from '@/app/components/PasswordResetDialog'
+"use client";
+import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import PasswordResetDialog from "@/app/components/PasswordResetDialog";
 
 const RecruiterSignIn = () => {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +85,6 @@ const RecruiterSignIn = () => {
 
   return (
     <>
-
       <div className="flex min-h-screen bg-gray-50">
         {/* Left side - Image Section */}
         <div className="hidden lg:block relative w-1/2 bg-gray-900">
@@ -250,7 +249,7 @@ const RecruiterSignIn = () => {
                     <input
                       id="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer accent-blue-600"
+                      className="h-4 w-4 rounded border-gray-300 text-[#f76918] focus:ring-blue-500 cursor-pointer accent-blue-600"
                     />
                     <label
                       htmlFor="remember-me"
@@ -323,7 +322,7 @@ const RecruiterSignIn = () => {
       </div>
 
       {/* Add the dialog */}
-      <PasswordResetDialog 
+      <PasswordResetDialog
         isOpen={isResetDialogOpen}
         onClose={() => setIsResetDialogOpen(false)}
       />

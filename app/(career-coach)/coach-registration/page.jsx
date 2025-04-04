@@ -372,7 +372,7 @@ export default function CoachRegistration() {
                     <input
                       id="rememberMe"
                       type="checkbox"
-                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-[#f76918]"
                       {...register("rememberMe", { required: true })}
                     />
                     <label
@@ -393,7 +393,7 @@ export default function CoachRegistration() {
                     <input
                       id="termsCondition"
                       type="checkbox"
-                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                      className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-[#f76918]"
                       {...register("terms", { required: true })}
                     />
                     <label

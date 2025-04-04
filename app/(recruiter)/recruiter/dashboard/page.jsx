@@ -76,10 +76,10 @@ const RecruiterDashboard = () => {
             </h3>
           </div>
           <div className="p-3 bg-blue-50 rounded-lg">
-            <BriefcaseIcon className="h-6 w-6 text-blue-600" />
+            <BriefcaseIcon className="h-6 w-6 text-[#f76918]" />
           </div>
         </div>
-        <div className="mt-4 text-sm text-blue-600">
+        <div className="mt-4 text-sm text-[#f76918]">
           {activeJobs} active jobs
         </div>
       </div>
@@ -187,7 +187,7 @@ const RecruiterDashboard = () => {
           </div>
           <button
             onClick={() => router.push(`/recruiter/applications/${job._id}`)}
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+            className="text-[#f76918] hover:text-blue-700 text-sm font-medium"
           >
             View Applications →
           </button>
@@ -228,7 +228,7 @@ const RecruiterDashboard = () => {
             </h2>
             <button
               onClick={() => router.push("/recruiter/jobs")}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+              className="text-sm text-[#f76918] hover:text-blue-700 font-medium"
             >
               View All Jobs →
             </button>

@@ -532,7 +532,7 @@ function JobMultistepForm({
   if (steps === 1) {
     return (
       <DialogContent
-        className="h-full sm:max-w-[70dvw] sm:h-[80dvh] p-0 bg-blue-900"
+        className="h-full sm:max-w-[70dvw] sm:h-[80dvh] p-0 bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -552,9 +552,9 @@ function JobMultistepForm({
             <div className="shadow-xl p-6 sm:p-10 h-full rounded-2xl bg-white">
               <div className="my-2">
                 <h2 className="font-bold text-xl sm:text-2xl text-blue-950 mb-5 text-center">
-                  Design a winning <span className="text-blue-600">CV</span> in
+                  Design a winning <span className="text-[#f76918]">CV</span> in
                   just minutes with <br />{" "}
-                  <span className="text-blue-600 text-2xl sm:text-3xl">
+                  <span className="text-[#f76918] text-2xl sm:text-3xl">
                     &#x201B; Genies Career Hub &#x2019;
                   </span>
                 </h2>
@@ -624,7 +624,7 @@ function JobMultistepForm({
   if (steps === 2) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-blue-900 z"
+        className="sm:max-w-[70dvw] no-scrollbar sm:h-[80vh] h-full p-0 bg-[#f76918] z"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -661,9 +661,9 @@ function JobMultistepForm({
                     </div>
                     <div className="max-h-[85%]">
                       <div className="flex justify-between items-center my-4 px-1">
-                        <p className="text-blue-900">Add Experience</p>
+                        <p className="text-black">Add Experience</p>
                         <button
-                          className="flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500"
+                          className="flex text-sm px-3 py-2 text-white rounded-md bg-[#f76918] cursor-pointer hover:bg-green-500"
                           onClick={handleAddExperience}
                         >
                           Add <IoIosAddCircle className="text-xl ml-2" />
@@ -848,7 +848,7 @@ function JobMultistepForm({
   if (steps === 3) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900"
+        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -868,9 +868,9 @@ function JobMultistepForm({
             <div className="shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white">
               <div className=" max-h-[85%]  overflow-scroll no-scrollbar">
                 <div className="flex justify-between items-center my-4 px-1">
-                  <p className="text-blue-900">Add Education</p>
+                  <p className="text-black">Add Education</p>
                   <button
-                    className="flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500"
+                    className="flex text-sm px-3 py-2 text-white rounded-md bg-[#f76918] cursor-pointer hover:bg-green-500"
                     onClick={handleAddEducation}
                   >
                     Add <IoIosAddCircle className="text-xl ml-2" />
@@ -1040,7 +1040,7 @@ function JobMultistepForm({
   if (steps === 4) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-blue-900"
+        className="sm:max-w-[70dvw] no-scrollbar h-full sm:h-[80vh] p-0 bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >
@@ -1060,9 +1060,9 @@ function JobMultistepForm({
             <div className="shadow-xl px-4 sm:px-10 py-5 w-full h-full max-h-full rounded-2xl overflow-hidden bg-white">
               <div className="max-h-[85%]  overflow-scroll no-scrollbar">
                 <div className="flex justify-between items-center my-4 px-1">
-                  <p className="text-blue-900">Add Projects</p>
+                  <p className="text-black">Add Projects</p>
                   <button
-                    className="flex text-sm px-3 py-2 text-white rounded-md bg-blue-950 cursor-pointer hover:bg-green-500"
+                    className="flex text-sm px-3 py-2 text-white rounded-md bg-[#f76918] cursor-pointer hover:bg-green-500"
                     onClick={handleAddProject}
                   >
                     Add <IoIosAddCircle className="text-xl ml-2" />
@@ -1228,7 +1228,7 @@ function JobMultistepForm({
   if (steps === 5) {
     return (
       <DialogContent
-        className="sm:max-w-[70dvw] no-scrollbar p-0 h-full sm:h-[80vh] bg-blue-900"
+        className="sm:max-w-[70dvw] no-scrollbar p-0 h-full sm:h-[80vh] bg-[#f76918]"
         onClick={handleCloseMultistepForm}
         showCloseButton
       >

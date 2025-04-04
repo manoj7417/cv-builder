@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import a1 from "../../public/animations/a1.json";
 import a2 from "../../public/animations/a2.json";
 import a3 from "../../public/animations/a3.json";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import "./getStarted.css"; // Import the CSS file
 import Link from "next/link";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
-  loading: () => <p></p>
+  loading: () => <p></p>,
 });
 
 const GetStartedModal = ({ onClose }) => {
@@ -28,26 +28,13 @@ const GetStartedModal = ({ onClose }) => {
     setTimeout(onClose, 300); // Delay to match the transition duration
   };
 
-  const animations = [a1, a2, a3];
+  const animations = [a1];
   const descriptions = [
     {
-      title: "CV Creator",
+      title: "Create CV",
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
       link: "/resume",
-    },
-    {
-      title: "CV Optimiser",
-      description:
-        "Analyse your resume with AI and optimise it for your desired Job Profile.",
-      link: "/resume-analyzer",
-    },
-    {
-      title: "CV Match",
-      description:
-        "Assess your personality traits and cognitive abilities to find the best career path.",
-      current: false,
-      link: "/job-cv",
     },
   ];
 
@@ -67,15 +54,15 @@ const GetStartedModal = ({ onClose }) => {
         >
           {/* Modal content */}
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">Genies Pro CV Studio,</span> Your
-            Automated Resume Builder!
+            <span className="text-[#f76918]">FREE JOB AI Pro CV Studio,</span>{" "}
+            Your Automated Resume Builder!
           </h1>
           <p className="text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
             Build tailored CVs and reach out to potential employers with
             confidence.
           </p>
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20">
+            <div className="grid grid-cols-1  gap-10 md:gap-20">
               {animations.map((animation, index) => (
                 <div
                   key={index}

@@ -59,17 +59,16 @@ export default function CourseSlider() {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + '</span>';
+      return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
   };
-
 
   return (
     <div className="bg-gray-100 rounded-3xl p-6 sm:p-10 steps_slider shadow-xl">
       <div className="steps_slider_title mb-5 sm:block hidden">
         <h3 className="lg:text-3xl text-xl text-black font-bold">
           A Step Closer to Your Dream Job with
-          <span className="font-bold text-blue-600"> Genies Pro Studio</span>
+          <span className="font-bold text-[#f76918]"> Genies Pro Studio</span>
         </h3>
         <p className="lg:text-base text-sm mt-3">
           Our AI-driven Genies CV Pro Studio is a comprehensive suite of three
@@ -93,7 +92,7 @@ export default function CourseSlider() {
         {stepsResumeData.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="steps_content pt-10 text-center sm:text-start">
-              <div className="title text-xl text-blue-900 font-bold my-3 ">
+              <div className="title text-xl text-black font-bold my-3 ">
                 {item.stepHeading}
               </div>
               <div className="steps_details lg:text-base text-sm font-medium mb-4">

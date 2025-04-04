@@ -187,7 +187,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
         </p>
         <div className="date_button">
           <button
-            className="bg-blue-950 text-white px-4 py-2 rounded mt-5 text-sm flex items-center gap-2"
+            className="bg-[#f76918] text-white px-4 py-2 rounded mt-5 text-sm flex items-center gap-2"
             onClick={() => setIsModalOpen(true)}
             type="button"
           >
@@ -234,7 +234,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
 
                       <div className="mt-6">
                         <Button
-                          className="bg-blue-950 text-white"
+                          className="bg-[#f76918] text-white"
                           onClick={() => setCurrentStep(2)}
                         >
                           Get Started
@@ -395,7 +395,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
                       mode === "multiple" ? (
                         <Button
                           type="button"
-                          className="bg-blue-950 text-white"
+                          className="bg-[#f76918] text-white"
                           onClick={handleSaveChanges}
                         >
                           Save changes
@@ -403,7 +403,7 @@ const DateOverrides = ({ timeSlot, dateOverrides, setDateOverrides }) => {
                       ) : (
                         <Button
                           type="button"
-                          className="bg-blue-950 text-white"
+                          className="bg-[#f76918] text-white"
                           onClick={handleupdateOverride}
                         >
                           Update override
