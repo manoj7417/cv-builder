@@ -11,10 +11,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useCouponStore } from "../store/useCouponStore";
+import Link from "next/link";
 
 export const CouponModal = ({ open, onClose, onSubmit }) => {
   const [code, setCode] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    coupon,
+    expiry,
+    applyCoupon: storeCoupon,
+    isValid,
+  } = useCouponStore();
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -31,11 +39,13 @@ export const CouponModal = ({ open, onClose, onSubmit }) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Enter Coupon Code</DialogTitle>
-          <DialogDescription>
-            Don't have a coupon?{" "}
-            <a href="/pricing" className="text-primary hover:underline">
-              Upgrade your plan
-            </a>
+          <DialogDescription className="space-y-2">
+            Your exclusive coupon code was sent to your welcome email. Please
+            check your inbox and copy it here.
+            <br />
+            <Link href="/pricing" className="text-primary mt-5 hover:underline">
+              Don't have a coupon? Upgrade your plan
+            </Link>
           </DialogDescription>
         </DialogHeader>
 

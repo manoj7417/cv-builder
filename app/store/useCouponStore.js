@@ -9,6 +9,7 @@ export const useCouponStore = create(
       coupon: null,
       expiry: null,
       applyCoupon: (code) => {
+        console.log("Applying coupon:", code);
         const expiryDate = new Date();
         expiryDate.setDate(expiryDate.getDate() + COUPON_EXPIRY_DAYS);
         set({ coupon: code, expiry: expiryDate.toISOString() });
