@@ -54,19 +54,19 @@ const SidebarCoach = () => {
   // Function to apply active class based on activeTab
   const getLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto"
+      ? "flex items-center rounded-md bg-[#f76918] text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto"
       : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm  font-bold w-full";
   };
 
   const getProgramLinkClass = (tab) => {
     return activeTab.includes(tab)
-      ? "flex items-center rounded-md bg-blue-950 text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto py-2 px-2"
+      ? "flex items-center rounded-md bg-[#f76918] text-white cursor-pointer text-sm shadow-md font-bold w-full h-auto py-2 px-2"
       : "flex items-center text-gray-500 rounded-md hover:bg-gray-200 cursor-pointer text-sm  font-bold w-full py-2";
   };
 
   const getSubLinkClass = (tab) => {
     return activeTab === tab
-      ? "flex items-center rounded-md bg-gray-100 text-blue-900 cursor-pointer text-sm shadow-md font-bold w-full h-auto my-1"
+      ? "flex items-center rounded-md bg-gray-100 text-black cursor-pointer text-sm shadow-md font-bold w-full h-auto my-1"
       : "flex items-center text-gray-500 rounded-md hover:bg-gray-100 cursor-pointer text-sm text-blue-700 font-bold w-full my-1";
   };
 

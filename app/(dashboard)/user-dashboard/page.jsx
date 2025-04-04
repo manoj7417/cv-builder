@@ -50,7 +50,7 @@ const UserDashboardPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -59,7 +59,7 @@ const UserDashboardPage = () => {
   const { userdata } = useUserStore((state) => state.userState);
   const [bookings, setBookings] = useState([]);
   const [program, setProgram] = useState([]);
-  console.log("program::",program)
+  console.log("program::", program);
   const [isLoading, setIsLoading] = useState(true);
   // const [showBooking, setShowBooking] = useState(false);
   const [selectedCoachId, setSelectedCoachId] = useState(null);
@@ -68,7 +68,7 @@ const UserDashboardPage = () => {
   const [rateMeetingModalOpen, setRateMeetingModalOpen] = useState(false);
   const [raiseConcernModalOpen, setRaiseConcernModalOpen] = useState(false);
   const [currentProgramId, setCurrentProgramId] = useState(null);
-  console.log("currentProgramId::",currentProgramId)
+  console.log("currentProgramId::", currentProgramId);
 
   const [isConcernLoading, setIsConcernLoading] = useState(false);
 
@@ -770,7 +770,7 @@ const UserDashboardPage = () => {
                                                   ? "noopener noreferrer"
                                                   : undefined
                                               }
-                                              className={`text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                              className={`text-sm bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
                                                 !item.showJoinMeeting
                                                   ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
                                                   : ""
@@ -800,7 +800,7 @@ const UserDashboardPage = () => {
                                                   title="Rate us"
                                                 >
                                                   <button
-                                                    className="text-xs bg-blue-900 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                                    className="text-xs bg-[#f76918] text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
                                                     onClick={() =>
                                                       handleRateMeeting(
                                                         item?.programId?._id
@@ -877,7 +877,7 @@ const UserDashboardPage = () => {
                                         href={item.meetingLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                        className="text-sm bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
                                       >
                                         Join Meeting
                                       </Link>
@@ -913,7 +913,7 @@ const UserDashboardPage = () => {
                                                 ? "noopener noreferrer"
                                                 : undefined
                                             }
-                                            className={`block w-full text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                            className={`block w-full text-sm bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
                                               !item.showJoinMeeting
                                                 ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
                                                 : ""
@@ -943,7 +943,7 @@ const UserDashboardPage = () => {
                                                 title="Rate us"
                                               >
                                                 <button
-                                                  className="text-xs bg-blue-900 text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                                  className="text-xs bg-[#f76918] text-white p-2 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
                                                   onClick={() =>
                                                     handleRateMeeting(
                                                       item?.programId?._id

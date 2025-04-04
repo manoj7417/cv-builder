@@ -13,7 +13,7 @@ const SingleBlogPage = () => {
       description:
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
       imageUrl: "/coach-6.png",
-       userName: "John Doe",
+      userName: "John Doe",
     },
     {
       id: 2,
@@ -55,7 +55,7 @@ const SingleBlogPage = () => {
             <span className="mr-3 flex flex-row items-center">
               {/* Clock Icon */}
               <svg
-                className="text-indigo-600"
+                className="text-[#f76918]"
                 fill="currentColor"
                 height="13px"
                 width="13px"
@@ -68,10 +68,10 @@ const SingleBlogPage = () => {
             </span>
 
             {/* Author Link */}
-            <div className="flex flex-row items-center hover:text-indigo-600 mr-3">
+            <div className="flex flex-row items-center hover:text-[#f76918] mr-3">
               {/* Author Icon */}
               <svg
-                className="text-indigo-600"
+                className="text-[#f76918]"
                 fill="currentColor"
                 height="16px"
                 viewBox="0 0 24 24"
@@ -88,10 +88,10 @@ const SingleBlogPage = () => {
 
             {/* Category Link */}
             <div>
-              <div className="flex flex-row items-center hover:text-indigo-600">
+              <div className="flex flex-row items-center hover:text-[#f76918]">
                 {/* Tag Icon */}
                 <svg
-                  className="text-indigo-600"
+                  className="text-[#f76918]"
                   fill="currentColor"
                   height="16px"
                   viewBox="0 0 18 18"

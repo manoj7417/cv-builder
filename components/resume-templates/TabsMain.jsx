@@ -35,8 +35,8 @@ const TabsMain = () => {
       const response = await axios.get("/api/getUserResumes", {
         headers: {
           Authorization: `Bearer ${accessToken?.value}`,
-        }
-      })
+        },
+      });
       if (response.status === 200) {
         setResumes(response.data.data);
       }
@@ -51,7 +51,11 @@ const TabsMain = () => {
     const { accessToken } = await GetTokens();
     setisCreatingResume(true);
     try {
-      const response = await axios.post("/api/createNewResume", { template: "Template3" }, { headers: { Authorization: `Bearer ${accessToken?.value}` } })
+      const response = await axios.post(
+        "/api/createNewResume",
+        { template: "Template3" },
+        { headers: { Authorization: `Bearer ${accessToken?.value}` } }
+      );
       if (response.data.data) {
         createResume(response.data.data);
         replaceResumeData(response.data.data);
@@ -64,18 +68,20 @@ const TabsMain = () => {
     }
   };
 
-
-
   const handleDeleteResume = async (e, id) => {
-    e.stopPropagation()
+    e.stopPropagation();
     const { accessToken } = await GetTokens();
     toast.promise(
-      axios.delete(`/api/deleteUserResume/${id}`, { headers: { Authorization: `Bearer ${accessToken?.value}` } }).then((response) => {
-        if (response.status === 204) {
-          deleteResume(id);
-        }
-      }).catch(err => toast.error("Error deleting resume")
-      ),
+      axios
+        .delete(`/api/deleteUserResume/${id}`, {
+          headers: { Authorization: `Bearer ${accessToken?.value}` },
+        })
+        .then((response) => {
+          if (response.status === 204) {
+            deleteResume(id);
+          }
+        })
+        .catch((err) => toast.error("Error deleting resume")),
       {
         pending: "Deleting resume...",
         success: "Resume deleted ",
@@ -105,16 +111,14 @@ const TabsMain = () => {
             <section className="flex lg:flex-row flex-col lg:px-0 px-10 gap-10 justify-center">
               <div className="grid lg:grid-cols-2 grid-cols-1 border border-gray-400 p-5 rounded-md lg:w-4/5 my-5 gap-2 place-content-center place-items-center h-full">
                 <Button
-                  className="file bg-blue-900 disabled:bg-gray-700 text-white p-3 rounded-md text-sm"
+                  className="file bg-[#f76918] disabled:bg-gray-700 text-white p-3 rounded-md text-sm"
                   onClick={handlecreateResume}
                   disabled={isCreatingResume}
                 >
                   Create CV
                 </Button>
                 <div className="text-sm">
-                  <p className="text-blue-900 my-3 font-bold text-base">
-                    New CV
-                  </p>
+                  <p className="text-black my-3 font-bold text-base">New CV</p>
                   <b>TIP:</b>
                   <span>
                     {" "}
@@ -127,14 +131,14 @@ const TabsMain = () => {
                 <div className="file">
                   <Link
                     href={"/coming-soon"}
-                    className="bg-blue-900 text-white p-3 rounded-md text-sm"
+                    className="bg-[#f76918] text-white p-3 rounded-md text-sm"
                   >
                     Create Cover Letter
                   </Link>
                 </div>
 
                 <div className="text-sm">
-                  <p className="text-blue-900 my-3 font-bold text-base">
+                  <p className="text-black my-3 font-bold text-base">
                     New Cover Letter
                   </p>
                   <b>TIP:</b>
@@ -160,9 +164,7 @@ const TabsMain = () => {
                   </Button>
                 </div>
                 <div className="bg-white p-4 flex w-full justify-center items-center">
-                  <h3 className="font-bold text-lg text-blue-900">
-                    Create New
-                  </h3>
+                  <h3 className="font-bold text-lg text-black">Create New</h3>
                 </div>
               </div>
               {resumes?.length > 0 &&
@@ -187,23 +189,22 @@ const TabsMain = () => {
 
                       <div className="flex justify-between items-start gap-2 px-3 py-2 bg-white h-full">
                         <div className="w-[90%]">
-
-                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-normal col-span-6">
+                          <h3 className="font-bold text-sm truncate text-black flex-grow break-normal col-span-6">
                             {item.title}
                           </h3>
                           <div className="flex justify-between">
                             <p className="text-gray-400 text-xs">
-                              {dayjs(item.createdAt).format('DD-MMM-YYYY')}
+                              {dayjs(item.createdAt).format("DD-MMM-YYYY")}
                             </p>
                             <p className="text-gray-400 text-xs">
-                              {dayjs(item.createdAt).format('hh:mm A')}
+                              {dayjs(item.createdAt).format("hh:mm A")}
                             </p>
                           </div>
                         </div>
                         <div className="col-span-1">
                           <DropdownMenu>
                             <DropdownMenuTrigger>
-                              <FaEllipsisVertical className="text-md text-blue-900" />
+                              <FaEllipsisVertical className="text-md text-black" />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                               <DropdownMenuItem

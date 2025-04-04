@@ -128,7 +128,9 @@ function Programs() {
                         {program.description}
                       </p> */}
                       <div
-                        dangerouslySetInnerHTML={{ __html: program.description }}
+                        dangerouslySetInnerHTML={{
+                          __html: program.description,
+                        }}
                       ></div>
                     </CardContent>
                     <CardFooter className="flex justify-end space-x-2 items-center py-4">
@@ -138,7 +140,7 @@ function Programs() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="text-blue-950 hover:bg-blue-950 hover:text-white"
+                          className="text-blue-950 hover:bg-[#f76918] hover:text-white"
                         >
                           <Pencil className="h-4 w-4 mr-2" />
                           Edit

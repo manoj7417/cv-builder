@@ -41,10 +41,10 @@ const menuItems = [
     name: "Contact Us",
     href: "/contact-us",
   },
-  {
-    name: "About Us",
-    href: "/about-us",
-  },
+  // {
+  //   name: "About Us",
+  //   href: "/about-us",
+  // },
   // {
   //   name: "For Recruiters",
   //   href: "#",
@@ -85,7 +85,7 @@ const menuItems = [
   //   name: "Login as Coach",
   //   href: "/coach-signin",
   //   className:
-  //     "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-blue-600",
+  //     "inline-flex items-center font-bold text-base text-blue-950 font-medium hover:underline hover:underline-offset-8 hover:text-[#f76918]",
   // },
 ];
 
@@ -191,7 +191,7 @@ export function ResumeHeader() {
         <div className="mx-auto flex max-w-7xl items-center justify-between h-full px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <Link href="/" className="font-bold">
-              Project X
+              FREE JOB AI
             </Link>
           </div>
           <div className="hidden lg:block">
@@ -488,7 +488,7 @@ export function ResumeHeader() {
                   ) : (
                     <div className="auths_button mt-4">
                       <button
-                        className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 rounded-md animate-bounce"
+                        className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-[#f76918] hover:border-blue-950 hover:text-white px-6 py-1 rounded-md animate-bounce"
                         onClick={handleLogin}
                       >
                         <span>Sign In</span>

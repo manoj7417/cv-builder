@@ -97,7 +97,8 @@ export default function NewResumeHeader() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start h-full">
                   <div>
                     <a href="/" className="flex items-center gap-2">
-                      <Image priority="true"
+                      <Image
+                        priority="true"
                         src="/genies-career-hub-logo.png"
                         width={100}
                         height={100}
@@ -125,7 +126,7 @@ export default function NewResumeHeader() {
                           >
                             {item.name}
                             {item.isBeta && (
-                              <span className="text-sm font-bold ml-1 text-blue-900">
+                              <span className="text-sm font-bold ml-1 text-black">
                                 (Beta)
                               </span>
                             )}
@@ -137,14 +138,14 @@ export default function NewResumeHeader() {
                         className="text-blue-950
                             rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
                       >
-                       Career Coaching
+                        Career Coaching
                       </a>
                       <a
                         href="/coming-soon"
                         className="text-blue-950
                             rounded-md px-3 py-2 text-base flex items-center justify-center nav-link-grow-up nav-link"
                       >
-                       Psychometric Test
+                        Psychometric Test
                       </a>
                     </div>
                   </div>

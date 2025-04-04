@@ -64,7 +64,7 @@ export function ServiceSection() {
               <div className="flex lg:flex-row flex-col space-x-2 mb-5 gap-5">
                 <div>
                   <input
-                    className="max-w-lg lg:py-2 py-2 flex-1 px-3 bg-blue-900 bg-opacity-10 rounded-lg text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 opacity-55"
+                    className="max-w-lg lg:py-2 py-2 flex-1 px-3 bg-[#f76918] bg-opacity-10 rounded-lg text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 opacity-55"
                     placeholder="Enter your email"
                     type="email"
                     ref={email}
@@ -85,7 +85,7 @@ export function ServiceSection() {
                   </Button>
                 ) : (
                   <Button
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-blue-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-[#f76918] px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                     disabled={!email || isSubscribing}
                     onClick={handleSubscribe}
                   >

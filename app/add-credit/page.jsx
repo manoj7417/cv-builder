@@ -113,7 +113,7 @@ export default function AddCreditPage() {
       <div>
         {/* Hero Section */}
         <div className="flex flex-col space-y-8 pb-10 pt-12 text-center md:pt-24">
-          <p className="text-3xl font-bold text-blue-900 md:text-5xl md:leading-10">
+          <p className="text-3xl font-bold text-black md:text-5xl md:leading-10">
             ADD CREDITS, CONTINUE GROWING
           </p>
           <p className="mx-auto max-w-3xl text-base text-gray-600 md:text-xl">
@@ -129,14 +129,14 @@ export default function AddCreditPage() {
                 className=" rounded-2xl border border-gray-200 bg-white shadow"
               >
                 <div className="flex w-full flex-col justify-start space-y-4 px-8 pt-10">
-                  <p className="text-4xl font-bold leading-10 text-blue-900">
+                  <p className="text-4xl font-bold leading-10 text-black">
                     {plan.price}
                   </p>
                   <div className="flex w-full flex-col items-start justify-start space-y-1">
-                    <p className="w-full text-2xl font-semibold leading-loose text-blue-900">
+                    <p className="w-full text-2xl font-semibold leading-loose text-black">
                       {plan.name}
                     </p>
-                    <p className="w-full text-2xl font-semibold leading-loose text-blue-900">
+                    <p className="w-full text-2xl font-semibold leading-loose text-black">
                       {getPriceForPlan(plan.name)}
                     </p>
                   </div>
@@ -149,7 +149,7 @@ export default function AddCreditPage() {
                         className="inline-flex w-full space-x-3"
                       >
                         <div className="flex items-center justify-center rounded-full bg-gray-100 p-1">
-                          <Check className="h-4 w-4 text-blue-900" />
+                          <Check className="h-4 w-4 text-black" />
                         </div>
                         <p className="w-full text-base leading-normal text-gray-800">
                           {feature}
@@ -162,7 +162,7 @@ export default function AddCreditPage() {
                   <div className="flex w-full flex-col items-start justify-start space-y-3">
                     <Button
                       type="button"
-                      className="w-full rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm"
+                      className="w-full rounded-md bg-[#f76918] px-3 py-2 text-sm font-semibold text-white shadow-sm"
                       onClick={() => handleAddMoreCredits(plan.name)}
                       disabled={loadingStates[plan.name]}
                     >

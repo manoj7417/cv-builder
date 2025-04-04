@@ -192,8 +192,6 @@ const additionalServices = [
 //   },
 // ];
 
-
-
 const workServicesData = [
   {
     id: 1,
@@ -216,7 +214,7 @@ const workServicesData = [
     description:
       "Ease your professional process with stress management, setting workplace priorities, learning effective communication, and developing problem-solving skills. Our guidance can help you achieve job satisfaction.",
   },
-   {
+  {
     id: 4,
     image: "/professional development.png",
     title: "Professional Development",
@@ -245,46 +243,50 @@ const featuredCourses = [
     id: 1,
     title: "Resilience Building for Leaders and Their Teams",
     subtitle: "Resilience Programmes",
-    description: "Develop robust leadership capabilities and team resilience through our comprehensive programme. Learn practical strategies to navigate challenges, maintain performance under pressure, and build a resilient organisational culture.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format",
+    description:
+      "Develop robust leadership capabilities and team resilience through our comprehensive programme. Learn practical strategies to navigate challenges, maintain performance under pressure, and build a resilient organisational culture.",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format",
     curriculum: [
       "Understanding resilience fundamentals",
       "Stress management and coping strategies",
       "Team dynamics and support systems",
       "Leadership under pressure",
-      "Building sustainable resilience practices"
+      "Building sustainable resilience practices",
     ],
     benefits: [
       "Build personal and team resilience",
       "Develop stress management techniques",
       "Enhance team performance under pressure",
-      "Create sustainable workplace wellbeing"
+      "Create sustainable workplace wellbeing",
     ],
     instructor: "Kai-Nneka Townsend",
-    duration: "12 weeks"
+    duration: "12 weeks",
   },
   {
     id: 2,
     title: "DiSC - Everything DiSC®",
     subtitle: "The Culture Catalyst™",
-    description: "Transform your workplace culture with DiSC®. This powerful behavioural assessment tool helps teams understand communication styles, improve collaboration, and build stronger working relationships.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format",
+    description:
+      "Transform your workplace culture with DiSC®. This powerful behavioural assessment tool helps teams understand communication styles, improve collaboration, and build stronger working relationships.",
+    image:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format",
     curriculum: [
       "Understanding DiSC® profiles",
       "Communication style mapping",
       "Building effective relationships",
       "Team dynamics optimisation",
-      "Conflict resolution strategies"
+      "Conflict resolution strategies",
     ],
     benefits: [
       "Enhance team communication",
       "Improve workplace relationships",
       "Develop emotional intelligence",
-      "Build effective leadership styles"
+      "Build effective leadership styles",
     ],
     instructor: "Kai-Nneka Townsend",
-    duration: "8 weeks"
-  }
+    duration: "8 weeks",
+  },
 ];
 
 const CoachNewPage = () => {
@@ -300,16 +302,14 @@ const CoachNewPage = () => {
     setOpen(index);
   };
 
+  const additionalServicesRef = useRef(null);
 
-   const additionalServicesRef = useRef(null);
-
-   const scrollToAdditionalServices = () => {
-     additionalServicesRef.current?.scrollIntoView({
-       behavior: 'smooth',
-       block: 'start',
-     });
-   };
-
+  const scrollToAdditionalServices = () => {
+    additionalServicesRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <div>
@@ -332,14 +332,14 @@ const CoachNewPage = () => {
               />
               <div className="flex lg:flex-row flex-col text-center justify-center xs:justify-start mt-5 gap-5">
                 <button
-                  className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
+                  className="bg-[#f76918] text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
                   onClick={() => setFindCoachPopup(true)}
                 >
                   Find Your Coach
                 </button>
                 <Link
-                href={"/coach-registration"}
-                  className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
+                  href={"/coach-registration"}
+                  className="bg-[#f76918] text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
                 >
                   Register as a Coach
                 </Link>
@@ -352,7 +352,7 @@ const CoachNewPage = () => {
       {/* Featured Courses Section */}
       <section className="featured-courses py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -362,8 +362,9 @@ const CoachNewPage = () => {
               Featured <span className="text-blue-700">Programmes</span>
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-              Transform your leadership and team dynamics with our specialised coaching programmes, 
-              designed to build resilience and enhance workplace culture.
+              Transform your leadership and team dynamics with our specialised
+              coaching programmes, designed to build resilience and enhance
+              workplace culture.
             </p>
           </motion.div>
 
@@ -385,12 +386,20 @@ const CoachNewPage = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                     <div className="absolute bottom-6 left-6 text-white">
-                      <p className="text-sm font-medium text-blue-400 mb-2">{course.subtitle}</p>
-                      <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
+                      <p className="text-sm font-medium text-blue-400 mb-2">
+                        {course.subtitle}
+                      </p>
+                      <h3 className="text-2xl font-bold mb-2">
+                        {course.title}
+                      </h3>
                       <div className="flex items-center gap-4 text-sm">
                         <span className="flex items-center">
-                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" />
                           </svg>
                           {course.duration}
                         </span>
@@ -400,34 +409,56 @@ const CoachNewPage = () => {
                 </div>
 
                 <div className="p-8">
-                  <p className="text-gray-600 mb-6 text-lg">{course.description}</p>
-                  
-                  <button 
-                    onClick={() => setExpandedCard(expandedCard === course.id ? null : course.id)}
-                    className="w-full flex items-center justify-between text-blue-600 hover:text-blue-700 transition-colors mb-6"
+                  <p className="text-gray-600 mb-6 text-lg">
+                    {course.description}
+                  </p>
+
+                  <button
+                    onClick={() =>
+                      setExpandedCard(
+                        expandedCard === course.id ? null : course.id
+                      )
+                    }
+                    className="w-full flex items-center justify-between text-[#f76918] hover:text-blue-700 transition-colors mb-6"
                   >
-                    <span className="font-semibold">View Programme Details</span>
-                    <svg 
-                      className={`w-5 h-5 transform transition-transform ${expandedCard === course.id ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <span className="font-semibold">
+                      View Programme Details
+                    </span>
+                    <svg
+                      className={`w-5 h-5 transform transition-transform ${
+                        expandedCard === course.id ? "rotate-180" : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </button>
 
                   <motion.div
                     initial={false}
-                    animate={{ height: expandedCard === course.id ? 'auto' : 0 }}
+                    animate={{
+                      height: expandedCard === course.id ? "auto" : 0,
+                    }}
                     className="overflow-hidden"
                   >
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-sm font-semibold text-gray-900 mb-4">What You&apos;ll Learn:</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-4">
+                          What You&apos;ll Learn:
+                        </h4>
                         <ul className="space-y-3">
                           {course.curriculum.map((item, index) => (
-                            <li key={index} className="flex items-center text-sm text-gray-600">
+                            <li
+                              key={index}
+                              className="flex items-center text-sm text-gray-600"
+                            >
                               <span className="h-2 w-2 bg-blue-600 rounded-full mr-3"></span>
                               {item}
                             </li>
@@ -436,10 +467,15 @@ const CoachNewPage = () => {
                       </div>
 
                       <div>
-                        <h4 className="text-sm font-semibold text-gray-900 mb-4">Programme Benefits:</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-4">
+                          Programme Benefits:
+                        </h4>
                         <ul className="space-y-3">
                           {course.benefits.map((benefit, index) => (
-                            <li key={index} className="flex items-center text-sm text-gray-600">
+                            <li
+                              key={index}
+                              className="flex items-center text-sm text-gray-600"
+                            >
                               <span className="h-2 w-2 bg-green-500 rounded-full mr-3"></span>
                               {benefit}
                             </li>
@@ -453,16 +489,30 @@ const CoachNewPage = () => {
                     <div className="flex items-center">
                       <div>
                         <p className="text-sm text-gray-600">Programme Lead</p>
-                        <p className="text-base font-semibold">{course.instructor}</p>
+                        <p className="text-base font-semibold">
+                          {course.instructor}
+                        </p>
                       </div>
                     </div>
                     <Link
-                      href={`/contact-us?message=${encodeURIComponent(`Hi, I'm interested in the ${course.title} programme led by ${course.instructor}. I would like to learn more about this programme.`)}`}
+                      href={`/contact-us?message=${encodeURIComponent(
+                        `Hi, I'm interested in the ${course.title} programme led by ${course.instructor}. I would like to learn more about this programme.`
+                      )}`}
                       className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
                     >
                       Contact Coach
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </Link>
                   </div>
@@ -479,7 +529,12 @@ const CoachNewPage = () => {
             How it <span className="text-blue-700">works?</span>
           </h2>
           <p className="max-w-3xl mx-auto text-base my-4">
-          Our community of experienced career coaches, specialising in an extended horizon of career domains, is here to help you. We host coaches from across the globe who come together on this platform. They aim to assist you with your career puzzles and help you grow in your career path. All you need to do is identify your exact set of struggles and find the most suitable coach on this platform. 
+            Our community of experienced career coaches, specialising in an
+            extended horizon of career domains, is here to help you. We host
+            coaches from across the globe who come together on this platform.
+            They aim to assist you with your career puzzles and help you grow in
+            your career path. All you need to do is identify your exact set of
+            struggles and find the most suitable coach on this platform.
           </p>
         </div>
         <div className="flex flex-wrap justify-between items-stretch gap-5 max-w-7xl mx-auto mt-5">
@@ -493,7 +548,7 @@ const CoachNewPage = () => {
 
           {/* Arrow between Step 1 and Step 2 */}
           <div className="hidden lg:flex items-center justify-center">
-            <FaArrowRight className="text-blue-800 text-3xl animate-bounce" />
+            <FaArrowRight className="text-[#f76918] text-3xl animate-bounce" />
           </div>
 
           <div className="step2 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
@@ -506,7 +561,7 @@ const CoachNewPage = () => {
 
           {/* Arrow between Step 1 and Step 2 */}
           <div className="hidden lg:flex items-center justify-center">
-            <FaArrowRight className="text-blue-800 text-3xl animate-bounce" />
+            <FaArrowRight className="text-[#f76918] text-3xl animate-bounce" />
           </div>
 
           <div className="step3 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
@@ -519,14 +574,14 @@ const CoachNewPage = () => {
 
           {/* Arrow between Step 3 and Step 4 */}
           <div className="hidden lg:flex items-center justify-center">
-            <FaArrowRight className="text-blue-800 text-3xl animate-bounce" />
+            <FaArrowRight className="text-[#f76918] text-3xl animate-bounce" />
           </div>
 
           <div className="step4 text-center lg:w-[20%] w-full bg-gray-50 p-5 rounded-md">
             <h2 className="text-3xl font-bold">Step 4</h2>
             <p className="text-sm my-2">
-              Connect with your Coach as per your coaching appointment schedule and
-              find the answers to all your questions.
+              Connect with your Coach as per your coaching appointment schedule
+              and find the answers to all your questions.
             </p>
           </div>
         </div>
@@ -549,11 +604,18 @@ const CoachNewPage = () => {
             <Button onClick={scrollToAdditionalServices}>Explore More</Button>
           </div>
           <div className="lg:w-[70%] w-full">
-            <CoachServiceSlider data={topServices} slidesPerView={2.5} setFindCoachPopup={setFindCoachPopup}/>
+            <CoachServiceSlider
+              data={topServices}
+              slidesPerView={2.5}
+              setFindCoachPopup={setFindCoachPopup}
+            />
           </div>
         </div>
       </div>
-      <div className="additional_services lg:p-10 p-5"  ref={additionalServicesRef} >
+      <div
+        className="additional_services lg:p-10 p-5"
+        ref={additionalServicesRef}
+      >
         <div className="max-w-7xl mx-auto ">
           <div className="max-w-5xl mx-auto text-center py-10 px-2">
             <h2 className="text-3xl font-bold">Additional Coaching Services</h2>
@@ -570,7 +632,7 @@ const CoachNewPage = () => {
                 <div
                   key={card.id}
                   className="overflow-hidden rounded-lg bg-white text-gray-600 shadow-md shadow-gray-200 min-w-[300px] min-h-[200px] cursor-pointer hover:scale-105 transition duration-300 ease-in-out"
-                  onClick={()=>setFindCoachPopup(true)}
+                  onClick={() => setFindCoachPopup(true)}
                 >
                   <figure>
                     <img
@@ -611,7 +673,11 @@ const CoachNewPage = () => {
             </p>
           </div>
           <div className="lg:w-[70%] w-full">
-            <CoachWorksSlider data={workServicesData} slidesPerView={2.5} setFindCoachPopup={setFindCoachPopup}/>
+            <CoachWorksSlider
+              data={workServicesData}
+              slidesPerView={2.5}
+              setFindCoachPopup={setFindCoachPopup}
+            />
           </div>
         </div>
       </div>

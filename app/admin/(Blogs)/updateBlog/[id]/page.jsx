@@ -77,9 +77,7 @@ function UpdateBlog() {
       );
       setBlog(response?.data?.blog);
       setIsLoading(false);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -284,7 +282,7 @@ function UpdateBlog() {
   //         Authorization: "Bearer " + token,
   //       },
   //     });
-  //     
+  //
   //     router.push("/admin/viewBlogs")
   //     toast.success("Blog created successfully",{
   //       position:"top-right"
@@ -501,17 +499,23 @@ function UpdateBlog() {
     });
   };
 
-  const handleBackButton=()=>{
-    router.push("/admin/viewBlogs")
-  }
+  const handleBackButton = () => {
+    router.push("/admin/viewBlogs");
+  };
 
   return (
     <>
       <div className="back_button flex justify-end pt-5 pr-5">
-        <button className="bg-blue-950 text-white px-5 py-2 rounded-md" onClick={handleBackButton}><MdKeyboardArrowLeft className="text-2xl inline-flex animate-pulse" />Back</button>
+        <button
+          className="bg-[#f76918] text-white px-5 py-2 rounded-md"
+          onClick={handleBackButton}
+        >
+          <MdKeyboardArrowLeft className="text-2xl inline-flex animate-pulse" />
+          Back
+        </button>
       </div>
       <div className="mt-24 mb-10  2xl:w-[70%] lg:w-[60%] w-full h-auto p-5 mx-auto rounded-xl shadow-xl">
-        <h1 className="text-center text-2xl text-blue-900 font-bold">
+        <h1 className="text-center text-2xl text-black font-bold">
           Update Blog Post
         </h1>
         <form onSubmit={handleSubmit} className="p-4">
@@ -761,7 +765,7 @@ function UpdateBlog() {
 
               <div className="my-2 mt-10">
                 <div className="w-full flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-blue-900">Sections</h2>
+                  <h2 className="text-2xl font-bold text-black">Sections</h2>
                   <Button type="button" onClick={handleAddSection}>
                     <FaPlus className="mr-1" /> Add Section
                   </Button>

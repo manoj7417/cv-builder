@@ -227,17 +227,17 @@ export default function Footer() {
           </div> */}
 
           <p className="text-sm text-black text-center">
-            &copy; {currentYear}. Project X . All rights reserved.
+            &copy; {currentYear}. FREE JOB AI . All rights reserved.
             <br />
             <br />
-            powered by
+            {/* powered by
             <Link
               href="https://www.glassfrogtech.com/"
               target="_blank"
               className="hover:underline pl-1"
             >
               Glassfrog Technologies
-            </Link>
+            </Link> */}
           </p>
         </div>
       </footer>

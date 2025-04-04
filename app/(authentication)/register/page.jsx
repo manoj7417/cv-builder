@@ -137,7 +137,7 @@ export default function Register() {
                 className="w-28 h-auto object-contain"
               />
             </Link> */}
-            <h1 className="text-2xl font-bold leading-tight text-[#FF5C5C] sm:text-4xl">
+            <h1 className="text-2xl font-bold leading-tight text-[#f76918] sm:text-4xl">
               Sign up
             </h1>
             <form className="mt-5" onSubmit={handleSubmit(handleRegister)}>
@@ -362,7 +362,7 @@ export default function Register() {
                     id="checkbox"
                     type="checkbox"
                     name="terms"
-                    className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                    className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-[#f76918]"
                     {...register("terms", { required: true })}
                   />
                   <label
@@ -373,7 +373,7 @@ export default function Register() {
                       By signing up you are agreeing to our
                       <Link
                         href="/terms-condition"
-                        className="text-[#FF5C5C] underline underline-offset-4 ml-1 font-semibold"
+                        className="text-[#f76918] underline underline-offset-4 ml-1 font-semibold"
                       >
                         {" "}
                         Terms and Conditions
@@ -390,7 +390,7 @@ export default function Register() {
                 <div>
                   <button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-[#FF5C5C] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#FF5C5C] disabled:bg-opacity-80"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-[#f76918] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#f76918] disabled:bg-opacity-80"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -419,7 +419,7 @@ export default function Register() {
                   <Link
                     href="/login"
                     title=""
-                    className="font-semibold text-[#FF5C5C] transition-all duration-200 hover:underline"
+                    className="font-semibold text-[#f76918] transition-all duration-200 hover:underline"
                   >
                     Sign In
                   </Link>

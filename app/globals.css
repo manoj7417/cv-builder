@@ -268,7 +268,7 @@ html {
 .mobile_responsive_nav .content .row header {
   /* color: #f2f2f2; */
   /* color: #000; */
-  color: #1e3a8a;
+  color: #f76918;
   font-size: 20px;
   font-weight: 600;
 }
@@ -675,7 +675,7 @@ footer a:hover svg {
   border-width: 1px;
   background-color: hsl(0, 0%, 100%);
   /* color: hsl(0, 0%, 29%); */
-  color: #1e3a8a;
+  color: #f76918;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 16px;
@@ -1079,7 +1079,7 @@ footer a:hover svg {
 }
 
 .generate-ai {
-  background: #1e3a8a;
+  background: #f76918;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -1096,11 +1096,11 @@ footer a:hover svg {
 
 @keyframes glow {
   0% {
-    box-shadow: 0 0 0 0 #1e3a8a;
+    box-shadow: 0 0 0 0 #f76918;
   }
 
   50% {
-    box-shadow: 0 0 30px 0 #1e3a8a;
+    box-shadow: 0 0 30px 0 #f76918;
   }
 }
 

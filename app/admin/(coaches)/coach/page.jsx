@@ -179,7 +179,7 @@ const Coach = () => {
                             </td>
                             <td className="w-[25%] text-end px-5">
                               <Button
-                                className="bg-white text-blue-900 text-lg hover:bg-white"
+                                className="bg-white text-black text-lg hover:bg-white"
                                 onClick={() => handleCoachDetails(coach?._id)}
                               >
                                 View
@@ -267,7 +267,7 @@ const Coach = () => {
                               </td>
                               <td className="w-[25%] text-end px-5">
                                 <Button
-                                  className="bg-white text-blue-900 text-lg hover:bg-white"
+                                  className="bg-white text-black text-lg hover:bg-white"
                                   onClick={() => handleCoachDetails(coach?._id)}
                                 >
                                   View
@@ -293,7 +293,7 @@ const Coach = () => {
                     >
                       <span>Coach</span>
                     </th>
-                    
+
                     <th
                       scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
@@ -356,7 +356,7 @@ const Coach = () => {
                               </td>
                               <td className="w-[25%] text-end px-5">
                                 <Button
-                                  className="bg-white text-blue-900 text-lg hover:bg-white"
+                                  className="bg-white text-black text-lg hover:bg-white"
                                   onClick={() => handleCoachDetails(coach?._id)}
                                 >
                                   View
@@ -382,7 +382,7 @@ const Coach = () => {
                     >
                       <span>Coach</span>
                     </th>
-                    
+
                     <th
                       scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
@@ -400,7 +400,7 @@ const Coach = () => {
                     <td colSpan="4" className="h-[250px]">
                       <div className="flex flex-col items-center justify-center h-full">
                         <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center">
-                          <FaUser className="text-4xl text-blue-800" />
+                          <FaUser className="text-4xl text-[#f76918]" />
                         </div>
                         <p className="mt-5 text-gray-600 text-lg">
                           No Coaches Found
@@ -423,7 +423,7 @@ const Coach = () => {
                     >
                       <span>Coach</span>
                     </th>
-                    
+
                     <th
                       scope="col"
                       className="px-4 py-3.5 text-center text-sm font-normal text-gray-700"
@@ -467,7 +467,7 @@ const Coach = () => {
                                 </div>
                               </div>
                             </td>
-                            
+
                             <td className="px-4 py-4 w-[25%]">
                               <div className="flex justify-center">
                                 {coach.isApproved ? (
@@ -483,7 +483,7 @@ const Coach = () => {
                             </td>
                             <td className="w-[25%] text-end px-5">
                               <Button
-                                className="bg-white text-blue-900 text-lg hover:bg-white"
+                                className="bg-white text-black text-lg hover:bg-white"
                                 onClick={() => handleCoachDetails(coach?._id)}
                               >
                                 View

@@ -53,7 +53,7 @@ const PercentageCircle = ({ percentage, label }) => {
               cy="40"
             />
             <circle
-              className="text-blue-600"
+              className="text-[#f76918]"
               strokeWidth="8"
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
@@ -65,7 +65,7 @@ const PercentageCircle = ({ percentage, label }) => {
               cy="40"
             />
           </svg>
-          <span className="text-xl font-semibold text-blue-600">
+          <span className="text-xl font-semibold text-[#f76918]">
             {percentage}%
           </span>
         </div>

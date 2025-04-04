@@ -91,8 +91,6 @@ const data = [
   },
 ];
 
-
-
 export default function ViewUsersPage() {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -103,21 +101,20 @@ export default function ViewUsersPage() {
 
   const RoleSelect = ({ row }) => {
     const [role, setRole] = useState(row.getValue("role"));
-  
+
     const handleChange = async (newRole) => {
       setRole(newRole);
-  
+
       // Update the role in your backend or state management
       try {
         await axios.put(`/api/updateUserRole/${row.original.id}`, {
           role: newRole,
         });
-        
       } catch (error) {
         console.error("Error updating role", error);
       }
     };
-  
+
     return (
       <Select value={role} onValueChange={handleChange}>
         <SelectTrigger className="w-[180px]">
@@ -171,7 +168,9 @@ export default function ViewUsersPage() {
           </Button>
         );
       },
-      cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+      cell: ({ row }) => (
+        <div className="lowercase">{row.getValue("email")}</div>
+      ),
     },
     {
       accessorKey: "username",
@@ -183,7 +182,7 @@ export default function ViewUsersPage() {
     {
       accessorKey: "role",
       header: "Role",
-      cell: ({ row }) => <RoleSelect row={row} />, 
+      cell: ({ row }) => <RoleSelect row={row} />,
     },
     {
       id: "actions",
@@ -192,20 +191,18 @@ export default function ViewUsersPage() {
       cell: ({ row }) => {
         const handleEdit = () => {
           // Add your edit logic here
-          
         };
-  
+
         const handleDelete = () => {
           // Add your delete logic here
-          
         };
-  
+
         return (
           <div className="flex gap-5 space-x-2">
             <button
               type="button"
               onClick={handleEdit}
-              className="text-blue-600 hover:text-blue-900"
+              className="text-[#f76918] hover:text-black"
               aria-label="Edit"
             >
               <FaEdit />
@@ -327,7 +324,7 @@ export default function ViewUsersPage() {
           </div>
           <div className="add_user">
             <button
-              className="bg-blue-950 text-white text-sm p-2 rounded-md"
+              className="bg-[#f76918] text-white text-sm p-2 rounded-md"
               onClick={() => setAddUserModal(true)}
             >
               Add User

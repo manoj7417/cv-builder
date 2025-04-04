@@ -140,7 +140,10 @@ const AdminCoachProgram = () => {
                                       <div
                                         className="coachingDescription-content"
                                         dangerouslySetInnerHTML={{
-                                          __html: coach?.description.slice(0, 40),
+                                          __html: coach?.description.slice(
+                                            0,
+                                            40
+                                          ),
                                         }}
                                       />
                                     </div>
@@ -174,7 +177,7 @@ const AdminCoachProgram = () => {
                               </td>
                               <td className="w-[25%] text-end px-5">
                                 <Button
-                                  className="bg-white text-blue-900 text-lg hover:bg-white"
+                                  className="bg-white text-black text-lg hover:bg-white"
                                   onClick={() =>
                                     handleProgramDetails(coach?._id)
                                   }
@@ -193,7 +196,7 @@ const AdminCoachProgram = () => {
               {!isLoading && programData.length === 0 && (
                 <div className="w-full border h-56 bg-white flex flex-col items-center justify-center py-5">
                   <div className="w-20 h-20  rounded-full bg-slate-100 flex items-center justify-center">
-                    <FaUser className="text-4xl text-blue-800" />
+                    <FaUser className="text-4xl text-[#f76918]" />
                   </div>
                   <p className="flex justify-center items-center mt-5">
                     No Coach Programs Found
@@ -298,7 +301,7 @@ const AdminCoachProgram = () => {
               {!isLoading && programData.length === 0 && (
                 <div className="w-full border h-56 bg-white flex flex-col items-center justify-center py-5">
                   <div className="w-20 h-20  rounded-full bg-slate-100 flex items-center justify-center">
-                    <FaUser className="text-4xl text-blue-800" />
+                    <FaUser className="text-4xl text-[#f76918]" />
                   </div>
                   <p className="flex justify-center items-center mt-5">
                     No Coach Programs Found
@@ -410,7 +413,7 @@ const AdminCoachProgram = () => {
               {!isLoading && programData.length === 0 && (
                 <div className="w-full border h-56 bg-white flex flex-col items-center justify-center py-5">
                   <div className="w-20 h-20  rounded-full bg-slate-100 flex items-center justify-center">
-                    <FaUser className="text-4xl text-blue-800" />
+                    <FaUser className="text-4xl text-[#f76918]" />
                   </div>
                   <p className="flex justify-center items-center mt-5">
                     No Coach Programs Found

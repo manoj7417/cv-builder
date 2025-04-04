@@ -29,7 +29,7 @@ function FeedbackModal({ content, showModal, onClick, onClose }) {
         <p className="text-xs text-center text-red-500">
           Integrate the Pointers to Create a Better CV with the Genie
         </p>
-        {/* <button className='border bg-blue-900 hover:bg-blue-700 text-white w-52 h-12 rounded-lg my-2' onClick={onClick}>Create Now</button> */}
+        {/* <button className='border bg-[#f76918] hover:bg-blue-700 text-white w-52 h-12 rounded-lg my-2' onClick={onClick}>Create Now</button> */}
       </div>
     </div>
   );
