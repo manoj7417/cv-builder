@@ -138,15 +138,12 @@ export default function Example() {
   const handlePayment = async (tier, index) => {
     try {
       setLoadingIndex(index);
-
-      console.log("Tier selected:", tier);
+      sessionStorage.removeItem("razorpay_session_token");
 
       const response = await axios.post("/api/create-order", {
         userId: userdata?._id,
         planType: tier.id,
       });
-
-      console.log("API Response:", response);
 
       // Extract `orderId` properly
       const { success, order } = response.data;
@@ -167,7 +164,7 @@ export default function Example() {
         handler: async function (response) {
           console.log("Payment Response:", response);
           await axios.post("/api/verify-payment", {
-            orderId,
+            orderId: order.orderId,
             paymentId: response.razorpay_payment_id,
             signature: response.razorpay_signature,
             userId: userdata?._id,
@@ -197,10 +194,10 @@ export default function Example() {
 
   return (
     <>
-      {/* <Script
+      <Script
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"
-      /> */}
+      />
       <div className="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div
           aria-hidden="true"
