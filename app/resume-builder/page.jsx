@@ -47,6 +47,7 @@ const ResumeBuilder = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const userdata = userState?.userdata || {}; // Ensure userdata is defined
   const userImage = userdata?.profilePicture || "/avatar.png";
+  console.log("userImage", userImage);
   const searchParams = useSearchParams();
   const newResume = searchParams.get("newresume");
   const [showDialog, setShowDialog] = useState(newResume || false);

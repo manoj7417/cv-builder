@@ -88,13 +88,15 @@ const nextConfig = {
             value: `
               default-src 'self';
               script-src 'self' 'unsafe-inline' 'unsafe-eval' 
+                https://checkout.razorpay.com 
+                https://api.razorpay.com 
                 https://www.googletagmanager.com 
                 https://googleads.g.doubleclick.net 
                 https://www.youtube.com 
                 https://cdnjs.cloudflare.com 
-                https://www.clarity.ms
+                https://www.clarity.ms 
                 https://js.stripe.com 
-                https://static.hotjar.com
+                https://static.hotjar.com 
                 https://connect.facebook.net;
               style-src 'self' 'unsafe-inline';
               img-src 'self' data: blob: 
@@ -114,7 +116,7 @@ const nextConfig = {
                 https://www.google.co.in 
                 https://www.google.com 
                 https://www.googletagmanager.com 
-                https://c.bing.com
+                https://c.bing.com 
                 https://www.facebook.com;
               font-src 'self' data:;
               connect-src 'self' blob: 
@@ -124,23 +126,27 @@ const nextConfig = {
                 https://www.google-analytics.com 
                 https://ipapi.co 
                 ws://127.0.0.1:51673 
-                https://*.clarity.ms
+                https://*.clarity.ms 
                 https://api.stripe.com 
                 https://googleads.g.doubleclick.net 
                 https://google.com 
                 https://www.google.com 
                 https://static.hotjar.com 
-                https://ws8.hotjar.com
+                https://ws8.hotjar.com 
                 https://j.clarity.ms
+                https://api.razorpay.com  
+                https://checkout.razorpay.com 
                 https://connect.facebook.net;
               frame-src 'self' 
                 https://www.youtube.com 
                 https://docs.google.com 
                 https://js.stripe.com 
                 https://td.doubleclick.net 
+                https://checkout.razorpay.com 
+                https://api.razorpay.com 
                 https://www.googletagmanager.com;
               worker-src 'self' blob:;
-            `.replace(/\s+/g, ' ').trim(),
+            `.replace(/\s{2,}/g, " ").trim(),
           },
           {
             key: "Referrer-Policy",
@@ -193,5 +199,5 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
 };
- 
+
 module.exports = nextConfig;

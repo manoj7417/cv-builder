@@ -30,6 +30,7 @@ import { BsFullscreen } from "react-icons/bs";
 import { useResumeStore, useTemporalResumeStore } from "../store/ResumeStore";
 import { GetTokens, RemoveTokens } from "../actions";
 import { useUserStore } from "../store/UserStore";
+import { useCouponStore } from "../store/useCouponStore";
 import { templateType } from "@/components/component/Slider";
 import { tempType, TempTypes } from "@/lib/templateTypes/TempTypes";
 import {
@@ -67,6 +68,7 @@ import FullResumeModal from "./FullResumeModal";
 import ServicesPopUp from "@/components/component/ServicesPopUp";
 import { Button } from "@/components/ui/button";
 import { PricingData } from "@/constants/prices";
+import { CouponModal } from "./CouponModel";
 
 const images = [
   {
@@ -116,7 +118,6 @@ const ResumeView = () => {
   const [showModal, setShowModal] = useState(false);
   const containerRef = useRef();
   const data = useResumeStore((state) => state.resume.data);
-  console.log("data:::", data);
   const setResumeData = useResumeStore((state) => state.setResumeData);
   const { userdata } = useUserStore((state) => state.userState);
   const resumeData = useResumeStore((state) => state.resume);
@@ -160,6 +161,13 @@ const ResumeView = () => {
   });
   const [selectedPlan, setSelectedPlan] = useState("monthly");
   const userState = useUserStore((state) => state.userState);
+  const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+  const {
+    coupon,
+    expiry,
+    applyCoupon: storeCoupon,
+    isValid,
+  } = useCouponStore();
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -200,69 +208,171 @@ const ResumeView = () => {
     }
   };
 
-  const handleDownloadResume = async (token) => {
-    console.log("token", token);
-    const el = document.getElementById("resume");
-    const resume = el.innerHTML;
-    if (!resume) {
-      console.error("Resume HTML is empty!");
-      return;
+  // const handleDownloadResume = async (token) => {
+  //   console.log("token", token);
+  //   const el = document.getElementById("resume");
+  //   const resume = el.innerHTML;
+  //   if (!resume) {
+  //     console.error("Resume HTML is empty!");
+  //     return;
+  //   }
+  //   const body = {
+  //     html: resume,
+  //   };
+  //   setIsLoading(true);
+
+  //   try {
+  //     const response = await axios.post("/api/printResume", body, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       responseType: "arraybuffer",
+  //     });
+
+  //     console.log("response", response);
+
+  //     if (response.status === 200) {
+  //       generateFunfact();
+  //       const blob = new Blob([response.data], { type: "application/pdf" });
+  //       const link = document.createElement("a");
+  //       link.href = window.URL.createObjectURL(blob);
+  //       link.download = resumeData.title;
+  //       link.click();
+  //       window.URL.revokeObjectURL(link.href);
+  //       return;
+  //     }
+  //   } catch (error) {
+  //     if (
+  //       error?.response?.status === 403 &&
+  //       res.message === "You are not eligible for this feature"
+  //     ) {
+  //       toast.info("Subscribe to Genies Pro Suite to download your CV.", {
+  //         autoclose: 3000,
+  //       });
+  //       updateRedirectPricingRoute("/resume-builder");
+  //       return router.push("/pricing?scroll=1");
+  //     }
+
+  //     if (
+  //       error?.response?.status === 403 &&
+  //       res.message === "Your download CV tokens have expired"
+  //     ) {
+  //       toast.info("Your plan validity has expired.", { autoclose: 3000 });
+  //       return router.push("/pricing");
+  //     }
+  //     if (
+  //       error?.response?.status === 403 &&
+  //       res.message === "You have no download CV tokens"
+  //     ) {
+  //       setIsServiceDialogOpen(true);
+  //     }
+  //     if (error?.response?.status === 500) {
+  //       toast.error("Error downloading your CV , Please try again later");
+  //     }
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  const handleDownloadClick = async () => {
+    if (isValid()) {
+      // Coupon is still valid, proceed with download
+      await handleDownloadWithCoupon();
+    } else {
+      // Show coupon modal
+      setIsCouponModalOpen(true);
     }
-    const body = {
-      html: resume,
-    };
+  };
+
+  const handleDownloadWithCoupon = async (couponCode) => {
     setIsLoading(true);
-
     try {
-      const response = await axios.post("/api/printResume", body, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        responseType: "arraybuffer",
-      });
+      const { accessToken } = await GetTokens();
+      const resumeHtml = document.getElementById("resume")?.innerHTML;
+      if (!resumeHtml) throw new Error("Resume content not found");
 
-      console.log("response", response);
-
-      if (response.status === 200) {
-        generateFunfact();
-        const blob = new Blob([response.data], { type: "application/pdf" });
-        const link = document.createElement("a");
-        link.href = window.URL.createObjectURL(blob);
-        link.download = resumeData.title;
-        link.click();
-        window.URL.revokeObjectURL(link.href);
+      // If no coupon provided but we have a valid one, proceed with download
+      if (!couponCode && isValid()) {
+        await downloadPdf(resumeHtml, accessToken);
         return;
       }
-    } catch (error) {
-      if (
-        error?.response?.status === 403 &&
-        res.message === "You are not eligible for this feature"
-      ) {
-        toast.info("Subscribe to Genies Pro Suite to download your CV.", {
-          autoclose: 3000,
-        });
-        updateRedirectPricingRoute("/resume-builder");
-        return router.push("/pricing?scroll=1");
+
+      // No coupon provided and no valid coupon - redirect to pricing
+      if (!couponCode) {
+        navigate("/pricing");
+        toast.info("Please upgrade your plan or use a coupon code");
+        return;
       }
 
-      if (
-        error?.response?.status === 403 &&
-        res.message === "Your download CV tokens have expired"
-      ) {
-        toast.info("Your plan validity has expired.", { autoclose: 3000 });
-        return router.push("/pricing?scroll=1");
-      }
-      if (
-        error?.response?.status === 403 &&
-        res.message === "You have no download CV tokens"
-      ) {
-        setIsServiceDialogOpen(true);
-      }
-      if (error?.response?.status === 500) {
-        toast.error("Error downloading your CV , Please try again later");
-      }
+      // Validate and apply coupon
+      const isValidCoupon = await validateCoupon(couponCode, accessToken);
+      if (!isValidCoupon) return;
+
+      await applyCoupon(couponCode, accessToken);
+
+      // Store coupon in Zustand (which persists to localStorage)
+      storeCoupon(couponCode);
+
+      toast.success("Coupon applied! Downloading your resume...");
+      await downloadPdf(resumeHtml, accessToken);
+    } catch (error) {
+      handleError(error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const downloadPdf = async (html, token) => {
+    const response = await axios.post(
+      "/api/printResume",
+      { html },
+      {
+        headers: { Authorization: `Bearer ${token.value}` },
+        responseType: "arraybuffer",
+      }
+    );
+
+    const blob = new Blob([response.data], { type: "application/pdf" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = resumeData.title;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const validateCoupon = async (code, token) => {
+    try {
+      const response = await axios.post(
+        "/api/validateCVCoupon",
+        { code },
+        {
+          headers: { Authorization: `Bearer ${token.value}` },
+        }
+      );
+      return response.data.message === "Coupon is valid";
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Invalid coupon");
+      return false;
+    }
+  };
+
+  const applyCoupon = async (code, token) => {
+    await axios.post(
+      "/api/applyCVCoupon",
+      { code },
+      {
+        headers: { Authorization: `Bearer ${token.value}` },
+      }
+    );
+  };
+
+  const handleError = (error) => {
+    if (error.response?.status === 403) {
+      toast.error("Access denied. Please upgrade your plan");
+      navigate("/pricing");
+    } else {
+      toast.error(error.message || "Download failed");
     }
   };
 
@@ -511,12 +621,18 @@ const ResumeView = () => {
             <ResumeTooltip icon={FaDownload} title="Download Template">
               <button
                 className="2xl:p-3 md:p-2 text-sm p-2  disabled:bg-gray-600 font-semibold 2xl:text-sm md:text-sm text-[12px] flex items-center justify-around rounded-md"
-                onClick={checkUserTemplate}
+                // onClick={checkUserTemplate}
+                onClick={handleDownloadClick}
                 disabled={isLoading}
               >
                 <FaDownload className="h-4 w-4 text-black" />
               </button>
             </ResumeTooltip>
+            <CouponModal
+              open={isCouponModalOpen}
+              onClose={() => setIsCouponModalOpen(false)}
+              onSubmit={(code) => handleDownloadWithCoupon(code)}
+            />
             <Dialog open={showModal} onOpenChange={setShowModal}>
               <DialogContent
                 className="max-w-full lg:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 py-6"
