@@ -299,7 +299,7 @@ const PricingFunc = () => {
           },
         }
       );
-      
+
       if (
         response.status === 200 &&
         response.data.error === "Trial coupon already redeemed"
@@ -314,10 +314,10 @@ const PricingFunc = () => {
           setClientSecret(response.data.clientSecret);
           setIsFreeDialogOpen(true);
           setIsDialogOpen(false);
-        } 
-      }else {
+        }
+      } else {
         const { url } = response.data;
-     
+
         window.location = url;
       }
     } catch (error) {
@@ -533,7 +533,7 @@ const PricingFunc = () => {
             <div className="start_button text-center mt-10">
               <Link
                 href={"/cv-studio"}
-                className="bg-blue-950 text-white px-5 py-2 text-base"
+                className="bg-[#f76918] text-white px-5 py-2 text-base"
               >
                 Start Free Trial
               </Link>
@@ -551,7 +551,7 @@ const PricingFunc = () => {
           showCloseButton
         >
           <DialogHeader>
-            <DialogTitle className="text-3xl text-blue-800">
+            <DialogTitle className="text-3xl text-[#f76918]">
               Enter Card Details
             </DialogTitle>
           </DialogHeader>
@@ -634,7 +634,7 @@ const PricingFunc = () => {
                         </div>
                         <button
                           onClick={applyCoupon}
-                          className="bg-blue-950 text-white px-5 py-2 rounded-md text-sm"
+                          className="bg-[#f76918] text-white px-5 py-2 rounded-md text-sm"
                           disabled={couloading || couponApplied}
                         >
                           {couloading
@@ -756,7 +756,7 @@ const PricingFunc = () => {
                   </div>
                   <div className="upgrade_button text-end mt-5">
                     <Button
-                      className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                      className="bg-[#f76918] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
                       onClick={() => UpgradePlan(selectedCard)}
                       disabled={loading}
                     >
@@ -880,7 +880,7 @@ const PricingFunc = () => {
                   </div>
                   <div className="upgrade_button text-end mt-5">
                     <Button
-                      className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+                      className="bg-[#f76918] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
                       onClick={() => UpgradePlan(selectedCard)}
                       disabled={loading}
                     >
@@ -899,7 +899,7 @@ const PricingFunc = () => {
           )}
           {/* <DialogFooter className="mt-4 sm:mt-8 absolute bottom-[20px] right-[20px]">
             <Button
-              className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+              className="bg-[#f76918] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
               onClick={() => UpgradePlan(selectedCard)}
               disabled={loading}
             >

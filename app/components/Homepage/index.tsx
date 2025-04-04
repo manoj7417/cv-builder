@@ -41,7 +41,7 @@ export default function Homepage() {
                 <Link
                   className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
                     hovered
-                      ? "bg-white text-blue-900 border-2 border-transparent"
+                      ? "bg-white text-black border-2 border-transparent"
                       : "bg-[#f76918] text-white"
                   }`}
                   href="/resume"
@@ -50,7 +50,7 @@ export default function Homepage() {
                   CV Curator
                 </Link>
                 <Link
-                  className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-bold text-blue-900 font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
+                  className={`inline-flex h-10 items-center justify-center rounded-md px-8 text-bold text-black font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ${
                     hovered
                       ? "bg-[#f76918] text-white border-2 border-transparent"
                       : "bg-white border-2"

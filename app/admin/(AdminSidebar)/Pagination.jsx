@@ -76,7 +76,7 @@ export default function Pagination({
                 key={pageNumber}
                 className={`relative cursor-pointer inline-flex items-center px-3 py-1 text-sm font-semibold focus:z-20 focus:outline-offset-0 ${
                   pageNumber === currentPage
-                    ? "bg-blue-950 text-white"
+                    ? "bg-[#f76918] text-white"
                     : "text-gray-900"
                 }`}
                 onClick={() => handlePageClick(pageNumber)}

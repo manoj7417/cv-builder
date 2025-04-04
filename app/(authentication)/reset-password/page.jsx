@@ -85,7 +85,7 @@ const ResetPasswordFunc = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
               Reset Password
             </h2>
             <form onSubmit={handleSubmit(hadleResetPassword)} className="mt-8">
@@ -94,7 +94,7 @@ const ResetPasswordFunc = () => {
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
-                      className="text-base font-medium text-blue-900"
+                      className="text-base font-medium text-black"
                     >
                       New Password
                     </label>
@@ -112,12 +112,12 @@ const ResetPasswordFunc = () => {
                     >
                       {!showPassword ? (
                         <FaRegEyeSlash
-                          className="text-blue-900"
+                          className="text-black"
                           onClick={() => setShowPassword(false)}
                         />
                       ) : (
                         <FaEye
-                          className="text-blue-900"
+                          className="text-black"
                           onClick={() => setShowPassword(true)}
                         />
                       )}
@@ -131,7 +131,7 @@ const ResetPasswordFunc = () => {
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
-                      className="text-base font-medium text-blue-900"
+                      className="text-base font-medium text-black"
                     >
                       Confirm Password
                     </label>
@@ -149,12 +149,12 @@ const ResetPasswordFunc = () => {
                     >
                       {!showConfirmPassword ? (
                         <FaRegEyeSlash
-                          className="text-blue-900"
+                          className="text-black"
                           onClick={() => setConfirmShowPassword(false)}
                         />
                       ) : (
                         <FaEye
-                          className="text-blue-900"
+                          className="text-black"
                           onClick={() => setConfirmShowPassword(true)}
                         />
                       )}
@@ -206,7 +206,7 @@ export default function ResetPassword() {
     <Suspense
       fallback={
         <div className="flex justify-center items-center h-screen">
-          <TbLoader className="animate-spin text-blue-900" size={48} />
+          <TbLoader className="animate-spin text-black" size={48} />
         </div>
       }
     >

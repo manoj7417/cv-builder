@@ -246,7 +246,7 @@ function Profile() {
         >
           <div className="w-full flex flex-col items-center">
             <div className="w-24  h-24 flex items-center justify-center rounded-full bg-blue-100">
-              <GoKey className="text-5xl text-blue-800" />
+              <GoKey className="text-5xl text-[#f76918]" />
             </div>
             <div className="py-4 text-xl w-full px-4 flex flex-col items-center">
               <h1>Set your new password</h1>

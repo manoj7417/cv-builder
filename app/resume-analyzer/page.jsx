@@ -349,8 +349,8 @@ const ResumeAnalyzer = () => {
           <div className="flex flex-col max-w-8xl text-center px-8  lg:px-32 pt-16 sm:pt-28">
             <div className=" flex flex-col">
               <h1 className="text-4xl lg:text-7xl font-bold mb-6 lg:mb-10 text-gray-900 lg:px-32">
-                An <span className="text-blue-600">ATS Resume</span> goes a Long
-                Way
+                An <span className="text-[#f76918]">ATS Resume</span> goes a
+                Long Way
               </h1>
               <p className="text-gray-700 text-sm lg:text-md sm:text-lg lg:px-32">
                 Wondering why your CV does not get through the initial rounds of
@@ -406,7 +406,7 @@ const ResumeAnalyzer = () => {
                   <p className="text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-20">
                     One Step Ahead of
                   </p>
-                  <h2 className="text-4xl lg:text-5xl font-bold  w-full pt-1  text-[#2C98CA]">
+                  <h2 className="text-4xl lg:text-5xl font-bold  w-full pt-1  text-[#f76918]">
                     Conventional CV Checkers
                   </h2>
 
@@ -435,7 +435,7 @@ const ResumeAnalyzer = () => {
                   {/* Step 1 */}
                   <div className="relative w-[291px] h-[127px] bg-[url('/Stepper_1_ats.png')] bg-no-repeat bg-contain">
                     <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                      <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                         Step 1
                       </h6>
                       <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
@@ -451,7 +451,7 @@ const ResumeAnalyzer = () => {
                   {/* Step 2 */}
                   <div className="relative w-[291px] h-[127px] bg-[url('/Stepper_2_ats.png')] bg-no-repeat bg-contain">
                     <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                      <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                         Step 2
                       </h6>
                       <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
@@ -467,7 +467,7 @@ const ResumeAnalyzer = () => {
                   {/* Step 3 */}
                   <div className="relative w-[291px] h-[127px] bg-[url('/Stepper_3_ats.png')] bg-no-repeat bg-contain">
                     <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                      <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                         Step 3
                       </h6>
                       <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">
@@ -480,7 +480,7 @@ const ResumeAnalyzer = () => {
                   {/* Step 4 */}
                   <div className="relative w-[291px] h-[127px] bg-[url('/Stepper_4_ats.png')] bg-no-repeat bg-contain">
                     <div className="absolute inset-0 px-3 py-2 text-black">
-                      <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                      <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                         Step 4
                       </h6>
                       <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
@@ -941,7 +941,7 @@ const ResumeAnalyzer = () => {
                     {/* Step 1 */}
                     <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_1.png')] bg-no-repeat bg-contain">
                       <div className="absolute inset-0 px-3 py-2 text-black">
-                        <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                        <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                           1. CLARITY
                         </h6>
                         <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
@@ -954,7 +954,7 @@ const ResumeAnalyzer = () => {
                     {/* Step 2 */}
                     <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_2.png')] bg-no-repeat bg-contain">
                       <div className="absolute inset-0 px-3 py-2 text-black">
-                        <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                        <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                           2. RELEVANCE
                         </h6>
                         <p className="text-[14px] leading-relaxed  overflow-hidden text-wrap">
@@ -967,7 +967,7 @@ const ResumeAnalyzer = () => {
                     {/* Step 3 */}
                     <div className="relative w-[291px] h-[127px] bg-[url('/ats_3level_optimization_3.png')] bg-no-repeat bg-contain">
                       <div className="absolute inset-0 px-3 py-2 text-black">
-                        <h6 className="text-[14px] font-bold text-[#2C98CA] mb-1">
+                        <h6 className="text-[14px] font-bold text-[#f76918] mb-1">
                           3. CONTENT
                         </h6>
                         <p className="text-[14px] leading-relaxed overflow-hidden text-wrap">

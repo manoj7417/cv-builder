@@ -192,7 +192,7 @@ const CoachForm = () => {
   });
 
   const platformIcons = {
-    facebook: <FaFacebook className="text-blue-600" />,
+    facebook: <FaFacebook className="text-[#f76918]" />,
     instagram: <FaInstagram className="text-pink-500" />,
     linkedin: <FaLinkedin className="text-blue-700" />,
     youtube: <FaYoutube className="text-red-600" />,
@@ -689,7 +689,7 @@ const CoachForm = () => {
                     access the coach dashboard.
                   </p>
                   <Link href="/coach-dashboard">
-                    <button className="bg-blue-950 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-[#f76918] transition duration-200 mt-5">
+                    <button className="bg-[#f76918] text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-[#f76918] transition duration-200 mt-5">
                       Go to Dashboard
                     </button>
                   </Link>
@@ -1110,7 +1110,7 @@ const CoachForm = () => {
                               <button
                                 type="button"
                                 onClick={() => handleViewFile("cv")}
-                                className="text-blue-600 hover:text-blue-800"
+                                className="text-[#f76918] hover:text-[#f76918]"
                               >
                                 <FaEye className="text-xl" /> {/* View Icon */}
                               </button>
@@ -1694,7 +1694,7 @@ const CoachForm = () => {
                                     <button
                                       type="button"
                                       onClick={() => handleViewFile("docs")}
-                                      className="text-blue-600 hover:text-blue-800"
+                                      className="text-[#f76918] hover:text-[#f76918]"
                                     >
                                       <FaEye className="text-xl" />{" "}
                                       {/* View Icon */}

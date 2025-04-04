@@ -118,9 +118,7 @@ const TabsMain = () => {
                   Create CV
                 </Button>
                 <div className="text-sm">
-                  <p className="text-blue-900 my-3 font-bold text-base">
-                    New CV
-                  </p>
+                  <p className="text-black my-3 font-bold text-base">New CV</p>
                   <b>TIP:</b>
                   <span>
                     {" "}
@@ -140,7 +138,7 @@ const TabsMain = () => {
                 </div>
 
                 <div className="text-sm">
-                  <p className="text-blue-900 my-3 font-bold text-base">
+                  <p className="text-black my-3 font-bold text-base">
                     New Cover Letter
                   </p>
                   <b>TIP:</b>
@@ -166,9 +164,7 @@ const TabsMain = () => {
                   </Button>
                 </div>
                 <div className="bg-white p-4 flex w-full justify-center items-center">
-                  <h3 className="font-bold text-lg text-blue-900">
-                    Create New
-                  </h3>
+                  <h3 className="font-bold text-lg text-black">Create New</h3>
                 </div>
               </div>
               {resumes?.length > 0 &&
@@ -193,7 +189,7 @@ const TabsMain = () => {
 
                       <div className="flex justify-between items-start gap-2 px-3 py-2 bg-white h-full">
                         <div className="w-[90%]">
-                          <h3 className="font-bold text-sm truncate text-blue-900 flex-grow break-normal col-span-6">
+                          <h3 className="font-bold text-sm truncate text-black flex-grow break-normal col-span-6">
                             {item.title}
                           </h3>
                           <div className="flex justify-between">
@@ -208,7 +204,7 @@ const TabsMain = () => {
                         <div className="col-span-1">
                           <DropdownMenu>
                             <DropdownMenuTrigger>
-                              <FaEllipsisVertical className="text-md text-blue-900" />
+                              <FaEllipsisVertical className="text-md text-black" />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                               <DropdownMenuItem

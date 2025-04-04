@@ -391,7 +391,7 @@ export default function Page() {
           )}
           <DialogFooter className="mt-4 sm:mt-8">
             <Button
-              className="bg-blue-950 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+              className="bg-[#f76918] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-base cursor-pointer w-full sm:w-auto"
               onClick={() => UpgradePlan(pricingInfo)}
               disabled={upgradingPlan}
             >
@@ -447,7 +447,7 @@ export default function Page() {
                 {contentType === "generateQuestions" && (
                   <section className="flex flex-col flex-1 gap-6 overflow-y-auto  sm:px-6 ">
                     <div className="space-y-4">
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl font-semibold text-[#1E3A8A]">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl font-semibold text-[#f76918]">
                         {categories[currentStep]}
                       </h2>
                       <p className="font-semibold text-sm sm:text-lg md:text-lg lg:text-lg xl:text-lg 2xl:text-lg">
@@ -598,7 +598,7 @@ export default function Page() {
                                             Please wait for a moment...
                                           </span>
                                           <br />
-                                          <span className="text-[#1E3A8A] font-semibold">
+                                          <span className="text-[#f76918] font-semibold">
                                             While we are generating the
                                             personalised test based on your
                                             input...
@@ -724,7 +724,7 @@ export default function Page() {
                     </p>
                     <div className="summary_card_footer absolute bottom-6 left-6 right-6 mt-5">
                       <div
-                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
+                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-[#f76918] rounded-md cursor-pointer"
                         onClick={(e) => handleReadMore(e, val)}
                       >
                         Read more
@@ -777,7 +777,7 @@ export default function Page() {
                     </p>
                     <div className="summary_card_footer absolute bottom-6 left-6 right-6 mt-5">
                       <div
-                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-blue-950 rounded-md cursor-pointer"
+                        className="inline-flex items-center px-2 py-2 text-sm text-white bg-[#f76918] rounded-md cursor-pointer"
                         onClick={(e) => handleReadMore(e, val)}
                       >
                         Read more
@@ -835,7 +835,7 @@ export default function Page() {
                     className="w-full py-5"
                     defaultValue="actionableInsights"
                   >
-                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto gap-0 md:gap-6 bg-[#1e3a8a78] rounded-full">
+                    <TabsList className="mb-4 flex w-full justify-center flex-wrap h-auto gap-0 md:gap-6 bg-[#f7691878] rounded-full">
                       <TabsTrigger
                         value="actionableInsights"
                         className="text-white  rounded-md text-base font-bold sumtab"
@@ -867,7 +867,7 @@ export default function Page() {
                           <ul className="space-y-3 text-sm">
                             {Object.entries(cardData?.actionableInsights).map(
                               ([key, value], idx) => (
-                                <li key={idx} className="text-[#1E3A8A]">
+                                <li key={idx} className="text-[#f76918]">
                                   <strong>
                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                     :
@@ -891,7 +891,7 @@ export default function Page() {
                               (career, index) => (
                                 <li
                                   key={index}
-                                  className="py-2 space-y-2 text-[#1E3A8A]"
+                                  className="py-2 space-y-2 text-[#f76918]"
                                 >
                                   <strong>Career:</strong> {career.career}
                                   <br />
@@ -914,7 +914,7 @@ export default function Page() {
                           <ul className="space-y-3 text-sm">
                             {Object.entries(cardData?.summary).map(
                               ([key, value], idx) => (
-                                <li key={idx} className="text-[#1E3A8A]">
+                                <li key={idx} className="text-[#f76918]">
                                   <strong>
                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                     :
@@ -967,7 +967,7 @@ export default function Page() {
                       <TabsTrigger
                         value="actionableInsights"
                         className="text-black rounded-md text-base font-bold bg-white
-                        data-[state=active]:bg-blue-950 data-[state=active]:text-white hover:bg-blue-950 hover:text-white"
+                        data-[state=active]:bg-[#f76918] data-[state=active]:text-white hover:bg-[#f76918] hover:text-white"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Actionable Insights
@@ -975,7 +975,7 @@ export default function Page() {
                       <TabsTrigger
                         value="careerSuggestions"
                         className="text-black rounded-md text-base font-bold bg-white
-                        data-[state=active]:bg-blue-950 data-[state=active]:text-white hover:bg-blue-950 hover:text-white"
+                        data-[state=active]:bg-[#f76918] data-[state=active]:text-white hover:bg-[#f76918] hover:text-white"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Career Suggestions
@@ -983,7 +983,7 @@ export default function Page() {
                       <TabsTrigger
                         value="summary"
                         className="text-black rounded-md text-base font-bold bg-white
-                        data-[state=active]:bg-blue-950 data-[state=active]:text-white hover:bg-blue-950 hover:text-white"
+                        data-[state=active]:bg-[#f76918] data-[state=active]:text-white hover:bg-[#f76918] hover:text-white"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Summary
@@ -998,7 +998,7 @@ export default function Page() {
                           <ul className="space-y-3 text-sm">
                             {Object.entries(cardData?.actionableInsights).map(
                               ([key, value], idx) => (
-                                <li key={idx} className="text-[#1E3A8A]">
+                                <li key={idx} className="text-[#f76918]">
                                   <strong>
                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                     :
@@ -1022,7 +1022,7 @@ export default function Page() {
                               (career, index) => (
                                 <li
                                   key={index}
-                                  className="py-2 space-y-2 text-[#1E3A8A]"
+                                  className="py-2 space-y-2 text-[#f76918]"
                                 >
                                   <strong>Career:</strong> {career.career}
                                   <br />
@@ -1045,7 +1045,7 @@ export default function Page() {
                           <ul className="space-y-3 text-sm">
                             {Object.entries(cardData?.summary).map(
                               ([key, value], idx) => (
-                                <li key={idx} className="text-[#1E3A8A]">
+                                <li key={idx} className="text-[#f76918]">
                                   <strong>
                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                     :

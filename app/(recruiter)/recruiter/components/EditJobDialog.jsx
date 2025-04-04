@@ -1,241 +1,251 @@
-import { Fragment, useState, useEffect } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { toast } from 'react-toastify'
-import dynamic from 'next/dynamic'
-import 'react-quill/dist/quill.snow.css'
-import React from 'react'
+import { Fragment, useState, useEffect } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { toast } from "react-toastify";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+import React from "react";
 
 // Dynamic import for React-Quill
-const ReactQuill = dynamic(() => import('react-quill'), {
+const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
-  loading: () => <div className="h-64 w-full bg-gray-50 animate-pulse rounded-lg"></div>,
-})
+  loading: () => (
+    <div className="h-64 w-full bg-gray-50 animate-pulse rounded-lg"></div>
+  ),
+});
 
 // Basic editor configuration
 const editorModules = {
   toolbar: [
-    ['bold', 'italic', 'underline'],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    ['clean']
-  ]
-}
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["clean"],
+  ],
+};
 
 const editorFormats = [
-  'header',
-  'bold', 'italic', 'underline', 'strike',
-  'list', 'bullet',
-  'link'
-]
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "list",
+  "bullet",
+  "link",
+];
 
 const CURRENCIES = [
-  { code: 'USD', symbol: '$', label: 'US Dollar' },
-  { code: 'EUR', symbol: '€', label: 'Euro' },
-  { code: 'GBP', symbol: '£', label: 'British Pound' },
-  { code: 'INR', symbol: '₹', label: 'Indian Rupee' },
-  { code: 'AUD', symbol: 'A$', label: 'Australian Dollar' },
-  { code: 'CAD', symbol: 'C$', label: 'Canadian Dollar' },
-]
+  { code: "USD", symbol: "$", label: "US Dollar" },
+  { code: "EUR", symbol: "€", label: "Euro" },
+  { code: "GBP", symbol: "£", label: "British Pound" },
+  { code: "INR", symbol: "₹", label: "Indian Rupee" },
+  { code: "AUD", symbol: "A$", label: "Australian Dollar" },
+  { code: "CAD", symbol: "C$", label: "Canadian Dollar" },
+];
 
 const JOB_STATUSES = [
-  { value: 'active', label: 'Active' },
-  { value: 'closed', label: 'Closed' }
-]
+  { value: "active", label: "Active" },
+  { value: "closed", label: "Closed" },
+];
 
 const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
-  const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0])
+  const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0]);
   const [formData, setFormData] = useState({
-    title: '',
-    company: '',
-    location: '',
-    type: 'Full-time',
-    description: '',
-    requirements: '',
+    title: "",
+    company: "",
+    location: "",
+    type: "Full-time",
+    description: "",
+    requirements: "",
     salary: {
-      min: '',
-      max: '',
-      currency: 'USD'
+      min: "",
+      max: "",
+      currency: "USD",
     },
-    workType: '',
-    status: 'active'
-  })
+    workType: "",
+    status: "active",
+  });
 
   // Add state to track if editors should be rendered
-  const [showEditors, setShowEditors] = useState(false)
+  const [showEditors, setShowEditors] = useState(false);
 
   // Add new state for closure details
-  const [showClosureDetails, setShowClosureDetails] = useState(false)
+  const [showClosureDetails, setShowClosureDetails] = useState(false);
   const [closureDetails, setClosureDetails] = useState({
     candidateFound: false,
-    closureReason: '',
-    closureNote: ''
-  })
+    closureReason: "",
+    closureNote: "",
+  });
 
   // First, add submitting state if not already present
-  const [submitting, setSubmitting] = useState(false)
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
-      setShowEditors(false)
-      return
+      setShowEditors(false);
+      return;
     }
 
     const timer = setTimeout(() => {
       if (job) {
         // Extract the actual location from formatted string for hybrid/onsite
-        let actualLocation = job.location
-        if (job.workType === 'hybrid') {
-          actualLocation = job.location.replace('Hybrid - ', '')
-        } else if (job.workType === 'onsite') {
-          actualLocation = job.location.replace('In-Office - ', '')
+        let actualLocation = job.location;
+        if (job.workType === "hybrid") {
+          actualLocation = job.location.replace("Hybrid - ", "");
+        } else if (job.workType === "onsite") {
+          actualLocation = job.location.replace("In-Office - ", "");
         }
 
         setFormData({
-          title: job.title || '',
-          company: job.company || '',
+          title: job.title || "",
+          company: job.company || "",
           location: actualLocation, // Set the cleaned location
-          type: job.type || 'Full-time',
-          description: job.description || '',
-          requirements: Array.isArray(job.requirements) ? job.requirements[0] : job.requirements || '',
-          salary: job.salary || { currency: 'USD', min: '', max: '' },
-          workType: job.workType || '',
-          status: job.status || 'active',
-        })
-        const currency = CURRENCIES.find(c => c.code === job.salary?.currency) || CURRENCIES[0]
-        setSelectedCurrency(currency)
-        setShowEditors(true)
+          type: job.type || "Full-time",
+          description: job.description || "",
+          requirements: Array.isArray(job.requirements)
+            ? job.requirements[0]
+            : job.requirements || "",
+          salary: job.salary || { currency: "USD", min: "", max: "" },
+          workType: job.workType || "",
+          status: job.status || "active",
+        });
+        const currency =
+          CURRENCIES.find((c) => c.code === job.salary?.currency) ||
+          CURRENCIES[0];
+        setSelectedCurrency(currency);
+        setShowEditors(true);
       }
-    }, 100)
+    }, 100);
 
-    return () => clearTimeout(timer)
-  }, [isOpen, job])
+    return () => clearTimeout(timer);
+  }, [isOpen, job]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    if (name === 'workType') {
+
+    if (name === "workType") {
       // Clear location when switching work types (except when it's remote)
-      let locationValue = '';
-      if (value === 'remote') {
-        locationValue = 'Remote';
+      let locationValue = "";
+      if (value === "remote") {
+        locationValue = "Remote";
       }
       // Always reset location when changing work type
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         workType: value,
-        location: locationValue // This will clear location when switching between hybrid/onsite
+        location: locationValue, // This will clear location when switching between hybrid/onsite
       }));
-    } else if (name === 'location') {
-      if (formData.workType === 'hybrid' || formData.workType === 'onsite') {
-        setFormData(prev => ({
+    } else if (name === "location") {
+      if (formData.workType === "hybrid" || formData.workType === "onsite") {
+        setFormData((prev) => ({
           ...prev,
-          location: value
+          location: value,
         }));
       }
-    } else if (name.startsWith('salary.')) {
-      const salaryField = name.split('.')[1];
-      setFormData(prev => ({
+    } else if (name.startsWith("salary.")) {
+      const salaryField = name.split(".")[1];
+      setFormData((prev) => ({
         ...prev,
         salary: {
           ...prev.salary,
-          [salaryField]: value
-        }
+          [salaryField]: value,
+        },
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
-  }
+  };
 
   const handleCurrencyChange = (currency) => {
-    setSelectedCurrency(currency)
-    setFormData(prev => ({
+    setSelectedCurrency(currency);
+    setFormData((prev) => ({
       ...prev,
       salary: {
         ...prev.salary,
-        currency: currency.code
-      }
-    }))
-  }
+        currency: currency.code,
+      },
+    }));
+  };
 
   const handleDescriptionChange = (content) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      description: content
-    }))
-  }
+      description: content,
+    }));
+  };
 
   const handleRequirementsChange = (content) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      requirements: content
-    }))
-  }
+      requirements: content,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       setSubmitting(true);
 
       // Validate closure details if needed
-      if (formData.status === 'closed') {
+      if (formData.status === "closed") {
         if (!closureDetails.closureReason) {
-          toast.error('Please select a closure reason');
+          toast.error("Please select a closure reason");
           return;
         }
         if (!closureDetails.closureNote.trim()) {
-          toast.error('Please provide a closure note');
+          toast.error("Please provide a closure note");
           return;
         }
       }
 
       const response = await fetch(`/api/recruiters/jobs/${job._id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           data: {
             ...formData,
-            ...(formData.status === 'closed' && {
-              ...closureDetails
-            })
-          }
-        })
+            ...(formData.status === "closed" && {
+              ...closureDetails,
+            }),
+          },
+        }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update job');
+        throw new Error("Failed to update job");
       }
 
       const data = await response.json();
-      
-      if (data.status === 'success') {
+
+      if (data.status === "success") {
         const updatedJob = {
           ...job,
           ...formData,
-          ...(formData.status === 'closed' && {
-            ...closureDetails
-          })
+          ...(formData.status === "closed" && {
+            ...closureDetails,
+          }),
         };
 
         // Update the local state first
         setFormData(updatedJob);
-        
+
         // Call onJobUpdated with the updated job data
         if (onJobUpdated) {
           onJobUpdated(updatedJob);
         }
 
-        toast.success('Job updated successfully');
+        toast.success("Job updated successfully");
         onClose();
       }
     } catch (error) {
-      console.error('Error updating job:', error);
-      toast.error(error.message || 'Failed to update job');
+      console.error("Error updating job:", error);
+      toast.error(error.message || "Failed to update job");
     } finally {
       setSubmitting(false);
     }
@@ -243,36 +253,36 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
 
   // Add status change handler
   const handleStatusChange = (e) => {
-    const newStatus = e.target.value
-    setFormData(prev => ({ ...prev, status: newStatus }))
-    
-    if (newStatus === 'closed') {
-      setShowClosureDetails(true)
+    const newStatus = e.target.value;
+    setFormData((prev) => ({ ...prev, status: newStatus }));
+
+    if (newStatus === "closed") {
+      setShowClosureDetails(true);
     } else {
-      setShowClosureDetails(false)
+      setShowClosureDetails(false);
       setClosureDetails({
         candidateFound: false,
-        closureReason: '',
-        closureNote: ''
-      })
+        closureReason: "",
+        closureNote: "",
+      });
     }
-  }
+  };
 
   // Update the handleCandidateFoundChange function
   const handleCandidateFoundChange = (e) => {
-    const isChecked = e.target.checked
-    
+    const isChecked = e.target.checked;
+
     // Update closure details with a single state update
     setClosureDetails({
       candidateFound: isChecked,
-      closureReason: isChecked ? 'hired' : '',
-      closureNote: isChecked 
-        ? 'Position filled through successful hire from this job posting.'
-        : ''
-    })
-  }
+      closureReason: isChecked ? "hired" : "",
+      closureNote: isChecked
+        ? "Position filled through successful hire from this job posting."
+        : "",
+    });
+  };
 
-  if (!isOpen || !job) return null
+  if (!isOpen || !job) return null;
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -304,7 +314,10 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                 {/* Header with Status */}
                 <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between bg-[#0d3572]">
                   <div className="flex items-center space-x-4">
-                    <Dialog.Title as="h3" className="text-xl font-semibold text-white">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-xl font-semibold text-white"
+                    >
                       Edit Job
                     </Dialog.Title>
                     <select
@@ -314,7 +327,7 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                       required
                       className="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white focus:border-[#0d3572] focus:ring-[#0d3572] min-w-[120px]"
                     >
-                      {JOB_STATUSES.map(status => (
+                      {JOB_STATUSES.map((status) => (
                         <option key={status.value} value={status.value}>
                           {status.label}
                         </option>
@@ -340,7 +353,10 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                         {/* Basic Info Section */}
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                              htmlFor="title"
+                              className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                               Job Title*
                             </label>
                             <input
@@ -355,7 +371,10 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                             />
                           </div>
                           <div>
-                            <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                              htmlFor="company"
+                              className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                               Company Name*
                             </label>
                             <input
@@ -383,7 +402,12 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                                   <ReactQuill
                                     theme="snow"
                                     value={formData.description}
-                                    onChange={(content) => setFormData(prev => ({ ...prev, description: content }))}
+                                    onChange={(content) =>
+                                      setFormData((prev) => ({
+                                        ...prev,
+                                        description: content,
+                                      }))
+                                    }
                                     modules={editorModules}
                                     formats={editorFormats}
                                     className="flex-1 overflow-y-auto"
@@ -408,7 +432,12 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                                   <ReactQuill
                                     theme="snow"
                                     value={formData.requirements}
-                                    onChange={(content) => setFormData(prev => ({ ...prev, requirements: content }))}
+                                    onChange={(content) =>
+                                      setFormData((prev) => ({
+                                        ...prev,
+                                        requirements: content,
+                                      }))
+                                    }
                                     modules={editorModules}
                                     formats={editorFormats}
                                     className="flex-1 overflow-y-auto"
@@ -426,7 +455,9 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                       <div className="space-y-6">
                         {/* Work Details Card */}
                         <div className="bg-gray-50 rounded-lg p-4 space-y-4">
-                          <h4 className="text-sm font-medium text-gray-900">Work Details</h4>
+                          <h4 className="text-sm font-medium text-gray-900">
+                            Work Details
+                          </h4>
                           <div className="grid gap-4">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -446,22 +477,27 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                               </select>
                             </div>
 
-                            {formData.workType !== 'remote' && formData.workType && (
-                              <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                  Location*
-                                </label>
-                                <input
-                                  type="text"
-                                  name="location"
-                                  value={formData.location}
-                                  onChange={handleChange}
-                                  required
-                                  className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                                  placeholder={`Enter ${formData.workType === 'hybrid' ? 'hybrid' : 'office'} location`}
-                                />
-                              </div>
-                            )}
+                            {formData.workType !== "remote" &&
+                              formData.workType && (
+                                <div>
+                                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Location*
+                                  </label>
+                                  <input
+                                    type="text"
+                                    name="location"
+                                    value={formData.location}
+                                    onChange={handleChange}
+                                    required
+                                    className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                                    placeholder={`Enter ${
+                                      formData.workType === "hybrid"
+                                        ? "hybrid"
+                                        : "office"
+                                    } location`}
+                                  />
+                                </div>
+                              )}
 
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -485,7 +521,9 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
 
                         {/* Salary Card */}
                         <div className="bg-gray-50 rounded-lg p-4 space-y-4">
-                          <h4 className="text-sm font-medium text-gray-900">Compensation</h4>
+                          <h4 className="text-sm font-medium text-gray-900">
+                            Compensation
+                          </h4>
                           <div className="space-y-4">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -494,13 +532,18 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                               <select
                                 value={selectedCurrency.code}
                                 onChange={(e) => {
-                                  const currency = CURRENCIES.find(c => c.code === e.target.value)
-                                  handleCurrencyChange(currency)
+                                  const currency = CURRENCIES.find(
+                                    (c) => c.code === e.target.value
+                                  );
+                                  handleCurrencyChange(currency);
                                 }}
                                 className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
                               >
                                 {CURRENCIES.map((currency) => (
-                                  <option key={currency.code} value={currency.code}>
+                                  <option
+                                    key={currency.code}
+                                    value={currency.code}
+                                  >
                                     {currency.code} - {currency.label}
                                   </option>
                                 ))}
@@ -556,7 +599,7 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                         <h3 className="text-lg font-medium text-gray-900 mb-4">
                           Job Closure Details
                         </h3>
-                        
+
                         <div className="space-y-4">
                           {/* Candidate Found Checkbox */}
                           <div className="relative flex items-start">
@@ -567,23 +610,24 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                                 name="candidateFound"
                                 checked={closureDetails.candidateFound}
                                 onChange={handleCandidateFoundChange}
-                                className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500
+                                className="h-5 w-5 rounded border-gray-300 text-[#f76918] focus:ring-blue-500
                                   appearance-none checked:bg-blue-600 checked:hover:bg-blue-700
                                   transition-colors cursor-pointer relative"
                               />
                             </div>
                             <div className="ml-3">
-                              <label 
-                                htmlFor="candidateFound" 
+                              <label
+                                htmlFor="candidateFound"
                                 className="text-sm font-medium text-gray-700 cursor-pointer select-none"
                               >
                                 Candidate found through this posting
                               </label>
-                              <p 
-                                id="candidate-found-description" 
+                              <p
+                                id="candidate-found-description"
                                 className="text-xs text-gray-500 mt-1"
                               >
-                                This will automatically set the closure reason to &quot;hired&quot;
+                                This will automatically set the closure reason
+                                to &quot;hired&quot;
                               </p>
                             </div>
                           </div>
@@ -595,19 +639,31 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                             </label>
                             <select
                               value={closureDetails.closureReason}
-                              onChange={(e) => setClosureDetails(prev => ({
-                                ...prev,
-                                closureReason: e.target.value
-                              }))}
+                              onChange={(e) =>
+                                setClosureDetails((prev) => ({
+                                  ...prev,
+                                  closureReason: e.target.value,
+                                }))
+                              }
                               disabled={closureDetails.candidateFound}
                               className={`w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 
-                                ${closureDetails.candidateFound ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                                ${
+                                  closureDetails.candidateFound
+                                    ? "bg-gray-100 cursor-not-allowed"
+                                    : ""
+                                }`}
                               required
                             >
                               <option value="">Select a reason</option>
-                              <option value="hired">Hired through this posting</option>
-                              <option value="position_filled">Position filled through other means</option>
-                              <option value="cancelled">Position cancelled</option>
+                              <option value="hired">
+                                Hired through this posting
+                              </option>
+                              <option value="position_filled">
+                                Position filled through other means
+                              </option>
+                              <option value="cancelled">
+                                Position cancelled
+                              </option>
                               <option value="other">Other</option>
                             </select>
                           </div>
@@ -619,19 +675,26 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
                             </label>
                             <textarea
                               value={closureDetails.closureNote}
-                              onChange={(e) => setClosureDetails(prev => ({
-                                ...prev,
-                                closureNote: e.target.value
-                              }))}
+                              onChange={(e) =>
+                                setClosureDetails((prev) => ({
+                                  ...prev,
+                                  closureNote: e.target.value,
+                                }))
+                              }
                               className={`w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                                ${closureDetails.candidateFound ? 'bg-gray-50' : ''}`}
+                                ${
+                                  closureDetails.candidateFound
+                                    ? "bg-gray-50"
+                                    : ""
+                                }`}
                               rows={3}
                               placeholder="Please provide details about the job closure..."
                               required
                             />
                             {closureDetails.candidateFound && (
                               <p className="mt-1 text-sm text-gray-500">
-                                You can edit this note to add more details about the hire.
+                                You can edit this note to add more details about
+                                the hire.
                               </p>
                             )}
                           </div>
@@ -724,7 +787,7 @@ const EditJobDialog = ({ isOpen, onClose, job, onJobUpdated }) => {
         }
       `}</style>
     </Transition>
-  )
-}
+  );
+};
 
-export default EditJobDialog
+export default EditJobDialog;

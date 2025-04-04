@@ -435,7 +435,7 @@ const CoachAvailability = () => {
           <Button
             type="submit"
             disabled={isupdatingdata}
-            className="bg-blue-950 text-white px-5 py-2"
+            className="bg-[#f76918] text-white px-5 py-2"
           >
             {isupdatingdata ? (
               <>

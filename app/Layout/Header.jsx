@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiBox,
   FiCamera,
@@ -23,7 +23,7 @@ import "./header.css";
 
 const Header = () => {
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
   const TOP_OFFSET = 50;
   const [showBackground, setShowBackground] = useState(false);
 
@@ -47,8 +47,7 @@ const Header = () => {
     router.push("/login");
   };
 
-  const isActiveLink = (path) => pathname === path ? "active-link" : "";
-
+  const isActiveLink = (path) => (pathname === path ? "active-link" : "");
 
   return (
     <div
@@ -65,7 +64,8 @@ const Header = () => {
         <div className="wrapper">
           <div className="logo">
             <Link href="/" className="flex items-center gap-2">
-              <Image priority="true"
+              <Image
+                priority="true"
                 src={"/genies-career-hub-logo.png"}
                 width={100}
                 height={100}
@@ -84,7 +84,9 @@ const Header = () => {
             <li>
               <Link
                 href="/resume"
-                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume")}`}
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink(
+                  "/resume"
+                )}`}
                 prefetch={false}
               >
                 CV Creator
@@ -93,7 +95,9 @@ const Header = () => {
             <li>
               <Link
                 href="/resume-analyzer"
-                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/resume-analyzer")}`}
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink(
+                  "/resume-analyzer"
+                )}`}
                 prefetch={false}
               >
                 CV Optimiser
@@ -101,12 +105,14 @@ const Header = () => {
             </li>
             <li>
               <Link
-                className={`hover:font-bold text-blue-950 text-base ${isActiveLink("/job-cv")}`}
+                className={`hover:font-bold text-blue-950 text-base ${isActiveLink(
+                  "/job-cv"
+                )}`}
                 href="/job-cv"
                 prefetch={false}
               >
                 CV Match
-                <span className="text-sm font-bold ml-1 text-blue-900">
+                <span className="text-sm font-bold ml-1 text-black">
                   (beta)
                 </span>
               </Link>
@@ -114,7 +120,9 @@ const Header = () => {
             <li className="nav-item">
               <Link
                 href="/recruiter/auth/signin"
-                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink("/recruiter/auth/signin")}`}
+                className={`desktop-item hover:font-bold text-blue-950 text-base nav-link-grow-up ${isActiveLink(
+                  "/recruiter/auth/signin"
+                )}`}
                 prefetch={false}
               >
                 For Recruiters
@@ -125,7 +133,7 @@ const Header = () => {
             <li>
               <div className="auths_button ml-2">
                 <button
-                  className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-blue-950 hover:border-blue-950 hover:text-white px-6 py-1 "
+                  className="border-2 text-blue-950 border-gray-500 text-sm hover:cursor-pointer hover:bg-[#f76918] hover:border-blue-950 hover:text-white px-6 py-1 "
                   onClick={handleLogin}
                 >
                   <span>Sign In</span>

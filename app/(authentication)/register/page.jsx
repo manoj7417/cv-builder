@@ -362,7 +362,7 @@ export default function Register() {
                     id="checkbox"
                     type="checkbox"
                     name="terms"
-                    className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-blue-600"
+                    className="form-checkbox lg:h-4 lg:w-4 h-3 w-3 text-[#f76918]"
                     {...register("terms", { required: true })}
                   />
                   <label

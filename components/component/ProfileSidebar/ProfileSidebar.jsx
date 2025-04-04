@@ -33,7 +33,7 @@ function ProfileSidebar() {
   return (
     <>
       <div className="icon lg:hidden block absolute top-24 left-2">
-        <FaCircleChevronRight 
+        <FaCircleChevronRight
           className="text-black text-3xl cursor-pointer animate-bounce"
           onClick={toggleSidebar}
         />
@@ -45,9 +45,12 @@ function ProfileSidebar() {
         aria-label="Sidebar"
       >
         <div className="w-full flex justify-between items-start px-3 py-5">
-          <h1 className="text-2xl text-blue-900 font-bold ml-3">Settings</h1>
+          <h1 className="text-2xl text-black font-bold ml-3">Settings</h1>
           <div className="close_icon lg:hidden block">
-            <FaTimes className="text-xl" onClick={()=>setIsSidebarOpen(false)}/>
+            <FaTimes
+              className="text-xl"
+              onClick={() => setIsSidebarOpen(false)}
+            />
           </div>
         </div>
         <div className="h-full px-3 py-4 overflow-y-auto bg-white ">
@@ -56,10 +59,10 @@ function ProfileSidebar() {
               <li key={href}>
                 <Link
                   href={href}
-                  onClick={()=>setIsSidebarOpen(false)}
+                  onClick={() => setIsSidebarOpen(false)}
                   className={`flex items-center px-4 p-2 my-2 rounded-lg hover:bg-gray-100 group h-10 ${
                     pathname === href
-                      ? "text-blue-900 border-r-8 border-blue-900 shadow-md rounded-tl-lg rounded-bl-lg rounded-none"
+                      ? "text-black border-r-8 border-blue-900 shadow-md rounded-tl-lg rounded-bl-lg rounded-none"
                       : "text-gray-900"
                   }`}
                 >

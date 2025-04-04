@@ -367,7 +367,7 @@ const CoachPage = () => {
 
                       <button
                         onClick={() => toggleContent("coachingDescription")}
-                        className="text-blue-600 mt-2 hover:underline"
+                        className="text-[#f76918] mt-2 hover:underline"
                       >
                         {showFullContent?.coachingDescription
                           ? "Show Less"
@@ -447,7 +447,7 @@ const CoachPage = () => {
 
                         <button
                           onClick={() => toggleContent("bio")}
-                          className="text-blue-600 mt-2 hover:underline"
+                          className="text-[#f76918] mt-2 hover:underline"
                         >
                           {showFullContent?.bio ? "Show Less" : "Show More"}
                         </button>
@@ -828,7 +828,7 @@ const CoachPage = () => {
 
                   <button
                     onClick={() => toggleContent("coachingDescription")}
-                    className="text-blue-600 mt-2 hover:underline"
+                    className="text-[#f76918] mt-2 hover:underline"
                   >
                     {showFullContent?.coachingDescription
                       ? "Show Less"
@@ -888,7 +888,7 @@ const CoachPage = () => {
 
                         <button
                           onClick={() => toggleContent("bio")}
-                          className="text-blue-600 mt-2 hover:underline"
+                          className="text-[#f76918] mt-2 hover:underline"
                         >
                           {showFullContent?.bio ? "Show Less" : "Show More"}
                         </button>

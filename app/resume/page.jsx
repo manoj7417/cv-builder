@@ -635,7 +635,7 @@ Follow the suggestions given below the score to get a higher score and better ca
             <div className="flex flex-col items-center justify-center 2xl:px-24 px-5">
               <div className="space-y-2 2xl:mt-40 lg:mt-32 mt-20 px-2 sm:px-10 text-center sm:text-start">
                 <h1 className="text-4xl lg:text-5xl font-bold mb-6 lg:mb-10 text-gray-900 text-center lg:px-20 xl:px-20 2xl:px-20">
-                  Find the <span className="text-[#1e3a8a]">Perfect CV </span>{" "}
+                  Find the <span className="text-[#f76918]">Perfect CV </span>{" "}
                   for Your Dream Job
                 </h1>
                 <p className="text-gray-700 text-sm lg:text-md sm:text-lg text-center lg:px-20 xl:px-20 2xl:px-20">
@@ -650,7 +650,7 @@ Follow the suggestions given below the score to get a higher score and better ca
                 <div className="flex items-center justify-center">
                   <Button
                     onClick={() => router.push("/user-history")}
-                    className="lg:text-base text-sm text-white bg-[#1e3a8a] rounded-md px-5 mt-10 py-3"
+                    className="lg:text-base text-sm text-white bg-[#f76918] rounded-md px-5 mt-10 py-3"
                   >
                     Create CV Now
                   </Button>

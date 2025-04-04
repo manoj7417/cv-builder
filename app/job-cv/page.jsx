@@ -559,9 +559,8 @@ export default function Home() {
                 className="font-extrabold text-[2rem] md:text-[3rem] lg:pe-20 mb-6 text-center lg:text-left"
                 style={{ lineHeight: "1.3 !important" }}
               >
-                Build a <span className="text-blue-900">CV</span> that opens
-                doors to your ideal{" "}
-                <span className="text-blue-900">career!</span>
+                Build a <span className="text-black">CV</span> that opens doors
+                to your ideal <span className="text-black">career!</span>
               </h1>
               <div className="flex flex-col sm:flex-row gap-2 py-3 rounded-lg w-full">
                 <div className="w-full sm:px-0 px-4 mb-4 sm:mb-0">
@@ -611,8 +610,8 @@ export default function Home() {
                   style={{ lineHeight: "1.3 !important" }}
                 >
                   Connect with a
-                  <span className="text-blue-900"> Career Coach </span>for
-                  Expert Advice, Anytime, Anywhere!
+                  <span className="text-black"> Career Coach </span>for Expert
+                  Advice, Anytime, Anywhere!
                 </h2>
                 <button className="bg-[#f76918] text-white px-4 py-2 rounded text-sm">
                   <Link href="/contact-us">Work With Coach</Link>
@@ -646,7 +645,7 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center text-center px-4 lg:px-20 xl:px-10 2xl:px-10">
                 <h3 className="text-4xl lg:text-5xl font-bold mb-2 text-[#101827] w-full md:pt-20 lg:pt-20 xl:pt-20 2xl:pt-20">
                   Find your{" "}
-                  <span className="text-[#2C98CA]">Professional CV</span>{" "}
+                  <span className="text-[#f76918]">Professional CV</span>{" "}
                 </h3>
                 <h4 className="text-4xl lg:text-5xl font-bold mb-2 text-gray-900 w-full pt-2 md:pb-20 lg:pb-20 xl:pb-20 2xl:pb-20">
                   in Six Simple Steps!
@@ -658,7 +657,7 @@ export default function Home() {
               {/* START-FIRST SECTION */}
               <div className="grid grid-col-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-14">
                 <div className="bg-[#FFFCDC] p-7">
-                  <h5 className="text-[#2C98CA] text-lg font-semibold">
+                  <h5 className="text-[#f76918] text-lg font-semibold">
                     Pre-written content
                   </h5>
                   <p className="text-base pt-3 text-[#1B1B1F]">
@@ -671,7 +670,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="bg-[#ECFFE7] p-7">
-                  <h6 className="text-[#2C98CA] text-lg font-semibold">
+                  <h6 className="text-[#f76918] text-lg font-semibold">
                     Professional CV ensured
                   </h6>
                   <p className="text-base pt-3 text-[#1B1B1F]">
@@ -688,7 +687,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="bg-[#CEEFFF] p-5">
-                  <p className="text-[#2C98CA] text-lg font-semibold">
+                  <p className="text-[#f76918] text-lg font-semibold">
                     45+ pre-written Resumes
                   </p>
                   <p className="text-base pt-3 text-[#1B1B1F]">
@@ -708,7 +707,7 @@ export default function Home() {
                   <div className="w-[100%] sm:w-[68%] md:w-[68%] lg:w-[68%] xl:w-[68%] 2xl:w-[68%]">
                     <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-14">
                       <div className="bg-[#FFD9ED] p-5">
-                        <p className="text-[#2C98CA] text-lg font-semibold">
+                        <p className="text-[#f76918] text-lg font-semibold">
                           AI expertise integrated
                         </p>
                         <p className="text-base pt-3 text-[#1B1B1F]">
@@ -723,7 +722,7 @@ export default function Home() {
                         </p>
                       </div>
                       <div className="bg-[#D8DAFF] p-7">
-                        <p className="text-[#2C98CA] text-lg font-semibold">
+                        <p className="text-[#f76918] text-lg font-semibold">
                           Edit your CV the way you want
                         </p>
                         <p className="text-base pt-3 text-[#1B1B1F]">
@@ -850,7 +849,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-[#2C98CA]">Or</p>
+                  <p className="text-2xl font-bold text-[#f76918]">Or</p>
                 </div>
                 <div className="flex lg:flex-row flex-col gap-10  lg:p-1 p-5">
                   <div className="lg:w-[50%] w-full h-auto image_content flex justify-center items-center lg:order-first order-last lg:bg-transparent ">
@@ -903,7 +902,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="lg:w-[10%] w-full ">
-                    <p className="text-2xl font-bold text-[#2C98CA] mt-20 text-center">
+                    <p className="text-2xl font-bold text-[#f76918] mt-20 text-center">
                       Or
                     </p>
                   </div>

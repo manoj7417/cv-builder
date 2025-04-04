@@ -28,21 +28,21 @@ const CVStudioPage = () => {
         "Create your CV with professional templates, powered by Artificial Intelligence.",
       link: "/resume",
     },
-    // {
-    //   title: "CV Optimiser",
-    //   image: a2,
-    //   description:
-    //     "Analyse your resume with AI and optimise it for your desired Job Profile.",
-    //   link: "/resume-analyzer",
-    // },
-    // {
-    //   title: "CV Match",
-    //   image: a3,
-    //   description:
-    //     "Assess your personality traits and cognitive abilities to find the best career path.",
-    //   current: false,
-    //   link: "/job-cv",
-    // },
+    {
+      title: "CV Optimiser",
+      image: a2,
+      description:
+        "Analyse your resume with AI and optimise it for your desired Job Profile.",
+      link: "/resume-analyzer",
+    },
+    {
+      title: "CV Match",
+      image: a3,
+      description:
+        "Assess your personality traits and cognitive abilities to find the best career path.",
+      current: false,
+      link: "/job-cv",
+    },
   ];
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const CVStudioPage = () => {
       >
         <div className="container ">
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">Project X Pro CV Studio,</span>{" "}
+            <span className="text-[#f76918]">FREE JOB AI Pro CV Studio,</span>{" "}
             Your Automated Resume Builder!
           </h1>
           <h2 className="text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
@@ -89,7 +89,7 @@ const CVStudioPage = () => {
                     <div className="pl-4 pr-4 pb-4">
                       <Link
                         href={animation?.link}
-                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-blue-950 hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"
+                        className="mt-auto block w-[60%] mx-auto rounded-sm bg-[#f76918] hover:bg-blue-800 p-3 text-sm font-semibold text-white shadow-sm text-center"
                       >
                         Try Now
                       </Link>

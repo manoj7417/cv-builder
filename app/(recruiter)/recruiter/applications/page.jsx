@@ -1,58 +1,69 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
-import { BriefcaseIcon, MapPinIcon, CurrencyDollarIcon, CalendarIcon, UserGroupIcon, ChartBarIcon, FunnelIcon, UserIcon, ClockIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
-import cookies from 'js-cookie'
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import {
+  BriefcaseIcon,
+  MapPinIcon,
+  CurrencyDollarIcon,
+  CalendarIcon,
+  UserGroupIcon,
+  ChartBarIcon,
+  FunnelIcon,
+  UserIcon,
+  ClockIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/24/outline";
+import cookies from "js-cookie";
 
 const ApplicationsPage = () => {
-  const [applications, setApplications] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [selectedStatus, setSelectedStatus] = useState('all')
-  const router = useRouter()
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState("all");
+  const router = useRouter();
 
   useEffect(() => {
-    fetchApplications()
-  }, [])
+    fetchApplications();
+  }, []);
 
   const fetchApplications = async () => {
     try {
-      const token = cookies.get('token')
+      const token = cookies.get("token");
       if (!token) {
-        router.push('/recruiter/signin')
-        return
+        router.push("/recruiter/signin");
+        return;
       }
 
-      setLoading(true)
-      
-      const response = await fetch('/api/recruiters/jobs', {
+      setLoading(true);
+
+      const response = await fetch("/api/recruiters/jobs", {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || 'Failed to fetch applications')
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to fetch applications");
       }
 
-      const data = await response.json()
+      const data = await response.json();
 
-      if (data.status === 'success') {
-        setApplications(data.data.jobs || [])
+      if (data.status === "success") {
+        setApplications(data.data.jobs || []);
       } else {
-        throw new Error(data.message || 'Failed to fetch applications')
+        throw new Error(data.message || "Failed to fetch applications");
       }
     } catch (error) {
-      console.error('Error fetching applications:', error)
-      setError(error.message || 'Failed to load applications')
-      toast.error(error.message || 'Failed to load applications')
+      console.error("Error fetching applications:", error);
+      setError(error.message || "Failed to load applications");
+      toast.error(error.message || "Failed to load applications");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // Calculate statistics correctly
   const calculateStats = () => {
@@ -60,34 +71,42 @@ const ApplicationsPage = () => {
     let pendingApplications = 0;
     let acceptedApplications = 0;
 
-    applications.forEach(job => {
+    applications.forEach((job) => {
       if (job.applications) {
         totalApplications += job.applications.length;
-        pendingApplications += job.applications.filter(app => app.status === 'pending').length;
-        acceptedApplications += job.applications.filter(app => app.status === 'accepted').length;
+        pendingApplications += job.applications.filter(
+          (app) => app.status === "pending"
+        ).length;
+        acceptedApplications += job.applications.filter(
+          (app) => app.status === "accepted"
+        ).length;
       }
     });
 
     return {
       total: totalApplications,
       pending: pendingApplications,
-      accepted: acceptedApplications
+      accepted: acceptedApplications,
     };
   };
 
   const ApplicationStats = () => {
     const stats = calculateStats();
-    
+
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-blue-600">Total Applications</p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">{stats.total}</p>
+              <p className="text-sm font-medium text-[#f76918]">
+                Total Applications
+              </p>
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {stats.total}
+              </p>
             </div>
             <div className="p-3 bg-blue-50 rounded-lg">
-              <UserIcon className="h-6 w-6 text-blue-600" />
+              <UserIcon className="h-6 w-6 text-[#f76918]" />
             </div>
           </div>
         </div>
@@ -95,8 +114,12 @@ const ApplicationsPage = () => {
         <div className="bg-white p-6 rounded-xl shadow-sm border border-yellow-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-yellow-600">Pending Review</p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">{stats.pending}</p>
+              <p className="text-sm font-medium text-yellow-600">
+                Pending Review
+              </p>
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {stats.pending}
+              </p>
             </div>
             <div className="p-3 bg-yellow-50 rounded-lg">
               <ClockIcon className="h-6 w-6 text-yellow-600" />
@@ -108,7 +131,9 @@ const ApplicationsPage = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-green-600">Accepted</p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">{stats.accepted}</p>
+              <p className="mt-2 text-3xl font-bold text-gray-900">
+                {stats.accepted}
+              </p>
             </div>
             <div className="p-3 bg-green-50 rounded-lg">
               <CheckCircleIcon className="h-6 w-6 text-green-600" />
@@ -120,10 +145,11 @@ const ApplicationsPage = () => {
   };
 
   const JobCard = ({ job }) => {
-    const applicationCount = job.applications?.length || 0
-    const statusColor = job.status === 'active' 
-      ? 'bg-green-100 text-green-800 border border-green-200' 
-      : 'bg-gray-100 text-gray-800 border border-gray-200'
+    const applicationCount = job.applications?.length || 0;
+    const statusColor =
+      job.status === "active"
+        ? "bg-green-100 text-green-800 border border-green-200"
+        : "bg-gray-100 text-gray-800 border border-gray-200";
 
     return (
       <div className="bg-white rounded-lg shadow-sm border-l-4 border border-blue-500 hover:shadow-md transition-all duration-200 group">
@@ -131,10 +157,12 @@ const ApplicationsPage = () => {
           {/* Left Section: Job Info */}
           <div className="flex-1 min-w-0 mr-4">
             <div className="flex items-center gap-3 mb-1">
-              <h3 className="text-base font-semibold text-gray-900 truncate group-hover:text-blue-600 transition-colors">
+              <h3 className="text-base font-semibold text-gray-900 truncate group-hover:text-[#f76918] transition-colors">
                 {job.title}
               </h3>
-              <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor}`}>
+              <span
+                className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor}`}
+              >
                 {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
               </span>
             </div>
@@ -145,15 +173,16 @@ const ApplicationsPage = () => {
               </span>
               <span className="flex items-center">
                 <CalendarIcon className="w-4 h-4 mr-1 text-gray-400" />
-                {new Date(job.createdAt).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric'
+                {new Date(job.createdAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
                 })}
               </span>
               {job.salary && (
                 <span className="flex items-center">
                   <CurrencyDollarIcon className="w-4 h-4 mr-1 text-gray-400" />
-                  {job.salary.currency} {job.salary.min.toLocaleString()} - {job.salary.max.toLocaleString()}
+                  {job.salary.currency} {job.salary.min.toLocaleString()} -{" "}
+                  {job.salary.max.toLocaleString()}
                 </span>
               )}
             </div>
@@ -164,7 +193,8 @@ const ApplicationsPage = () => {
             <div className="flex items-center px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700">
               <UserGroupIcon className="w-4 h-4 mr-1.5" />
               <span className="text-sm font-medium whitespace-nowrap">
-                {applicationCount} {applicationCount === 1 ? 'Application' : 'Applications'}
+                {applicationCount}{" "}
+                {applicationCount === 1 ? "Application" : "Applications"}
               </span>
             </div>
             <button
@@ -172,15 +202,25 @@ const ApplicationsPage = () => {
               className="inline-flex items-center px-3 py-1.5 border border-transparent rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
             >
               View Details
-              <svg className="ml-1.5 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="ml-1.5 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 py-8">
@@ -219,7 +259,9 @@ const ApplicationsPage = () => {
           ) : error ? (
             <div className="text-center py-12">
               <BriefcaseIcon className="mx-auto h-12 w-12 text-red-400" />
-              <h3 className="mt-2 text-sm font-medium text-red-900">Error loading jobs</h3>
+              <h3 className="mt-2 text-sm font-medium text-red-900">
+                Error loading jobs
+              </h3>
               <p className="mt-1 text-sm text-red-500">{error}</p>
               <button
                 onClick={fetchApplications}
@@ -231,7 +273,9 @@ const ApplicationsPage = () => {
           ) : applications.length === 0 ? (
             <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-200">
               <UserIcon className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No applications</h3>
+              <h3 className="mt-2 text-sm font-medium text-gray-900">
+                No applications
+              </h3>
               <p className="mt-1 text-sm text-gray-500">
                 You haven&apos;t received any applications yet.
               </p>
@@ -239,17 +283,19 @@ const ApplicationsPage = () => {
           ) : (
             <div className="p-6 grid gap-4">
               {applications
-                .filter(job => selectedStatus === 'all' || job.status === selectedStatus)
+                .filter(
+                  (job) =>
+                    selectedStatus === "all" || job.status === selectedStatus
+                )
                 .map((job) => (
                   <JobCard key={job._id} job={job} />
-                ))
-              }
+                ))}
             </div>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ApplicationsPage 
+export default ApplicationsPage;

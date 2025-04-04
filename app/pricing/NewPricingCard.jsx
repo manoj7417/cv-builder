@@ -215,7 +215,7 @@ export default function Example() {
           />
         </div>
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600">Pricing</h2>
+          <h2 className="text-base/7 font-semibold text-[#f76918]">Pricing</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl">
             Choose the right plan for you
           </p>
@@ -243,7 +243,7 @@ export default function Example() {
               <h3
                 id={tier.id}
                 className={classNames(
-                  tier.featured ? "text-indigo-400" : "text-indigo-600",
+                  tier.featured ? "text-[#f76918]" : "text-[#f76918]",
                   "text-base/7 font-semibold"
                 )}
               >
@@ -287,7 +287,7 @@ export default function Example() {
                     <CheckIcon
                       aria-hidden="true"
                       className={classNames(
-                        tier.featured ? "text-indigo-400" : "text-indigo-600",
+                        tier.featured ? "text-[#f76918]" : "text-[#f76918]",
                         "h-6 w-5 flex-none"
                       )}
                     />
@@ -297,7 +297,7 @@ export default function Example() {
               </ul>
               <button
                 onClick={() => handlePayment(tier, tierIdx)}
-                className="mt-8 w-full bg-indigo-600 text-white font-semibold px-4 py-2 rounded-md"
+                className="mt-8 w-full bg-[#f76918] text-white font-semibold px-4 py-2 rounded-md"
                 disabled={loadingIndex === tierIdx}
               >
                 {loadingIndex === tierIdx ? "Processing..." : "Get started"}

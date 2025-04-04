@@ -175,7 +175,7 @@ function UpdateProgram() {
               <Tooltip>
                 <TooltipTrigger>
                   <ArrowLeft
-                    className="h-6 w-6 cursor-pointer hover:text-blue-600"
+                    className="h-6 w-6 cursor-pointer hover:text-[#f76918]"
                     onClick={() => router.back()}
                   />
                 </TooltipTrigger>
@@ -204,7 +204,9 @@ function UpdateProgram() {
                 {...register("title")}
               />
               {errors.title && (
-                <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.title.message}
+                </p>
               )}
             </div>
 
@@ -223,7 +225,9 @@ function UpdateProgram() {
                 />
               </div>
               {errors.description && (
-                <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.description.message}
+                </p>
               )}
             </div>
 
@@ -294,8 +298,8 @@ function UpdateProgram() {
                 {programVideo ? (
                   <div className="space-y-4">
                     <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
-                      <ReactPlayer 
-                        url={programVideo} 
+                      <ReactPlayer
+                        url={programVideo}
                         width="100%"
                         height="100%"
                         className="react-player"
@@ -439,7 +443,7 @@ export default UpdateProgram;
     .editor-container .ql-toolbar {
       padding: 0.5rem;
     }
-    
+
     .editor-container .ql-toolbar .ql-formats {
       margin-right: 8px;
     }
@@ -455,4 +459,4 @@ export default UpdateProgram;
   .react-player > div {
     position: absolute;
   }
-`}</style>
+`}</style>;

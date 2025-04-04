@@ -1,150 +1,198 @@
-'use client'
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FaBriefcase, FaUsers, FaHandsHelping, FaGraduationCap, FaHeartbeat, FaLightbulb, FaChalkboardTeacher, FaArrowRight, FaChartLine, FaUserPlus, FaBullhorn } from 'react-icons/fa'
-import { MdBusinessCenter, MdVolunteerActivism, MdTrendingUp } from 'react-icons/md'
-import { BsPersonWorkspace } from 'react-icons/bs'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FaBriefcase,
+  FaUsers,
+  FaHandsHelping,
+  FaGraduationCap,
+  FaHeartbeat,
+  FaLightbulb,
+  FaChalkboardTeacher,
+  FaArrowRight,
+  FaChartLine,
+  FaUserPlus,
+  FaBullhorn,
+} from "react-icons/fa";
+import {
+  MdBusinessCenter,
+  MdVolunteerActivism,
+  MdTrendingUp,
+} from "react-icons/md";
+import { BsPersonWorkspace } from "react-icons/bs";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const CorporatePage = () => {
-  const router = useRouter()
-  const [hoveredService, setHoveredService] = useState(null)
-  
+  const router = useRouter();
+  const [hoveredService, setHoveredService] = useState(null);
+
   const handleServiceClick = (serviceSlug) => {
-    router.push(`/corporate/services/${serviceSlug}`)
-  }
+    router.push(`/corporate/services/${serviceSlug}`);
+  };
 
   const services = [
     {
       title: "Back to Work Programs",
-      description: "Specialized programs supporting mental health returnees and ex-offenders in workplace reintegration.",
-      icon: <FaBriefcase className="text-4xl text-blue-600" />,
+      description:
+        "Specialized programs supporting mental health returnees and ex-offenders in workplace reintegration.",
+      icon: <FaBriefcase className="text-4xl text-[#f76918]" />,
       category: "Inclusion",
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=500&auto=format",
-      slug: "back-to-work-programs"
+      image:
+        "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=500&auto=format",
+      slug: "back-to-work-programs",
     },
     {
       title: "Recruitment Process Optimization",
-      description: "Expert consultation to refine and enhance your recruitment strategies and processes.",
-      icon: <MdBusinessCenter className="text-4xl text-blue-600" />,
+      description:
+        "Expert consultation to refine and enhance your recruitment strategies and processes.",
+      icon: <MdBusinessCenter className="text-4xl text-[#f76918]" />,
       category: "Recruitment",
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=500&auto=format",
-      slug: "recruitment-optimization"
+      image:
+        "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=500&auto=format",
+      slug: "recruitment-optimization",
     },
     {
       title: "Outplacement Support",
-      description: "Comprehensive support for transitioning employees, ensuring smooth career changes.",
-      icon: <FaHandsHelping className="text-4xl text-blue-600" />,
+      description:
+        "Comprehensive support for transitioning employees, ensuring smooth career changes.",
+      icon: <FaHandsHelping className="text-4xl text-[#f76918]" />,
       category: "Career Transition",
-      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=500&auto=format",
-      slug: "outplacement-support"
+      image:
+        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=500&auto=format",
+      slug: "outplacement-support",
     },
     {
       title: "Corporate Training Programs",
-      description: "Customized training sessions tailored to your industry and skill requirements.",
-      icon: <FaGraduationCap className="text-4xl text-blue-600" />,
+      description:
+        "Customized training sessions tailored to your industry and skill requirements.",
+      icon: <FaGraduationCap className="text-4xl text-[#f76918]" />,
       category: "Training",
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=500&auto=format",
-      slug: "corporate-training"
+      image:
+        "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=500&auto=format",
+      slug: "corporate-training",
     },
     {
       title: "Team Building Retreats",
-      description: "Engaging events designed to enhance team cohesion and workplace morale.",
-      icon: <FaUsers className="text-4xl text-blue-600" />,
+      description:
+        "Engaging events designed to enhance team cohesion and workplace morale.",
+      icon: <FaUsers className="text-4xl text-[#f76918]" />,
       category: "Team Development",
-      image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=500&auto=format",
-      slug: "team-building"
+      image:
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=500&auto=format",
+      slug: "team-building",
     },
     {
       title: "Executive Coaching",
-      description: "One-on-one coaching sessions for leadership excellence and performance optimization.",
-      icon: <BsPersonWorkspace className="text-4xl text-blue-600" />,
+      description:
+        "One-on-one coaching sessions for leadership excellence and performance optimization.",
+      icon: <BsPersonWorkspace className="text-4xl text-[#f76918]" />,
       category: "Leadership",
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=500&auto=format",
-      slug: "executive-coaching"
+      image:
+        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=500&auto=format",
+      slug: "executive-coaching",
     },
     {
       title: "Corporate Wellness Programs",
-      description: "Holistic wellness initiatives promoting employee health and mental well-being.",
-      icon: <FaHeartbeat className="text-4xl text-blue-600" />,
+      description:
+        "Holistic wellness initiatives promoting employee health and mental well-being.",
+      icon: <FaHeartbeat className="text-4xl text-[#f76918]" />,
       category: "Wellness",
-      image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=500&auto=format",
-      slug: "corporate-wellness"
+      image:
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=500&auto=format",
+      slug: "corporate-wellness",
     },
     {
       title: "Professional Development",
-      description: "Comprehensive courses and workshops for continuous career advancement.",
-      icon: <MdTrendingUp className="text-4xl text-blue-600" />,
+      description:
+        "Comprehensive courses and workshops for continuous career advancement.",
+      icon: <MdTrendingUp className="text-4xl text-[#f76918]" />,
       category: "Development",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=500&auto=format",
-      slug: "professional-development"
+      image:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=500&auto=format",
+      slug: "professional-development",
     },
     {
       title: "CSR Initiatives",
-      description: "Meaningful programs connecting your business with community impact.",
-      icon: <MdVolunteerActivism className="text-4xl text-blue-600" />,
+      description:
+        "Meaningful programs connecting your business with community impact.",
+      icon: <MdVolunteerActivism className="text-4xl text-[#f76918]" />,
       category: "Social Impact",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=500&auto=format",
-      slug: "csr-initiatives"
+      image:
+        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=500&auto=format",
+      slug: "csr-initiatives",
     },
     {
       title: "Innovation Workshops",
-      description: "Cutting-edge sessions on technology and innovative business practices.",
-      icon: <FaLightbulb className="text-4xl text-blue-600" />,
+      description:
+        "Cutting-edge sessions on technology and innovative business practices.",
+      icon: <FaLightbulb className="text-4xl text-[#f76918]" />,
       category: "Innovation",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=500&auto=format",
-      slug: "innovation-workshops"
+      image:
+        "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=500&auto=format",
+      slug: "innovation-workshops",
     },
     {
       title: "Leadership Development",
-      description: "Comprehensive programs to cultivate next-generation leaders.",
-      icon: <FaChalkboardTeacher className="text-4xl text-blue-600" />,
+      description:
+        "Comprehensive programs to cultivate next-generation leaders.",
+      icon: <FaChalkboardTeacher className="text-4xl text-[#f76918]" />,
       category: "Leadership",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=500&auto=format",
-      slug: "leadership-development"
+      image:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=500&auto=format",
+      slug: "leadership-development",
     },
     {
       title: "Mental Health First Aid",
-      description: "Comprehensive training for workplace mental health support and crisis management.",
-      icon: <FaHeartbeat className="text-4xl text-blue-600" />,
+      description:
+        "Comprehensive training for workplace mental health support and crisis management.",
+      icon: <FaHeartbeat className="text-4xl text-[#f76918]" />,
       category: "Wellness",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2000&auto=format",
-      slug: "mental-health-first-aid"
+      image:
+        "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2000&auto=format",
+      slug: "mental-health-first-aid",
     },
     {
       title: "Disability Confident",
-      description: "Programs to create inclusive workplaces and support disability employment.",
-      icon: <FaUsers className="text-4xl text-blue-600" />,
+      description:
+        "Programs to create inclusive workplaces and support disability employment.",
+      icon: <FaUsers className="text-4xl text-[#f76918]" />,
       category: "Inclusion",
-      image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=2000&auto=format",
-      slug: "disability-confident"
+      image:
+        "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=2000&auto=format",
+      slug: "disability-confident",
     },
     {
       title: "Sales Training",
-      description: "Advanced sales techniques and strategies for revenue growth.",
-      icon: <FaChartLine className="text-4xl text-blue-600" />,
+      description:
+        "Advanced sales techniques and strategies for revenue growth.",
+      icon: <FaChartLine className="text-4xl text-[#f76918]" />,
       category: "Training",
-      image: "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2000&auto=format",
-      slug: "sales-training"
+      image:
+        "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2000&auto=format",
+      slug: "sales-training",
     },
     {
       title: "Recruitment Days",
-      description: "Organized recruitment events to attract and assess top talent.",
-      icon: <FaUserPlus className="text-4xl text-blue-600" />,
+      description:
+        "Organized recruitment events to attract and assess top talent.",
+      icon: <FaUserPlus className="text-4xl text-[#f76918]" />,
       category: "Recruitment",
-      image: "https://images.unsplash.com/photo-1560439514-4e9645039924?q=80&w=2000&auto=format",
-      slug: "recruitment-days"
+      image:
+        "https://images.unsplash.com/photo-1560439514-4e9645039924?q=80&w=2000&auto=format",
+      slug: "recruitment-days",
     },
     {
       title: "Marketing Training",
-      description: "Modern marketing strategies and digital skills development.",
-      icon: <FaBullhorn className="text-4xl text-blue-600" />,
+      description:
+        "Modern marketing strategies and digital skills development.",
+      icon: <FaBullhorn className="text-4xl text-[#f76918]" />,
       category: "Training",
-      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2000&auto=format",
-      slug: "marketing-training"
-    }
-  ]
+      image:
+        "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2000&auto=format",
+      slug: "marketing-training",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -158,7 +206,7 @@ const CorporatePage = () => {
           className="object-cover"
           sizes="100vw"
         />
-        
+
         {/* Light overlay for text readability */}
         <div className="absolute inset-0 bg-black/40">
           <div className="container mx-auto px-4 h-full flex flex-col justify-center">
@@ -169,20 +217,22 @@ const CorporatePage = () => {
               className="max-w-3xl"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
-                Transform Your <span className="text-blue-300">Workforce</span> with Our Corporate Solutions
+                Transform Your <span className="text-blue-300">Workforce</span>{" "}
+                with Our Corporate Solutions
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
-                Comprehensive solutions designed to elevate your organization&apos;s performance and employee potential.
+                Comprehensive solutions designed to elevate your
+                organization&apos;s performance and employee potential.
               </p>
               <div className="flex flex-wrap gap-4">
-                <button 
-                  onClick={() => router.push('/contact-us')}
+                <button
+                  onClick={() => router.push("/contact-us")}
                   className="bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-all transform hover:-translate-y-1"
                 >
                   Get Started
                 </button>
-                <button 
-                  onClick={() => router.push('/about-us')}
+                <button
+                  onClick={() => router.push("/about-us")}
                   className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-all"
                 >
                   Learn More
@@ -210,7 +260,9 @@ const CorporatePage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <h3 className="text-4xl font-bold text-blue-600 mb-2">{stat.number}</h3>
+                <h3 className="text-4xl font-bold text-[#f76918] mb-2">
+                  {stat.number}
+                </h3>
                 <p className="text-gray-600">{stat.label}</p>
               </motion.div>
             ))}
@@ -227,7 +279,8 @@ const CorporatePage = () => {
         >
           <h2 className="text-4xl font-bold mb-4">Our Corporate Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to meet your organization&apos;s unique needs and challenges.
+            Comprehensive solutions tailored to meet your organization&apos;s
+            unique needs and challenges.
           </p>
         </motion.div>
 
@@ -256,15 +309,19 @@ const CorporatePage = () => {
               <div className="p-6 relative">
                 <div className="flex items-center gap-3 mb-4">
                   {service.icon}
-                  <span className="text-sm font-semibold text-blue-600">
+                  <span className="text-sm font-semibold text-[#f76918]">
                     {service.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-[#f76918] transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <div className={`flex items-center text-blue-600 transition-opacity duration-300 ${hoveredService === index ? 'opacity-100' : 'opacity-0'}`}>
+                <div
+                  className={`flex items-center text-[#f76918] transition-opacity duration-300 ${
+                    hoveredService === index ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <span className="mr-2">Learn More</span>
                   <FaArrowRight />
                 </div>
@@ -284,7 +341,8 @@ const CorporatePage = () => {
           >
             <h2 className="text-4xl font-bold mb-4">Why Choose Us</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We bring expertise, innovation, and dedication to every partnership.
+              We bring expertise, innovation, and dedication to every
+              partnership.
             </p>
           </motion.div>
 
@@ -293,18 +351,18 @@ const CorporatePage = () => {
               {
                 title: "Expert Team",
                 description: "Industry professionals with proven track records",
-                icon: <FaUsers className="text-4xl text-blue-600" />
+                icon: <FaUsers className="text-4xl text-[#f76918]" />,
               },
               {
                 title: "Customized Solutions",
                 description: "Tailored approaches for your specific needs",
-                icon: <FaLightbulb className="text-4xl text-blue-600" />
+                icon: <FaLightbulb className="text-4xl text-[#f76918]" />,
               },
               {
                 title: "Proven Results",
                 description: "Measurable outcomes and success stories",
-                icon: <MdTrendingUp className="text-4xl text-blue-600" />
-              }
+                icon: <MdTrendingUp className="text-4xl text-[#f76918]" />,
+              },
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -329,13 +387,16 @@ const CorporatePage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-white">Ready to Transform Your Workplace?</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">
+              Ready to Transform Your Workplace?
+            </h2>
             <p className="text-gray-200 mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss how our corporate solutions can help your organization thrive in today&apos;s competitive landscape.
+              Let&apos;s discuss how our corporate solutions can help your
+              organization thrive in today&apos;s competitive landscape.
             </p>
-            <button 
-              onClick={() => router.push('/contact-us')}
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors text-lg font-semibold"
+            <button
+              onClick={() => router.push("/contact-us")}
+              className="bg-white text-[#f76918] px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors text-lg font-semibold"
             >
               Schedule a Consultation
             </button>
@@ -343,7 +404,7 @@ const CorporatePage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CorporatePage
+export default CorporatePage;

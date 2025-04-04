@@ -44,14 +44,14 @@ const features = [
 ];
 const faqs = [
   {
-    question: "What is ProjectX Resume?",
+    question: "What is FREE JOB AI Resume?",
     answer:
-      "ProjectX Resume is a platform to create, edit, and download professional resumes using customizable templates.",
+      "FREE JOB AI Resume is a platform to create, edit, and download professional resumes using customizable templates.",
   },
   {
-    question: "Is ProjectX Resume really free?",
+    question: "Is FREE JOB AI Resume really free?",
     answer:
-      "Yes! ProjectX Resume offers free resume templates and tools to get started easily.",
+      "Yes! FREE JOB AI Resume offers free resume templates and tools to get started easily.",
   },
   {
     question:
@@ -67,7 +67,7 @@ const faqs = [
   {
     question: "Can you give me feedback on my resume?",
     answer:
-      "Yes, ProjectX Resume offers AI-powered resume feedback to improve your content and formatting.",
+      "Yes, FREE JOB AI Resume offers AI-powered resume feedback to improve your content and formatting.",
   },
   {
     question: "Will my resume be made public?",
@@ -234,7 +234,7 @@ export default function HomepageNew() {
               <div className="flex justify-center xs:justify-start">
                 <button
                   onClick={handleButtonClick}
-                  className="bg-blue-950 text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
+                  className="bg-[#f76918] text-white py-3 px-8 rounded border-2 border-transparent transition duration-300 hover:bg-blue-700 hover:border-blue-500"
                 >
                   Get Started
                 </button>
@@ -244,13 +244,13 @@ export default function HomepageNew() {
             <div className="max-w-7xl mx-auto text-center">
               {/* #1 Resume Builder Badge */}
               <div>
-                <div className="mb-4 text-xs font-semibold text-blue-600 uppercase tracking-wide">
+                <div className="mb-4 text-xs font-semibold text-[#f76918] uppercase tracking-wide">
                   THE #1 RESUME BUILDER
                 </div>
 
                 {/* Main Heading */}
                 <h1
-                  className="text-8xl font-bold text-gray-900 mb-4"
+                  className="text-4xl md:text-8xl font-bold text-gray-900 mb-4"
                   style={{ lineHeight: "1.2 !importatnt" }}
                 >
                   Create a Job-Ready Resume in Minutes
@@ -327,22 +327,23 @@ export default function HomepageNew() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="lg:w-1/2">
             <h2 className="text-4xl font-bold leading-tight text-gray-800 sm:text-5xl">
-              Facing CV Rejections? It's Time for You to start
-              creatingATS-Friendly CVs!
+              Tired of sending CVs into the void?
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Sending out CVs as a part of a job application is the first and
-              non-negotiable step. However, many job applications get rejected
-              in this very process because employers, recruiters, or companies
-              now depend on ATS scanner. These are Application Tracking System
-              scrutinises for your information before manual checks. But in case
-              your CV is not compatible with the ATS, it gets rejected,
-              irrespective of the quality of your profile.
+              The modern job hunt demands Modern CVs. Don't let AI stand between
+              you and your next opportunity! Stop getting filtered out by
+              archaic resume formats. Free Job AI empowers you to create
+              ATS-optimized CVs that speak the language of today's hiring
+              landscape. We'll help you highlight your skills, break through the
+              noise, and land the interviews you're qualified for. Create your
+              CV now, and reclaim your job search.
             </p>
             <div className="mt-8 flex gap-6 flex-wrap">
-              <button className="flex items-center gap-2 px-6 py-3 bg-[#f76918] text-white rounded-md shadow-md ">
-                <span>Create CV Now!</span>
-              </button>
+              <Link href="/resume">
+                <button className="flex items-center gap-2 px-6 py-3 bg-[#f76918] text-white rounded-md shadow-md ">
+                  <span>Create CV Now!</span>
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -391,9 +392,11 @@ export default function HomepageNew() {
               by millions of professionals.
             </p>
             <div className="mt-8 flex gap-6 flex-wrap">
-              <button className="flex items-center gap-2 px-6 py-3 bg-[#f76918] text-white rounded-md shadow-md ">
-                <span>Create CV Now!</span>
-              </button>
+              <Link href="/resume">
+                <button className="flex items-center gap-2 px-6 py-3 bg-[#f76918] text-white rounded-md shadow-md ">
+                  <span>Create CV Now!</span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -451,28 +454,42 @@ export default function HomepageNew() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <h2 className="text-3xl font-semibold text-gray-800">
-              Creating CVs that Reflect Perfection
+              Crafting the perfect CV isn't an easy task – it's an art, and
+              we've mastered it.
             </h2>
             <p className="text-lg text-gray-600">
-              Explore unlimited possibilities with the power of a
-              precision-crafted CV by creating a resume that aligns with your
-              Professional Profile, employing our customised Curriculum Vitae
-              template.
+              Drafting a CV isn't just about documenting your experience; it's
+              about carving a powerful portrayal that showcases your
+              professional excellence. At Free Job AI, we empower you to
+              transcend generic resumes and work with the result of a document
+              that truly represents your unique career journey. Why choose us?
+              Because we're not just another CV builder. We're the industry's
+              leading platform, driven by cutting-edge technology and dedicated
+              to your success. Explore the boundless possibilities of a
+              customized CV, where every detail is meticulously aligned with
+              your professional profile.
             </p>
             <ul className="space-y-4 text-lg text-gray-600">
               <li className="flex items-center">
+                <span className="mr-3 text-green-500">✔️</span> Customizable
+                curriculum templates,
+              </li>
+              <li className="flex items-center">
                 <span className="mr-3 text-green-500">✔️</span> Professional
-                Templates
+                templates,
               </li>
               <li className="flex items-center">
-                <span className="mr-3 text-green-500">✔️</span> User-Friendly
-                Interface
+                <span className="mr-3 text-green-500">✔️</span> User-friendly
+                interface ,
               </li>
               <li className="flex items-center">
-                <span className="mr-3 text-green-500">✔️</span> Instant Download
-                & Print Options
+                <span className="mr-3 text-green-500">✔️</span> Ready to
+                download option
               </li>
             </ul>
+            <h3 className="text-xl font-semibold mb-2">
+              Choose Free Job AI – choose the best.
+            </h3>
           </div>
           <div className="relative">
             <div className="absolute top-0 left-0 right-0 bottom-0  opacity-50"></div>
@@ -591,11 +608,11 @@ export default function HomepageNew() {
           </div>
         </div> */}
 
-        <TabResume />
-        <WorkTogether />
-        <ServiceSection />
+        {/* <TabResume /> */}
+        {/* <WorkTogether /> */}
+        {/* <ServiceSection /> */}
         <div className="min-h-screen bg-white py-12 px-6 md:px-20">
-          <h2 className="text-sm text-blue-600 text-center font-medium uppercase mb-2">
+          <h2 className="text-sm text-[#f76918] text-center font-medium uppercase mb-2">
             FAQ
           </h2>
           <h1 className="text-4xl font-bold text-center mb-10">
@@ -621,7 +638,7 @@ export default function HomepageNew() {
             ))}
             <div className="text-center text-sm text-gray-500 mt-8">
               More questions? Visit our{" "}
-              <a href="#" className="text-blue-600 underline">
+              <a href="#" className="text-[#f76918] underline">
                 FAQ library
               </a>
               .
@@ -635,7 +652,7 @@ export default function HomepageNew() {
       {showFloatingButton && (
         <div className="fixed bottom-4 left-0 right-0 w-full flex justify-center">
           <button
-            className="bg-[#2C98CA] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block"
+            className="bg-[#f76918] text-white py-3 px-8 rounded hover:bg-blue-700 transition duration-300 hidden xs:block"
             onClick={handleButtonClick}
           >
             <span>Explore Now</span>

@@ -22,7 +22,7 @@ const coaches = [
     jobProfile: {
       title: "Web Developer",
       backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
+      textColor: "text-[#f76918]",
     },
     href: "#",
     imageSrc: "/coach-blog-1.png",
@@ -78,7 +78,7 @@ const coaches = [
     jobProfile: {
       title: "UX/UI Designer",
       backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
+      textColor: "text-[#f76918]",
     },
     href: "#",
     imageSrc: "/coach-blog-2.png",
@@ -288,7 +288,7 @@ const coaches = [
     jobProfile: {
       title: "Cybersecurity Analyst",
       backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
+      textColor: "text-[#f76918]",
     },
     href: "#",
     imageSrc: "/coach-7.png",
@@ -316,7 +316,7 @@ const coaches = [
     jobProfile: {
       title: "UX/UI",
       backgroundColor: "bg-blue-100",
-      textColor: "text-blue-800",
+      textColor: "text-[#f76918]",
     },
     href: "#",
     imageSrc: "/coach-7.png",
@@ -355,7 +355,7 @@ const CoachBlog = () => {
           </div>
           <div className="add_blog_button">
             <div
-              className="bg-blue-950 text-white px-5 py-2 cursor-pointer text-sm"
+              className="bg-[#f76918] text-white px-5 py-2 cursor-pointer text-sm"
               onClick={() => setShowDialog(true)}
             >
               Add New Blog +
@@ -425,9 +425,9 @@ const CoachBlog = () => {
                       <div>
                         <button
                           type="button"
-                          className="inline-flex w-full items-center justify-center rounded-md bg-blue-950 px-3.5 py-2.5 font-semibold leading-7 text-white"
+                          className="inline-flex w-full items-center justify-center rounded-md bg-[#f76918] px-3.5 py-2.5 font-semibold leading-7 text-white"
                         >
-                            Save Blog
+                          Save Blog
                           <ArrowRight className="ml-2" size={16} />
                         </button>
                       </div>
@@ -457,7 +457,9 @@ const CoachBlog = () => {
                 />
               </div>
               <div className="coaching_name mt-2 text-start ml-5">
-                <span className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} p-1`}>
+                <span
+                  className={`text-[12px] ${item?.jobProfile?.textColor} ${item?.jobProfile?.backgroundColor} p-1`}
+                >
                   {item?.jobProfile?.title}
                 </span>
                 <h3 className="text-sm text-gray-700 mt-2">{item.name}</h3>

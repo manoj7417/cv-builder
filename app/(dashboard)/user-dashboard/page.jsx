@@ -770,7 +770,7 @@ const UserDashboardPage = () => {
                                                   ? "noopener noreferrer"
                                                   : undefined
                                               }
-                                              className={`text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                              className={`text-sm bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
                                                 !item.showJoinMeeting
                                                   ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
                                                   : ""
@@ -877,7 +877,7 @@ const UserDashboardPage = () => {
                                         href={item.meetingLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
+                                        className="text-sm bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap"
                                       >
                                         Join Meeting
                                       </Link>
@@ -913,7 +913,7 @@ const UserDashboardPage = () => {
                                                 ? "noopener noreferrer"
                                                 : undefined
                                             }
-                                            className={`block w-full text-sm bg-blue-950 text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
+                                            className={`block w-full text-sm bg-[#f76918] text-white py-2 px-4 rounded-md font-medium transition duration-300 transform hover:bg-blue-700 whitespace-nowrap ${
                                               !item.showJoinMeeting
                                                 ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
                                                 : ""

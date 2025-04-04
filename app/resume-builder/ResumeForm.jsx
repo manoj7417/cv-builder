@@ -1330,9 +1330,7 @@ export default function ResumeForm() {
             )}
           </div>
           <div>
-            <Label className="text-sm text-blue-900 font-bold">
-              Resume Title
-            </Label>
+            <Label className="text-sm text-black font-bold">Resume Title</Label>
             <Input value={title || ""} onChange={handleResumeTitleChange} />
           </div>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-2">
@@ -1416,7 +1414,7 @@ export default function ResumeForm() {
               <div className="group">
                 <Label
                   htmlFor="Profile"
-                  className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2"
+                  className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2"
                 >
                   {data?.sections?.summary?.name}
                   <MdEdit className="text-xl" />
@@ -1483,7 +1481,7 @@ export default function ResumeForm() {
           <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.education?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -1495,7 +1493,7 @@ export default function ResumeForm() {
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.education?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1541,7 +1539,7 @@ export default function ResumeForm() {
                       defaultChecked
                     >
                       <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
+                        <AccordionTrigger className="group-hover:text-black">
                           <div className="px-3 flex flex-col items-start">
                             {item?.degree || item?.institute ? (
                               <p>
@@ -1690,7 +1688,7 @@ export default function ResumeForm() {
           </div>
           <div className="lg:px-10 px-4">
             <Button
-              className="w-full bg-transparent text-blue-900 p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent text-black p-2 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewEducation}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1704,7 +1702,7 @@ export default function ResumeForm() {
           <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.experience?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -1716,7 +1714,7 @@ export default function ResumeForm() {
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.experience?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -1926,7 +1924,7 @@ export default function ResumeForm() {
           </div>
           <div className="lg:px-10 px-4">
             <Button
-              className="w-full bg-transparent p-2 text-blue-900 font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent p-2 text-black font-semibold hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewExperience}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -1940,7 +1938,7 @@ export default function ResumeForm() {
           <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.projects?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -1952,7 +1950,7 @@ export default function ResumeForm() {
                   }
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.projects?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2127,7 +2125,7 @@ export default function ResumeForm() {
           </div>
           <div className="lg:px-10 px-5">
             <Button
-              className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
+              className="w-full bg-transparent p-2 font-semibold text-black hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
               onClick={handleAddNewProject}
             >
               <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2141,7 +2139,7 @@ export default function ResumeForm() {
           <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between py-3">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.skills?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -2151,7 +2149,7 @@ export default function ResumeForm() {
                   onChange={handleSkillsLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.skills?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2197,7 +2195,7 @@ export default function ResumeForm() {
                       defaultChecked
                     >
                       <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
+                        <AccordionTrigger className="group-hover:text-black">
                           <div className=" px-3 flex flex-col items-start ">
                             <p>{skills.name || "(Not Specified)"}</p>
                           </div>
@@ -2243,7 +2241,7 @@ export default function ResumeForm() {
           <div className="mt-5 lg:px-10 px-4">
             <div>
               <Button
-                className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
+                className="w-full bg-transparent p-2 font-semibold text-black hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
                 onClick={handleAddNewSkills}
               >
                 <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2257,7 +2255,7 @@ export default function ResumeForm() {
         <div className=" lg:px-10 px-5">
           <div className="my-5 flex justify-between w-full items-center ">
             <div className="group">
-              <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+              <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                 {sections?.hobbies?.name}
                 <MdEdit className="text-xl" />
               </Label>
@@ -2267,17 +2265,17 @@ export default function ResumeForm() {
                 onChange={handlehobbieslevelChange}
               />
             </div>
-            <div className="flex items-center justify-center text-blue-900 text-lg">
+            <div className="flex items-center justify-center text-black text-lg">
               {!sections?.hobbies?.visible ? (
                 <GoEyeClosed
-                  className=" cursor-pointer text-blue-900"
+                  className=" cursor-pointer text-black"
                   onClick={() =>
                     setResumeData("sections.hobbies.visible", true)
                   }
                 />
               ) : (
                 <GoEye
-                  className="cursor-pointer text-blue-900"
+                  className="cursor-pointer text-black"
                   onClick={() =>
                     setResumeData("sections.hobbies.visible", false)
                   }
@@ -2332,7 +2330,7 @@ export default function ResumeForm() {
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.awards?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -2342,7 +2340,7 @@ export default function ResumeForm() {
                   onChange={handleawardslevelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.awards?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2388,7 +2386,7 @@ export default function ResumeForm() {
                         defaultChecked
                       >
                         <AccordionItem value={`item-${index}`}>
-                          <AccordionTrigger className="group-hover:text-blue-900">
+                          <AccordionTrigger className="group-hover:text-black">
                             <div className=" px-3 flex flex-col items-start ">
                               <p>{award.name || "(Not Specified)"}</p>
                               <p>{award.date}</p>
@@ -2506,7 +2504,7 @@ export default function ResumeForm() {
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <div className="group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.reference?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -2516,7 +2514,7 @@ export default function ResumeForm() {
                   onChange={handlereferencelevelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.reference?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2562,7 +2560,7 @@ export default function ResumeForm() {
                         defaultChecked
                       >
                         <AccordionItem value={`item-${index}`}>
-                          <AccordionTrigger className="group-hover:text-blue-900">
+                          <AccordionTrigger className="group-hover:text-black">
                             <div className=" px-3 flex flex-col items-start ">
                               <p>{reference?.name || "(Not Specified)"}</p>
                               <p>{reference?.date}</p>
@@ -2680,7 +2678,7 @@ export default function ResumeForm() {
             <div className="mt-5 lg:px-10 px-4">
               <div>
                 <Button
-                  className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  className="w-full bg-transparent text-black font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
                   onClick={handleAddNewreference}
                 >
                   <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2696,7 +2694,7 @@ export default function ResumeForm() {
           <div className="lg:px-10 p-5 rounded-md">
             <div className="my-5 flex justify-between w-full items-center">
               <div className=" w-[40%] group">
-                <Label className="text-2xl group-hover:hidden text-blue-900 font-bold flex items-center gap-2">
+                <Label className="text-2xl group-hover:hidden text-black font-bold flex items-center gap-2">
                   {sections?.certificates?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -2706,7 +2704,7 @@ export default function ResumeForm() {
                   onChange={handlecertificatesLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.certificates?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2752,7 +2750,7 @@ export default function ResumeForm() {
                         defaultChecked
                       >
                         <AccordionItem value={`item-${index}`}>
-                          <AccordionTrigger className="group-hover:text-blue-900">
+                          <AccordionTrigger className="group-hover:text-black">
                             <div className=" px-3 flex flex-col items-start ">
                               <p>{certificate.name || "(Not Specified)"}</p>
                               <p>{certificate.date}</p>
@@ -2829,7 +2827,7 @@ export default function ResumeForm() {
             <div className="mt-5 lg:px-10 px-4">
               <div>
                 <Button
-                  className="w-full bg-transparent text-blue-900 font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
+                  className="w-full bg-transparent text-black font-bold hover:bg-blue-100 h-8 flex justify-start rounded-none item-center"
                   onClick={handleAddNewcertificate}
                 >
                   <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2845,7 +2843,7 @@ export default function ResumeForm() {
           <div className="space-y-2 lg:px-10 px-5">
             <div className="flex justify-between">
               <div className=" w-[40%] group">
-                <Label className="text-2xl flex group-hover:hidden text-blue-900 font-bold items-center gap-2">
+                <Label className="text-2xl flex group-hover:hidden text-black font-bold items-center gap-2">
                   {sections?.language?.name}
                   <MdEdit className="text-xl" />
                 </Label>
@@ -2855,7 +2853,7 @@ export default function ResumeForm() {
                   onChange={handlelanguageLabelChange}
                 />
               </div>
-              <div className="flex items-center justify-center text-blue-900 text-lg">
+              <div className="flex items-center justify-center text-black text-lg">
                 {!sections?.language?.visible ? (
                   <GoEyeClosed
                     className=" cursor-pointer"
@@ -2897,7 +2895,7 @@ export default function ResumeForm() {
                       defaultChecked
                     >
                       <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="group-hover:text-blue-900">
+                        <AccordionTrigger className="group-hover:text-black">
                           <div className=" px-3 flex flex-col items-start ">
                             <p>{language.name || "(Not Specified)"}</p>
                           </div>
@@ -2947,7 +2945,7 @@ export default function ResumeForm() {
           <div className="mt-5 lg:px-10 px-4">
             <div>
               <Button
-                className="w-full bg-transparent p-2 font-semibold text-blue-900 hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
+                className="w-full bg-transparent p-2 font-semibold text-black hover:bg-blue-100 hover:p-2 h-8 flex justify-start rounded-none item-center"
                 onClick={handleAddNewLanguage}
               >
                 <IoIosAddCircleOutline className="text-xl mr-2" />
@@ -2960,7 +2958,7 @@ export default function ResumeForm() {
         {/* theme */}
         <div className="lg:px-10 px-5 rounded-md ">
           <div className="my-5 flex justify-between w-full items-center">
-            <Label className="text-2xl text-blue-900 font-bold">Theme</Label>
+            <Label className="text-2xl text-black font-bold">Theme</Label>
             <div className="flex rounded-md items-center space-x-4 my-2">
               <Popover>
                 <PopoverTrigger asChild>
@@ -2997,7 +2995,7 @@ export default function ResumeForm() {
             className="w-full group-hover:shadow-lg rounded transition delay-150 duration-300 ease-in-out border-none bg-white"
           >
             <AccordionItem value="color">
-              <AccordionTrigger className="group-hover:text-blue-900">
+              <AccordionTrigger className="group-hover:text-black">
                 <div className="grid grid-cols-6 flex-wrap justify-items-center gap-y-4 @xs/right:grid-cols-9 w-full">
                   {AccordianColor.map((color, index) => (
                     <div

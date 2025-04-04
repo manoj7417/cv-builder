@@ -172,7 +172,7 @@ const CardDetailsForm = ({ clientSecret, onSuccess }) => {
           </div>
 
           <div className="md:w-1/2 bg-gray-100 p-4 rounded-lg">
-            <h2 className="text-lg font-bold text-blue-800">
+            <h2 className="text-lg font-bold text-[#f76918]">
               Trial Period Notice
             </h2>
             <p className="text-sm text-gray-600 mt-2">

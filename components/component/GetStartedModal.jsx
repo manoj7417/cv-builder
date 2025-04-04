@@ -28,27 +28,14 @@ const GetStartedModal = ({ onClose }) => {
     setTimeout(onClose, 300); // Delay to match the transition duration
   };
 
-  const animations = [a1, a2, a3];
+  const animations = [a1];
   const descriptions = [
     {
-      title: "CV Creator",
+      title: "Create CV",
       description:
         "Create your CV with professional templates, powered by Artificial Intelligence.",
       link: "/resume",
     },
-    // {
-    //   title: "CV Optimiser",
-    //   description:
-    //     "Analyse your resume with AI and optimise it for your desired Job Profile.",
-    //   link: "/resume-analyzer",
-    // },
-    // {
-    //   title: "CV Match",
-    //   description:
-    //     "Assess your personality traits and cognitive abilities to find the best career path.",
-    //   current: false,
-    //   link: "/job-cv",
-    // },
   ];
 
   return (
@@ -67,7 +54,7 @@ const GetStartedModal = ({ onClose }) => {
         >
           {/* Modal content */}
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-1">
-            <span className="text-[#2C98CA]">Project X Pro CV Studio,</span>{" "}
+            <span className="text-[#f76918]">FREE JOB AI Pro CV Studio,</span>{" "}
             Your Automated Resume Builder!
           </h1>
           <p className="text-center text-gray-500 text-sm md:text-lg mb-6 md:mb-10">
@@ -75,7 +62,7 @@ const GetStartedModal = ({ onClose }) => {
             confidence.
           </p>
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20">
+            <div className="grid grid-cols-1  gap-10 md:gap-20">
               {animations.map((animation, index) => (
                 <div
                   key={index}
